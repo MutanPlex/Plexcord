@@ -9,13 +9,15 @@ import "./styles.css";
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { UserIcon } from "@components/Icons";
+import SettingsPlugin from "@plugins/_core/settings";
 import { PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
+import { removeFromArray } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
-import { React } from "@webpack/common";
+import { SettingsRouter } from "@webpack/common";
 
-import { PresetManager } from "./components/presetManager";
-import { loadPresets, PresetSection } from "./utils/storage";
+import { loadPresets } from "./utils/storage";
 
 export const cl = classNameFactory("pc-profile-presets-");
 export const settings = definePluginSettings({
@@ -32,29 +34,26 @@ export const settings = definePluginSettings({
 export default definePlugin({
     name: "ProfileSets",
     description: () => t(plugin.profileSets.description),
-    authors: [PcDevs.omaw, PcDevs.justjxke],
     tags: ["appearance", "customisation", "utility"],
+    authors: [PcDevs.omaw, PcDevs.justjxke],
     settings,
-    patches: [
-        {
-            find: "DefaultCustomizationSections: user cannot be undefined",
-            replacement: {
-                match: /return.{0,50}children:\[(?<=\.getLegacyUsername\(\).*?)/,
-                replace: "$&$self.renderPresetSection(\"main\"),"
-            }
+    toolboxActions: () => ({
+        [t(plugin.profileSets.text.openProfileSets)]: () => {
+            SettingsRouter.openUserSettings("plexcord_profile_sets_panel");
         },
-        {
-            find: "USER_SETTINGS_GUILD_PROFILE)",
-            replacement: {
-                match: /guildId:(\i\.id),onChange:(\i)\}\)(?=.{0,25}profilePreviewTitle:)/,
-                replace: 'guildId:$1,onChange:$2}),$self.renderPresetSection("server",$1)'
-            }
-        }
-    ],
+    }),
+
     start() {
         loadPresets("main");
+        SettingsPlugin.customEntries.push({
+            key: "plexcord_profile_sets",
+            title: t(plugin.profileSets.text.profileSets),
+            Component: require("./components/profileSetsTab").default,
+            Icon: UserIcon
+        });
     },
-    renderPresetSection(section: PresetSection, guildId?: string) {
-        return <PresetManager section={section} guildId={guildId} />;
-    }
+
+    stop() {
+        removeFromArray(SettingsPlugin.customEntries, e => e.key === "plexcord_profile_sets");
+    },
 });

@@ -28,9 +28,9 @@ const FriendInvites = findByPropsLazy("createFriendInvite");
 export default definePlugin({
     name: "FriendInvites",
     description: () => t(plugin.friendInvites.description),
-    authors: [Devs.afn, Devs.Dziurwa],
+    dependencies: ["CommandsAPI"],
     tags: ["friends", "commands", "utility"],
-
+    authors: [Devs.afn, Devs.Dziurwa],
     commands: [
         {
             name: "create friend invite",

@@ -76,6 +76,7 @@ const TimeRow = (props: TimeRowProps) => {
 const settings = definePluginSettings({
     formats: {
         type: OptionType.COMPONENT,
+        label: () => t(plugin.customTimestamps.option.formats.label),
         description: () => t(plugin.customTimestamps.option.formats.description),
         component: componentProps => {
             const [settingsState, setSettingsState] = useState(useSettings().plugins?.CustomTimestamps?.formats ?? {});
@@ -138,7 +139,7 @@ export default definePlugin({
                 <Link href="https://momentjs.com/docs/#/displaying/format/">{t(plugin.customTimestamps.modal.moment)}</Link>
                 <div className={Margins.top8}>
                     {t(plugin.customTimestamps.modal.hint)}<br />
-                    <b>[calendar]</b> {t(plugin.customTimestamps.modal.calendar)} &quot;{t(plugin.customTimestamps.modal.today)}&quot; or &quot;{t(plugin.customTimestamps.modal.yesterday)}&quot;.<br />
+                    <b>[calendar]</b> {t(plugin.customTimestamps.modal.calendar)} &quot;{t(plugin.customTimestamps.modal.today)}&quot; {t(plugin.customTimestamps.modal.or)} &quot;{t(plugin.customTimestamps.modal.yesterday)}&quot;.<br />
                     <b>[relative]</b> {t(plugin.customTimestamps.modal.relative)} &quot;{t(plugin.customTimestamps.modal.relativeTime)}&quot;.<br />
                 </div>
             </Paragraph>
@@ -166,7 +167,7 @@ export default definePlugin({
             ]
         },
         {
-            find: /.full,.{0,15}children:/,
+            find: ".MINUTE],[45*",
             replacement: {
                 // Tooltips for timestamp markdown (e.g. <t:1234567890>)
                 match: /(__unsupportedReactNodeAsText:)\i.full/,

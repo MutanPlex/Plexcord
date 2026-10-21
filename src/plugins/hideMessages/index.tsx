@@ -5,17 +5,38 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import "./styles.css";
+
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
+import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
-import { Message } from "@plexcord/discord-types";
+import ErrorBoundary from "@components/ErrorBoundary";
+import { EyeIcon } from "@components/Icons";
+import { Channel, Message } from "@plexcord/discord-types";
+import pinDms from "@plugins/pinDms";
+import { isPinned } from "@plugins/pinDms/data";
 import { PcDevs } from "@utils/constants";
-import definePlugin, { IconComponent, OptionType } from "@utils/types";
-import { findExportedComponentLazy } from "@webpack";
-import { ChannelStore, FluxDispatcher, Menu } from "@webpack/common";
+import { classNameFactory } from "@utils/css";
+import definePlugin, { OptionType } from "@utils/types";
+import { ChannelStore, Clickable, FluxDispatcher, Menu, Tooltip } from "@webpack/common";
 
-const EyeIconLazy = findExportedComponentLazy("EyeIcon");
-const EyeIcon: IconComponent = props => <EyeIconLazy {...props} />;
+interface UserContextProps {
+    channel?: Channel;
+}
+
+interface PrivateChannelsListInstance {
+    forceUpdate(callback?: () => void): void;
+}
+
+const cl = classNameFactory("pc-hide-messages-");
+const hiddenDmIds = new Set<string>();
+let privateChannelsListInstance: PrivateChannelsListInstance | null = null;
+let showHiddenDms = false;
+
+function notifyHiddenDmsUpdate() {
+    privateChannelsListInstance?.forceUpdate();
+}
 
 const hideMessage = (messageId: string, channelId: string) => {
     FluxDispatcher.dispatch({
@@ -26,6 +47,17 @@ const hideMessage = (messageId: string, channelId: string) => {
     });
 };
 
+function toggleDm(channelId: string) {
+    if (hiddenDmIds.has(channelId)) {
+        hiddenDmIds.delete(channelId);
+        if (!hiddenDmIds.size) showHiddenDms = false;
+    } else {
+        hiddenDmIds.add(channelId);
+    }
+
+    notifyHiddenDmsUpdate();
+}
+
 const messageCtxPatch: NavContextMenuPatchCallback = (children, { message }: { message: Message; }) => {
     const group = findGroupChildrenByChildId("copy-text", children);
     if (!group) return;
@@ -35,7 +67,28 @@ const messageCtxPatch: NavContextMenuPatchCallback = (children, { message }: { m
             id="pc-hidemessages"
             label={t(plugin.hideMessages.button.hide)}
             icon={EyeIcon}
+            leadingAccessory={{ type: "icon", icon: EyeIcon }}
             action={() => hideMessage(message.id, message.channel_id)}
+        />
+    ));
+};
+
+const userCtxPatch: NavContextMenuPatchCallback = (children, { channel }: UserContextProps) => {
+    if (!channel?.isDM()) return;
+    if (isPluginEnabled(pinDms.name) && isPinned(channel.id)) return;
+
+    const group = findGroupChildrenByChildId("close-dm", children);
+    if (!group) return;
+
+    const hidden = hiddenDmIds.has(channel.id);
+
+    group.splice(group.findIndex(c => c?.props?.id === "close-dm"), 0, (
+        <Menu.MenuItem
+            id="pc-hidemessages-dm"
+            label={hidden ? t(plugin.hideMessages.button.unhideDm) : t(plugin.hideMessages.button.hideDm)}
+            icon={EyeIcon}
+            leadingAccessory={{ type: "icon", icon: EyeIcon }}
+            action={() => toggleDm(channel.id)}
         />
     ));
 };
@@ -54,10 +107,76 @@ export default definePlugin({
     description: () => t(plugin.hideMessages.description),
     authors: [PcDevs.yash],
     tags: ["privacy", "chat", "utility"],
+    patches: [
+        {
+            find: '"dm-quick-launcher"===',
+            replacement: [
+                {
+                    match: /render\(\)\{/,
+                    replace: "$&this.props.privateChannelIds=$self.filterPrivateChannelIds(this.props.privateChannelIds,this);"
+                },
+                {
+                    match: /renderRow=\i=>\{/,
+                    replace: "$&this.props.privateChannelIds=$self.filterPrivateChannelIds(this.props.privateChannelIds,this);"
+                },
+                {
+                    match: /renderDM=\(\i,\i\)=>\{/,
+                    replace: "$&this.props.privateChannelIds=$self.filterPrivateChannelIds(this.props.privateChannelIds,this);"
+                },
+                {
+                    match: /#{intl::DIRECT_MESSAGES}\)\}\),/,
+                    replace: "$&$self.renderHiddenMessagesToggle(),"
+                }
+            ]
+        }
+    ],
     contextMenus: {
-        "message": messageCtxPatch
+        "message": messageCtxPatch,
+        "user-context": userCtxPatch
     },
     settings,
+    stop() {
+        hiddenDmIds.clear();
+        showHiddenDms = false;
+        notifyHiddenDmsUpdate();
+        privateChannelsListInstance = null;
+    },
+    filterPrivateChannelIds(privateChannelIds: string[], instance?: PrivateChannelsListInstance) {
+        privateChannelsListInstance = instance ?? privateChannelsListInstance;
+        return showHiddenDms ? privateChannelIds : privateChannelIds.filter(id => !hiddenDmIds.has(id));
+    },
+    renderHiddenMessagesToggle: ErrorBoundary.wrap(() => {
+        const hasHiddenDms = hiddenDmIds.size > 0;
+        const label = !hasHiddenDms
+            ? t(plugin.hideMessages.toggle.none)
+            : showHiddenDms
+                ? t(plugin.hideMessages.toggle.hide)
+                : t(plugin.hideMessages.toggle.show);
+
+        return (
+            <Tooltip text={label}>
+                {tooltipProps => (
+                    <Clickable
+                        {...tooltipProps}
+                        className={cl("eye")}
+                        role="button"
+                        tabIndex={0}
+                        aria-label={label}
+                        aria-disabled={!hasHiddenDms}
+                        onClick={event => {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            if (!hasHiddenDms) return;
+                            showHiddenDms = !showHiddenDms;
+                            notifyHiddenDmsUpdate();
+                        }}
+                    >
+                        <EyeIcon width={14} height={14} />
+                    </Clickable>
+                )}
+            </Tooltip>
+        );
+    }, { noop: true }),
     messagePopoverButton: {
         icon: EyeIcon,
         render(message: Message) {

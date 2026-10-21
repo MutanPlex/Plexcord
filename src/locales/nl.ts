@@ -46,11 +46,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         switches: {
             useQuickCss: {
                 label: "Aangepaste CSS inschakelen",
-                description: "Laad aangepaste CSS vanuit de QuickCSS-editor. Hiermee kun je het uiterlijk van Discord aanpassen met je eigen stijlen."
+                description: "Pas je geconfigureerde QuickCSS toe"
             },
             enableReactDevtools: {
                 label: "Schakel React-ontwikkelaarstools in",
-                description: "Schakel de React Developer Tools-extensie in voor het debuggen van de React-componenten van Discord. Handig voor het ontwikkelen van plug-ins."
+                description: "Vooral nuttig voor pluginontwikkelaars. Negeer dit als je niet weet wat het is"
             },
             mainWindowFrameless: {
                 label: "Schakel het hoofdvensterframe uit",
@@ -60,7 +60,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Schakel het raamkozijn uit",
                 description: "Verwijder het oorspronkelijke raamkozijn voor een netter uiterlijk. U kunt het venster nog steeds verplaatsen door het titelbalkgebied te slepen."
             },
-            winNativeTitleBar: {
+            nativeTitleBar: {
                 label: "Gebruik de eigen titelbalk van Windows in plaats van de aangepaste titelbalk van Discord",
                 description: "Vervang de aangepaste titelbalk van Discord door de standaard Windows-titelbalk. Dit kan de compatibiliteit met sommige vensterbeheertools verbeteren."
             },
@@ -76,7 +76,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             disableMinSize: {
                 label: "Schakel de minimale venstergrootte uit",
-                description: "Sta toe dat het Discord-venster kleiner wordt gemaakt dan de standaard minimumgrootte. Handig voor het betegelen van windowmanagers of kleine schermen."
+                description: "Hiermee kun je het venster naar elk formaat schalen, zelfs kleiner dan het minimum van Discord"
             }
         },
         quickActions: {
@@ -193,6 +193,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignore: "Negeren - Laat de melding helemaal niet zien"
             },
         },
+        windowsMaterial: {
+            title: "Windows-achtergrondmateriaal (herstart vereist)",
+            description: "Transparante achtergrondeffecten van Windows. Je hebt een thema nodig dat transparantie ondersteunt, anders doet dit niets. Na het wijzigen van deze instelling is een herstart vereist.",
+            material: {
+                none: "Geen",
+                mica: "Mica (gebruikt systeemthema + bureaubladachtergrond om de achtergrond te kleuren)",
+                tabbed: "Tabbed (variant van Mica met sterkere achtergrondtint)",
+                acrylic: "Acrylic (vervaagt het venster achter Discord voor een doorschijnende achtergrond)"
+            }
+        },
         macVibrancy: {
             title: "Levendigheidsstijl van venster (herstart vereist)",
             description: "Pas het levendigheidseffect van macOS-vensters aan. Hiermee regelt u de stijl van vervaging en transparantie van het Discord-venster. Wijzigingen vereisen een herstart om van kracht te worden.",
@@ -212,6 +222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 fullscreenUI: "Gebruikersinterface op volledig scherm (transparant maar enigszins wazig)",
                 hud: "HUD (meest transparant)"
             }
+        },
+        tabs: {
+            renderFailed: "Kan het tabblad {{tab}} niet weergeven. Blijft het probleem bestaan, probeer dan opnieuw te installeren met het installatieprogramma!"
         }
     },
 
@@ -270,7 +283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             discordDesktop: "Discord Desktop-app",
             plextron: "Plextron-app",
             web: "Plextron-app en de webversie van Discord",
-            dev: "Ontwikkelaarsversie van Plexcord"
+            dev: "Ontwikkelaarsversie van Plexcord",
+            browser: "Webbrowserversie van Plexcord"
         },
         search: {
             looking: "Bent u op zoek naar",
@@ -307,7 +321,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userplugins: "Toon gebruikersplug-ins",
                 api: "Toon API-plug-ins",
                 type: "Filter op type",
-                tags: "Filter op tags"
+                tags: "Filter op tags",
+                favorites: "Favorieten tonen"
             }
         },
         pluginModal: {
@@ -320,7 +335,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             enabledUser: "Ingeschakelde gebruikersplug-ins",
             totalUser: "Totaal aantal gebruikersplug-ins",
             info: "Bekijk meer informatie",
-            source: "Bekijk de broncode"
+            source: "Bekijk de broncode",
+            favorite: "Plugin als favoriet markeren - zet hem bovenaan de pluginlijst",
+            unfavorite: "Niet meer als favoriet markeren"
         },
         metadata: {
             api: {
@@ -342,7 +359,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     userSettings: "Patcht de gebruikersinstellingen van Discord om hun groep en naam zichtbaar te maken.",
                     audioPlayer: "API om interne Discord-audiobestanden of externe audiolinks af te spelen.",
                     userArea: "API om knoppen toe te voegen aan het gebruikersgebiedpaneel.",
-                    profileCollections: "API om verzamelingen toe te voegen aan het gebruikersprofielpaneel, zoals de gamecollectie van Discord."
+                    profileCollections: "API om verzamelingen toe te voegen aan het gebruikersprofielpaneel, zoals de gamecollectie van Discord.",
+                    profileSections: "API om secties toe te voegen in de buurt van het 'Lid sinds'-gedeelte van gebruikersprofielpanelen.",
+                    headerBar: "API om knoppen aan de koptekstbalk toe te voegen.",
+                    surfaceClasses: "API om plugin-eigen semantische data-attributen en beperkte props toe te voegen aan stabiele Discord-layoutoppervlakken."
                 },
                 chatButtons: {
                     context: {
@@ -389,7 +409,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             button: "Knoppen van ingeschakelde plug-ins verschijnen hier."
-        }
+        },
+        invalidInput: "Ongeldige invoer",
+        loading: "Laden...",
+        authorPrefix: "door"
     },
 
     patchHelper: {
@@ -474,7 +497,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             plugins: "Plug-in exporteren",
             css: "Exporteer QuickCSS",
             datastore: "Gegevensopslag exporteren"
-        }
+        },
+        backupFileType: "Plexcord-instellingenback-up"
     },
 
     cloud: {
@@ -640,7 +664,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         newPlugins: "{{count}} Nieuwe plug-in{{s}}",
         following: "De volgende plug-ins zijn toegevoegd in recente updates:",
-        more: "+{{count}} meer plug-ins"
+        more: "+{{count}} meer plug-ins",
+        error: {
+            retrieveRepo: "Kan repository-informatie niet ophalen",
+            fetchRepo: "Kan niet ophalen uit de repository",
+            connectRepo: "Kan geen verbinding maken met de repository. Controleer je internetverbinding."
+        }
     },
 
     csp: {
@@ -717,7 +746,8 @@ const translations: MatchStructure<typeof enTranslations> = {
         unknown: {
             title: "Onbekend",
             author: "Onbekende auteur",
-            theme: "Een onenigheidsthema"
+            theme: "Een onenigheidsthema",
+            description: "Geen beschrijving opgegeven."
         },
         required: "De volgende plug-ins zijn vereist, maar zijn niet ingeschakeld:",
         homepage: "Startpagina",
@@ -778,6 +808,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             failed: {
                 download: "Kan het thema niet downloaden"
             }
+        },
+        openInFolder: "Openen in map",
+        fallback: {
+            author: "Onbekende auteur",
+            description: "Een Discord-thema."
         }
     },
 
@@ -834,6 +869,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         repo: "Repo",
         repoDescription: "Dit is de GitHub-repository waar Plexcord updates van ophaalt.",
         loading: "Laden...",
+        unknownAuthor: "Onbekende auteur"
     },
 
     components: {
@@ -849,7 +885,29 @@ const translations: MatchStructure<typeof enTranslations> = {
             message: "De QuickCSS-editor is nog steeds geopend op de achtergrond.",
             detail: "Wil je Discord toch sluiten? Hiermee wordt ook de QuickCSS-editor gesloten.",
             cancel: "Annuleren",
-            close: "Hoe dan ook sluiten"
+            close: "Hoe dan ook sluiten",
+            windowTitle: "Plexcord QuickCSS-editor"
+        },
+        messagePopover: {
+            scrollLeft: "Naar links scrollen",
+            scrollRight: "Naar rechts scrollen"
+        },
+        notices: {
+            error: "Fout bij het tonen van de melding"
+        },
+        tray: {
+            aboutPlexcord: "Over Plexcord",
+            updatePlexcord: "Plexcord bijwerken",
+            noUpdateTitle: "Geen update beschikbaar",
+            noUpdateBody: "Je gebruikt al de nieuwste versie van Plexcord.",
+            updateFailedTitle: "Update mislukt",
+            updateFailedBody: "Kan de update voor Plexcord niet toepassen.",
+            updateSuccessTitle: "Update geslaagd",
+            updateSuccessBody: "Plexcord wordt opnieuw gestart om de update toe te passen.",
+            updateErrorTitle: "Updatefout",
+            updateErrorBody: "Er is een fout opgetreden bij het bijwerken van Plexcord.\n\n{{error}}",
+            openSettingsFolder: "Instellingenmap openen",
+            openThemesFolder: "Themamap openen"
         }
     },
 
@@ -918,7 +976,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             seconds: "seconden",
             ago: "geleden",
             s: "S"
-        }
+        },
+        detectLanguage: "Taal detecteren"
     },
 
     plugin: {
@@ -945,6 +1004,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             utility: "Hulpmiddelen",
             voice: "Stem"
         },
+        concatenatedComponentExtractor: {
+            name: "ConcatenatedComponentExtractor",
+            description: "Extraheer componenten die zijn samengevoegd door de bundler"
+        },
+        concatenatedModules: {
+            name: "ConcatenatedModules",
+            description: "Extraheer modules die zijn samengevoegd door de bundler"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Schakel het volgen van Discord (analyse/'wetenschap'), statistieken en Sentry-crashrapportage uit",
@@ -952,6 +1019,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disableAnalytics: {
                     label: "Schakel Analytics uit",
                     description: "Schakel het volgen van Discord (analyse/'wetenschap'), statistieken en Sentry-crashrapportage uit"
+                },
+                disableStackDumping: {
+                    description: "Een native stacktrace in de console tonen als Discord crasht. Vereist een volledige herstart."
                 }
             }
         },
@@ -966,6 +1036,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsLocation: {
                     label: "Instellingen Locatie",
                     description: "Bepaalt waar het gedeelte met Plexcord-instellingen zich bevindt."
+                },
+                includePlexcordInfoWhenCopying: {
+                    label: "Plexcord-informatie opnemen bij kopiëren",
+                    description: "Kopieer ook Plexcord-informatie (Plexcord, Electron, Chromium) wanneer je op de versie-informatie linksonder op de instellingenpagina klikt"
                 }
             }
         },
@@ -983,6 +1057,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Wacht even!",
                     body: "Je gebruikt een verouderde versie van Plexcord! De kans is groot dat uw probleem al is opgelost.",
                     footer: "Update eerst voordat u om ondersteuning vraagt!",
+                    dismiss: "Als je weet wat je doet of niet kunt updaten, kun je deze melding sluiten.",
                     button: {
                         cancel: "Bekijk updates",
                         confirm: "Update en start nu opnieuw",
@@ -1130,7 +1205,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Geluidskwaliteit",
                     description: "Kwaliteit van geluid om te gebruiken",
                     high: "Hoog",
-                    med: "Medium",
+                    med: "Gemiddeld",
                     low: "Laag",
                     lowest: "Laagste"
                 }
@@ -1181,7 +1256,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Anonimiseringsmethode",
                     random: "Willekeurige karakters",
                     consistent: "Consistent",
-                    timestamp: "Tijdstempel"
+                    timestamp: "Tijdstempel",
+                    date: "Datum"
                 },
                 randomisedLength: {
                     label: "Gerandomiseerde lengte",
@@ -1190,6 +1266,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 consistent: {
                     label: "Consistent",
                     description: "Consistent anonimiseringsgeheim"
+                },
+                dateFormat: {
+                    description: "Datumnotatie (YYYY, MM, DD, HH, mm, ss, SSS worden ondersteund)",
+                    label: "Datumnotatie"
                 }
             },
             using: {
@@ -1201,76 +1281,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toggle: "Schakel spoiler voor uw bestanden in (standaard ingeschakeld)",
                 enabled: "Spoiler ingeschakeld!",
                 disabled: "Spoiler uitgeschakeld!"
-            }
-        },
-        appleMusic: {
-            name: "AppleMusicRichPresence",
-            description: "Discord rijke aanwezigheid voor je Apple Music!",
-            about: "Voor de aanpasbare tekenreeksen voor activiteitenformaten kunt u verschillende speciale tekenreeksen gebruiken om trackgegevens in activiteiten op te nemen! {{name}} wordt vervangen door de tracknaam; {{artist}} wordt vervangen door de naam/namen van de artiest(en); en {{album}} wordt vervangen door de albumnaam.",
-            button: {
-                listen: "Luister op Apple Music",
-                songLink: "Bekijk op SongLink"
-            },
-            option: {
-                activityType: {
-                    label: "Activiteitstype",
-                    description: "Welk type activiteit",
-                    listening: "Luisteren",
-                    playing: "Spelen"
-                },
-                statusDisplayType: {
-                    label: "Type statusweergave",
-                    description: "Toon de track-/artiestnaam in de ledenlijst",
-                    off: "Niet weergeven (toont een algemeen luisterbericht)",
-                    artist: "Toon artiestennaam",
-                    track: "Toon tracknaam"
-                },
-                refreshInterval: {
-                    label: "Vernieuwingsinterval",
-                    description: "Het interval tussen activiteitvernieuwingen (seconden)"
-                },
-                enableTimestamps: {
-                    label: "Tijdstempels inschakelen",
-                    description: "Of tijdstempels al dan niet moeten worden ingeschakeld"
-                },
-                enableButtons: {
-                    label: "Knoppen inschakelen",
-                    description: "Of knoppen al dan niet moeten worden ingeschakeld"
-                },
-                nameString: {
-                    label: "Naamreeks",
-                    description: "Indelingsreeks voor activiteitsnaam"
-                },
-                detailsString: {
-                    label: "Details String",
-                    description: "Formaatreeks voor activiteitsdetails"
-                },
-                stateString: {
-                    label: "Staatsreeks",
-                    description: "Indelingsreeks voor activiteitsstatus"
-                },
-                largeImageType: {
-                    label: "Groot afbeeldingstype",
-                    description: "Activiteitsitems groot afbeeldingstype",
-                    album: "Albumillustraties",
-                    artist: "Kunstwerk van de kunstenaar",
-                    disabled: "Gehandicapt"
-                },
-                largeTextString: {
-                    label: "Grote tekstreeks",
-                    description: "Activiteitsitems in grote tekstindeling"
-                },
-                smallImageType: {
-                    label: "Klein afbeeldingstype",
-                    description: "Activiteitsitems klein afbeeldingstype",
-                    album: "Apple Music-logo",
-                    artist: "Kunstwerk van de kunstenaar",
-                    disabled: "Gehandicapt"
-                },
-                smallTextString: {
-                    label: "Kleine tekstreeks",
-                    description: "Activiteitsitems in kleine tekstindeling"
-                }
             }
         },
         arRpc: {
@@ -1373,6 +1383,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     left: "Links",
                     right: "Rechts"
                 }
+            },
+            text: {
+                smallText: "Kleine tekst",
+                largeText: "Grote tekst"
             }
         },
         betterAudioPlayer: {
@@ -1405,7 +1419,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             toast: {
-                invalidColorFormat: "Ongeldig kleurformaat voor {{settingKey}}, zorg ervoor dat het formaat 'R, G, B' of '#RRGGBB' is"
+                invalidColorFormat: "Ongeldig kleurformaat voor {{settingKey}}, zorg ervoor dat het formaat 'R, G, B' of '#RRGGBB' is",
+                invalidColorFormatFor: "Ongeldige kleurnotatie voor {{key}}, gebruik \"R, G, B\" of \"#RRGGBB\""
             }
         },
         betterBanReasons: {
@@ -1423,7 +1438,20 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             title: "Redenen",
             placeholder: "Reden",
-            add: "Voeg nog een reden toe"
+            add: "Voeg nog een reden toe",
+            duration: {
+                discordDefault: "Discord-standaard",
+                none: "Niets verwijderen",
+                hour1: "Afgelopen uur",
+                hours6: "Afgelopen 6 uur",
+                hours12: "Afgelopen 12 uur",
+                hours24: "Afgelopen 24 uur",
+                days3: "Afgelopen 3 dagen",
+                days7: "Afgelopen 7 dagen"
+            },
+            text: {
+                autoDeleteDuration: "Duur van automatisch berichten verwijderen"
+            }
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
@@ -1485,6 +1513,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Forceer openen",
                     description: "Forceer het openen van een map wanneer u overschakelt naar een server van die map"
                 },
+                enableNestedFolders: {
+                    label: "Nesten van mappen inschakelen",
+                    description: "Sta toe om mappen in andere mappen te plaatsen door te slepen"
+                },
                 keepIcons: {
                     label: "Houd pictogrammen",
                     description: "Blijf gildepictogrammen tonen in de primaire gildebalkmap wanneer deze geopend is in de BetterFolders-zijbalk"
@@ -1518,6 +1550,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             render: {
                 tip: "Deze uitnodiging verloopt over {{time}}",
                 header: "{{name}} heeft je uitgenodigd voor {{server}}",
+                headerSelf: "Je hebt een uitnodiging gestuurd om lid te worden van {{server}}",
                 never: "niet verlopen"
             }
         },
@@ -1541,7 +1574,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterRoleContext: {
             name: "BetterRoleContext",
-            description: "Voegt opties toe om de rolkleur te kopiëren / de rol te bewerken / het rolpictogram te bekijken wanneer u met de rechtermuisknop op rollen in het gebruikersprofiel klikt",
+            description: "Voegt opties toe om rolkleur te kopiëren / rol te bewerken / rolpictogram te bekijken bij rechtsklikken op rollen in het gebruikersprofiel of de ledenlijst",
             option: {
                 roleIconFileFormat: {
                     label: "Bestandsformaat rolpictogram",
@@ -1551,7 +1584,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 copyColor: "Kopieer rolkleur",
                 editRole: "Rol bewerken",
-                viewIcon: "Rolpictogram bekijken"
+                viewIcon: "Rolpictogram bekijken",
+                viewMembers: "Rolleleden bekijken"
+            },
+            text: {
+                roleActions: "Rolacties"
             }
         },
         betterRoleDot: {
@@ -1627,6 +1664,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         blockKeywords: {
             name: "BlockKeywords",
             description: "Blokkeert berichten die specifieke, door de gebruiker gedefinieerde trefwoorden bevatten, alsof de gebruiker die ze heeft verzonden, is geblokkeerd.",
+            regexHelper: {
+                title: "Regex-helper",
+                placeholder: "Testinvoer...",
+                noPatterns: "Geen patronen ingesteld"
+            },
             option: {
                 blockedWords: {
                     label: "Geblokkeerde woorden",
@@ -1635,6 +1677,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 useRegex: {
                     label: "Gebruik Regex",
                     description: "Gebruik elke waarde als reguliere expressie bij het controleren van de berichtinhoud (geavanceerd)"
+                },
+                regexHelper: {
+                    label: "Regex-helper",
+                    description: "Test je reguliere expressies op een voorbeeldinvoer"
                 },
                 caseSensitive: {
                     label: "Hoofdlettergevoelig",
@@ -1778,6 +1824,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 loading: "Laden...",
                 save: "Redden",
                 edit: "Bewerking"
+            },
+            text: {
+                unknownUser: "Onbekende gebruiker"
             }
         },
         callTimer: {
@@ -2067,12 +2116,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 plusPulse: "Plus-knoppuls",
                 mentionGlow: "Vermeld Badge Glow",
                 compactExpand: "Uitbreiding compacte modus",
-                selectedBorder: "Geselecteerd tabblad Blauwe rand",
+                selectedBorder: "Accentrand van geselecteerd tabblad",
                 selectedBackground: "Geselecteerde achtergrondkleur van tabblad",
                 tabShadows: "Tabbladschaduweffecten",
                 tabRepositioning: "Tabbladherpositionering (soepele positieveranderingen)",
                 resizeHandle: "Formaat wijzigen Vervagen",
-                questActivate: "Actief zoektochtverloop"
+                questActivate: "Verloop voor actieve quests"
             },
             bookmark: {
                 label: "Bladwijzer",
@@ -2111,7 +2160,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 folderMenu: "Bladwijzermap Menu",
                 compact: "Compact",
                 bookmarkBar: "Bladwijzerbalk",
-                openAll: "Open Alles in Bladwijzers",
+                openAll: "Alle bladwijzers openen",
                 openNew: "Openen op nieuw tabblad",
                 close: {
                     tab: "Tabblad sluiten",
@@ -2190,6 +2239,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 tabWidthScale: {
                     label: "Tabbreedteschaal",
                     description: "Schaal van tabbreedte (percentage) - instelbaar door tabranden te slepen"
+                },
+                tabHeightScale: {
+                    label: "Tabbladhoogteschaal",
+                    description: "Tabbladhoogteschaal (percentage)."
                 },
                 renderAllTabs: {
                     label: "Geef alle tabbladen weer",
@@ -2398,11 +2451,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     restore: "Kan tabbladen niet herstellen",
                     saved: "Kan opgeslagen tabbladen niet laden"
                 }
+            },
+            text: {
+                folder: "Map"
             }
         },
         characterCounter: {
             name: "CharacterCounter",
-            description: "Geeft een tekenteller weer in het berichtenvenster",
+            description: "Voegt een tekenteller toe aan de chatinvoer",
             option: {
                 colorEffects: {
                     label: "Kleureffecten",
@@ -2416,7 +2472,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         cleanChannelName: {
             name: "CleanChannelName",
-            description: "Verwijder alle emoji's en decorshit uit kanaalnamen"
+            description: "Verwijdert emoji's en versieringen uit kanaalnamen. Tijdens het bewerken van het kanaal wordt het origineel getoond.",
+            option: {
+                ignoredChannels: {
+                    description: "Kommagescheiden lijst met kanaal-ID's die ongewijzigd moeten blijven.",
+                    label: "Genegeerde kanalen"
+                }
+            },
+            text: {
+                keepOriginalName: "Oorspronkelijke naam behouden"
+            }
         },
         clearURLs: {
             name: "ClearURLs",
@@ -2428,7 +2493,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 loading: "Leden laden...",
                 noMembers: "Geen leden gevonden.",
-                unknown: "Onbekende rol"
+                unknown: "Onbekende rol",
+                andMore: "en nog {{count}}"
             }
         },
         clientSideBlock: {
@@ -2494,6 +2560,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     disable: "Schakel het Nitro-thema uit",
                     reset: "Themakleur opnieuw instellen"
                 }
+            },
+            text: {
+                dark: "Donker",
+                light: "Licht"
             }
         },
         clipsEnhancements: {
@@ -2508,22 +2578,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     only: "Alleen als de naam van het begin of einde van de activiteit overeenkomt",
                     never: "Nooit"
                 },
-                enableScreenshotKeybind: {
-                    label: "Schakel Screenshot Keybind in",
-                    description: "Schakel de screenshot-keybind-functie in"
-                },
-                enableVoiceOnlyClips: {
-                    label: "Schakel alleen-spraakfragmenten in",
-                    description: "Schakel alleen-spraakfragmenten in (audio zonder video)"
-                },
-                enableAdvancedSignals: {
-                    label: "Schakel geavanceerde signalen in",
-                    description: "Geavanceerde clipsignalen inschakelen (automatische cliptriggers)"
-                },
-                ignorePlatformRestriction: {
-                    label: "Negeer platformbeperkingen",
-                    description: "Platformbeperkt knippen toestaan ​​(kan opslagfouten veroorzaken)"
-                },
                 clipsLink: {
                     label: "Clips-link",
                     link: "Wijzig de FPS- en duuropties in de Clips-instellingen!"
@@ -2536,7 +2590,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         commandPalette: {
             name: "CommandPalette",
-            description: "Hiermee kunt u met een toetsenbord door de gebruikersinterface navigeren.",
+            description: "Opdrachtenpalet in Raycast-stijl om overal in Discord acties uit te voeren",
             action: {
                 command: {
                     label: "Voer opdracht uit",
@@ -2990,7 +3044,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                             label: "Kan {{pluginName}}: {{actionLabel}} niet uitvoeren."
                         }
                     }
-                }
+                },
+                commandDeleted: "Opdracht verwijderd.",
+                statusSetToLabel: "Status ingesteld op {{label}}.",
+                themeSetToLabel: "Thema ingesteld op {{label}}.",
+                noSettingsPageWas: "Er is geen instellingenpagina opgegeven.",
+                unableToOpenLabel: "Kan {{label_that_settings_page}} niet openen.",
+                failedToStartDependencies: "Kan afhankelijkheden niet starten: {{join}}",
+                messageSentToUsername: "Bericht verzonden naar {{username}}.",
+                enabledRestart: "{{name}} ingeschakeld. Herstart om toe te passen.",
+                disabledRestart: "{{name}} uitgeschakeld. Herstart om toe te passen.",
+                enabled: "{{name}} ingeschakeld.",
+                disabled: "{{name}} uitgeschakeld.",
+                errorStarting: "Fout bij starten van {{name}}.",
+                errorStopping: "Fout bij stoppen van {{name}}."
             },
             display: {
                 channel: {
@@ -3026,6 +3093,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 customCommands: {
                     label: "Aangepaste opdrachten",
                     description: "Beheer aangepaste opdrachtpaletitems"
+                },
+                closeAfterExecute: {
+                    description: "Sluit het palet na het uitvoeren van een opdracht.",
+                    label: "Sluiten na uitvoeren"
                 }
             },
             template: {
@@ -3045,7 +3116,121 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Macro",
                     description: "Voer een reeks opdrachten uit"
                 }
-            }
+            },
+            text: {
+                insertTextInChat: "Tekst in chat invoegen",
+                name: "Name",
+                commandName: "Opdrachtnaam",
+                settingsPage: "Instellingenpagina",
+                searchSettingsPages: "Instellingenpagina's zoeken...",
+                text: "Tekst",
+                textToInsertInto: "Tekst om in het chatvak in te voegen",
+                editCommand: "Opdracht bewerken",
+                deleteCommand: "Opdracht verwijderen",
+                createCustomCommand: "Aangepaste opdracht maken",
+                light: "Licht",
+                ash: "As",
+                dark: "Donker",
+                onyx: "Onyx",
+                toggleMute: "Dempen in-/uitschakelen",
+                toggleDeafen: "Doof in-/uitschakelen",
+                setStatus: "Status instellen",
+                searchStatuses: "Statussen zoeken...",
+                setLabel: "{{label}} instellen",
+                toggleTheme: "Thema wisselen",
+                openServer: "Server openen",
+                openChannel: "Kanaal openen",
+                openDm: "DM openen",
+                goHome: "Naar start",
+                goToServer: "Naar server gaan",
+                searchServers: "Servers zoeken...",
+                goToChannel: "Naar kanaal gaan",
+                searchChannels: "Kanalen zoeken...",
+                searchFriends: "Vrienden zoeken...",
+                myAccount: "Mijn account",
+                profiles: "Profielen",
+                dataPrivacy: "Gegevens en privacy",
+                devices: "Apparaten",
+                connections: "Verbindingen",
+                appearance: "Weergave",
+                accessibility: "Toegankelijkheid",
+                voiceVideo: "Spraak en video",
+                chat: "Chat",
+                textImages: "Tekst en afbeeldingen",
+                notifications: "Meldingen",
+                keybinds: "Sneltoetsen",
+                authorizedApps: "Geautoriseerde apps",
+                familyCenter: "Gezinscentrum",
+                advanced: "Geavanceerd",
+                plexcord: "Plexcord",
+                plexcordPlugins: "Plexcord-plugins",
+                plexcordThemes: "Plexcord-thema's",
+                plexcordUpdater: "Plexcord-updater",
+                plexcordChangelog: "Plexcord-wijzigingslog",
+                openQuickcss: "QuickCSS openen",
+                openUpdater: "Updater openen",
+                openChangelog: "Wijzigingslog openen",
+                restartDiscord: "Discord herstarten",
+                managePlugins: "Plugins beheren",
+                searchPlugins: "Plugins zoeken...",
+                sendDm: "DM verzenden",
+                recipient: "Ontvanger",
+                message: "Bericht",
+                messageContent: "Berichtinhoud",
+                openPaletteHotkey: "Sneltoets om palet te openen",
+                actions: "Acties",
+                preview: "Voorbeeld",
+                openCommand: "Opdracht openen",
+                copyAnswer: "Antwoord kopiëren",
+                openDetails: "Details openen",
+                calculator: "Rekenmachine",
+                expression: "Expressie",
+                result: "Resultaat",
+                copyExpression: "Expressie kopiëren",
+                pinned: "Vastgezet",
+                suggestions: "Suggesties",
+                setAlias: "Alias instellen",
+                aliasForLabel: "Alias voor {{label}}",
+                leaveEmptyToRemove: "Leeg laten om te verwijderen",
+                command: "Opdracht",
+                noResults: "Geen resultaten",
+                addFile: "Bestand toevoegen",
+                saveCommand: "Commando opslaan",
+                createCommand: "Commando maken",
+                nameRequired: "Naam is verplicht.",
+                enterValidUrl: "Voer een geldige URL in.",
+                pickSettingsPage: "Kies een instellingenpagina uit de suggesties.",
+                textRequired: "Tekst is verplicht.",
+                commandSaved: "Commando opgeslagen.",
+                commandCreated: "Commando gemaakt.",
+                editCustomCommand: "Aangepast commando bewerken",
+                disablePlugin: "Plugin uitschakelen",
+                enablePlugin: "Plugin inschakelen",
+                pickRecipient: "Kies een ontvanger uit de suggesties.",
+                addMessageOrFile: "Voeg een bericht of een bestand toe.",
+                pressKeys: "Druk op toetsen...",
+                answerCopied: "Antwoord naar klembord gekopieerd.",
+                calculationCopied: "Berekening naar klembord gekopieerd.",
+                unpinCommand: "Commando losmaken",
+                pinCommand: "Commando vastmaken",
+                saveAlias: "Alias opslaan",
+                changeHotkey: "Sneltoets wijzigen",
+                recordHotkey: "Sneltoets opnemen",
+                pressKeyCombo: "Druk op een toetscombinatie, Backspace om te wissen, Esc om te annuleren",
+                searchIn: "Zoeken in {{title}}...",
+                searchCommands: "Commando's zoeken...",
+                somethingWentWrong: "Er is iets misgegaan.",
+                remove: "Verwijderen",
+                enabled: "Ingeschakeld",
+                disabled: "Uitgeschakeld",
+                sectionNavigation: "Navigatie",
+                sectionCustom: "Aangepast",
+                sectionPlugins: "Plugins",
+                sectionMessaging: "Berichten",
+                current: "Huidig",
+                submit: "Verzenden"
+            },
+            description2: "Opdrachtenpalet in Raycast-stijl om overal in Discord acties uit te voeren"
         },
         consoleJanitor: {
             name: "ConsoleJanitor",
@@ -3115,11 +3300,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         copyProfileColors: {
             name: "CopyProfileColors",
             description: "Een plug-in om de verloopkleuren van het profiel van mensen naar het klembord te kopiëren.",
-            copy: "Kopieer profielkleuren",
+            copy: "Kleuren van serverprofiel kopiëren",
             toast: {
                 noColor: "Geen profielkleuren gevonden!",
                 copied: "Profielkleuren gekopieerd naar klembord!",
                 error: "Fout bij kopiëren van profielkleuren!"
+            },
+            text: {
+                formatted: "Primaire kleur #{{primary}}, Secundaire kleur #{{secondary}}"
             }
         },
         copyStatusUrls: {
@@ -3134,8 +3322,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "CopyStickerLinks",
             description: "Voegt de mogelijkheid toe om stickerlinks te kopiëren en te openen",
             context: {
-                copy: "Kopieer link",
-                open: "Link openen"
+                copy: "Stickerlink kopiëren",
+                open: "Stickerlink openen"
             },
             toast: {
                 success: "Link gekopieerd!"
@@ -3243,7 +3431,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Als het paard zou vervagen als de cursor dichtbij is"
                 },
                 freeroam: {
-                    label: "Freeroam",
+                    label: "Vrij rondzwerven",
                     description: "Als het paard vrij moet rondlopen als hij stilstaat"
                 },
                 shake: {
@@ -3271,6 +3459,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unset: "Uitgeschakeld",
                 set: "Stel een nieuw pictogram in",
                 hover: "Mogelijk moet u na het instellen met de muis over de map bewegen om deze te laten vernieuwen."
+            },
+            context: {
+                changeIcon: "Pictogram wijzigen"
             }
         },
         customIdle: {
@@ -3302,7 +3493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             error: {
                 appIdInvalid: "App-ID moet een geldig nummer zijn.",
                 notice: "Kennisgeving",
-                sharing: "Het delen van activiteiten is niet ingeschakeld. Mensen kunnen uw aangepaste uitgebreide aanwezigheid niet zien!",
+                sharing: "Activiteit delen is niet ingeschakeld, dus anderen kunnen je aangepaste Rich Presence niet zien!",
                 enable: "Inschakelen",
                 validStream: "De streaminglink moet een geldige URL zijn.",
                 mustBeURL: "Moet een geldige URL zijn.",
@@ -3418,7 +3609,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 buttonTwoURL: {
                     label: "Knop 2-URL",
                     description: "Knop 2-URL"
+                },
+                enablePresence: {
+                    description: "Of de aanwezigheid moet worden getoond",
+                    label: "Aanwezigheid inschakelen"
                 }
+            },
+            toast: {
+                savedPresetName: "Voorinstelling {{name}} opgeslagen.",
+                loadedPresetName: "Voorinstelling {{name}} geladen.",
+                deletedPresetSelectedpreset: "Voorinstelling {{selectedPreset}} verwijderd."
+            },
+            text: {
+                presetName: "Naam voorinstelling",
+                selectAPreset: "Kies een voorinstelling",
+                streamLinkTwitchOr: "Streamlink (Twitch of YouTube, alleen als het activiteitstype Streamen is)",
+                presets: "Voorinstellingen",
+                save: "Opslaan",
+                load: "Laden",
+                delete: "Verwijderen",
+                noSavedPresetsYet: "Nog geen opgeslagen voorinstellingen.",
+                showCustomRpc: "Aangepaste RPC tonen",
+                customRpcDisabled: "Aangepaste RPC uitgeschakeld",
+                theEnablePresenceSetting: "De instelling \"Aanwezigheid inschakelen\" staat uit, dus je aanwezigheid wordt niet getoond. Was dat niet de bedoeling, schakel haar dan hieronder in.",
+                activitySharingDisabled: "Activiteit delen uitgeschakeld",
+                discordDeveloperPortal: "Discord-ontwikkelaarsportaal",
+                imgur: "Imgur",
+                enableActivitySharing: "Activiteit delen inschakelen"
             }
         },
         customSounds: {
@@ -3450,7 +3667,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             button: {
                 preview: "Voorbeeld",
-                stop: "Stop",
+                stop: "Stoppen",
                 volume: "Volume",
                 soundSource: "Geluidsbron",
                 customFile: "Aangepast bestand",
@@ -3460,7 +3677,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 default: "Standaard",
                 custom: "Aangepast",
-                select: "Selecteer een bestand..."
+                select: "Selecteer een bestand...",
+                overrides: {
+                    label: "Overschrijvingen"
+                },
+                soundpack: {
+                    label: "Geluidspakket",
+                    description: "Geluidspakket dat gebruikt wordt in plaats van het pakket dat in Discord is ingesteld.",
+                    default: "Discord-standaard"
+                }
             },
             type: {
                 activityEnd: "Activiteit einde",
@@ -3534,6 +3759,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 calendar: "maakt dynamische datumopmaak mogelijk, zoals",
                 today: "Vandaag",
                 yesterday: "Gisteren",
+                or: "of",
                 relative: "geeft je tijden zoals",
                 relativeTime: "4 uur geleden",
                 preview: "Voorbeeld",
@@ -3627,6 +3853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 dearrowed: "Deze insluiting is DeArrowed; klik om te herstellen",
                 dearrow: "Klik naar DeArrow"
+            },
+            text: {
+                toggleDearrow: "Dearrow in-/uitschakelen"
             }
         },
         declutter: {
@@ -3635,6 +3864,12 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 userProfileHeader: {
                     label: "Gebruikersprofiel"
+                },
+                removeAvatarDecoration: {
+                    label: "Avatardecoratie verwijderen",
+                    description: "Avatardecoraties verwijderen. Dit is/wordt uitgeschakeld als Decor is ingeschakeld.",
+                    alertBody: "Het verwijderen van avatardecoraties is uitgeschakeld om conflicten met de Decor-plugin te voorkomen.",
+                    ok: "OK"
                 },
                 removeNameplate: {
                     label: "Naamplaatje verwijderen",
@@ -3693,7 +3928,27 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeButtonTooltips: {
                     label: "Knopinfo verwijderen",
                     description: "Knopinfo verwijderen."
+                },
+                removeProfileFrame: {
+                    description: "Profielkaders verwijderen.",
+                    label: "Profielkader verwijderen"
+                },
+                removeDisplayNameStyles: {
+                    description: "Geanimeerde/opgemaakte weergavenamen in de ledenlijst verwijderen.",
+                    label: "Weergavenaamstijlen verwijderen"
+                },
+                removeLibraryAboveDms: {
+                    description: "Bibliotheek boven de DM-lijst verwijderen.",
+                    label: "Bibliotheek boven DM's verwijderen"
+                },
+                removeFamilyCenterAboveDms: {
+                    description: "Gezinscentrum boven de DM-lijst verwijderen.",
+                    label: "Gezinscentrum boven DM's verwijderen"
                 }
+            },
+            text: {
+                discordAlreadyHasA: "Discord heeft al een ingebouwde optie voor gebruikersnaamstijl in",
+                accessibilitySettings: "toegankelijkheidsinstellingen."
             }
         },
         decodeBase64: {
@@ -3800,6 +4055,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hold: "Wacht even",
                 suspended: "Door een decoratie in te dienen, gaat u akkoord met {{guidelines}}. Als u deze richtlijnen niet leest, kan dit tot gevolg hebben dat uw account in de toekomst wordt opgeschort voor het maken van meer decoraties.",
                 guidelines: "de richtlijnen"
+            },
+            toast: {
+                failedToAuthorizeMessage: "Autoriseren mislukt: {{message}}"
+            },
+            text: {
+                removeDecoration: "Decor-decoratie verwijderen",
+                decoration: "Decor-decoratie",
+                none: "Geen",
+                decorationFile: "Decoratiebestand"
             }
         },
         demonstration: {
@@ -3861,6 +4125,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                 starting: "Fout bij het starten van plug-in {{plugin}}",
                 noMessage: "Geen foutmelding",
                 noReason: "Geen reden opgegeven"
+            },
+            text: {
+                reconnect: "Opnieuw verbinden",
+                loadingLazyModules: "Lazy modules worden geladen, herstarten kan fouten veroorzaken",
+                loadedLazyModules: "Alle lazy modules zijn geladen",
+                failedLazyModules: "Laden van lazy modules mislukt, controleer de console",
+                ok: "OK"
             }
         },
         disableCallIdle: {
@@ -3919,6 +4190,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Diverse variabelen",
                     newline: "Newline-karakter"
                 }
+            },
+            text: {
+                notSupported: "Niet ondersteund",
+                devBuild: "Dev-build",
+                standalone: "Standalone"
             }
         },
         dontFilterMe: {
@@ -3935,6 +4211,23 @@ const translations: MatchStructure<typeof enTranslations> = {
         dontRoundMyTimestamps: {
             name: "DontRoundMyTimestamps",
             description: "Rondt relatieve tijdstempels altijd naar beneden af, zodat 7,6 jaar 7 jaar wordt in plaats van 8 jaar"
+        },
+        downloadAllAttachments: {
+            name: "DownloadAllAttachments",
+            description: "Voegt een popover-knop toe om alle bijlagen van een bericht in één keer te downloaden.",
+            button: "Alle bijlagen downloaden",
+            toast: {
+                success: "{{count}} bijlage(n) gedownload.",
+                partial: "{{succeeded}} van {{total}} bijlagen gedownload. {{failed}} mislukt.",
+                downloadedPluralizeSucceededAttachment: "{{pluralize_succeeded_attachment}} gedownload.",
+                downloadedSucceededOfLength: "{{succeeded}} van {{length}} bijlagen gedownload. {{failed}} mislukt."
+            },
+            option: {
+                downloadAllFileTypes: {
+                    description: "Download ook bijlagen die geen media zijn. Schakel dit alleen in als je vertrouwt wat mensen je sturen.",
+                    label: "Alle bestandstypen downloaden"
+                }
+            }
         },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
@@ -3999,7 +4292,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     created: "Uitnodiging gemaakt.",
                     unable: "Kan uitnodiging niet maken.",
                     noChannel: "Geen kanaal beschikbaar voor uitnodigingen.",
-                }
+                },
+                noReusableInvite: "Geen herbruikbare uitnodiging beschikbaar.",
+                unableToReuseInvite: "Kan uitnodiging niet hergebruiken."
             },
             ghost: {
                 user: "Gebruiker",
@@ -4110,6 +4405,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Werkbalkontwikkelaarsmenu",
                     description: "Wijzig de Help (?)-werkbalkknop (rechtsboven in de chat) naar het ontwikkelaarsmenu van Discord"
                 }
+            },
+            text: {
+                searchExperiments: "Experimenten zoeken"
             }
         },
         exportMessages: {
@@ -4193,6 +4491,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportAll: "Exporteer alle berichten van {{user}}",
                 user: "Gebruiker",
                 exportAllChannel: "Exporteer alle kanaalberichten"
+            },
+            text: {
+                unknownError: "Onbekende fout"
             }
         },
         expressionCloner: {
@@ -4206,11 +4507,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 success: "Met succes {{name}} naar {{guild}} gekloond!",
                 yourServer: "jouw server",
                 failed: "Kan niet klonen:",
-                console: "Er is iets misgegaan (controleer de console!)"
+                console: "Er is iets misgegaan (controleer de console!)",
+                successfullyClonedNameTo: "{{name}} is gekloond naar {{name_your_server}}!"
             },
             context: {
                 clone: "Kloon {{type}}",
                 cloneName: "Kloon {{data}}"
+            },
+            text: {
+                yourServer: "je server",
+                cloneTo: "Klonen naar {{name}}",
+                emoji: "Emoji",
+                sticker: "Sticker"
             }
         },
         f8break: {
@@ -4305,7 +4613,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 step3: "• Plak de onzichtbare tekst ergens in je biografie",
                 pickers: "Kleurkiezers",
                 primary: "Primair",
-                accent: "Accent"
+                accent: "Accentkleur"
             },
             option: {
                 nitroFirst: {
@@ -4333,7 +4641,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modal: {
                 primary: "Primair",
-                accent: "Accent",
+                accent: "Accentkleur",
                 effect: "Effect",
                 usage: {
                     title: "Gebruik",
@@ -4413,36 +4721,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removed: "Alias ​​verwijderd: {{alias}}",
                 failedRemove: "Kan alias niet verwijderen",
                 duplicate: "Dubbele alias",
-                failedSave: "Kan alias niet opslaan."
+                failedSave: "Kan alias niet opslaan.",
+                removedAliasAlias: "Alias :{{alias}}: verwijderd",
+                aliasSetForGetemojidisplayname: "Alias ingesteld voor {{getEmojiDisplayName_ref}}."
             },
             button: {
                 edit: "Alias ​​bewerken",
                 set: "Alias ​​instellen"
+            },
+            text: {
+                remove: "Verwijderen",
+                noAliasesSetYet: "Nog geen aliassen ingesteld.",
+                aliasRequired: "Alias is verplicht.",
+                aliasInvalid: "Alias moet 2-32 tekens lang zijn en mag alleen kleine letters, cijfers of underscores bevatten."
             }
         },
-        favoriteGifSearch: {
-            name: "FavouriteGifSearch",
-            description: "Voegt een zoekbalk toe aan favoriete GIF's.",
-            placeholder: "Zoek naar favoriete GIF's",
-            option: {
-                searchOption: {
-                    label: "Zoekoptie",
-                    description: "Het deel van de URL dat u wilt doorzoeken",
-                    url: "Volledige URL",
-                    path: "Alleen pad (/somegif.gif)",
-                    hostandpath: "Host en pad (tenor.com somgif.gif)"
-                }
-            }
-        },
-        favouriteAnything: {
-            name: "FavouriteAnything",
+        favoriteAnything: {
+            name: "FavoriteAnything",
             description: "Favoriet elke afbeelding",
             noFiles: "Geen bestanden gevonden die overeenkomen met je zoekopdracht.",
             searchPlaceholder: "Bestanden zoeken",
             media: "Media",
             demoText: "Klik op de ster om een bestand toe te voegen aan favorieten.\nFavoriete bestanden verschijnen hier!",
             fetchError: "Kon {filename} niet ophalen",
-            uploadError: "Kon {filename} niet uploaden"
+            uploadError: "Kon {filename} niet uploaden",
+            text: {
+                clickTheStarTo: "Klik op de ster om een bestand als favoriet te markeren.",
+                favoriteFilesWillShow: "Favoriete bestanden verschijnen hier!"
+            },
+            option: {
+                localThumbnails: {
+                    description: "Genereer bestandsminiaturen lokaal in plaats van een externe dienst (placeholder.nin0.dev) te gebruiken. Niet compatibel met mobiel. Deze optie wijzigen heeft geen invloed op bestaande favorieten.",
+                    label: "Lokale miniaturen"
+                }
+            }
         },
         fileDownloadButton: {
             name: "FileDownloadButton",
@@ -4457,7 +4769,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 navigate: "Gebruik het onderste paneel om tussen antwoorden te navigeren.",
                 container: "Kan het containerelement niet vinden.",
-                couldntFind: "Kan het antwoordbericht niet vinden."
+                couldntFind: "Kan geen antwoord vinden."
             },
             option: {
                 includePings: {
@@ -4545,6 +4857,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 channelFull: {
                     label: "Kanaal vol",
                     description: "Probeer je naar het kanaal te verplaatsen als het niet meer vol is"
+                },
+                onlyWhenInVoice: {
+                    label: "Alleen in spraak",
+                    description: "Volg de gebruiker alleen als je in een spraakkanaal zit"
                 }
             },
             toast: {
@@ -4589,25 +4905,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     previewText: "De snelle bruine vos springt over de luie hond heen",
                     authors: "Door {{authors}}"
                 }
+            },
+            text: {
+                currentFont: "Huidig lettertype:",
+                resetFont: "Lettertype herstellen"
             }
         },
         forceOwnerCrown: {
             name: "ForceOwnerCrown",
             description: "Forceer de eigenaarskroon naast gebruikersnamen, zelfs als de server groot is."
-        },
-        forwardAnywhere: {
-            name: "ForwardAnywhere",
-            description: "Als het doorsturen mislukt, verzendt u het als een normaal bericht; staat ook NSFW-voorwaarts toe",
-            option: {
-                forwardPreface: {
-                    label: "Voorwoord",
-                    description: "Waarmee de doorgestuurde inhoud moet worden voorafgegaan"
-                }
-            },
-            context: {
-                attachments: "Bijlagen",
-                forwarded: "Doorgestuurd van"
-            }
         },
         freaky: {
             name: "Freaky",
@@ -4707,12 +5013,17 @@ const translations: MatchStructure<typeof enTranslations> = {
                     name: "Besties",
                     description: "Hoe krijg je dit überhaupt voor elkaar??? (5 jaar)"
                 }
+            },
+            option: {
+                showFriendsInChat: {
+                    description: "Een vriendpictogram tonen bij berichten van vrienden.",
+                    label: "Vrienden in chat tonen"
+                }
+            },
+            text: {
+                friend: "Vriend",
+                rankIcon: "Rangpictogram"
             }
-        },
-        friendsSince: {
-            name: "FriendsSince",
-            description: "Laat zien wanneer je vrienden bent geworden met iemand in de gebruikerspop-out",
-            section: "Vrienden sinds"
         },
         friendTags: {
             name: "FriendTags",
@@ -4748,7 +5059,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
-            description: "Voegt een schakelaar toe aan de gebruikerspop-out om uw gameactiviteit te tonen/verbergen",
+            description: "Voegt naast de microfoon- en dempknop een knop toe om spelactiviteit in/uit te schakelen. Rechtsklik om Spotify-activiteit te schakelen.",
             tooltip: "Schakel spelactiviteit in",
             gameActivity: {
                 enabled: "Spelactiviteit ingeschakeld",
@@ -4765,6 +5076,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     panel: "Naast Mute/Doof",
                     toolbox: "Plexcord-gereedschapskist"
                 }
+            },
+            text: {
+                disableGameActivity: "Game-activiteit uitschakelen",
+                enableGameActivity: "Game-activiteit inschakelen",
+                shareSpotifyActivity: "Spotify-activiteit delen",
+                shareSpotifyActivityAccount: "Spotify-activiteit delen ({{name}})"
             }
         },
         ghosted: {
@@ -4912,7 +5229,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "Afbeeldingslink gekopieerd naar klembord!",
                 urlCopied: "URL gekopieerd naar klembord!",
                 already: "Die verzameling bestaat al",
-                alreadyCollection: "Die GIF zit al in die collectie"
+                alreadyCollection: "Deze GIF staat al in de verzameling",
+                collectionsImportedSuccessfully: "Verzamelingen geïmporteerd.",
+                failedToImportCollections: "Kan verzamelingen niet importeren: {{String_err}}"
             },
             modal: {
                 create: {
@@ -4948,6 +5267,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     remove: "Verwijderen",
                     cancel: "Laat maar zitten"
                 }
+            },
+            text: {
+                gifPickerCategoryOptions: "Categorieopties van GIF-kiezer",
+                gifCollections: "GIF-collecties",
+                unknown: "Onbekend"
             }
         },
         gifPaste: {
@@ -4959,7 +5283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Voegt een opdracht toe om een ​​willekeurige GIF van je favorieten te verzenden, met een kans van één op tien om de eigenaar van de server te pingen",
             command: {
                 gifRoulette: {
-                    description: "Verleid het lot en stuur een GIF"
+                    description: "Verleid het lot en stuur een GIF",
+                    restricted: "Deze opdracht is beperkt op deze server."
                 }
             },
             option: {
@@ -4994,7 +5319,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 only: "Alleen top {{length}}/{{total}} weergeven"
             },
             modal: {
-                title: "De GitHub-opslagplaatsen van {{user}}",
+                title: "GitHub-repository's van {{username}}",
                 repository: "Opslagplaats",
                 description: "Beschrijving",
                 language: "Taal",
@@ -5079,7 +5404,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Mogelijkheid om de chatknoppen te verbergen",
             tooltip: {
                 close: "Dichtbij",
-                open: "Open"
+                open: "Openen"
             },
             option: {
                 color: {
@@ -5087,7 +5412,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Kleur het rood bij het openen"
                 },
                 open: {
-                    label: "Open",
+                    label: "Openen",
                     description: "Standaard geopend"
                 }
             }
@@ -5101,9 +5426,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         hideMessages: {
             name: "HideMessages",
-            description: "Een plug-in om berichten tijdelijk te verbergen totdat u opnieuw opstart.",
+            description: "Verberg berichten en DM's tijdelijk tot je opnieuw opstart.",
             button: {
-                hide: "Verbergen"
+                hide: "Verbergen",
+                hideDm: "DM verbergen",
+                unhideDm: "DM tonen"
+            },
+            toggle: {
+                none: "Geen verborgen DM's",
+                hide: "Verborgen DM's verbergen",
+                show: "Verborgen DM's tonen"
             },
             option: {
                 hidePopoverButton: {
@@ -5111,6 +5443,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Verberg de knop Verbergen in de berichtenpopover."
                 }
             }
+        },
+        hideMutedVoiceIndicator: {
+            name: "HideMutedVoiceIndicator",
+            description: "Verbergt de spraakindicator in de serverlijst wanneer de enige actieve spraakkanalen gedempt zijn"
         },
         hideServers: {
             name: "HideServers",
@@ -5231,10 +5567,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 refreshed: "Avatars zijn vernieuwd.",
                 deletedAll: "Alle notities zijn succesvol verwijderd.",
                 imported: "Notities geïmporteerd.",
-                invalid: "Kan notities niet importeren."
+                invalid: "Kan notities niet importeren.",
+                invalidJson: "Ongeldige JSON"
             },
             toolbox: {
                 action: "Notities openen"
+            },
+            text: {
+                holyNotes: "Holy Notes",
+                noteTag: "NOTITIE"
             }
         },
         homeTyping: {
@@ -5342,7 +5683,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 ignoreListening: {
                     label: "Negeer luisteren",
-                    description: "Negeer alle luisteractiviteiten (dit zijn meestal Spotify-activiteiten)"
+                    description: "Alle luisteractiviteiten negeren (meestal Spotify-activiteiten)"
                 },
                 ignoreWatching: {
                     label: "Negeer het kijken",
@@ -5355,6 +5696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoredActivities: {
                     label: "Genegeerde activiteiten"
                 }
+            },
+            text: {
+                enableActivity: "Activiteit inschakelen",
+                disableActivity: "Activiteit uitschakelen"
             }
         },
         ignoreCalls: {
@@ -5440,6 +5785,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 sizeHTML: "Maat",
                 dimensions: "Afmetingen",
                 filename: "Bestandsnaam"
+            },
+            text: {
+                bytes: "Bytes"
             }
         },
         imgToGif: {
@@ -5558,6 +5906,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toast: "Direct scherm delen {{state}}",
                 enabled: "Ingeschakeld",
                 disabled: "Gehandicapt"
+            },
+            toast: {
+                instantScreenshareDisabled: "Direct scherm delen {{disabled}}"
+            },
+            text: {
+                instantScreenshare: "Instant Screenshare"
             }
         },
         invisibleChat: {
@@ -5676,10 +6030,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 button: {
                     validate: "Valideren en opslaan",
                     cancel: "Annuleren",
-                    openEditor: "Open Editor",
+                    openEditor: "Editor openen",
                     resetData: "Opslag opnieuw instellen",
                     sure: "Weet je het zeker?"
                 }
+            },
+            text: {
+                serverOptions: "Serveropties",
+                copyServerId: "Server-ID kopiëren",
+                serverIdCopied: "Server-ID naar klembord gekopieerd"
             }
         },
         jumpTo: {
@@ -5746,6 +6105,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Trefwoorden",
                     description: "Beheer trefwoorden"
                 }
+            },
+            text: {
+                keywordEntryI1: "Trefwoordvermelding {{i_1}}",
+                listPriorityAdvanced: "Lijstprioriteit (geavanceerd)",
+                whichListToPrioritize: "Welke lijst voorrang krijgt als een bericht beide lijsten activeert",
+                ifYouAreNot: "Weet je het niet zeker, dan staat dit in de meeste gevallen op Zwarte lijst"
             }
         },
         lastOnline: {
@@ -5819,10 +6184,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     listenbrainzLogo: "Gebruik een groot ListenBrainz-logo",
                     generic: "Gebruik een algemene tijdelijke aanduiding"
                 },
+                showAlbumCover: {
+                    label: "Albumhoezen tonen",
+                    description: "Toon albumhoezen. Als je dit uitschakelt, wordt er een tijdelijke aanduiding getoond. Handig als je muziek ongeschikte hoesafbeeldingen heeft"
+                },
                 useLogo: {
                     label: "Gebruik logo",
                     description: "Toon het ListenBrainz-logo op albumhoezen"
                 }
+            },
+            button: {
+                profile: "ListenBrainz-profiel",
+                viewSong: "Nummer bekijken"
             }
         },
         loadingQuotes: {
@@ -5849,6 +6222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Extra scheidingsteken voor aanhalingstekens",
                     description: "Scheidingsteken voor aanvullende offertes"
                 }
+            },
+            text: {
+                allQuotesDisabled: "Heb je echt alle laadcitaten uitgeschakeld? Wat ben jij een clown..."
             }
         },
         loginWithQR: {
@@ -5867,7 +6243,26 @@ const translations: MatchStructure<typeof enTranslations> = {
             stopScanning: "Stop met scannen",
             usingWebcam: "Scannen met webcam",
             dragDrop: "Sleep hier een afbeelding en zet deze neer, of klik om een ​​afbeelding te selecteren",
-            orPaste: "Of plak een afbeelding vanaf uw klembord!"
+            orPaste: "Of plak een afbeelding vanaf uw klembord!",
+            verifyLogin: "Inloggen verifiëren",
+            text: {
+                scanQrCode: "QR-code scannen"
+            }
+        },
+        markdownTables: {
+            name: "MarkdownTables",
+            description: "Toont markdowntabellen in GitHub-stijl in Discord-berichten.",
+            toolbar: {
+                label: "Markdown-tabelweergave",
+                table: "Tabel",
+                raw: "Ruw"
+            },
+            option: {
+                hideToggle: {
+                    label: "Schakelaar verbergen",
+                    description: "Verbergt de Tabel/Ruw-schakelaar en toont tabellen altijd weergegeven."
+                }
+            }
         },
         mediaPlaybackSpeed: {
             name: "MediaPlaybackSpeed",
@@ -5893,7 +6288,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         memberCount: {
             name: "MemberCount",
-            description: "Toont het aantal online leden, het totale aantal leden en gebruikers in spraakkanalen op de server – in de ledenlijst en knopinfo.",
+            description: "Toont het aantal online leden, totaal aantal leden en gebruikers in spraakkanalen van de server - in de ledenlijst en tooltip.",
             option: {
                 toolTip: {
                     label: "Tooltip",
@@ -5910,7 +6305,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             onlineThisChannel: "{{formattedOnlineCount}} online in dit kanaal",
             totalMembers: "{{formattedTotalCount}} totaal aantal serverleden",
-            totalVoice: "{{formattedVoiceCount}} leden in stem"
+            totalVoice: "{{formattedVoiceCount}} leden in stem",
+            tooltip: {
+                total: "{{count}} serverleden in totaal"
+            }
         },
         mentionAvatars: {
             name: "MentionAvatars",
@@ -6045,7 +6443,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 openThread: "Open draad",
                 openTab: "Tabblad openen",
                 quote: "Citaat",
-                pin: "Pin"
+                pin: "Vastzetten"
             },
             missingPermissions: {
                 react: "Kan niet reageren: ontbrekende rechten",
@@ -6057,7 +6455,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                 messageContent: "Berichtinhoud gekopieerd!",
                 userId: "Gebruikers-ID gekopieerd!"
             },
-            linkCopied: "Link gekopieerd!"
+            linkCopied: "Link gekopieerd!",
+            text: {
+                shift: "Shift",
+                ctrl: "Ctrl",
+                alt: "Alt",
+                backspace: "Backspace",
+                pickEmoji: "Emoji kiezen"
+            },
+            emojiSetting: {
+                pick: "Emoji kiezen",
+                selectMain: "Emoji voor reacties kiezen",
+                selectAdditional: "Extra emoji's kiezen",
+                additionalPlaceholder: "gescheiden door komma/nieuwe regel, max. {{max}}"
+            },
+            toast: {
+                cannotReact: "Kan niet reageren: ontbrekende rechten",
+                linkCopied: "Link gekopieerd!"
+            }
         },
         messageColors: {
             name: "MessageColors",
@@ -6212,7 +6627,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         messageLogger: {
             name: "MessageLogger",
             description: "Registreert tijdelijk verwijderde en bewerkte berichten.",
-            removeMessage: "Berichtgeschiedenis verwijderen",
+            removeMessage: "Berichtgeschiedenis wissen",
             removeMessageTemporary: "Bericht verwijderen (tijdelijk)",
             clearMessageLog: "Berichtenlog wissen",
             showDiff: "Verschillen tonen",
@@ -6276,7 +6691,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                 separatedDiffs: {
                     label: "Gescheiden verschillen",
                     description: "Afzonderlijke toevoegingen en verwijderingen in diffs voor een beter leesbaar verschil"
+                },
+                logDeletedAttachments: {
+                    description: "Of verwijderde bijlagen moeten worden gelogd",
+                    label: "Verwijderde bijlagen loggen"
                 }
+            },
+            text: {
+                clearHistory: "Geschiedenis wissen",
+                toggleDeletedHighlight: "Markering van verwijderde in-/uitschakelen",
+                enableDiffView: "Verschilweergave inschakelen",
+                disableDiffView: "Verschilweergave uitschakelen",
+                noDeletedMessages: "Geen verwijderde berichten",
+                deletedMessageSuffix: " verwijderd bericht",
+                deletedMessagesSuffix: " verwijderde berichten"
             }
         },
         messageLoggerEnhanced: {
@@ -6478,11 +6906,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 whitelistedIds: {
                     label: "ID's op de witte lijst",
-                    description: "Server-, kanaal- of gebruikers-ID's op de witte lijst gezet."
+                    description: "Server-, kanaal- of gebruikers-ID's die altijd in het berichtenlogboek worden getoond."
                 },
                 blacklistedIds: {
                     label: "ID's op de zwarte lijst",
-                    description: "Server-, kanaal- of gebruikers-ID's op de zwarte lijst gezet."
+                    description: "Server-, kanaal- of gebruikers-ID's die nooit in het berichtenlogboek worden getoond."
                 },
                 imageCacheDir: {
                     label: "Map voor afbeeldingscache",
@@ -6520,6 +6948,25 @@ const translations: MatchStructure<typeof enTranslations> = {
                     confirmText: "Duidelijk",
                     cancel: "Annuleren"
                 }
+            },
+            toast: {
+                clearedLogs: "Logboeken gewist",
+                failedToClearLogs: "Kan logboeken niet wissen",
+                failedToRemoveMessage: "Kan bericht niet verwijderen. Bekijk de console voor details.",
+                noMessagesFoundIn: "Geen berichten gevonden in logbestand",
+                successfullyImportedCountLogs: "{{count}} logboeken geïmporteerd",
+                successfullyExportedLogs: "Logboeken geëxporteerd",
+                successfullyExportedCountLogs: "{{count}} logboeken geëxporteerd",
+                errorExportingLogsCheck: "Fout bij exporteren van logboeken. Bekijk de console voor meer informatie"
+            },
+            text: {
+                jsonFile: "JSON-bestand",
+                clearLogs: "Logs wissen",
+                clearingLogs: "Logs wissen...",
+                messageLogger: "Message Logger",
+                importLogs: "Logs importeren",
+                logs: "Logs",
+                loadingTabLogs: "Logboeken laden: {{tab}}..."
             }
         },
         messageNotifier: {
@@ -6685,7 +7132,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     response: "**Client-uptime**: {{uptime}} minuten"
                 },
                 gettime: {
-                    description: "Gets the current time",
+                    description: "Haalt de huidige tijd op",
                     response: "De huidige tijd is {{time}}"
                 },
                 transform: {
@@ -6913,13 +7360,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     LRCLIB: "LRCLIB"
                 },
                 spotifyLyricsApiUrl: {
-                    label: "Spotify Lyrics API-URL",
-                    description: "Spotify lyrics API basis-URL."
+                    label: "Basis-URL van Spotify Lyrics API",
+                    description: "Basis-URL van aangepaste instantie (bijvoorbeeld: http://localhost:8080)."
                 },
                 translateTo: {
                     label: "Vertalen naar",
                     description: "Vertaal songteksten naar - Als u dit wijzigt, worden bestaande vertalingen gewist",
-                    cleared: "Vertaling gewist"
+                    cleared: "Vertalingen gewist"
                 },
                 lyricsConversion: {
                     label: "Conversie van songteksten",
@@ -6941,6 +7388,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Wis alle in de cache opgeslagen teksten en vertalingen",
                     button: "Cache leegmaken",
                     cacheLyricsPurged: "Cache van de songteksten is leeggemaakt"
+                },
+                lyricDelay: {
+                    label: "Vertraging songtekst"
                 }
             },
             context: {
@@ -6949,7 +7399,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     type: "Spotify {{type}}-menu",
                     copy: "Kopieer {{type}} Naam",
                     link: "Kopieer {{type}}-link",
-                    open: "Open {{type}} in Spotify",
+                    open: "{{type}} openen in Spotify",
                     album: "Spotify-albummenu"
                 },
                 tidal: {
@@ -6957,7 +7407,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     lyrics: "Getijdenteksten",
                     type: "Getijden {{name}} Menu",
                     copy: "Kopieer {{name}} Naam",
-                    open: "Open {{name}} in Tidal",
+                    open: "{{name}} openen in Tidal",
                     album: "Getijdenalbummenu"
                 },
                 ytm: {
@@ -7025,6 +7475,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 failed: "Kan Modal niet weergeven :(",
                 checkConsole: "Controleer de console op fouten",
                 invalidUrlCustomApi: "Ongeldige URL-indeling voor aangepaste API-server-URL"
+            },
+            text: {
+                unknownArtist: "Onbekende artiest",
+                unknownTitle: "Onbekende titel"
             }
         },
         mutualGroupDMs: {
@@ -7045,7 +7499,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "NewGuildSettings",
             description: "Demp automatisch nieuwe servers en wijzig diverse andere instellingen wanneer u lid wordt",
             context: {
-                apply: "Pas nieuwe Gilde-instellingen toe"
+                apply: "NewGuildSettings toepassen op map"
             },
             option: {
                 guild: {
@@ -7100,7 +7554,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 dontShowAgain: "Laat dit niet meer zien",
                 restartRequired: "Opnieuw opstarten vereist om wijzigingen toe te passen",
                 restart: "Opnieuw opstarten",
-                continue: "Doorgaan"
+                continue: "Doorgaan",
+                supportUs: "Plexcord is opensourcesoftware. Als je het graag gebruikt, overweeg ons dan te steunen",
+                supportUsLink: "hier"
             }
         },
         noAppsAllowed: {
@@ -7284,7 +7740,10 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         notificationTitle: {
             name: "NotificationTitle",
-            description: "Maakt bureaubladmeldingen informatiever"
+            description: "Maakt bureaubladmeldingen informatiever",
+            text: {
+                threadInParent: "{{thread}} in {{parent}}"
+            }
         },
         notificationVolume: {
             name: "NotificationVolume",
@@ -7360,6 +7819,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 vrcx: {
                     label: "VRChat",
                     description: "Open VRChat-links in de VRCX-app"
+                },
+                telegram: {
+                    label: "Telegram",
+                    description: "Telegram-links openen in de Telegram-app"
                 }
             },
             notification: {
@@ -7447,6 +7910,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 highest: "Hoogste rol",
                 lowest: "Laagste rol",
                 details: "Roldetails"
+            },
+            text: {
+                roleOptions: "Rolopties",
+                userOptions: "Gebruikersopties",
+                unknownRole: "Onbekende rol",
+                unknownUser: "Onbekende gebruiker"
             }
         },
         petpet: {
@@ -7497,7 +7966,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unnamed: "eh oh"
                 },
                 pin: {
-                    label: "DM vastzetten",
+                    label: "DM's vastzetten",
                     addCategory: "Categorie toevoegen"
                 },
                 unPin: {
@@ -7534,7 +8003,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     color: "Kleur",
                     save: "Redden",
                     create: "Creëren"
-                }
+                },
+                defaultCategoryName: "Vastgezette categorie {{number}}"
             }
         },
         pingNotifications: {
@@ -7578,12 +8048,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformIndicators: {
             name: "PlatformIndicators",
             description: "Voegt platformindicatoren (Desktop, Mobiel, Web...) toe aan gebruikers",
-            embeddedTooltip: "Troosten",
+            embeddedTooltip: "Ingebed (console of game)",
             vrTooltip: "VR",
             option: {
                 list: {
                     label: "Lijst",
-                    description: "Toon indicatoren in de ledenlijst"
+                    description: "Indicatoren tonen in gebruikersprofielen"
                 },
                 badges: {
                     label: "Insignes",
@@ -7606,7 +8076,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformSpoofer: {
             name: "PlatformSpoofer",
             description: "Spoof op welk platform of apparaat u zich bevindt",
-            about: "We kunnen niet garanderen dat u voor deze plug-in niet gewaarschuwd of verbannen wordt.",
+            about: "We kunnen niet garanderen dat je door deze plugin geen waarschuwing of ban krijgt. Als je Xbox/Playstation/VR kiest, kan je client een verouderde versie worden.",
             platform: {
                 desktop: "Discord-klant",
                 web: "Onenigheidsweb",
@@ -7619,7 +8089,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 platform: {
                     label: "Platform",
-                    description: "Op welk platform je moet verschijnen",
+                    description: "Op welk platform je wilt doen alsof je zit.",
                     desktop: "Bureaublad",
                     web: "Web",
                     android: "Android",
@@ -7689,9 +8159,9 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         profileSets: {
             name: "ProfileSets",
-            description: "Hiermee kunt u verschillende profielvoorinstellingen opslaan en laden via het gedeelte Profiel in Instellingen.",
+            description: "Hiermee kun je verschillende profielvoorinstellingen opslaan en laden.",
             toast: {
-                importFailed: "Kan profielsets niet importeren. Het bestand is mogelijk ongeldig.",
+                importFailed: "Kan voorinstellingen niet importeren. Het bestand is mogelijk ongeldig.",
             },
             option: {
                 avatarSize: {
@@ -7722,397 +8192,550 @@ const translations: MatchStructure<typeof enTranslations> = {
                 random: "Willekeurig",
                 import: "Importeren",
                 exportAll: "Alles exporteren"
+            },
+            text: {
+                selectAServer: "Kies een server",
+                profileSets: "Profielsets",
+                youAreNotIn: "Je zit nog niet in een server.",
+                mainProfile: "Hoofdprofiel",
+                serverProfiles: "Serverprofielen",
+                openProfileSets: "Profielsets openen"
             }
         },
         questify: {
             name: "Questify",
-            description: "Verbeter je Quest-ervaring met een reeks functies, of schakel ze volledig uit als ze niet jouw ding zijn.",
-            quests: "Zoektochten",
+            description: "Verbeter specifieke Quest-functies, schakel storende elementen uit of verwijder Quests volledig.",
+            quests: "Quests",
             context: {
                 quest: {
                     label: "Quest-knopmenu",
-                    ignore: "Markeer alles genegeerd",
-                    reset: "Reset genegeerde lijst",
-                    fetch: "Haal speurtochten op",
-                    markAsIgnored: "Markeer als genegeerd",
-                    unmarkAsIgnored: "Markeer als genegeerd",
-                    stopAuto: "Stop automatisch aanvullen",
-                    copyQuestID: "Kopieer Quest-ID",
-                    startAuto: "Start automatisch aanvullen"
+                    ignore: "Alles als genegeerd markeren",
+                    reset: "Negeerlijst resetten",
+                    fetch: "Quests ophalen",
+                    markAsIgnored: "Als genegeerd markeren",
+                    unmarkAsIgnored: "Niet meer negeren",
+                    stopAuto: "Automatisch voltooien stoppen",
+                    startAuto: "Automatisch voltooien starten",
+                    copyQuestID: "Quest-ID kopiëren"
                 }
+            },
+            button: {
+                completing: "Bezig met voltooien...",
+                completingWithTime: "Bezig met voltooien ({{time}})",
+                completingIn: "Voltooid over {{time}}",
+                queued: "In wachtrij ({{position}})",
+                resuming: "Hervatten...",
+                completeNow: "Nu voltooien",
+                complete: "Voltooien ({{time}})",
+                resume: "Hervatten ({{time}})",
+                completed: "Voltooid"
+            },
+            reward: {
+                orbs: "{{status}} voor {{orbQuantity}} Orbs.",
+                article: "{{status}} voor {{itemName}}.",
+                unrecognized: "{{status}} voor een onbekende beloning."
+            },
+            toast: {
+                autoCompleteBroken: "Automatisch voltooien werkt niet. Er komt binnenkort een oplossing.",
+                enrollmentFailed: "Inschrijven voor de Quest {{questName}} is mislukt.",
+                enrollmentInNormalizequestnameQuest: "Inschrijving voor quest {{normalizeQuestName_quest}} mislukt{{rateLimitSuffix}}."
+            },
+            notification: {
+                completed: {
+                    title: "Quest voltooid!",
+                    body: "De Quest {{questName}} is voltooid."
+                },
+                newQuest: {
+                    title: "Nieuwe Quest gevonden!",
+                    body: "De Quest {{questName}} is nu beschikbaar."
+                },
+                newQuests: {
+                    title: "Nieuwe Quests gevonden!",
+                    body: "{{count}} nieuwe Quests zijn nu beschikbaar."
+                },
+                newExcludedQuest: {
+                    title: "Nieuwe uitgesloten Quest gevonden!",
+                    body: "De uitgesloten Quest {{questName}} is gevonden. ID: {{questId}}"
+                },
+                newExcludedQuests: {
+                    title: "Nieuwe uitgesloten Quests gevonden!",
+                    body: "{{count}} nieuwe uitgesloten Quests gevonden. Bekijk de console voor hun Quest-ID's."
+                }
+            },
+            alert: {
+                restart: {
+                    title: "Herstart vereist",
+                    body: "Een wijziging in de instellingen van Questify vereist een herstart.",
+                    confirm: "Herstarten",
+                    cancel: "Later"
+                },
+                dangerous: {
+                    title: "Weet je het zeker?",
+                    confirm: "Doorgaan",
+                    cancel: "Annuleren",
+                    disableEverything: "Dit schakelt de Quest-functionaliteit volledig uit.",
+                    allowDangerous: "Dit staat het wijzigen van gevaarlijke instellingen toe."
+                }
+            },
+            status: {
+                unclaimed: "NIET GECLAIMD",
+                claimed: "Geclaimd",
+                ignored: "Genegeerd",
+                expired: "Verlopen"
+            },
+            questTypes: {
+                watchVideo: "Video bekijken",
+                watchVideoOnMobile: "Video bekijken op mobiel",
+                achievementInActivity: "Prestatie in activiteit",
+                achievementInGame: "Prestatie in game",
+                playActivity: "Activiteit spelen",
+                playOnDesktop: "Spelen op desktop",
+                playOnDesktopV2: "Spelen op desktop V2",
+                streamOnDesktop: "Streamen op desktop",
+                playOnPlayStation: "Spelen op PlayStation",
+                playOnXbox: "Spelen op Xbox"
             },
             settings: {
                 questButton: {
                     title: "Quest-knop",
-                    description: "Toon een Quest-knop in de serverlijst met een optionele indicator voor niet-geclaimde Quests.",
-                    leftClick: "Linksklikactie",
-                    middleClick: "Middelste klikactie",
-                    rightClick: "Klik met de rechtermuisknop op actie",
-                    visibility: "Knopzichtbaarheid",
-                    unclaimedIndicator: "Niet-geclaimde indicator",
-                    badgeColor: "Badgekleur",
-                    rewardDisplay: "Beloningsweergave",
-                    includedRewardTypes: "Inbegrepen beloningstypen",
-                    includedRewardTypesDesc: "Tel missies met deze beloningstypen alleen als niet-geclaimd bij het bepalen van de knopzichtbaarheid, het aantal badges en bij het afspelen van het waarschuwingsgeluid.",
-                    selectRewardTypes: "Selecteer welke beloningstypen u wilt opnemen in de niet-geclaimde telling...",
-                    noRewardType: "Er is geen ondersteunde Quest-functie met die naam.",
-                    default: "Standaard",
-                    disable: "Uitzetten"
+                    description: "Toon een Quest-knop in de serverlijst met een optionele indicator voor niet-geclaimde en niet-genegeerde Quests.",
+                    behavior: "Knopgedrag",
+                    leftClick: "Actie bij linkerklik:",
+                    middleClick: "Actie bij middelklik:",
+                    rightClick: "Actie bij rechterklik:",
+                    visibility: "Zichtbaarheid van de knop:",
+                    visibilityTooltip: "Altijd toont de Quest-knop zolang deze functie is ingeschakeld.\n\nNiet geclaimd toont hem alleen als je relevante niet-geclaimde Quest-beloningen hebt.\n\nNooit verbergt de Quest-knop.",
+                    unclaimedIndicator: "Indicator niet geclaimd:",
+                    unclaimedIndicatorTooltip: "Pil toont Discords ongelezen-markering naast de Quest-knop.\n\nBadge toont het aantal relevante niet-geclaimde Quest-beloningen.\n\nBeide toont de pil en de badge samen.\n\nGeen verbergt de indicatoren.",
+                    badgeColor: "Badgekleur:",
+                    relevancy: "Quest-relevantie",
+                    includedRewardTypes: "Meegenomen beloningstypen:",
+                    includedRewardTypesTooltip: "Tel alleen Quests met deze beloningstypen als niet geclaimd bij het bepalen van de knopzichtbaarheid, het badgegetal en het meldingsgedrag.",
+                    includedQuestTypes: "Meegenomen Quest-typen:",
+                    includedQuestTypesTooltip: "Tel alleen Quests met deze taaktypen als niet geclaimd bij het bepalen van de knopzichtbaarheid, het badgegetal en het meldingsgedrag.",
+                    display: {
+                        always: "Altijd",
+                        unclaimed: "Niet geclaimd",
+                        never: "Nooit"
+                    },
+                    indicator: {
+                        pill: "Pil",
+                        badge: "Badge",
+                        both: "Beide",
+                        none: "Geen"
+                    },
+                    action: {
+                        openQuests: "Quests openen",
+                        contextMenu: "Contextmenu",
+                        pluginSettings: "Plugin-instellingen",
+                        nothing: "Niets"
+                    },
+                    rewardTypes: {
+                        orbs: "Orbs",
+                        nitroCodes: "Nitro-codes",
+                        rewardCodes: "Beloningscodes",
+                        inGameItems: "In-game items",
+                        profileCollectibles: "Profielverzamelobjecten"
+                    }
                 },
                 questFeatures: {
                     title: "Quest-functies",
-                    description: "Pas specifieke Quest-functies aan.",
-                    popupWarning: "De optie {{disablePopup}} wordt genegeerd voor voltooide missies en het bijhouden van de voortgang van missies.",
-                    videoQuestInfo: "De optie {{completeVideo}} wacht gedurende de duur van de Video Quest en markeert deze automatisch als voltooid.",
-                    gameQuestInfo: "Op dezelfde manier wacht de optie {{completeGame}} gedurende de Game Quest en markeert deze automatisch als voltooid. Deze optie wordt alleen ondersteund op de officiële desktopclient.",
-                    manualStartWarning: "Je moet de Quests nog steeds handmatig starten. De eerste klik start de Quests op de achtergrond. Voor videomissies openen volgende klikken de videomodal zoals normaal. Om de Quests af te breken, kun je het contextmenu op de Quest-tegel openen en {{stopAuto}} selecteren.",
-                    tosWarning: "Het gebruik van een van deze opties is in strijd met de ToS van Discord. Gebruik op eigen risico.",
-                    selectFeatures: "Selecteer welke Quest-functies je wilt wijzigen.",
-                    disablePopup: "Schakel de Quest-pop-up boven het accountpaneel uit",
-                    completeVideo: "Voltooi videomissies op de achtergrond",
-                    completeGame: "Voltooi speelgame-missies op de achtergrond",
-                    stopAuto: "Stop automatisch aanvullen"
+                    description: "Pas aan hoe Quests werken om functionaliteit te verbeteren of te verwijderen.",
+                    disableFeatures: "Functies uitschakelen",
+                    disableEverything: "Quest-functionaliteit volledig uitschakelen:",
+                    disableEverythingTooltip: "Dit schakelt alle plugin-verbeteringen uit, verbergt de Quest-pagina en Quest-elementen in heel Discord en voorkomt dat Discord Quest-gegevens ophaalt. De winkel wordt niet beïnvloed, omdat Orbs als tweede valuta te nauw met de winkel verbonden zijn.",
+                    disableSpecific: "Specifieke functies uitschakelen:",
+                    disableSpecificTooltip: "Gesponsorde banner is een betaalde Quest-banner bovenaan de Quest-pagina.\n\nVerhuismeldingen zijn aanduidingen, zoals op de Ontdekken-pagina, dat Quests naar DM's zijn verplaatst.\n\nVriendenlijst-promo is een kaart in de sectie \"Nu actief\" van je vriendenlijst terwijl een gebruiker met wie je een server deelt een game met een actieve Quest speelt.\n\nLedenlijst-promo is een pictogram bij leden in de ledenlijst van een server terwijl ze een game met een actieve Quest spelen.\n\nAccountpaneel-promo is een betaalde Quest-promotie boven je accountpaneel.\n\nAccountpaneel-voortgang is de actieve of voltooide Quest-voortgang boven je accountpaneel.\n\nQuest- & Orbs-badges zijn badges op profielen voor wie minstens één Quest heeft voltooid of de Orbs-badge heeft gekocht.",
+                    disableOptions: {
+                        sponsoredBanner: "Gesponsorde banner",
+                        relocationNotices: "Verhuismeldingen",
+                        friendsListPromo: "Vriendenlijst-promo",
+                        membersListPromo: "Ledenlijst-promo",
+                        accountPanelPromo: "Accountpaneel-promo",
+                        accountPanelProgress: "Accountpaneel-voortgang",
+                        orbsAndQuestsBadges: "Quest- & Orbs-badges"
+                    },
+                    modifyFeatures: "Functies aanpassen",
+                    warningTos: "Discord is begonnen met het waarschuwen van gebruikers van scripts of plugins die aanpassen hoe Quests worden voltooid, wat in strijd is met hun {{tos}}.",
+                    tos: "Servicevoorwaarden",
+                    warningEscalate: "De waarschuwingen lijken beperkt tot het dreigen met verlies van toegang tot Quests of hun beloningen, maar Discord kan op elk moment strenger worden.",
+                    warningDetection: "Door de verschillende methoden die Discord gebruikt om gebruikers te volgen, is er realistisch gezien geen manier om detectie te ontwijken. Als je doorgaat, besef dan dat Discord het waarschijnlijk op een gegeven moment zal detecteren.",
+                    warningRisk: "Gebruik de volgende schakelaar om op eigen risico toegang te krijgen tot mogelijk gevaarlijke instellingen.",
+                    allowDangerous: "Wijzigen van gevaarlijke instellingen toestaan...",
+                    disallowDangerous: "Resetten en wijzigen van gevaarlijke instellingen verbieden...",
+                    completeVideoQuicker: "Automatisch voltooien van video-Quests versnellen:",
+                    completeVideoQuickerTooltip: "Discord staat toe dat video-Quests worden voltooid zodra sinds je inschrijving de videoduur min 24 seconden is verstreken.\n\nDat betekent dat een video-Quest van 24 seconden of korter, of een Quest waarvoor je je inschrijft en later terugkomt, direct kan worden voltooid.\n\nDeze instelling geldt alleen voor het automatisch voltooien van video-Quests en is afhankelijk van de instelling voor automatisch voltooien hieronder. Handmatig voltooien vereist nog steeds het wachten van de volledige duur en hangt niet af van het inschrijfmoment.",
+                    mobileDesktop: "Sommige mobiel-only video-Quests voltooibaar maken op desktop:",
+                    mobileDesktopTooltip: "Voor sommige mobiel-only video-Quests kun je je op desktop inschrijven, maar ze moeten nog steeds op mobiel worden voltooid. Deze instelling maakt voltooien op desktop mogelijk.\n\nVoor sommige mobiel-only video-Quests kun je je alleen op mobiel inschrijven. Om deze instelling daarop toe te passen, moet je je eerst op je mobiele apparaat inschrijven voordat je terugkeert naar desktop en je Quests vernieuwt.\n\nAfzonderlijk ingeschakeld geldt deze instelling alleen voor het handmatig voltooien van video-Quests. Het automatisch voltooien van mobiele video-Quests vanaf desktop hangt af van de instelling voor automatisch voltooien hieronder en schakelt deze instelling impliciet ook in.",
+                    simultaneous: "Quests tegelijk in plaats van na elkaar automatisch voltooien:",
+                    simultaneousTooltip: "Standaard worden meerdere automatisch te voltooien Quests in een wachtrij gezet en op volgorde voltooid.\n\nMet deze instelling lopen alle automatisch te voltooien Quests in plaats daarvan tegelijk.\n\nDeze instelling geldt alleen voor automatisch voltooien en is afhankelijk van de instelling voor automatisch voltooien hieronder.",
+                    resumeInterrupted: "Onderbroken automatische voltooiingen hervatten na herladen of herstarten:",
+                    resumeInterruptedTooltip: "Deze instelling hervat automatisch voltooiingen die door herladen of herstarten zijn onderbroken, inclusief het opnieuw in de wachtrij zetten van Quests die al in de wachtrij stonden maar nog niet waren begonnen.",
+                    autoCompleteTypes: "Specifieke Quest-typen automatisch voltooien:",
+                    autoCompleteTypesTooltip: "\"Video bekijken op mobiel\"-Quests werken alleen voor mobiele Quests waarvoor je je op desktop kunt inschrijven. Is inschrijving beperkt tot mobiel, dan moet je je eerst op je mobiele apparaat inschrijven voordat je terugkeert naar desktop en je Quests vernieuwt.\n\nAlle videogerelateerde Quests sturen meestal een stacktrace mee met de voortgangsrapporten. Discord weet dus precies welke functies zijn aangeroepen en kan controleren of de eigen functies de voortgang hebben gestart. Questify wist deze stacktrace, maar de afwezigheid ervan verraadt evenveel als de aanwezigheid.\n\n\"Spelen op desktop\", \"Spelen op PlayStation\", \"Spelen op Xbox\" en \"Activiteit spelen\"-Quests zijn door een beperking van Discord alleen beschikbaar in officiële desktopclients. Clients van derden zoals webextensies, Plextron en andere ondersteunen het automatisch voltooien van deze typen niet.\n\nAlle gamegerelateerde Quests sturen meestal een game-fingerprint mee met de heartbeat-rapporten. Discord kan zo met gegevens van tienduizenden gebruikers bepalen of anderen waarschijnlijk een echte game gebruiken of het uitvoerbare bestand emuleren. Er is geen redelijke manier om deze waarde te vervalsen, dus Questify laat hem leeg, maar de afwezigheid ervan verraadt evenveel als een slechte vervalsing.\n\n\"Prestatie in activiteit\"-Quests kunnen alleen automatisch worden voltooid door ze direct te voltooien. Deze methode kan op elk moment worden gepatcht.\n\nAutomatisch voltooien gebeurt door op de bijbehorende knoppen op de Quest-pagina te klikken. Quests worden voltooid in de volgorde waarin ze in de wachtrij zijn gezet, tenzij hierboven gelijktijdig voltooien is ingeschakeld.\n\nHet automatisch voltooien van Quests is de meest riskante gevaarlijke instelling. Schakel het in op eigen risico."
                 },
-                restyleQuests: {
-                    title: "Restyle-missies",
-                    description: "Markeer missies met optionele themakleuren voor zichtbaarheid.",
-                    precedenceNote: "Geclaimde en Verlopen Quest-stijlen hebben voorrang, zelfs als een Quest wordt genegeerd.",
-                    gradientStyle: "Verloopstijl",
-                    assetPreload: "Activa vooraf laden",
-                    unclaimed: "Niet geclaimd",
-                    claimed: "Geclaimd",
-                    ignored: "Genegeerd",
-                    expired: "Verlopen",
-                    intenseGradient: "Intens Restyle-verloop",
-                    defaultGradient: "Standaard Restyle-verloop",
-                    blackGradient: "Subtiel zwart verloop",
-                    noGradient: "Geen verloop",
-                    loadAllAssets: "Laad alle Quest-middelen bij het laden van de pagina",
-                    loadDuringScroll: "Laad Quest-items tijdens het scrollen van de pagina"
+                questNotifications: {
+                    title: "Quest-meldingen",
+                    description: "Stel meldingen en waarschuwingen in voor voltooide en nieuw gevonden Quests.",
+                    questCompleted: "Quest voltooid",
+                    notifyOnComplete: "Melding tonen wanneer een Quest is voltooid:",
+                    soundOnComplete: "Geluid afspelen wanneer een Quest is voltooid:",
+                    volume: "Volume:",
+                    newQuests: "Nieuwe Quests gevonden",
+                    notifyOnNew: "Melding tonen wanneer nieuwe Quests worden gevonden:",
+                    soundOnNew: "Geluid afspelen wanneer nieuwe Quests worden gevonden:",
+                    notifyOnNewExcluded: "Melding tonen wanneer nieuwe uitgesloten Quests worden gevonden:",
+                    notifyOnNewExcludedTooltip: "Sommige Quests zijn vanwege regio- of platformbeperkingen uitgesloten van je lijst met beschikbare Quests.\n\nIndien ingeschakeld haalt Questify hun configuraties op, past je filters voor Quest- en beloningstypen toe, schrijft de gegevens van uitgesloten Quests naar de console en toont een aparte melding voor overeenkomende uitgesloten Quests.",
+                    soundOnNewExcluded: "Geluid afspelen wanneer nieuwe uitgesloten Quests worden gevonden:",
+                    soundOnNewExcludedTooltip: "Sommige Quests zijn vanwege regio- of platformbeperkingen uitgesloten van je lijst met beschikbare Quests.\n\nAls er een geluid is gekozen, haalt Questify hun configuraties op, past je filters voor Quest- en beloningstypen toe, schrijft de gegevens van uitgesloten Quests naar de console en speelt dit geluid af voor overeenkomende uitgesloten Quests.",
+                    fetchInterval: "Interval voor het ophalen van Quests:",
+                    fetchIntervalTooltip: "Discord haalt Quests alleen op bij het laden en wanneer je de Quest-pagina bezoekt.\n\nDit interval haalt Quests regelmatig op zolang de client open blijft, zodat de Quest-knopindicatoren en meldingen over nieuwe Quests de hele dag actueel blijven.\n\nDit werkt alleen als het is ingeschakeld en de instellingen van de Quest-knop of Quest-meldingen periodiek ophalen zinvol maken.",
+                    disabled: "UITGESCHAKELD",
+                    preview: "{{sound}} beluisteren",
+                    intervals: {
+                        thirtyMinutes: "30 minuten",
+                        fortyFiveMinutes: "45 minuten",
+                        oneHour: "1 uur",
+                        threeHours: "3 uur",
+                        sixHours: "6 uur",
+                        twelveHours: "12 uur"
+                    }
+                },
+                questTiles: {
+                    title: "Quest-tegels",
+                    description: "Markeer Quests met optionele themakleuren voor betere zichtbaarheid.",
+                    behavior: "Tegelgedrag",
+                    gradientStyle: "Verloopstijl:",
+                    gradientStyleTooltip: "Intens en Standaard gebruiken de gekozen tegelkleur in het afbeeldingsverloop.\n\nSubtiel zwart gebruikt een donkerder neutraal verloop voor contrast.\n\nGeen verloop verwijdert het afbeeldingsverloop, waardoor sommige Quest-afbeeldingen moeilijker leesbaar kunnen zijn.",
+                    assetPreload: "Vooraf laden van bestanden:",
+                    assetPreloadTooltip: "Alle bestanden laden bij het openen van de Quest-pagina vermindert verschuivingen in de lay-out tijdens het scrollen.\n\nLaden tijdens het scrollen ligt dichter bij het standaardgedrag van Discord en vergt vooraf minder werk.",
+                    colors: "Tegelkleuren",
+                    enable: "Inschakelen",
+                    disable: "Uitschakelen",
+                    gradient: {
+                        intense: "Intens restyle-verloop",
+                        default: "Standaard restyle-verloop",
+                        black: "Subtiel zwart verloop",
+                        hide: "Geen verloop"
+                    },
+                    preload: {
+                        onLoad: "Alle Quest-bestanden laden bij het openen van de pagina",
+                        onScroll: "Quest-bestanden laden tijdens het scrollen"
+                    }
                 },
                 reorderQuests: {
-                    title: "Zoekopdrachten opnieuw rangschikken",
-                    description: "Sorteer missies op hun status. Toegepast wanneer de sorteeroptie \"Questify\" is geselecteerd op de Quest-pagina.",
-                    formatNote: "Een door komma's gescheiden lijst moet het volgende bevatten: {{items}}.",
-                    placeholder: "U moet alle items van NIET-CLAIMED, CLAIMED, GENEGORED en EXPIRED opnemen",
-                    invalidFormat: "Ongeldig formaat.",
-                    unclaimedSubsort: "Niet-geclaimde subsoort",
-                    claimedSubsort: "Geclaimde ondersoort",
-                    ignoredSubsort: "Genegeerde subsoort",
-                    expiredSubsort: "Verlopen subsoort",
-                    addedNewest: "Toegevoegd (nieuwste)",
-                    addedOldest: "Toegevoegd (oudste)",
-                    expiredRecent: "Verlopen (meest recente)",
-                    expiredLeast: "Verlopen (minst recent)",
-                    expiringSoon: "Verloopt (binnenkort)",
-                    expiringLate: "Verloopt (laatste)",
-                    claimedRecent: "Geclaimd (meest recente)",
-                    claimedLeast: "Geclaimd (minst recent)",
-                    ignoredQuestProfile: "Genegeerd Quest-profiel",
-                    sharedProfile: "Gedeeld: Alle accounts op deze clientshare worden genegeerd.",
-                    privateProfile: "Privé: alle accounts op deze client hebben afzonderlijke negaties.",
-                    rememberSort: "Onthoud de sorteerkeuze",
-                    rememberFilter: "Onthoud de filterkeuze",
-                    yes: "Ja",
-                    no: "Nee",
-                    rememberNote: "Deze sorteer- en filterkeuze verwijst naar de ingebouwde sorteer- en filteropties op de Quest-pagina. De aangepaste sortering hierboven wordt alleen toegepast als de sorteeroptie \"Questify\" is geselecteerd op de Quest-pagina. Als het onthouden is uitgeschakeld, worden de sorteer- of filteropties elke keer opnieuw ingesteld als je de Quest-pagina opent."
-                },
-                fetchingQuests: {
-                    title: "Quests ophalen",
-                    description: "Configureer hoe vaak je Quests van Discord wilt ophalen en stel waarschuwingen in voor nieuwe Quests.",
-                    defaultBehavior: "Standaard haalt Discord alleen Quests op tijdens het laden en bij het bezoeken van de Quests-pagina. Dit betekent dat zonder een hieronder gedefinieerd ophaalinterval, deze plug-in niet op de hoogte zal zijn van nieuwe Quests die gedurende de dag worden toegevoegd.",
-                    requirement: "Dit is afhankelijk van het feit dat de Quest-knop is ingeschakeld en is ingesteld op {{unclaimed}}, of is ingesteld op {{always}} met niet-geclaimde {{pill}}-, {{badge}}- of {{both}}-indicatoren ingeschakeld. Anders is er geen reden om periodiek speurtochten op te halen.",
-                    blockWarning: "Ook als {{fetchingQuests}} is geblokkeerd in de instelling {{questFeatures}}, zal dit niet werken.",
-                    fetchInterval: "Interval ophalen",
-                    alertSound: "Waarschuwingsgeluid",
-                    intervalPlaceholder: "Selecteer of typ een interval tussen 30 minuten en 12 uur.",
-                    intervalFeedback: "Intervallen moeten tussen 30 minuten en 12 uur liggen.",
-                    soundPlaceholder: "Selecteer een geluid of geef een aangepaste geluids-URL op.",
-                    soundFeedback: "Er is geen geluid gevonden of de URL is niet afkomstig van een ondersteund domein.",
-                    disabled: "Gehandicapt",
-                    minutes: "Notulen",
-                    minute: "Minuut",
-                    hours: "Uur",
-                    hour: "Uur",
-                    thirtyMinutes: "30 minuten",
-                    oneHour: "1 uur",
-                    threeHours: "3 uur",
-                    sixHours: "6 uur",
-                    twelveHours: "12 uur",
-                    customSound: "AANGEPASTE GELUID"
-                },
-                disableOptions: {
-                    everything: "Schakel alles uit",
-                    discovery: "Schakel het tabblad Ontdekking uit",
-                    dms: "Schakel het tabblad Quests uit in DM's",
-                    fetching: "Schakel het ophalen van speurtochten uit",
-                    popup: "Schakel pop-up boven accountpaneel uit",
-                    sponsored: "Schakel de gesponsorde banner op de Quests-pagina uit",
-                    badge: "Badge op gebruikersprofielen uitschakelen",
-                    inventory: "Melding van verplaatsing van cadeauvoorraad uitschakelen",
-                    friendsList: "Vriendenlijst Actie nu actief",
-                    membersList: "Ledenlijst Actief spelende pictogrammen",
-                    gameQuests: "Voltooi spel-/activiteitsmissies op de achtergrond",
-                    videoQuests: "Voltooi bekijk video-missies op de achtergrond",
-                    achievementQuests: "Voltooi de taak in activiteitsmissies op de achtergrond",
-                    mobileDesktop: "Maak Mobile Quests Desktop-compatibel",
-                    notifyOnComplete: "Informeer bij voltooiing van de zoektocht"
-                },
-                options: {
-                    always: "Altijd",
-                    unclaimed: "Niet geclaimd",
-                    never: "Nooit",
-                    pill: "Pil",
-                    badge: "Kenteken",
-                    both: "Beide",
-                    none: "Geen",
-                    openQuests: "Open speurtochten",
-                    contextMenu: "Contextmenu",
-                    pluginSettings: "Plugin-instellingen",
-                    nothing: "Niets",
-                    orbs: "Orbs",
-                    nitroCodes: "Nitro-codes",
-                    rewardCodes: "Beloningscodes",
-                    inGameItems: "In-game-items",
-                    profileCollectibles: "Profiel Verzamelobjecten"
+                    title: "Quests herordenen",
+                    description: "Quests op status sorteren als de Questify-sortering is gekozen op de questpagina. Verborgen statussen worden bij elke sortering uitgefilterd.",
+                    statusOrder: "Statusvolgorde",
+                    statusOrderTooltip: "Elke status kan maar één keer voorkomen. Een status kiezen die al op een andere positie staat, wisselt de twee posities om.",
+                    positions: {
+                        first: "Eerste:",
+                        second: "Tweede:",
+                        third: "Derde:",
+                        fourth: "Vierde:"
+                    },
+                    subsorts: "Subsorteringen",
+                    unclaimedSubsort: "Subsortering niet geclaimd:",
+                    unclaimedSubsortTooltip: "Voltooide maar niet-geclaimde Quests blijven onder onvoltooide niet-geclaimde Quests; daarna wordt deze subsortering binnen die groepen toegepast.",
+                    claimedSubsort: "Subsortering geclaimd:",
+                    claimedSubsortTooltip: "Geclaimde Quests kunnen worden gesorteerd op claimtijd of op het moment dat de Quest is toegevoegd.",
+                    ignoredSubsort: "Subsortering genegeerd:",
+                    ignoredSubsortTooltip: "Genegeerde Quests behouden hun groepspositie; deze subsortering bepaalt hun volgorde binnen die groep.",
+                    expiredSubsort: "Subsortering verlopen:",
+                    expiredSubsortTooltip: "Verlopen Quests kunnen worden gesorteerd op vervaltijd of op het moment dat de Quest is toegevoegd.",
+                    subsort: {
+                        addedNewest: "Toegevoegd (nieuwste)",
+                        addedOldest: "Toegevoegd (oudste)",
+                        expiringSoonest: "Verloopt (eerst)",
+                        expiringLatest: "Verloopt (laatst)",
+                        expiredMostRecent: "Verlopen (meest recent)",
+                        expiredLeastRecent: "Verlopen (minst recent)",
+                        claimedMostRecent: "Geclaimd (meest recent)",
+                        claimedLeastRecent: "Geclaimd (minst recent)"
+                    },
+                    memory: "Geheugen van de Quest-pagina",
+                    rememberSort: "Gekozen sortering van de Quest-pagina onthouden:",
+                    rememberSortTooltip: "Indien uitgeschakeld, opent de Quest-pagina elke keer met de Questify-sortering.",
+                    rememberFilters: "Gekozen filters van de Quest-pagina onthouden:",
+                    rememberFiltersTooltip: "Indien uitgeschakeld, opent de Quest-pagina elke keer zonder taak- of beloningsfilters."
                 }
             },
             option: {
-                disableQuests: {
-                    label: "Schakel missies uit",
-                    description: "Selecteer welke Quest-functies je wilt uitschakelen."
+                migrationVersion: {
+                    label: "Migratieversie",
+                    description: "De huidige migratieversie van de instellingen."
+                },
+                questFeatures: {
+                    label: "Quest-functies",
+                    description: "Kies welke Quest-functies uitgeschakeld moeten worden."
                 },
                 disableQuestsEverything: {
-                    label: "Schakel alles uit",
-                    description: "Schakel alle Quest-functies uit."
+                    label: "Alles uitschakelen",
+                    description: "Schakelt alle Quest-functies uit."
                 },
-                disableQuestsFetchingQuests: {
-                    label: "Schakel het ophalen van speurtochten uit",
-                    description: "Schakel het ophalen van missies uit Discord uit."
+                disableRelocationNotices: {
+                    label: "Verhuismeldingen uitschakelen",
+                    description: "Schakelt Quest-verhuismeldingen op de Ontdekken-pagina uit."
                 },
-                disableQuestsDirectMessagesTab: {
-                    label: "Schakel het tabblad Quests uit in DM's",
-                    description: "Schakel het tabblad Quest uit op de pagina Directe berichten."
+                disableSponsoredBanner: {
+                    label: "Gesponsorde banner uitschakelen",
+                    description: "Schakelt de gesponsorde banner op de Quest-pagina uit."
                 },
-                disableQuestsDiscoveryTab: {
-                    label: "Schakel het tabblad Ontdekking uit",
-                    description: "Schakel het tabblad Quest uit op de ontdekkingspagina."
+                disableAccountPanelPromo: {
+                    label: "Accountpaneel-promo uitschakelen",
+                    description: "Schakelt de gepromote Quest-pop-up boven je accountpaneel uit."
                 },
-                disableQuestsPageSponsoredBanner: {
-                    label: "Schakel de gesponsorde banner op de Quests-pagina uit",
-                    description: "Schakel de gesponsorde banner op de Quest-pagina uit."
+                disableAccountPanelQuestProgress: {
+                    label: "Accountpaneel-voortgang uitschakelen",
+                    description: "Schakelt actieve en voltooide Quest-voortgang boven je accountpaneel uit."
                 },
-                disableQuestsPopupAboveAccountPanel: {
-                    label: "Schakel pop-up boven accountpaneel uit",
-                    description: "Schakel de Quest-pop-up boven uw accountpaneel uit."
+                disableOrbsAndQuestsBadges: {
+                    label: "Quest- & Orbs-badges uitschakelen",
+                    description: "Schakelt de Quest-badge op profielen uit."
                 },
-                disableQuestsBadgeOnUserProfiles: {
-                    label: "Badge op gebruikersprofielen uitschakelen",
-                    description: "Schakel de Quest-badge uit op gebruikersprofielen."
+                disableFriendsListPromo: {
+                    label: "Vriendenlijst-promo uitschakelen",
+                    description: "Schakelt de promotie van Quests voor games die vrienden spelen uit."
                 },
-                disableQuestsGiftInventoryRelocationNotice: {
-                    label: "Melding van verplaatsing van cadeauvoorraad uitschakelen",
-                    description: "Schakel de kennisgeving van de Quest-verhuizing van de cadeau-inventaris uit."
+                disableMembersListPromo: {
+                    label: "Ledenlijst-promo uitschakelen",
+                    description: "Schakelt het pictogram voor actief spelen in de ledenlijst uit."
                 },
-                disableFriendsListActiveNowPromotion: {
-                    label: "Vriendenlijst uitschakelen Actie nu actief",
-                    description: "Schakel de promotie van Quests uit voor games die door vrienden worden gespeeld."
+                allowChangingDangerousSettings: {
+                    label: "Gevaarlijke instellingen toestaan",
+                    description: "Staat het wijzigen van gevaarlijke instellingen toe."
                 },
-                disableMembersListActivelyPlayingIcons: {
-                    label: "Schakel ledenlijst uit met actief spelende pictogrammen",
-                    description: "Schakel de actief spelende pictogrammen in de ledenlijst uit."
+                resumeInterruptedQuests: {
+                    label: "Onderbroken Quests hervatten",
+                    description: "Hervat het automatisch voltooien van Quests na herladen of herstarten."
                 },
-                makeMobileQuestsDesktopCompatible: {
-                    label: "Maak Mobile Quests Desktop-compatibel",
-                    description: "Maak Quests voor mobiel compatibel met desktop."
+                makeMobileVideoQuestsDesktopCompatible: {
+                    label: "Mobiele video-Quests desktopcompatibel maken",
+                    description: "Maakt mobiel-only video-Quests compatibel met desktop."
                 },
-                completeVideoQuestsInBackground: {
-                    label: "Voltooi videomissies op de achtergrond",
-                    description: "Voltooi videomissies op de achtergrond nadat de videoduur is verstreken."
+                autoCompleteQuestsSimultaneously: {
+                    label: "Tegelijk automatisch voltooien",
+                    description: "Voltooit Quests tegelijk in plaats van na elkaar."
                 },
-                completeGameQuestsInBackground: {
-                    label: "Voltooi spelmissies op de achtergrond",
-                    description: "Voltooi gamemissies op de achtergrond nadat de spelduur is verstreken."
+                completeVideoQuestsQuicker: {
+                    label: "Video-Quests sneller voltooien",
+                    description: "Gebruikt Discords voortgangsmarge en de verstreken tijd sinds inschrijving bij het automatisch voltooien van video-Quests."
                 },
-                completeAchievementQuestsInBackground: {
-                    label: "Voltooi de taak in activiteitsmissies op de achtergrond",
-                    description: "Voltooi prestaties in activiteitenmissies op de achtergrond."
-                },
-                notifyOnQuestComplete: {
-                    label: "Informeer bij voltooiing van de zoektocht",
-                    description: "Toon een melding wanneer een Quest automatisch is voltooid."
+                autoCompleteQuestTypes: {
+                    label: "Automatisch te voltooien Quest-typen",
+                    description: "Welke Quest-typen op de achtergrond automatisch worden voltooid."
                 },
                 questButton: {
                     label: "Quest-knop",
-                    description: "Toon een Quest-knop in de serverlijst."
+                    description: "Pas de Quest-knop in de serverlijst aan."
                 },
                 questButtonDisplay: {
-                    label: "Quest-knopweergave",
-                    description: "Welk weergavetype moet worden gebruikt voor de Quest-knop in de serverlijst."
+                    label: "Weergave Quest-knop",
+                    description: "Welk weergavetype voor de Quest-knop in de serverlijst wordt gebruikt."
                 },
-                questRewardIncludeRewardCode: {
-                    label: "Inclusief beloningscodes",
-                    description: "Voeg speurtochten met beloningscodes toe wanneer het aantal speurtochten wordt weergegeven."
+                questButtonIncludedTypes: {
+                    label: "Meegenomen typen Quest-knop",
+                    description: "Welke beloningstypen en Quest-typen worden meegenomen in het aantal op de Quest-knop."
                 },
-                questRewardIncludeNitroCode: {
-                    label: "Inclusief Nitro-codes",
-                    description: "Voeg missies met Nitro-codes toe wanneer het aantal missies wordt weergegeven."
+                questButtonIndicator: {
+                    label: "Indicator Quest-knop",
+                    description: "Welk weergavetype voor de indicator niet geclaimd op de Quest-knop wordt gebruikt."
                 },
-                questRewardIncludeInGame: {
-                    label: "Inclusief in-game beloningen",
-                    description: "Voeg speurtochten met in-game beloningen toe wanneer het aantal speurtochten wordt weergegeven."
-                },
-                questRewardIncludeCollectibles: {
-                    label: "Inclusief verzamelobjecten",
-                    description: "Voeg speurtochten met verzamelvoorwerpen toe wanneer het aantal speurtochten wordt weergegeven."
-                },
-                questRewardIncludeOrbs: {
-                    label: "Inclusief lichtbollen",
-                    description: "Voeg speurtochten met lichtbollen toe wanneer het aantal speurtochten wordt weergegeven."
-                },
-                questButtonUnclaimed: {
-                    label: "Quest-knop Niet-geclaimde indicator",
-                    description: "Welk weergavetype moet worden gebruikt voor de niet-geclaimde indicator op de Quest-knop in de serverlijst."
+                questButtonBadgeCount: {
+                    label: "Badgegetal",
+                    description: "Het huidige aantal relevante niet-geclaimde Quests."
                 },
                 questButtonBadgeColor: {
-                    label: "Quest-knopbadgekleur",
-                    description: "De kleur van de Quest-knopbadge in de serverlijst."
+                    label: "Badgekleur",
+                    description: "De kleur van de badge van de Quest-knop in de serverlijst."
                 },
                 questButtonLeftClickAction: {
-                    label: "Linksklikactie",
-                    description: "De actie die moet worden uitgevoerd wanneer u met de linkermuisknop op de Quest-knop in de serverlijst klikt."
+                    label: "Actie bij linkerklik",
+                    description: "De actie bij een linkerklik op de Quest-knop."
                 },
                 questButtonMiddleClickAction: {
-                    label: "Middelste klikactie",
-                    description: "De actie die moet worden uitgevoerd wanneer u met de middelste muisklik op de Quest-knop in de serverlijst klikt."
+                    label: "Actie bij middelklik",
+                    description: "De actie bij een middelklik op de Quest-knop."
                 },
                 questButtonRightClickAction: {
-                    label: "Klik met de rechtermuisknop op actie",
-                    description: "De actie die moet worden uitgevoerd wanneer u met de rechtermuisknop op de Quest-knop in de serverlijst klikt."
+                    label: "Actie bij rechterklik",
+                    description: "De actie bij een rechterklik op de Quest-knop."
                 },
-                fetchingQuests: {
-                    label: "Quests ophalen",
-                    description: "Haal missies op van Discord."
+                questNotifications: {
+                    label: "Quest-meldingen",
+                    description: "Stel meldingen in voor voltooide en nieuw gevonden Quests."
                 },
-                fetchingQuestsInterval: {
-                    label: "Interval voor het ophalen van speurtochten",
-                    description: "Het interval in seconden om Quests van Discord op te halen."
+                notifyOnQuestComplete: {
+                    label: "Melden bij voltooiing",
+                    description: "Toont een melding wanneer een Quest is voltooid."
                 },
-                fetchingQuestsAlert: {
-                    label: "Quests-waarschuwing ophalen",
-                    description: "Het geluid dat wordt afgespeeld wanneer er nieuwe Quests worden gedetecteerd."
+                notifyOnNewQuests: {
+                    label: "Nieuwe Quests melden",
+                    description: "Toont een melding wanneer nieuwe Quests worden gevonden."
                 },
-                fetchingQuestsAlertVolume: {
-                    label: "Waarschuwingsvolume voor speurtochten ophalen",
-                    description: "Het volume van het waarschuwingsgeluid wanneer er nieuwe Quests worden gedetecteerd."
+                notifyOnNewExcludedQuests: {
+                    label: "Nieuwe uitgesloten Quests melden",
+                    description: "Toont een melding wanneer nieuwe uitgesloten Quests worden gevonden."
                 },
-                restyleQuests: {
-                    label: "Restyle-missies",
-                    description: "Pas het uiterlijk van Quest-tegels aan op de Quests-pagina."
+                questCompletedAlertSound: {
+                    label: "Geluid Quest voltooid",
+                    description: "Het geluid dat wordt afgespeeld wanneer een Quest is voltooid."
                 },
-                restyleQuestsUnclaimed: {
-                    label: "Restyle-missies niet geclaimd",
-                    description: "De kleur van niet-opgeëiste Quest-tegels op de Quests-pagina."
+                questCompletedAlertVolume: {
+                    label: "Volume Quest voltooid",
+                    description: "Het volume van het geluid bij een voltooide Quest."
                 },
-                restyleQuestsClaimed: {
-                    label: "Restyle-missies geclaimd",
-                    description: "De kleur van de geclaimde Quest-tegels op de Quests-pagina."
+                questFetchInterval: {
+                    label: "Ophaalinterval",
+                    description: "Het interval in seconden voor het ophalen van Quests bij Discord."
                 },
-                restyleQuestsIgnored: {
-                    label: "Restyle-missies genegeerd",
-                    description: "De kleur van genegeerde Quest-tegels op de Quests-pagina."
+                newQuestAlertSound: {
+                    label: "Geluid nieuwe Quest",
+                    description: "Het geluid dat wordt afgespeeld wanneer nieuwe Quests worden gevonden."
                 },
-                restyleQuestsExpired: {
-                    label: "Restyle-missies verlopen",
-                    description: "De kleur van verlopen Quest-tegels op de Quests-pagina."
+                newQuestAlertVolume: {
+                    label: "Volume nieuwe Quest",
+                    description: "Het volume van het geluid bij nieuwe Quests."
                 },
-                restyleQuestsGradient: {
-                    label: "Restyle Quests-verloop",
-                    description: "Stijl van het verloop dat wordt gebruikt in de Quest-tegels."
+                newExcludedQuestAlertSound: {
+                    label: "Geluid nieuwe uitgesloten Quest",
+                    description: "Het geluid dat wordt afgespeeld wanneer nieuwe uitgesloten Quests worden gevonden."
                 },
-                restyleQuestsPreload: {
-                    label: "Restyle-missies vooraf laden",
-                    description: "Probeer de middelen voor de Quest-tegels vooraf te laden."
+                newExcludedQuestAlertVolume: {
+                    label: "Volume nieuwe uitgesloten Quest",
+                    description: "Het volume van het geluid bij nieuwe uitgesloten Quests."
+                },
+                questTiles: {
+                    label: "Quest-tegels",
+                    description: "Pas het uiterlijk van Quest-tegels op de Quest-pagina aan."
+                },
+                questTileUnclaimedColor: {
+                    label: "Tegelkleur niet geclaimd",
+                    description: "De kleur van niet-geclaimde Quest-tegels."
+                },
+                questTileClaimedColor: {
+                    label: "Tegelkleur geclaimd",
+                    description: "De kleur van geclaimde Quest-tegels."
+                },
+                questTileIgnoredColor: {
+                    label: "Tegelkleur genegeerd",
+                    description: "De kleur van genegeerde Quest-tegels."
+                },
+                questTileExpiredColor: {
+                    label: "Tegelkleur verlopen",
+                    description: "De kleur van verlopen Quest-tegels."
+                },
+                questTileGradient: {
+                    label: "Tegelverloop",
+                    description: "Stijl van het verloop in de Quest-tegels."
+                },
+                questTilePreload: {
+                    label: "Tegelbestanden vooraf laden",
+                    description: "Probeert de bestanden van Quest-tegels vooraf te laden."
                 },
                 reorderQuests: {
-                    label: "Zoekopdrachten opnieuw rangschikken",
-                    description: "Sorteer missies op hun status. Laat leeg voor standaardsortering. Een door komma's gescheiden lijst moet de volgende gegevens bevatten: UNCLAIMED, CLAIMED, IGNORED, EXPIRED."
+                    label: "Quests herordenen",
+                    description: "Sorteert Quests op status."
+                },
+                questOrder: {
+                    label: "Quest-volgorde",
+                    description: "Sorteervolgorde van de Quest-statusgroepen."
                 },
                 unclaimedSubsort: {
-                    label: "Niet-geclaimde subsoort",
-                    description: "Subsorteermethode voor niet-geclaimde missies."
+                    label: "Subsortering niet geclaimd",
+                    description: "Subsorteermethode voor niet-geclaimde Quests."
                 },
                 claimedSubsort: {
-                    label: "Geclaimde ondersoort",
-                    description: "Subsorteermethode voor geclaimde speurtochten."
+                    label: "Subsortering geclaimd",
+                    description: "Subsorteermethode voor geclaimde Quests."
                 },
                 ignoredSubsort: {
-                    label: "Genegeerde subsoort",
-                    description: "Subsorteermethode voor genegeerde missies."
+                    label: "Subsortering genegeerd",
+                    description: "Subsorteermethode voor genegeerde Quests."
                 },
                 expiredSubsort: {
-                    label: "Verlopen subsoort",
-                    description: "Subsorteermethode voor verlopen missies."
+                    label: "Subsortering verlopen",
+                    description: "Subsorteermethode voor verlopen Quests."
                 },
-                unclaimedUnignoredQuests: {
-                    label: "Niet-opgeëiste, niet-genegeerde missies",
-                    description: "Houdt het aantal niet-geclaimde en niet-genegeerde missies bij."
-                },
-                onQuestsPage: {
-                    label: "Op Quests-pagina",
-                    description: "Of de gebruiker zich momenteel op de Quests-pagina bevindt."
-                },
-                triggerQuestsRerender: {
-                    label: "Triggermissies opnieuw weergeven",
-                    description: "Activeer een nieuwe weergave van de Quests-pagina door deze instelling te wijzigen."
-                },
-                ignoredQuestProfile: {
-                    label: "Genegeerd Quest-profiel",
-                    description: "Het profiel dat wordt gebruikt voor genegeerde missies."
+                isOnQuestsPage: {
+                    label: "Op de Quest-pagina",
+                    description: "Of de gebruiker zich momenteel op de Quest-pagina bevindt."
                 },
                 rememberQuestPageSort: {
-                    label: "Onthoud Quest-paginasortering",
-                    description: "Onthoud de laatst gebruikte sortering op de Quests-pagina."
+                    label: "Sortering onthouden",
+                    description: "Onthoudt de laatst gebruikte sortering op de Quest-pagina."
                 },
                 rememberQuestPageFilters: {
-                    label: "Onthoud Quest-paginafilters",
-                    description: "Onthoud de laatst gebruikte filters op de Quests-pagina."
+                    label: "Filters onthouden",
+                    description: "Onthoudt de laatst gebruikte filters op de Quest-pagina."
                 },
                 lastQuestPageSort: {
-                    label: "Laatste zoektochtpagina sorteren",
-                    description: "Onthoud de laatst gebruikte sortering op de Quests-pagina."
+                    label: "Laatste sortering",
+                    description: "De laatst gebruikte sortering op de Quest-pagina."
                 },
                 lastQuestPageFilters: {
-                    label: "Laatste Quest-paginafilters",
-                    description: "Onthoud de laatst gebruikte filters op de Quests-pagina."
+                    label: "Laatste filters",
+                    description: "De laatst gebruikte filters op de Quest-pagina."
                 },
                 ignoredQuestIDs: {
                     label: "Genegeerde Quest-ID's",
-                    description: "Een reeks Quest-ID's die worden genegeerd."
+                    description: "Een lijst met genegeerde Quest-ID's."
                 },
                 resumeQuestIDs: {
-                    label: "Quest-ID's hervatten",
-                    description: "Een reeks Quest-ID's die op de achtergrond automatisch worden aangevuld."
+                    label: "Te hervatten Quest-ID's",
+                    description: "Een lijst met Quest-ID's die op de achtergrond automatisch worden voltooid of daarvoor in de wachtrij staan."
+                },
+                acknowledgedNotices: {
+                    description: "Eenmalige meldingen die de gebruiker heeft bevestigd.",
+                    label: "Bevestigde meldingen"
+                },
+                settingsSearch: {
+                    description: "Questify-instellingen doorzoeken.",
+                    label: "Instellingen zoeken"
+                },
+                hideNonAutoCompletableQuests: {
+                    description: "Onvoltooide quests zonder ondersteunde en ingeschakelde automatische voltooiingstaak verbergen.",
+                    label: "Niet automatisch voltooibare quests verbergen"
+                },
+                preventVideoQuestsPausing: {
+                    description: "Voorkomen dat de video pauzeert als het questvenster de focus verliest.",
+                    label: "Pauzeren van videoquests voorkomen"
+                },
+                hiddenQuestStatuses: {
+                    description: "Te verbergen queststatusgroepen.",
+                    label: "Verborgen queststatussen"
                 }
             },
-            button: {
-                questInProgressWithTime: "Voltooien ({{remainTime}})",
-                completing: "Voltooien",
-                resume: "Hervatten (~{{remainTime}})",
-                complete: "Voltooi {{remainTime}}",
-                completeImmediate: "Voltooid (onmiddellijk)",
-                completed: "Voltooid"
-            },
-            reward: {
-                orbs: "{{completingText}} voor {{orbQuantity}} lichtbollen.",
-                article: "{{completingText}} voor {{itemName}}.",
-                unrecognized: "{{completingText}} voor een niet-herkend beloningstype."
-            },
-            notification: {
-                completed: {
-                    title: "Zoektocht voltooid",
-                    body: "De {{questName}} Quest is voltooid."
-                }
+            text: {
+                clearQuestQueue: "Questwachtrij wissen",
+                hideIncompleteQuestsWith: "Onvoltooide quests met status niet-geclaimd of genegeerd verbergen als op dit platform geen automatische voltooiingstaak wordt ondersteund en ingeschakeld in de keuzelijst met questtypen. Geclaimde, verlopen en voltooide quests zijn uitgezonderd. Gebruik de opties voor verborgen statusvolgorde om die quests te verbergen.",
+                discordForcesYouTo: "Discord dwingt je om de client actief te hebben zodat videoquests hun video afspelen.",
+                hideNonAutoCompletable: "Niet automatisch voltooibare quests verbergen:",
+                preventVideoQuestsFrom: "Voorkomen dat videoquests pauzeren bij focusverlies:",
+                thePunishmentAlsoConsists: "De straf omvat ook een overtreding van de accountstatus die per overtreding 2 jaar duurt.",
+                dueToTheVarious: "Door de verschillende methoden die Discord gebruikt om gebruikers te volgen, is detectie realistisch gezien niet te ontwijken. Als je doorgaat, besef dan dat Discord je gebruik waarschijnlijk ooit zal detecteren.",
+                enrollInQuest: "Inschrijven voor quest",
+                hidden: "Verborgen",
+                selectingAnOccupiedPosition: "Een bezette positie kiezen verwisselt de twee statussen. Verborgen statussen worden uit de questlijsten verwijderd.",
+                searchQuestifySettings: "Questify-instellingen doorzoeken",
+                searchQuestifySettings2: "Questify-instellingen doorzoeken...",
+                noMatchingSettings: "Geen overeenkomende instellingen.",
+                questifyNoticeAugust7th: "Questify-melding - 7 augustus 2026",
+                keepUsingDangerousQuestify: "Gevaarlijke Questify-instellingen blijven gebruiken",
+                disableDangerousQuestifySettings: "Gevaarlijke Questify-instellingen uitschakelen",
+                questifyNoticeAugust26th: "Questify-melding - 26 augustus 2026",
+                areYouSure: "Weet je het zeker?",
+                thePunishmentAppearsLimited: "De straf lijkt beperkt tot verlies van toegang tot quests en hun beloningen, maar Discord kan op elk moment strenger optreden.",
+                queueAllQuests: "Alle quests in wachtrij zetten",
+                inProgress: "Bezig",
+                rateLimited: "Gelimiteerd",
+                preventsVideoPausing: "Deze instelling voorkomt dat de video pauzeert, zodat de voltooiing normaal verloopt.",
+                appliesOnlyToVideoQuests: "Deze instelling geldt alleen voor het handmatig voltooien van videoquests.",
+                knownToPunish: "Discord staat erom bekend gebruikers van scripts of plugins die het voltooien van quests aanpassen te straffen. Het aanpassen van het voltooien van quests is in strijd met Discords",
+                punishmentConsists: "De straf bestaat uit tijdelijk of permanent verlies van toegang tot quests en hun beloningen.",
+                questBanSystem: "Discord heeft een questbansysteem ingevoerd dat je toegang tot het voltooien van quests en het claimen van beloningen tijdelijk of permanent beperkt als blijkt dat je ze via onofficiële wegen voltooit. Het aanpassen van het voltooien van quests is in strijd met hun",
+                begunPunishing: "Discord is begonnen met het straffen van gebruikers van scripts en plugins die het voltooien van quests aanpassen. Het aanpassen van het voltooien van quests is in strijd met hun",
+                dueToRateLimits: " vanwege snelheidslimieten"
             }
         },
         questionMarkReplacement: {
@@ -8230,6 +8853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Opslaan als GIF",
                     description: "Standaard opslaan als GIF"
                 }
+            },
+            text: {
+                quotePreview: "Citaatvoorbeeld"
             }
         },
         randomVoice: {
@@ -8287,7 +8913,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                     server: "Ongeldige server"
                 }
             },
+            keybind: {
+                label: "Sneltoets",
+                recording: "Opnemen...",
+                reset: "Herstellen"
+            },
             option: {
+                keybindEnabled: {
+                    label: "Sneltoets ingeschakeld",
+                    description: "Toon de sneltoetsinstellingen voor willekeurige spraak"
+                },
                 userAmountOperation: {
                     label: "Bewerking gebruikersbedrag",
                     description: "Selecteer een bewerking voor het aantal gebruikers"
@@ -8379,6 +9014,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             alert: {
                 failed: "Kan geen spraakkanaal vinden!"
+            },
+            toast: {
+                failedToFindA: "Kan geen spraakkanaal vinden.",
+                voiceChannelIsUnavailable: "Spraakkanaal niet beschikbaar."
+            },
+            text: {
+                userCount: "{{count}} gebruiker",
+                usersCount: "{{count}} gebruikers"
             }
         },
         reactErrorDecoder: {
@@ -8426,7 +9069,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 clearRdms: {
                     label: "RDMS-lijst wissen",
                     description: "Hulpprogramma voor testen: Wis de RDM-lijst",
-                    toast: "RMDS-geschiedenis gewist",
+                    toast: "RDMS-geschiedenis gewist",
                     button: "Wis de RDM-geschiedenis"
                 }
             },
@@ -8477,6 +9120,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noLongerFriend: "Je bent niet langer vrienden met {{user}}.",
                 friendRequestRevoked: "Vriendschapsverzoek van {{user}} is ingetrokken.",
                 ok: "OK"
+            },
+            text: {
+                relationshipNotifier: "Relatiemelder"
             }
         },
         remix: {
@@ -8500,7 +9146,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ellipse: "Ellips",
                 line: "Lijn",
                 arrow: "Pijl",
-                fill: "Vullen"
+                fill: "Vullen",
+                image: "Afbeelding"
             }
         },
         repeatMessages: {
@@ -8534,12 +9181,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Zoek tekst",
                 searchWith: "Zoeken met {{name}}"
+            },
+            text: {
+                google: "Google"
             }
         },
         replyPingControl: {
             name: "ReplyPingControl",
-            description: "Bepaal of u altijd of nooit gepingd wilt worden bij berichtantwoorden, met een whitelist-functie",
+            description: "Beheer of je altijd of nooit een vermelding wilt krijgen bij antwoorden op berichten, met functies voor een witte en zwarte lijst",
             option: {
+                replyPingBlacklist: {
+                    label: "Zwarte lijst antwoordvermeldingen",
+                    description: "Kommagescheiden lijst van gebruikers-ID's waarvan je nooit antwoordvermeldingen wilt ontvangen"
+                },
                 alwaysPingOnReply: {
                     label: "Altijd Ping On Antwoord",
                     description: "Ontvang altijd een ping als iemand op uw berichten reageert"
@@ -8564,6 +9218,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Zoek afbeelding",
                 all: "Zoek alles"
+            },
+            text: {
+                all: "Alle"
             }
         },
         reviewDB: {
@@ -8671,6 +9328,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             profile: {
                 optedOut: "Gebruiker geweigerd",
                 noReviews: "Nog geen recensies"
+            },
+            toast: {
+                youCannotVoteOn: "Je kunt niet op je eigen recensie stemmen.",
+                networkErrorFailedTo: "Netwerkfout: kan geen verbinding maken met ReviewDB.",
+                pleaseAuthorizeToVote: "Autoriseer om op recensies te stemmen.",
+                requestFailed: "ReviewDB: verzoek mislukt met status {{status}}"
+            },
+            text: {
+                ok: "Oké",
+                updateReviewFor: "Review voor @{{name}} bijwerken",
+                reviewUser: "@{{name}} reviewen",
+                system: "Systeem",
+                reviewCount: "({{count}} beoordelingen)"
             }
         },
         richMagnetLinks: {
@@ -8764,46 +9434,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
         },
-        rpcStats: {
-            name: "RPCStats",
-            description: "Geeft statistieken weer over uw activiteit als RPC",
-            option: {
-                assetURL: {
-                    label: "Item-URL",
-                    description: "De afbeelding die u voor uw RPC moet gebruiken. Als je deze leeg laat, wordt je profielfoto gebruikt"
-                },
-                rpcTitle: {
-                    label: "RPC-titel",
-                    description: "De titel van uw RPC"
-                },
-                statDisplay: {
-                    label: "Statistische weergave",
-                    description: "Wat moet de RPC weergeven? (Je kunt maar één regel hebben, ik ben er vrij zeker van)",
-                    today: "Het aantal berichten dat vandaag is verzonden",
-                    alltime: "Het aantal berichten dat ooit is verzonden",
-                    listened: "Je meest beluisterde album van de week"
-                },
-                lastFMApiKey: {
-                    label: "Last.fm API-sleutel",
-                    description: "Uw Last.fm API-sleutel"
-                },
-                lastFMUsername: {
-                    label: "Last.fm-gebruikersnaam",
-                    description: "Uw Last.fm-gebruikersnaam"
-                },
-                albumCoverImage: {
-                    label: "Afbeelding albumomslag",
-                    description: "Moet de albumhoesafbeelding worden gebruikt als de RPC-afbeelding? (Als u de Last.fm-weergave hebt gekozen)"
-                },
-                lastFMStatFormat: {
-                    label: "Last.fm Stat-indeling",
-                    description: "Hoe moet de Last.fm-statistiek worden geformatteerd? $album wordt vervangen door de albumnaam en $artist wordt vervangen door de artiestennaam"
-                }
-            },
-            noInfo: "Er is momenteel geen informatie :(",
-            messagesToday: "Berichten verzonden vandaag: {{count}}",
-            messagesAllTime: "Berichten die altijd zijn verzonden: {{count}}"
-        },
         saveFavoriteGIFs: {
             name: "SaveFavouritedGIFs",
             description: "Exporteer favoriete GIF-URL's",
@@ -8868,7 +9498,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 maxMessagesReached: "Maximaal {{max}} berichten per kanaal per bereikte minuut",
                 messageScheduled: "Bericht gepland!",
                 messageRemoved: "Gepland bericht verwijderd",
-                allCleared: "Alle geplande berichten zijn gewist"
+                allCleared: "Alle geplande berichten zijn gewist",
+                scheduledMessageSentTo: "Gepland bericht verzonden naar {{name}}"
             },
             button: {
                 tooltipOn: "Schemamodus AAN (klik om uit te schakelen, klik met de rechtermuisknop voor lijst)",
@@ -8910,7 +9541,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Oplossing voor het vervelende 'We hebben het vergrootglas laten vallen!' fout.",
             notPerfect: "Deze oplossing is niet perfect, dus het kan zijn dat u de zoekbalk opnieuw moet laden om de problemen op te lossen.",
             paragraph1: "Discord staat slechts een maximale offset van 5000 toe (dit is de oorzaak van de vergrootglasfout).",
-            paragraph2: "This means that you can only see precisely 5000 messages into the past, and 5000 messages into the future (when sorting by old).",
+            paragraph2: "Dit betekent dat je precies 5000 berichten terug in de tijd kunt zien, en 5000 berichten vooruit (bij sorteren op oudste).",
             paragraph3: "Deze plug-in springt gewoon naar de tegenovergestelde sorteermethode om de beperking van Discord te omzeilen,",
             paragraph4: "maar als er een groot zoekresultaat is en u probeert een bericht te bekijken dat met beide sorteermethoden niet kan worden verkregen,",
             paragraph5: "de plug-in toont eenvoudigweg offset 0 (nieuwste of oudste bericht, afhankelijk van de sorteermethode)."
@@ -8924,20 +9555,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Speel alleen het Sneeuwhalatie-thema"
                 }
             }
-        },
-        summaries: {
-            name: "Summaries",
-            description: "Schakelt de experimentele samenvattingenfunctie van Discord op elke server in, waarbij door AI gegenereerde samenvattingen van gesprekken worden weergegeven",
-            option: {
-                summaryExpiryThresholdDays: {
-                    label: "Samenvatting Vervaldatumdrempel (dagen)",
-                    description: "De tijd in dagen voordat een samenvatting wordt verwijderd. Houd er rekening mee dat er per kanaal slechts maximaal 50 samenvattingen worden bijgehouden"
-                }
-            }
-        },
-        selfForward: {
-            name: "SelfForward",
-            description: "Voegt het huidige kanaal toe aan de pop-up met de doorstuurlijst"
         },
         sendTimestamps: {
             name: "SendTimestamps",
@@ -8996,13 +9613,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     level: "Verificatieniveau",
                     none: "Geen",
                     low: "Laag",
-                    medium: "Medium",
+                    medium: "Gemiddeld",
                     high: "Hoog",
                     highest: "Hoogste"
                 },
                 serverBoosts: "Serverboosts",
                 channels: "Kanalen",
-                roles: "Rollen"
+                roles: "Rollen",
+                boostLevel: "{{count}} (Niveau {{level}})"
             }
         },
         serverListIndicators: {
@@ -9061,6 +9679,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bgOpacity: {
                     label: "Achtergronddekking",
                     description: "Achtergronddekking"
+                },
+                ignoredLanguages: {
+                    label: "Genegeerde talen",
+                    description: "Kommagescheiden lijst met talen die aan de standaard codeblokken van Discord worden overgelaten"
                 }
             },
             button: {
@@ -9079,6 +9701,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noShiftPin: {
                     label: "Geen schakelpin",
                     description: "Verwijder de vereiste om shift ingedrukt te houden voor het vastzetten van een bericht."
+                },
+                noQuickReacts: {
+                    description: "Snelle reacties verbergen. Standaard verbergt het volledige menu de knoppen voor snelle reacties.",
+                    label: "Geen snelle reacties"
                 }
             }
         },
@@ -9161,6 +9787,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     compact: "Compact",
                     cozy: "Knus",
                     roomy: "Ruim"
+                },
+                showGithubOrgs: {
+                    description: "GitHub-organisaties tonen waarvan de gebruiker lid is",
+                    label: "GitHub-organisaties tonen"
+                },
+                showOnModal: {
+                    description: "Gekoppelde accounts tonen in het volledige profielvenster",
+                    label: "In venster tonen"
                 }
             }
         },
@@ -9295,7 +9929,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 memberList: {
                     label: "Ledenlijst",
-                    description: "Geef de eerste beschikbare naam weer die in uw aangepaste naamnotatie in de ledenlijst wordt vermeld."
+                    description: "De eerste beschikbare naam uit je aangepaste naamindeling tonen in de ledenlijst, DM-lijst, vriendenlijst en Nu actief."
                 },
                 profilePopout: {
                     label: "Profielpop-out",
@@ -9349,6 +9983,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Aangepaste naam alleen in directe berichten",
                     description: "Geef alleen aangepaste namen weer in DM's, en niet op servers."
                 },
+                alwaysShowEffects: {
+                    label: "Effecten altijd animeren",
+                    description: "Toon effecten altijd zoals wanneer je er met de muis overheen beweegt."
+                },
                 includedNames: {
                     label: "Inclusief namen",
                     description: "De volgorde waarin gebruikersnamen, weergavenamen, bijnamen en namen van vrienden worden weergegeven. Gebruik de volgende tijdelijke aanduidingen: {user}, {display}, {nick}, {friend}. Je kunt meerdere naamopties opgeven die je kunt gebruiken als reserve als er één niet beschikbaar is, door ze te scheiden met komma's als volgt: {friend, nick, display}. U kunt maximaal drie voorvoegsels en drie achtervoegsels per naam hebben."
@@ -9376,6 +10014,42 @@ const translations: MatchStructure<typeof enTranslations> = {
                 triggerNameRerender: {
                     label: "Triggernaam opnieuw weergeven",
                     description: "Activeer een herweergave van de naam door deze instelling te wijzigen."
+                },
+                searchAutocomplete: {
+                    description: "De eerste beschikbare naam uit je aangepaste naamindeling tonen in de automatische aanvulling voor vermeldingen en zoeken.",
+                    label: "Automatisch aanvullen bij zoeken"
+                },
+                styleDirectMessagesList: {
+                    description: "Weergavenaameffecten tonen bij niet-geselecteerde items zonder hover. Geselecteerde en gehoverde items blijven opgemaakt als dit uit staat.",
+                    label: "Lijst met privéberichten opmaken"
+                },
+                styleDirectMessagesMessages: {
+                    description: "Weergavenaameffecten tonen bij berichtauteurs zonder hover. Gehoverde namen blijven opgemaakt als dit uit staat.",
+                    label: "Berichten in privéberichten opmaken"
+                },
+                styleFriendsList: {
+                    description: "Weergavenaameffecten tonen zonder hover. Gehoverde items blijven opgemaakt als dit uit staat.",
+                    label: "Vriendenlijst opmaken"
+                },
+                styleActiveNow: {
+                    description: "Weergavenaameffecten tonen zonder hover. Gehoverde items blijven opgemaakt als dit uit staat.",
+                    label: "Nu actief opmaken"
+                },
+                ignoreEffects: {
+                    description: "Voor niet-primaire namen alleen de primaire rolkleur gebruiken en weergavenaameffecten weglaten.",
+                    label: "Effecten negeren"
+                },
+                animateEffects: {
+                    description: "Rolverlopen en weergavenaameffecten op niet-primaire namen animeren. Uitgeschakeld door \"Effecten negeren\" en verminderde beweging.",
+                    label: "Effecten animeren"
+                },
+                alwaysAnimateEffects: {
+                    description: "Weergavenaameffecten laten animeren als ze al zichtbaar zouden zijn, ook zonder hover.",
+                    label: "Effecten altijd animeren"
+                },
+                gradientGlow: {
+                    description: "Een gloed toevoegen aan geanimeerde gebruikersverlopen, net als bij serverrolverlopen.",
+                    label: "Verloopgloed"
                 }
             },
             modal: {
@@ -9389,6 +10063,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nickname: "SMYN-bijnaam",
                 reset: "SMYN-bijnaam opnieuw instellen",
                 cancel: "Annuleren"
+            },
+            text: {
+                save: "Opslaan",
+                unknown: "Onbekend"
             }
         },
         showTimeoutDuration: {
@@ -9401,6 +10079,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     tooltip: "In de Tooltip",
                     inline: "Naast het time-outpictogram"
                 }
+            },
+            text: {
+                timeoutRemaining: "time-out resterend"
             }
         },
         showResourceChannels: {
@@ -9559,7 +10240,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 hidden: "Typen verborgen ({{location}})",
                 visible: "Typen zichtbaar ({{location}})",
-                global: "Typen zichtbaar (algemeen)"
+                global: "Typen zichtbaar (algemeen)",
+                voiceChannel: "Typen altijd zichtbaar in de chat van het verbonden spraakkanaal",
+                temporary: "Typen tijdelijk zichtbaar in dit kanaal vanwege een recent bericht"
             },
             option: {
                 enabledGlobally: {
@@ -9610,6 +10293,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Standaard verborgen",
                     description: "Indien ingeschakeld, verbergt de plug-in uw typen voor anderen in DM's/kanalen/gilden die niet vermeld staan ​​in 'Uitgeschakelde locaties' hieronder. Indien uitgeschakeld, zal de plug-in uw typen aan anderen laten zien voor alle DM's/kanalen/gilden die niet vermeld staan ​​in 'Ingeschakelde locaties' hieronder."
                 },
+                alwaysEnableInActiveVoiceChat: {
+                    label: "Altijd inschakelen in actieve spraakchat",
+                    description: "Sta altijd toe dat je typindicator wordt getoond wanneer je typt in een spraakkanaal waarmee je verbonden bent."
+                },
+                temporaryEnableThresholdServers: {
+                    label: "Tijdelijke inschakeldrempel (servers)",
+                    description: "Sta tijdelijk toe dat je typindicator zoveel seconden wordt getoond na het verzenden van een bericht in een serverkanaal. Als de typindicator al zichtbaar is in het kanaal, heeft deze instelling geen effect."
+                },
+                temporaryEnableThresholdDirectMessages: {
+                    label: "Tijdelijke inschakeldrempel (directe berichten)",
+                    description: "Sta tijdelijk toe dat je typindicator zoveel seconden wordt getoond na het verzenden van een bericht in een DM of groeps-DM. Als de typindicator al zichtbaar is in het kanaal, heeft deze instelling geen effect."
+                },
                 enabledLocations: {
                     label: "Ingeschakelde locaties",
                     description: "Schakel functionaliteit voor deze ID's in. Accepteert een door komma's gescheiden lijst met DM-ID's, kanaal-ID's en gilde-ID's. Wordt alleen gebruikt als 'Standaard verborgen' is uitgeschakeld."
@@ -9618,6 +10313,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Gehandicapte locaties",
                     description: "Schakel de functionaliteit voor deze ID's uit. Accepteert een door komma's gescheiden lijst met DM-ID's, kanaal-ID's en gilde-ID's. Wordt alleen gebruikt als 'Standaard verborgen' is ingeschakeld."
                 }
+            },
+            text: {
+                silentTyping: "Stil typen",
+                enabled: "Ingeschakeld",
+                chatBarIndicators: "Indicatoren in chatbalk",
+                membersListIndicators: "Indicatoren in ledenlijst",
+                guild: "Server",
+                channel: "Kanaal",
+                global: "Globaal"
             }
         },
         snowfall: {
@@ -9714,7 +10418,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         splitLargeMessages: {
             name: "SplitLargeMessages",
-            description: "Splitst grote berichten in meerdere berichten, zodat ze binnen de berichtenlimiet van Discord vallen.",
+            description: "Splitst te grote berichten vóór verzending in stukken van Discord-formaat.",
             option: {
                 maxLength: {
                     label: "Maximale berichtlengte",
@@ -9726,7 +10430,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 sendDelay: {
                     label: "Vertraging verzenden",
-                    description: "Vertraging tussen elk deel in seconden."
+                    description: "Minimale vertraging tussen elk deel in seconden."
                 },
                 hardSplit: {
                     label: "Harde splitsing",
@@ -9734,32 +10438,26 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 splitInSlowmode: {
                     label: "Splitsen in slowmode",
-                    description: "Moeten berichten worden gesplitst als op het kanaal slowmode is ingeschakeld?"
+                    description: "Splitsen in slowmodus toestaan als de vertraging binnen het ingestelde maximum valt."
                 },
                 slowmodeMax: {
-                    label: "Slowmode Max",
-                    description: "Maximale slowmode-tijd bij splitsen in slowmode."
-                }
-            }
-        },
-        spotifyActivityToggle: {
-            name: "SpotifyActivityToggle",
-            description: "Voegt een schakelknop toe voor zichtbaarheid van Spotify-activiteiten.",
-            tooltip: {
-                enable: "Schakel Spotify-activiteit in",
-                disable: "Schakel Spotify-activiteit uit"
-            },
-            option: {
-                location: {
-                    label: "Locatie",
-                    description: "Waar de Spotify-schakelknop moet worden weergegeven",
-                    panel: "Naast Mute/Doof",
-                    toolbox: "Plexcord-gereedschapskist"
+                    label: "Maximale slowmodus",
+                    description: "Maximale slowmodusduur die is toegestaan bij het splitsen van berichten."
                 },
-                activityStatus: {
-                    label: "Activiteitsstatus",
-                    description: "De huidige status van uw Spotify-activiteit"
+                splitMode: {
+                    description: "Deze grens verkiezen bij het splitsen van een bericht.",
+                    label: "Splitsmodus"
                 }
+            },
+            toast: {
+                cannotSplitThisMessage: "Dit bericht kan niet worden gesplitst vanwege de slowmodus van het kanaal.",
+                onlySentLengthMessage: "Slechts {{sent}}/{{length}} berichtdelen zijn verzonden.",
+                unsentCopied: "Niet-verzonden berichtdelen naar klembord gekopieerd."
+            },
+            text: {
+                newlines: "Nieuwe regels",
+                spaces: "Spaties",
+                strictCharacterLimit: "Strikte tekenlimiet"
             }
         },
         spotifyCrack: {
@@ -9845,7 +10543,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             context: {
                 edit: "Aangepaste voorinstellingen bewerken",
-                set: "Aangepaste status instellen"
+                set: "Aangepaste status instellen",
+                delete: "Voorinstelling verwijderen"
             },
             notification: {
                 successfully: "Status succesvol opgeslagen"
@@ -9912,11 +10611,39 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 blockSticker: "Bloksticker",
                 unblockSticker: "Deblokkeer sticker"
+            },
+            text: {
+                failedToRender: "Weergeven mislukt :("
             }
         },
         stickerPaste: {
             name: "StickerPaste",
             description: "Maakt het kiezen van een sticker in de stickerkiezer mogelijk, plaats deze in de chatbox in plaats van deze direct te verzenden"
+        },
+        streaks: {
+            name: "Streaks",
+            description: "Toont een reeks naast een gebruiker wanneer jullie op opeenvolgende dagen DM's uitwisselen.",
+            tooltip: "Reeks van {{count}} dagen",
+            tooltipExpiring: "Reeks van {{count}} dagen — stuur vandaag een bericht om hem vast te houden!",
+            option: {
+                account: {
+                    description: "In- of uitloggen bij de Streaks-API. Reeksen worden in de API opgeslagen, dus je moet ingelogd zijn om ze bij te houden.",
+                    login: "Inloggen bij Streaks-API",
+                    logout: "Uitloggen bij Streaks-API"
+                },
+                eliteColor: "Elite-reekskleur (100+ dagen)",
+                diamondColor: "Diamant-reekskleur (60+ dagen)",
+                platinumColor: "Platina-reekskleur (45+ dagen)",
+                goldColor: "Goud-reekskleur (30+ dagen)",
+                silverColor: "Zilver-reekskleur (14+ dagen)",
+                bronzeColor: "Brons-reekskleur (7+ dagen)",
+                defaultColor: "Standaard reekskleur (1+ dagen)"
+            },
+            toast: {
+                authFailed: "Autorisatie mislukt: {{error}}",
+                failedToAuthorizeMessage: "Autoriseren mislukt: {{message}}",
+                authorizationExpired: "Streaks-autorisatie is verlopen. Autoriseer opnieuw in de instellingen van de Streaks-plugin."
+            }
         },
         streamerModeOnStream: {
             name: "StreamerModeOnStream",
@@ -9924,27 +10651,27 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         streamingCodecDisabler: {
             name: "StreamingCodecDisabler",
-            description: "Schakel codecs uit voor streaming naar keuze",
+            description: "Schakel videocodecs naar keuze uit voor streamen en camera's.",
             option: {
                 disableAv1Codec: {
                     label: "AV1-codec uitschakelen",
-                    description: "Voorkom dat Discord overweegt AV1 te gebruiken voor streaming."
+                    description: "Laat Discord AV1 niet overwegen voor streamen en camera's."
                 },
                 disableH265Codec: {
                     label: "Schakel H265-codec uit",
-                    description: "Voorkom dat Discord overweegt H265 te gebruiken voor streaming."
+                    description: "Laat Discord H265 niet overwegen voor streamen en camera's."
                 },
                 disableH264Codec: {
                     label: "Schakel H264-codec uit",
-                    description: "Voorkom dat Discord overweegt H264 te gebruiken voor streaming."
+                    description: "Laat Discord H264 niet overwegen voor streamen en camera's."
                 },
                 disableVP8Codec: {
                     label: "Schakel VP8-codec uit",
-                    description: "Voorkom dat Discord overweegt VP8 te gebruiken voor streaming."
+                    description: "Laat Discord VP8 niet overwegen voor streamen en camera's."
                 },
                 disableVP9Codec: {
                     label: "Schakel VP9-codec uit",
-                    description: "Voorkom dat Discord overweegt VP9 te gebruiken voor streaming."
+                    description: "Laat Discord VP9 niet overwegen voor streamen en camera's."
                 }
             }
         },
@@ -9990,6 +10717,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             modal: {
+                name: "Naam",
+                nameDescription: "Een optionele naam om deze regel te herkennen.",
+                search: "Zoek een regel...",
+                noResults: "Geen regels komen overeen met je zoekopdracht.",
                 title: "Testregels",
                 find: "Vinden",
                 findRegex: "Regex-patroon",
@@ -10004,6 +10735,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 add: "Regel toevoegen",
                 empty: "Lege regel",
                 rule: "Regel",
+            },
+            text: {
+                optionallyOnlyApplyThis: "Pas deze regel optioneel alleen toe als het bericht deze tekst bevat.",
+                emptyRule: "Lege regel {{number}}",
+                ruleWithFind: "Regel {{number}} - {{find}}"
             }
         },
         themeAttributes: {
@@ -10050,7 +10786,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 twentyFourHourTime: {
                     label: "24-uurs tijd",
-                    description: "Toon de tijd in 24-uursformaat"
+                    description: "Tijd tonen in 24-uursnotatie"
                 },
                 showTimezoneInfo: {
                     label: "Tijdzone-info weergeven",
@@ -10089,6 +10825,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 askedTimezone: {
                     label: "Tijdzone gevraagd",
                     description: "Of de gebruiker is gevraagd om zijn tijdzone in te stellen"
+                },
+                recipientTimezoneInDms: {
+                    label: "Tijdzone van ontvanger in DM's",
+                    description: "Toon in DM's de tijdzone van de ontvanger bij je berichten"
+                },
+                showLocalTimezone: {
+                    label: "Lokale tijdzone tonen",
+                    description: "Lokale tijdzone tonen in plaats van alleen \"lokaal\""
                 }
             },
             modal: {
@@ -10097,6 +10841,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 selectPlaceholder: "Selecteer een tijdzone",
                 delete: "Tijdzone verwijderen",
                 save: "Redden"
+            },
+            text: {
+                invalidResponseFormat: "Ongeldige antwoordindeling"
             }
         },
         toastNotifications: {
@@ -10157,6 +10904,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 determineServerNotifications: {
                     label: "Bepaal servermeldingen",
                     description: "Bepaal of u meldingen wilt weergeven op basis van de instellingen voor servermeldingen"
+                },
+                respectDoNotDisturb: {
+                    label: "Niet storen respecteren",
+                    description: "Geen meldingen tonen wanneer je status Niet storen is."
                 },
                 directMessages: {
                     label: "Directe berichten",
@@ -10244,8 +10995,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "DeepL vereist een betaalde API-sleutel van DeepL Pro",
                     descriptionWeb: "Vertaalservice (niet ondersteund op internet!)",
                     google: "Google Vertalen",
-                    deepl: "DeepL gratis",
-                    deeplPro: "DeepL Pro"
+                    deepl: "DeepL Gratis - API-sleutel vereist",
+                    deeplPro: "DeepL Pro - API-sleutel vereist",
+                    kagi: "Kagi Vertaling - API-sleutel vereist"
+                },
+                kagiSession: {
+                    label: "Kagi-sessie",
+                    description: "Haal je sessietoken op van https://kagi.com/settings?p=user_details"
                 },
                 deeplApiKey: {
                     label: "DeepL API-sleutel",
@@ -10284,6 +11040,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     cancel: "Ik heb het",
                     secondaryConfirm: "Niet meer laten zien"
                 }
+            },
+            button: {
+                manageLanguages: "Vertaaltalen en automatisch vertalen aanpassen"
             }
         },
         typingIndicator: {
@@ -10596,6 +11355,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Afbeeldingsgrootte",
                     description: "Het afbeeldingsformaat dat moet worden gebruikt"
                 }
+            },
+            text: {
+                viewAvatarDecoration: "Avatardecoratie bekijken"
             }
         },
         viewRaw: {
@@ -10616,11 +11378,23 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Wijzig de knop om de onbewerkte inhoud/gegevens van elk bericht te bekijken.",
                     left: "Klik met de linkermuisknop om de onbewerkte inhoud te bekijken.",
                     right: "Klik met de rechtermuisknop om de onbewerkte inhoud te bekijken."
+                },
+                messageContextMenu: {
+                    description: "Tonen in het contextmenu van berichten",
+                    label: "Contextmenu van berichten"
+                },
+                sortKeys: {
+                    description: "De sleutels van de ruwe gegevens alfabetisch sorteren.",
+                    label: "Sleutels sorteren"
+                },
+                stripSensitiveData: {
+                    description: "Gevoelige gegevens zoals je e-mailadres en telefoonnummer uit de ruwe gegevens verwijderen.",
+                    label: "Gevoelige gegevens verwijderen"
                 }
             },
             modal: {
                 title: "Bekijk Ruw",
-                content: "Inhoud",
+                content: "Berichtinhoud",
                 data: "{{type}} Gegevens",
                 copied: "{{type}} gegevens gekopieerd naar klembord!",
                 copy: "Kopieer {{type}} JSON",
@@ -10633,6 +11407,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 guild: "Gilde",
                 role: "Rol",
                 user: "Gebruiker"
+            },
+            text: {
+                copyTypeData: "{{type}}-gegevens kopiëren",
+                rawTypeData: "Ruwe {{type}}-gegevens",
+                messageData: "Berichtgegevens"
             }
         },
         voiceButtons: {
@@ -10811,6 +11590,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 pause: "Pauzeer de opname",
                 recording: "OPNAME",
                 send: "Versturen",
+            },
+            text: {
+                convertioWebConverter: "convertio-webconverter"
             }
         },
         volumeBooster: {
@@ -10820,39 +11602,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 multiplier: {
                     label: "Vermenigvuldiger",
                     description: "Volumevermenigvuldiger"
-                }
-            }
-        },
-        wallpaperFree: {
-            name: "WallpaperFree",
-            description: "Recreatie van het oude DM-behangexperiment; Stel een achtergrondafbeelding in voor elk kanaal, gebruiker of server.",
-            option: {
-                globalDefault: {
-                    label: "Globale standaard",
-                    description: "Stel een algemene standaardachtergrond in voor alle kanalen."
-                },
-                stylingTips: {
-                    label: "Stylingtips"
-                }
-            },
-            context: {
-                setWallpaper: "Achtergrond instellen",
-                removeWallpaper: "Verwijder behang"
-            },
-            modal: {
-                set: "Achtergrond instellen",
-                image: "De afbeeldings-URL",
-                cancel: "Annuleren",
-                apply: "Toepassen",
-                global: {
-                    set: "Stel een globale achtergrond in",
-                    remove: "Verwijder de algemene standaardachtergrond",
-                    reset: "Achtergrondgegevens opnieuw instellen"
-                },
-                web: {
-                    info: "U kunt lokale bestanden gebruiken door ze in de Plexcord-themamap te plaatsen en de URL plexcord:///themes/bestandsnaam.ext te gebruiken",
-                    open: "Open de Themamap",
-                    quickCSS: "Open QuickCSS"
                 }
             }
         },
@@ -10868,7 +11617,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webKeybinds: {
             name: "WebKeybinds",
-            description: "Voegt keybinds opnieuw toe die ontbreken in de webversie van Discord: Ctrl+T, Ctrl+Shift+T, Ctrl+Tab, Ctrl+Shift+Tab, Ctrl+1-9, Ctrl+,. Werkt alleen volledig op Plextron/Legcord, niet in uw browser"
+            description: "Voegt sneltoetsen toe die ontbreken in de webversie van Discord. Werkt alleen volledig op Plextron/Legcord, niet in je browser",
+            option: {
+                showNavigationButtons: {
+                    description: "Navigatieknoppen terug/vooruit tonen in de titelbalk.",
+                    label: "Navigatieknoppen tonen"
+                },
+                overrideCommonKeybinds: {
+                    description: "Laat Discord de meest gebruikte sneltoetsen voor tabnavigatie overschrijven (ctrl+t, ctrl+shift+t, ctrl+tab, ctrl+shift+tab, ctrl+n). Werkt alleen in enkele browsers die websitesneltoetsen voorrang geven.",
+                    label: "Veelgebruikte sneltoetsen overschrijven"
+                }
+            }
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
@@ -10887,6 +11646,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 avatarClick: {
                     label: "Avatar-klik",
                     description: "Schakel klikken op avatars in reacties in"
+                },
+                clickableAvatars: {
+                    description: "Als dit is ingeschakeld, opent klikken op de avatar van een reagerende gebruiker diens profiel in plaats van de reactie toe te voegen",
+                    label: "Klikbare avatars"
                 }
             }
         },
@@ -11002,6 +11765,2447 @@ const translations: MatchStructure<typeof enTranslations> = {
         youtubeDescription: {
             name: "YouTubeDescription",
             description: "Voegt beschrijvingen toe aan YouTube-video-insluitingen"
+        },
+        addAttachments: {
+            name: "AddAttachments",
+            description: "Hiermee kun je nieuwe bijlagen toevoegen tijdens het bewerken van berichten",
+            toast: {
+                youCannotAddMore: "Je kunt geen bijlagen meer aan dit bericht toevoegen.",
+                youCanOnlyAdd: "Je kunt nog maar {{count}} bijlage(n) aan dit bericht toevoegen.",
+                uploadingThisCanTake: "Bezig met uploaden, dit kan even duren...",
+                addedOne: "Bijlage toegevoegd!",
+                addedMany: "Bijlagen toegevoegd!"
+            },
+            text: {
+                addAttachments: "Bijlagen toevoegen"
+            }
+        },
+        advancedPermissions: {
+            option: {
+                simplifiedCard: {
+                    description: "Wat er moet gebeuren met de vereenvoudigde machtigingenkaart van Discord",
+                    label: "Vereenvoudigde kaart",
+                    hide: "Verbergen",
+                    collapse: "Inklapbaar maken",
+                    show: "Zichtbaar laten"
+                },
+                collapsedByDefault: {
+                    description: "Start met de vereenvoudigde machtigingen ingeklapt.",
+                    label: "Standaard ingeklapt"
+                }
+            },
+            name: "AdvancedPermissions",
+            description: "Toon standaard de geavanceerde machtigingenkaart.",
+            text: {
+                simplifiedPermissions: "Vereenvoudigde machtigingen"
+            }
+        },
+        autoJumpToMessage: {
+            option: {
+                onlyWhenUnfocused: {
+                    description: "Spring alleen automatisch naar berichten als het Discord-venster niet gefocust is.",
+                    label: "Alleen als niet gefocust"
+                }
+            },
+            name: "AutoJumpToMessage",
+            description: "Opent automatisch het kanaal van nieuwe berichten."
+        },
+        betterForwards: {
+            text: {
+                serverIconForName: "Servericoon van {{name}}",
+                messageAttachments: "Berichtbijlagen",
+                messageTextWillNot: "Berichttekst wordt niet doorgestuurd als deze optie is uitgeschakeld",
+                forwardEverything: "Alles doorsturen",
+                viewServer: "Server bekijken",
+                embed: "Insluiting",
+                embedNumber: "Insluiting {{number}}",
+                image: "Afbeelding",
+                video: "Video",
+                serverIcon: "Serverpictogram van {{name}}",
+                dmIcon: "DM-pictogram van {{name}}",
+                groupDmIcon: "Groeps-DM-pictogram van {{name}}"
+            },
+            option: {
+                resendOnFail: {
+                    description: "Probeert een doorgestuurd bericht opnieuw te verzenden als het doorsturen mislukt. Kan onbedoelde pings of tekstspam veroorzaken. Omzeilt NSFW-beperkingen.",
+                    label: "Opnieuw verzenden bij fout"
+                },
+                forwardPreface: {
+                    description: "Waarmee het doorgestuurde bericht moet beginnen",
+                    label: "Doorstuurvoorvoegsel"
+                },
+                dontFollowForwards: {
+                    description: "Na het doorsturen van één bericht er niet naartoe springen. Houd Shift ingedrukt om dit gedrag te negeren.",
+                    label: "Doorsturingen niet volgen"
+                },
+                selfForward: {
+                    description: "Toon het huidige kanaal in de pop-up met de doorstuurlijst.",
+                    label: "Naar zelf doorsturen"
+                }
+            },
+            name: "BetterForwards",
+            description: "Hulpmiddelen voor het doorsturen van berichten, inclusief NSFW-omzeiling en UI-verbeteringen."
+        },
+        betterImageEditor: {
+            text: {
+                search: "Zoeken",
+                searchSavedPictures: "Opgeslagen afbeeldingen doorzoeken",
+                clearTheSearch: "Zoekopdracht wissen",
+                savedPictures: "Opgeslagen afbeeldingen",
+                removeName: "{{name}} verwijderen",
+                removeHoldShiftTo: "Verwijderen. Houd Shift ingedrukt om de bevestiging over te slaan",
+                originals: "Originelen",
+                putBackTheLast: "De laatste terugzetten",
+                forgetEveryRememberedCrop: "Alle onthouden bijsnijdingen vergeten?",
+                yourPicturesStayEach: "Je afbeeldingen blijven. Elke afbeelding opent vanaf nu zonder kadrering, totdat je haar opnieuw bijsnijdt.",
+                forget: "Vergeten",
+                cancel: "Annuleren",
+                clearSavedPictures: "Opgeslagen afbeeldingen wissen?",
+                everyPictureYouHave: "Elke afbeelding die je hier hebt opgeslagen verdwijnt, samen met de onthouden bijsnijding van elke afbeelding. Het eigen archief van Discord en je huidige avatar en banner blijven onaangeroerd.",
+                clear: "Wissen",
+                removeThisPicture: "Deze afbeelding verwijderen?",
+                remove: "Verwijderen",
+                keepTheCroppedCopy: "Bijgesneden kopie bewaren?",
+                itGoesOnThe: "Die komt op de plank {{toLowerCase}}, naast je originelen.",
+                keep: "Bewaren",
+                noThanks: "Nee, bedankt",
+                exportToAFile: "Exporteren naar een bestand",
+                importFromAFile: "Importeren uit een bestand",
+                forgetRememberedFraming: "Onthouden kadrering vergeten",
+                clearSavedPictures2: "Opgeslagen afbeeldingen wissen",
+                croppedKind: "Bijgesneden {{kind}}",
+                unpinName: "{{name}} losmaken",
+                pinName: "{{name}} vastmaken",
+                pinnedNeverDrops: "Vastgemaakt, valt nooit van de plank",
+                pinNeverDrops: "Vastmaken zodat het nooit van de plank valt",
+                nothingMatches: "Hier komt niets mee overeen",
+                originalsEmpty: "Afbeeldingen die je kiest, plakt of neerzet komen hier terecht",
+                croppedEmpty: "Afbeeldingen die je bijsnijdt komen hier terecht",
+                forgotFraming: "Uitsnede van {{count}} afbeelding(en) vergeten",
+                nothingFramed: "Er was niets uitgesneden",
+                pictureLibrary: "Afbeeldingenbibliotheek",
+                addedPictures: "{{count}} afbeelding(en) toegevoegd",
+                nothingNew: "Niets nieuws in dat bestand",
+                shownOfTotal: "{{shown}} van {{total}}",
+                keptCount: "{{count}} bewaard",
+                youAreWearingThis: "Je gebruikt dit nu",
+                removePictureBody: "{{name}} wordt verwijderd uit je opgeslagen afbeeldingen, samen met de onthouden bijsnijding."
+            },
+            option: {
+                librarySize: {
+                    description: "Hoeveel afbeeldingen er op elke plank bewaard blijven.",
+                    label: "Bibliotheekgrootte"
+                },
+                rememberCrop: {
+                    description: "Herstel de zoom en positie die je het laatst voor een afbeelding hebt gebruikt.",
+                    label: "Bijsnijding onthouden"
+                },
+                forgetFraming: {
+                    description: "Gooi alle onthouden bijsnijdingen weg en open elke afbeelding zoals Discord dat zou doen.",
+                    label: "Kadrering vergeten"
+                },
+                saveCropped: {
+                    description: "Bewaar een kopie van elke afbeelding nadat je deze hebt bijgesneden.",
+                    label: "Bijgesneden opslaan"
+                },
+                askBeforeSavingCropped: {
+                    description: "Eerst vragen in plaats van de bijgesneden kopie automatisch te bewaren.",
+                    label: "Vragen voor opslaan van bijgesneden"
+                },
+                transfer: {
+                    description: "Neem je afbeeldingen, en hoe elk ervan is gekadreerd, mee naar een ander apparaat.",
+                    label: "Overdragen"
+                },
+                clearLibrary: {
+                    description: "Gooi alle opgeslagen afbeeldingen weg.",
+                    label: "Bibliotheek wissen"
+                }
+            },
+            name: "BetterImageEditor",
+            description: "Bewaart een plank met je afbeeldingen in de avatar- en bannereditor en onthoudt hoe je elke afbeelding hebt bijgesneden.",
+            toast: {
+                couldNotExportYour: "Kon je afbeeldingen niet exporteren",
+                couldNotReadThat: "Kon dat bestand niet lezen",
+                thatPictureIsMissing: "Die afbeelding ontbreekt",
+                thatPictureIsToo: "Die afbeelding is te groot voor Discord",
+                couldNotUseThat: "Kon die afbeelding niet gebruiken",
+                couldNotKeepThe: "Kon de bijgesneden kopie niet bewaren"
+            },
+            kind: {
+                avatars: "avatars",
+                banners: "banners",
+                serverIcons: "serverpictogrammen",
+                serverBanners: "serverbanners",
+                eventCovers: "evenementcovers",
+                homeHeaders: "startpaginakoppen",
+                decorations: "decoraties",
+                widgetCovers: "widgetcovers",
+                widgetImages: "widgetafbeeldingen"
+            }
+        },
+        cancelFriendRequest: {
+            name: "CancelFriendRequest",
+            description: "Voegt een manier toe om uitgaande vriendschapsverzoeken vanuit profielen te annuleren.",
+            text: {
+                cancelOutgoingFriendRequest: "Uitgaand vriendschapsverzoek annuleren"
+            }
+        },
+        clipUpload: {
+            text: {
+                createdAtMustBe: "De aanmaakdatum moet een geldige datum zijn.",
+                cancel: "Annuleren",
+                uploadClipFile: "Clipbestand uploaden",
+                fileName: "Bestandsnaam",
+                title: "Titel",
+                epicMoment: "Episch moment",
+                message: "Bericht",
+                checkOutThisClip: "Bekijk deze clip!",
+                spoiler: "Spoiler",
+                remix: "Remix",
+                thumbnail: "Miniatuur",
+                file: "Bestand",
+                selectFile: "Bestand kiezen",
+                parseClipMetadataFrom: "Clipmetadata uit bestand halen",
+                selectFriends: "Vrienden kiezen",
+                selectAGame: "Kies een game",
+                customApplicationId: "Aangepaste applicatie-ID",
+                createdAt: "Aangemaakt op",
+                participants: "Deelnemers",
+                onlyTagPeopleWho: "Tag alleen mensen die aanwezig waren en ermee hebben ingestemd in deze clip te staan.",
+                gameApplication: "Game/applicatie",
+                uploadClipFile2: "Clipbestand uploaden",
+                uploading: "Uploaden",
+                upload: "Uploaden",
+                noFileSelected: "Geen bestand geselecteerd",
+                couldNotPrepare: "Kan het geselecteerde bestand niet voorbereiden.",
+                couldNotRead: "Kan het geselecteerde bestand niet lezen.",
+                couldNotUpdateMetadata: "Kan clipmetadata niet bijwerken.",
+                notCompatible: "Dit bestand is niet compatibel. Gebruik een MP4-clip met H.264-video en AAC-audio.",
+                uploadFailed: "Upload mislukt.",
+                noUploadSlot: "Discord heeft geen uploadslot teruggegeven.",
+                uploadCanceled: "Upload geannuleerd.",
+                failedToUpload: "Kan clip niet uploaden.",
+                selectClipFile: "Clipbestand selecteren",
+                mp4Video: "MP4-video"
+            },
+            name: "ClipUpload",
+            description: "Voegt een knop toe om een lokaal videobestand als Discord-clip te uploaden.",
+            toast: {
+                checkingClipFile: "Clipbestand wordt gecontroleerd.",
+                convertingClipFile: "Clipbestand wordt geconverteerd.",
+                clipUploaded: "Clip geüpload."
+            }
+        },
+        collapsibleUI: {
+            name: "CollapsibleUI",
+            description: "Ingebouwde inklapbare vlakken voor kanalen, leden, chatknoppen en gebruikersgebied.",
+            text: {
+                collapsibleUi: "Inklapbare interface",
+                guildBar: "Serverbalk",
+                channelList: "Kanaallijst",
+                membersList: "Ledenlijst",
+                messageButtons: "Berichtknoppen",
+                titleBar: "Titelbalk",
+                headerBar: "Kopbalk",
+                userArea: "Gebruikersgebied"
+            },
+            option: {
+                detachUserArea: {
+                    description: "Maak het gebruikersgebied los zodat het vrij kan worden verplaatst wanneer het niet is ingeklapt.",
+                    label: "Gebruikersgebied losmaken"
+                },
+                detachedUserAreaX: {
+                    description: "Onthoud de x-positie van het losgemaakte gebruikersgebied.",
+                    label: "Losgemaakt gebruikersgebied X"
+                },
+                detachedUserAreaY: {
+                    description: "Onthoud de y-positie van het losgemaakte gebruikersgebied.",
+                    label: "Losgemaakt gebruikersgebied Y"
+                },
+                guildBarCollapsed: {
+                    description: "Onthoud de serverbalk als ingeklapt.",
+                    label: "Serverbalk ingeklapt"
+                },
+                channelListCollapsed: {
+                    description: "Onthoud de kanaallijst als ingeklapt.",
+                    label: "Kanaallijst ingeklapt"
+                },
+                membersListCollapsed: {
+                    description: "Onthoud de ledenlijst als ingeklapt.",
+                    label: "Ledenlijst ingeklapt"
+                },
+                chatButtonsCollapsed: {
+                    description: "Onthoud de rij berichtknoppen als ingeklapt.",
+                    label: "Chatknoppen ingeklapt"
+                },
+                titleBarCollapsed: {
+                    description: "Onthoud de titelbalk als ingeklapt.",
+                    label: "Titelbalk ingeklapt"
+                },
+                headerBarCollapsed: {
+                    description: "Onthoud de kopbalk als ingeklapt.",
+                    label: "Kopbalk ingeklapt"
+                },
+                userAreaCollapsed: {
+                    description: "Onthoud het gebruikersgebied als ingeklapt.",
+                    label: "Gebruikersgebied ingeklapt"
+                }
+            }
+        },
+        customCommands: {
+            text: {
+                cancel: "Annuleren",
+                name: "Name",
+                response: "Antwoord",
+                detectedArguments: "Gedetecteerde argumenten",
+                exampleCommandResponse: "Voorbeeld van opdrachtantwoord:",
+                exampleUsage: "Voorbeeldgebruik:",
+                exampleOutput: "Voorbeelduitvoer:",
+                viewArgumentsGuide: "Gids voor argumenten bekijken",
+                editTag: "Tag bewerken",
+                deleteTag: "Tag verwijderen",
+                registeredTags: "Geregistreerde tags",
+                createTag: "Tag maken",
+                aTagWithThe: "Een tag met de naam **{{name}}** bestaat niet!",
+                successfullyDeletedTheTag: "De tag **{{name}}** is verwijderd!",
+                ephemeralReserved: "De argumentnaam \"ephemeral\" is gereserveerd en kan niet worden gebruikt.",
+                createNewTag: "Nieuwe tag maken",
+                editTagSubtitle: "Bewerk je aangepaste commando.",
+                createTagSubtitle: "Maak een nieuwe tag die als slash-commando wordt geregistreerd.",
+                save: "Opslaan",
+                create: "Maken",
+                variablesHelp: "Je antwoord kan variabelen tussen dubbele accolades bevatten die commando-argumenten worden, bijvoorbeeld",
+                defaultValuesHelp: "Je kunt argumenten met standaardwaarden opgeven met een isgelijkteken, bijvoorbeeld",
+                noTagsYet: "Oeps! Er zijn nog geen tags, gebruik `/tags create` om er een te maken!",
+                nameAlreadyExists: "Een tag met de naam \"{{name}}\" bestaat al en wordt overschreven.",
+                defaultValue: "(standaard: {{value}})"
+            },
+            name: "CustomCommands",
+            description: "Hiermee kun je aangepaste slash-opdrachten / tags maken",
+            option: {
+                tagsList: {
+                    label: "Taglijst"
+                }
+            },
+            command: {
+                ephemeral: "Of het antwoord alleen voor jou zichtbaar moet zijn",
+                tags: "Alle aangepaste opdrachten beheren",
+                create: "Maak een nieuw label",
+                list: "Al je tags weergeven",
+                delete: "Een tag op naam verwijderen",
+                tagName: "De naam van de tag"
+            }
+        },
+        fileUpload: {
+            name: "FileUpload",
+            description: "Upload bestanden naar hostingdiensten zoals Zipline, Nest, S3 en WebDAV",
+            toast: {
+                fileTypeNotAllowed: "Bestandstype niet toegestaan door het huidige filter",
+                pleaseConfigureFileuploadSettings: "Configureer eerst de FileUpload-instellingen",
+                sharexConfigIsValid: "ShareX-configuratie is geldig",
+                importedSharexConfig: "ShareX-configuratie geïmporteerd",
+                uploadSuccessfulButNo: "Upload gelukt, maar er was geen URL om te kopiëren",
+                uploadSuccessfulUrlCopied: "Upload gelukt, URL naar klembord gekopieerd",
+                uploadSuccessfulButFailed: "Upload gelukt, maar URL kopiëren mislukt",
+                uploadSuccessful: "Upload gelukt",
+                uploadSucceededWithServicelabels: "Upload gelukt met {{serviceLabels_service}} na reserve",
+                apngToGifConversion: "APNG-naar-GIF-conversie mislukt, wordt als APNG geüpload",
+                uploadAlreadyInProgress: "Upload is al bezig",
+                uploadCancelled: "Upload geannuleerd",
+                uploadFailedMessage: "Upload mislukt: {{message}}",
+                invalidSharexConfig: "Ongeldige ShareX-configuratie",
+                failedToImportSharexConfig: "Kan ShareX-configuratie niet importeren"
+            },
+            text: {
+                uploadToServicename: "Uploaden naar {{serviceName}}",
+                uploadToHost: "Uploaden naar host",
+                chooseFile: "Bestand kiezen...",
+                zipline: "Zipline",
+                eZHost: "E-Z Host",
+                nest: "Nest",
+                encryptingHost: "Encrypting.host",
+                s3Compatible: "S3-compatibel",
+                catboxMoe: "Catbox.moe",
+                litterbox: "Litterbox",
+                sharexCustomUploader: "Aangepaste ShareX-uploader",
+                webdavNextcloudOwncloud: "WebDAV (Nextcloud/Owncloud)",
+                n1Hour: "1 uur",
+                n12Hours: "12 uur",
+                n24Hours: "24 uur",
+                n72Hours: "72 uur",
+                corsProxy: "CORS-proxy",
+                query: "Query",
+                param: "Parameter",
+                fakeLink: "Neplink",
+                embed: "Embed",
+                n30Seconds: "30 seconden",
+                n1Minute: "1 minuut",
+                n2Minutes: "2 minuten",
+                n5Minutes: "5 minuten",
+                n10Minutes: "10 minuten",
+                dragHostsToReorder: "Sleep hosts om de volgorde van reservepogingen te wijzigen. De geselecteerde host wordt eerst geprobeerd, daarna wordt deze volgorde gebruikt.",
+                chooseWhereFileuploadSends: "Kies waar FileUpload nieuwe bestanden naartoe stuurt.",
+                connectionDetailsForYour: "Verbindingsgegevens voor je Zipline-instantie.",
+                theUrlOfYour: "De URL van je Zipline-instantie",
+                yourZiplineApiAuthorization: "Je Zipline API-autorisatietoken",
+                yourZiplineApiToken: "Je Zipline API-token",
+                folderIdForUploads: "Map-ID voor uploads (laat leeg voor geen map)",
+                leaveEmptyForNo: "Laat leeg voor geen map",
+                connectionDetailsForE: "Verbindingsgegevens voor E-Z Host-uploads.",
+                yourEZHost: "Je E-Z Host API-sleutel",
+                connectionDetailsForNest: "Verbindingsgegevens voor Nest-uploads.",
+                yourNestApiAuthorization: "Je Nest API-autorisatietoken",
+                yourNestApiToken: "Je Nest API-token",
+                connectionDetailsForEncrypting: "Verbindingsgegevens voor Encrypting.host-uploads.",
+                yourEncryptingHostApi: "Je Encrypting.host API-sleutel",
+                howEncryptingHostShould: "Hoe Encrypting.host geretourneerde links moet opmaken.",
+                selectUrlStyle: "URL-stijl kiezen",
+                optionalTitleForEmbed: "Optionele titel voor antwoorden in embedstijl.",
+                optionalTitle: "Optionele titel",
+                optionalColorForEmbed: "Optionele kleur voor antwoorden in embedstijl.",
+                optionalColor: "Optionele kleur",
+                optionalFakeLinkValue: "Optionele neplinkwaarde voor antwoorden in fakelinkstijl.",
+                optionalFakeLink: "Optionele neplink",
+                connectionDetailsAndObject: "Verbindingsgegevens en objectnaamgeving voor je bucket.",
+                s3CompatibleEndpointE: "S3-compatibele endpoint (bijv. https://<accountid>.r2.cloudflarestorage.com)",
+                bucketToUploadInto: "Bucket om naar te uploaden",
+                awsRegionOrAuto: "AWS-regio of auto voor Cloudflare R2",
+                s3CompatibleAccessKey: "S3-compatibele toegangssleutel",
+                yourAccessKeyId: "Je toegangssleutel-ID",
+                s3CompatibleSecretKey: "S3-compatibele geheime sleutel",
+                yourSecretAccessKey: "Je geheime toegangssleutel",
+                optionalTemporaryCredentialToken: "Optioneel tijdelijk referentietoken",
+                optionalSessionToken: "Optioneel sessietoken",
+                optionalPublicUrlBase: "Optionele openbare basis-URL voor geretourneerde links",
+                optionalFolderPrefixInside: "Optionele map/voorvoegsel in de bucket",
+                useEndpointBucketKey: "Gebruik de indeling endpoint/bucket/key, aanbevolen voor R2.",
+                optionalAccountBindingFor: "Optionele accountkoppeling voor Catbox-uploads.",
+                yourCatboxUserhashFor: "Je Catbox-userhash voor accountkoppeling, laat leeg voor anonieme uploads.",
+                yourCatboxUserhash: "Je Catbox-userhash",
+                howLongUploadsAre: "Hoe lang uploads worden bewaard",
+                selectExpiry: "Vervaltijd kiezen",
+                optionalAccountBindingFor2: "Optionele accountkoppeling voor GoFile-uploads.",
+                optionalGofileTokenTo: "Optioneel GoFile-token om naar je account te uploaden.",
+                optionalGofileToken: "Optioneel GoFile-token",
+                connectionDetailsForPixelvault: "Verbindingsgegevens voor PixelVault-uploads.",
+                yourPixelvaultAuthorizationKey: "Je PixelVault-autorisatiesleutel.",
+                yourPixelvaultUploadKey: "Je PixelVault-uploadsleutel",
+                optionalAccountBindingFor3: "Optionele accountkoppeling voor PixelDrain-uploads.",
+                optionalPixeldrainApiKey: "Optionele PixelDrain API-sleutel voor geauthenticeerde uploads. Laat leeg voor anonieme uploads.",
+                yourPixeldrainApiKey: "Je PixelDrain API-sleutel",
+                pasteImportOrValidate: "Plak, importeer of valideer een aangepaste ShareX-uploaderconfiguratie.",
+                pasteYourSharexCustom: "Plak de JSON van je aangepaste ShareX-uploader (.sxcu/.json). DestinationType moet FileUploader of ImageUploader bevatten.",
+                importFromFileOr: "Importeren uit bestand of geplakte configuratie valideren",
+                connectionDetailsForWebdav: "Verbindingsgegevens voor WebDAV-servers (Nextcloud, Owncloud enz.).",
+                baseWebdavUrlE: "Basis-WebDAV-URL (bijv. https://nextcloud.example.com/remote.php/dav/files/username)",
+                optionalSubdirectoryOnThe: "Optionele submap op de server om naar te uploaden (bijv. uploads)",
+                leaveEmptyForRoot: "Laat leeg voor de hoofdmap",
+                selectYourWebdavServer: "Kies je WebDAV-servertype. Nextcloud en ownCloud maken een openbare deellink. Algemeen geeft de directe bestands-URL terug.",
+                selectServerType: "Servertype kiezen",
+                howToReturnThe: "Hoe de openbare deellink wordt teruggegeven. Deelpagina linkt naar een webpagina; Directe download linkt rechtstreeks naar het bestand; Markdown-link verpakt de deelpagina in een klikbare bestandsnaam.",
+                selectShareLinkFormat: "Indeling van deellink kiezen",
+                controlWhatFileuploadDoes: "Bepaal wat FileUpload doet nadat een host een URL teruggeeft.",
+                stripQueryParametersFrom: "Queryparameters uit de URL van het geüploade bestand verwijderen.",
+                wrapUploadedVideoLinks: "Geüploade videolinks omhullen met een embedproxy voor betere Discord-voorbeelden.",
+                chooseWhichEmbedProxy: "Kies welke embedproxydienst wordt gebruikt voor geüploade videolinks",
+                selectAnEmbedProxy: "Kies een embedproxydienst",
+                convertApngFilesTo: "APNG-bestanden naar GIF-indeling converteren.",
+                useTheOriginalFilename: "Gebruik de oorspronkelijke bestandsnaam in plaats van uploads upload.ext te noemen.",
+                automaticallyCopyTheUploaded: "De URL van het geüploade bestand automatisch naar het klembord kopiëren.",
+                onlyUseTheSelected: "Alleen de geselecteerde uploader gebruiken zonder reservehosts te proberen.",
+                afterUploadInsertThe: "Na het uploaden de resulterende URL in de huidige chatinvoer invoegen.",
+                wrapInsertedUrlsIn: "Ingevoegde URL's tussen punthaken zetten om Discord-voorbeelden te voorkomen.",
+                chooseWhenFileuploadTakes: "Kies wanneer FileUpload de bestandsafhandeling van Discord overneemt.",
+                useFileuploadWhenUploading: "FileUpload gebruiken bij uploaden via de bestandskiezer van Discord.",
+                useFileuploadOnlyFor: "FileUpload alleen gebruiken voor bestanden groter dan je huidige Discord-uploadlimiet.",
+                manualDiscordFileSize: "Handmatige Discord-bestandsgroottelimiet in MB, gebruikt als automatische detectie onjuist is. Laat leeg voor automatisch.",
+                auto: "Automatisch",
+                commaSeparatedListOf: "Kommagescheiden lijst met extensies (bijv. png,jpg,gif). Laat leeg om alles toe te staan.",
+                configureBrowserUploadProxying: "Proxy en time-outs voor browseruploads configureren.",
+                corsProxyUsedFor: "CORS-proxy voor webuploads. Laat leeg om de standaardproxy te gebruiken.",
+                sourceCodeForThe: "Broncode van de standaard-CORS-proxy",
+                maximumTimeToWait: "Maximale wachttijd per uploadpoging voordat naar reserve wordt overgeschakeld",
+                selectTimeout: "Time-out kiezen",
+                drag: "Slepen",
+                importSxcuJson: ".sxcu/.json importeren",
+                validate: "Valideren",
+                resetToDefault: "Standaard herstellen",
+                progress: "{{percent}}% - {{transferred}} van {{total}}",
+                cancel: "Annuleren"
+            },
+            option: {
+                serviceType: {
+                    description: "Geselecteerde uploaddienst",
+                    label: "Diensttype"
+                },
+                serviceUrl: {
+                    description: "URL van de Zipline-dienst",
+                    label: "Dienst-URL"
+                },
+                ziplineToken: {
+                    description: "Zipline-authenticatietoken",
+                    label: "Zipline-token"
+                },
+                folderId: {
+                    description: "Optionele Zipline-map-ID",
+                    label: "Map-ID"
+                },
+                ezHostKey: {
+                    description: "E-Z Host API-sleutel",
+                    label: "E-Z Host-sleutel"
+                },
+                nestToken: {
+                    description: "Nest API-token",
+                    label: "Nest-token"
+                },
+                encryptingHostKey: {
+                    description: "Encrypting.host API-sleutel",
+                    label: "Encrypting.host-sleutel"
+                },
+                encryptingHostUrlStyle: {
+                    description: "URL-stijl van Encrypting.host",
+                    label: "Encrypting.host URL-stijl"
+                },
+                encryptingHostDomains: {
+                    description: "JSON-lijst met Encrypting.host-domeinen",
+                    label: "Encrypting.host-domeinen"
+                },
+                encryptingHostTitle: {
+                    description: "Optionele titel voor Encrypting.host-embed",
+                    label: "Encrypting.host-titel"
+                },
+                encryptingHostColor: {
+                    description: "Optionele kleur voor Encrypting.host-embed",
+                    label: "Encrypting.host-kleur"
+                },
+                encryptingHostFakelink: {
+                    description: "Optionele neplink voor Encrypting.host",
+                    label: "Encrypting.host-neplink"
+                },
+                s3Endpoint: {
+                    description: "S3-compatibele endpoint-URL",
+                    label: "S3-endpoint"
+                },
+                s3Bucket: {
+                    description: "Naam van S3-bucket",
+                    label: "S3-bucket"
+                },
+                s3Region: {
+                    description: "S3-regio (gebruik auto voor R2)",
+                    label: "S3-regio"
+                },
+                s3AccessKeyId: {
+                    description: "S3-toegangssleutel-ID",
+                    label: "S3-toegangssleutel-ID"
+                },
+                s3SecretAccessKey: {
+                    description: "Geheime S3-toegangssleutel",
+                    label: "Geheime S3-toegangssleutel"
+                },
+                s3SessionToken: {
+                    description: "Optioneel S3-sessietoken",
+                    label: "S3-sessietoken"
+                },
+                s3PublicUrl: {
+                    description: "Optionele openbare basis-URL",
+                    label: "Openbare S3-URL"
+                },
+                s3Prefix: {
+                    description: "Optioneel voorvoegsel voor S3-objectsleutels",
+                    label: "S3-voorvoegsel"
+                },
+                s3ForcePathStyle: {
+                    description: "S3-URL's in padstijl gebruiken",
+                    label: "S3-padstijl afdwingen"
+                },
+                litterboxExpiry: {
+                    description: "Bewaartermijn van Litterbox",
+                    label: "Litterbox-vervaltijd"
+                },
+                catboxUserhash: {
+                    description: "Catbox-userhash voor accountkoppeling",
+                    label: "Catbox-userhash"
+                },
+                sharexConfig: {
+                    description: "JSON van aangepaste ShareX-uploader",
+                    label: "ShareX-configuratie"
+                },
+                disableFallbacks: {
+                    description: "Reserve-uploaddiensten uitschakelen",
+                    label: "Reserves uitschakelen"
+                },
+                autoSend: {
+                    description: "Geüploade URL in de chatinvoer invoegen",
+                    label: "Automatisch verzenden"
+                },
+                autoFormat: {
+                    description: "Ingevoegde URL tussen punthaken zetten",
+                    label: "Automatisch opmaken"
+                },
+                bypassDiscordUpload: {
+                    description: "Discord-uploads omzeilen en in plaats daarvan FileUpload gebruiken.",
+                    label: "Discord-upload omzeilen"
+                },
+                bypassDiscordUploadOnlyOverLimit: {
+                    description: "Gebruik FileUpload alleen als het bestand of de bestanden de groottelimiet overschrijden.",
+                    label: "Discord-upload alleen boven limiet omzeilen"
+                },
+                customDiscordFileSizeLimitMB: {
+                    description: "Handmatige Discord-bestandsgroottelimiet in MB. 0 betekent automatische detectie.",
+                    label: "Aangepaste Discord-bestandsgroottelimiet (MB)"
+                },
+                gofileToken: {
+                    description: "Optioneel GoFile API-token",
+                    label: "GoFile-token"
+                },
+                fallbackOrder: {
+                    description: "Volgorde van reserve-uploaders",
+                    label: "Reservevolgorde"
+                },
+                pixelVaultKey: {
+                    description: "PixelVault-uploadsleutel",
+                    label: "PixelVault-sleutel"
+                },
+                pixelDrainKey: {
+                    description: "Optionele PixelDrain API-sleutel",
+                    label: "PixelDrain-sleutel"
+                },
+                uploadTimeoutMs: {
+                    description: "Uploadtime-out in milliseconden",
+                    label: "Uploadtime-out (ms)"
+                },
+                stripQueryParams: {
+                    description: "Queryparameters uit geüploade URL's verwijderen",
+                    label: "Queryparameters verwijderen"
+                },
+                embedProxyEnabled: {
+                    description: "Geüploade videolinks via een embedhulpdienst leiden.",
+                    label: "Embedproxy ingeschakeld"
+                },
+                embedProxyService: {
+                    description: "Embedhulpdienst die geüploade videolinks omhult.",
+                    label: "Embedproxydienst"
+                },
+                corsProxyUrl: {
+                    description: "CORS-proxy-URL voor browseruploads",
+                    label: "CORS-proxy-URL"
+                },
+                apngToGif: {
+                    description: "APNG-uploads naar GIF converteren",
+                    label: "APNG naar GIF"
+                },
+                preserveOriginalFilename: {
+                    description: "Behoud de oorspronkelijke bestandsnaam bij het uploaden.",
+                    label: "Oorspronkelijke bestandsnaam behouden"
+                },
+                autoCopy: {
+                    description: "Upload-URL automatisch kopiëren",
+                    label: "Automatisch kopiëren"
+                },
+                autoUploadPastedFiles: {
+                    description: "Bestanden van het klembord automatisch naar de afbeeldingshost uploaden bij plakken in de chatinvoer.",
+                    label: "Geplakte bestanden automatisch uploaden"
+                },
+                webdavUrl: {
+                    description: "URL van WebDAV-server",
+                    label: "WebDAV-URL"
+                },
+                webdavUsername: {
+                    description: "WebDAV-gebruikersnaam",
+                    label: "WebDAV-gebruikersnaam"
+                },
+                webdavPassword: {
+                    description: "WebDAV-wachtwoord of app-token",
+                    label: "WebDAV-wachtwoord"
+                },
+                webdavDirectory: {
+                    description: "Optionele submap op de WebDAV-server",
+                    label: "WebDAV-map"
+                },
+                webdavServerType: {
+                    description: "WebDAV-servertype",
+                    label: "WebDAV-servertype",
+                    nextcloud: "Nextcloud",
+                    owncloud: "ownCloud",
+                    generic: "Algemene WebDAV"
+                },
+                webdavShareType: {
+                    description: "Indeling van WebDAV-deellink",
+                    label: "WebDAV-deeltype",
+                    sharepage: "Deelpagina",
+                    directdownload: "Directe download",
+                    markdown: "Markdown-link"
+                },
+                uploadAllowedFileTypes: {
+                    description: "Kommagescheiden lijst met toegestane bestandsextensies (bijv. png,jpg,gif,mp4). Laat leeg om alle bestanden toe te staan.",
+                    label: "Toegestane bestandstypen voor upload"
+                },
+                settingsComponent: {
+                    description: "Instellingen",
+                    label: "Instellingencomponent"
+                }
+            },
+            panel: {
+                fallbackOrder: "Reservevolgorde",
+                uploadService: "Uploaddienst",
+                zipline: "Zipline",
+                serviceUrl: "Dienst-URL",
+                ziplineToken: "Zipline-token",
+                folderId: "Map-ID",
+                eZHost: "E-Z Host",
+                eZHostApiKey: "E-Z Host API-sleutel",
+                nest: "Nest",
+                nestToken: "Nest-token",
+                encryptingHost: "Encrypting.host",
+                encryptingHostApiKey: "Encrypting.host API-sleutel",
+                urlStyle: "URL-stijl",
+                domainsJson: "Domeinen (JSON)",
+                embedTitle: "Titel van embed",
+                embedColor: "Kleur van embed",
+                fakeLink: "Neplink",
+                s3CompatibleStorage: "S3-compatibele opslag",
+                s3EndpointUrl: "S3-endpoint-URL",
+                bucketName: "Bucketnaam",
+                region: "Regio",
+                accessKeyId: "Toegangssleutel-ID",
+                secretAccessKey: "Geheime toegangssleutel",
+                sessionToken: "Sessietoken",
+                publicBaseUrl: "Openbare basis-URL",
+                objectKeyPrefix: "Voorvoegsel voor objectsleutels",
+                usePathStyleEndpoint: "Endpoint in padstijl gebruiken",
+                catbox: "Catbox",
+                catboxUserhash: "Catbox-userhash",
+                litterboxExpiry: "Litterbox-vervaltijd",
+                gofile: "GoFile",
+                gofileToken: "GoFile-token",
+                pixelvault: "PixelVault",
+                pixelvaultUploadKey: "PixelVault-uploadsleutel",
+                pixeldrain: "PixelDrain",
+                pixeldrainApiKey: "PixelDrain API-sleutel",
+                sharexCustomUploader: "Aangepaste ShareX-uploader",
+                sharexCustomUploaderConfig: "Configuratie van aangepaste ShareX-uploader",
+                sharexConfigActions: "ShareX-configuratieacties",
+                webdav: "WebDAV",
+                serverUrl: "Server-URL",
+                username: "Gebruikersnaam",
+                passwordOrAppToken: "Wachtwoord of app-token",
+                passwordOrAppToken2: "wachtwoord of app-token",
+                uploadDirectory: "Uploadmap",
+                serverType: "Servertype",
+                shareLinkFormat: "Indeling van deellink",
+                uploadBehavior: "Uploadgedrag",
+                stripQueryParameters: "Queryparameters verwijderen",
+                useEmbedProxy: "Embedproxy gebruiken",
+                embedProxyService: "Embedproxydienst",
+                convertApngToGif: "APNG naar GIF converteren",
+                preserveOriginalFilename: "Oorspronkelijke bestandsnaam behouden",
+                autoCopyUrl: "URL automatisch kopiëren",
+                disableFallbackUploaders: "Reserve-uploaders uitschakelen",
+                insertUrlIntoChatInput: "URL invoegen in chatinvoer",
+                formatInsertedUrl: "Ingevoegde URL opmaken",
+                discordIntegration: "Discord-integratie",
+                bypassDiscordUploadButton: "Uploadknop van Discord omzeilen",
+                autoUploadPastedFiles: "Geplakte bestanden automatisch uploaden",
+                respectDiscordFileSizeLimit: "Discord-bestandsgroottelimiet respecteren",
+                discordLimitOverrideMb: "Discord-limiet overschrijven (MB)",
+                allowedFileTypes: "Toegestane bestandstypen",
+                network: "Netwerk",
+                corsProxyUrl: "CORS-proxy-URL",
+                defaultCorsProxySource: "Bron van standaard-CORS-proxy",
+                uploadTimeout: "Uploadtime-out",
+                domainsJsonDescription: "JSON-array van te gebruiken domeinen, bijvoorbeeld [\"offensive\"]."
+            },
+            status: {
+                cancelled: "Upload geannuleerd.",
+                uploadingVia: "Uploaden via {{service}}...",
+                uploading: "Uploaden...",
+                unknownError: "Onbekende fout",
+                startingVia: "Upload starten via {{service}}...",
+                retryingWith: "Opnieuw proberen met {{service}} ({{attempt}}/{{total}})...",
+                uploadedVia: "Succesvol geüpload via {{service}}.",
+                allFailed: "Alle uploaddiensten zijn mislukt. Laatste fout: {{error}}",
+                fileReady: "Bestand klaar, upload wordt gestart...",
+                preparing: "Upload voorbereiden...",
+                failed: "Upload mislukt: {{message}}",
+                timedOut: "Upload is verlopen",
+                serviceFailed: "{{service}} mislukt: {{message}}",
+                preparingFile: "{{name}}{{suffix}} voorbereiden..."
+            }
+        },
+        gifMaker: {
+            option: {
+                lastWidth: {
+                    label: "Laatste breedte"
+                },
+                lastHeight: {
+                    label: "Laatste hoogte"
+                },
+                lastCaptionMode: {
+                    label: "Laatste bijschriftmodus"
+                },
+                lastCaptionText: {
+                    label: "Laatste bijschrifttekst"
+                },
+                lastCaptionSize: {
+                    label: "Laatste bijschriftgrootte"
+                },
+                lastFontFamily: {
+                    label: "Laatste lettertypefamilie"
+                },
+                lastBubbleTipBase: {
+                    label: "Laatste basis van ballonpunt"
+                },
+                maxWidth: {
+                    description: "Maximale breedte bij automatisch passend maken.",
+                    label: "Max. breedte"
+                },
+                maxHeight: {
+                    description: "Maximale hoogte bij automatisch passend maken.",
+                    label: "Max. hoogte"
+                }
+            },
+            name: "GifMaker",
+            description: "Maak GIF's met bijschrift van elk medium in de chat of de GIF-kiezer.",
+            text: {
+                send: "Verzenden",
+                export: "Exporteren",
+                makeGif: "GIF maken",
+                editGif: "GIF bewerken",
+                selectAFont: "Kies een lettertype...",
+                enterCaption: "Bijschrift invoeren...",
+                width: "Breedte",
+                height: "Hoogte",
+                loadingFonts: "Lettertypen laden...",
+                captions: "Bijschriften",
+                text: "Tekst",
+                font: "Lettertype",
+                fontSize: "Lettergrootte",
+                tipBase: "Basis van punt",
+                dimensions: "Afmetingen",
+                generatingGif: "GIF genereren...",
+                clickOnThePreview: "Klik op het voorbeeld om de ballonpunt te plaatsen",
+                gifPreview: "GIF-voorbeeld"
+            },
+            captionMode: {
+                caption: "Bijschrift",
+                none: "Geen",
+                speechbubble: "Tekstballon"
+            }
+        },
+        gifProviderSwitcher: {
+            name: "GifProviderSwitcher",
+            description: "Hiermee kun je de GIF-zoekfunctie van Tenor of Giphy gebruiken in plaats van Klipy",
+            text: {
+                tenor: "Tenor",
+                giphy: "Giphy",
+                klipy: "Klipy",
+                providers: "Aanbieders",
+                providersCount: "{{count}} providers"
+            }
+        },
+        keyboardNavigation: {
+            toast: {
+                invalidUrl: "Ongeldige URL",
+                copiedResponseToClipboard: "Antwoord naar klembord gekopieerd!",
+                issueFetchingUrl: "Probleem bij ophalen van URL",
+                copiedGitInfoTo: "Git-info naar klembord gekopieerd!",
+                noUpdatesAvailable: "Geen updates beschikbaar",
+                enabledPlugin: "{{id}} ingeschakeld",
+                disabledPlugin: "{{id}} uitgeschakeld"
+            },
+            text: {
+                openPlexcordTab: "Plexcord-tabblad openen",
+                openPluginTab: "Plugintabblad openen",
+                openThemesTab: "Themas-tabblad openen",
+                openUpdaterTab: "Updater-tabblad openen",
+                openCloudTab: "Cloudtabblad openen",
+                openBackupRestoreTab: "Tabblad Back-up en herstel openen",
+                restartClient: "Client herstarten",
+                openQuickCssFile: "QuickCSS-bestand openen",
+                openSettingsFolder: "Instellingenmap openen",
+                openInGithub: "Openen op GitHub",
+                openInBrowser: "Openen in browser",
+                togglePlugin: "Plugin in-/uitschakelen",
+                enable: "Inschakelen",
+                disable: "Uitschakelen",
+                quickFetch: "Snel ophalen",
+                copyGitInfo: "Git-info kopiëren",
+                checkForUpdates: "Controleren op updates",
+                aPlexcordUpdateIs: "Er is een Plexcord-update beschikbaar!",
+                clickHereToView: "Klik hier om de update te bekijken",
+                navigateToServer: "Naar server gaan",
+                commandPalette: "Opdrachtenpalet",
+                searchTheCommandPalette: "Opdrachtenpalet doorzoeken",
+                multipleChoice: "Meerkeuze",
+                textInput: "Tekstinvoer",
+                openDevTab: "Ontwikkelaarstabblad openen",
+                enterUrlToFetch: "Voer URL in om op te halen (alleen GET)",
+                typeAndPressEnter: "Typ en druk op Enter",
+                recording: "Opnemen...",
+                recordKeybind: "Sneltoets opnemen",
+                enterUrl: "Voer een URL in"
+            },
+            option: {
+                hotkey: {
+                    description: "De sneltoets om het opdrachtenpalet te openen.",
+                    label: "Sneltoets"
+                },
+                allowMouseControl: {
+                    description: "De muis het opdrachtenpalet laten bedienen.",
+                    label: "Muisbediening toestaan"
+                }
+            },
+            name: "KeyboardNavigation",
+            description: "Hiermee kun je met het toetsenbord door de interface navigeren."
+        },
+        lastActive: {
+            name: "LastActive",
+            description: "Een plugin om naar het laatste actieve bericht van jezelf of een andere gebruiker in een kanaal/server te springen.",
+            toast: {
+                failedToFindMessages: "Kan berichten niet vinden. Bekijk de console voor details.",
+                couldnTFindAny: "Geen recente berichten van deze gebruiker gevonden.",
+                channelInformationNotAvailable: "Kanaalinformatie niet beschikbaar.",
+                failedToJumpTo: "Kan niet naar bericht springen. Bekijk de console voor details."
+            },
+            text: {
+                yourLastMessage: "Je laatste bericht",
+                userSLastMessage: "Laatste bericht van gebruiker"
+            }
+        },
+        limitlessScreenshare: {
+            text: {
+                deleteTag: "Tag verwijderen",
+                mustBeGreaterThan: "Moet >{{value}} zijn",
+                maxResolutionTooLow: "Maximale resolutie mag niet lager zijn dan {{value}}",
+                maxResolutionRound: "Maximale resolutie moet op 0 eindigen als Resolutie afronden aan staat"
+            },
+            name: "LimitlessScreenshare",
+            description: "Voegt een schuifregelaar toe voor resolutie en fps van scherm delen.",
+            option: {
+                maxFPS: {
+                    description: "Max. FPS voor de schuifregelaar",
+                    label: "Max. FPS"
+                },
+                maxResolution: {
+                    description: "Max. resolutie voor de schuifregelaar",
+                    label: "Max. resolutie"
+                },
+                roundResolution: {
+                    description: "Resolutie afronden op de dichtstbijzijnde 10p",
+                    label: "Resolutie afronden"
+                },
+                resolutions: {
+                    label: "Resoluties"
+                },
+                fpss: {
+                    label: "FPS-waarden"
+                }
+            }
+        },
+        messagePeek: {
+            option: {
+                hideMuted: {
+                    description: "Berichtvoorbeelden en tijdstempels verbergen voor gedempte DM's en groepschats.",
+                    label: "Gedempte verbergen"
+                }
+            },
+            name: "MessagePeek",
+            description: "Toont het voorbeeld en de tijdstempel van het laatste bericht in de lijst met privéberichten.",
+            text: {
+                officialDiscordMessage: "Officieel Discord-bericht",
+                sentGif: "stuurde een GIF",
+                voiceMessage: "spraakbericht",
+                membersCount: "{{count}} leden",
+                you: "Jij"
+            }
+        },
+        messageTranslate: {
+            name: "MessageTranslate",
+            description: "Vertaal berichten automatisch naar je taal, met caching, schakelaars per kanaal en meer opties.",
+            option: {
+                targetLanguage: {
+                    description: "Doeltaalcode voor vertalingen (bijv. en, es, fr, de, ja).",
+                    label: "Doeltaal"
+                },
+                excludedLanguages: {
+                    description: "Taalcodes die van vertaling worden uitgesloten (bijv. en, es, fr, de, ja).",
+                    label: "Uitgesloten talen"
+                },
+                confidenceRequirement: {
+                    description: "Minimale betrouwbaarheid (0 tot 1) om een vertaling te tonen.",
+                    label: "Vereiste betrouwbaarheid"
+                },
+                autoTranslate: {
+                    description: "Berichten automatisch vertalen zodra ze verschijnen.",
+                    label: "Automatisch vertalen"
+                },
+                skipOwnMessages: {
+                    description: "Je eigen berichten niet vertalen.",
+                    label: "Eigen berichten overslaan"
+                },
+                skipBotMessages: {
+                    description: "Botberichten niet vertalen.",
+                    label: "Botberichten overslaan"
+                },
+                ignoredGuilds: {
+                    description: "Kommagescheiden lijst met server-ID's waarin niet wordt vertaald.",
+                    label: "Genegeerde servers"
+                },
+                ignoredChannels: {
+                    description: "Kommagescheiden lijst met kanaal-ID's waarin niet wordt vertaald.",
+                    label: "Genegeerde kanalen"
+                },
+                ignoredUsers: {
+                    description: "Kommagescheiden lijst met gebruikers-ID's die niet worden vertaald.",
+                    label: "Genegeerde gebruikers"
+                },
+                showIndicator: {
+                    description: "Een kleine (vertaald)-indicator toevoegen aan vertaalde berichten.",
+                    label: "Indicator tonen"
+                },
+                showOriginal: {
+                    description: "De oorspronkelijke en vertaalde tekst tonen.",
+                    noorig: "Origineel niet tonen."
+                }
+            },
+            text: {
+                showOriginalInSubtext: "Origineel in subtekst tonen",
+                showOriginalMessageTranslation: "Oorspronkelijk bericht tonen, vertaling in subtekst",
+                translatedFrom: "vertaald uit het {{lang}}"
+            }
+        },
+        moreStickers: {
+            toast: {
+                stickerPackDeleted: "Stickerpakket verwijderd",
+                stickerPackAdded: "Stickerpakket toegevoegd",
+                stickerPacksAdded: "Stickerpakketten toegevoegd",
+                stickerPacksExported: "Stickerpakketten geëxporteerd",
+                newStickerPacksAlready: "Nieuwe stickerpakketten bestaan al, migratie niet nodig",
+                oldStickerPacksNot: "Oude stickerpakketten niet gevonden, niets te migreren",
+                migrationFailedTitleId: "Migratie mislukt: {{title}} ({{id}})",
+                stickerPackMigrationComplete: "Migratie van stickerpakketten voltooid",
+                failedToUploadSticker: "Kan sticker niet uploaden"
+            },
+            text: {
+                stickerPackUrl: "URL van stickerpakket",
+                pasteHtmlHere: "Plak HTML hier",
+                delete: "Verwijderen",
+                addStickerPackFrom: "Stickerpakket toevoegen via URL",
+                insert: "Invoegen",
+                addStickerPackFrom2: "Stickerpakket toevoegen via HTML",
+                insertFromHtml: "Invoegen vanuit HTML",
+                addStickerPackFrom3: "Stickerpakket toevoegen uit bestand",
+                miscTools: "Diverse hulpmiddelen",
+                exportStickerPacks: "Stickerpakketten exporteren",
+                migrateFromV1: "Migreren vanaf v1",
+                stickersManagement: "Stickerbeheer",
+                theRegionLineRecognized: "De regio die LINE herkent kan afwijken van jouw regio vanwege de CORS-proxy die we gebruiken.",
+                openStickerPackFile: "Stickerpakketbestand openen",
+                stickers: "Stickers+",
+                categoryTitle: "Categorie, {{title}}",
+                searchStickers: "Stickers zoeken",
+                ffmpegstatecontextIsUndefined: "FFmpegStateContext is niet gedefinieerd",
+                recentlyUsed: "Recent gebruikt",
+                addFromUrl: "Toevoegen via URL",
+                addFromHtml: "Toevoegen via HTML",
+                addFromFile: "Toevoegen uit bestand",
+                misc: "Overig",
+                invalidUrl: "Ongeldige URL",
+                lineOnly: "Momenteel worden alleen LINE-stickers/-emoji's ondersteund.",
+                getTelegramStickers: "Haal Telegram-stickers op met",
+                htmlFallbackHelp: "Als je fouten tegenkomt bij het toevoegen van een stickerpakket, kun je proberen het toe te voegen via de HTML-broncode van de pakketpagina.",
+                htmlFallbackApplies: "Dit geldt voor stickers die regio-/besturingssysteemgebonden zijn enz."
+            },
+            option: {
+                promptToUpload: {
+                    description: "Voegt de sticker in de chatbalk in in plaats van hem meteen te verzenden",
+                    label: "Vragen voor uploaden"
+                },
+                packs: {
+                    description: "Pakketten",
+                    label: "Pakketten"
+                }
+            },
+            name: "MoreStickers",
+            description: "Voegt stickerpakketten toe van andere sociale-mediaplatforms. (bijv. LINE)"
+        },
+        musicRichPresence: {
+            option: {
+                scrobblerBackend: {
+                    description: "De te gebruiken scrobbler-backend.",
+                    label: "Scrobbler-backend"
+                },
+                instanceBaseURL: {
+                    description: "De basis-URL van je ListenBrainz-instantie.",
+                    label: "Basis-URL van instantie"
+                },
+                instanceAPIBaseUrl: {
+                    description: "De basis-URL van je ListenBrainz-API.",
+                    label: "API-basis-URL van instantie"
+                },
+                apiKey: {
+                    description: "Last.fm API-sleutel. Niet verplicht, maar sterk aanbevolen om snelheidslimieten met onze gedeelde sleutel te voorkomen",
+                    label: "API-sleutel"
+                },
+                username: {
+                    description: "Gebruikersnaam",
+                    label: "Gebruikersnaam"
+                },
+                shareUsername: {
+                    description: "Link naar scrobblerprofiel tonen",
+                    label: "Gebruikersnaam delen"
+                },
+                clickableLinks: {
+                    description: "Nummer-, artiest- en albumnamen klikbare links maken",
+                    label: "Klikbare links"
+                },
+                hideWithSpotify: {
+                    description: "Aanwezigheid verbergen als Spotify draait",
+                    label: "Verbergen met Spotify"
+                },
+                hideWithActivity: {
+                    description: "Aanwezigheid verbergen als je een andere aanwezigheid hebt",
+                    label: "Verbergen bij activiteit"
+                },
+                statusName: {
+                    description: "Aangepaste statustekst. Je kunt de volgende variabelen gebruiken: {artist} | {album} | {title}",
+                    label: "Statusnaam"
+                },
+                statusDisplayType: {
+                    description: "Nummer-/artiestnaam tonen in de ledenlijst",
+                    off: "Niet tonen (toont algemeen luisterbericht)"
+                },
+                nameFormat: {
+                    description: "Naam van nummer en artiest tonen in de statusnaam",
+                    statusName: "Aangepaste statusnaam gebruiken"
+                },
+                missingArt: {
+                    description: "Als album of albumhoes ontbreekt",
+                    logo: "Groot scrobblerlogo gebruiken"
+                },
+                showLogo: {
+                    description: "Logo van scrobblerdienst tonen bij de albumhoes",
+                    label: "Scrobblerlogo tonen"
+                },
+                showAlbumCover: {
+                    description: "Albumhoes tonen. Uitschakelen toont een tijdelijke afbeelding. Handig als je muziek ongepaste hoezen heeft",
+                    label: "Albumhoes tonen"
+                },
+                useListeningStatus: {
+                    description: "Status \"Luistert naar\" tonen in plaats van \"Speelt\""
+                }
+            },
+            name: "MusicRichPresence",
+            description: "Rich Presence voor Last.FM/Listenbrainz",
+            text: {
+                showArtistName: "Artiestnaam tonen",
+                showTrackName: "Nummernaam tonen",
+                useMusicServiceName: "Naam van muziekdienst gebruiken (valt terug op aangepaste statustekst)",
+                useFormatArtistSong: "Indeling 'artiest - nummer' gebruiken",
+                useFormatSongArtist: "Indeling 'nummer - artiest' gebruiken",
+                useArtistNameOnly: "Alleen artiestnaam gebruiken",
+                useSongNameOnly: "Alleen nummernaam gebruiken",
+                useAlbumNameFalls: "Albumnaam gebruiken (valt terug op aangepaste statustekst als het nummer geen album heeft)",
+                useGenericPlaceholder: "Algemene tijdelijke afbeelding gebruiken",
+                lastFm: "Last.FM",
+                howToCreateAn: "Een API-sleutel maken",
+                set: "Stel",
+                applicationName: "Naam van de applicatie",
+                applicationDescription: "Beschrijving van de applicatie",
+                toAnythingAndLeave: "in op iets willekeurigs en laat de rest leeg.",
+                createApiKey: "API-sleutel maken",
+                invalidInstance: "Ongeldige ListenBrainz-compatibele instantie",
+                provideBoth: "Geef zowel de",
+                apiBaseUrl: "API-basis-URL",
+                andThe: "als de",
+                instanceBaseUrl: "instantie-basis-URL",
+                forYourCustomInstance: "van je eigen ListenBrainz-instantie op, of schakel terug naar ListenBrainz/Last.FM",
+                allowConnectTitle: "Plexcord toestaan verbinding te maken met de ListenBrainz-instantie",
+                allowConnectBody: "Om je eigen ListenBrainz-instantie te gebruiken, moet je Plexcord eerst toestaan er verbinding mee te maken.",
+                allowInstance: "Instantie toestaan",
+                listenBrainzCompatible: "ListenBrainz-compatibel (zelf gehost)",
+                and: "en"
+            }
+        },
+        noMiddleClickPaste: {
+            name: "NoMiddleClickPaste",
+            description: "Plakken met middelste muisknop op Linux uitschakelen - alleen Linux"
+        },
+        orbolayBridge: {
+            option: {
+                port: {
+                    description: "Poort om mee te verbinden",
+                    label: "Poort"
+                }
+            },
+            name: "OrbolayBridge",
+            description: "Brugplugin om Orbolay met Discord te verbinden",
+            toast: {
+                connectedToOrbolayServer: "Verbonden met Orbolay-server"
+            }
+        },
+        plexcordHelper: {
+            name: "PlexcordHelper",
+            description: "Wordt gebruikt om ondersteuning te bieden en door Discord veroorzaakte crashes te verhelpen.",
+            text: {
+                restartRequired: "Herstart vereist",
+                restartNow: "Nu herstarten",
+                later: "Later",
+                wouldYouLikeTo: "Wil je nu herstarten?",
+                somePluginsRequireA: "Sommige plugins vereisen een herstart om volledig te worden uitgeschakeld.",
+                alreadyEnabled: "{{plugin}} is al ingeschakeld",
+                alreadyDisabled: "{{plugin}} is al uitgeschakeld",
+                disablePlugin: "{{plugin}} uitschakelen",
+                enablePlugin: "{{plugin}} inschakelen",
+                errorStopping: "Fout bij het stoppen van plugin {{plugin}}",
+                errorStarting: "Fout bij het starten van plugin {{plugin}}"
+            },
+            toast: {
+                failedToTolowercase: "{{toLowerCase}} mislukt",
+                aRestartIsRequired: "Een herstart is nodig om de wijziging door te voeren!"
+            },
+            card: {
+                notOnThisVersion: "Deze plugin zit niet in deze versie van Plexcord. Probeer bij te werken!"
+            }
+        },
+        plexcordTweaks: {
+            name: "PlexcordTweaks",
+            option: {
+                removeActivitySection: {
+                    description: "Verwijdert de activiteitensectie boven de ledenlijst",
+                    label: "Activiteitensectie verwijderen"
+                },
+                showYourOwnActivityButtons: {
+                    description: "Discord verbergt om de een of andere reden je eigen activiteitsknoppen",
+                    label: "Je eigen activiteitsknoppen tonen"
+                },
+                refreshSlashCommands: {
+                    description: "Ververst slash-opdrachten zodat nieuwe opdrachten zonder herstart van de client verschijnen.",
+                    label: "Slash-opdrachten verversen"
+                },
+                forceRoleIcon: {
+                    description: "Dwingt rolpictogrammen naast berichten in compacte modus af",
+                    label: "Rolpictogram afdwingen"
+                },
+                accountStandingButton: {
+                    description: "Een knop voor accountstatus tonen in de koptekstbalk",
+                    label: "Knop voor accountstatus"
+                },
+                jsonGateway: {
+                    description: "Dwingt JSON af bij opnieuw verbinden met de gateway",
+                    label: "JSON-gateway"
+                },
+                enableAutoCorrect: {
+                    description: "Voegt een schakelaar toe aan het contextmenu van het chatvak voor native autocorrectie en tekstvervangingen",
+                    label: "Autocorrectie inschakelen"
+                },
+                autoCorrect: {
+                    description: "Native autocorrectie en tekstvervangingen gebruiken in berichteditors",
+                    label: "Autocorrectie"
+                },
+                disableHolidayNotifications: {
+                    label: "Feestdagmeldingen uitschakelen",
+                    description: "Altijd de standaard meldingsgeluiden van Discord gebruiken"
+                },
+                showAllBadges: {
+                    label: "Alle badges tonen",
+                    description: "Toont elke profielbadge in plaats van de rest achter +n te verbergen"
+                }
+            },
+            text: {
+                allGood: "Alles in orde!",
+                limited: "Beperkt",
+                veryLimited: "Zeer beperkt",
+                atRisk: "Risico",
+                suspended: "Geschorst",
+                slashCommandsRefreshedSuccessfully: "Slash-opdrachten ververst.",
+                failedToRefreshCommands: "Kan opdrachten niet verversen. Bekijk de console voor details.",
+                enableAutocorrect: "Autocorrectie inschakelen"
+            },
+            command: {
+                refreshCommands: "Slash-opdrachten verversen"
+            },
+            description: "Een verzameling kleine aanpassingen en oplossingen voor Discord."
+        },
+        plextronStreamFixes: {
+            option: {
+                unlockQualityOptions: {
+                    description: "Streamkwaliteitsopties ontgrendelen ongeacht Nitro-status",
+                    label: "Kwaliteitsopties ontgrendelen"
+                },
+                removeResolutionCap: {
+                    description: "Resoluties boven 720p bij 60 fps toestaan",
+                    label: "Resolutielimiet verwijderen"
+                },
+                forceEncoderSettings: {
+                    description: "Encoder dwingen de ingestelde resolutie/fps te gebruiken",
+                    label: "Encoderinstellingen afdwingen"
+                },
+                preventDownscale: {
+                    description: "Voorkomen dat Discord de streamresolutie verlaagt",
+                    label: "Verlagen voorkomen"
+                },
+                keyframeInterval: {
+                    description: "Keyframe-interval in ms (0 = encoderstandaard, 5000 = elke 5 s)",
+                    label: "Keyframe-interval"
+                },
+                minBitrate: {
+                    description: "Minimale encoderbitrate in kbps",
+                    label: "Min. bitrate"
+                },
+                raiseBitrateCaps: {
+                    description: "Standaard bitratelimieten op desktop verhogen (doel 600 kbps → 10 Mbps, max 3,5 Mbps → 40 Mbps)",
+                    label: "Bitratelimieten verhogen"
+                },
+                preventFramerateReduction: {
+                    description: "Voorkomen dat Discord de framerate van de stream verlaagt als je niet praat",
+                    label: "Framerateverlaging voorkomen"
+                },
+                bitsPerPixelPct: {
+                    description: "Bits per pixel in procenten voor de doelbitrate (8 = 0,08 bpp, 12 = 0,12 bpp)",
+                    label: "Bits per pixel (%)"
+                }
+            },
+            name: "PlextronStreamFixes",
+            description: "Probeert de streamkwaliteit op Plextron te verbeteren door de encoder en kwaliteitsbeperkingen van Discord te patchen."
+        },
+        rPCEditor: {
+            name: "RPCEditor"
+        },
+        reactionTimestamps: {
+            name: "ReactionTimestamps",
+            description: "Toont het tijdstip van elke reactie in het reactievenster.",
+            text: {
+                userAtTime: "{{user}} om {{time}}"
+            }
+        },
+        richPresence: {
+            text: {
+                useCustomStatusName: "Aangepaste statusnaam gebruiken",
+                useFormatArtistSong: "Indeling 'artiest - nummer' gebruiken",
+                useFormatSongArtist: "Indeling 'nummer - artiest' gebruiken",
+                useArtistNameOnly: "Alleen artiestnaam gebruiken",
+                useSongNameOnly: "Alleen nummernaam gebruiken",
+                useAlbumName: "Albumnaam gebruiken",
+                useLargeStatsFm: "Groot Stats.fm-logo gebruiken",
+                useGenericPlaceholder: "Algemene tijdelijke afbeelding gebruiken",
+                seriesMovieName: "Naam serie/film",
+                seriesEpisodeTrackMovie: "Serie - naam aflevering/track/film",
+                custom: "Aangepast",
+                seriesCover: "Serieomslag",
+                episodeCover: "Afleveringsomslag",
+                season1Episode1: "Seizoen 1 aflevering 1",
+                off: "Uit",
+                listening: "Luistert",
+                playing: "Speelt",
+                streaming: "Streamt",
+                watching: "Kijkt",
+                none: "Geen",
+                navidromeInstanceExposesServer: "Navidrome-instantie (stelt server-URL bloot. Eenmalige authenticatie verzonden.)",
+                lastFmApiSends: "Last.fm-API (stuurt metadata naar last.fm)",
+                donTShowShows: "Niet tonen (toont algemeen luisterbericht)",
+                showStateLineContent: "Inhoud van statusregel tonen",
+                showDetailsLineContent: "Inhoud van detailregel tonen",
+                displayYourCurrentlyPlaying: "Toon je huidige luisterboeken als Discord Rich Presence. Vereist de URL, gebruikersnaam en het wachtwoord van je AudioBookShelf-server.",
+                audiobookshelfServerUrl: "URL van AudioBookShelf-server.",
+                audiobookshelfUsername: "AudioBookShelf-gebruikersnaam.",
+                audiobookshelfPassword: "AudioBookShelf-wachtwoord.",
+                connectsToTosuVia: "Maakt via WebSocket op poort 24050 verbinding met tosu. Geen configuratie nodig, zorg alleen dat tosu naast osu! draait.",
+                showWhatYouRe: "Toon via stats.fm waar je naar luistert. Je luistergeschiedenis moet openbaar zijn.",
+                statsFmUsername: "Stats.fm-gebruikersnaam.",
+                customStatusText: "Aangepaste statustekst.",
+                statsFm: "Stats.fm",
+                nameFormat: "Naamindeling.",
+                fallbackWhenArtIs: "Terugval als de hoes ontbreekt.",
+                showListeningStatus: "Luisterstatus tonen.",
+                showStatsFmLogo: "Stats.fm-logo naast de albumhoes tonen.",
+                showLinkToStats: "Link naar stats.fm-profiel tonen.",
+                showLinkToSong: "Link naar nummer op stats.fm tonen.",
+                hideStatsFmPresence: "stats.fm-aanwezigheid verbergen als Spotify draait.",
+                hideStatsFmPresence2: "stats.fm-aanwezigheid verbergen als een externe RPC draait.",
+                disableDownloadingAlbumArt: "Downloaden van albumhoezen uitschakelen.",
+                showWhatYouRe2: "Toon wat je afspeelt op Jellyfin. Zo krijg je je API-sleutel: open de Jellyfin-webinterface, druk op F12 om de ontwikkelaarstools te openen, ga naar het tabblad Netwerk, zoek verzoeken naar je server, vind de Authorization-header (Ctrl+F om te zoeken); je hebt het deel uit Token='this' nodig. Je gebruikers-ID staat in de URL van je profielpagina.",
+                jellyfinServerUrl: "URL van Jellyfin-server.",
+                jellyfinApiKey: "Jellyfin API-sleutel.",
+                authorization: "Authorization",
+                jellyfinUserId: "Jellyfin-gebruikers-ID.",
+                userIdFromProfile: "Gebruikers-ID uit profiel-URL",
+                nameDisplayFormat: "Weergave-indeling van naam.",
+                customNameTemplate: "Aangepast naamsjabloon.",
+                nameOnJellyfin: "{name} op Jellyfin",
+                coverTypeForTv: "Type omslag voor tv-series.",
+                episodeNumberFormat: "Indeling van afleveringsnummer.",
+                overrideRichPresenceType: "Rich presence-type overschrijven.",
+                showEpisodeNameAfter: "Afleveringsnaam tonen na seizoen-/afleveringsinfo.",
+                showPresenceWhenMedia: "Aanwezigheid tonen als media gepauzeerd is.",
+                hideMediaDetails: "Mediadetails verbergen.",
+                discordRichPresenceFor: "Discord Rich Presence voor Gensokyo Radio. Schakel het in en luister!",
+                refreshIntervalInSeconds: "Vernieuwingsinterval in seconden.",
+                showWhatYouRe3: "Toon via Navidrome waar je naar luistert.",
+                navidromeServerUrlMust: "Navidrome-server-URL (moet een openbaar domein zijn, bijv. https://navidrome.example.com).",
+                navidromeUsername: "Navidrome-gebruikersnaam.",
+                navidromePassword: "Navidrome-wachtwoord.",
+                optionalDiscordApplicationClient: "Optionele client-ID van Discord-applicatie.",
+                howToFetchAlbum: "Hoe albumhoezen worden opgehaald.",
+                optionalProvideYourOwn: "Optioneel: geef je eigen Last.fm API-sleutel op (standaard als leeg).",
+                showNavidromeLogoIn: "Navidrome-logo rechtsonder op de albumhoes tonen.",
+                showAlbumNameIn: "Albumnaam tonen in aanwezigheid.",
+                whichTypeOfActivity: "Welk activiteitstype wordt getoond.",
+                showTheStateDetails: "Inhoud van status-/detailregel tonen in de ledenlijst",
+                hideRichPresenceWhen: "Rich Presence verbergen als muziek gepauzeerd is (in plaats van een stopwatch te tonen)",
+                theListeningToText: "De tekst 'Luistert naar' (bijv. {artist})",
+                navidrome: "Navidrome",
+                theMainLineShowing: "De hoofdregel die toont welk nummer speelt (bijv. {song})",
+                song: "{song}",
+                theLineBelowThe: "De regel onder de nummernaam (bijv. {artist})",
+                artist: "{artist}",
+                theAlbumLineE: "De albumregel (bijv. {album})",
+                album: "{album}",
+                enableTabLabelsCurrenttab: "{{TAB_LABELS_currentTab}}-aanwezigheid inschakelen.",
+                statsFmProfile: "Stats.fm-profiel",
+                viewSong: "Nummer bekijken",
+                showArtistName: "Artiestnaam tonen",
+                showTrackName: "Nummernaam tonen",
+                enterValue: "Voer een waarde in"
+            },
+            name: "RichPresence",
+            description: "Centrale Rich Presence-hub voor AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome en Gensokyo Radio.",
+            toast: {
+                audiobookshelfRpcIsNot: "AudioBookShelf-RPC is niet geconfigureerd.",
+                jellyfinRpcIsNot: "Jellyfin-RPC is niet geconfigureerd.",
+                jellyfinReturnedAnInvalid: "Jellyfin gaf een ongeldig antwoord. Je API-sleutel is mogelijk onjuist."
+            },
+            option: {
+                enabled: {
+                    description: "Rich Presence-diensten inschakelen.",
+                    label: "Ingeschakeld"
+                },
+                serviceSettings: {
+                    description: "Dienstconfiguratie.",
+                    label: "Dienstinstellingen"
+                },
+                abs_enabled: {
+                    description: "AudioBookShelf-aanwezigheid inschakelen.",
+                    label: "AudioBookShelf ingeschakeld"
+                },
+                tosu_enabled: {
+                    description: "osu! (tosu)-aanwezigheid inschakelen.",
+                    label: "osu! (tosu) ingeschakeld"
+                },
+                sfm_enabled: {
+                    description: "stats.fm-aanwezigheid inschakelen.",
+                    label: "Stats.fm ingeschakeld"
+                },
+                jf_enabled: {
+                    description: "Jellyfin-aanwezigheid inschakelen.",
+                    label: "Jellyfin ingeschakeld"
+                },
+                gr_enabled: {
+                    description: "Gensokyo Radio-aanwezigheid inschakelen.",
+                    label: "Gensokyo Radio ingeschakeld"
+                },
+                nd_enabled: {
+                    description: "Navidrome-aanwezigheid inschakelen.",
+                    label: "Navidrome ingeschakeld"
+                },
+                abs_serverUrl: {
+                    description: "URL van AudioBookShelf-server.",
+                    label: "AudioBookShelf-server-URL"
+                },
+                abs_username: {
+                    description: "AudioBookShelf-gebruikersnaam.",
+                    label: "AudioBookShelf-gebruikersnaam"
+                },
+                abs_password: {
+                    description: "AudioBookShelf-wachtwoord.",
+                    label: "AudioBookShelf-wachtwoord"
+                },
+                sfm_username: {
+                    description: "Stats.fm-gebruikersnaam.",
+                    label: "Stats.fm-gebruikersnaam"
+                },
+                sfm_shareUsername: {
+                    description: "Link naar stats.fm-profiel tonen.",
+                    label: "Stats.fm: gebruikersnaam delen"
+                },
+                sfm_shareSong: {
+                    description: "Link naar nummer op stats.fm tonen.",
+                    label: "Stats.fm: nummer delen"
+                },
+                sfm_hideWithSpotify: {
+                    description: "stats.fm-aanwezigheid verbergen als Spotify draait.",
+                    label: "Stats.fm: verbergen met Spotify"
+                },
+                sfm_hideWithExternalRPC: {
+                    description: "stats.fm-aanwezigheid verbergen als een externe RPC draait.",
+                    label: "Stats.fm: verbergen bij externe RPC"
+                },
+                sfm_statusName: {
+                    description: "Aangepaste statustekst.",
+                    label: "Stats.fm: statusnaam"
+                },
+                sfm_nameFormat: {
+                    description: "Naamindeling.",
+                    label: "Stats.fm: naamindeling",
+                    statusName: "Aangepaste statusnaam gebruiken",
+                    artistFirst: "Indeling 'artiest - nummer' gebruiken",
+                    songFirst: "Indeling 'nummer - artiest' gebruiken",
+                    artistOnly: "Alleen artiestnaam gebruiken",
+                    songOnly: "Alleen nummernaam gebruiken",
+                    albumName: "Albumnaam gebruiken"
+                },
+                sfm_useListeningStatus: {
+                    description: "Luisterstatus tonen.",
+                    label: "Stats.fm: luisterstatus gebruiken"
+                },
+                sfm_missingArt: {
+                    description: "Terugval als de hoes ontbreekt.",
+                    label: "Stats.fm: ontbrekende hoes",
+                    statsFmLogo: "Groot Stats.fm-logo gebruiken",
+                    placeholder: "Algemene tijdelijke afbeelding gebruiken"
+                },
+                sfm_showLogo: {
+                    description: "Stats.fm-logo naast de albumhoes tonen.",
+                    label: "Stats.fm: logo tonen"
+                },
+                sfm_alwaysHideArt: {
+                    description: "Downloaden van albumhoezen uitschakelen.",
+                    label: "Stats.fm: hoes altijd verbergen"
+                },
+                jf_serverUrl: {
+                    description: "URL van Jellyfin-server.",
+                    label: "Jellyfin-server-URL"
+                },
+                jf_apiKey: {
+                    description: "Jellyfin API-sleutel.",
+                    label: "Jellyfin API-sleutel"
+                },
+                jf_userId: {
+                    description: "Jellyfin-gebruikers-ID.",
+                    label: "Jellyfin-gebruikers-ID"
+                },
+                jf_nameDisplay: {
+                    description: "Weergave-indeling van naam.",
+                    label: "Jellyfin: naamweergave",
+                    default: "Naam serie/film",
+                    full: "Serie - naam aflevering/track/film",
+                    custom: "Aangepast"
+                },
+                jf_customName: {
+                    description: "Aangepast naamsjabloon.",
+                    label: "Jellyfin: aangepaste naam"
+                },
+                jf_coverType: {
+                    description: "Type omslag voor tv-series.",
+                    label: "Jellyfin: type omslag",
+                    series: "Serieomslag",
+                    episode: "Afleveringsomslag"
+                },
+                jf_episodeFormat: {
+                    description: "Indeling van afleveringsnummer.",
+                    label: "Jellyfin: afleveringsindeling",
+                    long: "S01E01",
+                    fulltext: "Seizoen 1 aflevering 1"
+                },
+                jf_showEpisodeName: {
+                    description: "Afleveringsnaam tonen na seizoen-/afleveringsinfo.",
+                    label: "Jellyfin: afleveringsnaam tonen"
+                },
+                jf_overrideType: {
+                    description: "Rich presence-type overschrijven.",
+                    label: "Jellyfin: type overschrijven",
+                    off: "Uit",
+                    listening: "Luistert",
+                    playing: "Speelt",
+                    streaming: "Streamt",
+                    watching: "Kijkt"
+                },
+                jf_showPausedState: {
+                    description: "Aanwezigheid tonen als media gepauzeerd is.",
+                    label: "Jellyfin: gepauzeerde status tonen"
+                },
+                jf_privacyMode: {
+                    description: "Mediadetails verbergen.",
+                    label: "Jellyfin: privacymodus"
+                },
+                gr_refreshInterval: {
+                    description: "Vernieuwingsinterval in seconden.",
+                    label: "Gensokyo Radio: vernieuwingsinterval"
+                },
+                nd_serverUrl: {
+                    description: "Navidrome-server-URL (bijv. https://navidrome.example.com)",
+                    label: "Navidrome-server-URL"
+                },
+                nd_username: {
+                    description: "Navidrome-gebruikersnaam",
+                    label: "Navidrome-gebruikersnaam"
+                },
+                nd_password: {
+                    description: "Navidrome-wachtwoord",
+                    label: "Navidrome-wachtwoord"
+                },
+                nd_clientId: {
+                    description: "Optionele client-ID van Discord-applicatie",
+                    label: "Navidrome: client-ID"
+                },
+                nd_showSmallImage: {
+                    description: "Navidrome-logo rechtsonder op de albumhoes tonen.",
+                    label: "Navidrome: kleine afbeelding tonen"
+                },
+                nd_showAlbum: {
+                    description: "Albumnaam tonen in aanwezigheid.",
+                    label: "Navidrome: album tonen"
+                },
+                nd_albumArtMode: {
+                    description: "Hoe albumhoezen worden opgehaald.",
+                    label: "Navidrome: albumhoesmodus",
+                    none: "Geen",
+                    instance: "Navidrome-instantie (stelt server-URL bloot aan Discord, geen authenticatie verzonden)",
+                    lastfm: "Last.fm-API (stuurt nummermetadata naar Last.fm)"
+                },
+                nd_lastfmApiKey: {
+                    description: "Optionele Last.fm API-sleutel",
+                    label: "Navidrome: Last.fm API-sleutel"
+                },
+                nd_refreshInterval: {
+                    description: "Vernieuwingsinterval in seconden.",
+                    label: "Navidrome: vernieuwingsinterval"
+                },
+                nd_activityType: {
+                    description: "Welk activiteitstype",
+                    label: "Navidrome: activiteitstype",
+                    listening: "Luistert",
+                    playingFixesHiddenLines: "Speelt (verhelpt verborgen regels)",
+                    watching: "Kijkt"
+                },
+                nd_nameString: {
+                    description: "Opmaakreeks voor activiteitsnaam",
+                    label: "Navidrome: naamreeks"
+                },
+                nd_detailsString: {
+                    description: "Opmaakreeks voor activiteitsdetails",
+                    label: "Navidrome: detailreeks"
+                },
+                nd_stateString: {
+                    description: "Opmaakreeks voor activiteitsstatus",
+                    label: "Navidrome: statusreeks"
+                },
+                nd_largeTextString: {
+                    description: "Opmaakreeks voor grote activiteitstekst",
+                    label: "Navidrome: reeks voor grote tekst"
+                },
+                nd_statusDisplayType: {
+                    description: "Nummer-/artiestnaam tonen in de ledenlijst",
+                    off: "Niet tonen (toont algemeen luisterbericht)"
+                },
+                nd_hideOnPause: {
+                    description: "Rich Presence verbergen als muziek gepauzeerd is",
+                    label: "Navidrome: verbergen bij pauze"
+                }
+            },
+            panel: {
+                password: "Wachtwoord",
+                statsFmUsername: "stats.fm-gebruikersnaam",
+                customStatusText: "Aangepaste statustekst",
+                nameFormat: "Naam Formaat",
+                missingArtFallback: "Terugval bij ontbrekende hoes",
+                showListeningStatus: "Luisterstatus tonen",
+                showStatsFmLogo: "Stats.fm-logo tonen",
+                showProfileLink: "Profiellink tonen",
+                showSongLink: "Nummerlink tonen",
+                hideWithSpotify: "Verbergen met Spotify",
+                hideWithExternalRpc: "Verbergen bij externe RPC",
+                disableAlbumArt: "Albumhoezen uitschakelen",
+                apiKey: "API-sleutel",
+                userId: "Gebruikers-ID",
+                nameDisplay: "Naamweergave",
+                customNameTemplate: "Aangepast naamsjabloon",
+                coverType: "Type omslag",
+                episodeFormat: "Afleveringsindeling",
+                overridePresenceType: "Aanwezigheidstype overschrijven",
+                showEpisodeName: "Afleveringsnaam tonen",
+                showWhenPaused: "Tonen bij pauze",
+                privacyMode: "Privacymodus",
+                refreshInterval: "Vernieuwingsinterval",
+                clientId: "Client-ID",
+                albumArtMode: "Albumhoesmodus",
+                lastFmApiKey: "Last.fm API-sleutel",
+                showSmallImage: "Kleine afbeelding tonen",
+                showAlbum: "Album tonen",
+                activityType: "Activiteitstype",
+                statusDisplayType: "Weergavetype van status",
+                hideOnPause: "Verbergen bij pauze",
+                activityNameFormat: "Indeling van activiteitsnaam",
+                detailsFormat: "Indeling van details",
+                stateFormat: "Indeling van status",
+                largeTextFormat: "Indeling van grote tekst",
+                enabled: "Ingeschakeld"
+            }
+        },
+        sedEnhanced: {
+            option: {
+                regexByDefault: {
+                    description: "Keert de `r`-vlag om: met `r` wordt niet-regex-modus ingeschakeld, zonder wordt regex-modus gebruikt.",
+                    label: "Standaard regex"
+                }
+            },
+            name: "SedEnhanced",
+            description: "Breidt de rudimentaire `sed`-ondersteuning van Discord uit."
+        },
+        showRolesInChat: {
+            option: {
+                showBots: {
+                    description: "Of de hoogste rol bij bots wordt getoond.",
+                    label: "Bots tonen"
+                },
+                useRoleColor: {
+                    description: "De kleur van de rol voor het pictogram gebruiken.",
+                    label: "Rolkleur gebruiken"
+                }
+            },
+            name: "ShowRolesInChat",
+            description: "Toont de hoogste rol van een gebruiker naast de naam in chatberichten. Verberg/toon specifieke rollen via hun contextmenu (rechtsklik).",
+            text: {
+                chatRoleActions: "Rolacties in chat",
+                unhideRolesInChat: "Rollen weer tonen in chat",
+                showRoleInChat: "Rol in chat tonen",
+                hideRoleInChat: "Rol in chat verbergen"
+            }
+        },
+        silenceUsers: {
+            option: {
+                mutedUserIds: {
+                    description: "Kommagescheiden Discord-gebruikers-ID's waarvan pings en serverbadges worden gedempt.",
+                    label: "Gedempte gebruikers-ID's"
+                }
+            },
+            name: "SilenceUsers",
+            description: "Dempt @vermeldingspings en serverbadgetellers van specifieke gebruikers. Gewone berichten en DM's blijven ongemoeid."
+        },
+        songLink: {
+            text: {
+                showIfAvailable: "Tonen indien beschikbaar",
+                openInDesktopApp: "Openen in desktop-app",
+                loadingSongLink: "Nummerlink laden...",
+                pleaseProvideAMusic: "Geef een muzieklink op.",
+                thisWillTakeA: "Dit duurt even...",
+                noAlternativePlatformsFound: "Geen alternatieve platforms gevonden voor deze link.",
+                failedToResolveMusic: "Kan muzieklink niet herleiden",
+                logo: "{{name}}-logo"
+            },
+            option: {
+                servicesSettings: {
+                    description: "instellingen voor diensten",
+                    label: "Dienstinstellingen"
+                },
+                userCountry: {
+                    description: "Land gebruikt voor opzoeken (landcode van twee letters)",
+                    label: "Land van gebruiker"
+                },
+                includeMetadata: {
+                    description: "Titel en artiestnaam als kop opnemen.",
+                    label: "Metadata opnemen"
+                }
+            },
+            name: "SongLink",
+            description: "Voegt knoppen voor streamingdiensten toe onder nummerlinks",
+            command: {
+                musiclink: "Een muzieklink omzetten naar andere streamingplatforms.",
+                url: "Muzieklink (Spotify, Deezer, YouTube, Tidal, Apple Music, SoundCloud)"
+            }
+        },
+        songSpotlight: {
+            name: "SongSpotlight",
+            description: "Laat nummers zien op je profiel",
+            text: {
+                songSpotlight: "Song Spotlight",
+                explicit: "Expliciet",
+                addSong: "Nummer toevoegen",
+                addANewSong: "Een nieuw nummer toevoegen",
+                copyLink: "Link kopiëren",
+                removeSong: "Nummer verwijderen",
+                failedToLoad: "Laden mislukt!",
+                areYouSure: "Weet je het zeker?",
+                thisWillOverwriteYour: "Dit overschrijft je huidige nummers.",
+                continue: "Doorgaan",
+                nevermind: "Laat maar",
+                thisWillPermanentlyDelete: "Dit verwijdert al je nummers permanent.",
+                delete: "Verwijderen",
+                signInToSong: "Aanmelden bij Song Spotlight",
+                songs: "Nummers",
+                authorization: "Authorization",
+                importFromClipboard: "Importeren van klembord",
+                copyToClipboard: "Naar klembord kopiëren",
+                signOut: "Afmelden",
+                deleteSongs: "Nummers verwijderen",
+                more: "Meer",
+                editSongs: "Nummers bewerken",
+                copyJson: "JSON kopiëren",
+                looksLikeThereS: "Het lijkt erop dat hier niets is!",
+                uhOhSongSpotlight: "Oeps! Song Spotlight kon niet worden geladen. Bekijk de console voor meer details.",
+                stealSong: "Nummer stelen",
+                profileSongs: "Profielnummers",
+                notEnoughSpace: "Niet genoeg ruimte",
+                alreadyAdded: "Je hebt dit nummer al toegevoegd",
+                invalidLink: "Ongeldige link",
+                failedToParseLink: "Kan link niet verwerken",
+                invalidUrl: "Ongeldige URL",
+                goAddSongs: "Nou? Waar wacht je op? Voeg wat nummers toe aan je Song Spotlight!",
+                tellUserToAddSongs: "Vraag {{name}} om wat nummers aan de Song Spotlight toe te voegen!",
+                supportedServices: "Song Spotlight ondersteunt deze diensten:",
+                viewSongsVia: "Je kunt je nummers ook bekijken via het commando",
+                viewSongsViaSuffix: "!",
+                coverTooltipOwner: "{{sublabel}} van {{label}}",
+                coverTooltipBy: "{{label}} van {{sublabel}}",
+                lastUpdated: "Laatst bijgewerkt",
+                save: "Opslaan",
+                showMore: "Toon nog {{count}}"
+            },
+            toast: {
+                youHaveBeenSigned: "Je bent afgemeld bij Song Spotlight. Meld je opnieuw aan.",
+                songSpotlightError: "Song Spotlight: {{error}}",
+                successfullyAuthorized: "Autorisatie gelukt!",
+                failedToPlaySong: "Kan nummervoorbeeld niet afspelen!",
+                addedSong: "Nummer toegevoegd!",
+                removedSong: "Nummer verwijderd!",
+                noJsonInClipboard: "Geen JSON op het klembord!",
+                invalidSongSpotlightData: "Ongeldige Song Spotlight-gegevens op het klembord!",
+                oneOrMoreImported: "Een of meer geïmporteerde nummers waren ongeldig.",
+                importedSongsFromClipboard: "Nummers geïmporteerd van het klembord!",
+                successfullySavedSongs: "Nummers opgeslagen!",
+                successfullySignedOut: "Afgemeld!",
+                successfullyDeletedSongs: "Nummers verwijderd!",
+                youDonTHave: "Je hebt niet genoeg ruimte!",
+                uhOhThisSong: "Oeps, dit nummer bestaat niet!",
+                youAlreadyHaveThis: "Je hebt dit nummer al toegevoegd!",
+                youDonTHave2: "Je... hebt dit nummer niet toegevoegd?",
+                fetchError: "Song Spotlight-ophaalfout bij {{path}}"
+            },
+            option: {
+                collapseSongList: {
+                    description: "Vouwt de nummerlijst op profielen samen tot een knop die een apart menu opent",
+                    label: "Nummerlijst samenvouwen"
+                },
+                profileSongsLimit: {
+                    description: "Hoeveel nummers worden getoond bij het eerste klikken op een gebruiker",
+                    label: "Limiet profielnummers"
+                },
+                previewVolume: {
+                    description: "Volume van nummervoorbeelden bij afspelen",
+                    label: "Voorbeeldvolume"
+                }
+            }
+        },
+        stopAutoUnread: {
+            name: "StopAutoUnread",
+            description: "Voorkomt dat Discord de meldingsinstelling van een kanaal automatisch op \"Alle berichten\" zet"
+        },
+        themeLibrary: {
+            text: {
+                enablePlugin: "Plugin inschakelen",
+                cancel: "Annuleren",
+                holdOn: "Wacht even!",
+                thisThemeRequiresThe: "Dit thema vereist de",
+                pluginToWorkProperly: "plugin om goed te werken!",
+                doYouWantTo: "Wil je het inschakelen?",
+                themeInfo: "Thema-info",
+                viewSource: "Bron bekijken",
+                close: "Sluiten",
+                download: "Downloaden",
+                overwrite: "Overschrijven",
+                keepMyFile: "Mijn bestand behouden",
+                copyToClipboard: "Naar klembord kopiëren",
+                conflict: "Conflict!",
+                themeSource: "Themabron",
+                aThemeWithThe: "Een thema met dezelfde naam",
+                alreadyExists: "bestaat al",
+                inYourThemesDirectory: "in je themamap! Wil je het overschrijven?",
+                version: "Versie",
+                likes: "Likes",
+                donate: "Doneren",
+                supportServer: "Supportserver",
+                source: "Bron",
+                tags: "Tags",
+                youCanSupportThe: "Je kunt de auteur steunen door hieronder te doneren!",
+                joinDiscordServer: "Discord-server joinen",
+                viewThemeSource: "Themabron bekijken",
+                showAll: "Alles tonen",
+                showThemes: "Thema's tonen",
+                showSnippets: "Snippets tonen",
+                showMostLiked: "Meest gelikete tonen",
+                showDark: "Donkere tonen",
+                showLight: "Lichte tonen",
+                showEnabled: "Ingeschakelde tonen",
+                showDisabled: "Uitgeschakelde tonen",
+                searchForATheme: "Een thema zoeken...",
+                gettingTheLatestThemes: "Nieuwste thema's ophalen...",
+                thisWonTTake: "Dit duurt niet lang!",
+                failedToFetchThemes: "Kan thema's niet ophalen",
+                couldNotFetchThe: "Kan de themalijst niet ophalen. Probeer het later opnieuw.",
+                wantYourThemeRemoved: "Wil je dat je thema wordt verwijderd?",
+                hide: "Verbergen",
+                noThemeFound: "Geen thema gevonden.",
+                tryNarrowingYourSearch: "Probeer je zoekopdracht te verfijnen.",
+                themeLibrary: "Themabibliotheek",
+                successfullyAuthorizedWithThemelibrary: "Geautoriseerd bij ThemeLibrary!",
+                failedToAuthorizeCheck: "Autoriseren mislukt, bekijk de console",
+                successfullyDeauthorizedFromThemelibrary: "Autorisatie bij ThemeLibrary ingetrokken!",
+                failedToDeauthorizeCheck: "Intrekken mislukt, bekijk de console",
+                themelibraryAuth: "ThemeLibrary-autorisatie",
+                themeRemoval: "Thema verwijderen",
+                allThemeAuthorsAre: "Alle thema-auteurs worden vermeld in de thema-info en er is geen bron gewijzigd. Wil je je thema toch laten verwijderen, open dan hieronder een issue.",
+                authorizeWithThemelibrary: "Autoriseren bij ThemeLibrary",
+                copyThemelibraryToken: "ThemeLibrary-token kopiëren",
+                deauthorizeThemelibrary: "Autorisatie bij ThemeLibrary intrekken",
+                themeDetails: "Details van {{name}}",
+                mostLiked: "Meest geliked",
+                newestAdditions: "Nieuwste toevoegingen",
+                removeTheme: "Thema verwijderen",
+                addTheme: "Thema toevoegen",
+                authors: "Auteurs",
+                author: "Auteur",
+                nobodyLikedTheme: "Nog niemand vindt dit thema leuk.",
+                nobodyLikedSnippet: "Nog niemand vindt dit snippet leuk.",
+                usersLikedTheme: "{{likes}} gebruikers vinden dit thema leuk!",
+                usersLikedSnippet: "{{likes}} gebruikers vinden dit snippet leuk!",
+                openThemeLibrary: "Themabibliotheek openen",
+                lastUpdated: "Dit thema is voor het laatst bijgewerkt op",
+                removalInfo: "Als je wilt dat je thema('s) permanent worden verwijderd, open dan een issue op",
+                themes: "Thema's",
+                requestRemoval: "Verwijdering van thema aanvragen",
+                pluginSuffix: "plugin!"
+            },
+            toast: {
+                downloadedName: "{{name}} gedownload!",
+                failedToDownloadName: "Kan {{name}} niet downloaden! (bekijk de console)",
+                invalidOrExpiredInvite: "Ongeldige of verlopen uitnodiging!",
+                copiedToClipboard: "Gekopieerd naar klembord",
+                noUniquetokenPresentTry: "Geen uniqueToken aanwezig, autoriseer eerst!",
+                noTokenToCopy: "Geen token om te kopiëren, autoriseer eerst!",
+                copiedToClipboard2: "Gekopieerd naar klembord!"
+            },
+            name: "ThemeLibrary",
+            description: "Een bibliotheek met thema's voor Plexcord.",
+            option: {
+                hideWarningCard: {
+                    description: "De waarschuwingskaart bovenaan het tabblad Themabibliotheek verbergen",
+                    label: "Waarschuwingskaart verbergen"
+                },
+                buttons: {
+                    description: "ThemeLibrary-knoppen",
+                    label: "Knoppen"
+                }
+            }
+        },
+        translatePlus: {
+            name: "Translate+",
+            description: "De vertaalplugin van Plexcord, maar met ondersteuning voor kunsttalen!",
+            text: {
+                translate: "Vertalen",
+                dismiss: "Sluiten",
+                translationFailedDueTo: "Vertaling mislukt door een fout.",
+                translatedFrom: "vertaald uit het {{lang}}"
+            },
+            option: {
+                target: {
+                    description: "Doeltaal",
+                    label: "Doel"
+                },
+                toki: {
+                    description: "Toki Pona inschakelen",
+                    label: "Toki Pona"
+                },
+                sitelen: {
+                    description: "Sitelen Pona inschakelen",
+                    label: "Sitelen Pona"
+                },
+                shavian: {
+                    description: "Shavian inschakelen",
+                    label: "Shavian"
+                }
+            }
+        },
+        triviaAI: {
+            name: "TriviaAI",
+            description: "Een plugin die je helpt quizvragen te beantwoorden met AI.",
+            text: {
+                answerWithAi: "Antwoorden met AI",
+                enterApiKeyHere: "Voer hier de API-sleutel voor je AI-endpoint in.",
+                enterSystemPrompt: "Voer systeemprompt in.",
+                enterYourOpenaiCompatible: "Voer hier je OpenAI-compatibele AI-endpoint in.",
+                status: "Status {{status}}"
+            },
+            option: {
+                apiKey: {
+                    description: "API-sleutel.",
+                    label: "API-sleutel"
+                },
+                model: {
+                    description: "Te gebruiken AI-model.",
+                    label: "Model",
+                    placeholder: "bijv. google/gemini-3-flash-preview, inception/mercury, openai/gpt-5.2-chat, enz."
+                },
+                systemPrompt: {
+                    description: "Systeemprompt voor de AI. Tijdelijke aanduidingen: {current_user}, {current_time}",
+                    label: "Systeemprompt"
+                },
+                maxTokens: {
+                    description: "Maximaal aantal tokens in het antwoord.",
+                    label: "Max. tokens"
+                },
+                endpoint: {
+                    description: "OpenAI-compatibele AI-endpoint.",
+                    label: "Endpoint"
+                },
+                context: {
+                    description: "Aantal eerdere berichten om als context op te nemen.",
+                    label: "Context"
+                },
+                passMessageAuthorName: {
+                    description: "De naam van de auteur vóór de berichtinhoud plaatsen wanneer deze naar de AI gaat. Dit helpt de AI om gebruikers in een gesprek te onderscheiden.",
+                    label: "Naam van berichtauteur doorgeven"
+                },
+                treatSelfAsAssistant: {
+                    description: "Indien ingeschakeld worden je eigen berichten in de context als assistentberichten behandeld. Sommige modellen gaan dan fanfictie genereren.",
+                    label: "Mezelf als assistent behandelen"
+                },
+                mode: {
+                    description: "Hoe moeten antwoorden worden afgehandeld?",
+                    label: "Modus",
+                    autoreply: "Automatisch antwoorden",
+                    chatbar: "Tekst in chatbalk vervangen",
+                    bot: "Clyde"
+                },
+                supportImages: {
+                    description: "Afbeeldingen als context aan de AI doorgeven (indien aanwezig). Niet alle modellen ondersteunen dit.",
+                    label: "Afbeeldingen ondersteunen"
+                },
+                sendImagesAsBase64: {
+                    description: "Afbeeldingen als base64 naar de AI sturen.",
+                    label: "Afbeeldingen als base64 sturen"
+                }
+            },
+            toast: {
+                triviaaiApiSettingsAre: "TriviaAI: API-instellingen zijn onvolledig.",
+                errorGettingResponseFrom: "Fout bij ophalen van antwoord van AI-model"
+            }
+        },
+        unreadCountBadge: {
+            option: {
+                showOnMutedChannels: {
+                    description: "Aantal ongelezen tonen bij gedempte kanalen",
+                    label: "Tonen bij gedempte kanalen"
+                },
+                notificationCountLimit: {
+                    description: "+99 tonen in plaats van het werkelijke aantal",
+                    label: "Limiet voor meldingsaantal"
+                }
+            },
+            name: "UnreadCountBadge",
+            description: "Toont badges met het aantal ongelezen berichten bij kanalen in de kanalenlijst"
+        },
+        userPFP: {
+            toast: {
+                gifsWebpMustBe: "GIF's/WebP moeten via een URL worden toegevoegd. Upload je GIF/WebP naar een afbeeldingshost en plak de link."
+            },
+            text: {
+                save: "Opslaan",
+                delete: "Verwijderen",
+                customAvatar: "Aangepaste avatar",
+                original: "Origineel",
+                local: "Lokaal",
+                enterPngGifUrl: "PNG/GIF-URL invoeren",
+                setAvatar: "Avatar instellen",
+                usingTheSetAvatar: "De functie avatar instellen is alleen lokaal, dus alleen jij ziet de wijziging.",
+                joinUserpfpServer: "Word lid van de UserPFP-server",
+                dropHere: "Hier neerzetten!",
+                dragOrClick: "⬆ Sleep een afbeelding of klik om te uploaden (gebruik voor GIF's of WebP een URL)",
+                uploadedFile: "(geüpload bestand)",
+                supportHere: "Steun UserPFP hier"
+            },
+            option: {
+                overrideServerAvatars: {
+                    description: "Serveravatars overschrijven met aangepaste avatars of de standaardavatar als er geen aangepaste is ingesteld.",
+                    label: "Serveravatars overschrijven"
+                },
+                preferNitro: {
+                    description: "Welke avatar wordt gebruikt als zowel een standaard geanimeerde (Nitro) profielfoto als een UserPFP-avatar aanwezig is",
+                    label: "Nitro verkiezen",
+                    false: "UserPFP",
+                    true: "Nitro"
+                },
+                databaseSource: {
+                    description: "URL waarvan de database wordt geladen",
+                    label: "Databasebron"
+                }
+            },
+            name: "UserPFP",
+            description: "Hiermee kun je lokale statische of geanimeerde avatars instellen voor jezelf en andere gebruikers"
+        },
+        userpluginInstaller: {
+            toast: {
+                restartToApplyChanges: "Herstart om wijzigingen toe te passen!"
+            },
+            text: {
+                installError: "Installatiefout",
+                done: "Klaar!",
+                later: "Later",
+                updateError: "Updatefout",
+                checkingForUpdates: "Controleren op updates...",
+                loadingPlugins: "Plugins laden...",
+                pluginUpdatesAvailable: "Plugin-updates beschikbaar",
+                theFollowingPluginsAre: "De volgende plugins zijn verouderd:",
+                youCanUpdatePlugins: "Je kunt de plugins hieronder bijwerken.",
+                installPlugin: "Plugin installeren",
+                userplugininstallerNotFullyLoaded: "UserpluginInstaller niet volledig geladen",
+                youNeedToRestart: "Je moet herstarten zodat het native deel kan laden :)",
+                restartNow: "Nu herstarten",
+                someUserpluginsAreOut: "Sommige UserPlugins zijn verouderd!",
+                clickToOpenThe: "Klik om de UserPlugin-updater te openen",
+                plexcordDoesNotModerate: "Plexcord modereert geen userplugins en is niet verantwoordelijk voor de gevolgen van het installeren ervan.",
+                onlyInstallUserpluginsFrom: "Installeer alleen userplugins van ontwikkelaars die je vertrouwt. Dit is volledig op eigen risico.",
+                setGitPath: "Git-pad instellen",
+                installHint: "Je kunt een plugin van GitHub, GitLab, Codeberg, git.nin0.dev of plugins.nin0.dev installeren door hier de clone-URL te plakken.",
+                enableAndRestart: "Inschakelen en herstarten",
+                enableAndRefresh: "Inschakelen en vernieuwen",
+                tabCounts: "({{total}}, {{enabled}} ingeschakeld)",
+                possiblyMore: "en mogelijk meer, omdat het controleren op updates nog niet klaar is. ",
+                alreadyInstalled: "Plugin is al geïnstalleerd, werk hieronder bij",
+                invalidUrl: "Ongeldige URL, lees de melding hierboven",
+                install: "Installeren",
+                restart: "Herstarten",
+                refresh: "Vernieuwen",
+                update: "Bijwerken",
+                source: "Bron",
+                support: "Ondersteuning",
+                managePlugins: "Plugins beheren",
+                uninstalledRestart: "{{name}} is verwijderd. Een herstart is nodig om de plugin volledig te verwijderen.",
+                uninstalledRefresh: "{{name}} is verwijderd. Vernieuwen is nodig om de plugin volledig te verwijderen.",
+                updatedRestart: "{{name}} is bijgewerkt. Een herstart is nodig om de update toe te passen.",
+                updatedRefresh: "{{name}} is bijgewerkt. Vernieuwen is nodig om de update toe te passen.",
+                installedBody: "{{name}} is succesvol geïnstalleerd. Wat nu?",
+                installedNativeBody: "{{name}} is succesvol geïnstalleerd. Omdat het native functies gebruikt, is een herstart van de client vereist. Wat nu?"
+            },
+            option: {
+                allowlistedChannels: {
+                    description: "Kommagescheiden lijst met kanalen waar de knop Plugin installeren wordt getoond. In de Plexcord-userpluginkanalen wordt hij altijd getoond",
+                    label: "Toegestane kanalen"
+                },
+                notifyIfUpdate: {
+                    description: "Een Plexcord-melding tonen als UserPlugins moeten worden bijgewerkt",
+                    label: "Melden bij update"
+                },
+                neverNotifyForPlugins: {
+                    description: "Nooit updatemeldingen tonen voor deze plugins (je kunt ze nog steeds bijwerken via het tabblad UserPlugins)",
+                    label: "Nooit melden voor plugins"
+                }
+            },
+            name: "UserpluginInstaller",
+            description: "Installeer userplugins met één klik op een knop"
+        },
+        vCPanelSettings: {
+            option: {
+                title1: {
+                    label: "Titel 1"
+                },
+                uncollapseSettingsByDefault: {
+                    description: "Spraakinstellingen standaard automatisch uitklappen",
+                    label: "Instellingen standaard uitklappen"
+                },
+                title2: {
+                    label: "Titel 2"
+                },
+                outputVolume: {
+                    description: "Een schuifregelaar voor uitvoervolume tonen",
+                    label: "Uitvoervolume"
+                },
+                inputVolume: {
+                    description: "Een schuifregelaar voor invoervolume tonen",
+                    label: "Invoervolume"
+                },
+                outputDevice: {
+                    description: "Een keuzelijst voor uitvoerapparaat tonen",
+                    label: "Uitvoerapparaat"
+                },
+                inputDevice: {
+                    description: "Een keuzelijst voor invoerapparaat tonen",
+                    label: "Invoerapparaat"
+                },
+                camera: {
+                    description: "Een camerakeuzelijst tonen",
+                    label: "Camera"
+                },
+                title3: {
+                    label: "Titel 3"
+                },
+                showOutputVolumeHeader: {
+                    description: "Kop boven de schuifregelaar voor uitvoervolume tonen",
+                    label: "Kop voor uitvoervolume tonen"
+                },
+                showInputVolumeHeader: {
+                    description: "Kop boven de schuifregelaar voor invoervolume tonen",
+                    label: "Kop voor invoervolume tonen"
+                },
+                showOutputDeviceHeader: {
+                    description: "Kop boven de keuzelijst voor uitvoerapparaat tonen",
+                    label: "Kop voor uitvoerapparaat tonen"
+                },
+                showInputDeviceHeader: {
+                    description: "Kop boven de keuzelijst voor invoerapparaat tonen",
+                    label: "Kop voor invoerapparaat tonen"
+                },
+                showVideoDeviceHeader: {
+                    description: "Kop boven de camerakeuzelijst tonen",
+                    label: "Kop voor videoapparaat tonen"
+                }
+            },
+            name: "VCPanelSettings",
+            description: "Bedien spraakinstellingen rechtstreeks vanuit het spraakpaneel",
+            text: {
+                appearance: "Weergave",
+                settingsToShow: "Te tonen instellingen",
+                headersToShow: "Te tonen koppen",
+                outputVolume: "Uitvoervolume",
+                inputVolume: "Invoervolume",
+                outputDevice: "Uitvoerapparaat",
+                inputDevice: "Invoerapparaat",
+                settings: "Instellingen",
+                hide: "Verbergen"
+            }
+        },
+        voiceMessageTranscriber: {
+            text: {
+                autoDetect: "Automatisch detecteren",
+                start: "Starten",
+                transcriptionOptions: "Transcriptieopties",
+                audioLanguage: "Audiotaal",
+                retry: "Opnieuw proberen",
+                transcriptionFailed: "Transcriptie mislukt",
+                transcribeVoiceMessage: "Spraakbericht transcriberen",
+                close: "Sluiten",
+                baseRecommended: "Base (aanbevolen)",
+                small: "Small",
+                largeV3TurboBest: "Large v3 Turbo (beste nauwkeurigheid, GPU aanbevolen)",
+                transcribe: "Transcriberen",
+                translateToEnglish: "Naar het Engels vertalen",
+                voiceMessageTranslation: "Vertaling van spraakbericht",
+                voiceMessageTranscription: "Transcriptie van spraakbericht",
+                hideTimestamps: "Tijdstempels verbergen",
+                showTimestamps: "Tijdstempels tonen",
+                copied: "Gekopieerd!",
+                copyText: "Tekst kopiëren",
+                downloadingAudio: "Audio downloaden...",
+                processingAudio: "Audio verwerken...",
+                loadingModel: "Model laden...",
+                transcribing: "Transcriberen...",
+                transcription: "Transcriptie",
+                transcriptionError: "Transcriptiefout",
+                transcribingInProgress: "Transcriptie bezig...",
+                initializing: "Initialiseren...",
+                workerCrashed: "Transcriptie-worker is gecrasht",
+                workerStopped: "Transcriptie-worker is gestopt",
+                deleteCache: "Alle gecachte bestanden verwijderen ({{size}} MB)",
+                action: "Actie"
+            },
+            name: "VoiceMessageTranscriber",
+            description: "Transcripties van spraakberichten op het apparaat, aangedreven door Whisper",
+            option: {
+                embed: {
+                    description: "Transcriptie rechtstreeks in de bijlage van het spraakbericht tonen in plaats van in een venster.",
+                    label: "Embed"
+                },
+                maintainHorizontal: {
+                    description: "Horizontale grootte van het ingesloten transcriptievak behouden en verticaal uitbreiden.",
+                    label: "Horizontaal behouden"
+                },
+                selectedModel: {
+                    description: "Modelgrootte.",
+                    onnxcommunitywhispertiny: "Tiny (snelst, laagste nauwkeurigheid)"
+                },
+                useGpu: {
+                    description: "Het model op je GPU (WebGPU) uitvoeren als dat wordt ondersteund. Veel sneller en maakt grotere modellen bruikbaar. Valt terug op de CPU indien niet beschikbaar.",
+                    label: "GPU gebruiken"
+                },
+                quantized: {
+                    description: "Gekwantiseerde modellen gebruiken op de CPU (kleiner, licht kwaliteitsverlies).",
+                    label: "Gekwantiseerd"
+                },
+                deleteModalFiles: {
+                    description: "Gecachte bestanden uit de opslag verwijderen.",
+                    label: "Modelbestanden verwijderen"
+                }
+            }
+        },
+        voiceMessagesInBackground: {
+            name: "VoiceMessagesInBackground",
+            description: "Laat spraakberichten doorspelen tussen chats met een gesynchroniseerde minispeler.",
+            text: {
+                voiceMessagesInBackground: "Achtergrondspeler voor spraakberichten",
+                returnToChannelname: "Terug naar {{channelName}}",
+                voiceMessagePosition: "Positie in spraakbericht",
+                changePlaybackSpeed: "Afspeelsnelheid wijzigen",
+                playbackSpeedSpeedTimes: "Afspeelsnelheid {{speed}} keer",
+                closeVoiceMessagePlayer: "Speler voor spraakberichten sluiten",
+                voiceMessage: "Spraakbericht",
+                directMessage: "Privébericht",
+                resume: "Spraakbericht hervatten",
+                pause: "Spraakbericht pauzeren"
+            }
+        },
+        webPWA: {
+            name: "WebPWA",
+            description: "Maakt Discord installeerbaar als app (PWA). Schakelt meldingsbadges, globale sneltoetsen en de eigen titelbalk van Discord in.",
+            text: {
+                activities: "Activiteiten",
+                hopIn: "Doe mee",
+                status: "Status",
+                emojis: "Emoji's",
+                rooms: "Ruimtes",
+                discord: "Discord",
+                platforms: "Platforms",
+                keybindsInfoBefore: "Aangepaste globale Druk om X-sneltoetsen worden ondersteund. Ga naar",
+                keybindsInfoAfter: "om ze te wijzigen. Houd ingedrukt voor X-sneltoetsen worden niet ondersteund."
+            }
+        },
+        "webRichPresence (arRPC)": {
+            name: "WebRichPresence (arRPC)"
+        },
+        webScreenShare: {
+            option: {
+                resolution: {
+                    description: "Resolutie",
+                    label: "Resolutie"
+                },
+                frameRate: {
+                    description: "Framerate",
+                    label: "Framerate"
+                },
+                contentHint: {
+                    description: "Inhoudshint",
+                    label: "Inhoudshint"
+                },
+                systemAudio: {
+                    description: "Systeemgeluid dempen",
+                    label: "Systeemgeluid"
+                }
+            },
+            name: "WebScreenShare",
+            description: "Voegt een menu met opties voor scherm delen toe. Hiermee wijzig je resolutie, framerate, coderingshints en systeemgeluid.",
+            text: {
+                stream: "Stream",
+                streamMuted: "Stream gedempt",
+                streamMode: "Streammodus",
+                muteStreamAudio: "Streamgeluid dempen",
+                preventsSystemAudioFrom: "Voorkomt dat systeemgeluid in je stream wordt opgenomen.",
+                showStreamPreviews: "Streamvoorbeelden tonen",
+                allowsOthersToSee: "Laat anderen een voorbeeld van je stream zien voordat ze meedoen.",
+                smootherVideo: "Vloeiendere video",
+                cleanerText: "Scherpere tekst",
+                userPreset: "Gebruikersvoorinstelling",
+                custom: "Aangepast",
+                gaming: "Gaming",
+                screenshare: "Scherm delen"
+            }
+        },
+        whitelistedEmojis: {
+            option: {
+                defaultEmojis: {
+                    description: "Standaard Unicode-emoji's verbergen in automatisch aanvullen, tenzij ze op de witte lijst staan.",
+                    label: "Standaardemoji's"
+                },
+                serverEmojis: {
+                    description: "Aangepaste serveremoji's verbergen in automatisch aanvullen, tenzij ze op de witte lijst staan.",
+                    label: "Serveremoji's"
+                },
+                disableToasts: {
+                    description: "Geen meldingen tonen bij het toevoegen of verwijderen van emoji's.",
+                    label: "Meldingen uitschakelen"
+                },
+                whiteListedEmojis: {
+                    description: "Emoji's op witte lijst",
+                    label: "Emoji's op witte lijst"
+                },
+                exportEmojis: {
+                    description: "Emoji's exporteren",
+                    label: "Emoji's exporteren"
+                },
+                importEmojis: {
+                    description: "Emoji's importeren",
+                    label: "Emoji's importeren"
+                },
+                resetEmojis: {
+                    description: "Emoji's herstellen",
+                    label: "Emoji's herstellen"
+                }
+            },
+            name: "WhitelistedEmojis",
+            description: "Hiermee kun je alle berichtemoji's uitschakelen, behalve een set op de witte lijst.",
+            toast: {
+                addedLengthEmojisTo: "{{length}} emoji's aan de lijst toegevoegd, {{length}} stonden er al in",
+                removedLengthEmojisFrom: "{{length}} emoji's uit de lijst verwijderd",
+                nameIsAlreadyIn: "\"{{name}}\" staat al in de lijst",
+                addedNameToThe: "\"{{name}}\" aan de lijst toegevoegd",
+                nameIsNotIn: "\"{{name}}\" staat niet in de lijst",
+                removedNameFromThe: "\"{{name}}\" uit de lijst verwijderd",
+                successfullyExportedEmojis: "Emoji's geëxporteerd",
+                successfullyImportedEmojis: "Emoji's geïmporteerd",
+                invalidJsonData: "Ongeldige JSON-gegevens",
+                failedToImportEmojis: "Kan emoji's niet importeren: {{err}}",
+                resetEmojis: "Emoji's hersteld"
+            },
+            text: {
+                areYouSure: "Weet je het zeker?",
+                thisWillOverwriteYour: "Dit overschrijft je huidige witte lijst.",
+                import: "Importeren",
+                cancel: "Annuleren",
+                thisWillRemoveAll: "Dit verwijdert alle emoji's van je witte lijst.",
+                reset: "Herstellen",
+                addAllGuildEmojis: "Alle serveremoji's toevoegen",
+                removeAllGuildEmojis: "Alle serveremoji's verwijderen",
+                noEmojisInThe: "Geen emoji's op de witte lijst.",
+                removeAll: "Alles verwijderen",
+                removeFromWhitelist: "Van whitelist verwijderen",
+                addToWhitelist: "Aan whitelist toevoegen",
+                defaultEmojis: "Standaardemoji's",
+                guildEmojis: "Emoji's van {{name}}",
+                guildFallback: "Server {{id}}",
+                whitelistedEmojis: "Emoji's op de whitelist",
+                remove: "Verwijderen"
+            }
+        },
+        wigglyText: {
+            option: {
+                intensity: {
+                    description: "Animatie-intensiteit in px",
+                    label: "Intensiteit"
+                }
+            },
+            name: "WigglyText",
+            description: "Voegt een nieuwe markdown-opmaak toe waarmee tekst wiebelt.",
+            text: {
+                leftAndRight: "links en rechts",
+                byTyping: "door te typen",
+                upAndDown: "op en neer",
+                inACircle: "in een cirkel",
+                youCanMakeTextWiggle: "Zo kun je tekst laten wiebelen:"
+            }
+        },
+        fixDiscordCss: {
+            description: "Verhelpt de CSS-vertraging van Discord"
+        },
+        directFileDownload: {
+            name: "DirectFileDownload",
+            description: "Download bestanden rechtstreeks vanuit Discord in plaats van ze in de browser te openen"
+        },
+        githubRepos: {
+            text: {
+                failedToFetchRepositories: "Kan repository's niet ophalen",
+                personal: "Persoonlijk",
+                unknown: "Onbekend",
+                sortedByCount: "Gesorteerd op aantal repo's. Klik om A-Z te sorteren",
+                sortedAlphabetically: "Gesorteerd A-Z. Klik om op aantal repo's te sorteren",
+                mostRepos: "Meeste repo's"
+            }
         }
     }
 } as const;

@@ -18,58 +18,48 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
+import { RenderModalProps } from "@plexcord/discord-types";
 import invisibleChatDesktop, { decrypt } from "@plugins/invisibleChat.desktop/index";
-import {
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalRoot,
-    openModal,
-} from "@utils/modal";
-import { React, TextInput } from "@webpack/common";
+import { Modal, openModal, React, TextInput } from "@webpack/common";
 
-export function DecModal(props: any) {
+export function DecModal(props: RenderModalProps & { message: any; }) {
     const encryptedMessage: string = props?.message?.content;
     const [password, setPassword] = React.useState("password");
 
+    const onDecrypt = () => {
+        const toSend = decrypt(encryptedMessage, password, true);
+        if (!toSend || !props?.message) return;
+        invisibleChatDesktop.buildEmbed(props?.message, toSend);
+        props.onClose();
+    };
+
     return (
-        <ModalRoot {...props}>
-            <ModalHeader>
-                <Heading>{t(plugin.invisibleChat.modal.decrypt.title)}</Heading>
-            </ModalHeader>
-
-            <ModalContent>
-                <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.decrypt.with)}</Heading>
-                <TextInput defaultValue={encryptedMessage} disabled={true}></TextInput>
-                <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.decrypt.password)}</Heading>
-                <TextInput
-                    style={{ marginBottom: "20px" }}
-                    onChange={setPassword}
-                />
-            </ModalContent>
-
-            <ModalFooter>
-                <Button
-                    variant="positive"
-                    onClick={() => {
-                        const toSend = decrypt(encryptedMessage, password, true);
-                        if (!toSend || !props?.message) return;
-                        invisibleChatDesktop.buildEmbed(props?.message, toSend);
-                        props.onClose();
-                    }}>
-                    {t(plugin.invisibleChat.modal.decrypt.decrypt)}
-                </Button>
-                <Button
-                    variant="secondary"
-                    style={{ left: 15, position: "absolute" }}
-                    onClick={props.onClose}
-                >
-                    {t(plugin.invisibleChat.modal.decrypt.cancel)}
-                </Button>
-            </ModalFooter>
-        </ModalRoot>
+        <Modal
+            {...props}
+            size="sm"
+            title={t(plugin.invisibleChat.modal.decrypt.title)}
+            actions={[
+                {
+                    text: t(plugin.invisibleChat.modal.decrypt.decrypt),
+                    variant: "primary",
+                    onClick: onDecrypt
+                },
+                {
+                    text: t(plugin.invisibleChat.modal.decrypt.cancel),
+                    variant: "secondary",
+                    onClick: props.onClose
+                }
+            ]}
+        >
+            <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.decrypt.with)}</Heading>
+            <TextInput defaultValue={encryptedMessage} disabled={true}></TextInput>
+            <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.decrypt.password)}</Heading>
+            <TextInput
+                style={{ marginBottom: "20px" }}
+                onChange={setPassword}
+            />
+        </Modal>
     );
 }
 

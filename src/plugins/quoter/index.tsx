@@ -8,16 +8,13 @@
 import { findGroupChildrenByChildId } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { BaseText } from "@components/BaseText";
-import { Button } from "@components/Button";
 import { FormSwitch } from "@components/FormSwitch";
 import { QuoteIcon } from "@components/Icons";
-import { Message } from "@plexcord/discord-types";
+import { Message, RenderModalProps } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { getCurrentChannel } from "@utils/discord";
-import { ModalCloseButton, ModalContent, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
-import { IconUtils, Menu, UploadHandler, useEffect, useState } from "@webpack/common";
+import { IconUtils, Menu, Modal, openModal, UploadHandler, useEffect, useState } from "@webpack/common";
 
 import { QuoteFont } from "./types";
 import { createQuoteImage, ensureFontLoaded, generateFileNamePreview, getFileExtension, getMimeType, resetFontLoading } from "./utils";
@@ -80,6 +77,7 @@ export default definePlugin({
                     id="pc-quote"
                     label={t(plugin.quoter.context.quote)}
                     icon={QuoteIcon}
+                    leadingAccessory={{ type: "icon", icon: QuoteIcon }}
                     action={() => openModal(props => <QuoteModal message={message} {...props} />)}
                 />
             );
@@ -101,7 +99,7 @@ export default definePlugin({
     },
 });
 
-function QuoteModal({ message, ...props }: ModalProps & { message: Message; }) {
+function QuoteModal({ message, ...props }: RenderModalProps & { message: Message; }) {
     const [gray, setGray] = useState(settings.store.grayscale);
     const [showWatermark, setShowWatermark] = useState(settings.store.showWatermark);
     const [saveAsGif, setSaveAsGif] = useState(settings.store.saveAsGif);
@@ -176,27 +174,31 @@ function QuoteModal({ message, ...props }: ModalProps & { message: Message; }) {
     };
 
     return (
-        <ModalRoot {...props} size={ModalSize.MEDIUM}>
-            <ModalHeader separator={false}>
-                <BaseText color="text-strong" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
-                    {t(plugin.quoter.modal.title)}
-                </BaseText>
-                <ModalCloseButton onClick={props.onClose} />
-            </ModalHeader>
-            <ModalContent scrollbarType="none">
-                <img alt="Quote preview" src="" id="quoterPreview" style={{ borderRadius: "20px", width: "100%", marginBottom: "20px" }} />
-                <FormSwitch title={t(plugin.quoter.modal.grayscale)} value={gray} onChange={setGray} />
-                <FormSwitch
-                    title={t(plugin.quoter.modal.saveAsGIF)}
-                    value={saveAsGif}
-                    onChange={setSaveAsGif}
-                    description={t(plugin.quoter.modal.saveDescription)}
-                />
-                <div style={{ display: "flex", gap: "8px", marginTop: "16px", marginBottom: "16px" }}>
-                    <Button variant="secondary" size="small" onClick={handleExport}>{t(plugin.quoter.modal.export)}</Button>
-                    <Button variant="secondary" size="small" onClick={handleSendInChat}>{t(plugin.quoter.modal.send)}</Button>
-                </div>
-            </ModalContent>
-        </ModalRoot>
+        <Modal
+            {...props}
+            size="md"
+            title={t(plugin.quoter.modal.title)}
+            actions={[
+                {
+                    text: t(plugin.quoter.modal.export),
+                    variant: "primary",
+                    onClick: handleExport
+                },
+                {
+                    text: t(plugin.quoter.modal.send),
+                    variant: "primary",
+                    onClick: handleSendInChat
+                }
+            ]}
+        >
+            <img alt={t(plugin.quoter.text.quotePreview)} src="" id="quoterPreview" style={{ borderRadius: "20px", width: "100%", marginBottom: "20px" }} />
+            <FormSwitch title={t(plugin.quoter.modal.grayscale)} value={gray} onChange={setGray} />
+            <FormSwitch
+                title={t(plugin.quoter.modal.saveAsGIF)}
+                value={saveAsGif}
+                onChange={setSaveAsGif}
+                description={t(plugin.quoter.modal.saveDescription)}
+            />
+        </Modal>
     );
 }

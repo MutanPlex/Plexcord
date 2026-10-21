@@ -20,9 +20,10 @@
 import "./style.css";
 
 import { plugin, t } from "@api/i18n";
-import { definePluginSettings, Settings } from "@api/Settings";
+import { isPluginEnabled } from "@api/PluginManager";
+import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { buildSeveralUsers } from "@plugins/typingTweaks";
+import TypingTweaksPlugin, { buildSeveralUsers } from "@plugins/typingTweaks";
 import { Devs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
@@ -87,7 +88,7 @@ function TypingIndicator({ channelId, guildId }: { channelId: string; guildId: s
             break;
         }
         default: {
-            tooltipText = Settings.plugins.TypingTweaks.enabled
+            tooltipText = isPluginEnabled(TypingTweaksPlugin.name)
                 ? buildSeveralUsers({ users: [a, b].map(UserStore.getUser), count: typingUsersArray.length - 2, guildId })
                 : getIntlMessage("SEVERAL_USERS_TYPING");
             break;
@@ -190,7 +191,7 @@ export default definePlugin({
             // Thread "spine" that shows in the left.
             find: "M0 15H2c0 1.6569",
             replacement: {
-                match: /mentionsCount:\i.+?null(?<=channel:(\i).+?)/,
+                match: /\(\i,\{thread:(\i),countInVoice:.{0,200}?\]\}\)(?=\])/,
                 replace: "$&,$self.TypingIndicator($1.id,$1.getGuildId())"
             }
         }

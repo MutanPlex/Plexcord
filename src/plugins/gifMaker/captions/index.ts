@@ -1,0 +1,17 @@
+/*
+ * Plexcord, a modification for Discord's desktop app
+ * Copyright (c) 2025 Vendicated and contributors
+ * Copyright (c) 2026 MutanPlex
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+import type { CaptionDefinition } from "../types";
+import { captionCaption } from "./caption";
+import { noneCaption } from "./none";
+import { speechbubbleCaption } from "./speechbubble";
+
+export const CAPTIONS: CaptionDefinition[] = [
+    noneCaption,
+    captionCaption,
+    speechbubbleCaption,
+];

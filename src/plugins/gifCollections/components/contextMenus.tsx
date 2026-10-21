@@ -7,12 +7,13 @@
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
+import { FolderIcon, InfoIcon, LinkIcon, PencilIcon, PlusIcon, RemixIcon, TrashIcon } from "@components/Icons";
 import { getGif } from "@plugins/gifCollections/utils/getGif";
 import { copyToClipboard } from "@utils/clipboard";
-import { Alerts, ContextMenuApi, FluxDispatcher, Menu, showToast, Toasts } from "@webpack/common";
+import { Alerts, FluxDispatcher, Menu, showToast } from "@webpack/common";
 
 import { settings } from "../settings";
-import type { Gif, GifItem, GifPickerInstance } from "../types";
+import type { Gif } from "../types";
 import { addToCollection, cache_collections, deleteCollection, getGifById, getItemCollectionNameFromId, removeFromCollection } from "../utils/collectionManager";
 import { stripPrefix } from "../utils/misc";
 import { uuidv4 } from "../utils/uuidv4";
@@ -25,7 +26,13 @@ function dispatchRefresh(collectionName: string) {
 
 function AddToCollectionMenu(gif: Gif) {
     return (
-        <Menu.MenuItem label={t(plugin.gifCollections.context.collection.add)} key="add-to-collection" id="add-to-collection">
+        <Menu.MenuItem
+            label={t(plugin.gifCollections.context.collection.add)}
+            key="add-to-collection"
+            id="add-to-collection"
+            icon={FolderIcon}
+            leadingAccessory={{ type: "icon", icon: FolderIcon }}
+        >
             {cache_collections.length > 0 && cache_collections.map(col => (
                 <Menu.MenuItem
                     key={col.name}
@@ -39,6 +46,8 @@ function AddToCollectionMenu(gif: Gif) {
                 key="create-collection"
                 id="create-collection"
                 label={t(plugin.gifCollections.context.collection.create)}
+                icon={PlusIcon}
+                leadingAccessory={{ type: "icon", icon: PlusIcon }}
                 action={() => openCreateCollectionModal(gif)}
             />
         </Menu.MenuItem>
@@ -61,9 +70,11 @@ export const addCollectionContextMenuPatch: NavContextMenuPatchCallback = (child
                 label={t(plugin.gifCollections.context.copyImageLink)}
                 key="copy-image-link"
                 id="copy-image-link"
+                icon={LinkIcon}
+                leadingAccessory={{ type: "icon", icon: LinkIcon }}
                 action={() => {
                     copyToClipboard(gif.url);
-                    showToast(t(plugin.gifCollections.toast.copied), Toasts.Type.SUCCESS);
+                    showToast({ text: t(plugin.gifCollections.toast.copied), variant: "success" });
                 }}
             />
         );
@@ -72,29 +83,29 @@ export const addCollectionContextMenuPatch: NavContextMenuPatchCallback = (child
     group.push(AddToCollectionMenu(gif));
 };
 
-export function RemoveItemContextMenu({ type, nameOrId, instance }: { type: "collection" | "gif"; nameOrId: string; instance: { forceUpdate: () => void; }; }) {
+export function RemoveItemContextMenuItems({ type, nameOrId }: { type: "collection" | "gif"; nameOrId: string; }) {
     return (
-        <Menu.Menu
-            navId="gif-collection-id"
-            onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-            aria-label={type === "collection" ? t(plugin.gifCollections.context.collection.delete) : t(plugin.gifCollections.context.collection.remove)}
-        >
+        <Menu.MenuGroup key={`remove-item-${nameOrId}`}>
             {type === "collection" && (
                 <>
                     <Menu.MenuItem
                         key="collection-information"
                         id="collection-information"
                         label={t(plugin.gifCollections.context.collection.information)}
+                        icon={InfoIcon}
+                        leadingAccessory={{ type: "icon", icon: InfoIcon }}
                         action={() => {
                             const collection = cache_collections.find(c => c.name === nameOrId);
                             if (collection) openCollectionInfoModal(collection);
                         }}
                     />
-                    <Menu.MenuSeparator />
+                    <Menu.MenuSeparator key="collection-sep-1" />
                     <Menu.MenuItem
                         key="rename-collection"
                         id="rename-collection"
                         label={t(plugin.gifCollections.context.collection.rename)}
+                        icon={PencilIcon}
+                        leadingAccessory={{ type: "icon", icon: PencilIcon }}
                         action={() => openRenameCollectionModal(nameOrId)}
                     />
                 </>
@@ -106,30 +117,36 @@ export function RemoveItemContextMenu({ type, nameOrId, instance }: { type: "col
                         key="gif-information"
                         id="gif-information"
                         label={t(plugin.gifCollections.context.gif.information)}
+                        icon={InfoIcon}
+                        leadingAccessory={{ type: "icon", icon: InfoIcon }}
                         action={() => {
                             const gif = getGifById(nameOrId);
                             if (gif) openGifInfoModal(gif);
                         }}
                     />
-                    <Menu.MenuSeparator />
+                    <Menu.MenuSeparator key="gif-sep-1" />
                     <Menu.MenuItem
                         key="copy-url"
                         id="copy-url"
                         label={t(plugin.gifCollections.context.copyUrl)}
+                        icon={LinkIcon}
+                        leadingAccessory={{ type: "icon", icon: LinkIcon }}
                         action={() => {
                             const gif = getGifById(nameOrId);
                             if (!gif) return;
                             copyToClipboard(gif.url);
-                            showToast(t(plugin.gifCollections.toast.urlCopied), Toasts.Type.SUCCESS);
+                            showToast({ text: t(plugin.gifCollections.toast.urlCopied), variant: "success" });
                         }}
                     />
                     <Menu.MenuItem
                         key="move-to-collection"
                         id="move-to-collection"
                         label={t(plugin.gifCollections.context.collection.move)}
+                        icon={RemixIcon}
+                        leadingAccessory={{ type: "icon", icon: RemixIcon }}
                         action={() => openMoveToCollectionModal(nameOrId)}
                     />
-                    <Menu.MenuSeparator />
+                    <Menu.MenuSeparator key="gif-sep-2" />
                 </>
             )}
 
@@ -137,17 +154,18 @@ export function RemoveItemContextMenu({ type, nameOrId, instance }: { type: "col
                 key="delete-collection"
                 id="delete-collection"
                 label={type === "collection" ? t(plugin.gifCollections.context.collection.delete) : t(plugin.gifCollections.context.collection.remove)}
+                icon={TrashIcon}
+                leadingAccessory={{ type: "icon", icon: TrashIcon }}
                 action={() => {
                     const doDelete = async () => {
                         if (type === "collection") {
-                            await deleteCollection(nameOrId);
-                            instance.forceUpdate();
-                            return;
+                            deleteCollection(nameOrId);
+                            FluxDispatcher.dispatch({ type: "GIF_PICKER_QUERY", query: "" });
+                        } else {
+                            const collectionName = getItemCollectionNameFromId(nameOrId);
+                            await removeFromCollection(nameOrId);
+                            if (collectionName) dispatchRefresh(collectionName);
                         }
-
-                        const collectionName = getItemCollectionNameFromId(nameOrId);
-                        await removeFromCollection(nameOrId);
-                        if (collectionName) dispatchRefresh(collectionName);
                     };
 
                     if (settings.store.stopWarnings) {
@@ -169,7 +187,7 @@ export function RemoveItemContextMenu({ type, nameOrId, instance }: { type: "col
                     });
                 }}
             />
-        </Menu.Menu>
+        </Menu.MenuGroup>
     );
 }
 
@@ -185,9 +203,11 @@ export function GifPickerContextMenu({ gif }: { gif: Gif; }) {
                     label={t(plugin.gifCollections.context.copyImageLink)}
                     key="copy-image-link"
                     id="copy-image-link"
+                    icon={LinkIcon}
+                    leadingAccessory={{ type: "icon", icon: LinkIcon }}
                     action={() => {
                         copyToClipboard(gif.url);
-                        showToast(t(plugin.gifCollections.toast.copied), Toasts.Type.SUCCESS);
+                        showToast({ text: t(plugin.gifCollections.toast.copied), variant: "success" });
                     }}
                 />
             )}
@@ -196,31 +216,24 @@ export function GifPickerContextMenu({ gif }: { gif: Gif; }) {
     );
 }
 
-export function buildGifPickerContextMenu(
-    e: React.MouseEvent,
-    item: GifItem,
-    GIF_COLLECTION_PREFIX: string,
-    GIF_ITEM_PREFIX: string,
-    instance: GifPickerInstance
-) {
-    if (item?.name?.startsWith(GIF_COLLECTION_PREFIX)) {
-        return ContextMenuApi.openContextMenu(e, () =>
-            <RemoveItemContextMenu type="collection" nameOrId={item.name!} instance={instance} />
-        );
-    }
-
-    if (item?.id?.startsWith(GIF_ITEM_PREFIX)) {
-        return ContextMenuApi.openContextMenu(e, () =>
-            <RemoveItemContextMenu type="gif" nameOrId={item.id!} instance={instance} />
-        );
-    }
-
-    const { src, url, height, width } = item;
-    if (src && url && height != null && width != null && !item.id?.startsWith(GIF_ITEM_PREFIX)) {
-        return ContextMenuApi.openContextMenu(e, () =>
-            <GifPickerContextMenu gif={{ id: uuidv4(GIF_ITEM_PREFIX), src, url, height, width }} />
-        );
-    }
-
-    return null;
+export function getGifPickerContextMenuItems(src: string, url: string, height: number, width: number) {
+    const gif: Gif = { id: uuidv4(settings.store.itemPrefix), src, url, height, width };
+    return (
+        <Menu.MenuGroup key="gif-collections-group">
+            {settings.store.showCopyImageLink && (
+                <Menu.MenuItem
+                    label={t(plugin.gifCollections.context.copyImageLink)}
+                    key="copy-image-link"
+                    id="copy-image-link"
+                    icon={LinkIcon}
+                    leadingAccessory={{ type: "icon", icon: LinkIcon }}
+                    action={() => {
+                        copyToClipboard(url);
+                        showToast({ text: t(plugin.gifCollections.toast.copied), variant: "success" });
+                    }}
+                />
+            )}
+            {AddToCollectionMenu(gif)}
+        </Menu.MenuGroup>
+    );
 }

@@ -56,21 +56,23 @@ function Updater() {
                 {t(updater.preferences.description)}
             </Paragraph>
 
-            <FormSwitch
-                title={t(updater.automatically.label)}
-                description={t(updater.automatically.description)}
-                value={settings.autoUpdate}
-                onChange={(v: boolean) => settings.autoUpdate = v}
-                hideBorder
-            />
-            <FormSwitch
-                title={t(updater.notify.label)}
-                description={t(updater.notify.description)}
-                value={settings.autoUpdateNotification}
-                onChange={(v: boolean) => settings.autoUpdateNotification = v}
-                disabled={!settings.autoUpdate}
-                hideBorder
-            />
+            <div className="pc-settings-switches">
+                <FormSwitch
+                    title={t(updater.automatically.label)}
+                    description={t(updater.automatically.description)}
+                    value={settings.autoUpdate}
+                    onChange={(v: boolean) => settings.autoUpdate = v}
+                    hideBorder
+                />
+                <FormSwitch
+                    title={t(updater.notify.label)}
+                    description={t(updater.notify.description)}
+                    value={settings.autoUpdateNotification}
+                    onChange={(v: boolean) => settings.autoUpdateNotification = v}
+                    disabled={!settings.autoUpdate}
+                    hideBorder
+                />
+            </div>
 
             <Divider />
 

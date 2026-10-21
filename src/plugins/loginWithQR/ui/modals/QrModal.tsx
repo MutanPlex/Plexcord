@@ -11,18 +11,9 @@ import { QrCodeIcon } from "@components/Icons";
 import { wrapTab } from "@components/settings";
 import loginWithQR from "@plugins/loginWithQR";
 import { images } from "@plugins/loginWithQR/images";
-import {
-    ModalProps,
-} from "@utils/modal";
-import { findByPropsLazy } from "@webpack";
-import {
-    RestAPI,
-    useEffect,
-    useRef,
-    useState,
-} from "@webpack/common";
+import { RestAPI, useEffect, useRef, useState } from "@webpack/common";
 import jsQR, { QRCode } from "jsqr";
-import { MutableRefObject, ReactElement } from "react";
+import type { ReactElement, RefObject } from "react";
 
 import { cl, Spinner, SpinnerTypes } from "..";
 import openVerifyModal from "./VerifyModal";
@@ -48,7 +39,7 @@ interface QrModalProps {
         location?: QRCode["location"]
     ) => Promise<void>;
 }
-type QrModalPropsRef = MutableRefObject<QrModalProps>;
+type QrModalPropsRef = RefObject<QrModalProps>;
 
 const limitSize = (width: number, height: number) => {
     if (width > height) {
@@ -60,14 +51,11 @@ const limitSize = (width: number, height: number) => {
     }
 };
 
-const { getVideoDeviceId } = findByPropsLazy("getVideoDeviceId");
-
 const tokenRegex = /^https:\/\/discord\.com\/ra\/([\w-]+)$/;
 const verifyUrl = async (
     token: string,
     { current: modalProps }: QrModalPropsRef
 ) => {
-    // yay
     let handshake: string | null = null;
     try {
         const res = await RestAPI.post({
@@ -137,7 +125,7 @@ const handleProcessImage = (file: File, modalPropsRef: QrModalPropsRef) => {
     reader.readAsDataURL(file);
 };
 
-function QrModal(props: ModalProps) {
+function QrModal() {
     const [state, setState] = useState(LoginStateType.Idle);
     const [preview, setPreview] = useState<Preview | null>(null);
     const error = useRef<string | null>(null);
@@ -397,4 +385,4 @@ function QrModal(props: ModalProps) {
     );
 }
 
-export default wrapTab(QrModal, "Scan QR Code");
+export default wrapTab(QrModal, t(plugin.loginWithQR.text.scanQrCode));

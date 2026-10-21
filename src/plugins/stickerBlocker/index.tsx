@@ -163,6 +163,6 @@ export default definePlugin({
 
         return false;
     },
-    blockedComponent: ErrorBoundary.wrap(blockedComponentRender, { fallback: () => <p style={{ color: "red" }}>Failed to render :(</p> }),
+    blockedComponent: ErrorBoundary.wrap(blockedComponentRender, { fallback: () => <p style={{ color: "red" }}>{t(plugin.stickerBlocker.text.failedToRender)}</p> }),
     settings,
 });

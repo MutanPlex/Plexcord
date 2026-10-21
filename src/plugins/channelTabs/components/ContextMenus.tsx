@@ -9,13 +9,15 @@ import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
+import { BookCheckIcon, OpenExternalIcon, PencilIcon, StarFilled, StarOutlined, TrashIcon, UnsendIcon, WindowTopOutlineIcon, XLargeBoldIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
+import { RenderModalProps } from "@plexcord/discord-types";
 import { bookmarkFolderColors, bookmarkPlaceholderName, closeOtherTabs, closeTab, closeTabsToTheLeft, closeTabsToTheRight, createTab, getDiscordFolderIcon, getDiscordFolderIconNames, hasClosedTabs, isBookmarkFolder, openedTabs, reopenClosedTab, settings, toggleCompactTab } from "@plugins/channelTabs/util";
 import { Bookmark, BookmarkFolder, Bookmarks, ChannelTabsProps, UseBookmarkMethods } from "@plugins/channelTabs/util/types";
 import { getIntlMessage } from "@utils/discord";
 import { Margins } from "@utils/margins";
-import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, openModal } from "@utils/modal";
-import { ChannelStore, ColorPicker, FluxDispatcher, Menu, ReadStateStore, ReadStateUtils, Select, TextInput, useMemo, useState } from "@webpack/common";
+import { ChannelStore, closeModal, ColorPicker, FluxDispatcher, Menu, Modal, openModal, ReadStateStore, ReadStateUtils, Select, TextInput, useMemo, useState } from "@webpack/common";
+
 const legacyFolderColors: Record<string, string> = {
     "var(--channeltabs-red)": bookmarkFolderColors.Red,
     "var(--channeltabs-blue)": bookmarkFolderColors.Blue,
@@ -117,7 +119,7 @@ function FolderChipPreview({ name, color, iconName }: { name: string; color: str
 }
 
 function FolderIconPickerModal({ modalProps, modalKey, name, color, iconName, onSelect, onColorChange }: {
-    modalProps: ModalProps,
+    modalProps: RenderModalProps,
     modalKey: string,
     name: string,
     color: string,
@@ -135,73 +137,72 @@ function FolderIconPickerModal({ modalProps, modalKey, name, color, iconName, on
     }, [iconNames, search]);
 
     return (
-        <ModalRoot {...modalProps}>
-            <ModalHeader>
-                <BaseText size="lg" weight="semibold">{t(plugin.channelTabs.modal.folderIcon.title)}</BaseText>
-            </ModalHeader>
-            <ModalContent>
-                <Heading className={Margins.top16}>{t(plugin.channelTabs.modal.folderIcon.preview)}</Heading>
-                <FolderChipPreview name={name} color={localColor} iconName={iconName} />
-                <Heading className={Margins.top16}>{t(plugin.channelTabs.modal.folderIcon.iconColor)}</Heading>
-                <div className={Margins.top8}>
-                    <ColorPicker
-                        color={colorToInt(localColor)}
-                        onChange={value => {
-                            const nextColor = intToColor(value);
-                            setLocalColor(nextColor);
-                            onColorChange(nextColor);
-                        }}
-                        showEyeDropper={false}
-                    />
-                </div>
-                <Heading className={Margins.top16}>{t(plugin.channelTabs.modal.folderIcon.search)}</Heading>
-                <TextInput
-                    value={search}
-                    placeholder={t(plugin.channelTabs.modal.folderIcon.searchPlaceholder, { count: iconNames.length })}
-                    onChange={setSearch}
+        <Modal
+            {...modalProps}
+            size="sm"
+            title={<BaseText size="lg" weight="semibold">{t(plugin.channelTabs.modal.folderIcon.title)}</BaseText>}
+            actions={[
+                {
+                    text: t(plugin.channelTabs.button.close),
+                    variant: "secondary",
+                    onClick: () => closeModal(modalKey)
+                }
+            ]}
+        >
+            <Heading className={Margins.top16}>{t(plugin.channelTabs.modal.folderIcon.preview)}</Heading>
+            <FolderChipPreview name={name} color={localColor} iconName={iconName} />
+            <Heading className={Margins.top16}>{t(plugin.channelTabs.modal.folderIcon.iconColor)}</Heading>
+            <div className={Margins.top8}>
+                <ColorPicker
+                    color={colorToInt(localColor)}
+                    onChange={value => {
+                        const nextColor = intToColor(value);
+                        setLocalColor(nextColor);
+                        onColorChange(nextColor);
+                    }}
+                    showEyeDropper={false}
                 />
-                <div style={{
-                    display: "grid",
-                    gap: 8,
-                    gridTemplateColumns: "repeat(auto-fill, minmax(52px, 1fr))",
-                    marginTop: 16,
-                    maxHeight: 320,
-                    overflowY: "auto"
-                }}>
-                    {filteredIconNames.map(name => (
-                        <button
-                            key={name}
-                            onClick={() => {
-                                onSelect(name);
-                                closeModal(modalKey);
-                            }}
-                            style={{
-                                alignItems: "center",
-                                background: name === iconName ? "var(--background-modifier-hover)" : "var(--background-secondary)",
-                                border: "1px solid var(--border-subtle)",
-                                borderRadius: 8,
-                                cursor: "pointer",
-                                display: "flex",
-                                height: 52,
-                                justifyContent: "center",
-                                padding: 0
-                            }}
-                            title={name}
-                            type="button"
-                        >
-                            <FolderGlyph color={localColor} iconName={name} />
-                        </button>
-                    ))}
-                </div>
-            </ModalContent>
-            <ModalFooter>
-                <Button
-                    color="transparent"
-                    variant="none"
-                    onClick={() => closeModal(modalKey)}
-                >{t(plugin.channelTabs.button.close)}</Button>
-            </ModalFooter>
-        </ModalRoot>
+            </div>
+            <Heading className={Margins.top16}>{t(plugin.channelTabs.modal.folderIcon.search)}</Heading>
+            <TextInput
+                value={search}
+                placeholder={t(plugin.channelTabs.modal.folderIcon.searchPlaceholder, { count: iconNames.length })}
+                onChange={setSearch}
+            />
+            <div style={{
+                display: "grid",
+                gap: 8,
+                gridTemplateColumns: "repeat(auto-fill, minmax(52px, 1fr))",
+                marginTop: 16,
+                maxHeight: 320,
+                overflowY: "auto"
+            }}>
+                {filteredIconNames.map(name => (
+                    <button
+                        key={name}
+                        onClick={() => {
+                            onSelect(name);
+                            closeModal(modalKey);
+                        }}
+                        style={{
+                            alignItems: "center",
+                            background: name === iconName ? "var(--background-modifier-hover)" : "var(--background-secondary)",
+                            border: "1px solid var(--border-subtle)",
+                            borderRadius: 8,
+                            cursor: "pointer",
+                            display: "flex",
+                            height: 52,
+                            justifyContent: "center",
+                            padding: 0
+                        }}
+                        title={name}
+                        type="button"
+                    >
+                        <FolderGlyph color={localColor} iconName={name} />
+                    </button>
+                ))}
+            </div>
+        </Modal>
     );
 }
 
@@ -212,7 +213,7 @@ function FolderAppearanceFields({
     setColor,
     iconName,
     setIconName,
-    placeholder = "Folder"
+    placeholder = t(plugin.channelTabs.text.folder)
 }: {
     name: string,
     setName: (value: string) => void,
@@ -265,7 +266,7 @@ function FolderAppearanceFields({
 }
 
 export function EditModal({ modalProps, modalKey, bookmark, onSave }: {
-    modalProps: ModalProps,
+    modalProps: RenderModalProps,
     modalKey: string,
     bookmark: Bookmark | BookmarkFolder,
     onSave: (name: string, color: string, iconName?: string) => void;
@@ -276,45 +277,47 @@ export function EditModal({ modalProps, modalKey, bookmark, onSave }: {
     const placeholder = bookmarkPlaceholderName(bookmark);
 
     return (
-        <ModalRoot {...modalProps}>
-            <ModalHeader>
-                <BaseText size="lg" weight="semibold">{t(plugin.channelTabs.modal.edit.title)}</BaseText>
-            </ModalHeader>
-            <ModalContent>
-                {isBookmarkFolder(bookmark)
-                    ? <FolderAppearanceFields
-                        name={name}
-                        setName={setName}
-                        color={color}
-                        setColor={setColor}
-                        iconName={iconName}
-                        setIconName={setIconName}
+        <Modal
+            {...modalProps}
+            size="sm"
+            title={<BaseText size="lg" weight="semibold">{t(plugin.channelTabs.modal.edit.title)}</BaseText>}
+            actions={[
+                {
+                    text: t(plugin.channelTabs.button.save),
+                    variant: "primary",
+                    onClick: () => onSave(name || placeholder, color, iconName)
+                },
+                {
+                    text: t(plugin.channelTabs.button.cancel),
+                    variant: "secondary",
+                    onClick: () => closeModal(modalKey)
+                }
+            ]}
+        >
+            {isBookmarkFolder(bookmark)
+                ? <FolderAppearanceFields
+                    name={name}
+                    setName={setName}
+                    color={color}
+                    setColor={setColor}
+                    iconName={iconName}
+                    setIconName={setIconName}
+                    placeholder={placeholder}
+                /> :
+                <>
+                    <Heading className={Margins.top16}>{t(plugin.channelTabs.modal.edit.name)}</Heading>
+                    <TextInput
+                        value={name === placeholder ? undefined : name}
                         placeholder={placeholder}
-                    /> :
-                    <>
-                        <Heading className={Margins.top16}>{t(plugin.channelTabs.modal.edit.name)}</Heading>
-                        <TextInput
-                            value={name === placeholder ? undefined : name}
-                            placeholder={placeholder}
-                            onChange={v => setName(v)}
-                        />
-                    </>}
-            </ModalContent>
-            <ModalFooter>
-                <Button
-                    onClick={() => onSave(name || placeholder, color, iconName)}
-                >{t(plugin.channelTabs.button.save)}</Button>
-                <Button
-                    variant="primary"
-                    onClick={() => closeModal(modalKey)}
-                >{t(plugin.channelTabs.button.cancel)}</Button>
-            </ModalFooter>
-        </ModalRoot>
+                        onChange={v => setName(v)}
+                    />
+                </>}
+        </Modal>
     );
 }
 
 function AddToFolderModal({ modalProps, modalKey, bookmarks, onSave }: {
-    modalProps: any,
+    modalProps: RenderModalProps,
     modalKey: string,
     bookmarks: Bookmarks,
     onSave: (folderIndex: number, folderName: string, folderColor: string, iconName?: string) => void;
@@ -325,76 +328,79 @@ function AddToFolderModal({ modalProps, modalKey, bookmarks, onSave }: {
     const [iconName, setIconName] = useState<string | undefined>();
 
     return (
-        <ModalRoot {...modalProps}>
-            <ModalHeader>
-                <BaseText size="lg" weight="semibold">{t(plugin.channelTabs.modal.add.title)}</BaseText>
-            </ModalHeader>
-            <ModalContent>
-                <Heading className={Margins.top16}>{t(plugin.channelTabs.modal.add.select)}</Heading>
-                <Select
-                    options={[...Object.entries(bookmarks)
-                        .filter(([, bookmark]) => isBookmarkFolder(bookmark))
-                        .map(([index, bookmark]) => ({
-                            label: bookmark.name,
-                            value: parseInt(index, 10)
-                        })),
-                    {
-                        label: t(plugin.channelTabs.modal.add.create),
-                        value: -1,
-                        default: true
-                    }]}
-                    isSelected={v => v === folderIndex}
-                    select={setIndex}
-                    serialize={String}
-                />
-                {folderIndex === -1 && <FolderAppearanceFields
-                    name={folderName}
-                    setName={setFolderName}
-                    color={folderColor}
-                    setColor={setFolderColor}
-                    iconName={iconName}
-                    setIconName={setIconName}
-                />}
-            </ModalContent>
-            <ModalFooter>
-                <Button
-                    onClick={() => onSave(folderIndex, folderName, folderColor, iconName)}
-                >{t(plugin.channelTabs.button.save)}</Button>
-                <Button
-                    variant="primary"
-                    onClick={() => closeModal(modalKey)}
-                >{t(plugin.channelTabs.button.cancel)}</Button>
-            </ModalFooter>
-        </ModalRoot>
+        <Modal
+            {...modalProps}
+            size="sm"
+            title={<BaseText size="lg" weight="semibold">{t(plugin.channelTabs.modal.add.title)}</BaseText>}
+            actions={[
+                {
+                    text: t(plugin.channelTabs.button.save),
+                    variant: "primary",
+                    onClick: () => onSave(folderIndex, folderName, folderColor, iconName)
+                },
+                {
+                    text: t(plugin.channelTabs.button.cancel),
+                    variant: "secondary",
+                    onClick: () => closeModal(modalKey)
+                }
+            ]}
+        >
+            <Heading className={Margins.top16}>{t(plugin.channelTabs.modal.add.select)}</Heading>
+            <Select
+                options={[...Object.entries(bookmarks)
+                    .filter(([, bookmark]) => isBookmarkFolder(bookmark))
+                    .map(([index, bookmark]) => ({
+                        label: bookmark.name,
+                        value: parseInt(index, 10)
+                    })),
+                {
+                    label: t(plugin.channelTabs.modal.add.create),
+                    value: -1,
+                    default: true
+                }]}
+                isSelected={v => v === folderIndex}
+                select={setIndex}
+                serialize={String}
+            />
+            {folderIndex === -1 && <FolderAppearanceFields
+                name={folderName}
+                setName={setFolderName}
+                color={folderColor}
+                setColor={setFolderColor}
+                iconName={iconName}
+                setIconName={setIconName}
+            />}
+        </Modal>
     );
 }
 
-function DeleteFolderConfirmationModal({ modalProps, modalKey, onConfirm }) {
+function DeleteFolderConfirmationModal({ modalProps, modalKey, onConfirm }: {
+    modalProps: RenderModalProps,
+    modalKey: string,
+    onConfirm: () => void;
+}) {
     return (
-        <ModalRoot {...modalProps}>
-            <ModalHeader>
-                <BaseText size="lg" weight="semibold">{t(plugin.channelTabs.modal.delete.title)}</BaseText>
-            </ModalHeader>
-            <ModalContent>
-                <Paragraph className={Margins.top16}>
-                    {t(plugin.channelTabs.modal.delete.description)}
-                </Paragraph>
-            </ModalContent>
-            <ModalFooter>
-                <Button
-                    variant="dangerPrimary"
-                    onClick={onConfirm}
-                >
-                    {t(plugin.channelTabs.button.delete)}
-                </Button>
-                <Button
-                    variant="primary"
-                    onClick={() => closeModal(modalKey)}
-                >
-                    {t(plugin.channelTabs.button.cancel)}
-                </Button>
-            </ModalFooter>
-        </ModalRoot>
+        <Modal
+            {...modalProps}
+            size="sm"
+            title={<BaseText size="lg" weight="semibold">{t(plugin.channelTabs.modal.delete.title)}</BaseText>}
+            actions={[
+                {
+                    text: t(plugin.channelTabs.button.delete),
+                    variant: "critical-primary",
+                    onClick: onConfirm
+                },
+                {
+                    text: t(plugin.channelTabs.button.cancel),
+                    variant: "secondary",
+                    onClick: () => closeModal(modalKey)
+                }
+            ]}
+        >
+            <Paragraph className={Margins.top16}>
+                {t(plugin.channelTabs.modal.delete.description)}
+            </Paragraph>
+        </Modal>
     );
 }
 
@@ -413,6 +419,8 @@ export function BookmarkContextMenu({ bookmarks, index, methods }: { bookmarks: 
                 {bookmarkNotificationDot && !isFolder &&
                     <Menu.MenuItem
                         id="mark-as-read"
+                        icon={BookCheckIcon}
+                        leadingAccessory={{ type: "icon", icon: BookCheckIcon }}
                         label={getIntlMessage("MARK_AS_READ")}
                         disabled={!ReadStateStore.hasUnread(bookmark.channelId)}
                         action={() => ReadStateUtils.ackChannel(ChannelStore.getChannel(bookmark.channelId))}
@@ -422,11 +430,15 @@ export function BookmarkContextMenu({ bookmarks, index, methods }: { bookmarks: 
                     ? <Menu.MenuItem
                         id="open-all-in-folder"
                         label={t(plugin.channelTabs.context.openAll)}
+                        icon={StarFilled}
+                        leadingAccessory={{ type: "icon", icon: StarFilled }}
                         action={() => bookmark.bookmarks.forEach(b => createTab(b))}
                     />
                     : < Menu.MenuItem
                         id="open-in-tab"
                         label={t(plugin.channelTabs.context.openNew)}
+                        icon={OpenExternalIcon}
+                        leadingAccessory={{ type: "icon", icon: OpenExternalIcon }}
                         action={() => createTab(bookmark)}
                     />
                 }
@@ -435,6 +447,8 @@ export function BookmarkContextMenu({ bookmarks, index, methods }: { bookmarks: 
                 <Menu.MenuItem
                     id="edit-bookmark"
                     label={t(plugin.channelTabs.modal.edit.title)}
+                    icon={PencilIcon}
+                    leadingAccessory={{ type: "icon", icon: PencilIcon }}
                     action={() => {
                         const key = openModal(modalProps =>
                             <EditModal
@@ -456,6 +470,8 @@ export function BookmarkContextMenu({ bookmarks, index, methods }: { bookmarks: 
                 <Menu.MenuItem
                     id="delete-bookmark"
                     label={t(plugin.channelTabs.bookmark.delete)}
+                    icon={TrashIcon}
+                    leadingAccessory={{ type: "icon", icon: TrashIcon }}
                     action={() => {
                         if (isFolder) {
                             const key = openModal(modalProps =>
@@ -474,6 +490,8 @@ export function BookmarkContextMenu({ bookmarks, index, methods }: { bookmarks: 
                 <Menu.MenuItem
                     id="add-to-folder"
                     label={t(plugin.channelTabs.modal.add.title)}
+                    icon={PencilIcon}
+                    leadingAccessory={{ type: "icon", icon: PencilIcon }}
                     disabled={isFolder}
                     action={() => {
                         const key = openModal(modalProps =>
@@ -501,6 +519,8 @@ export function BookmarkContextMenu({ bookmarks, index, methods }: { bookmarks: 
                     checked={showBookmarkBar}
                     id="show-bookmark-bar"
                     label={t(plugin.channelTabs.context.bookmarkBar)}
+                    icon={StarOutlined}
+                    leadingAccessory={{ type: "icon", icon: StarOutlined }}
                     action={() => {
                         settings.store.showBookmarkBar = !settings.store.showBookmarkBar;
                     }}
@@ -526,6 +546,8 @@ export function TabContextMenu({ tab }: { tab: ChannelTabsProps; }) {
                     <Menu.MenuItem
                         id="mark-as-read"
                         label={getIntlMessage("MARK_AS_READ")}
+                        icon={BookCheckIcon}
+                        leadingAccessory={{ type: "icon", icon: BookCheckIcon }}
                         disabled={!ReadStateStore.hasUnread(channel.id)}
                         action={() => ReadStateUtils.ackChannel(channel)}
                     />
@@ -534,6 +556,8 @@ export function TabContextMenu({ tab }: { tab: ChannelTabsProps; }) {
                     checked={compact}
                     id="toggle-compact-tab"
                     label={t(plugin.channelTabs.context.compact)}
+                    icon={WindowTopOutlineIcon}
+                    leadingAccessory={{ type: "icon", icon: WindowTopOutlineIcon }}
                     action={() => {
                         setCompact(compact => !compact);
                         toggleCompactTab(tab.id);
@@ -544,28 +568,38 @@ export function TabContextMenu({ tab }: { tab: ChannelTabsProps; }) {
                 <Menu.MenuItem
                     id="close-tab"
                     label={t(plugin.channelTabs.context.close.tab)}
+                    icon={XLargeBoldIcon}
+                    leadingAccessory={{ type: "icon", icon: XLargeBoldIcon }}
                     action={() => closeTab(tab.id)}
                 />
                 <Menu.MenuItem
                     id="close-other-tabs"
                     label={t(plugin.channelTabs.context.close.otherTabs)}
+                    icon={XLargeBoldIcon}
+                    leadingAccessory={{ type: "icon", icon: XLargeBoldIcon }}
                     action={() => closeOtherTabs(tab.id)}
                 />
                 <Menu.MenuItem
                     id="close-right-tabs"
                     label={t(plugin.channelTabs.context.close.tabsToRight)}
+                    icon={XLargeBoldIcon}
+                    leadingAccessory={{ type: "icon", icon: XLargeBoldIcon }}
                     disabled={openedTabs.indexOf(tab) === openedTabs.length - 1}
                     action={() => closeTabsToTheRight(tab.id)}
                 />
                 <Menu.MenuItem
                     id="close-left-tabs"
                     label={t(plugin.channelTabs.context.close.tabsToLeft)}
+                    icon={XLargeBoldIcon}
+                    leadingAccessory={{ type: "icon", icon: XLargeBoldIcon }}
                     disabled={openedTabs.indexOf(tab) === 0}
                     action={() => closeTabsToTheLeft(tab.id)}
                 />
                 <Menu.MenuItem
                     id="reopen-closed-tab"
                     label={t(plugin.channelTabs.context.close.reopen)}
+                    icon={UnsendIcon}
+                    leadingAccessory={{ type: "icon", icon: UnsendIcon }}
                     disabled={!hasClosedTabs()}
                     action={() => reopenClosedTab()}
                 />
@@ -575,6 +609,8 @@ export function TabContextMenu({ tab }: { tab: ChannelTabsProps; }) {
                     checked={showBookmarkBar}
                     id="show-bookmark-bar"
                     label={t(plugin.channelTabs.context.bookmarkBar)}
+                    icon={StarOutlined}
+                    leadingAccessory={{ type: "icon", icon: StarOutlined }}
                     action={() => {
                         settings.store.showBookmarkBar = !settings.store.showBookmarkBar;
                     }}

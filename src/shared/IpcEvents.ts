@@ -25,7 +25,6 @@ export const enum IpcEvents {
     SET_QUICK_CSS = "PlexcordSetQuickCss",
     UPLOAD_THEME = "PlexcordUploadTheme",
     DELETE_THEME = "PlexcordDeleteTheme",
-    GET_THEMES_DIR = "PlexcordGetThemesDir",
     GET_THEMES_LIST = "PlexcordGetThemesList",
     GET_THEME_DATA = "PlexcordGetThemeData",
     GET_THEME_SYSTEM_VALUES = "PlexcordGetThemeSystemValues",
@@ -34,10 +33,12 @@ export const enum IpcEvents {
     SET_SETTINGS = "PlexcordSetSettings",
     THEME_UPDATE = "PlexcordThemeUpdate",
     OPEN_EXTERNAL = "PlexcordOpenExternal",
-    GET_UPDATES = "PlexcordGetUpdates",
-    GET_REPO = "PlexcordGetRepo",
-    UPDATE = "PlexcordUpdate",
-    BUILD = "PlexcordBuild",
+
+    UPDATER_LIST_UPDATES = "PlexcordListUpdates",
+    UPDATER_GET_REPO = "PlexcordGetRepo",
+    UPDATER_FETCH_UPDATE = "PlexcordFetchUpdate",
+    UPDATER_APPLY_UPDATE = "PlexcordApplyUpdate",
+
     OPEN_MONACO_EDITOR = "PlexcordOpenMonacoEditor",
     GET_MONACO_THEME = "PlexcordGetMonacoTheme",
 
@@ -53,8 +54,5 @@ export const enum IpcEvents {
     RENDERER_CSS_UPDATE = "PlexcordRendererCssUpdate",
     PRELOAD_GET_RENDERER_JS = "PlexcordPreloadGetRendererJs",
 
-    SET_TRAY_UPDATE_STATE = "PlexcordSetTrayUpdateState",
-    TRAY_REPAIR = "PlexcordTrayRepair",
-    TRAY_CHECK_UPDATES = "PlexcordTrayCheckUpdates",
-    TRAY_ABOUT = "PlexcordTrayAbout",
+    SUPPORTS_WINDOWS_MATERIAL = "PlexcordSupportsWindowsMaterial",
 }

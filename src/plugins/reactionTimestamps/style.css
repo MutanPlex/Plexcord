@@ -1,0 +1,12 @@
+.pc-reaction-timestamps-name {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-left: 4px;
+}
+
+.pc-reaction-timestamps-time {
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 16px;
+}

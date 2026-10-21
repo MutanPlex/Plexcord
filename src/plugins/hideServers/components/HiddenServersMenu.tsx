@@ -9,44 +9,23 @@ import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
-import { Guild } from "@plexcord/discord-types";
+import { Guild, RenderModalProps } from "@plexcord/discord-types";
 import { HiddenServersStore } from "@plugins/hideServers/HiddenServersStore";
 import { classNameFactory } from "@utils/css";
 import { getGuildAcronym } from "@utils/discord";
 import { classes } from "@utils/misc";
-import {
-    closeModal,
-    ModalCloseButton,
-    ModalContent,
-    ModalHeader,
-    ModalProps,
-    ModalRoot,
-    ModalSize,
-    openModal,
-} from "@utils/modal";
 import { findCssClassesLazy } from "@webpack";
-import { IconUtils, useStateFromStores } from "@webpack/common";
-
-import { SortedGuildStore } from "..";
+import { closeModal, IconUtils, Modal, openModal, SortedGuildStore, useStateFromStores } from "@webpack/common";
 
 const cl = classNameFactory("pc-hideservers-");
 const IconClasses = findCssClassesLazy("icon", "acronym", "childWrapper");
 
-function HiddenServersModal({ modalProps, close }: { modalProps: ModalProps; close(): void; }) {
+function HiddenServersModal({ modalProps, close }: { modalProps: RenderModalProps; close(): void; }) {
     const guilds = useStateFromStores([HiddenServersStore], () => HiddenServersStore.hiddenGuildsDetail());
     return (
-        <ModalRoot {...modalProps} size={ModalSize.LARGE}>
-            <ModalHeader>
-                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>
-                    {t(plugin.hideServers.button.hiddenServers)}
-                </BaseText>
-                <ModalCloseButton onClick={close} />
-            </ModalHeader>
-
-            <ModalContent>
-                <HiddenServersMenu guilds={guilds} />
-            </ModalContent>
-        </ModalRoot>
+        <Modal {...modalProps} size="lg" title={t(plugin.hideServers.button.hiddenServers)}>
+            <HiddenServersMenu guilds={guilds} />
+        </Modal>
     );
 }
 function isGuildHidden(guild: Guild, SortedGuildStore: any) {

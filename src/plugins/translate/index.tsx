@@ -22,9 +22,9 @@ import "./styles.css";
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
 import { Message } from "@plexcord/discord-types";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
-import { ChannelStore, Menu } from "@webpack/common";
+import { Menu } from "@webpack/common";
 
 import { settings } from "./settings";
 import { setShouldShowTranslateEnabledTooltip, TranslateChatBarIcon, TranslateIcon } from "./TranslateIcon";
@@ -43,6 +43,7 @@ const messageCtxPatch: NavContextMenuPatchCallback = (children, { message }: { m
             id="pc-trans"
             label={t(plugin.translate.context.translate)}
             icon={TranslateIcon}
+            leadingAccessory={{ type: "icon", icon: TranslateIcon }}
             action={async () => {
                 const trans = await translate("received", content);
                 handleTranslate(message.id, trans);
@@ -65,7 +66,7 @@ let tooltipTimeout: any;
 export default definePlugin({
     name: "Translate",
     description: () => t(plugin.translate.description),
-    authors: [Devs.Ven, Devs.AshtonMemer],
+    authors: [Devs.Ven, Devs.AshtonMemer, PcDevs.MutanPlex, Devs.koish1],
     tags: ["chat", "utility"],
     dependencies: ["ChatInputButtonAPI", "MessagePopoverAPI"],
     settings,
@@ -92,8 +93,6 @@ export default definePlugin({
             return {
                 label: t(plugin.translate.tooltip.label),
                 icon: TranslateIcon,
-                message,
-                channel: ChannelStore.getChannel(message.channel_id),
                 onClick: async () => {
                     const trans = await translate("received", content);
                     handleTranslate(message.id, trans);

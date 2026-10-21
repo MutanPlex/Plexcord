@@ -15,5 +15,5 @@
 }
 
 .pc-charCounter-selected {
-    color: #4285F4
+    color: var(--brand-500);
 }

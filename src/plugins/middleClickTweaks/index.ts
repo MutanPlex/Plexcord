@@ -6,8 +6,8 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { definePluginSettings, SettingsStore } from "@api/Settings";
-import { PcDevs } from "@utils/index";
+import { definePluginSettings } from "@api/Settings";
+import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const MIDDLE_CLICK = 1;
@@ -80,32 +80,14 @@ const settings = definePluginSettings({
     }
 });
 
-function migrate() {
-    const { plugins } = SettingsStore.plain;
-    const oldPlugin = plugins?.LimitMiddleClickPaste;
-
-    if (!oldPlugin) return;
-
-    const newPlugin = plugins.MiddleClickTweaks ??= { enabled: false };
-    const { scope, threshold, preventLinkOpen } = oldPlugin;
-
-    if (scope) newPlugin.pasteScope = scope;
-    if (threshold) newPlugin.pasteThreshold = threshold;
-    if (preventLinkOpen) newPlugin.openScope = "both";
-    if (oldPlugin.enabled) newPlugin.enabled = true;
-
-    delete plugins.LimitMiddleClickPaste;
-    SettingsStore.markAsChanged();
-}
-
-migrate();
-
 export default definePlugin({
     name: "MiddleClickTweaks",
     description: () => t(plugin.middleClickTweaks.description),
     authors: [PcDevs.Etorix, PcDevs.korzi, PcDevs.MutanPlex],
     tags: ["shortcuts", "utility"],
     settings,
+
+    searchTerms: ["LimitMiddleClickPaste"],
 
     isPastingDisabled(isInput: boolean) {
         const pasteBlocked = Date.now() - lastMiddleClickUp < Math.max(settings.store.pasteThreshold, 1);
@@ -118,37 +100,33 @@ export default definePlugin({
         return false;
     },
 
-    start() {
-        migrate();
-        updateListeners();
-    },
-
+    start() { updateListeners(); },
     stop() { updateListeners(false); },
 
     patches: [
         {
             // Detects paste events triggered by the "browser" outside of input fields.
-            find: "document.addEventListener(\"paste\",",
+            find: 'document.addEventListener("paste",',
             replacement: {
-                match: /(?<=paste",(\i)=>{)/,
+                match: /(?<=APPLICATION_DIRECTORY}\)}\(\);return \i\.useEffect\(\(\)=>{function \i\((\i)\)\{)/,
                 replace: "if($1.target.tagName===\"BUTTON\"||$self.isPastingDisabled(false)){$1.preventDefault?.();$1.stopPropagation?.();return;};"
             }
         },
         {
-            // Detects paste events triggered inside of Discord's text input.
+            // Detects paste events triggered inside of Discord's text inputs.
             find: ",origin:\"clipboard\"});",
             replacement: {
-                match: /(?<=handlePaste=(\i)=>{)(?=let)/,
+                match: /(?<=handlePaste=(\i)=>{)(?=let)/g,
                 replace: "if($self.isPastingDisabled(true)){$1.preventDefault?.();$1.stopPropagation?.();return;}"
             }
         },
         {
-            // Detects paste events triggered inside of Discord's search box.
-            find: "props.handlePastedText&&",
+            // Detects paste events triggered inside Discord's channel search editor.
+            find: "onPasteCapture:function",
             replacement: {
-                match: /(?<=clipboardData\);)/,
-                replace: "if($self.isPastingDisabled(true)){arguments[1].preventDefault?.();arguments[1].stopPropagation?.();return;};"
+                match: /(?<=onPasteCapture:function\((\i)\){)(?=\i\.insertData\(\1\.clipboardData\))/,
+                replace: "if($self.isPastingDisabled(true)){$1.preventDefault?.();$1.stopPropagation?.();return;}"
             }
-        },
+        }
     ],
 });

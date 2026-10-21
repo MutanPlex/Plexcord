@@ -9,10 +9,10 @@ import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Heading } from "@components/Heading";
+import { RenderModalProps } from "@plexcord/discord-types";
 import { classNameFactory } from "@utils/css";
-import { closeModal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, openModal } from "@utils/modal";
 import { findByPropsLazy } from "@webpack";
-import { ChannelStore, DraftType, showToast, TextInput, Toasts, UploadManager, useState } from "@webpack/common";
+import { ChannelStore, closeModal, DraftType, Modal, openModal, showToast, TextInput, UploadManager, useState } from "@webpack/common";
 
 import { ScheduledAttachment } from "../types";
 import { addScheduledMessage, getChannelDisplayInfo } from "../utils";
@@ -25,7 +25,7 @@ function ScheduleTimeModalInner({ channelId, content, attachments, rootProps, cl
     channelId: string;
     content: string;
     attachments?: ScheduledAttachment[];
-    rootProps: ModalProps;
+    rootProps: RenderModalProps;
     close: () => void;
 }) {
     const [scheduleType, setScheduleType] = useState<"delay" | "time">("delay");
@@ -63,7 +63,7 @@ function ScheduleTimeModalInner({ channelId, content, attachments, rootProps, cl
         if (result.success) {
             ComponentDispatch.dispatchToLastSubscribed("CLEAR_TEXT");
             UploadManager.clearAll(channelId, DraftType.ChannelMessage);
-            showToast(t(plugin.scheduledMessages.toast.messageScheduled), Toasts.Type.SUCCESS);
+            showToast({ text: t(plugin.scheduledMessages.toast.messageScheduled), variant: "success" });
             close();
         } else {
             setError(result.error ?? t(plugin.scheduledMessages.toast.messageFailed));
@@ -71,74 +71,78 @@ function ScheduleTimeModalInner({ channelId, content, attachments, rootProps, cl
     };
 
     return (
-        <ModalRoot {...rootProps}>
-            <ModalHeader className={cl("modal-header")}>
-                <Heading tag="h2" className={cl("modal-title")}>{t(plugin.scheduledMessages.scheduleModal.title)}</Heading>
-                <ModalCloseButton onClick={close} />
-            </ModalHeader>
+        <Modal
+            {...rootProps}
+            size="sm"
+            title={t(plugin.scheduledMessages.scheduleModal.title)}
+            actions={[
+                {
+                    text: t(plugin.scheduledMessages.scheduleModal.schedule),
+                    variant: "primary",
+                    onClick: handleSchedule
+                },
+                {
+                    text: t(plugin.scheduledMessages.scheduleModal.cancel),
+                    variant: "secondary",
+                    onClick: close
+                }
+            ]}
+        >
+            <div className={cl("channel-info")}>
+                {avatar && <img src={avatar} className={cl("channel-avatar")} alt="" />}
+                <span className={cl("channel-text")}>
+                    {t(plugin.scheduledMessages.scheduleModal.schedulingFor, { channel: isDM ? name : `#${name}` })}
+                </span>
+            </div>
 
-            <ModalContent className={cl("modal-content")}>
-                <div className={cl("channel-info")}>
-                    {avatar && <img src={avatar} className={cl("channel-avatar")} alt="" />}
-                    <span className={cl("channel-text")}>
-                        {t(plugin.scheduledMessages.scheduleModal.schedulingFor, { channel: isDM ? name : `#${name}` })}
-                    </span>
+            <Heading tag="h5" className={cl("field-label")}>{t(plugin.scheduledMessages.scheduleModal.scheduleType)}</Heading>
+            <div className={cl("schedule-type-buttons")}>
+                <Button
+                    size="small"
+                    variant={scheduleType === "delay" ? "primary" : "secondary"}
+                    onClick={() => setScheduleType("delay")}
+                >
+                    {t(plugin.scheduledMessages.scheduleModal.delay)}
+                </Button>
+                <Button
+                    size="small"
+                    variant={scheduleType === "time" ? "primary" : "secondary"}
+                    onClick={() => setScheduleType("time")}
+                >
+                    {t(plugin.scheduledMessages.scheduleModal.specificTime)}
+                </Button>
+            </div>
+
+            {scheduleType === "delay" ? (
+                <>
+                    <Heading tag="h5" className={cl("field-label")}>{t(plugin.scheduledMessages.scheduleModal.delayMinutes)}</Heading>
+                    <TextInput
+                        value={delayMinutes}
+                        onChange={setDelayMinutes}
+                        placeholder="5"
+                        type="number"
+                    />
+                </>
+            ) : (
+                <>
+                    <Heading tag="h5" className={cl("field-label")}>{t(plugin.scheduledMessages.scheduleModal.dateTime)}</Heading>
+                    <input
+                        type="datetime-local"
+                        className={cl("datetime-input")}
+                        value={scheduledDateTime}
+                        onChange={e => setScheduledDateTime(e.target.value)}
+                        min={new Date().toISOString().slice(0, 16)}
+                    />
+                </>
+            )}
+
+            {error && (
+                <div className={cl("error")}>
+                    <ErrorIcon />
+                    <span>{error}</span>
                 </div>
-
-                <Heading tag="h5" className={cl("field-label")}>{t(plugin.scheduledMessages.scheduleModal.scheduleType)}</Heading>
-                <div className={cl("schedule-type-buttons")}>
-                    <Button
-                        size="small"
-                        variant={scheduleType === "delay" ? "primary" : "secondary"}
-                        onClick={() => setScheduleType("delay")}
-                    >
-                        {t(plugin.scheduledMessages.scheduleModal.delay)}
-                    </Button>
-                    <Button
-                        size="small"
-                        variant={scheduleType === "time" ? "primary" : "secondary"}
-                        onClick={() => setScheduleType("time")}
-                    >
-                        {t(plugin.scheduledMessages.scheduleModal.specificTime)}
-                    </Button>
-                </div>
-
-                {scheduleType === "delay" ? (
-                    <>
-                        <Heading tag="h5" className={cl("field-label")}>{t(plugin.scheduledMessages.scheduleModal.delayMinutes)}</Heading>
-                        <TextInput
-                            value={delayMinutes}
-                            onChange={setDelayMinutes}
-                            placeholder="5"
-                            type="number"
-                        />
-                    </>
-                ) : (
-                    <>
-                        <Heading tag="h5" className={cl("field-label")}>{t(plugin.scheduledMessages.scheduleModal.dateTime)}</Heading>
-                        <input
-                            type="datetime-local"
-                            className={cl("datetime-input")}
-                            value={scheduledDateTime}
-                            onChange={e => setScheduledDateTime(e.target.value)}
-                            min={new Date().toISOString().slice(0, 16)}
-                        />
-                    </>
-                )}
-
-                {error && (
-                    <div className={cl("error")}>
-                        <ErrorIcon />
-                        <span>{error}</span>
-                    </div>
-                )}
-            </ModalContent>
-
-            <ModalFooter className={cl("modal-footer")}>
-                <Button onClick={handleSchedule} variant="positive">{t(plugin.scheduledMessages.scheduleModal.schedule)}</Button>
-                <Button variant="secondary" onClick={close}>{t(plugin.scheduledMessages.scheduleModal.cancel)}</Button>
-            </ModalFooter>
-        </ModalRoot>
+            )}
+        </Modal>
     );
 }
 

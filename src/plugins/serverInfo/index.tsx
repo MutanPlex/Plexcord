@@ -8,6 +8,7 @@
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { InfoIcon } from "@components/Icons";
 import { Guild } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -15,13 +16,14 @@ import { Menu } from "@webpack/common";
 
 import { openGuildInfoModal } from "./GuildInfoModal";
 
-const Patch: NavContextMenuPatchCallback = (children, { guild }: { guild: Guild; }) => {
+const makePatch: (showIcon: boolean) => NavContextMenuPatchCallback = showIcon => (children, { guild }: { guild: Guild; }) => {
     const group = findGroupChildrenByChildId("privacy", children);
 
     group?.push(
         <Menu.MenuItem
             id="pc-server-info"
             label={t(plugin.serverInfo.context.serverInfo)}
+            leadingAccessory={showIcon ? { type: "icon", icon: InfoIcon } : undefined}
             action={() => openGuildInfoModal(guild)}
         />
     );
@@ -56,10 +58,10 @@ export default definePlugin({
     authors: [Devs.Ven, Devs.Nuckyz, PcDevs.Z1xus],
     tags: ["servers", "utility"],
     dependencies: ["DynamicImageModalAPI"],
-
+    searchTerms: ["guild", "info", "ServerProfile"],
+    settings,
     contextMenus: {
-        "guild-context": Patch,
-        "guild-header-popout": Patch
-    },
-    settings
+        "guild-context": makePatch(false),
+        "guild-header-popout": makePatch(true)
+    }
 });

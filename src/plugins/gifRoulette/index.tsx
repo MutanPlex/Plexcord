@@ -5,9 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { sendBotMessage } from "@api/Commands";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { Devs, PcDevs } from "@utils/constants";
+import { Devs, PcDevs, PLEXCORD_GUILD_ID } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { UserSettingsActionCreators } from "@webpack/common";
 
@@ -48,9 +49,15 @@ export default definePlugin({
         {
             name: "gifroulette",
             description: () => t(plugin.gifRoulette.command.gifRoulette.description),
-            execute: (opts, other) => ({
-                content: getMessage(opts, other)
-            }),
+            execute: (opts, other) => {
+                if (other?.guild?.id === PLEXCORD_GUILD_ID) return sendBotMessage(other.channel.id, {
+                    content: t(plugin.gifRoulette.command.gifRoulette.restricted)
+                });
+
+                return {
+                    content: getMessage(opts, other)
+                };
+            },
         }
     ]
 });

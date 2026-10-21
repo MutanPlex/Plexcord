@@ -24,7 +24,7 @@ import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin, { IconComponent, OptionType } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { ChannelStore, createRoot, MessageStore, Toasts } from "@webpack/common";
+import { ChannelStore, createRoot, MessageStore, showToast } from "@webpack/common";
 import { Root } from "react-dom/client";
 
 import ReplyNavigator from "./ReplyNavigator";
@@ -141,18 +141,10 @@ export default definePlugin({
                             jumpType: "INSTANT"
                         });
                         if (replies.length > 1) {
-                            Toasts.show({
-                                id: Toasts.genId(),
-                                message: t(plugin.findReply.toast.navigate),
-                                type: Toasts.Type.MESSAGE
-                            });
-                            const container = document.querySelector("[class*=channelBottomBarArea]");
+                            showToast({ text: t(plugin.findReply.toast.navigate) });
+                            const container = document.querySelector("[class*=channelBottomBarArea_]");
                             if (!container) {
-                                Toasts.show({
-                                    id: Toasts.genId(),
-                                    message: t(plugin.findReply.toast.container),
-                                    type: Toasts.Type.FAILURE
-                                });
+                                showToast({ text: t(plugin.findReply.toast.container), variant: "critical" });
                                 return;
                             }
                             if (!madeComponent) {
@@ -164,11 +156,7 @@ export default definePlugin({
                             root!.render(<ReplyNavigator replies={replies} />);
                         }
                     } else {
-                        Toasts.show({
-                            id: Toasts.genId(),
-                            message: t(plugin.findReply.toast.couldntFind),
-                            type: Toasts.Type.FAILURE
-                        });
+                        showToast({ text: t(plugin.findReply.toast.couldntFind), variant: "critical" });
                     }
                 }
             };

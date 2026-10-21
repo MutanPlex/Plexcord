@@ -18,10 +18,16 @@ export default definePlugin({
     patches: [
         {
             find: "#{intl::USER_PROFILE_PRONOUNS}",
-            replacement: {
-                match: /(?<=children:\[\i," ",\i\]\}\)\))(,null!=\i)/,
-                replace: ",...Plexcord.Api.NicknameIcons._renderIcons({userId:arguments[0].user?.id})$1"
-            }
+            replacement: [
+                {
+                    match: /(?<=children:\i\}\):\i,)null!=\i/,
+                    replace: "($&||!!Plexcord.Api.NicknameIcons._renderIcons({userId:arguments[0].user?.id})?.length)"
+                },
+                {
+                    match: /(?<=shouldUnderlineOnHover:null.{0,300})children:(\i)(?=\}\)\])/,
+                    replace: "children:[...Plexcord.Api.NicknameIcons._renderIcons({userId:arguments[0].user?.id}),$1]"
+                }
+            ]
         }
     ]
 });

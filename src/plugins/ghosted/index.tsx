@@ -15,9 +15,8 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
-import { closeModal, openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
-import { Menu, Tooltip, useEffect, useState } from "@webpack/common";
+import { Menu, openModal, Tooltip, useEffect, useState } from "@webpack/common";
 
 import { Boo, clearChannelFromGhost, getBooCount, getGhostedChannels, onBooCountChange } from "./Boo";
 import { getChannelDisplayName, GhostedUsersModal } from "./GhostedUsersModal";
@@ -77,7 +76,6 @@ export const settings = definePluginSettings({
 
 function BooIndicator() {
     const [count, setCount] = useState(getBooCount());
-    const [showJumpscare, setShowJumpscare] = useState(false);
 
     useEffect(() => {
         const unsubscribe = onBooCountChange(newCount => {
@@ -89,16 +87,15 @@ function BooIndicator() {
         };
     }, []);
 
-    if (!settings.store.showIndicator && !showJumpscare) return null;
+    if (!settings.store.showIndicator) return null;
 
     const handleClick = () => {
         const ghostedChannels = getGhostedChannels();
-        const modalKey = openModal(modalProps => (
+        openModal(modalProps => (
             <ErrorBoundary>
                 <GhostedUsersModal
                     modalProps={modalProps}
                     ghostedChannels={ghostedChannels}
-                    onClose={() => closeModal(modalKey)}
                     onClearGhost={clearChannelFromGhost}
                 />
             </ErrorBoundary>

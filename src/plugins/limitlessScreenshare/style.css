@@ -1,0 +1,14 @@
+.pc-limitlessScreenshare-settings-card {
+    white-space: nowrap;
+    text-wrap-mode: nowrap;
+}
+
+.pc-limitlessScreenshare-settings-preset-label {
+    padding-left: 0.5em;
+}
+
+.pc-limitlessScreenshare-settings-flex-input > div:first-child > div > div > div {
+    --custom-text-input-height: 2em;
+
+    width: 5em;
+}

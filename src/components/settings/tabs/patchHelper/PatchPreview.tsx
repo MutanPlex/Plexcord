@@ -16,8 +16,8 @@ import { ReplaceFn } from "@utils/types";
 import { Parser, useMemo, useState } from "@webpack/common";
 import type { Change } from "diff";
 
-// Do not include diff in non dev builds (side effects import)
-if (IS_DEV) {
+// Do not include diff in standalone builds (side effects import)
+if (!IS_STANDALONE) {
     var differ = require("diff") as typeof import("diff");
 }
 
@@ -123,7 +123,7 @@ export function PatchPreview({ module, match, replacement, setReplacementError }
 
     return (
         <>
-            <Heading>{t(patchHelper.module)} {id}</Heading>
+            <Heading style={{ userSelect: "text" }}>{t(patchHelper.module)} {id}</Heading>
 
             <Match matchResult={matchResult} />
             <Diff diff={diff} />
@@ -133,7 +133,10 @@ export function PatchPreview({ module, match, replacement, setReplacementError }
                     className={Margins.top20}
                     onClick={() => {
                         try {
-                            Function(patchedCode.replace(/^(?=function\()/, "0,"));
+                            const isArrowFunction = patchedCode.startsWith("(");
+                            const wrappedCode = "0," + (!isArrowFunction ? "function" : "") + patchedCode.slice(patchedCode.indexOf("("));
+                            Function(wrappedCode);
+
                             setCompileResult([true, t(patchHelper.compiled)]);
                         } catch (err) {
                             setCompileResult([false, (err as Error).message]);

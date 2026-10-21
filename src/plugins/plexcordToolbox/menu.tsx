@@ -1,6 +1,6 @@
 import { plugin, plugins, t, themes } from "@api/i18n";
 import { openNotificationLogModal } from "@api/Notifications/notificationLog";
-import { isPluginEnabled, plugins as Plugins } from "@api/PluginManager";
+import { isPluginEnabled, isSettingDisabled, isSettingHidden, plugins as Plugins } from "@api/PluginManager";
 import { Settings, useSettings } from "@api/Settings";
 import { openPluginModal, openSettingsTabModal, PluginsTab, ThemesTab } from "@components/settings";
 import { useAwaiter } from "@utils/react";
@@ -81,8 +81,8 @@ export function buildPluginMenuEntries(includeEmpty = false) {
 
                     let hasAnyOption = false;
 
-                    if (p.options) for (const [key, option] of Object.entries(p.options)) {
-                        if ("hidden" in option && option.hidden) continue;
+                    if (p.settings) for (const [key, option] of Object.entries(p.settings.def)) {
+                        if (isSettingHidden(p.settings, option)) continue;
 
                         hasAnyOption = true;
 
@@ -92,7 +92,7 @@ export function buildPluginMenuEntries(includeEmpty = false) {
                             id: `${pluginName}-${key}`,
                             key: key,
                             label: t(`plugin.${pluginName.charAt(0).toLowerCase() + pluginName.slice(1)}.option.${key}.label`) as string,
-                            disabled: "disabled" in option ? option.disabled?.call(p.settings) : false,
+                            disabled: isSettingDisabled(p.settings, option)
                         };
 
                         switch (option.type) {
@@ -103,7 +103,7 @@ export function buildPluginMenuEntries(includeEmpty = false) {
                                         checked={s[key]}
                                         action={() => {
                                             s[key] = !s[key];
-                                            if (option.restartNeeded) showToast(t(plugins.restart.apply));
+                                            if (option.restartNeeded) showToast({ text: t(plugins.restart.apply) });
                                         }}
                                     />
                                 );
@@ -122,7 +122,7 @@ export function buildPluginMenuEntries(includeEmpty = false) {
                                                     checked={s[key] === opt.value}
                                                     action={() => {
                                                         s[key] = opt.value;
-                                                        if (option.restartNeeded) showToast(t(plugins.restart.apply));
+                                                        if (option.restartNeeded) showToast({ text: t(plugins.restart.apply) });
                                                     }}
                                                 />
                                             );

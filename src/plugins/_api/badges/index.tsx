@@ -22,13 +22,14 @@ import "./fixDiscordBadgePadding.css";
 import { _getBadges, BadgePosition, BadgeUserArgs, ProfileBadge } from "@api/Badges";
 import { plugins, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { CopyIcon, LinkIcon } from "@components/Icons";
 import { openContributorModal } from "@components/settings/tabs";
 import { Devs, PcDevs } from "@utils/constants";
 import { copyWithToast } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import { shouldShowContributorBadge, shouldShowPcContributorBadge } from "@utils/misc";
 import definePlugin from "@utils/types";
-import { ContextMenuApi, Menu, Toasts, UserStore } from "@webpack/common";
+import { ContextMenuApi, Menu, showToast, UserStore } from "@webpack/common";
 
 import Plugins, { PluginMeta } from "~plugins";
 
@@ -124,6 +125,7 @@ export function BadgeContextMenu({ badge }: { badge: Omit<ProfileBadge, "id"> & 
                             : badge.description;
                         if (description) copyWithToast(description);
                     }}
+                    leadingAccessory={{ type: "icon", icon: CopyIcon }}
                 />
             )}
             {badge.iconSrc && (
@@ -131,6 +133,7 @@ export function BadgeContextMenu({ badge }: { badge: Omit<ProfileBadge, "id"> & 
                     id="pc-badge-copy-link"
                     label={t(plugins.metadata.badges.context.copy.link)}
                     action={() => copyWithToast(badge.iconSrc!)}
+                    leadingAccessory={{ type: "icon", icon: LinkIcon }}
                 />
             )}
         </Menu.Menu>
@@ -152,9 +155,15 @@ export default definePlugin({
                     match: /alt:" ","aria-hidden":!0,src:.{0,50}(\i).iconSrc/,
                     replace: "...$1.props,$&"
                 },
+                // Path with 2026-04-badge-discovery OFF
                 {
                     match: /(?<=forceOpen:.{0,40}?ariaHidden:!0,)children:(?=.{0,50}?(\i)\.id)/,
-                    replace: "children:$1.component?$self.renderBadgeComponent({...$1}) :"
+                    replace: "children:$1.component?$self.renderBadgeComponent({...$1}):"
+                },
+                // Path with 2026-04-badge-discovery ON
+                {
+                    match: /(?<=fallbackIconSrc:.{0,50}?)children:(?=.{0,50}?(\i)\.id)/,
+                    replace: "children:$1.component?$self.renderBadgeComponent({...$1}):"
                 },
                 // handle onClick and onContextMenu
                 {
@@ -180,11 +189,7 @@ export default definePlugin({
     toolboxActions: () => ({
         [t(plugins.metadata.badges.context.refetch.button)]: async function () {
             await loadAllBadges(true);
-            Toasts.show({
-                id: Toasts.genId(),
-                message: t(plugins.metadata.badges.context.refetch.success),
-                type: Toasts.Type.SUCCESS
-            });
+            showToast({ text: t(plugins.metadata.badges.context.refetch.success), variant: "success" });
         }
     }),
 

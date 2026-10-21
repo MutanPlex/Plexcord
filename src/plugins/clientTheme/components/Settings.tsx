@@ -14,12 +14,11 @@ import { relativeLuminance } from "@plugins/clientTheme/utils/colorUtils";
 import { createOrUpdateThemeColorVars } from "@plugins/clientTheme/utils/styleUtils";
 import { classNameFactory } from "@utils/css";
 import { Margins } from "@utils/margins";
-import { findByCodeLazy, findStoreLazy } from "@webpack";
-import { ColorPicker, ThemeStore, useStateFromStores } from "@webpack/common";
+import { findByCodeLazy } from "@webpack";
+import { ClientThemesBackgroundStore, ColorPicker, ThemeStore, useStateFromStores } from "@webpack/common";
 
 import { settings } from "..";
 const saveClientTheme = findByCodeLazy('type:"UNSYNCED_USER_SETTINGS_UPDATE', '"system"===');
-const NitroThemeStore = findStoreLazy("ClientThemesBackgroundStore");
 
 const cl = classNameFactory("pc-clientTheme-");
 
@@ -46,7 +45,7 @@ export function ThemeSettingsComponent() {
     const isLightTheme = currentTheme === "light";
     const oppositeTheme = isLightTheme ? "Dark" : "Light";
 
-    const nitroThemeEnabled = useStateFromStores([NitroThemeStore], () => NitroThemeStore.gradientPreset != null);
+    const nitroThemeEnabled = useStateFromStores([ClientThemesBackgroundStore], () => ClientThemesBackgroundStore.gradientPreset != null);
 
     const selectedLuminance = relativeLuminance(settings.store.color);
 
@@ -89,7 +88,7 @@ export function ThemeSettingsComponent() {
                     {nitroThemeEnabled && <Paragraph>{">"} {t(plugin.clientTheme.error.modal.nitro)}</Paragraph>}
 
                     <div className={cl("buttons-container")}>
-                        {(contrastWarning && fixableContrast) && <Button onClick={() => setDiscordTheme(oppositeTheme)} variant="dangerPrimary">{t(plugin.clientTheme.error.modal.switch, { oppositeTheme })}</Button>}
+                        {(contrastWarning && fixableContrast) && <Button onClick={() => setDiscordTheme(oppositeTheme)} variant="dangerPrimary">{t(plugin.clientTheme.error.modal.switch, { oppositeTheme: isLightTheme ? t(plugin.clientTheme.text.dark) : t(plugin.clientTheme.text.light) })}</Button>}
                         {(nitroThemeEnabled) && <Button onClick={() => setDiscordTheme(currentTheme)} variant="dangerPrimary">{t(plugin.clientTheme.error.modal.disable)}</Button>}
                     </div>
                 </ErrorCard>

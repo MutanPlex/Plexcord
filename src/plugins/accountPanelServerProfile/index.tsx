@@ -12,10 +12,10 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { User } from "@plexcord/discord-types";
 import alwaysExpandProfiles from "@plugins/alwaysExpandProfiles";
 import { Devs } from "@utils/constants";
-import { fetchUserProfile, getCurrentChannel } from "@utils/discord";
+import { fetchUserProfile, getCurrentChannel, openUserProfile } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
-import { ContextMenuApi, Menu, UserStore } from "@webpack/common";
+import { ContextMenuApi, Menu, useEffect, UserStore } from "@webpack/common";
 
 interface UserProfileProps {
     popoutProps: Record<string, any>;
@@ -23,7 +23,7 @@ interface UserProfileProps {
     originalRenderPopout: () => React.ReactNode;
 }
 
-const UserProfile = findComponentByCodeLazy(".POPOUT,user");
+const UserProfile = findComponentByCodeLazy(".isNonUserBot()?", ",onClickContainer:");
 
 let openAlternatePopout = false;
 let accountPanelRef: React.RefObject<HTMLDivElement | null> = { current: null };
@@ -43,9 +43,9 @@ const AccountPanelContextMenu = ErrorBoundary.wrap(() => {
                 action={async e => {
                     if (isPluginEnabled(alwaysExpandProfiles.name)) {
                         const user = await fetchUserProfile(UserStore.getCurrentUser().id, {
-                            guild_id: getCurrentChannel()?.getGuildId()
+                            guild_id: prioritizeServerProfile ? undefined : getCurrentChannel()?.getGuildId()
                         }, false);
-                        return alwaysExpandProfiles.openUserModal(user!.userId);
+                        return openUserProfile(user!.userId);
                     }
                     openAlternatePopout = true;
                     accountPanelRef.current?.click();
@@ -129,6 +129,10 @@ export default definePlugin({
             return originalRenderPopout();
         }
 
+        if (isPluginEnabled(alwaysExpandProfiles.name)) {
+            return <ServerProfileLauncher popoutProps={popoutProps} userId={currentUser.id} guildId={currentChannel.getGuildId()!} />;
+        }
+
         return (
             <UserProfile
                 {...popoutProps}
@@ -140,3 +144,14 @@ export default definePlugin({
         );
     }, { noop: true })
 });
+
+function ServerProfileLauncher({ popoutProps, userId, guildId }: { popoutProps: Record<string, any>; userId: string; guildId: string; }) {
+    useEffect(() => {
+        popoutProps.closePopout?.();
+        popoutProps.onRequestClose?.();
+        fetchUserProfile(userId, { guild_id: guildId }, false).then(user => {
+            if (user) openUserProfile(user.userId);
+        });
+    }, []);
+    return null;
+}

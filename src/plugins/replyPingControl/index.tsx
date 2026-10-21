@@ -25,13 +25,19 @@ export const settings = definePluginSettings({
         type: OptionType.STRING,
         default: "",
         disabled: () => settings.store.alwaysPingOnReply,
+    },
+    replyPingBlacklist: {
+        label: () => t(plugin.replyPingControl.option.replyPingBlacklist.label),
+        description: () => t(plugin.replyPingControl.option.replyPingBlacklist.description),
+        type: OptionType.STRING,
+        default: "",
     }
 });
 
 export default definePlugin({
     name: "ReplyPingControl",
     description: () => t(plugin.replyPingControl.description),
-    authors: [Devs.ant0n, PcDevs.MrDiamond, PcDevs.MutanPlex],
+    authors: [Devs.ant0n, PcDevs.MrDiamond, PcDevs.MutanPlex, PcDevs.keircn],
     tags: ["chat", "notifications", "utility"],
     settings,
 
@@ -50,10 +56,17 @@ export default definePlugin({
         const repliedMessage = this.getRepliedMessage(message);
         if (!repliedMessage || repliedMessage.author.id !== user.id) return;
 
-        const whitelist = settings.store.replyPingWhitelist.split(",").map(id => id.trim());
-        const isWhitelisted = whitelist.includes(message.author.id);
+        const { replyPingBlacklist, replyPingWhitelist, alwaysPingOnReply } = settings.plain;
+        const authorId = message.author.id;
 
-        if (isWhitelisted || settings.store.alwaysPingOnReply) {
+        if (replyPingBlacklist && replyPingBlacklist.split(",").some(id => id.trim() === authorId)) {
+            message.mentions = message.mentions.filter(mention => mention.id !== user.id);
+            return;
+        }
+
+        const isWhitelisted = replyPingWhitelist && replyPingWhitelist.split(",").some(id => id.trim() === authorId);
+
+        if (isWhitelisted || alwaysPingOnReply) {
             if (!message.mentions.some(mention => mention.id === user.id)) {
                 message.mentions.push(user as any);
             }

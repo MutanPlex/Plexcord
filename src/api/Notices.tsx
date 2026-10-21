@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { components, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { isPrimitiveReactNode } from "@utils/react";
 import { waitFor } from "@webpack";
@@ -43,7 +44,7 @@ export function nextNotice() {
 export function showNotice(message: ReactNode, buttonText: string, onOkClick: () => void) {
     const notice = isPrimitiveReactNode(message)
         ? message
-        : <ErrorBoundary fallback={() => "Error Showing Notice"}>{message}</ErrorBoundary>;
+        : <ErrorBoundary fallback={() => t(components.notices.error)}>{message}</ErrorBoundary>;
 
     noticesQueue.push(["GENERIC", notice, buttonText, onOkClick]);
     if (!currentNotice) nextNotice();

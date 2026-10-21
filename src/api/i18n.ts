@@ -21,8 +21,29 @@ import { Logger } from "@utils/Logger";
 import { FluxDispatcher, useEffect, useState } from "@webpack/common";
 
 import { PlexcordCreateElement } from "../../scripts/build/inject/react.mjs";
+import daTranslations from "../locales/da";
+import deTranslations from "../locales/de";
+import enGBTranslations from "../locales/en-GB";
 import enTranslations, { changelog, cloud, commands, common, components, csp, memberlist, message, notifications, patchHelper, plugin, plugins, settings, sync, themes, updater, utils, } from "../locales/en-US";
+import es419Translations from "../locales/es-419";
+import esESTranslations from "../locales/es-ES";
+import frTranslations from "../locales/fr";
+import itTranslations from "../locales/it";
+import jaTranslations from "../locales/ja";
+import koTranslations from "../locales/ko";
+import nlTranslations from "../locales/nl";
+import plTranslations from "../locales/pl";
+import ptBRTranslations from "../locales/pt-BR";
+import ptPTTranslations from "../locales/pt-PT";
+import roTranslations from "../locales/ro";
+import ruTranslations from "../locales/ru";
+import svSETranslations from "../locales/sv-SE";
+import trTranslations from "../locales/tr";
 import { NestedKeyOf } from "../locales/types";
+import ukTranslations from "../locales/uk";
+import viTranslations from "../locales/vi";
+import zhCNTranslations from "../locales/zh-CN";
+import zhTWTranslations from "../locales/zh-TW";
 
 // Type for translation keys
 export type TranslationKey = NestedKeyOf<typeof enTranslations>;
@@ -194,6 +215,33 @@ interface I18nStore {
     pluginTranslations: Record<string, Record<string, LocaleData>>;
 }
 
+// Bundled statically so translations are available synchronously; plugin modules evaluate (and may call t())
+// before LocaleLoader finishes loading, which previously made those calls return raw key paths.
+const BUNDLED_LOCALES: Record<string, LocaleData> = {
+    "en-US": enTranslations as LocaleData,
+    "da": daTranslations as LocaleData,
+    "de": deTranslations as LocaleData,
+    "en-GB": enGBTranslations as LocaleData,
+    "es-419": es419Translations as LocaleData,
+    "es-ES": esESTranslations as LocaleData,
+    "fr": frTranslations as LocaleData,
+    "it": itTranslations as LocaleData,
+    "ja": jaTranslations as LocaleData,
+    "ko": koTranslations as LocaleData,
+    "nl": nlTranslations as LocaleData,
+    "pl": plTranslations as LocaleData,
+    "pt-BR": ptBRTranslations as LocaleData,
+    "pt-PT": ptPTTranslations as LocaleData,
+    "ro": roTranslations as LocaleData,
+    "ru": ruTranslations as LocaleData,
+    "sv-SE": svSETranslations as LocaleData,
+    "tr": trTranslations as LocaleData,
+    "uk": ukTranslations as LocaleData,
+    "vi": viTranslations as LocaleData,
+    "zh-CN": zhCNTranslations as LocaleData,
+    "zh-TW": zhTWTranslations as LocaleData,
+};
+
 class I18nManager {
     private store: I18nStore;
     private listeners: Set<() => void> = new Set();
@@ -204,7 +252,7 @@ class I18nManager {
             locale: this.getDefaultLocale(),
             fallbackLocale: "en-US",
             autoDetect: true,
-            translations: {},
+            translations: { ...BUNDLED_LOCALES },
             pluginTranslations: {}
         };
 
@@ -686,6 +734,17 @@ export const t = (key: any, params?: Record<string, any>) => {
 };
 
 export const getCurrentLocale = () => currentGlobalLocale;
+
+/** Localized name of a language code via Intl.DisplayNames; `fallback` when the code is unknown. */
+export function getLanguageName(code: string, fallback = code) {
+    if (code === "auto") return t(common.detectLanguage);
+    try {
+        const name = new Intl.DisplayNames([i18n.getLocale()], { type: "language" }).of(code);
+        return name && name.toLowerCase() !== code.toLowerCase() ? name : fallback;
+    } catch {
+        return fallback;
+    }
+}
 
 export function useGlobalLocale() {
     const [locale, setLocale] = useState(currentGlobalLocale);

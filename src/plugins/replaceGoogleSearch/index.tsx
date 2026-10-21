@@ -8,7 +8,7 @@
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { Flex } from "@components/Flex";
+import { SearchIcon } from "@components/Icons";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { Menu } from "@webpack/common";
@@ -23,7 +23,8 @@ const DefaultEngines = {
     GitHub: "https://github.com/search?q=",
     Reddit: "https://www.reddit.com/search?q=",
     Wikipedia: "https://wikipedia.org/w/index.php?search=",
-    Startpage: "https://www.startpage.com/sp/search?query="
+    Startpage: "https://www.startpage.com/sp/search?query=",
+    Kagi: "https://kagi.com/search?q="
 } as const;
 
 const enum ReplacementEngineValue {
@@ -36,7 +37,7 @@ const settings = definePluginSettings({
         label: () => t(plugin.replaceGoogleSearch.option.customEngineName.label),
         description: () => t(plugin.replaceGoogleSearch.option.customEngineName.description),
         type: OptionType.STRING,
-        placeholder: "Google"
+        placeholder: t(plugin.replaceGoogleSearch.text.google)
     },
     customEngineURL: {
         label: () => t(plugin.replaceGoogleSearch.option.customEngineURL.label),
@@ -92,6 +93,7 @@ function makeSearchItem(src: string) {
             label={t(plugin.replaceGoogleSearch.context.label)}
             key="search-text"
             id="pc-search-text"
+            leadingAccessory={{ type: "icon", icon: SearchIcon }}
         >
             {Object.keys(Engines).map(engine => {
                 const key = "pc-search-content-" + engine;
@@ -99,20 +101,8 @@ function makeSearchItem(src: string) {
                     <Menu.MenuItem
                         key={key}
                         id={key}
-                        label={
-                            <Flex gap="0.5em" alignItems="center">
-                                <img
-                                    style={{
-                                        borderRadius: "50%"
-                                    }}
-                                    aria-hidden="true"
-                                    height={16}
-                                    width={16}
-                                    src={`https://icons.duckduckgo.com/ip3/${new URL(Engines[engine]).hostname}.ico`}
-                                />
-                                {engine}
-                            </Flex>
-                        }
+                        label={engine}
+                        leadingAccessory={{ type: "image", src: `https://icons.duckduckgo.com/ip3/${new URL(Engines[engine]).hostname}.ico` }}
                         action={() => search(src, Engines[engine])}
                     />
                 );

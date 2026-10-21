@@ -7,7 +7,6 @@
 
 import { plugin, t } from "@api/i18n";
 import { Devs, PcDevs } from "@utils/constants";
-import { openUserProfile } from "@utils/discord";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
@@ -20,13 +19,10 @@ export default definePlugin({
         {
             find: '"view-profile"',
             replacement: {
-                match: /("PRESS_VIEW_PROFILE".{0,200})return(?<=userId:(\i\.id).*?)/,
-                replace: "$1return $self.openUserModal($2);"
+                match: /function (\i)\(\i?\)\{.{0,45}\(0,\i\.openUserProfileModal.{0,300}(?=return)/,
+                replace: "$&return $1();"
             },
             all: true
         },
     ],
-    openUserModal(userId: string) {
-        openUserProfile(userId);
-    }
 });

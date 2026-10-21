@@ -11,6 +11,7 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Message } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
@@ -101,17 +102,19 @@ export default definePlugin({
     ],
 
     MentionTooltip({ Component, pcProps, ...props }) {
-        return withTooltip(Component, props, pcProps.messageId, pcProps.channelId);
+        return withTooltip(Component, props, pcProps?.messageId, pcProps?.channelId);
     },
 
     ReplyTooltip({ Component, pcProps, ...props }) {
-        const mess = pcProps.baseMessage.messageReference;
-        return withTooltip(Component, props, mess?.message_id, mess?.channel_id);
+        const messageReference = pcProps?.baseMessage?.messageReference;
+        if (!messageReference) return <Component {...props} />;
+        return withTooltip(Component, props, messageReference?.message_id, messageReference?.channel_id);
     },
 
     ForwardTooltip({ Component, pcProps, ...props }) {
-        const mess = pcProps.message.messageReference;
-        return withTooltip(Component, props, mess?.message_id, mess?.channel_id);
+        const messageReference = pcProps?.message?.messageReference;
+        if (!messageReference) return <Component {...props} />;
+        return withTooltip(Component, props, messageReference?.message_id, messageReference?.channel_id);
     },
 });
 
@@ -158,7 +161,7 @@ function useMessage(channelId, messageId) {
         [MessageStore],
         () => MessageStore.getMessage(channelId, messageId)
     );
-    const [message, setMessage] = useState(cachedMessage);
+    const [message, setMessage] = useState<Message | undefined>(cachedMessage);
     useEffect(() => {
         if (message == null)
             (async () => {

@@ -24,9 +24,8 @@ import definePlugin from "@utils/types";
 export default definePlugin({
     name: "NoUnblockToJump",
     description: () => t(plugin.noUnblockToJump.description),
-    authors: [Devs.dzshn],
     tags: ["chat", "utility", "privacy"],
-
+    authors: [Devs.Rini],
     patches: [
         {
             find: "#{intl::UNIGNORE_TO_JUMP_BODY}",

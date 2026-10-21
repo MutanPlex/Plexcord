@@ -12,7 +12,6 @@ import { Notifications } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
 import type { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
-import { addToStatusGroup } from "@utils/contextMenuHelpers";
 import { getCurrentChannel } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
@@ -27,14 +26,28 @@ interface IMessageCreate {
 
 const SILENT_PING_FLAG = 1 << 12;
 
-function Icon(enabled?: boolean): JSX.Element {
-    return <svg
-        width="18"
-        height="18"
-    >
-        <circle cx="9" cy="9" r="8" fill={!enabled ? "var(--status-positive)" : "var(--status-danger)"} />
-        <circle cx="9" cy="9" r="3.75" fill="white" />
-    </svg>;
+function DisabledIcon(): JSX.Element {
+    return (
+        <svg
+            width="18"
+            height="18"
+        >
+            <circle cx="9" cy="9" r="8" fill="var(--status-danger)" />
+            <circle cx="9" cy="9" r="3.75" fill="white" />
+        </svg>
+    );
+}
+
+function EnabledIcon(): JSX.Element {
+    return (
+        <svg
+            width="18"
+            height="18"
+        >
+            <circle cx="9" cy="9" r="8" fill="currentColor" />
+            <circle cx="9" cy="9" r="3.75" fill="black" />
+        </svg>
+    );
 }
 
 function processIds(value: string): string {
@@ -78,20 +91,22 @@ function ContextCallback(name: "guild" | "user" | "channel"): NavContextMenuPatc
         if (!type) return;
         const enabled = settings.store[`${name}s`].split(", ").includes(type.id);
         if (name === "user" && type.id === UserStore.getCurrentUser().id) return;
-
-        addToStatusGroup(children,
-            <Menu.MenuItem
-                id={`status-${name}-bypass`}
-                label={`${enabled ? t(plugin.bypassStatus.context.remove) : t(plugin.bypassStatus.context.add)}`}
-                icon={() => Icon(enabled)}
-                action={() => {
-                    let bypasses: string[] = settings.store[`${name}s`].split(", ");
-                    if (enabled) bypasses = bypasses.filter(id => id !== type.id);
-                    else bypasses.push(type.id);
-                    settings.store[`${name}s`] = bypasses.filter(id => id.trim() !== "").join(", ");
-                }}
-            />
-        );
+        children.splice(-1, 0, (
+            <Menu.MenuGroup>
+                <Menu.MenuItem
+                    id={`status-${name}-bypass`}
+                    label={t(enabled ? plugin.bypassStatus.context.remove : plugin.bypassStatus.context.add)}
+                    icon={enabled ? EnabledIcon : DisabledIcon}
+                    leadingAccessory={{ type: "icon", icon: enabled ? EnabledIcon : DisabledIcon }}
+                    action={() => {
+                        let bypasses: string[] = settings.store[`${name}s`].split(", ");
+                        if (enabled) bypasses = bypasses.filter(id => id !== type.id);
+                        else bypasses.push(type.id);
+                        settings.store[`${name}s`] = bypasses.filter(id => id.trim() !== "").join(", ");
+                    }}
+                />
+            </Menu.MenuGroup>
+        ));
     };
 }
 

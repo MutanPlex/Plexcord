@@ -316,9 +316,9 @@ async function fetchFileSize(url: string): Promise<number | undefined> {
 }
 
 function formatFileSize(bytes: number): string {
-    if (bytes === 0) return "0 Bytes";
+    if (bytes === 0) return `0 ${t(plugin.imageZoom.text.bytes)}`;
     const k = 1024;
-    const sizes = ["Bytes", "KB", "MB", "GB"];
+    const sizes = [t(plugin.imageZoom.text.bytes), "KB", "MB", "GB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
 }
@@ -339,7 +339,7 @@ export default definePlugin({
                     replace: `id:"${ELEMENT_ID}",$&`
                 },
                 {
-                    match: /(?<=null!=(\i)\?.{0,20})\i\.\i,{children:\1/,
+                    match: /(?<=null!=(\i)\?.{0,20})\i(?:\.\i)?,{children:\1/, // TODO: (?:\.\i)? is stable compat
                     replace: "'div',{onClick:e=>e.stopPropagation(),children:$1"
                 }
             ]

@@ -186,4 +186,4 @@ function PatchHelper() {
     );
 }
 
-export default IS_DEV ? wrapTab(PatchHelper, t(patchHelper.title)) : null;
+export default !IS_STANDALONE ? wrapTab(PatchHelper, t(patchHelper.title)) : null;

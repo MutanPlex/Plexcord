@@ -19,14 +19,14 @@
 
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
 import { plugin, t } from "@api/i18n";
-import { Paragraph } from "@components/Paragraph";
+import { TooltipContainer } from "@components/TooltipContainer";
+import { RenderModalProps } from "@plexcord/discord-types";
 import { classes } from "@utils/misc";
-import { openModal } from "@utils/modal";
 import { IconComponent } from "@utils/types";
-import { Alerts, Tooltip, useEffect, useState } from "@webpack/common";
+import { ConfirmModal, openModal, useEffect, useState } from "@webpack/common";
 
 import { settings } from "./settings";
-import { TranslateModal } from "./TranslateModal";
+import { openTranslateModal } from "./TranslateModal";
 import { cl } from "./utils";
 
 export const TranslateIcon: IconComponent = ({ height = 20, width = 20, className }) => (
@@ -42,6 +42,27 @@ export const TranslateIcon: IconComponent = ({ height = 20, width = 20, classNam
 
 export let setShouldShowTranslateEnabledTooltip: undefined | ((show: boolean) => void);
 
+function AutoTranslateConfirmModal(props: RenderModalProps) {
+    const s = settings.use(["dismissedAutoTranslateAlert"]);
+
+    return (
+        <ConfirmModal
+            {...props}
+            title={t(plugin.translate.modal.autoTranslateEnabled.title)}
+            subtitle={t(plugin.translate.modal.autoTranslateEnabled.body)}
+            confirmText={t(plugin.translate.modal.autoTranslateEnabled.confirm)}
+            onConfirm={() => settings.store.autoTranslate = false}
+            cancelText={t(plugin.translate.modal.autoTranslateEnabled.cancel)}
+            variant="primary"
+            checkboxProps={{
+                label: t(plugin.translate.modal.autoTranslateEnabled.secondaryConfirm),
+                checked: s.dismissedAutoTranslateAlert === true,
+                onChange: checked => s.dismissedAutoTranslateAlert = checked,
+            }}
+        />
+    );
+}
+
 export const TranslateChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
     const { autoTranslate } = settings.use(["autoTranslate"]);
 
@@ -56,22 +77,8 @@ export const TranslateChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
     const toggle = () => {
         const newState = !autoTranslate;
         settings.store.autoTranslate = newState;
-        if (newState && settings.store.showAutoTranslateAlert !== false)
-            Alerts.show({
-                title: t(plugin.translate.modal.autoTranslateEnabled.title),
-                body: <>
-                    <Paragraph>
-                        {t(plugin.translate.modal.autoTranslateEnabled.body)}
-                    </Paragraph>
-                </>,
-                confirmText: t(plugin.translate.modal.autoTranslateEnabled.confirm),
-                cancelText: t(plugin.translate.modal.autoTranslateEnabled.cancel),
-                secondaryConfirmText: t(plugin.translate.modal.autoTranslateEnabled.secondaryConfirm),
-                onConfirmSecondary: () => settings.store.showAutoTranslateAlert = false,
-                onConfirm: () => settings.store.autoTranslate = false,
-                // troll
-                confirmColor: "pc-notification-log-danger-btn",
-            });
+        if (newState && !settings.store.dismissedAutoTranslateAlert)
+            openModal(props => <AutoTranslateConfirmModal {...props} />);
     };
 
     const button = (
@@ -79,10 +86,7 @@ export const TranslateChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
             tooltip={t(plugin.translate.context.open)}
             onClick={e => {
                 if (e.shiftKey) return toggle();
-
-                openModal(props => (
-                    <TranslateModal rootProps={props} />
-                ));
+                else openTranslateModal();
             }}
             onContextMenu={toggle}
             buttonProps={{
@@ -95,9 +99,9 @@ export const TranslateChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
 
     if (shouldShowTranslateEnabledTooltip && settings.store.showAutoTranslateTooltip)
         return (
-            <Tooltip text={t(plugin.translate.context.auto)} forceOpen>
-                {() => button}
-            </Tooltip>
+            <TooltipContainer text={t(plugin.translate.context.auto)} forceOpen>
+                {button}
+            </TooltipContainer>
         );
 
     return button;

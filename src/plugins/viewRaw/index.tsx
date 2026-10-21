@@ -17,33 +17,75 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import "./style.css";
+
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
-import { definePluginSettings } from "@api/Settings";
-import { BaseText } from "@components/BaseText";
-import { Button } from "@components/Button";
+import { definePluginSettings, migratePluginSettings } from "@api/Settings";
 import { CodeBlock } from "@components/CodeBlock";
-import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Flex } from "@components/Flex";
-import { Heading } from "@components/Heading";
+import { HeadingSecondary } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { copyWithToast, getCurrentGuild, getIntlMessage } from "@utils/discord";
-import { Margins } from "@utils/margins";
-import { closeModal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
+import { isTruthy } from "@utils/guards";
 import definePlugin, { IconComponent, OptionType } from "@utils/types";
-import { ChannelStore, GuildRoleStore, Menu } from "@webpack/common";
+import { GuildRoleStore, Menu, Modal, openModal, UserProfileStore } from "@webpack/common";
+import { MouseEventHandler } from "react";
 
-const CopyIcon: IconComponent = ({ height = 20, width = 20, className }) => (
-    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" width={width} height={height} className={className}>
-        <path d="M12.9297 3.25007C12.7343 3.05261 12.4154 3.05226 12.2196 3.24928L11.5746 3.89824C11.3811 4.09297 11.3808 4.40733 11.5739 4.60245L16.5685 9.64824C16.7614 9.84309 16.7614 10.1569 16.5685 10.3517L11.5739 15.3975C11.3808 15.5927 11.3811 15.907 11.5746 16.1017L12.2196 16.7507C12.4154 16.9477 12.7343 16.9474 12.9297 16.7499L19.2604 10.3517C19.4532 10.1568 19.4532 9.84314 19.2604 9.64832L12.9297 3.25007Z" />
-        <path d="M8.42616 4.60245C8.6193 4.40733 8.61898 4.09297 8.42545 3.89824L7.78047 3.24928C7.58466 3.05226 7.26578 3.05261 7.07041 3.25007L0.739669 9.64832C0.5469 9.84314 0.546901 10.1568 0.739669 10.3517L7.07041 16.7499C7.26578 16.9474 7.58465 16.9477 7.78047 16.7507L8.42545 16.1017C8.61898 15.907 8.6193 15.5927 8.42616 15.3975L3.43155 10.3517C3.23869 10.1569 3.23869 9.84309 3.43155 9.64824L8.42616 4.60245Z" />
-    </svg>
-);
+const CopyRawIcon: IconComponent = ({ height = 20, width = 20, className }) => {
+    return (
+        <svg
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+            width={width}
+            height={height}
+            className={className}
+        >
+            <path d="M12.9297 3.25007C12.7343 3.05261 12.4154 3.05226 12.2196 3.24928L11.5746 3.89824C11.3811 4.09297 11.3808 4.40733 11.5739 4.60245L16.5685 9.64824C16.7614 9.84309 16.7614 10.1569 16.5685 10.3517L11.5739 15.3975C11.3808 15.5927 11.3811 15.907 11.5746 16.1017L12.2196 16.7507C12.4154 16.9477 12.7343 16.9474 12.9297 16.7499L19.2604 10.3517C19.4532 10.1568 19.4532 9.84314 19.2604 9.64832L12.9297 3.25007Z" />
+            <path d="M8.42616 4.60245C8.6193 4.40733 8.61898 4.09297 8.42545 3.89824L7.78047 3.24928C7.58466 3.05226 7.26578 3.05261 7.07041 3.25007L0.739669 9.64832C0.5469 9.84314 0.546901 10.1568 0.739669 10.3517L7.07041 16.7499C7.26578 16.9474 7.58465 16.9477 7.78047 16.7507L8.42545 16.1017C8.61898 15.907 8.6193 15.5927 8.42616 15.3975L3.43155 10.3517C3.23869 10.1569 3.23869 9.84309 3.43155 9.64824L8.42616 4.60245Z" />
+        </svg>
+    );
+};
 
-function sortObject<T extends object>(obj: T): T {
-    return Object.fromEntries(Object.entries(obj).sort(([k1], [k2]) => k1.localeCompare(k2))) as T;
+// We can't use structuredClone because some objects may contain methods, which cause a DataCloneError.
+function cloneObject<T>(obj: T): T {
+    return JSON.parse(JSON.stringify(obj));
+}
+
+function sortObject<T>(obj: T): T {
+    if (!settings.store.sortKeys) return obj;
+
+    if (Array.isArray(obj)) {
+        return obj.map(sortObject) as T;
+    }
+
+    if (obj !== null && typeof obj === "object") {
+        return Object.fromEntries(
+            Object.entries(obj)
+                .sort(([k1], [k2]) => k1.localeCompare(k2))
+                .map(([key, value]) => [key, sortObject(value)])
+        ) as T;
+    }
+
+    return obj;
+}
+
+const deleteProperties = (obj: object, keys: string[]) => keys.forEach(key => delete obj[key]);
+
+function redactUser(data: object) {
+    if (settings.store.stripSensitiveData) {
+        deleteProperties(data, [
+            "email",
+            "phone",
+            "storeCountry",
+            "personalConnectionId"
+        ]);
+    }
+
+    return data;
 }
 
 function translateType(type: string): string {
@@ -52,69 +94,53 @@ function translateType(type: string): string {
 }
 
 function cleanMessage(msg: Message) {
-    const clone = sortObject(JSON.parse(JSON.stringify(msg)));
-    for (const key of [
-        "email",
-        "phone",
-        "mfaEnabled",
-        "personalConnectionId"
-    ]) delete clone.author[key];
+    msg = cloneObject(msg);
+    redactUser(msg.author);
 
     // message logger added properties
-    const cloneAny = clone as any;
-    delete cloneAny.editHistory;
-    delete cloneAny.deleted;
-    delete cloneAny.firstEditTimestamp;
-    cloneAny.attachments?.forEach(a => delete a.deleted);
+    deleteProperties(msg, ["editHistory", "deleted", "firstEditTimestamp"]);
+    msg.attachments?.forEach(a => delete (a as any).deleted);
 
-    return clone;
+    return msg;
 }
 
-function openViewRawModal(json: string, type: string, msgContent?: string) {
-    const key = openModal(props => (
-        <ErrorBoundary>
-            <ModalRoot {...props} size={ModalSize.LARGE}>
-                <ModalHeader>
-                    <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t(plugin.viewRaw.modal.title)}</BaseText>
-                    <ModalCloseButton onClick={() => closeModal(key)} />
-                </ModalHeader>
-                <ModalContent>
-                    <div style={{ padding: "16px 0" }}>
-                        {!!msgContent && (
-                            <>
-                                <Heading>{t(plugin.viewRaw.modal.content)}</Heading>
-                                <CodeBlock content={msgContent} lang="" />
-                                <Divider className={Margins.bottom20} />
-                            </>
-                        )}
+function openViewRawModal(data: object, rawType: string, msgContent?: string) {
+    const type = translateType(rawType);
+    const json = JSON.stringify(sortObject(data), null, 4);
 
-                        <Heading>{t(plugin.viewRaw.modal.data, { type: translateType(type) })}</Heading>
-                        <CodeBlock content={json} lang="json" />
-                    </div>
-                </ModalContent >
-                <ModalFooter>
-                    <Flex>
-                        <Button onClick={() => copyWithToast(json, t(plugin.viewRaw.modal.copied, { type: translateType(type) }))}>
-                            {t(plugin.viewRaw.modal.copy, { type: translateType(type) })}
-                        </Button>
-                        {!!msgContent && (
-                            <Button onClick={() => copyWithToast(msgContent, t(plugin.viewRaw.modal.copiedContent))}>
-                                {t(plugin.viewRaw.modal.copyContent)}
-                            </Button>
-                        )}
-                    </Flex>
-                </ModalFooter>
-            </ModalRoot >
-        </ErrorBoundary >
+    openModal(props => (
+        <ErrorBoundary>
+            <Modal
+                {...props}
+                title={t(plugin.viewRaw.text.rawTypeData, { type })}
+                size="xl"
+                actions={[
+                    {
+                        text: t(plugin.viewRaw.text.copyTypeData, { type }),
+                        variant: "secondary",
+                        onClick: () => copyWithToast(json, t(plugin.viewRaw.modal.copied, { type }))
+                    },
+                    msgContent && {
+                        text: t(plugin.viewRaw.modal.copyContent),
+                        variant: "secondary",
+                        onClick: () => copyWithToast(msgContent, t(plugin.viewRaw.modal.copiedContent))
+                    }
+                ].filter(isTruthy)}
+            >
+                {!!msgContent && (
+                    <>
+                        <HeadingSecondary>{t(plugin.viewRaw.modal.content)}</HeadingSecondary>
+                        <CodeBlock className="pc-viewRaw-codeBlock" content={msgContent} lang="" />
+                        <HeadingSecondary className={Margins.top16}>{t(plugin.viewRaw.text.messageData)}</HeadingSecondary>
+                    </>
+                )}
+                <CodeBlock className="pc-viewRaw-codeBlock" content={json} lang="json" />
+            </Modal>
+        </ErrorBoundary>
     ));
 }
 
-function openViewRawModalMessage(msg: Message) {
-    msg = cleanMessage(msg);
-    const msgJson = JSON.stringify(msg, null, 4);
-
-    return openViewRawModal(msgJson, "Message", msg.content);
-}
+const openViewRawModalMessage = (msg: Message) => openViewRawModal(cleanMessage(msg), "Message", msg.content);
 
 const settings = definePluginSettings({
     popoverButton: {
@@ -133,15 +159,28 @@ const settings = definePluginSettings({
         ]
     },
     messageContextMenu: {
-        description: "Show in message context menu",
+        label: () => t(plugin.viewRaw.option.messageContextMenu.label),
+        description: () => t(plugin.viewRaw.option.messageContextMenu.description),
         type: OptionType.BOOLEAN,
         default: false
+    },
+    sortKeys: {
+        label: () => t(plugin.viewRaw.option.sortKeys.label),
+        description: () => t(plugin.viewRaw.option.sortKeys.description),
+        type: OptionType.BOOLEAN,
+        default: true
+    },
+    stripSensitiveData: {
+        label: () => t(plugin.viewRaw.option.stripSensitiveData.label),
+        description: () => t(plugin.viewRaw.option.stripSensitiveData.description),
+        type: OptionType.BOOLEAN,
+        default: true
     }
 });
 
-function MakeContextCallback(name: "Guild" | "Role" | "User" | "Channel" | "Message"): NavContextMenuPatchCallback {
+function MakeContextCallback(name: "Guild" | "Role" | "User" | "Channel" | "Message" | "Profile", getData?: (props: any) => any): NavContextMenuPatchCallback {
     return (children, props) => {
-        const value = props[name.toLowerCase()];
+        const value = getData ? getData(props) : props[name.toLowerCase()];
         if (!value) return;
         if (props.label === getIntlMessage("CHANNEL_ACTIONS_MENU_LABEL")) return; // random shit like notification settings
         const isMessage = name === "Message";
@@ -151,7 +190,9 @@ function MakeContextCallback(name: "Guild" | "Role" | "User" | "Channel" | "Mess
         const id = `pc-view-${name.toLowerCase()}-raw`;
         const action = isMessage
             ? () => openViewRawModalMessage(value)
-            : () => openViewRawModal(JSON.stringify(value, null, 4), name);
+            : name === "User"
+                ? () => openViewRawModal(redactUser(cloneObject(value)), name)
+                : () => openViewRawModal(value, name);
 
         const devContainer = findGroupChildrenByChildId(`devmode-copy-id-${value.id}`, children);
 
@@ -160,7 +201,8 @@ function MakeContextCallback(name: "Guild" | "Role" | "User" | "Channel" | "Mess
                 id={id}
                 label={t(plugin.viewRaw.context.view)}
                 action={action}
-                icon={CopyIcon}
+                icon={CopyRawIcon}
+                leadingAccessory={{ type: "icon", icon: CopyRawIcon }}
             />
         );
     };
@@ -177,12 +219,14 @@ const devContextCallback: NavContextMenuPatchCallback = (children, { id }: { id:
         <Menu.MenuItem
             id={"pc-view-role-raw"}
             label={t(plugin.viewRaw.context.view)}
-            action={() => openViewRawModal(JSON.stringify(role, null, 4), "Role")}
-            icon={CopyIcon}
+            action={() => openViewRawModal(role, "Role")}
+            icon={CopyRawIcon}
+            leadingAccessory={{ type: "icon", icon: CopyRawIcon }}
         />
     );
 };
 
+migratePluginSettings("ViewRaw", "ViewRawVariant");
 export default definePlugin({
     name: "ViewRaw",
     description: () => t(plugin.viewRaw.description),
@@ -199,11 +243,12 @@ export default definePlugin({
         "gdm-context": MakeContextCallback("Channel"),
         "user-context": MakeContextCallback("User"),
         "message": MakeContextCallback("Message"),
-        "dev-context": devContextCallback
+        "dev-context": devContextCallback,
+        "user-profile-overflow-menu": MakeContextCallback("Profile", props => UserProfileStore.getGuildMemberProfile(props.user?.id, props.guildId) ?? UserProfileStore.getUserProfile(props.user?.id))
     },
 
     messagePopoverButton: {
-        icon: CopyIcon,
+        icon: CopyRawIcon,
         render(msg) {
             if (!settings.store.popoverButton) return null;
 
@@ -215,7 +260,7 @@ export default definePlugin({
                 }
             };
 
-            const handleContextMenu = e => {
+            const handleContextMenu: MouseEventHandler<HTMLDivElement> = e => {
                 if (settings.store.clickMethod === "Left") {
                     e.preventDefault();
                     e.stopPropagation();
@@ -233,9 +278,7 @@ export default definePlugin({
 
             return {
                 label,
-                icon: CopyIcon,
-                message: msg,
-                channel: ChannelStore.getChannel(msg.channel_id),
+                icon: CopyRawIcon,
                 onClick: handleClick,
                 onContextMenu: handleContextMenu
             };

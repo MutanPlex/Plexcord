@@ -13,6 +13,7 @@ type PolicyMap = Record<string, string[]>;
 export const ConnectSrc = ["connect-src"];
 export const ImageSrc = [...ConnectSrc, "img-src", "media-src"];
 export const CssSrc = ["style-src", "font-src"];
+export const ImageAndMediaSrc = [...ImageSrc, "media-src"];
 export const ImageAndCssSrc = [...ImageSrc, ...CssSrc];
 export const ImageScriptsAndCssSrc = [...ImageAndCssSrc, "script-src", "worker-src"];
 
@@ -45,7 +46,6 @@ export const CspPolicies: PolicyMap = {
     "i.imgur.com": ImageSrc, // Imgur, used by some themes
     "i.ibb.co": ImageSrc, // ImgBB, used by some themes
     "i.pinimg.com": ImageSrc, // Pinterest, used by some themes
-    "*.tenor.com": ImageSrc, // Tenor, used by some themes
     "files.catbox.moe": ImageAndCssSrc, // Catbox, used by some themes
 
     "cdn.discordapp.com": ImageAndCssSrc, // Discord CDN, used by Plexcord and some themes to load media
@@ -59,6 +59,11 @@ export const CspPolicies: PolicyMap = {
     // Function Specific
     "api.github.com": ConnectSrc, // used for updating Plexcord itself
     "ws.audioscrobbler.com": ConnectSrc, // Last.fm API
+    "musicbrainz.org": ConnectSrc,
+    "*.listenbrainz.org": ConnectSrc,
+    "coverartarchive.org": ConnectSrc,
+    "archive.org": ConnectSrc,
+    "*.archive.org": ConnectSrc,
     "translate-pa.googleapis.com": ConnectSrc, // Google Translate API
     "*.vencord.dev": ImageSrc, // VenCloud (api.vencord.dev) and Badges (badges.vencord.dev)
     "*.plexcord.club": ImageSrc, // PlexCloud (api.plexcord.club) and Badges (badges.plexcord.club)
@@ -66,6 +71,7 @@ export const CspPolicies: PolicyMap = {
     "*.vercel.app": ImageSrc, // Vercel CDN, used by some themes
     "manti.vendicated.dev": ImageSrc, // ReviewDB API
     "decor.fieryflames.dev": ConnectSrc, // Decor API
+    "streaks.plexcord.club": ConnectSrc, // Streaks API
     "ugc.decor.fieryflames.dev": ImageSrc, // Decor CDN
     "sponsor.ajay.app": ConnectSrc, // Dearrow API
     "dearrow-thumb.ajay.app": ImageSrc, // Dearrow Thumbnail CDN
@@ -73,6 +79,11 @@ export const CspPolicies: PolicyMap = {
     "icons.duckduckgo.com": ImageSrc, // DuckDuckGo Favicon API (Reverse Image Search)
     "timezone.creations.works": ConnectSrc, // Timezone API
     "api.vmohammad.dev": ConnectSrc, // Custom API
+
+    // Tenor & Giphy, used by GifProviderSwitcher plugin and some themes
+    "*.tenor.com": ImageAndMediaSrc,
+    "*.tenor.co": ImageAndMediaSrc,
+    "*.giphy.com": ImageAndMediaSrc,
 };
 
 const findHeader = (headers: PolicyMap, headerName: Lowercase<string>) => {

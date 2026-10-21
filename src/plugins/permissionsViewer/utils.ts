@@ -20,11 +20,12 @@
 import { Guild, GuildMember, Role } from "@plexcord/discord-types";
 import { PermissionOverwriteType } from "@plexcord/discord-types/enums";
 import { classNameFactory } from "@utils/css";
-import { findByPropsLazy } from "@webpack";
+import { extractAndLoadChunksLazy, findByPropsLazy } from "@webpack";
 import { GuildRoleStore } from "@webpack/common";
 
 import { PermissionsSortOrder, settings } from ".";
 
+export const loadGetGuildPermissionSpecMap = extractAndLoadChunksLazy([".PRIMARY,badgeTooltipDelay:"]);
 export const { getGuildPermissionSpecMap } = findByPropsLazy("getGuildPermissionSpecMap");
 
 export const cl = classNameFactory("pc-permviewer-");
@@ -56,6 +57,9 @@ export function sortPermissionOverwrites<T extends { id: string; type: number; }
         const roleA = roles[a.id];
         const roleB = roles[b.id];
 
-        return roleB.position - roleA.position;
+        const posA = roleA?.position ?? -Infinity;
+        const posB = roleB?.position ?? -Infinity;
+
+        return posB - posA;
     });
 }

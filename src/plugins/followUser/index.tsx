@@ -14,17 +14,7 @@ import { Devs, PcDevs } from "@utils/constants";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import {
-    ChannelStore,
-    Menu,
-    PermissionsBits,
-    PermissionStore,
-    React,
-    SelectedChannelStore,
-    Toasts,
-    UserStore,
-    VoiceStateStore
-} from "@webpack/common";
+import { ChannelStore, Menu, PermissionsBits, PermissionStore, React, SelectedChannelStore, showToast, UserStore, VoiceStateStore } from "@webpack/common";
 
 function Icon(isFollowed: boolean, props: React.SVGProps<SVGSVGElement>) {
     return (
@@ -57,6 +47,12 @@ export const settings = definePluginSettings({
     onlyManualTrigger: {
         label: () => t(plugin.followUser.option.onlyManualTrigger.label),
         description: () => t(plugin.followUser.option.onlyManualTrigger.description), type: OptionType.BOOLEAN,
+        restartNeeded: false,
+        default: false
+    },
+    onlyWhenInVoice: {
+        label: () => t(plugin.followUser.option.onlyWhenInVoice.label),
+        description: () => t(plugin.followUser.option.onlyWhenInVoice.description), type: OptionType.BOOLEAN,
         restartNeeded: false,
         default: false
     },
@@ -128,55 +124,27 @@ function triggerFollow(userChannelId: string | null = getChannelId(settings.stor
                 const memberCount = voiceStates ? Object.keys(voiceStates).length : null;
                 if (channel.type === 1 || PermissionStore.can(CONNECT, channel)) {
                     if (channel.userLimit !== 0 && memberCount !== null && memberCount >= channel.userLimit && !PermissionStore.can(PermissionsBits.MOVE_MEMBERS, channel)) {
-                        Toasts.show({
-                            message: t(plugin.followUser.toast.channelFull),
-                            id: Toasts.genId(),
-                            type: Toasts.Type.FAILURE
-                        });
+                        showToast({ text: t(plugin.followUser.toast.channelFull), variant: "critical" });
                         return;
                     }
                     ChannelActions.selectVoiceChannel(userChannelId);
-                    Toasts.show({
-                        message: t(plugin.followUser.toast.newVc),
-                        id: Toasts.genId(),
-                        type: Toasts.Type.SUCCESS
-                    });
+                    showToast({ text: t(plugin.followUser.toast.newVc), variant: "success" });
                 } else {
-                    Toasts.show({
-                        message: t(plugin.followUser.toast.insufficientPermissions),
-                        id: Toasts.genId(),
-                        type: Toasts.Type.FAILURE
-                    });
+                    showToast({ text: t(plugin.followUser.toast.insufficientPermissions), variant: "critical" });
                 }
             } else {
-                Toasts.show({
-                    message: t(plugin.followUser.toast.sameVc),
-                    id: Toasts.genId(),
-                    type: Toasts.Type.FAILURE
-                });
+                showToast({ text: t(plugin.followUser.toast.sameVc), variant: "critical" });
             }
         } else if (myChanId) {
             // if not in a voice channel and the setting is on disconnect
             if (settings.store.followLeave) {
                 ChannelActions.disconnect();
-                Toasts.show({
-                    message: t(plugin.followUser.toast.disconnect),
-                    id: Toasts.genId(),
-                    type: Toasts.Type.SUCCESS
-                });
+                showToast({ text: t(plugin.followUser.toast.disconnect), variant: "success" });
             } else {
-                Toasts.show({
-                    message: t(plugin.followUser.toast.notFollowing),
-                    id: Toasts.genId(),
-                    type: Toasts.Type.FAILURE
-                });
+                showToast({ text: t(plugin.followUser.toast.notFollowing), variant: "critical" });
             }
         } else {
-            Toasts.show({
-                message: t(plugin.followUser.toast.notVc),
-                id: Toasts.genId(),
-                type: Toasts.Type.FAILURE
-            });
+            showToast({ text: t(plugin.followUser.toast.notVc), variant: "critical" });
         }
     }
 }
@@ -251,6 +219,10 @@ export default definePlugin({
     flux: {
         VOICE_STATE_UPDATES({ voiceStates }: { voiceStates: VoiceState[]; }) {
             if (settings.store.onlyManualTrigger || !settings.store.followUserId) {
+                return;
+            }
+            // only follow automatically while you are in a voice channel yourself
+            if (settings.store.onlyWhenInVoice && !SelectedChannelStore.getVoiceChannelId()) {
                 return;
             }
             for (const state of voiceStates) {

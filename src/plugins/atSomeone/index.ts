@@ -17,13 +17,15 @@ export default definePlugin({
     authors: [Devs.Joona, PcDevs.MutanPlex],
     tags: ["chat", "fun"],
 
+    getMentionDescription: () => t(plugin.atSomeone.description),
+
     patches: [
         {
             find: ".LAUNCHABLE_APPLICATIONS;",
             replacement: [
                 {
                     match: /&(\i)\(\)\((\i),\i\(\)\.test\)&&(\i)\.push\(\i\(\)\)/g,
-                    replace: "$&,$1()($2,/someone/.test)&&$3.push({text:'@someone',description:t(plugin.atSomeone.description)})"
+                    replace: "$&,$1()($2,/someone/.test)&&$3.push({text:'@someone',description:$self.getMentionDescription()})"
                 },
             ],
         },

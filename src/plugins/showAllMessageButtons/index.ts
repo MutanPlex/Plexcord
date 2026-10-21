@@ -36,6 +36,13 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: true,
     },
+    noQuickReacts: {
+        label: () => t(plugin.showAllMessageButtons.option.noQuickReacts.label),
+        default: true,
+        restartNeeded: true,
+        type: OptionType.BOOLEAN,
+        description: () => t(plugin.showAllMessageButtons.option.noQuickReacts.description),
+    },
 });
 
 export default definePlugin({
@@ -47,7 +54,7 @@ export default definePlugin({
 
     patches: [
         {
-            find: "#{intl::MESSAGE_UTILITIES_A11Y_LABEL}",
+            find: "#{intl::MESSAGE_UTILITIES_A11Y_LABEL}),children",
             replacement: [
                 {
                     match: /isExpanded:\i&&(.+?),/,
@@ -62,7 +69,12 @@ export default definePlugin({
                     predicate: () => settings.store.noShiftPin,
                     match: /onClick:.{10,30}(?=\},"pin")/,
                     replace: "onClick:() => $self.toggleMessagePin(arguments[0]),"
-                }
+                },
+                {
+                    predicate: () => !settings.store.noQuickReacts,
+                    match: /\i(\?null:\(0,\i\.jsxs\).{0,100}message:\i\}\)),\(0,\i\.jsxs?\)\(\i\.\i,\{\}\)/,
+                    replace: "false$1"
+                },
             ]
         },
     ],

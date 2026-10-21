@@ -6,9 +6,7 @@
  */
 
 import { Icon } from "@plexcord/discord-types";
-import { findByPropsLazy } from "@webpack";
-
-const iconsModule = findByPropsLazy("AngleBracketsIcon", "StaffBadgeIcon") as Record<string, Icon>;
+import { iconsModule } from "@plugins/_core/concatenatedModules";
 
 let iconNames: string[] | undefined;
 

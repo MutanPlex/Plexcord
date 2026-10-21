@@ -21,7 +21,7 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType, PluginNative, SettingsDefinition } from "@utils/types";
-import { showToast, Toasts } from "@webpack/common";
+import { showToast } from "@webpack/common";
 import type { MouseEvent } from "react";
 
 interface URLReplacementRule {
@@ -59,7 +59,11 @@ const UrlReplacementRules: Record<string, URLReplacementRule> = {
     },
     vrcx: {
         match: /^https:\/\/vrchat.com\/home\/(user|avatar|world|group)\/(.+)$/,
-        replace: (_, type, id) => `vrcx://${type}/${id}`,
+        replace: (_, type, id) => `vrcx://${type}/${id}`
+    },
+    telegram: {
+        match: /^https:\/\/t\.me\/([a-zA-Z0-9_]+)$/,
+        replace: (_, username) => `tg://resolve?domain=${username}`
     }
 };
 
@@ -136,7 +140,7 @@ export default definePlugin({
             }
 
             if (rule.match.test(url)) {
-                showToast(t(plugin.openInApp.notification.open), Toasts.Type.SUCCESS);
+                showToast({ text: t(plugin.openInApp.notification.open), variant: "success" });
 
                 const newUrl = url.replace(rule.match, rule.replace);
                 PlexcordNative.native.openExternal(newUrl);

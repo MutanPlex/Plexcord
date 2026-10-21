@@ -30,8 +30,6 @@ function readSettings<T = object>(name: string, file: string): Partial<T> {
 
 export const RendererSettings = new SettingsStore(readSettings<Settings>("renderer", SETTINGS_FILE));
 
-mainI18n.initialize();
-
 RendererSettings.addGlobalChangeListener((data, path) => {
     try {
         writeFileSync(SETTINGS_FILE, JSON.stringify(RendererSettings.plain, null, 4));

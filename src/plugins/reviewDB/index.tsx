@@ -30,7 +30,7 @@ import { classes } from "@utils/misc";
 import { useAwaiter } from "@utils/react";
 import definePlugin from "@utils/types";
 import { findCssClassesLazy } from "@webpack";
-import { Alerts, Clickable, IconUtils, Menu, Parser } from "@webpack/common";
+import { Clickable, ConfirmModal, IconUtils, Menu, openModal, Parser } from "@webpack/common";
 
 import { Auth, initAuth, updateAuth } from "./auth";
 import { openReviewsModal } from "./components/ReviewModal";
@@ -51,6 +51,7 @@ const guildPopoutPatch: NavContextMenuPatchCallback = (children, { guild }: { gu
             label={t(plugin.reviewDB.context.view)}
             id="pc-rdb-server-reviews"
             icon={OpenExternalIcon}
+            leadingAccessory={{ type: "icon", icon: OpenExternalIcon }}
             action={() => openReviewsModal(guild.id, guild.name, ReviewType.Server)}
         />
     );
@@ -63,6 +64,7 @@ const userContextPatch: NavContextMenuPatchCallback = (children, { user }: { use
             label={t(plugin.reviewDB.context.view)}
             id="pc-rdb-user-reviews"
             icon={OpenExternalIcon}
+            leadingAccessory={{ type: "icon", icon: OpenExternalIcon }}
             action={() => openReviewsModal(user.id, user.username, ReviewType.User)}
         />
     );
@@ -96,103 +98,113 @@ export default definePlugin({
         setTimeout(async () => {
             if (!Auth.token) return;
 
-            const user = await getCurrentUserInfo(Auth.token);
-            updateAuth({ user });
+            const user = await getCurrentUserInfo();
+            if (user) {
+                updateAuth({ user });
 
-            if (notifyReviews) {
-                if (lastReviewId && lastReviewId < user.lastReviewID) {
-                    s.lastReviewId = user.lastReviewID;
-                    if (user.lastReviewID !== 0)
-                        showToast(t(plugin.reviewDB.notification.newReview));
+                if (notifyReviews) {
+                    if (lastReviewId && lastReviewId < user.lastReviewID) {
+                        s.lastReviewId = user.lastReviewID;
+                        if (user.lastReviewID !== 0)
+                            showToast({ text: t(plugin.reviewDB.notification.newReview) });
+                    }
                 }
-            }
 
-            if (user.notification) {
-                const props = user.notification.type === NotificationType.Ban ? {
-                    cancelText: t(plugin.reviewDB.button.appeal),
-                    confirmText: t(plugin.reviewDB.button.ok),
-                    onCancel: async () =>
-                        PlexcordNative.native.openExternal(
-                            "https://reviewdb.mantikafasi.dev/api/redirect?"
-                            + new URLSearchParams({
-                                token: Auth.token!,
-                                page: "dashboard/appeal"
-                            })
-                        )
-                } : {};
+                const { notification } = user;
+                if (notification) {
+                    const props = notification.type === NotificationType.Ban ? {
+                        cancelText: t(plugin.reviewDB.button.appeal),
+                        confirmText: t(plugin.reviewDB.text.ok),
+                        onCancel: async () =>
+                            PlexcordNative.native.openExternal(
+                                "https://reviewdb.mantikafasi.dev/api/redirect?"
+                                + new URLSearchParams({
+                                    token: Auth.token!,
+                                    page: "dashboard/appeal"
+                                })
+                            )
+                    } : {};
 
-                Alerts.show({
-                    title: user.notification.title,
-                    body: (
-                        Parser.parse(
-                            user.notification.content,
-                            false
-                        )
-                    ),
-                    ...props
-                });
+                    openModal(modalProps => (
+                        <ConfirmModal
+                            {...modalProps}
+                            title={notification.title}
+                            confirmText={props.confirmText ?? t(plugin.reviewDB.button.ok)}
+                            cancelText={props.cancelText}
+                            variant="primary"
+                            onCancel={props.onCancel}
+                        >
+                            {Parser.parse(
+                                notification.content,
+                                false
+                            )}
+                        </ConfirmModal>
+                    ));
 
-                readNotification(user.notification.id);
+                    readNotification(notification.id);
+                }
             }
         }, 4000);
     },
 
-    renderProfileCollection: ({ user, isSideBar = false }: { user: User; isSideBar?: boolean; }) => {
-        const [reviewData] = useAwaiter(() => getReviews(user.id, { limit: 4 }), { deps: [user.id], fallbackValue: null });
+    renderProfileCollection: {
+        priority: 0,
+        render: ({ user, isSideBar = false, isRedesignEnabled = false }: { user: User; isSideBar?: boolean; isRedesignEnabled?: boolean; }) => {
+            const [reviewData] = useAwaiter(() => getReviews(user.id, { limit: 4 }), { deps: [user.id], fallbackValue: null });
 
-        // Discord are masters at using a crap ton of html elements and css classes to create a simple ui that could have
-        // been made with less than half of the number of elements, so we have to do this insanity to replicate their ui
-        const reviewsSection = (
-            <section className={ProfileCardClasses.container}>
-                <ul className={ProfileCardClasses.cardsList} tabIndex={-1}>
-                    <li className={ProfileCardClasses.firstCardContainer}>
-                        <Clickable
-                            className={classes(ProfileCardContainerClasses.breadcrumb, reviewData?.hasOptedOut && cl("profile-popout-disabled"))}
-                            onClick={() => !reviewData?.hasOptedOut && openReviewsModal(user.id, user.username, ReviewType.User)}
-                        >
-                            <div className={classes(ProfileCardOverlayClasses.overlay, ProfileCardContainerClasses.innerContainer, ProfileCardClasses.card)}>
-                                <Paragraph size={isSideBar ? "sm" : "xs"} weight="medium">{t(plugin.reviewDB.context.view)}</Paragraph>
-                                {!!reviewData?.reviewCount
-                                    ? (
-                                        <div className={ProfileCardContainerClasses.icons}>
-                                            {reviewData.reviews
-                                                .filter(review => review.id !== 0)
-                                                .slice(0, 4)
-                                                .reverse()
-                                                .map((review, idx) => {
-                                                    const showCount = idx === 3 && reviewData.reviewCount > 4;
+            // Discord are masters at using a crap ton of html elements and css classes to create a simple ui that could have
+            // been made with less than half of the number of elements, so we have to do this insanity to replicate their ui
+            const reviewsSection = (
+                <section className={ProfileCardClasses.container}>
+                    <ul className={ProfileCardClasses.cardsList} tabIndex={-1}>
+                        <li className={ProfileCardClasses.firstCardContainer}>
+                            <Clickable
+                                className={classes(ProfileCardContainerClasses.breadcrumb, reviewData?.hasOptedOut && cl("profile-popout-disabled"))}
+                                onClick={() => !reviewData?.hasOptedOut && openReviewsModal(user.id, user.username, ReviewType.User)}
+                            >
+                                <div className={classes(ProfileCardOverlayClasses.overlay, ProfileCardContainerClasses.innerContainer, ProfileCardClasses.card)}>
+                                    <Paragraph size={isSideBar ? "sm" : "xs"} weight="medium">{t(plugin.reviewDB.context.view)}</Paragraph>
+                                    {!!reviewData?.reviewCount
+                                        ? (
+                                            <div className={ProfileCardContainerClasses.icons}>
+                                                {reviewData.reviews
+                                                    .filter(review => review.id !== 0)
+                                                    .slice(0, 4)
+                                                    .map((review, idx) => {
+                                                        const showCount = idx === 3 && reviewData.reviewCount > 4;
 
-                                                    return (
-                                                        <div className={ProfileCardContainerClasses.icon} key={review.id}>
-                                                            <img
-                                                                src={review.sender.profilePhoto}
-                                                                alt={review.sender.username}
-                                                                className={showCount ? ProfileCardContainerClasses.displayCount : undefined}
-                                                                onError={e => e.currentTarget.src = IconUtils.getDefaultAvatarURL(review.sender.discordID)}
-                                                            />
-                                                            {showCount && (
-                                                                <div className={ProfileCardContainerClasses.displayCountText}>
-                                                                    <Span className={ProfileCardContainerClasses.displayCountTextColor} size="xs" weight="medium" defaultColor={false}>
-                                                                        +{reviewData.reviewCount - 4}
-                                                                    </Span>
-                                                                </div>
-                                                            )}
-                                                        </div>
-                                                    );
-                                                })}
-                                        </div>
-                                    )
-                                    : <Paragraph size={isSideBar ? "sm" : "xs"}>{reviewData?.hasOptedOut ? t(plugin.reviewDB.profile.optedOut) : t(plugin.reviewDB.profile.noReviews)}</Paragraph>
-                                }
-                            </div>
-                        </Clickable>
-                    </li>
-                </ul>
-            </section>
-        );
+                                                        return (
+                                                            <div className={ProfileCardContainerClasses.icon} key={review.id}>
+                                                                <img
+                                                                    src={review.sender.profilePhoto}
+                                                                    alt={review.sender.username}
+                                                                    className={showCount ? ProfileCardContainerClasses.displayCount : undefined}
+                                                                    onError={e => e.currentTarget.src = IconUtils.getDefaultAvatarURL(review.sender.discordID)}
+                                                                />
+                                                                {showCount && (
+                                                                    <div className={ProfileCardContainerClasses.displayCountText}>
+                                                                        <Span className={ProfileCardContainerClasses.displayCountTextColor} size="xs" weight="medium" defaultColor={false}>
+                                                                            +{reviewData.reviewCount - 4}
+                                                                        </Span>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        );
+                                                    })}
+                                            </div>
+                                        )
+                                        : <Paragraph size={isSideBar ? "sm" : "xs"}>{reviewData?.hasOptedOut ? t(plugin.reviewDB.profile.optedOut) : t(plugin.reviewDB.profile.noReviews)}</Paragraph>
+                                    }
+                                </div>
+                            </Clickable>
+                        </li>
+                    </ul>
+                </section>
+            );
 
-        return isSideBar
-            ? <div className={DMSideBarClasses.widgetPreviews}>{reviewsSection}</div>
-            : reviewsSection;
-    }
+            return isSideBar && !isRedesignEnabled
+                ? <div className={DMSideBarClasses.widgetPreviews}>{reviewsSection}</div>
+                : reviewsSection;
+        },
+    },
 });

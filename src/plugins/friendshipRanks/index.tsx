@@ -10,15 +10,16 @@ import "./styles.css";
 import { BadgePosition, BadgeUserArgs, ProfileBadge } from "@api/Badges";
 import { i18n, plugin, t } from "@api/i18n";
 import { Badges } from "@api/index";
+import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
+import { RenderModalProps } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
-import { ModalContent, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
-import definePlugin from "@utils/types";
-import { RelationshipStore } from "@webpack/common";
+import definePlugin, { OptionType } from "@utils/types";
+import { Modal, openModal, RelationshipStore, Tooltip, useStateFromStores } from "@webpack/common";
 
 interface rankInfo {
     title: string;
@@ -28,6 +29,15 @@ interface rankInfo {
 }
 
 const cl = classNameFactory("pc-friendship-ranks-");
+
+const settings = definePluginSettings({
+    showFriendsInChat: {
+        label: () => t(plugin.friendshipRanks.option.showFriendsInChat.label),
+        type: OptionType.BOOLEAN,
+        description: () => t(plugin.friendshipRanks.option.showFriendsInChat.description),
+        default: false,
+    },
+});
 
 function daysSince(dateString: string): number {
     const date = new Date(dateString);
@@ -89,25 +99,26 @@ function getRanks(): rankInfo[] {
 
 function openRankModal(rankIndex: number) {
     const rank = getRanks()[rankIndex];
-    openModal(props => (
+    openModal((props: RenderModalProps) => (
         <ErrorBoundary>
-            <ModalRoot {...props} size={ModalSize.DYNAMIC}>
-                <ModalHeader>
+            <Modal
+                {...props}
+                size="sm"
+                title={
                     <Flex className={cl("flex")}>
                         <Heading className={cl("img")} tag="h2">
-                            <img src={rank.iconSrc} alt="rank icon" />
+                            <img src={rank.iconSrc} alt={t(plugin.friendshipRanks.text.rankIcon)} />
                             {rank.title}
                         </Heading>
                     </Flex>
-                </ModalHeader>
-                <ModalContent>
-                    <div className={cl("text")}>
-                        <Paragraph>
-                            {rank.description}
-                        </Paragraph>
-                    </div>
-                </ModalContent>
-            </ModalRoot>
+                }
+            >
+                <div className={cl("text")}>
+                    <Paragraph>
+                        {rank.description}
+                    </Paragraph>
+                </div>
+            </Modal>
         </ErrorBoundary >
     ));
 }
@@ -151,13 +162,34 @@ function reloadBadges() {
     currentBadges.forEach(b => Badges.addProfileBadge(b));
 }
 
+const FriendDecoration = ErrorBoundary.wrap(({ userId }: { userId: string; }) => {
+    const isFriend = useStateFromStores([RelationshipStore], () => RelationshipStore.isFriend(userId), [userId]);
+    if (!isFriend) return null;
+
+    return (
+        <Tooltip text={t(plugin.friendshipRanks.text.friend)}>
+            {tooltipProps => (
+                <span {...tooltipProps} className={cl("decoration")}>
+                    <svg className={cl("icon")} aria-hidden="true" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M13 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+                        <path fill="currentColor" d="M3 5v-.75C3 3.56 3.56 3 4.25 3s1.24.56 1.33 1.25C6.12 8.65 9.46 12 13 12h1a8 8 0 0 1 8 8 2 2 0 0 1-2 2 .21.21 0 0 1-.2-.15 7.65 7.65 0 0 0-1.32-2.3c-.15-.2-.42-.06-.39.17l.25 2c.02.15-.1.28-.25.28H9a2 2 0 0 1-2-2v-2.22c0-1.57-.67-3.05-1.53-4.37A15.85 15.85 0 0 1 3 5Z" />
+                    </svg>
+                </span>
+            )}
+        </Tooltip>
+    );
+}, { noop: true });
+
 export default definePlugin({
     name: "FriendshipRanks",
     description: () => t(plugin.friendshipRanks.description),
-    authors: [Devs.Samwich, PcDevs.MutanPlex],
     tags: ["friends", "appearance", "fun"],
-    localeUnsubscribe: null as (() => void) | null,
-
+    authors: [Devs.Samwich, PcDevs.lucabeyer],
+    settings,
+    renderMessageDecoration({ message }) {
+        if (!settings.store.showFriendsInChat || !message?.author) return null;
+        return <FriendDecoration userId={message.author.id} />;
+    },
     start() {
         currentBadges = getBadgesToApply();
         currentBadges.forEach(b => Badges.addProfileBadge(b));

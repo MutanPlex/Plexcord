@@ -6,137 +6,150 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { addMessagePreSendListener, MessageSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
+import { MessageSendListener } from "@api/MessageEvents";
 import { definePluginSettings } from "@api/Settings";
+import type { Channel } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
-import { getCurrentChannel, sendMessage } from "@utils/discord";
-import definePlugin, { OptionType } from "@utils/types";
-import { ChannelStore, ComponentDispatch, PermissionsBits, UserStore } from "@webpack/common";
+import { copyWithToast, getCurrentChannel, insertTextIntoChatInputBox, sendMessage } from "@utils/discord";
+import { Logger } from "@utils/Logger";
+import { sleep } from "@utils/misc";
+import definePlugin, { makeRange, OptionType } from "@utils/types";
+import { ChannelStore, ComponentDispatch, PermissionsBits, PermissionStore, showToast, UserStore } from "@webpack/common";
 
-let maxLength: number = 0;
+import { splitMessage, type SplitMode } from "./splitMessage";
 
-const canSplit: () => boolean = () => {
-    const slowmode = getCurrentChannel()?.rateLimitPerUser ?? 0;
-    return (settings.store.splitInSlowmode ? slowmode < settings.store.slowmodeMax : slowmode <= 0) && settings.store.disableFileConversion;
-};
-
-const autoMaxLength = () => {
-    const hasNitro = UserStore.getCurrentUser()?.premiumType === 2;
-    return hasNitro ? 4000 : 2000;
-};
-
-const split = async (channelId: string, chunks: string[], delayInMs: number) => {
-    const sendChunk = async (chunk: string) => {
-        await sendMessage(channelId, { content: chunk }, true);
-    };
-
-    // Send the chunks
-    for (let i = 0; i < chunks.length; i++) {
-        await sendChunk(chunks[i]);
-        if (i < chunks.length - 1) // Not the last chunk
-            await new Promise(resolve => setTimeout(resolve, delayInMs)); // Wait for `delayInMs`
-    }
-};
-
-const listener: MessageSendListener = async (channelId, msg) => {
-    if (msg.content.trim().length < maxLength || !canSplit()) return; // Nothing to split
-
-    const channel = ChannelStore.getChannel(channelId);
-
-    // Check for slowmode
-    let isSlowmode = channel.rateLimitPerUser > 0;
-    if ((channel.accessPermissions & PermissionsBits.MANAGE_MESSAGES) === PermissionsBits.MANAGE_MESSAGES
-        || (channel.accessPermissions & PermissionsBits.MANAGE_CHANNELS) === PermissionsBits.MANAGE_CHANNELS)
-        isSlowmode = false;
-
-    // Not slowmode or splitInSlowmode is on and less than slowmodeMax
-    if (!isSlowmode || (settings.store.splitInSlowmode && channel.rateLimitPerUser < settings.store.slowmodeMax)) {
-        const chunks: string[] = [];
-        const { hardSplit } = settings.store;
-        while (msg.content.length > maxLength) {
-            msg.content = msg.content.trim();
-
-            // Get last space or newline
-            const splitIndex = Math.max(msg.content.lastIndexOf(" ", maxLength), msg.content.lastIndexOf("\n", maxLength));
-
-            // If hard split is on or neither newline or space found, split at maxLength
-            if (hardSplit || splitIndex === -1) {
-                chunks.push(msg.content.slice(0, maxLength));
-                msg.content = msg.content.slice(maxLength);
-            } else {
-                chunks.push(msg.content.slice(0, splitIndex));
-                msg.content = msg.content.slice(splitIndex);
-            }
-        }
-
-        ComponentDispatch.dispatchToLastSubscribed("CLEAR_TEXT");
-        await split(channelId, [...chunks, msg.content], settings.store.sendDelay * 1000);
-    }
-    return { cancel: true };
-};
+const MESSAGE_LIMIT = 2000;
+const NITRO_MESSAGE_LIMIT = 4000;
+const SLOWMODE_BUFFER_MS = 250;
+const logger = new Logger("SplitLargeMessages");
+const splitModes = new Set<SplitMode>(["characters", "spaces", "newlines"]);
 
 const settings = definePluginSettings({
-    maxLength: {
-        label: () => t(plugin.splitLargeMessages.option.maxLength.label),
-        description: () => t(plugin.splitLargeMessages.option.maxLength.description),
-        type: OptionType.NUMBER,
-        default: 0,
-        max: 4000,
-        onChange(newValue) {
-            if (newValue === 0)
-                maxLength = autoMaxLength();
-        },
-    },
-    disableFileConversion: {
-        label: () => t(plugin.splitLargeMessages.option.disableFileConversion.label),
-        description: () => t(plugin.splitLargeMessages.option.disableFileConversion.description),
-        type: OptionType.BOOLEAN,
-        default: true,
-    },
+
     sendDelay: {
         label: () => t(plugin.splitLargeMessages.option.sendDelay.label),
         description: () => t(plugin.splitLargeMessages.option.sendDelay.description),
         type: OptionType.SLIDER,
+        markers: makeRange(0.5, 10, 0.5),
         default: 1,
-        markers: [1, 2, 3, 5, 10],
+        stickToMarkers: true,
     },
-    hardSplit: {
-        label: () => t(plugin.splitLargeMessages.option.hardSplit.label),
-        description: () => t(plugin.splitLargeMessages.option.hardSplit.description),
-        type: OptionType.BOOLEAN,
-        default: false,
+    splitMode: {
+        label: () => t(plugin.splitLargeMessages.option.splitMode.label),
+        type: OptionType.SELECT,
+        description: () => t(plugin.splitLargeMessages.option.splitMode.description),
+        options: [
+            { value: "newlines", label: t(plugin.splitLargeMessages.text.newlines), default: true },
+            { value: "spaces", label: t(plugin.splitLargeMessages.text.spaces) },
+            { value: "characters", label: t(plugin.splitLargeMessages.text.strictCharacterLimit) },
+        ],
     },
     splitInSlowmode: {
         label: () => t(plugin.splitLargeMessages.option.splitInSlowmode.label),
         description: () => t(plugin.splitLargeMessages.option.splitInSlowmode.description),
         type: OptionType.BOOLEAN,
+        default: false,
     },
     slowmodeMax: {
+        type: OptionType.SLIDER,
         label: () => t(plugin.splitLargeMessages.option.slowmodeMax.label),
         description: () => t(plugin.splitLargeMessages.option.slowmodeMax.description),
-        type: OptionType.NUMBER,
+        markers: makeRange(1, 30, 1),
         default: 5,
-        min: 1,
-        max: 30,
-    }
+        stickToMarkers: true,
+    },
 });
+
+function getMessageLimit() {
+    return UserStore.getCurrentUser()?.premiumType === 2 ? NITRO_MESSAGE_LIMIT : MESSAGE_LIMIT;
+}
+
+function getSplitMode(value: unknown): SplitMode {
+    return typeof value === "string" && splitModes.has(value as SplitMode)
+        ? value as SplitMode
+        : "newlines";
+}
+
+function canBypassSlowmode(channel: Channel) {
+    return PermissionStore.can(PermissionsBits.MANAGE_MESSAGES, channel)
+        || PermissionStore.can(PermissionsBits.MANAGE_CHANNELS, channel);
+}
+
+function getSendDelay(channel: Channel) {
+    const configuredDelay = settings.store.sendDelay * 1000;
+    const slowmodeDelay = channel.rateLimitPerUser * 1000;
+
+    return canBypassSlowmode(channel)
+        ? configuredDelay
+        : Math.max(configuredDelay, slowmodeDelay + SLOWMODE_BUFFER_MS);
+}
+
+function canSplitInChannel(channel: Channel | undefined) {
+    if (!channel) return false;
+    if (!channel.rateLimitPerUser || canBypassSlowmode(channel)) return true;
+
+    return settings.store.splitInSlowmode
+        && channel.rateLimitPerUser <= settings.store.slowmodeMax;
+}
+
+async function sendChunks(channelId: string, chunks: string[], delay: number) {
+    let sent = 0;
+
+    try {
+        for (const [index, chunk] of chunks.entries()) {
+            await sendMessage(channelId, { content: chunk }, true);
+            sent++;
+
+            if (index < chunks.length - 1) await sleep(delay);
+        }
+    } catch (error) {
+        logger.error(`Failed after sending ${sent}/${chunks.length} message parts.`, error);
+        return sent;
+    }
+
+    return sent;
+}
+
+function restoreUnsentContent(channelId: string, chunks: string[], sent: number) {
+    const unsentContent = chunks.slice(sent).join("");
+    if (!unsentContent) return;
+
+    if (getCurrentChannel()?.id === channelId) {
+        insertTextIntoChatInputBox(unsentContent);
+    } else {
+        copyWithToast(unsentContent, t(plugin.splitLargeMessages.toast.unsentCopied));
+    }
+}
+
+const listener: MessageSendListener = async (channelId, message) => {
+    const limit = getMessageLimit();
+    if (message.content.length <= limit) return;
+
+    const channel = ChannelStore.getChannel(channelId);
+    if (!canSplitInChannel(channel)) {
+        showToast({ text: t(plugin.splitLargeMessages.toast.cannotSplitThisMessage), variant: "critical" });
+        return { cancel: true };
+    }
+
+    const chunks = splitMessage(message.content, limit, getSplitMode(settings.store.splitMode));
+    ComponentDispatch.dispatchToLastSubscribed("CLEAR_TEXT");
+
+    const sent = await sendChunks(channelId, chunks, getSendDelay(channel));
+    if (sent !== chunks.length) {
+        restoreUnsentContent(channelId, chunks, sent);
+        showToast({ text: t(plugin.splitLargeMessages.toast.onlySentLengthMessage, { sent, length: chunks.length }), variant: "critical" });
+    }
+
+    return { cancel: true };
+};
 
 export default definePlugin({
     name: "SplitLargeMessages",
     description: () => t(plugin.splitLargeMessages.description),
-    authors: [PcDevs.Reycko],
-    tags: ["chat", "utility"],
     dependencies: ["MessageEventsAPI"],
+    tags: ["chat", "utility"],
+    authors: [PcDevs.Reycko, PcDevs.justjxke],
     settings,
-
-    start() {
-        if (settings.store.maxLength === 0) maxLength = autoMaxLength();
-        addMessagePreSendListener(listener);
-    },
-
-    stop() {
-        removeMessagePreSendListener(listener);
-    },
 
     patches: [
         {
@@ -144,15 +157,14 @@ export default definePlugin({
             replacement: {
                 match: /if\(\i.length>\i/,
                 replace: "if(false",
-            }
+            },
         },
-
         {
             find: ".onHideAutocomplete?", // disable file conversion
             replacement: {
                 match: /(?<=getData\(\i\.type\);)if\(\i.length>\i\)/,
                 replace: "if(false)",
             },
-        }
-    ]
+        },
+    ],
 });

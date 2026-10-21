@@ -24,9 +24,27 @@ import gitRemote from "~git-remote";
 
 import { serializeErrors } from "./common";
 
-if (!IS_UPDATER_DISABLED) {
-    require(IS_STANDALONE ? "./http" : "./git");
-} else {
-    ipcMain.handle(IpcEvents.GET_REPO, serializeErrors(() => `https://github.com/${gitRemote}`));
-    ipcMain.handle(IpcEvents.GET_UPDATES, serializeErrors(() => []));
+export type UpdateData = Record<"hash" | "message" | "author", string>;
+
+export interface Updater {
+    getRepo(): Promise<string>;
+    listUpdates(): Promise<UpdateData[]>;
+    fetchUpdate(): Promise<boolean>;
+    applyUpdate(): Promise<boolean>;
 }
+
+const updater: Updater = IS_UPDATER_DISABLED
+    ? {
+        getRepo: async () => `https://github.com/${gitRemote}`,
+        listUpdates: async () => [],
+        fetchUpdate: async () => false,
+        applyUpdate: async () => false,
+    }
+    : require(IS_STANDALONE ? "./http" : "./git").default;
+
+ipcMain.handle(IpcEvents.UPDATER_GET_REPO, serializeErrors(updater.getRepo));
+ipcMain.handle(IpcEvents.UPDATER_LIST_UPDATES, serializeErrors(updater.listUpdates));
+ipcMain.handle(IpcEvents.UPDATER_FETCH_UPDATE, serializeErrors(updater.fetchUpdate));
+ipcMain.handle(IpcEvents.UPDATER_APPLY_UPDATE, serializeErrors(updater.applyUpdate));
+
+export default updater;

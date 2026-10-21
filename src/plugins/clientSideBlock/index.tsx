@@ -169,16 +169,16 @@ export default definePlugin({
         {
             find: ".NITRO_NOTIFICATION,[",
             replacement: {
-                match: /renderContentOnly:\i}=\i;/,
-                replace: "$&if($self.shouldHideUser(arguments[0].message.author.id, arguments[0].message.channel_id)) return null; "
+                match: /\i\(\)\(\i\.type.{0,40}Message must not be a thread starter message/,
+                replace: "if($self.shouldHideUser(arguments[0].message.author.id, arguments[0].message.channel_id)) return null;$&"
             }
         },
         // friends list (should work with all tabs)
         {
             find: "peopleListItemRef.current.componentWillLeave",
             replacement: {
-                match: /\i}=this.state;/,
-                replace: "$&if($self.shouldHideUser(this.props.user.id)) return null; "
+                match: /return \i===\i\.\i\.FRIEND_ANNIVERSARY/,
+                replace: "if($self.shouldHideUser(this.props.user.id)) return null;$&"
             }
         },
         // member list
@@ -239,8 +239,8 @@ export default definePlugin({
         {
             find: "ACTIVE_NOW_COLUMN)",
             replacement: {
-                match: /(\i\.\i),\{(?=\}\)\])/,
-                replace: '"div",{children:$self.activeNowView($1())'
+                match: /(__invalid_consentCard.{0,40}\()(\i),\{/,
+                replace: '$1"div",{children:$self.activeNowView($2())'
             }
         },
         // mutual friends list in user profile

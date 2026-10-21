@@ -26,8 +26,17 @@ import { definePluginSettings } from "@api/Settings";
 import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
 import { Channel } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
+import { useForceUpdater } from "@utils/react";
 import definePlugin, { IconComponent, OptionType } from "@utils/types";
-import { ChannelStore, FluxDispatcher, Menu, React } from "@webpack/common";
+import { ChannelStore, FluxDispatcher, Menu, MessageStore, React, SelectedChannelStore, useEffect, UserStore } from "@webpack/common";
+
+const rerenderListeners = new Set<() => void>();
+
+function triggerChatToggleRerender() {
+    for (const listener of rerenderListeners) {
+        listener();
+    }
+}
 
 const settings = definePluginSettings({
     enabledGlobally: {
@@ -99,6 +108,24 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: true,
     },
+    alwaysEnableInActiveVoiceChat: {
+        label: () => t(plugin.silentTyping.option.alwaysEnableInActiveVoiceChat.label),
+        description: () => t(plugin.silentTyping.option.alwaysEnableInActiveVoiceChat.description),
+        type: OptionType.BOOLEAN,
+        default: false
+    },
+    temporaryEnableThresholdServers: {
+        label: () => t(plugin.silentTyping.option.temporaryEnableThresholdServers.label),
+        description: () => t(plugin.silentTyping.option.temporaryEnableThresholdServers.description),
+        type: OptionType.NUMBER,
+        default: 0,
+    },
+    temporaryEnableThresholdDirectMessages: {
+        label: () => t(plugin.silentTyping.option.temporaryEnableThresholdDirectMessages.label),
+        description: () => t(plugin.silentTyping.option.temporaryEnableThresholdDirectMessages.description),
+        type: OptionType.NUMBER,
+        default: 0,
+    },
     enabledLocations: {
         label: () => t(plugin.silentTyping.option.enabledLocations.label),
         description: () => t(plugin.silentTyping.option.enabledLocations.description),
@@ -166,19 +193,40 @@ const SilentTypingChatToggle: ChatBarButtonFactory = ({ channel, type }) => {
     } = settings.use([
         "enabledGlobally",
         "chatIcon",
-        "defaultHidden"
+        "defaultHidden",
+        "enabledLocations",
+        "disabledLocations",
+        "alwaysEnableInActiveVoiceChat",
+        "temporaryEnableThresholdServers",
+        "temporaryEnableThresholdDirectMessages"
     ]);
+
+    const forceUpdate = useForceUpdater();
+
+    useEffect(() => {
+        rerenderListeners.add(forceUpdate);
+
+        return () => {
+            rerenderListeners.delete(forceUpdate);
+        };
+    }, []);
 
     const validChat = ["normal", "sidebar"].some(x => type.analyticsName === x);
 
     if (!validChat || !chatIcon) return null;
 
     const effectiveList = getEffectiveList();
-    const enabledLocally = enabledGlobally && checkEnabled(channel);
-    const location = channel.guild_id && effectiveList.includes(channel.guild_id) ? "Guild" : effectiveList.includes(channel.id) ? "Channel" : "Global";
+    const isLocallyDisallowed = isExplicitlyDisallowed(channel);
+    const allowedLocallyImplicitly = isImplicitlyAllowed(channel);
+    const location = channel.guild_id && effectiveList.includes(channel.guild_id) ? t(plugin.silentTyping.text.guild) : effectiveList.includes(channel.id) ? t(plugin.silentTyping.text.channel) : t(plugin.silentTyping.text.global);
 
     const tooltip = enabledGlobally ? (
-        enabledLocally ? t(plugin.silentTyping.tooltip.hidden, { location }) : t(plugin.silentTyping.tooltip.visible, { location })
+        allowedLocallyImplicitly === 1
+            ? t(plugin.silentTyping.tooltip.voiceChannel)
+            : allowedLocallyImplicitly === 2
+                ? t(plugin.silentTyping.tooltip.temporary)
+                : isLocallyDisallowed
+                    ? t(plugin.silentTyping.tooltip.hidden, { location }) : t(plugin.silentTyping.tooltip.visible, { location })
     ) : t(plugin.silentTyping.tooltip.global);
 
     function performAction(action: string): void {
@@ -217,7 +265,7 @@ const SilentTypingChatToggle: ChatBarButtonFactory = ({ channel, type }) => {
                 }
             }}
         >
-            {enabledLocally ? <SilentTypingDisabledIcon /> : <SilentTypingIcon />}
+            {isLocallyDisallowed && !allowedLocallyImplicitly ? <SilentTypingDisabledIcon /> : <SilentTypingIcon />}
         </ChatBarButton>
     );
 };
@@ -240,17 +288,49 @@ function getEffectiveList(): string[] {
     }
 }
 
-function checkEnabled(channel: string | Channel): boolean {
+function isImplicitlyAllowed(channel: string | Channel): number {
+    const resolvedChannel = typeof channel === "string" ? ChannelStore.getChannel(channel) : channel;
+
+    if (!resolvedChannel) {
+        return 0;
+    }
+
+    const connectedVoiceChannelID = SelectedChannelStore.getVoiceChannelId();
+    const guildID = resolvedChannel.guild_id;
+
+    if (settings.store.alwaysEnableInActiveVoiceChat && connectedVoiceChannelID === resolvedChannel.id) {
+        return 1;
+    }
+
+    const addedThreshold = !guildID
+        ? settings.store.temporaryEnableThresholdDirectMessages
+        : settings.store.temporaryEnableThresholdServers;
+
+    if (addedThreshold === 0) {
+        return 0;
+    }
+
+    const lastMessage = MessageStore.getLastEditableMessage(resolvedChannel.id);
+    const messageTimestamp = lastMessage?.timestamp?.getTime?.();
+
+    if (messageTimestamp && Date.now() < messageTimestamp + (addedThreshold * 1000)) {
+        return 2;
+    }
+
+    return 0;
+}
+
+function isExplicitlyDisallowed(channel: string | Channel): boolean {
     if (!settings.store.enabledGlobally) return false;
 
-    const channelId = typeof channel === "string" ? channel : channel.id;
-    const guildId = typeof channel === "string" ? ChannelStore.getChannel(channelId)?.guild_id : channel.guild_id;
+    const channelID = typeof channel === "string" ? channel : channel.id;
+    const guildID = typeof channel === "string" ? ChannelStore.getChannel(channelID)?.guild_id : channel.guild_id;
     const effectiveChannels = getEffectiveList();
 
     if (settings.store.defaultHidden) {
-        return !effectiveChannels.includes(guildId) && !effectiveChannels.includes(channelId);
+        return !effectiveChannels.includes(guildID) && !effectiveChannels.includes(channelID);
     } else {
-        return effectiveChannels.includes(guildId) || effectiveChannels.includes(channelId);
+        return effectiveChannels.includes(guildID) || effectiveChannels.includes(channelID);
     }
 }
 
@@ -276,16 +356,16 @@ const ChatBarContextCheckbox: NavContextMenuPatchCallback = children => {
     const idx = group.findIndex(c => c?.props?.id === "submit-button");
 
     group.splice(idx >= 0 ? idx : 0, 0,
-        <Menu.MenuItem id="pc-silent-typing" label="Silent Typing">
-            <Menu.MenuCheckboxItem id="pc-silent-typing-enabled" label="Enabled" checked={enabledGlobally}
+        <Menu.MenuItem id="pc-silent-typing" label={t(plugin.silentTyping.text.silentTyping)}>
+            <Menu.MenuCheckboxItem id="pc-silent-typing-enabled" label={t(plugin.silentTyping.text.enabled)} checked={enabledGlobally}
                 action={() => settings.store.enabledGlobally = !settings.store.enabledGlobally} />
-            <Menu.MenuCheckboxItem id="pc-silent-typing-chat-bar-indicators" label="Chat Bar Indicators" checked={settings.store.hideChatBoxTypingIndicators}
+            <Menu.MenuCheckboxItem id="pc-silent-typing-chat-bar-indicators" label={t(plugin.silentTyping.text.chatBarIndicators)} checked={settings.store.hideChatBoxTypingIndicators}
                 action={() => settings.store.hideChatBoxTypingIndicators = !settings.store.hideChatBoxTypingIndicators} />
-            <Menu.MenuCheckboxItem id="pc-silent-typing-members-list-indicators" label="Members List Indicators" checked={settings.store.hideMembersListTypingIndicators}
+            <Menu.MenuCheckboxItem id="pc-silent-typing-members-list-indicators" label={t(plugin.silentTyping.text.membersListIndicators)} checked={settings.store.hideMembersListTypingIndicators}
                 action={() => settings.store.hideMembersListTypingIndicators = !settings.store.hideMembersListTypingIndicators} />
-            <Menu.MenuCheckboxItem id="pc-silent-typing-chat-icon" label="Chat Icon" checked={chatIcon}
+            <Menu.MenuCheckboxItem id="pc-silent-typing-chat-icon" label={t(plugin.silentTyping.option.chatIcon.label)} checked={chatIcon}
                 action={() => settings.store.chatIcon = !settings.store.chatIcon} />
-            <Menu.MenuCheckboxItem id="pc-silent-typing-default" label="Default Hidden" checked={defaultHidden}
+            <Menu.MenuCheckboxItem id="pc-silent-typing-default" label={t(plugin.silentTyping.option.defaultHidden.label)} checked={defaultHidden}
                 action={() => settings.store.defaultHidden = !settings.store.defaultHidden} />
         </Menu.MenuItem>
     );
@@ -321,6 +401,44 @@ export default definePlugin({
         render: SilentTypingChatToggle
     },
 
+    flux: {
+        VOICE_STATE_UPDATES({ voiceStates }) {
+            const state = voiceStates?.[0];
+
+            if (!state) {
+                return;
+            }
+
+            if (state.userId !== UserStore.getCurrentUser().id) {
+                return;
+            }
+
+            if (state.channelId === state.oldChannelId) {
+                return;
+            }
+
+            if (settings.store.alwaysEnableInActiveVoiceChat) {
+                triggerChatToggleRerender();
+            }
+        },
+
+        MESSAGE_CREATE({ message }) {
+            if (message.author.id === UserStore.getCurrentUser().id) {
+                const threshold = message.guild_id
+                    ? settings.store.temporaryEnableThresholdServers
+                    : settings.store.temporaryEnableThresholdDirectMessages;
+
+                if (threshold > 0) {
+                    triggerChatToggleRerender();
+
+                    setTimeout(() => {
+                        triggerChatToggleRerender();
+                    }, (threshold * 1000) + 25);
+                }
+            }
+        }
+    },
+
     patches: [
         {
             find: '.dispatch({type:"TYPING_START_LOCAL"',
@@ -338,7 +456,7 @@ export default definePlugin({
                     replace: "const silentTypingShouldHideChatBarTypingIndicators=$self.shouldHideChatBarTypingIndicators();$1"
                 },
                 {
-                    match: /("stop-animation".{0,80}?ref:\i,children:)/,
+                    match: /("stop-animation".{0,150}?ref:\i,children:)/,
                     replace: "$1silentTypingShouldHideChatBarTypingIndicators?[]:"
                 }
             ]
@@ -444,7 +562,10 @@ export default definePlugin({
     }],
 
     async startTyping(channelId: string) {
-        if (checkEnabled(channelId)) return;
+        if (isExplicitlyDisallowed(channelId) && !isImplicitlyAllowed(channelId)) {
+            return;
+        }
+
         FluxDispatcher.dispatch({ type: "TYPING_START_LOCAL", channelId });
     }
 });

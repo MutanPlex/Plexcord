@@ -19,6 +19,7 @@ import { _blacklistBadModules, _initWebpack, factoryListeners, findModuleFactory
 
 export const patches = [] as Patch[];
 
+export const SYM_ORIGINAL_MODULE_FACTORIES = Symbol("WebpackPatcher.originalModuleFactories");
 export const SYM_IS_PROXIED_FACTORY = Symbol("WebpackPatcher.isProxiedFactory");
 export const SYM_ORIGINAL_FACTORY = Symbol("WebpackPatcher.originalFactory");
 export const SYM_PATCHED_SOURCE = Symbol("WebpackPatcher.patchedSource");
@@ -38,7 +39,7 @@ export const getBuildNumber = makeLazy(() => {
             return Number(buildNumberMatch[1]);
         }
 
-        const hardcodedFactoryStr = String(wreq.m[446023]);
+        const hardcodedFactoryStr = String(wreq.m[927815]);
         if (hardcodedFactoryStr.includes("Trying to open a changelog for an invalid build number")) {
             const hardcodedBuildNumber = matchBuildNumber(hardcodedFactoryStr);
 
@@ -113,7 +114,7 @@ define(Function.prototype, "m", {
         // Currently, sentry and libdiscore Webpack instances are not meant to be patched.
         // As an extra measure, take advatange of the fact their files include the names and return early if it's one of them.
         // Later down we also include other measures to avoid patching them.
-        if (["sentry", "libdiscore"].some(name => fileName?.toLowerCase()?.includes(name))) {
+        if (["sentry", "libdiscore", "fast-connect"].some(name => fileName?.toLowerCase()?.includes(name))) {
             return;
         }
 
@@ -130,7 +131,7 @@ define(Function.prototype, "m", {
                 // libdiscore init Webpack instance always returns a constant string for the js filename of a chunk.
                 // In that case, avoid patching this instance,
                 // as it runs before the main Webpack instance and will make the WebpackRequire fallback not work properly, or init an wrongful main WebpackRequire.
-                if (bundlePath !== "/assets/" || /(?:=>|{return)"[^"]/.exec(String(this.u))) {
+                if (bundlePath !== "/assets/" || /(?:=>|{return)"[^"]+?"[^=]/.exec(String(this.u))) {
                     return;
                 }
 
@@ -187,7 +188,7 @@ define(Function.prototype, "m", {
 
             // Proxy (and maybe patch) pre-populated factories
             for (const moduleId in originalModules) {
-                updateExistingOrProxyFactory(originalModules, moduleId, originalModules[moduleId], originalModules, true);
+                proxyFactoryAndUpdateExisting(originalModules, moduleId, originalModules[moduleId], originalModules, true);
             }
 
             define(originalModules, Symbol.toStringTag, {
@@ -237,20 +238,30 @@ const moduleFactoriesHandler: ProxyHandler<AnyWebpackRequire["m"]> = {
     },
     */
 
-    set: updateExistingOrProxyFactory
+    get(target, p, receiver) {
+        if (p === SYM_ORIGINAL_MODULE_FACTORIES) {
+            return target;
+        }
+
+        return Reflect.get(target, p, receiver);
+    },
+
+    set: proxyFactoryAndUpdateExisting
 };
 
 // The proxy for patching lazily and/or running factories with our wrapper.
 const moduleFactoryHandler: ProxyHandler<MaybePatchedModuleFactory> = {
     apply(target, thisArg: unknown, argArray: Parameters<AnyModuleFactory>) {
-        // SYM_ORIGINAL_FACTORY means the factory has already been patched
+        // If SYM_ORIGINAL_FACTORY exists in the proxy target, it means the proxy target is already a patched factory.
+        // In that case, just run it.
         if (target[SYM_ORIGINAL_FACTORY] != null) {
             return runFactoryWithWrap(target as PatchedModuleFactory, thisArg, argArray);
         }
 
-        // SAFETY: Factories have `name` as their key in the module factories object, and that is always their module id
+        // SAFETY: Factories have `name` as their key in the module factories object, and that is always their module id.
         const moduleId: string = target.name;
 
+        // Patch the proxy target, which is the original factory.
         const patchedFactory = patchFactory(moduleId, target);
         return runFactoryWithWrap(patchedFactory, thisArg, argArray);
     },
@@ -260,6 +271,7 @@ const moduleFactoryHandler: ProxyHandler<MaybePatchedModuleFactory> = {
             return true;
         }
 
+        // If the proxy target is a patched factory, SYM_ORIGINAL_FACTORY will have the original factory. Otherwise the target itself will be it.
         const originalFactory: AnyModuleFactory = target[SYM_ORIGINAL_FACTORY] ?? target;
 
         // Redirect these properties to the original factory, including making `toString` return the original factory `toString`
@@ -272,62 +284,55 @@ const moduleFactoryHandler: ProxyHandler<MaybePatchedModuleFactory> = {
     }
 };
 
-function updateExistingOrProxyFactory(moduleFactories: AnyWebpackRequire["m"], moduleId: PropertyKey, newFactory: AnyModuleFactory, receiver: any, ignoreExistingInTarget = false) {
-    if (updateExistingFactory(moduleFactories, moduleId, newFactory, receiver, ignoreExistingInTarget)) {
+function proxyFactoryAndUpdateExisting(moduleFactories: AnyWebpackRequire["m"], moduleId: PropertyKey, newFactory: AnyModuleFactory, receiver: any, ignoreExistingInTarget = false) {
+    notifyFactoryListeners(moduleId, newFactory);
+    const proxiedFactory = new Proxy(Settings.eagerPatches ? patchFactory(moduleId, newFactory) : newFactory, moduleFactoryHandler);
+
+    if (updateExistingFactory(moduleFactories, moduleId, newFactory, proxiedFactory, ignoreExistingInTarget)) {
         return true;
     }
 
-    notifyFactoryListeners(moduleId, newFactory);
-
-    const proxiedFactory = new Proxy(Settings.eagerPatches ? patchFactory(moduleId, newFactory) : newFactory, moduleFactoryHandler);
     return Reflect.set(moduleFactories, moduleId, proxiedFactory, receiver);
 }
 
 /**
- * Update a duplicated factory that exists in any of the Webpack instances we track with a new original factory.
+ * Update a duplicated factory that exists in any of the Webpack instances we track with a new original and proxied factory.
  *
  * @param moduleFactories The module factories where this new original factory is being set
  * @param moduleId The id of the module
  * @param newFactory The new original factory
+ * @param newProxiedFactory The new original and proxied factory
  * @param receiver The receiver of the factory
  * @param ignoreExistingInTarget Whether to ignore checking if the factory already exists in the moduleFactories where it is being set
  * @returns Whether the original factory was updated, or false if it doesn't exist in any of the tracked Webpack instances
  */
-function updateExistingFactory(moduleFactories: AnyWebpackRequire["m"], moduleId: PropertyKey, newFactory: AnyModuleFactory, receiver: any, ignoreExistingInTarget) {
+function updateExistingFactory(moduleFactories: AnyWebpackRequire["m"], moduleId: PropertyKey, newFactory: AnyModuleFactory, newProxiedFactory: AnyModuleFactory, ignoreExistingInTarget: boolean) {
     let existingFactory: AnyModuleFactory | undefined;
-    let moduleFactoriesWithFactory: AnyWebpackRequire["m"] | undefined;
     for (const wreq of allWebpackInstances) {
-        if (ignoreExistingInTarget && wreq.m === moduleFactories) {
+        const instanceModuleFactories = wreq.m[SYM_ORIGINAL_MODULE_FACTORIES] ?? wreq.m;
+
+        if (ignoreExistingInTarget && instanceModuleFactories === moduleFactories) {
             continue;
         }
 
         if (Object.hasOwn(wreq.m, moduleId)) {
-            existingFactory = wreq.m[moduleId];
-            moduleFactoriesWithFactory = wreq.m;
+            existingFactory = wreq.m[moduleId]; // Must use wreq.m here instead of instanceModuleFactories to use our proxy in case the module factories are already proxied.
             break;
         }
     }
 
     if (existingFactory != null) {
-        // If existingFactory exists in any of the Webpack instances we track, it's either wrapped in our proxy, or it has already been required.
-        // In the case it is wrapped in our proxy, and the instance we are setting does not already have it, we need to make sure the instance contains our proxy too.
-        if (moduleFactoriesWithFactory !== moduleFactories && existingFactory[SYM_IS_PROXIED_FACTORY]) {
-            Reflect.set(moduleFactories, moduleId, existingFactory, receiver);
-        }
-        // Else, if it is not wrapped in our proxy, set this new original factory in all the instances
-        else {
-            defineInWebpackInstances(moduleId, newFactory);
-        }
-
-        // Update existingFactory with the new original, if it does have a current original factory
+        // SYM_ORIGINAL_FACTORY means the factory has already been patched. In this case, only update existingFactory original factory to the new one.
         if (existingFactory[SYM_ORIGINAL_FACTORY] != null) {
             existingFactory[SYM_ORIGINAL_FACTORY] = newFactory;
-        }
 
-        // Persist patched source and patched by in the new original factory
-        if (IS_DEV) {
-            newFactory[SYM_PATCHED_SOURCE] = existingFactory[SYM_PATCHED_SOURCE];
-            newFactory[SYM_PATCHED_BY] = existingFactory[SYM_PATCHED_BY];
+            // Persist patched source and patched by in the new original factory
+            if (IS_DEV) {
+                newFactory[SYM_PATCHED_SOURCE] = existingFactory[SYM_PATCHED_SOURCE];
+                newFactory[SYM_PATCHED_BY] = existingFactory[SYM_PATCHED_BY];
+            }
+        } else {
+            defineInWebpackInstances(moduleId, newProxiedFactory);
         }
 
         return true;
@@ -503,8 +508,8 @@ function patchFactory(moduleId: PropertyKey, originalFactory: AnyModuleFactory):
     const isArrowFunction = originalFactoryCode.startsWith("(");
 
     // 0, prefix to turn it into an expression: 0,function(){} would be invalid syntax without the 0,
-    let code = "0," + (!isArrowFunction ? "function" : "") + originalFactoryCode.slice(originalFactoryCode.indexOf("("));
-    let patchedSource = code;
+    let patchedCode = "0," + (!isArrowFunction ? "function" : "") + originalFactoryCode.slice(originalFactoryCode.indexOf("("));
+    let patchedSource = patchedCode;
     let patchedFactory = originalFactory;
 
     const patchedBy = new Set<string>();
@@ -517,58 +522,59 @@ function patchFactory(moduleId: PropertyKey, originalFactory: AnyModuleFactory):
 
         if (
             shouldCheckBuildNumber &&
-            (patch.fromBuild != null && buildNumber < patch.fromBuild) ||
-            (patch.toBuild != null && buildNumber > patch.toBuild)
+            ((patch.fromBuild != null && buildNumber < patch.fromBuild) || (patch.toBuild != null && buildNumber > patch.toBuild))
         ) {
             patches.splice(i--, 1);
             continue;
         }
 
         const moduleMatches = typeof patch.find === "string"
-            ? code.includes(patch.find)
-            : (patch.find.global && (patch.find.lastIndex = 0), patch.find.test(code));
+            ? originalFactoryCode.includes(patch.find)
+            : (patch.find.global && (patch.find.lastIndex = 0), patch.find.test(originalFactoryCode));
 
         if (!moduleMatches) {
             continue;
         }
+
+        // Save the result from the previous patch so we can restore it in case a patch group fails.
+        const previousPatchedCode = patchedCode;
+        const previousPatchedSource = patchedSource;
+        const previousPatchedFactory = patchedFactory;
+
+        let shouldRestorePrevious = false;
+        let markedAsPatched = false;
 
         const executePatch = traceFunctionWithResults(`patch by ${patch.plugin}`, (match: string | RegExp, replace: string) => {
             if (typeof match !== "string" && match.global) {
                 match.lastIndex = 0;
             }
 
-            return code.replace(match, replace);
+            return patchedCode.replace(match, replace);
         });
-
-        const previousCode = code;
-        const previousFactory = originalFactory;
-        let markedAsPatched = false;
 
         // We change all patch.replacement to array in PluginManager
         for (const replacement of patch.replacement as PatchReplacement[]) {
             if (
                 shouldCheckBuildNumber &&
-                (replacement.fromBuild != null && buildNumber < replacement.fromBuild) ||
-                (replacement.toBuild != null && buildNumber > replacement.toBuild)
+                ((replacement.fromBuild != null && buildNumber < replacement.fromBuild) || (replacement.toBuild != null && buildNumber > replacement.toBuild))
             ) {
                 continue;
             }
 
-            const lastCode = code;
-            const lastFactory = originalFactory;
-
+            let newPatchedCode: string = "";
             try {
-                const [newCode, totalTime] = executePatch(replacement.match, replacement.replace as string);
+                const [patchResult, totalTime] = executePatch(replacement.match, replacement.replace as string);
+                newPatchedCode = patchResult;
 
                 if (IS_REPORTER) {
                     patchTimings.push([patch.plugin, moduleId, replacement.match, totalTime]);
                 }
 
-                if (newCode === code) {
+                if (newPatchedCode === patchedCode) {
                     if (!(patch.noWarn || replacement.noWarn)) {
                         logger.warn(`Patch by ${patch.plugin} had no effect (Module id is ${String(moduleId)}): ${replacement.match}`);
                         if (IS_DEV) {
-                            logger.debug("Function Source:\n", code);
+                            logger.debug("Function Source:\n", patchedCode);
                         }
                         if (IS_COMPANION_TEST)
                             reporterData.failedPatches.hadNoEffect.push({
@@ -579,8 +585,6 @@ function patchFactory(moduleId: PropertyKey, originalFactory: AnyModuleFactory):
 
                     if (patch.group) {
                         logger.warn(`Undoing patch group ${patch.find} by ${patch.plugin} because replacement ${replacement.match} had no effect`);
-                        code = previousCode;
-                        patchedFactory = previousFactory;
 
                         if (markedAsPatched) {
                             patchedBy.delete(patch.plugin);
@@ -592,6 +596,7 @@ function patchFactory(moduleId: PropertyKey, originalFactory: AnyModuleFactory):
                                 id: moduleId
                             });
 
+                        shouldRestorePrevious = true;
                         break;
                     }
 
@@ -603,14 +608,17 @@ function patchFactory(moduleId: PropertyKey, originalFactory: AnyModuleFactory):
                     pluginsList.push(patch.plugin);
                 }
 
-                code = newCode;
-                patchedSource = `// Webpack Module ${String(moduleId)} - Patched by ${pluginsList.join(", ")}\n${code}\n//# sourceURL=file:///WebpackModule${String(moduleId)}`;
-                patchedFactory = (0, eval)(patchedSource);
+                const newPatchedSource = `// Webpack Module ${String(moduleId)} - Patched by ${pluginsList.join(", ")}\n${newPatchedCode}\n//# sourceURL=file:///WebpackModule${String(moduleId)}`;
+                const newPatchedFactory = (0, eval)(newPatchedSource);
 
                 if (!patchedBy.has(patch.plugin)) {
                     patchedBy.add(patch.plugin);
                     markedAsPatched = true;
                 }
+
+                patchedCode = newPatchedCode;
+                patchedSource = newPatchedSource;
+                patchedFactory = newPatchedFactory;
             } catch (err) {
                 // FIXME: Maybe fix this properly
                 const shouldSuppressError = patch.plugin === "ContextMenuAPI" && err instanceof SyntaxError && err.message.includes("arguments");
@@ -620,18 +628,14 @@ function patchFactory(moduleId: PropertyKey, originalFactory: AnyModuleFactory):
                     if (IS_COMPANION_TEST)
                         reporterData.failedPatches.erroredPatch.push({
                             ...patch,
-                            oldModule: lastCode,
-                            newModule: code,
+                            oldModule: patchedCode,
+                            newModule: newPatchedCode,
                             id: moduleId
                         });
 
                     if (IS_DEV) {
-                        diffErroredPatch(code, lastCode, lastCode.match(replacement.match)!);
+                        diffErroredPatch(newPatchedCode, patchedCode, patchedCode.match(replacement.match)!);
                     }
-                }
-
-                if (markedAsPatched) {
-                    patchedBy.delete(patch.plugin);
                 }
 
                 if (patch.group) {
@@ -641,13 +645,19 @@ function patchFactory(moduleId: PropertyKey, originalFactory: AnyModuleFactory):
                             ...patch,
                             id: moduleId
                         });
-                    code = previousCode;
-                    patchedFactory = previousFactory;
+                    shouldRestorePrevious = true;
                     break;
                 }
+            }
+        }
 
-                code = lastCode;
-                patchedFactory = lastFactory;
+        if (shouldRestorePrevious) {
+            patchedCode = previousPatchedCode;
+            patchedSource = previousPatchedSource;
+            patchedFactory = previousPatchedFactory;
+
+            if (markedAsPatched) {
+                patchedBy.delete(patch.plugin);
             }
         }
 
@@ -669,9 +679,12 @@ function patchFactory(moduleId: PropertyKey, originalFactory: AnyModuleFactory):
 function diffErroredPatch(code: string, lastCode: string, match: RegExpMatchArray) {
     const changeSize = code.length - lastCode.length;
 
+    const matchIndex = match?.index ?? 0;
+    const matchLength = match?.[0]?.length ?? 0;
+
     // Use 200 surrounding characters of context
-    const start = Math.max(0, match.index! - 200);
-    const end = Math.min(lastCode.length, match.index! + match[0].length + 200);
+    const start = Math.max(0, matchIndex - 200);
+    const end = Math.min(lastCode.length, matchIndex + matchLength + 200);
     // (changeSize may be negative)
     const endPatched = end + changeSize;
 

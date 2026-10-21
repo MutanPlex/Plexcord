@@ -16,7 +16,6 @@ import { JSX } from "react";
 
 export function showAllActivitiesComponent({ activity, user, ...props }: Readonly<AllActivitiesProps>): JSX.Element | null {
     const currentUser = UserStore.getCurrentUser();
-    if (!currentUser) return null;
 
     const [currentActivity, setCurrentActivity] = useState<Activity | null>(
         activity?.type !== 4 ? activity! : null
@@ -24,7 +23,7 @@ export function showAllActivitiesComponent({ activity, user, ...props }: Readonl
 
     const activities = useStateFromStores(
         [PresenceStore],
-        () => PresenceStore.getActivities(user.id).filter((activity: Activity) => activity.type !== 4)
+        () => PresenceStore.getActivities(user.id).filter((activity: Activity) => activity != null && activity.type !== 4)
     );
 
     useEffect(() => {
@@ -33,8 +32,12 @@ export function showAllActivitiesComponent({ activity, user, ...props }: Readonl
             return;
         }
 
-        if (!currentActivity || !activities.includes(currentActivity))
+        const existing = currentActivity && activities.find(a => a.id === currentActivity.id);
+        if (!existing) {
             setCurrentActivity(activities[0]);
+        } else if (existing !== currentActivity) {
+            setCurrentActivity(existing);
+        }
     }, [activities]);
 
     // we use these for other activities, it would be better to somehow get the corresponding activity props
@@ -44,9 +47,10 @@ export function showAllActivitiesComponent({ activity, user, ...props }: Readonl
         return acc;
     }, {}), [props]);
 
-    if (!activities.length) return null;
+    if (!currentUser || !activities.length) return null;
 
     if (settings.store.allActivitiesStyle === "carousel") {
+        if (!currentActivity) return null;
         return (
             <ErrorBoundary noop>
                 <div style={{ display: "flex", flexDirection: "column" }}>

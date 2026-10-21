@@ -18,8 +18,6 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { isPluginEnabled } from "@api/PluginManager";
-import betterGifPicker from "@plugins/betterGifPicker";
 import { Devs, PcDevs } from "@utils/constants";
 import { insertTextIntoChatInputBox } from "@utils/discord";
 import definePlugin from "@utils/types";
@@ -34,18 +32,15 @@ export default definePlugin({
     patches: [{
         find: "handleSelectGIF=",
         replacement: {
-            match: /handleSelectGIF=(\i)=>\{/,
-            replace: "$&if (!this.props.className) return $self.handleSelect($1);"
+            match: /handleSelectGIF=\((\i),\i\)=>\{/,
+            replace: "$&if (!this?.props?.className) return $self.handleSelect($1);"
         }
     }],
 
     handleSelect(gif?: { url: string; }) {
         if (gif) {
             insertTextIntoChatInputBox(gif.url + " ");
-
-            if (!(isPluginEnabled(betterGifPicker.name) && betterGifPicker.settings.store.keepOpen)) {
-                ExpressionPickerStore.closeExpressionPicker();
-            }
+            ExpressionPickerStore.closeExpressionPicker();
         }
     }
 });

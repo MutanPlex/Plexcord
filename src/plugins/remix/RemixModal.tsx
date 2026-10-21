@@ -6,9 +6,8 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
-import { Button } from "@components/Button";
-import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
+import { RenderModalProps } from "@plexcord/discord-types";
+import { Modal } from "@webpack/common";
 
 import { sendRemix } from ".";
 import { brushCanvas, canvas, cropCanvas, ctx, exportImg, shapeCanvas } from "./editor/components/Canvas";
@@ -17,7 +16,7 @@ import { resetBounds } from "./editor/tools/crop";
 import { SendIcon } from "./icons/SendIcon";
 
 type Props = {
-    modalProps: ModalProps;
+    modalProps: RenderModalProps;
     close: () => void;
     url?: string;
 };
@@ -40,18 +39,28 @@ async function closeModal(closeFunc: () => void, save?: boolean) {
 
 export default function RemixModal({ modalProps, close, url }: Props) {
     return (
-        <ModalRoot {...modalProps} size={ModalSize.LARGE}>
-            <ModalHeader>
-                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t(plugin.remix.label)}</BaseText>
-                <ModalCloseButton onClick={() => closeModal(close)} />
-            </ModalHeader>
-            <ModalContent>
-                <Editor url={url} />
-            </ModalContent>
-            <ModalFooter className="pc-remix-modal-footer">
-                <Button onClick={() => closeModal(close, true)} className="pc-remix-send"><SendIcon /> {t(plugin.remix.button.send)}</Button>
-                <Button onClick={() => closeModal(close)} variant="dangerPrimary">{t(plugin.remix.button.close)}</Button>
-            </ModalFooter>
-        </ModalRoot>
+        <Modal
+            {...modalProps}
+            size="lg"
+            title={t(plugin.remix.label)}
+            actions={[
+                {
+                    text: (
+                        <span style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                            <SendIcon /> {t(plugin.remix.button.send)}
+                        </span>
+                    ) as any,
+                    variant: "primary",
+                    onClick: () => closeModal(close, true)
+                },
+                {
+                    text: t(plugin.remix.button.close),
+                    variant: "critical-primary",
+                    onClick: () => closeModal(close)
+                }
+            ]}
+        >
+            <Editor url={url} />
+        </Modal>
     );
 }

@@ -1,0 +1,60 @@
+.pc-message-popover-slot {
+    inset-inline-start: 0;
+}
+
+.pc-message-popover {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.pc-message-popover .pc-message-popover-bar {
+    display: flex;
+    max-width: 100%;
+}
+
+.pc-popover-overflow {
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    container-type: scroll-state;
+}
+
+.pc-popover-overflow::-webkit-scrollbar {
+    display: none;
+}
+
+.pc-popover-overflow-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+}
+
+.pc-popover-overflow .pc-popover-overflow-arrow {
+    display: none;
+    position: sticky;
+    z-index: 1;
+    width: 24px;
+    background: var(--background-surface-high);
+}
+
+.pc-popover-overflow .pc-popover-overflow-arrow-left {
+    left: 0;
+    margin-inline-end: -24px;
+}
+
+.pc-popover-overflow .pc-popover-overflow-arrow-right {
+    right: 0;
+    margin-inline-start: -24px;
+}
+
+@container scroll-state(scrollable: left) {
+    .pc-popover-overflow .pc-popover-overflow-arrow-left {
+        display: flex;
+    }
+}
+
+@container scroll-state(scrollable: right) {
+    .pc-popover-overflow .pc-popover-overflow-arrow-right {
+        display: flex;
+    }
+}

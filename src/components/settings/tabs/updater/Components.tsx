@@ -16,7 +16,7 @@ import { Span } from "@components/Span";
 import { Margins } from "@utils/margins";
 import { relaunch } from "@utils/native";
 import { changes, checkForUpdates, update, updateError } from "@utils/updater";
-import { Alerts, React, Toasts, useState } from "@webpack/common";
+import { ConfirmModal, openModal, React, showToast, useState } from "@webpack/common";
 
 import { runWithDispatch } from "./runWithDispatch";
 
@@ -93,13 +93,9 @@ export function Updatable(props: CommonProps) {
                         } else {
                             setUpdates([]);
 
-                            Toasts.show({
-                                message: t(updater.successful.noFound),
-                                id: Toasts.genId(),
-                                type: Toasts.Type.MESSAGE,
-                                options: {
-                                    position: Toasts.Position.BOTTOM
-                                }
+                            showToast({
+                                text: t(updater.successful.noFound),
+                                position: "bottom"
                             });
                         }
                     })}
@@ -116,17 +112,21 @@ export function Updatable(props: CommonProps) {
                                 setUpdates([]);
 
                                 await new Promise<void>(r => {
-                                    Alerts.show({
-                                        title: t(updater.successful.title),
-                                        body: t(updater.successful.body),
-                                        confirmText: t(updater.successful.button.confirm),
-                                        cancelText: t(updater.successful.button.cancel),
-                                        onConfirm() {
-                                            relaunch();
-                                            r();
-                                        },
-                                        onCancel: r
-                                    });
+                                    openModal(props => (
+                                        <ConfirmModal
+                                            {...props}
+                                            title={t(updater.successful.title)}
+                                            subtitle={t(updater.successful.body)}
+                                            confirmText={t(updater.successful.button.confirm)}
+                                            cancelText={t(updater.successful.button.cancel)}
+                                            variant="primary"
+                                            onConfirm={() => {
+                                                relaunch();
+                                                r();
+                                            }}
+                                            onCancel={r}
+                                        />
+                                    ));
                                 });
                             }
                         })}

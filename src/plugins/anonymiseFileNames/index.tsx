@@ -34,6 +34,7 @@ const enum Methods {
     Random,
     Consistent,
     Timestamp,
+    Date
 }
 
 const ANONYMISE_UPLOAD_SYMBOL = Symbol("vcAnonymise");
@@ -60,21 +61,36 @@ const settings = definePluginSettings({
             { label: () => t(plugin.anonymiseFileNames.option.method.random), value: Methods.Random, default: true },
             { label: () => t(plugin.anonymiseFileNames.option.method.consistent), value: Methods.Consistent },
             { label: () => t(plugin.anonymiseFileNames.option.method.timestamp), value: Methods.Timestamp },
+            { label: () => t(plugin.anonymiseFileNames.option.method.date), value: Methods.Date },
         ],
     },
     randomisedLength: {
         label: () => t(plugin.anonymiseFileNames.option.randomisedLength.label),
         description: () => t(plugin.anonymiseFileNames.option.randomisedLength.description),
         type: OptionType.NUMBER,
-        default: 7,
-        disabled: () => settings.store.method !== Methods.Random,
+        default: 7
     },
     consistent: {
         label: () => t(plugin.anonymiseFileNames.option.consistent.label),
         description: () => t(plugin.anonymiseFileNames.option.consistent.description),
         type: OptionType.STRING,
-        default: "image",
-        disabled: () => settings.store.method !== Methods.Consistent,
+        default: "image"
+    },
+    dateFormat: {
+        label: () => t(plugin.anonymiseFileNames.option.dateFormat.label),
+        description: () => t(plugin.anonymiseFileNames.option.dateFormat.description),
+        type: OptionType.STRING,
+        default: "YYYY-MM-DD_HH-mm-ss-SSS"
+    }
+}, {
+    randomisedLength: {
+        disabled() { return this.store.method !== Methods.Random; },
+    },
+    consistent: {
+        disabled() { return this.store.method !== Methods.Consistent; },
+    },
+    dateFormat: {
+        disabled() { return this.store.method !== Methods.Date; },
     },
 });
 
@@ -152,6 +168,18 @@ export default definePlugin({
                     return addSpoilerPrefix(settings.store.consistent + ext);
                 case Methods.Timestamp:
                     return addSpoilerPrefix(Date.now().toString() + ext);
+                case Methods.Date:
+                    const now = new Date();
+                    const format = settings.store.dateFormat
+                        .replace(/YYYY/g, now.getFullYear().toString())
+                        .replace(/MM/g, (now.getMonth() + 1).toString().padStart(2, "0"))
+                        .replace(/DD/g, now.getDate().toString().padStart(2, "0"))
+                        .replace(/HH/g, now.getHours().toString().padStart(2, "0"))
+                        .replace(/mm/g, now.getMinutes().toString().padStart(2, "0"))
+                        .replace(/ss/g, now.getSeconds().toString().padStart(2, "0"))
+                        .replace(/SSS/g, now.getMilliseconds().toString().padStart(3, "0"));
+
+                    return format ? addSpoilerPrefix(format + ext) : addSpoilerPrefix(Date.now().toString() + ext);
             }
         })();
 

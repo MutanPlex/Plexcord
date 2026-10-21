@@ -13,9 +13,8 @@ import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { IS_MAC, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
-import { closeModal, openModal } from "@utils/modal";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
-import { ChannelRouter, ChannelStore, IconUtils, React, RelationshipStore, SelectedChannelStore, Toasts, UserStore } from "@webpack/common";
+import { ChannelRouter, ChannelStore, closeModal, IconUtils, openModal, React, RelationshipStore, SelectedChannelStore, showToast, UserStore } from "@webpack/common";
 
 const STORAGE_KEY = "RDMSwitch_history";
 
@@ -87,7 +86,7 @@ const settings = definePluginSettings({
                     cycleSnapshot = [];
                     cycleIndex = -1;
                     await DataStore.set(STORAGE_KEY, []);
-                    Toasts.show({ id: Toasts.genId(), type: Toasts.Type.SUCCESS, message: t(plugin.recentDMSwitcher.option.clearRdms.toast) });
+                    showToast({ text: t(plugin.recentDMSwitcher.option.clearRdms.toast), variant: "success" });
                 }}>
                 {t(plugin.recentDMSwitcher.option.clearRdms.button)}
             </Button>
@@ -95,7 +94,6 @@ const settings = definePluginSettings({
     }
 });
 
-let activeToastId: string | null = null;
 let overlayModalKey: string | null = null;
 let overlayRerender: (() => void) | null = null;
 
@@ -175,7 +173,6 @@ function endCycleSession() {
 
     cycleSnapshot = [];
     cycleIndex = -1;
-    activeToastId = null;
 
     const visEnd = (settings as any).store?.visualStyle;
     if (visEnd === "overlay") unmountOverlay();
@@ -330,12 +327,10 @@ function showCycleToast() {
     const id = cycleSnapshot[cycleIndex];
     if (!id) return;
     const { name } = getDisplayForChannel(id);
-    if (!activeToastId) activeToastId = Toasts.genId();
-    Toasts.show({
-        id: activeToastId,
-        message: t(plugin.recentDMSwitcher.modal.switchingTo, { name }),
-        type: Toasts.Type.MESSAGE,
-        options: { position: Toasts.Position.BOTTOM, duration: settings.store.toastDurationMs }
+    showToast({
+        text: t(plugin.recentDMSwitcher.modal.switchingTo, { name }),
+        position: "bottom",
+        duration: settings.store.toastDurationMs
     });
 }
 
@@ -380,7 +375,6 @@ export default definePlugin({
         suppressRdmsWhileCycling = false;
         cycleSnapshot = [];
         cycleIndex = -1;
-        activeToastId = null;
 
         const visEnd = (settings as any).store?.visualStyle;
         if (visEnd === "overlay") unmountOverlay();

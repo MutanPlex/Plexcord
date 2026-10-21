@@ -13,15 +13,15 @@ import { DataStore } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
+import { PencilIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
 import { Emoji, Message } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { Logger } from "@utils/Logger";
-import { openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
-import { findByPropsLazy, findExportedComponentLazy } from "@webpack";
-import { EmojiStore, Menu, TextInput, Toasts, useEffect, useState } from "@webpack/common";
+import { findByPropsLazy } from "@webpack";
+import { EmojiStore, Menu, openModal, showToast, TextInput, useEffect, useState } from "@webpack/common";
 
 import { ClearAliasesConfirmModal } from "./components/modals/ClearAliasesConfirmModal";
 import { SetAliasModal } from "./components/modals/SetAliasModal";
@@ -101,7 +101,6 @@ interface MessageContextMenuArgs {
 const DATA_KEY = "emoji-aliases";
 const logger = new Logger("EmojiAlias");
 const EmojiQueryService = findByPropsLazy("queryEmojiResults");
-const PencilIcon = findExportedComponentLazy("PencilIcon");
 const cl = classNameFactory("pc-emoji-alias-");
 
 let aliasMap: AliasMap = {};
@@ -153,8 +152,8 @@ function normalizeEmojiNameForCompare(input: string | undefined): string {
 
 function getAliasValidationError(input: string): string | null {
     const normalized = normalizeAlias(input);
-    if (!normalized.length) return "Alias is required.";
-    if (!/^[a-z0-9_]{2,32}$/.test(normalized)) return "Alias must be 2-32 characters and only use lowercase letters, numbers, or underscores.";
+    if (!normalized.length) return t(plugin.favoriteEmojiFirst.text.aliasRequired);
+    if (!/^[a-z0-9_]{2,32}$/.test(normalized)) return t(plugin.favoriteEmojiFirst.text.aliasInvalid);
     return null;
 }
 
@@ -705,18 +704,10 @@ async function removeAlias(alias: string) {
 
     try {
         await persistAliases(nextMap);
-        Toasts.show({
-            id: Toasts.genId(),
-            message: t(plugin.favoriteEmojiFirst.toast.removed, { alias }),
-            type: Toasts.Type.SUCCESS
-        });
+        showToast({ text: t(plugin.favoriteEmojiFirst.toast.removedAliasAlias, { alias }), variant: "success" });
     } catch (error) {
         logger.error("Failed to remove emoji alias.", error);
-        Toasts.show({
-            id: Toasts.genId(),
-            message: t(plugin.favoriteEmojiFirst.toast.failedRemove),
-            type: Toasts.Type.FAILURE
-        });
+        showToast({ text: t(plugin.favoriteEmojiFirst.toast.failedRemove), variant: "critical" });
     }
 }
 
@@ -725,18 +716,10 @@ async function clearAliases() {
 
     try {
         await persistAliases({});
-        Toasts.show({
-            id: Toasts.genId(),
-            message: t(plugin.favoriteEmojiFirst.toast.clearAll),
-            type: Toasts.Type.SUCCESS
-        });
+        showToast({ text: t(plugin.favoriteEmojiFirst.toast.clearAll), variant: "success" });
     } catch (error) {
         logger.error("Failed to clear emoji aliases.", error);
-        Toasts.show({
-            id: Toasts.genId(),
-            message: t(plugin.favoriteEmojiFirst.toast.failedDeleted),
-            type: Toasts.Type.FAILURE
-        });
+        showToast({ text: t(plugin.favoriteEmojiFirst.toast.failedDeleted), variant: "critical" });
     }
 }
 
@@ -755,11 +738,7 @@ function openSetAliasModal(ref: StoredEmojiRef) {
             onSave={async input => {
                 const result = await saveAlias(input, ref);
                 if (!result.ok) return result;
-                Toasts.show({
-                    id: Toasts.genId(),
-                    message: t(plugin.favoriteEmojiFirst.toast.set, { emoji: getEmojiDisplayName(ref) }),
-                    type: Toasts.Type.SUCCESS
-                });
+                showToast({ text: t(plugin.favoriteEmojiFirst.toast.aliasSetForGetemojidisplayname, { getEmojiDisplayName_ref: getEmojiDisplayName(ref) }), variant: "success" });
                 return result;
             }}
         />
@@ -1024,7 +1003,7 @@ function AliasRow({ alias, emojiRef }: { alias: string; emojiRef: StoredEmojiRef
                 >
                     <PencilIcon width={14} height={14} />
                 </Button>
-                <Button variant="dangerSecondary" size="small" onClick={() => removeAlias(alias)}>Remove</Button>
+                <Button variant="dangerSecondary" size="small" onClick={() => removeAlias(alias)}>{t(plugin.favoriteEmojiFirst.text.remove)}</Button>
             </div>
         </div>
     );
@@ -1038,7 +1017,7 @@ function AliasListSetting() {
     const entries = getAliasMapEntries();
 
     if (!entries.length) {
-        return <Paragraph>No aliases set yet.</Paragraph>;
+        return <Paragraph>{t(plugin.favoriteEmojiFirst.text.noAliasesSetYet)}</Paragraph>;
     }
 
     return (
@@ -1059,7 +1038,7 @@ function ClearAllAliasesSetting() {
 
     return (
         <Button variant="dangerPrimary" size="small" disabled={disabled} onClick={openClearAliasesConfirmModal}>
-            Delete all aliases
+            {t(plugin.favoriteEmojiFirst.modal.clear.confirm)}
         </Button>
     );
 }
@@ -1146,7 +1125,7 @@ export default definePlugin({
                     replace: "$1Infinity"
                 },
                 {
-                    match: /(\i)\.slice\(0,(Math\.max\(\i,\i(?:-\i\.length){2}\))\)/,
+                    match: /(\i)\.slice\(0,(Math\.max\(\d+?,\i(?:-\i\.length){2}\))\)/,
                     replace: "($1.sliceTo = $2, $1)"
                 }
             ]

@@ -18,28 +18,29 @@
 */
 
 import { plugins, t } from "@api/i18n";
-import { PluginOptionSelect } from "@utils/types";
+import { isSettingDisabled } from "@api/PluginManager";
+import { PluginSettingSelectDef } from "@utils/types";
 import { React, Select, useState } from "@webpack/common";
 
 import { resolveError, SettingProps, SettingsSection } from "./Common";
 
-export function SelectSetting({ option, pluginSettings, definedSettings, onChange, id }: SettingProps<PluginOptionSelect>) {
-    const def = pluginSettings[id] ?? option.options?.find(o => o.default)?.value;
+export function SelectSetting({ setting, pluginSettings, definedSettings, onChange, id }: SettingProps<PluginSettingSelectDef>) {
+    const def = pluginSettings[id] ?? setting.options?.find(o => o.default)?.value;
 
     const [state, setState] = useState<any>(def ?? null);
     const [error, setError] = useState<string | null>(null);
 
     // Resolve function labels to strings
     const resolvedOptions = React.useMemo(() =>
-        option.options.map(opt => ({
+        setting.options.map(opt => ({
             ...opt,
             label: typeof opt.label === "function" ? opt.label() : opt.label
         })),
-        [option.options]
+        [setting.options]
     );
 
     function handleChange(newValue: any) {
-        const isValid = option.isValid?.call(definedSettings, newValue) ?? true;
+        const isValid = setting.isValid?.call(definedSettings, newValue) ?? true;
 
         setState(newValue);
         setError(resolveError(isValid));
@@ -50,17 +51,17 @@ export function SelectSetting({ option, pluginSettings, definedSettings, onChang
     }
 
     return (
-        <SettingsSection name={id} description={option.description} label={option.label} error={error}>
+        <SettingsSection name={id} description={setting.description} label={setting.label} error={error}>
             <Select
-                placeholder={(option.placeholder ? (typeof option.placeholder === "function" ? option.placeholder() : option.placeholder) : undefined) ?? t(plugins.placeholder.select)}
+                placeholder={(setting.placeholder ? (typeof setting.placeholder === "function" ? setting.placeholder() : setting.placeholder) : undefined) ?? t(plugins.placeholder.select)}
                 options={resolvedOptions}
                 maxVisibleItems={5}
                 closeOnSelect={true}
                 select={handleChange}
                 isSelected={v => v === state}
                 serialize={v => String(v)}
-                isDisabled={option.disabled?.call(definedSettings) ?? false}
-                {...option.componentProps}
+                isDisabled={isSettingDisabled(definedSettings, setting)}
+                {...setting.componentProps}
             />
         </SettingsSection>
     );

@@ -7,13 +7,12 @@
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { Link } from "@components/Link";
+import { TextButton } from "@components/Button";
 import { Paragraph } from "@components/Paragraph";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
-import { closeAllModals } from "@utils/modal";
 import { OptionType } from "@utils/types";
-import { FluxDispatcher } from "@webpack/common";
+import { SettingsRouter } from "@webpack/common";
 
 import DecorPlugin from ".";
 import DecorSection from "./ui/components/DecorSection";
@@ -22,7 +21,7 @@ export const settings = definePluginSettings({
     changeDecoration: {
         label: () => t(plugin.decor.option.changeDecoration.label),
         type: OptionType.COMPONENT,
-        component() {
+        component({ closePluginSettings }) {
             if (!DecorPlugin.started) return <Paragraph>
                 {t(plugin.decor.option.changeDecoration.description)}
             </Paragraph>;
@@ -31,14 +30,13 @@ export const settings = definePluginSettings({
                 <DecorSection hideTitle hideDivider noMargin />
                 <Paragraph className={classes(Margins.top8, Margins.bottom8)}>
                     {t(plugin.decor.option.changeDecoration.also, {
-                        profiles: <Link
-                            href="/settings/profile-customization"
-                            onClick={e => {
-                                e.preventDefault();
-                                closeAllModals();
-                                FluxDispatcher.dispatch({ type: "USER_SETTINGS_MODAL_SET_SECTION", section: "Profile Customization" });
+                        profiles: <TextButton
+                            variant="link"
+                            onClick={() => {
+                                closePluginSettings();
+                                SettingsRouter.openUserSettings("profile_panel");
                             }}
-                        >{t(plugin.decor.option.changeDecoration.profiles)}</Link>
+                        >{t(plugin.decor.option.changeDecoration.profiles)}</TextButton>
                     })}
                 </Paragraph>
             </div>;

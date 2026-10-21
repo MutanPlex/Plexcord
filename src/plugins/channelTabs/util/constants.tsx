@@ -41,10 +41,9 @@ function AnimationSettings(): JSX.Element {
         { label: t(plugin.channelTabs.animation.questActivate), value: "quests-active", selected: settings.store.animationQuestsActive }
     ];
 
-    const [currentValue, setCurrentValue] = useState(animationOptions.filter(option => option.selected));
+    const [currentValue, setCurrentValue] = useState(animationOptions.filter(option => option.selected).map(option => option.value));
 
-    function updateSettingsTruthy(enabled: DynamicDropdownSettingOption[]) {
-        const enabledValues = enabled.map(option => option.value);
+    function updateSettingsTruthy(enabledValues: string[]) {
 
         animationOptions.forEach(option => {
             option.selected = enabledValues.includes(option.value);
@@ -66,23 +65,24 @@ function AnimationSettings(): JSX.Element {
         settings.store.animationResizeHandle = enabledValues.includes("resize-handle");
         settings.store.animationQuestsActive = enabledValues.includes("quests-active");
 
-        setCurrentValue(enabled);
+        setCurrentValue(enabledValues);
     }
 
     function handleChange(values: Array<DynamicDropdownSettingOption | string>) {
-        if (values.length === 0) {
-            updateSettingsTruthy([]);
+        const valueStrings = values.map(v => typeof v === "string" ? v : v.value);
+        const toggled = valueStrings.length > currentValue.length
+            ? valueStrings.find(v => !currentValue.includes(v))
+            : currentValue.find(v => !valueStrings.includes(v));
+
+        if (toggled == null) {
+            updateSettingsTruthy(valueStrings);
             return;
         }
 
-        const stringlessValues = values.filter(v => typeof v !== "string") as DynamicDropdownSettingOption[];
-        const selectedOption = values.find(v => typeof v === "string") as string;
-        const option = animationOptions.find(option => option.value === selectedOption) as DynamicDropdownSettingOption;
-
-        if (option.selected) {
-            updateSettingsTruthy(stringlessValues.filter(v => v.value !== selectedOption));
+        if (currentValue.includes(toggled)) {
+            updateSettingsTruthy(currentValue.filter(v => v !== toggled));
         } else {
-            updateSettingsTruthy([...stringlessValues, option]);
+            updateSettingsTruthy([...currentValue, toggled]);
         }
     }
 
@@ -148,12 +148,7 @@ export const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         default: {}
     },
-    noPomeloNames: {
-        label: () => t(plugin.channelTabs.option.noPomeloNames.label),
-        description: () => t(plugin.channelTabs.option.noPomeloNames.description),
-        type: OptionType.BOOLEAN,
-        default: false
-    },
+
     showStatusIndicators: {
         label: () => t(plugin.channelTabs.option.showStatusIndicators.label),
         description: () => t(plugin.channelTabs.option.showStatusIndicators.description),
@@ -192,6 +187,13 @@ export const settings = definePluginSettings({
         type: OptionType.NUMBER,
         default: 100,
         hidden: true,
+        restartNeeded: false
+    },
+    tabHeightScale: {
+        label: () => t(plugin.channelTabs.option.tabHeightScale.label),
+        description: () => t(plugin.channelTabs.option.tabHeightScale.description),
+        type: OptionType.NUMBER,
+        default: 100,
         restartNeeded: false
     },
     renderAllTabs: {

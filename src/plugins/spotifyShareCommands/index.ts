@@ -19,53 +19,20 @@
 
 import { ApplicationCommandInputType, findOption, OptionalMessageOption, sendBotMessage } from "@api/Commands";
 import { plugin, t } from "@api/i18n";
-import { Command } from "@plexcord/discord-types";
+import { Command, SpotifyTrack } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
 import definePlugin from "@utils/types";
-import { findByPropsLazy } from "@webpack";
-import { FluxDispatcher, MessageActions, PendingReplyStore } from "@webpack/common";
+import { FluxDispatcher, MessageActions, PendingReplyStore, SpotifyStore } from "@webpack/common";
 
-interface Album {
-    id: string;
-    image: {
-        height: number;
-        width: number;
-        url: string;
-    };
-    name: string;
-}
-
-interface Artist {
-    external_urls: {
-        spotify: string;
-    };
-    href: string;
-    id: string;
-    name: string;
-    type: "artist" | string;
-    uri: string;
-}
-
-interface Track {
-    id: string | null;
-    album: Album;
-    artists: Artist[];
-    duration: number;
-    isLocal: boolean;
-    name: string;
-}
-
-const Spotify = findByPropsLazy("getPlayerState");
-
-function makeCommand(name: string, formatUrl: (track: Track) => string): Command {
+function makeCommand(name: string, formatUrl: (track: SpotifyTrack) => string): Command {
     return {
         name,
         description: () => t(plugin.spotifyShareCommands.command.makeCommand.description, { type: name }),
         inputType: ApplicationCommandInputType.BUILT_IN,
         options: [OptionalMessageOption],
         execute(options, { channel }) {
-            const track: Track | null = Spotify.getTrack();
+            const track = SpotifyStore.getTrack();
             if (!track) {
                 return sendBotMessage(channel.id, {
                     author: {

@@ -16,9 +16,11 @@ import { openCategoryModal } from "./CreateCategoryModal";
 function createPinMenuItem(channelId: string) {
     const pinned = isPinned(channelId);
 
+    const showSeparator = pinned || currentUserCategories.length > 0;
+
     return (
         <Menu.MenuItem
-            id="pin-dm"
+            id="pc-pin-dm"
             label={t(plugin.pinDMs.context.pin.label)}
         >
 
@@ -30,7 +32,7 @@ function createPinMenuItem(channelId: string) {
                         color="brand"
                         action={() => openCategoryModal(null, channelId)}
                     />
-                    <Menu.MenuSeparator />
+                    {showSeparator && <Menu.MenuSeparator />}
 
                     {
                         currentUserCategories.map(category => (
@@ -48,7 +50,7 @@ function createPinMenuItem(channelId: string) {
             {pinned && (
                 <>
                     <Menu.MenuItem
-                        id="unpin-dm"
+                        id="pc-unpin-dm"
                         label={t(plugin.pinDMs.context.unPin.label)}
                         color="danger"
                         action={() => removeChannelFromCategory(channelId)}

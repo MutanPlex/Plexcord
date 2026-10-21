@@ -15,7 +15,7 @@ export const settings = definePluginSettings({
     format: {
         component: ({ setValue }) => FormatSetting(setValue),
         type: OptionType.COMPONENT,
-        default: "{buildChannel} {buildNumber} ({buildHash}) | {plexcordName} {plexcordVersion} ({plexcordHash})",
+        default: "{plexcordIcon} Plexcord {plexcordVersion} ({plexcordHash})",
         restartNeeded: true
     }
 });

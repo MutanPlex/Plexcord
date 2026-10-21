@@ -28,34 +28,6 @@ const settings = definePluginSettings({
             { label: () => t(plugin.clipsEnhancements.option.richPresenceTagging.never), value: "never" },
         ]
     },
-    enableScreenshotKeybind: {
-        label: () => t(plugin.clipsEnhancements.option.enableScreenshotKeybind.label),
-        description: () => t(plugin.clipsEnhancements.option.enableScreenshotKeybind.description),
-        type: OptionType.BOOLEAN,
-        default: true,
-        restartNeeded: true
-    },
-    enableVoiceOnlyClips: {
-        label: () => t(plugin.clipsEnhancements.option.enableVoiceOnlyClips.label),
-        description: () => t(plugin.clipsEnhancements.option.enableVoiceOnlyClips.description),
-        type: OptionType.BOOLEAN,
-        default: true,
-        restartNeeded: true
-    },
-    enableAdvancedSignals: {
-        label: () => t(plugin.clipsEnhancements.option.enableAdvancedSignals.label),
-        description: () => t(plugin.clipsEnhancements.option.enableAdvancedSignals.description),
-        type: OptionType.BOOLEAN,
-        default: true,
-        restartNeeded: true
-    },
-    ignorePlatformRestriction: {
-        label: () => t(plugin.clipsEnhancements.option.ignorePlatformRestriction.label),
-        description: () => t(plugin.clipsEnhancements.option.ignorePlatformRestriction.description),
-        type: OptionType.BOOLEAN,
-        default: true,
-        restartNeeded: true
-    },
     clipsLink: {
         label: () => t(plugin.clipsEnhancements.option.clipsLink.label),
         type: OptionType.COMPONENT,
@@ -93,27 +65,18 @@ export default definePlugin({
             }
         },
         {
-            find: ".CLIPS_FRAME_RATE,{",
-            replacement: {
-                match: /\[\{.{0,25}\i.\i.FPS_15.{0,500}\}\]/,
-                replace: "$self.patchFramerates($&)"
-            }
+            find: ".SECONDS_30,label:",
+            replacement: [
+                {
+                    match: /\[\{.{0,25}\i.\i.SECONDS_30.{0,500}\}\]/,
+                    replace: " $self.patchTimeslots($&)"
+                },
+                {
+                    match: /\[\{.{0,25}\i.\i.FPS_15.{0,500}\}\]/,
+                    replace: " $self.patchFramerates($&)"
+                }
+            ]
         },
-        {
-            find: ".CLIPS_LENGTH,{",
-            replacement: {
-                match: /\[\{.{0,25}\i.\i.SECONDS_30.{0,500}\}\]/,
-                replace: "$self.patchTimeslots($&)"
-            }
-        },
-        // enables clips
-        {
-            find: "2026-03-clips-experiment",
-            replacement: {
-                match: /defaultConfig:\{enableClips:!\d,ignorePlatformRestriction:!\d,showClipsHeaderEntrypoint:!\d,enableScreenshotKeybind:!\d,enableVoiceOnlyClips:!\d,enableAdvancedSignals:!\d\}/,
-                replace: "defaultConfig:{enableClips:!0,ignorePlatformRestriction:$self.settings.store.ignorePlatformRestriction,showClipsHeaderEntrypoint:!0,enableScreenshotKeybind:$self.settings.store.enableScreenshotKeybind,enableVoiceOnlyClips:$self.settings.store.enableVoiceOnlyClips,enableAdvancedSignals:$self.settings.store.enableAdvancedSignals}"
-            }
-        }
     ],
 
     patchTimeslots(timeslots: { id: string; value: number; label: string; }[]) {

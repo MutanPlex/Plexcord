@@ -46,11 +46,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         switches: {
             useQuickCss: {
                 label: "Bật CSS tùy chỉnh",
-                description: "Tải CSS tùy chỉnh từ trình chỉnh sửa QuickCSS. Điều này cho phép bạn tùy chỉnh giao diện của Discord theo phong cách của riêng bạn."
+                description: "Áp dụng QuickCSS bạn đã cấu hình"
             },
             enableReactDevtools: {
                 label: "Kích hoạt công cụ dành cho nhà phát triển React",
-                description: "Kích hoạt tiện ích mở rộng Công cụ dành cho nhà phát triển React để gỡ lỗi các thành phần React của Discord. Hữu ích cho việc phát triển plugin."
+                description: "Chủ yếu hữu ích cho nhà phát triển plugin. Bỏ qua nếu bạn không biết đây là gì"
             },
             mainWindowFrameless: {
                 label: "Vô hiệu hóa khung cửa sổ chính",
@@ -60,7 +60,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Tắt khung cửa sổ",
                 description: "Loại bỏ khung cửa sổ gốc để có cái nhìn rõ ràng hơn. Bạn vẫn có thể di chuyển cửa sổ bằng cách kéo vùng thanh tiêu đề."
             },
-            winNativeTitleBar: {
+            nativeTitleBar: {
                 label: "Sử dụng thanh tiêu đề gốc của Windows thay vì thanh tiêu đề tùy chỉnh của Discord",
                 description: "Thay thế thanh tiêu đề tùy chỉnh của Discord bằng thanh tiêu đề tiêu chuẩn của Windows. Điều này có thể cải thiện khả năng tương thích với một số công cụ quản lý cửa sổ."
             },
@@ -76,7 +76,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             disableMinSize: {
                 label: "Vô hiệu hóa kích thước cửa sổ tối thiểu",
-                description: "Cho phép thay đổi kích thước cửa sổ Discord nhỏ hơn kích thước tối thiểu mặc định của nó. Hữu ích cho việc sắp xếp các trình quản lý cửa sổ hoặc màn hình nhỏ."
+                description: "Cho phép thay đổi kích thước cửa sổ tùy ý, kể cả nhỏ hơn kích thước tối thiểu của Discord"
             }
         },
         quickActions: {
@@ -193,6 +193,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignore: "Bỏ qua - Hoàn toàn không hiển thị thông báo"
             },
         },
+        windowsMaterial: {
+            title: "Chất liệu nền Windows (Yêu cầu khởi động lại)",
+            description: "Hiệu ứng nền trong suốt của Windows. Bạn cần một chủ đề hỗ trợ trong suốt, nếu không tùy chọn này sẽ không có tác dụng. Cần khởi động lại sau khi thay đổi cài đặt này.",
+            material: {
+                none: "Không",
+                mica: "Mica (kết hợp chủ đề hệ thống + hình nền máy tính để tô nền)",
+                tabbed: "Tabbed (biến thể của Mica với sắc nền đậm hơn)",
+                acrylic: "Acrylic (làm mờ cửa sổ phía sau Discord để tạo nền mờ trong suốt)"
+            }
+        },
         macVibrancy: {
             title: "Kiểu sống động của cửa sổ (Yêu cầu khởi động lại)",
             description: "Tùy chỉnh hiệu ứng rung của cửa sổ macOS. Điều này kiểm soát kiểu mờ và trong suốt của cửa sổ Discord. Những thay đổi yêu cầu khởi động lại để có hiệu lực.",
@@ -212,6 +222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 fullscreenUI: "Giao diện người dùng toàn màn hình (Trong suốt nhưng hơi mờ)",
                 hud: "HUD (Minh bạch nhất)"
             }
+        },
+        tabs: {
+            renderFailed: "Không thể hiển thị thẻ {{tab}}. Nếu sự cố vẫn tiếp diễn, hãy thử cài đặt lại bằng trình cài đặt!"
         }
     },
 
@@ -270,7 +283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             discordDesktop: "Ứng dụng Discord dành cho máy tính để bàn",
             plextron: "ứng dụng Plextron",
             web: "Ứng dụng Plextron và phiên bản Web của Discord",
-            dev: "Phiên bản dành cho nhà phát triển của Plexcord"
+            dev: "Phiên bản dành cho nhà phát triển của Plexcord",
+            browser: "Phiên bản trình duyệt web của Plexcord"
         },
         search: {
             looking: "Bạn đang tìm kiếm",
@@ -307,7 +321,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userplugins: "Hiển thị plugin của người dùng",
                 api: "Hiển thị plugin API",
                 type: "Lọc theo loại",
-                tags: "Lọc theo thẻ"
+                tags: "Lọc theo thẻ",
+                favorites: "Hiện mục yêu thích"
             }
         },
         pluginModal: {
@@ -320,7 +335,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             enabledUser: "Plugin người dùng đã bật",
             totalUser: "Tổng số plugin người dùng",
             info: "Xem thêm thông tin",
-            source: "Xem mã nguồn"
+            source: "Xem mã nguồn",
+            favorite: "Yêu thích plugin - ghim nó lên đầu danh sách plugin",
+            unfavorite: "Bỏ yêu thích plugin"
         },
         metadata: {
             api: {
@@ -342,7 +359,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     userSettings: "Vá cài đặt người dùng của Discord để hiển thị nhóm và tên của họ.",
                     audioPlayer: "API để phát các tệp âm thanh Discord nội bộ hoặc liên kết âm thanh bên ngoài.",
                     userArea: "API để thêm các nút vào bảng khu vực người dùng.",
-                    profileCollections: "API để thêm các bộ sưu tập vào bảng hồ sơ người dùng, như bộ sưu tập trò chơi của Discord."
+                    profileCollections: "API để thêm các bộ sưu tập vào bảng hồ sơ người dùng, như bộ sưu tập trò chơi của Discord.",
+                    profileSections: "API để thêm các phần gần khu vực 'Thành viên từ' của bảng hồ sơ người dùng.",
+                    headerBar: "API để thêm nút vào thanh tiêu đề.",
+                    surfaceClasses: "API để thêm thuộc tính dữ liệu ngữ nghĩa của plugin và props giới hạn vào các vùng bố cục ổn định của Discord."
                 },
                 chatButtons: {
                     context: {
@@ -389,7 +409,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             button: "Các nút của plugin đã bật sẽ xuất hiện ở đây."
-        }
+        },
+        invalidInput: "Dữ liệu nhập không hợp lệ",
+        loading: "Đang tải...",
+        authorPrefix: "bởi"
     },
 
     patchHelper: {
@@ -474,7 +497,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             plugins: "Xuất plugin",
             css: "Xuất QuickCSS",
             datastore: "Xuất kho dữ liệu"
-        }
+        },
+        backupFileType: "Bản sao lưu cài đặt Plexcord"
     },
 
     cloud: {
@@ -640,7 +664,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         newPlugins: "{{count}} Plugin mới{{s}}",
         following: "Các plugin sau đã được thêm vào trong các bản cập nhật gần đây:",
-        more: "+{{count}} plugin khác"
+        more: "+{{count}} plugin khác",
+        error: {
+            retrieveRepo: "Không thể lấy thông tin kho mã",
+            fetchRepo: "Không thể tải dữ liệu từ kho mã",
+            connectRepo: "Không thể kết nối tới kho mã. Hãy kiểm tra kết nối internet."
+        }
     },
 
     csp: {
@@ -717,7 +746,8 @@ const translations: MatchStructure<typeof enTranslations> = {
         unknown: {
             title: "Không xác định",
             author: "Tác giả không xác định",
-            theme: "Một chủ đề bất hòa"
+            theme: "Một chủ đề bất hòa",
+            description: "Không có mô tả."
         },
         required: "Các plugin sau là bắt buộc nhưng chưa được bật:",
         homepage: "Trang chủ",
@@ -778,6 +808,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             failed: {
                 download: "Không tải được chủ đề xuống"
             }
+        },
+        openInFolder: "Mở trong thư mục",
+        fallback: {
+            author: "Tác giả không rõ",
+            description: "Một chủ đề Discord."
         }
     },
 
@@ -834,6 +869,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         repo: "Repo",
         repoDescription: "Đây là kho lưu trữ GitHub nơi Plexcord tìm nạp các bản cập nhật từ đó.",
         loading: "Đang tải...",
+        unknownAuthor: "Tác giả không rõ"
     },
 
     components: {
@@ -849,7 +885,29 @@ const translations: MatchStructure<typeof enTranslations> = {
             message: "Trình soạn thảo QuickCSS vẫn đang mở ở chế độ nền.",
             detail: "Bạn có muốn đóng Discord không? Thao tác này cũng sẽ đóng trình soạn thảo QuickCSS.",
             cancel: "Hủy bỏ",
-            close: "Vẫn đóng"
+            close: "Vẫn đóng",
+            windowTitle: "Trình chỉnh sửa QuickCSS của Plexcord"
+        },
+        messagePopover: {
+            scrollLeft: "Cuộn sang trái",
+            scrollRight: "Cuộn sang phải"
+        },
+        notices: {
+            error: "Lỗi khi hiển thị thông báo"
+        },
+        tray: {
+            aboutPlexcord: "Giới thiệu Plexcord",
+            updatePlexcord: "Cập nhật Plexcord",
+            noUpdateTitle: "Không có bản cập nhật",
+            noUpdateBody: "Bạn đang dùng phiên bản Plexcord mới nhất.",
+            updateFailedTitle: "Cập nhật thất bại",
+            updateFailedBody: "Không thể áp dụng bản cập nhật cho Plexcord.",
+            updateSuccessTitle: "Cập nhật thành công",
+            updateSuccessBody: "Đang khởi động lại Plexcord để áp dụng bản cập nhật.",
+            updateErrorTitle: "Lỗi cập nhật",
+            updateErrorBody: "Đã xảy ra lỗi khi cập nhật Plexcord.\n\n{{error}}",
+            openSettingsFolder: "Mở thư mục cài đặt",
+            openThemesFolder: "Mở thư mục chủ đề"
         }
     },
 
@@ -918,7 +976,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             seconds: "giây",
             ago: "trước kia",
             s: "S"
-        }
+        },
+        detectLanguage: "Phát hiện ngôn ngữ"
     },
 
     plugin: {
@@ -945,6 +1004,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             utility: "Tiện ích",
             voice: "Giọng nói"
         },
+        concatenatedComponentExtractor: {
+            name: "ConcatenatedComponentExtractor",
+            description: "Trích xuất các thành phần đã được nối lại bởi bundler"
+        },
+        concatenatedModules: {
+            name: "ConcatenatedModules",
+            description: "Trích xuất các module đã được nối lại bởi bundler"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Tắt tính năng theo dõi của Discord (phân tích/'khoa học'), số liệu và báo cáo sự cố Sentry",
@@ -952,6 +1019,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disableAnalytics: {
                     label: "Vô hiệu hóa phân tích",
                     description: "Tắt tính năng theo dõi của Discord (phân tích/'khoa học'), số liệu và báo cáo sự cố Sentry"
+                },
+                disableStackDumping: {
+                    description: "In dấu vết ngăn xếp gốc ra bảng điều khiển khi Discord bị sập. Cần khởi động lại hoàn toàn."
                 }
             }
         },
@@ -966,6 +1036,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsLocation: {
                     label: "Cài đặt Vị trí",
                     description: "Xác định vị trí của phần cài đặt Plexcord."
+                },
+                includePlexcordInfoWhenCopying: {
+                    label: "Bao gồm thông tin Plexcord khi sao chép",
+                    description: "Sao chép cả thông tin Plexcord (Plexcord, Electron, Chromium) khi nhấp vào thông tin phiên bản ở góc dưới bên trái của trang Cài đặt"
                 }
             }
         },
@@ -983,6 +1057,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Giữ lấy!",
                     body: "Bạn đang sử dụng phiên bản Plexcord đã lỗi thời! Rất có thể sự cố của bạn đã được khắc phục.",
                     footer: "Vui lòng cập nhật trước khi yêu cầu hỗ trợ!",
+                    dismiss: "Nếu bạn biết mình đang làm gì hoặc không thể cập nhật, bạn có thể bỏ qua thông báo này.",
                     button: {
                         cancel: "Xem cập nhật",
                         confirm: "Cập nhật và khởi động lại ngay",
@@ -1181,7 +1256,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Phương pháp ẩn danh",
                     random: "Nhân vật ngẫu nhiên",
                     consistent: "Nhất quán",
-                    timestamp: "Dấu thời gian"
+                    timestamp: "Dấu thời gian",
+                    date: "Ngày"
                 },
                 randomisedLength: {
                     label: "Độ dài ngẫu nhiên",
@@ -1190,6 +1266,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 consistent: {
                     label: "Nhất quán",
                     description: "Bí mật ẩn danh nhất quán"
+                },
+                dateFormat: {
+                    description: "Định dạng ngày (hỗ trợ YYYY, MM, DD, HH, mm, ss, SSS)",
+                    label: "Định dạng ngày"
                 }
             },
             using: {
@@ -1201,76 +1281,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toggle: "Chuyển đổi spoiler cho các tập tin của bạn (bật mặc định)",
                 enabled: "Đã bật spoiler!",
                 disabled: "Đã vô hiệu hóa spoiler!"
-            }
-        },
-        appleMusic: {
-            name: "AppleMusicRichPresence",
-            description: "Sự hiện diện phong phú của Discord cho Apple Music của bạn!",
-            about: "Đối với các chuỗi định dạng hoạt động có thể tùy chỉnh, bạn có thể sử dụng một số chuỗi đặc biệt để đưa dữ liệu theo dõi vào hoạt động! {{name}} được thay thế bằng tên bản nhạc; {{artist}} được thay thế bằng tên của (các) nghệ sĩ; và {{album}} được thay thế bằng tên album.",
-            button: {
-                listen: "Nghe trên Apple Music",
-                songLink: "Xem trên SongLink"
-            },
-            option: {
-                activityType: {
-                    label: "Loại hoạt động",
-                    description: "Loại hoạt động nào",
-                    listening: "Nghe",
-                    playing: "Đang chơi"
-                },
-                statusDisplayType: {
-                    label: "Loại hiển thị trạng thái",
-                    description: "Hiển thị tên bài hát/nghệ sĩ trong danh sách thành viên",
-                    off: "Không hiển thị (hiển thị thông báo nghe chung)",
-                    artist: "Hiển thị tên nghệ sĩ",
-                    track: "Hiển thị tên bản nhạc"
-                },
-                refreshInterval: {
-                    label: "Khoảng thời gian làm mới",
-                    description: "Khoảng thời gian giữa các lần làm mới hoạt động (giây)"
-                },
-                enableTimestamps: {
-                    label: "Bật dấu thời gian",
-                    description: "Có hay không bật dấu thời gian"
-                },
-                enableButtons: {
-                    label: "Bật nút",
-                    description: "Có bật nút hay không"
-                },
-                nameString: {
-                    label: "Chuỗi tên",
-                    description: "Chuỗi định dạng tên hoạt động"
-                },
-                detailsString: {
-                    label: "Chuỗi chi tiết",
-                    description: "Chuỗi định dạng chi tiết hoạt động"
-                },
-                stateString: {
-                    label: "Chuỗi trạng thái",
-                    description: "Chuỗi định dạng trạng thái hoạt động"
-                },
-                largeImageType: {
-                    label: "Loại hình ảnh lớn",
-                    description: "Nội dung hoạt động loại hình ảnh lớn",
-                    album: "Album ảnh nghệ thuật",
-                    artist: "Tác phẩm nghệ thuật của nghệ sĩ",
-                    disabled: "Tàn tật"
-                },
-                largeTextString: {
-                    label: "Chuỗi văn bản lớn",
-                    description: "Nội dung hoạt động chuỗi định dạng văn bản lớn"
-                },
-                smallImageType: {
-                    label: "Loại hình ảnh nhỏ",
-                    description: "Nội dung hoạt động loại hình ảnh nhỏ",
-                    album: "Biểu tượng Apple Music",
-                    artist: "Tác phẩm nghệ thuật của nghệ sĩ",
-                    disabled: "Tàn tật"
-                },
-                smallTextString: {
-                    label: "Chuỗi văn bản nhỏ",
-                    description: "Nội dung hoạt động chuỗi định dạng văn bản nhỏ"
-                }
             }
         },
         arRpc: {
@@ -1373,6 +1383,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     left: "Bên trái",
                     right: "Phải"
                 }
+            },
+            text: {
+                smallText: "Văn bản nhỏ",
+                largeText: "Văn bản lớn"
             }
         },
         betterAudioPlayer: {
@@ -1405,7 +1419,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             toast: {
-                invalidColorFormat: "Định dạng màu không hợp lệ cho {{settingKey}}, hãy đảm bảo nó ở định dạng 'R, G, B' hoặc '#RRGGBB'"
+                invalidColorFormat: "Định dạng màu không hợp lệ cho {{settingKey}}, hãy đảm bảo nó ở định dạng 'R, G, B' hoặc '#RRGGBB'",
+                invalidColorFormatFor: "Định dạng màu không hợp lệ cho {{key}}, hãy dùng \"R, G, B\" hoặc \"#RRGGBB\""
             }
         },
         betterBanReasons: {
@@ -1423,7 +1438,20 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             title: "Lý do",
             placeholder: "Lý do",
-            add: "Thêm một lý do khác"
+            add: "Thêm một lý do khác",
+            duration: {
+                discordDefault: "Mặc định của Discord",
+                none: "Không xóa gì",
+                hour1: "1 giờ qua",
+                hours6: "6 giờ qua",
+                hours12: "12 giờ qua",
+                hours24: "24 giờ qua",
+                days3: "3 ngày qua",
+                days7: "7 ngày qua"
+            },
+            text: {
+                autoDeleteDuration: "Thời gian tự động xóa tin nhắn"
+            }
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
@@ -1485,6 +1513,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Buộc mở",
                     description: "Buộc mở một thư mục khi chuyển sang máy chủ của thư mục đó"
                 },
+                enableNestedFolders: {
+                    label: "Bật thư mục lồng nhau",
+                    description: "Cho phép lồng các thư mục vào bên trong thư mục khác bằng cách kéo"
+                },
                 keepIcons: {
                     label: "Giữ biểu tượng",
                     description: "Tiếp tục hiển thị các biểu tượng bang hội trong thư mục thanh bang hội chính khi nó được mở trong thanh bên BetterFolders"
@@ -1518,6 +1550,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             render: {
                 tip: "Lời mời này sẽ hết hạn {{time}}",
                 header: "{{name}} đã mời bạn tham gia {{server}}",
+                headerSelf: "Bạn đã gửi lời mời tham gia {{server}}",
                 never: "không hết hạn"
             }
         },
@@ -1541,7 +1574,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterRoleContext: {
             name: "BetterRoleContext",
-            description: "Thêm tùy chọn sao chép màu vai trò/chỉnh sửa vai trò/xem biểu tượng vai trò khi nhấp chuột phải vào vai trò trong hồ sơ người dùng",
+            description: "Thêm tùy chọn sao chép màu vai trò / sửa vai trò / xem biểu tượng vai trò khi nhấp chuột phải vào vai trò trong hồ sơ người dùng hoặc danh sách thành viên",
             option: {
                 roleIconFileFormat: {
                     label: "Định dạng tệp biểu tượng vai trò",
@@ -1551,7 +1584,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 copyColor: "Sao chép màu vai trò",
                 editRole: "Chỉnh sửa vai trò",
-                viewIcon: "Xem biểu tượng vai trò"
+                viewIcon: "Xem biểu tượng vai trò",
+                viewMembers: "Xem thành viên của vai trò"
+            },
+            text: {
+                roleActions: "Thao tác vai trò"
             }
         },
         betterRoleDot: {
@@ -1627,6 +1664,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         blockKeywords: {
             name: "BlockKeywords",
             description: "Chặn các tin nhắn chứa các từ khóa cụ thể do người dùng xác định, như thể người dùng gửi chúng đã bị chặn.",
+            regexHelper: {
+                title: "Trợ giúp Regex",
+                placeholder: "Văn bản để kiểm tra...",
+                noPatterns: "Chưa cấu hình mẫu nào"
+            },
             option: {
                 blockedWords: {
                     label: "từ bị chặn",
@@ -1635,6 +1677,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 useRegex: {
                     label: "Sử dụng Regex",
                     description: "Sử dụng từng giá trị làm biểu thức chính quy khi kiểm tra nội dung thư (nâng cao)"
+                },
+                regexHelper: {
+                    label: "Trợ giúp Regex",
+                    description: "Kiểm tra biểu thức chính quy của bạn với văn bản mẫu"
                 },
                 caseSensitive: {
                     label: "Phân biệt chữ hoa chữ thường",
@@ -1778,6 +1824,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 loading: "Đang tải...",
                 save: "Cứu",
                 edit: "Biên tập"
+            },
+            text: {
+                unknownUser: "Người dùng không rõ"
             }
         },
         callTimer: {
@@ -2067,12 +2116,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 plusPulse: "Xung nút cộng",
                 mentionGlow: "Huy hiệu đề cập phát sáng",
                 compactExpand: "Mở rộng chế độ nhỏ gọn",
-                selectedBorder: "Tab đã chọn Viền xanh",
+                selectedBorder: "Viền nhấn của thẻ đã chọn",
                 selectedBackground: "Màu nền của tab đã chọn",
                 tabShadows: "Hiệu ứng đổ bóng tab",
                 tabRepositioning: "Định vị lại tab (thay đổi vị trí mượt mà)",
                 resizeHandle: "Thay đổi kích thước xử lý mờ dần",
-                questActivate: "Độ dốc nhiệm vụ hoạt động"
+                questActivate: "Dải màu nhiệm vụ đang hoạt động"
             },
             bookmark: {
                 label: "Đánh dấu",
@@ -2110,7 +2159,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 tab: "Menu ngữ cảnh tab ChannelTabs",
                 compact: "Nhỏ gọn",
                 bookmarkBar: "Thanh dấu trang",
-                openAll: "Mở tất cả trong dấu trang",
+                openAll: "Mở tất cả dấu trang",
                 openNew: "Mở trong tab mới",
                 folderMenu: "Menu thư mục dấu trang",
                 close: {
@@ -2190,6 +2239,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 tabWidthScale: {
                     label: "Tỷ lệ chiều rộng tab",
                     description: "Tỷ lệ chiều rộng tab (phần trăm) - có thể điều chỉnh bằng cách kéo các cạnh tab"
+                },
+                tabHeightScale: {
+                    label: "Tỷ lệ chiều cao thẻ",
+                    description: "Tỷ lệ chiều cao thẻ (phần trăm)."
                 },
                 renderAllTabs: {
                     label: "Kết xuất tất cả các tab",
@@ -2398,11 +2451,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     restore: "Không thể khôi phục các tab",
                     saved: "Không tải được các tab đã lưu"
                 }
+            },
+            text: {
+                folder: "Thư mục"
             }
         },
         characterCounter: {
             name: "CharacterCounter",
-            description: "Hiển thị bộ đếm ký tự trong hộp tin nhắn",
+            description: "Thêm bộ đếm ký tự vào ô nhập trò chuyện",
             option: {
                 colorEffects: {
                     label: "Hiệu ứng màu sắc",
@@ -2416,7 +2472,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         cleanChannelName: {
             name: "CleanChannelName",
-            description: "Xóa tất cả biểu tượng cảm xúc và nội dung trang trí khỏi tên kênh"
+            description: "Xóa biểu tượng cảm xúc và trang trí khỏi tên kênh. Trở về tên gốc khi bạn đang chỉnh sửa kênh.",
+            option: {
+                ignoredChannels: {
+                    description: "Danh sách ID kênh, phân tách bằng dấu phẩy, sẽ được giữ nguyên.",
+                    label: "Kênh bị bỏ qua"
+                }
+            },
+            text: {
+                keepOriginalName: "Giữ tên gốc"
+            }
         },
         clearURLs: {
             name: "ClearURLs",
@@ -2428,7 +2493,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 loading: "Đang tải thành viên...",
                 noMembers: "Không tìm thấy thành viên nào",
-                unknown: "Vai trò không xác định"
+                unknown: "Vai trò không xác định",
+                andMore: "và {{count}} người khác"
             }
         },
         clientSideBlock: {
@@ -2494,6 +2560,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     disable: "Tắt chủ đề Nitro",
                     reset: "Đặt lại màu chủ đề"
                 }
+            },
+            text: {
+                dark: "Tối",
+                light: "Sáng"
             }
         },
         clipsEnhancements: {
@@ -2508,22 +2578,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     only: "Chỉ khi tên bắt đầu hoặc kết thúc của hoạt động trùng khớp",
                     never: "Không bao giờ"
                 },
-                enableScreenshotKeybind: {
-                    label: "Bật liên kết khóa ảnh chụp màn hình",
-                    description: "Kích hoạt tính năng keybind ảnh chụp màn hình"
-                },
-                enableVoiceOnlyClips: {
-                    label: "Bật clip chỉ có giọng nói",
-                    description: "Bật clip chỉ có giọng nói (âm thanh không có video)"
-                },
-                enableAdvancedSignals: {
-                    label: "Kích hoạt tín hiệu nâng cao",
-                    description: "Bật tín hiệu clip nâng cao (trình kích hoạt clip tự động)"
-                },
-                ignorePlatformRestriction: {
-                    label: "Bỏ qua hạn chế nền tảng",
-                    description: "Cho phép cắt hạn chế nền tảng (có thể gây ra lỗi lưu)"
-                },
                 clipsLink: {
                     label: "Liên kết clip",
                     link: "Thay đổi tùy chọn FPS và thời lượng trong cài đặt Clip!"
@@ -2536,7 +2590,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         commandPalette: {
             name: "CommandPalette",
-            description: "Cho phép bạn điều hướng giao diện người dùng bằng bàn phím.",
+            description: "Bảng lệnh kiểu Raycast để chạy thao tác ở bất cứ đâu trong Discord",
             action: {
                 command: {
                     label: "Chạy lệnh",
@@ -2990,7 +3044,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                             label: "Không chạy được {{pluginName}}: {{actionLabel}}."
                         }
                     }
-                }
+                },
+                commandDeleted: "Đã xóa lệnh.",
+                statusSetToLabel: "Đã đặt trạng thái thành {{label}}.",
+                themeSetToLabel: "Đã đặt chủ đề thành {{label}}.",
+                noSettingsPageWas: "Chưa cung cấp trang cài đặt nào.",
+                unableToOpenLabel: "Không thể mở {{label_that_settings_page}}.",
+                failedToStartDependencies: "Không thể khởi động các phụ thuộc: {{join}}",
+                messageSentToUsername: "Đã gửi tin nhắn tới {{username}}.",
+                enabledRestart: "Đã bật {{name}}. Khởi động lại để áp dụng.",
+                disabledRestart: "Đã tắt {{name}}. Khởi động lại để áp dụng.",
+                enabled: "Đã bật {{name}}.",
+                disabled: "Đã tắt {{name}}.",
+                errorStarting: "Lỗi khi khởi động {{name}}.",
+                errorStopping: "Lỗi khi dừng {{name}}."
             },
             display: {
                 channel: {
@@ -3026,6 +3093,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 customCommands: {
                     label: "Lệnh tùy chỉnh",
                     description: "Quản lý các mục bảng lệnh tùy chỉnh"
+                },
+                closeAfterExecute: {
+                    description: "Đóng bảng lệnh sau khi chạy lệnh.",
+                    label: "Đóng sau khi chạy"
                 }
             },
             template: {
@@ -3045,7 +3116,121 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Vĩ mô",
                     description: "Chạy một chuỗi lệnh"
                 }
-            }
+            },
+            text: {
+                insertTextInChat: "Chèn văn bản vào cuộc trò chuyện",
+                name: "Name",
+                commandName: "Tên lệnh",
+                settingsPage: "Trang cài đặt",
+                searchSettingsPages: "Tìm trang cài đặt...",
+                text: "Văn bản",
+                textToInsertInto: "Văn bản sẽ chèn vào ô trò chuyện",
+                editCommand: "Sửa lệnh",
+                deleteCommand: "Xóa lệnh",
+                createCustomCommand: "Tạo lệnh tùy chỉnh",
+                light: "Sáng",
+                ash: "Tro",
+                dark: "Tối",
+                onyx: "Onyx",
+                toggleMute: "Bật/tắt tắt tiếng",
+                toggleDeafen: "Bật/tắt tắt loa",
+                setStatus: "Đặt trạng thái",
+                searchStatuses: "Tìm trạng thái...",
+                setLabel: "Đặt {{label}}",
+                toggleTheme: "Đổi chủ đề",
+                openServer: "Mở máy chủ",
+                openChannel: "Mở kênh",
+                openDm: "Mở tin nhắn trực tiếp",
+                goHome: "Về trang chủ",
+                goToServer: "Đi tới máy chủ",
+                searchServers: "Tìm máy chủ...",
+                goToChannel: "Đi tới kênh",
+                searchChannels: "Tìm kênh...",
+                searchFriends: "Tìm bạn bè...",
+                myAccount: "Tài khoản của tôi",
+                profiles: "Hồ sơ",
+                dataPrivacy: "Dữ liệu & Quyền riêng tư",
+                devices: "Thiết bị",
+                connections: "Kết nối",
+                appearance: "Giao diện",
+                accessibility: "Trợ năng",
+                voiceVideo: "Giọng nói & Video",
+                chat: "Trò chuyện",
+                textImages: "Văn bản & Hình ảnh",
+                notifications: "Thông báo",
+                keybinds: "Phím tắt",
+                authorizedApps: "Ứng dụng được ủy quyền",
+                familyCenter: "Trung tâm gia đình",
+                advanced: "Nâng cao",
+                plexcord: "Plexcord",
+                plexcordPlugins: "Plugin Plexcord",
+                plexcordThemes: "Chủ đề Plexcord",
+                plexcordUpdater: "Trình cập nhật Plexcord",
+                plexcordChangelog: "Nhật ký thay đổi Plexcord",
+                openQuickcss: "Mở QuickCSS",
+                openUpdater: "Mở trình cập nhật",
+                openChangelog: "Mở nhật ký thay đổi",
+                restartDiscord: "Khởi động lại Discord",
+                managePlugins: "Quản lý plugin",
+                searchPlugins: "Tìm plugin...",
+                sendDm: "Gửi tin nhắn trực tiếp",
+                recipient: "Người nhận",
+                message: "Tin nhắn",
+                messageContent: "Nội dung tin nhắn",
+                openPaletteHotkey: "Phím tắt mở bảng lệnh",
+                actions: "Thao tác",
+                preview: "Xem trước",
+                openCommand: "Mở lệnh",
+                copyAnswer: "Sao chép đáp án",
+                openDetails: "Mở chi tiết",
+                calculator: "Máy tính",
+                expression: "Biểu thức",
+                result: "Kết quả",
+                copyExpression: "Sao chép biểu thức",
+                pinned: "Đã ghim",
+                suggestions: "Gợi ý",
+                setAlias: "Đặt bí danh",
+                aliasForLabel: "Bí danh cho {{label}}",
+                leaveEmptyToRemove: "Để trống để xóa",
+                command: "Lệnh",
+                noResults: "Không có kết quả",
+                addFile: "Thêm tệp",
+                saveCommand: "Lưu lệnh",
+                createCommand: "Tạo lệnh",
+                nameRequired: "Cần nhập tên.",
+                enterValidUrl: "Nhập một URL hợp lệ.",
+                pickSettingsPage: "Chọn một trang cài đặt từ gợi ý.",
+                textRequired: "Cần nhập văn bản.",
+                commandSaved: "Đã lưu lệnh.",
+                commandCreated: "Đã tạo lệnh.",
+                editCustomCommand: "Sửa lệnh tùy chỉnh",
+                disablePlugin: "Tắt plugin",
+                enablePlugin: "Bật plugin",
+                pickRecipient: "Chọn một người nhận từ gợi ý.",
+                addMessageOrFile: "Thêm tin nhắn hoặc tệp.",
+                pressKeys: "Nhấn phím...",
+                answerCopied: "Đã sao chép câu trả lời vào bộ nhớ tạm.",
+                calculationCopied: "Đã sao chép phép tính vào bộ nhớ tạm.",
+                unpinCommand: "Bỏ ghim lệnh",
+                pinCommand: "Ghim lệnh",
+                saveAlias: "Lưu bí danh",
+                changeHotkey: "Đổi phím tắt",
+                recordHotkey: "Ghi phím tắt",
+                pressKeyCombo: "Nhấn tổ hợp phím, Backspace để xóa, Esc để hủy",
+                searchIn: "Tìm trong {{title}}...",
+                searchCommands: "Tìm lệnh...",
+                somethingWentWrong: "Đã xảy ra lỗi.",
+                remove: "Xóa",
+                enabled: "Đã bật",
+                disabled: "Đã tắt",
+                sectionNavigation: "Điều hướng",
+                sectionCustom: "Tùy chỉnh",
+                sectionPlugins: "Plugin",
+                sectionMessaging: "Nhắn tin",
+                current: "Hiện tại",
+                submit: "Gửi"
+            },
+            description2: "Bảng lệnh kiểu Raycast để chạy thao tác ở bất cứ đâu trong Discord"
         },
         consoleJanitor: {
             name: "ConsoleJanitor",
@@ -3115,11 +3300,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         copyProfileColors: {
             name: "CopyProfileColors",
             description: "Một plugin để sao chép màu gradient trong hồ sơ của mọi người vào khay nhớ tạm.",
-            copy: "Sao chép màu hồ sơ",
+            copy: "Sao chép màu hồ sơ máy chủ",
             toast: {
                 noColor: "Không tìm thấy màu hồ sơ!",
                 copied: "Màu hồ sơ được sao chép vào clipboard!",
                 error: "Lỗi sao chép màu hồ sơ!"
+            },
+            text: {
+                formatted: "Màu chính #{{primary}}, Màu phụ #{{secondary}}"
             }
         },
         copyStatusUrls: {
@@ -3134,8 +3322,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "CopyStickerLinks",
             description: "Thêm khả năng sao chép và mở liên kết Nhãn dán",
             context: {
-                copy: "Sao chép liên kết",
-                open: "Mở liên kết"
+                copy: "Sao chép liên kết nhãn dán",
+                open: "Mở liên kết nhãn dán"
             },
             toast: {
                 success: "Đã sao chép liên kết!"
@@ -3271,6 +3459,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unset: "Bỏ đặt",
                 set: "Đặt biểu tượng mới",
                 hover: "Bạn có thể phải di chuột qua thư mục sau khi cài đặt để làm mới nó."
+            },
+            context: {
+                changeIcon: "Đổi biểu tượng"
             }
         },
         customIdle: {
@@ -3302,7 +3493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             error: {
                 appIdInvalid: "ID ứng dụng phải là số hợp lệ.",
                 notice: "Để ý",
-                sharing: "Chia sẻ hoạt động không được bật, mọi người sẽ không thể thấy sự hiện diện phong phú tùy chỉnh của bạn!",
+                sharing: "Chia sẻ hoạt động chưa bật nên mọi người sẽ không thấy Rich Presence tùy chỉnh của bạn!",
                 enable: "Cho phép",
                 validStream: "Liên kết phát trực tuyến phải là một URL hợp lệ.",
                 mustBeURL: "Phải là một URL hợp lệ.",
@@ -3418,7 +3609,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 buttonTwoURL: {
                     label: "URL của nút 2",
                     description: "URL của nút 2"
+                },
+                enablePresence: {
+                    description: "Có hiển thị trạng thái hay không",
+                    label: "Bật trạng thái"
                 }
+            },
+            toast: {
+                savedPresetName: "Đã lưu cấu hình sẵn {{name}}.",
+                loadedPresetName: "Đã tải cấu hình sẵn {{name}}.",
+                deletedPresetSelectedpreset: "Đã xóa cấu hình sẵn {{selectedPreset}}."
+            },
+            text: {
+                presetName: "Tên cấu hình sẵn",
+                selectAPreset: "Chọn cấu hình sẵn",
+                streamLinkTwitchOr: "Liên kết phát trực tiếp (Twitch hoặc YouTube, chỉ khi loại hoạt động là Đang phát trực tiếp)",
+                presets: "Cấu hình sẵn",
+                save: "Lưu",
+                load: "Tải",
+                delete: "Xóa",
+                noSavedPresetsYet: "Chưa có cấu hình sẵn nào được lưu.",
+                showCustomRpc: "Hiển thị RPC tùy chỉnh",
+                customRpcDisabled: "RPC tùy chỉnh đã tắt",
+                theEnablePresenceSetting: "Cài đặt \"Bật trạng thái\" đang tắt nên trạng thái của bạn sẽ không hiển thị. Nếu không cố ý, hãy bật nó bên dưới.",
+                activitySharingDisabled: "Đã tắt chia sẻ hoạt động",
+                discordDeveloperPortal: "Cổng nhà phát triển Discord",
+                imgur: "Imgur",
+                enableActivitySharing: "Bật chia sẻ hoạt động"
             }
         },
         customSounds: {
@@ -3460,7 +3677,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 default: "Mặc định",
                 custom: "Phong tục",
-                select: "Chọn một tập tin..."
+                select: "Chọn một tập tin...",
+                overrides: {
+                    label: "Ghi đè"
+                },
+                soundpack: {
+                    label: "Gói âm thanh",
+                    description: "Gói âm thanh dùng thay cho gói đã đặt trong Discord.",
+                    default: "Mặc định của Discord"
+                }
             },
             type: {
                 activityEnd: "Kết thúc hoạt động",
@@ -3509,7 +3734,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 streamUserJoined: "Người dùng phát trực tuyến đã tham gia",
                 streamUserLeft: "Truyền trực tuyến người dùng còn lại",
                 success: "Thành công",
-                undeafen: "Undeafen",
+                undeafen: "Bật nghe",
                 unmute: "Bật tiếng",
                 userJoin: "Người dùng tham gia",
                 userLeave: "Người dùng nghỉ phép",
@@ -3534,6 +3759,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 calendar: "cho phép định dạng ngày động như",
                 today: "Hôm nay",
                 yesterday: "Hôm qua",
+                or: "hoặc",
                 relative: "mang lại cho bạn những thời điểm như",
                 relativeTime: "4 giờ trước",
                 preview: "Xem trước",
@@ -3627,6 +3853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 dearrowed: "Nội dung nhúng này đã được DeArrowed; bấm vào để khôi phục",
                 dearrow: "Bấm vào DeArrow"
+            },
+            text: {
+                toggleDearrow: "Bật/tắt Dearrow"
             }
         },
         declutter: {
@@ -3635,6 +3864,12 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 userProfileHeader: {
                     label: "Hồ sơ người dùng"
+                },
+                removeAvatarDecoration: {
+                    label: "Xóa trang trí ảnh đại diện",
+                    description: "Xóa trang trí ảnh đại diện. Tùy chọn này bị tắt nếu bật Decor.",
+                    alertBody: "Tính năng xóa trang trí ảnh đại diện đã bị vô hiệu hóa để tránh xung đột với plugin Decor.",
+                    ok: "OK"
                 },
                 removeNameplate: {
                     label: "Xóa bảng tên",
@@ -3693,7 +3928,27 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeButtonTooltips: {
                     label: "Xóa chú giải công cụ nút",
                     description: "Xóa chú giải công cụ nút."
+                },
+                removeProfileFrame: {
+                    description: "Xóa khung hồ sơ.",
+                    label: "Xóa khung hồ sơ"
+                },
+                removeDisplayNameStyles: {
+                    description: "Xóa tên hiển thị có hiệu ứng/kiểu trong danh sách thành viên.",
+                    label: "Xóa kiểu tên hiển thị"
+                },
+                removeLibraryAboveDms: {
+                    description: "Xóa thư viện phía trên danh sách tin nhắn trực tiếp.",
+                    label: "Xóa thư viện phía trên tin nhắn trực tiếp"
+                },
+                removeFamilyCenterAboveDms: {
+                    description: "Xóa trung tâm gia đình phía trên danh sách tin nhắn trực tiếp.",
+                    label: "Xóa trung tâm gia đình phía trên tin nhắn trực tiếp"
                 }
+            },
+            text: {
+                discordAlreadyHasA: "Discord đã có sẵn tùy chọn kiểu tên người dùng trong",
+                accessibilitySettings: "cài đặt trợ năng."
             }
         },
         decodeBase64: {
@@ -3800,6 +4055,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hold: "Giữ lấy",
                 suspended: "Bằng cách gửi đồ trang trí, bạn đồng ý với {{guidelines}}. Việc không đọc những nguyên tắc này có thể khiến tài khoản của bạn bị đình chỉ tạo thêm đồ trang trí trong tương lai.",
                 guidelines: "các hướng dẫn"
+            },
+            toast: {
+                failedToAuthorizeMessage: "Ủy quyền thất bại: {{message}}"
+            },
+            text: {
+                removeDecoration: "Gỡ trang trí Decor",
+                decoration: "Trang trí Decor",
+                none: "Không có",
+                decorationFile: "Tệp trang trí"
             }
         },
         demonstration: {
@@ -3861,6 +4125,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                 starting: "Lỗi khi khởi động plugin {{plugin}}",
                 noMessage: "Không có thông báo lỗi",
                 noReason: "Không có lý do nào được cung cấp"
+            },
+            text: {
+                reconnect: "Kết nối lại",
+                loadingLazyModules: "Đang tải các module lazy, khởi động lại có thể gây lỗi",
+                loadedLazyModules: "Đã tải tất cả module lazy",
+                failedLazyModules: "Không thể tải module lazy, hãy kiểm tra console",
+                ok: "OK"
             }
         },
         disableCallIdle: {
@@ -3919,6 +4190,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Các biến khác",
                     newline: "Ký tự dòng mới"
                 }
+            },
+            text: {
+                notSupported: "Không được hỗ trợ",
+                devBuild: "Bản phát triển",
+                standalone: "Độc lập"
             }
         },
         dontFilterMe: {
@@ -3935,6 +4211,23 @@ const translations: MatchStructure<typeof enTranslations> = {
         dontRoundMyTimestamps: {
             name: "DontRoundMyTimestamps",
             description: "Luôn làm tròn dấu thời gian tương đối xuống, do đó 7,6y trở thành 7y thay vì 8y"
+        },
+        downloadAllAttachments: {
+            name: "DownloadAllAttachments",
+            description: "Thêm nút vào menu tin nhắn để tải xuống tất cả tệp đính kèm cùng lúc.",
+            button: "Tải xuống tất cả tệp đính kèm",
+            toast: {
+                success: "Đã tải xuống {{count}} tệp đính kèm.",
+                partial: "Đã tải xuống {{succeeded}}/{{total}} tệp đính kèm. {{failed}} tệp thất bại.",
+                downloadedPluralizeSucceededAttachment: "Đã tải xuống {{pluralize_succeeded_attachment}}.",
+                downloadedSucceededOfLength: "Đã tải {{succeeded}}/{{length}} tệp đính kèm. {{failed}} thất bại."
+            },
+            option: {
+                downloadAllFileTypes: {
+                    description: "Tải cả tệp đính kèm không phải phương tiện. Chỉ bật nếu bạn tin tưởng những gì người khác gửi.",
+                    label: "Tải mọi loại tệp"
+                }
+            }
         },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
@@ -3999,7 +4292,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     created: "Đã tạo lời mời.",
                     unable: "Không thể tạo lời mời.",
                     noChannel: "Không có kênh nào có sẵn cho lời mời.",
-                }
+                },
+                noReusableInvite: "Không có lời mời tái sử dụng được.",
+                unableToReuseInvite: "Không thể tái sử dụng lời mời."
             },
             ghost: {
                 user: "người dùng",
@@ -4110,6 +4405,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Menu phát triển của thanh công cụ",
                     description: "Thay đổi nút thanh công cụ Trợ giúp (?) (trên cùng bên phải trong trò chuyện) thành menu nhà phát triển của Discord"
                 }
+            },
+            text: {
+                searchExperiments: "Tìm thử nghiệm"
             }
         },
         exportMessages: {
@@ -4193,6 +4491,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportAll: "Xuất tất cả tin nhắn từ {{user}}",
                 user: "người dùng",
                 exportAllChannel: "Xuất tất cả tin nhắn kênh"
+            },
+            text: {
+                unknownError: "Lỗi không xác định"
             }
         },
         expressionCloner: {
@@ -4206,11 +4507,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 success: "Đã sao chép thành công {{name}} thành {{guild}}!",
                 yourServer: "máy chủ của bạn",
                 failed: "Không sao chép được:",
-                console: "Đã xảy ra lỗi (kiểm tra bảng điều khiển!)"
+                console: "Đã xảy ra lỗi (kiểm tra bảng điều khiển!)",
+                successfullyClonedNameTo: "Đã sao chép {{name}} sang {{name_your_server}}!"
             },
             context: {
                 clone: "Nhân bản {{type}}",
                 cloneName: "Nhân bản {{data}}"
+            },
+            text: {
+                yourServer: "máy chủ của bạn",
+                cloneTo: "Sao chép sang {{name}}",
+                emoji: "Emoji",
+                sticker: "Nhãn dán"
             }
         },
         f8break: {
@@ -4413,36 +4721,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removed: "Bí danh đã xóa: {{alias}}",
                 failedRemove: "Không xóa được bí danh",
                 duplicate: "Bí danh trùng lặp",
-                failedSave: "Không lưu được bí danh."
+                failedSave: "Không lưu được bí danh.",
+                removedAliasAlias: "Đã xóa bí danh :{{alias}}:",
+                aliasSetForGetemojidisplayname: "Đã đặt bí danh cho {{getEmojiDisplayName_ref}}."
             },
             button: {
                 edit: "Chỉnh sửa bí danh",
                 set: "Đặt bí danh"
+            },
+            text: {
+                remove: "Xóa",
+                noAliasesSetYet: "Chưa đặt bí danh nào.",
+                aliasRequired: "Cần nhập bí danh.",
+                aliasInvalid: "Bí danh phải dài 2-32 ký tự và chỉ dùng chữ thường, số hoặc dấu gạch dưới."
             }
         },
-        favoriteGifSearch: {
-            name: "FavouriteGifSearch",
-            description: "Thêm thanh tìm kiếm vào ảnh GIF yêu thích.",
-            placeholder: "Tìm kiếm ảnh GIF yêu thích",
-            option: {
-                searchOption: {
-                    label: "Tùy chọn tìm kiếm",
-                    description: "Phần URL bạn muốn tìm kiếm",
-                    url: "Toàn bộ URL",
-                    path: "Chỉ đường dẫn (/somegif.gif)",
-                    hostandpath: "Máy chủ & Đường dẫn (tenor.com somgif.gif)"
-                }
-            }
-        },
-        favouriteAnything: {
-            name: "FavouriteAnything",
+        favoriteAnything: {
+            name: "FavoriteAnything",
             description: "Yêu thích bất kỳ hình ảnh",
             noFiles: "Không có tệp nào khớp với tìm kiếm của bạn.",
             searchPlaceholder: "Tìm kiếm tệp",
             media: "Phương tiện",
             demoText: "Nhấp vào ngôi sao để thêm tệp vào yêu thích.\nCác tệp yêu thích sẽ hiển thị ở đây!",
             fetchError: "Không thể tải {filename}",
-            uploadError: "Không thể tải lên {filename}"
+            uploadError: "Không thể tải lên {filename}",
+            text: {
+                clickTheStarTo: "Nhấn vào ngôi sao để yêu thích một tệp.",
+                favoriteFilesWillShow: "Tệp yêu thích sẽ hiển thị ở đây!"
+            },
+            option: {
+                localThumbnails: {
+                    description: "Tạo ảnh thu nhỏ tệp cục bộ thay vì dùng dịch vụ bên ngoài (placeholder.nin0.dev). Không tương thích với thiết bị di động. Bật/tắt tùy chọn này không ảnh hưởng đến mục yêu thích hiện có.",
+                    label: "Ảnh thu nhỏ cục bộ"
+                }
+            }
         },
         fileDownloadButton: {
             name: "FileDownloadButton",
@@ -4457,7 +4769,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 navigate: "Sử dụng bảng điều khiển phía dưới để điều hướng giữa các câu trả lời.",
                 container: "Không thể tìm thấy phần tử vùng chứa.",
-                couldntFind: "Không thể tìm thấy tin nhắn trả lời."
+                couldntFind: "Không tìm thấy phản hồi."
             },
             option: {
                 includePings: {
@@ -4545,6 +4857,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 channelFull: {
                     label: "Kênh đầy đủ",
                     description: "Cố gắng chuyển bạn đến kênh khi kênh không còn đầy"
+                },
+                onlyWhenInVoice: {
+                    label: "Chỉ khi ở kênh thoại",
+                    description: "Chỉ theo dõi người dùng khi bạn đang ở kênh thoại"
                 }
             },
             toast: {
@@ -4589,25 +4905,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     previewText: "Cáo nâu nhanh nhẹn nhảy qua chó lười",
                     authors: "Bởi {{authors}}"
                 }
+            },
+            text: {
+                currentFont: "Phông chữ hiện tại:",
+                resetFont: "Đặt lại phông chữ"
             }
         },
         forceOwnerCrown: {
             name: "ForceOwnerCrown",
             description: "Buộc chủ sở hữu phải đặt tên bên cạnh tên người dùng ngay cả khi máy chủ lớn."
-        },
-        forwardAnywhere: {
-            name: "ForwardAnywhere",
-            description: "Nếu chuyển tiếp không thành công, hãy gửi nó dưới dạng tin nhắn bình thường; cũng cho phép chuyển tiếp NSFW",
-            option: {
-                forwardPreface: {
-                    label: "Lời tựa chuyển tiếp",
-                    description: "Nội dung được chuyển tiếp nên được mở đầu bằng gì"
-                }
-            },
-            context: {
-                attachments: "Tệp đính kèm",
-                forwarded: "Chuyển tiếp từ"
-            }
         },
         freaky: {
             name: "Freaky",
@@ -4707,12 +5013,17 @@ const translations: MatchStructure<typeof enTranslations> = {
                     name: "Besties",
                     description: "Làm thế nào để bạn thậm chí quản lý điều này ??? (5 năm)"
                 }
+            },
+            option: {
+                showFriendsInChat: {
+                    description: "Hiển thị biểu tượng bạn bè trên tin nhắn từ bạn bè.",
+                    label: "Hiển thị bạn bè trong trò chuyện"
+                }
+            },
+            text: {
+                friend: "Bạn bè",
+                rankIcon: "Biểu tượng cấp bậc"
             }
-        },
-        friendsSince: {
-            name: "FriendsSince",
-            description: "Hiển thị khi bạn trở thành bạn bè với ai đó trong cửa sổ bật lên của người dùng",
-            section: "Bạn bè kể từ"
         },
         friendTags: {
             name: "FriendTags",
@@ -4748,7 +5059,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
-            description: "Thêm nút bật tắt vào cửa sổ bật lên của người dùng để hiển thị/ẩn hoạt động trò chơi của bạn",
+            description: "Thêm nút cạnh nút micro và tắt nghe để bật/tắt hoạt động trò chơi. Nhấp chuột phải để bật/tắt hoạt động Spotify.",
             tooltip: "Chuyển đổi hoạt động trò chơi",
             gameActivity: {
                 enabled: "Đã bật hoạt động trò chơi",
@@ -4765,6 +5076,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     panel: "Bên cạnh Tắt tiếng/Điếc",
                     toolbox: "Hộp công cụ Plexcord"
                 }
+            },
+            text: {
+                disableGameActivity: "Tắt hoạt động trò chơi",
+                enableGameActivity: "Bật hoạt động trò chơi",
+                shareSpotifyActivity: "Chia sẻ hoạt động Spotify",
+                shareSpotifyActivityAccount: "Chia sẻ hoạt động Spotify ({{name}})"
             }
         },
         ghosted: {
@@ -4912,7 +5229,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "Đã sao chép liên kết hình ảnh vào clipboard!",
                 urlCopied: "Đã sao chép URL vào khay nhớ tạm!",
                 already: "Bộ sưu tập đó đã tồn tại",
-                alreadyCollection: "GIF đó đã có trong bộ sưu tập đó"
+                alreadyCollection: "GIF này đã có trong bộ sưu tập",
+                collectionsImportedSuccessfully: "Đã nhập bộ sưu tập.",
+                failedToImportCollections: "Không thể nhập bộ sưu tập: {{String_err}}"
             },
             modal: {
                 create: {
@@ -4948,6 +5267,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     remove: "Di dời",
                     cancel: "Đừng bận tâm"
                 }
+            },
+            text: {
+                gifPickerCategoryOptions: "Tùy chọn danh mục bộ chọn GIF",
+                gifCollections: "Bộ sưu tập GIF",
+                unknown: "Không rõ"
             }
         },
         gifPaste: {
@@ -4959,7 +5283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Thêm lệnh gửi ảnh GIF ngẫu nhiên từ mục yêu thích của bạn, với cơ hội 1/10 để ping chủ sở hữu máy chủ",
             command: {
                 gifRoulette: {
-                    description: "Cám dỗ số phận và gửi ảnh GIF"
+                    description: "Cám dỗ số phận và gửi ảnh GIF",
+                    restricted: "Lệnh này bị hạn chế trên máy chủ này."
                 }
             },
             option: {
@@ -4994,7 +5319,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 only: "Chỉ hiển thị hàng đầu {{length}}/{{total}}"
             },
             modal: {
-                title: "Kho lưu trữ GitHub của {{user}}",
+                title: "Kho GitHub của {{username}}",
                 repository: "Kho lưu trữ",
                 description: "Sự miêu tả",
                 language: "Ngôn ngữ",
@@ -5101,9 +5426,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         hideMessages: {
             name: "HideMessages",
-            description: "Một plugin để tạm thời ẩn tin nhắn cho đến khi bạn khởi động lại.",
+            description: "Tạm thời ẩn tin nhắn và DM cho đến khi khởi động lại.",
             button: {
-                hide: "Trốn"
+                hide: "Trốn",
+                hideDm: "Ẩn DM",
+                unhideDm: "Bỏ ẩn DM"
+            },
+            toggle: {
+                none: "Không có DM bị ẩn",
+                hide: "Ẩn các DM đã ẩn",
+                show: "Hiện các DM đã ẩn"
             },
             option: {
                 hidePopoverButton: {
@@ -5111,6 +5443,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Ẩn nút ẩn trong cửa sổ bật lên tin nhắn."
                 }
             }
+        },
+        hideMutedVoiceIndicator: {
+            name: "HideMutedVoiceIndicator",
+            description: "Ẩn chỉ báo thoại trong danh sách máy chủ khi các kênh thoại đang hoạt động đều đã bị tắt tiếng"
         },
         hideServers: {
             name: "HideServers",
@@ -5231,10 +5567,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 refreshed: "Đã làm mới avatar thành công.",
                 deletedAll: "Đã xóa thành công tất cả ghi chú.",
                 imported: "Đã nhập ghi chú thành công.",
-                invalid: "Không thể nhập ghi chú."
+                invalid: "Không thể nhập ghi chú.",
+                invalidJson: "JSON không hợp lệ"
             },
             toolbox: {
                 action: "Mở ghi chú"
+            },
+            text: {
+                holyNotes: "Holy Notes",
+                noteTag: "GHI CHÚ"
             }
         },
         homeTyping: {
@@ -5342,7 +5683,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 ignoreListening: {
                     label: "Bỏ qua việc nghe",
-                    description: "Bỏ qua mọi hoạt động nghe (đây thường là hoạt động Spotify)"
+                    description: "Bỏ qua mọi hoạt động nghe nhạc (thường là hoạt động Spotify)"
                 },
                 ignoreWatching: {
                     label: "Bỏ qua việc xem",
@@ -5355,6 +5696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoredActivities: {
                     label: "Hoạt động bị bỏ qua"
                 }
+            },
+            text: {
+                enableActivity: "Bật hoạt động",
+                disableActivity: "Tắt hoạt động"
             }
         },
         ignoreCalls: {
@@ -5440,6 +5785,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 sizeHTML: "Kích cỡ",
                 dimensions: "Kích thước",
                 filename: "Tên tệp"
+            },
+            text: {
+                bytes: "Byte"
             }
         },
         imgToGif: {
@@ -5558,6 +5906,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toast: "Chia sẻ màn hình tức thì {{state}}",
                 enabled: "Đã bật",
                 disabled: "Tàn tật"
+            },
+            toast: {
+                instantScreenshareDisabled: "Chia sẻ màn hình tức thì {{disabled}}"
+            },
+            text: {
+                instantScreenshare: "Instant Screenshare"
             }
         },
         invisibleChat: {
@@ -5680,6 +6034,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     resetData: "Đặt lại bộ nhớ",
                     sure: "Bạn có chắc không?"
                 }
+            },
+            text: {
+                serverOptions: "Tùy chọn máy chủ",
+                copyServerId: "Sao chép ID máy chủ",
+                serverIdCopied: "Đã sao chép ID máy chủ vào bộ nhớ tạm"
             }
         },
         jumpTo: {
@@ -5746,6 +6105,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Từ khóa",
                     description: "Quản lý từ khóa"
                 }
+            },
+            text: {
+                keywordEntryI1: "Mục từ khóa {{i_1}}",
+                listPriorityAdvanced: "Ưu tiên danh sách (nâng cao)",
+                whichListToPrioritize: "Danh sách nào được ưu tiên nếu tin nhắn kích hoạt cả hai danh sách",
+                ifYouAreNot: "Nếu không chắc, trong hầu hết trường hợp thường đặt là Danh sách đen"
             }
         },
         lastOnline: {
@@ -5819,10 +6184,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     listenbrainzLogo: "Sử dụng logo ListenBrainz lớn",
                     generic: "Sử dụng trình giữ chỗ chung"
                 },
+                showAlbumCover: {
+                    label: "Hiển thị ảnh bìa album",
+                    description: "Hiển thị ảnh bìa album. Tắt tùy chọn này sẽ hiển thị ảnh giữ chỗ. Hữu ích nếu nhạc của bạn có ảnh bìa không phù hợp"
+                },
                 useLogo: {
                     label: "Sử dụng biểu tượng",
                     description: "Hiển thị logo ListenBrainz trên ảnh bìa album"
                 }
+            },
+            button: {
+                profile: "Hồ sơ ListenBrainz",
+                viewSong: "Xem bài hát"
             }
         },
         loadingQuotes: {
@@ -5849,6 +6222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Dấu phân cách trích dẫn bổ sung",
                     description: "Dấu phân cách cho dấu ngoặc kép bổ sung"
                 }
+            },
+            text: {
+                allQuotesDisabled: "Bạn thật sự đã tắt hết câu trích dẫn khi tải sao? Đúng là đồ ngốc..."
             }
         },
         loginWithQR: {
@@ -5867,7 +6243,26 @@ const translations: MatchStructure<typeof enTranslations> = {
             stopScanning: "Dừng quét",
             usingWebcam: "Quét bằng webcam",
             dragDrop: "Kéo và thả hình ảnh vào đây hoặc nhấp để chọn hình ảnh",
-            orPaste: "Hoặc dán hình ảnh từ clipboard của bạn!"
+            orPaste: "Hoặc dán hình ảnh từ clipboard của bạn!",
+            verifyLogin: "Xác minh đăng nhập",
+            text: {
+                scanQrCode: "Quét mã QR"
+            }
+        },
+        markdownTables: {
+            name: "MarkdownTables",
+            description: "Hiển thị bảng markdown kiểu GitHub trong tin nhắn Discord.",
+            toolbar: {
+                label: "Chế độ xem bảng markdown",
+                table: "Bảng",
+                raw: "Thô"
+            },
+            option: {
+                hideToggle: {
+                    label: "Ẩn nút chuyển",
+                    description: "Ẩn nút chuyển Bảng/Thô và luôn hiển thị bảng đã hiển thị."
+                }
+            }
         },
         mediaPlaybackSpeed: {
             name: "MediaPlaybackSpeed",
@@ -5893,7 +6288,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         memberCount: {
             name: "MemberCount",
-            description: "Hiển thị số lượng thành viên trực tuyến, tổng số thành viên và người dùng trong các kênh thoại trên máy chủ — trong danh sách thành viên và chú giải công cụ.",
+            description: "Hiển thị số thành viên trực tuyến, tổng số thành viên và người dùng trong kênh thoại của máy chủ - trong danh sách thành viên và chú giải.",
             option: {
                 toolTip: {
                     label: "Chú giải công cụ",
@@ -5910,7 +6305,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             onlineThisChannel: "{{formattedOnlineCount}} trực tuyến trên kênh này",
             totalMembers: "{{formattedTotalCount}} tổng số thành viên máy chủ",
-            totalVoice: "{{formattedVoiceCount}} thành viên lên tiếng"
+            totalVoice: "{{formattedVoiceCount}} thành viên lên tiếng",
+            tooltip: {
+                total: "Tổng cộng {{count}} thành viên máy chủ"
+            }
         },
         mentionAvatars: {
             name: "MentionAvatars",
@@ -6057,7 +6455,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                 messageContent: "Đã sao chép nội dung tin nhắn!",
                 userId: "ID người dùng đã được sao chép!"
             },
-            linkCopied: "Đã sao chép liên kết!"
+            linkCopied: "Đã sao chép liên kết!",
+            text: {
+                shift: "Shift",
+                ctrl: "Ctrl",
+                alt: "Alt",
+                backspace: "Backspace",
+                pickEmoji: "Chọn emoji"
+            },
+            emojiSetting: {
+                pick: "Chọn biểu tượng cảm xúc",
+                selectMain: "Chọn biểu tượng cảm xúc để bày tỏ",
+                selectAdditional: "Chọn thêm biểu tượng cảm xúc",
+                additionalPlaceholder: "phân tách bằng dấu phẩy/xuống dòng, tối đa {{max}}"
+            },
+            toast: {
+                cannotReact: "Không thể bày tỏ cảm xúc: Thiếu quyền",
+                linkCopied: "Đã sao chép liên kết!"
+            }
         },
         messageColors: {
             name: "MessageColors",
@@ -6276,7 +6691,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                 separatedDiffs: {
                     label: "Khác biệt riêng biệt",
                     description: "Tách riêng phần bổ sung và loại bỏ trong các khác biệt để có sự khác biệt dễ đọc hơn"
+                },
+                logDeletedAttachments: {
+                    description: "Có ghi lại tệp đính kèm đã xóa hay không",
+                    label: "Ghi lại tệp đính kèm đã xóa"
                 }
+            },
+            text: {
+                clearHistory: "Xóa lịch sử",
+                toggleDeletedHighlight: "Bật/tắt tô sáng tin đã xóa",
+                enableDiffView: "Bật chế độ xem khác biệt",
+                disableDiffView: "Tắt chế độ xem khác biệt",
+                noDeletedMessages: "Không có tin nhắn đã xóa",
+                deletedMessageSuffix: " tin nhắn đã xóa",
+                deletedMessagesSuffix: " tin nhắn đã xóa"
             }
         },
         messageLoggerEnhanced: {
@@ -6478,11 +6906,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 whitelistedIds: {
                     label: "ID thuộc danh sách trắng",
-                    description: "Máy chủ, kênh hoặc ID người dùng được đưa vào danh sách trắng."
+                    description: "ID máy chủ, kênh hoặc người dùng luôn hiển thị trong nhật ký tin nhắn."
                 },
                 blacklistedIds: {
                     label: "ID bị liệt vào danh sách đen",
-                    description: "Máy chủ, kênh hoặc ID người dùng bị liệt vào danh sách đen."
+                    description: "ID máy chủ, kênh hoặc người dùng không bao giờ hiển thị trong nhật ký tin nhắn."
                 },
                 imageCacheDir: {
                     label: "Thư mục bộ đệm hình ảnh",
@@ -6520,6 +6948,25 @@ const translations: MatchStructure<typeof enTranslations> = {
                     confirmText: "Thông thoáng",
                     cancel: "Hủy bỏ"
                 }
+            },
+            toast: {
+                clearedLogs: "Đã xóa nhật ký",
+                failedToClearLogs: "Không thể xóa nhật ký",
+                failedToRemoveMessage: "Không thể xóa tin nhắn. Xem bảng điều khiển để biết chi tiết.",
+                noMessagesFoundIn: "Không tìm thấy tin nhắn trong tệp nhật ký",
+                successfullyImportedCountLogs: "Đã nhập {{count}} nhật ký",
+                successfullyExportedLogs: "Đã xuất nhật ký",
+                successfullyExportedCountLogs: "Đã xuất {{count}} nhật ký",
+                errorExportingLogsCheck: "Lỗi khi xuất nhật ký. Xem bảng điều khiển để biết thêm thông tin"
+            },
+            text: {
+                jsonFile: "Tệp JSON",
+                clearLogs: "Xóa nhật ký",
+                clearingLogs: "Đang xóa nhật ký...",
+                messageLogger: "Message Logger",
+                importLogs: "Nhập nhật ký",
+                logs: "Nhật ký",
+                loadingTabLogs: "Đang tải nhật ký {{tab}}..."
             }
         },
         messageNotifier: {
@@ -6913,8 +7360,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     LRCLIB: "LRCLIB"
                 },
                 spotifyLyricsApiUrl: {
-                    label: "URL API lời bài hát Spotify",
-                    description: "URL cơ sở của API lời bài hát Spotify."
+                    label: "URL cơ sở API lời bài hát Spotify",
+                    description: "URL cơ sở của phiên bản tùy chỉnh (ví dụ: http://localhost:8080)."
                 },
                 translateTo: {
                     label: "Dịch sang",
@@ -6941,6 +7388,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Xóa tất cả lời bài hát và bản dịch được lưu trong bộ nhớ đệm",
                     button: "Xóa bộ nhớ đệm",
                     cacheLyricsPurged: "Bộ nhớ đệm lời bài hát đã bị xóa"
+                },
+                lyricDelay: {
+                    label: "Độ trễ lời bài hát"
                 }
             },
             context: {
@@ -7025,6 +7475,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 failed: "Không thể hiển thị Phương thức :(",
                 checkConsole: "Kiểm tra bảng điều khiển để tìm lỗi",
                 invalidUrlCustomApi: "Định dạng URL không hợp lệ cho URL máy chủ API tùy chỉnh"
+            },
+            text: {
+                unknownArtist: "Nghệ sĩ không rõ",
+                unknownTitle: "Tiêu đề không rõ"
             }
         },
         mutualGroupDMs: {
@@ -7045,7 +7499,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "NewGuildSettings",
             description: "Tự động tắt tiếng máy chủ mới và thay đổi nhiều cài đặt khác khi tham gia",
             context: {
-                apply: "Áp dụng Cài đặt bang hội mới"
+                apply: "Áp dụng NewGuildSettings cho thư mục"
             },
             option: {
                 guild: {
@@ -7100,7 +7554,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 dontShowAgain: "Đừng hiển thị lại điều này",
                 restartRequired: "Cần phải khởi động lại để áp dụng các thay đổi",
                 restart: "Khởi động lại",
-                continue: "Tiếp tục"
+                continue: "Tiếp tục",
+                supportUs: "Plexcord là phần mềm mã nguồn mở. Nếu bạn thích dùng nó, hãy cân nhắc ủng hộ chúng tôi",
+                supportUsLink: "tại đây"
             }
         },
         noAppsAllowed: {
@@ -7284,7 +7740,10 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         notificationTitle: {
             name: "NotificationTitle",
-            description: "Làm cho thông báo trên màn hình có nhiều thông tin hơn"
+            description: "Làm cho thông báo trên màn hình có nhiều thông tin hơn",
+            text: {
+                threadInParent: "{{thread}} trong {{parent}}"
+            }
         },
         notificationVolume: {
             name: "NotificationVolume",
@@ -7360,6 +7819,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 vrcx: {
                     label: "VRChat",
                     description: "Mở liên kết VRChat trong ứng dụng VRCX"
+                },
+                telegram: {
+                    label: "Telegram",
+                    description: "Mở liên kết Telegram trong ứng dụng Telegram"
                 }
             },
             notification: {
@@ -7447,6 +7910,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 highest: "Vai trò cao nhất",
                 lowest: "Vai trò thấp nhất",
                 details: "Chi tiết vai trò"
+            },
+            text: {
+                roleOptions: "Tùy chọn vai trò",
+                userOptions: "Tùy chọn người dùng",
+                unknownRole: "Vai trò không rõ",
+                unknownUser: "Người dùng không rõ"
             }
         },
         petpet: {
@@ -7497,7 +7966,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unnamed: "ồ ồ"
                 },
                 pin: {
-                    label: "Ghim DM",
+                    label: "Ghim tin nhắn trực tiếp",
                     addCategory: "Thêm danh mục"
                 },
                 unPin: {
@@ -7534,7 +8003,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     color: "Màu sắc",
                     save: "Cứu",
                     create: "Tạo nên"
-                }
+                },
+                defaultCategoryName: "Danh mục ghim {{number}}"
             }
         },
         pingNotifications: {
@@ -7578,12 +8048,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformIndicators: {
             name: "PlatformIndicators",
             description: "Thêm chỉ báo nền tảng (Desktop, Mobile, Web...) cho người dùng",
-            embeddedTooltip: "Bảng điều khiển",
+            embeddedTooltip: "Nhúng (Máy chơi game hoặc Trò chơi)",
             vrTooltip: "thực tế ảo",
             option: {
                 list: {
                     label: "Danh sách",
-                    description: "Hiển thị các chỉ số trong danh sách thành viên"
+                    description: "Hiển thị chỉ báo trong hồ sơ người dùng"
                 },
                 badges: {
                     label: "Huy hiệu",
@@ -7606,7 +8076,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformSpoofer: {
             name: "PlatformSpoofer",
             description: "Giả mạo nền tảng hoặc thiết bị bạn đang sử dụng",
-            about: "Chúng tôi không thể đảm bảo plugin này sẽ không khiến bạn bị cảnh báo hoặc bị cấm.",
+            about: "Chúng tôi không thể đảm bảo plugin này sẽ không khiến bạn bị cảnh cáo hoặc cấm. Chọn Xbox/Playstation/VR có thể khiến ứng dụng của bạn thành phiên bản lỗi thời.",
             platform: {
                 desktop: "Ứng dụng khách bất hòa",
                 web: "Web bất hòa",
@@ -7619,7 +8089,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 platform: {
                     label: "Nền tảng",
-                    description: "Nền tảng nào sẽ hiển thị dưới dạng",
+                    description: "Nền tảng mà bạn muốn giả vờ đang dùng.",
                     desktop: "Máy tính để bàn",
                     web: "Web",
                     android: "Android",
@@ -7689,9 +8159,9 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         profileSets: {
             name: "ProfileSets",
-            description: "Cho phép bạn lưu và tải các cài đặt trước hồ sơ khác nhau thông qua phần Hồ sơ trong Cài đặt.",
+            description: "Cho phép lưu và tải các cấu hình hồ sơ khác nhau.",
             toast: {
-                importFailed: "Không thể nhập bộ hồ sơ. Tệp có thể không hợp lệ.",
+                importFailed: "Không thể nhập cấu hình sẵn. Tệp có thể không hợp lệ.",
             },
             option: {
                 avatarSize: {
@@ -7722,397 +8192,550 @@ const translations: MatchStructure<typeof enTranslations> = {
                 random: "Ngẫu nhiên",
                 import: "Nhập khẩu",
                 exportAll: "Xuất tất cả"
+            },
+            text: {
+                selectAServer: "Chọn máy chủ",
+                profileSets: "Bộ hồ sơ",
+                youAreNotIn: "Bạn chưa tham gia máy chủ nào.",
+                mainProfile: "Hồ sơ chính",
+                serverProfiles: "Hồ sơ máy chủ",
+                openProfileSets: "Mở bộ hồ sơ"
             }
         },
         questify: {
             name: "Questify",
-            description: "Nâng cao trải nghiệm Quest của bạn với một bộ tính năng hoặc tắt chúng hoàn toàn nếu chúng không phù hợp với bạn.",
-            quests: "Nhiệm vụ",
+            description: "Nâng cao một số tính năng Quest, tắt các phiền toái hoặc loại bỏ hoàn toàn Quest.",
+            quests: "Quest",
             context: {
                 quest: {
-                    label: "Menu nút nhiệm vụ",
-                    ignore: "Đánh dấu tất cả đã bỏ qua",
-                    reset: "Đặt lại danh sách bị bỏ qua",
-                    fetch: "Tìm nạp nhiệm vụ",
-                    markAsIgnored: "Đánh dấu là đã bỏ qua",
-                    unmarkAsIgnored: "Bỏ đánh dấu là đã bỏ qua",
+                    label: "Menu nút Quest",
+                    ignore: "Đánh dấu tất cả là bỏ qua",
+                    reset: "Đặt lại danh sách bỏ qua",
+                    fetch: "Tải Quest",
+                    markAsIgnored: "Đánh dấu là bỏ qua",
+                    unmarkAsIgnored: "Bỏ đánh dấu bỏ qua",
                     stopAuto: "Dừng tự động hoàn thành",
-                    copyQuestID: "Sao chép ID nhiệm vụ",
-                    startAuto: "Bắt đầu tự động hoàn thành"
-                }
-            },
-            settings: {
-                questButton: {
-                    title: "Nút nhiệm vụ",
-                    description: "Hiển thị nút Nhiệm vụ trong danh sách máy chủ với chỉ báo tùy chọn cho các Nhiệm vụ chưa được nhận.",
-                    leftClick: "Hành động nhấp chuột trái",
-                    middleClick: "Hành động nhấp chuột giữa",
-                    rightClick: "Hành động nhấp chuột phải",
-                    visibility: "Hiển thị nút",
-                    unclaimedIndicator: "Chỉ báo chưa được xác nhận",
-                    badgeColor: "Màu huy hiệu",
-                    rewardDisplay: "Hiển thị phần thưởng",
-                    includedRewardTypes: "Các loại phần thưởng đi kèm",
-                    includedRewardTypesDesc: "Chỉ tính Nhiệm vụ có các loại phần thưởng này là chưa được nhận khi xác định mức độ hiển thị của nút, số lượng huy hiệu và khi phát âm thanh cảnh báo.",
-                    selectRewardTypes: "Chọn loại phần thưởng để đưa vào số lượng chưa được nhận...",
-                    noRewardType: "Không có tính năng Quest được hỗ trợ với tên đó.",
-                    default: "Mặc định",
-                    disable: "Vô hiệu hóa"
-                },
-                questFeatures: {
-                    title: "Tính năng nhiệm vụ",
-                    description: "Sửa đổi các tính năng Quest cụ thể.",
-                    popupWarning: "Tùy chọn {{disablePopup}} sẽ bị bỏ qua đối với các Nhiệm vụ đã hoàn thành và theo dõi tiến trình Nhiệm vụ.",
-                    videoQuestInfo: "Tùy chọn {{completeVideo}} sẽ đợi trong suốt thời gian của Nhiệm vụ video và tự động đánh dấu nó là đã hoàn thành.",
-                    gameQuestInfo: "Tương tự, tùy chọn {{completeGame}} sẽ đợi trong suốt thời gian của Nhiệm vụ trò chơi và tự động đánh dấu nó là đã hoàn thành. Tùy chọn này chỉ được hỗ trợ trên máy tính để bàn chính thức.",
-                    manualStartWarning: "Bạn vẫn phải bắt đầu Nhiệm vụ theo cách thủ công. Lần nhấp đầu tiên sẽ bắt đầu Nhiệm vụ ở chế độ nền. Đối với Nhiệm vụ video, các lần nhấp tiếp theo sẽ mở chế độ video như bình thường. Để hủy Nhiệm vụ, bạn có thể mở menu ngữ cảnh trên ô Nhiệm vụ và chọn {{stopAuto}}.",
-                    tosWarning: "Sử dụng một trong các tùy chọn đó là trái với Điều khoản dịch vụ của Discord. Sử dụng có nguy cơ của riêng bạn.",
-                    selectFeatures: "Chọn những tính năng của Quest cần sửa đổi.",
-                    disablePopup: "Tắt cửa sổ bật lên nhiệm vụ trên bảng tài khoản",
-                    completeVideo: "Hoàn thành nhiệm vụ video trong nền",
-                    completeGame: "Hoàn thành nhiệm vụ chơi trò chơi trong nền",
-                    stopAuto: "Dừng tự động hoàn thành"
-                },
-                restyleQuests: {
-                    title: "Nhiệm vụ thay đổi phong cách",
-                    description: "Làm nổi bật Nhiệm vụ bằng màu sắc chủ đề tùy chọn để dễ nhìn.",
-                    precedenceNote: "Kiểu Nhiệm vụ đã xác nhận và Đã hết hạn sẽ được ưu tiên ngay cả khi Nhiệm vụ bị bỏ qua.",
-                    gradientStyle: "Kiểu chuyển màu",
-                    assetPreload: "Tải trước nội dung",
-                    unclaimed: "Chưa được xác nhận",
-                    claimed: "Đã xác nhận quyền sở hữu",
-                    ignored: "Đã bỏ qua",
-                    expired: "Hết hạn",
-                    intenseGradient: "Chuyển đổi phong cách mạnh mẽ",
-                    defaultGradient: "Chuyển đổi kiểu mặc định",
-                    blackGradient: "Màu đen tinh tế",
-                    noGradient: "Không có độ dốc",
-                    loadAllAssets: "Tải tất cả nội dung nhiệm vụ khi tải trang",
-                    loadDuringScroll: "Tải nội dung nhiệm vụ trong khi cuộn trang"
-                },
-                reorderQuests: {
-                    title: "Sắp xếp lại nhiệm vụ",
-                    description: "Sắp xếp các nhiệm vụ theo trạng thái của chúng. Áp dụng khi tùy chọn sắp xếp \"Questify\" được chọn trên trang Nhiệm vụ.",
-                    formatNote: "Danh sách được phân tách bằng dấu phẩy phải chứa tất cả: {{items}}.",
-                    placeholder: "Bạn phải bao gồm tất cả KHÔNG ĐƯỢC CHẤP NHẬN, ĐƯỢC YÊU CẦU, BỎ QUA, HẾT HẠN",
-                    invalidFormat: "Định dạng không hợp lệ.",
-                    unclaimedSubsort: "Phân loại phụ chưa được xác nhận quyền sở hữu",
-                    claimedSubsort: "Phân loại phụ được yêu cầu",
-                    ignoredSubsort: "Phân loại bị bỏ qua",
-                    expiredSubsort: "Phân loại đã hết hạn",
-                    addedNewest: "Đã thêm (Mới nhất)",
-                    addedOldest: "Đã thêm (Cũ nhất)",
-                    expiredRecent: "Đã hết hạn (Gần đây nhất)",
-                    expiredLeast: "Đã hết hạn (Ít nhất gần đây)",
-                    expiringSoon: "Hết hạn (Sớm nhất)",
-                    expiringLate: "Hết hạn (Mới nhất)",
-                    claimedRecent: "Đã xác nhận quyền sở hữu (Gần đây nhất)",
-                    claimedLeast: "Đã xác nhận quyền sở hữu (Ít nhất gần đây)",
-                    ignoredQuestProfile: "Hồ sơ nhiệm vụ bị bỏ qua",
-                    sharedProfile: "Đã chia sẻ: Tất cả tài khoản trên khách hàng này đều bị bỏ qua.",
-                    privateProfile: "Riêng tư: Tất cả tài khoản trên khách hàng này đều có chế độ bỏ qua riêng.",
-                    rememberSort: "Ghi nhớ lựa chọn sắp xếp",
-                    rememberFilter: "Ghi nhớ lựa chọn bộ lọc",
-                    yes: "Đúng",
-                    no: "KHÔNG",
-                    rememberNote: "Lựa chọn sắp xếp và lọc này đề cập đến các tùy chọn sắp xếp và lọc tích hợp trên trang Nhiệm vụ. Việc sắp xếp tùy chỉnh ở trên chỉ được áp dụng khi tùy chọn sắp xếp \"Questify\" được chọn trên trang Nhiệm vụ. Nếu tính năng ghi nhớ bị tắt, các tùy chọn sắp xếp hoặc lọc sẽ được đặt lại mỗi khi bạn mở trang Nhiệm vụ."
-                },
-                fetchingQuests: {
-                    title: "Tìm nạp nhiệm vụ",
-                    description: "Định cấu hình tần suất tìm nạp Nhiệm vụ từ Discord và thiết lập cảnh báo cho Nhiệm vụ mới.",
-                    defaultBehavior: "Theo mặc định, Discord chỉ tìm nạp Nhiệm vụ khi tải và khi truy cập trang Nhiệm vụ. Điều này có nghĩa là nếu không có khoảng thời gian tìm nạp được xác định bên dưới, plugin này sẽ không biết về các Nhiệm vụ mới được thêm vào trong ngày.",
-                    requirement: "Điều này phụ thuộc vào việc Nút Nhiệm vụ được bật và đặt thành {{unclaimed}} hoặc được đặt thành {{always}} với các chỉ báo {{pill}}, {{badge}} hoặc {{both}} chưa được xác nhận đã bật. Nếu không, không có lý do gì để tìm Nhiệm vụ định kỳ.",
-                    blockWarning: "Ngoài ra, nếu {{fetchingQuests}} bị chặn trong cài đặt {{questFeatures}} thì thao tác này sẽ không hoạt động.",
-                    fetchInterval: "Khoảng thời gian tìm nạp",
-                    alertSound: "Âm thanh cảnh báo",
-                    intervalPlaceholder: "Chọn hoặc nhập khoảng thời gian từ 30 phút đến 12 giờ.",
-                    intervalFeedback: "Khoảng thời gian phải từ 30 phút đến 12 giờ.",
-                    soundPlaceholder: "Chọn âm thanh hoặc cung cấp URL âm thanh tùy chỉnh.",
-                    soundFeedback: "Không tìm thấy âm thanh hoặc URL không thuộc miền được hỗ trợ.",
-                    disabled: "Tàn tật",
-                    minutes: "Phút",
-                    minute: "Phút",
-                    hours: "Giờ",
-                    hour: "Giờ",
-                    thirtyMinutes: "30 phút",
-                    oneHour: "1 giờ",
-                    threeHours: "3 giờ",
-                    sixHours: "6 giờ",
-                    twelveHours: "12 giờ",
-                    customSound: "ÂM THANH TÙY CHỈNH"
-                },
-                disableOptions: {
-                    everything: "Vô hiệu hóa mọi thứ",
-                    discovery: "Vô hiệu hóa tab khám phá",
-                    dms: "Vô hiệu hóa tab nhiệm vụ trong DM",
-                    fetching: "Vô hiệu hóa nhiệm vụ tìm nạp",
-                    popup: "Tắt cửa sổ bật lên phía trên bảng tài khoản",
-                    sponsored: "Tắt biểu ngữ được tài trợ trên trang nhiệm vụ",
-                    badge: "Tắt huy hiệu trên hồ sơ người dùng",
-                    inventory: "Tắt thông báo di dời kho quà tặng",
-                    friendsList: "Danh sách bạn bè Đang hoạt động Khuyến mãi",
-                    membersList: "Danh sách thành viên tích cực chơi biểu tượng",
-                    gameQuests: "Hoàn thành nhiệm vụ chơi trò chơi/hoạt động trong nền",
-                    videoQuests: "Hoàn thành nhiệm vụ xem video trong nền",
-                    achievementQuests: "Hoàn thành nhiệm vụ trong Nhiệm vụ hoạt động trong nền",
-                    mobileDesktop: "Làm cho nhiệm vụ di động tương thích với máy tính để bàn",
-                    notifyOnComplete: "Thông báo khi hoàn thành nhiệm vụ"
-                },
-                options: {
-                    always: "Luôn luôn",
-                    unclaimed: "Chưa được xác nhận",
-                    never: "Không bao giờ",
-                    pill: "Thuốc viên",
-                    badge: "Huy hiệu",
-                    both: "Cả hai",
-                    none: "Không có",
-                    openQuests: "Nhiệm vụ mở",
-                    contextMenu: "Trình đơn ngữ cảnh",
-                    pluginSettings: "Cài đặt plugin",
-                    nothing: "Không có gì",
-                    orbs: "Quả cầu",
-                    nitroCodes: "Mã Nitro",
-                    rewardCodes: "Mã thưởng",
-                    inGameItems: "Vật phẩm trong trò chơi",
-                    profileCollectibles: "Hồ sơ sưu tầm"
-                }
-            },
-            option: {
-                disableQuests: {
-                    label: "Vô hiệu hóa nhiệm vụ",
-                    description: "Chọn những tính năng của Quest để tắt."
-                },
-                disableQuestsEverything: {
-                    label: "Vô hiệu hóa mọi thứ",
-                    description: "Vô hiệu hóa tất cả các tính năng của Quest."
-                },
-                disableQuestsFetchingQuests: {
-                    label: "Vô hiệu hóa nhiệm vụ tìm nạp",
-                    description: "Vô hiệu hóa việc tìm nạp Nhiệm vụ từ Discord."
-                },
-                disableQuestsDirectMessagesTab: {
-                    label: "Vô hiệu hóa tab nhiệm vụ trong DM",
-                    description: "Tắt tab Nhiệm vụ trong trang Tin nhắn Trực tiếp."
-                },
-                disableQuestsDiscoveryTab: {
-                    label: "Vô hiệu hóa tab khám phá",
-                    description: "Tắt tab Nhiệm vụ trong trang Khám phá."
-                },
-                disableQuestsPageSponsoredBanner: {
-                    label: "Tắt biểu ngữ được tài trợ trên trang nhiệm vụ",
-                    description: "Vô hiệu hóa biểu ngữ được tài trợ trên trang Quest."
-                },
-                disableQuestsPopupAboveAccountPanel: {
-                    label: "Tắt cửa sổ bật lên phía trên bảng tài khoản",
-                    description: "Tắt cửa sổ bật lên Quest phía trên bảng tài khoản của bạn."
-                },
-                disableQuestsBadgeOnUserProfiles: {
-                    label: "Vô hiệu hóa huy hiệu trên hồ sơ người dùng",
-                    description: "Vô hiệu hóa huy hiệu Nhiệm vụ trên hồ sơ người dùng."
-                },
-                disableQuestsGiftInventoryRelocationNotice: {
-                    label: "Tắt thông báo di dời kho quà tặng",
-                    description: "Vô hiệu hóa kho quà tặng Thông báo di dời Quest."
-                },
-                disableFriendsListActiveNowPromotion: {
-                    label: "Tắt danh sách bạn bè Đang hoạt động Khuyến mãi",
-                    description: "Vô hiệu hóa việc quảng bá Nhiệm vụ cho các trò chơi do bạn bè chơi."
-                },
-                disableMembersListActivelyPlayingIcons: {
-                    label: "Vô hiệu hóa các biểu tượng danh sách thành viên đang phát tích cực",
-                    description: "Tắt các biểu tượng đang phát trong danh sách thành viên."
-                },
-                makeMobileQuestsDesktopCompatible: {
-                    label: "Làm cho nhiệm vụ di động tương thích với máy tính để bàn",
-                    description: "Làm cho các Nhiệm vụ chỉ dành cho thiết bị di động tương thích với máy tính để bàn."
-                },
-                completeVideoQuestsInBackground: {
-                    label: "Hoàn thành nhiệm vụ video trong nền",
-                    description: "Hoàn thành Nhiệm vụ video ở chế độ nền sau khi hết thời lượng video."
-                },
-                completeGameQuestsInBackground: {
-                    label: "Hoàn thành nhiệm vụ trò chơi trong nền",
-                    description: "Hoàn thành Nhiệm vụ trò chơi ở chế độ nền sau khi thời gian trò chơi trôi qua."
-                },
-                completeAchievementQuestsInBackground: {
-                    label: "Hoàn thành nhiệm vụ trong nhiệm vụ hoạt động trong nền",
-                    description: "Hoàn thành thành tích trong Nhiệm vụ hoạt động ở chế độ nền."
-                },
-                notifyOnQuestComplete: {
-                    label: "Thông báo khi hoàn thành nhiệm vụ",
-                    description: "Hiển thị thông báo khi Nhiệm vụ được hoàn thành tự động."
-                },
-                questButton: {
-                    label: "Nút nhiệm vụ",
-                    description: "Hiển thị nút Nhiệm vụ trong danh sách máy chủ."
-                },
-                questButtonDisplay: {
-                    label: "Hiển thị nút nhiệm vụ",
-                    description: "Loại hiển thị nào sẽ sử dụng cho nút Nhiệm vụ trong danh sách máy chủ."
-                },
-                questRewardIncludeRewardCode: {
-                    label: "Bao gồm mã thưởng",
-                    description: "Bao gồm các Nhiệm vụ kèm theo Mã Phần thưởng khi hiển thị số lượng Nhiệm vụ."
-                },
-                questRewardIncludeNitroCode: {
-                    label: "Bao gồm mã Nitro",
-                    description: "Bao gồm các Nhiệm vụ với Mã Nitro khi hiển thị số lượng Nhiệm vụ."
-                },
-                questRewardIncludeInGame: {
-                    label: "Bao gồm phần thưởng trong trò chơi",
-                    description: "Bao gồm các Nhiệm vụ với phần thưởng trong trò chơi khi hiển thị số lượng Nhiệm vụ."
-                },
-                questRewardIncludeCollectibles: {
-                    label: "Bao gồm sưu tầm",
-                    description: "Bao gồm các Nhiệm vụ có Đồ sưu tầm khi hiển thị số lượng Nhiệm vụ."
-                },
-                questRewardIncludeOrbs: {
-                    label: "Bao gồm các quả cầu",
-                    description: "Bao gồm các Nhiệm vụ có Quả cầu khi hiển thị số lượng Nhiệm vụ."
-                },
-                questButtonUnclaimed: {
-                    label: "Chỉ báo chưa được xác nhận của nút nhiệm vụ",
-                    description: "Loại hiển thị nào sẽ được sử dụng cho chỉ báo chưa được xác nhận trên nút Nhiệm vụ trong danh sách máy chủ."
-                },
-                questButtonBadgeColor: {
-                    label: "Màu huy hiệu nút nhiệm vụ",
-                    description: "Màu của huy hiệu nút Nhiệm vụ trong danh sách máy chủ."
-                },
-                questButtonLeftClickAction: {
-                    label: "Hành động nhấp chuột trái",
-                    description: "Hành động cần thực hiện khi nhấn chuột trái vào nút Quest trong danh sách máy chủ."
-                },
-                questButtonMiddleClickAction: {
-                    label: "Hành động nhấp chuột giữa",
-                    description: "Hành động cần thực hiện khi nhấp chuột giữa vào nút Nhiệm vụ trong danh sách máy chủ."
-                },
-                questButtonRightClickAction: {
-                    label: "Hành động nhấp chuột phải",
-                    description: "Hành động cần thực hiện khi nhấn chuột phải vào nút Quest trong danh sách máy chủ."
-                },
-                fetchingQuests: {
-                    label: "Tìm nạp nhiệm vụ",
-                    description: "Tìm nạp nhiệm vụ từ Discord."
-                },
-                fetchingQuestsInterval: {
-                    label: "Khoảng thời gian tìm nạp nhiệm vụ",
-                    description: "Khoảng thời gian tính bằng giây để tìm nạp Nhiệm vụ từ Discord."
-                },
-                fetchingQuestsAlert: {
-                    label: "Đang tìm nạp thông báo nhiệm vụ",
-                    description: "Âm thanh phát ra khi phát hiện Nhiệm vụ mới."
-                },
-                fetchingQuestsAlertVolume: {
-                    label: "Đang tìm nạp khối lượng cảnh báo nhiệm vụ",
-                    description: "Âm lượng của âm thanh cảnh báo khi phát hiện Nhiệm vụ mới."
-                },
-                restyleQuests: {
-                    label: "Nhiệm vụ thay đổi phong cách",
-                    description: "Tùy chỉnh giao diện của các ô Nhiệm vụ trong trang Nhiệm vụ."
-                },
-                restyleQuestsUnclaimed: {
-                    label: "Nhiệm vụ làm lại phong cách chưa được nhận",
-                    description: "Màu của các ô Nhiệm vụ chưa được nhận trong trang Nhiệm vụ."
-                },
-                restyleQuestsClaimed: {
-                    label: "Nhiệm vụ Restyle được yêu cầu",
-                    description: "Màu của các ô Nhiệm vụ được xác nhận trong trang Nhiệm vụ."
-                },
-                restyleQuestsIgnored: {
-                    label: "Nhiệm vụ Restyle bị bỏ qua",
-                    description: "Màu của các ô Nhiệm vụ bị bỏ qua trong trang Nhiệm vụ."
-                },
-                restyleQuestsExpired: {
-                    label: "Nhiệm vụ Restyle đã hết hạn",
-                    description: "Màu của các ô Nhiệm vụ đã hết hạn trong trang Nhiệm vụ."
-                },
-                restyleQuestsGradient: {
-                    label: "Thay đổi phong cách nhiệm vụ gradient",
-                    description: "Kiểu chuyển màu được sử dụng trong các ô Nhiệm vụ."
-                },
-                restyleQuestsPreload: {
-                    label: "Tải lại nhiệm vụ Restyle",
-                    description: "Cố gắng tải trước nội dung cho các ô Nhiệm vụ."
-                },
-                reorderQuests: {
-                    label: "Sắp xếp lại nhiệm vụ",
-                    description: "Sắp xếp các nhiệm vụ theo trạng thái của chúng. Để trống để sắp xếp mặc định. Danh sách được phân tách bằng dấu phẩy phải chứa tất cả: KHÔNG ĐƯỢC CHẤP NHẬN, ĐƯỢC YÊU CẦU, BỎ QUA, HẾT HẠN."
-                },
-                unclaimedSubsort: {
-                    label: "Phân loại phụ chưa được xác nhận quyền sở hữu",
-                    description: "Phương pháp phân loại cho các Nhiệm vụ chưa được nhận."
-                },
-                claimedSubsort: {
-                    label: "Phân loại phụ được yêu cầu",
-                    description: "Phương pháp phân loại cho các Nhiệm vụ được xác nhận."
-                },
-                ignoredSubsort: {
-                    label: "Phân loại bị bỏ qua",
-                    description: "Phương pháp phân loại cho các Nhiệm vụ bị bỏ qua."
-                },
-                expiredSubsort: {
-                    label: "Phân loại đã hết hạn",
-                    description: "Phương pháp phân loại cho các Nhiệm vụ đã hết hạn."
-                },
-                unclaimedUnignoredQuests: {
-                    label: "Nhiệm vụ chưa được xác nhận",
-                    description: "Theo dõi số lượng Nhiệm vụ chưa được nhận và chưa được bỏ qua."
-                },
-                onQuestsPage: {
-                    label: "Trên trang nhiệm vụ",
-                    description: "Liệu người dùng hiện có ở trang Nhiệm vụ hay không."
-                },
-                triggerQuestsRerender: {
-                    label: "Kết xuất lại nhiệm vụ kích hoạt",
-                    description: "Kích hoạt hiển thị lại trang Nhiệm vụ bằng cách chuyển đổi cài đặt này."
-                },
-                ignoredQuestProfile: {
-                    label: "Hồ sơ nhiệm vụ bị bỏ qua",
-                    description: "Hồ sơ được sử dụng cho các Nhiệm vụ bị bỏ qua."
-                },
-                rememberQuestPageSort: {
-                    label: "Ghi nhớ sắp xếp trang nhiệm vụ",
-                    description: "Hãy nhớ cách sắp xếp được sử dụng lần cuối trên trang Nhiệm vụ."
-                },
-                rememberQuestPageFilters: {
-                    label: "Ghi nhớ bộ lọc trang nhiệm vụ",
-                    description: "Ghi nhớ các bộ lọc được sử dụng gần đây nhất trên trang Nhiệm vụ."
-                },
-                lastQuestPageSort: {
-                    label: "Sắp xếp trang nhiệm vụ cuối cùng",
-                    description: "Hãy nhớ cách sắp xếp được sử dụng lần cuối trên trang Nhiệm vụ."
-                },
-                lastQuestPageFilters: {
-                    label: "Bộ lọc trang nhiệm vụ cuối cùng",
-                    description: "Ghi nhớ các bộ lọc được sử dụng gần đây nhất trên trang Nhiệm vụ."
-                },
-                ignoredQuestIDs: {
-                    label: "ID nhiệm vụ bị bỏ qua",
-                    description: "Một mảng ID nhiệm vụ bị bỏ qua."
-                },
-                resumeQuestIDs: {
-                    label: "Tiếp tục ID nhiệm vụ",
-                    description: "Một mảng ID nhiệm vụ đang được tự động hoàn thành ở chế độ nền."
+                    startAuto: "Bắt đầu tự động hoàn thành",
+                    copyQuestID: "Sao chép ID Quest"
                 }
             },
             button: {
-                questInProgressWithTime: "Đang hoàn thành ({{remainTime}})",
-                completing: "Đang hoàn thiện",
-                resume: "Tiếp tục (~{{remainTime}})",
-                complete: "Hoàn thành {{remainTime}}",
-                completeImmediate: "Hoàn thành (Ngay lập tức)",
-                completed: "Hoàn thành"
+                completing: "Đang hoàn thành...",
+                completingWithTime: "Đang hoàn thành ({{time}})",
+                completingIn: "Hoàn thành sau {{time}}",
+                queued: "Đang chờ ({{position}})",
+                resuming: "Đang tiếp tục...",
+                completeNow: "Hoàn thành ngay",
+                complete: "Hoàn thành ({{time}})",
+                resume: "Tiếp tục ({{time}})",
+                completed: "Đã hoàn thành"
             },
             reward: {
-                orbs: "{{completingText}} cho {{orbQuantity}} Quả cầu.",
-                article: "{{completingText}} cho {{itemName}}.",
-                unrecognized: "{{completingText}} đối với loại phần thưởng không được công nhận."
+                orbs: "{{status}} để nhận {{orbQuantity}} Orbs.",
+                article: "{{status}} để nhận {{itemName}}.",
+                unrecognized: "{{status}} để nhận phần thưởng không xác định."
+            },
+            toast: {
+                autoCompleteBroken: "Tự động hoàn thành đang bị lỗi. Bản sửa sẽ sớm được phát hành.",
+                enrollmentFailed: "Đăng ký Quest {{questName}} thất bại.",
+                enrollmentInNormalizequestnameQuest: "Đăng ký nhiệm vụ {{normalizeQuestName_quest}} thất bại{{rateLimitSuffix}}."
             },
             notification: {
                 completed: {
-                    title: "Nhiệm vụ đã hoàn thành",
-                    body: "Nhiệm vụ {{questName}} đã hoàn thành."
+                    title: "Đã hoàn thành Quest!",
+                    body: "Quest {{questName}} đã hoàn thành."
+                },
+                newQuest: {
+                    title: "Phát hiện Quest mới!",
+                    body: "Quest {{questName}} hiện đã có."
+                },
+                newQuests: {
+                    title: "Phát hiện Quest mới!",
+                    body: "Hiện có {{count}} Quest mới."
+                },
+                newExcludedQuest: {
+                    title: "Phát hiện Quest bị loại trừ mới!",
+                    body: "Đã phát hiện Quest bị loại trừ {{questName}}. ID: {{questId}}"
+                },
+                newExcludedQuests: {
+                    title: "Phát hiện các Quest bị loại trừ mới!",
+                    body: "Đã phát hiện {{count}} Quest bị loại trừ mới. Xem console để biết ID của chúng."
                 }
+            },
+            alert: {
+                restart: {
+                    title: "Cần khởi động lại",
+                    body: "Một thay đổi trong cài đặt Questify cần khởi động lại.",
+                    confirm: "Khởi động lại",
+                    cancel: "Để sau"
+                },
+                dangerous: {
+                    title: "Bạn có chắc không?",
+                    confirm: "Tiếp tục",
+                    cancel: "Hủy",
+                    disableEverything: "Thao tác này sẽ tắt hoàn toàn chức năng Quest.",
+                    allowDangerous: "Thao tác này sẽ cho phép thay đổi các cài đặt nguy hiểm."
+                }
+            },
+            status: {
+                unclaimed: "CHƯA NHẬN",
+                claimed: "Đã nhận",
+                ignored: "Bỏ qua",
+                expired: "Hết hạn"
+            },
+            questTypes: {
+                watchVideo: "Xem video",
+                watchVideoOnMobile: "Xem video trên điện thoại",
+                achievementInActivity: "Thành tựu trong hoạt động",
+                achievementInGame: "Thành tựu trong trò chơi",
+                playActivity: "Chơi hoạt động",
+                playOnDesktop: "Chơi trên máy tính",
+                playOnDesktopV2: "Chơi trên máy tính V2",
+                streamOnDesktop: "Phát trực tiếp trên máy tính",
+                playOnPlayStation: "Chơi trên PlayStation",
+                playOnXbox: "Chơi trên Xbox"
+            },
+            settings: {
+                questButton: {
+                    title: "Nút Quest",
+                    description: "Hiển thị nút Quest trong danh sách máy chủ với chỉ báo tùy chọn cho các Quest chưa nhận và chưa bỏ qua.",
+                    behavior: "Hành vi của nút",
+                    leftClick: "Hành động khi nhấp chuột trái:",
+                    middleClick: "Hành động khi nhấp chuột giữa:",
+                    rightClick: "Hành động khi nhấp chuột phải:",
+                    visibility: "Hiển thị nút:",
+                    visibilityTooltip: "Luôn luôn hiển thị nút Quest khi tính năng này được bật.\n\nChưa nhận chỉ hiển thị khi bạn có phần thưởng Quest liên quan chưa nhận.\n\nKhông bao giờ ẩn nút Quest.",
+                    unclaimedIndicator: "Chỉ báo chưa nhận:",
+                    unclaimedIndicatorTooltip: "Viên hiển thị dấu chưa đọc kiểu Discord bên cạnh nút Quest.\n\nHuy hiệu hiển thị số phần thưởng Quest liên quan chưa nhận.\n\nCả hai hiển thị viên và huy hiệu cùng lúc.\n\nKhông có ẩn các chỉ báo.",
+                    badgeColor: "Màu huy hiệu:",
+                    relevancy: "Mức độ liên quan của Quest",
+                    includedRewardTypes: "Loại phần thưởng được tính:",
+                    includedRewardTypesTooltip: "Chỉ tính là chưa nhận các Quest có những loại phần thưởng này khi xác định hiển thị nút, số trên huy hiệu và cảnh báo.",
+                    includedQuestTypes: "Loại Quest được tính:",
+                    includedQuestTypesTooltip: "Chỉ tính là chưa nhận các Quest có những loại nhiệm vụ này khi xác định hiển thị nút, số trên huy hiệu và cảnh báo.",
+                    display: {
+                        always: "Luôn luôn",
+                        unclaimed: "Chưa nhận",
+                        never: "Không bao giờ"
+                    },
+                    indicator: {
+                        pill: "Viên",
+                        badge: "Huy hiệu",
+                        both: "Cả hai",
+                        none: "Không có"
+                    },
+                    action: {
+                        openQuests: "Mở Quest",
+                        contextMenu: "Menu ngữ cảnh",
+                        pluginSettings: "Cài đặt plugin",
+                        nothing: "Không làm gì"
+                    },
+                    rewardTypes: {
+                        orbs: "Orbs",
+                        nitroCodes: "Mã Nitro",
+                        rewardCodes: "Mã phần thưởng",
+                        inGameItems: "Vật phẩm trong trò chơi",
+                        profileCollectibles: "Vật phẩm sưu tầm hồ sơ"
+                    }
+                },
+                questFeatures: {
+                    title: "Tính năng Quest",
+                    description: "Thay đổi cách Quest hoạt động để nâng cao hoặc loại bỏ chức năng.",
+                    disableFeatures: "Tắt tính năng",
+                    disableEverything: "Tắt hoàn toàn chức năng Quest:",
+                    disableEverythingTooltip: "Thao tác này tắt mọi cải tiến của plugin, ẩn trang Quest và các thành phần Quest trên toàn Discord, đồng thời ngăn Discord tải dữ liệu Quest. Cửa hàng không bị ảnh hưởng vì Orbs gắn quá chặt với nó như một loại tiền tệ phụ.",
+                    disableSpecific: "Tắt các tính năng cụ thể:",
+                    disableSpecificTooltip: "Biểu ngữ tài trợ là biểu ngữ Quest trả phí ở đầu trang Quest.\n\nThông báo chuyển vị trí là các chỉ báo, ví dụ trên trang Khám phá, cho biết Quest đã được chuyển sang tin nhắn trực tiếp.\n\nQuảng bá danh sách bạn bè là thẻ hiển thị trong mục \"Đang hoạt động\" của danh sách bạn bè khi một người dùng chung máy chủ đang chơi trò chơi có Quest đang diễn ra.\n\nQuảng bá danh sách thành viên là biểu tượng hiển thị cạnh thành viên trong danh sách của máy chủ khi họ đang chơi trò chơi có Quest đang diễn ra.\n\nQuảng bá bảng tài khoản là quảng bá Quest trả phí xuất hiện phía trên bảng tài khoản của bạn.\n\nTiến độ bảng tài khoản là tiến độ Quest đang chạy hoặc đã hoàn thành hiển thị phía trên bảng tài khoản của bạn.\n\nHuy hiệu Quest và Orbs là huy hiệu trên hồ sơ cho người đã hoàn thành ít nhất một Quest hoặc đã mua huy hiệu Orbs.",
+                    disableOptions: {
+                        sponsoredBanner: "Biểu ngữ tài trợ",
+                        relocationNotices: "Thông báo chuyển vị trí",
+                        friendsListPromo: "Quảng bá danh sách bạn bè",
+                        membersListPromo: "Quảng bá danh sách thành viên",
+                        accountPanelPromo: "Quảng bá bảng tài khoản",
+                        accountPanelProgress: "Tiến độ bảng tài khoản",
+                        orbsAndQuestsBadges: "Huy hiệu Quest và Orbs"
+                    },
+                    modifyFeatures: "Thay đổi tính năng",
+                    warningTos: "Discord đã bắt đầu cảnh cáo người dùng các script hoặc plugin thay đổi cách hoàn thành Quest, điều này vi phạm {{tos}} của họ.",
+                    tos: "Điều khoản dịch vụ",
+                    warningEscalate: "Các cảnh cáo hiện có vẻ chỉ dừng ở mức đe dọa mất quyền truy cập Quest hoặc phần thưởng, nhưng Discord có thể siết chặt bất cứ lúc nào.",
+                    warningDetection: "Do Discord dùng nhiều phương pháp để theo dõi người dùng, thực tế không có cách nào tránh bị phát hiện. Nếu tiếp tục, hãy hiểu rằng Discord nhiều khả năng sẽ phát hiện vào một lúc nào đó.",
+                    warningRisk: "Dùng nút sau để truy cập các cài đặt có thể nguy hiểm, bạn tự chịu rủi ro.",
+                    allowDangerous: "Cho phép thay đổi cài đặt nguy hiểm...",
+                    disallowDangerous: "Đặt lại và không cho phép thay đổi cài đặt nguy hiểm...",
+                    completeVideoQuicker: "Tăng tốc tự động hoàn thành Quest video:",
+                    completeVideoQuickerTooltip: "Discord cho phép hoàn thành Quest video khi đã trôi qua thời lượng video trừ 24 giây kể từ lúc đăng ký.\n\nNghĩa là Quest video dài 24 giây trở xuống, hoặc Quest bạn đăng ký rồi quay lại sau, có thể hoàn thành ngay.\n\nCài đặt này chỉ áp dụng cho việc tự động hoàn thành Quest video và phụ thuộc vào cài đặt tự động hoàn thành bên dưới. Hoàn thành thủ công vẫn phải chờ đủ thời lượng và không phụ thuộc vào thời điểm đăng ký.",
+                    mobileDesktop: "Cho phép hoàn thành một số Quest video chỉ dành cho điện thoại trên máy tính:",
+                    mobileDesktopTooltip: "Một số Quest video chỉ dành cho điện thoại có thể đăng ký trên máy tính nhưng vẫn phải hoàn thành trên điện thoại. Cài đặt này cho phép hoàn thành chúng trên máy tính.\n\nMột số Quest video chỉ dành cho điện thoại chỉ có thể đăng ký trên điện thoại. Để cài đặt này có hiệu lực, bạn phải đăng ký trên điện thoại trước khi quay lại máy tính và làm mới Quest.\n\nKhi bật riêng, cài đặt này chỉ áp dụng cho việc hoàn thành thủ công Quest video. Tự động hoàn thành Quest video điện thoại từ máy tính phụ thuộc vào cài đặt tự động hoàn thành bên dưới và cũng sẽ ngầm bật cài đặt này.",
+                    simultaneous: "Tự động hoàn thành Quest đồng thời thay vì lần lượt:",
+                    simultaneousTooltip: "Theo mặc định, khi tự động hoàn thành nhiều Quest, chúng sẽ được xếp hàng để hoàn thành theo thứ tự.\n\nCài đặt này cho phép tất cả Quest tự động hoàn thành chạy cùng lúc.\n\nCài đặt này chỉ áp dụng cho tự động hoàn thành và phụ thuộc vào cài đặt tự động hoàn thành bên dưới.",
+                    resumeInterrupted: "Tiếp tục các lần tự động hoàn thành bị gián đoạn sau khi tải lại hoặc khởi động lại:",
+                    resumeInterruptedTooltip: "Cài đặt này sẽ tự động tiếp tục các lần tự động hoàn thành bị gián đoạn do tải lại hoặc khởi động lại, kể cả xếp hàng lại các Quest đang chờ nhưng chưa bắt đầu.",
+                    autoCompleteTypes: "Tự động hoàn thành các loại Quest cụ thể:",
+                    autoCompleteTypesTooltip: "Quest \"Xem video trên điện thoại\" chỉ hoạt động với Quest điện thoại có thể đăng ký trên máy tính. Nếu Quest chỉ cho đăng ký trên điện thoại, bạn phải đăng ký trên điện thoại trước rồi quay lại máy tính và làm mới Quest.\n\nTất cả Quest liên quan đến video thường gửi stack trace kèm báo cáo tiến độ. Như vậy Discord biết chính xác hàm nào đã được gọi và có thể xác minh tiến độ do hàm của họ khởi tạo. Questify xóa stack trace này, nhưng việc thiếu nó cũng dễ lộ như khi có nó.\n\nCác Quest \"Chơi trên máy tính\", \"Chơi trên PlayStation\", \"Chơi trên Xbox\" và \"Chơi hoạt động\" chỉ khả dụng trên ứng dụng máy tính chính thức do giới hạn của Discord. Ứng dụng bên thứ ba như tiện ích trình duyệt, Plextron và các ứng dụng khác không hỗ trợ tự động hoàn thành các loại này.\n\nTất cả Quest liên quan đến trò chơi thường gửi dấu vân tay trò chơi kèm báo cáo heartbeat. Như vậy Discord có thể dùng dữ liệu từ hàng chục nghìn người dùng để xác định người khác có thật sự chạy trò chơi hay đang giả lập tệp thực thi. Không có cách hợp lý để giả mạo giá trị này nên Questify để trống, nhưng việc thiếu nó cũng dễ lộ như giả mạo kém.\n\nQuest \"Thành tựu trong hoạt động\" chỉ có thể tự động hoàn thành bằng cách hoàn thành ngay lập tức. Phương pháp này có thể bị vá bất cứ lúc nào.\n\nTự động hoàn thành được thực hiện bằng cách nhấp vào nút tương ứng trên trang Quest. Quest sẽ được hoàn thành theo thứ tự xếp hàng, trừ khi bật hoàn thành đồng thời ở trên.\n\nTự động hoàn thành Quest là cài đặt nguy hiểm rủi ro nhất. Hãy bật nó với rủi ro của riêng bạn."
+                },
+                questNotifications: {
+                    title: "Thông báo Quest",
+                    description: "Cấu hình thông báo và cảnh báo khi hoàn thành Quest và khi phát hiện Quest mới.",
+                    questCompleted: "Hoàn thành Quest",
+                    notifyOnComplete: "Hiển thị thông báo khi hoàn thành Quest:",
+                    soundOnComplete: "Phát âm thanh khi hoàn thành Quest:",
+                    volume: "Âm lượng:",
+                    newQuests: "Phát hiện Quest mới",
+                    notifyOnNew: "Hiển thị thông báo khi phát hiện Quest mới:",
+                    soundOnNew: "Phát âm thanh khi phát hiện Quest mới:",
+                    notifyOnNewExcluded: "Hiển thị thông báo khi phát hiện Quest bị loại trừ mới:",
+                    notifyOnNewExcludedTooltip: "Một số Quest bị loại khỏi danh sách Quest khả dụng của bạn do giới hạn khu vực hoặc nền tảng.\n\nKhi bật, Questify sẽ tải cấu hình của chúng, áp dụng bộ lọc loại Quest và phần thưởng của bạn, in dữ liệu Quest bị loại trừ ra console và hiển thị thông báo riêng cho các Quest bị loại trừ phù hợp.",
+                    soundOnNewExcluded: "Phát âm thanh khi phát hiện Quest bị loại trừ mới:",
+                    soundOnNewExcludedTooltip: "Một số Quest bị loại khỏi danh sách Quest khả dụng của bạn do giới hạn khu vực hoặc nền tảng.\n\nKhi chọn âm thanh, Questify sẽ tải cấu hình của chúng, áp dụng bộ lọc loại Quest và phần thưởng của bạn, in dữ liệu Quest bị loại trừ ra console và phát âm thanh này cho các Quest bị loại trừ phù hợp.",
+                    fetchInterval: "Khoảng thời gian tải Quest:",
+                    fetchIntervalTooltip: "Discord chỉ tải Quest khi khởi động và khi bạn truy cập trang Quest.\n\nKhoảng thời gian này định kỳ tải Quest khi ứng dụng vẫn mở, để chỉ báo của nút Quest và cảnh báo Quest mới luôn cập nhật suốt cả ngày.\n\nChỉ chạy khi được bật và khi cài đặt nút Quest hoặc thông báo Quest được cấu hình sao cho việc tải định kỳ có ý nghĩa.",
+                    disabled: "ĐÃ TẮT",
+                    preview: "Nghe thử {{sound}}",
+                    intervals: {
+                        thirtyMinutes: "30 phút",
+                        fortyFiveMinutes: "45 phút",
+                        oneHour: "1 giờ",
+                        threeHours: "3 giờ",
+                        sixHours: "6 giờ",
+                        twelveHours: "12 giờ"
+                    }
+                },
+                questTiles: {
+                    title: "Ô Quest",
+                    description: "Làm nổi bật Quest bằng màu chủ đề tùy chọn để dễ nhìn hơn.",
+                    behavior: "Hành vi của ô",
+                    gradientStyle: "Kiểu chuyển màu:",
+                    gradientStyleTooltip: "Mạnh và Mặc định dùng màu ô đã chọn trong dải chuyển màu của hình ảnh.\n\nĐen nhẹ giữ dải chuyển màu trung tính tối hơn để tạo tương phản.\n\nKhông chuyển màu loại bỏ dải chuyển màu của hình ảnh, có thể khiến một số hình minh họa Quest khó đọc hơn.",
+                    assetPreload: "Tải trước tài nguyên:",
+                    assetPreloadTooltip: "Tải mọi tài nguyên khi mở trang Quest giúp giảm xê dịch bố cục khi cuộn.\n\nTải trong lúc cuộn gần với hành vi mặc định của Discord hơn và có thể tốn ít công sức ban đầu hơn.",
+                    colors: "Màu của ô",
+                    enable: "Bật",
+                    disable: "Tắt",
+                    gradient: {
+                        intense: "Chuyển màu tái tạo kiểu mạnh",
+                        default: "Chuyển màu tái tạo kiểu mặc định",
+                        black: "Chuyển màu đen nhẹ",
+                        hide: "Không chuyển màu"
+                    },
+                    preload: {
+                        onLoad: "Tải mọi tài nguyên Quest khi mở trang",
+                        onScroll: "Tải tài nguyên Quest khi cuộn trang"
+                    }
+                },
+                reorderQuests: {
+                    title: "Sắp xếp lại Quest",
+                    description: "Sắp xếp nhiệm vụ theo trạng thái khi chọn sắp xếp Questify trên trang nhiệm vụ. Trạng thái ẩn sẽ bị lọc với mọi cách sắp xếp.",
+                    statusOrder: "Thứ tự trạng thái",
+                    statusOrderTooltip: "Mỗi trạng thái chỉ xuất hiện một lần. Chọn một trạng thái đã dùng ở vị trí khác sẽ hoán đổi hai vị trí.",
+                    positions: {
+                        first: "Thứ nhất:",
+                        second: "Thứ hai:",
+                        third: "Thứ ba:",
+                        fourth: "Thứ tư:"
+                    },
+                    subsorts: "Sắp xếp phụ",
+                    unclaimedSubsort: "Sắp xếp phụ chưa nhận:",
+                    unclaimedSubsortTooltip: "Quest đã hoàn thành nhưng chưa nhận nằm dưới Quest chưa hoàn thành chưa nhận, sau đó sắp xếp phụ này được áp dụng trong các nhóm đó.",
+                    claimedSubsort: "Sắp xếp phụ đã nhận:",
+                    claimedSubsortTooltip: "Quest đã nhận có thể sắp xếp theo thời gian nhận hoặc thời gian Quest được thêm.",
+                    ignoredSubsort: "Sắp xếp phụ bỏ qua:",
+                    ignoredSubsortTooltip: "Quest bị bỏ qua vẫn giữ vị trí nhóm của chúng, sau đó sắp xếp phụ này quyết định thứ tự trong nhóm.",
+                    expiredSubsort: "Sắp xếp phụ hết hạn:",
+                    expiredSubsortTooltip: "Quest hết hạn có thể sắp xếp theo thời gian hết hạn hoặc thời gian Quest được thêm.",
+                    subsort: {
+                        addedNewest: "Thêm vào (mới nhất)",
+                        addedOldest: "Thêm vào (cũ nhất)",
+                        expiringSoonest: "Sắp hết hạn (sớm nhất)",
+                        expiringLatest: "Sắp hết hạn (muộn nhất)",
+                        expiredMostRecent: "Đã hết hạn (gần nhất)",
+                        expiredLeastRecent: "Đã hết hạn (lâu nhất)",
+                        claimedMostRecent: "Đã nhận (gần nhất)",
+                        claimedLeastRecent: "Đã nhận (lâu nhất)"
+                    },
+                    memory: "Ghi nhớ trang Quest",
+                    rememberSort: "Ghi nhớ cách sắp xếp đã chọn trên trang Quest:",
+                    rememberSortTooltip: "Khi tắt, trang Quest luôn mở với tùy chọn sắp xếp Questify.",
+                    rememberFilters: "Ghi nhớ bộ lọc đã chọn trên trang Quest:",
+                    rememberFiltersTooltip: "Khi tắt, trang Quest luôn mở mà không có bộ lọc nhiệm vụ hay phần thưởng."
+                }
+            },
+            option: {
+                migrationVersion: {
+                    label: "Phiên bản chuyển đổi",
+                    description: "Phiên bản chuyển đổi hiện tại của cài đặt."
+                },
+                questFeatures: {
+                    label: "Tính năng Quest",
+                    description: "Chọn tính năng Quest cần tắt."
+                },
+                disableQuestsEverything: {
+                    label: "Tắt mọi thứ",
+                    description: "Tắt tất cả tính năng Quest."
+                },
+                disableRelocationNotices: {
+                    label: "Tắt thông báo chuyển vị trí",
+                    description: "Tắt thông báo chuyển vị trí Quest trên trang Khám phá."
+                },
+                disableSponsoredBanner: {
+                    label: "Tắt biểu ngữ tài trợ",
+                    description: "Tắt biểu ngữ tài trợ trên trang Quest."
+                },
+                disableAccountPanelPromo: {
+                    label: "Tắt quảng bá bảng tài khoản",
+                    description: "Tắt cửa sổ Quest được quảng bá phía trên bảng tài khoản."
+                },
+                disableAccountPanelQuestProgress: {
+                    label: "Tắt tiến độ bảng tài khoản",
+                    description: "Tắt tiến độ Quest đang chạy và đã hoàn thành phía trên bảng tài khoản."
+                },
+                disableOrbsAndQuestsBadges: {
+                    label: "Tắt huy hiệu Quest và Orbs",
+                    description: "Tắt huy hiệu Quest trên hồ sơ người dùng."
+                },
+                disableFriendsListPromo: {
+                    label: "Tắt quảng bá danh sách bạn bè",
+                    description: "Tắt quảng bá Quest cho trò chơi bạn bè đang chơi."
+                },
+                disableMembersListPromo: {
+                    label: "Tắt quảng bá danh sách thành viên",
+                    description: "Tắt biểu tượng đang chơi trong danh sách thành viên."
+                },
+                allowChangingDangerousSettings: {
+                    label: "Cho phép cài đặt nguy hiểm",
+                    description: "Cho phép thay đổi cài đặt nguy hiểm."
+                },
+                resumeInterruptedQuests: {
+                    label: "Tiếp tục Quest bị gián đoạn",
+                    description: "Tiếp tục tự động hoàn thành Quest sau khi tải lại hoặc khởi động lại."
+                },
+                makeMobileVideoQuestsDesktopCompatible: {
+                    label: "Quest video điện thoại tương thích máy tính",
+                    description: "Cho Quest video chỉ dành cho điện thoại tương thích với máy tính."
+                },
+                autoCompleteQuestsSimultaneously: {
+                    label: "Tự động hoàn thành đồng thời",
+                    description: "Hoàn thành Quest đồng thời thay vì lần lượt."
+                },
+                completeVideoQuestsQuicker: {
+                    label: "Hoàn thành Quest video nhanh hơn",
+                    description: "Dùng biên độ tiến độ của Discord và thời gian kể từ khi đăng ký để tự động hoàn thành Quest video."
+                },
+                autoCompleteQuestTypes: {
+                    label: "Loại Quest tự động hoàn thành",
+                    description: "Các loại Quest được tự động hoàn thành trong nền."
+                },
+                questButton: {
+                    label: "Nút Quest",
+                    description: "Tùy chỉnh nút Quest trong danh sách máy chủ."
+                },
+                questButtonDisplay: {
+                    label: "Hiển thị nút Quest",
+                    description: "Kiểu hiển thị dùng cho nút Quest trong danh sách máy chủ."
+                },
+                questButtonIncludedTypes: {
+                    label: "Loại được tính cho nút Quest",
+                    description: "Các loại phần thưởng và Quest được tính khi hiển thị số lượng trên nút Quest."
+                },
+                questButtonIndicator: {
+                    label: "Chỉ báo nút Quest",
+                    description: "Kiểu hiển thị dùng cho chỉ báo chưa nhận trên nút Quest."
+                },
+                questButtonBadgeCount: {
+                    label: "Số trên huy hiệu",
+                    description: "Số Quest liên quan chưa nhận hiện tại."
+                },
+                questButtonBadgeColor: {
+                    label: "Màu huy hiệu",
+                    description: "Màu huy hiệu của nút Quest trong danh sách máy chủ."
+                },
+                questButtonLeftClickAction: {
+                    label: "Hành động nhấp chuột trái",
+                    description: "Hành động khi nhấp chuột trái vào nút Quest."
+                },
+                questButtonMiddleClickAction: {
+                    label: "Hành động nhấp chuột giữa",
+                    description: "Hành động khi nhấp chuột giữa vào nút Quest."
+                },
+                questButtonRightClickAction: {
+                    label: "Hành động nhấp chuột phải",
+                    description: "Hành động khi nhấp chuột phải vào nút Quest."
+                },
+                questNotifications: {
+                    label: "Thông báo Quest",
+                    description: "Cấu hình thông báo khi hoàn thành Quest và khi phát hiện Quest mới."
+                },
+                notifyOnQuestComplete: {
+                    label: "Thông báo khi hoàn thành",
+                    description: "Hiển thị thông báo khi hoàn thành Quest."
+                },
+                notifyOnNewQuests: {
+                    label: "Thông báo Quest mới",
+                    description: "Hiển thị thông báo khi phát hiện Quest mới."
+                },
+                notifyOnNewExcludedQuests: {
+                    label: "Thông báo Quest bị loại trừ mới",
+                    description: "Hiển thị thông báo khi phát hiện Quest bị loại trừ mới."
+                },
+                questCompletedAlertSound: {
+                    label: "Âm thanh hoàn thành Quest",
+                    description: "Âm thanh phát khi hoàn thành Quest."
+                },
+                questCompletedAlertVolume: {
+                    label: "Âm lượng hoàn thành Quest",
+                    description: "Âm lượng của âm thanh hoàn thành Quest."
+                },
+                questFetchInterval: {
+                    label: "Khoảng thời gian tải",
+                    description: "Khoảng thời gian (giây) để tải Quest từ Discord."
+                },
+                newQuestAlertSound: {
+                    label: "Âm thanh Quest mới",
+                    description: "Âm thanh phát khi phát hiện Quest mới."
+                },
+                newQuestAlertVolume: {
+                    label: "Âm lượng Quest mới",
+                    description: "Âm lượng của âm thanh Quest mới."
+                },
+                newExcludedQuestAlertSound: {
+                    label: "Âm thanh Quest bị loại trừ mới",
+                    description: "Âm thanh phát khi phát hiện Quest bị loại trừ mới."
+                },
+                newExcludedQuestAlertVolume: {
+                    label: "Âm lượng Quest bị loại trừ mới",
+                    description: "Âm lượng của âm thanh Quest bị loại trừ mới."
+                },
+                questTiles: {
+                    label: "Ô Quest",
+                    description: "Tùy chỉnh giao diện các ô Quest trên trang Quest."
+                },
+                questTileUnclaimedColor: {
+                    label: "Màu ô chưa nhận",
+                    description: "Màu của ô Quest chưa nhận."
+                },
+                questTileClaimedColor: {
+                    label: "Màu ô đã nhận",
+                    description: "Màu của ô Quest đã nhận."
+                },
+                questTileIgnoredColor: {
+                    label: "Màu ô bỏ qua",
+                    description: "Màu của ô Quest bị bỏ qua."
+                },
+                questTileExpiredColor: {
+                    label: "Màu ô hết hạn",
+                    description: "Màu của ô Quest hết hạn."
+                },
+                questTileGradient: {
+                    label: "Chuyển màu của ô",
+                    description: "Kiểu chuyển màu dùng trong các ô Quest."
+                },
+                questTilePreload: {
+                    label: "Tải trước ô",
+                    description: "Cố gắng tải trước tài nguyên cho các ô Quest."
+                },
+                reorderQuests: {
+                    label: "Sắp xếp lại Quest",
+                    description: "Sắp xếp Quest theo trạng thái."
+                },
+                questOrder: {
+                    label: "Thứ tự Quest",
+                    description: "Thứ tự sắp xếp các nhóm trạng thái Quest."
+                },
+                unclaimedSubsort: {
+                    label: "Sắp xếp phụ chưa nhận",
+                    description: "Phương thức sắp xếp phụ cho Quest chưa nhận."
+                },
+                claimedSubsort: {
+                    label: "Sắp xếp phụ đã nhận",
+                    description: "Phương thức sắp xếp phụ cho Quest đã nhận."
+                },
+                ignoredSubsort: {
+                    label: "Sắp xếp phụ bỏ qua",
+                    description: "Phương thức sắp xếp phụ cho Quest bị bỏ qua."
+                },
+                expiredSubsort: {
+                    label: "Sắp xếp phụ hết hạn",
+                    description: "Phương thức sắp xếp phụ cho Quest hết hạn."
+                },
+                isOnQuestsPage: {
+                    label: "Đang ở trang Quest",
+                    description: "Người dùng hiện có đang ở trang Quest hay không."
+                },
+                rememberQuestPageSort: {
+                    label: "Ghi nhớ sắp xếp",
+                    description: "Ghi nhớ cách sắp xếp dùng gần nhất trên trang Quest."
+                },
+                rememberQuestPageFilters: {
+                    label: "Ghi nhớ bộ lọc",
+                    description: "Ghi nhớ bộ lọc dùng gần nhất trên trang Quest."
+                },
+                lastQuestPageSort: {
+                    label: "Sắp xếp gần nhất",
+                    description: "Cách sắp xếp dùng gần nhất trên trang Quest."
+                },
+                lastQuestPageFilters: {
+                    label: "Bộ lọc gần nhất",
+                    description: "Bộ lọc dùng gần nhất trên trang Quest."
+                },
+                ignoredQuestIDs: {
+                    label: "ID Quest bị bỏ qua",
+                    description: "Danh sách ID Quest bị bỏ qua."
+                },
+                resumeQuestIDs: {
+                    label: "ID Quest cần tiếp tục",
+                    description: "Danh sách ID Quest đang được tự động hoàn thành hoặc đang chờ trong nền."
+                },
+                acknowledgedNotices: {
+                    description: "Các thông báo một lần mà người dùng đã xác nhận.",
+                    label: "Thông báo đã xác nhận"
+                },
+                settingsSearch: {
+                    description: "Tìm trong cài đặt Questify.",
+                    label: "Tìm cài đặt"
+                },
+                hideNonAutoCompletableQuests: {
+                    description: "Ẩn nhiệm vụ chưa hoàn thành không có tác vụ tự hoàn thành được hỗ trợ và bật.",
+                    label: "Ẩn nhiệm vụ không thể tự hoàn thành"
+                },
+                preventVideoQuestsPausing: {
+                    description: "Ngăn video tạm dừng khi cửa sổ nhiệm vụ mất tiêu điểm.",
+                    label: "Ngăn tạm dừng nhiệm vụ video"
+                },
+                hiddenQuestStatuses: {
+                    description: "Các nhóm trạng thái nhiệm vụ sẽ ẩn.",
+                    label: "Trạng thái nhiệm vụ đã ẩn"
+                }
+            },
+            text: {
+                clearQuestQueue: "Xóa hàng đợi nhiệm vụ",
+                hideIncompleteQuestsWith: "Ẩn nhiệm vụ chưa hoàn thành có trạng thái chưa nhận hoặc bị bỏ qua khi không có tác vụ tự hoàn thành nào được hỗ trợ trên nền tảng này và được bật trong danh sách loại nhiệm vụ. Nhiệm vụ đã nhận, hết hạn và đã hoàn thành được loại trừ. Dùng tùy chọn ẩn thứ tự trạng thái để ẩn chúng.",
+                discordForcesYouTo: "Discord buộc bạn phải ở trong client để nhiệm vụ video phát video.",
+                hideNonAutoCompletable: "Ẩn nhiệm vụ không thể tự hoàn thành:",
+                preventVideoQuestsFrom: "Ngăn nhiệm vụ video tạm dừng khi mất tiêu điểm:",
+                thePunishmentAlsoConsists: "Hình phạt còn bao gồm một vi phạm tình trạng tài khoản kéo dài 2 năm cho mỗi lần vi phạm.",
+                dueToTheVarious: "Do Discord dùng nhiều phương pháp theo dõi người dùng, không có cách thực tế nào để tránh bị phát hiện. Nếu tiếp tục, hãy hiểu rằng Discord có thể sẽ phát hiện việc bạn sử dụng vào lúc nào đó.",
+                enrollInQuest: "Đăng ký nhiệm vụ",
+                hidden: "Ẩn",
+                selectingAnOccupiedPosition: "Chọn một vị trí đã có sẽ hoán đổi hai trạng thái. Trạng thái ẩn sẽ bị xóa khỏi danh sách nhiệm vụ.",
+                searchQuestifySettings: "Tìm trong cài đặt Questify",
+                searchQuestifySettings2: "Tìm trong cài đặt Questify...",
+                noMatchingSettings: "Không có cài đặt phù hợp.",
+                questifyNoticeAugust7th: "Thông báo Questify - Ngày 7 tháng 8 năm 2026",
+                keepUsingDangerousQuestify: "Tiếp tục dùng cài đặt Questify nguy hiểm",
+                disableDangerousQuestifySettings: "Tắt cài đặt Questify nguy hiểm",
+                questifyNoticeAugust26th: "Thông báo Questify - Ngày 26 tháng 8 năm 2026",
+                areYouSure: "Bạn có chắc không?",
+                thePunishmentAppearsLimited: "Hình phạt có vẻ chỉ giới hạn ở việc mất quyền truy cập nhiệm vụ và phần thưởng, nhưng Discord có thể tăng nặng bất cứ lúc nào.",
+                queueAllQuests: "Xếp hàng tất cả nhiệm vụ",
+                inProgress: "Đang tiến hành",
+                rateLimited: "Bị giới hạn",
+                preventsVideoPausing: "Cài đặt này ngăn video tạm dừng và cho phép tiến độ hoàn thành diễn ra bình thường.",
+                appliesOnlyToVideoQuests: "Cài đặt này chỉ áp dụng khi hoàn thành Nhiệm vụ Video thủ công.",
+                knownToPunish: "Discord được biết là trừng phạt người dùng script hoặc plugin thay đổi việc hoàn thành Nhiệm vụ. Việc thay đổi việc hoàn thành Nhiệm vụ vi phạm",
+                punishmentConsists: "Hình phạt là mất quyền truy cập Nhiệm vụ và phần thưởng tạm thời hoặc vĩnh viễn.",
+                questBanSystem: "Discord đã triển khai hệ thống cấm Nhiệm vụ, sẽ tạm thời hoặc vĩnh viễn hạn chế quyền hoàn thành Nhiệm vụ và nhận phần thưởng nếu phát hiện bạn hoàn thành chúng bằng cách không chính thức. Việc thay đổi việc hoàn thành Nhiệm vụ vi phạm",
+                begunPunishing: "Discord đã bắt đầu trừng phạt người dùng script và plugin thay đổi việc hoàn thành Nhiệm vụ. Việc thay đổi việc hoàn thành Nhiệm vụ vi phạm",
+                dueToRateLimits: " do giới hạn tần suất"
             }
         },
         questionMarkReplacement: {
@@ -8230,6 +8853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Lưu dưới dạng Gif",
                     description: "Lưu dưới dạng GIF theo mặc định"
                 }
+            },
+            text: {
+                quotePreview: "Xem trước trích dẫn"
             }
         },
         randomVoice: {
@@ -8287,7 +8913,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                     server: "Máy chủ không hợp lệ"
                 }
             },
+            keybind: {
+                label: "Phím tắt",
+                recording: "Đang ghi...",
+                reset: "Đặt lại"
+            },
             option: {
+                keybindEnabled: {
+                    label: "Bật phím tắt",
+                    description: "Hiển thị điều khiển phím tắt thoại ngẫu nhiên"
+                },
                 userAmountOperation: {
                     label: "Hoạt động số lượng người dùng",
                     description: "Chọn thao tác cho số lượng người dùng"
@@ -8379,6 +9014,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             alert: {
                 failed: "Không tìm thấy Kênh Thoại!"
+            },
+            toast: {
+                failedToFindA: "Không tìm thấy kênh thoại.",
+                voiceChannelIsUnavailable: "Kênh thoại không khả dụng."
+            },
+            text: {
+                userCount: "{{count}} người dùng",
+                usersCount: "{{count}} người dùng"
             }
         },
         reactErrorDecoder: {
@@ -8426,7 +9069,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 clearRdms: {
                     label: "Xóa danh sách RDMS",
                     description: "Tiện ích kiểm tra: Xóa danh sách RDM",
-                    toast: "Đã xóa lịch sử RMDS",
+                    toast: "Đã xóa lịch sử RDMS",
                     button: "Xóa lịch sử RDM"
                 }
             },
@@ -8477,6 +9120,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noLongerFriend: "Bạn không còn là bạn với {{user}}.",
                 friendRequestRevoked: "Yêu cầu kết bạn từ {{user}} đã bị thu hồi.",
                 ok: "ĐƯỢC RỒI"
+            },
+            text: {
+                relationshipNotifier: "Thông báo quan hệ"
             }
         },
         remix: {
@@ -8500,7 +9146,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ellipse: "hình elip",
                 line: "Đường kẻ",
                 arrow: "Mũi tên",
-                fill: "Đổ đầy"
+                fill: "Đổ đầy",
+                image: "Hình ảnh"
             }
         },
         repeatMessages: {
@@ -8534,12 +9181,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Tìm kiếm văn bản",
                 searchWith: "Tìm kiếm với {{name}}"
+            },
+            text: {
+                google: "Google"
             }
         },
         replyPingControl: {
             name: "ReplyPingControl",
-            description: "Kiểm soát việc luôn luôn hay không bao giờ nhận được ping khi trả lời tin nhắn bằng tính năng danh sách trắng",
+            description: "Kiểm soát việc luôn luôn hoặc không bao giờ nhận thông báo khi được trả lời tin nhắn, kèm tính năng danh sách trắng và danh sách đen",
             option: {
+                replyPingBlacklist: {
+                    label: "Danh sách đen thông báo trả lời",
+                    description: "Danh sách các ID người dùng phân tách bằng dấu phẩy để không bao giờ nhận thông báo trả lời từ họ"
+                },
                 alwaysPingOnReply: {
                     label: "Luôn Ping khi trả lời",
                     description: "Luôn nhận được ping khi ai đó trả lời tin nhắn của bạn"
@@ -8564,6 +9218,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Tìm kiếm hình ảnh",
                 all: "Tìm kiếm tất cả"
+            },
+            text: {
+                all: "Tất cả"
             }
         },
         reviewDB: {
@@ -8671,6 +9328,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             profile: {
                 optedOut: "Người dùng đã từ chối",
                 noReviews: "Chưa có đánh giá"
+            },
+            toast: {
+                youCannotVoteOn: "Bạn không thể bình chọn đánh giá của chính mình.",
+                networkErrorFailedTo: "Lỗi mạng: Không thể kết nối tới ReviewDB.",
+                pleaseAuthorizeToVote: "Hãy ủy quyền để bình chọn đánh giá.",
+                requestFailed: "ReviewDB: Yêu cầu thất bại với trạng thái {{status}}"
+            },
+            text: {
+                ok: "OK",
+                updateReviewFor: "Cập nhật đánh giá cho @{{name}}",
+                reviewUser: "Đánh giá @{{name}}",
+                system: "Hệ thống",
+                reviewCount: "({{count}} đánh giá)"
             }
         },
         richMagnetLinks: {
@@ -8764,46 +9434,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
         },
-        rpcStats: {
-            name: "RPCStats",
-            description: "Hiển thị số liệu thống kê về hoạt động của bạn dưới dạng RPC",
-            option: {
-                assetURL: {
-                    label: "URL nội dung",
-                    description: "Hình ảnh để sử dụng cho RPC của bạn. Ảnh hồ sơ của bạn sẽ được sử dụng nếu để trống"
-                },
-                rpcTitle: {
-                    label: "Tiêu đề RPC",
-                    description: "Tiêu đề RPC của bạn"
-                },
-                statDisplay: {
-                    label: "Hiển thị thống kê",
-                    description: "RPC nên hiển thị những gì? (Bạn chỉ có thể có một dòng, tôi khá chắc chắn)",
-                    today: "Số lượng tin nhắn được gửi hôm nay",
-                    alltime: "Số lượng tin nhắn được gửi mọi lúc",
-                    listened: "Album được nghe nhiều nhất trong tuần"
-                },
-                lastFMApiKey: {
-                    label: "Khóa API Last.fm",
-                    description: "Khóa API Last.fm của bạn"
-                },
-                lastFMUsername: {
-                    label: "Tên người dùng Last.fm",
-                    description: "Tên người dùng Last.fm của bạn"
-                },
-                albumCoverImage: {
-                    label: "Ảnh bìa album",
-                    description: "Có nên sử dụng ảnh bìa album làm ảnh RPC không? (Nếu bạn đã chọn màn hình Last.fm)"
-                },
-                lastFMStatFormat: {
-                    label: "Định dạng thống kê Last.fm",
-                    description: "Chỉ số Last.fm nên được định dạng như thế nào? $album được thay thế bằng tên album và $artist được thay thế bằng tên nghệ sĩ"
-                }
-            },
-            noInfo: "Hiện chưa có thông tin :(",
-            messagesToday: "Tin nhắn đã gửi hôm nay: {{count}}",
-            messagesAllTime: "Tin nhắn đã gửi mọi lúc: {{count}}"
-        },
         saveFavoriteGIFs: {
             name: "SaveFavouritedGIFs",
             description: "Xuất URL GIF yêu thích",
@@ -8868,7 +9498,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 maxMessagesReached: "Đã đạt tới tối đa {{max}} tin nhắn trên mỗi kênh mỗi phút",
                 messageScheduled: "Đã lên lịch tin nhắn!",
                 messageRemoved: "Đã xóa tin nhắn theo lịch trình",
-                allCleared: "Đã xóa tất cả tin nhắn đã lên lịch"
+                allCleared: "Đã xóa tất cả tin nhắn đã lên lịch",
+                scheduledMessageSentTo: "Đã gửi tin nhắn đã lên lịch tới {{name}}"
             },
             button: {
                 tooltipOn: "Chế độ lịch trình BẬT (nhấp để tắt, nhấp chuột phải để xem danh sách)",
@@ -8924,20 +9555,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Chỉ chơi chủ đề Snow Halation"
                 }
             }
-        },
-        summaries: {
-            name: "Summaries",
-            description: "Kích hoạt tính năng Tóm tắt thử nghiệm của Discord trên mọi máy chủ, hiển thị các bản tóm tắt cuộc hội thoại do AI tạo",
-            option: {
-                summaryExpiryThresholdDays: {
-                    label: "Ngưỡng hết hạn tóm tắt (Ngày)",
-                    description: "Thời gian tính bằng ngày trước khi bản tóm tắt bị xóa. Lưu ý rằng chỉ có tối đa 50 bản tóm tắt được lưu giữ trên mỗi kênh"
-                }
-            }
-        },
-        selfForward: {
-            name: "SelfForward",
-            description: "Thêm kênh hiện tại vào cửa sổ bật lên danh sách chuyển tiếp"
         },
         sendTimestamps: {
             name: "SendTimestamps",
@@ -9002,7 +9619,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 serverBoosts: "Tăng cường máy chủ",
                 channels: "Kênh",
-                roles: "Vai trò"
+                roles: "Vai trò",
+                boostLevel: "{{count}} (Cấp {{level}})"
             }
         },
         serverListIndicators: {
@@ -9061,6 +9679,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bgOpacity: {
                     label: "Độ mờ nền",
                     description: "Độ mờ nền"
+                },
+                ignoredLanguages: {
+                    label: "Ngôn ngữ bị bỏ qua",
+                    description: "Danh sách ngôn ngữ, phân tách bằng dấu phẩy, để lại cho khối mã mặc định của Discord"
                 }
             },
             button: {
@@ -9079,6 +9701,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noShiftPin: {
                     label: "Không có phím Shift",
                     description: "Loại bỏ yêu cầu giữ phím shift để ghim tin nhắn."
+                },
+                noQuickReacts: {
+                    description: "Ẩn bày tỏ cảm xúc nhanh. Theo mặc định, hiển thị toàn bộ menu sẽ ẩn các nút này.",
+                    label: "Không có cảm xúc nhanh"
                 }
             }
         },
@@ -9161,6 +9787,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     compact: "Nhỏ gọn",
                     cozy: "Ấm áp",
                     roomy: "rộng rãi"
+                },
+                showGithubOrgs: {
+                    description: "Hiển thị các tổ chức GitHub mà người dùng là thành viên",
+                    label: "Hiển thị tổ chức GitHub"
+                },
+                showOnModal: {
+                    description: "Hiển thị tài khoản đã kết nối trong cửa sổ hồ sơ đầy đủ",
+                    label: "Hiển thị trong cửa sổ"
                 }
             }
         },
@@ -9295,7 +9929,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 memberList: {
                     label: "Danh sách thành viên",
-                    description: "Hiển thị tên khả dụng đầu tiên được liệt kê ở định dạng tên tùy chỉnh của bạn trong danh sách thành viên."
+                    description: "Hiển thị tên khả dụng đầu tiên trong định dạng tên tùy chỉnh ở danh sách thành viên, tin nhắn trực tiếp, bạn bè và Đang hoạt động."
                 },
                 profilePopout: {
                     label: "Hồ sơ bật lên",
@@ -9349,6 +9983,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Chỉ tên tùy chỉnh trong tin nhắn trực tiếp",
                     description: "Chỉ hiển thị tên tùy chỉnh khi ở trong DM chứ không phải trong máy chủ."
                 },
+                alwaysShowEffects: {
+                    label: "Luôn tạo hoạt ảnh hiệu ứng",
+                    description: "Luôn hiển thị các hiệu ứng như thể bạn đang di chuột qua."
+                },
                 includedNames: {
                     label: "Tên bao gồm",
                     description: "Thứ tự hiển thị tên người dùng, tên hiển thị, biệt hiệu và tên bạn bè. Sử dụng các phần giữ chỗ sau: {user}, {display}, {nick}, {friend}. Bạn có thể cung cấp nhiều tùy chọn tên để sử dụng làm tên dự phòng nếu không có tùy chọn tên bằng cách phân tách chúng bằng dấu phẩy, chẳng hạn như: {friend, nick, display}. Bạn có thể có tối đa ba tiền tố và ba hậu tố cho mỗi tên."
@@ -9376,6 +10014,42 @@ const translations: MatchStructure<typeof enTranslations> = {
                 triggerNameRerender: {
                     label: "Trình kết xuất tên kích hoạt",
                     description: "Kích hoạt hiển thị lại tên bằng cách chuyển đổi cài đặt này."
+                },
+                searchAutocomplete: {
+                    description: "Hiển thị tên khả dụng đầu tiên trong định dạng tên tùy chỉnh của bạn ở phần tự hoàn thành nhắc đến và tìm kiếm.",
+                    label: "Tự hoàn thành tìm kiếm"
+                },
+                styleDirectMessagesList: {
+                    description: "Hiển thị hiệu ứng tên hiển thị trên mục chưa chọn mà không cần di chuột. Khi tắt, mục đã chọn và đang di chuột vẫn được tạo kiểu.",
+                    label: "Tạo kiểu danh sách tin nhắn trực tiếp"
+                },
+                styleDirectMessagesMessages: {
+                    description: "Hiển thị hiệu ứng tên hiển thị trên tác giả tin nhắn mà không cần di chuột. Khi tắt, tên đang di chuột vẫn được tạo kiểu.",
+                    label: "Tạo kiểu tin nhắn trong tin nhắn trực tiếp"
+                },
+                styleFriendsList: {
+                    description: "Hiển thị hiệu ứng tên hiển thị mà không cần di chuột. Khi tắt, mục đang di chuột vẫn được tạo kiểu.",
+                    label: "Tạo kiểu danh sách bạn bè"
+                },
+                styleActiveNow: {
+                    description: "Hiển thị hiệu ứng tên hiển thị mà không cần di chuột. Khi tắt, mục đang di chuột vẫn được tạo kiểu.",
+                    label: "Tạo kiểu Đang hoạt động"
+                },
+                ignoreEffects: {
+                    description: "Với tên không chính, chỉ dùng màu vai trò chính và bỏ hiệu ứng tên hiển thị.",
+                    label: "Bỏ qua hiệu ứng"
+                },
+                animateEffects: {
+                    description: "Tạo hoạt ảnh cho dải màu vai trò và hiệu ứng tên hiển thị trên tên không chính. Bị tắt bởi \"Bỏ qua hiệu ứng\" và giảm chuyển động.",
+                    label: "Tạo hoạt ảnh hiệu ứng"
+                },
+                alwaysAnimateEffects: {
+                    description: "Buộc hiệu ứng tên hiển thị chạy hoạt ảnh khi chúng đã hiển thị, kể cả không di chuột.",
+                    label: "Luôn tạo hoạt ảnh hiệu ứng"
+                },
+                gradientGlow: {
+                    description: "Thêm hiệu ứng phát sáng cho dải màu người dùng động giống như dải màu vai trò máy chủ.",
+                    label: "Phát sáng dải màu"
                 }
             },
             modal: {
@@ -9389,6 +10063,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nickname: "Biệt danh SMYN",
                 reset: "Đặt lại biệt danh SMYN",
                 cancel: "Hủy bỏ"
+            },
+            text: {
+                save: "Lưu",
+                unknown: "Không rõ"
             }
         },
         showTimeoutDuration: {
@@ -9401,6 +10079,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     tooltip: "Trong chú giải công cụ",
                     inline: "Bên cạnh biểu tượng hết thời gian chờ"
                 }
+            },
+            text: {
+                timeoutRemaining: "thời gian tạm khóa còn lại"
             }
         },
         showResourceChannels: {
@@ -9559,7 +10240,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 hidden: "Đang gõ ẩn ({{location}})",
                 visible: "Đang gõ hiển thị ({{location}})",
-                global: "Đang gõ có thể nhìn thấy (Toàn cầu)"
+                global: "Đang gõ có thể nhìn thấy (Toàn cầu)",
+                voiceChannel: "Trạng thái đang nhập luôn hiển thị trong chat của kênh thoại đang kết nối",
+                temporary: "Trạng thái đang nhập tạm thời hiển thị trong kênh này do có tin nhắn gần đây"
             },
             option: {
                 enabledGlobally: {
@@ -9610,6 +10293,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Mặc định Ẩn",
                     description: "If enabled, the plugin will hide your typing from others in any DMs/channels/guilds not listed in 'Disabled Locations' below. Nếu bị tắt, plugin sẽ hiển thị nội dung bạn nhập cho người khác đối với bất kỳ DM/kênh/bang hội nào không được liệt kê trong 'Vị trí đã bật' bên dưới."
                 },
+                alwaysEnableInActiveVoiceChat: {
+                    label: "Luôn bật trong chat thoại đang hoạt động",
+                    description: "Luôn cho phép hiển thị chỉ báo đang nhập khi bạn nhập trong kênh thoại mà bạn đang kết nối."
+                },
+                temporaryEnableThresholdServers: {
+                    label: "Ngưỡng bật tạm thời (máy chủ)",
+                    description: "Tạm thời cho phép hiển thị chỉ báo đang nhập trong số giây này sau khi gửi tin nhắn trong kênh máy chủ. Nếu chỉ báo đã hiển thị trong kênh, cài đặt này sẽ không có tác dụng."
+                },
+                temporaryEnableThresholdDirectMessages: {
+                    label: "Ngưỡng bật tạm thời (tin nhắn trực tiếp)",
+                    description: "Tạm thời cho phép hiển thị chỉ báo đang nhập trong số giây này sau khi gửi tin nhắn trong DM hoặc DM nhóm. Nếu chỉ báo đã hiển thị trong kênh, cài đặt này sẽ không có tác dụng."
+                },
                 enabledLocations: {
                     label: "Vị trí đã bật",
                     description: "Kích hoạt chức năng cho các ID này. Chấp nhận danh sách ID DM, ID kênh và ID bang hội được phân tách bằng dấu phẩy. Chỉ được sử dụng nếu 'Ẩn mặc định' bị tắt."
@@ -9618,6 +10313,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Vị trí bị vô hiệu hóa",
                     description: "Tắt chức năng cho các ID này. Chấp nhận danh sách ID DM, ID kênh và ID bang hội được phân tách bằng dấu phẩy. Chỉ được sử dụng nếu 'Ẩn mặc định' được bật."
                 }
+            },
+            text: {
+                silentTyping: "Gõ phím im lặng",
+                enabled: "Đã bật",
+                chatBarIndicators: "Chỉ báo thanh trò chuyện",
+                membersListIndicators: "Chỉ báo danh sách thành viên",
+                guild: "Máy chủ",
+                channel: "Kênh",
+                global: "Toàn cục"
             }
         },
         snowfall: {
@@ -9714,7 +10418,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         splitLargeMessages: {
             name: "SplitLargeMessages",
-            description: "Chia các tin nhắn lớn thành nhiều phần để phù hợp với giới hạn tin nhắn của Discord.",
+            description: "Tách tin nhắn quá dài thành các phần vừa với Discord trước khi gửi.",
             option: {
                 maxLength: {
                     label: "Độ dài tin nhắn tối đa",
@@ -9726,7 +10430,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 sendDelay: {
                     label: "Gửi trễ",
-                    description: "Độ trễ giữa mỗi đoạn tính bằng giây."
+                    description: "Độ trễ tối thiểu giữa mỗi phần, tính bằng giây."
                 },
                 hardSplit: {
                     label: "Chia cứng",
@@ -9734,32 +10438,26 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 splitInSlowmode: {
                     label: "Chia ở chế độ chậm",
-                    description: "Có nên chia nhỏ tin nhắn nếu kênh đã bật chế độ chậm không?"
+                    description: "Cho phép tách trong chế độ chậm khi độ trễ nằm trong mức tối đa đã cấu hình."
                 },
                 slowmodeMax: {
                     label: "Chế độ chậm tối đa",
-                    description: "Thời gian làm chậm tối đa nếu tách ở chế độ chậm."
-                }
-            }
-        },
-        spotifyActivityToggle: {
-            name: "SpotifyActivityToggle",
-            description: "Thêm nút chuyển đổi để hiển thị hoạt động Spotify.",
-            tooltip: {
-                enable: "Bật hoạt động Spotify",
-                disable: "Tắt hoạt động Spotify"
-            },
-            option: {
-                location: {
-                    label: "Vị trí",
-                    description: "Nơi hiển thị nút chuyển đổi Spotify",
-                    panel: "Bên cạnh Tắt tiếng/Điếc",
-                    toolbox: "Hộp công cụ Plexcord"
+                    description: "Thời lượng chế độ chậm tối đa được phép khi tách tin nhắn."
                 },
-                activityStatus: {
-                    label: "Trạng thái hoạt động",
-                    description: "Trạng thái hiện tại của hoạt động Spotify của bạn"
+                splitMode: {
+                    description: "Ưu tiên ranh giới này khi tách tin nhắn.",
+                    label: "Chế độ tách"
                 }
+            },
+            toast: {
+                cannotSplitThisMessage: "Không thể tách tin nhắn này do chế độ chậm của kênh.",
+                onlySentLengthMessage: "Chỉ gửi được {{sent}}/{{length}} phần tin nhắn.",
+                unsentCopied: "Đã sao chép các phần tin nhắn chưa gửi vào bộ nhớ tạm."
+            },
+            text: {
+                newlines: "Xuống dòng",
+                spaces: "Dấu cách",
+                strictCharacterLimit: "Giới hạn ký tự nghiêm ngặt"
             }
         },
         spotifyCrack: {
@@ -9845,7 +10543,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             context: {
                 edit: "Chỉnh sửa cài đặt trước tùy chỉnh",
-                set: "Đặt trạng thái tùy chỉnh"
+                set: "Đặt trạng thái tùy chỉnh",
+                delete: "Xóa bản mẫu"
             },
             notification: {
                 successfully: "Trạng thái đã lưu thành công"
@@ -9912,11 +10611,39 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 blockSticker: "Hình dán khối",
                 unblockSticker: "Bỏ chặn nhãn dán"
+            },
+            text: {
+                failedToRender: "Không thể hiển thị :("
             }
         },
         stickerPaste: {
             name: "StickerPaste",
             description: "Làm cho việc chọn nhãn dán trong bộ chọn nhãn dán chèn nhãn dán đó vào hộp trò chuyện thay vì gửi ngay lập tức"
+        },
+        streaks: {
+            name: "Streaks",
+            description: "Hiển thị chuỗi ngày bên cạnh người dùng khi bạn nhắn tin riêng với họ trong các ngày liên tiếp.",
+            tooltip: "Chuỗi {{count}} ngày",
+            tooltipExpiring: "Chuỗi {{count}} ngày — hãy nhắn tin hôm nay để giữ chuỗi!",
+            option: {
+                account: {
+                    description: "Đăng nhập hoặc đăng xuất khỏi API Streaks. Chuỗi ngày được lưu trên API nên bạn cần đăng nhập để chúng được ghi nhận.",
+                    login: "Đăng nhập API Streaks",
+                    logout: "Đăng xuất khỏi API Streaks"
+                },
+                eliteColor: "Màu chuỗi Tinh anh (100+ ngày)",
+                diamondColor: "Màu chuỗi Kim cương (60+ ngày)",
+                platinumColor: "Màu chuỗi Bạch kim (45+ ngày)",
+                goldColor: "Màu chuỗi Vàng (30+ ngày)",
+                silverColor: "Màu chuỗi Bạc (14+ ngày)",
+                bronzeColor: "Màu chuỗi Đồng (7+ ngày)",
+                defaultColor: "Màu chuỗi mặc định (1+ ngày)"
+            },
+            toast: {
+                authFailed: "Ủy quyền thất bại: {{error}}",
+                failedToAuthorizeMessage: "Ủy quyền thất bại: {{message}}",
+                authorizationExpired: "Ủy quyền Streaks đã hết hạn. Hãy ủy quyền lại trong cài đặt plugin Streaks."
+            }
         },
         streamerModeOnStream: {
             name: "StreamerModeOnStream",
@@ -9924,27 +10651,27 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         streamingCodecDisabler: {
             name: "StreamingCodecDisabler",
-            description: "Vô hiệu hóa codec để phát trực tuyến theo lựa chọn của bạn",
+            description: "Tắt các codec video bạn chọn cho phát trực tiếp và camera.",
             option: {
                 disableAv1Codec: {
                     label: "Tắt Codec AV1",
-                    description: "Ngăn Discord cân nhắc sử dụng AV1 để phát trực tuyến."
+                    description: "Khiến Discord không dùng AV1 cho phát trực tiếp và camera."
                 },
                 disableH265Codec: {
                     label: "Tắt Codec H265",
-                    description: "Ngăn Discord cân nhắc sử dụng H265 để phát trực tuyến."
+                    description: "Khiến Discord không dùng H265 cho phát trực tiếp và camera."
                 },
                 disableH264Codec: {
                     label: "Tắt Codec H264",
-                    description: "Ngăn Discord cân nhắc sử dụng H264 để phát trực tuyến."
+                    description: "Khiến Discord không dùng H264 cho phát trực tiếp và camera."
                 },
                 disableVP8Codec: {
                     label: "Tắt Codec VP8",
-                    description: "Ngăn Discord cân nhắc sử dụng VP8 để phát trực tuyến."
+                    description: "Khiến Discord không dùng VP8 cho phát trực tiếp và camera."
                 },
                 disableVP9Codec: {
                     label: "Tắt Codec VP9",
-                    description: "Ngăn Discord cân nhắc sử dụng VP9 để phát trực tuyến."
+                    description: "Khiến Discord không dùng VP9 cho phát trực tiếp và camera."
                 }
             }
         },
@@ -9990,6 +10717,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             modal: {
+                name: "Tên",
+                nameDescription: "Tên tùy chọn để giúp bạn nhận biết quy tắc này.",
+                search: "Tìm quy tắc...",
+                noResults: "Không có quy tắc nào khớp với tìm kiếm.",
                 title: "Quy tắc kiểm tra",
                 find: "Tìm thấy",
                 findRegex: "Mẫu regex",
@@ -10004,6 +10735,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 add: "Thêm quy tắc",
                 empty: "Quy tắc trống",
                 rule: "Quy tắc",
+            },
+            text: {
+                optionallyOnlyApplyThis: "Tùy chọn, chỉ áp dụng quy tắc này nếu tin nhắn chứa văn bản này.",
+                emptyRule: "Quy tắc trống {{number}}",
+                ruleWithFind: "Quy tắc {{number}} - {{find}}"
             }
         },
         themeAttributes: {
@@ -10050,7 +10786,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 twentyFourHourTime: {
                     label: "Thời gian 24 giờ",
-                    description: "Hiển thị thời gian ở định dạng 24 giờ"
+                    description: "Hiển thị giờ dạng 24h"
                 },
                 showTimezoneInfo: {
                     label: "Hiển thị thông tin múi giờ",
@@ -10089,6 +10825,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 askedTimezone: {
                     label: "Múi giờ được hỏi",
                     description: "Người dùng có được yêu cầu đặt múi giờ của họ hay không"
+                },
+                recipientTimezoneInDms: {
+                    label: "Múi giờ người nhận trong tin nhắn trực tiếp",
+                    description: "Trong tin nhắn trực tiếp, hiển thị múi giờ của người nhận trên tin nhắn của bạn"
+                },
+                showLocalTimezone: {
+                    label: "Hiển thị múi giờ địa phương",
+                    description: "Hiển thị múi giờ địa phương thay vì chỉ \"địa phương\""
                 }
             },
             modal: {
@@ -10097,6 +10841,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 selectPlaceholder: "Chọn múi giờ",
                 delete: "Xóa múi giờ",
                 save: "Cứu"
+            },
+            text: {
+                invalidResponseFormat: "Định dạng phản hồi không hợp lệ"
             }
         },
         toastNotifications: {
@@ -10157,6 +10904,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 determineServerNotifications: {
                     label: "Xác định thông báo máy chủ",
                     description: "Xác định xem có hiển thị thông báo dựa trên cài đặt thông báo của máy chủ hay không"
+                },
+                respectDoNotDisturb: {
+                    label: "Tôn trọng Không làm phiền",
+                    description: "Không hiển thị thông báo khi trạng thái của bạn là Không làm phiền."
                 },
                 directMessages: {
                     label: "Tin nhắn trực tiếp",
@@ -10244,8 +10995,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "DeepL yêu cầu khóa API trả phí từ DeepL Pro",
                     descriptionWeb: "Dịch vụ dịch thuật (Không được hỗ trợ trên Web!)",
                     google: "Google Dịch",
-                    deepl: "DeepL miễn phí",
-                    deeplPro: "DeepL Pro"
+                    deepl: "DeepL Miễn phí - Yêu cầu khóa API",
+                    deeplPro: "DeepL Pro - Yêu cầu khóa API",
+                    kagi: "Kagi Dịch - Yêu cầu khóa API"
+                },
+                kagiSession: {
+                    label: "Phiên Kagi",
+                    description: "Lấy token phiên của bạn từ https://kagi.com/settings?p=user_details"
                 },
                 deeplApiKey: {
                     label: "Khóa API DeepL",
@@ -10284,6 +11040,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     cancel: "Hiểu rồi",
                     secondaryConfirm: "Không hiển thị lại"
                 }
+            },
+            button: {
+                manageLanguages: "Tùy chỉnh ngôn ngữ dịch và tự động dịch"
             }
         },
         typingIndicator: {
@@ -10596,6 +11355,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Kích thước hình ảnh",
                     description: "Kích thước hình ảnh sử dụng"
                 }
+            },
+            text: {
+                viewAvatarDecoration: "Xem trang trí ảnh đại diện"
             }
         },
         viewRaw: {
@@ -10616,11 +11378,23 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Thay đổi nút để xem nội dung/dữ liệu thô của bất kỳ tin nhắn nào.",
                     left: "Nhấp chuột trái để xem nội dung thô.",
                     right: "Nhấp chuột phải để xem nội dung thô."
+                },
+                messageContextMenu: {
+                    description: "Hiển thị trong menu ngữ cảnh tin nhắn",
+                    label: "Menu ngữ cảnh tin nhắn"
+                },
+                sortKeys: {
+                    description: "Sắp xếp các khóa của dữ liệu thô theo bảng chữ cái.",
+                    label: "Sắp xếp khóa"
+                },
+                stripSensitiveData: {
+                    description: "Xóa dữ liệu nhạy cảm như email và số điện thoại khỏi dữ liệu thô.",
+                    label: "Xóa dữ liệu nhạy cảm"
                 }
             },
             modal: {
                 title: "Xem bản thô",
-                content: "Nội dung",
+                content: "Nội dung tin nhắn",
                 data: "{{type}} Dữ liệu",
                 copied: "{{type}} dữ liệu đã được sao chép vào bảng nhớ tạm!",
                 copy: "Sao chép {{type}} JSON",
@@ -10633,6 +11407,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 guild: "bang hội",
                 role: "Vai trò",
                 user: "người dùng"
+            },
+            text: {
+                copyTypeData: "Sao chép dữ liệu {{type}}",
+                rawTypeData: "Dữ liệu thô {{type}}",
+                messageData: "Dữ liệu tin nhắn"
             }
         },
         voiceButtons: {
@@ -10697,7 +11476,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 mute: "Tắt tiếng",
                 deafen: "Điếc",
                 unmute: "Bật tiếng",
-                undeafen: "Undeafen",
+                undeafen: "Bật nghe",
                 serverUnmute: "Bật tiếng máy chủ",
                 serverUndeafen: "Máy chủ Undeafen"
             }
@@ -10811,6 +11590,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 pause: "Tạm dừng ghi",
                 recording: "GHI ÂM",
                 send: "Gửi",
+            },
+            text: {
+                convertioWebConverter: "công cụ chuyển đổi web convertio"
             }
         },
         volumeBooster: {
@@ -10820,39 +11602,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 multiplier: {
                     label: "Số nhân",
                     description: "Hệ số nhân khối lượng"
-                }
-            }
-        },
-        wallpaperFree: {
-            name: "WallpaperFree",
-            description: "Giải trí thử nghiệm hình nền DM cũ; Đặt hình nền cho bất kỳ kênh, người dùng hoặc máy chủ nào.",
-            option: {
-                globalDefault: {
-                    label: "Mặc định toàn cầu",
-                    description: "Đặt hình nền mặc định chung cho tất cả các kênh."
-                },
-                stylingTips: {
-                    label: "Mẹo tạo kiểu"
-                }
-            },
-            context: {
-                setWallpaper: "Đặt hình nền",
-                removeWallpaper: "Xóa hình nền"
-            },
-            modal: {
-                set: "Đặt hình nền",
-                image: "URL hình ảnh",
-                cancel: "Hủy bỏ",
-                apply: "Áp dụng",
-                global: {
-                    set: "Đặt hình nền toàn cầu",
-                    remove: "Xóa hình nền mặc định toàn cầu",
-                    reset: "Đặt lại dữ liệu hình nền"
-                },
-                web: {
-                    info: "Bạn có thể sử dụng các tệp cục bộ bằng cách đặt chúng trong thư mục chủ đề Plexcord và sử dụng URL plexcord:///themes/filename.ext",
-                    open: "Mở thư mục chủ đề",
-                    quickCSS: "Mở QuickCSS"
                 }
             }
         },
@@ -10868,7 +11617,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webKeybinds: {
             name: "WebKeybinds",
-            description: "Thêm lại các tổ hợp phím bị thiếu trong phiên bản web của Discord: Ctrl+T, Ctrl+Shift+T, Ctrl+Tab, Ctrl+Shift+Tab, Ctrl+1-9, Ctrl+,. Chỉ hoạt động hoàn toàn trên Plextron/Legcord, không hoạt động trong trình duyệt của bạn"
+            description: "Thêm lại phím tắt bị thiếu trong phiên bản web của Discord. Chỉ hoạt động đầy đủ trên Plextron/Legcord, không phải trong trình duyệt",
+            option: {
+                showNavigationButtons: {
+                    description: "Hiển thị nút điều hướng lùi/tiến trên thanh tiêu đề.",
+                    label: "Hiển thị nút điều hướng"
+                },
+                overrideCommonKeybinds: {
+                    description: "Cho phép Discord ghi đè các phím tắt điều hướng thẻ phổ biến nhất (ctrl+t, ctrl+shift+t, ctrl+tab, ctrl+shift+tab, ctrl+n). Chỉ hoạt động trên một số trình duyệt cho phép phím tắt của trang web được ưu tiên.",
+                    label: "Ghi đè phím tắt phổ biến"
+                }
+            }
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
@@ -10887,6 +11646,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 avatarClick: {
                     label: "Bấm vào hình đại diện",
                     description: "Chuyển đổi cách nhấp vào hình đại diện trong phản ứng"
+                },
+                clickableAvatars: {
+                    description: "Khi bật, nhấp vào ảnh đại diện của người đã bày tỏ cảm xúc sẽ mở hồ sơ của họ thay vì thêm cảm xúc",
+                    label: "Ảnh đại diện có thể nhấp"
                 }
             }
         },
@@ -11002,6 +11765,2447 @@ const translations: MatchStructure<typeof enTranslations> = {
         youtubeDescription: {
             name: "YouTubeDescription",
             description: "Thêm mô tả vào video nhúng trên YouTube"
+        },
+        addAttachments: {
+            name: "AddAttachments",
+            description: "Cho phép thêm tệp đính kèm mới khi chỉnh sửa tin nhắn",
+            toast: {
+                youCannotAddMore: "Bạn không thể thêm tệp đính kèm vào tin nhắn này nữa.",
+                youCanOnlyAdd: "Bạn chỉ có thể thêm {{count}} tệp đính kèm nữa vào tin nhắn này.",
+                uploadingThisCanTake: "Đang tải lên, việc này có thể mất một lúc...",
+                addedOne: "Đã thêm tệp đính kèm!",
+                addedMany: "Đã thêm các tệp đính kèm!"
+            },
+            text: {
+                addAttachments: "Thêm tệp đính kèm"
+            }
+        },
+        advancedPermissions: {
+            option: {
+                simplifiedCard: {
+                    description: "Xử lý thẻ quyền rút gọn của Discord như thế nào",
+                    label: "Thẻ rút gọn",
+                    hide: "Ẩn đi",
+                    collapse: "Cho phép thu gọn",
+                    show: "Để hiển thị"
+                },
+                collapsedByDefault: {
+                    description: "Bắt đầu với phần quyền rút gọn ở trạng thái thu gọn.",
+                    label: "Thu gọn theo mặc định"
+                }
+            },
+            name: "AdvancedPermissions",
+            description: "Hiển thị thẻ quyền nâng cao theo mặc định.",
+            text: {
+                simplifiedPermissions: "Quyền rút gọn"
+            }
+        },
+        autoJumpToMessage: {
+            option: {
+                onlyWhenUnfocused: {
+                    description: "Chỉ tự động chuyển đến tin nhắn khi cửa sổ Discord không được chọn.",
+                    label: "Chỉ khi không được chọn"
+                }
+            },
+            name: "AutoJumpToMessage",
+            description: "Tự động mở kênh có tin nhắn mới."
+        },
+        betterForwards: {
+            text: {
+                serverIconForName: "Biểu tượng máy chủ của {{name}}",
+                messageAttachments: "Tệp đính kèm của tin nhắn",
+                messageTextWillNot: "Nội dung tin nhắn sẽ không được chuyển tiếp khi tùy chọn này bị tắt",
+                forwardEverything: "Chuyển tiếp tất cả",
+                viewServer: "Xem máy chủ",
+                embed: "Nhúng",
+                embedNumber: "Nhúng {{number}}",
+                image: "Hình ảnh",
+                video: "Video",
+                serverIcon: "Biểu tượng máy chủ {{name}}",
+                dmIcon: "Biểu tượng tin nhắn riêng của {{name}}",
+                groupDmIcon: "Biểu tượng nhóm tin nhắn {{name}}"
+            },
+            option: {
+                resendOnFail: {
+                    description: "Sẽ thử gửi lại tin nhắn được chuyển tiếp nếu việc chuyển tiếp thất bại. Có thể gây ra lượt nhắc hoặc spam ngoài ý muốn. Bỏ qua giới hạn NSFW.",
+                    label: "Gửi lại khi thất bại"
+                },
+                forwardPreface: {
+                    description: "Tin nhắn được chuyển tiếp nên bắt đầu bằng gì",
+                    label: "Tiền tố chuyển tiếp"
+                },
+                dontFollowForwards: {
+                    description: "Sau khi chuyển tiếp một tin nhắn, không chuyển đến tin nhắn đó. Giữ Shift để bỏ qua hành vi này.",
+                    label: "Không theo dõi chuyển tiếp"
+                },
+                selfForward: {
+                    description: "Hiển thị kênh hiện tại trong cửa sổ danh sách chuyển tiếp.",
+                    label: "Tự chuyển tiếp"
+                }
+            },
+            name: "BetterForwards",
+            description: "Tiện ích chuyển tiếp tin nhắn, bao gồm bỏ qua NSFW và cải thiện giao diện."
+        },
+        betterImageEditor: {
+            text: {
+                search: "Tìm kiếm",
+                searchSavedPictures: "Tìm ảnh đã lưu",
+                clearTheSearch: "Xóa tìm kiếm",
+                savedPictures: "Ảnh đã lưu",
+                removeName: "Xóa {{name}}",
+                removeHoldShiftTo: "Xóa. Giữ Shift để bỏ qua xác nhận",
+                originals: "Bản gốc",
+                putBackTheLast: "Đặt lại cái cuối cùng",
+                forgetEveryRememberedCrop: "Quên mọi lần cắt đã ghi nhớ?",
+                yourPicturesStayEach: "Ảnh của bạn vẫn được giữ. Từ giờ mỗi ảnh sẽ mở mà không có khung, cho đến khi bạn cắt lại.",
+                forget: "Quên",
+                cancel: "Hủy",
+                clearSavedPictures: "Xóa ảnh đã lưu?",
+                everyPictureYouHave: "Mọi ảnh bạn đã lưu tại đây sẽ bị xóa, cùng với cách cắt đã ghi nhớ của từng ảnh. Kho lưu trữ của Discord cùng ảnh đại diện và biểu ngữ hiện tại không bị ảnh hưởng.",
+                clear: "Xóa",
+                removeThisPicture: "Xóa ảnh này?",
+                remove: "Xóa",
+                keepTheCroppedCopy: "Giữ bản sao đã cắt?",
+                itGoesOnThe: "Nó sẽ được đặt trên kệ {{toLowerCase}}, cạnh các bản gốc của bạn.",
+                keep: "Giữ",
+                noThanks: "Không, cảm ơn",
+                exportToAFile: "Xuất ra tệp",
+                importFromAFile: "Nhập từ tệp",
+                forgetRememberedFraming: "Quên khung ảnh đã ghi nhớ",
+                clearSavedPictures2: "Xóa ảnh đã lưu",
+                croppedKind: "{{kind}} đã cắt",
+                unpinName: "Bỏ ghim {{name}}",
+                pinName: "Ghim {{name}}",
+                pinnedNeverDrops: "Đã ghim, sẽ không bao giờ rơi khỏi kệ",
+                pinNeverDrops: "Ghim để không bao giờ rơi khỏi kệ",
+                nothingMatches: "Không có gì ở đây khớp",
+                originalsEmpty: "Ảnh bạn chọn, dán hoặc thả vào sẽ nằm ở đây",
+                croppedEmpty: "Ảnh bạn cắt sẽ nằm ở đây",
+                forgotFraming: "Đã quên khung cắt của {{count}} ảnh",
+                nothingFramed: "Không có gì được đóng khung",
+                pictureLibrary: "Thư viện ảnh",
+                addedPictures: "Đã thêm {{count}} ảnh",
+                nothingNew: "Không có gì mới trong tệp đó",
+                shownOfTotal: "{{shown}} / {{total}}",
+                keptCount: "Đã lưu {{count}}",
+                youAreWearingThis: "Bạn đang dùng ảnh này",
+                removePictureBody: "{{name}} sẽ bị xóa khỏi ảnh đã lưu, cùng với vùng cắt đã ghi nhớ."
+            },
+            option: {
+                librarySize: {
+                    description: "Số ảnh được giữ trên mỗi kệ.",
+                    label: "Kích thước thư viện"
+                },
+                rememberCrop: {
+                    description: "Khôi phục mức thu phóng và vị trí bạn đã dùng lần cuối cho một ảnh.",
+                    label: "Ghi nhớ cắt ảnh"
+                },
+                forgetFraming: {
+                    description: "Bỏ mọi lần cắt đã ghi nhớ và mở từng ảnh theo cách của Discord.",
+                    label: "Quên khung ảnh"
+                },
+                saveCropped: {
+                    description: "Giữ một bản sao của mỗi ảnh sau khi bạn cắt.",
+                    label: "Lưu ảnh đã cắt"
+                },
+                askBeforeSavingCropped: {
+                    description: "Hỏi trước thay vì tự động giữ bản sao đã cắt.",
+                    label: "Hỏi trước khi lưu ảnh đã cắt"
+                },
+                transfer: {
+                    description: "Mang ảnh của bạn, cùng cách đóng khung từng ảnh, sang thiết bị khác.",
+                    label: "Chuyển"
+                },
+                clearLibrary: {
+                    description: "Bỏ tất cả ảnh bạn đã lưu.",
+                    label: "Xóa thư viện"
+                }
+            },
+            name: "BetterImageEditor",
+            description: "Giữ một kệ ảnh của bạn trong trình chỉnh sửa ảnh đại diện và biểu ngữ, đồng thời ghi nhớ cách bạn đã cắt từng ảnh.",
+            toast: {
+                couldNotExportYour: "Không thể xuất ảnh của bạn",
+                couldNotReadThat: "Không thể đọc tệp đó",
+                thatPictureIsMissing: "Ảnh đó bị thiếu",
+                thatPictureIsToo: "Ảnh đó quá lớn đối với Discord",
+                couldNotUseThat: "Không thể dùng ảnh đó",
+                couldNotKeepThe: "Không thể giữ bản sao đã cắt"
+            },
+            kind: {
+                avatars: "ảnh đại diện",
+                banners: "biểu ngữ",
+                serverIcons: "biểu tượng máy chủ",
+                serverBanners: "biểu ngữ máy chủ",
+                eventCovers: "ảnh bìa sự kiện",
+                homeHeaders: "tiêu đề trang chủ",
+                decorations: "trang trí",
+                widgetCovers: "ảnh bìa tiện ích",
+                widgetImages: "hình ảnh tiện ích"
+            }
+        },
+        cancelFriendRequest: {
+            name: "CancelFriendRequest",
+            description: "Thêm cách hủy lời mời kết bạn đã gửi từ hồ sơ.",
+            text: {
+                cancelOutgoingFriendRequest: "Hủy lời mời kết bạn đã gửi"
+            }
+        },
+        clipUpload: {
+            text: {
+                createdAtMustBe: "Ngày tạo phải là một ngày hợp lệ.",
+                cancel: "Hủy",
+                uploadClipFile: "Tải lên tệp clip",
+                fileName: "Tên tệp",
+                title: "Tiêu đề",
+                epicMoment: "Khoảnh khắc đỉnh cao",
+                message: "Tin nhắn",
+                checkOutThisClip: "Xem clip này nè!",
+                spoiler: "Tiết lộ nội dung",
+                remix: "Remix",
+                thumbnail: "Ảnh thu nhỏ",
+                file: "Tệp",
+                selectFile: "Chọn tệp",
+                parseClipMetadataFrom: "Đọc siêu dữ liệu clip từ tệp",
+                selectFriends: "Chọn bạn bè",
+                selectAGame: "Chọn trò chơi",
+                customApplicationId: "ID ứng dụng tùy chỉnh",
+                createdAt: "Ngày tạo",
+                participants: "Người tham gia",
+                onlyTagPeopleWho: "Chỉ gắn thẻ những người có mặt và đã đồng ý xuất hiện trong clip này.",
+                gameApplication: "Trò chơi/Ứng dụng",
+                uploadClipFile2: "Tải lên tệp clip",
+                uploading: "Đang tải lên",
+                upload: "Tải lên",
+                noFileSelected: "Chưa chọn tệp",
+                couldNotPrepare: "Không thể chuẩn bị tệp đã chọn.",
+                couldNotRead: "Không thể đọc tệp đã chọn.",
+                couldNotUpdateMetadata: "Không thể cập nhật siêu dữ liệu clip.",
+                notCompatible: "Tệp này không tương thích. Hãy dùng clip MP4 với video H.264 và âm thanh AAC.",
+                uploadFailed: "Tải lên thất bại.",
+                noUploadSlot: "Discord không trả về vị trí tải lên.",
+                uploadCanceled: "Đã hủy tải lên.",
+                failedToUpload: "Không thể tải clip lên.",
+                selectClipFile: "Chọn tệp clip",
+                mp4Video: "Video MP4"
+            },
+            name: "ClipUpload",
+            description: "Thêm nút để tải lên tệp video cục bộ dưới dạng clip Discord.",
+            toast: {
+                checkingClipFile: "Đang kiểm tra tệp clip.",
+                convertingClipFile: "Đang chuyển đổi tệp clip.",
+                clipUploaded: "Đã tải clip lên."
+            }
+        },
+        collapsibleUI: {
+            name: "CollapsibleUI",
+            description: "Các vùng thu gọn gốc cho kênh, thành viên, nút trò chuyện và khu vực người dùng.",
+            text: {
+                collapsibleUi: "Giao diện thu gọn",
+                guildBar: "Thanh máy chủ",
+                channelList: "Danh sách kênh",
+                membersList: "Danh sách thành viên",
+                messageButtons: "Nút tin nhắn",
+                titleBar: "Thanh tiêu đề",
+                headerBar: "Thanh đầu trang",
+                userArea: "Khu vực người dùng"
+            },
+            option: {
+                detachUserArea: {
+                    description: "Tách khu vực người dùng để có thể di chuyển tự do khi không bị thu gọn.",
+                    label: "Tách khu vực người dùng"
+                },
+                detachedUserAreaX: {
+                    description: "Lưu vị trí x của khu vực người dùng đã tách.",
+                    label: "Khu vực người dùng đã tách X"
+                },
+                detachedUserAreaY: {
+                    description: "Lưu vị trí y của khu vực người dùng đã tách.",
+                    label: "Khu vực người dùng đã tách Y"
+                },
+                guildBarCollapsed: {
+                    description: "Ghi nhớ thanh máy chủ ở trạng thái thu gọn.",
+                    label: "Thanh máy chủ thu gọn"
+                },
+                channelListCollapsed: {
+                    description: "Ghi nhớ danh sách kênh ở trạng thái thu gọn.",
+                    label: "Danh sách kênh thu gọn"
+                },
+                membersListCollapsed: {
+                    description: "Ghi nhớ danh sách thành viên ở trạng thái thu gọn.",
+                    label: "Danh sách thành viên thu gọn"
+                },
+                chatButtonsCollapsed: {
+                    description: "Ghi nhớ hàng nút tin nhắn ở trạng thái thu gọn.",
+                    label: "Nút trò chuyện thu gọn"
+                },
+                titleBarCollapsed: {
+                    description: "Ghi nhớ thanh tiêu đề ở trạng thái thu gọn.",
+                    label: "Thanh tiêu đề thu gọn"
+                },
+                headerBarCollapsed: {
+                    description: "Ghi nhớ thanh đầu trang ở trạng thái thu gọn.",
+                    label: "Thanh đầu trang thu gọn"
+                },
+                userAreaCollapsed: {
+                    description: "Ghi nhớ khu vực người dùng ở trạng thái thu gọn.",
+                    label: "Khu vực người dùng thu gọn"
+                }
+            }
+        },
+        customCommands: {
+            text: {
+                cancel: "Hủy",
+                name: "Name",
+                response: "Phản hồi",
+                detectedArguments: "Đối số được phát hiện",
+                exampleCommandResponse: "Ví dụ phản hồi lệnh:",
+                exampleUsage: "Ví dụ sử dụng:",
+                exampleOutput: "Ví dụ đầu ra:",
+                viewArgumentsGuide: "Xem hướng dẫn đối số",
+                editTag: "Sửa thẻ",
+                deleteTag: "Xóa thẻ",
+                registeredTags: "Thẻ đã đăng ký",
+                createTag: "Tạo thẻ",
+                aTagWithThe: "Không tồn tại thẻ có tên **{{name}}**!",
+                successfullyDeletedTheTag: "Đã xóa thẻ **{{name}}**!",
+                ephemeralReserved: "Tên đối số \"ephemeral\" đã được dành riêng và không thể sử dụng.",
+                createNewTag: "Tạo thẻ mới",
+                editTagSubtitle: "Chỉnh sửa lệnh tùy chỉnh của bạn.",
+                createTagSubtitle: "Tạo một thẻ mới sẽ được đăng ký thành lệnh gạch chéo.",
+                save: "Lưu",
+                create: "Tạo",
+                variablesHelp: "Phản hồi của bạn có thể chứa biến trong cặp ngoặc nhọn kép, chúng sẽ trở thành đối số của lệnh, ví dụ",
+                defaultValuesHelp: "Bạn có thể đặt đối số với giá trị mặc định bằng dấu bằng, ví dụ",
+                noTagsYet: "Úi! Chưa có thẻ nào, hãy dùng `/tags create` để tạo!",
+                nameAlreadyExists: "Thẻ có tên \"{{name}}\" đã tồn tại và sẽ bị ghi đè.",
+                defaultValue: "(mặc định: {{value}})"
+            },
+            name: "CustomCommands",
+            description: "Cho phép tạo lệnh gạch chéo / thẻ tùy chỉnh",
+            option: {
+                tagsList: {
+                    label: "Danh sách thẻ"
+                }
+            },
+            command: {
+                ephemeral: "Phản hồi có chỉ hiển thị với bạn hay không",
+                tags: "Quản lý tất cả lệnh tùy chỉnh",
+                create: "Tạo một thẻ mới",
+                list: "Liệt kê tất cả thẻ của bạn",
+                delete: "Xóa thẻ theo tên",
+                tagName: "Tên của thẻ"
+            }
+        },
+        fileUpload: {
+            name: "FileUpload",
+            description: "Tải tệp lên các dịch vụ lưu trữ như Zipline, Nest, S3 và WebDAV",
+            toast: {
+                fileTypeNotAllowed: "Loại tệp không được bộ lọc hiện tại cho phép",
+                pleaseConfigureFileuploadSettings: "Hãy cấu hình cài đặt FileUpload trước",
+                sharexConfigIsValid: "Cấu hình ShareX hợp lệ",
+                importedSharexConfig: "Đã nhập cấu hình ShareX",
+                uploadSuccessfulButNo: "Tải lên thành công nhưng không có URL để sao chép",
+                uploadSuccessfulUrlCopied: "Tải lên thành công, đã sao chép URL vào bộ nhớ tạm",
+                uploadSuccessfulButFailed: "Tải lên thành công nhưng không thể sao chép URL",
+                uploadSuccessful: "Tải lên thành công",
+                uploadSucceededWithServicelabels: "Tải lên thành công bằng {{serviceLabels_service}} sau khi dự phòng",
+                apngToGifConversion: "Chuyển APNG sang GIF thất bại, đang tải lên dưới dạng APNG",
+                uploadAlreadyInProgress: "Đang tải lên rồi",
+                uploadCancelled: "Đã hủy tải lên",
+                uploadFailedMessage: "Tải lên thất bại: {{message}}",
+                invalidSharexConfig: "Cấu hình ShareX không hợp lệ",
+                failedToImportSharexConfig: "Không thể nhập cấu hình ShareX"
+            },
+            text: {
+                uploadToServicename: "Tải lên {{serviceName}}",
+                uploadToHost: "Tải lên máy chủ lưu trữ",
+                chooseFile: "Chọn tệp...",
+                zipline: "Zipline",
+                eZHost: "E-Z Host",
+                nest: "Nest",
+                encryptingHost: "Encrypting.host",
+                s3Compatible: "Tương thích S3",
+                catboxMoe: "Catbox.moe",
+                litterbox: "Litterbox",
+                sharexCustomUploader: "Trình tải lên tùy chỉnh ShareX",
+                webdavNextcloudOwncloud: "WebDAV (Nextcloud/Owncloud)",
+                n1Hour: "1 giờ",
+                n12Hours: "12 giờ",
+                n24Hours: "24 giờ",
+                n72Hours: "72 giờ",
+                corsProxy: "Proxy CORS",
+                query: "Truy vấn",
+                param: "Tham số",
+                fakeLink: "Liên kết giả",
+                embed: "Nhúng",
+                n30Seconds: "30 giây",
+                n1Minute: "1 phút",
+                n2Minutes: "2 phút",
+                n5Minutes: "5 phút",
+                n10Minutes: "10 phút",
+                dragHostsToReorder: "Kéo các máy chủ để sắp xếp lại thứ tự thử dự phòng. Máy chủ đã chọn được thử trước, sau đó dùng thứ tự này.",
+                chooseWhereFileuploadSends: "Chọn nơi FileUpload gửi tệp mới.",
+                connectionDetailsForYour: "Thông tin kết nối cho phiên bản Zipline của bạn.",
+                theUrlOfYour: "URL phiên bản Zipline của bạn",
+                yourZiplineApiAuthorization: "Mã ủy quyền API Zipline của bạn",
+                yourZiplineApiToken: "Mã API Zipline của bạn",
+                folderIdForUploads: "ID thư mục để tải lên (để trống nếu không dùng thư mục)",
+                leaveEmptyForNo: "Để trống nếu không dùng thư mục",
+                connectionDetailsForE: "Thông tin kết nối để tải lên E-Z Host.",
+                yourEZHost: "Khóa API E-Z Host của bạn",
+                connectionDetailsForNest: "Thông tin kết nối để tải lên Nest.",
+                yourNestApiAuthorization: "Mã ủy quyền API Nest của bạn",
+                yourNestApiToken: "Mã API Nest của bạn",
+                connectionDetailsForEncrypting: "Thông tin kết nối để tải lên Encrypting.host.",
+                yourEncryptingHostApi: "Khóa API Encrypting.host của bạn",
+                howEncryptingHostShould: "Cách Encrypting.host định dạng liên kết trả về.",
+                selectUrlStyle: "Chọn kiểu URL",
+                optionalTitleForEmbed: "Tiêu đề tùy chọn cho phản hồi kiểu nhúng.",
+                optionalTitle: "Tiêu đề (tùy chọn)",
+                optionalColorForEmbed: "Màu tùy chọn cho phản hồi kiểu nhúng.",
+                optionalColor: "Màu (tùy chọn)",
+                optionalFakeLinkValue: "Giá trị liên kết giả tùy chọn cho phản hồi kiểu fakelink.",
+                optionalFakeLink: "Liên kết giả (tùy chọn)",
+                connectionDetailsAndObject: "Thông tin kết nối và cách đặt tên đối tượng cho bucket của bạn.",
+                s3CompatibleEndpointE: "Điểm cuối tương thích S3 (vd: https://<accountid>.r2.cloudflarestorage.com)",
+                bucketToUploadInto: "Bucket để tải lên",
+                awsRegionOrAuto: "Vùng AWS hoặc auto cho Cloudflare R2",
+                s3CompatibleAccessKey: "Khóa truy cập tương thích S3",
+                yourAccessKeyId: "ID khóa truy cập của bạn",
+                s3CompatibleSecretKey: "Khóa bí mật tương thích S3",
+                yourSecretAccessKey: "Khóa truy cập bí mật của bạn",
+                optionalTemporaryCredentialToken: "Mã thông tin xác thực tạm thời (tùy chọn)",
+                optionalSessionToken: "Mã phiên (tùy chọn)",
+                optionalPublicUrlBase: "URL cơ sở công khai tùy chọn cho liên kết trả về",
+                optionalFolderPrefixInside: "Thư mục/tiền tố tùy chọn trong bucket",
+                useEndpointBucketKey: "Dùng định dạng endpoint/bucket/key, khuyến nghị cho R2.",
+                optionalAccountBindingFor: "Liên kết tài khoản tùy chọn cho tải lên Catbox.",
+                yourCatboxUserhashFor: "Userhash Catbox của bạn để liên kết tài khoản, để trống để tải lên ẩn danh.",
+                yourCatboxUserhash: "Userhash Catbox của bạn",
+                howLongUploadsAre: "Thời gian lưu giữ tệp tải lên",
+                selectExpiry: "Chọn thời hạn",
+                optionalAccountBindingFor2: "Liên kết tài khoản tùy chọn cho tải lên GoFile.",
+                optionalGofileTokenTo: "Mã GoFile tùy chọn để tải lên tài khoản của bạn.",
+                optionalGofileToken: "Mã GoFile (tùy chọn)",
+                connectionDetailsForPixelvault: "Thông tin kết nối để tải lên PixelVault.",
+                yourPixelvaultAuthorizationKey: "Khóa ủy quyền PixelVault của bạn.",
+                yourPixelvaultUploadKey: "Khóa tải lên PixelVault của bạn",
+                optionalAccountBindingFor3: "Liên kết tài khoản tùy chọn cho tải lên PixelDrain.",
+                optionalPixeldrainApiKey: "Khóa API PixelDrain tùy chọn cho tải lên đã xác thực. Để trống để tải lên ẩn danh.",
+                yourPixeldrainApiKey: "Khóa API PixelDrain của bạn",
+                pasteImportOrValidate: "Dán, nhập hoặc xác thực cấu hình trình tải lên tùy chỉnh ShareX.",
+                pasteYourSharexCustom: "Dán JSON trình tải lên tùy chỉnh ShareX của bạn (.sxcu/.json). DestinationType phải bao gồm FileUploader hoặc ImageUploader.",
+                importFromFileOr: "Nhập từ tệp hoặc xác thực cấu hình đã dán",
+                connectionDetailsForWebdav: "Thông tin kết nối cho máy chủ WebDAV (Nextcloud, Owncloud, v.v.).",
+                baseWebdavUrlE: "URL WebDAV cơ sở (vd: https://nextcloud.example.com/remote.php/dav/files/username)",
+                optionalSubdirectoryOnThe: "Thư mục con tùy chọn trên máy chủ để tải lên (vd: uploads)",
+                leaveEmptyForRoot: "Để trống để dùng thư mục gốc",
+                selectYourWebdavServer: "Chọn loại máy chủ WebDAV. Nextcloud và ownCloud sẽ tạo liên kết chia sẻ công khai. Chung sẽ trả về URL tệp thô.",
+                selectServerType: "Chọn loại máy chủ",
+                howToReturnThe: "Cách trả về liên kết chia sẻ công khai. Trang chia sẻ dẫn đến một trang web; Tải xuống trực tiếp dẫn thẳng tới tệp; Liên kết Markdown bọc trang chia sẻ trong một tên tệp có thể nhấp.",
+                selectShareLinkFormat: "Chọn định dạng liên kết chia sẻ",
+                controlWhatFileuploadDoes: "Kiểm soát việc FileUpload làm gì sau khi máy chủ trả về URL.",
+                stripQueryParametersFrom: "Xóa tham số truy vấn khỏi URL của tệp đã tải lên.",
+                wrapUploadedVideoLinks: "Bọc liên kết video đã tải lên bằng proxy nhúng để xem trước trên Discord tốt hơn.",
+                chooseWhichEmbedProxy: "Chọn dịch vụ proxy nhúng dùng cho liên kết video đã tải lên",
+                selectAnEmbedProxy: "Chọn dịch vụ proxy nhúng",
+                convertApngFilesTo: "Chuyển tệp APNG sang định dạng GIF.",
+                useTheOriginalFilename: "Dùng tên tệp gốc thay vì đặt tên tệp tải lên là upload.ext.",
+                automaticallyCopyTheUploaded: "Tự động sao chép URL tệp đã tải lên vào bộ nhớ tạm.",
+                onlyUseTheSelected: "Chỉ dùng trình tải lên đã chọn mà không thử máy chủ dự phòng.",
+                afterUploadInsertThe: "Sau khi tải lên, chèn URL nhận được vào ô trò chuyện hiện tại.",
+                wrapInsertedUrlsIn: "Bọc URL đã chèn trong dấu ngoặc nhọn để tránh Discord nhúng bản xem trước.",
+                chooseWhenFileuploadTakes: "Chọn thời điểm FileUpload tiếp quản việc xử lý tệp của Discord.",
+                useFileuploadWhenUploading: "Dùng FileUpload khi tải lên qua trình chọn tệp của Discord.",
+                useFileuploadOnlyFor: "Chỉ dùng FileUpload cho tệp lớn hơn giới hạn tải lên Discord hiện tại của bạn.",
+                manualDiscordFileSize: "Giới hạn dung lượng tệp Discord thủ công (MB), dùng khi tự động phát hiện sai. Để trống để tự động.",
+                auto: "Tự động",
+                commaSeparatedListOf: "Danh sách phần mở rộng phân tách bằng dấu phẩy (vd: png,jpg,gif). Để trống để cho phép tất cả.",
+                configureBrowserUploadProxying: "Cấu hình proxy và thời gian chờ cho tải lên từ trình duyệt.",
+                corsProxyUsedFor: "Proxy CORS dùng cho tải lên web. Để trống để dùng proxy mặc định.",
+                sourceCodeForThe: "Mã nguồn của proxy CORS mặc định",
+                maximumTimeToWait: "Thời gian chờ tối đa cho mỗi lần tải lên trước khi chuyển sang dự phòng",
+                selectTimeout: "Chọn thời gian chờ",
+                drag: "Kéo",
+                importSxcuJson: "Nhập .sxcu/.json",
+                validate: "Xác thực",
+                resetToDefault: "Đặt lại mặc định",
+                progress: "{{percent}}% - {{transferred}} / {{total}}",
+                cancel: "Hủy"
+            },
+            option: {
+                serviceType: {
+                    description: "Dịch vụ tải lên đã chọn",
+                    label: "Loại dịch vụ"
+                },
+                serviceUrl: {
+                    description: "URL dịch vụ Zipline",
+                    label: "URL dịch vụ"
+                },
+                ziplineToken: {
+                    description: "Mã xác thực Zipline",
+                    label: "Mã Zipline"
+                },
+                folderId: {
+                    description: "ID thư mục Zipline (tùy chọn)",
+                    label: "ID thư mục"
+                },
+                ezHostKey: {
+                    description: "Khóa API E-Z Host",
+                    label: "Khóa E-Z Host"
+                },
+                nestToken: {
+                    description: "Mã API Nest",
+                    label: "Mã Nest"
+                },
+                encryptingHostKey: {
+                    description: "Khóa API Encrypting.host",
+                    label: "Khóa Encrypting.host"
+                },
+                encryptingHostUrlStyle: {
+                    description: "Kiểu URL Encrypting.host",
+                    label: "Kiểu URL Encrypting.host"
+                },
+                encryptingHostDomains: {
+                    description: "Danh sách tên miền Encrypting.host dạng JSON",
+                    label: "Tên miền Encrypting.host"
+                },
+                encryptingHostTitle: {
+                    description: "Tiêu đề nhúng Encrypting.host (tùy chọn)",
+                    label: "Tiêu đề Encrypting.host"
+                },
+                encryptingHostColor: {
+                    description: "Màu nhúng Encrypting.host (tùy chọn)",
+                    label: "Màu Encrypting.host"
+                },
+                encryptingHostFakelink: {
+                    description: "Liên kết giả Encrypting.host (tùy chọn)",
+                    label: "Liên kết giả Encrypting.host"
+                },
+                s3Endpoint: {
+                    description: "URL điểm cuối tương thích S3",
+                    label: "Điểm cuối S3"
+                },
+                s3Bucket: {
+                    description: "Tên bucket S3",
+                    label: "Bucket S3"
+                },
+                s3Region: {
+                    description: "Vùng S3 (dùng auto cho R2)",
+                    label: "Vùng S3"
+                },
+                s3AccessKeyId: {
+                    description: "ID khóa truy cập S3",
+                    label: "ID khóa truy cập S3"
+                },
+                s3SecretAccessKey: {
+                    description: "Khóa truy cập bí mật S3",
+                    label: "Khóa truy cập bí mật S3"
+                },
+                s3SessionToken: {
+                    description: "Mã phiên S3 (tùy chọn)",
+                    label: "Mã phiên S3"
+                },
+                s3PublicUrl: {
+                    description: "URL cơ sở công khai (tùy chọn)",
+                    label: "URL công khai S3"
+                },
+                s3Prefix: {
+                    description: "Tiền tố khóa đối tượng S3 (tùy chọn)",
+                    label: "Tiền tố S3"
+                },
+                s3ForcePathStyle: {
+                    description: "Dùng URL S3 kiểu đường dẫn",
+                    label: "Buộc dùng kiểu đường dẫn S3"
+                },
+                litterboxExpiry: {
+                    description: "Thời gian lưu giữ Litterbox",
+                    label: "Hết hạn Litterbox"
+                },
+                catboxUserhash: {
+                    description: "Userhash Catbox để liên kết tài khoản",
+                    label: "Userhash Catbox"
+                },
+                sharexConfig: {
+                    description: "JSON trình tải lên tùy chỉnh ShareX",
+                    label: "Cấu hình ShareX"
+                },
+                disableFallbacks: {
+                    description: "Tắt dịch vụ tải lên dự phòng",
+                    label: "Tắt dự phòng"
+                },
+                autoSend: {
+                    description: "Chèn URL đã tải lên vào ô trò chuyện",
+                    label: "Tự động gửi"
+                },
+                autoFormat: {
+                    description: "Bọc URL đã chèn trong dấu ngoặc nhọn",
+                    label: "Tự động định dạng"
+                },
+                bypassDiscordUpload: {
+                    description: "Bỏ qua tải lên của Discord và dùng FileUpload thay thế.",
+                    label: "Bỏ qua tải lên Discord"
+                },
+                bypassDiscordUploadOnlyOverLimit: {
+                    description: "Chỉ dùng FileUpload khi tệp vượt quá giới hạn dung lượng.",
+                    label: "Chỉ bỏ qua tải lên Discord khi vượt giới hạn"
+                },
+                customDiscordFileSizeLimitMB: {
+                    description: "Giới hạn dung lượng tệp Discord thủ công tính bằng MB. 0 nghĩa là tự động phát hiện.",
+                    label: "Giới hạn dung lượng Discord tùy chỉnh (MB)"
+                },
+                gofileToken: {
+                    description: "Mã API GoFile (tùy chọn)",
+                    label: "Mã GoFile"
+                },
+                fallbackOrder: {
+                    description: "Thứ tự trình tải lên dự phòng",
+                    label: "Thứ tự dự phòng"
+                },
+                pixelVaultKey: {
+                    description: "Khóa tải lên PixelVault",
+                    label: "Khóa PixelVault"
+                },
+                pixelDrainKey: {
+                    description: "Khóa API PixelDrain (tùy chọn)",
+                    label: "Khóa PixelDrain"
+                },
+                uploadTimeoutMs: {
+                    description: "Thời gian chờ tải lên (mili giây)",
+                    label: "Thời gian chờ tải lên (ms)"
+                },
+                stripQueryParams: {
+                    description: "Xóa tham số truy vấn khỏi URL đã tải lên",
+                    label: "Xóa tham số truy vấn"
+                },
+                embedProxyEnabled: {
+                    description: "Chuyển liên kết video đã tải lên qua dịch vụ hỗ trợ nhúng.",
+                    label: "Bật proxy nhúng"
+                },
+                embedProxyService: {
+                    description: "Dịch vụ hỗ trợ nhúng để bọc liên kết video đã tải lên.",
+                    label: "Dịch vụ proxy nhúng"
+                },
+                corsProxyUrl: {
+                    description: "URL proxy CORS dùng cho tải lên từ trình duyệt",
+                    label: "URL proxy CORS"
+                },
+                apngToGif: {
+                    description: "Chuyển APNG tải lên thành GIF",
+                    label: "APNG sang GIF"
+                },
+                preserveOriginalFilename: {
+                    description: "Giữ tên tệp gốc khi tải lên.",
+                    label: "Giữ tên tệp gốc"
+                },
+                autoCopy: {
+                    description: "Tự động sao chép URL tải lên",
+                    label: "Tự động sao chép"
+                },
+                autoUploadPastedFiles: {
+                    description: "Tự động tải tệp từ bộ nhớ tạm lên máy chủ ảnh khi dán vào ô trò chuyện.",
+                    label: "Tự động tải tệp đã dán"
+                },
+                webdavUrl: {
+                    description: "URL máy chủ WebDAV",
+                    label: "URL WebDAV"
+                },
+                webdavUsername: {
+                    description: "Tên người dùng WebDAV",
+                    label: "Tên người dùng WebDAV"
+                },
+                webdavPassword: {
+                    description: "Mật khẩu WebDAV hoặc mã ứng dụng",
+                    label: "Mật khẩu WebDAV"
+                },
+                webdavDirectory: {
+                    description: "Thư mục con trên máy chủ WebDAV (tùy chọn)",
+                    label: "Thư mục WebDAV"
+                },
+                webdavServerType: {
+                    description: "Loại máy chủ WebDAV",
+                    label: "Loại máy chủ WebDAV",
+                    nextcloud: "Nextcloud",
+                    owncloud: "ownCloud",
+                    generic: "WebDAV chung"
+                },
+                webdavShareType: {
+                    description: "Định dạng liên kết chia sẻ WebDAV",
+                    label: "Kiểu chia sẻ WebDAV",
+                    sharepage: "Trang chia sẻ",
+                    directdownload: "Tải xuống trực tiếp",
+                    markdown: "Liên kết Markdown"
+                },
+                uploadAllowedFileTypes: {
+                    description: "Danh sách phần mở rộng tệp được phép, phân tách bằng dấu phẩy (vd: png,jpg,gif,mp4). Để trống để cho phép mọi tệp.",
+                    label: "Loại tệp được phép tải lên"
+                },
+                settingsComponent: {
+                    description: "Cài đặt",
+                    label: "Thành phần cài đặt"
+                }
+            },
+            panel: {
+                fallbackOrder: "Thứ tự dự phòng",
+                uploadService: "Dịch vụ tải lên",
+                zipline: "Zipline",
+                serviceUrl: "URL dịch vụ",
+                ziplineToken: "Mã Zipline",
+                folderId: "ID thư mục",
+                eZHost: "E-Z Host",
+                eZHostApiKey: "Khóa API E-Z Host",
+                nest: "Nest",
+                nestToken: "Mã Nest",
+                encryptingHost: "Encrypting.host",
+                encryptingHostApiKey: "Khóa API Encrypting.host",
+                urlStyle: "Kiểu URL",
+                domainsJson: "Tên miền (JSON)",
+                embedTitle: "Tiêu đề nhúng",
+                embedColor: "Màu nhúng",
+                fakeLink: "Liên kết giả",
+                s3CompatibleStorage: "Lưu trữ tương thích S3",
+                s3EndpointUrl: "URL điểm cuối S3",
+                bucketName: "Tên bucket",
+                region: "Vùng",
+                accessKeyId: "ID khóa truy cập",
+                secretAccessKey: "Khóa truy cập bí mật",
+                sessionToken: "Mã phiên",
+                publicBaseUrl: "URL cơ sở công khai",
+                objectKeyPrefix: "Tiền tố khóa đối tượng",
+                usePathStyleEndpoint: "Dùng điểm cuối kiểu đường dẫn",
+                catbox: "Catbox",
+                catboxUserhash: "Userhash Catbox",
+                litterboxExpiry: "Hết hạn Litterbox",
+                gofile: "GoFile",
+                gofileToken: "Mã GoFile",
+                pixelvault: "PixelVault",
+                pixelvaultUploadKey: "Khóa tải lên PixelVault",
+                pixeldrain: "PixelDrain",
+                pixeldrainApiKey: "Khóa API PixelDrain",
+                sharexCustomUploader: "Trình tải lên tùy chỉnh ShareX",
+                sharexCustomUploaderConfig: "Cấu hình trình tải lên tùy chỉnh ShareX",
+                sharexConfigActions: "Thao tác cấu hình ShareX",
+                webdav: "WebDAV",
+                serverUrl: "URL máy chủ",
+                username: "Tên người dùng",
+                passwordOrAppToken: "Mật khẩu hoặc mã ứng dụng",
+                passwordOrAppToken2: "mật khẩu hoặc mã ứng dụng",
+                uploadDirectory: "Thư mục tải lên",
+                serverType: "Loại máy chủ",
+                shareLinkFormat: "Định dạng liên kết chia sẻ",
+                uploadBehavior: "Hành vi tải lên",
+                stripQueryParameters: "Xóa tham số truy vấn",
+                useEmbedProxy: "Dùng proxy nhúng",
+                embedProxyService: "Dịch vụ proxy nhúng",
+                convertApngToGif: "Chuyển APNG sang GIF",
+                preserveOriginalFilename: "Giữ tên tệp gốc",
+                autoCopyUrl: "Tự động sao chép URL",
+                disableFallbackUploaders: "Tắt trình tải lên dự phòng",
+                insertUrlIntoChatInput: "Chèn URL vào ô trò chuyện",
+                formatInsertedUrl: "Định dạng URL đã chèn",
+                discordIntegration: "Tích hợp Discord",
+                bypassDiscordUploadButton: "Bỏ qua nút tải lên của Discord",
+                autoUploadPastedFiles: "Tự động tải tệp đã dán",
+                respectDiscordFileSizeLimit: "Tuân theo giới hạn dung lượng của Discord",
+                discordLimitOverrideMb: "Ghi đè giới hạn Discord (MB)",
+                allowedFileTypes: "Loại tệp được phép",
+                network: "Mạng",
+                corsProxyUrl: "URL proxy CORS",
+                defaultCorsProxySource: "Nguồn proxy CORS mặc định",
+                uploadTimeout: "Thời gian chờ tải lên",
+                domainsJsonDescription: "Mảng JSON các tên miền sẽ dùng, ví dụ [\"offensive\"]."
+            },
+            status: {
+                cancelled: "Đã hủy tải lên.",
+                uploadingVia: "Đang tải lên qua {{service}}...",
+                uploading: "Đang tải lên...",
+                unknownError: "Lỗi không xác định",
+                startingVia: "Bắt đầu tải lên qua {{service}}...",
+                retryingWith: "Đang thử lại với {{service}} ({{attempt}}/{{total}})...",
+                uploadedVia: "Đã tải lên thành công qua {{service}}.",
+                allFailed: "Tất cả dịch vụ tải lên đều thất bại. Lỗi cuối: {{error}}",
+                fileReady: "Tệp đã sẵn sàng, bắt đầu tải lên...",
+                preparing: "Đang chuẩn bị tải lên...",
+                failed: "Tải lên thất bại: {{message}}",
+                timedOut: "Tải lên đã hết thời gian chờ",
+                serviceFailed: "{{service}} thất bại: {{message}}",
+                preparingFile: "Đang chuẩn bị {{name}}{{suffix}}..."
+            }
+        },
+        gifMaker: {
+            option: {
+                lastWidth: {
+                    label: "Chiều rộng gần nhất"
+                },
+                lastHeight: {
+                    label: "Chiều cao gần nhất"
+                },
+                lastCaptionMode: {
+                    label: "Chế độ chú thích gần nhất"
+                },
+                lastCaptionText: {
+                    label: "Văn bản chú thích gần nhất"
+                },
+                lastCaptionSize: {
+                    label: "Cỡ chú thích gần nhất"
+                },
+                lastFontFamily: {
+                    label: "Họ phông chữ gần nhất"
+                },
+                lastBubbleTipBase: {
+                    label: "Gốc đuôi bong bóng gần nhất"
+                },
+                maxWidth: {
+                    description: "Chiều rộng tối đa khi tự động vừa khít.",
+                    label: "Chiều rộng tối đa"
+                },
+                maxHeight: {
+                    description: "Chiều cao tối đa khi tự động vừa khít.",
+                    label: "Chiều cao tối đa"
+                }
+            },
+            name: "GifMaker",
+            description: "Tạo và thêm chú thích cho GIF từ bất kỳ phương tiện nào trong trò chuyện hoặc bộ chọn GIF.",
+            text: {
+                send: "Gửi",
+                export: "Xuất",
+                makeGif: "Tạo GIF",
+                editGif: "Sửa GIF",
+                selectAFont: "Chọn phông chữ...",
+                enterCaption: "Nhập chú thích...",
+                width: "Chiều rộng",
+                height: "Chiều cao",
+                loadingFonts: "Đang tải phông chữ...",
+                captions: "Chú thích",
+                text: "Văn bản",
+                font: "Phông chữ",
+                fontSize: "Cỡ chữ",
+                tipBase: "Gốc đuôi",
+                dimensions: "Kích thước",
+                generatingGif: "Đang tạo GIF...",
+                clickOnThePreview: "Nhấp vào bản xem trước để đặt vị trí đuôi bong bóng",
+                gifPreview: "Xem trước GIF"
+            },
+            captionMode: {
+                caption: "Chú thích",
+                none: "Không có",
+                speechbubble: "Bong bóng"
+            }
+        },
+        gifProviderSwitcher: {
+            name: "GifProviderSwitcher",
+            description: "Cho phép dùng tìm kiếm GIF của Tenor hoặc Giphy thay cho Klipy",
+            text: {
+                tenor: "Tenor",
+                giphy: "Giphy",
+                klipy: "Klipy",
+                providers: "Nhà cung cấp",
+                providersCount: "{{count}} nhà cung cấp"
+            }
+        },
+        keyboardNavigation: {
+            toast: {
+                invalidUrl: "URL không hợp lệ",
+                copiedResponseToClipboard: "Đã sao chép phản hồi vào bộ nhớ tạm!",
+                issueFetchingUrl: "Lỗi khi tải URL",
+                copiedGitInfoTo: "Đã sao chép thông tin Git vào bộ nhớ tạm!",
+                noUpdatesAvailable: "Không có bản cập nhật",
+                enabledPlugin: "Đã bật {{id}}",
+                disabledPlugin: "Đã tắt {{id}}"
+            },
+            text: {
+                openPlexcordTab: "Mở thẻ Plexcord",
+                openPluginTab: "Mở thẻ plugin",
+                openThemesTab: "Mở thẻ chủ đề",
+                openUpdaterTab: "Mở thẻ cập nhật",
+                openCloudTab: "Mở thẻ đám mây",
+                openBackupRestoreTab: "Mở thẻ sao lưu và khôi phục",
+                restartClient: "Khởi động lại client",
+                openQuickCssFile: "Mở tệp QuickCSS",
+                openSettingsFolder: "Mở thư mục cài đặt",
+                openInGithub: "Mở trên GitHub",
+                openInBrowser: "Mở trong trình duyệt",
+                togglePlugin: "Bật/tắt plugin",
+                enable: "Bật",
+                disable: "Tắt",
+                quickFetch: "Tải nhanh",
+                copyGitInfo: "Sao chép thông tin Git",
+                checkForUpdates: "Kiểm tra cập nhật",
+                aPlexcordUpdateIs: "Đã có bản cập nhật Plexcord!",
+                clickHereToView: "Nhấn vào đây để xem bản cập nhật",
+                navigateToServer: "Đi tới máy chủ",
+                commandPalette: "Bảng lệnh",
+                searchTheCommandPalette: "Tìm trong bảng lệnh",
+                multipleChoice: "Nhiều lựa chọn",
+                textInput: "Nhập văn bản",
+                openDevTab: "Mở thẻ nhà phát triển",
+                enterUrlToFetch: "Nhập URL cần lấy (chỉ GET)",
+                typeAndPressEnter: "Nhập rồi nhấn Enter",
+                recording: "Đang ghi...",
+                recordKeybind: "Ghi phím tắt",
+                enterUrl: "Nhập URL"
+            },
+            option: {
+                hotkey: {
+                    description: "Phím tắt để mở bảng lệnh.",
+                    label: "Phím tắt"
+                },
+                allowMouseControl: {
+                    description: "Cho phép chuột điều khiển bảng lệnh.",
+                    label: "Cho phép điều khiển bằng chuột"
+                }
+            },
+            name: "KeyboardNavigation",
+            description: "Cho phép điều hướng giao diện bằng bàn phím."
+        },
+        lastActive: {
+            name: "LastActive",
+            description: "Plugin để nhảy đến tin nhắn hoạt động gần nhất của bạn hoặc người dùng khác trong kênh/máy chủ.",
+            toast: {
+                failedToFindMessages: "Không tìm thấy tin nhắn. Xem bảng điều khiển để biết chi tiết.",
+                couldnTFindAny: "Không tìm thấy tin nhắn gần đây nào của người dùng này.",
+                channelInformationNotAvailable: "Không có thông tin kênh.",
+                failedToJumpTo: "Không thể nhảy đến tin nhắn. Xem bảng điều khiển để biết chi tiết."
+            },
+            text: {
+                yourLastMessage: "Tin nhắn gần nhất của bạn",
+                userSLastMessage: "Tin nhắn gần nhất của người dùng"
+            }
+        },
+        limitlessScreenshare: {
+            text: {
+                deleteTag: "Xóa thẻ",
+                mustBeGreaterThan: "Phải >{{value}}",
+                maxResolutionTooLow: "Độ phân giải tối đa không thể thấp hơn {{value}}",
+                maxResolutionRound: "Độ phân giải tối đa phải kết thúc bằng 0 nếu bật Làm tròn độ phân giải"
+            },
+            name: "LimitlessScreenshare",
+            description: "Thêm thanh trượt cho độ phân giải và fps chia sẻ màn hình.",
+            option: {
+                maxFPS: {
+                    description: "FPS tối đa cho thanh trượt",
+                    label: "FPS tối đa"
+                },
+                maxResolution: {
+                    description: "Độ phân giải tối đa cho thanh trượt",
+                    label: "Độ phân giải tối đa"
+                },
+                roundResolution: {
+                    description: "Làm tròn độ phân giải đến 10p gần nhất",
+                    label: "Làm tròn độ phân giải"
+                },
+                resolutions: {
+                    label: "Độ phân giải"
+                },
+                fpss: {
+                    label: "Giá trị FPS"
+                }
+            }
+        },
+        messagePeek: {
+            option: {
+                hideMuted: {
+                    description: "Ẩn bản xem trước và dấu thời gian tin nhắn của tin nhắn trực tiếp và nhóm đã tắt tiếng.",
+                    label: "Ẩn mục đã tắt tiếng"
+                }
+            },
+            name: "MessagePeek",
+            description: "Hiển thị bản xem trước và dấu thời gian của tin nhắn gần nhất trong danh sách tin nhắn trực tiếp.",
+            text: {
+                officialDiscordMessage: "Tin nhắn chính thức của Discord",
+                sentGif: "đã gửi một GIF",
+                voiceMessage: "tin nhắn thoại",
+                membersCount: "{{count}} thành viên",
+                you: "Bạn"
+            }
+        },
+        messageTranslate: {
+            name: "MessageTranslate",
+            description: "Tự động dịch tin nhắn sang ngôn ngữ của bạn với bộ nhớ đệm, bật/tắt theo kênh và nhiều tùy chọn khác.",
+            option: {
+                targetLanguage: {
+                    description: "Mã ngôn ngữ đích cho bản dịch (vd: en, es, fr, de, ja).",
+                    label: "Ngôn ngữ đích"
+                },
+                excludedLanguages: {
+                    description: "Mã ngôn ngữ loại trừ khỏi bản dịch (vd: en, es, fr, de, ja).",
+                    label: "Ngôn ngữ loại trừ"
+                },
+                confidenceRequirement: {
+                    description: "Độ tin cậy tối thiểu (0 đến 1) cần để hiển thị bản dịch.",
+                    label: "Yêu cầu độ tin cậy"
+                },
+                autoTranslate: {
+                    description: "Tự động dịch tin nhắn khi chúng xuất hiện.",
+                    label: "Tự động dịch"
+                },
+                skipOwnMessages: {
+                    description: "Không dịch tin nhắn của chính bạn.",
+                    label: "Bỏ qua tin nhắn của mình"
+                },
+                skipBotMessages: {
+                    description: "Không dịch tin nhắn của bot.",
+                    label: "Bỏ qua tin nhắn bot"
+                },
+                ignoredGuilds: {
+                    description: "Danh sách ID máy chủ phân tách bằng dấu phẩy sẽ không dịch.",
+                    label: "Máy chủ bị bỏ qua"
+                },
+                ignoredChannels: {
+                    description: "Danh sách ID kênh phân tách bằng dấu phẩy sẽ không dịch.",
+                    label: "Kênh bị bỏ qua"
+                },
+                ignoredUsers: {
+                    description: "Danh sách ID người dùng phân tách bằng dấu phẩy sẽ không dịch.",
+                    label: "Người dùng bị bỏ qua"
+                },
+                showIndicator: {
+                    description: "Thêm chỉ báo nhỏ (đã dịch) vào tin nhắn đã dịch.",
+                    label: "Hiển thị chỉ báo"
+                },
+                showOriginal: {
+                    description: "Hiển thị văn bản gốc và bản dịch.",
+                    noorig: "Không hiển thị bản gốc."
+                }
+            },
+            text: {
+                showOriginalInSubtext: "Hiển thị bản gốc ở dòng phụ",
+                showOriginalMessageTranslation: "Hiển thị tin nhắn gốc, bản dịch ở dòng phụ",
+                translatedFrom: "dịch từ {{lang}}"
+            }
+        },
+        moreStickers: {
+            toast: {
+                stickerPackDeleted: "Đã xóa gói nhãn dán",
+                stickerPackAdded: "Đã thêm gói nhãn dán",
+                stickerPacksAdded: "Đã thêm các gói nhãn dán",
+                stickerPacksExported: "Đã xuất các gói nhãn dán",
+                newStickerPacksAlready: "Đã có gói nhãn dán mới, không cần chuyển đổi",
+                oldStickerPacksNot: "Không tìm thấy gói nhãn dán cũ, không có gì để chuyển",
+                migrationFailedTitleId: "Chuyển đổi thất bại: {{title}} ({{id}})",
+                stickerPackMigrationComplete: "Đã chuyển đổi gói nhãn dán xong",
+                failedToUploadSticker: "Không thể tải lên nhãn dán"
+            },
+            text: {
+                stickerPackUrl: "URL gói nhãn dán",
+                pasteHtmlHere: "Dán HTML vào đây",
+                delete: "Xóa",
+                addStickerPackFrom: "Thêm gói nhãn dán từ URL",
+                insert: "Chèn",
+                addStickerPackFrom2: "Thêm gói nhãn dán từ HTML",
+                insertFromHtml: "Chèn từ HTML",
+                addStickerPackFrom3: "Thêm gói nhãn dán từ tệp",
+                miscTools: "Công cụ khác",
+                exportStickerPacks: "Xuất gói nhãn dán",
+                migrateFromV1: "Chuyển từ v1",
+                stickersManagement: "Quản lý nhãn dán",
+                theRegionLineRecognized: "Khu vực LINE nhận diện có thể khác khu vực của bạn do proxy CORS mà chúng tôi dùng.",
+                openStickerPackFile: "Mở tệp gói nhãn dán",
+                stickers: "Nhãn dán+",
+                categoryTitle: "Danh mục, {{title}}",
+                searchStickers: "Tìm nhãn dán",
+                ffmpegstatecontextIsUndefined: "FFmpegStateContext chưa được định nghĩa",
+                recentlyUsed: "Dùng gần đây",
+                addFromUrl: "Thêm từ URL",
+                addFromHtml: "Thêm từ HTML",
+                addFromFile: "Thêm từ tệp",
+                misc: "Khác",
+                invalidUrl: "URL không hợp lệ",
+                lineOnly: "Hiện chỉ hỗ trợ sticker/emoji LINE.",
+                getTelegramStickers: "Lấy sticker Telegram bằng",
+                htmlFallbackHelp: "Nếu gặp lỗi khi thêm gói sticker, bạn có thể thử thêm bằng mã nguồn HTML của trang gói sticker.",
+                htmlFallbackApplies: "Điều này áp dụng cho sticker bị khóa theo khu vực / hệ điều hành / v.v."
+            },
+            option: {
+                promptToUpload: {
+                    description: "Chèn nhãn dán vào thanh trò chuyện thay vì gửi ngay",
+                    label: "Hỏi trước khi tải lên"
+                },
+                packs: {
+                    description: "Gói",
+                    label: "Gói"
+                }
+            },
+            name: "MoreStickers",
+            description: "Thêm gói nhãn dán từ các nền tảng mạng xã hội khác. (vd: LINE)"
+        },
+        musicRichPresence: {
+            option: {
+                scrobblerBackend: {
+                    description: "Backend scrobbler sẽ dùng.",
+                    label: "Backend scrobbler"
+                },
+                instanceBaseURL: {
+                    description: "URL cơ sở của phiên bản ListenBrainz của bạn.",
+                    label: "URL cơ sở của phiên bản"
+                },
+                instanceAPIBaseUrl: {
+                    description: "URL cơ sở của API ListenBrainz của bạn.",
+                    label: "URL cơ sở API của phiên bản"
+                },
+                apiKey: {
+                    description: "Khóa API Last.fm. Không bắt buộc nhưng rất nên dùng để tránh bị giới hạn tốc độ với khóa dùng chung của chúng tôi",
+                    label: "Khóa API"
+                },
+                username: {
+                    description: "Tên người dùng",
+                    label: "Tên người dùng"
+                },
+                shareUsername: {
+                    description: "Hiển thị liên kết tới hồ sơ scrobbler",
+                    label: "Chia sẻ tên người dùng"
+                },
+                clickableLinks: {
+                    description: "Biến tên bài, nghệ sĩ và album thành liên kết có thể nhấp",
+                    label: "Liên kết có thể nhấp"
+                },
+                hideWithSpotify: {
+                    description: "Ẩn trạng thái nếu Spotify đang chạy",
+                    label: "Ẩn khi có Spotify"
+                },
+                hideWithActivity: {
+                    description: "Ẩn trạng thái nếu bạn có trạng thái khác",
+                    label: "Ẩn khi có hoạt động"
+                },
+                statusName: {
+                    description: "Văn bản trạng thái tùy chỉnh. Bạn có thể dùng các biến: {artist} | {album} | {title}",
+                    label: "Tên trạng thái"
+                },
+                statusDisplayType: {
+                    description: "Hiển thị tên bài / nghệ sĩ trong danh sách thành viên",
+                    off: "Không hiển thị (hiển thị thông báo đang nghe chung)"
+                },
+                nameFormat: {
+                    description: "Hiển thị tên bài hát và nghệ sĩ trong tên trạng thái",
+                    statusName: "Dùng tên trạng thái tùy chỉnh"
+                },
+                missingArt: {
+                    description: "Khi thiếu album hoặc ảnh bìa",
+                    logo: "Dùng logo scrobbler lớn"
+                },
+                showLogo: {
+                    description: "Hiển thị logo dịch vụ scrobbler cạnh ảnh bìa album",
+                    label: "Hiển thị logo scrobbler"
+                },
+                showAlbumCover: {
+                    description: "Hiển thị ảnh bìa album. Tắt sẽ hiển thị ảnh giữ chỗ. Hữu ích nếu nhạc của bạn có ảnh bìa không phù hợp",
+                    label: "Hiển thị ảnh bìa album"
+                },
+                useListeningStatus: {
+                    description: "Hiển thị trạng thái \"Đang nghe\" thay vì \"Đang chơi\""
+                }
+            },
+            name: "MusicRichPresence",
+            description: "Rich Presence cho Last.FM/Listenbrainz",
+            text: {
+                showArtistName: "Hiển thị tên nghệ sĩ",
+                showTrackName: "Hiển thị tên bài",
+                useMusicServiceName: "Dùng tên dịch vụ nhạc (dự phòng là văn bản trạng thái tùy chỉnh)",
+                useFormatArtistSong: "Dùng định dạng 'nghệ sĩ - bài hát'",
+                useFormatSongArtist: "Dùng định dạng 'bài hát - nghệ sĩ'",
+                useArtistNameOnly: "Chỉ dùng tên nghệ sĩ",
+                useSongNameOnly: "Chỉ dùng tên bài hát",
+                useAlbumNameFalls: "Dùng tên album (dự phòng là văn bản trạng thái tùy chỉnh nếu bài không có album)",
+                useGenericPlaceholder: "Dùng ảnh giữ chỗ chung",
+                lastFm: "Last.FM",
+                howToCreateAn: "Cách tạo khóa API",
+                set: "Đặt",
+                applicationName: "Tên ứng dụng",
+                applicationDescription: "Mô tả ứng dụng",
+                toAnythingAndLeave: "thành bất kỳ giá trị nào và để trống phần còn lại.",
+                createApiKey: "Tạo khóa API",
+                invalidInstance: "Phiên bản tương thích ListenBrainz không hợp lệ",
+                provideBoth: "Hãy cung cấp cả",
+                apiBaseUrl: "URL gốc của API",
+                andThe: "và",
+                instanceBaseUrl: "URL gốc của phiên bản",
+                forYourCustomInstance: "cho phiên bản ListenBrainz tùy chỉnh của bạn hoặc chuyển lại về ListenBrainz/Last.FM",
+                allowConnectTitle: "Cho phép Plexcord kết nối với phiên bản ListenBrainz",
+                allowConnectBody: "Để dùng phiên bản ListenBrainz tùy chỉnh, trước tiên bạn phải cho phép Plexcord kết nối với nó.",
+                allowInstance: "Cho phép phiên bản",
+                listenBrainzCompatible: "Tương thích ListenBrainz (tự lưu trữ)",
+                and: "và"
+            }
+        },
+        noMiddleClickPaste: {
+            name: "NoMiddleClickPaste",
+            description: "Tắt dán bằng chuột giữa trên Linux - chỉ Linux"
+        },
+        orbolayBridge: {
+            option: {
+                port: {
+                    description: "Cổng để kết nối",
+                    label: "Cổng"
+                }
+            },
+            name: "OrbolayBridge",
+            description: "Plugin cầu nối để kết nối Orbolay với Discord",
+            toast: {
+                connectedToOrbolayServer: "Đã kết nối tới máy chủ Orbolay"
+            }
+        },
+        plexcordHelper: {
+            name: "PlexcordHelper",
+            description: "Dùng để hỗ trợ và sửa các lỗi văng do Discord gây ra.",
+            text: {
+                restartRequired: "Cần khởi động lại",
+                restartNow: "Khởi động lại ngay",
+                later: "Để sau",
+                wouldYouLikeTo: "Bạn có muốn khởi động lại ngay không?",
+                somePluginsRequireA: "Một số plugin cần khởi động lại để tắt hoàn toàn.",
+                alreadyEnabled: "{{plugin}} đã được bật",
+                alreadyDisabled: "{{plugin}} đã bị tắt",
+                disablePlugin: "Tắt {{plugin}}",
+                enablePlugin: "Bật {{plugin}}",
+                errorStopping: "Lỗi khi dừng plugin {{plugin}}",
+                errorStarting: "Lỗi khi khởi động plugin {{plugin}}"
+            },
+            toast: {
+                failedToTolowercase: "Không thể {{toLowerCase}}",
+                aRestartIsRequired: "Cần khởi động lại để thay đổi có hiệu lực!"
+            },
+            card: {
+                notOnThisVersion: "Plugin này không có trong phiên bản Plexcord này. Hãy thử cập nhật!"
+            }
+        },
+        plexcordTweaks: {
+            name: "PlexcordTweaks",
+            option: {
+                removeActivitySection: {
+                    description: "Xóa phần hoạt động phía trên danh sách thành viên",
+                    label: "Xóa phần hoạt động"
+                },
+                showYourOwnActivityButtons: {
+                    description: "Discord vì lý do nào đó ẩn các nút hoạt động của chính bạn",
+                    label: "Hiển thị nút hoạt động của bạn"
+                },
+                refreshSlashCommands: {
+                    description: "Làm mới lệnh gạch chéo để hiển thị lệnh mới mà không cần khởi động lại client.",
+                    label: "Làm mới lệnh gạch chéo"
+                },
+                forceRoleIcon: {
+                    description: "Buộc hiển thị biểu tượng vai trò bên cạnh tin nhắn ở chế độ thu gọn",
+                    label: "Buộc biểu tượng vai trò"
+                },
+                accountStandingButton: {
+                    description: "Hiển thị nút tình trạng tài khoản trên thanh tiêu đề",
+                    label: "Nút tình trạng tài khoản"
+                },
+                jsonGateway: {
+                    description: "Buộc dùng JSON khi kết nối lại gateway",
+                    label: "Gateway JSON"
+                },
+                enableAutoCorrect: {
+                    description: "Thêm nút bật/tắt tự động sửa lỗi và thay thế văn bản gốc vào menu ngữ cảnh của ô trò chuyện",
+                    label: "Bật tự động sửa lỗi"
+                },
+                autoCorrect: {
+                    description: "Dùng tự động sửa lỗi và thay thế văn bản gốc trong trình soạn tin nhắn",
+                    label: "Tự động sửa lỗi"
+                },
+                disableHolidayNotifications: {
+                    label: "Tắt thông báo ngày lễ",
+                    description: "Luôn dùng âm thanh thông báo mặc định của Discord"
+                },
+                showAllBadges: {
+                    label: "Hiện tất cả huy hiệu",
+                    description: "Hiện mọi huy hiệu hồ sơ thay vì gộp phần còn lại vào +n"
+                }
+            },
+            text: {
+                allGood: "Mọi thứ đều ổn!",
+                limited: "Bị hạn chế",
+                veryLimited: "Bị hạn chế nhiều",
+                atRisk: "Có nguy cơ",
+                suspended: "Bị đình chỉ",
+                slashCommandsRefreshedSuccessfully: "Đã làm mới lệnh gạch chéo.",
+                failedToRefreshCommands: "Không thể làm mới lệnh. Xem bảng điều khiển để biết chi tiết.",
+                enableAutocorrect: "Bật tự động sửa lỗi"
+            },
+            command: {
+                refreshCommands: "Làm mới lệnh gạch chéo"
+            },
+            description: "Bộ sưu tập các tinh chỉnh và bản sửa lỗi nhỏ cho Discord."
+        },
+        plextronStreamFixes: {
+            option: {
+                unlockQualityOptions: {
+                    description: "Mở khóa tùy chọn chất lượng phát trực tiếp bất kể trạng thái Nitro",
+                    label: "Mở khóa tùy chọn chất lượng"
+                },
+                removeResolutionCap: {
+                    description: "Cho phép độ phân giải trên 720p ở 60fps",
+                    label: "Bỏ giới hạn độ phân giải"
+                },
+                forceEncoderSettings: {
+                    description: "Buộc bộ mã hóa dùng độ phân giải/fps đã cấu hình",
+                    label: "Buộc cài đặt bộ mã hóa"
+                },
+                preventDownscale: {
+                    description: "Ngăn Discord giảm độ phân giải phát trực tiếp",
+                    label: "Ngăn giảm độ phân giải"
+                },
+                keyframeInterval: {
+                    description: "Khoảng cách khung hình chính tính bằng ms (0 = mặc định bộ mã hóa, 5000 = mỗi 5 giây)",
+                    label: "Khoảng cách khung hình chính"
+                },
+                minBitrate: {
+                    description: "Bitrate tối thiểu của bộ mã hóa (kbps)",
+                    label: "Bitrate tối thiểu"
+                },
+                raiseBitrateCaps: {
+                    description: "Nâng giới hạn bitrate mặc định trên máy tính (mục tiêu 600kbps → 10Mbps, tối đa 3,5Mbps → 40Mbps)",
+                    label: "Nâng giới hạn bitrate"
+                },
+                preventFramerateReduction: {
+                    description: "Ngăn Discord giảm tốc độ khung hình phát trực tiếp khi bạn không nói",
+                    label: "Ngăn giảm tốc độ khung hình"
+                },
+                bitsPerPixelPct: {
+                    description: "Phần trăm bit trên mỗi điểm ảnh cho bitrate mục tiêu (8 = 0,08 bpp, 12 = 0,12 bpp)",
+                    label: "Bit trên điểm ảnh (%)"
+                }
+            },
+            name: "PlextronStreamFixes",
+            description: "Cố gắng cải thiện chất lượng phát trực tiếp trên Plextron bằng cách vá bộ mã hóa và giới hạn chất lượng của Discord."
+        },
+        rPCEditor: {
+            name: "RPCEditor"
+        },
+        reactionTimestamps: {
+            name: "ReactionTimestamps",
+            description: "Hiển thị thời gian của từng cảm xúc trong cửa sổ cảm xúc.",
+            text: {
+                userAtTime: "{{user}} lúc {{time}}"
+            }
+        },
+        richPresence: {
+            text: {
+                useCustomStatusName: "Dùng tên trạng thái tùy chỉnh",
+                useFormatArtistSong: "Dùng định dạng 'nghệ sĩ - bài hát'",
+                useFormatSongArtist: "Dùng định dạng 'bài hát - nghệ sĩ'",
+                useArtistNameOnly: "Chỉ dùng tên nghệ sĩ",
+                useSongNameOnly: "Chỉ dùng tên bài hát",
+                useAlbumName: "Dùng tên album",
+                useLargeStatsFm: "Dùng logo Stats.fm lớn",
+                useGenericPlaceholder: "Dùng ảnh giữ chỗ chung",
+                seriesMovieName: "Tên phim bộ/phim lẻ",
+                seriesEpisodeTrackMovie: "Phim bộ - Tên tập/bài/phim",
+                custom: "Tùy chỉnh",
+                seriesCover: "Ảnh bìa phim bộ",
+                episodeCover: "Ảnh bìa tập",
+                season1Episode1: "Mùa 1 Tập 1",
+                off: "Tắt",
+                listening: "Đang nghe",
+                playing: "Đang chơi",
+                streaming: "Đang phát trực tiếp",
+                watching: "Đang xem",
+                none: "Không có",
+                navidromeInstanceExposesServer: "Phiên bản Navidrome (Lộ URL máy chủ. Gửi xác thực một lần.)",
+                lastFmApiSends: "API Last.fm (Gửi siêu dữ liệu đến last.fm)",
+                donTShowShows: "Không hiển thị (hiển thị thông báo đang nghe chung)",
+                showStateLineContent: "Hiển thị nội dung dòng trạng thái",
+                showDetailsLineContent: "Hiển thị nội dung dòng chi tiết",
+                displayYourCurrentlyPlaying: "Hiển thị sách nói bạn đang nghe dưới dạng Discord Rich Presence. Cần URL máy chủ AudioBookShelf, tên người dùng và mật khẩu.",
+                audiobookshelfServerUrl: "URL máy chủ AudioBookShelf.",
+                audiobookshelfUsername: "Tên người dùng AudioBookShelf.",
+                audiobookshelfPassword: "Mật khẩu AudioBookShelf.",
+                connectsToTosuVia: "Kết nối tới tosu qua WebSocket ở cổng 24050. Không cần cấu hình, chỉ cần đảm bảo tosu đang chạy cùng osu!.",
+                showWhatYouRe: "Hiển thị bài bạn đang nghe qua stats.fm. Yêu cầu lịch sử nghe của bạn ở chế độ công khai.",
+                statsFmUsername: "Tên người dùng Stats.fm.",
+                customStatusText: "Văn bản trạng thái tùy chỉnh.",
+                statsFm: "Stats.fm",
+                nameFormat: "Định dạng tên.",
+                fallbackWhenArtIs: "Phương án dự phòng khi thiếu ảnh bìa.",
+                showListeningStatus: "Hiển thị trạng thái đang nghe.",
+                showStatsFmLogo: "Hiển thị logo Stats.fm cạnh ảnh bìa album.",
+                showLinkToStats: "Hiển thị liên kết tới hồ sơ stats.fm.",
+                showLinkToSong: "Hiển thị liên kết tới bài hát trên stats.fm.",
+                hideStatsFmPresence: "Ẩn trạng thái stats.fm nếu Spotify đang chạy.",
+                hideStatsFmPresence2: "Ẩn trạng thái stats.fm nếu có RPC bên ngoài đang chạy.",
+                disableDownloadingAlbumArt: "Tắt tải ảnh bìa album.",
+                showWhatYouRe2: "Hiển thị nội dung bạn đang phát trên Jellyfin. Để lấy khóa API: mở giao diện web Jellyfin, nhấn F12 để mở Công cụ nhà phát triển, vào thẻ Mạng, tìm các yêu cầu tới máy chủ, tìm tiêu đề Authorization (Ctrl+F để tìm) và bạn cần phần trong Token='this'. ID người dùng nằm trong URL trang hồ sơ của bạn.",
+                jellyfinServerUrl: "URL máy chủ Jellyfin.",
+                jellyfinApiKey: "Khóa API Jellyfin.",
+                authorization: "Authorization",
+                jellyfinUserId: "ID người dùng Jellyfin.",
+                userIdFromProfile: "ID người dùng từ URL hồ sơ",
+                nameDisplayFormat: "Định dạng hiển thị tên.",
+                customNameTemplate: "Mẫu tên tùy chỉnh.",
+                nameOnJellyfin: "{name} trên Jellyfin",
+                coverTypeForTv: "Loại ảnh bìa cho chương trình TV.",
+                episodeNumberFormat: "Định dạng số tập.",
+                overrideRichPresenceType: "Ghi đè loại Rich Presence.",
+                showEpisodeNameAfter: "Hiển thị tên tập sau thông tin mùa/tập.",
+                showPresenceWhenMedia: "Hiển thị trạng thái khi phương tiện bị tạm dừng.",
+                hideMediaDetails: "Ẩn chi tiết phương tiện.",
+                discordRichPresenceFor: "Discord Rich Presence cho Gensokyo Radio. Chỉ cần bật và nghe!",
+                refreshIntervalInSeconds: "Khoảng thời gian làm mới (giây).",
+                showWhatYouRe3: "Hiển thị bài bạn đang nghe qua Navidrome.",
+                navidromeServerUrlMust: "URL máy chủ Navidrome (phải là tên miền công khai, vd: https://navidrome.example.com).",
+                navidromeUsername: "Tên người dùng Navidrome.",
+                navidromePassword: "Mật khẩu Navidrome.",
+                optionalDiscordApplicationClient: "ID client ứng dụng Discord (tùy chọn).",
+                howToFetchAlbum: "Cách lấy ảnh bìa album.",
+                optionalProvideYourOwn: "Tùy chọn: Cung cấp khóa API Last.fm của riêng bạn (để trống sẽ dùng mặc định).",
+                showNavidromeLogoIn: "Hiển thị logo Navidrome ở góc dưới bên phải ảnh bìa.",
+                showAlbumNameIn: "Hiển thị tên album trong trạng thái.",
+                whichTypeOfActivity: "Loại hoạt động sẽ hiển thị.",
+                showTheStateDetails: "Hiển thị nội dung dòng trạng thái / chi tiết trong danh sách thành viên",
+                hideRichPresenceWhen: "Ẩn Rich Presence khi nhạc tạm dừng (thay vì hiển thị đồng hồ bấm giờ)",
+                theListeningToText: "Văn bản 'Đang nghe' (vd: {artist})",
+                navidrome: "Navidrome",
+                theMainLineShowing: "Dòng chính hiển thị bài hát đang phát (vd: {song})",
+                song: "{song}",
+                theLineBelowThe: "Dòng bên dưới tên bài hát (vd: {artist})",
+                artist: "{artist}",
+                theAlbumLineE: "Dòng album (vd: {album})",
+                album: "{album}",
+                enableTabLabelsCurrenttab: "Bật trạng thái {{TAB_LABELS_currentTab}}.",
+                statsFmProfile: "Hồ sơ Stats.fm",
+                viewSong: "Xem bài hát",
+                showArtistName: "Hiển thị tên nghệ sĩ",
+                showTrackName: "Hiển thị tên bài",
+                enterValue: "Nhập giá trị"
+            },
+            name: "RichPresence",
+            description: "Trung tâm Rich Presence hợp nhất cho AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome và Gensokyo Radio.",
+            toast: {
+                audiobookshelfRpcIsNot: "RPC AudioBookShelf chưa được cấu hình.",
+                jellyfinRpcIsNot: "RPC Jellyfin chưa được cấu hình.",
+                jellyfinReturnedAnInvalid: "Jellyfin trả về phản hồi không hợp lệ. Khóa API của bạn có thể sai."
+            },
+            option: {
+                enabled: {
+                    description: "Bật các dịch vụ Rich Presence.",
+                    label: "Đã bật"
+                },
+                serviceSettings: {
+                    description: "Cấu hình dịch vụ.",
+                    label: "Cài đặt dịch vụ"
+                },
+                abs_enabled: {
+                    description: "Bật trạng thái AudioBookShelf.",
+                    label: "Bật AudioBookShelf"
+                },
+                tosu_enabled: {
+                    description: "Bật trạng thái osu! (tosu).",
+                    label: "Bật osu! (tosu)"
+                },
+                sfm_enabled: {
+                    description: "Bật trạng thái stats.fm.",
+                    label: "Bật Stats.fm"
+                },
+                jf_enabled: {
+                    description: "Bật trạng thái Jellyfin.",
+                    label: "Bật Jellyfin"
+                },
+                gr_enabled: {
+                    description: "Bật trạng thái Gensokyo Radio.",
+                    label: "Bật Gensokyo Radio"
+                },
+                nd_enabled: {
+                    description: "Bật trạng thái Navidrome.",
+                    label: "Bật Navidrome"
+                },
+                abs_serverUrl: {
+                    description: "URL máy chủ AudioBookShelf.",
+                    label: "URL máy chủ AudioBookShelf"
+                },
+                abs_username: {
+                    description: "Tên người dùng AudioBookShelf.",
+                    label: "Tên người dùng AudioBookShelf"
+                },
+                abs_password: {
+                    description: "Mật khẩu AudioBookShelf.",
+                    label: "Mật khẩu AudioBookShelf"
+                },
+                sfm_username: {
+                    description: "Tên người dùng Stats.fm.",
+                    label: "Tên người dùng Stats.fm"
+                },
+                sfm_shareUsername: {
+                    description: "Hiển thị liên kết tới hồ sơ stats.fm.",
+                    label: "Stats.fm: chia sẻ tên người dùng"
+                },
+                sfm_shareSong: {
+                    description: "Hiển thị liên kết tới bài hát trên stats.fm.",
+                    label: "Stats.fm: chia sẻ bài hát"
+                },
+                sfm_hideWithSpotify: {
+                    description: "Ẩn trạng thái stats.fm nếu Spotify đang chạy.",
+                    label: "Stats.fm: ẩn khi có Spotify"
+                },
+                sfm_hideWithExternalRPC: {
+                    description: "Ẩn trạng thái stats.fm nếu có RPC bên ngoài đang chạy.",
+                    label: "Stats.fm: ẩn khi có RPC bên ngoài"
+                },
+                sfm_statusName: {
+                    description: "Văn bản trạng thái tùy chỉnh.",
+                    label: "Stats.fm: tên trạng thái"
+                },
+                sfm_nameFormat: {
+                    description: "Định dạng tên.",
+                    label: "Stats.fm: định dạng tên",
+                    statusName: "Dùng tên trạng thái tùy chỉnh",
+                    artistFirst: "Dùng định dạng 'nghệ sĩ - bài hát'",
+                    songFirst: "Dùng định dạng 'bài hát - nghệ sĩ'",
+                    artistOnly: "Chỉ dùng tên nghệ sĩ",
+                    songOnly: "Chỉ dùng tên bài hát",
+                    albumName: "Dùng tên album"
+                },
+                sfm_useListeningStatus: {
+                    description: "Hiển thị trạng thái đang nghe.",
+                    label: "Stats.fm: dùng trạng thái đang nghe"
+                },
+                sfm_missingArt: {
+                    description: "Phương án dự phòng khi thiếu ảnh bìa.",
+                    label: "Stats.fm: thiếu ảnh bìa",
+                    statsFmLogo: "Dùng logo Stats.fm lớn",
+                    placeholder: "Dùng ảnh giữ chỗ chung"
+                },
+                sfm_showLogo: {
+                    description: "Hiển thị logo Stats.fm cạnh ảnh bìa album.",
+                    label: "Stats.fm: hiển thị logo"
+                },
+                sfm_alwaysHideArt: {
+                    description: "Tắt tải ảnh bìa album.",
+                    label: "Stats.fm: luôn ẩn ảnh bìa"
+                },
+                jf_serverUrl: {
+                    description: "URL máy chủ Jellyfin.",
+                    label: "URL máy chủ Jellyfin"
+                },
+                jf_apiKey: {
+                    description: "Khóa API Jellyfin.",
+                    label: "Khóa API Jellyfin"
+                },
+                jf_userId: {
+                    description: "ID người dùng Jellyfin.",
+                    label: "ID người dùng Jellyfin"
+                },
+                jf_nameDisplay: {
+                    description: "Định dạng hiển thị tên.",
+                    label: "Jellyfin: hiển thị tên",
+                    default: "Tên phim bộ/phim lẻ",
+                    full: "Phim bộ - Tên tập/bài/phim",
+                    custom: "Tùy chỉnh"
+                },
+                jf_customName: {
+                    description: "Mẫu tên tùy chỉnh.",
+                    label: "Jellyfin: tên tùy chỉnh"
+                },
+                jf_coverType: {
+                    description: "Loại ảnh bìa cho chương trình TV.",
+                    label: "Jellyfin: loại ảnh bìa",
+                    series: "Ảnh bìa phim bộ",
+                    episode: "Ảnh bìa tập"
+                },
+                jf_episodeFormat: {
+                    description: "Định dạng số tập.",
+                    label: "Jellyfin: định dạng tập",
+                    long: "S01E01",
+                    fulltext: "Mùa 1 Tập 1"
+                },
+                jf_showEpisodeName: {
+                    description: "Hiển thị tên tập sau thông tin mùa/tập.",
+                    label: "Jellyfin: hiển thị tên tập"
+                },
+                jf_overrideType: {
+                    description: "Ghi đè loại Rich Presence.",
+                    label: "Jellyfin: ghi đè loại",
+                    off: "Tắt",
+                    listening: "Đang nghe",
+                    playing: "Đang chơi",
+                    streaming: "Đang phát trực tiếp",
+                    watching: "Đang xem"
+                },
+                jf_showPausedState: {
+                    description: "Hiển thị trạng thái khi phương tiện bị tạm dừng.",
+                    label: "Jellyfin: hiển thị trạng thái tạm dừng"
+                },
+                jf_privacyMode: {
+                    description: "Ẩn chi tiết phương tiện.",
+                    label: "Jellyfin: chế độ riêng tư"
+                },
+                gr_refreshInterval: {
+                    description: "Khoảng thời gian làm mới (giây).",
+                    label: "Gensokyo Radio: khoảng làm mới"
+                },
+                nd_serverUrl: {
+                    description: "URL máy chủ Navidrome (vd: https://navidrome.example.com)",
+                    label: "URL máy chủ Navidrome"
+                },
+                nd_username: {
+                    description: "Tên người dùng Navidrome",
+                    label: "Tên người dùng Navidrome"
+                },
+                nd_password: {
+                    description: "Mật khẩu Navidrome",
+                    label: "Mật khẩu Navidrome"
+                },
+                nd_clientId: {
+                    description: "ID client ứng dụng Discord (tùy chọn)",
+                    label: "Navidrome: ID client"
+                },
+                nd_showSmallImage: {
+                    description: "Hiển thị logo Navidrome ở góc dưới bên phải ảnh bìa.",
+                    label: "Navidrome: hiển thị ảnh nhỏ"
+                },
+                nd_showAlbum: {
+                    description: "Hiển thị tên album trong trạng thái.",
+                    label: "Navidrome: hiển thị album"
+                },
+                nd_albumArtMode: {
+                    description: "Cách lấy ảnh bìa album.",
+                    label: "Navidrome: chế độ ảnh bìa",
+                    none: "Không có",
+                    instance: "Phiên bản Navidrome (Lộ URL máy chủ cho Discord, không gửi xác thực)",
+                    lastfm: "API Last.fm (Gửi siêu dữ liệu bài hát đến Last.fm)"
+                },
+                nd_lastfmApiKey: {
+                    description: "Khóa API Last.fm (tùy chọn)",
+                    label: "Navidrome: khóa API Last.fm"
+                },
+                nd_refreshInterval: {
+                    description: "Khoảng thời gian làm mới (giây).",
+                    label: "Navidrome: khoảng làm mới"
+                },
+                nd_activityType: {
+                    description: "Loại hoạt động",
+                    label: "Navidrome: loại hoạt động",
+                    listening: "Đang nghe",
+                    playingFixesHiddenLines: "Đang chơi (Sửa dòng bị ẩn)",
+                    watching: "Đang xem"
+                },
+                nd_nameString: {
+                    description: "Chuỗi định dạng tên hoạt động",
+                    label: "Navidrome: chuỗi tên"
+                },
+                nd_detailsString: {
+                    description: "Chuỗi định dạng chi tiết hoạt động",
+                    label: "Navidrome: chuỗi chi tiết"
+                },
+                nd_stateString: {
+                    description: "Chuỗi định dạng trạng thái hoạt động",
+                    label: "Navidrome: chuỗi trạng thái"
+                },
+                nd_largeTextString: {
+                    description: "Chuỗi định dạng văn bản lớn của hoạt động",
+                    label: "Navidrome: chuỗi văn bản lớn"
+                },
+                nd_statusDisplayType: {
+                    description: "Hiển thị tên bài / nghệ sĩ trong danh sách thành viên",
+                    off: "Không hiển thị (hiển thị thông báo đang nghe chung)"
+                },
+                nd_hideOnPause: {
+                    description: "Ẩn Rich Presence khi nhạc tạm dừng",
+                    label: "Navidrome: ẩn khi tạm dừng"
+                }
+            },
+            panel: {
+                password: "Mật khẩu",
+                statsFmUsername: "tên người dùng stats.fm",
+                customStatusText: "Văn bản trạng thái tùy chỉnh",
+                nameFormat: "Định dạng tên",
+                missingArtFallback: "Dự phòng khi thiếu ảnh bìa",
+                showListeningStatus: "Hiển thị trạng thái đang nghe",
+                showStatsFmLogo: "Hiển thị logo Stats.fm",
+                showProfileLink: "Hiển thị liên kết hồ sơ",
+                showSongLink: "Hiển thị liên kết bài hát",
+                hideWithSpotify: "Ẩn khi có Spotify",
+                hideWithExternalRpc: "Ẩn khi có RPC bên ngoài",
+                disableAlbumArt: "Tắt ảnh bìa album",
+                apiKey: "Khóa API",
+                userId: "ID người dùng",
+                nameDisplay: "Hiển thị tên",
+                customNameTemplate: "Mẫu tên tùy chỉnh",
+                coverType: "Loại ảnh bìa",
+                episodeFormat: "Định dạng tập",
+                overridePresenceType: "Ghi đè loại trạng thái",
+                showEpisodeName: "Hiển thị tên tập",
+                showWhenPaused: "Hiển thị khi tạm dừng",
+                privacyMode: "Chế độ riêng tư",
+                refreshInterval: "Khoảng làm mới",
+                clientId: "ID client",
+                albumArtMode: "Chế độ ảnh bìa",
+                lastFmApiKey: "Khóa API Last.fm",
+                showSmallImage: "Hiển thị ảnh nhỏ",
+                showAlbum: "Hiển thị album",
+                activityType: "Loại hoạt động",
+                statusDisplayType: "Kiểu hiển thị trạng thái",
+                hideOnPause: "Ẩn khi tạm dừng",
+                activityNameFormat: "Định dạng tên hoạt động",
+                detailsFormat: "Định dạng chi tiết",
+                stateFormat: "Định dạng trạng thái",
+                largeTextFormat: "Định dạng văn bản lớn",
+                enabled: "Đã bật"
+            }
+        },
+        sedEnhanced: {
+            option: {
+                regexByDefault: {
+                    description: "Đảo ngược cờ `r`, nên dùng cờ `r` sẽ bật chế độ không regex, bỏ qua sẽ dùng chế độ regex.",
+                    label: "Regex mặc định"
+                }
+            },
+            name: "SedEnhanced",
+            description: "Mở rộng hỗ trợ `sed` sơ khai của Discord."
+        },
+        showRolesInChat: {
+            option: {
+                showBots: {
+                    description: "Có hiển thị vai trò cao nhất trên bot hay không.",
+                    label: "Hiển thị bot"
+                },
+                useRoleColor: {
+                    description: "Dùng màu của vai trò cho biểu tượng.",
+                    label: "Dùng màu vai trò"
+                }
+            },
+            name: "ShowRolesInChat",
+            description: "Hiển thị vai trò cao nhất của người dùng cạnh tên trong tin nhắn. Ẩn/hiện vai trò cụ thể trong menu ngữ cảnh của chúng (chuột phải).",
+            text: {
+                chatRoleActions: "Thao tác vai trò trong trò chuyện",
+                unhideRolesInChat: "Hiện lại vai trò trong trò chuyện",
+                showRoleInChat: "Hiện vai trò trong trò chuyện",
+                hideRoleInChat: "Ẩn vai trò trong trò chuyện"
+            }
+        },
+        silenceUsers: {
+            option: {
+                mutedUserIds: {
+                    description: "ID người dùng Discord phân tách bằng dấu phẩy để tắt ping và huy hiệu máy chủ.",
+                    label: "ID người dùng bị tắt tiếng"
+                }
+            },
+            name: "SilenceUsers",
+            description: "Tắt ping @nhắc đến và số đếm huy hiệu máy chủ từ người dùng cụ thể. Tin nhắn thường và tin nhắn trực tiếp không bị ảnh hưởng."
+        },
+        songLink: {
+            text: {
+                showIfAvailable: "Hiển thị nếu có",
+                openInDesktopApp: "Mở trong ứng dụng máy tính",
+                loadingSongLink: "Đang tải liên kết bài hát...",
+                pleaseProvideAMusic: "Hãy cung cấp liên kết nhạc.",
+                thisWillTakeA: "Việc này sẽ mất một chút thời gian...",
+                noAlternativePlatformsFound: "Không tìm thấy nền tảng thay thế cho liên kết này.",
+                failedToResolveMusic: "Không thể phân giải liên kết nhạc",
+                logo: "Logo {{name}}"
+            },
+            option: {
+                servicesSettings: {
+                    description: "cài đặt cho dịch vụ",
+                    label: "Cài đặt dịch vụ"
+                },
+                userCountry: {
+                    description: "Quốc gia dùng để tra cứu (mã quốc gia hai chữ cái)",
+                    label: "Quốc gia người dùng"
+                },
+                includeMetadata: {
+                    description: "Thêm tên bài và tên nghệ sĩ làm tiêu đề.",
+                    label: "Bao gồm siêu dữ liệu"
+                }
+            },
+            name: "SongLink",
+            description: "Thêm nút dịch vụ phát nhạc bên dưới liên kết bài hát",
+            command: {
+                musiclink: "Chuyển liên kết nhạc sang các nền tảng phát nhạc khác.",
+                url: "Liên kết nhạc (Spotify, Deezer, YouTube, Tidal, Apple Music, SoundCloud)"
+            }
+        },
+        songSpotlight: {
+            name: "SongSpotlight",
+            description: "Khoe bài hát trên hồ sơ của bạn",
+            text: {
+                songSpotlight: "Song Spotlight",
+                explicit: "Nhạy cảm",
+                addSong: "Thêm bài hát",
+                addANewSong: "Thêm bài hát mới",
+                copyLink: "Sao chép liên kết",
+                removeSong: "Xóa bài hát",
+                failedToLoad: "Tải thất bại!",
+                areYouSure: "Bạn có chắc không?",
+                thisWillOverwriteYour: "Thao tác này sẽ ghi đè các bài hát hiện tại của bạn.",
+                continue: "Tiếp tục",
+                nevermind: "Thôi",
+                thisWillPermanentlyDelete: "Thao tác này sẽ xóa vĩnh viễn tất cả bài hát của bạn.",
+                delete: "Xóa",
+                signInToSong: "Đăng nhập Song Spotlight",
+                songs: "Bài hát",
+                authorization: "Authorization",
+                importFromClipboard: "Nhập từ bộ nhớ tạm",
+                copyToClipboard: "Sao chép vào bộ nhớ tạm",
+                signOut: "Đăng xuất",
+                deleteSongs: "Xóa bài hát",
+                more: "Thêm",
+                editSongs: "Sửa bài hát",
+                copyJson: "Sao chép JSON",
+                looksLikeThereS: "Có vẻ như ở đây chưa có gì!",
+                uhOhSongSpotlight: "Ôi không! Không thể tải Song Spotlight. Bạn có thể xem bảng điều khiển để biết thêm chi tiết.",
+                stealSong: "Lấy bài hát",
+                profileSongs: "Bài hát hồ sơ",
+                notEnoughSpace: "Không đủ chỗ",
+                alreadyAdded: "Bạn đã thêm bài hát này rồi",
+                invalidLink: "Liên kết không hợp lệ",
+                failedToParseLink: "Không thể phân tích liên kết",
+                invalidUrl: "URL không hợp lệ",
+                goAddSongs: "Sao nào? Còn chờ gì nữa? Hãy thêm vài bài hát vào Song Spotlight của bạn!",
+                tellUserToAddSongs: "Hãy bảo {{name}} thêm vài bài hát vào Song Spotlight!",
+                supportedServices: "Song Spotlight hỗ trợ các dịch vụ sau:",
+                viewSongsVia: "Bạn cũng có thể xem bài hát của mình qua lệnh",
+                viewSongsViaSuffix: "!",
+                coverTooltipOwner: "{{sublabel}} của {{label}}",
+                coverTooltipBy: "{{label}} của {{sublabel}}",
+                lastUpdated: "Cập nhật lần cuối",
+                save: "Lưu",
+                showMore: "Hiện thêm {{count}}"
+            },
+            toast: {
+                youHaveBeenSigned: "Bạn đã bị đăng xuất khỏi Song Spotlight. Hãy đăng nhập lại.",
+                songSpotlightError: "Song Spotlight: {{error}}",
+                successfullyAuthorized: "Ủy quyền thành công!",
+                failedToPlaySong: "Không thể phát bản nghe thử bài hát!",
+                addedSong: "Đã thêm bài hát!",
+                removedSong: "Đã xóa bài hát!",
+                noJsonInClipboard: "Không có JSON trong bộ nhớ tạm!",
+                invalidSongSpotlightData: "Dữ liệu Song Spotlight trong bộ nhớ tạm không hợp lệ!",
+                oneOrMoreImported: "Một hoặc nhiều bài hát đã nhập không hợp lệ.",
+                importedSongsFromClipboard: "Đã nhập bài hát từ bộ nhớ tạm!",
+                successfullySavedSongs: "Đã lưu bài hát!",
+                successfullySignedOut: "Đăng xuất thành công!",
+                successfullyDeletedSongs: "Đã xóa bài hát!",
+                youDonTHave: "Bạn không đủ chỗ trống!",
+                uhOhThisSong: "Ôi không, bài hát này không tồn tại!",
+                youAlreadyHaveThis: "Bạn đã thêm bài hát này rồi!",
+                youDonTHave2: "Bạn... chưa thêm bài hát này mà?",
+                fetchError: "Lỗi tải Song Spotlight tại {{path}}"
+            },
+            option: {
+                collapseSongList: {
+                    description: "Thu gọn danh sách bài hát trên hồ sơ thành một nút mở menu riêng",
+                    label: "Thu gọn danh sách bài hát"
+                },
+                profileSongsLimit: {
+                    description: "Số bài hát hiển thị khi lần đầu nhấp vào người dùng",
+                    label: "Giới hạn bài hát trên hồ sơ"
+                },
+                previewVolume: {
+                    description: "Âm lượng bản nghe thử bài hát",
+                    label: "Âm lượng nghe thử"
+                }
+            }
+        },
+        stopAutoUnread: {
+            name: "StopAutoUnread",
+            description: "Ngăn Discord tự động nâng cài đặt thông báo của kênh lên \"Tất cả tin nhắn\""
+        },
+        themeLibrary: {
+            text: {
+                enablePlugin: "Bật plugin",
+                cancel: "Hủy",
+                holdOn: "Khoan đã!",
+                thisThemeRequiresThe: "Chủ đề này cần",
+                pluginToWorkProperly: "plugin để hoạt động đúng!",
+                doYouWantTo: "Bạn có muốn bật nó không?",
+                themeInfo: "Thông tin chủ đề",
+                viewSource: "Xem mã nguồn",
+                close: "Đóng",
+                download: "Tải xuống",
+                overwrite: "Ghi đè",
+                keepMyFile: "Giữ tệp của tôi",
+                copyToClipboard: "Sao chép vào bộ nhớ tạm",
+                conflict: "Xung đột!",
+                themeSource: "Nguồn chủ đề",
+                aThemeWithThe: "Một chủ đề cùng tên",
+                alreadyExists: "đã tồn tại",
+                inYourThemesDirectory: "trong thư mục chủ đề! Bạn có muốn ghi đè không?",
+                version: "Phiên bản",
+                likes: "Lượt thích",
+                donate: "Ủng hộ",
+                supportServer: "Máy chủ hỗ trợ",
+                source: "Nguồn",
+                tags: "Thẻ",
+                youCanSupportThe: "Bạn có thể ủng hộ tác giả bằng cách quyên góp bên dưới!",
+                joinDiscordServer: "Tham gia máy chủ Discord",
+                viewThemeSource: "Xem nguồn chủ đề",
+                showAll: "Hiển thị tất cả",
+                showThemes: "Hiển thị chủ đề",
+                showSnippets: "Hiển thị đoạn mã",
+                showMostLiked: "Hiển thị được thích nhất",
+                showDark: "Hiển thị chủ đề tối",
+                showLight: "Hiển thị chủ đề sáng",
+                showEnabled: "Hiển thị đã bật",
+                showDisabled: "Hiển thị đã tắt",
+                searchForATheme: "Tìm chủ đề...",
+                gettingTheLatestThemes: "Đang tải chủ đề mới nhất...",
+                thisWonTTake: "Sẽ không lâu đâu!",
+                failedToFetchThemes: "Không thể tải chủ đề",
+                couldNotFetchThe: "Không thể tải danh sách chủ đề. Hãy thử lại sau.",
+                wantYourThemeRemoved: "Bạn muốn gỡ chủ đề của mình?",
+                hide: "Ẩn",
+                noThemeFound: "Không tìm thấy chủ đề.",
+                tryNarrowingYourSearch: "Hãy thu hẹp tìm kiếm.",
+                themeLibrary: "Thư viện chủ đề",
+                successfullyAuthorizedWithThemelibrary: "Đã ủy quyền với ThemeLibrary!",
+                failedToAuthorizeCheck: "Ủy quyền thất bại, xem bảng điều khiển",
+                successfullyDeauthorizedFromThemelibrary: "Đã hủy ủy quyền ThemeLibrary!",
+                failedToDeauthorizeCheck: "Hủy ủy quyền thất bại, xem bảng điều khiển",
+                themelibraryAuth: "Xác thực ThemeLibrary",
+                themeRemoval: "Gỡ chủ đề",
+                allThemeAuthorsAre: "Tất cả tác giả chủ đề đều được ghi công trong thông tin chủ đề, không có mã nguồn nào bị sửa đổi. Nếu bạn vẫn muốn gỡ chủ đề, hãy mở Issue bằng cách nhấn bên dưới.",
+                authorizeWithThemelibrary: "Ủy quyền với ThemeLibrary",
+                copyThemelibraryToken: "Sao chép mã ThemeLibrary",
+                deauthorizeThemelibrary: "Hủy ủy quyền ThemeLibrary",
+                themeDetails: "Chi tiết {{name}}",
+                mostLiked: "Được thích nhiều nhất",
+                newestAdditions: "Mới thêm gần đây",
+                removeTheme: "Gỡ chủ đề",
+                addTheme: "Thêm chủ đề",
+                authors: "Tác giả",
+                author: "Tác giả",
+                nobodyLikedTheme: "Chưa ai thích chủ đề này.",
+                nobodyLikedSnippet: "Chưa ai thích đoạn mã này.",
+                usersLikedTheme: "{{likes}} người dùng đã thích chủ đề này!",
+                usersLikedSnippet: "{{likes}} người dùng đã thích đoạn mã này!",
+                openThemeLibrary: "Mở thư viện chủ đề",
+                lastUpdated: "Chủ đề này được cập nhật lần cuối",
+                removalInfo: "Nếu bạn muốn xóa vĩnh viễn chủ đề của mình, hãy mở một issue trên",
+                themes: "Chủ đề",
+                requestRemoval: "Yêu cầu gỡ chủ đề",
+                pluginSuffix: "plugin!"
+            },
+            toast: {
+                downloadedName: "Đã tải xuống {{name}}!",
+                failedToDownloadName: "Không thể tải xuống {{name}}! (xem bảng điều khiển)",
+                invalidOrExpiredInvite: "Lời mời không hợp lệ hoặc đã hết hạn!",
+                copiedToClipboard: "Đã sao chép vào bộ nhớ tạm",
+                noUniquetokenPresentTry: "Không có uniqueToken, hãy ủy quyền trước!",
+                noTokenToCopy: "Không có mã để sao chép, hãy ủy quyền trước!",
+                copiedToClipboard2: "Đã sao chép vào bộ nhớ tạm!"
+            },
+            name: "ThemeLibrary",
+            description: "Thư viện chủ đề cho Plexcord.",
+            option: {
+                hideWarningCard: {
+                    description: "Ẩn thẻ cảnh báo ở đầu thẻ thư viện chủ đề",
+                    label: "Ẩn thẻ cảnh báo"
+                },
+                buttons: {
+                    description: "Nút ThemeLibrary",
+                    label: "Nút"
+                }
+            }
+        },
+        translatePlus: {
+            name: "Translate+",
+            description: "Plugin dịch của Plexcord nhưng hỗ trợ cả ngôn ngữ nhân tạo!",
+            text: {
+                translate: "Dịch",
+                dismiss: "Bỏ qua",
+                translationFailedDueTo: "Dịch thất bại do lỗi.",
+                translatedFrom: "dịch từ {{lang}}"
+            },
+            option: {
+                target: {
+                    description: "Ngôn ngữ đích",
+                    label: "Đích"
+                },
+                toki: {
+                    description: "Bật Toki Pona",
+                    label: "Toki Pona"
+                },
+                sitelen: {
+                    description: "Bật Sitelen Pona",
+                    label: "Sitelen Pona"
+                },
+                shavian: {
+                    description: "Bật Shavian",
+                    label: "Shavian"
+                }
+            }
+        },
+        triviaAI: {
+            name: "TriviaAI",
+            description: "Plugin giúp bạn trả lời câu đố bằng AI.",
+            text: {
+                answerWithAi: "Trả lời bằng AI",
+                enterApiKeyHere: "Nhập khóa API cho điểm cuối AI của bạn tại đây.",
+                enterSystemPrompt: "Nhập lời nhắc hệ thống.",
+                enterYourOpenaiCompatible: "Nhập điểm cuối AI tương thích OpenAI của bạn tại đây.",
+                status: "Trạng thái {{status}}"
+            },
+            option: {
+                apiKey: {
+                    description: "Khóa API.",
+                    label: "Khóa API"
+                },
+                model: {
+                    description: "Mô hình AI sẽ dùng.",
+                    label: "Mô hình",
+                    placeholder: "vd: google/gemini-3-flash-preview, inception/mercury, openai/gpt-5.2-chat, v.v."
+                },
+                systemPrompt: {
+                    description: "Lời nhắc hệ thống cho AI. Biến giữ chỗ: {current_user}, {current_time}",
+                    label: "Lời nhắc hệ thống"
+                },
+                maxTokens: {
+                    description: "Số token tối đa trong phản hồi.",
+                    label: "Token tối đa"
+                },
+                endpoint: {
+                    description: "Điểm cuối AI tương thích OpenAI.",
+                    label: "Điểm cuối"
+                },
+                context: {
+                    description: "Số tin nhắn trước đó đưa vào làm ngữ cảnh.",
+                    label: "Ngữ cảnh"
+                },
+                passMessageAuthorName: {
+                    description: "Thêm tên tác giả trước nội dung tin nhắn khi gửi cho AI. Điều này giúp AI phân biệt người dùng trong cuộc trò chuyện.",
+                    label: "Gửi tên tác giả tin nhắn"
+                },
+                treatSelfAsAssistant: {
+                    description: "Khi bật, tin nhắn của bạn sẽ được coi là tin nhắn của trợ lý trong ngữ cảnh. Điều này khiến một số mô hình bắt đầu viết fanfic.",
+                    label: "Coi tôi là trợ lý"
+                },
+                mode: {
+                    description: "Xử lý câu trả lời như thế nào?",
+                    label: "Chế độ",
+                    autoreply: "Tự động trả lời",
+                    chatbar: "Thay văn bản thanh trò chuyện",
+                    bot: "Clyde"
+                },
+                supportImages: {
+                    description: "Gửi hình ảnh cho AI làm ngữ cảnh (nếu có). Không phải mô hình nào cũng hỗ trợ.",
+                    label: "Hỗ trợ hình ảnh"
+                },
+                sendImagesAsBase64: {
+                    description: "Gửi hình ảnh cho AI dưới dạng base64.",
+                    label: "Gửi hình ảnh dạng base64"
+                }
+            },
+            toast: {
+                triviaaiApiSettingsAre: "TriviaAI: Cài đặt API chưa đầy đủ.",
+                errorGettingResponseFrom: "Lỗi khi lấy phản hồi từ mô hình AI"
+            }
+        },
+        unreadCountBadge: {
+            option: {
+                showOnMutedChannels: {
+                    description: "Hiển thị số chưa đọc trên kênh đã tắt tiếng",
+                    label: "Hiển thị trên kênh đã tắt tiếng"
+                },
+                notificationCountLimit: {
+                    description: "Hiển thị +99 thay vì số thực",
+                    label: "Giới hạn số thông báo"
+                }
+            },
+            name: "UnreadCountBadge",
+            description: "Hiển thị huy hiệu số tin nhắn chưa đọc trên các kênh trong danh sách kênh"
+        },
+        userPFP: {
+            toast: {
+                gifsWebpMustBe: "GIF/WebP phải được thêm qua URL. Tải GIF/WebP của bạn lên dịch vụ lưu trữ ảnh và dán liên kết."
+            },
+            text: {
+                save: "Lưu",
+                delete: "Xóa",
+                customAvatar: "Ảnh đại diện tùy chỉnh",
+                original: "Gốc",
+                local: "Cục bộ",
+                enterPngGifUrl: "Nhập URL PNG/GIF",
+                setAvatar: "Đặt ảnh đại diện",
+                usingTheSetAvatar: "Tính năng đặt ảnh đại diện chỉ hoạt động cục bộ, nghĩa là chỉ bạn thấy thay đổi.",
+                joinUserpfpServer: "Tham gia máy chủ UserPFP",
+                dropHere: "Thả vào đây!",
+                dragOrClick: "⬆ Kéo ảnh vào hoặc nhấn để tải lên (với GIF hoặc WebP hãy dùng URL)",
+                uploadedFile: "(tệp đã tải lên)",
+                supportHere: "Ủng hộ UserPFP tại đây"
+            },
+            option: {
+                overrideServerAvatars: {
+                    description: "Ghi đè ảnh đại diện máy chủ bằng ảnh tùy chỉnh hoặc ảnh mặc định nếu chưa đặt ảnh tùy chỉnh.",
+                    label: "Ghi đè ảnh đại diện máy chủ"
+                },
+                preferNitro: {
+                    description: "Ảnh đại diện nào sẽ dùng nếu có cả ảnh động mặc định (Nitro) và ảnh UserPFP",
+                    label: "Ưu tiên Nitro",
+                    false: "UserPFP",
+                    true: "Nitro"
+                },
+                databaseSource: {
+                    description: "URL để tải cơ sở dữ liệu",
+                    label: "Nguồn cơ sở dữ liệu"
+                }
+            },
+            name: "UserPFP",
+            description: "Cho phép bạn đặt ảnh đại diện tĩnh hoặc động cục bộ cho bản thân và người dùng khác"
+        },
+        userpluginInstaller: {
+            toast: {
+                restartToApplyChanges: "Khởi động lại để áp dụng thay đổi!"
+            },
+            text: {
+                installError: "Lỗi cài đặt",
+                done: "Xong!",
+                later: "Để sau",
+                updateError: "Lỗi cập nhật",
+                checkingForUpdates: "Đang kiểm tra cập nhật...",
+                loadingPlugins: "Đang tải plugin...",
+                pluginUpdatesAvailable: "Có bản cập nhật plugin",
+                theFollowingPluginsAre: "Các plugin sau đã lỗi thời:",
+                youCanUpdatePlugins: "Bạn có thể cập nhật plugin bên dưới.",
+                installPlugin: "Cài đặt plugin",
+                userplugininstallerNotFullyLoaded: "UserpluginInstaller chưa được tải đầy đủ",
+                youNeedToRestart: "Bạn cần khởi động lại để tải phần native :)",
+                restartNow: "Khởi động lại ngay",
+                someUserpluginsAreOut: "Một số UserPlugin đã lỗi thời!",
+                clickToOpenThe: "Nhấn để mở trình cập nhật UserPlugin",
+                plexcordDoesNotModerate: "Plexcord không kiểm duyệt userplugin và không chịu trách nhiệm về bất cứ điều gì có thể xảy ra khi cài đặt chúng.",
+                onlyInstallUserpluginsFrom: "Chỉ cài userplugin từ nhà phát triển bạn tin tưởng. Việc này hoàn toàn do bạn tự chịu rủi ro.",
+                setGitPath: "Đặt đường dẫn Git",
+                installHint: "Bạn có thể cài plugin từ GitHub, GitLab, Codeberg, git.nin0.dev hoặc plugins.nin0.dev bằng cách dán URL clone vào đây.",
+                enableAndRestart: "Bật và khởi động lại",
+                enableAndRefresh: "Bật và tải lại",
+                tabCounts: "({{total}}, {{enabled}} đã bật)",
+                possiblyMore: "và có thể còn nữa, vì việc kiểm tra cập nhật chưa xong. ",
+                alreadyInstalled: "Plugin đã được cài, hãy cập nhật bên dưới",
+                invalidUrl: "URL không hợp lệ, hãy đọc lưu ý ở trên",
+                install: "Cài đặt",
+                restart: "Khởi động lại",
+                refresh: "Làm mới",
+                update: "Cập nhật",
+                source: "Mã nguồn",
+                support: "Hỗ trợ",
+                managePlugins: "Quản lý plugin",
+                uninstalledRestart: "{{name}} đã được gỡ. Cần khởi động lại để gỡ hoàn toàn plugin.",
+                uninstalledRefresh: "{{name}} đã được gỡ. Cần làm mới để gỡ hoàn toàn plugin.",
+                updatedRestart: "{{name}} đã được cập nhật. Cần khởi động lại để áp dụng bản cập nhật.",
+                updatedRefresh: "{{name}} đã được cập nhật. Cần làm mới để áp dụng bản cập nhật.",
+                installedBody: "{{name}} đã được cài đặt thành công. Giờ thì sao?",
+                installedNativeBody: "{{name}} đã được cài đặt thành công. Tuy nhiên, vì dùng chức năng native nên cần khởi động lại ứng dụng. Giờ thì sao?"
+            },
+            option: {
+                allowlistedChannels: {
+                    description: "Danh sách kênh phân tách bằng dấu phẩy nơi hiển thị nút Cài đặt plugin. Nút luôn hiển thị trong các kênh Userplugin của Plexcord",
+                    label: "Kênh được cho phép"
+                },
+                notifyIfUpdate: {
+                    description: "Hiển thị thông báo Plexcord nếu UserPlugins cần cập nhật",
+                    label: "Thông báo khi có cập nhật"
+                },
+                neverNotifyForPlugins: {
+                    description: "Không bao giờ hiển thị thông báo cập nhật cho các plugin này (bạn vẫn có thể cập nhật từ thẻ UserPlugins)",
+                    label: "Không bao giờ thông báo cho plugin"
+                }
+            },
+            name: "UserpluginInstaller",
+            description: "Cài userplugin chỉ bằng một cú nhấp"
+        },
+        vCPanelSettings: {
+            option: {
+                title1: {
+                    label: "Tiêu đề 1"
+                },
+                uncollapseSettingsByDefault: {
+                    description: "Tự động mở rộng cài đặt thoại theo mặc định",
+                    label: "Mở rộng cài đặt theo mặc định"
+                },
+                title2: {
+                    label: "Tiêu đề 2"
+                },
+                outputVolume: {
+                    description: "Hiển thị thanh trượt âm lượng đầu ra",
+                    label: "Âm lượng đầu ra"
+                },
+                inputVolume: {
+                    description: "Hiển thị thanh trượt âm lượng đầu vào",
+                    label: "Âm lượng đầu vào"
+                },
+                outputDevice: {
+                    description: "Hiển thị bộ chọn thiết bị đầu ra",
+                    label: "Thiết bị đầu ra"
+                },
+                inputDevice: {
+                    description: "Hiển thị bộ chọn thiết bị đầu vào",
+                    label: "Thiết bị đầu vào"
+                },
+                camera: {
+                    description: "Hiển thị bộ chọn camera",
+                    label: "Camera"
+                },
+                title3: {
+                    label: "Tiêu đề 3"
+                },
+                showOutputVolumeHeader: {
+                    description: "Hiển thị tiêu đề phía trên thanh trượt âm lượng đầu ra",
+                    label: "Hiển thị tiêu đề âm lượng đầu ra"
+                },
+                showInputVolumeHeader: {
+                    description: "Hiển thị tiêu đề phía trên thanh trượt âm lượng đầu vào",
+                    label: "Hiển thị tiêu đề âm lượng đầu vào"
+                },
+                showOutputDeviceHeader: {
+                    description: "Hiển thị tiêu đề phía trên bộ chọn thiết bị đầu ra",
+                    label: "Hiển thị tiêu đề thiết bị đầu ra"
+                },
+                showInputDeviceHeader: {
+                    description: "Hiển thị tiêu đề phía trên bộ chọn thiết bị đầu vào",
+                    label: "Hiển thị tiêu đề thiết bị đầu vào"
+                },
+                showVideoDeviceHeader: {
+                    description: "Hiển thị tiêu đề phía trên bộ chọn camera",
+                    label: "Hiển thị tiêu đề thiết bị video"
+                }
+            },
+            name: "VCPanelSettings",
+            description: "Điều khiển cài đặt thoại ngay từ bảng thoại",
+            text: {
+                appearance: "Giao diện",
+                settingsToShow: "Cài đặt hiển thị",
+                headersToShow: "Tiêu đề hiển thị",
+                outputVolume: "Âm lượng đầu ra",
+                inputVolume: "Âm lượng đầu vào",
+                outputDevice: "Thiết bị đầu ra",
+                inputDevice: "Thiết bị đầu vào",
+                settings: "Cài đặt",
+                hide: "Ẩn"
+            }
+        },
+        voiceMessageTranscriber: {
+            text: {
+                autoDetect: "Tự động phát hiện",
+                start: "Bắt đầu",
+                transcriptionOptions: "Tùy chọn chép lời",
+                audioLanguage: "Ngôn ngữ âm thanh",
+                retry: "Thử lại",
+                transcriptionFailed: "Chép lời thất bại",
+                transcribeVoiceMessage: "Chép lời tin nhắn thoại",
+                close: "Đóng",
+                baseRecommended: "Base (Khuyến nghị)",
+                small: "Small",
+                largeV3TurboBest: "Large v3 Turbo (Độ chính xác tốt nhất, khuyến nghị GPU)",
+                transcribe: "Chép lời",
+                translateToEnglish: "Dịch sang tiếng Anh",
+                voiceMessageTranslation: "Bản dịch tin nhắn thoại",
+                voiceMessageTranscription: "Bản chép lời tin nhắn thoại",
+                hideTimestamps: "Ẩn mốc thời gian",
+                showTimestamps: "Hiện mốc thời gian",
+                copied: "Đã sao chép!",
+                copyText: "Sao chép văn bản",
+                downloadingAudio: "Đang tải âm thanh...",
+                processingAudio: "Đang xử lý âm thanh...",
+                loadingModel: "Đang tải mô hình...",
+                transcribing: "Đang chép lời...",
+                transcription: "Bản chép lời",
+                transcriptionError: "Lỗi chép lời",
+                transcribingInProgress: "Đang chép lời...",
+                initializing: "Đang khởi tạo...",
+                workerCrashed: "Tiến trình chép lời đã bị lỗi",
+                workerStopped: "Tiến trình chép lời đã bị dừng",
+                deleteCache: "Xóa tất cả tệp đã lưu đệm ({{size}} MB)",
+                action: "Hành động"
+            },
+            name: "VoiceMessageTranscriber",
+            description: "Chép lời tin nhắn thoại ngay trên thiết bị nhờ Whisper",
+            option: {
+                embed: {
+                    description: "Hiển thị bản chép lời ngay trong tệp đính kèm tin nhắn thoại thay vì cửa sổ.",
+                    label: "Nhúng"
+                },
+                maintainHorizontal: {
+                    description: "Giữ kích thước ngang của hộp chép lời nhúng và mở rộng theo chiều dọc.",
+                    label: "Giữ chiều ngang"
+                },
+                selectedModel: {
+                    description: "Kích thước mô hình.",
+                    onnxcommunitywhispertiny: "Tiny (Nhanh nhất, độ chính xác thấp nhất)"
+                },
+                useGpu: {
+                    description: "Chạy mô hình trên GPU (WebGPU) khi được hỗ trợ. Nhanh hơn nhiều và giúp dùng được mô hình lớn hơn. Dự phòng CPU nếu không khả dụng.",
+                    label: "Dùng GPU"
+                },
+                quantized: {
+                    description: "Dùng mô hình lượng tử hóa khi chạy trên CPU (kích thước nhỏ hơn, giảm nhẹ chất lượng).",
+                    label: "Lượng tử hóa"
+                },
+                deleteModalFiles: {
+                    description: "Xóa tệp đã lưu bộ nhớ đệm khỏi bộ nhớ.",
+                    label: "Xóa tệp mô hình"
+                }
+            }
+        },
+        voiceMessagesInBackground: {
+            name: "VoiceMessagesInBackground",
+            description: "Giữ tin nhắn thoại tiếp tục phát giữa các cuộc trò chuyện với trình phát mini đồng bộ.",
+            text: {
+                voiceMessagesInBackground: "Trình phát tin nhắn thoại nền",
+                returnToChannelname: "Quay lại {{channelName}}",
+                voiceMessagePosition: "Vị trí tin nhắn thoại",
+                changePlaybackSpeed: "Đổi tốc độ phát",
+                playbackSpeedSpeedTimes: "Tốc độ phát {{speed}} lần",
+                closeVoiceMessagePlayer: "Đóng trình phát tin nhắn thoại",
+                voiceMessage: "Tin nhắn thoại",
+                directMessage: "Tin nhắn trực tiếp",
+                resume: "Tiếp tục tin nhắn thoại",
+                pause: "Tạm dừng tin nhắn thoại"
+            }
+        },
+        webPWA: {
+            name: "WebPWA",
+            description: "Cho phép cài Discord như một ứng dụng (PWA). Bật huy hiệu thông báo, phím tắt toàn cục và thanh tiêu đề riêng của Discord.",
+            text: {
+                activities: "Hoạt động",
+                hopIn: "Tham gia",
+                status: "Trạng thái",
+                emojis: "Biểu tượng cảm xúc",
+                rooms: "Phòng",
+                discord: "Discord",
+                platforms: "Nền tảng",
+                keybindsInfoBefore: "Hỗ trợ phím tắt toàn cục Nhấn để X tùy chỉnh. Truy cập",
+                keybindsInfoAfter: "để thay đổi. Phím tắt Giữ để X không được hỗ trợ."
+            }
+        },
+        "webRichPresence (arRPC)": {
+            name: "WebRichPresence (arRPC)"
+        },
+        webScreenShare: {
+            option: {
+                resolution: {
+                    description: "Độ phân giải",
+                    label: "Độ phân giải"
+                },
+                frameRate: {
+                    description: "Tốc độ khung hình",
+                    label: "Tốc độ khung hình"
+                },
+                contentHint: {
+                    description: "Gợi ý nội dung",
+                    label: "Gợi ý nội dung"
+                },
+                systemAudio: {
+                    description: "Tắt âm thanh hệ thống",
+                    label: "Âm thanh hệ thống"
+                }
+            },
+            name: "WebScreenShare",
+            description: "Thêm menu tùy chọn chia sẻ màn hình. Cho phép thay đổi độ phân giải, tốc độ khung hình, gợi ý mã hóa và âm thanh hệ thống.",
+            text: {
+                stream: "Phát trực tiếp",
+                streamMuted: "Đã tắt tiếng phát trực tiếp",
+                streamMode: "Chế độ phát trực tiếp",
+                muteStreamAudio: "Tắt tiếng âm thanh phát trực tiếp",
+                preventsSystemAudioFrom: "Ngăn âm thanh hệ thống được đưa vào luồng phát của bạn.",
+                showStreamPreviews: "Hiển thị bản xem trước phát trực tiếp",
+                allowsOthersToSee: "Cho phép người khác xem trước luồng phát của bạn trước khi tham gia.",
+                smootherVideo: "Video mượt hơn",
+                cleanerText: "Văn bản rõ hơn",
+                userPreset: "Cài đặt sẵn của người dùng",
+                custom: "Tùy chỉnh",
+                gaming: "Chơi game",
+                screenshare: "Chia sẻ màn hình"
+            }
+        },
+        whitelistedEmojis: {
+            option: {
+                defaultEmojis: {
+                    description: "Ẩn biểu tượng cảm xúc Unicode mặc định khỏi tự hoàn thành trừ khi có trong danh sách trắng.",
+                    label: "Biểu tượng cảm xúc mặc định"
+                },
+                serverEmojis: {
+                    description: "Ẩn biểu tượng cảm xúc tùy chỉnh của máy chủ khỏi tự hoàn thành trừ khi có trong danh sách trắng.",
+                    label: "Biểu tượng cảm xúc máy chủ"
+                },
+                disableToasts: {
+                    description: "Không hiển thị thông báo khi thêm hoặc xóa biểu tượng cảm xúc.",
+                    label: "Tắt thông báo"
+                },
+                whiteListedEmojis: {
+                    description: "Biểu tượng cảm xúc trong danh sách trắng",
+                    label: "Biểu tượng cảm xúc trong danh sách trắng"
+                },
+                exportEmojis: {
+                    description: "Xuất biểu tượng cảm xúc",
+                    label: "Xuất biểu tượng cảm xúc"
+                },
+                importEmojis: {
+                    description: "Nhập biểu tượng cảm xúc",
+                    label: "Nhập biểu tượng cảm xúc"
+                },
+                resetEmojis: {
+                    description: "Đặt lại biểu tượng cảm xúc",
+                    label: "Đặt lại biểu tượng cảm xúc"
+                }
+            },
+            name: "WhitelistedEmojis",
+            description: "Cho phép tắt tất cả biểu tượng cảm xúc trong tin nhắn trừ một nhóm trong danh sách trắng.",
+            toast: {
+                addedLengthEmojisTo: "Đã thêm {{length}} biểu tượng cảm xúc vào danh sách, {{length}} đã có sẵn",
+                removedLengthEmojisFrom: "Đã xóa {{length}} biểu tượng cảm xúc khỏi danh sách",
+                nameIsAlreadyIn: "\"{{name}}\" đã có trong danh sách",
+                addedNameToThe: "Đã thêm \"{{name}}\" vào danh sách",
+                nameIsNotIn: "\"{{name}}\" không có trong danh sách",
+                removedNameFromThe: "Đã xóa \"{{name}}\" khỏi danh sách",
+                successfullyExportedEmojis: "Đã xuất biểu tượng cảm xúc",
+                successfullyImportedEmojis: "Đã nhập biểu tượng cảm xúc",
+                invalidJsonData: "Dữ liệu JSON không hợp lệ",
+                failedToImportEmojis: "Không thể nhập biểu tượng cảm xúc: {{err}}",
+                resetEmojis: "Đã đặt lại biểu tượng cảm xúc"
+            },
+            text: {
+                areYouSure: "Bạn có chắc không?",
+                thisWillOverwriteYour: "Thao tác này sẽ ghi đè danh sách trắng hiện tại của bạn.",
+                import: "Nhập",
+                cancel: "Hủy",
+                thisWillRemoveAll: "Thao tác này sẽ xóa tất cả biểu tượng cảm xúc khỏi danh sách trắng.",
+                reset: "Đặt lại",
+                addAllGuildEmojis: "Thêm tất cả biểu tượng cảm xúc của máy chủ",
+                removeAllGuildEmojis: "Xóa tất cả biểu tượng cảm xúc của máy chủ",
+                noEmojisInThe: "Không có biểu tượng cảm xúc nào trong danh sách trắng.",
+                removeAll: "Xóa tất cả",
+                removeFromWhitelist: "Xóa khỏi danh sách trắng",
+                addToWhitelist: "Thêm vào danh sách trắng",
+                defaultEmojis: "Emoji mặc định",
+                guildEmojis: "Emoji của {{name}}",
+                guildFallback: "Máy chủ {{id}}",
+                whitelistedEmojis: "Emoji trong danh sách trắng",
+                remove: "Xóa"
+            }
+        },
+        wigglyText: {
+            option: {
+                intensity: {
+                    description: "Cường độ hoạt ảnh (px)",
+                    label: "Cường độ"
+                }
+            },
+            name: "WigglyText",
+            description: "Thêm định dạng markdown mới làm chữ lắc lư.",
+            text: {
+                leftAndRight: "trái và phải",
+                byTyping: "bằng cách gõ",
+                upAndDown: "lên và xuống",
+                inACircle: "theo vòng tròn",
+                youCanMakeTextWiggle: "Bạn có thể làm chữ lắc lư như sau:"
+            }
+        },
+        fixDiscordCss: {
+            description: "Sửa lỗi giật CSS của Discord"
+        },
+        directFileDownload: {
+            name: "DirectFileDownload",
+            description: "Tải tệp trực tiếp từ Discord thay vì mở chúng trong trình duyệt"
+        },
+        githubRepos: {
+            text: {
+                failedToFetchRepositories: "Không thể lấy kho mã",
+                personal: "Cá nhân",
+                unknown: "Không rõ",
+                sortedByCount: "Sắp xếp theo số kho mã. Nhấn để sắp xếp A-Z",
+                sortedAlphabetically: "Sắp xếp A-Z. Nhấn để sắp xếp theo số kho mã",
+                mostRepos: "Nhiều kho mã nhất"
+            }
         }
     }
 } as const;

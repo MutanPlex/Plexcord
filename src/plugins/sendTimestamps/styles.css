@@ -3,7 +3,7 @@
     color: var(--text-default);
     width: 95%;
     padding: 8px 8px 8px 12px;
-    margin: 1em 0;
+    margin-bottom: 1em;
     outline: none;
     border: 1px solid var(--input-background-default);
     border-radius: 4px;
@@ -20,18 +20,6 @@
 
 .pc-st-format-label {
     --border-subtle: transparent;
-}
-
-.pc-st-modal-header {
-    place-content: center space-between;
-}
-
-.pc-st-modal-title {
-    margin: 0;
-}
-
-.pc-st-modal-close-button {
-    padding: 0;
 }
 
 .pc-st-preview-text {

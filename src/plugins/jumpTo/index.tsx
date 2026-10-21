@@ -10,7 +10,7 @@ import { plugin, t } from "@api/i18n";
 import { Channel, Message, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
-import { ChannelStore, Constants, Menu, NavigationRouter, RestAPI, SelectedChannelStore, SelectedGuildStore, Toasts } from "@webpack/common";
+import { ChannelStore, Constants, Menu, NavigationRouter, RestAPI, SelectedChannelStore, SelectedGuildStore, showToast } from "@webpack/common";
 
 function jumpToFirstMessage(channelId: string, guildId?: string | null) {
     NavigationRouter.transitionTo(`/channels/${guildId ?? "@me"}/${channelId}/0`);
@@ -42,21 +42,13 @@ async function jumpToUserMessage(channelId: string, guildId: string, userId: str
 
         const messageId = res.body?.messages?.[0]?.[0]?.id;
         if (!messageId) {
-            Toasts.show({
-                type: Toasts.Type.FAILURE,
-                message: t(plugin.jumpTo.context.noMessages),
-                id: Toasts.genId()
-            });
+            showToast({ text: t(plugin.jumpTo.context.noMessages), variant: "critical" });
             return;
         }
 
         NavigationRouter.transitionTo(`/channels/${guildId}/${channelId}/${messageId}`);
     } catch (e) {
-        Toasts.show({
-            type: Toasts.Type.FAILURE,
-            message: t(plugin.jumpTo.context.searchFailed),
-            id: Toasts.genId()
-        });
+        showToast({ text: t(plugin.jumpTo.context.searchFailed), variant: "critical" });
     }
 }
 

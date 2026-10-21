@@ -26,20 +26,6 @@ import definePlugin, { OptionType } from "@utils/types";
 
 let style: HTMLStyleElement;
 
-function setCss() {
-    style.textContent = `
-        .pc-nsfw-img [class*=imageContainer],
-        .pc-nsfw-img [class*=wrapperPaused] {
-            filter: blur(${settings.store.blurAmount}px);
-            transition: filter 0.2s;
-
-            &:hover {
-                filter: blur(0);
-            }
-        }
-        `;
-}
-
 const settings = definePluginSettings({
     blurAmount: {
         label: () => t(plugin.blurNSFW.option.blurAmount.label),
@@ -56,6 +42,25 @@ const settings = definePluginSettings({
     }
 });
 
+function setCss() {
+    style.textContent = `
+        .pc-nsfw-img [class*=imageContainer] img,
+        .pc-nsfw-img [class*=imageContainer] video,
+        .pc-nsfw-img [class*=wrapperPaused] img,
+        .pc-nsfw-img [class*=wrapperPaused] video {
+            filter: blur(${settings.store.blurAmount}px);
+            transition: filter 0.2s;
+        }
+
+        .pc-nsfw-img [class*=imageContainer]:hover img,
+        .pc-nsfw-img [class*=imageContainer]:hover video,
+        .pc-nsfw-img [class*=wrapperPaused]:hover img,
+        .pc-nsfw-img [class*=wrapperPaused]:hover video {
+            filter: blur(0);
+        }
+        `;
+}
+
 export default definePlugin({
     name: "BlurNSFW",
     description: () => t(plugin.blurNSFW.description),
@@ -69,7 +74,7 @@ export default definePlugin({
             replacement: [
                 {
                     match: /(\.renderReactions\(\i\).+?className:)/,
-                    replace: '$&(this.props?.channel?.nsfw || $self.settings.store.blurAllChannels ? "pc-nsfw-img ": "")+'
+                    replace: '$&(this?.props?.channel?.nsfw||$self.settings.store.blurAllChannels?"pc-nsfw-img ":"")+'
                 }
             ]
         }

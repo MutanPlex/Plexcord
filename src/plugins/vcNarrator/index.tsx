@@ -18,6 +18,7 @@
 */
 
 import { plugin, t } from "@api/i18n";
+import { migrateSettingsFromPlugin } from "@api/Settings";
 import { Button } from "@components/Button";
 import { ErrorCard } from "@components/ErrorCard";
 import { Heading } from "@components/Heading";
@@ -48,7 +49,8 @@ interface VoiceStateChangeEvent {
 // not say the second mute, which would lead you to believe they're unmuted
 
 function speak(text: string) {
-    if (!text) return;
+    // Don't narrate in the overlay window, otherwise everything is said twice
+    if (!text || window.__OVERLAY__) return;
 
     const { volume, rate } = settings.store;
 
@@ -142,6 +144,7 @@ function playSample(type: string) {
     ));
 }
 
+migrateSettingsFromPlugin("VcNarrator", "VcNarratorCustom", "enabled");
 export default definePlugin({
     name: "VcNarrator",
     description: () => t(plugin.vcNarrator.description),

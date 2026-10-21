@@ -31,9 +31,18 @@ import { Devs } from "@utils/constants";
 import { copyWithToast } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy, findByPropsLazy } from "@webpack";
-import { Tooltip, UserProfileStore } from "@webpack/common";
+import { Tooltip, useEffect, UserProfileStore, useState } from "@webpack/common";
 
 import { VerifiedIcon } from "./VerifiedIcon";
+
+interface ConnectionPlatform {
+    getPlatformUserUrl(connection: ConnectedAccount): string;
+    icon: { lightSVG: string, darkSVG: string; };
+}
+
+interface GithubOrg {
+    login: string;
+}
 
 const useLegacyPlatformType: (platform: string) => string = findByCodeLazy(".TWITTER_LEGACY:");
 const platforms: { get(type: string): ConnectionPlatform; } = findByPropsLazy("isSupported", "getByUrl");
@@ -63,12 +72,67 @@ const settings = definePluginSettings({
             { label: () => t(plugin.showConnections.option.iconSpacing.cozy), value: Spacing.COZY }, // US Spelling :/
             { label: () => t(plugin.showConnections.option.iconSpacing.roomy), value: Spacing.ROOMY }
         ]
+    },
+    showGithubOrgs: {
+        label: () => t(plugin.showConnections.option.showGithubOrgs.label),
+        type: OptionType.BOOLEAN,
+        description: () => t(plugin.showConnections.option.showGithubOrgs.description),
+        default: true
+    },
+    showOnModal: {
+        label: () => t(plugin.showConnections.option.showOnModal.label),
+        type: OptionType.BOOLEAN,
+        description: () => t(plugin.showConnections.option.showOnModal.description),
+        default: true
     }
 });
 
-interface ConnectionPlatform {
-    getPlatformUserUrl(connection: ConnectedAccount): string;
-    icon: { lightSVG: string, darkSVG: string; };
+async function fetchGithubOrgs(username: string): Promise<GithubOrg[]> {
+    try {
+        const res = await fetch(`https://api.github.com/users/${encodeURIComponent(username)}/orgs`);
+        if (!res.ok) return [];
+        return await res.json();
+    } catch {
+        return [];
+    }
+}
+
+function GithubOrgIcons({ username, size, iconSrc }: { username: string, size: number, iconSrc: string; }) {
+    const [orgs, setOrgs] = useState<GithubOrg[]>([]);
+
+    useEffect(() => {
+        let cancelled = false;
+        fetchGithubOrgs(username).then(data => {
+            if (!cancelled) setOrgs(data);
+        });
+        return () => { cancelled = true; };
+    }, [username]);
+
+    if (!orgs.length) return null;
+
+    return (
+        <>
+            {orgs.map(org => (
+                <Tooltip text={org.login} key={org.login}>
+                    {tooltipProps => (
+                        <a
+                            {...tooltipProps}
+                            className="pc-user-connection"
+                            href={`https://github.com/${org.login}`}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <img
+                                src={iconSrc}
+                                alt={org.login}
+                                style={{ width: size, height: size }}
+                            />
+                        </a>
+                    )}
+                </Tooltip>
+            ))}
+        </>
+    );
 }
 
 const profilePopoutComponent = ErrorBoundary.wrap(
@@ -116,49 +180,57 @@ function CompactConnectionComponent({ connection, theme }: { connection: Connect
     const TooltipIcon = url ? LinkIcon : CopyIcon;
 
     return (
-        <Tooltip
-            text={
-                <span className="pc-sc-tooltip">
-                    <span className="pc-sc-connection-name">{connection.name}</span>
-                    {connection.verified && <VerifiedIcon />}
-                    <TooltipIcon height={16} width={16} className="pc-sc-tooltip-icon" />
-                </span>
-            }
-            key={connection.id}
-        >
-            {tooltipProps =>
-                url
-                    ? <a
-                        {...tooltipProps}
-                        className="pc-user-connection"
-                        href={url}
-                        target="_blank"
-                        rel="noreferrer"
-                        onClick={e => {
-                            if (isPluginEnabled(OpenInAppPlugin.name)) {
-                                // handleLink will .preventDefault() if applicable
-                                OpenInAppPlugin.handleLink(e.currentTarget, e);
-                            }
-                        }}
-                    >
-                        {img}
-                    </a>
-                    : <button
-                        {...tooltipProps}
-                        className="pc-user-connection"
-                        onClick={() => {
-                            if (connection.type === "xbox") {
-                                PlexcordNative.native.openExternal(`https://www.xbox.com/en-US/play/user/${encodeURIComponent(connection.name)}`);
-                            } else {
-                                copyWithToast(connection.name);
-                            }
-                        }}
-                    >
-                        {img}
-                    </button>
-
-            }
-        </Tooltip>
+        <>
+            <Tooltip
+                text={
+                    <span className="pc-sc-tooltip">
+                        <span className="pc-sc-connection-name">{connection.name}</span>
+                        {connection.verified && <VerifiedIcon />}
+                        <TooltipIcon height={16} width={16} className="pc-sc-tooltip-icon" />
+                    </span>
+                }
+                key={connection.id}
+            >
+                {tooltipProps =>
+                    url
+                        ? <a
+                            {...tooltipProps}
+                            className="pc-user-connection"
+                            href={url}
+                            target="_blank"
+                            rel="noreferrer"
+                            onClick={e => {
+                                if (isPluginEnabled(OpenInAppPlugin.name)) {
+                                    // handleLink will .preventDefault() if applicable
+                                    OpenInAppPlugin.handleLink(e.currentTarget, e);
+                                }
+                            }}
+                        >
+                            {img}
+                        </a>
+                        : <button
+                            {...tooltipProps}
+                            className="pc-user-connection"
+                            onClick={() => {
+                                if (connection.type === "xbox") {
+                                    PlexcordNative.native.openExternal(`https://www.xbox.com/en-US/play/user/${encodeURIComponent(connection.name)}`);
+                                } else {
+                                    copyWithToast(connection.name);
+                                }
+                            }}
+                        >
+                            {img}
+                        </button>
+                }
+            </Tooltip>
+            {connection.type === "github" && settings.store.showGithubOrgs && (
+                <GithubOrgIcons
+                    username={connection.name}
+                    size={settings.store.iconSize}
+                    iconSrc={theme === "light" ? platform.icon.lightSVG : platform.icon.darkSVG}
+                />
+            )}
+        </>
     );
 }
 
@@ -171,10 +243,27 @@ export default definePlugin({
 
     patches: [
         {
-            find: /onOpenUserProfileModal:\i\}\),\i/,
+            // Same find as ReviewDB
+            find: '"UserProfilePopout");',
             replacement: {
-                match: /userId:\i\.id,guild:\i.{0,15}\}\).{0,100}(?=\])/,
+                match: /userId:\i\.id,guild:\i\}\)(?=])/,
                 replace: "$&,$self.profilePopoutComponent(arguments[0])"
+            }
+        },
+        {
+            find: ",applicationRoleConnection:",
+            predicate: () => settings.store.showOnModal,
+            replacement: {
+                match: /\i\.length>0.{0,250}locale:\i\}\)\}\)/,
+                replace: "$self.profilePopoutComponent(arguments[0]),",
+            }
+        },
+        {
+            find: ".MODAL_V2,onClose:",
+            predicate: () => settings.store.showOnModal,
+            replacement: {
+                match: /!\i&&\(\i\|\|\i\).{0,250}profileAppConnections\}\)\}\)/,
+                replace: "$self.profilePopoutComponent(arguments[0]),",
             }
         }
     ],

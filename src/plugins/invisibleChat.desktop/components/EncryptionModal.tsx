@@ -18,22 +18,14 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { Button } from "@components/Button";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
+import { RenderModalProps } from "@plexcord/discord-types";
 import { encrypt } from "@plugins/invisibleChat.desktop/index";
 import { insertTextIntoChatInputBox } from "@utils/discord";
-import {
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalProps,
-    ModalRoot,
-    openModal,
-} from "@utils/modal";
-import { React, TextInput } from "@webpack/common";
+import { Modal, openModal, React, TextInput } from "@webpack/common";
 
-function EncModal(props: ModalProps) {
+function EncModal(props: RenderModalProps) {
     const [secret, setSecret] = React.useState("");
     const [cover, setCover] = React.useState("");
     const [password, setPassword] = React.useState("password");
@@ -41,72 +33,65 @@ function EncModal(props: ModalProps) {
 
     const isValid = secret && (noCover || (cover && cover.trim().split(" ").length > 1));
 
+    const onSend = () => {
+        if (!isValid) return;
+        const encrypted = encrypt(secret, password, noCover ? "d d" : cover);
+        const toSend = noCover ? encrypted.replaceAll("d", "") : encrypted;
+        if (!toSend) return;
+
+        insertTextIntoChatInputBox(toSend);
+
+        props.onClose();
+    };
+
     return (
-        <ModalRoot {...props}>
-            <ModalHeader>
-                <Heading>{t(plugin.invisibleChat.modal.encrypt.title)}</Heading>
-            </ModalHeader>
-
-            <ModalContent>
-                <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.encrypt.secret)}</Heading>
-                <TextInput
-                    onChange={(e: string) => {
-                        setSecret(e);
-                    }}
-                />
-                <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.encrypt.cover)}</Heading>
-                <TextInput
-                    disabled={noCover}
-                    onChange={(e: string) => {
-                        setCover(e);
-                    }}
-                />
-                <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.encrypt.password)}</Heading>
-                <TextInput
-                    style={{ marginBottom: "20px" }}
-                    defaultValue={"password"}
-                    onChange={(e: string) => {
-                        setPassword(e);
-                    }}
-                />
-                <FormSwitch
-                    value={noCover}
-                    onChange={(e: boolean) => {
-                        setNoCover(e);
-                    }}
-                    title={t(plugin.invisibleChat.modal.encrypt.dontUseCover)}
-                />
-
-            </ModalContent>
-
-            <ModalFooter>
-                <Button
-                    variant="positive"
-                    disabled={!isValid}
-                    onClick={() => {
-                        if (!isValid) return;
-                        const encrypted = encrypt(secret, password, noCover ? "d d" : cover);
-                        const toSend = noCover ? encrypted.replaceAll("d", "") : encrypted;
-                        if (!toSend) return;
-
-                        insertTextIntoChatInputBox(toSend);
-
-                        props.onClose();
-                    }}
-                >
-                    {t(plugin.invisibleChat.modal.encrypt.send)}
-                </Button>
-                <Button
-                    variant="secondary"
-                    style={{ left: 15, position: "absolute" }}
-                    onClick={() => {
-                        props.onClose();
-                    }}
-                >
-                    {t(plugin.invisibleChat.modal.encrypt.cancel)}
-                </Button>
-            </ModalFooter>
-        </ModalRoot>
+        <Modal
+            {...props}
+            size="sm"
+            title={t(plugin.invisibleChat.modal.encrypt.title)}
+            actions={[
+                {
+                    text: t(plugin.invisibleChat.modal.encrypt.send),
+                    variant: "primary",
+                    disabled: !isValid,
+                    onClick: onSend
+                },
+                {
+                    text: t(plugin.invisibleChat.modal.encrypt.cancel),
+                    variant: "secondary",
+                    onClick: props.onClose
+                }
+            ]}
+        >
+            <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.encrypt.secret)}</Heading>
+            <TextInput
+                onChange={(e: string) => {
+                    setSecret(e);
+                }}
+            />
+            <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.encrypt.cover)}</Heading>
+            <TextInput
+                disabled={noCover}
+                onChange={(e: string) => {
+                    setCover(e);
+                }}
+            />
+            <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.encrypt.password)}</Heading>
+            <TextInput
+                style={{ marginBottom: "20px" }}
+                defaultValue={"password"}
+                onChange={(e: string) => {
+                    setPassword(e);
+                }}
+            />
+            <FormSwitch
+                value={noCover}
+                onChange={(e: boolean) => {
+                    setNoCover(e);
+                }}
+                title={t(plugin.invisibleChat.modal.encrypt.dontUseCover)}
+            />
+        </Modal>
     );
 }
 

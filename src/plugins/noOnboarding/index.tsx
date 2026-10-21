@@ -20,15 +20,22 @@ export default definePlugin({
         {
             find: ",acceptInvite(",
             replacement: {
-                match: /INVITE_ACCEPT_SUCCESS.+?,(\i)=\i\?\.guild_id.+?;/,
+                match: /INVITE_ACCEPT_SUCCESS.+?,(\i)=null!=.+?;/,
                 replace: (m, guildId) => `${m}$self.bypassOnboard(${guildId});`
             }
         },
         {
             find: "{joinGuild:",
             replacement: {
-                match: /guildId:(\i),lurker:(\i).{0,20}}\)\);/,
+                match: /guildId:(\i),lurker:(\i).{0,20}}\);/,
                 replace: (m, guildId, lurker) => `${m}if(!${lurker})$self.bypassOnboard(${guildId});`
+            }
+        },
+        {
+            find: 'type:"GUILD_ONBOARDING_PROMPTS_FETCH_START"',
+            replacement: {
+                match: /(?<="GUILD_ONBOARDING_PROMPTS_FETCH_SUCCESS",guildId:\i,\.\.\.\i)(?=\})/,
+                replace: ",enabled:!1"
             }
         }
     ],

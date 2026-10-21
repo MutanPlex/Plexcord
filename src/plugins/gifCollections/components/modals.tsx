@@ -10,9 +10,9 @@ import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
+import { RenderModalProps } from "@plexcord/discord-types";
 import { classes } from "@utils/misc";
-import { ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
-import { FluxDispatcher, TextInput, useCallback, useState } from "@webpack/common";
+import { FluxDispatcher, Modal, openModal, TextInput, useCallback, useState } from "@webpack/common";
 
 import { settings } from "../settings";
 import type { Collection, Gif } from "../types";
@@ -27,8 +27,8 @@ export function openCollectionInfoModal(collection: Collection) {
             rows={[
                 { label: t(plugin.gifCollections.context.collection.name), value: stripPrefix(collection.name) },
                 { label: t(plugin.gifCollections.context.collection.gifs), value: String(collection.gifs.length) },
-                { label: t(plugin.gifCollections.context.collection.created), value: collection.createdAt ? new Date(collection.createdAt).toLocaleString() : "Unknown" },
-                { label: t(plugin.gifCollections.context.collection.updated), value: collection.lastUpdated ? new Date(collection.lastUpdated).toLocaleString() : "Unknown" },
+                { label: t(plugin.gifCollections.context.collection.created), value: collection.createdAt ? new Date(collection.createdAt).toLocaleString() : t(plugin.gifCollections.text.unknown) },
+                { label: t(plugin.gifCollections.context.collection.updated), value: collection.lastUpdated ? new Date(collection.lastUpdated).toLocaleString() : t(plugin.gifCollections.text.unknown) },
             ]}
         />
     ));
@@ -40,7 +40,7 @@ export function openGifInfoModal(gif: Gif) {
             props={props}
             title={t(plugin.gifCollections.context.gif.information)}
             rows={[
-                { label: t(plugin.gifCollections.context.gif.added), value: gif.addedAt ? new Date(gif.addedAt).toLocaleString() : "Unknown" },
+                { label: t(plugin.gifCollections.context.gif.added), value: gif.addedAt ? new Date(gif.addedAt).toLocaleString() : t(plugin.gifCollections.text.unknown) },
                 { label: t(plugin.gifCollections.context.gif.width), value: String(gif.width) },
                 { label: t(plugin.gifCollections.context.gif.height), value: String(gif.height) },
             ]}
@@ -60,126 +60,118 @@ export function openRenameCollectionModal(name: string) {
     openModal(props => <RenameCollectionModal props={props} name={name} />);
 }
 
-function InfoModal({ props, title, rows }: { props: ModalProps; title: string; rows: { label: string; value: string; }[]; }) {
+function InfoModal({ props, title, rows }: { props: RenderModalProps; title: string; rows: { label: string; value: string; }[]; }) {
     return (
-        <ModalRoot {...props} size={ModalSize.SMALL} className={cl("modal")}>
-            <ModalHeader separator={false} className={cl("modal-header")}>
-                <Paragraph className={cl("modal-title")}>{title}</Paragraph>
-            </ModalHeader>
-            <ModalContent className={cl("modal-content")}>
-                <section>
-                    {rows.map(row => (
-                        <Flex key={row.label} className={cl("info-row")}>
-                            <Heading className={cl("info-title")}>{row.label}</Heading>
-                            <Paragraph className={cl("info-text")}>{row.value}</Paragraph>
-                        </Flex>
+        <Modal
+            {...props}
+            size="sm"
+            title={title}
+            actions={[
+                { text: t(plugin.gifCollections.context.collection.close), variant: "secondary", onClick: props.onClose }
+            ]}
+        >
+            <section>
+                {rows.map(row => (
+                    <Flex key={row.label} className={cl("info-row")}>
+                        <Heading className={cl("info-title")}>{row.label}</Heading>
+                        <Paragraph className={cl("info-text")}>{row.value}</Paragraph>
+                    </Flex>
+                ))}
+            </section>
+        </Modal>
+    );
+}
+
+function MoveToCollectionModal({ props, gifId }: { props: RenderModalProps; gifId: string; }) {
+    return (
+        <Modal
+            {...props}
+            size="sm"
+            title={t(plugin.gifCollections.context.collection.move)}
+            actions={[
+                { text: t(plugin.gifCollections.context.collection.close), variant: "secondary", onClick: props.onClose }
+            ]}
+        >
+            <Heading style={{ marginBottom: "10px" }}>{t(plugin.gifCollections.context.collection.select)}</Heading>
+            <div className={cl("buttons")}>
+                {cache_collections
+                    .filter(col => col.name !== getItemCollectionNameFromId(gifId))
+                    .map(col => (
+                        <Button
+                            key={col.name}
+                            className={cl("button")}
+                            onClick={async () => {
+                                const fromCollection = getItemCollectionNameFromId(gifId);
+                                if (!fromCollection) return;
+                                await moveGifToCollection(gifId, fromCollection, col.name);
+                                FluxDispatcher.dispatch({ type: "GIF_PICKER_QUERY", query: "" });
+                                FluxDispatcher.dispatch({ type: "GIF_PICKER_QUERY", query: fromCollection });
+                                props.onClose();
+                            }}
+                        >
+                            {stripPrefix(col.name)}
+                        </Button>
                     ))}
-                </section>
-            </ModalContent>
-            <ModalFooter className={cl("modal-footer")}>
-                <Button onClick={props.onClose}>{t(plugin.gifCollections.context.collection.close)}</Button>
-            </ModalFooter>
-        </ModalRoot>
+            </div>
+        </Modal>
     );
 }
 
-function MoveToCollectionModal({ props, gifId }: { props: ModalProps; gifId: string; }) {
-    return (
-        <ModalRoot {...props} size={ModalSize.SMALL} className={cl("modal")}>
-            <ModalHeader separator={false} className={cl("modal-header")}>
-                <Paragraph className={cl("modal-title")}>{t(plugin.gifCollections.context.collection.move)}</Paragraph>
-            </ModalHeader>
-            <ModalContent className={cl("modal-content")}>
-                <Heading>{t(plugin.gifCollections.context.collection.select)}</Heading>
-                <div className={cl("buttons")}>
-                    {cache_collections
-                        .filter(col => col.name !== getItemCollectionNameFromId(gifId))
-                        .map(col => (
-                            <Button
-                                key={col.name}
-                                className={cl("button")}
-                                onClick={async () => {
-                                    const fromCollection = getItemCollectionNameFromId(gifId);
-                                    if (!fromCollection) return;
-                                    await moveGifToCollection(gifId, fromCollection, col.name);
-                                    FluxDispatcher.dispatch({ type: "GIF_PICKER_QUERY", query: "" });
-                                    FluxDispatcher.dispatch({ type: "GIF_PICKER_QUERY", query: fromCollection });
-                                    props.onClose();
-                                }}
-                            >
-                                {stripPrefix(col.name)}
-                            </Button>
-                        ))}
-                </div>
-            </ModalContent>
-            <ModalFooter className={cl("modal-footer")}>
-                <Button onClick={props.onClose}>{t(plugin.gifCollections.context.collection.close)}</Button>
-            </ModalFooter>
-        </ModalRoot>
-    );
-}
-
-function CreateCollectionModal({ props, gif }: { props: ModalProps; gif: Gif; }) {
+function CreateCollectionModal({ props, gif }: { props: RenderModalProps; gif: Gif; }) {
     const [name, setName] = useState("");
 
-    const onSubmit = useCallback((e: React.FormEvent) => {
-        e.preventDefault();
+    const onSubmit = useCallback((e?: React.FormEvent) => {
+        e?.preventDefault();
         if (!name.length) return;
         void createCollection(name, [gif]);
         props.onClose();
     }, [name, gif, props]);
 
     return (
-        <ModalRoot {...props}>
+        <Modal
+            {...props}
+            size="sm"
+            title={t(plugin.gifCollections.modal.create.title)}
+            actions={[
+                { text: t(plugin.gifCollections.modal.create.create), onClick: onSubmit, disabled: !name.length, variant: "primary" }
+            ]}
+        >
             <form onSubmit={onSubmit}>
-                <ModalHeader>
-                    <Paragraph>{t(plugin.gifCollections.modal.create.title)}</Paragraph>
-                </ModalHeader>
-                <ModalContent>
-                    <Heading className={cl("rename-text")}>{t(plugin.gifCollections.modal.create.name)}</Heading>
-                    <TextInput onChange={setName} />
-                </ModalContent>
-                <ModalFooter>
-                    <Button type="submit" variant="positive" disabled={!name.length} onClick={onSubmit}>
-                        {t(plugin.gifCollections.modal.create.create)}
-                    </Button>
-                </ModalFooter>
+                <Heading className={cl("rename-text")}>{t(plugin.gifCollections.modal.create.name)}</Heading>
+                <TextInput onChange={setName} />
             </form>
-        </ModalRoot>
+        </Modal>
     );
 }
 
-function RenameCollectionModal({ props, name }: { props: ModalProps; name: string; }) {
+function RenameCollectionModal({ props, name }: { props: RenderModalProps; name: string; }) {
     const prefix = settings.store.collectionPrefix;
     const strippedName = name.startsWith(prefix) ? name.slice(prefix.length) : name;
 
     const [newName, setNewName] = useState(strippedName);
     const tooLong = newName.length >= 25;
 
-    const onSubmit = useCallback(async (e: React.FormEvent) => {
-        e.preventDefault();
+    const onSubmit = useCallback(async (e?: React.FormEvent) => {
+        e?.preventDefault();
         if (!newName.length || tooLong) return;
         await renameCollection(name, newName);
         props.onClose();
     }, [newName, name, tooLong, props]);
 
     return (
-        <ModalRoot {...props}>
+        <Modal
+            {...props}
+            size="sm"
+            title={t(plugin.gifCollections.modal.rename.title)}
+            actions={[
+                { text: t(plugin.gifCollections.modal.rename.rename), onClick: onSubmit, disabled: !newName.length || tooLong, variant: "primary" }
+            ]}
+        >
             <form onSubmit={onSubmit}>
-                <ModalHeader>
-                    <Paragraph>{t(plugin.gifCollections.modal.rename.title)}</Paragraph>
-                </ModalHeader>
-                <ModalContent>
-                    <Paragraph className={cl("rename-text")}>{t(plugin.gifCollections.modal.rename.name)}</Paragraph>
-                    <TextInput value={newName} className={classes(cl("rename-input"), tooLong ? cl("input-warning") : "")} onChange={setNewName} />
-                    {tooLong && <Paragraph className={cl("warning-text")}>{t(plugin.gifCollections.modal.rename.warning)}</Paragraph>}
-                </ModalContent>
-                <ModalFooter>
-                    <Button type="submit" variant="positive" disabled={!newName.length || tooLong} onClick={onSubmit}>
-                        {t(plugin.gifCollections.modal.rename.rename)}
-                    </Button>
-                </ModalFooter>
+                <Paragraph className={cl("rename-text")}>{t(plugin.gifCollections.modal.rename.name)}</Paragraph>
+                <TextInput value={newName} className={classes(cl("rename-input"), tooLong ? cl("input-warning") : "")} onChange={setNewName} />
+                {tooLong && <Paragraph className={cl("warning-text")}>{t(plugin.gifCollections.modal.rename.warning)}</Paragraph>}
             </form>
-        </ModalRoot>
+        </Modal>
     );
 }

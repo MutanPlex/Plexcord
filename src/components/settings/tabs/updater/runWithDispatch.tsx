@@ -7,8 +7,9 @@
 
 import { t, updater } from "@api/i18n";
 import { ErrorCard } from "@components/ErrorCard";
+import { getIntlMessage } from "@utils/discord";
 import { UpdateLogger } from "@utils/updater";
-import { Alerts, Parser } from "@webpack/common";
+import { ConfirmModal, openModal, Parser } from "@webpack/common";
 
 function getErrorMessage(e: any) {
     if (!e?.code || !e.cmd)
@@ -35,16 +36,20 @@ export function runWithDispatch(dispatch: React.Dispatch<React.SetStateAction<bo
 
             const err = getErrorMessage(e);
 
-            Alerts.show({
-                title: t(updater.error.title),
-                body: (
+            openModal(props => (
+                <ConfirmModal
+                    {...props}
+                    title={t(updater.error.title)}
+                    confirmText={getIntlMessage("OKAY")}
+                    variant="primary"
+                >
                     <ErrorCard>
                         {err.split("\n").map((line, idx) =>
                             <div key={idx}>{Parser.parse(line)}</div>
                         )}
                     </ErrorCard>
-                )
-            });
+                </ConfirmModal>
+            ));
         } finally {
             dispatch(false);
         }

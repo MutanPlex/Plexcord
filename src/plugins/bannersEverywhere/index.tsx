@@ -9,7 +9,6 @@ import * as DataStore from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
-import { disableStyle, enableStyle } from "@api/Styles";
 import { User } from "@plexcord/discord-types";
 import USRBGPlugin from "@plugins/usrbg";
 import { Devs, PcDevs } from "@utils/constants";
@@ -78,14 +77,13 @@ export default definePlugin({
     ],
 
     data: {},
+    managedStyle: style,
 
     async start() {
-        enableStyle(style);
         this.data = await DataStore.get(DATASTORE_KEY) || {};
     },
 
     stop() {
-        disableStyle(style);
         DataStore.set(DATASTORE_KEY, this.data);
     },
 

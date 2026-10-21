@@ -7,18 +7,17 @@
 
 import { set } from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
-import { Button } from "@components/Button";
-import { HeadingPrimary, HeadingSecondary } from "@components/Heading";
+import { HeadingSecondary } from "@components/Heading";
+import { RenderModalProps } from "@plexcord/discord-types";
 import { classNameFactory } from "@utils/css";
 import { Margins } from "@utils/margins";
-import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
-import { ColorPicker, useState } from "@webpack/common";
+import { ColorPicker, Modal, React, useState } from "@webpack/common";
 
 import { colors, DATASTORE_KEY } from "./index";
 
 const cl = classNameFactory("pc-customColors-");
 
-export function SetColorModal({ id, modalProps }: { id: string, modalProps: ModalProps; }) {
+export function SetColorModal({ id, modalProps }: { id: string, modalProps: RenderModalProps; }) {
     const initialColor = parseInt(colors[id], 16) || 372735;
     // color picker default to current color set for user (if null it's 0x05afff :3 )
 
@@ -29,7 +28,7 @@ export function SetColorModal({ id, modalProps }: { id: string, modalProps: Moda
         setColorPickerColor(color);
     }
 
-    function handleKey(e: KeyboardEvent) {
+    function handleKey(e: React.KeyboardEvent) {
         if (e.key === "Enter")
             saveUserColor();
     }
@@ -47,14 +46,24 @@ export function SetColorModal({ id, modalProps }: { id: string, modalProps: Moda
     }
 
     return (
-        <ModalRoot {...modalProps}>
-            <ModalHeader className={cl("modal-header")}>
-                <HeadingPrimary>
-                    {t(plugin.customUserColors.modal.custom)}
-                </HeadingPrimary>
-                <ModalCloseButton onClick={modalProps.onClose} />
-            </ModalHeader>
-            <ModalContent className={cl("modal-content")} onKeyDown={handleKey}>
+        <Modal
+            {...modalProps}
+            size="sm"
+            title={t(plugin.customUserColors.modal.custom)}
+            actions={[
+                {
+                    text: t(plugin.customUserColors.modal.save),
+                    variant: "primary",
+                    onClick: saveUserColor
+                },
+                {
+                    text: t(plugin.customUserColors.modal.delete),
+                    variant: "critical-primary",
+                    onClick: deleteUserColor
+                }
+            ]}
+        >
+            <div onKeyDown={handleKey} className={cl("modal-content")}>
                 <section className={Margins.bottom16}>
                     <HeadingSecondary>
                         {t(plugin.customUserColors.modal.pick)}
@@ -65,22 +74,7 @@ export function SetColorModal({ id, modalProps }: { id: string, modalProps: Moda
                         showEyeDropper={false}
                     />
                 </section>
-            </ModalContent>
-
-            <ModalFooter className={cl("modal-footer")}>
-                <Button
-                    variant="dangerSecondary"
-                    onClick={deleteUserColor}
-                >
-                    {t(plugin.customUserColors.modal.delete)}
-                </Button>
-                <Button
-                    variant="secondary"
-                    onClick={saveUserColor}
-                >
-                    {t(plugin.customUserColors.modal.save)}
-                </Button>
-            </ModalFooter>
-        </ModalRoot>
+            </div>
+        </Modal>
     );
 }

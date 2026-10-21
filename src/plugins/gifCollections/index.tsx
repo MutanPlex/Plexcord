@@ -7,12 +7,14 @@
 
 import "./style.css";
 
+import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
-import { FluxDispatcher } from "@webpack/common";
+import { ContextMenuApi, FluxDispatcher, Menu } from "@webpack/common";
+import type { MouseEvent } from "react";
 
-import { addCollectionContextMenuPatch, buildGifPickerContextMenu } from "./components/contextMenus";
+import { addCollectionContextMenuPatch, getGifPickerContextMenuItems, RemoveItemContextMenuItems } from "./components/contextMenus";
 import { settings, SortingOptions } from "./settings";
 import type { Category, Collection, Gif, GifPickerInstance } from "./types";
 import { cache_collections, refreshCacheCollection, updateGif } from "./utils/collectionManager";
@@ -26,6 +28,26 @@ let GIF_ITEM_PREFIX: string;
 let refreshingUrls = false;
 let oldTrendingCat: Category[] | null = null;
 
+const gifPickerContextMenuPatch: NavContextMenuPatchCallback = (children, props) => {
+    if (!props) return;
+    const { name, id } = props;
+
+    if (name?.startsWith(GIF_COLLECTION_PREFIX)) {
+        children.push(RemoveItemContextMenuItems({ type: "collection", nameOrId: name }));
+        return;
+    }
+
+    if (id?.startsWith(GIF_ITEM_PREFIX)) {
+        children.push(RemoveItemContextMenuItems({ type: "gif", nameOrId: id }));
+        return;
+    }
+
+    const { src, url, height, width } = props;
+    if (!src || !url || !height || !width) return;
+
+    children.push(getGifPickerContextMenuItems(src, url, height, width));
+};
+
 export default definePlugin({
     name: "GifCollections",
     description: () => t(plugin.gifCollections.description),
@@ -34,7 +56,8 @@ export default definePlugin({
 
     settings,
     contextMenus: {
-        message: addCollectionContextMenuPatch,
+        "message": addCollectionContextMenuPatch,
+        "gif-picker": gifPickerContextMenuPatch,
     },
 
     patches: [
@@ -52,13 +75,6 @@ export default definePlugin({
             ],
         },
         {
-            find: "renderEmptyFavorite",
-            replacement: {
-                match: /render\(\){.{1,500}onClick:this\.handleClick,/,
-                replace: "$&onContextMenu: (e) => $self.collectionContextMenu(e, this),",
-            },
-        },
-        {
             find: "renderHeaderContent()",
             replacement: {
                 match: /(renderContent\(\){)(.{1,50}resultItems)/,
@@ -68,10 +84,17 @@ export default definePlugin({
         {
             find: "type:\"GIF_PICKER_QUERY\"",
             replacement: {
-                match: /(function \i\(.{1,10}\){)(.{1,100}.GIFS_SEARCH,query:)/,
+                match: /(function \i\(.{1,10}\){)(.{1,200}.GIFS_SEARCH,query:)/,
                 replace: "$1if($self.shouldStopFetch(arguments[0])) return;$2",
             },
         },
+        {
+            find: "#{intl::CATEGORY_FAVORITE}),icon:",
+            replacement: {
+                match: /(\i)\.name\),renderExtras:this\.renderCategoryExtras,/,
+                replace: "$&onContextMenu:(e)=>$self.openCategoryContextMenu(e,$1),"
+            }
+        }
     ],
 
     start() {
@@ -179,7 +202,19 @@ export default definePlugin({
         return query.startsWith(GIF_COLLECTION_PREFIX) && cache_collections.some(c => c.name === query);
     },
 
-    collectionContextMenu(e: React.MouseEvent, instance: GifPickerInstance) {
-        return buildGifPickerContextMenu(e, instance.props.item, GIF_COLLECTION_PREFIX, GIF_ITEM_PREFIX, instance);
+    openCategoryContextMenu(e: MouseEvent, item: any) {
+        if (!item?.name?.startsWith(GIF_COLLECTION_PREFIX)) return;
+
+        const children = [RemoveItemContextMenuItems({ type: "collection", nameOrId: item.name })];
+
+        ContextMenuApi.openContextMenu(e, () =>
+            <Menu.Menu
+                navId="gif-picker-category"
+                onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
+                aria-label={t(plugin.gifCollections.text.gifPickerCategoryOptions)}
+            >
+                {children}
+            </Menu.Menu>
+        );
     },
 });

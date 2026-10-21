@@ -251,7 +251,7 @@ async function processAndExportMessages(
         console.error("Export messages error:", error);
         showNotification({
             title: t(plugin.exportMessages.toast.failed.title),
-            body: `${t(plugin.exportMessages.toast.failed.body)}: ${(error as Error).message || "Unknown error"}`,
+            body: `${t(plugin.exportMessages.toast.failed.body)}: ${(error as Error).message || t(plugin.exportMessages.text.unknownError)}`,
             icon: "https://discord.com/assets/4f584fe7b12fcf02.svg"
         });
     }

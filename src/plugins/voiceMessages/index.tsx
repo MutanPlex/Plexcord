@@ -25,19 +25,19 @@ import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { Heading } from "@components/Heading";
-import { Microphone } from "@components/Icons";
+import { ClockIcon, Microphone } from "@components/Icons";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
+import { RenderModalProps } from "@plexcord/discord-types";
 import { CloudUploadPlatform } from "@plexcord/discord-types/enums";
 import { lastState as silentMessageEnabled } from "@plugins/silentMessageToggle";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { Margins } from "@utils/margins";
-import { ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, openModal } from "@utils/modal";
 import { useAwaiter } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { chooseFile } from "@utils/web";
-import { CloudUploader, Constants, FluxDispatcher, lodash, Menu, MessageActions, PendingReplyStore, PermissionsBits, PermissionStore, RestAPI, SelectedChannelStore, showToast, SnowflakeUtils, Toasts, useEffect, useState } from "@webpack/common";
+import { CloudUploader, Constants, FluxDispatcher, lodash, Menu, MessageActions, Modal, openModal, PendingReplyStore, PermissionsBits, PermissionStore, RestAPI, SelectedChannelStore, showToast, SnowflakeUtils, useEffect, useState } from "@webpack/common";
 
 import { VoiceRecorderDesktop } from "./components/DesktopRecorder";
 import { VoicePreview } from "./components/VoicePreview";
@@ -133,7 +133,7 @@ function sendAudio(blob: Blob, meta: AudioMetadata) {
             }
         });
     });
-    upload.on("error", () => showToast(t(plugin.voiceMessages.notification.failed.upload), Toasts.Type.FAILURE));
+    upload.on("error", () => showToast({ text: t(plugin.voiceMessages.notification.failed.upload), variant: "critical" }));
 
     upload.upload();
 }
@@ -160,17 +160,33 @@ const ctxMenuPatch: NavContextMenuPatchCallback = (children, props) => {
                 icon: Microphone
             }}
             label={t(plugin.voiceMessages.context.sendVoiceMessage)}
-            action={() => openModal(modalProps => <Modal modalProps={modalProps} />)}
+            action={() => openModal(modalProps => <VoiceMessageModal modalProps={modalProps} />)}
         />
     );
 };
+export interface VoiceMessageProps {
+    src: string;
+    waveform: string;
+}
+export let VoiceMessage: React.ComponentType<VoiceMessageProps> = () => null;
 
-function Modal({ modalProps }: { modalProps: ModalProps; }) {
+function VoiceMessageModal({ modalProps }: { modalProps: RenderModalProps; }) {
     const [isRecording, setRecording] = useState(false);
     const [blob, setBlob] = useState<Blob>();
     const [blobUrl, setBlobUrl] = useObjectUrl();
 
     const VoiceRecorder = IS_DISCORD_DESKTOP ? VoiceRecorderDesktop : VoiceRecorderWeb;
+
+    const setAudioBlob = (file: Blob) => {
+        setBlob(file);
+        setBlobUrl(file);
+    };
+
+    const handleDrop: React.DragEventHandler = e => {
+        e.preventDefault();
+        const file = e.dataTransfer.files[0];
+        if (file) setAudioBlob(file);
+    };
 
     useEffect(() => () => {
         if (blobUrl)
@@ -195,67 +211,61 @@ function Modal({ modalProps }: { modalProps: ModalProps; }) {
     const isUnsupportedFormat = blob && (!blob.type.startsWith("audio/ogg") || blob.type.includes("codecs") && !blob.type.includes("opus"));
 
     return (
-        <ModalRoot {...modalProps}>
-            <ModalHeader>
-                <Heading>{t(plugin.voiceMessages.modal.record)}</Heading>
-            </ModalHeader>
+        <Modal
+            {...modalProps}
+            title={t(plugin.voiceMessages.modal.record)}
+            actions={[{
+                text: t(plugin.voiceMessages.modal.send),
+                variant: "primary",
+                onClick: () => {
+                    sendAudio(blob!, meta ?? EMPTY_META);
+                    modalProps.onClose();
+                    showToast({ text: t(plugin.voiceMessages.modal.sending), icon: ClockIcon, iconColor: "var(--text-default)" });
+                },
+                disabled: !blob
+            }]}
+        >
+            <div
+                className={cl("buttons")}
+                onDrop={handleDrop}
+                onDragOver={e => e.preventDefault()}
+            >
+                <VoiceRecorder
+                    setAudioBlob={setAudioBlob}
+                    onRecordingChange={setRecording}
+                />
 
-            <ModalContent className={cl("modal")}>
-                <div className={cl("buttons")}>
-                    <VoiceRecorder
-                        setAudioBlob={blob => {
-                            setBlob(blob);
-                            setBlobUrl(blob);
-                        }}
-                        onRecordingChange={setRecording}
-                    />
-
-                    <Button onClick={async () => {
+                <Button
+                    onClick={async () => {
                         const file = await chooseFile("audio/*");
-                        if (file) {
-                            setBlob(file);
-                            setBlobUrl(file);
-                        }
-                    }}>
-                        {t(plugin.voiceMessages.modal.upload)}
-                    </Button>
-                </div>
+                        if (file) setAudioBlob(file);
+                    }}
+                >
+                    {t(plugin.voiceMessages.modal.upload)}
+                </Button>
+            </div>
 
-                <Heading>{t(plugin.voiceMessages.modal.preview)}</Heading>
-                {metaError
-                    ? <Paragraph className={cl("error")}>{t(plugin.voiceMessages.modal.failed)} {metaError.message}</Paragraph>
-                    : (
-                        <VoicePreview
-                            src={blobUrl}
-                            waveform={meta.waveform}
-                            recording={isRecording}
-                        />
-                    )}
-
-                {isUnsupportedFormat && (
-                    <Card variant="warning" className={Margins.top16} defaultPadding>
-                        <Paragraph>{t(plugin.voiceMessages.modal.oggOpus, { "type": blob.type })}</Paragraph>
-
-                        <Paragraph className={Margins.top8}>
-                            {t(plugin.voiceMessages.modal.fix, { link: <Link href="https://convertio.co/mp3-opus/">convertio web converter</Link> })}
-                        </Paragraph>
-                    </Card>
+            <Heading tag="h5">{t(plugin.voiceMessages.modal.preview)}</Heading>
+            {metaError
+                ? <Paragraph className={cl("error")}>{t(plugin.voiceMessages.modal.failed)} {metaError.message}</Paragraph>
+                : (
+                    <VoicePreview
+                        src={blobUrl}
+                        waveform={meta.waveform}
+                        recording={isRecording}
+                    />
                 )}
 
-            </ModalContent>
+            {isUnsupportedFormat && (
+                <Card variant="warning" className={Margins.top16} defaultPadding>
+                    <Paragraph>{t(plugin.voiceMessages.modal.oggOpus, { "type": blob.type })}</Paragraph>
 
-            <ModalFooter>
-                <Button
-                    disabled={!blob}
-                    onClick={() => {
-                        sendAudio(blob!, meta ?? EMPTY_META);
-                        modalProps.onClose();
-                        showToast(t(plugin.voiceMessages.modal.sending), Toasts.Type.MESSAGE);
-                    }}>
-                    {t(plugin.voiceMessages.modal.send)}
-                </Button>
-            </ModalFooter>
-        </ModalRoot>
+                    <Paragraph className={Margins.top8}>
+                        {t(plugin.voiceMessages.modal.fix, { link: <Link href="https://convertio.co/mp3-opus/">{t(plugin.voiceMessages.text.convertioWebConverter)}</Link> })}
+                    </Paragraph>
+                </Card>
+            )}
+        </Modal>
     );
 }
 
@@ -280,6 +290,20 @@ export default definePlugin({
     authors: [Devs.Ven, Devs.Vap, Devs.Nickyux, PcDevs.Z1xus],
     tags: ["voice", "chat", "media", "utility"],
     settings,
+
+    patches: [
+        {
+            find: "#{intl::VOICE_MESSAGES_A11Y_LABEL}",
+            replacement: {
+                match: /(?<=\i=)(?=\i\.memo\(.{0,50}?=1,onVolumeChange:[^}]+?waveform:[^}]+?playbackCacheKey:)/,
+                replace: "$self.VoiceMessage=",
+            }
+        }
+    ],
+
+    set VoiceMessage(value) {
+        VoiceMessage = value;
+    },
 
     contextMenus: {
         "channel-attach": ctxMenuPatch

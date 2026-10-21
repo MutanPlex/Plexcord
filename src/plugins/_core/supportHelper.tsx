@@ -17,7 +17,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { sendBotMessage } from "@api/Commands";
 import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
@@ -30,28 +29,26 @@ import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
 import { openSettingsTabModal, UpdaterTab } from "@components/settings";
-import { Channel } from "@plexcord/discord-types";
+import { Channel, RenderModalProps } from "@plexcord/discord-types";
 import { CloudUploadPlatform } from "@plexcord/discord-types/enums";
 import { gitHashShort } from "@shared/plexcordUserAgent";
 import { BOT_COMMANDS_CHANNEL_ID, CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, KNOWN_ISSUES_CHANNEL_ID, PcDevs, PLEXBOT_USER_ID, PLEXCORD_GUILD_ID, REGULAR_ROLE_ID, SUPPORT_CATEGORY_ID, SUPPORT_CHANNEL_ID } from "@utils/constants";
-import { openInviteModal, sendMessage } from "@utils/discord";
+import { getIntlMessage, openInviteModal, sendMessage } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
-import { isAnyPluginDev, isPcPluginDev, isPluginDev, tryOrElse } from "@utils/misc";
+import { isAnyPluginDev, isPcPluginDev, isPlexcordGuild, isPluginDev, isSupport, isSupportChannel, tryOrElse } from "@utils/misc";
 import { relaunch } from "@utils/native";
 import { onlyOnce } from "@utils/onlyOnce";
 import { makeCodeblock } from "@utils/text";
 import definePlugin from "@utils/types";
 import { checkForUpdates, isOutdated, update } from "@utils/updater";
-import { Alerts, ChannelRouter, ChannelStore, CloudUploader, Constants, GuildMemberStore, Parser, PermissionsBits, PermissionStore, RelationshipStore, RestAPI, SelectedChannelStore, showToast, SnowflakeUtils, Toasts, UserStore } from "@webpack/common";
+import { Alerts, ChannelRouter, ChannelStore, CloudUploader, ConfirmModal, Constants, GuildMemberStore, openModal, Parser, PermissionsBits, PermissionStore, RelationshipStore, RestAPI, SelectedChannelStore, showToast, SnowflakeUtils, UserStore } from "@webpack/common";
 import { JSX } from "react";
 
 import gitHash from "~git-hash";
 import plugins, { PluginMeta } from "~plugins";
 
 import SettingsPlugin from "./settings";
-
-const CodeBlockRe = /```snippet\n(.+?)```/s;
 
 const AdditionalAllowedChannelIds = [
     BOT_COMMANDS_CHANNEL_ID, // Plexcord > #bot-spam
@@ -62,8 +59,6 @@ const TrustedRolesIds = [
     REGULAR_ROLE_ID, // regular
     DONOR_ROLE_ID, // donor
 ];
-
-const AsyncFunction = async function () { }.constructor;
 
 const ShowCurrentGame = getUserSettingLazy<boolean>("status", "showCurrentGame")!;
 
@@ -283,22 +278,71 @@ const settings = definePluginSettings({}).withPrivateSettings<{
     dismissedDevBuildWarning?: boolean;
 }>();
 
+function DevBuildConfirmModal(props: RenderModalProps) {
+    const s = settings.use(["dismissedDevBuildWarning"]);
+
+    return (
+        <ConfirmModal
+            {...props}
+            title={t(plugin.supportHelper.modals.custom.title)}
+            confirmText={t(plugin.supportHelper.modals.custom.button.confirm)}
+            variant="primary"
+            checkboxProps={{
+                label: t(plugin.supportHelper.modals.custom.button.secondaryConfirm),
+                checked: s.dismissedDevBuildWarning === true,
+                onChange: checked => s.dismissedDevBuildWarning = checked
+            }}
+        >
+            <div>
+                <Paragraph>{t(plugin.supportHelper.modals.custom.header)}</Paragraph>
+
+                <Paragraph className={Margins.top8}>
+                    {t(plugin.supportHelper.modals.custom.body, {
+                        officialBuild: <Link href="https://plexcord.club/download">{t(plugin.supportHelper.modals.custom.official)}</Link>,
+                        switch: <Link href="https://plexcord.club/download">{t(plugin.supportHelper.modals.custom.switch)}</Link>
+                    })}
+                </Paragraph>
+
+                <BaseText size="md" weight="bold" className={Margins.top8}>{t(plugin.supportHelper.modals.custom.footer)}</BaseText>
+            </div>
+        </ConfirmModal>
+    );
+}
+
 export default definePlugin({
     name: "SupportHelper",
     description: () => t(plugin.supportHelper.description),
     required: true,
     authors: [Devs.Ven, PcDevs.MutanPlex],
     tags: ["utility", "developers"],
-    dependencies: ["UserSettingsAPI"],
+    dependencies: ["UserSettingsAPI", "CommandsAPI", "MessageAccessoriesAPI"],
     settings,
 
-    patches: [{
-        find: "#{intl::BEGINNING_DM}",
-        replacement: {
-            match: /#{intl::BEGINNING_DM},{.+?}\),(?=.{0,300}(\i)\.isMultiUserDM)/,
-            replace: "$& $self.renderContributorDmWarningCard({ channel: $1 }),"
+    patches: [
+        {
+            find: "#{intl::BEGINNING_DM}",
+            replacement: {
+                match: /#{intl::BEGINNING_DM},{.+?}\),(?=.{0,300}(\i)\.isMultiUserDM)/,
+                replace: "$& $self.renderContributorDmWarningCard({ channel: $1 }),"
+            },
+        },
+        // Fix a race condition?
+        {
+            find: ".completeOperation(",
+            replacement: {
+                match: /(?<=this\.nextId\(\);)(\i\(\i\)),(.{0,200}reject:\i\}\))/,
+                replace: "$2,$1"
+            }
+        },
+        // catch if it cant open
+        {
+            find: "discarding speculative database",
+            replacement: {
+                match: /await \i\(\i\)(?=;.{0,15}this\.databases)/,
+                replace: "$&.catch(()=>null)"
+            }
         }
-    }],
+    ],
 
     commands: [
         {
@@ -343,20 +387,28 @@ export default definePlugin({
                 await checkForUpdatesOnce().catch(() => { });
 
                 if (isOutdated) {
-                    return Alerts.show({
-                        title: t(plugin.supportHelper.modals.outdated.title),
-                        body: <div>
-                            <Paragraph>{t(plugin.supportHelper.modals.outdated.body)}</Paragraph>
-                            <Paragraph className={Margins.top8}>
-                                {t(plugin.supportHelper.modals.outdated.footer)}
-                            </Paragraph>
-                        </div>,
-                        onCancel: () => openSettingsTabModal(UpdaterTab!),
-                        cancelText: t(plugin.supportHelper.modals.outdated.button.cancel),
-                        confirmText: t(plugin.supportHelper.modals.outdated.button.confirm),
-                        onConfirm: forceUpdate,
-                        secondaryConfirmText: t(plugin.supportHelper.modals.outdated.button.secondaryConfirm)
-                    });
+                    openModal(props => (
+                        <ConfirmModal
+                            {...props}
+                            variant="primary"
+                            title={t(plugin.supportHelper.modals.outdated.title)}
+                            confirmText={t(plugin.supportHelper.modals.outdated.button.confirm)}
+                            cancelText={t(plugin.supportHelper.modals.outdated.button.cancel)}
+                            onConfirm={forceUpdate}
+                            onCancel={() => openSettingsTabModal(UpdaterTab!)}
+                        >
+                            <div>
+                                <Paragraph>{t(plugin.supportHelper.modals.outdated.body)}</Paragraph>
+                                <Paragraph className={Margins.top8}>
+                                    {t(plugin.supportHelper.modals.outdated.footer)}
+                                </Paragraph>
+                                <Paragraph className={Margins.top8}>
+                                    {t(plugin.supportHelper.modals.outdated.dismiss)}
+                                </Paragraph>
+                            </div>
+                        </ConfirmModal>
+                    ));
+                    return;
                 }
             }
 
@@ -364,44 +416,39 @@ export default definePlugin({
             if (!roles || TrustedRolesIds.some(id => roles.includes(id))) return;
 
             if (!IS_WEB && IS_UPDATER_DISABLED) {
-                return Alerts.show({
-                    title: t(plugin.supportHelper.modals.updater.title),
-                    body: <div>
-                        <Paragraph>{t(plugin.supportHelper.modals.updater.body)}</Paragraph>
-                        <Paragraph className={Margins.top8}>
-                            {t(plugin.supportHelper.modals.updater.footer, {
-                                officially: <Link href="https://plexcord.club/download">{t(plugin.supportHelper.modals.updater.officially)}</Link>
-                            })}
-                        </Paragraph>
-                    </div>
-                });
+                openModal(props => (
+                    <ConfirmModal
+                        {...props}
+                        title={t(plugin.supportHelper.modals.updater.title)}
+                        confirmText={getIntlMessage("OKAY")}
+                        variant="primary"
+                    >
+                        <div>
+                            <Paragraph>{t(plugin.supportHelper.modals.updater.body)}</Paragraph>
+                            <Paragraph className={Margins.top8}>
+                                {t(plugin.supportHelper.modals.updater.footer, {
+                                    officially: <Link href="https://plexcord.club/download">{t(plugin.supportHelper.modals.updater.officially)}</Link>
+                                })}
+                            </Paragraph>
+                        </div>
+                    </ConfirmModal>
+                ));
+                return;
             }
 
             if (!IS_STANDALONE && !settings.store.dismissedDevBuildWarning) {
-                return Alerts.show({
-                    title: t(plugin.supportHelper.modals.custom.title),
-                    body: <div>
-                        <Paragraph>{t(plugin.supportHelper.modals.custom.header)}</Paragraph>
-
-                        <Paragraph className={Margins.top8}>
-                            {t(plugin.supportHelper.modals.custom.body, {
-                                officialBuild: <Link href="https://plexcord.club/download">{t(plugin.supportHelper.modals.custom.official)}</Link>,
-                                switch: <Link href="https://plexcord.club/download">{t(plugin.supportHelper.modals.custom.switch)}</Link>
-                            })}
-                        </Paragraph>
-
-                        <BaseText size="md" weight="bold" className={Margins.top8}>{t(plugin.supportHelper.modals.custom.footer)}</BaseText>
-                    </div>,
-                    confirmText: t(plugin.supportHelper.modals.custom.button.confirm),
-                    secondaryConfirmText: t(plugin.supportHelper.modals.custom.button.secondaryConfirm),
-                    onConfirmSecondary: () => settings.store.dismissedDevBuildWarning = true
-                });
+                openModal(props => <DevBuildConfirmModal {...props} />);
+                return;
             }
         }
     },
 
     renderMessageAccessory(props) {
+        if (props.message.plexcordEmbeddedBy) return null;
+
         const buttons = [] as JSX.Element[];
+
+        const plexcordSupport = isPlexcordGuild(props.message.channel_id) && isSupport(props.message.author.id);
 
         const shouldAddUpdateButton =
             !IS_UPDATER_DISABLED
@@ -419,12 +466,12 @@ export default definePlugin({
                     onClick={async () => {
                         try {
                             if (await forceUpdate())
-                                showToast(t(plugin.supportHelper.modals.updater.toast.success), Toasts.Type.SUCCESS);
+                                showToast({ text: t(plugin.supportHelper.modals.updater.toast.success), variant: "success" });
                             else
-                                showToast(t(plugin.supportHelper.modals.updater.toast.already), Toasts.Type.MESSAGE);
+                                showToast({ text: t(plugin.supportHelper.modals.updater.toast.already) });
                         } catch (e) {
                             new Logger(t(plugin.supportHelper.name)).error("Error while updating:", e);
-                            showToast(t(plugin.supportHelper.modals.updater.toast.failed), Toasts.Type.FAILURE);
+                            showToast({ text: t(plugin.supportHelper.modals.updater.toast.failed), variant: "critical" });
                         }
                     }}
                 >
@@ -433,7 +480,7 @@ export default definePlugin({
             );
         }
 
-        if (props.channel.parent_id === SUPPORT_CATEGORY_ID && PermissionStore.can(PermissionsBits.SEND_MESSAGES, props.channel)) {
+        if (plexcordSupport && isSupportChannel(props.channel.id) && PermissionStore.can(PermissionsBits.SEND_MESSAGES, props.channel)) {
             if (props.message.content.includes("/plexcord-debug") || props.message.content.includes("/plexcord-plugins")) {
                 buttons.push(
                     <Button
@@ -453,10 +500,10 @@ export default definePlugin({
                             } else if (pluginList && typeof pluginList === "object" && pluginList.uploadFile) {
                                 try {
                                     await uploadPluginListFile(props.channel.id, pluginList.fileContent, pluginList.filename);
-                                    showToast(t(plugin.supportHelper.toast.upload), Toasts.Type.SUCCESS);
+                                    showToast({ text: t(plugin.supportHelper.toast.upload), variant: "success" });
                                 } catch (e) {
                                     new Logger("SupportHelper").error("Failed to upload plugin list:", e);
-                                    showToast(t(plugin.supportHelper.toast.failedUpload), Toasts.Type.FAILURE);
+                                    showToast({ text: t(plugin.supportHelper.toast.failedUpload), variant: "critical" });
                                 }
                             }
                         }}
@@ -466,34 +513,6 @@ export default definePlugin({
                 );
             }
 
-            if (props.message.author.id === PLEXBOT_USER_ID) {
-                const match = CodeBlockRe.exec(props.message.content || props.message.embeds[0]?.rawDescription || "");
-                if (match) {
-                    buttons.push(
-                        <Button
-                            key="pc-run-snippet"
-                            onClick={async () => {
-                                try {
-                                    const result = await AsyncFunction(match[1])();
-                                    const stringed = String(result);
-                                    if (stringed) {
-                                        await sendBotMessage(SelectedChannelStore.getChannelId(), {
-                                            author: { username: "Plexcord" },
-                                            content: stringed
-                                        });
-                                    }
-                                    showToast(t(plugin.supportHelper.toast.success), Toasts.Type.SUCCESS);
-                                } catch (e) {
-                                    new Logger(t(plugin.supportHelper.name)).error("Error while running snippet:", e);
-                                    showToast(t(plugin.supportHelper.toast.failed), Toasts.Type.FAILURE);
-                                }
-                            }}
-                        >
-                            {t(plugin.supportHelper.button.snippet)}
-                        </Button>
-                    );
-                }
-            }
         }
 
         return buttons.length
@@ -517,7 +536,7 @@ export default definePlugin({
                 }
             } catch (error) {
                 console.error("Failed to open invite modal:", error);
-                showToast(t(plugin.supportHelper.toast.failedOpenInvite), Toasts.Type.FAILURE);
+                showToast({ text: t(plugin.supportHelper.toast.failedOpenInvite), variant: "critical" });
             }
         };
 

@@ -31,6 +31,7 @@ export const KNOWN_ISSUES_CHANNEL_ID = "1344056436795379824";
 export const BOT_COMMANDS_CHANNEL_ID = "1342669379669594254";
 export const PLEXBOT_USER_ID = "772640437789523978";
 export const SUPPORT_CHANNEL_IDS = [SUPPORT_CHANNEL_ID, PLEXTRON_SUPPORT_CHANNEL_ID];
+export const KNOWN_ISSUES_CHANNEL_IDS = [KNOWN_ISSUES_CHANNEL_ID];
 
 const platform = navigator.platform.toLowerCase();
 export const IS_WINDOWS = platform.startsWith("win");
@@ -183,10 +184,6 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     kemo: {
         name: "kemo",
         id: 715746190813298788n
-    },
-    dzshn: {
-        name: "dzshn",
-        id: 310449948011528192n
     },
     Ducko: {
         name: "Ducko",
@@ -366,8 +363,8 @@ export const Devs = /* #__PURE__*/ Object.freeze({
         id: 354191516979429376n
     },
     Rini: {
-        name: "Rini",
-        id: 1079479184478441643n
+        name: "rini",
+        id: 0n
     },
     castdrian: {
         name: "castdrian",
@@ -507,7 +504,7 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     Byeoon: {
         name: "byeoon",
-        id: 1167275288036655133n
+        id: 495683688474869781n
     },
     Kaitlyn: {
         name: "kaitlyn",
@@ -551,7 +548,7 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     nyx: {
         name: "verticalsync.",
-        id: 1207087393929171095n
+        id: 1280505961546649633n
     },
     nekohaxx: {
         name: "nekohaxx",
@@ -621,6 +618,11 @@ export const Devs = /* #__PURE__*/ Object.freeze({
         name: "Cootshk",
         id: 921605971577548820n
     },
+    koish1: {
+        name: "koish1",
+        id: 291089948709486593n,
+        badge: false,
+    },
     thororen: {
         name: "thororen",
         id: 848339671629299742n
@@ -640,6 +642,62 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     prism: {
         name: "prism",
         id: 390884143749136386n,
+    },
+    ThaUnknown: {
+        name: "ThaUnknown_",
+        id: 252390917665718273n
+    },
+    nightmaresan: {
+        name: "NightmareSan",
+        id: 304239816466235392n
+    },
+    angelcube: {
+        name: "angelcube",
+        id: 958505257288208446n
+    },
+    Lunascape: {
+        name: "Lunascape",
+        id: 383365021415243776n
+    },
+    paige: {
+        name: "paige",
+        id: 1375697625864601650n
+    },
+    jax: {
+        name: "jax",
+        id: 1493703027801194598n
+    },
+    yuna0x0: {
+        name: "yuna0x0",
+        id: 213656926414831616n
+    },
+    scattagain: {
+        name: "Amelia",
+        id: 1098234477626544180n
+    },
+    Davri: {
+        name: "Davri",
+        id: 457579346282938368n
+    },
+    Kaede: {
+        name: "Kaede",
+        id: 1492642701320126504n
+    },
+    c0nnorgg: {
+        name: "c0nnorgg",
+        id: 1088882977985003620n
+    },
+    f3tch: {
+        name: "f3tch",
+        id: 1016388460929626174n
+    },
+    Darxoon: {
+        name: "Darxoon",
+        id: 409745838898937866n
+    },
+    imnotplayinginreallife: {
+        name: "I'm not playing in real life",
+        id: 841939724306087986n
     },
 } satisfies Record<string, Dev>);
 
@@ -913,10 +971,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "PWall",
         id: 0n,
     },
-    davri: {
-        name: "Davri",
-        id: 457579346282938368n,
-    },
     Fafa: {
         name: "Fafa",
         id: 428188716641812481n
@@ -976,7 +1030,163 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     estiwen: {
         name: "estiwen",
         id: 1332150572362760234n
-    }
+    },
+    yonn2222: {
+        name: "yonn2222",
+        id: 821835831844012103n
+    },
+    Moowi: {
+        name: "Moowi",
+        id: 246128594756173824n
+    },
+    Gir0fa: {
+        name: "gir0fa",
+        id: 1282734265955520545n,
+    },
+    dhopcs: {
+        name: "dhopcs",
+        id: 206309860038410240n
+    },
+    secp192k1: {
+        name: "secp192k1",
+        id: 477497542205243392n
+    },
+    yafyx: {
+        name: "kiniyaku",
+        id: 658209494609821699n
+    },
+    Ape: {
+        name: "Ape",
+        id: 722832640360841308n
+    },
+    tt: {
+        name: "_.tt",
+        id: 497966466617049089n
+    },
+    BachLe2000: {
+        name: "BachLe2000",
+        id: 624091967625625610n
+    },
+    pandaptable: {
+        name: "pandaptable",
+        id: 97153209843335168n
+    },
+    SobakinTech: {
+        name: "sobakintech",
+        id: 745203026335236178n
+    },
+    Nyro: {
+        name: "zeyno36",
+        id: 1325431712406179962n
+    },
+    Jahsohsani: {
+        name: "jahsohsani",
+        id: 806442568564604968n
+    },
+    dawn: {
+        name: "dawn",
+        id: 604653220341743618n
+    },
+    Willow: {
+        name: "Willow",
+        id: 965933914092888074n
+    },
+    kat: {
+        name: "kat",
+        id: 665120188047556609n
+    },
+    Star123451: {
+        name: "Star123451",
+        id: 1037526188039618560n
+    },
+    auggeeo: {
+        name: "August (auggeeo)",
+        id: 594864203102158859n
+    },
+    bastih18: {
+        name: "bastih18",
+        id: 273797150880563201n
+    },
+    lucabeyer: {
+        name: "luca.beyer",
+        id: 405090676771127317n
+    },
+    benjas333: {
+        name: "benjas333",
+        id: 456577284464443394n
+    },
+    k304: {
+        name: "k304",
+        id: 255004979637649408n
+    },
+    ELJoOker: {
+        name: "ELJoOker",
+        id: 605894319408283678n
+    },
+    penguinwokrs: {
+        name: "penguinwokrs",
+        id: 385266832136863746n
+    },
+    Kurt: {
+        name: "Kurt",
+        id: 112222963276750848n
+    },
+    heart_menace: {
+        name: "heart_menace",
+        id: 281162701303185408n
+    },
+    tie: {
+        name: "tie",
+        id: 783087994419675201n
+    },
+    Oggetto: {
+        name: "Oggetto",
+        id: 619203349954166804n
+    },
+    KawaiianPizza: {
+        name: "KawaiianPizza",
+        id: 501000986735673347n
+    },
+    Leko: {
+        name: "Leko",
+        id: 108153734541942784n
+    },
+    Naibuu: {
+        name: "hs50",
+        id: 1120045713867423835n
+    },
+    NassCT: {
+        name: "NassCT",
+        id: 354996937868705793n
+    },
+    Prince527: {
+        name: "Prince527",
+        id: 364105797162237952n
+    },
+    SpikeHD: {
+        name: "SpikeHD",
+        id: 221757857836564485n
+    },
+    dka: {
+        name: "DKA",
+        id: 119386840624005121n
+    },
+    qdnx: {
+        name: "qdnx",
+        id: 1374803023506702508n
+    },
+    sketchmyname: {
+        name: "sketchmyname",
+        id: 1412164910443663491n
+    },
+    soapphia: {
+        name: "soap phia",
+        id: 1012095822957133976n
+    },
+    itzmeshadow999: {
+        name: "ItzMeShadow999",
+        id: 1065604516399026176n
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>

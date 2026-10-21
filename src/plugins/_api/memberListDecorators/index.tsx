@@ -47,19 +47,5 @@ export default definePlugin({
                 replace: "decorators:[Plexcord.Api.MemberListDecorators.__getDecorators(arguments[0],'dm'),$1]"
             }
         },
-        // fix discords styling for now
-        {
-            find: '"AvatarWithText"',
-            replacement: [
-                {
-                    match: /(?<=className:.{0,10}),\{.{0,10}\}\)(?=,children:)/,
-                    replace: ')+" pc-member-list-decorators-display-names"'
-                },
-                {
-                    match: /(?<=className:\i\.\i)(?=,children:\i\}\))/,
-                    replace: '+" pc-member-list-decorators-display-names"'
-                }
-            ]
-        }
     ]
 });

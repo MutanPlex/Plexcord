@@ -10,15 +10,15 @@ import "./styles.css";
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import * as DataStore from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
-import { definePluginSettings } from "@api/Settings";
+import { showNotification } from "@api/Notifications";
+import { definePluginSettings, migratePluginSetting } from "@api/Settings";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Message, User } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
-import { openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy, findCssClassesLazy } from "@webpack";
-import { Menu, showToast, Toasts, Tooltip, useEffect, UserStore, useState } from "@webpack/common";
+import { ChannelStore, Menu, openModal, showToast, Tooltip, useEffect, UserStore, useState } from "@webpack/common";
 
 import { deleteTimezone, getTimezone, loadDatabaseTimezones, setUserDatabaseTimezone } from "./database";
 import { SetTimezoneModal } from "./TimezoneModal";
@@ -45,6 +45,8 @@ export function getSystemTimezone(): string {
 const classes = findCssClassesLazy("timestamp", "compact", "contentOnly");
 const locale = findByPropsLazy("getLocale");
 
+migratePluginSetting("Timezones", "twentyFourHourFormat", "twentyFourHourTime");
+
 export const settings = definePluginSettings({
     showOwnTimezone: {
         label: () => t(plugin.timezones.option.showOwnTimezone.label),
@@ -53,7 +55,7 @@ export const settings = definePluginSettings({
         default: true
     },
 
-    twentyFourHourTime: {
+    twentyFourHourFormat: {
         label: () => t(plugin.timezones.option.twentyFourHourTime.label),
         description: () => t(plugin.timezones.option.twentyFourHourTime.description),
         type: OptionType.BOOLEAN,
@@ -72,6 +74,13 @@ export const settings = definePluginSettings({
         description: () => t(plugin.timezones.option.showMessageHeaderTime.description),
         type: OptionType.BOOLEAN,
         default: true
+    },
+
+    recipientTimezoneInDms: {
+        label: () => t(plugin.timezones.option.recipientTimezoneInDms.label),
+        description: () => t(plugin.timezones.option.recipientTimezoneInDms.description),
+        type: OptionType.BOOLEAN,
+        default: false
     },
 
     showProfileTime: {
@@ -93,6 +102,13 @@ export const settings = definePluginSettings({
         description: () => t(plugin.timezones.option.preferDatabaseOverLocal.description),
         type: OptionType.BOOLEAN,
         default: true
+    },
+
+    showLocalTimezone: {
+        label: () => t(plugin.timezones.option.showLocalTimezone.label),
+        description: () => t(plugin.timezones.option.showLocalTimezone.description),
+        type: OptionType.BOOLEAN,
+        default: false,
     },
 
     databaseUrl: {
@@ -128,7 +144,7 @@ export const settings = definePluginSettings({
                         await deleteTimezone();
                     } catch (error) {
                         console.error("Error resetting database timezone:", error);
-                        showToast(t(plugin.timezones.option.resetDatabaseTimezone.failed), Toasts.Type.FAILURE);
+                        showToast({ text: t(plugin.timezones.option.resetDatabaseTimezone.failed), variant: "critical" });
                     }
                 }}
             >
@@ -149,7 +165,7 @@ export const settings = definePluginSettings({
 function getTime(timezone: string, timestamp: string | number, props: Intl.DateTimeFormatOptions = {}) {
     const date = new Date(timestamp);
     const formatter = new Intl.DateTimeFormat(locale.getLocale() ?? "en-US", {
-        hour12: !settings.store["24h Time"],
+        hour12: !settings.store.twentyFourHourFormat,
         timeZone: timezone,
         ...props
     });
@@ -210,12 +226,14 @@ const TimestampComponent = ErrorBoundary.wrap(({ userId, timestamp, type }: Prop
 
     if (settings.store.showTimezoneInfo) {
         const userTimezone = getSystemTimezone();
-        if (timezone === userTimezone) {
+        isLocal = timezone === userTimezone && !settings.store.showLocalTimezone;
+        if (isLocal) {
             displayTime = "local";
-            isLocal = true;
         } else {
             const timezoneInfo = getTimezoneAbbreviation(timezone, currentTime);
-            displayTime = `${shortTime} ${timezoneInfo || timezone}`;
+            const tz = timezoneInfo || timezone;
+            const hideLocalTime = isLocal && type === "message";
+            displayTime = hideLocalTime ? tz : `${shortTime} ${tz}`;
         }
     }
 
@@ -233,7 +251,6 @@ const TimestampComponent = ErrorBoundary.wrap(({ userId, timestamp, type }: Prop
     return (
         <Tooltip
             position="top"
-            // @ts-ignore
             delay={750}
             allowOverflow={false}
             spacing={8}
@@ -279,17 +296,24 @@ export default definePlugin({
     patches: [
         // stolen from ViewIcons
         {
-            find: 'backgroundColor:"COMPLETE"',
+            find: 'backgroundColor:"COMPLETE"===',
             replacement: {
-                match: /(?<=backgroundImage.+?children:)!\i.{0,100}className:\i\.\i\}\)/,
-                replace: "[$self.renderProfileTimezone(arguments[0]),$&]"
+                match: /bannerSrc:\i,(?=backgroundColor:"COMPLETE")/,
+                replace: "$&user:arguments[0].user,"
+            }
+        },
+        {
+            find: '"--custom-cutout-radius":',
+            replacement: {
+                match: /(?<=children:\[)\i.{0,100}className:\i\.\i\}\)/,
+                replace: "$self.renderProfileTimezone(arguments[0]),$&"
             }
         },
         {
             find: "#{intl::GUILD_COMMUNICATION_DISABLED_ICON_TOOLTIP_BODY}",
             replacement: {
-                match: /(?<=isVisibleOnlyOnHover.+?)id:.{1,11},timestamp.{1,50}}\),/,
-                replace: "$&,$self.renderMessageTimezone(arguments[0]),"
+                match: /(?<=isVisibleOnlyOnHover.+?)id:.{0,15},timestamp.{1,50}}\),/,
+                replace: "$&$self.renderMessageTimezone(arguments[0]),"
             }
         }
     ],
@@ -303,14 +327,14 @@ export default definePlugin({
                 const good = await loadDatabaseTimezones();
 
                 if (good) {
-                    showToast(t(plugin.timezones.toast.refresh.successfully), Toasts.Type.SUCCESS);
+                    showToast({ text: t(plugin.timezones.toast.refresh.successfully), variant: "success" });
                 } else {
-                    showToast(t(plugin.timezones.toast.refresh.failed), Toasts.Type.FAILURE);
+                    showToast({ text: t(plugin.timezones.toast.refresh.failed), variant: "critical" });
                 }
             }
             catch (error) {
                 console.error("Failed to refresh timezone:", error);
-                showToast(t(plugin.timezones.toast.refresh.failedTo), Toasts.Type.FAILURE);
+                showToast({ text: t(plugin.timezones.toast.refresh.failedTo), variant: "critical" });
             }
         }
     }),
@@ -322,24 +346,11 @@ export default definePlugin({
             await loadDatabaseTimezones();
 
             if (!settings.store.askedTimezone) {
-                showToast(
-                    "",
-                    Toasts.Type.MESSAGE,
-                    {
-                        duration: 10000,
-                        component: (
-                            <Button
-                                variant="positive"
-                                onClick={() => {
-                                    openModal(modalProps => <SetTimezoneModal userId={UserStore.getCurrentUser().id} modalProps={modalProps} database={true} />);
-                                }}
-                            >
-                                {t(plugin.timezones.button.wantToSave)}
-                            </Button>
-                        ),
-                        position: Toasts.Position.BOTTOM
-                    }
-                );
+                showNotification({
+                    title: t(plugin.timezones.name),
+                    body: t(plugin.timezones.button.wantToSave),
+                    onClick: () => openModal(modalProps => <SetTimezoneModal userId={UserStore.getCurrentUser().id} modalProps={modalProps} database={true} />)
+                });
                 settings.store.askedTimezone = true;
             }
         }
@@ -348,17 +359,32 @@ export default definePlugin({
     settings,
     getTime,
 
-    renderProfileTimezone: (props?: { user?: User; }) => {
+    renderProfileTimezone: props => {
         if (!settings.store.showProfileTime || !props?.user?.id) return null;
-        if (props.user.id === UserStore.getCurrentUser().id && !settings.store.showOwnTimezone) return null;
 
-        return <TimestampComponent userId={props.user.id} type="profile" />;
+        const userId = props.user.id;
+        if (userId === UserStore.getCurrentUser().id && !settings.store.showOwnTimezone) return null;
+
+        return <TimestampComponent userId={userId} type="profile" />;
     },
 
     renderMessageTimezone: (props?: { message?: Message; }) => {
-        if (!settings.store.showMessageHeaderTime || !props?.message) return null;
-        if (props.message.author.id === UserStore.getCurrentUser().id && !settings.store.showOwnTimezone) return null;
+        const { showMessageHeaderTime, recipientTimezoneInDms, showOwnTimezone } = settings.store;
+        if (!showMessageHeaderTime || !props?.message) return null;
 
-        return <TimestampComponent userId={props.message.author.id} timestamp={props.message.timestamp.toISOString()} type="message" />;
+        let userId = props.message.author.id;
+
+        if (userId === UserStore.getCurrentUser().id) {
+            const channel = ChannelStore.getChannel(props.message.channel_id);
+            const recipientId = channel?.isDM() ? channel.getRecipientId() : null;
+
+            if (recipientTimezoneInDms && recipientId) {
+                userId = recipientId;
+            } else if (!showOwnTimezone) {
+                return null;
+            }
+        }
+
+        return <TimestampComponent userId={userId} timestamp={props.message.timestamp.toISOString()} type="message" />;
     }
 });

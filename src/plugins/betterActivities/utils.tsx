@@ -5,16 +5,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { plugin, t } from "@api/i18n";
 import { Activity, Application } from "@plexcord/discord-types";
 import { classNameFactory } from "@utils/css";
-import { findByPropsLazy, findComponentByCodeLazy, findStoreLazy } from "@webpack";
+import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
+import { ApplicationStore } from "@webpack/common";
 
 import { settings } from "./settings";
 import { ActivityViewProps, ApplicationIcon } from "./types";
-
-const ApplicationStore: {
-    getApplication: (id: string) => Application | null;
-} = findStoreLazy("ApplicationStore");
 
 const { fetchApplication }: {
     fetchApplication: (id: string) => Promise<Application | null>;
@@ -34,14 +32,14 @@ export function getActivityApplication(activity: Activity | null) {
     if (!application_id) return undefined;
     let application = ApplicationStore.getApplication(application_id);
     if (!application && fetchedApplications.has(application_id)) {
-        application = fetchedApplications.get(application_id) ?? null;
+        application = fetchedApplications.get(application_id)!;
     }
     return application ?? undefined;
 }
 
 export function getApplicationIcons(activities: Activity[], preferSmall = false): ApplicationIcon[] {
     const applicationIcons: ApplicationIcon[] = [];
-    const applications = activities.filter(activity => activity.application_id || activity.platform || activity?.id?.startsWith("spotify:"));
+    const applications = activities.filter(activity => activity != null && (activity.application_id || activity.platform || activity.id?.startsWith("spotify:")));
 
     for (const activity of applications) {
         const { assets, application_id, platform, id } = activity;
@@ -49,8 +47,8 @@ export function getApplicationIcons(activities: Activity[], preferSmall = false)
 
         if (assets) {
             const { small_image, small_text, large_image, large_text } = assets;
-            const smallText = small_text ?? "Small Text";
-            const largeText = large_text ?? "Large Text";
+            const smallText = small_text ?? t(plugin.betterActivities.text.smallText);
+            const largeText = large_text ?? t(plugin.betterActivities.text.largeText);
 
             const addImage = (image: string, alt: string) => {
                 if (image.startsWith("mp:")) {
@@ -93,7 +91,7 @@ export function getApplicationIcons(activities: Activity[], preferSmall = false)
             let application = ApplicationStore.getApplication(application_id);
             if (!application) {
                 if (fetchedApplications.has(application_id)) {
-                    application = fetchedApplications.get(application_id) as Application | null;
+                    application = fetchedApplications.get(application_id)!;
                 } else {
                     fetchedApplications.set(application_id, null);
                     fetchApplication(application_id).then(app => {

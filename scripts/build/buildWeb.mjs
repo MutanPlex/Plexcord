@@ -25,7 +25,7 @@ import { appendFile, mkdir, readdir, readFile, rm, writeFile } from "fs/promises
 import { join } from "path";
 import JSZip from "jszip";
 
-import { BUILD_TIMESTAMP, commonOpts, globPlugins, IS_DEV, IS_REPORTER, IS_COMPANION_TEST, VERSION, commonRendererPlugins, buildOrWatchAll, stringifyValues, IS_ANTI_CRASH_TEST } from "./common.mjs";
+import { BUILD_TIMESTAMP, buildOrWatchAll, commonOpts, commonRendererPlugins, globPlugins, IS_ANTI_CRASH_TEST, IS_COMPANION_TEST, IS_DEV, IS_REPORTER, IS_STANDALONE, stringifyValues, VERSION } from "./common.mjs";
 
 /**
  * @type {import("esbuild").BuildOptions}
@@ -45,7 +45,7 @@ const commonOptions = {
         IS_WEB: true,
         IS_EXTENSION: false,
         IS_USERSCRIPT: false,
-        IS_STANDALONE: true,
+        IS_STANDALONE,
         IS_DEV,
         IS_REPORTER,
         IS_COMPANION_TEST,
@@ -193,7 +193,7 @@ const appendCssRuntime = readFile("dist/Plexcord.user.css", "utf-8").then(conten
 if (!process.argv.includes("--skip-extension")) {
     await Promise.all([
         appendCssRuntime,
-        buildExtension("chromium-unpacked", ["modifyResponseHeaders.json", "content.js", "manifest.json", "icon.png"]),
+        buildExtension("chromium-unpacked", ["modifyResponseHeaders.json", "content.js", "manifest.json", "icon.png", "service-worker.js"]),
         buildExtension("firefox-unpacked", ["background.js", "content.js", "manifestv2.json", "icon.png"]),
     ]);
 

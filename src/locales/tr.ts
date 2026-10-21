@@ -46,11 +46,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         switches: {
             useQuickCss: {
                 label: "Özel CSS'yi Etkinleştir",
-                description: "QuickCSS düzenleyicisinden özel CSS yükleyin. Bu, Discord'un görünümünü kendi stillerinizle özelleştirmenize olanak tanır."
+                description: "Yapılandırdığın QuickCSS'i uygula"
             },
             enableReactDevtools: {
                 label: "React Geliştirici Araçlarını Etkinleştir",
-                description: "Discord'un React bileşenlerinde hata ayıklamak için React Geliştirici Araçları uzantısını etkinleştirin. Eklenti geliştirme için kullanışlıdır."
+                description: "Çoğunlukla eklenti geliştiricileri için kullanışlıdır. Ne olduğunu bilmiyorsan görmezden gel"
             },
             mainWindowFrameless: {
                 label: "Ana Pencere Çerçevesini Devre Dışı Bırak",
@@ -60,7 +60,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Pencere çerçevesini devre dışı bırak",
                 description: "Daha temiz bir görünüm için yerel pencere çerçevesini çıkarın. Başlık çubuğu alanını sürükleyerek pencereyi hâlâ taşıyabilirsiniz."
             },
-            winNativeTitleBar: {
+            nativeTitleBar: {
                 label: "Discord'un özel başlık çubuğu yerine Windows'un yerel başlık çubuğunu kullan",
                 description: "Discord'un özel başlık çubuğunu standart Windows başlık çubuğuyla değiştirin. Bu, bazı pencere yönetimi araçlarıyla uyumluluğu geliştirebilir."
             },
@@ -76,7 +76,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             disableMinSize: {
                 label: "Minimum pencere boyutunu devre dışı bırak",
-                description: "Discord penceresinin varsayılan minimum boyutundan daha küçük yeniden boyutlandırılmasına izin verin. Pencere yöneticilerini veya küçük ekranları döşemek için kullanışlıdır."
+                description: "Pencereyi Discord'un minimum boyutundan bile küçük olacak şekilde istediğin boyuta getirmeni sağlar"
             }
         },
         quickActions: {
@@ -193,6 +193,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignore: "Yoksay - Bildirimi hiç gösterme"
             },
         },
+        windowsMaterial: {
+            title: "Windows Arka Plan Materyali (Yeniden Başlatma Gerekir)",
+            description: "Windows şeffaf arka plan efektleri. Şeffaflığı destekleyen bir tema kullanman gerekir, aksi halde hiçbir etkisi olmaz. Bu ayarı değiştirdikten sonra yeniden başlatma gerekir.",
+            material: {
+                none: "Yok",
+                mica: "Mica (arka planı boyamak için sistem temasını ve masaüstü duvar kâğıdını kullanır)",
+                tabbed: "Tabbed (daha güçlü arka plan renklendirmesine sahip Mica çeşidi)",
+                acrylic: "Acrylic (yarı saydam bir arka plan için Discord'un arkasındaki pencereyi bulanıklaştırır)"
+            }
+        },
         macVibrancy: {
             title: "Pencere Titreme Stili (Yeniden başlatma gerekli)",
             description: "macOS pencere titreme efektini özelleştirin. Bu, Discord penceresinin bulanıklık ve şeffaflık stilini kontrol eder. Değişikliklerin etkili olması için yeniden başlatma gereklidir.",
@@ -212,6 +222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 fullscreenUI: "Tam ekran UI (şeffaf ama biraz mat)",
                 hud: "HUD (En şeffaf)"
             }
+        },
+        tabs: {
+            renderFailed: "{{tab}} sekmesi görüntülenemedi. Sorun devam ederse yükleyiciyle yeniden yüklemeyi dene!"
         }
     },
 
@@ -270,7 +283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             discordDesktop: "Discord Masaüstü uygulaması",
             plextron: "Plextron uygulaması",
             web: "Plextron uygulaması ve Discord'un Web sürümü",
-            dev: "Plexcord'un Geliştirici sürümü"
+            dev: "Plexcord'un Geliştirici sürümü",
+            browser: "Plexcord'un Web Tarayıcı sürümü"
         },
         search: {
             looking: "Aradığın şey bu mu",
@@ -307,7 +321,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userplugins: "Kullanıcı Eklentileri",
                 api: "API Eklentileri",
                 type: "Türe Göre Filtrele",
-                tags: "Etiketlere Göre Filtrele"
+                tags: "Etiketlere Göre Filtrele",
+                favorites: "Favorileri Göster"
             }
         },
         pluginModal: {
@@ -320,7 +335,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             enabledUser: "Aktif Kullanıcı Eklentileri",
             totalUser: "Toplam Kullanıcı Eklentileri",
             info: "Daha fazla bilgi görüntüle",
-            source: "Kaynak kodunu görüntüle"
+            source: "Kaynak kodunu görüntüle",
+            favorite: "Eklentiyi favorile - eklenti listesinin en üstüne sabitler",
+            unfavorite: "Eklentiyi favorilerden çıkar"
         },
         metadata: {
             api: {
@@ -342,7 +359,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     userSettings: "Discord'un kullanıcı ayarlarını, grupları ve isimleri ortaya çıkarmak için yamalar",
                     audioPlayer: "Discord'un dahili ses dosyalarını veya harici ses bağlantılarını oynatmak için API.",
                     userArea: "Kullanıcı alanı paneline düğmeler eklemek için API.",
-                    profileCollections: "Discord'un oyun koleksiyonu gibi kullanıcı profil paneline koleksiyonlar eklemek için API."
+                    profileCollections: "Discord'un oyun koleksiyonu gibi kullanıcı profil paneline koleksiyonlar eklemek için API.",
+                    profileSections: "Kullanıcı profili panellerinin 'Üyelik Tarihi' alanının yakınına bölümler eklemek için API.",
+                    headerBar: "Başlık çubuğuna düğme eklemek için API.",
+                    surfaceClasses: "Kararlı Discord düzen yüzeylerine eklentiye ait anlamsal veri öznitelikleri ve sınırlı props eklemek için API."
                 },
                 chatButtons: {
                     context: {
@@ -389,7 +409,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             button: "Etkinleştirilen eklentilerin butonları burada görünecektir."
-        }
+        },
+        invalidInput: "Geçersiz giriş",
+        loading: "Yükleniyor...",
+        authorPrefix: "Yapımcı:"
     },
 
     patchHelper: {
@@ -474,7 +497,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             plugins: "Eklentiyi Dışa Aktar",
             css: "QuickCSS'yi Dışa Aktar",
             datastore: "Veri Depolarını Dışa Aktar"
-        }
+        },
+        backupFileType: "Plexcord Ayar Yedeği"
     },
 
     cloud: {
@@ -640,7 +664,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         newPlugins: "{{count}} Yeni Eklenti",
         following: "Son güncellemelerde aşağıdaki eklentiler eklendi:",
-        more: "+{{count}} yeni eklenti"
+        more: "+{{count}} yeni eklenti",
+        error: {
+            retrieveRepo: "Depo bilgileri alınamadı",
+            fetchRepo: "Depodan veri alınamadı",
+            connectRepo: "Depoya bağlanılamadı. İnternet bağlantını kontrol et."
+        }
     },
 
     csp: {
@@ -685,7 +714,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         pinned: "Sabitlenmiş",
         stylus: "Stylus uzantısı",
         bd: "BetterDiscord Temaları",
-        github: "Github",
+        github: "GitHub",
         download: "Tema mı arıyorsunuz? {{bd}} sitesine göz atın veya {{github}} üzerinde arama yapın. BetterDiscord’tan indirirken “Download” butonuna tıklayın ve .theme.css dosyasını tema klasörünüze yerleştirin.",
         add: "Ekle",
         reset: "Ayarları varsayılana sıfırla",
@@ -717,7 +746,8 @@ const translations: MatchStructure<typeof enTranslations> = {
         unknown: {
             title: "Bilinmiyor",
             author: "Bilinmeyen Yazar",
-            theme: "Discord Teması"
+            theme: "Discord Teması",
+            description: "Açıklama belirtilmemiş."
         },
         required: "Aşağıdaki eklentiler gereklidir ancak etkin değil: ",
         homepage: "Ana Sayfa",
@@ -778,6 +808,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             failed: {
                 download: "Tema indirilemedi"
             }
+        },
+        openInFolder: "Klasörde Aç",
+        fallback: {
+            author: "Bilinmeyen Yazar",
+            description: "Bir Discord Teması."
         }
     },
 
@@ -834,6 +869,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         repo: "Depo",
         repoDescription: "Plexcord'un güncellemeleri aldığı GitHub deposu burasıdır.",
         loading: "Yükleniyor...",
+        unknownAuthor: "Bilinmeyen Yazar"
     },
 
     components: {
@@ -849,7 +885,29 @@ const translations: MatchStructure<typeof enTranslations> = {
             message: "QuickCSS düzenleyicisi arka planda hala açık.",
             detail: "Discord'u yine de kapatmak istiyor musunuz? Bu işlem QuickCSS düzenleyiciyi de kapatacaktır.",
             cancel: "İptal",
-            close: "Yine de Kapat"
+            close: "Yine de Kapat",
+            windowTitle: "Plexcord QuickCSS Düzenleyicisi"
+        },
+        messagePopover: {
+            scrollLeft: "Sola kaydır",
+            scrollRight: "Sağa kaydır"
+        },
+        notices: {
+            error: "Bildirim gösterilirken hata oluştu"
+        },
+        tray: {
+            aboutPlexcord: "Plexcord Hakkında",
+            updatePlexcord: "Plexcord'u Güncelle",
+            noUpdateTitle: "Güncelleme Yok",
+            noUpdateBody: "Zaten Plexcord'un en son sürümünü kullanıyorsun.",
+            updateFailedTitle: "Güncelleme Başarısız",
+            updateFailedBody: "Plexcord güncellemesi uygulanamadı.",
+            updateSuccessTitle: "Güncelleme Başarılı",
+            updateSuccessBody: "Güncellemeyi uygulamak için Plexcord yeniden başlatılıyor.",
+            updateErrorTitle: "Güncelleme Hatası",
+            updateErrorBody: "Plexcord güncellenirken bir hata oluştu.\n\n{{error}}",
+            openSettingsFolder: "Ayarlar Klasörünü Aç",
+            openThemesFolder: "Temalar Klasörünü Aç"
         }
     },
 
@@ -918,7 +976,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             seconds: "saniye",
             ago: "önce",
             s: " "
-        }
+        },
+        detectLanguage: "Dili algıla"
     },
 
     plugin: {
@@ -945,6 +1004,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             utility: "Araçlar",
             voice: "Ses"
         },
+        concatenatedComponentExtractor: {
+            name: "ConcatenatedComponentExtractor",
+            description: "Paketleyici (bundler) tarafından birleştirilmiş bileşenleri ayıklar"
+        },
+        concatenatedModules: {
+            name: "ConcatenatedModules",
+            description: "Paketleyici (bundler) tarafından birleştirilmiş modülleri ayıklar"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Discord'un takip sistemini (analitik/'science'), metriklerini ve Sentry çökme raporlamasını devre dışı bırakır",
@@ -952,6 +1019,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disableAnalytics: {
                     label: "Analizi Kapat",
                     description: "Discord'un takip sistemini (analitik/'science') metriklerini ve Sentry çökme raporlamasını devre dışı bırak"
+                },
+                disableStackDumping: {
+                    description: "Discord çöktüğünde konsola yerel yığın izi yazdır. Tam yeniden başlatma gerektirir."
                 }
             }
         },
@@ -966,6 +1036,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsLocation: {
                     label: "Ayarlar Konumu",
                     description: "Plexcord ayarlar bölümünün nereye konulacağını belirler"
+                },
+                includePlexcordInfoWhenCopying: {
+                    label: "Kopyalarken Plexcord Bilgilerini Dahil Et",
+                    description: "Ayarlar sayfasının sol alt kısmındaki sürüm bilgilerine tıklandığında Plexcord bilgilerini de (Plexcord, Electron, Chromium) kopyalar"
                 }
             }
         },
@@ -983,6 +1057,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Bekle!",
                     body: "Eski bir Plexcord sürümü kullanıyorsun! Büyük ihtimalle sorunların zaten çözülmüştür.",
                     footer: "Lütfen destek istemeden önce güncelleme yap!",
+                    dismiss: "Ne yaptığını biliyorsan veya güncelleyemiyorsan bu uyarıyı kapatabilirsin.",
                     button: {
                         cancel: "Güncellemeleri Gör",
                         confirm: "Şimdi Güncelle ve Yeniden Başlat",
@@ -1181,7 +1256,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Anonimleştirme yöntemi",
                     random: "Rastgele Karakterler",
                     consistent: "Tutarlı",
-                    timestamp: "Zaman Damgası"
+                    timestamp: "Zaman Damgası",
+                    date: "Tarih"
                 },
                 randomisedLength: {
                     label: "Rastgeleleştirme uzunluğu",
@@ -1190,6 +1266,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 consistent: {
                     label: "Tutarlı anonimleştirme",
                     description: "Tutarlı anonimleştirme için gizli anahtar"
+                },
+                dateFormat: {
+                    description: "Tarih biçimi (YYYY, MM, DD, HH, mm, ss, SSS desteklenir)",
+                    label: "Tarih Biçimi"
                 }
             },
             using: {
@@ -1201,76 +1281,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toggle: "Dosyalarınız için Spoiler'ınızı açıp kapatın (varsayılan açık)",
                 enabled: "Spoiler aktif edildi!",
                 disabled: "Spoiler devre dışı bırakıldı!"
-            }
-        },
-        appleMusic: {
-            name: "Apple Music Rich Presence",
-            description: "Apple Music dinleme durumunu Discord Rich Presence olarak gösterir",
-            about: "Özelleştirilebilir etkinlik formatı dizeleri için, etkinliklere parça verilerini eklemek amacıyla birkaç özel dize kullanabilirsin! {{name}} parça adıyla, {{artist}} sanatçı adı(ları)yla, {{album}} ise albüm adıyla değiştirilir.",
-            button: {
-                listen: "Apple Music'te Dinle",
-                songLink: "SongLink'te Görüntüle"
-            },
-            option: {
-                activityType: {
-                    label: "Aktivite Türü",
-                    description: "Hangi tür aktivite gösterilecek",
-                    listening: "Dinliyor",
-                    playing: "Oynuyor"
-                },
-                statusDisplayType: {
-                    label: "Durum Gösterim Türü",
-                    description: "Üye listesinde parça / sanatçı adını göster",
-                    off: "Gösterme (genel dinleme mesajını gösterir)",
-                    artist: "Sanatçı adını göster",
-                    track: "Parça adını göster"
-                },
-                refreshInterval: {
-                    label: "Yenileme Aralığı",
-                    description: "Etkinlik yenileme aralığı (saniye)"
-                },
-                enableTimestamps: {
-                    label: "Zaman Damgalarını Etkinleştir",
-                    description: "Zaman damgalarını etkinleştirip etkinleştirmeyeceğiniz"
-                },
-                enableButtons: {
-                    label: "Butonları Etkinleştir",
-                    description: "Butonları etkinleştirip etkinleştirmeyeceğiniz"
-                },
-                nameString: {
-                    label: "İsim Dizesi",
-                    description: "Etkinlik ismi format dizesi"
-                },
-                detailsString: {
-                    label: "Detaylar Dizesi",
-                    description: "Etkinlik detayları format dizesi"
-                },
-                stateString: {
-                    label: "Durum Dizesi",
-                    description: "Etkinlik durumu format dizesi"
-                },
-                largeImageType: {
-                    label: "Büyük Resim Türü",
-                    description: "Etkinlik varlıkları büyük resim türü",
-                    album: "Albüm kapak resmi",
-                    artist: "Sanatçı resmi",
-                    disabled: "Devre dışı"
-                },
-                largeTextString: {
-                    label: "Büyük Metin Dizesi",
-                    description: "Etkinlik varlıkları büyük metin format dizesi"
-                },
-                smallImageType: {
-                    label: "Küçük Resim Türü",
-                    description: "Etkinlik varlıkları küçük resim türü",
-                    album: "Apple Music logosu",
-                    artist: "Sanatçı resmi",
-                    disabled: "Devre dışı"
-                },
-                smallTextString: {
-                    label: "Küçük Metin Dizesi",
-                    description: "Etkinlik varlıkları küçük metin format dizesi"
-                }
             }
         },
         arRpc: {
@@ -1373,6 +1383,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     left: "Sol",
                     right: "Sağ"
                 }
+            },
+            text: {
+                smallText: "Küçük Metin",
+                largeText: "Büyük Metin"
             }
         },
         betterAudioPlayer: {
@@ -1405,7 +1419,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             toast: {
-                invalidColorFormat: "{{settingKey}} için geçersiz renk formatı, 'R, G, B' veya '#RRGGBB' formatında olduğundan emin olun"
+                invalidColorFormat: "{{settingKey}} için geçersiz renk formatı, 'R, G, B' veya '#RRGGBB' formatında olduğundan emin olun",
+                invalidColorFormatFor: "{{key}} için geçersiz renk biçimi, \"R, G, B\" veya \"#RRGGBB\" kullan"
             }
         },
         betterBanReasons: {
@@ -1423,7 +1438,20 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             title: "Nedenler",
             placeholder: "Neden",
-            add: "Başka bir neden ekle"
+            add: "Başka bir neden ekle",
+            duration: {
+                discordDefault: "Discord varsayılanı",
+                none: "Hiçbirini silme",
+                hour1: "Son 1 saat",
+                hours6: "Son 6 saat",
+                hours12: "Son 12 saat",
+                hours24: "Son 24 saat",
+                days3: "Son 3 gün",
+                days7: "Son 7 gün"
+            },
+            text: {
+                autoDeleteDuration: "Mesajları otomatik silme süresi"
+            }
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
@@ -1485,6 +1513,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Zorla Aç",
                     description: "Bir klasörün sunucusuna geçildiğinde klasörü açmaya zorla"
                 },
+                enableNestedFolders: {
+                    label: "İç İçe Klasörleri Etkinleştir",
+                    description: "Sürükleyerek klasörleri başka klasörlerin içine yerleştirmeye izin verir"
+                },
                 keepIcons: {
                     label: "Simgeleri Koru",
                     description: "Klasör BetterFolders kenar çubuğunda açıkken ana sunucu çubuğu klasöründeki sunucu simgelerini göstermeye devam et"
@@ -1518,6 +1550,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             render: {
                 tip: "Bu davet {{time}} sonra sona erecek",
                 header: "{{name}} seni {{server}} sunucusuna davet etti",
+                headerSelf: "{{server}} sunucusuna katılmak için bir davet gönderdin",
                 never: "hiçbir zaman"
             }
         },
@@ -1541,7 +1574,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterRoleContext: {
             name: "BetterRoleContext",
-            description: "Kullanıcı profillerinde rollere sağ tıklandığında rol rengini kopyalama / rolü düzenleme / rol simgesini görüntüleme seçeneklerini ekler",
+            description: "Kullanıcı profilinde veya üye listesinde rollere sağ tıkladığında rol rengini kopyalama / rolü düzenleme / rol simgesini görüntüleme seçenekleri ekler",
             option: {
                 roleIconFileFormat: {
                     label: "Rol Simge Dosya Formatı",
@@ -1551,7 +1584,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 copyColor: "Rol Rengini Kopyala",
                 editRole: "Rolü Düzenle",
-                viewIcon: "Rol Simgesini Görüntüle"
+                viewIcon: "Rol Simgesini Görüntüle",
+                viewMembers: "Rol Üyelerini Görüntüle"
+            },
+            text: {
+                roleActions: "Rol İşlemleri"
             }
         },
         betterRoleDot: {
@@ -1627,6 +1664,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         blockKeywords: {
             name: "BlockKeywords",
             description: "Belirli kullanıcı tanımlı anahtar kelimeleri içeren mesajları, gönderen kullanıcı engellenmiş gibi engeller.",
+            regexHelper: {
+                title: "Regex Yardımcısı",
+                placeholder: "Test edilecek metin...",
+                noPatterns: "Hiç kalıp ayarlanmadı"
+            },
             option: {
                 blockedWords: {
                     label: "Engellenen Kelimeler",
@@ -1635,6 +1677,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 useRegex: {
                     label: "Regex Kullan",
                     description: "Mesaj içeriğini kontrol ederken her değeri düzenli ifade olarak kullan (gelişmiş)"
+                },
+                regexHelper: {
+                    label: "Regex Yardımcısı",
+                    description: "Düzenli ifadelerini örnek bir metin üzerinde test et"
                 },
                 caseSensitive: {
                     label: "Büyük/Küçük Harf Duyarlı",
@@ -1778,6 +1824,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 loading: "Yükleniyor...",
                 save: "Kaydet",
                 edit: "Düzenle"
+            },
+            text: {
+                unknownUser: "Bilinmeyen Kullanıcı"
             }
         },
         callTimer: {
@@ -2067,12 +2116,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 plusPulse: "Artı Butonu Nabız Efekti",
                 mentionGlow: "Bahsetme Rozeti Işıltısı",
                 compactExpand: "Kompakt Mod Genişleme",
-                selectedBorder: "Seçili Sekme Mavi Kenarlığı",
+                selectedBorder: "Seçili Sekme Vurgu Kenarlığı",
                 selectedBackground: "Seçili Sekme Arka Plan Rengi",
                 tabShadows: "Sekme Gölge Efektleri",
                 tabRepositioning: "Sekme Yeniden Konumlandırma (yumuşak geçiş)",
                 resizeHandle: "Yeniden Boyutlandırma Tutacağı Solma",
-                questActivate: "Aktif Görev Gradyanı"
+                questActivate: "Etkin Görevler Gradyanı"
             },
             bookmark: {
                 label: "Yer İmi",
@@ -2111,7 +2160,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 folderMenu: "Yer İmi Klasör Menüsü",
                 compact: "Kompakt",
                 bookmarkBar: "Yer İmi Çubuğu",
-                openAll: "Tümünü Yer İmlerinde Aç",
+                openAll: "Tüm Yer İmlerini Aç",
                 openNew: "Yeni Sekmede Aç",
                 close: {
                     tab: "Sekmeyi Kapat",
@@ -2190,6 +2239,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 tabWidthScale: {
                     label: "Sekme Genişlik Ölçeği",
                     description: "Sekme genişliği ölçeği (yüzde) – sekme kenarlarını sürükleyerek ayarlanabilir"
+                },
+                tabHeightScale: {
+                    label: "Sekme Yüksekliği Ölçeği",
+                    description: "Sekme yüksekliği ölçeği (yüzde olarak)."
                 },
                 renderAllTabs: {
                     label: "Tüm Sekmeleri Bellekte Tut",
@@ -2398,11 +2451,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     restore: "Sekmeler geri yüklenemedi",
                     saved: "Kaydedilen sekmeler yüklenemedi"
                 }
+            },
+            text: {
+                folder: "Klasör"
             }
         },
         characterCounter: {
             name: "CharacterCounter",
-            description: "Mesaj kutusunda bir karakter sayacı gösterir",
+            description: "Sohbet girişine karakter sayacı ekler",
             option: {
                 colorEffects: {
                     label: "Renk Efektleri",
@@ -2416,7 +2472,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         cleanChannelName: {
             name: "CleanChannelName",
-            description: "Kanal adlarındaki tüm emoji ve saçma süslemeleri kaldır"
+            description: "Kanal adlarından emoji ve süslemeleri kaldırır. Kanalı düzenlerken orijinaline döner.",
+            option: {
+                ignoredChannels: {
+                    description: "Dokunulmayacak kanal kimliklerinin virgülle ayrılmış listesi.",
+                    label: "Yok Sayılan Kanallar"
+                }
+            },
+            text: {
+                keepOriginalName: "Orijinal Adı Koru"
+            }
         },
         clearURLs: {
             name: "ClearURLs",
@@ -2428,7 +2493,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 loading: "Üyeler yükleniyor...",
                 noMembers: "Hiç üye bulunamadı.",
-                unknown: "Bilinmeyen Rol"
+                unknown: "Bilinmeyen Rol",
+                andMore: "ve {{count}} kişi daha"
             }
         },
         clientSideBlock: {
@@ -2494,6 +2560,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     disable: "Nitro Temasını Devre Dışı Bırak",
                     reset: "Tema Rengini Sıfırla"
                 }
+            },
+            text: {
+                dark: "Koyu",
+                light: "Açık"
             }
         },
         clipsEnhancements: {
@@ -2508,22 +2578,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     only: "Yalnızca etkinlik adının başı veya sonu eşleştiğinde",
                     never: "Asla"
                 },
-                enableScreenshotKeybind: {
-                    label: "Ekran Görüntüsü Kısayol Tuşunu Etkinleştir",
-                    description: "Ekran görüntüsü kısayol tuşu özelliğini etkinleştir"
-                },
-                enableVoiceOnlyClips: {
-                    label: "Sadece Sesli Klipleri Etkinleştir",
-                    description: "Sadece sesli klipleri etkinleştir (video olmadan ses)"
-                },
-                enableAdvancedSignals: {
-                    label: "Gelişmiş Sinyalleri Etkinleştir",
-                    description: "Gelişmiş klip sinyallerini etkinleştir (otomatik klip tetikleyicileri)"
-                },
-                ignorePlatformRestriction: {
-                    label: "Platform Kısıtlamalarını Yoksay",
-                    description: "Platforma Özel Kliplemeye İzin Ver (kaydetme hatalarına neden olabilir)"
-                },
                 clipsLink: {
                     label: "Klipler Bağlantısı",
                     link: "Klipler ayarlarında FPS ve süre seçeneklerini değiştirin!"
@@ -2536,7 +2590,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         commandPalette: {
             name: "Komut Paleti",
-            description: "Klavye kullanarak arayüzde gezinmenizi sağlar.",
+            description: "Discord'un her yerinde işlem çalıştırmak için Raycast tarzı komut paleti",
             action: {
                 command: {
                     label: "Komutu Çalıştır",
@@ -2990,7 +3044,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                             label: "{{pluginName}} çalıştırılamadı: {{actionLabel}}."
                         }
                     }
-                }
+                },
+                commandDeleted: "Komut silindi.",
+                statusSetToLabel: "Durum {{label}} olarak ayarlandı.",
+                themeSetToLabel: "Tema {{label}} olarak ayarlandı.",
+                noSettingsPageWas: "Bir ayarlar sayfası belirtilmedi.",
+                unableToOpenLabel: "{{label_that_settings_page}} açılamadı.",
+                failedToStartDependencies: "Bağımlılıklar başlatılamadı: {{join}}",
+                messageSentToUsername: "{{username}} kullanıcısına mesaj gönderildi.",
+                enabledRestart: "{{name}} etkinleştirildi. Uygulamak için yeniden başlat.",
+                disabledRestart: "{{name}} devre dışı bırakıldı. Uygulamak için yeniden başlat.",
+                enabled: "{{name}} etkinleştirildi.",
+                disabled: "{{name}} devre dışı bırakıldı.",
+                errorStarting: "{{name}} başlatılırken hata oluştu.",
+                errorStopping: "{{name}} durdurulurken hata oluştu."
             },
             display: {
                 channel: {
@@ -3026,6 +3093,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 customCommands: {
                     label: "Özel Komutlar",
                     description: "Özel komut paleti girişlerini yönet"
+                },
+                closeAfterExecute: {
+                    description: "Bir komut çalıştırıldıktan sonra paleti kapat.",
+                    label: "Çalıştırdıktan Sonra Kapat"
                 }
             },
             template: {
@@ -3045,7 +3116,121 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Makro",
                     description: "Bir dizi komutu çalıştırır"
                 }
-            }
+            },
+            text: {
+                insertTextInChat: "Sohbete Metin Ekle",
+                name: "Name",
+                commandName: "Komut adı",
+                settingsPage: "Ayarlar sayfası",
+                searchSettingsPages: "Ayar sayfalarında ara...",
+                text: "Metin",
+                textToInsertInto: "Sohbet kutusuna eklenecek metin",
+                editCommand: "Komutu Düzenle",
+                deleteCommand: "Komutu Sil",
+                createCustomCommand: "Özel Komut Oluştur",
+                light: "Açık",
+                ash: "Kül",
+                dark: "Koyu",
+                onyx: "Oniks",
+                toggleMute: "Sessizi Aç/Kapat",
+                toggleDeafen: "Sağırlaştırmayı Aç/Kapat",
+                setStatus: "Durum Ayarla",
+                searchStatuses: "Durum ara...",
+                setLabel: "{{label}} olarak ayarla",
+                toggleTheme: "Temayı Değiştir",
+                openServer: "Sunucuyu Aç",
+                openChannel: "Kanalı Aç",
+                openDm: "DM'yi Aç",
+                goHome: "Ana Sayfaya Git",
+                goToServer: "Sunucuya Git",
+                searchServers: "Sunucu ara...",
+                goToChannel: "Kanala Git",
+                searchChannels: "Kanal ara...",
+                searchFriends: "Arkadaş ara...",
+                myAccount: "Hesabım",
+                profiles: "Profiller",
+                dataPrivacy: "Veriler ve Gizlilik",
+                devices: "Cihazlar",
+                connections: "Bağlantılar",
+                appearance: "Görünüm",
+                accessibility: "Erişilebilirlik",
+                voiceVideo: "Ses ve Görüntü",
+                chat: "Sohbet",
+                textImages: "Metin ve Görseller",
+                notifications: "Bildirimler",
+                keybinds: "Tuş Atamaları",
+                authorizedApps: "Yetkili Uygulamalar",
+                familyCenter: "Aile Merkezi",
+                advanced: "Gelişmiş",
+                plexcord: "Plexcord",
+                plexcordPlugins: "Plexcord Eklentileri",
+                plexcordThemes: "Plexcord Temaları",
+                plexcordUpdater: "Plexcord Güncelleyici",
+                plexcordChangelog: "Plexcord Değişiklik Günlüğü",
+                openQuickcss: "QuickCSS'i Aç",
+                openUpdater: "Güncelleyiciyi Aç",
+                openChangelog: "Değişiklik Günlüğünü Aç",
+                restartDiscord: "Discord'u Yeniden Başlat",
+                managePlugins: "Eklentileri Yönet",
+                searchPlugins: "Eklenti ara...",
+                sendDm: "DM Gönder",
+                recipient: "Alıcı",
+                message: "Mesaj",
+                messageContent: "Mesaj içeriği",
+                openPaletteHotkey: "Paleti açma kısayolu",
+                actions: "İşlemler",
+                preview: "Önizleme",
+                openCommand: "Komutu Aç",
+                copyAnswer: "Cevabı Kopyala",
+                openDetails: "Ayrıntıları Aç",
+                calculator: "Hesap Makinesi",
+                expression: "İfade",
+                result: "Sonuç",
+                copyExpression: "İfadeyi Kopyala",
+                pinned: "Sabitlenmiş",
+                suggestions: "Öneriler",
+                setAlias: "Takma Ad Belirle",
+                aliasForLabel: "{{label}} için takma ad",
+                leaveEmptyToRemove: "Kaldırmak için boş bırak",
+                command: "Komut",
+                noResults: "Sonuç yok",
+                addFile: "Dosya ekle",
+                saveCommand: "Komutu Kaydet",
+                createCommand: "Komut Oluştur",
+                nameRequired: "Ad gerekli.",
+                enterValidUrl: "Geçerli bir URL gir.",
+                pickSettingsPage: "Önerilerden bir ayar sayfası seç.",
+                textRequired: "Metin gerekli.",
+                commandSaved: "Komut kaydedildi.",
+                commandCreated: "Komut oluşturuldu.",
+                editCustomCommand: "Özel Komutu Düzenle",
+                disablePlugin: "Eklentiyi Devre Dışı Bırak",
+                enablePlugin: "Eklentiyi Etkinleştir",
+                pickRecipient: "Önerilerden bir alıcı seç.",
+                addMessageOrFile: "Bir mesaj veya dosya ekle.",
+                pressKeys: "Tuşlara bas...",
+                answerCopied: "Cevap panoya kopyalandı.",
+                calculationCopied: "Hesaplama panoya kopyalandı.",
+                unpinCommand: "Komutun Sabitlemesini Kaldır",
+                pinCommand: "Komutu Sabitle",
+                saveAlias: "Takma Adı Kaydet",
+                changeHotkey: "Kısayolu Değiştir",
+                recordHotkey: "Kısayol Kaydet",
+                pressKeyCombo: "Bir tuş kombinasyonuna bas; temizlemek için Backspace, iptal için Esc",
+                searchIn: "{{title}} içinde ara...",
+                searchCommands: "Komut ara...",
+                somethingWentWrong: "Bir şeyler ters gitti.",
+                remove: "Kaldır",
+                enabled: "Etkin",
+                disabled: "Devre dışı",
+                sectionNavigation: "Gezinme",
+                sectionCustom: "Özel",
+                sectionPlugins: "Eklentiler",
+                sectionMessaging: "Mesajlaşma",
+                current: "Mevcut",
+                submit: "Gönder"
+            },
+            description2: "Discord'un her yerinde işlem çalıştırmak için Raycast tarzı komut paleti"
         },
         consoleJanitor: {
             name: "ConsoleJanitor",
@@ -3115,11 +3300,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         copyProfileColors: {
             name: "CopyProfileColors",
             description: "Kullanıcıların profil gradyan renklerini panoya kopyalayan bir eklenti.",
-            copy: "Profil Renklerini Kopyala",
+            copy: "Sunucu Profili Renklerini Kopyala",
             toast: {
                 noColor: "Profil renkleri bulunamadı!",
                 copied: "Profil renkleri panoya kopyalandı!",
                 error: "Profil renkleri kopyalanırken hata oluştu!"
+            },
+            text: {
+                formatted: "Birincil renk #{{primary}}, İkincil renk #{{secondary}}"
             }
         },
         copyStatusUrls: {
@@ -3134,8 +3322,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "CopyStickerLinks",
             description: "Sticker bağlantılarını kopyalama ve açma özelliği ekler",
             context: {
-                copy: "Bağlantıyı Kopyala",
-                open: "Bağlantıyı Aç"
+                copy: "Çıkartma Bağlantısını Kopyala",
+                open: "Çıkartma Bağlantısını Aç"
             },
             toast: {
                 success: "Bağlantı kopyalandı!"
@@ -3204,7 +3392,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 buddy: {
-                    label: "Buddy",
+                    label: "Arkadaş",
                     description: "Bir imleç arkadaşı seçin",
                     oneko: "Oneko",
                     fathorse: "Şişman At"
@@ -3271,6 +3459,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unset: "Kaldır",
                 set: "Yeni Bir Simge Ayarla",
                 hover: "Yenilenmesi için ayarladıktan sonra klasörün üzerine gelmeniz gerekebilir."
+            },
+            context: {
+                changeIcon: "Simgeyi Değiştir"
             }
         },
         customIdle: {
@@ -3302,7 +3493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             error: {
                 appIdInvalid: "Uygulama Kimliği geçerli bir sayı değil.",
                 notice: "Uyarı",
-                sharing: "Etkinlik Paylaşımı etkin değil, insanlar özel Rich Presence’inizi göremeyecek!",
+                sharing: "Etkinlik Paylaşımı etkin değil, bu yüzden başkaları özel zengin durumunu göremeyecek!",
                 enable: "Etkinleştir",
                 validStream: "Yayın bağlantısı geçerli bir URL olmalıdır.",
                 mustBeURL: "Geçerli bir URL olmalıdır.",
@@ -3418,7 +3609,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 buttonTwoURL: {
                     label: "Buton 2 URL",
                     description: "Buton 2 bağlantısı"
+                },
+                enablePresence: {
+                    description: "Durumun gösterilip gösterilmeyeceği",
+                    label: "Durumu Etkinleştir"
                 }
+            },
+            toast: {
+                savedPresetName: "{{name}} ön ayarı kaydedildi.",
+                loadedPresetName: "{{name}} ön ayarı yüklendi.",
+                deletedPresetSelectedpreset: "{{selectedPreset}} ön ayarı silindi."
+            },
+            text: {
+                presetName: "Ön ayar adı",
+                selectAPreset: "Bir ön ayar seç",
+                streamLinkTwitchOr: "Yayın Bağlantısı (Twitch veya YouTube, yalnızca etkinlik türü Yayında ise)",
+                presets: "Ön Ayarlar",
+                save: "Kaydet",
+                load: "Yükle",
+                delete: "Sil",
+                noSavedPresetsYet: "Henüz kayıtlı ön ayar yok.",
+                showCustomRpc: "Özel RPC'yi Göster",
+                customRpcDisabled: "Özel RPC devre dışı",
+                theEnablePresenceSetting: "\"Durumu Etkinleştir\" ayarı kapalı, bu yüzden durumun gösterilmeyecek. İstemeden olduysa aşağıdan etkinleştir.",
+                activitySharingDisabled: "Etkinlik paylaşımı devre dışı",
+                discordDeveloperPortal: "Discord Geliştirici Portalı",
+                imgur: "Imgur",
+                enableActivitySharing: "Etkinlik Paylaşımını Etkinleştir"
             }
         },
         customSounds: {
@@ -3460,7 +3677,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 default: "Varsayılan",
                 custom: "Özel",
-                select: "Bir dosya seç..."
+                select: "Bir dosya seç...",
+                overrides: {
+                    label: "Geçersiz Kılmalar"
+                },
+                soundpack: {
+                    label: "Ses Paketi",
+                    description: "Discord'da ayarlı olan yerine kullanılacak ses paketi.",
+                    default: "Discord Varsayılanı"
+                }
             },
             type: {
                 activityEnd: "Etkinlik Bitti",
@@ -3534,6 +3759,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 calendar: "dinamik tarih biçimlendirmesini etkinleştirir, örneğin",
                 today: "Bugün",
                 yesterday: "Dün",
+                or: "veya",
                 relative: "size şu tür zamanlar verir:",
                 relativeTime: "4 saat önce",
                 preview: "Önizleme",
@@ -3627,6 +3853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 dearrowed: "Bu embed'e Dearrow uygulandı, geri yüklemek için tıklayın",
                 dearrow: "Dearrow uygulamak için tıklayın"
+            },
+            text: {
+                toggleDearrow: "Dearrow'u Aç/Kapat"
             }
         },
         declutter: {
@@ -3635,6 +3864,12 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 userProfileHeader: {
                     label: "Kullanıcı Profili"
+                },
+                removeAvatarDecoration: {
+                    label: "Profil Resmi Süslemesini Kaldır",
+                    description: "Avatar süslemelerini kaldır. Decor etkinse bu devre dışıdır/devre dışı kalır.",
+                    alertBody: "Decor eklentisiyle çakışmaları önlemek için profil resmi süslemesini kaldırma özelliği devre dışı bırakıldı.",
+                    ok: "Tamam"
                 },
                 removeNameplate: {
                     label: "İsim Levhasını Kaldır",
@@ -3693,7 +3928,27 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeButtonTooltips: {
                     label: "Buton İpuçlarını Kaldır",
                     description: "Butonların üzerinde çıkan bilgi yazılarını (tooltip) kaldırır."
+                },
+                removeProfileFrame: {
+                    description: "Profil çerçevelerini kaldırır.",
+                    label: "Profil Çerçevesini Kaldır"
+                },
+                removeDisplayNameStyles: {
+                    description: "Üye listesindeki hareketli/stilli görünen adları kaldırır.",
+                    label: "Görünen Ad Stillerini Kaldır"
+                },
+                removeLibraryAboveDms: {
+                    description: "DM listesinin üstündeki kitaplığı kaldırır.",
+                    label: "DM'lerin Üstündeki Kitaplığı Kaldır"
+                },
+                removeFamilyCenterAboveDms: {
+                    description: "DM listesinin üstündeki aile merkezini kaldırır.",
+                    label: "DM'lerin Üstündeki Aile Merkezini Kaldır"
                 }
+            },
+            text: {
+                discordAlreadyHasA: "Discord'da zaten yerleşik bir kullanıcı adı stili seçeneği var:",
+                accessibilitySettings: "Erişilebilirlik ayarları."
             }
         },
         decodeBase64: {
@@ -3789,7 +4044,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 file: "Dosya APNG veya PNG olmalıdır.",
                 fileHolder: "Bir dosya seç",
                 name: "Bu ad, bu süslemeye atıfta bulunurken kullanılacaktır.",
-                nameHolder: "Companion Cube",
+                nameHolder: "Arkadaş Küp",
                 nameTitle: "Ad"
             },
             help: {
@@ -3800,6 +4055,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hold: "Bekleyin",
                 suspended: "Bir süsleme göndererek {{guidelines}} kabul etmiş olursunuz. Bu kuralları okumamak gelecekte daha fazla süsleme oluşturma hakkınızın askıya alınmasına neden olabilir.",
                 guidelines: "kuralları"
+            },
+            toast: {
+                failedToAuthorizeMessage: "Yetkilendirme başarısız: {{message}}"
+            },
+            text: {
+                removeDecoration: "Decor süslemesini kaldır",
+                decoration: "Decor süslemesi",
+                none: "Yok",
+                decorationFile: "Süsleme dosyası"
             }
         },
         demonstration: {
@@ -3861,6 +4125,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                 starting: "{{plugin}} eklentisi başlatılırken hata oluştu",
                 noMessage: "Hata Mesajı Yok",
                 noReason: "Sebep Sağlanmadı"
+            },
+            text: {
+                reconnect: "Yeniden bağlan",
+                loadingLazyModules: "Tembel modüller yükleniyor, yeniden başlatmak hatalara yol açabilir",
+                loadedLazyModules: "Tüm tembel modüller yüklendi",
+                failedLazyModules: "Tembel modüller yüklenemedi, hatalar için konsolu kontrol et",
+                ok: "Tamam"
             }
         },
         disableCallIdle: {
@@ -3919,6 +4190,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Çeşitli Değişkenler",
                     newline: "Yeni satır karakteri"
                 }
+            },
+            text: {
+                notSupported: "Desteklenmiyor",
+                devBuild: "Geliştirici Sürümü",
+                standalone: "Bağımsız"
             }
         },
         dontFilterMe: {
@@ -3935,6 +4211,23 @@ const translations: MatchStructure<typeof enTranslations> = {
         dontRoundMyTimestamps: {
             name: "DontRoundMyTimestamps",
             description: "Göreli zaman damgalarını her zaman aşağı yuvarlar, böylece 7.6y 8y yerine 7y olur"
+        },
+        downloadAllAttachments: {
+            name: "DownloadAllAttachments",
+            description: "Bir mesajdaki tüm ekleri tek seferde indirmek için mesaj menüsüne bir buton ekler.",
+            button: "Tüm Ekleri İndir",
+            toast: {
+                success: "{{count}} ek indirildi.",
+                partial: "{{total}} ekten {{succeeded}} tanesi indirildi. {{failed}} tanesi başarısız oldu.",
+                downloadedPluralizeSucceededAttachment: "{{pluralize_succeeded_attachment}} indirildi.",
+                downloadedSucceededOfLength: "{{length}} ekten {{succeeded}} tanesi indirildi. {{failed}} başarısız."
+            },
+            option: {
+                downloadAllFileTypes: {
+                    description: "Medya olmayan ekleri de indir. Yalnızca sana gönderilenlere güveniyorsan etkinleştir.",
+                    label: "Tüm Dosya Türlerini İndir"
+                }
+            }
         },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
@@ -3999,7 +4292,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     created: "Davet oluşturuldu.",
                     unable: "Davet oluşturulamıyor.",
                     noChannel: "Davet oluşturmak için uygun kanal yok.",
-                }
+                },
+                noReusableInvite: "Yeniden kullanılabilir davet yok.",
+                unableToReuseInvite: "Davet yeniden kullanılamadı."
             },
             ghost: {
                 user: "Kullanıcı",
@@ -4110,6 +4405,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Araç Çubuğu Geliştirici Menüsü",
                     description: "Yardım (?) araç çubuğu düğmesini (sohbetin sağ üstünde) Discord'un geliştirici menüsüyle değiştirir"
                 }
+            },
+            text: {
+                searchExperiments: "Deneyleri ara"
             }
         },
         exportMessages: {
@@ -4193,6 +4491,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportAll: "{{user}} kullanıcısının tüm mesajlarını dışarı aktar",
                 user: "Kullanıcı",
                 exportAllChannel: "Kanalın Tüm Mesajlarını Dışarı Aktar"
+            },
+            text: {
+                unknownError: "Bilinmeyen hata"
             }
         },
         expressionCloner: {
@@ -4206,11 +4507,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 success: "{{name}}, {{guild}} sunucusuna başarıyla klonlandı!",
                 yourServer: "senin sunucun",
                 failed: "Klonlama başarısız: ",
-                console: "Bir şeyler yanlış gitti (konsolu kontrol et!)"
+                console: "Bir şeyler yanlış gitti (konsolu kontrol et!)",
+                successfullyClonedNameTo: "{{name}}, {{name_your_server}} sunucusuna başarıyla kopyalandı!"
             },
             context: {
                 clone: "{{type}} Klonla",
                 cloneName: "{{data}} Klonla"
+            },
+            text: {
+                yourServer: "sunucun",
+                cloneTo: "{{name}} sunucusuna kopyala",
+                emoji: "Emoji",
+                sticker: "Çıkartma"
             }
         },
         f8break: {
@@ -4413,36 +4721,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removed: "{{alias}} için takma ad silindi",
                 failedRemove: "Takma ad kaldırma başarısız oldu",
                 duplicate: "Yinelenen takma ad",
-                failedSave: "Takma ad kaydedilemedi"
+                failedSave: "Takma ad kaydedilemedi",
+                removedAliasAlias: ":{{alias}}: takma adı kaldırıldı",
+                aliasSetForGetemojidisplayname: "{{getEmojiDisplayName_ref}} için takma ad belirlendi."
             },
             button: {
                 edit: "Takma Adı Düzenle",
                 set: "Takma Ad Ayarla"
+            },
+            text: {
+                remove: "Kaldır",
+                noAliasesSetYet: "Henüz takma ad belirlenmedi.",
+                aliasRequired: "Takma ad gerekli.",
+                aliasInvalid: "Takma ad 2-32 karakter olmalı ve yalnızca küçük harf, rakam veya alt çizgi içermeli."
             }
         },
-        favoriteGifSearch: {
-            name: "FavoriteGifSearch",
-            description: "Favori GIF’lere bir arama çubuğu ekler.",
-            placeholder: "Favori GIF’lerde ara",
-            option: {
-                searchOption: {
-                    label: "Arama Seçeneği",
-                    description: "URL’nin hangi kısmında arama yapmak istediğiniz",
-                    url: "Tüm URL",
-                    path: "Yalnızca Yol (/somegif.gif)",
-                    hostandpath: "Host ve Yol (tenor.com somegif.gif)"
-                }
-            }
-        },
-        favouriteAnything: {
-            name: "FavouriteAnything",
+        favoriteAnything: {
+            name: "FavoriteAnything",
             description: "Herhangi bir resmi favorile",
             noFiles: "Aramanızla eşleşen dosya yok.",
             searchPlaceholder: "Dosya ara",
             media: "Medya",
             demoText: "Bir dosyayı favorilere eklemek için yıldıza tıklayın.\nFavori dosyalarınız burada görünecek!",
             fetchError: "{filename} alınamadı",
-            uploadError: "{filename} yüklenemedi"
+            uploadError: "{filename} yüklenemedi",
+            text: {
+                clickTheStarTo: "Bir dosyayı favorilere eklemek için yıldıza tıkla.",
+                favoriteFilesWillShow: "Favori dosyalar burada görünecek!"
+            },
+            option: {
+                localThumbnails: {
+                    description: "Harici bir hizmet (placeholder.nin0.dev) yerine dosya küçük resimlerini yerel olarak oluştur. Mobil ile uyumlu değil. Bu seçeneği değiştirmek mevcut favorileri etkilemez.",
+                    label: "Yerel Küçük Resimler"
+                }
+            }
         },
         fileDownloadButton: {
             name: "FileDownloadButton",
@@ -4457,7 +4769,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 navigate: "Yanıtlar arasında gezinmek için alt paneli kullanın.",
                 container: "Kapsayıcı öğe bulunamadı.",
-                couldntFind: "Yanıt mesajı bulunamadı."
+                couldntFind: "Yanıt bulunamadı."
             },
             option: {
                 includePings: {
@@ -4545,6 +4857,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 channelFull: {
                     label: "Kanal Doldu",
                     description: "Kanal artık dolu değilse sizi oraya taşımayı dene"
+                },
+                onlyWhenInVoice: {
+                    label: "Yalnızca Sesteyken",
+                    description: "Kullanıcıyı yalnızca sen bir ses kanalındayken takip et"
                 }
             },
             toast: {
@@ -4589,25 +4905,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     previewText: "Pijamalı hasta yağız şoföre çabucak güvendi",
                     authors: "{{authors}} tarafından"
                 }
+            },
+            text: {
+                currentFont: "Geçerli yazı tipi:",
+                resetFont: "Yazı Tipini Sıfırla"
             }
         },
         forceOwnerCrown: {
             name: "ForceOwnerCrown",
             description: "Sunucu büyük olsa bile, kullanıcı adlarının yanında sunucu sahibi tacını zorla gösterir."
-        },
-        forwardAnywhere: {
-            name: "ForwardAnywhere",
-            description: "İletme işlemi başarısız olursa mesajı normal bir mesaj olarak gönderir; ayrıca NSFW içeriklerin iletilmesine olanak tanır.",
-            option: {
-                forwardPreface: {
-                    label: "İletme Ön Eki",
-                    description: "İletilen mesajın başına hangi ifade eklenmeli?"
-                }
-            },
-            context: {
-                attachments: "Ekler",
-                forwarded: "Şuradan iletildi:"
-            }
         },
         freaky: {
             name: "Freaky",
@@ -4707,12 +5013,17 @@ const translations: MatchStructure<typeof enTranslations> = {
                     name: "En İyi Arkadaş",
                     description: "Bunu nasıl başarıyorsunuz??? (5 Yıl)"
                 }
+            },
+            option: {
+                showFriendsInChat: {
+                    description: "Arkadaşlardan gelen mesajlarda arkadaş simgesi göster.",
+                    label: "Sohbette Arkadaşları Göster"
+                }
+            },
+            text: {
+                friend: "Arkadaş",
+                rankIcon: "Rütbe simgesi"
             }
-        },
-        friendsSince: {
-            name: "FriendsSince",
-            description: "Kullanıcı açılır penceresinde biriyle ne zaman arkadaş olduğunu gösterir.",
-            section: "Arkadaş Olunan Tarih"
         },
         friendTags: {
             name: "FriendTags",
@@ -4748,7 +5059,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
-            description: "Kullanıcı açılır penceresine oyun etkinliğinizi gösterip gizlemek için bir anahtar ekler.",
+            description: "Mikrofon ve sağırlaştır düğmesinin yanına oyun etkinliğini açıp kapatan bir düğme ekler. Spotify etkinliğini açıp kapatmak için sağ tıkla.",
             tooltip: "Oyun Etkinliğini Değiştir",
             gameActivity: {
                 enabled: "Oyun Etkinliği Etkin",
@@ -4765,6 +5076,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     panel: "Sustur/Mikrofon Kapat'ın Yanında",
                     toolbox: "Plexcord Araç Kutusunda"
                 }
+            },
+            text: {
+                disableGameActivity: "Oyun Etkinliğini Devre Dışı Bırak",
+                enableGameActivity: "Oyun Etkinliğini Etkinleştir",
+                shareSpotifyActivity: "Spotify Etkinliğini Paylaş",
+                shareSpotifyActivityAccount: "Spotify Etkinliğini Paylaş ({{name}})"
             }
         },
         ghosted: {
@@ -4912,7 +5229,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "Görsel bağlantısı panoya kopyalandı!",
                 urlCopied: "URL panoya kopyalandı!",
                 already: "Bu koleksiyon zaten mevcut",
-                alreadyCollection: "Bu GIF zaten koleksiyonda mevcut"
+                alreadyCollection: "Bu GIF zaten koleksiyonda",
+                collectionsImportedSuccessfully: "Koleksiyonlar başarıyla içe aktarıldı.",
+                failedToImportCollections: "Koleksiyonlar içe aktarılamadı: {{String_err}}"
             },
             modal: {
                 create: {
@@ -4948,6 +5267,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     remove: "Kaldır",
                     cancel: "Vazgeç"
                 }
+            },
+            text: {
+                gifPickerCategoryOptions: "GIF Seçici Kategori Seçenekleri",
+                gifCollections: "GIF Koleksiyonları",
+                unknown: "Bilinmiyor"
             }
         },
         gifPaste: {
@@ -4959,7 +5283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Favorilerinizden rastgele bir GIF gönderen bir komut ekler; sunucu sahibini etiketleme ihtimali %10'dur!",
             command: {
                 gifRoulette: {
-                    description: "Şansını dene ve rastgele bir GIF gönder"
+                    description: "Şansını dene ve rastgele bir GIF gönder",
+                    restricted: "Bu komut bu sunucuda kısıtlanmıştır."
                 }
             },
             option: {
@@ -4994,7 +5319,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 only: "Yalnızca en iyi {{length}}/{{total}} gösteriliyor"
             },
             modal: {
-                title: "{{user}} adlı kullanıcının GitHub Depoları",
+                title: "{{username}} kullanıcısının GitHub Depoları",
                 repository: "Depo",
                 description: "Açıklama",
                 language: "Dil",
@@ -5101,9 +5426,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         hideMessages: {
             name: "HideMessages",
-            description: "Yeniden başlatana kadar mesajları geçici olarak gizler.",
+            description: "Yeniden başlatana kadar mesajları ve DM'leri geçici olarak gizler.",
             button: {
-                hide: "Gizle"
+                hide: "Gizle",
+                hideDm: "DM'yi Gizle",
+                unhideDm: "DM'yi Göster"
+            },
+            toggle: {
+                none: "Gizli DM Yok",
+                hide: "Gizli DM'leri Gizle",
+                show: "Gizli DM'leri Göster"
             },
             option: {
                 hidePopoverButton: {
@@ -5111,6 +5443,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Mesaj popover'ında gizle butonunu gizler."
                 }
             }
+        },
+        hideMutedVoiceIndicator: {
+            name: "HideMutedVoiceIndicator",
+            description: "Sunucu listesinde, aktif ses kanallarının hepsi susturulmuşsa ses göstergesini gizler"
         },
         hideServers: {
             name: "HideServers",
@@ -5231,10 +5567,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 refreshed: "Avatarlar başarıyla yenilendi.",
                 deletedAll: "Tüm notlar başarıyla silindi.",
                 imported: "Notlar başarıyla içe aktarıldı.",
-                invalid: "Notlar içe aktarılamadı."
+                invalid: "Notlar içe aktarılamadı.",
+                invalidJson: "Geçersiz JSON"
             },
             toolbox: {
                 action: "Notları Aç"
+            },
+            text: {
+                holyNotes: "Holy Notes",
+                noteTag: "NOT"
             }
         },
         homeTyping: {
@@ -5342,7 +5683,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 ignoreListening: {
                     label: "Dinlenenleri Yok Say",
-                    description: "Tüm dinleme etkinliklerini yok say (Genellikle Spotify etkinlikleridir)"
+                    description: "Tüm dinleme etkinliklerini yok say (bunlar genellikle Spotify etkinlikleridir)"
                 },
                 ignoreWatching: {
                     label: "İzlenenleri Yok Say",
@@ -5355,6 +5696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoredActivities: {
                     label: "Yok Sayılan Etkinlikler"
                 }
+            },
+            text: {
+                enableActivity: "Etkinliği Etkinleştir",
+                disableActivity: "Etkinliği Devre Dışı Bırak"
             }
         },
         ignoreCalls: {
@@ -5440,6 +5785,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 sizeHTML: "Boyut",
                 dimensions: "Boyutlar",
                 filename: "Dosya Adı"
+            },
+            text: {
+                bytes: "Bayt"
             }
         },
         imgToGif: {
@@ -5558,6 +5906,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toast: "Anında Ekran Paylaşımı {{state}}",
                 enabled: "Etkin",
                 disabled: "Devre Dışı"
+            },
+            toast: {
+                instantScreenshareDisabled: "Anında Ekran Paylaşımı {{disabled}}"
+            },
+            text: {
+                instantScreenshare: "Instant Screenshare"
             }
         },
         invisibleChat: {
@@ -5680,6 +6034,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     resetData: "Verileri Sıfırla",
                     sure: "Emin misin?"
                 }
+            },
+            text: {
+                serverOptions: "Sunucu Seçenekleri",
+                copyServerId: "Sunucu Kimliğini Kopyala",
+                serverIdCopied: "Sunucu kimliği panoya kopyalandı"
             }
         },
         jumpTo: {
@@ -5746,6 +6105,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Anahtar Kelimeler",
                     description: "Anahtar kelimeleri yönet"
                 }
+            },
+            text: {
+                keywordEntryI1: "Anahtar Kelime Girdisi {{i_1}}",
+                listPriorityAdvanced: "Liste önceliği (Gelişmiş)",
+                whichListToPrioritize: "Bir mesaj iki listeyi de tetiklerse hangi listenin öncelikli olacağı",
+                ifYouAreNot: "Emin değilsen, çoğu yaygın senaryoda genellikle Kara Liste olarak ayarlanır"
             }
         },
         lastOnline: {
@@ -5819,10 +6184,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     listenbrainzLogo: "Büyük ListenBrainz logosunu kullan",
                     generic: "Genel bir yer tutucu kullan"
                 },
+                showAlbumCover: {
+                    label: "Albüm Kapağını Göster",
+                    description: "Albüm kapağını gösterir. Bunu devre dışı bırakmak yer tutucu bir görsel görüntüler. Müziğiniz uygunsuz kapak görseline sahipse kullanışlıdır"
+                },
                 useLogo: {
                     label: "Logo Kullan",
                     description: "Albüm kapağında ListenBrainz logosunu göster"
                 }
+            },
+            button: {
+                profile: "ListenBrainz Profili",
+                viewSong: "Şarkıyı Görüntüle"
             }
         },
         loadingQuotes: {
@@ -5849,6 +6222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Ek Alıntılar Ayırıcısı",
                     description: "Ek alıntılar için ayırıcı"
                 }
+            },
+            text: {
+                allQuotesDisabled: "Tüm yükleme alıntılarını gerçekten devre dışı mı bıraktınız? Ne aptalca bir hareket..."
             }
         },
         loginWithQR: {
@@ -5867,7 +6243,26 @@ const translations: MatchStructure<typeof enTranslations> = {
             stopScanning: "Taramayı Durdur",
             usingWebcam: "Web kamerası kullanarak tara",
             dragDrop: "Bir resmi buraya sürükleyip bırak ya da bir resim seçmek için tıkla",
-            orPaste: "Veya panodan bir resim yapıştır!"
+            orPaste: "Veya panodan bir resim yapıştır!",
+            verifyLogin: "Girişi Doğrula",
+            text: {
+                scanQrCode: "QR Kodu Tara"
+            }
+        },
+        markdownTables: {
+            name: "MarkdownTables",
+            description: "Discord mesajlarında GitHub tarzı markdown tablolarını görüntüler.",
+            toolbar: {
+                label: "Markdown tablo görünümü",
+                table: "Tablo",
+                raw: "Ham"
+            },
+            option: {
+                hideToggle: {
+                    label: "Geçişi Gizle",
+                    description: "Tablo/Ham geçişini gizler ve tabloları her zaman işlenmiş olarak gösterir."
+                }
+            }
         },
         mediaPlaybackSpeed: {
             name: "MediaPlaybackSpeed",
@@ -5893,7 +6288,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         memberCount: {
             name: "MemberCount",
-            description: "Sunucuda çevrimiçi üyelerin, toplam üyelerin ve sesli kanallardaki kullanıcıların sayısını — üye listesinde ve araç ipucunda gösterir.",
+            description: "Sunucudaki çevrimiçi üye, toplam üye ve ses kanallarındaki kullanıcı sayısını üye listesinde ve araç ipucunda gösterir.",
             option: {
                 toolTip: {
                     label: "Araç İpucu",
@@ -5910,7 +6305,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             onlineThisChannel: "{{formattedOnlineCount}} bu kanalda çevrimiçi",
             totalMembers: "{{formattedTotalCount}} sunucudaki toplam üye",
-            totalVoice: "{{formattedVoiceCount}} sesli kanallarda üye"
+            totalVoice: "{{formattedVoiceCount}} sesli kanallarda üye",
+            tooltip: {
+                total: "Toplam {{count}} sunucu üyesi"
+            }
         },
         mentionAvatars: {
             name: "MentionAvatars",
@@ -6057,7 +6455,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                 messageContent: "Mesaj içeriği kopyalandı!",
                 userId: "Kullanıcı ID'si kopyalandı!"
             },
-            linkCopied: "Bağlantı kopyalandı!"
+            linkCopied: "Bağlantı kopyalandı!",
+            text: {
+                shift: "Shift",
+                ctrl: "Ctrl",
+                alt: "Alt",
+                backspace: "Geri Al",
+                pickEmoji: "Emoji Seç"
+            },
+            emojiSetting: {
+                pick: "Emoji Seç",
+                selectMain: "Tepkiler İçin Emoji Seç",
+                selectAdditional: "Ek Emojileri Seç",
+                additionalPlaceholder: "virgül/yeni satırla ayrılmış, en fazla {{max}}"
+            },
+            toast: {
+                cannotReact: "Tepki verilemiyor: Eksik izinler",
+                linkCopied: "Bağlantı kopyalandı!"
+            }
         },
         messageColors: {
             name: "MessageColors",
@@ -6212,7 +6627,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         messageLogger: {
             name: "MessageLogger",
             description: "Silinen ve düzenlenen mesajları geçici olarak kaydeder.",
-            removeMessage: "Mesaj Geçmişini Kaldır",
+            removeMessage: "Mesaj Geçmişini Temizle",
             removeMessageTemporary: "Mesajı Kaldır (Geçici)",
             clearMessageLog: "Mesaj Günlüğünü Temizle",
             showDiff: "Farkı Göster",
@@ -6276,7 +6691,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                 separatedDiffs: {
                     label: "Ayrılmış Farklar",
                     description: "Farklarda eklemeleri ve silmeleri ayrı göstererek daha okunabilir bir görünüm sağlar"
+                },
+                logDeletedAttachments: {
+                    description: "Silinen eklerin kaydedilip kaydedilmeyeceği",
+                    label: "Silinen Ekleri Kaydet"
                 }
+            },
+            text: {
+                clearHistory: "Geçmişi Temizle",
+                toggleDeletedHighlight: "Silinen Vurgusunu Aç/Kapat",
+                enableDiffView: "Fark Görünümünü Etkinleştir",
+                disableDiffView: "Fark Görünümünü Devre Dışı Bırak",
+                noDeletedMessages: "Silinmiş mesaj yok",
+                deletedMessageSuffix: " silinmiş mesaj",
+                deletedMessagesSuffix: " silinmiş mesaj"
             }
         },
         messageLoggerEnhanced: {
@@ -6478,11 +6906,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 whitelistedIds: {
                     label: "Beyaz Liste Kimlikleri",
-                    description: "Beyaz listedeki sunucu, kanal veya kullanıcı kimlikleri."
+                    description: "Mesaj kaydında her zaman gösterilecek sunucu, kanal veya kullanıcı kimlikleri."
                 },
                 blacklistedIds: {
                     label: "Kara Liste Kimlikleri",
-                    description: "Kara listedeki sunucu, kanal veya kullanıcı kimlikleri."
+                    description: "Mesaj kaydında asla gösterilmeyecek sunucu, kanal veya kullanıcı kimlikleri."
                 },
                 imageCacheDir: {
                     label: "Görsel Önbellek Dizini",
@@ -6520,6 +6948,25 @@ const translations: MatchStructure<typeof enTranslations> = {
                     confirmText: "Temizle",
                     cancel: "İptal"
                 }
+            },
+            toast: {
+                clearedLogs: "Kayıtlar temizlendi",
+                failedToClearLogs: "Kayıtlar temizlenemedi",
+                failedToRemoveMessage: "Mesaj kaldırılamadı. Ayrıntılar için konsolu kontrol et.",
+                noMessagesFoundIn: "Kayıt dosyasında mesaj bulunamadı",
+                successfullyImportedCountLogs: "{{count}} kayıt başarıyla içe aktarıldı",
+                successfullyExportedLogs: "Kayıtlar başarıyla dışa aktarıldı",
+                successfullyExportedCountLogs: "{{count}} kayıt başarıyla dışa aktarıldı",
+                errorExportingLogsCheck: "Kayıtlar dışa aktarılırken hata oluştu. Daha fazla bilgi için konsolu kontrol et"
+            },
+            text: {
+                jsonFile: "JSON Dosyası",
+                clearLogs: "Kayıtları Temizle",
+                clearingLogs: "Kayıtlar temizleniyor...",
+                messageLogger: "Message Logger",
+                importLogs: "Kayıtları İçe Aktar",
+                logs: "Kayıtlar",
+                loadingTabLogs: "{{tab}} kayıtları yükleniyor..."
             }
         },
         messageNotifier: {
@@ -6877,7 +7324,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Tidal için şarkı sözlerini göster"
                 },
                 websocketURL: {
-                    label: "Websocket URL",
+                    label: "WebSocket URL'si",
                     description: "Varsayılan: ws://localhost:24123"
                 },
                 YtmSectionTitle: {
@@ -6913,13 +7360,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     LRCLIB: "LRCLIB"
                 },
                 spotifyLyricsApiUrl: {
-                    label: "Spotify Şarkı Sözü API URL'si",
-                    description: "Spotify şarkı sözü API temel URL'si."
+                    label: "Spotify Şarkı Sözü API Temel URL'si",
+                    description: "Özel örnek temel URL'si (örneğin: http://localhost:8080)."
                 },
                 translateTo: {
                     label: "Diline Çevir",
                     description: "Şarkı sözlerini çevir — Bunu değiştirmek mevcut çevirileri temizler",
-                    cleared: "Çeviri Temizlendi"
+                    cleared: "Çeviriler temizlendi"
                 },
                 lyricsConversion: {
                     label: "Şarkı Sözü Dönüştürme",
@@ -6941,6 +7388,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Tüm önbelleğe alınmış şarkı sözlerini ve çevirileri sil",
                     button: "Önbelleği Temizle",
                     cacheLyricsPurged: "Şarkı sözü önbelleği temizlendi"
+                },
+                lyricDelay: {
+                    label: "Şarkı Sözü Gecikmesi"
                 }
             },
             context: {
@@ -7025,6 +7475,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 failed: "Pencere oluşturulamadı :(",
                 checkConsole: "Hatalar için konsolu kontrol et",
                 invalidUrlCustomApi: "Geçersiz Özel API Sunucu URL biçimi"
+            },
+            text: {
+                unknownArtist: "Bilinmeyen Sanatçı",
+                unknownTitle: "Bilinmeyen Başlık"
             }
         },
         mutualGroupDMs: {
@@ -7045,7 +7499,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "NewGuildSettings",
             description: "Yeni sunuculara katıldığında otomatik olarak sessize alır ve çeşitli diğer ayarları değiştirir",
             context: {
-                apply: "Yeni Sunucu Ayarlarını Uygula"
+                apply: "NewGuildSettings'i Klasöre Uygula"
             },
             option: {
                 guild: {
@@ -7100,7 +7554,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 dontShowAgain: "Bir daha gösterme",
                 restartRequired: "Aşağıdaki eklentiler yeniden başlatma gerektiriyor",
                 restart: "Yeniden Başlat",
-                continue: "Devam Et"
+                continue: "Devam Et",
+                supportUs: "Plexcord Açık Kaynak bir yazılımdır. Kullanmaktan keyif alıyorsan bizi desteklemeyi düşünebilirsin:",
+                supportUsLink: "buradan"
             }
         },
         noAppsAllowed: {
@@ -7284,7 +7740,10 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         notificationTitle: {
             name: "NotificationTitle",
-            description: "Masaüstü bildirimlerini daha bilgilendirici hale getirir."
+            description: "Masaüstü bildirimlerini daha bilgilendirici hale getirir.",
+            text: {
+                threadInParent: "{{parent}} içinde {{thread}}"
+            }
         },
         notificationVolume: {
             name: "NotificationVolume",
@@ -7360,10 +7819,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 vrcx: {
                     label: "VRChat",
                     description: "VRChat bağlantılarını VRChat uygulamasında aç"
+                },
+                telegram: {
+                    label: "Telegram",
+                    description: "Telegram bağlantılarını Telegram uygulamasında aç"
                 }
             },
             notification: {
-                open: "Opened link in native app"
+                open: "Bağlantı yerel uygulamada açıldı"
             }
         },
         overrideForumDefaults: {
@@ -7447,6 +7910,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 highest: "En Yüksek Rol",
                 lowest: "En Düşük Rol",
                 details: "Rol Detayları"
+            },
+            text: {
+                roleOptions: "Rol Seçenekleri",
+                userOptions: "Kullanıcı Seçenekleri",
+                unknownRole: "Bilinmeyen Rol",
+                unknownUser: "Bilinmeyen Kullanıcı"
             }
         },
         petpet: {
@@ -7497,7 +7966,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unnamed: "isimsiz"
                 },
                 pin: {
-                    label: "DM Sabitle",
+                    label: "DM'leri Sabitle",
                     addCategory: "Kategori Ekle"
                 },
                 unPin: {
@@ -7534,7 +8003,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     color: "Renk",
                     save: "Kaydet",
                     create: "Oluştur"
-                }
+                },
+                defaultCategoryName: "Sabit Kategori {{number}}"
             }
         },
         pingNotifications: {
@@ -7578,12 +8048,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformIndicators: {
             name: "PlatformIndicators",
             description: "Kullanıcılara platform göstergeleri (Masaüstü, Mobil, Web...) ekler.",
-            embeddedTooltip: "Konsol",
+            embeddedTooltip: "Gömülü (Konsol veya Oyun)",
             vrTooltip: "VR",
             option: {
                 list: {
                     label: "Liste",
-                    description: "Üye listesinde göstergeleri göster"
+                    description: "Kullanıcı profillerinde göstergeleri göster"
                 },
                 badges: {
                     label: "Rozetler",
@@ -7606,7 +8076,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformSpoofer: {
             name: "PlatformSpoofer",
             description: "Hangi platformda veya cihazda olduğunuzu taklit eder",
-            about: "Bu eklentinin sizi uyarılmaktan veya yasaklanmaktan koruyacağını garanti edemeyiz.",
+            about: "Bu eklentinin uyarı veya yasaklama almana neden olmayacağını garanti edemeyiz. Xbox/Playstation/VR seçmek istemcini eski bir sürüme çevirebilir.",
             platform: {
                 desktop: "Discord İstemcisi",
                 web: "Discord Web",
@@ -7619,7 +8089,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 platform: {
                     label: "Platform",
-                    description: "Hangi platform olarak görünmek istiyorsunuz",
+                    description: "Hangi platformdaymış gibi görüneceğin.",
                     desktop: "Masaüstü",
                     web: "Web",
                     android: "Android",
@@ -7689,9 +8159,9 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         profileSets: {
             name: "ProfileSets",
-            description: "Profil önayarlarını kaydetmenize ve Ayarlar'daki Profil Bölümü üzerinden yüklemenize olanak tanır.",
+            description: "Farklı profil ön ayarlarını kaydetmeni ve yüklemeni sağlar.",
             toast: {
-                importFailed: "Profil önayarları içe aktarılamadı. Dosya geçersiz olabilir.",
+                importFailed: "Ön ayarlar içe aktarılamadı. Dosya geçersiz olabilir.",
             },
             option: {
                 avatarSize: {
@@ -7700,419 +8170,572 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
             },
             modal: {
-                override: "Override",
-                merge: "Merge",
-                cancel: "Cancel",
-                timestamp: "{{formattedDate}} at {{formattedTime}}",
-                rename: "Rename",
-                update: "Update",
-                moveUp: "Move Up",
-                moveDown: "Move Down",
-                moveTo: "Move to Page 1",
-                delete: "Delete",
-                importProfiles: "Import Profiles",
-                importText: "You have {{existingCount}} existing profiles in this section. Do you want to override them or merge with imported profiles?",
-                heading: "Saved Profiles",
-                searchProfiles: "Search Profiles...",
-                profileName: "Profile Name",
-                saving: "Saving...",
-                save: "Save Profile",
-                cancelSearch: "Cancel Search",
-                search: "Search",
-                random: "Random",
-                import: "Import",
-                exportAll: "Export All"
+                override: "Üzerine Yaz",
+                merge: "Birleştir",
+                cancel: "İptal",
+                timestamp: "{{formattedDate}}, {{formattedTime}}",
+                rename: "Yeniden Adlandır",
+                update: "Güncelle",
+                moveUp: "Yukarı Taşı",
+                moveDown: "Aşağı Taşı",
+                moveTo: "1. Sayfaya Taşı",
+                delete: "Sil",
+                importProfiles: "Profilleri İçe Aktar",
+                importText: "Bu bölümde {{existingCount}} mevcut profilin var. Bunların üzerine mi yazmak istersin, yoksa içe aktarılan profillerle birleştirmek mi?",
+                heading: "Kayıtlı Profiller",
+                searchProfiles: "Profillerde ara...",
+                profileName: "Profil Adı",
+                saving: "Kaydediliyor...",
+                save: "Profili Kaydet",
+                cancelSearch: "Aramayı İptal Et",
+                search: "Ara",
+                random: "Rastgele",
+                import: "İçe Aktar",
+                exportAll: "Tümünü Dışa Aktar"
+            },
+            text: {
+                selectAServer: "Bir sunucu seç",
+                profileSets: "Profil Setleri",
+                youAreNotIn: "Henüz hiçbir sunucuda değilsin.",
+                mainProfile: "Ana Profil",
+                serverProfiles: "Sunucu Profilleri",
+                openProfileSets: "Profil Setlerini Aç"
             }
         },
         questify: {
             name: "Questify",
-            description: "Görev deneyiminizi bir dizi özellik ile geliştirin veya istediğiniz değilse tamamen devre dışı bırakın.",
+            description: "Belirli Görev özelliklerini geliştirin, rahatsız edici öğeleri kapatın veya Görevleri tamamen kaldırın.",
             quests: "Görevler",
             context: {
                 quest: {
-                    label: "Görev Düğmesi Menüsü",
-                    ignore: "Tümünü Yoksay Olarak İşaretle",
-                    reset: "Yoksayma Listesini Sıfırla",
+                    label: "Görev Butonu Menüsü",
+                    ignore: "Tümünü Yok Sayılan Olarak İşaretle",
+                    reset: "Yok Sayılanlar Listesini Sıfırla",
                     fetch: "Görevleri Getir",
-                    markAsIgnored: "Yoksay Olarak İşaretle",
-                    unmarkAsIgnored: "Yoksaymayı Kaldır",
+                    markAsIgnored: "Yok Sayılan Olarak İşaretle",
+                    unmarkAsIgnored: "Yok Sayılan İşaretini Kaldır",
                     stopAuto: "Otomatik Tamamlamayı Durdur",
-                    copyQuestID: "Görev ID'sini Kopyala",
-                    startAuto: "Otomatik Tamamlamayı Başlat"
-                }
-            },
-            settings: {
-                questButton: {
-                    title: "Görev Düğmesi",
-                    description: "Sunucu listesinde talep edilmemiş Görevler için isteğe bağlı gösterge içeren bir Görev düğmesi gösterin.",
-                    leftClick: "Sol Tıklama İşlemi",
-                    middleClick: "Orta Tıklama İşlemi",
-                    rightClick: "Sağ Tıklama İşlemi",
-                    visibility: "Düğme Görünürlüğü",
-                    unclaimedIndicator: "Talep Edilmemiş Gösterge",
-                    badgeColor: "Rozet Rengi",
-                    rewardDisplay: "Ödül Gösterimi",
-                    includedRewardTypes: "Dahil Edilen Ödül Türleri",
-                    includedRewardTypesDesc: "Düğme görünürlüğü, rozet sayısı ve uyarı sesini çalarken yalnızca bu ödül türlerine sahip Görevleri talep edilmemiş olarak say.",
-                    selectRewardTypes: "Talep edilmemiş sayıma dahil edilecek ödül türlerini seçin...",
-                    noRewardType: "Bu isimde desteklenen bir Görev özelliği yok.",
-                    default: "Varsayılan",
-                    disable: "Devre Dışı Bırak"
-                },
-                questFeatures: {
-                    title: "Görev Özellikleri",
-                    description: "Belirli Görev özelliklerini değiştirin.",
-                    popupWarning: "{{disablePopup}} seçeneği, tamamlanmış Görevler ve Görev ilerleme takibi için göz ardı edilecektir.",
-                    videoQuestInfo: "{{completeVideo}} seçeneği, Video Görevinin süresini bekleyecek ve otomatik olarak tamamlandı olarak işaretleyecektir.",
-                    gameQuestInfo: "Benzer şekilde, {{completeGame}} seçeneği Oyun Görevinin süresini bekleyecek ve otomatik olarak tamamlandı olarak işaretleyecektir. Bu seçenek yalnızca resmi masaüstü istemcisinde desteklenir.",
-                    manualStartWarning: "Görevleri manuel olarak başlatmanız gerekir. İlk tıklama, Görevleri arka planda başlatır. Video Görevleri için, sonraki tıklamalar video modalını normal şekilde açar. Görevleri iptal etmek için Görev kutucuğunda bağlam menüsünü açıp {{stopAuto}} seçeneğini seçebilirsiniz.",
-                    tosWarning: "Bu seçeneklerden herhangi birini kullanmak Discord'un Hizmet Şartlarına aykırıdır. Riski kendinize ait olmak üzere kullanın.",
-                    selectFeatures: "Hangi Görev özelliklerini değiştireceğinizi seçin.",
-                    disablePopup: "Hesap Paneli Üzerindeki Görev Açılır Penceresini Devre Dışı Bırak",
-                    completeVideo: "Video Görevlerini Arka Planda Tamamla",
-                    completeGame: "Oyun Oynama Görevlerini Arka Planda Tamamla",
-                    stopAuto: "Otomatik Tamamlamayı Durdur"
-                },
-                restyleQuests: {
-                    title: "Görevleri Yeniden Biçimlendir",
-                    description: "Görünürlük için isteğe bağlı tema renkleriyle Görevleri vurgulayın.",
-                    precedenceNote: "Talep Edilmiş ve Süresi Dolmuş Görev stilleri, Görev yoksayılsa bile öncelikli olacaktır.",
-                    gradientStyle: "Gradyan Stili",
-                    assetPreload: "Varlık Ön Yükleme",
-                    unclaimed: "Talep Edilmemiş",
-                    claimed: "Talep Edilmiş",
-                    ignored: "Yoksayılmış",
-                    expired: "Süresi Dolmuş",
-                    intenseGradient: "Yoğun Yeniden Biçimlendirme Gradyanı",
-                    defaultGradient: "Varsayılan Yeniden Biçimlendirme Gradyanı",
-                    blackGradient: "İnce Siyah Gradyan",
-                    noGradient: "Gradyan Yok",
-                    loadAllAssets: "Sayfa Yüklendiğinde Tüm Görev Varlıklarını Yükle",
-                    loadDuringScroll: "Sayfa Kaydırma Sırasında Görev Varlıklarını Yükle"
-                },
-                reorderQuests: {
-                    title: "Görevleri Yeniden Sırala",
-                    description: "Görevleri durumlarına göre sıralayın. Görev sayfasında \"Questify\" sıralama seçeneği seçildiğinde uygulanır.",
-                    formatNote: "Virgülle ayrılmış liste şunların hepsini içermelidir: {{items}}.",
-                    placeholder: "UNCLAIMED, CLAIMED, IGNORED, EXPIRED hepsini eklemelisiniz",
-                    invalidFormat: "Geçersiz format.",
-                    unclaimedSubsort: "Talep Edilmemiş Alt Sıralama",
-                    claimedSubsort: "Talep Edilmiş Alt Sıralama",
-                    ignoredSubsort: "Yoksayılmış Alt Sıralama",
-                    expiredSubsort: "Süresi Dolmuş Alt Sıralama",
-                    addedNewest: "Eklenme (En Yeni)",
-                    addedOldest: "Eklenme (En Eski)",
-                    expiredRecent: "Süresi Dolmuş (En Son)",
-                    expiredLeast: "Süresi Dolmuş (En Az Son)",
-                    expiringSoon: "Süresi Doluyor (En Yakın)",
-                    expiringLate: "Süresi Doluyor (En Geç)",
-                    claimedRecent: "Talep Edilmiş (En Son)",
-                    claimedLeast: "Talep Edilmiş (En Az Son)",
-                    ignoredQuestProfile: "Yoksayılan Görev Profili",
-                    sharedProfile: "Paylaşımlı: Bu istemcideki tüm hesaplar yoksaymaları paylaşır.",
-                    privateProfile: "Özel: Bu istemcideki tüm hesapların ayrı yoksaymaları vardır.",
-                    rememberSort: "Sıralama Seçimini Hatırla",
-                    rememberFilter: "Filtre Seçimini Hatırla",
-                    yes: "Evet",
-                    no: "Hayır",
-                    rememberNote: "Bu sıralama ve filtre seçimi, Görev sayfasındaki yerleşik sıralama ve filtre seçeneklerini ifade eder. Yukarıdaki özel sıralama yalnızca Görev sayfasında \"Questify\" sıralama seçeneği seçildiğinde uygulanır. Hatırlama devre dışı bırakılırsa, sıralama veya filtre seçenekleri Görev sayfasını her açtığınızda sıfırlanır."
-                },
-                fetchingQuests: {
-                    title: "Görevleri Getirme",
-                    description: "Discord'dan ne sıklıkla Görev getirileceğini yapılandırın ve yeni Görevler için uyarılar ayarlayın.",
-                    defaultBehavior: "Varsayılan olarak, Discord Görevleri yalnızca yüklendiğinde ve Görevler sayfasını ziyaret ettiğinizde getirir. Bu, aşağıda tanımlanan bir getirme aralığı olmadan, bu eklentinin gün boyunca eklenen yeni Görevlerden haberdar olamayacağı anlamına gelir.",
-                    requirement: "Bu, Görev Düğmesinin etkin olmasına ve {{unclaimed}} olarak ayarlanmasına veya {{always}} olarak ayarlanıp talep edilmemiş {{pill}}, {{badge}} veya {{both}} göstergelerinin etkin olmasına bağlıdır. Aksi takdirde, periyodik olarak Görev getirmeye gerek yoktur.",
-                    blockWarning: "Ayrıca, {{questFeatures}} ayarında {{fetchingQuests}} engellenirse, bu çalışmayacaktır.",
-                    fetchInterval: "Getirme Aralığı",
-                    alertSound: "Uyarı Sesi",
-                    intervalPlaceholder: "30 dakika ile 12 saat arasında bir aralık seçin veya yazın.",
-                    intervalFeedback: "Aralıklar 30 dakika ile 12 saat arasında olmalıdır.",
-                    soundPlaceholder: "Bir ses seçin veya özel bir ses URL'si sağlayın.",
-                    soundFeedback: "Ses bulunamadı veya URL desteklenen bir alan adından değil.",
-                    disabled: "Devre Dışı",
-                    minutes: "Dakika",
-                    minute: "Dakika",
-                    hours: "Saat",
-                    hour: "Saat",
-                    thirtyMinutes: "30 Dakika",
-                    oneHour: "1 Saat",
-                    threeHours: "3 Saat",
-                    sixHours: "6 Saat",
-                    twelveHours: "12 Saat",
-                    customSound: "ÖZEL SES"
-                },
-                disableOptions: {
-                    everything: "Her Şeyi Devre Dışı Bırak",
-                    discovery: "Keşfet Sekmesini Devre Dışı Bırak",
-                    dms: "DM'lerde Görevler Sekmesini Devre Dışı Bırak",
-                    fetching: "Görev Getirmeyi Devre Dışı Bırak",
-                    popup: "Hesap Panelinin Üstündeki Açılır Pencereyi Devre Dışı Bırak",
-                    sponsored: "Görevler Sayfasındaki Sponsorlu Banner'ı Devre Dışı Bırak",
-                    badge: "Kullanıcı Profillerindeki Rozeti Devre Dışı Bırak",
-                    inventory: "Hediye Envanteri Taşıma Bildirimini Devre Dışı Bırak",
-                    friendsList: "Arkadaş Listesi Şu Anda Aktif Tanıtımı",
-                    membersList: "Üyeler Listesi Aktif Oynuyor Simgeleri",
-                    gameQuests: "Oyun/Aktivite Görevlerini Arka Planda Tamamla",
-                    videoQuests: "Video İzleme Görevlerini Arka Planda Tamamla",
-                    achievementQuests: "Aktivite içindeki Görevlerini Arka Planda Tamamla",
-                    mobileDesktop: "Mobil Görevleri Masaüstü ile Uyumlu Hale Getir",
-                    notifyOnComplete: "Görev Tamamlandığında Bildir"
-                },
-                options: {
-                    always: "Her Zaman",
-                    unclaimed: "Talep Edilmemiş",
-                    never: "Asla",
-                    pill: "Hap",
-                    badge: "Rozet",
-                    both: "İkisi de",
-                    none: "Hiçbiri",
-                    openQuests: "Görevleri Aç",
-                    contextMenu: "Bağlam Menüsü",
-                    pluginSettings: "Eklenti Ayarları",
-                    nothing: "Hiçbir şey",
-                    orbs: "Küreler",
-                    nitroCodes: "Nitro Kodları",
-                    rewardCodes: "Ödül Kodları",
-                    inGameItems: "Oyun İçi Öğeler",
-                    profileCollectibles: "Profil Koleksiyonları"
-                }
-            },
-            option: {
-                disableQuests: {
-                    label: "Görevleri Devre Dışı Bırak",
-                    description: "Hangi Görev özelliklerini devre dışı bırakacağınızı seçin."
-                },
-                disableQuestsEverything: {
-                    label: "Her Şeyi Devre Dışı Bırak",
-                    description: "Tüm Görev özelliklerini devre dışı bırak."
-                },
-                disableQuestsFetchingQuests: {
-                    label: "Görev Getirmeyi Devre Dışı Bırak",
-                    description: "Discord'dan Görev getirmeyi devre dışı bırak."
-                },
-                disableQuestsDirectMessagesTab: {
-                    label: "DM'lerdeki Görev Sekmesini Devre Dışı Bırak",
-                    description: "Doğrudan Mesajlar sayfasındaki Görev sekmesini devre dışı bırak."
-                },
-                disableQuestsDiscoveryTab: {
-                    label: "Keşfet Sekmesini Devre Dışı Bırak",
-                    description: "Keşfet sayfasındaki Görev sekmesini devre dışı bırak."
-                },
-                disableQuestsPageSponsoredBanner: {
-                    label: "Görevler Sayfasındaki Sponsorlu Banner'ı Devre Dışı Bırak",
-                    description: "Görevler sayfasındaki sponsorlu banner'ı devre dışı bırak."
-                },
-                disableQuestsPopupAboveAccountPanel: {
-                    label: "Hesap Paneli Üstündeki Açılır Pencereyi Devre Dışı Bırak",
-                    description: "Hesap panelinizin üstündeki Görev açılır penceresini devre dışı bırak."
-                },
-                disableQuestsBadgeOnUserProfiles: {
-                    label: "Kullanıcı Profillerindeki Rozeti Devre Dışı Bırak",
-                    description: "Kullanıcı profillerindeki Görev rozetini devre dışı bırak."
-                },
-                disableQuestsGiftInventoryRelocationNotice: {
-                    label: "Hediye Envanteri Taşınma Bildirimini Devre Dışı Bırak",
-                    description: "Hediye envanteri Görev taşınma bildirimini devre dışı bırak."
-                },
-                disableFriendsListActiveNowPromotion: {
-                    label: "Arkadaş Listesi Şu Anda Aktif Tanıtımını Devre Dışı Bırak",
-                    description: "Arkadaşların oynadığı oyunlar için Görev tanıtımını devre dışı bırak."
-                },
-                disableMembersListActivelyPlayingIcons: {
-                    label: "Üyeler Listesindeki Aktif Oynama Simgelerini Devre Dışı Bırak",
-                    description: "Üyeler listesindeki aktif oynama simgelerini devre dışı bırak."
-                },
-                makeMobileQuestsDesktopCompatible: {
-                    label: "Mobil Görevleri Masaüstü Uyumlu Yap",
-                    description: "Yalnızca mobil Görevleri masaüstü ile uyumlu hale getir."
-                },
-                completeVideoQuestsInBackground: {
-                    label: "Video Görevlerini Arka Planda Tamamla",
-                    description: "Video Görevlerini, video süresi geçtikten sonra arka planda tamamla."
-                },
-                completeGameQuestsInBackground: {
-                    label: "Oyun Görevlerini Arka Planda Tamamla",
-                    description: "Oyun Görevlerini, oyun süresi geçtikten sonra arka planda tamamla."
-                },
-                completeAchievementQuestsInBackground: {
-                    label: "Aktivite Görevlerini Arka Planda Tamamla",
-                    description: "Aktivite Görevlerini arka planda tamamla."
-                },
-                notifyOnQuestComplete: {
-                    label: "Görev Tamamlandığında Bildir",
-                    description: "Bir Görev otomatik olarak tamamlandığında bildirim göster."
-                },
-                questButton: {
-                    label: "Görev Düğmesi",
-                    description: "Sunucu listesinde bir Görev düğmesi göster."
-                },
-                questButtonDisplay: {
-                    label: "Görev Düğmesi Görünümü",
-                    description: "Sunucu listesindeki Görev düğmesi için hangi görüntüleme türünün kullanılacağı."
-                },
-                questRewardIncludeRewardCode: {
-                    label: "Ödül Kodlarını Dahil Et",
-                    description: "Görev sayılarını görüntülerken Ödül Kodlu Görevleri dahil et."
-                },
-                questRewardIncludeNitroCode: {
-                    label: "Nitro Kodlarını Dahil Et",
-                    description: "Görev sayılarını görüntülerken Nitro Kodlu Görevleri dahil et."
-                },
-                questRewardIncludeInGame: {
-                    label: "Oyun İçi Ödülleri Dahil Et",
-                    description: "Görev sayılarını görüntülerken Oyun İçi ödüllü Görevleri dahil et."
-                },
-                questRewardIncludeCollectibles: {
-                    label: "Koleksiyonları Dahil Et",
-                    description: "Görev sayılarını görüntülerken Koleksiyon Öğeli Görevleri dahil et."
-                },
-                questRewardIncludeOrbs: {
-                    label: "Küreleri Dahil Et",
-                    description: "Görev sayılarını görüntülerken Küre ödüllü Görevleri dahil et."
-                },
-                questButtonUnclaimed: {
-                    label: "Görev Düğmesi Talep Edilmemiş Göstergesi",
-                    description: "Sunucu listesindeki Görev düğmesinde talep edilmemiş gösterge için hangi görüntüleme türünün kullanılacağı."
-                },
-                questButtonBadgeColor: {
-                    label: "Görev Düğmesi Rozet Rengi",
-                    description: "Sunucu listesindeki Görev düğmesi rozetinin rengi."
-                },
-                questButtonLeftClickAction: {
-                    label: "Sol Tıklama İşlemi",
-                    description: "Sunucu listesindeki Görev düğmesine sol tıklanınca yapılacak işlem."
-                },
-                questButtonMiddleClickAction: {
-                    label: "Orta Tıklama İşlemi",
-                    description: "Sunucu listesindeki Görev düğmesine orta tıklanınca yapılacak işlem."
-                },
-                questButtonRightClickAction: {
-                    label: "Sağ Tıklama İşlemi",
-                    description: "Sunucu listesindeki Görev düğmesine sağ tıklanınca yapılacak işlem."
-                },
-                fetchingQuests: {
-                    label: "Görevleri Getirme",
-                    description: "Discord'dan Görev getir."
-                },
-                fetchingQuestsInterval: {
-                    label: "Görev Getirme Aralığı",
-                    description: "Discord'dan Görevleri getirme aralığı (saniye cinsinden)."
-                },
-                fetchingQuestsAlert: {
-                    label: "Görev Getirme Uyarısı",
-                    description: "Yeni Görevler tespit edildiğinde çalınacak ses."
-                },
-                fetchingQuestsAlertVolume: {
-                    label: "Görev Getirme Uyarısı Sesi Hacmi",
-                    description: "Yeni Görevler tespit edildiğinde çalınacak sesin hacmi."
-                },
-                restyleQuests: {
-                    label: "Görevleri Yeniden Biçimlendir",
-                    description: "Görevler sayfasındaki Görev kutucuklarının görünümünü özelleştir."
-                },
-                restyleQuestsUnclaimed: {
-                    label: "Görevleri Yeniden Biçimlendir - Talep Edilmemiş",
-                    description: "Görevler sayfasındaki talep edilmemiş Görev kutucuklarının rengi."
-                },
-                restyleQuestsClaimed: {
-                    label: "Görevleri Yeniden Biçimlendir - Talep Edilmiş",
-                    description: "Görevler sayfasındaki talep edilmiş Görev kutucuklarının rengi."
-                },
-                restyleQuestsIgnored: {
-                    label: "Görevleri Yeniden Biçimlendir - Yoksayılmış",
-                    description: "Görevler sayfasındaki yoksayılmış Görev kutucuklarının rengi."
-                },
-                restyleQuestsExpired: {
-                    label: "Görevleri Yeniden Biçimlendir - Süresi Dolmuş",
-                    description: "Görevler sayfasındaki süresi dolmuş Görev kutucuklarının rengi."
-                },
-                restyleQuestsGradient: {
-                    label: "Görevleri Yeniden Biçimlendir - Gradyan",
-                    description: "Görev kutucuklarında kullanılan gradyan stili."
-                },
-                restyleQuestsPreload: {
-                    label: "Görevleri Yeniden Biçimlendir - Ön Yükleme",
-                    description: "Görev kutucukları için varlıkları önceden yüklemeyi dene."
-                },
-                reorderQuests: {
-                    label: "Görevleri Yeniden Sırala",
-                    description: "Görevleri durumlarına göre sırala. Varsayılan sıralama için boş bırak. Virgülle ayrılmış liste şunların hepsini içermelidir: UNCLAIMED, CLAIMED, IGNORED, EXPIRED."
-                },
-                unclaimedSubsort: {
-                    label: "Talep Edilmemiş Alt Sıralama",
-                    description: "Talep edilmemiş Görevler için alt sıralama yöntemi."
-                },
-                claimedSubsort: {
-                    label: "Talep Edilmiş Alt Sıralama",
-                    description: "Talep edilmiş Görevler için alt sıralama yöntemi."
-                },
-                ignoredSubsort: {
-                    label: "Yoksayılmış Alt Sıralama",
-                    description: "Yoksayılmış Görevler için alt sıralama yöntemi."
-                },
-                expiredSubsort: {
-                    label: "Süresi Dolmuş Alt Sıralama",
-                    description: "Süresi dolmuş Görevler için alt sıralama yöntemi."
-                },
-                unclaimedUnignoredQuests: {
-                    label: "Talep Edilmemiş Yoksayılmamış Görevler",
-                    description: "Talep edilmemiş ve yoksayılmamış Görevlerin sayısını takip eder."
-                },
-                onQuestsPage: {
-                    label: "Görevler Sayfasında",
-                    description: "Kullanıcının şu anda Görevler sayfasında olup olmadığı."
-                },
-                triggerQuestsRerender: {
-                    label: "Görevler Yeniden Render Tetikleme",
-                    description: "Bu ayarı değiştirerek Görevler sayfasının yeniden render edilmesini tetikle."
-                },
-                ignoredQuestProfile: {
-                    label: "Yoksayılan Görev Profili",
-                    description: "Yoksayılan Görevler için kullanılan profil."
-                },
-                rememberQuestPageSort: {
-                    label: "Görev Sayfası Sıralamasını Hatırla",
-                    description: "Görevler sayfasında en son kullanılan sıralamayı hatırla."
-                },
-                rememberQuestPageFilters: {
-                    label: "Görev Sayfası Filtrelerini Hatırla",
-                    description: "Görevler sayfasında en son kullanılan filtreleri hatırla."
-                },
-                lastQuestPageSort: {
-                    label: "Son Görev Sayfası Sıralaması",
-                    description: "Görevler sayfasında en son kullanılan sıralamayı hatırla."
-                },
-                lastQuestPageFilters: {
-                    label: "Son Görev Sayfası Filtreleri",
-                    description: "Görevler sayfasında en son kullanılan filtreleri hatırla."
-                },
-                ignoredQuestIDs: {
-                    label: "Yoksayılan Görev Kimlikleri",
-                    description: "Yoksayılan Görev kimliklerinin dizisi."
-                },
-                resumeQuestIDs: {
-                    label: "Devam Edilen Görev Kimlikleri",
-                    description: "Arka planda otomatik tamamlanan Görev kimliklerinin dizisi."
+                    startAuto: "Otomatik Tamamlamayı Başlat",
+                    copyQuestID: "Görev ID'sini Kopyala"
                 }
             },
             button: {
-                questInProgressWithTime: "Tamamlanıyor ({{remainTime}})",
-                completing: "Tamamlanıyor",
-                resume: "Devam Et (~{{remainTime}})",
-                complete: "Tamamla {{remainTime}}",
-                completeImmediate: "Tamamla (Hemen)",
+                completing: "Tamamlanıyor...",
+                completingWithTime: "Tamamlanıyor ({{time}})",
+                completingIn: "{{time}} içinde tamamlanıyor",
+                queued: "Sırada ({{position}})",
+                resuming: "Devam ediliyor...",
+                completeNow: "Şimdi Tamamla",
+                complete: "Tamamla ({{time}})",
+                resume: "Devam Et ({{time}})",
                 completed: "Tamamlandı"
             },
             reward: {
-                orbs: "{{orbQuantity}} Orbs için {{completingText}}.",
-                article: "{{itemName}} için {{completingText}}.",
-                unrecognized: "Tanınmayan bir ödül türü için {{completingText}}."
+                orbs: "{{status}}: {{orbQuantity}} Orb.",
+                article: "{{status}}: {{itemName}}.",
+                unrecognized: "{{status}}: tanınmayan bir ödül."
+            },
+            toast: {
+                autoCompleteBroken: "Otomatik Tamamlama bozuk. Kısa süre içinde bir düzeltme yayınlanacak.",
+                enrollmentFailed: "{{questName}} Görevine kayıt başarısız oldu.",
+                enrollmentInNormalizequestnameQuest: "{{normalizeQuestName_quest}} görevine kayıt başarısız oldu{{rateLimitSuffix}}."
             },
             notification: {
                 completed: {
-                    title: "Görev Tamamlandı",
-                    body: "{{questName}} görevi tamamlandı."
+                    title: "Görev Tamamlandı!",
+                    body: "{{questName}} Görevi tamamlandı."
+                },
+                newQuest: {
+                    title: "Yeni Görev Bulundu!",
+                    body: "{{questName}} Görevi artık mevcut."
+                },
+                newQuests: {
+                    title: "Yeni Görevler Bulundu!",
+                    body: "{{count}} yeni Görev artık mevcut."
+                },
+                newExcludedQuest: {
+                    title: "Yeni Hariç Tutulan Görev Bulundu!",
+                    body: "Hariç tutulan {{questName}} Görevi bulundu. ID: {{questId}}"
+                },
+                newExcludedQuests: {
+                    title: "Yeni Hariç Tutulan Görevler Bulundu!",
+                    body: "{{count}} yeni hariç tutulan Görev bulundu. Görev ID'leri için konsolu kontrol edin."
                 }
+            },
+            alert: {
+                restart: {
+                    title: "Yeniden Başlatma Gerekli",
+                    body: "Questify ayarlarında yaptığınız bir değişiklik yeniden başlatma gerektiriyor.",
+                    confirm: "Yeniden Başlat",
+                    cancel: "Daha Sonra"
+                },
+                dangerous: {
+                    title: "Emin misiniz?",
+                    confirm: "Devam Et",
+                    cancel: "İptal",
+                    disableEverything: "Bu, Görev işlevselliğini tamamen devre dışı bırakacak.",
+                    allowDangerous: "Bu, tehlikeli ayarların değiştirilmesine izin verecek."
+                }
+            },
+            status: {
+                unclaimed: "ALINMADI",
+                claimed: "Alınmış",
+                ignored: "Yok Sayılan",
+                expired: "Süresi Dolmuş"
+            },
+            questTypes: {
+                watchVideo: "Video İzle",
+                watchVideoOnMobile: "Mobilde Video İzle",
+                achievementInActivity: "Etkinlikte Başarım",
+                achievementInGame: "Oyunda Başarım",
+                playActivity: "Etkinlik Oyna",
+                playOnDesktop: "Masaüstünde Oyna",
+                playOnDesktopV2: "Masaüstünde Oyna V2",
+                streamOnDesktop: "Masaüstünde Yayın Yap",
+                playOnPlayStation: "PlayStation'da Oyna",
+                playOnXbox: "Xbox'ta Oyna"
+            },
+            settings: {
+                questButton: {
+                    title: "Görev Butonu",
+                    description: "Sunucu listesinde, alınmamış ve yok sayılmamış Görevler için isteğe bağlı bir göstergeyle bir Görev Butonu gösterin.",
+                    behavior: "Buton Davranışı",
+                    leftClick: "Sol Tık Eylemi:",
+                    middleClick: "Orta Tık Eylemi:",
+                    rightClick: "Sağ Tık Eylemi:",
+                    visibility: "Buton Görünürlüğü:",
+                    visibilityTooltip: "Her Zaman, bu özellik etkin olduğu sürece Görev Butonunu gösterir.\n\nAlınmamış, yalnızca ilgili alınmamış Görev ödülleriniz varken gösterir.\n\nAsla, Görev Butonunu gizler.",
+                    unclaimedIndicator: "Alınmamış Göstergesi:",
+                    unclaimedIndicatorTooltip: "Hap, Görev Butonunun yanında Discord'un okunmamış tarzı işaretini gösterir.\n\nRozet, ilgili alınmamış Görev ödüllerinin sayısını gösterir.\n\nİkisi, hap ve rozeti birlikte gösterir.\n\nHiçbiri, alınmamış göstergelerini gizler.",
+                    badgeColor: "Rozet Rengi:",
+                    relevancy: "Görev Uygunluğu",
+                    includedRewardTypes: "Dahil Edilen Ödül Türleri:",
+                    includedRewardTypesTooltip: "Buton görünürlüğü, rozet sayısı ve uyarı davranışı belirlenirken yalnızca bu ödül türlerine sahip Görevleri alınmamış olarak say.",
+                    includedQuestTypes: "Dahil Edilen Görev Türleri:",
+                    includedQuestTypesTooltip: "Buton görünürlüğü, rozet sayısı ve uyarı davranışı belirlenirken yalnızca bu görev türlerine sahip Görevleri alınmamış olarak say.",
+                    display: {
+                        always: "Her Zaman",
+                        unclaimed: "Alınmamış",
+                        never: "Asla"
+                    },
+                    indicator: {
+                        pill: "Hap",
+                        badge: "Rozet",
+                        both: "İkisi",
+                        none: "Hiçbiri"
+                    },
+                    action: {
+                        openQuests: "Görevleri Aç",
+                        contextMenu: "Bağlam Menüsü",
+                        pluginSettings: "Eklenti Ayarları",
+                        nothing: "Hiçbir Şey"
+                    },
+                    rewardTypes: {
+                        orbs: "Orb'lar",
+                        nitroCodes: "Nitro Kodları",
+                        rewardCodes: "Ödül Kodları",
+                        inGameItems: "Oyun İçi Eşyalar",
+                        profileCollectibles: "Profil Koleksiyonları"
+                    }
+                },
+                questFeatures: {
+                    title: "Görev Özellikleri",
+                    description: "İşlevselliği geliştirmek veya kaldırmak için Görevlerin davranışını değiştirin.",
+                    disableFeatures: "Özellikleri Devre Dışı Bırak",
+                    disableEverything: "Görev işlevselliğini tamamen devre dışı bırak:",
+                    disableEverythingTooltip: "Bu, tüm eklenti geliştirmelerini devre dışı bırakır, Görevler sayfasını ve Discord genelindeki Görev öğelerini gizler ve Discord'un Görev verilerini getirmesini engeller. Orb'lar ikincil para birimi olarak mağazaya sıkı sıkıya bağlı olduğundan bu, mağazayı etkilemez.",
+                    disableSpecific: "Belirli özellikleri devre dışı bırak:",
+                    disableSpecificTooltip: "Sponsorlu Afiş, Görevler sayfasının üstündeki ücretli Görev afişidir.\n\nTaşınma Bildirimleri, Keşfet sayfasında olduğu gibi Görevlerin DM'lere taşındığını belirten göstergelerdir.\n\nArkadaş Listesi Tanıtımı, sunucu paylaştığınız bir kullanıcı aktif Görevi olan bir oyun oynarken Arkadaş Listenizin \"Şimdi Aktif\" bölümünde görünen bir karttır.\n\nÜye Listesi Tanıtımı, bir sunucunun Üye Listesinde aktif Görevi olan bir oyun oynayan üyelerin yanında görünen bir simgedir.\n\nHesap Paneli Tanıtımı, kullanıcı hesap panelinizin üstünde görünen ücretli bir Görev tanıtımıdır.\n\nHesap Paneli İlerlemesi, kullanıcı hesap panelinizin üstünde gösterilen aktif veya tamamlanmış Görev ilerlemesidir.\n\nGörev ve Orb Rozetleri, birinin en az bir Görevi tamamladığını veya Orb rozetini satın aldığını gösteren kullanıcı profillerindeki rozetlerdir.",
+                    disableOptions: {
+                        sponsoredBanner: "Sponsorlu Afiş",
+                        relocationNotices: "Taşınma Bildirimleri",
+                        friendsListPromo: "Arkadaş Listesi Tanıtımı",
+                        membersListPromo: "Üye Listesi Tanıtımı",
+                        accountPanelPromo: "Hesap Paneli Tanıtımı",
+                        accountPanelProgress: "Hesap Paneli İlerlemesi",
+                        orbsAndQuestsBadges: "Görev ve Orb Rozetleri"
+                    },
+                    modifyFeatures: "Özellikleri Değiştir",
+                    warningTos: "Discord, Görevlerin nasıl tamamlandığını değiştiren betik veya eklenti kullanıcılarına uyarı göndermeye başladı; bu, {{tos}} ihlalidir.",
+                    tos: "Hizmet Koşulları",
+                    warningEscalate: "Uyarılar şimdilik Görevlere veya ödüllerine erişimin kaybedilmesi tehdidiyle sınırlı görünüyor, ancak Discord bunu her an ağırlaştırabilir.",
+                    warningDetection: "Discord'un kullanıcıları izlemek için kullandığı çeşitli yöntemler nedeniyle tespitten gerçekçi bir şekilde kaçmanın yolu yoktur. Devam ederseniz, Discord'un büyük olasılıkla bir noktada bunu tespit edeceğini bilin.",
+                    warningRisk: "Potansiyel olarak tehlikeli ayarlara erişmek için aşağıdaki düğmeyi riski size ait olmak üzere kullanın.",
+                    allowDangerous: "Tehlikeli ayarların değiştirilmesine izin ver...",
+                    disallowDangerous: "Sıfırla ve tehlikeli ayarların değiştirilmesini engelle...",
+                    completeVideoQuicker: "Video Görevi otomatik tamamlamayı hızlandır:",
+                    completeVideoQuickerTooltip: "Discord, Göreve kaydolduğunuzdan bu yana video süresinden 24 saniye eksik bir süre geçtiğinde Video Görevlerinin tamamlanmasına izin verir.\n\nBu, bir Video Görevi 24 saniye veya daha kısaysa ya da bir Video Görevine kaydolup tamamlamak için daha sonra geri dönerseniz, hemen tamamlanabileceği anlamına gelir.\n\nBu ayar yalnızca Video Görevlerinin otomatik tamamlanmasına uygulanır ve aşağıdaki otomatik tamamlama ayarına bağlıdır. Video Görevlerini elle tamamlamak yine tüm sürenin beklenmesini gerektirir ve kayıt zamanına bağlı değildir.",
+                    mobileDesktop: "Yalnızca mobil olan bazı Video Görevlerini masaüstünde tamamlanabilir yap:",
+                    mobileDesktopTooltip: "Yalnızca mobil olan bazı Video Görevlerine masaüstünden kaydolunabilir, ancak yine de mobilde tamamlanmaları gerekir. Bu ayar, bunların masaüstünde tamamlanmasına izin verir.\n\nYalnızca mobil olan bazı Video Görevlerine yalnızca mobilden kaydolunabilir. Bu ayarın bunları etkilemesi için, masaüstüne dönüp Görevlerinizi yenilemeden önce bu Görevlere mobil cihazınızdan kaydolmalısınız.\n\nBu ayar tek başına etkinleştirildiğinde yalnızca Video Görevlerinin elle tamamlanmasına uygulanır. Mobil Video Görevlerinin masaüstünden otomatik tamamlanması aşağıdaki otomatik tamamlama ayarına bağlıdır ve bu ayarı da örtük olarak etkinleştirir.",
+                    simultaneous: "Görevleri sırayla değil aynı anda otomatik tamamla:",
+                    simultaneousTooltip: "Varsayılan olarak, birden fazla Görevi otomatik tamamlamaya çalışmak onları sırayla tamamlanmak üzere kuyruğa alır.\n\nBu ayar bunun yerine tüm otomatik tamamlanan Görevlerin aynı anda çalışmasına izin verir.\n\nBu ayar yalnızca Görevlerin otomatik tamamlanmasına uygulanır ve aşağıdaki otomatik tamamlama ayarına bağlıdır.",
+                    resumeInterrupted: "Yeniden yükleme veya yeniden başlatmadan sonra kesintiye uğrayan otomatik tamamlamaları sürdür:",
+                    resumeInterruptedTooltip: "Bu ayar, yeniden yüklemeler veya yeniden başlatmalar nedeniyle kesintiye uğrayan otomatik tamamlamaları, henüz başlamamış ancak kuyruğa alınmış Görevleri yeniden kuyruğa almak dahil, otomatik olarak sürdürür.",
+                    autoCompleteTypes: "Belirli Görev türlerini otomatik tamamla:",
+                    autoCompleteTypesTooltip: "Mobilde Video İzle Görevleri yalnızca masaüstünden kaydolunabilen mobil Görevlerde çalışır. Bir Göreve kayıt mobille sınırlıysa, masaüstüne dönüp Görevlerinizi yenilemeden önce mobil cihazınızdan ona kaydolmalısınız.\n\nVideoyla ilgili tüm Görevler genellikle ilerleme raporlarıyla birlikte bir yığın izi (stack trace) gönderir. Bu, Discord'un tam olarak hangi fonksiyonların çağrıldığını bileceği ve dolayısıyla ilerlemeyi kendi fonksiyonlarının başlattığını doğrulayabileceği anlamına gelir. Questify bu yığın izini siler, ancak yokluğu da varlığı kadar ele verici olacaktır.\n\nMasaüstünde Oyna, PlayStation'da Oyna, Xbox'ta Oyna ve Etkinlik Oyna Görevleri, Discord'un getirdiği bir kısıtlama nedeniyle yalnızca resmi masaüstü istemcilerinde kullanılabilir. Web eklentileri, Plextron ve diğerleri gibi 3. taraf istemciler bu Görev türlerinin otomatik tamamlanmasını desteklemez.\n\nOyunla ilgili tüm Görevler genellikle heartbeat raporlarıyla birlikte bir oyun parmak izi gönderir. Bu, Discord'un on binlerce kullanıcının verilerini kullanarak diğer kullanıcıların gerçek bir oyun mu kullandığını yoksa çalıştırılabilir dosyayı mı taklit ettiğini belirleyebileceği anlamına gelir. Bu değeri taklit etmenin makul bir yolu yoktur, bu yüzden Questify onu boş bırakır, ancak yokluğu da değeri kötü taklit etmek kadar ele verici olacaktır.\n\nEtkinlikte Başarım Görevleri yalnızca anında tamamlanarak otomatik tamamlanabilir. Bu yöntem her an yamalanabilir.\n\nGörevlerin otomatik tamamlanması, Görevler sayfasındaki ilgili butonlarına tıklanarak yapılır. Yukarıdaki eşzamanlı tamamlama ayarı etkin değilse, Görevler kuyruğa alındıkları sırayla otomatik tamamlanır.\n\nGörevleri otomatik tamamlamak, mevcut en riskli tehlikeli ayardır. Riski size ait olmak üzere etkinleştirin."
+                },
+                questNotifications: {
+                    title: "Görev Bildirimleri",
+                    description: "Görev tamamlandı ve yeni Görev bulundu bildirimlerini ve uyarılarını yapılandırın.",
+                    questCompleted: "Görev Tamamlandı",
+                    notifyOnComplete: "Bir Görev tamamlandığında bildirim göster:",
+                    soundOnComplete: "Bir Görev tamamlandığında ses çal:",
+                    volume: "Ses Seviyesi:",
+                    newQuests: "Yeni Görevler Bulundu",
+                    notifyOnNew: "Yeni Görevler bulunduğunda bildirim göster:",
+                    soundOnNew: "Yeni Görevler bulunduğunda ses çal:",
+                    notifyOnNewExcluded: "Yeni hariç tutulan Görevler bulunduğunda bildirim göster:",
+                    notifyOnNewExcludedTooltip: "Bazı Görevler bölge veya platform kısıtlamaları nedeniyle mevcut Görevler listenizden hariç tutulur.\n\nEtkinleştirildiğinde Questify, bunların Görev yapılandırmalarını getirir, dahil ettiğiniz Görev ve ödül türü filtrelerini uygular, çözümlenen hariç tutulan Görev verilerini konsola yazdırır ve eşleşen hariç tutulan Görevler için ayrı bir bildirim gösterir.",
+                    soundOnNewExcluded: "Yeni hariç tutulan Görevler bulunduğunda ses çal:",
+                    soundOnNewExcludedTooltip: "Bazı Görevler bölge veya platform kısıtlamaları nedeniyle mevcut Görevler listenizden hariç tutulur.\n\nBir ses seçildiğinde Questify, bunların Görev yapılandırmalarını getirir, dahil ettiğiniz Görev ve ödül türü filtrelerini uygular, çözümlenen hariç tutulan Görev verilerini konsola yazdırır ve eşleşen hariç tutulan Görevler için bu sesi çalar.",
+                    fetchInterval: "Görev Getirme Aralığı:",
+                    fetchIntervalTooltip: "Discord, Görevleri yalnızca açılışta ve Görevler sayfasını ziyaret ettiğinizde getirir.\n\nBu aralık, istemci açık kaldığı sürece Görevleri sizin için düzenli olarak getirir; böylece Görev Butonu göstergeleri ve yeni Görev uyarıları gün boyunca güncel kalabilir.\n\nBu yalnızca etkinse ve Görev Butonu veya Görev Bildirimleri ayarları düzenli getirmeyi anlamlı kılacak şekilde yapılandırılmışsa çalışır.",
+                    disabled: "DEVRE DIŞI",
+                    preview: "{{sound}} önizle",
+                    intervals: {
+                        thirtyMinutes: "30 Dakika",
+                        fortyFiveMinutes: "45 Dakika",
+                        oneHour: "1 Saat",
+                        threeHours: "3 Saat",
+                        sixHours: "6 Saat",
+                        twelveHours: "12 Saat"
+                    }
+                },
+                questTiles: {
+                    title: "Görev Kartları",
+                    description: "Görünürlük için Görevleri isteğe bağlı tema renkleriyle vurgulayın.",
+                    behavior: "Kart Davranışı",
+                    gradientStyle: "Gradyan Stili:",
+                    gradientStyleTooltip: "Yoğun ve Varsayılan, varlık gradyanında seçilen kart rengini kullanır.\n\nİnce Siyah, kontrast için daha koyu ve nötr bir gradyan kullanır.\n\nGradyan Yok, varlık gradyanını kaldırır; bu, bazı Görev görsellerinin okunmasını zorlaştırabilir.",
+                    assetPreload: "Varlık Ön Yükleme:",
+                    assetPreloadTooltip: "Görevler sayfası açıldığında tüm varlıkları yüklemek, kaydırırken düzen kaymalarını azaltır.\n\nSayfa kaydırılırken yüklemek, Discord'un varsayılan davranışına daha yakındır ve başlangıçta daha az iş gerektirebilir.",
+                    colors: "Kart Renkleri",
+                    enable: "Etkinleştir",
+                    disable: "Devre Dışı Bırak",
+                    gradient: {
+                        intense: "Yoğun Yeniden Stil Gradyanı",
+                        default: "Varsayılan Yeniden Stil Gradyanı",
+                        black: "İnce Siyah Gradyan",
+                        hide: "Gradyan Yok"
+                    },
+                    preload: {
+                        onLoad: "Tüm Görev Varlıklarını Sayfa Açılışında Yükle",
+                        onScroll: "Görev Varlıklarını Sayfa Kaydırılırken Yükle"
+                    }
+                },
+                reorderQuests: {
+                    title: "Görevleri Yeniden Sırala",
+                    description: "Görevler sayfasında Questify sıralaması seçiliyken görevleri durumlarına göre sırala. Gizli durumlar her sıralamada filtrelenir.",
+                    statusOrder: "Durum Sırası",
+                    statusOrderTooltip: "Her durum yalnızca bir kez görünebilir. Başka bir konumda zaten kullanılan bir durumu seçmek iki konumu yer değiştirir.",
+                    positions: {
+                        first: "Birinci:",
+                        second: "İkinci:",
+                        third: "Üçüncü:",
+                        fourth: "Dördüncü:"
+                    },
+                    subsorts: "Alt Sıralamalar",
+                    unclaimedSubsort: "Alınmamış Alt Sıralaması:",
+                    unclaimedSubsortTooltip: "Tamamlanmış ancak alınmamış Görevler, tamamlanmamış alınmamış Görevlerin altında kalır; ardından bu alt sıralama o grupların içinde uygulanır.",
+                    claimedSubsort: "Alınmış Alt Sıralaması:",
+                    claimedSubsortTooltip: "Alınmış Görevler, alınma zamanına veya Görevin eklenme zamanına göre sıralanabilir.",
+                    ignoredSubsort: "Yok Sayılan Alt Sıralaması:",
+                    ignoredSubsortTooltip: "Yok sayılan Görevler yok sayılan grup konumlarını korur; ardından bu alt sıralama o grubun içindeki sıralarını belirler.",
+                    expiredSubsort: "Süresi Dolmuş Alt Sıralaması:",
+                    expiredSubsortTooltip: "Süresi dolmuş Görevler, sona erme zamanına veya Görevin eklenme zamanına göre sıralanabilir.",
+                    subsort: {
+                        addedNewest: "Eklenme (En Yeni)",
+                        addedOldest: "Eklenme (En Eski)",
+                        expiringSoonest: "Sona Erme (En Yakın)",
+                        expiringLatest: "Sona Erme (En Uzak)",
+                        expiredMostRecent: "Süresi Dolma (En Son)",
+                        expiredLeastRecent: "Süresi Dolma (En Eski)",
+                        claimedMostRecent: "Alınma (En Son)",
+                        claimedLeastRecent: "Alınma (En Eski)"
+                    },
+                    memory: "Görev Sayfası Hafızası",
+                    rememberSort: "Seçilen Görev sayfası sıralamasını hatırla:",
+                    rememberSortTooltip: "Devre dışı bırakıldığında, Görevler sayfası her seferinde Questify sıralama seçeneğiyle açılır.",
+                    rememberFilters: "Seçilen Görev sayfası filtrelerini hatırla:",
+                    rememberFiltersTooltip: "Devre dışı bırakıldığında, Görevler sayfası her seferinde görev veya ödül filtresi olmadan açılır."
+                }
+            },
+            option: {
+                migrationVersion: {
+                    label: "Geçiş Sürümü",
+                    description: "Ayarların mevcut geçiş sürümü."
+                },
+                questFeatures: {
+                    label: "Görev Özellikleri",
+                    description: "Devre dışı bırakılacak Görev özelliklerini seçin."
+                },
+                disableQuestsEverything: {
+                    label: "Her Şeyi Devre Dışı Bırak",
+                    description: "Tüm Görev özelliklerini devre dışı bırakır."
+                },
+                disableRelocationNotices: {
+                    label: "Taşınma Bildirimlerini Devre Dışı Bırak",
+                    description: "Keşfet sayfasındaki Görev taşınma bildirimlerini devre dışı bırakır."
+                },
+                disableSponsoredBanner: {
+                    label: "Sponsorlu Afişi Devre Dışı Bırak",
+                    description: "Görev sayfasındaki sponsorlu afişi devre dışı bırakır."
+                },
+                disableAccountPanelPromo: {
+                    label: "Hesap Paneli Tanıtımını Devre Dışı Bırak",
+                    description: "Hesap panelinizin üstündeki tanıtılan Görev açılır penceresini devre dışı bırakır."
+                },
+                disableAccountPanelQuestProgress: {
+                    label: "Hesap Paneli İlerlemesini Devre Dışı Bırak",
+                    description: "Hesap panelinizin üstündeki aktif ve tamamlanmış Görev ilerlemesini devre dışı bırakır."
+                },
+                disableOrbsAndQuestsBadges: {
+                    label: "Görev ve Orb Rozetlerini Devre Dışı Bırak",
+                    description: "Kullanıcı profillerindeki Görev rozetini devre dışı bırakır."
+                },
+                disableFriendsListPromo: {
+                    label: "Arkadaş Listesi Tanıtımını Devre Dışı Bırak",
+                    description: "Arkadaşların oynadığı oyunlar için Görev tanıtımını devre dışı bırakır."
+                },
+                disableMembersListPromo: {
+                    label: "Üye Listesi Tanıtımını Devre Dışı Bırak",
+                    description: "Üye listesi öğelerindeki aktif olarak oynuyor simgesini devre dışı bırakır."
+                },
+                allowChangingDangerousSettings: {
+                    label: "Tehlikeli Ayarların Değiştirilmesine İzin Ver",
+                    description: "Tehlikeli ayarların değiştirilmesine izin verir."
+                },
+                resumeInterruptedQuests: {
+                    label: "Kesintiye Uğrayan Görevleri Sürdür",
+                    description: "Yeniden yükleme veya yeniden başlatmadan sonra Görevleri otomatik tamamlamaya devam eder."
+                },
+                makeMobileVideoQuestsDesktopCompatible: {
+                    label: "Mobil Video Görevlerini Masaüstü Uyumlu Yap",
+                    description: "Yalnızca mobil olan Video Görevlerini masaüstüyle uyumlu hale getirir."
+                },
+                autoCompleteQuestsSimultaneously: {
+                    label: "Görevleri Aynı Anda Otomatik Tamamla",
+                    description: "Görevleri sırayla değil aynı anda tamamlar."
+                },
+                completeVideoQuestsQuicker: {
+                    label: "Video Görevlerini Daha Hızlı Tamamla",
+                    description: "Video Görevi otomatik tamamlamada Discord'un ilerleme toleransını ve kayıttan bu yana geçen süreyi kullanır."
+                },
+                autoCompleteQuestTypes: {
+                    label: "Otomatik Tamamlanacak Görev Türleri",
+                    description: "Arka planda otomatik tamamlanacak Görev türleri."
+                },
+                questButton: {
+                    label: "Görev Butonu",
+                    description: "Sunucu listesindeki Görev butonunu özelleştirin."
+                },
+                questButtonDisplay: {
+                    label: "Görev Butonu Görünümü",
+                    description: "Sunucu listesindeki Görev butonu için kullanılacak görünüm türü."
+                },
+                questButtonIncludedTypes: {
+                    label: "Görev Butonuna Dahil Edilen Türler",
+                    description: "Görev butonunda Görev sayılarını gösterirken dahil edilecek ödül ve Görev türleri."
+                },
+                questButtonIndicator: {
+                    label: "Görev Butonu Göstergesi",
+                    description: "Sunucu listesindeki Görev butonunda alınmamış göstergesi için kullanılacak görünüm türü."
+                },
+                questButtonBadgeCount: {
+                    label: "Görev Butonu Rozet Sayısı",
+                    description: "İlgili alınmamış Görevlerin mevcut sayısı."
+                },
+                questButtonBadgeColor: {
+                    label: "Görev Butonu Rozet Rengi",
+                    description: "Sunucu listesindeki Görev butonu rozetinin rengi."
+                },
+                questButtonLeftClickAction: {
+                    label: "Sol Tık Eylemi",
+                    description: "Sunucu listesindeki Görev butonuna sol tıklandığında gerçekleştirilecek eylem."
+                },
+                questButtonMiddleClickAction: {
+                    label: "Orta Tık Eylemi",
+                    description: "Sunucu listesindeki Görev butonuna orta tıklandığında gerçekleştirilecek eylem."
+                },
+                questButtonRightClickAction: {
+                    label: "Sağ Tık Eylemi",
+                    description: "Sunucu listesindeki Görev butonuna sağ tıklandığında gerçekleştirilecek eylem."
+                },
+                questNotifications: {
+                    label: "Görev Bildirimleri",
+                    description: "Görev tamamlandı ve yeni Görev bulundu bildirimlerini yapılandırın."
+                },
+                notifyOnQuestComplete: {
+                    label: "Görev Tamamlandığında Bildir",
+                    description: "Bir Görev tamamlandığında bildirim gösterir."
+                },
+                notifyOnNewQuests: {
+                    label: "Yeni Görevlerde Bildir",
+                    description: "Yeni Görevler bulunduğunda bildirim gösterir."
+                },
+                notifyOnNewExcludedQuests: {
+                    label: "Yeni Hariç Tutulan Görevlerde Bildir",
+                    description: "Yeni hariç tutulan Görevler bulunduğunda bildirim gösterir."
+                },
+                questCompletedAlertSound: {
+                    label: "Görev Tamamlandı Uyarı Sesi",
+                    description: "Bir Görev tamamlandığında çalınacak ses."
+                },
+                questCompletedAlertVolume: {
+                    label: "Görev Tamamlandı Uyarı Ses Seviyesi",
+                    description: "Görev tamamlandı uyarı sesinin ses seviyesi."
+                },
+                questFetchInterval: {
+                    label: "Görev Getirme Aralığı",
+                    description: "Görevlerin Discord'dan getirilme aralığı (saniye)."
+                },
+                newQuestAlertSound: {
+                    label: "Yeni Görev Uyarı Sesi",
+                    description: "Yeni Görevler bulunduğunda çalınacak ses."
+                },
+                newQuestAlertVolume: {
+                    label: "Yeni Görev Uyarı Ses Seviyesi",
+                    description: "Yeni Görev uyarı sesinin ses seviyesi."
+                },
+                newExcludedQuestAlertSound: {
+                    label: "Yeni Hariç Tutulan Görev Uyarı Sesi",
+                    description: "Yeni hariç tutulan Görevler bulunduğunda çalınacak ses."
+                },
+                newExcludedQuestAlertVolume: {
+                    label: "Yeni Hariç Tutulan Görev Uyarı Ses Seviyesi",
+                    description: "Yeni hariç tutulan Görev uyarı sesinin ses seviyesi."
+                },
+                questTiles: {
+                    label: "Görev Kartları",
+                    description: "Görevler sayfasındaki Görev kartlarının görünümünü özelleştirin."
+                },
+                questTileUnclaimedColor: {
+                    label: "Alınmamış Kart Rengi",
+                    description: "Görevler sayfasındaki alınmamış Görev kartlarının rengi."
+                },
+                questTileClaimedColor: {
+                    label: "Alınmış Kart Rengi",
+                    description: "Görevler sayfasındaki alınmış Görev kartlarının rengi."
+                },
+                questTileIgnoredColor: {
+                    label: "Yok Sayılan Kart Rengi",
+                    description: "Görevler sayfasındaki yok sayılan Görev kartlarının rengi."
+                },
+                questTileExpiredColor: {
+                    label: "Süresi Dolmuş Kart Rengi",
+                    description: "Görevler sayfasındaki süresi dolmuş Görev kartlarının rengi."
+                },
+                questTileGradient: {
+                    label: "Kart Gradyanı",
+                    description: "Görev kartlarında kullanılan gradyanın stili."
+                },
+                questTilePreload: {
+                    label: "Kart Varlıklarını Ön Yükle",
+                    description: "Görev kartlarının varlıklarını önceden yüklemeye çalışır."
+                },
+                reorderQuests: {
+                    label: "Görevleri Yeniden Sırala",
+                    description: "Görevleri durumlarına göre sıralar."
+                },
+                questOrder: {
+                    label: "Görev Sırası",
+                    description: "Görev durum grupları için sıralama düzeni."
+                },
+                unclaimedSubsort: {
+                    label: "Alınmamış Alt Sıralaması",
+                    description: "Alınmamış Görevler için alt sıralama yöntemi."
+                },
+                claimedSubsort: {
+                    label: "Alınmış Alt Sıralaması",
+                    description: "Alınmış Görevler için alt sıralama yöntemi."
+                },
+                ignoredSubsort: {
+                    label: "Yok Sayılan Alt Sıralaması",
+                    description: "Yok sayılan Görevler için alt sıralama yöntemi."
+                },
+                expiredSubsort: {
+                    label: "Süresi Dolmuş Alt Sıralaması",
+                    description: "Süresi dolmuş Görevler için alt sıralama yöntemi."
+                },
+                isOnQuestsPage: {
+                    label: "Görevler Sayfasında",
+                    description: "Kullanıcının şu anda Görevler sayfasında olup olmadığı."
+                },
+                rememberQuestPageSort: {
+                    label: "Görev Sayfası Sıralamasını Hatırla",
+                    description: "Görevler sayfasında son kullanılan sıralamayı hatırlar."
+                },
+                rememberQuestPageFilters: {
+                    label: "Görev Sayfası Filtrelerini Hatırla",
+                    description: "Görevler sayfasında son kullanılan filtreleri hatırlar."
+                },
+                lastQuestPageSort: {
+                    label: "Son Görev Sayfası Sıralaması",
+                    description: "Görevler sayfasında son kullanılan sıralama."
+                },
+                lastQuestPageFilters: {
+                    label: "Son Görev Sayfası Filtreleri",
+                    description: "Görevler sayfasında son kullanılan filtreler."
+                },
+                ignoredQuestIDs: {
+                    label: "Yok Sayılan Görev ID'leri",
+                    description: "Yok sayılan Görev ID'lerinin listesi."
+                },
+                resumeQuestIDs: {
+                    label: "Sürdürülecek Görev ID'leri",
+                    description: "Arka planda otomatik tamamlanan veya tamamlanmak üzere kuyruğa alınan Görev ID'lerinin listesi."
+                },
+                acknowledgedNotices: {
+                    description: "Kullanıcının onayladığı tek seferlik duyurular.",
+                    label: "Onaylanan Duyurular"
+                },
+                settingsSearch: {
+                    description: "Questify ayarlarında ara.",
+                    label: "Ayar Arama"
+                },
+                hideNonAutoCompletableQuests: {
+                    description: "Desteklenen ve etkin bir otomatik tamamlama görevi olmayan tamamlanmamış görevleri gizle.",
+                    label: "Otomatik Tamamlanamayan Görevleri Gizle"
+                },
+                preventVideoQuestsPausing: {
+                    description: "Görev penceresi odağı kaybettiğinde videonun duraklamasını engelle.",
+                    label: "Video Görevlerinin Duraklamasını Engelle"
+                },
+                hiddenQuestStatuses: {
+                    description: "Gizlenecek görev durumu grupları.",
+                    label: "Gizli Görev Durumları"
+                }
+            },
+            text: {
+                clearQuestQueue: "Görev Kuyruğunu Temizle",
+                hideIncompleteQuestsWith: "Bu platformda desteklenen ve Görev türleri listesinde etkin bir otomatik tamamlama görevi yoksa, alınmamış veya yok sayılmış durumdaki tamamlanmamış görevleri gizle. Alınmış, süresi dolmuş ve tamamlanmış görevler hariçtir. Bunları gizlemek için Durum Sırası Gizli seçeneklerini kullan.",
+                discordForcesYouTo: "Discord, Video Görevlerinin videoyu oynatması için istemcinin önde olmasını zorunlu tutuyor.",
+                hideNonAutoCompletable: "Otomatik Tamamlanamayan Görevleri Gizle:",
+                preventVideoQuestsFrom: "Odak kaybolduğunda Video Görevlerinin duraklamasını engelle:",
+                thePunishmentAlsoConsists: "Ceza ayrıca ihlal başına 2 yıl süren bir hesap durumu ihlalini de içerir.",
+                dueToTheVarious: "Discord'un kullanıcıları izlemek için kullandığı çeşitli yöntemler nedeniyle tespit edilmekten gerçekçi olarak kaçınmanın yolu yok. Devam edersen, Discord'un kullanımını büyük olasılıkla bir noktada tespit edeceğini bil.",
+                enrollInQuest: "Göreve Kaydol",
+                hidden: "Gizli",
+                selectingAnOccupiedPosition: "Dolu bir konumu seçmek iki durumu yer değiştirir. Gizli durumlar görev listelerinden kaldırılır.",
+                searchQuestifySettings: "Questify Ayarlarında Ara",
+                searchQuestifySettings2: "Questify ayarlarında ara...",
+                noMatchingSettings: "Eşleşen ayar yok.",
+                questifyNoticeAugust7th: "Questify Duyurusu - 7 Ağustos 2026",
+                keepUsingDangerousQuestify: "Tehlikeli Questify Ayarlarını Kullanmaya Devam Et",
+                disableDangerousQuestifySettings: "Tehlikeli Questify Ayarlarını Devre Dışı Bırak",
+                questifyNoticeAugust26th: "Questify Duyurusu - 26 Ağustos 2026",
+                areYouSure: "Emin misin?",
+                thePunishmentAppearsLimited: "Ceza, görevlere ve ödüllerine erişimin kaybıyla sınırlı görünüyor, ancak Discord her an ağırlaştırabilir.",
+                queueAllQuests: "Tüm Görevleri Sıraya Al",
+                inProgress: "Devam Ediyor",
+                rateLimited: "Hız Sınırında",
+                preventsVideoPausing: "Bu ayar videonun duraklamasını engeller ve tamamlanmanın normal şekilde ilerlemesini sağlar.",
+                appliesOnlyToVideoQuests: "Bu ayar yalnızca Video Görevlerini manuel olarak tamamlarken geçerlidir.",
+                knownToPunish: "Discord'un, Görevlerin tamamlanmasını değiştiren betik veya eklenti kullanıcılarını cezalandırdığı bilinmektedir. Görevlerin tamamlanmasını değiştirmek Discord'un şu kurallarına aykırıdır:",
+                punishmentConsists: "Ceza, Görevlere ve ödüllerine erişimin geçici ya da kalıcı olarak kaybedilmesinden oluşur.",
+                questBanSystem: "Discord, Görevleri resmi olmayan yollarla tamamladığın tespit edilirse Görevleri tamamlama ve ödüllerini alma erişimini geçici ya da kalıcı olarak kısıtlayan bir Görev Yasağı sistemi uygulamaya koydu. Görevlerin tamamlanmasını değiştirmek şu kurallara aykırıdır:",
+                begunPunishing: "Discord, Görevlerin tamamlanmasını değiştiren betik ve eklenti kullanıcılarını cezalandırmaya başladı. Görevlerin tamamlanmasını değiştirmek şu kurallara aykırıdır:",
+                dueToRateLimits: " (hız sınırı nedeniyle)"
             }
         },
         questionMarkReplacement: {
@@ -8230,6 +8853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "GIF Olarak Kaydet",
                     description: "Varsayılan olarak GIF olarak kaydet"
                 }
+            },
+            text: {
+                quotePreview: "Alıntı önizlemesi"
             }
         },
         randomVoice: {
@@ -8287,7 +8913,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                     server: "geçersiz sunucu"
                 }
             },
+            keybind: {
+                label: "Kısayol Tuşu",
+                recording: "Kaydediliyor...",
+                reset: "Sıfırla"
+            },
             option: {
+                keybindEnabled: {
+                    label: "Kısayol Tuşu Etkin",
+                    description: "Rastgele ses kısayol tuşu kontrollerini göster"
+                },
                 userAmountOperation: {
                     label: "Kullanıcı Sayısı İşlemi",
                     description: "Kullanıcı sayısı için bir işlem seçin"
@@ -8379,6 +9014,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             alert: {
                 failed: "Bir Ses Kanalı bulunamadı!"
+            },
+            toast: {
+                failedToFindA: "Ses kanalı bulunamadı.",
+                voiceChannelIsUnavailable: "Ses kanalı kullanılamıyor."
+            },
+            text: {
+                userCount: "{{count}} kullanıcı",
+                usersCount: "{{count}} kullanıcı"
             }
         },
         reactErrorDecoder: {
@@ -8477,6 +9120,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noLongerFriend: "{{user}} ile artık arkadaş değilsiniz.",
                 friendRequestRevoked: "{{user}} tarafından gönderilen arkadaşlık isteği geri çekildi.",
                 ok: "Tamam"
+            },
+            text: {
+                relationshipNotifier: "İlişki Bildirici"
             }
         },
         remix: {
@@ -8500,7 +9146,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ellipse: "Elips",
                 line: "Çizgi",
                 arrow: "Ok",
-                fill: "Doldur"
+                fill: "Doldur",
+                image: "Resim"
             }
         },
         repeatMessages: {
@@ -8534,12 +9181,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Metni Ara",
                 searchWith: "{{name}} ile Ara"
+            },
+            text: {
+                google: "Google"
             }
         },
         replyPingControl: {
             name: "ReplyPingControl",
-            description: "Mesaj yanıtlarında her zaman veya asla ping almayı kontrol etmenizi sağlar, ayrıca beyaz liste özelliği içerir",
+            description: "Mesaj yanıtlarında her zaman veya hiçbir zaman etiketlenmeyeceğinizi (ping) kontrol edin; beyaz liste ve kara liste özellikleriyle birlikte",
             option: {
+                replyPingBlacklist: {
+                    label: "Yanıt Etiketleme Kara Listesi",
+                    description: "Yanıt etiketlemesi almak istemediğiniz Kullanıcı Kimliklerinin (ID) virgülle ayrılmış listesi"
+                },
                 alwaysPingOnReply: {
                     label: "Her Zaman Yanıt Ping'i",
                     description: "Birisi mesajlarınıza yanıt verdiğinde her zaman ping alın"
@@ -8564,6 +9218,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Görseli Ara",
                 all: "Tümünde Ara"
+            },
+            text: {
+                all: "Tümü"
             }
         },
         reviewDB: {
@@ -8671,6 +9328,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             profile: {
                 optedOut: "Kullanıcı çıkış yaptı",
                 noReviews: "Henüz inceleme yok"
+            },
+            toast: {
+                youCannotVoteOn: "Kendi incelemene oy veremezsin.",
+                networkErrorFailedTo: "Ağ hatası: ReviewDB'ye bağlanılamadı.",
+                pleaseAuthorizeToVote: "İncelemelere oy vermek için yetkilendir.",
+                requestFailed: "ReviewDB: İstek {{status}} durum koduyla başarısız oldu"
+            },
+            text: {
+                ok: "Tamam",
+                updateReviewFor: "@{{name}} için incelemeyi güncelle",
+                reviewUser: "@{{name}} kullanıcısını incele",
+                system: "Sistem",
+                reviewCount: "({{count}} Değerlendirme)"
             }
         },
         richMagnetLinks: {
@@ -8764,46 +9434,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
         },
-        rpcStats: {
-            name: "RPCStats",
-            description: "Etkinliğinizle ilgili istatistikleri bir Rich Presence olarak görüntüler",
-            option: {
-                assetURL: {
-                    label: "Görsel URL'si",
-                    description: "RPC için kullanılacak görsel. Boş bırakılırsa profil resminiz kullanılır"
-                },
-                rpcTitle: {
-                    label: "RPC Başlığı",
-                    description: "RPC'nizin başlığı"
-                },
-                statDisplay: {
-                    label: "İstatistik Görüntüleme",
-                    description: "RPC neyi görüntülemeli? (Muhtemelen sadece tek satır hakkınız var)",
-                    today: "Bugün gönderilen mesaj miktarı",
-                    alltime: "Tüm zamanlarda gönderilen mesaj miktarı",
-                    listened: "Haftanın en çok dinlenen albümü"
-                },
-                lastFMApiKey: {
-                    label: "Last.fm API Anahtarı",
-                    description: "Last.fm API anahtarınız"
-                },
-                lastFMUsername: {
-                    label: "Last.fm Kullanıcı Adı",
-                    description: "Last.fm kullanıcı adınız"
-                },
-                albumCoverImage: {
-                    label: "Albüm Kapağı Görseli",
-                    description: "Albüm kapağı RPC görseli olarak kullanılsın mı? (Last.fm gösterimi seçiliyse)"
-                },
-                lastFMStatFormat: {
-                    label: "Last.fm İstatistik Formatı",
-                    description: "Last.fm istatistiği nasıl formatlanmalı? $album albüm adıyla, $artist ise sanatçı adıyla değiştirilir"
-                }
-            },
-            noInfo: "Şu an bilgi yok :(",
-            messagesToday: "Bugün gönderilen mesajlar: {{count}}",
-            messagesAllTime: "Tüm zamanlarda gönderilen mesajlar: {{count}}"
-        },
         saveFavoriteGIFs: {
             name: "SaveFavoriteGIFs",
             description: "Favoriye eklenen GIF bağlantılarını dışa aktarır",
@@ -8868,7 +9498,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 maxMessagesReached: "Kanal başına dakikada maksimum {{max}} mesaj sınırına ulaşıldı",
                 messageScheduled: "Mesaj planlandı!",
                 messageRemoved: "Planlanmış mesaj kaldırıldı",
-                allCleared: "Tüm planlanmış mesajlar temizlendi"
+                allCleared: "Tüm planlanmış mesajlar temizlendi",
+                scheduledMessageSentTo: "Zamanlanmış mesaj {{name}} kullanıcısına gönderildi"
             },
             button: {
                 tooltipOn: "Planlama Modu AÇIK (devre dışı bırakmak için tıklayın, liste için sağ tıklayın)",
@@ -8924,20 +9555,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Yalnızca Snow Halation Temasını çal"
                 }
             }
-        },
-        summaries: {
-            name: "Summaries",
-            description: "Discord'un deneysel Özetler özelliğini tüm sunucularda etkinleştirir ve konuşmaların yapay zekâ tarafından oluşturulmuş özetlerini gösterir",
-            option: {
-                summaryExpiryThresholdDays: {
-                    label: "Özet Silinme Eşiği (Gün)",
-                    description: "Bir özetin kaldırılmadan önce geçerli olduğu gün sayısı. Kanal başına en fazla 50 özetin saklandığını unutmayın"
-                }
-            }
-        },
-        selfForward: {
-            name: "SelfForward",
-            description: "Geçerli kanalı iletme listesi açılır penceresine ekler"
         },
         sendTimestamps: {
             name: "SendTimestamps",
@@ -9002,7 +9619,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 serverBoosts: "Sunucu Boostları",
                 channels: "Kanallar",
-                roles: "Roller"
+                roles: "Roller",
+                boostLevel: "{{count}} (Seviye {{level}})"
             }
         },
         serverListIndicators: {
@@ -9061,6 +9679,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bgOpacity: {
                     label: "Arkaplan Opaklığı",
                     description: "Arkaplan opaklığı"
+                },
+                ignoredLanguages: {
+                    label: "Yok Sayılan Diller",
+                    description: "Discord'un varsayılan kod bloklarına bırakılacak dillerin virgülle ayrılmış listesi"
                 }
             },
             button: {
@@ -9079,6 +9701,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noShiftPin: {
                     label: "Shift'siz Sabitleme",
                     description: "Bir mesajı sabitlemek için shift tuşuna basma gereksinimini kaldırır."
+                },
+                noQuickReacts: {
+                    description: "Hızlı tepkileri gizle. Varsayılan olarak tam menüyü göstermek hızlı tepki düğmelerini gizler.",
+                    label: "Hızlı Tepki Yok"
                 }
             }
         },
@@ -9161,6 +9787,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     compact: "Kompakt",
                     cozy: "Rahat",
                     roomy: "Geniş"
+                },
+                showGithubOrgs: {
+                    description: "Kullanıcının üyesi olduğu GitHub kuruluşlarını göster",
+                    label: "GitHub Kuruluşlarını Göster"
+                },
+                showOnModal: {
+                    description: "Bağlı hesapları tam boyutlu profil penceresinde göster",
+                    label: "Pencerede Göster"
                 }
             }
         },
@@ -9291,7 +9925,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 memberList: {
                     label: "Üye Listesi",
-                    description: "Üye listesinde özel ad formatınızda listelenen ilk kullanılabilir adı göster."
+                    description: "Özel ad biçimindeki ilk kullanılabilir adı üye listesinde, DM listesinde, arkadaş listesinde ve Şu An Aktif'te göster."
                 },
                 typingIndicator: {
                     label: "Yazma Göstergesi",
@@ -9349,6 +9983,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Özel Ad Sadece Özel Mesajlarda Göster",
                     description: "Sadece özel mesajlarda özel adları göster, sunucularda değil."
                 },
+                alwaysShowEffects: {
+                    label: "Efektleri Her Zaman Canlandır",
+                    description: "İmleçle üzerine gelinmiş gibi efektleri her zaman gösterir."
+                },
                 includedNames: {
                     label: "Dahil Edilen Adlar",
                     description: "Kullanıcı adlarının, görünen adların, takma adların ve arkadaş adlarının görüntülenme sırası. Şu yer tutucuları kullanın: {user}, {display}, {nick}, {friend}. Bir ad mevcut değilse kullanılacak alternatifleri virgülle ayırarak yazabilirsiniz: {friend, nick, display}. Her bir ad için üç ön ek ve üç son ek ekleyebilirsiniz."
@@ -9376,6 +10014,42 @@ const translations: MatchStructure<typeof enTranslations> = {
                 triggerNameRerender: {
                     label: "Adı Yeniden Oluşturmayı Tetikle",
                     description: "Bu ayarı değiştirerek adın yeniden oluşturulmasını tetikler."
+                },
+                searchAutocomplete: {
+                    description: "Bahsetme ve arama otomatik tamamlamasında özel ad biçimindeki ilk kullanılabilir adı göster.",
+                    label: "Arama Otomatik Tamamlama"
+                },
+                styleDirectMessagesList: {
+                    description: "Seçili olmayan girişlerde üzerine gelmeden görünen ad efektlerini göster. Kapalıyken seçili ve üzerine gelinen girişler yine biçimlendirilir.",
+                    label: "Doğrudan Mesaj Listesini Biçimlendir"
+                },
+                styleDirectMessagesMessages: {
+                    description: "Mesaj yazarlarında üzerine gelmeden görünen ad efektlerini göster. Kapalıyken üzerine gelinen adlar yine biçimlendirilir.",
+                    label: "Doğrudan Mesajlardaki Mesajları Biçimlendir"
+                },
+                styleFriendsList: {
+                    description: "Üzerine gelmeden görünen ad efektlerini göster. Kapalıyken üzerine gelinen girişler yine biçimlendirilir.",
+                    label: "Arkadaş Listesini Biçimlendir"
+                },
+                styleActiveNow: {
+                    description: "Üzerine gelmeden görünen ad efektlerini göster. Kapalıyken üzerine gelinen girişler yine biçimlendirilir.",
+                    label: "Şu An Aktif'i Biçimlendir"
+                },
+                ignoreEffects: {
+                    description: "Birincil olmayan adlarda yalnızca birincil rol rengini kullan ve görünen ad efektlerini atla.",
+                    label: "Efektleri Yok Say"
+                },
+                animateEffects: {
+                    description: "Birincil olmayan adlarda rol gradyanlarını ve görünen ad efektlerini canlandır. \"Efektleri Yok Say\" ve azaltılmış hareket bunu devre dışı bırakır.",
+                    label: "Efektleri Canlandır"
+                },
+                alwaysAnimateEffects: {
+                    description: "Görünen ad efektlerini zaten görünür olduklarında, üzerine gelmeden bile canlanmaya zorla.",
+                    label: "Efektleri Her Zaman Canlandır"
+                },
+                gradientGlow: {
+                    description: "Animasyonlu kullanıcı gradyanlarına, sunucu rol gradyanlarındaki gibi bir parıltı ekle.",
+                    label: "Gradyan Parıltısı"
                 }
             },
             modal: {
@@ -9389,6 +10063,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nickname: "SMYN Takma Adı",
                 reset: "SMYN Takma Adını Sıfırla",
                 cancel: "İptal Et"
+            },
+            text: {
+                save: "Kaydet",
+                unknown: "Bilinmiyor"
             }
         },
         showResourceChannels: {
@@ -9409,6 +10087,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     tooltip: "Araç İpucunda",
                     inline: "Zaman aşımı ikonunun yanında"
                 }
+            },
+            text: {
+                timeoutRemaining: "susturma süresi kaldı"
             }
         },
         sidebarChat: {
@@ -9559,7 +10240,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 hidden: "Yazıyor Gizli ({{location}})",
                 visible: "Yazıyor Görünür ({{location}})",
-                global: "Yazıyor Görünür (Global)"
+                global: "Yazıyor Görünür (Global)",
+                voiceChannel: "Yazıyor Her Zaman Görünür (Bağlı Ses Kanalı Sohbeti)",
+                temporary: "Yazıyor Geçici Olarak Görünür (Son Gönderilen Mesaj)"
             },
             option: {
                 enabledGlobally: {
@@ -9610,6 +10293,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Varsayılan Gizli",
                     description: "Etkinleştirilirse, aşağıda 'Devre Dışı Konumlar' listesinde yer almayan tüm DM/kanal/sunucularda yazıyor göstergeniz diğer kullanıcılardan gizlenecek. Devre dışı ise, 'Etkin Konumlar' listesinde yer almayan yerlerde yazıyor göstergeniz görünecek."
                 },
+                alwaysEnableInActiveVoiceChat: {
+                    label: "Aktif Ses Sohbetinde Her Zaman Etkinleştir",
+                    description: "Bağlı olduğun ses kanalında yazarken yazma göstergenin her zaman görünmesine izin verir."
+                },
+                temporaryEnableThresholdServers: {
+                    label: "Geçici Etkinleştirme Süresi (Sunucular)",
+                    description: "Bir sunucu kanalında mesaj gönderdikten sonra yazma göstergenin bu kadar saniye boyunca geçici olarak görünmesine izin verir. Yazma göstergesi kanalda zaten görünüyorsa bu ayarın bir etkisi olmaz."
+                },
+                temporaryEnableThresholdDirectMessages: {
+                    label: "Geçici Etkinleştirme Süresi (Özel Mesajlar)",
+                    description: "Bir DM'de veya Grup DM'de mesaj gönderdikten sonra yazma göstergenin bu kadar saniye boyunca geçici olarak görünmesine izin verir. Yazma göstergesi kanalda zaten görünüyorsa bu ayarın bir etkisi olmaz."
+                },
                 enabledLocations: {
                     label: "Etkin Konumlar",
                     description: "Bu ID'ler için işlevi etkinleştir. Virgülle ayrılmış DM ID'leri, kanal ID'leri ve sunucu ID'leri kabul eder. Yalnızca 'Varsayılan Gizli' devre dışı ise kullanılır."
@@ -9618,6 +10313,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Devre Dışı Konumlar",
                     description: "Bu ID'ler için işlevi devre dışı bırak. Virgülle ayrılmış DM ID'leri, kanal ID'leri ve sunucu ID'leri kabul eder. Yalnızca 'Varsayılan Gizli' etkinse kullanılır."
                 }
+            },
+            text: {
+                silentTyping: "Sessiz Yazma",
+                enabled: "Etkin",
+                chatBarIndicators: "Sohbet Çubuğu Göstergeleri",
+                membersListIndicators: "Üye Listesi Göstergeleri",
+                guild: "Sunucu",
+                channel: "Kanal",
+                global: "Genel"
             }
         },
         snowfall: {
@@ -9714,7 +10418,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         splitLargeMessages: {
             name: "SplitLargeMessages",
-            description: "Büyük mesajları, Discord'un mesaj sınırına uyması için birden fazla mesaja böler.",
+            description: "Çok büyük mesajları göndermeden önce Discord boyutunda parçalara böler.",
             option: {
                 maxLength: {
                     label: "Maksimum Mesaj Uzunluğu",
@@ -9726,7 +10430,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 sendDelay: {
                     label: "Gönderim Gecikmesi",
-                    description: "Her parça arasında saniye cinsinden bekleme süresi."
+                    description: "Her parça arasındaki en kısa gecikme (saniye)."
                 },
                 hardSplit: {
                     label: "Katı Bölme",
@@ -9734,32 +10438,26 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 splitInSlowmode: {
                     label: "Yavaş Modda Böl",
-                    description: "Kanalda yavaş mod etkinse mesajlar bölünsün mü?"
+                    description: "Gecikmesi yapılandırılan en yüksek değerin içindeyse yavaş modda bölmeye izin ver."
                 },
                 slowmodeMax: {
                     label: "Yavaş Mod Maksimumu",
-                    description: "Yavaş modda bölünürken izin verilen maksimum yavaş mod süresi."
-                }
-            }
-        },
-        spotifyActivityToggle: {
-            name: "SpotifyActivityToggle",
-            description: "Spotify etkinliği görünürlüğü için bir aç/kapa butonu ekler.",
-            tooltip: {
-                enable: "Spotify etkinliğini aç",
-                disable: "Spotify etkinliğini kapat"
-            },
-            option: {
-                location: {
-                    label: "Konum",
-                    description: "Spotify açma/kapama düğmesinin nerede gösterileceği",
-                    panel: "Sessize Al/Kapat'ın Yanında",
-                    toolbox: "Plexcord Araç Kutusu"
+                    description: "Mesajları bölerken izin verilen en uzun yavaş mod süresi."
                 },
-                activityStatus: {
-                    label: "Aktivite Durumu",
-                    description: "Spotify etkinliğinizin mevcut durumu"
+                splitMode: {
+                    description: "Bir mesajı bölerken bu sınırı tercih et.",
+                    label: "Bölme Modu"
                 }
+            },
+            toast: {
+                cannotSplitThisMessage: "Kanalın yavaş modu nedeniyle bu mesaj bölünemiyor.",
+                onlySentLengthMessage: "Yalnızca {{sent}}/{{length}} mesaj parçası gönderildi.",
+                unsentCopied: "Gönderilmeyen mesaj parçaları panoya kopyalandı."
+            },
+            text: {
+                newlines: "Yeni Satırlar",
+                spaces: "Boşluklar",
+                strictCharacterLimit: "Katı Karakter Sınırı"
             }
         },
         spotifyCrack: {
@@ -9845,7 +10543,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             context: {
                 edit: "Özel Ön Ayarları Düzenle",
-                set: "Özel Durumu Ayarla"
+                set: "Özel Durumu Ayarla",
+                delete: "Ön Ayarı Sil"
             },
             notification: {
                 successfully: "Durum başarıyla kaydedildi"
@@ -9912,11 +10611,39 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 blockSticker: "Çıkartmayı Engelle",
                 unblockSticker: "Çıkartmanın Engelini Kaldır"
+            },
+            text: {
+                failedToRender: "Görüntülenemedi :("
             }
         },
         stickerPaste: {
             name: "StickerPaste",
             description: "Çıkartma seçicide bir çıkartma seçtiğinizde, onu anında göndermek yerine sohbet kutusuna ekler"
+        },
+        streaks: {
+            name: "Streaks",
+            description: "Ardışık günlerde DM'leştiğin kullanıcıların yanında bir seri gösterir.",
+            tooltip: "{{count}} günlük seri",
+            tooltipExpiring: "{{count}} günlük seri — devam ettirmek için bugün mesajlaş!",
+            option: {
+                account: {
+                    description: "Streaks API'ye giriş yap veya çıkış yap. Seriler API'de saklanır, takip edilmeleri için giriş yapman gerekir.",
+                    login: "Streaks API'ye Giriş Yap",
+                    logout: "Streaks API'den Çıkış Yap"
+                },
+                eliteColor: "Elit Seri Rengi (100+ gün)",
+                diamondColor: "Elmas Seri Rengi (60+ gün)",
+                platinumColor: "Platin Seri Rengi (45+ gün)",
+                goldColor: "Altın Seri Rengi (30+ gün)",
+                silverColor: "Gümüş Seri Rengi (14+ gün)",
+                bronzeColor: "Bronz Seri Rengi (7+ gün)",
+                defaultColor: "Varsayılan Seri Rengi (1+ gün)"
+            },
+            toast: {
+                authFailed: "Yetkilendirme başarısız: {{error}}",
+                failedToAuthorizeMessage: "Yetkilendirme başarısız: {{message}}",
+                authorizationExpired: "Streaks yetkilendirmesinin süresi doldu. Streaks eklenti ayarlarından yeniden yetkilendir."
+            }
         },
         streamerModeOnStream: {
             name: "StreamerModeOnStream",
@@ -9924,27 +10651,27 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         streamingCodecDisabler: {
             name: "StreamingCodecDisabler",
-            description: "İstediğiniz yayın codec'lerini devre dışı bırakır",
+            description: "Yayın ve kameralar için seçtiğin video kodeklerini devre dışı bırak.",
             option: {
                 disableAv1Codec: {
                     label: "AV1 Codec'ini Devre Dışı Bırak",
-                    description: "Discord'un yayın için AV1 kullanmayı düşünmesini engeller."
+                    description: "Discord'un yayın ve kameralar için AV1 kullanmayı düşünmemesini sağla."
                 },
                 disableH265Codec: {
                     label: "H265 Codec'ini Devre Dışı Bırak",
-                    description: "Discord'un yayın için H265 kullanmayı düşünmesini engeller."
+                    description: "Discord'un yayın ve kameralar için H265 kullanmayı düşünmemesini sağla."
                 },
                 disableH264Codec: {
                     label: "H264 Codec'ini Devre Dışı Bırak",
-                    description: "Discord'un yayın için H264 kullanmayı düşünmesini engeller."
+                    description: "Discord'un yayın ve kameralar için H264 kullanmayı düşünmemesini sağla."
                 },
                 disableVP8Codec: {
                     label: "VP8 Codec'ini Devre Dışı Bırak",
-                    description: "Discord'un yayın için VP8 kullanmayı düşünmesini engeller."
+                    description: "Discord'un yayın ve kameralar için VP8 kullanmayı düşünmemesini sağla."
                 },
                 disableVP9Codec: {
                     label: "VP9 Codec'ini Devre Dışı Bırak",
-                    description: "Discord'un yayın için VP9 kullanmayı düşünmesini engeller."
+                    description: "Discord'un yayın ve kameralar için VP9 kullanmayı düşünmemesini sağla."
                 }
             }
         },
@@ -9990,6 +10717,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             modal: {
+                name: "İsim",
+                nameDescription: "Bu kuralı tanımana yardımcı olacak isteğe bağlı bir isim.",
+                search: "Kural ara...",
+                noResults: "Aramanla eşleşen kural yok.",
                 title: "Kuralları Test Et",
                 find: "Bul",
                 findRegex: "Regex deseni",
@@ -10004,6 +10735,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 add: "Kural Ekle",
                 empty: "Boş Kural",
                 rule: "Kural",
+            },
+            text: {
+                optionallyOnlyApplyThis: "İsteğe bağlı olarak bu kuralı yalnızca mesaj bu metni içeriyorsa uygula.",
+                emptyRule: "Boş Kural {{number}}",
+                ruleWithFind: "Kural {{number}} - {{find}}"
             }
         },
         themeAttributes: {
@@ -10050,7 +10786,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 twentyFourHourTime: {
                     label: "24 Saat Biçimi",
-                    description: "Saati 24 saatlik biçimde göster"
+                    description: "Saati 24 saat biçiminde göster"
                 },
                 showTimezoneInfo: {
                     label: "Saat Dilimi Bilgisini Göster",
@@ -10089,6 +10825,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 askedTimezone: {
                     label: "Saat Dilimi Soruldu",
                     description: "Kullanıcıya saat diliminin sorulup sorulmadığını belirtir"
+                },
+                recipientTimezoneInDms: {
+                    label: "DM'lerde Alıcının Saat Dilimi",
+                    description: "DM'lerde mesajlarında alıcının saat dilimini göster"
+                },
+                showLocalTimezone: {
+                    label: "Yerel Saat Dilimini Göster",
+                    description: "Yalnızca \"yerel\" yerine yerel saat dilimini göster"
                 }
             },
             modal: {
@@ -10097,6 +10841,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 selectPlaceholder: "Bir Saat Dilimi Seçin",
                 delete: "Saat Dilimini Sil",
                 save: "Kaydet"
+            },
+            text: {
+                invalidResponseFormat: "Geçersiz yanıt biçimi"
             }
         },
         toastNotifications: {
@@ -10157,6 +10904,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 determineServerNotifications: {
                     label: "Sunucu Bildirimlerini Belirle",
                     description: "Sunucu bildirim ayarlarına göre bildirim gösterilip gösterilmeyeceğini belirle"
+                },
+                respectDoNotDisturb: {
+                    label: "Rahatsız Etmeyin'e Uy",
+                    description: "Durumunuz Rahatsız Etmeyin olduğunda bildirim gösterme."
                 },
                 directMessages: {
                     label: "Direkt Mesajlar",
@@ -10244,8 +10995,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "DeepL Pro, ücretli bir API anahtarı gerektirir",
                     descriptionWeb: "Çeviri servisi (Web üzerinde desteklenmez!)",
                     google: "Google Translate",
-                    deepl: "DeepL Ücretsiz",
-                    deeplPro: "DeepL Pro"
+                    deepl: "DeepL Ücretsiz - API anahtarı gerekli",
+                    deeplPro: "DeepL Pro - API anahtarı gerekli",
+                    kagi: "Kagi Çeviri - API anahtarı gerekli"
+                },
+                kagiSession: {
+                    label: "Kagi Oturumu",
+                    description: "Oturum belirtecinizi (token) https://kagi.com/settings?p=user_details adresinden alın"
                 },
                 deeplApiKey: {
                     label: "DeepL API Anahtarı",
@@ -10284,6 +11040,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     cancel: "Anladım",
                     secondaryConfirm: "Bir daha gösterme"
                 }
+            },
+            button: {
+                manageLanguages: "Çeviri dillerini ve otomatik çeviriyi özelleştir"
             }
         },
         typingIndicator: {
@@ -10475,8 +11234,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitroFirst: {
                     label: "Önce Nitro",
                     description: "Hem Nitro hem de USRBG bannerı varsa hangisinin kullanılacağını belirleyin",
-                    nitro: "Nitro Banner",
-                    usrbg: "USRBG Banner"
+                    nitro: "Nitro Afişi",
+                    usrbg: "USRBG Afişi"
                 },
                 voiceBackground: {
                     label: "Ses Arka Planı",
@@ -10596,6 +11355,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Görsel Boyutu",
                     description: "Kullanılacak görsel boyutu"
                 }
+            },
+            text: {
+                viewAvatarDecoration: "Avatar Süslemesini Görüntüle"
             }
         },
         viewRaw: {
@@ -10616,11 +11378,23 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Herhangi bir mesajın ham içerik/verisini görüntülemek için kullanılacak tıklama yöntemini değiştirin.",
                     left: "Ham içeriği görüntülemek için Sol Tık.",
                     right: "Ham içeriği görüntülemek için Sağ Tık."
+                },
+                messageContextMenu: {
+                    description: "Mesaj bağlam menüsünde göster",
+                    label: "Mesaj Bağlam Menüsü"
+                },
+                sortKeys: {
+                    description: "Ham verinin anahtarlarını alfabetik sırala.",
+                    label: "Anahtarları Sırala"
+                },
+                stripSensitiveData: {
+                    description: "E-posta ve telefon numarası gibi hassas verileri ham veriden kaldır.",
+                    label: "Hassas Verileri Kaldır"
                 }
             },
             modal: {
                 title: "Ham Veri",
-                content: "İçerik",
+                content: "Mesaj İçeriği",
                 data: "{{type}} Veri",
                 copied: "{{type}} verisi panoya kopyalandı!",
                 copy: "{{type}} JSON'unu Kopyala",
@@ -10633,6 +11407,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 guild: "Sunucu",
                 role: "Rol",
                 user: "Kullanıcı"
+            },
+            text: {
+                copyTypeData: "{{type}} Verisini Kopyala",
+                rawTypeData: "Ham {{type}} Verisi",
+                messageData: "Mesaj Verisi"
             }
         },
         voiceButtons: {
@@ -10811,6 +11590,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 pause: "Kaydı duraklat",
                 recording: "KAYIT YAPILIYOR",
                 send: "Gönder"
+            },
+            text: {
+                convertioWebConverter: "convertio web dönüştürücüsü"
             }
         },
         volumeBooster: {
@@ -10820,39 +11602,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 multiplier: {
                     label: "Çarpan",
                     description: "Ses Çarpanı"
-                }
-            }
-        },
-        wallpaperFree: {
-            name: "WallpaperFree",
-            description: "Eski DM duvar kâğıdı deneyinin yeniden yapımı; herhangi bir kanal, kullanıcı veya sunucu için arka plan resmi ayarlayın.",
-            option: {
-                globalDefault: {
-                    label: "Genel Varsayılan",
-                    description: "Tüm kanallar için genel bir varsayılan duvar kâğıdı ayarlayın."
-                },
-                stylingTips: {
-                    label: "Stil İpuçları"
-                }
-            },
-            context: {
-                setWallpaper: "Duvar Kâğıdı Ayarla",
-                removeWallpaper: "Duvar Kâğıdını Kaldır"
-            },
-            modal: {
-                set: "Duvar kâğıdı ayarla",
-                image: "Resim URL'si",
-                cancel: "İptal",
-                apply: "Uygula",
-                global: {
-                    set: "Genel bir duvar kâğıdı ayarla",
-                    remove: "Genel varsayılan duvar kâğıdını kaldır",
-                    reset: "Duvar kâğıdı verilerini sıfırla"
-                },
-                web: {
-                    info: "Yerel dosyaları, plexcord tema dizinine koyarak ve plexcord:///themes/filename.ext url'sini kullanarak kullanabilirsiniz.",
-                    open: "Tema Dizini Aç",
-                    quickCSS: "QuickCSS'i Aç"
                 }
             }
         },
@@ -10868,7 +11617,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webKeybinds: {
             name: "WebKeybinds",
-            description: "Discord’un web sürümünde eksik olan kısayol tuşlarını geri ekler: ctrl+t, ctrl+shift+t, ctrl+tab, ctrl+shift+tab, ctrl+1-9, ctrl+,. Tam olarak yalnızca Plextron/Legcord üzerinde çalışır, tarayıcı içinde çalışmaz."
+            description: "Discord'un web sürümünde eksik olan kısayolları geri ekler. Yalnızca Plextron/Legcord'da tam çalışır, tarayıcında çalışmaz",
+            option: {
+                showNavigationButtons: {
+                    description: "Başlık çubuğunda geri/ileri gezinme düğmelerini göster.",
+                    label: "Gezinme Düğmelerini Göster"
+                },
+                overrideCommonKeybinds: {
+                    description: "Discord'un en yaygın sekme gezinme kısayollarını (ctrl+t, ctrl+shift+t, ctrl+tab, ctrl+shift+tab, ctrl+n) geçersiz kılmasına izin verir. Yalnızca web sitesi kısayollarına öncelik veren birkaç tarayıcıda çalışır.",
+                    label: "Yaygın Kısayolları Geçersiz Kıl"
+                }
+            }
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
@@ -10887,6 +11646,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 avatarClick: {
                     label: "Avatar Tıklaması",
                     description: "Reaksiyonlardaki avatarların tıklanabilirliğini aç/kapat"
+                },
+                clickableAvatars: {
+                    description: "Etkinken tepki veren kullanıcının avatarına tıklamak tepki eklemek yerine profilini açar",
+                    label: "Tıklanabilir Avatarlar"
                 }
             }
         },
@@ -10925,7 +11688,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     reply: " (yanıt)",
                     embed: " [embed] ",
                     onlyEmbed: "mesaj embed(leri) gönderdi",
-                    sticker: " [sticker] ",
+                    sticker: " [çıkartma]",
                     onlySticker: "bir çıkartma gönderdi",
                     image: "resim",
                     attachment: "ek"
@@ -11002,6 +11765,2447 @@ const translations: MatchStructure<typeof enTranslations> = {
         youtubeDescription: {
             name: "YouTubeDescription",
             description: "YouTube video yerleştirmelerine açıklamalar ekler"
+        },
+        addAttachments: {
+            name: "AddAttachments",
+            description: "Mesajları düzenlerken yeni ekler eklemeni sağlar",
+            toast: {
+                youCannotAddMore: "Bu mesaja daha fazla ek ekleyemezsin.",
+                youCanOnlyAdd: "Bu mesaja yalnızca {{count}} ek daha ekleyebilirsin.",
+                uploadingThisCanTake: "Yükleniyor, bu biraz zaman alabilir...",
+                addedOne: "Ek başarıyla eklendi!",
+                addedMany: "Ekler başarıyla eklendi!"
+            },
+            text: {
+                addAttachments: "Ek Ekle"
+            }
+        },
+        advancedPermissions: {
+            option: {
+                simplifiedCard: {
+                    description: "Discord'un basitleştirilmiş izin kartıyla ne yapılacağı",
+                    label: "Basitleştirilmiş Kart",
+                    hide: "Gizle",
+                    collapse: "Daraltılabilir yap",
+                    show: "Görünür bırak"
+                },
+                collapsedByDefault: {
+                    description: "Basitleştirilmiş izinleri daraltılmış olarak başlat.",
+                    label: "Varsayılan Olarak Daraltılmış"
+                }
+            },
+            name: "AdvancedPermissions",
+            description: "Gelişmiş izin kartını varsayılan olarak gösterir.",
+            text: {
+                simplifiedPermissions: "Basitleştirilmiş izinler"
+            }
+        },
+        autoJumpToMessage: {
+            option: {
+                onlyWhenUnfocused: {
+                    description: "Yalnızca Discord penceresi odakta değilken mesajlara otomatik olarak atla.",
+                    label: "Yalnızca Odakta Değilken"
+                }
+            },
+            name: "AutoJumpToMessage",
+            description: "Yeni mesajların kanalını otomatik olarak açar."
+        },
+        betterForwards: {
+            text: {
+                serverIconForName: "{{name}} sunucu simgesi",
+                messageAttachments: "Mesaj ekleri",
+                messageTextWillNot: "Bu seçenek kapalıyken mesaj metni yönlendirilmez",
+                forwardEverything: "Her Şeyi Yönlendir",
+                viewServer: "Sunucuyu görüntüle",
+                embed: "Gömülü",
+                embedNumber: "Gömülü {{number}}",
+                image: "Görsel",
+                video: "Video",
+                serverIcon: "{{name}} sunucu simgesi",
+                dmIcon: "{{name}} DM simgesi",
+                groupDmIcon: "{{name}} grup DM simgesi"
+            },
+            option: {
+                resendOnFail: {
+                    description: "Yönlendirme başarısız olursa yönlendirilen mesajı yeniden göndermeyi dener. İstenmeyen etiketlere veya metin spamına yol açabilir. NSFW kısıtlamalarını aşar.",
+                    label: "Başarısız Olursa Yeniden Gönder"
+                },
+                forwardPreface: {
+                    description: "Yönlendirilen mesajın neyle başlayacağı",
+                    label: "Yönlendirme Öneki"
+                },
+                dontFollowForwards: {
+                    description: "Tek bir mesajı yönlendirdikten sonra ona atlama. Bu davranışı yok saymak için Shift tuşunu basılı tut.",
+                    label: "Yönlendirmeleri Takip Etme"
+                },
+                selfForward: {
+                    description: "Yönlendirme listesi açılır penceresinde mevcut kanalı göster.",
+                    label: "Kendine Yönlendir"
+                }
+            },
+            name: "BetterForwards",
+            description: "NSFW atlatma ve arayüz iyileştirmeleri dahil mesaj yönlendirme araçları."
+        },
+        betterImageEditor: {
+            text: {
+                search: "Ara",
+                searchSavedPictures: "Kayıtlı resimlerde ara",
+                clearTheSearch: "Aramayı temizle",
+                savedPictures: "Kayıtlı resimler",
+                removeName: "{{name}} öğesini kaldır",
+                removeHoldShiftTo: "Kaldır. Onayı atlamak için Shift tuşunu basılı tut",
+                originals: "Orijinaller",
+                putBackTheLast: "Sonuncuyu geri koy",
+                forgetEveryRememberedCrop: "Hatırlanan tüm kırpmalar unutulsun mu?",
+                yourPicturesStayEach: "Resimlerin kalır. Bundan sonra her biri, yeniden kırpana kadar çerçevesiz açılır.",
+                forget: "Unut",
+                cancel: "İptal",
+                clearSavedPictures: "Kayıtlı resimler temizlensin mi?",
+                everyPictureYouHave: "Burada kaydettiğin her resim, her biri için hatırlanan kırpmayla birlikte silinir. Discord'un kendi arşivine ve mevcut avatar ile bannerına dokunulmaz.",
+                clear: "Temizle",
+                removeThisPicture: "Bu resim kaldırılsın mı?",
+                remove: "Kaldır",
+                keepTheCroppedCopy: "Kırpılmış kopya saklansın mı?",
+                itGoesOnThe: "Orijinallerinin yanındaki {{toLowerCase}} rafına konur.",
+                keep: "Sakla",
+                noThanks: "Hayır, teşekkürler",
+                exportToAFile: "Dosyaya dışa aktar",
+                importFromAFile: "Dosyadan içe aktar",
+                forgetRememberedFraming: "Hatırlanan çerçevelemeyi unut",
+                clearSavedPictures2: "Kayıtlı resimleri temizle",
+                croppedKind: "Kırpılmış {{kind}}",
+                unpinName: "{{name}} sabitlemesini kaldır",
+                pinName: "{{name}} sabitle",
+                pinnedNeverDrops: "Sabitlendi, raftan asla düşmez",
+                pinNeverDrops: "Raftan asla düşmemesi için sabitle",
+                nothingMatches: "Burada bununla eşleşen bir şey yok",
+                originalsEmpty: "Seçtiğin, yapıştırdığın veya bıraktığın resimler buraya gelir",
+                croppedEmpty: "Kırptığın resimler buraya gelir",
+                forgotFraming: "{{count}} resmin çerçevesi unutuldu",
+                nothingFramed: "Hiçbir şey çerçevelenmemişti",
+                pictureLibrary: "Resim kitaplığı",
+                addedPictures: "{{count}} resim eklendi",
+                nothingNew: "O dosyada yeni bir şey yok",
+                shownOfTotal: "{{shown}} / {{total}}",
+                keptCount: "{{count}} saklanıyor",
+                youAreWearingThis: "Şu anda bunu kullanıyorsun",
+                removePictureBody: "{{name}}, kendisi için hatırlanan kırpma ile birlikte kayıtlı resimlerinden kaldırılacak."
+            },
+            option: {
+                librarySize: {
+                    description: "Her rafta kaç resim tutulacağı.",
+                    label: "Kitaplık Boyutu"
+                },
+                rememberCrop: {
+                    description: "Bir resim için en son kullandığın yakınlaştırma ve konumu geri yükler.",
+                    label: "Kırpmayı Hatırla"
+                },
+                forgetFraming: {
+                    description: "Hatırlanan tüm kırpmaları sil ve her resmi Discord'un açacağı şekilde aç.",
+                    label: "Çerçevelemeyi Unut"
+                },
+                saveCropped: {
+                    description: "Kırptıktan sonra her resmin bir kopyasını sakla.",
+                    label: "Kırpılanları Kaydet"
+                },
+                askBeforeSavingCropped: {
+                    description: "Kırpılmış kopyayı otomatik saklamak yerine önce sor.",
+                    label: "Kırpılanları Kaydetmeden Önce Sor"
+                },
+                transfer: {
+                    description: "Resimlerini ve her birinin çerçevelemesini başka bir cihaza taşı.",
+                    label: "Aktar"
+                },
+                clearLibrary: {
+                    description: "Kaydettiğin tüm resimleri at.",
+                    label: "Kitaplığı Temizle"
+                }
+            },
+            name: "BetterImageEditor",
+            description: "Avatar ve banner düzenleyicisinde resimlerin için bir raf tutar ve her birini nasıl kırptığını hatırlar.",
+            toast: {
+                couldNotExportYour: "Resimlerin dışa aktarılamadı",
+                couldNotReadThat: "Bu dosya okunamadı",
+                thatPictureIsMissing: "Bu resim eksik",
+                thatPictureIsToo: "Bu resim Discord için çok büyük",
+                couldNotUseThat: "Bu resim kullanılamadı",
+                couldNotKeepThe: "Kırpılmış kopya saklanamadı"
+            },
+            kind: {
+                avatars: "avatarlar",
+                banners: "afişler",
+                serverIcons: "sunucu simgeleri",
+                serverBanners: "sunucu afişleri",
+                eventCovers: "etkinlik kapakları",
+                homeHeaders: "ana sayfa başlıkları",
+                decorations: "süslemeler",
+                widgetCovers: "widget kapakları",
+                widgetImages: "widget görselleri"
+            }
+        },
+        cancelFriendRequest: {
+            name: "CancelFriendRequest",
+            description: "Profillerden gönderilen arkadaşlık isteklerini iptal etmenin bir yolunu ekler.",
+            text: {
+                cancelOutgoingFriendRequest: "Gönderilen Arkadaşlık İsteğini İptal Et"
+            }
+        },
+        clipUpload: {
+            text: {
+                createdAtMustBe: "Oluşturulma tarihi geçerli bir tarih olmalıdır.",
+                cancel: "İptal",
+                uploadClipFile: "Klip Dosyası Yükle",
+                fileName: "Dosya adı",
+                title: "Başlık",
+                epicMoment: "Efsane An",
+                message: "Mesaj",
+                checkOutThisClip: "Bu klibe bir bak!",
+                spoiler: "Spoiler",
+                remix: "Remiks",
+                thumbnail: "Küçük resim",
+                file: "Dosya",
+                selectFile: "Dosya Seç",
+                parseClipMetadataFrom: "Klip meta verilerini dosyadan al",
+                selectFriends: "Arkadaş seç",
+                selectAGame: "Bir oyun seç",
+                customApplicationId: "Özel uygulama kimliği",
+                createdAt: "Oluşturulma",
+                participants: "Katılımcılar",
+                onlyTagPeopleWho: "Yalnızca orada bulunan ve bu klipte yer almayı kabul eden kişileri etiketle.",
+                gameApplication: "Oyun/Uygulama",
+                uploadClipFile2: "Klip dosyası yükle",
+                uploading: "Yükleniyor",
+                upload: "Yükle",
+                noFileSelected: "Dosya seçilmedi",
+                couldNotPrepare: "Seçilen dosya hazırlanamadı.",
+                couldNotRead: "Seçilen dosya okunamadı.",
+                couldNotUpdateMetadata: "Klip meta verileri güncellenemedi.",
+                notCompatible: "Bu dosya uyumlu değil. H.264 video ve AAC ses içeren bir MP4 klip kullan.",
+                uploadFailed: "Yükleme başarısız.",
+                noUploadSlot: "Discord bir yükleme alanı döndürmedi.",
+                uploadCanceled: "Yükleme iptal edildi.",
+                failedToUpload: "Klip yüklenemedi.",
+                selectClipFile: "Klip dosyası seç",
+                mp4Video: "MP4 Video"
+            },
+            name: "ClipUpload",
+            description: "Yerel bir video dosyasını Discord klibi olarak yüklemek için bir düğme ekler.",
+            toast: {
+                checkingClipFile: "Klip dosyası kontrol ediliyor.",
+                convertingClipFile: "Klip dosyası dönüştürülüyor.",
+                clipUploaded: "Klip yüklendi."
+            }
+        },
+        collapsibleUI: {
+            name: "CollapsibleUI",
+            description: "Kanal, üye, sohbet düğmeleri ve kullanıcı alanı için yerleşik daraltılabilir yüzeyler.",
+            text: {
+                collapsibleUi: "Daraltılabilir Arayüz",
+                guildBar: "Sunucu Çubuğu",
+                channelList: "Kanal Listesi",
+                membersList: "Üye Listesi",
+                messageButtons: "Mesaj Düğmeleri",
+                titleBar: "Başlık Çubuğu",
+                headerBar: "Üst Çubuk",
+                userArea: "Kullanıcı Alanı"
+            },
+            option: {
+                detachUserArea: {
+                    description: "Kullanıcı alanını ayırarak daraltılmamışken serbestçe taşınabilmesini sağlar.",
+                    label: "Kullanıcı Alanını Ayır"
+                },
+                detachedUserAreaX: {
+                    description: "Ayrılmış kullanıcı alanının x konumunu saklar.",
+                    label: "Ayrılmış Kullanıcı Alanı X"
+                },
+                detachedUserAreaY: {
+                    description: "Ayrılmış kullanıcı alanının y konumunu saklar.",
+                    label: "Ayrılmış Kullanıcı Alanı Y"
+                },
+                guildBarCollapsed: {
+                    description: "Sunucu çubuğunu daraltılmış olarak hatırla.",
+                    label: "Sunucu Çubuğu Daraltılmış"
+                },
+                channelListCollapsed: {
+                    description: "Kanal listesini daraltılmış olarak hatırla.",
+                    label: "Kanal Listesi Daraltılmış"
+                },
+                membersListCollapsed: {
+                    description: "Üye listesini daraltılmış olarak hatırla.",
+                    label: "Üye Listesi Daraltılmış"
+                },
+                chatButtonsCollapsed: {
+                    description: "Mesaj düğmesi satırını daraltılmış olarak hatırla.",
+                    label: "Sohbet Düğmeleri Daraltılmış"
+                },
+                titleBarCollapsed: {
+                    description: "Başlık çubuğunu daraltılmış olarak hatırla.",
+                    label: "Başlık Çubuğu Daraltılmış"
+                },
+                headerBarCollapsed: {
+                    description: "Üst çubuğu daraltılmış olarak hatırla.",
+                    label: "Üst Çubuk Daraltılmış"
+                },
+                userAreaCollapsed: {
+                    description: "Kullanıcı alanını daraltılmış olarak hatırla.",
+                    label: "Kullanıcı Alanı Daraltılmış"
+                }
+            }
+        },
+        customCommands: {
+            text: {
+                cancel: "İptal",
+                name: "Name",
+                response: "Yanıt",
+                detectedArguments: "Algılanan Argümanlar",
+                exampleCommandResponse: "Örnek komut yanıtı:",
+                exampleUsage: "Örnek kullanım:",
+                exampleOutput: "Örnek çıktı:",
+                viewArgumentsGuide: "Argüman Rehberini Görüntüle",
+                editTag: "Etiketi Düzenle",
+                deleteTag: "Etiketi Sil",
+                registeredTags: "Kayıtlı Etiketler",
+                createTag: "Etiket Oluştur",
+                aTagWithThe: "**{{name}}** adlı bir etiket yok!",
+                successfullyDeletedTheTag: "**{{name}}** etiketi başarıyla silindi!",
+                ephemeralReserved: "\"ephemeral\" argüman adı ayrılmıştır ve kullanılamaz.",
+                createNewTag: "Yeni Etiket Oluştur",
+                editTagSubtitle: "Özel komutunu düzenle.",
+                createTagSubtitle: "Eğik çizgi komutu olarak kaydedilecek yeni bir etiket oluştur.",
+                save: "Kaydet",
+                create: "Oluştur",
+                variablesHelp: "Yanıtın, komut argümanlarına dönüşecek çift süslü parantez içindeki değişkenleri içerebilir, örneğin",
+                defaultValuesHelp: "Eşittir işareti kullanarak varsayılan değerli argümanlar belirtebilirsin, örneğin",
+                noTagsYet: "Hay aksi! Henüz hiç etiket yok, oluşturmak için `/tags create` kullan!",
+                nameAlreadyExists: "\"{{name}}\" adında bir etiket zaten var ve üzerine yazılacak.",
+                defaultValue: "(varsayılan: {{value}})"
+            },
+            name: "CustomCommands",
+            description: "Özel eğik çizgi komutları / etiketler oluşturmanı sağlar",
+            option: {
+                tagsList: {
+                    label: "Etiket Listesi"
+                }
+            },
+            command: {
+                ephemeral: "Yanıtın yalnızca sana görünüp görünmeyeceği",
+                tags: "Tüm özel komutları yönet",
+                create: "Yeni bir etiket oluştur",
+                list: "Tüm etiketlerini listele",
+                delete: "Bir etiketi adına göre kaldır",
+                tagName: "Etiketin adı"
+            }
+        },
+        fileUpload: {
+            name: "FileUpload",
+            description: "Dosyaları Zipline, Nest, S3 ve WebDAV gibi barındırma hizmetlerine yükle",
+            toast: {
+                fileTypeNotAllowed: "Dosya türüne mevcut filtre tarafından izin verilmiyor",
+                pleaseConfigureFileuploadSettings: "Önce FileUpload ayarlarını yapılandır",
+                sharexConfigIsValid: "ShareX yapılandırması geçerli",
+                importedSharexConfig: "ShareX yapılandırması içe aktarıldı",
+                uploadSuccessfulButNo: "Yükleme başarılı, ancak kopyalanacak URL yok",
+                uploadSuccessfulUrlCopied: "Yükleme başarılı, URL panoya kopyalandı",
+                uploadSuccessfulButFailed: "Yükleme başarılı, ancak URL kopyalanamadı",
+                uploadSuccessful: "Yükleme başarılı",
+                uploadSucceededWithServicelabels: "Yedeğe geçtikten sonra {{serviceLabels_service}} ile yükleme başarılı",
+                apngToGifConversion: "APNG'den GIF'e dönüştürme başarısız, APNG olarak yükleniyor",
+                uploadAlreadyInProgress: "Yükleme zaten devam ediyor",
+                uploadCancelled: "Yükleme iptal edildi",
+                uploadFailedMessage: "Yükleme başarısız: {{message}}",
+                invalidSharexConfig: "Geçersiz ShareX yapılandırması",
+                failedToImportSharexConfig: "ShareX yapılandırması içe aktarılamadı"
+            },
+            text: {
+                uploadToServicename: "{{serviceName}} hizmetine yükle",
+                uploadToHost: "Barındırıcıya Yükle",
+                chooseFile: "Dosya Seç...",
+                zipline: "Zipline",
+                eZHost: "E-Z Host",
+                nest: "Nest",
+                encryptingHost: "Encrypting.host",
+                s3Compatible: "S3 Uyumlu",
+                catboxMoe: "Catbox.moe",
+                litterbox: "Litterbox",
+                sharexCustomUploader: "ShareX Özel Yükleyici",
+                webdavNextcloudOwncloud: "WebDAV (Nextcloud/Owncloud)",
+                n1Hour: "1 saat",
+                n12Hours: "12 saat",
+                n24Hours: "24 saat",
+                n72Hours: "72 saat",
+                corsProxy: "CORS Proxy",
+                query: "Sorgu",
+                param: "Parametre",
+                fakeLink: "Sahte Bağlantı",
+                embed: "Gömme",
+                n30Seconds: "30 saniye",
+                n1Minute: "1 dakika",
+                n2Minutes: "2 dakika",
+                n5Minutes: "5 dakika",
+                n10Minutes: "10 dakika",
+                dragHostsToReorder: "Yedek denemelerin sırasını değiştirmek için barındırıcıları sürükle. Önce seçili barındırıcı denenir, ardından bu sıra kullanılır.",
+                chooseWhereFileuploadSends: "FileUpload'un yeni dosyaları nereye göndereceğini seç.",
+                connectionDetailsForYour: "Zipline örneğin için bağlantı ayrıntıları.",
+                theUrlOfYour: "Zipline örneğinin URL'si",
+                yourZiplineApiAuthorization: "Zipline API yetkilendirme belirtecin",
+                yourZiplineApiToken: "Zipline API belirtecin",
+                folderIdForUploads: "Yüklemeler için klasör kimliği (klasör istemiyorsan boş bırak)",
+                leaveEmptyForNo: "Klasör istemiyorsan boş bırak",
+                connectionDetailsForE: "E-Z Host yüklemeleri için bağlantı ayrıntıları.",
+                yourEZHost: "E-Z Host API anahtarın",
+                connectionDetailsForNest: "Nest yüklemeleri için bağlantı ayrıntıları.",
+                yourNestApiAuthorization: "Nest API yetkilendirme belirtecin",
+                yourNestApiToken: "Nest API belirtecin",
+                connectionDetailsForEncrypting: "Encrypting.host yüklemeleri için bağlantı ayrıntıları.",
+                yourEncryptingHostApi: "Encrypting.host API anahtarın",
+                howEncryptingHostShould: "Encrypting.host'un döndürülen bağlantıları nasıl biçimlendireceği.",
+                selectUrlStyle: "URL stili seç",
+                optionalTitleForEmbed: "Gömme tarzı yanıtlar için isteğe bağlı başlık.",
+                optionalTitle: "İsteğe bağlı başlık",
+                optionalColorForEmbed: "Gömme tarzı yanıtlar için isteğe bağlı renk.",
+                optionalColor: "İsteğe bağlı renk",
+                optionalFakeLinkValue: "Fakelink tarzı yanıtlar için isteğe bağlı sahte bağlantı değeri.",
+                optionalFakeLink: "İsteğe bağlı sahte bağlantı",
+                connectionDetailsAndObject: "Kovan için bağlantı ayrıntıları ve nesne adlandırması.",
+                s3CompatibleEndpointE: "S3 uyumlu uç nokta (ör. https://<accountid>.r2.cloudflarestorage.com)",
+                bucketToUploadInto: "Yüklenecek kova",
+                awsRegionOrAuto: "AWS bölgesi veya Cloudflare R2 için auto",
+                s3CompatibleAccessKey: "S3 uyumlu erişim anahtarı",
+                yourAccessKeyId: "Erişim anahtarı kimliğin",
+                s3CompatibleSecretKey: "S3 uyumlu gizli anahtar",
+                yourSecretAccessKey: "Gizli erişim anahtarın",
+                optionalTemporaryCredentialToken: "İsteğe bağlı geçici kimlik belirteci",
+                optionalSessionToken: "İsteğe bağlı oturum belirteci",
+                optionalPublicUrlBase: "Döndürülen bağlantılar için isteğe bağlı genel temel URL",
+                optionalFolderPrefixInside: "Kova içinde isteğe bağlı klasör/önek",
+                useEndpointBucketKey: "Uç nokta/kova/anahtar biçimini kullan, R2 için önerilir.",
+                optionalAccountBindingFor: "Catbox yüklemeleri için isteğe bağlı hesap bağlama.",
+                yourCatboxUserhashFor: "Hesap bağlama için Catbox kullanıcı karman; anonim yükleme için boş bırak.",
+                yourCatboxUserhash: "Catbox kullanıcı karman",
+                howLongUploadsAre: "Yüklemelerin ne kadar süre saklanacağı",
+                selectExpiry: "Süre sonunu seç",
+                optionalAccountBindingFor2: "GoFile yüklemeleri için isteğe bağlı hesap bağlama.",
+                optionalGofileTokenTo: "Hesabına yüklemek için isteğe bağlı GoFile belirteci.",
+                optionalGofileToken: "İsteğe bağlı GoFile belirteci",
+                connectionDetailsForPixelvault: "PixelVault yüklemeleri için bağlantı ayrıntıları.",
+                yourPixelvaultAuthorizationKey: "PixelVault yetkilendirme anahtarın.",
+                yourPixelvaultUploadKey: "PixelVault yükleme anahtarın",
+                optionalAccountBindingFor3: "PixelDrain yüklemeleri için isteğe bağlı hesap bağlama.",
+                optionalPixeldrainApiKey: "Kimliği doğrulanmış yüklemeler için isteğe bağlı PixelDrain API anahtarı. Anonim yükleme için boş bırak.",
+                yourPixeldrainApiKey: "PixelDrain API anahtarın",
+                pasteImportOrValidate: "Bir ShareX özel yükleyici yapılandırmasını yapıştır, içe aktar veya doğrula.",
+                pasteYourSharexCustom: "ShareX özel yükleyici JSON'unu (.sxcu/.json) yapıştır. DestinationType, FileUploader veya ImageUploader içermelidir.",
+                importFromFileOr: "Dosyadan içe aktar veya yapıştırılan yapılandırmayı doğrula",
+                connectionDetailsForWebdav: "WebDAV sunucuları (Nextcloud, Owncloud vb.) için bağlantı ayrıntıları.",
+                baseWebdavUrlE: "Temel WebDAV URL'si (ör. https://nextcloud.example.com/remote.php/dav/files/username)",
+                optionalSubdirectoryOnThe: "Sunucuda yükleme yapılacak isteğe bağlı alt dizin (ör. uploads)",
+                leaveEmptyForRoot: "Kök dizin için boş bırak",
+                selectYourWebdavServer: "WebDAV sunucu türünü seç. Nextcloud ve ownCloud genel bir paylaşım bağlantısı oluşturur. Genel ise ham dosya URL'sini döndürür.",
+                selectServerType: "Sunucu türü seç",
+                howToReturnThe: "Genel paylaşım bağlantısının nasıl döndürüleceği. Paylaşım Sayfası bir web sayfasına bağlanır; Doğrudan İndirme doğrudan dosyaya bağlanır; Markdown Bağlantısı paylaşım sayfasını tıklanabilir bir dosya adıyla sarar.",
+                selectShareLinkFormat: "Paylaşım bağlantısı biçimini seç",
+                controlWhatFileuploadDoes: "Bir barındırıcı URL döndürdükten sonra FileUpload'un ne yapacağını kontrol et.",
+                stripQueryParametersFrom: "Yüklenen dosya URL'sinden sorgu parametrelerini kaldır.",
+                wrapUploadedVideoLinks: "Daha iyi Discord önizlemeleri için yüklenen video bağlantılarını bir gömme proxy'siyle sar.",
+                chooseWhichEmbedProxy: "Yüklenen video bağlantıları için hangi gömme proxy hizmetinin kullanılacağını seç",
+                selectAnEmbedProxy: "Bir gömme proxy hizmeti seç",
+                convertApngFilesTo: "APNG dosyalarını GIF biçimine dönüştür.",
+                useTheOriginalFilename: "Yüklemeleri upload.ext olarak adlandırmak yerine orijinal dosya adını kullan.",
+                automaticallyCopyTheUploaded: "Yüklenen dosya URL'sini otomatik olarak panoya kopyala.",
+                onlyUseTheSelected: "Yedek barındırıcıları denemeden yalnızca seçili yükleyiciyi kullan.",
+                afterUploadInsertThe: "Yüklemeden sonra elde edilen URL'yi mevcut sohbet girişine ekle.",
+                wrapInsertedUrlsIn: "Discord önizleme gömmesini önlemek için eklenen URL'leri açılı ayraçlarla sar.",
+                chooseWhenFileuploadTakes: "FileUpload'un Discord dosya işlemlerini ne zaman devralacağını seç.",
+                useFileuploadWhenUploading: "Discord'un dosya seçicisiyle yüklerken FileUpload kullan.",
+                useFileuploadOnlyFor: "FileUpload'u yalnızca mevcut Discord yükleme sınırından büyük dosyalar için kullan.",
+                manualDiscordFileSize: "Otomatik algılama yanlış olduğunda kullanılan, MB cinsinden manuel Discord dosya boyutu sınırı. Otomatik için boş bırak.",
+                auto: "Otomatik",
+                commaSeparatedListOf: "Virgülle ayrılmış uzantı listesi (ör. png,jpg,gif). Tümüne izin vermek için boş bırak.",
+                configureBrowserUploadProxying: "Tarayıcı yükleme proxy'sini ve zaman aşımlarını yapılandır.",
+                corsProxyUsedFor: "Web yüklemeleri için kullanılan CORS proxy'si. Varsayılan proxy için boş bırak.",
+                sourceCodeForThe: "Varsayılan CORS proxy'sinin kaynak kodu",
+                maximumTimeToWait: "Yedeğe geçmeden önce yükleme denemesi başına en uzun bekleme süresi",
+                selectTimeout: "Zaman aşımı seç",
+                drag: "Sürükle",
+                importSxcuJson: ".sxcu/.json İçe Aktar",
+                validate: "Doğrula",
+                resetToDefault: "Varsayılana Sıfırla",
+                progress: "%{{percent}} - {{transferred}} / {{total}}",
+                cancel: "İptal"
+            },
+            option: {
+                serviceType: {
+                    description: "Seçili yükleme hizmeti",
+                    label: "Hizmet Türü"
+                },
+                serviceUrl: {
+                    description: "Zipline hizmet URL'si",
+                    label: "Hizmet URL'si"
+                },
+                ziplineToken: {
+                    description: "Zipline kimlik doğrulama belirteci",
+                    label: "Zipline Belirteci"
+                },
+                folderId: {
+                    description: "İsteğe bağlı Zipline klasör kimliği",
+                    label: "Klasör Kimliği"
+                },
+                ezHostKey: {
+                    description: "E-Z Host API anahtarı",
+                    label: "E-Z Host Anahtarı"
+                },
+                nestToken: {
+                    description: "Nest API belirteci",
+                    label: "Nest Belirteci"
+                },
+                encryptingHostKey: {
+                    description: "Encrypting.host API anahtarı",
+                    label: "Encrypting.host Anahtarı"
+                },
+                encryptingHostUrlStyle: {
+                    description: "Encrypting.host URL stili",
+                    label: "Encrypting.host URL Stili"
+                },
+                encryptingHostDomains: {
+                    description: "Encrypting.host alan adları JSON listesi",
+                    label: "Encrypting.host Alan Adları"
+                },
+                encryptingHostTitle: {
+                    description: "İsteğe bağlı Encrypting.host gömme başlığı",
+                    label: "Encrypting.host Başlığı"
+                },
+                encryptingHostColor: {
+                    description: "İsteğe bağlı Encrypting.host gömme rengi",
+                    label: "Encrypting.host Rengi"
+                },
+                encryptingHostFakelink: {
+                    description: "İsteğe bağlı Encrypting.host sahte bağlantısı",
+                    label: "Encrypting.host Sahte Bağlantı"
+                },
+                s3Endpoint: {
+                    description: "S3 uyumlu uç nokta URL'si",
+                    label: "S3 Uç Noktası"
+                },
+                s3Bucket: {
+                    description: "S3 kova adı",
+                    label: "S3 Kovası"
+                },
+                s3Region: {
+                    description: "S3 bölgesi (R2 için auto kullan)",
+                    label: "S3 Bölgesi"
+                },
+                s3AccessKeyId: {
+                    description: "S3 erişim anahtarı kimliği",
+                    label: "S3 Erişim Anahtarı Kimliği"
+                },
+                s3SecretAccessKey: {
+                    description: "S3 gizli erişim anahtarı",
+                    label: "S3 Gizli Erişim Anahtarı"
+                },
+                s3SessionToken: {
+                    description: "İsteğe bağlı S3 oturum belirteci",
+                    label: "S3 Oturum Belirteci"
+                },
+                s3PublicUrl: {
+                    description: "İsteğe bağlı genel temel URL",
+                    label: "S3 Genel URL'si"
+                },
+                s3Prefix: {
+                    description: "İsteğe bağlı S3 nesne anahtarı öneki",
+                    label: "S3 Öneki"
+                },
+                s3ForcePathStyle: {
+                    description: "Yol stili S3 URL'leri kullan",
+                    label: "S3 Yol Stilini Zorla"
+                },
+                litterboxExpiry: {
+                    description: "Litterbox saklama süresi",
+                    label: "Litterbox Süre Sonu"
+                },
+                catboxUserhash: {
+                    description: "Hesap bağlama için Catbox kullanıcı karması",
+                    label: "Catbox Kullanıcı Karması"
+                },
+                sharexConfig: {
+                    description: "ShareX özel yükleyici JSON'u",
+                    label: "ShareX Yapılandırması"
+                },
+                disableFallbacks: {
+                    description: "Yedek yükleme hizmetlerini devre dışı bırak",
+                    label: "Yedekleri Devre Dışı Bırak"
+                },
+                autoSend: {
+                    description: "Yüklenen URL'yi sohbet girişine ekle",
+                    label: "Otomatik Gönder"
+                },
+                autoFormat: {
+                    description: "Eklenen URL'yi açılı ayraçlarla sar",
+                    label: "Otomatik Biçimlendir"
+                },
+                bypassDiscordUpload: {
+                    description: "Discord yüklemelerini atla ve bunun yerine FileUpload kullan.",
+                    label: "Discord Yüklemesini Atla"
+                },
+                bypassDiscordUploadOnlyOverLimit: {
+                    description: "Yalnızca dosya(lar) boyut sınırını aşarsa FileUpload kullan.",
+                    label: "Discord Yüklemesini Yalnızca Sınır Aşılınca Atla"
+                },
+                customDiscordFileSizeLimitMB: {
+                    description: "MB cinsinden manuel Discord dosya boyutu sınırı. 0 otomatik algılama demektir.",
+                    label: "Özel Discord Dosya Boyutu Sınırı (MB)"
+                },
+                gofileToken: {
+                    description: "İsteğe bağlı GoFile API belirteci",
+                    label: "GoFile Belirteci"
+                },
+                fallbackOrder: {
+                    description: "Yedek yükleyici sırası",
+                    label: "Yedek Sırası"
+                },
+                pixelVaultKey: {
+                    description: "PixelVault yükleme anahtarı",
+                    label: "PixelVault Anahtarı"
+                },
+                pixelDrainKey: {
+                    description: "İsteğe bağlı PixelDrain API anahtarı",
+                    label: "PixelDrain Anahtarı"
+                },
+                uploadTimeoutMs: {
+                    description: "Milisaniye cinsinden yükleme zaman aşımı",
+                    label: "Yükleme Zaman Aşımı (ms)"
+                },
+                stripQueryParams: {
+                    description: "Yüklenen URL'lerden sorgu parametrelerini kaldır",
+                    label: "Sorgu Parametrelerini Kaldır"
+                },
+                embedProxyEnabled: {
+                    description: "Yüklenen video bağlantılarını bir gömme yardımcı hizmeti üzerinden geçir.",
+                    label: "Gömme Proxy'si Etkin"
+                },
+                embedProxyService: {
+                    description: "Yüklenen video bağlantılarını saran gömme yardımcı hizmeti.",
+                    label: "Gömme Proxy Hizmeti"
+                },
+                corsProxyUrl: {
+                    description: "Tarayıcı yüklemeleri için kullanılan CORS proxy URL'si",
+                    label: "CORS Proxy URL'si"
+                },
+                apngToGif: {
+                    description: "APNG yüklemelerini GIF'e dönüştür",
+                    label: "APNG'den GIF'e"
+                },
+                preserveOriginalFilename: {
+                    description: "Yüklerken orijinal dosya adını koru.",
+                    label: "Orijinal Dosya Adını Koru"
+                },
+                autoCopy: {
+                    description: "Yükleme URL'sini otomatik kopyala",
+                    label: "Otomatik Kopyala"
+                },
+                autoUploadPastedFiles: {
+                    description: "Sohbet girişine yapıştırırken panodaki dosyaları otomatik olarak görsel barındırıcıya yükle.",
+                    label: "Yapıştırılan Dosyaları Otomatik Yükle"
+                },
+                webdavUrl: {
+                    description: "WebDAV sunucu URL'si",
+                    label: "WebDAV URL'si"
+                },
+                webdavUsername: {
+                    description: "WebDAV kullanıcı adı",
+                    label: "WebDAV Kullanıcı Adı"
+                },
+                webdavPassword: {
+                    description: "WebDAV parolası veya uygulama belirteci",
+                    label: "WebDAV Parolası"
+                },
+                webdavDirectory: {
+                    description: "WebDAV sunucusunda isteğe bağlı alt dizin",
+                    label: "WebDAV Dizini"
+                },
+                webdavServerType: {
+                    description: "WebDAV sunucu türü",
+                    label: "WebDAV Sunucu Türü",
+                    nextcloud: "Nextcloud",
+                    owncloud: "ownCloud",
+                    generic: "Genel WebDAV"
+                },
+                webdavShareType: {
+                    description: "WebDAV paylaşım bağlantısı biçimi",
+                    label: "WebDAV Paylaşım Türü",
+                    sharepage: "Paylaşım Sayfası",
+                    directdownload: "Doğrudan İndirme",
+                    markdown: "Markdown Bağlantısı"
+                },
+                uploadAllowedFileTypes: {
+                    description: "İzin verilen dosya uzantılarının virgülle ayrılmış listesi (ör. png,jpg,gif,mp4). Tüm dosyalara izin vermek için boş bırak.",
+                    label: "Yüklemeye İzin Verilen Dosya Türleri"
+                },
+                settingsComponent: {
+                    description: "Ayarlar",
+                    label: "Ayarlar Bileşeni"
+                }
+            },
+            panel: {
+                fallbackOrder: "Yedek Sırası",
+                uploadService: "Yükleme Hizmeti",
+                zipline: "Zipline",
+                serviceUrl: "Hizmet URL'si",
+                ziplineToken: "Zipline Belirteci",
+                folderId: "Klasör Kimliği",
+                eZHost: "E-Z Host",
+                eZHostApiKey: "E-Z Host API Anahtarı",
+                nest: "Nest",
+                nestToken: "Nest Belirteci",
+                encryptingHost: "Encrypting.host",
+                encryptingHostApiKey: "Encrypting.host API Anahtarı",
+                urlStyle: "URL Stili",
+                domainsJson: "Alan Adları (JSON)",
+                embedTitle: "Gömme Başlığı",
+                embedColor: "Gömme Rengi",
+                fakeLink: "Sahte Bağlantı",
+                s3CompatibleStorage: "S3 Uyumlu Depolama",
+                s3EndpointUrl: "S3 Uç Nokta URL'si",
+                bucketName: "Kova Adı",
+                region: "Bölge",
+                accessKeyId: "Erişim Anahtarı Kimliği",
+                secretAccessKey: "Gizli Erişim Anahtarı",
+                sessionToken: "Oturum Belirteci",
+                publicBaseUrl: "Genel Temel URL",
+                objectKeyPrefix: "Nesne Anahtarı Öneki",
+                usePathStyleEndpoint: "Yol Stili Uç Nokta Kullan",
+                catbox: "Catbox",
+                catboxUserhash: "Catbox Kullanıcı Karması",
+                litterboxExpiry: "Litterbox Süre Sonu",
+                gofile: "GoFile",
+                gofileToken: "GoFile Belirteci",
+                pixelvault: "PixelVault",
+                pixelvaultUploadKey: "PixelVault Yükleme Anahtarı",
+                pixeldrain: "PixelDrain",
+                pixeldrainApiKey: "PixelDrain API Anahtarı",
+                sharexCustomUploader: "ShareX Özel Yükleyici",
+                sharexCustomUploaderConfig: "ShareX Özel Yükleyici Yapılandırması",
+                sharexConfigActions: "ShareX Yapılandırma İşlemleri",
+                webdav: "WebDAV",
+                serverUrl: "Sunucu URL'si",
+                username: "Kullanıcı Adı",
+                passwordOrAppToken: "Parola veya Uygulama Belirteci",
+                passwordOrAppToken2: "parola veya uygulama belirteci",
+                uploadDirectory: "Yükleme Dizini",
+                serverType: "Sunucu Türü",
+                shareLinkFormat: "Paylaşım Bağlantısı Biçimi",
+                uploadBehavior: "Yükleme Davranışı",
+                stripQueryParameters: "Sorgu Parametrelerini Kaldır",
+                useEmbedProxy: "Gömme Proxy'si Kullan",
+                embedProxyService: "Gömme Proxy Hizmeti",
+                convertApngToGif: "APNG'yi GIF'e Dönüştür",
+                preserveOriginalFilename: "Orijinal Dosya Adını Koru",
+                autoCopyUrl: "URL'yi Otomatik Kopyala",
+                disableFallbackUploaders: "Yedek Yükleyicileri Devre Dışı Bırak",
+                insertUrlIntoChatInput: "URL'yi Sohbet Girişine Ekle",
+                formatInsertedUrl: "Eklenen URL'yi Biçimlendir",
+                discordIntegration: "Discord Entegrasyonu",
+                bypassDiscordUploadButton: "Discord Yükleme Düğmesini Atla",
+                autoUploadPastedFiles: "Yapıştırılan Dosyaları Otomatik Yükle",
+                respectDiscordFileSizeLimit: "Discord Dosya Boyutu Sınırına Uy",
+                discordLimitOverrideMb: "Discord Sınırını Geçersiz Kıl (MB)",
+                allowedFileTypes: "İzin Verilen Dosya Türleri",
+                network: "Ağ",
+                corsProxyUrl: "CORS Proxy URL'si",
+                defaultCorsProxySource: "Varsayılan CORS Proxy Kaynağı",
+                uploadTimeout: "Yükleme Zaman Aşımı",
+                domainsJsonDescription: "Kullanılacak alan adlarının JSON dizisi, örneğin [\"offensive\"]."
+            },
+            status: {
+                cancelled: "Yükleme iptal edildi.",
+                uploadingVia: "{{service}} ile yükleniyor...",
+                uploading: "Yükleniyor...",
+                unknownError: "Bilinmeyen hata",
+                startingVia: "{{service}} ile yükleme başlatılıyor...",
+                retryingWith: "{{service}} ile yeniden deneniyor ({{attempt}}/{{total}})...",
+                uploadedVia: "{{service}} ile başarıyla yüklendi.",
+                allFailed: "Tüm yükleme servisleri başarısız oldu. Son hata: {{error}}",
+                fileReady: "Dosya hazır, yükleme başlıyor...",
+                preparing: "Yükleme hazırlanıyor...",
+                failed: "Yükleme başarısız: {{message}}",
+                timedOut: "Yükleme zaman aşımına uğradı",
+                serviceFailed: "{{service}} başarısız: {{message}}",
+                preparingFile: "{{name}}{{suffix}} hazırlanıyor..."
+            }
+        },
+        gifMaker: {
+            option: {
+                lastWidth: {
+                    label: "Son Genişlik"
+                },
+                lastHeight: {
+                    label: "Son Yükseklik"
+                },
+                lastCaptionMode: {
+                    label: "Son Altyazı Modu"
+                },
+                lastCaptionText: {
+                    label: "Son Altyazı Metni"
+                },
+                lastCaptionSize: {
+                    label: "Son Altyazı Boyutu"
+                },
+                lastFontFamily: {
+                    label: "Son Yazı Tipi Ailesi"
+                },
+                lastBubbleTipBase: {
+                    label: "Son Balon Ucu Tabanı"
+                },
+                maxWidth: {
+                    description: "Otomatik sığdırma için en fazla genişlik.",
+                    label: "En Fazla Genişlik"
+                },
+                maxHeight: {
+                    description: "Otomatik sığdırma için en fazla yükseklik.",
+                    label: "En Fazla Yükseklik"
+                }
+            },
+            name: "GifMaker",
+            description: "Sohbetteki veya GIF seçicideki herhangi bir medyadan GIF oluştur ve altyazı ekle.",
+            text: {
+                send: "Gönder",
+                export: "Dışa Aktar",
+                makeGif: "GIF Oluştur",
+                editGif: "GIF'i Düzenle",
+                selectAFont: "Bir yazı tipi seç...",
+                enterCaption: "Altyazı gir...",
+                width: "Genişlik",
+                height: "Yükseklik",
+                loadingFonts: "Yazı tipleri yükleniyor...",
+                captions: "Altyazılar",
+                text: "Metin",
+                font: "Yazı Tipi",
+                fontSize: "Yazı tipi boyutu",
+                tipBase: "Uç Tabanı",
+                dimensions: "Boyutlar",
+                generatingGif: "GIF oluşturuluyor...",
+                clickOnThePreview: "Balon ucunu konumlandırmak için önizlemeye tıkla",
+                gifPreview: "GIF önizlemesi"
+            },
+            captionMode: {
+                caption: "Altyazı",
+                none: "Yok",
+                speechbubble: "Baloncuk"
+            }
+        },
+        gifProviderSwitcher: {
+            name: "GifProviderSwitcher",
+            description: "Klipy yerine Tenor veya Giphy GIF aramasını kullanmanı sağlar",
+            text: {
+                tenor: "Tenor",
+                giphy: "Giphy",
+                klipy: "Klipy",
+                providers: "Sağlayıcılar",
+                providersCount: "{{count}} sağlayıcı"
+            }
+        },
+        keyboardNavigation: {
+            toast: {
+                invalidUrl: "Geçersiz URL",
+                copiedResponseToClipboard: "Yanıt panoya kopyalandı!",
+                issueFetchingUrl: "URL alınırken sorun oluştu",
+                copiedGitInfoTo: "Git bilgisi panoya kopyalandı!",
+                noUpdatesAvailable: "Güncelleme yok",
+                enabledPlugin: "{{id}} başarıyla etkinleştirildi",
+                disabledPlugin: "{{id}} başarıyla devre dışı bırakıldı"
+            },
+            text: {
+                openPlexcordTab: "Plexcord Sekmesini Aç",
+                openPluginTab: "Eklenti Sekmesini Aç",
+                openThemesTab: "Temalar Sekmesini Aç",
+                openUpdaterTab: "Güncelleyici Sekmesini Aç",
+                openCloudTab: "Bulut Sekmesini Aç",
+                openBackupRestoreTab: "Yedekle ve Geri Yükle Sekmesini Aç",
+                restartClient: "İstemciyi Yeniden Başlat",
+                openQuickCssFile: "QuickCSS Dosyasını Aç",
+                openSettingsFolder: "Ayarlar Klasörünü Aç",
+                openInGithub: "GitHub'da Aç",
+                openInBrowser: "Tarayıcıda Aç",
+                togglePlugin: "Eklentiyi Aç/Kapat",
+                enable: "Etkinleştir",
+                disable: "Devre Dışı Bırak",
+                quickFetch: "Hızlı Getir",
+                copyGitInfo: "Git Bilgisini Kopyala",
+                checkForUpdates: "Güncellemeleri Denetle",
+                aPlexcordUpdateIs: "Bir Plexcord güncellemesi mevcut!",
+                clickHereToView: "Güncellemeyi görmek için buraya tıkla",
+                navigateToServer: "Sunucuya Git",
+                commandPalette: "Komut Paleti",
+                searchTheCommandPalette: "Komut Paletinde Ara",
+                multipleChoice: "Çoktan Seçmeli",
+                textInput: "Metin Girişi",
+                openDevTab: "Geliştirici Sekmesini Aç",
+                enterUrlToFetch: "Getirilecek URL'yi gir (yalnızca GET)",
+                typeAndPressEnter: "Yaz ve Enter'a bas",
+                recording: "Kaydediliyor...",
+                recordKeybind: "Kısayol kaydet",
+                enterUrl: "Bir URL gir"
+            },
+            option: {
+                hotkey: {
+                    description: "Komut paletini açma kısayolu.",
+                    label: "Kısayol"
+                },
+                allowMouseControl: {
+                    description: "Farenin komut paletini kontrol etmesine izin ver.",
+                    label: "Fare Kontrolüne İzin Ver"
+                }
+            },
+            name: "KeyboardNavigation",
+            description: "Arayüzde klavyeyle gezinmeni sağlar."
+        },
+        lastActive: {
+            name: "LastActive",
+            description: "Bir kanalda/sunucuda kendinin veya başka bir kullanıcının son etkin mesajına atlamak için bir eklenti.",
+            toast: {
+                failedToFindMessages: "Mesajlar bulunamadı. Ayrıntılar için konsolu kontrol et.",
+                couldnTFindAny: "Bu kullanıcıdan son mesaj bulunamadı.",
+                channelInformationNotAvailable: "Kanal bilgisi mevcut değil.",
+                failedToJumpTo: "Mesaja atlanamadı. Ayrıntılar için konsolu kontrol et."
+            },
+            text: {
+                yourLastMessage: "Son Mesajın",
+                userSLastMessage: "Kullanıcının Son Mesajı"
+            }
+        },
+        limitlessScreenshare: {
+            text: {
+                deleteTag: "Etiketi Sil",
+                mustBeGreaterThan: ">{{value}} olmalı",
+                maxResolutionTooLow: "Maksimum çözünürlük {{value}} değerinden düşük olamaz",
+                maxResolutionRound: "Çözünürlüğü Yuvarla açıkken maksimum çözünürlük 0 ile bitmeli"
+            },
+            name: "LimitlessScreenshare",
+            description: "Ekran paylaşımı çözünürlüğü ve fps için bir kaydırıcı ekler.",
+            option: {
+                maxFPS: {
+                    description: "Kaydırıcı için en fazla FPS",
+                    label: "En Fazla FPS"
+                },
+                maxResolution: {
+                    description: "Kaydırıcı için en yüksek çözünürlük",
+                    label: "En Yüksek Çözünürlük"
+                },
+                roundResolution: {
+                    description: "Çözünürlüğü en yakın 10p'ye yuvarla",
+                    label: "Çözünürlüğü Yuvarla"
+                },
+                resolutions: {
+                    label: "Çözünürlükler"
+                },
+                fpss: {
+                    label: "FPS Değerleri"
+                }
+            }
+        },
+        messagePeek: {
+            option: {
+                hideMuted: {
+                    description: "Sessize alınmış DM'ler ve grup sohbetleri için mesaj önizlemelerini ve zaman damgalarını gizle.",
+                    label: "Sessizdekileri Gizle"
+                }
+            },
+            name: "MessagePeek",
+            description: "Doğrudan Mesajlar listesinde son mesaj önizlemesini ve zaman damgasını gösterir.",
+            text: {
+                officialDiscordMessage: "Resmi Discord Mesajı",
+                sentGif: "bir GIF gönderdi",
+                voiceMessage: "sesli mesaj",
+                membersCount: "{{count}} Üye",
+                you: "Sen"
+            }
+        },
+        messageTranslate: {
+            name: "MessageTranslate",
+            description: "Önbellekleme, kanal bazlı açma/kapatma ve daha fazla seçenekle mesajları otomatik olarak diline çevir.",
+            option: {
+                targetLanguage: {
+                    description: "Çeviriler için hedef dil kodu (ör. en, es, fr, de, ja).",
+                    label: "Hedef Dil"
+                },
+                excludedLanguages: {
+                    description: "Çeviriden hariç tutulacak dil kodları (ör. en, es, fr, de, ja).",
+                    label: "Hariç Tutulan Diller"
+                },
+                confidenceRequirement: {
+                    description: "Bir çeviriyi göstermek için gereken en düşük güven (0 ile 1 arası).",
+                    label: "Güven Gereksinimi"
+                },
+                autoTranslate: {
+                    description: "Mesajları göründükçe otomatik çevir.",
+                    label: "Otomatik Çevir"
+                },
+                skipOwnMessages: {
+                    description: "Kendi mesajlarını çevirme.",
+                    label: "Kendi Mesajlarını Atla"
+                },
+                skipBotMessages: {
+                    description: "Bot mesajlarını çevirme.",
+                    label: "Bot Mesajlarını Atla"
+                },
+                ignoredGuilds: {
+                    description: "Çeviri yapılmayacak sunucu kimliklerinin virgülle ayrılmış listesi.",
+                    label: "Yok Sayılan Sunucular"
+                },
+                ignoredChannels: {
+                    description: "Çeviri yapılmayacak kanal kimliklerinin virgülle ayrılmış listesi.",
+                    label: "Yok Sayılan Kanallar"
+                },
+                ignoredUsers: {
+                    description: "Çevrilmeyecek kullanıcı kimliklerinin virgülle ayrılmış listesi.",
+                    label: "Yok Sayılan Kullanıcılar"
+                },
+                showIndicator: {
+                    description: "Çevrilen mesajlara küçük bir (çevrildi) göstergesi ekle.",
+                    label: "Göstergeyi Göster"
+                },
+                showOriginal: {
+                    description: "Orijinal ve çevrilmiş metni göster.",
+                    noorig: "Orijinali gösterme."
+                }
+            },
+            text: {
+                showOriginalInSubtext: "Orijinali alt metinde göster",
+                showOriginalMessageTranslation: "Orijinal mesajı göster, çeviriyi alt metinde",
+                translatedFrom: "{{lang}} dilinden çevrildi"
+            }
+        },
+        moreStickers: {
+            toast: {
+                stickerPackDeleted: "Çıkartma paketi silindi",
+                stickerPackAdded: "Çıkartma paketi eklendi",
+                stickerPacksAdded: "Çıkartma paketleri eklendi",
+                stickerPacksExported: "Çıkartma paketleri dışa aktarıldı",
+                newStickerPacksAlready: "Yeni çıkartma paketleri zaten var, taşıma gerekmiyor",
+                oldStickerPacksNot: "Eski çıkartma paketleri bulunamadı, taşınacak bir şey yok",
+                migrationFailedTitleId: "Taşıma başarısız: {{title}} ({{id}})",
+                stickerPackMigrationComplete: "Çıkartma Paketi Taşıma İşlemi Tamamlandı",
+                failedToUploadSticker: "Çıkartma yüklenemedi"
+            },
+            text: {
+                stickerPackUrl: "Çıkartma Paketi URL'si",
+                pasteHtmlHere: "HTML'yi buraya yapıştır",
+                delete: "Sil",
+                addStickerPackFrom: "URL'den Çıkartma Paketi Ekle",
+                insert: "Ekle",
+                addStickerPackFrom2: "HTML'den Çıkartma Paketi Ekle",
+                insertFromHtml: "HTML'den Ekle",
+                addStickerPackFrom3: "Dosyadan Çıkartma Paketi Ekle",
+                miscTools: "Çeşitli Araçlar",
+                exportStickerPacks: "Çıkartma Paketlerini Dışa Aktar",
+                migrateFromV1: "v1'den Taşı",
+                stickersManagement: "Çıkartma Yönetimi",
+                theRegionLineRecognized: "Kullandığımız CORS proxy'si nedeniyle LINE'ın tanıdığı bölge bulunduğun bölgeden farklı olabilir.",
+                openStickerPackFile: "Çıkartma Paketi Dosyasını Aç",
+                stickers: "Çıkartmalar+",
+                categoryTitle: "Kategori, {{title}}",
+                searchStickers: "Çıkartma ara",
+                ffmpegstatecontextIsUndefined: "FFmpegStateContext tanımsız",
+                recentlyUsed: "Son Kullanılanlar",
+                addFromUrl: "URL'den Ekle",
+                addFromHtml: "HTML'den Ekle",
+                addFromFile: "Dosyadan Ekle",
+                misc: "Diğer",
+                invalidUrl: "Geçersiz URL",
+                lineOnly: "Şu anda yalnızca LINE çıkartmaları/emojileri destekleniyor.",
+                getTelegramStickers: "Telegram çıkartmalarını şununla al:",
+                htmlFallbackHelp: "Çıkartma paketi eklerken hatayla karşılaşırsan, paketi çıkartma paketi sayfasının HTML kaynak koduyla eklemeyi deneyebilirsin.",
+                htmlFallbackApplies: "Bu, bölge kilitli / işletim sistemi kilitli vb. çıkartmalar için geçerlidir."
+            },
+            option: {
+                promptToUpload: {
+                    description: "Çıkartmayı hemen göndermek yerine sohbet çubuğuna ekler",
+                    label: "Yüklemeden Önce Sor"
+                },
+                packs: {
+                    description: "Paketler",
+                    label: "Paketler"
+                }
+            },
+            name: "MoreStickers",
+            description: "Diğer sosyal medya platformlarından çıkartma paketleri ekler. (ör. LINE)"
+        },
+        musicRichPresence: {
+            option: {
+                scrobblerBackend: {
+                    description: "Kullanılacak scrobbler arka ucu.",
+                    label: "Scrobbler Arka Ucu"
+                },
+                instanceBaseURL: {
+                    description: "ListenBrainz örneğinin temel URL'si.",
+                    label: "Örnek Temel URL'si"
+                },
+                instanceAPIBaseUrl: {
+                    description: "ListenBrainz API'nin temel URL'si.",
+                    label: "Örnek API Temel URL'si"
+                },
+                apiKey: {
+                    description: "Last.fm API anahtarı. Zorunlu değil ama paylaşılan anahtarımızla hız sınırına takılmamak için şiddetle önerilir",
+                    label: "API Anahtarı"
+                },
+                username: {
+                    description: "Kullanıcı adı",
+                    label: "Kullanıcı Adı"
+                },
+                shareUsername: {
+                    description: "Scrobbler profiline bağlantı göster",
+                    label: "Kullanıcı Adını Paylaş"
+                },
+                clickableLinks: {
+                    description: "Parça, sanatçı ve albüm adlarını tıklanabilir bağlantı yap",
+                    label: "Tıklanabilir Bağlantılar"
+                },
+                hideWithSpotify: {
+                    description: "Spotify çalışıyorsa durumu gizle",
+                    label: "Spotify ile Gizle"
+                },
+                hideWithActivity: {
+                    description: "Başka bir durumun varsa gizle",
+                    label: "Etkinlik Varsa Gizle"
+                },
+                statusName: {
+                    description: "Özel durum metni. Şu değişkenleri kullanabilirsin: {artist} | {album} | {title}",
+                    label: "Durum Adı"
+                },
+                statusDisplayType: {
+                    description: "Üye listesinde parça / sanatçı adını göster",
+                    off: "Gösterme (genel dinleme mesajı gösterir)"
+                },
+                nameFormat: {
+                    description: "Durum adında şarkı ve sanatçı adını göster",
+                    statusName: "Özel durum adını kullan"
+                },
+                missingArt: {
+                    description: "Albüm veya albüm kapağı eksik olduğunda",
+                    logo: "Büyük scrobbler logosunu kullan"
+                },
+                showLogo: {
+                    description: "Albüm kapağının yanında scrobbler hizmeti logosunu göster",
+                    label: "Scrobbler Logosunu Göster"
+                },
+                showAlbumCover: {
+                    description: "Albüm kapağını göster. Kapatırsan yer tutucu gösterilir. Müziğinde uygunsuz kapaklar varsa kullanışlı",
+                    label: "Albüm Kapağını Göster"
+                },
+                useListeningStatus: {
+                    description: "\"Oynuyor\" yerine \"Dinliyor\" durumunu göster"
+                }
+            },
+            name: "MusicRichPresence",
+            description: "Last.FM/Listenbrainz için Zengin Durum",
+            text: {
+                showArtistName: "Sanatçı adını göster",
+                showTrackName: "Parça adını göster",
+                useMusicServiceName: "Müzik hizmeti adını kullan (yoksa özel durum metni)",
+                useFormatArtistSong: "'sanatçı - şarkı' biçimini kullan",
+                useFormatSongArtist: "'şarkı - sanatçı' biçimini kullan",
+                useArtistNameOnly: "Yalnızca sanatçı adını kullan",
+                useSongNameOnly: "Yalnızca şarkı adını kullan",
+                useAlbumNameFalls: "Albüm adını kullan (şarkının albümü yoksa özel durum metni)",
+                useGenericPlaceholder: "Genel yer tutucu kullan",
+                lastFm: "Last.FM",
+                howToCreateAn: "API anahtarı nasıl oluşturulur",
+                set: "Ayarla:",
+                applicationName: "Uygulama adı",
+                applicationDescription: "Uygulama açıklaması",
+                toAnythingAndLeave: "alanlarına herhangi bir şey yaz ve gerisini boş bırak.",
+                createApiKey: "API Anahtarı Oluştur",
+                invalidInstance: "Geçersiz ListenBrainz uyumlu sunucu",
+                provideBoth: "Özel ListenBrainz sunucun için hem",
+                apiBaseUrl: "API Temel URL'sini",
+                andThe: "hem de",
+                instanceBaseUrl: "Sunucu Temel URL'sini",
+                forYourCustomInstance: "gir ya da ListenBrainz/Last.FM'e geri dön",
+                allowConnectTitle: "Plexcord'un ListenBrainz sunucusuna bağlanmasına izin ver",
+                allowConnectBody: "Özel ListenBrainz sunucunu kullanmak için önce Plexcord'un ona bağlanmasına izin vermelisin.",
+                allowInstance: "Sunucuya İzin Ver",
+                listenBrainzCompatible: "ListenBrainz Uyumlu (kendi sunucunda)",
+                and: "ve"
+            }
+        },
+        noMiddleClickPaste: {
+            name: "NoMiddleClickPaste",
+            description: "Linux orta tık yapıştırmasını devre dışı bırak - yalnızca Linux"
+        },
+        orbolayBridge: {
+            option: {
+                port: {
+                    description: "Bağlanılacak bağlantı noktası",
+                    label: "Bağlantı Noktası"
+                }
+            },
+            name: "OrbolayBridge",
+            description: "Orbolay'i Discord'a bağlayan köprü eklentisi",
+            toast: {
+                connectedToOrbolayServer: "Orbolay sunucusuna bağlanıldı"
+            }
+        },
+        plexcordHelper: {
+            name: "PlexcordHelper",
+            description: "Destek sağlamak ve Discord kaynaklı çökmeleri düzeltmek için kullanılır.",
+            text: {
+                restartRequired: "Yeniden Başlatma Gerekli",
+                restartNow: "Şimdi Yeniden Başlat",
+                later: "Daha Sonra",
+                wouldYouLikeTo: "Şimdi yeniden başlatmak ister misin?",
+                somePluginsRequireA: "Bazı eklentilerin tamamen devre dışı kalması için yeniden başlatma gerekir.",
+                alreadyEnabled: "{{plugin}} zaten etkin",
+                alreadyDisabled: "{{plugin}} zaten devre dışı",
+                disablePlugin: "{{plugin}} devre dışı bırak",
+                enablePlugin: "{{plugin}} etkinleştir",
+                errorStopping: "{{plugin}} eklentisi durdurulurken hata oluştu",
+                errorStarting: "{{plugin}} eklentisi başlatılırken hata oluştu"
+            },
+            toast: {
+                failedToTolowercase: "{{toLowerCase}} başarısız",
+                aRestartIsRequired: "Değişikliğin geçerli olması için yeniden başlatma gerekiyor!"
+            },
+            card: {
+                notOnThisVersion: "Bu eklenti Plexcord'un bu sürümünde yok. Güncellemeyi dene!"
+            }
+        },
+        plexcordTweaks: {
+            name: "PlexcordTweaks",
+            option: {
+                removeActivitySection: {
+                    description: "Üye listesinin üstündeki etkinlik bölümünü kaldırır",
+                    label: "Etkinlik Bölümünü Kaldır"
+                },
+                showYourOwnActivityButtons: {
+                    description: "Discord bir nedenden dolayı kendi etkinlik düğmelerini gizliyor",
+                    label: "Kendi Etkinlik Düğmelerini Göster"
+                },
+                refreshSlashCommands: {
+                    description: "Yeni eklenen komutları istemciyi yeniden başlatmadan göstermek için eğik çizgi komutlarını yeniler.",
+                    label: "Eğik Çizgi Komutlarını Yenile"
+                },
+                forceRoleIcon: {
+                    description: "Kompakt modda rol simgelerini mesajların yanında göstermeye zorlar",
+                    label: "Rol Simgesini Zorla"
+                },
+                accountStandingButton: {
+                    description: "Başlık çubuğunda hesap durumu düğmesi göster",
+                    label: "Hesap Durumu Düğmesi"
+                },
+                jsonGateway: {
+                    description: "Ağ geçidine yeniden bağlanırken JSON'u zorlar",
+                    label: "JSON Ağ Geçidi"
+                },
+                enableAutoCorrect: {
+                    description: "Sohbet kutusu bağlam menüsüne yerel otomatik düzeltme ve metin değiştirme için bir anahtar ekler",
+                    label: "Otomatik Düzeltmeyi Etkinleştir"
+                },
+                autoCorrect: {
+                    description: "Mesaj düzenleyicilerinde yerel otomatik düzeltme ve metin değiştirmeleri kullan",
+                    label: "Otomatik Düzeltme"
+                },
+                disableHolidayNotifications: {
+                    label: "Tatil Bildirimlerini Devre Dışı Bırak",
+                    description: "Her zaman Discord'un varsayılan bildirim seslerini kullan"
+                },
+                showAllBadges: {
+                    label: "Tüm Rozetleri Göster",
+                    description: "Kalanları +n arkasına gizlemek yerine tüm profil rozetlerini gösterir"
+                }
+            },
+            text: {
+                allGood: "Her şey yolunda!",
+                limited: "Sınırlı",
+                veryLimited: "Çok sınırlı",
+                atRisk: "Risk altında",
+                suspended: "Askıya alındı",
+                slashCommandsRefreshedSuccessfully: "Eğik çizgi komutları başarıyla yenilendi.",
+                failedToRefreshCommands: "Komutlar yenilenemedi. Ayrıntılar için konsolu kontrol et.",
+                enableAutocorrect: "Otomatik Düzeltmeyi Etkinleştir"
+            },
+            command: {
+                refreshCommands: "Eğik Çizgi Komutlarını Yenile"
+            },
+            description: "Discord için küçük ince ayarlar ve düzeltmelerden oluşan bir koleksiyon."
+        },
+        plextronStreamFixes: {
+            option: {
+                unlockQualityOptions: {
+                    description: "Nitro durumundan bağımsız olarak yayın kalitesi seçeneklerinin kilidini aç",
+                    label: "Kalite Seçeneklerinin Kilidini Aç"
+                },
+                removeResolutionCap: {
+                    description: "60 fps'de 720p üzeri çözünürlüklere izin ver",
+                    label: "Çözünürlük Sınırını Kaldır"
+                },
+                forceEncoderSettings: {
+                    description: "Kodlayıcıyı yapılandırılmış çözünürlük/fps kullanmaya zorla",
+                    label: "Kodlayıcı Ayarlarını Zorla"
+                },
+                preventDownscale: {
+                    description: "Discord'un yayın çözünürlüğünü düşürmesini engelle",
+                    label: "Ölçek Düşürmeyi Engelle"
+                },
+                keyframeInterval: {
+                    description: "Ms cinsinden anahtar kare aralığı (0 = kodlayıcı varsayılanı, 5000 = her 5 sn)",
+                    label: "Anahtar Kare Aralığı"
+                },
+                minBitrate: {
+                    description: "Kbps cinsinden en düşük kodlayıcı bit hızı",
+                    label: "En Düşük Bit Hızı"
+                },
+                raiseBitrateCaps: {
+                    description: "Masaüstü varsayılan bit hızı sınırlarını yükselt (hedef 600 kbps → 10 Mbps, en fazla 3,5 Mbps → 40 Mbps)",
+                    label: "Bit Hızı Sınırlarını Yükselt"
+                },
+                preventFramerateReduction: {
+                    description: "Konuşmadığında Discord'un yayın kare hızını düşürmesini engelle",
+                    label: "Kare Hızı Düşüşünü Engelle"
+                },
+                bitsPerPixelPct: {
+                    description: "Hedef bit hızı için piksel başına bit yüzdesi (8 = 0,08 bpp, 12 = 0,12 bpp)",
+                    label: "Piksel Başına Bit (%)"
+                }
+            },
+            name: "PlextronStreamFixes",
+            description: "Discord'un kodlayıcısını ve kalite kısıtlamalarını yamalayarak Plextron'da yayın kalitesini düzeltmeye çalışır."
+        },
+        rPCEditor: {
+            name: "RPCEditor"
+        },
+        reactionTimestamps: {
+            name: "ReactionTimestamps",
+            description: "Tepki penceresinde her tepkinin zamanını gösterir.",
+            text: {
+                userAtTime: "{{user}}, {{time}}"
+            }
+        },
+        richPresence: {
+            text: {
+                useCustomStatusName: "Özel durum adını kullan",
+                useFormatArtistSong: "'sanatçı - şarkı' biçimini kullan",
+                useFormatSongArtist: "'şarkı - sanatçı' biçimini kullan",
+                useArtistNameOnly: "Yalnızca sanatçı adını kullan",
+                useSongNameOnly: "Yalnızca şarkı adını kullan",
+                useAlbumName: "Albüm adını kullan",
+                useLargeStatsFm: "Büyük Stats.fm logosunu kullan",
+                useGenericPlaceholder: "Genel yer tutucu kullan",
+                seriesMovieName: "Dizi/Film Adı",
+                seriesEpisodeTrackMovie: "Dizi - Bölüm/Parça/Film Adı",
+                custom: "Özel",
+                seriesCover: "Dizi Kapağı",
+                episodeCover: "Bölüm Kapağı",
+                season1Episode1: "Sezon 1 Bölüm 1",
+                off: "Kapalı",
+                listening: "Dinliyor",
+                playing: "Oynuyor",
+                streaming: "Yayında",
+                watching: "İzliyor",
+                none: "Yok",
+                navidromeInstanceExposesServer: "Navidrome Örneği (Sunucu URL'sini açığa çıkarır. Tek seferlik kimlik doğrulama gönderilir.)",
+                lastFmApiSends: "Last.fm API (Meta verileri last.fm'e gönderir)",
+                donTShowShows: "Gösterme (genel dinleme mesajı gösterir)",
+                showStateLineContent: "Durum satırı içeriğini göster",
+                showDetailsLineContent: "Ayrıntı satırı içeriğini göster",
+                displayYourCurrentlyPlaying: "Şu an dinlediğin sesli kitapları Discord Zengin Durum olarak göster. AudioBookShelf sunucu URL'si, kullanıcı adı ve parola gerekir.",
+                audiobookshelfServerUrl: "AudioBookShelf sunucu URL'si.",
+                audiobookshelfUsername: "AudioBookShelf kullanıcı adı.",
+                audiobookshelfPassword: "AudioBookShelf parolası.",
+                connectsToTosuVia: "24050 bağlantı noktasında WebSocket üzerinden tosu'ya bağlanır. Yapılandırma gerekmez, yalnızca tosu'nun osu! ile birlikte çalıştığından emin ol.",
+                showWhatYouRe: "stats.fm üzerinden şu an ne dinlediğini göster. Dinleme geçmişinin herkese açık olması gerekir.",
+                statsFmUsername: "Stats.fm kullanıcı adı.",
+                customStatusText: "Özel durum metni.",
+                statsFm: "Stats.fm",
+                nameFormat: "Ad biçimi.",
+                fallbackWhenArtIs: "Kapak eksikse yedek.",
+                showListeningStatus: "Dinleme durumunu göster.",
+                showStatsFmLogo: "Albüm kapağının yanında Stats.fm logosunu göster.",
+                showLinkToStats: "stats.fm profiline bağlantı göster.",
+                showLinkToSong: "stats.fm'de şarkıya bağlantı göster.",
+                hideStatsFmPresence: "Spotify çalışıyorsa stats.fm durumunu gizle.",
+                hideStatsFmPresence2: "Harici bir RPC çalışıyorsa stats.fm durumunu gizle.",
+                disableDownloadingAlbumArt: "Albüm kapağı indirmeyi devre dışı bırak.",
+                showWhatYouRe2: "Jellyfin'de ne oynattığını göster. API anahtarını almak için: Jellyfin web arayüzünü aç, Geliştirici Araçları için F12'ye bas, Ağ sekmesine git, sunucuna giden istekleri bul, Authorization başlığını bul (aramak için Ctrl+F) ve Token='this' kısmına ihtiyacın var. Kullanıcı kimliğin profil sayfası URL'sinde bulunur.",
+                jellyfinServerUrl: "Jellyfin sunucu URL'si.",
+                jellyfinApiKey: "Jellyfin API anahtarı.",
+                authorization: "Authorization",
+                jellyfinUserId: "Jellyfin kullanıcı kimliği.",
+                userIdFromProfile: "Profil URL'sindeki kullanıcı kimliği",
+                nameDisplayFormat: "Ad görüntüleme biçimi.",
+                customNameTemplate: "Özel ad şablonu.",
+                nameOnJellyfin: "Jellyfin'de {name}",
+                coverTypeForTv: "TV dizileri için kapak türü.",
+                episodeNumberFormat: "Bölüm numarası biçimi.",
+                overrideRichPresenceType: "Zengin durum türünü geçersiz kıl.",
+                showEpisodeNameAfter: "Sezon/bölüm bilgisinden sonra bölüm adını göster.",
+                showPresenceWhenMedia: "Medya duraklatıldığında durumu göster.",
+                hideMediaDetails: "Medya ayrıntılarını gizle.",
+                discordRichPresenceFor: "Gensokyo Radio için Discord Zengin Durum. Etkinleştir ve dinle!",
+                refreshIntervalInSeconds: "Saniye cinsinden yenileme aralığı.",
+                showWhatYouRe3: "Navidrome üzerinden şu an ne dinlediğini göster.",
+                navidromeServerUrlMust: "Navidrome sunucu URL'si (genel bir alan adı olmalı, ör. https://navidrome.example.com).",
+                navidromeUsername: "Navidrome kullanıcı adı.",
+                navidromePassword: "Navidrome parolası.",
+                optionalDiscordApplicationClient: "İsteğe bağlı Discord Uygulaması İstemci Kimliği.",
+                howToFetchAlbum: "Albüm kapağının nasıl alınacağı.",
+                optionalProvideYourOwn: "İsteğe bağlı: Kendi Last.fm API anahtarını gir (boşsa varsayılan kalır).",
+                showNavidromeLogoIn: "Albüm kapağının sağ altında Navidrome logosunu göster.",
+                showAlbumNameIn: "Durumda albüm adını göster.",
+                whichTypeOfActivity: "Hangi etkinlik türünün gösterileceği.",
+                showTheStateDetails: "Üye listesinde durum / ayrıntı satırı içeriğini göster",
+                hideRichPresenceWhen: "Müzik duraklatıldığında Zengin Durumu gizle (kronometre göstermek yerine)",
+                theListeningToText: "'Dinliyor' metni (ör. {artist})",
+                navidrome: "Navidrome",
+                theMainLineShowing: "Çalan şarkıyı gösteren ana satır (ör. {song})",
+                song: "{song}",
+                theLineBelowThe: "Şarkı adının altındaki satır (ör. {artist})",
+                artist: "{artist}",
+                theAlbumLineE: "Albüm satırı (ör. {album})",
+                album: "{album}",
+                enableTabLabelsCurrenttab: "{{TAB_LABELS_currentTab}} durumunu etkinleştir.",
+                statsFmProfile: "Stats.fm Profili",
+                viewSong: "Şarkıyı Görüntüle",
+                showArtistName: "Sanatçı adını göster",
+                showTrackName: "Parça adını göster",
+                enterValue: "Bir değer gir"
+            },
+            name: "RichPresence",
+            description: "AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome ve Gensokyo Radio için birleşik zengin durum merkezi.",
+            toast: {
+                audiobookshelfRpcIsNot: "AudioBookShelf RPC yapılandırılmamış.",
+                jellyfinRpcIsNot: "Jellyfin RPC yapılandırılmamış.",
+                jellyfinReturnedAnInvalid: "Jellyfin geçersiz bir yanıt döndürdü. API anahtarın yanlış olabilir."
+            },
+            option: {
+                enabled: {
+                    description: "Zengin durum hizmetlerini etkinleştir.",
+                    label: "Etkin"
+                },
+                serviceSettings: {
+                    description: "Hizmet yapılandırması.",
+                    label: "Hizmet Ayarları"
+                },
+                abs_enabled: {
+                    description: "AudioBookShelf durumunu etkinleştir.",
+                    label: "AudioBookShelf Etkin"
+                },
+                tosu_enabled: {
+                    description: "osu! (tosu) durumunu etkinleştir.",
+                    label: "osu! (tosu) Etkin"
+                },
+                sfm_enabled: {
+                    description: "stats.fm durumunu etkinleştir.",
+                    label: "Stats.fm Etkin"
+                },
+                jf_enabled: {
+                    description: "Jellyfin durumunu etkinleştir.",
+                    label: "Jellyfin Etkin"
+                },
+                gr_enabled: {
+                    description: "Gensokyo Radio durumunu etkinleştir.",
+                    label: "Gensokyo Radio Etkin"
+                },
+                nd_enabled: {
+                    description: "Navidrome durumunu etkinleştir.",
+                    label: "Navidrome Etkin"
+                },
+                abs_serverUrl: {
+                    description: "AudioBookShelf sunucu URL'si.",
+                    label: "AudioBookShelf Sunucu URL'si"
+                },
+                abs_username: {
+                    description: "AudioBookShelf kullanıcı adı.",
+                    label: "AudioBookShelf Kullanıcı Adı"
+                },
+                abs_password: {
+                    description: "AudioBookShelf parolası.",
+                    label: "AudioBookShelf Parolası"
+                },
+                sfm_username: {
+                    description: "Stats.fm kullanıcı adı.",
+                    label: "Stats.fm Kullanıcı Adı"
+                },
+                sfm_shareUsername: {
+                    description: "stats.fm profiline bağlantı göster.",
+                    label: "Stats.fm: Kullanıcı Adını Paylaş"
+                },
+                sfm_shareSong: {
+                    description: "stats.fm'de şarkıya bağlantı göster.",
+                    label: "Stats.fm: Şarkıyı Paylaş"
+                },
+                sfm_hideWithSpotify: {
+                    description: "Spotify çalışıyorsa stats.fm durumunu gizle.",
+                    label: "Stats.fm: Spotify ile Gizle"
+                },
+                sfm_hideWithExternalRPC: {
+                    description: "Harici bir RPC çalışıyorsa stats.fm durumunu gizle.",
+                    label: "Stats.fm: Harici RPC ile Gizle"
+                },
+                sfm_statusName: {
+                    description: "Özel durum metni.",
+                    label: "Stats.fm: Durum Adı"
+                },
+                sfm_nameFormat: {
+                    description: "Ad biçimi.",
+                    label: "Stats.fm: Ad Biçimi",
+                    statusName: "Özel durum adını kullan",
+                    artistFirst: "'sanatçı - şarkı' biçimini kullan",
+                    songFirst: "'şarkı - sanatçı' biçimini kullan",
+                    artistOnly: "Yalnızca sanatçı adını kullan",
+                    songOnly: "Yalnızca şarkı adını kullan",
+                    albumName: "Albüm adını kullan"
+                },
+                sfm_useListeningStatus: {
+                    description: "Dinleme durumunu göster.",
+                    label: "Stats.fm: Dinleme Durumunu Kullan"
+                },
+                sfm_missingArt: {
+                    description: "Kapak eksikse yedek.",
+                    label: "Stats.fm: Eksik Kapak",
+                    statsFmLogo: "Büyük Stats.fm logosunu kullan",
+                    placeholder: "Genel yer tutucu kullan"
+                },
+                sfm_showLogo: {
+                    description: "Albüm kapağının yanında Stats.fm logosunu göster.",
+                    label: "Stats.fm: Logoyu Göster"
+                },
+                sfm_alwaysHideArt: {
+                    description: "Albüm kapağı indirmeyi devre dışı bırak.",
+                    label: "Stats.fm: Kapağı Her Zaman Gizle"
+                },
+                jf_serverUrl: {
+                    description: "Jellyfin sunucu URL'si.",
+                    label: "Jellyfin Sunucu URL'si"
+                },
+                jf_apiKey: {
+                    description: "Jellyfin API anahtarı.",
+                    label: "Jellyfin API Anahtarı"
+                },
+                jf_userId: {
+                    description: "Jellyfin kullanıcı kimliği.",
+                    label: "Jellyfin Kullanıcı Kimliği"
+                },
+                jf_nameDisplay: {
+                    description: "Ad görüntüleme biçimi.",
+                    label: "Jellyfin: Ad Görüntüleme",
+                    default: "Dizi/Film Adı",
+                    full: "Dizi - Bölüm/Parça/Film Adı",
+                    custom: "Özel"
+                },
+                jf_customName: {
+                    description: "Özel ad şablonu.",
+                    label: "Jellyfin: Özel Ad"
+                },
+                jf_coverType: {
+                    description: "TV dizileri için kapak türü.",
+                    label: "Jellyfin: Kapak Türü",
+                    series: "Dizi Kapağı",
+                    episode: "Bölüm Kapağı"
+                },
+                jf_episodeFormat: {
+                    description: "Bölüm numarası biçimi.",
+                    label: "Jellyfin: Bölüm Biçimi",
+                    long: "S01E01",
+                    fulltext: "Sezon 1 Bölüm 1"
+                },
+                jf_showEpisodeName: {
+                    description: "Sezon/bölüm bilgisinden sonra bölüm adını göster.",
+                    label: "Jellyfin: Bölüm Adını Göster"
+                },
+                jf_overrideType: {
+                    description: "Zengin durum türünü geçersiz kıl.",
+                    label: "Jellyfin: Türü Geçersiz Kıl",
+                    off: "Kapalı",
+                    listening: "Dinliyor",
+                    playing: "Oynuyor",
+                    streaming: "Yayında",
+                    watching: "İzliyor"
+                },
+                jf_showPausedState: {
+                    description: "Medya duraklatıldığında durumu göster.",
+                    label: "Jellyfin: Duraklatılmış Durumu Göster"
+                },
+                jf_privacyMode: {
+                    description: "Medya ayrıntılarını gizle.",
+                    label: "Jellyfin: Gizlilik Modu"
+                },
+                gr_refreshInterval: {
+                    description: "Saniye cinsinden yenileme aralığı.",
+                    label: "Gensokyo Radio: Yenileme Aralığı"
+                },
+                nd_serverUrl: {
+                    description: "Navidrome sunucu URL'si (ör. https://navidrome.example.com)",
+                    label: "Navidrome Sunucu URL'si"
+                },
+                nd_username: {
+                    description: "Navidrome Kullanıcı Adı",
+                    label: "Navidrome Kullanıcı Adı"
+                },
+                nd_password: {
+                    description: "Navidrome Parolası",
+                    label: "Navidrome Parolası"
+                },
+                nd_clientId: {
+                    description: "İsteğe bağlı Discord Uygulaması İstemci Kimliği",
+                    label: "Navidrome: İstemci Kimliği"
+                },
+                nd_showSmallImage: {
+                    description: "Albüm kapağının sağ altında Navidrome logosunu göster.",
+                    label: "Navidrome: Küçük Görseli Göster"
+                },
+                nd_showAlbum: {
+                    description: "Durumda albüm adını göster.",
+                    label: "Navidrome: Albümü Göster"
+                },
+                nd_albumArtMode: {
+                    description: "Albüm kapağının nasıl alınacağı.",
+                    label: "Navidrome: Albüm Kapağı Modu",
+                    none: "Yok",
+                    instance: "Navidrome Örneği (Sunucu URL'sini Discord'a açar, kimlik doğrulama gönderilmez)",
+                    lastfm: "Last.fm API (Parça meta verilerini Last.fm'e gönderir)"
+                },
+                nd_lastfmApiKey: {
+                    description: "İsteğe bağlı Last.fm API anahtarı",
+                    label: "Navidrome: Last.fm API Anahtarı"
+                },
+                nd_refreshInterval: {
+                    description: "Saniye cinsinden yenileme aralığı.",
+                    label: "Navidrome: Yenileme Aralığı"
+                },
+                nd_activityType: {
+                    description: "Hangi etkinlik türü",
+                    label: "Navidrome: Etkinlik Türü",
+                    listening: "Dinliyor",
+                    playingFixesHiddenLines: "Oynuyor (Gizli satırları düzeltir)",
+                    watching: "İzliyor"
+                },
+                nd_nameString: {
+                    description: "Etkinlik adı biçim dizesi",
+                    label: "Navidrome: Ad Dizesi"
+                },
+                nd_detailsString: {
+                    description: "Etkinlik ayrıntıları biçim dizesi",
+                    label: "Navidrome: Ayrıntı Dizesi"
+                },
+                nd_stateString: {
+                    description: "Etkinlik durumu biçim dizesi",
+                    label: "Navidrome: Durum Dizesi"
+                },
+                nd_largeTextString: {
+                    description: "Etkinlik büyük metin biçim dizesi",
+                    label: "Navidrome: Büyük Metin Dizesi"
+                },
+                nd_statusDisplayType: {
+                    description: "Üye listesinde parça / sanatçı adını göster",
+                    off: "Gösterme (genel dinleme mesajı gösterir)"
+                },
+                nd_hideOnPause: {
+                    description: "Müzik duraklatıldığında Zengin Durumu gizle",
+                    label: "Navidrome: Duraklatınca Gizle"
+                }
+            },
+            panel: {
+                password: "Şifre",
+                statsFmUsername: "stats.fm kullanıcı adı",
+                customStatusText: "Özel Durum Metni",
+                nameFormat: "İsim Biçimi",
+                missingArtFallback: "Eksik Kapak Yedeği",
+                showListeningStatus: "Dinleme Durumunu Göster",
+                showStatsFmLogo: "Stats.fm Logosunu Göster",
+                showProfileLink: "Profil Bağlantısını Göster",
+                showSongLink: "Şarkı Bağlantısını Göster",
+                hideWithSpotify: "Spotify ile Gizle",
+                hideWithExternalRpc: "Harici RPC ile Gizle",
+                disableAlbumArt: "Albüm Kapağını Devre Dışı Bırak",
+                apiKey: "API Anahtarı",
+                userId: "Kullanıcı Kimliği (ID)",
+                nameDisplay: "Ad Görüntüleme",
+                customNameTemplate: "Özel Ad Şablonu",
+                coverType: "Kapak Türü",
+                episodeFormat: "Bölüm Biçimi",
+                overridePresenceType: "Durum Türünü Geçersiz Kıl",
+                showEpisodeName: "Bölüm Adını Göster",
+                showWhenPaused: "Duraklatıldığında Göster",
+                privacyMode: "Gizlilik Modu",
+                refreshInterval: "Yenileme Aralığı",
+                clientId: "İstemci Kimliği",
+                albumArtMode: "Albüm Kapağı Modu",
+                lastFmApiKey: "Last.fm API Anahtarı",
+                showSmallImage: "Küçük Görseli Göster",
+                showAlbum: "Albümü Göster",
+                activityType: "Etkinlik Türü",
+                statusDisplayType: "Durum Görüntüleme Türü",
+                hideOnPause: "Duraklatınca Gizle",
+                activityNameFormat: "Etkinlik Adı Biçimi",
+                detailsFormat: "Ayrıntı Biçimi",
+                stateFormat: "Durum Biçimi",
+                largeTextFormat: "Büyük Metin Biçimi",
+                enabled: "Etkin"
+            }
+        },
+        sedEnhanced: {
+            option: {
+                regexByDefault: {
+                    description: "`r` bayrağını tersine çevirir; `r` kullanmak regex dışı modu açar, kullanmamak regex modunu kullanır.",
+                    label: "Varsayılan Olarak Regex"
+                }
+            },
+            name: "SedEnhanced",
+            description: "Discord'un temel `sed` desteğini genişletir."
+        },
+        showRolesInChat: {
+            option: {
+                showBots: {
+                    description: "Botlarda en yüksek rolün gösterilip gösterilmeyeceği.",
+                    label: "Botları Göster"
+                },
+                useRoleColor: {
+                    description: "Simge için rolün rengini kullan.",
+                    label: "Rol Rengini Kullan"
+                }
+            },
+            name: "ShowRolesInChat",
+            description: "Sohbet mesajlarında kullanıcının en yüksek rolünü adının yanında gösterir. Belirli rolleri bağlam menüsünden (sağ tık) gizle/göster.",
+            text: {
+                chatRoleActions: "Sohbet Rol İşlemleri",
+                unhideRolesInChat: "Sohbetteki Rolleri Yeniden Göster",
+                showRoleInChat: "Rolü Sohbette Göster",
+                hideRoleInChat: "Rolü Sohbette Gizle"
+            }
+        },
+        silenceUsers: {
+            option: {
+                mutedUserIds: {
+                    description: "Pingleri ve sunucu rozetleri susturulacak Discord kullanıcı kimlikleri (virgülle ayrılmış).",
+                    label: "Susturulan Kullanıcı Kimlikleri"
+                }
+            },
+            name: "SilenceUsers",
+            description: "Belirli kullanıcılardan gelen @bahsetme pinglerini ve sunucu rozet sayılarını susturur. Normal mesajlar ve DM'ler etkilenmez."
+        },
+        songLink: {
+            text: {
+                showIfAvailable: "Varsa göster",
+                openInDesktopApp: "Masaüstü Uygulamasında Aç",
+                loadingSongLink: "Şarkı bağlantısı yükleniyor...",
+                pleaseProvideAMusic: "Lütfen bir müzik bağlantısı gir.",
+                thisWillTakeA: "Bu biraz zaman alacak...",
+                noAlternativePlatformsFound: "Bu bağlantı için alternatif platform bulunamadı.",
+                failedToResolveMusic: "Müzik bağlantısı çözümlenemedi",
+                logo: "{{name}} logosu"
+            },
+            option: {
+                servicesSettings: {
+                    description: "hizmet ayarları",
+                    label: "Hizmet Ayarları"
+                },
+                userCountry: {
+                    description: "Arama için kullanılan ülke (iki harfli ülke kodu)",
+                    label: "Kullanıcı Ülkesi"
+                },
+                includeMetadata: {
+                    description: "Parça adını ve sanatçı adını başlık olarak ekle.",
+                    label: "Meta Verileri Ekle"
+                }
+            },
+            name: "SongLink",
+            description: "Şarkı bağlantılarının altına yayın hizmeti düğmeleri ekler",
+            command: {
+                musiclink: "Bir müzik bağlantısını diğer yayın platformlarına dönüştür.",
+                url: "Müzik bağlantısı (Spotify, Deezer, YouTube, Tidal, Apple Music, SoundCloud)"
+            }
+        },
+        songSpotlight: {
+            name: "SongSpotlight",
+            description: "Profilinde şarkılarını sergile",
+            text: {
+                songSpotlight: "Song Spotlight",
+                explicit: "Müstehcen",
+                addSong: "Şarkı ekle",
+                addANewSong: "Yeni şarkı ekle",
+                copyLink: "Bağlantıyı kopyala",
+                removeSong: "Şarkıyı kaldır",
+                failedToLoad: "Yüklenemedi!",
+                areYouSure: "Emin misin?",
+                thisWillOverwriteYour: "Bu, mevcut şarkılarının üzerine yazacak.",
+                continue: "Devam",
+                nevermind: "Boş ver",
+                thisWillPermanentlyDelete: "Bu, tüm şarkılarını kalıcı olarak silecek.",
+                delete: "Sil",
+                signInToSong: "Song Spotlight'a giriş yap",
+                songs: "Şarkılar",
+                authorization: "Authorization",
+                importFromClipboard: "Panodan içe aktar",
+                copyToClipboard: "Panoya kopyala",
+                signOut: "Çıkış yap",
+                deleteSongs: "Şarkıları sil",
+                more: "Daha fazla",
+                editSongs: "Şarkıları düzenle",
+                copyJson: "JSON'u kopyala",
+                looksLikeThereS: "Görünüşe göre burada hiçbir şey yok!",
+                uhOhSongSpotlight: "Hay aksi! Song Spotlight yüklenemedi. Daha fazla ayrıntı için konsolu kontrol edebilirsin.",
+                stealSong: "Şarkıyı Çal",
+                profileSongs: "Profil Şarkıları",
+                notEnoughSpace: "Yeterli yer yok",
+                alreadyAdded: "Bu şarkıyı zaten ekledin",
+                invalidLink: "Geçersiz bağlantı",
+                failedToParseLink: "Bağlantı ayrıştırılamadı",
+                invalidUrl: "Geçersiz URL",
+                goAddSongs: "Eee? Ne bekliyorsun? Song Spotlight'ına birkaç şarkı ekle!",
+                tellUserToAddSongs: "{{name}} kullanıcısına Song Spotlight'ına birkaç şarkı eklemesini söyle!",
+                supportedServices: "Song Spotlight şu servisleri destekler:",
+                viewSongsVia: "Şarkılarını ayrıca",
+                viewSongsViaSuffix: "komutuyla görüntüleyebilirsin!",
+                coverTooltipOwner: "{{label}} - {{sublabel}}",
+                coverTooltipBy: "{{sublabel}} - {{label}}",
+                lastUpdated: "Son güncelleme",
+                save: "Kaydet",
+                showMore: "{{count}} tane daha göster"
+            },
+            toast: {
+                youHaveBeenSigned: "Song Spotlight oturumun kapatıldı. Lütfen tekrar giriş yap.",
+                songSpotlightError: "Song Spotlight: {{error}}",
+                successfullyAuthorized: "Başarıyla yetkilendirildi!",
+                failedToPlaySong: "Şarkı önizlemesi oynatılamadı!",
+                addedSong: "Şarkı eklendi!",
+                removedSong: "Şarkı kaldırıldı!",
+                noJsonInClipboard: "Panoda JSON yok!",
+                invalidSongSpotlightData: "Panodaki Song Spotlight verileri geçersiz!",
+                oneOrMoreImported: "İçe aktarılan şarkılardan biri veya birkaçı geçersizdi.",
+                importedSongsFromClipboard: "Şarkılar panodan içe aktarıldı!",
+                successfullySavedSongs: "Şarkılar başarıyla kaydedildi!",
+                successfullySignedOut: "Başarıyla çıkış yapıldı!",
+                successfullyDeletedSongs: "Şarkılar başarıyla silindi!",
+                youDonTHave: "Yeterli alanın yok!",
+                uhOhThisSong: "Hay aksi, bu şarkı yok!",
+                youAlreadyHaveThis: "Bu şarkıyı zaten eklemişsin!",
+                youDonTHave2: "Bu şarkıyı... eklememişsin ki?",
+                fetchError: "Song Spotlight isteği başarısız: {{path}}"
+            },
+            option: {
+                collapseSongList: {
+                    description: "Profillerdeki şarkı listesini ayrı bir menü açan bir düğmeye daraltır",
+                    label: "Şarkı Listesini Daralt"
+                },
+                profileSongsLimit: {
+                    description: "Bir kullanıcıya ilk tıklandığında kaç şarkı gösterileceği",
+                    label: "Profil Şarkı Sınırı"
+                },
+                previewVolume: {
+                    description: "Şarkı önizlemelerinin çalma sesi",
+                    label: "Önizleme Ses Seviyesi"
+                }
+            }
+        },
+        stopAutoUnread: {
+            name: "StopAutoUnread",
+            description: "Discord'un bir kanalın bildirim ayarını otomatik olarak \"Tüm Mesajlar\"a yükseltmesini engeller"
+        },
+        themeLibrary: {
+            text: {
+                enablePlugin: "Eklentiyi Etkinleştir",
+                cancel: "İptal",
+                holdOn: "Bir dakika!",
+                thisThemeRequiresThe: "Bu tema düzgün çalışmak için",
+                pluginToWorkProperly: "eklentisine ihtiyaç duyuyor!",
+                doYouWantTo: "Etkinleştirmek ister misin?",
+                themeInfo: "Tema Bilgisi",
+                viewSource: "Kaynağı Görüntüle",
+                close: "Kapat",
+                download: "İndir",
+                overwrite: "Üzerine Yaz",
+                keepMyFile: "Dosyamı Koru",
+                copyToClipboard: "Panoya Kopyala",
+                conflict: "Çakışma!",
+                themeSource: "Tema Kaynağı",
+                aThemeWithThe: "Aynı ada sahip bir tema",
+                alreadyExists: "zaten var",
+                inYourThemesDirectory: "tema klasöründe! Üzerine yazmak ister misin?",
+                version: "Sürüm",
+                likes: "Beğeniler",
+                donate: "Bağış Yap",
+                supportServer: "Destek Sunucusu",
+                source: "Kaynak",
+                tags: "Etiketler",
+                youCanSupportThe: "Aşağıdan bağış yaparak yazarı destekleyebilirsin!",
+                joinDiscordServer: "Discord Sunucusuna Katıl",
+                viewThemeSource: "Tema Kaynağını Görüntüle",
+                showAll: "Tümünü Göster",
+                showThemes: "Temaları Göster",
+                showSnippets: "Kod Parçacıklarını Göster",
+                showMostLiked: "En Çok Beğenilenleri Göster",
+                showDark: "Koyu Olanları Göster",
+                showLight: "Açık Olanları Göster",
+                showEnabled: "Etkin Olanları Göster",
+                showDisabled: "Devre Dışı Olanları Göster",
+                searchForATheme: "Tema ara...",
+                gettingTheLatestThemes: "En yeni temalar alınıyor...",
+                thisWonTTake: "Uzun sürmeyecek!",
+                failedToFetchThemes: "Temalar alınamadı",
+                couldNotFetchThe: "Tema listesi alınamadı. Daha sonra tekrar dene.",
+                wantYourThemeRemoved: "Temanın kaldırılmasını mı istiyorsun?",
+                hide: "Gizle",
+                noThemeFound: "Tema bulunamadı.",
+                tryNarrowingYourSearch: "Aramanı daraltmayı dene.",
+                themeLibrary: "Tema Kitaplığı",
+                successfullyAuthorizedWithThemelibrary: "ThemeLibrary ile başarıyla yetkilendirildi!",
+                failedToAuthorizeCheck: "Yetkilendirme başarısız, konsolu kontrol et",
+                successfullyDeauthorizedFromThemelibrary: "ThemeLibrary yetkisi başarıyla kaldırıldı!",
+                failedToDeauthorizeCheck: "Yetki kaldırma başarısız, konsolu kontrol et",
+                themelibraryAuth: "ThemeLibrary Kimlik Doğrulama",
+                themeRemoval: "Tema Kaldırma",
+                allThemeAuthorsAre: "Tüm tema yazarlarına tema bilgisinde yer verilir, hiçbir kaynak değiştirilmemiştir. Yine de temanın kaldırılmasını istiyorsan aşağıya tıklayarak bir Issue aç.",
+                authorizeWithThemelibrary: "ThemeLibrary ile Yetkilendir",
+                copyThemelibraryToken: "ThemeLibrary Belirtecini Kopyala",
+                deauthorizeThemelibrary: "ThemeLibrary Yetkisini Kaldır",
+                themeDetails: "{{name}} ayrıntıları",
+                mostLiked: "En Çok Beğenilen",
+                newestAdditions: "En Yeni Eklenenler",
+                removeTheme: "Temayı Kaldır",
+                addTheme: "Tema Ekle",
+                authors: "Yazarlar",
+                author: "Yazar",
+                nobodyLikedTheme: "Bu temayı henüz kimse beğenmedi.",
+                nobodyLikedSnippet: "Bu parçacığı henüz kimse beğenmedi.",
+                usersLikedTheme: "{{likes}} kullanıcı bu temayı beğendi!",
+                usersLikedSnippet: "{{likes}} kullanıcı bu parçacığı beğendi!",
+                openThemeLibrary: "Tema Kütüphanesini Aç",
+                lastUpdated: "Bu tema en son şu tarihte güncellendi:",
+                removalInfo: "Tema(lar)ının kalıcı olarak kaldırılmasını istiyorsan lütfen şurada bir issue aç:",
+                themes: "Temalar",
+                requestRemoval: "Tema Kaldırma Talebi",
+                pluginSuffix: "eklentisine ihtiyaç duyar!"
+            },
+            toast: {
+                downloadedName: "{{name}} indirildi!",
+                failedToDownloadName: "{{name}} indirilemedi! (konsolu kontrol et)",
+                invalidOrExpiredInvite: "Geçersiz veya süresi dolmuş davet!",
+                copiedToClipboard: "Panoya kopyalandı",
+                noUniquetokenPresentTry: "uniqueToken yok, önce yetkilendirmeyi dene!",
+                noTokenToCopy: "Kopyalanacak belirteç yok, önce yetkilendirmeyi dene!",
+                copiedToClipboard2: "Panoya kopyalandı!"
+            },
+            name: "ThemeLibrary",
+            description: "Plexcord için bir tema kitaplığı.",
+            option: {
+                hideWarningCard: {
+                    description: "Tema kitaplığı sekmesinin üstündeki uyarı kartını gizle",
+                    label: "Uyarı Kartını Gizle"
+                },
+                buttons: {
+                    description: "ThemeLibrary Düğmeleri",
+                    label: "Düğmeler"
+                }
+            }
+        },
+        translatePlus: {
+            name: "Translate+",
+            description: "Plexcord'un çeviri eklentisi, ama yapay dil desteğiyle!",
+            text: {
+                translate: "Çevir",
+                dismiss: "Kapat",
+                translationFailedDueTo: "Bir hata nedeniyle çeviri başarısız oldu.",
+                translatedFrom: "{{lang}} dilinden çevrildi"
+            },
+            option: {
+                target: {
+                    description: "Hedef dil",
+                    label: "Hedef"
+                },
+                toki: {
+                    description: "Toki Pona'yı Etkinleştir",
+                    label: "Toki Pona"
+                },
+                sitelen: {
+                    description: "Sitelen Pona'yı Etkinleştir",
+                    label: "Sitelen Pona"
+                },
+                shavian: {
+                    description: "Shavian'ı Etkinleştir",
+                    label: "Shavian"
+                }
+            }
+        },
+        triviaAI: {
+            name: "TriviaAI",
+            description: "Yapay zekâ kullanarak bilgi yarışması sorularını yanıtlamana yardım eden bir eklenti.",
+            text: {
+                answerWithAi: "Yapay Zekâ ile Yanıtla",
+                enterApiKeyHere: "Yapay zekâ uç noktan için API anahtarını buraya gir.",
+                enterSystemPrompt: "Sistem istemini gir.",
+                enterYourOpenaiCompatible: "OpenAI uyumlu yapay zekâ uç noktanı buraya gir.",
+                status: "Durum {{status}}"
+            },
+            option: {
+                apiKey: {
+                    description: "API anahtarı.",
+                    label: "API Anahtarı"
+                },
+                model: {
+                    description: "Kullanılacak yapay zekâ modeli.",
+                    label: "Model",
+                    placeholder: "ör. google/gemini-3-flash-preview, inception/mercury, openai/gpt-5.2-chat vb."
+                },
+                systemPrompt: {
+                    description: "Yapay zekâ için sistem istemi. Yer tutucular: {current_user}, {current_time}",
+                    label: "Sistem İstemi"
+                },
+                maxTokens: {
+                    description: "Yanıttaki en fazla belirteç sayısı.",
+                    label: "En Fazla Belirteç"
+                },
+                endpoint: {
+                    description: "OpenAI uyumlu yapay zekâ uç noktası.",
+                    label: "Uç Nokta"
+                },
+                context: {
+                    description: "Bağlam olarak dahil edilecek önceki mesaj sayısı.",
+                    label: "Bağlam"
+                },
+                passMessageAuthorName: {
+                    description: "Mesaj içeriğini yapay zekâya iletirken başına yazarın adını ekle. Bu, yapay zekânın konuşmadaki farklı kullanıcıları ayırt etmesine yardımcı olabilir.",
+                    label: "Mesaj Yazarının Adını İlet"
+                },
+                treatSelfAsAssistant: {
+                    description: "Etkinleştirildiğinde kendi mesajların bağlamda asistan mesajı olarak işlenir. Bu, bazı modellerin hayran kurgusu üretmeye başlamasına neden olur.",
+                    label: "Kendimi Asistan Olarak Say"
+                },
+                mode: {
+                    description: "Yanıtlar nasıl işlenmeli?",
+                    label: "Mod",
+                    autoreply: "Otomatik Yanıt",
+                    chatbar: "Sohbet Çubuğu Metnini Değiştir",
+                    bot: "Clyde"
+                },
+                supportImages: {
+                    description: "Görselleri bağlam için yapay zekâya ilet (varsa). Bu, tüm modellerce desteklenmez.",
+                    label: "Görselleri Destekle"
+                },
+                sendImagesAsBase64: {
+                    description: "Görselleri yapay zekâya base64 olarak gönder.",
+                    label: "Görselleri Base64 Olarak Gönder"
+                }
+            },
+            toast: {
+                triviaaiApiSettingsAre: "TriviaAI: API ayarları eksik.",
+                errorGettingResponseFrom: "Yapay zekâ modelinden yanıt alınırken hata oluştu"
+            }
+        },
+        unreadCountBadge: {
+            option: {
+                showOnMutedChannels: {
+                    description: "Sessize alınmış kanallarda okunmamış sayısını göster",
+                    label: "Sessizdeki Kanallarda Göster"
+                },
+                notificationCountLimit: {
+                    description: "Gerçek sayı yerine +99 göster",
+                    label: "Bildirim Sayısı Sınırı"
+                }
+            },
+            name: "UnreadCountBadge",
+            description: "Kanal listesindeki kanallarda okunmamış mesaj sayısı rozetleri gösterir"
+        },
+        userPFP: {
+            toast: {
+                gifsWebpMustBe: "GIF/WebP dosyaları URL ile eklenmelidir. GIF/WebP dosyanı bir görsel barındırma hizmetine yükle ve bağlantıyı yapıştır."
+            },
+            text: {
+                save: "Kaydet",
+                delete: "Sil",
+                customAvatar: "Özel Avatar",
+                original: "Orijinal",
+                local: "Yerel",
+                enterPngGifUrl: "PNG/GIF URL'si gir",
+                setAvatar: "Avatar Belirle",
+                usingTheSetAvatar: "Avatar belirleme özelliği yalnızca yereldir; değişikliği yalnızca sen görürsün.",
+                joinUserpfpServer: "UserPFP Sunucusuna Katıl",
+                dropHere: "Buraya bırak!",
+                dragOrClick: "⬆ Bir resim sürükle veya yüklemek için tıkla (GIF veya WebP için bunun yerine URL kullan)",
+                uploadedFile: "(yüklenen dosya)",
+                supportHere: "UserPFP'yi buradan destekle"
+            },
+            option: {
+                overrideServerAvatars: {
+                    description: "Sunucu avatarlarını özel avatarlarla veya özel avatar yoksa varsayılan kullanıcı avatarıyla değiştir.",
+                    label: "Sunucu Avatarlarını Geçersiz Kıl"
+                },
+                preferNitro: {
+                    description: "Hem varsayılan hareketli (Nitro) profil resmi hem de UserPFP avatarı varsa hangisinin kullanılacağı",
+                    label: "Nitro'yu Tercih Et",
+                    false: "UserPFP",
+                    true: "Nitro"
+                },
+                databaseSource: {
+                    description: "Veritabanının yükleneceği URL",
+                    label: "Veritabanı Kaynağı"
+                }
+            },
+            name: "UserPFP",
+            description: "Kendin ve diğer kullanıcılar için yerel statik veya animasyonlu avatarlar ayarlamanı sağlar"
+        },
+        userpluginInstaller: {
+            toast: {
+                restartToApplyChanges: "Değişiklikleri uygulamak için yeniden başlat!"
+            },
+            text: {
+                installError: "Yükleme hatası",
+                done: "Tamamlandı!",
+                later: "Daha Sonra",
+                updateError: "Güncelleme hatası",
+                checkingForUpdates: "Güncellemeler denetleniyor...",
+                loadingPlugins: "Eklentiler yükleniyor...",
+                pluginUpdatesAvailable: "Eklenti Güncellemeleri Mevcut",
+                theFollowingPluginsAre: "Aşağıdaki eklentiler güncel değil:",
+                youCanUpdatePlugins: "Eklentileri aşağıdan güncelleyebilirsin.",
+                installPlugin: "Eklentiyi Yükle",
+                userplugininstallerNotFullyLoaded: "UserpluginInstaller tam olarak yüklenmedi",
+                youNeedToRestart: "Yerel kısmın yüklenmesi için yeniden başlatman gerekiyor :)",
+                restartNow: "Şimdi yeniden başlat",
+                someUserpluginsAreOut: "Bazı UserPlugins güncel değil!",
+                clickToOpenThe: "UserPlugin Güncelleyicisini açmak için tıkla",
+                plexcordDoesNotModerate: "Plexcord kullanıcı eklentilerini denetlemez ve bunların yüklenmesinden doğabilecek hiçbir şeyden sorumlu değildir.",
+                onlyInstallUserpluginsFrom: "Yalnızca güvendiğin geliştiricilerin kullanıcı eklentilerini yükle. Bunu yapmak tamamen kendi sorumluluğundadır.",
+                setGitPath: "Git Yolunu Ayarla",
+                installHint: "GitHub, GitLab, Codeberg, git.nin0.dev veya plugins.nin0.dev'den bir eklentiyi klonlama URL'sini buraya yapıştırarak yükleyebilirsin.",
+                enableAndRestart: "Etkinleştir ve yeniden başlat",
+                enableAndRefresh: "Etkinleştir ve yenile",
+                tabCounts: "({{total}}, {{enabled}} etkin)",
+                possiblyMore: "ve güncelleme denetimi bitmediği için muhtemelen daha fazlası. ",
+                alreadyInstalled: "Eklenti zaten yüklü, aşağıdan güncelle",
+                invalidUrl: "Geçersiz URL, yukarıdaki notu oku",
+                install: "Yükle",
+                restart: "Yeniden başlat",
+                refresh: "Yenile",
+                update: "Güncelle",
+                source: "Kaynak",
+                support: "Destek",
+                managePlugins: "Eklentileri yönet",
+                uninstalledRestart: "{{name}} kaldırıldı. Eklentiyi tamamen kaldırmak için yeniden başlatma gerekiyor.",
+                uninstalledRefresh: "{{name}} kaldırıldı. Eklentiyi tamamen kaldırmak için yenileme gerekiyor.",
+                updatedRestart: "{{name}} güncellendi. Güncellemeyi uygulamak için yeniden başlatma gerekiyor.",
+                updatedRefresh: "{{name}} güncellendi. Güncellemeyi uygulamak için yenileme gerekiyor.",
+                installedBody: "{{name}} başarıyla yüklendi. Şimdi ne yapmak istersin?",
+                installedNativeBody: "{{name}} başarıyla yüklendi. Ancak native işlevler kullandığı için istemcinin yeniden başlatılması gerekiyor. Şimdi ne yapmak istersin?"
+            },
+            option: {
+                allowlistedChannels: {
+                    description: "Eklentiyi Yükle düğmesinin gösterileceği kanalların virgülle ayrılmış listesi. Plexcord Kullanıcı Eklentisi kanallarında her zaman gösterilir",
+                    label: "İzin Verilen Kanallar"
+                },
+                notifyIfUpdate: {
+                    description: "UserPlugins güncellenmesi gerekiyorsa Plexcord bildirimi göster",
+                    label: "Güncelleme Varsa Bildir"
+                },
+                neverNotifyForPlugins: {
+                    description: "Bu eklentiler için asla güncelleme bildirimi gösterme (yine de UserPlugins sekmesinden güncelleyebilirsin)",
+                    label: "Bu Eklentiler İçin Asla Bildirme"
+                }
+            },
+            name: "UserpluginInstaller",
+            description: "Kullanıcı eklentilerini tek tıkla yükle"
+        },
+        vCPanelSettings: {
+            option: {
+                title1: {
+                    label: "Başlık 1"
+                },
+                uncollapseSettingsByDefault: {
+                    description: "Ses ayarlarını varsayılan olarak otomatik genişlet",
+                    label: "Ayarları Varsayılan Olarak Genişlet"
+                },
+                title2: {
+                    label: "Başlık 2"
+                },
+                outputVolume: {
+                    description: "Çıkış ses seviyesi kaydırıcısı göster",
+                    label: "Çıkış Ses Seviyesi"
+                },
+                inputVolume: {
+                    description: "Giriş ses seviyesi kaydırıcısı göster",
+                    label: "Giriş Ses Seviyesi"
+                },
+                outputDevice: {
+                    description: "Çıkış aygıtı seçicisi göster",
+                    label: "Çıkış Aygıtı"
+                },
+                inputDevice: {
+                    description: "Giriş aygıtı seçicisi göster",
+                    label: "Giriş Aygıtı"
+                },
+                camera: {
+                    description: "Kamera seçicisi göster",
+                    label: "Kamera"
+                },
+                title3: {
+                    label: "Başlık 3"
+                },
+                showOutputVolumeHeader: {
+                    description: "Çıkış ses seviyesi kaydırıcısının üstünde başlık göster",
+                    label: "Çıkış Ses Seviyesi Başlığını Göster"
+                },
+                showInputVolumeHeader: {
+                    description: "Giriş ses seviyesi kaydırıcısının üstünde başlık göster",
+                    label: "Giriş Ses Seviyesi Başlığını Göster"
+                },
+                showOutputDeviceHeader: {
+                    description: "Çıkış aygıtı seçicisinin üstünde başlık göster",
+                    label: "Çıkış Aygıtı Başlığını Göster"
+                },
+                showInputDeviceHeader: {
+                    description: "Giriş aygıtı seçicisinin üstünde başlık göster",
+                    label: "Giriş Aygıtı Başlığını Göster"
+                },
+                showVideoDeviceHeader: {
+                    description: "Kamera seçicisinin üstünde başlık göster",
+                    label: "Video Aygıtı Başlığını Göster"
+                }
+            },
+            name: "VCPanelSettings",
+            description: "Ses ayarlarını doğrudan ses panelinden kontrol et",
+            text: {
+                appearance: "Görünüm",
+                settingsToShow: "Gösterilecek ayarlar",
+                headersToShow: "Gösterilecek başlıklar",
+                outputVolume: "Çıkış ses seviyesi",
+                inputVolume: "Giriş ses seviyesi",
+                outputDevice: "Çıkış aygıtı",
+                inputDevice: "Giriş aygıtı",
+                settings: "Ayarlar",
+                hide: "Gizle"
+            }
+        },
+        voiceMessageTranscriber: {
+            text: {
+                autoDetect: "Otomatik Algıla",
+                start: "Başlat",
+                transcriptionOptions: "Yazıya Dökme Seçenekleri",
+                audioLanguage: "Ses Dili",
+                retry: "Tekrar Dene",
+                transcriptionFailed: "Yazıya Dökme Başarısız",
+                transcribeVoiceMessage: "Sesli Mesajı Yazıya Dök",
+                close: "Kapat",
+                baseRecommended: "Base (Önerilen)",
+                small: "Small",
+                largeV3TurboBest: "Large v3 Turbo (En iyi doğruluk, GPU önerilir)",
+                transcribe: "Yazıya Dök",
+                translateToEnglish: "İngilizceye Çevir",
+                voiceMessageTranslation: "Sesli Mesaj Çevirisi",
+                voiceMessageTranscription: "Sesli Mesaj Dökümü",
+                hideTimestamps: "Zaman Damgalarını Gizle",
+                showTimestamps: "Zaman Damgalarını Göster",
+                copied: "Kopyalandı!",
+                copyText: "Metni Kopyala",
+                downloadingAudio: "Ses indiriliyor...",
+                processingAudio: "Ses işleniyor...",
+                loadingModel: "Model yükleniyor...",
+                transcribing: "Yazıya dökülüyor...",
+                transcription: "Döküm",
+                transcriptionError: "Döküm Hatası",
+                transcribingInProgress: "Yazıya dökme sürüyor...",
+                initializing: "Başlatılıyor...",
+                workerCrashed: "Döküm işleyicisi çöktü",
+                workerStopped: "Döküm işleyicisi durduruldu",
+                deleteCache: "Tüm önbellek dosyalarını sil ({{size}} MB)",
+                action: "Eylem"
+            },
+            name: "VoiceMessageTranscriber",
+            description: "Whisper destekli, cihaz üzerinde sesli mesaj yazıya dökme",
+            option: {
+                embed: {
+                    description: "Yazıya dökümü pencere yerine doğrudan sesli mesaj ekinde göster.",
+                    label: "Gömme"
+                },
+                maintainHorizontal: {
+                    description: "Gömülü yazıya dökme kutusunun yatay boyutunu koru ve dikey olarak genişlet.",
+                    label: "Yatayı Koru"
+                },
+                selectedModel: {
+                    description: "Model boyutu.",
+                    onnxcommunitywhispertiny: "Tiny (En hızlı, en düşük doğruluk)"
+                },
+                useGpu: {
+                    description: "Destekleniyorsa modeli GPU'nda (WebGPU) çalıştır. Çok daha hızlıdır ve büyük modelleri kullanılabilir kılar. Kullanılamıyorsa CPU'ya geri döner.",
+                    label: "GPU Kullan"
+                },
+                quantized: {
+                    description: "CPU'da çalışırken nicemlenmiş modelleri kullan (daha küçük boyut, hafif kalite kaybı).",
+                    label: "Nicemlenmiş"
+                },
+                deleteModalFiles: {
+                    description: "Önbelleğe alınmış dosyaları depolamadan sil.",
+                    label: "Model Dosyalarını Sil"
+                }
+            }
+        },
+        voiceMessagesInBackground: {
+            name: "VoiceMessagesInBackground",
+            description: "Senkronize bir mini oynatıcıyla sesli mesajların sohbetler arasında çalmaya devam etmesini sağlar.",
+            text: {
+                voiceMessagesInBackground: "Arka Plan Sesli Mesaj Oynatıcısı",
+                returnToChannelname: "{{channelName}} kanalına dön",
+                voiceMessagePosition: "Sesli mesaj konumu",
+                changePlaybackSpeed: "Oynatma hızını değiştir",
+                playbackSpeedSpeedTimes: "Oynatma hızı {{speed}} kat",
+                closeVoiceMessagePlayer: "Sesli mesaj oynatıcısını kapat",
+                voiceMessage: "Sesli mesaj",
+                directMessage: "Özel mesaj",
+                resume: "Sesli mesajı sürdür",
+                pause: "Sesli mesajı duraklat"
+            }
+        },
+        webPWA: {
+            name: "WebPWA",
+            description: "Discord'u uygulama (PWA) olarak yüklenebilir yapar. Bildirim rozetlerini, genel kısayolları ve Discord'un özel başlık çubuğunu etkinleştirir.",
+            text: {
+                activities: "Etkinlikler",
+                hopIn: "Katıl",
+                status: "Durum",
+                emojis: "Emojiler",
+                rooms: "Odalar",
+                discord: "Discord",
+                platforms: "Platformlar",
+                keybindsInfoBefore: "Özel genel Bas-X tuş atamaları desteklenir. Değiştirmek için",
+                keybindsInfoAfter: "adresine git. Basılı Tut-X tuş atamaları desteklenmez."
+            }
+        },
+        "webRichPresence (arRPC)": {
+            name: "WebRichPresence (arRPC)"
+        },
+        webScreenShare: {
+            option: {
+                resolution: {
+                    description: "Çözünürlük",
+                    label: "Çözünürlük"
+                },
+                frameRate: {
+                    description: "Kare Hızı",
+                    label: "Kare Hızı"
+                },
+                contentHint: {
+                    description: "İçerik İpucu",
+                    label: "İçerik İpucu"
+                },
+                systemAudio: {
+                    description: "Sistem sesini kapat",
+                    label: "Sistem Sesi"
+                }
+            },
+            name: "WebScreenShare",
+            description: "Bir ekran paylaşımı seçenekleri menüsü ekler. Çözünürlüğü, kare hızını, kodlama ipuçlarını ve sistem sesi ayarlarını değiştirmeni sağlar.",
+            text: {
+                stream: "Yayın",
+                streamMuted: "Yayın Sessizde",
+                streamMode: "Yayın Modu",
+                muteStreamAudio: "Yayın Sesini Kapat",
+                preventsSystemAudioFrom: "Sistem sesinin yayınına dahil edilmesini engeller.",
+                showStreamPreviews: "Yayın Önizlemelerini Göster",
+                allowsOthersToSee: "Başkalarının katılmadan önce yayınının önizlemesini görmesini sağlar.",
+                smootherVideo: "Daha akıcı video",
+                cleanerText: "Daha net metin",
+                userPreset: "Kullanıcı ön ayarı",
+                custom: "Özel",
+                gaming: "Oyun",
+                screenshare: "Ekran Paylaşımı"
+            }
+        },
+        whitelistedEmojis: {
+            option: {
+                defaultEmojis: {
+                    description: "Beyaz listede olmadıkça varsayılan Unicode emojilerini otomatik tamamlamadan gizle.",
+                    label: "Varsayılan Emojiler"
+                },
+                serverEmojis: {
+                    description: "Beyaz listede olmadıkça özel sunucu emojilerini otomatik tamamlamadan gizle.",
+                    label: "Sunucu Emojileri"
+                },
+                disableToasts: {
+                    description: "Emoji eklerken veya kaldırırken bildirim gösterme.",
+                    label: "Bildirimleri Devre Dışı Bırak"
+                },
+                whiteListedEmojis: {
+                    description: "Beyaz Listedeki Emojiler",
+                    label: "Beyaz Listedeki Emojiler"
+                },
+                exportEmojis: {
+                    description: "Emojileri Dışa Aktar",
+                    label: "Emojileri Dışa Aktar"
+                },
+                importEmojis: {
+                    description: "Emojileri İçe Aktar",
+                    label: "Emojileri İçe Aktar"
+                },
+                resetEmojis: {
+                    description: "Emojileri Sıfırla",
+                    label: "Emojileri Sıfırla"
+                }
+            },
+            name: "WhitelistedEmojis",
+            description: "Beyaz listedeki küme dışındaki tüm mesaj emojilerini devre dışı bırakma imkânı ekler.",
+            toast: {
+                addedLengthEmojisTo: "Listeye {{length}} emoji eklendi, {{length}} tanesi zaten listedeydi",
+                removedLengthEmojisFrom: "Listeden {{length}} emoji kaldırıldı",
+                nameIsAlreadyIn: "\"{{name}}\" zaten listede",
+                addedNameToThe: "\"{{name}}\" listeye eklendi",
+                nameIsNotIn: "\"{{name}}\" listede değil",
+                removedNameFromThe: "\"{{name}}\" listeden kaldırıldı",
+                successfullyExportedEmojis: "Emojiler başarıyla dışa aktarıldı",
+                successfullyImportedEmojis: "Emojiler başarıyla içe aktarıldı",
+                invalidJsonData: "Geçersiz JSON verisi",
+                failedToImportEmojis: "Emojiler içe aktarılamadı: {{err}}",
+                resetEmojis: "Emojiler sıfırlandı"
+            },
+            text: {
+                areYouSure: "Emin misin?",
+                thisWillOverwriteYour: "Bu, mevcut beyaz listenin üzerine yazacak.",
+                import: "İçe Aktar",
+                cancel: "İptal",
+                thisWillRemoveAll: "Bu, beyaz listendeki tüm emojileri kaldıracak.",
+                reset: "Sıfırla",
+                addAllGuildEmojis: "Tüm Sunucu Emojilerini Ekle",
+                removeAllGuildEmojis: "Tüm Sunucu Emojilerini Kaldır",
+                noEmojisInThe: "Beyaz listede emoji yok.",
+                removeAll: "Tümünü Kaldır",
+                removeFromWhitelist: "Beyaz Listeden Kaldır",
+                addToWhitelist: "Beyaz Listeye Ekle",
+                defaultEmojis: "Varsayılan Emojiler",
+                guildEmojis: "{{name}} Emojileri",
+                guildFallback: "Sunucu {{id}}",
+                whitelistedEmojis: "Beyaz Listedeki Emojiler",
+                remove: "Kaldır"
+            }
+        },
+        wigglyText: {
+            option: {
+                intensity: {
+                    description: "Px cinsinden animasyon yoğunluğu",
+                    label: "Yoğunluk"
+                }
+            },
+            name: "WigglyText",
+            description: "Metni kıpır kıpır yapan yeni bir markdown biçimlendirmesi ekler.",
+            text: {
+                leftAndRight: "sağa ve sola",
+                byTyping: "yazarak",
+                upAndDown: "yukarı ve aşağı",
+                inACircle: "daire şeklinde",
+                youCanMakeTextWiggle: "Metni şu şekillerde dalgalandırabilirsin:"
+            }
+        },
+        fixDiscordCss: {
+            description: "Discord'un CSS gecikmesini düzeltir"
+        },
+        directFileDownload: {
+            name: "DirectFileDownload",
+            description: "Dosyaları tarayıcıda açmak yerine doğrudan Discord'dan indir"
+        },
+        githubRepos: {
+            text: {
+                failedToFetchRepositories: "Depolar alınamadı",
+                personal: "Kişisel",
+                unknown: "Bilinmiyor",
+                sortedByCount: "Depo sayısına göre sıralı. A-Z sıralamak için tıkla",
+                sortedAlphabetically: "A-Z sıralı. Depo sayısına göre sıralamak için tıkla",
+                mostRepos: "En çok depo"
+            }
         }
     }
 } as const;

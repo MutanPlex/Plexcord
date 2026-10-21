@@ -27,8 +27,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
-import { findStoreLazy } from "@webpack";
-import { GuildStore, PresenceStore, RelationshipStore, Tooltip, useStateFromStores } from "@webpack/common";
+import { GuildStore, PresenceStore, RelationshipStore, Tooltip, UserGuildJoinRequestStore, useStateFromStores } from "@webpack/common";
 
 const enum IndicatorType {
     SERVER = 1 << 0,
@@ -38,8 +37,6 @@ const enum IndicatorType {
 
 let onlineFriendsCount = 0;
 let guildCount = 0;
-
-const UserGuildJoinRequestStore = findStoreLazy("UserGuildJoinRequestStore");
 
 function FriendsIndicator() {
     onlineFriendsCount = useStateFromStores([RelationshipStore, PresenceStore], () => {
@@ -139,8 +136,8 @@ export const settings = definePluginSettings({
 export default definePlugin({
     name: "ServerListIndicators",
     description: () => t(plugin.serverListIndicators.description),
-    authors: [Devs.dzshn, PcDevs.Panniku],
     tags: ["friends", "servers", "utility"],
+    authors: [Devs.Rini, PcDevs.Panniku],
     dependencies: ["ServerListAPI"],
     settings,
 

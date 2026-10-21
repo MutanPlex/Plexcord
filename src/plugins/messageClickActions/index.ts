@@ -15,7 +15,7 @@ import { Devs, PcDevs } from "@utils/constants";
 import { copyWithToast, insertTextIntoChatInputBox } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
-import { AuthenticationStore, Constants, EditMessageStore, FluxDispatcher, MessageActions, MessageTypeSets, PermissionsBits, PermissionStore, PinActions, RestAPI, Toasts, WindowStore } from "@webpack/common";
+import { AuthenticationStore, Constants, EditMessageStore, FluxDispatcher, MessageActions, MessageTypeSets, PermissionsBits, PermissionStore, PinActions, RestAPI, showToast, WindowStore } from "@webpack/common";
 
 import { AdditionalReactEmojisSetting, MAX_ADDITIONAL_REACT_EMOJIS, ReactEmojiSetting } from "./ReactEmojiSetting";
 
@@ -67,15 +67,15 @@ const doubleClickOthersActions: { label: () => string; value: ClickAction; }[] =
 ];
 
 const modifiers: { label: string; value: Modifier; }[] = [
-    { label: "None", value: "NONE" },
-    { label: "Shift", value: "SHIFT" },
-    { label: "Ctrl", value: "CTRL" },
-    { label: "Alt", value: "ALT" }
+    { label: t(plugin.messageClickActions.actions.none), value: "NONE" },
+    { label: t(plugin.messageClickActions.text.shift), value: "SHIFT" },
+    { label: t(plugin.messageClickActions.text.ctrl), value: "CTRL" },
+    { label: t(plugin.messageClickActions.text.alt), value: "ALT" }
 ];
 
 const singleClickModifiers: { label: string; value: Modifier; }[] = [
-    { label: "Backspace", value: "BACKSPACE" },
-    { label: "Delete", value: "DELETE" },
+    { label: t(plugin.messageClickActions.text.backspace), value: "BACKSPACE" },
+    { label: t(plugin.messageClickActions.actions.delete), value: "DELETE" },
     ...modifiers
 ];
 
@@ -276,13 +276,10 @@ export const settings = definePluginSettings({
 });
 
 function showWarning(message: string) {
-    Toasts.show({
-        message,
-        type: Toasts.Type.FAILURE,
-        id: Toasts.genId(),
-        options: {
-            duration: 3000
-        }
+    showToast({
+        text: message,
+        variant: "critical",
+        duration: 3000
     });
 }
 
@@ -380,7 +377,7 @@ async function addReaction(channelId: string, messageId: string, emoji: string, 
     if (!emojiParam) return;
 
     if (channel.guild_id && (!PermissionStore.can(PermissionsBits.ADD_REACTIONS, channel) || !PermissionStore.can(PermissionsBits.READ_MESSAGE_HISTORY, channel))) {
-        showWarning("Cannot react: Missing permissions");
+        showWarning(t(plugin.messageClickActions.toast.cannotReact));
         return;
     }
 
@@ -411,7 +408,7 @@ function getMessageLink(msg: Message, channel: Channel) {
 }
 
 function copyLink(msg: Message, channel: Channel) {
-    copyWithToast(getMessageLink(msg, channel), "Link copied!");
+    copyWithToast(getMessageLink(msg, channel), t(plugin.messageClickActions.toast.linkCopied));
 }
 
 function togglePin(channel: Channel, msg: Message) {
@@ -473,7 +470,8 @@ async function executeAction(
     action: ClickAction,
     msg: Message,
     channel: Channel,
-    event: MouseEvent
+    event: MouseEvent,
+    triggerModifier: Modifier = "NONE"
 ) {
     const myId = AuthenticationStore.getId();
     const isMe = msg.author.id === myId;
@@ -526,7 +524,7 @@ async function executeAction(
             if (!canReply(msg)) return;
             if (!canSend(channel)) return;
 
-            const isShiftPress = event.shiftKey;
+            const isShiftPress = event.shiftKey && triggerModifier !== "SHIFT";
             const shouldMention = isPluginEnabled(NoReplyMentionPlugin.name)
                 ? NoReplyMentionPlugin.shouldMention(msg, isShiftPress)
                 : !isShiftPress;
@@ -672,7 +670,7 @@ export default definePlugin({
             }
 
             if (isModifierPressed(tripleClickModifier) && tripleClickAction !== "NONE") {
-                executeAction(tripleClickAction, msg, channel, event);
+                executeAction(tripleClickAction, msg, channel, event, tripleClickModifier);
                 pressedModifiers.clear();
             }
             doubleClickFired = false;
@@ -703,7 +701,7 @@ export default definePlugin({
                 if (!canSend(channel)) return;
                 if (msg.deleted === true) return;
                 if (canDoubleClick && isQuickDoubleClick) {
-                    executeAction(doubleClickAction, msg, channel, event);
+                    executeAction(doubleClickAction, msg, channel, event, doubleClickModifier);
                     pressedModifiers.clear();
                 }
             };
@@ -735,7 +733,7 @@ export default definePlugin({
 
             const executeSingleClick = () => {
                 if (!doubleClickFired && !doubleClickDetected && isModifierPressed(singleClickModifier) && singleClickAction !== "NONE") {
-                    executeAction(singleClickAction, msg, channel, event);
+                    executeAction(singleClickAction, msg, channel, event, singleClickModifier);
                     pressedModifiers.clear();
                 }
                 resetClickState();

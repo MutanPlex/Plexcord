@@ -18,17 +18,13 @@
 */
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { BaseText } from "@components/BaseText";
-import { Button } from "@components/Button";
 import { CodeBlock } from "@components/CodeBlock";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
 import { PcDevs } from "@utils/constants";
 import { copyWithToast } from "@utils/discord";
-import { closeModal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import definePlugin, { IconComponent, OptionType } from "@utils/types";
-import { ChannelStore } from "@webpack/common";
+import { ChannelStore, Modal, openModal } from "@webpack/common";
 
 const DecodeIcon: IconComponent = ({ height = 24, width = 24, className }) => {
     return (
@@ -66,34 +62,26 @@ function decodeBase64Strings(base64Strings) {
 }
 
 function openDecodedBase64Modal(decodedContent) {
-    const key = openModal(props => (
+    openModal(props => (
         <ErrorBoundary>
-            <ModalRoot {...props} size={ModalSize.LARGE}>
-                <ModalHeader>
-                    <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t(plugin.decodeBase64.modal.title)}</BaseText>
-                    <ModalCloseButton onClick={() => closeModal(key)} />
-                </ModalHeader>
-                <ModalContent>
-                    <div style={{ padding: "16px 0" }}>
-                        <Heading>{t(plugin.decodeBase64.modal.content)}</Heading>
-                        {decodedContent.map((content, index) => (
-                            <CodeBlock key={index} content={content} lang="" />
-                        ))}
-                    </div>
-                </ModalContent >
-                <ModalFooter>
-                    <Flex>
-                        {decodedContent.map((content, index) => (
-                            <Button key={index} onClick={() => copyWithToast(content, t(plugin.decodeBase64.modal.copied))}>
-                                {t(plugin.decodeBase64.modal.copy, {
-                                    index: index + 1
-                                })}
-                            </Button>
-                        ))}
-                    </Flex>
-                </ModalFooter>
-            </ModalRoot >
-        </ErrorBoundary >
+            <Modal
+                {...props}
+                size="lg"
+                title={t(plugin.decodeBase64.modal.title)}
+                actions={decodedContent.map((content, index) => ({
+                    text: t(plugin.decodeBase64.modal.copy, { index: index + 1 }),
+                    variant: "primary",
+                    onClick: () => copyWithToast(content, t(plugin.decodeBase64.modal.copied))
+                }))}
+            >
+                <div style={{ padding: "16px 0" }}>
+                    <Heading>{t(plugin.decodeBase64.modal.content)}</Heading>
+                    {decodedContent.map((content, index) => (
+                        <CodeBlock key={index} content={content} lang="" />
+                    ))}
+                </div>
+            </Modal>
+        </ErrorBoundary>
     ));
 }
 

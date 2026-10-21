@@ -20,12 +20,16 @@
 import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
-import { UserAreaButton, UserAreaRenderProps } from "@api/UserArea";
+import { UserAreaRenderProps } from "@api/UserArea";
 import { getUserSettingLazy } from "@api/UserSettings";
 import PlexcordToolboxPlugin from "@plugins/plexcordToolbox";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { Menu } from "@webpack/common";
+import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
+import { ConnectedAccountsStore, Menu, Popout, useRef, useState, useStateFromStores } from "@webpack/common";
+
+const Button = findComponentByCodeLazy(".GREEN,positionKeyStemOverride:");
+const ConnectedAccountActions = findByPropsLazy("setShowActivity");
 
 const ShowCurrentGame = getUserSettingLazy<boolean>("status", "showCurrentGame")!;
 
@@ -80,29 +84,74 @@ function Icon({ className }: { className?: string; }) {
     );
 }
 
-function GameActivityToggleButton({ iconForeground, hideTooltips, nameplate }: UserAreaRenderProps) {
+function GameActivityToggleButton(props: UserAreaRenderProps) {
     const { location } = settings.use(["location"]);
     const showCurrentGame = ShowCurrentGame.useSetting();
 
+    const connectedAccounts = useStateFromStores([ConnectedAccountsStore], () => ConnectedAccountsStore.getAccounts());
+    const spotifyAccounts = connectedAccounts.filter(account => account.type === "spotify" && !account.revoked);
+    // The update is an API request which takes a bit to update the store, so keep local overrides to reflect changes immediately
+    const [spotifyActivityOverrides, setSpotifyActivityOverrides] = useState<Record<string, boolean>>({});
+
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
+
     if (location !== "PANEL" && isPluginEnabled(PlexcordToolboxPlugin.name)) return null;
+
+    const buttonProps = {
+        tooltipText: showCurrentGame ? t(plugin.gameActivityToggle.text.disableGameActivity) : t(plugin.gameActivityToggle.text.enableGameActivity),
+        icon: Icon,
+        role: "switch",
+        ariaChecked: !showCurrentGame,
+        redGlow: !showCurrentGame,
+        plated: props?.nameplate != null,
+        onClick: () => ShowCurrentGame.updateSetting(old => !old)
+    };
+
+    if (spotifyAccounts.length === 0)
+        return <Button {...buttonProps} />;
+
     return (
-        <UserAreaButton
-            tooltipText={hideTooltips ? void 0 : showCurrentGame ? t(plugin.gameActivityToggle.gameActivity.enabled) : t(plugin.gameActivityToggle.gameActivity.disabled)}
-            icon={<Icon className={iconForeground} />}
-            role="switch"
-            aria-checked={!showCurrentGame}
-            redGlow={!showCurrentGame}
-            plated={nameplate != null}
-            onClick={() => ShowCurrentGame.updateSetting(old => !old)}
-        />
+        <Popout
+            position="top"
+            align="left"
+            targetElementRef={buttonRef}
+            renderPopout={({ closePopout }) => (
+                <Menu.Menu navId="pc-gameActivityToggle-menu" onClose={closePopout}>
+                    {spotifyAccounts.map(account => {
+                        const checked = spotifyActivityOverrides[account.id] ?? account.showActivity;
+
+                        return (
+                            <Menu.MenuCheckboxItem
+                                key={account.id}
+                                id={`pc-toggle-spotify-${account.id}`}
+                                label={spotifyAccounts.length === 1 ? t(plugin.gameActivityToggle.text.shareSpotifyActivity) : t(plugin.gameActivityToggle.text.shareSpotifyActivityAccount, { name: account.name })}
+                                checked={checked}
+                                action={() => {
+                                    ConnectedAccountActions.setShowActivity(account.type, account.id, !checked);
+                                    setSpotifyActivityOverrides(current => ({ ...current, [account.id]: !checked }));
+                                }}
+                            />
+                        );
+                    })}
+                </Menu.Menu>
+            )}
+        >
+            {popoutProps => (
+                <Button
+                    ref={buttonRef}
+                    onContextMenu={popoutProps.onClick}
+                    {...buttonProps}
+                />
+            )}
+        </Popout>
     );
 }
 
 export default definePlugin({
     name: "GameActivityToggle",
     description: () => t(plugin.gameActivityToggle.description),
-    authors: [Devs.Nuckyz, Devs.RuukuLada],
     tags: ["activity", "utility"],
+    authors: [Devs.Nuckyz, Devs.RuukuLada],
     dependencies: ["UserSettingsAPI"],
     settings,
 

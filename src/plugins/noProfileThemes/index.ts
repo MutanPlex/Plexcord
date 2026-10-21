@@ -33,7 +33,7 @@ export default definePlugin({
             find: "hasThemeColors(){",
             replacement: {
                 match: /get canUsePremiumProfileCustomization\(\){return /,
-                replace: "$&$self.isCurrentUser(this.userId)&&"
+                replace: "$&$self.isCurrentUser(this?.userId)&&"
             }
         },
     ],

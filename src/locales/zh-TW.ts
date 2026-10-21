@@ -46,11 +46,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         switches: {
             useQuickCss: {
                 label: "啟用自訂 CSS",
-                description: "從 QuickCSS 編輯器載入自訂 CSS。這允許您使用自己的風格自訂 Discord 的外觀。"
+                description: "套用你設定的 QuickCSS"
             },
             enableReactDevtools: {
                 label: "啟用 React 開發者工具",
-                description: "啟用 React Developer Tools 擴充功能來偵錯 Discord 的 React 元件。對於插件開發很有用。"
+                description: "主要供外掛開發者使用。如果你不知道這是什麼，請忽略"
             },
             mainWindowFrameless: {
                 label: "停用主視窗框架",
@@ -60,7 +60,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "停用窗框",
                 description: "移除原生窗框以獲得更乾淨的外觀。您仍然可以透過拖曳標題列區域來移動視窗。"
             },
-            winNativeTitleBar: {
+            nativeTitleBar: {
                 label: "使用 Windows 的原生標題列而不是 Discord 的自訂標題列",
                 description: "將 Discord 的自訂標題列替換為標準 Windows 標題列。這可能會提高與某些視窗管理工具的相容性。"
             },
@@ -76,7 +76,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             disableMinSize: {
                 label: "禁用最小視窗大小",
-                description: "允許將 Discord 視窗的大小調整為小於其預設的最小大小。對於平鋪視窗管理器或小螢幕很有用。"
+                description: "允許將視窗調整為任意大小，甚至小於 Discord 的最小尺寸"
             }
         },
         quickActions: {
@@ -193,6 +193,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignore: "忽略 - 根本不顯示通知"
             },
         },
+        windowsMaterial: {
+            title: "Windows 背景材質（需要重新啟動）",
+            description: "Windows 透明背景效果。你需要一個支援透明的主題，否則此選項不會有任何效果。變更此設定後需要重新啟動。",
+            material: {
+                none: "無",
+                mica: "Mica（結合系統主題和桌面桌布繪製背景）",
+                tabbed: "Tabbed（背景著色更強的 Mica 變體）",
+                acrylic: "Acrylic（模糊 Discord 後方的視窗，形成半透明背景）"
+            }
+        },
         macVibrancy: {
             title: "視窗活力風格（需重新啟動）",
             description: "自訂 macOS 視窗活力效果。這控制 Discord 視窗的模糊和透明度樣式。更改需要重新啟動才能生效。",
@@ -212,6 +222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 fullscreenUI: "全螢幕使用者介面（透明但稍微模糊）",
                 hud: "HUD（最透明）"
             }
+        },
+        tabs: {
+            renderFailed: "無法顯示 {{tab}} 分頁。如果問題持續，請嘗試使用安裝程式重新安裝！"
         }
     },
 
@@ -270,7 +283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             discordDesktop: "Discord 桌面應用程式",
             plextron: "Plextron 應用程式",
             web: "Plextron 應用程式和 Discord 網路版",
-            dev: "Plexcord 開發者版本"
+            dev: "Plexcord 開發者版本",
+            browser: "Plexcord 網頁瀏覽器版本"
         },
         search: {
             looking: "您在尋找嗎",
@@ -307,7 +321,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userplugins: "顯示使用者插件",
                 api: "顯示 API 插件",
                 type: "依類型篩選",
-                tags: "依標籤篩選"
+                tags: "依標籤篩選",
+                favorites: "顯示收藏"
             }
         },
         pluginModal: {
@@ -320,7 +335,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             enabledUser: "啟用的使用者插件",
             totalUser: "用戶插件總數",
             info: "查看更多信息",
-            source: "查看原始碼"
+            source: "查看原始碼",
+            favorite: "收藏外掛 - 將其釘選到外掛列表頂端",
+            unfavorite: "取消收藏外掛"
         },
         metadata: {
             api: {
@@ -342,7 +359,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     userSettings: "修補 Discord 的 UserSettings 以公開他們的群組和名稱。",
                     audioPlayer: "用於播放內部 Discord 音訊檔案或外部音訊連結的 API。",
                     userArea: "用於向使用者區域面板新增按鈕的 API。",
-                    profileCollections: "用於將集合新增到使用者個人資料面板的 API，例如 Discord 的遊戲收藏。"
+                    profileCollections: "用於將集合新增到使用者個人資料面板的 API，例如 Discord 的遊戲收藏。",
+                    profileSections: "用於在使用者個人資料面板「成員始於」區域附近新增區段的 API。",
+                    headerBar: "用於在標題列新增按鈕的 API。",
+                    surfaceClasses: "用於向 Discord 穩定版面區域新增外掛自有的語意資料屬性與有限 props 的 API。"
                 },
                 chatButtons: {
                     context: {
@@ -389,7 +409,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             button: "已啟用插件的按鈕將出現在此。"
-        }
+        },
+        invalidInput: "輸入無效",
+        loading: "載入中...",
+        authorPrefix: "作者："
     },
 
     patchHelper: {
@@ -474,7 +497,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             plugins: "導出插件",
             css: "匯出 QuickCSS",
             datastore: "匯出資料存儲"
-        }
+        },
+        backupFileType: "Plexcord 設定備份"
     },
 
     cloud: {
@@ -614,7 +638,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             settings: "新設定"
         },
         toast: {
-            already: "Already up to date with repository",
+            already: "已與儲存庫保持最新",
             found: "從儲存庫中找到 {{count}} 新提交 {{s}}",
             local: "儲存庫與您的本機副本保持同步",
             failed: "無法從儲存庫取得:(",
@@ -640,7 +664,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         newPlugins: "{{count}} 新外掛程式{{s}}",
         following: "最近的更新中新增了以下插件：",
-        more: "+{{count}} 更多插件"
+        more: "+{{count}} 更多插件",
+        error: {
+            retrieveRepo: "無法取得儲存庫資訊",
+            fetchRepo: "無法從儲存庫取得資料",
+            connectRepo: "無法連線至儲存庫。請檢查你的網路連線。"
+        }
     },
 
     csp: {
@@ -717,7 +746,8 @@ const translations: MatchStructure<typeof enTranslations> = {
         unknown: {
             title: "未知",
             author: "作者未知",
-            theme: "不和諧的主題"
+            theme: "不和諧的主題",
+            description: "未提供描述。"
         },
         required: "以下插件是必需的，但未啟用：",
         homepage: "首頁",
@@ -778,6 +808,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             failed: {
                 download: "主題下載失敗"
             }
+        },
+        openInFolder: "在資料夾中開啟",
+        fallback: {
+            author: "未知作者",
+            description: "一個 Discord 主題。"
         }
     },
 
@@ -834,6 +869,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         repo: "回購協議",
         repoDescription: "這是 Plexcord 從中取得更新的 GitHub 儲存庫。",
         loading: "載入中...",
+        unknownAuthor: "未知作者"
     },
 
     components: {
@@ -849,7 +885,29 @@ const translations: MatchStructure<typeof enTranslations> = {
             message: "QuickCSS 編輯器仍然在背景開啟。",
             detail: "您仍然想關閉 Discord 嗎？這也將關閉 QuickCSS 編輯器。",
             cancel: "取消",
-            close: "無論如何關閉"
+            close: "無論如何關閉",
+            windowTitle: "Plexcord QuickCSS 編輯器"
+        },
+        messagePopover: {
+            scrollLeft: "向左捲動",
+            scrollRight: "向右捲動"
+        },
+        notices: {
+            error: "顯示通知時發生錯誤"
+        },
+        tray: {
+            aboutPlexcord: "關於 Plexcord",
+            updatePlexcord: "更新 Plexcord",
+            noUpdateTitle: "沒有可用的更新",
+            noUpdateBody: "你已在使用最新版本的 Plexcord。",
+            updateFailedTitle: "更新失敗",
+            updateFailedBody: "無法套用 Plexcord 更新。",
+            updateSuccessTitle: "更新成功",
+            updateSuccessBody: "正在重新啟動 Plexcord 以套用更新。",
+            updateErrorTitle: "更新錯誤",
+            updateErrorBody: "更新 Plexcord 時發生錯誤。\n\n{{error}}",
+            openSettingsFolder: "開啟設定資料夾",
+            openThemesFolder: "開啟主題資料夾"
         }
     },
 
@@ -918,7 +976,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             seconds: "秒",
             ago: "前",
             s: "s"
-        }
+        },
+        detectLanguage: "偵測語言"
     },
 
     plugin: {
@@ -945,6 +1004,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             utility: "工具",
             voice: "語音"
         },
+        concatenatedComponentExtractor: {
+            name: "ConcatenatedComponentExtractor",
+            description: "擷取已被打包工具（bundler）串接的組件"
+        },
+        concatenatedModules: {
+            name: "ConcatenatedModules",
+            description: "擷取已被打包工具（bundler）串接的模組"
+        },
         noTrack: {
             name: "NoTrack",
             description: "停用 Discord 的追蹤（分析/「科學」）、指標和 Sentry 崩潰報告",
@@ -952,6 +1019,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disableAnalytics: {
                     label: "禁用分析",
                     description: "停用 Discord 的追蹤（分析/「科學」）、指標和 Sentry 崩潰報告"
+                },
+                disableStackDumping: {
+                    description: "Discord 當機時在主控台輸出原生堆疊追蹤。需要完全重新啟動。"
                 }
             }
         },
@@ -966,6 +1036,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsLocation: {
                     label: "設定位置",
                     description: "確定 Plexcord 設定部分的位置。"
+                },
+                includePlexcordInfoWhenCopying: {
+                    label: "複製時包含 Plexcord 資訊",
+                    description: "點擊設定頁面左下角的版本資訊時，一併複製 Plexcord 資訊（Plexcord, Electron, Chromium）"
                 }
             }
         },
@@ -983,6 +1057,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "堅持，稍等！",
                     body: "您正在使用過時版本的 Plexcord！您的問題很可能已經解決。",
                     footer: "在尋求支援之前請先更新！",
+                    dismiss: "如果你清楚自己在做什麼，或無法更新，可以關閉此提示。",
                     button: {
                         cancel: "查看更新",
                         confirm: "立即更新並重新啟動",
@@ -1181,7 +1256,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "匿名化方法",
                     random: "隨機字符",
                     consistent: "持續的",
-                    timestamp: "時間戳"
+                    timestamp: "時間戳",
+                    date: "日期"
                 },
                 randomisedLength: {
                     label: "隨機長度",
@@ -1190,6 +1266,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 consistent: {
                     label: "持續的",
                     description: "一致的匿名化秘密"
+                },
+                dateFormat: {
+                    description: "日期格式（支援 YYYY、MM、DD、HH、mm、ss、SSS）",
+                    label: "日期格式"
                 }
             },
             using: {
@@ -1201,76 +1281,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toggle: "切換檔案的擾流板（預設為開啟）",
                 enabled: "劇透啟用！",
                 disabled: "劇透已停用！"
-            }
-        },
-        appleMusic: {
-            name: "AppleMusicRichPresence",
-            description: "Discord 為您的 Apple Music 提供豐富的存在感！",
-            about: "對於可自訂的活動格式字串，您可以使用幾個特殊字串在活動中包含追蹤資料！ {{name}} 替換為曲目名稱； {{artist}} 替換為藝術家姓​​名； {{album}} 被替換為專輯名稱。",
-            button: {
-                listen: "在 Apple Music 收聽",
-                songLink: "在 SongLink 上查看"
-            },
-            option: {
-                activityType: {
-                    label: "活動類型",
-                    description: "哪種類型的活動",
-                    listening: "聽力",
-                    playing: "演奏"
-                },
-                statusDisplayType: {
-                    label: "狀態顯示類型",
-                    description: "在成員清單中顯示曲目/藝人姓名",
-                    off: "不顯示（顯示一般監聽訊息）",
-                    artist: "顯示藝術家姓名",
-                    track: "顯示曲目名稱"
-                },
-                refreshInterval: {
-                    label: "刷新間隔",
-                    description: "活動刷新間隔（秒）"
-                },
-                enableTimestamps: {
-                    label: "啟用時間戳",
-                    description: "是否啟用時間戳"
-                },
-                enableButtons: {
-                    label: "啟用按鈕",
-                    description: "是否啟用按鈕"
-                },
-                nameString: {
-                    label: "名稱字串",
-                    description: "活動名稱格式字串"
-                },
-                detailsString: {
-                    label: "詳細資訊字串",
-                    description: "活動詳細資訊格式字串"
-                },
-                stateString: {
-                    label: "狀態字串",
-                    description: "活動狀態格式字串"
-                },
-                largeImageType: {
-                    label: "大圖像類型",
-                    description: "活動資產大圖類型",
-                    album: "專輯封面",
-                    artist: "藝術家藝術品",
-                    disabled: "殘障人士"
-                },
-                largeTextString: {
-                    label: "大文本字串",
-                    description: "活動生產大文字格式字串"
-                },
-                smallImageType: {
-                    label: "小圖像類型",
-                    description: "活動生產小圖型",
-                    album: "蘋果音樂標誌",
-                    artist: "藝術家藝術品",
-                    disabled: "殘障人士"
-                },
-                smallTextString: {
-                    label: "小文字字串",
-                    description: "活動生產小文字格式字串"
-                }
             }
         },
         arRpc: {
@@ -1373,6 +1383,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     left: "左邊",
                     right: "正確的"
                 }
+            },
+            text: {
+                smallText: "小文字",
+                largeText: "大文字"
             }
         },
         betterAudioPlayer: {
@@ -1405,7 +1419,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             toast: {
-                invalidColorFormat: "{{settingKey}} 的顏色格式無效，請確保其格式為“R、G、B”或“#RRGGBB”"
+                invalidColorFormat: "{{settingKey}} 的顏色格式無效，請確保其格式為“R、G、B”或“#RRGGBB”",
+                invalidColorFormatFor: "{{key}} 的顏色格式無效，請使用 \"R, G, B\" 或 \"#RRGGBB\""
             }
         },
         betterBanReasons: {
@@ -1423,7 +1438,20 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             title: "原因",
             placeholder: "原因",
-            add: "添加另一個原因"
+            add: "添加另一個原因",
+            duration: {
+                discordDefault: "Discord 預設",
+                none: "不刪除任何訊息",
+                hour1: "過去 1 小時",
+                hours6: "過去 6 小時",
+                hours12: "過去 12 小時",
+                hours24: "過去 24 小時",
+                days3: "過去 3 天",
+                days7: "過去 7 天"
+            },
+            text: {
+                autoDeleteDuration: "訊息自動刪除時長"
+            }
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
@@ -1485,6 +1513,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "強制打開",
                     description: "切換到該資料夾的伺服器時強制開啟該資料夾"
                 },
+                enableNestedFolders: {
+                    label: "啟用嵌套資料夾",
+                    description: "允許透過拖曳將資料夾嵌套在其他資料夾內部"
+                },
                 keepIcons: {
                     label: "保留圖示",
                     description: "當主公會欄資料夾在 BetterFolders 側邊欄中開啟時，繼續在主公會欄資料夾中顯示公會圖標"
@@ -1518,6 +1550,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             render: {
                 tip: "此邀請將於 {{time}} 過期",
                 header: "{{name}} 邀請您參加 {{server}}",
+                headerSelf: "您傳送了加入 {{server}} 的邀請",
                 never: "沒有過期"
             }
         },
@@ -1541,7 +1574,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterRoleContext: {
             name: "BetterRoleContext",
-            description: "新增右鍵點選使用者設定檔中的角色時複製角色顏色/編輯角色/檢視角色圖示的選項",
+            description: "在使用者個人檔案或成員清單中右鍵點擊身分組時，新增複製身分組顏色 / 編輯身分組 / 檢視身分組圖示的選項",
             option: {
                 roleIconFileFormat: {
                     label: "角色圖示檔案格式",
@@ -1551,7 +1584,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 copyColor: "複製角色顏色",
                 editRole: "編輯角色",
-                viewIcon: "查看角色圖標"
+                viewIcon: "查看角色圖標",
+                viewMembers: "檢視身分組成員"
+            },
+            text: {
+                roleActions: "身分組操作"
             }
         },
         betterRoleDot: {
@@ -1627,6 +1664,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         blockKeywords: {
             name: "BlockKeywords",
             description: "封鎖包含特定使用者定義關鍵字的訊息，就像發送這些關鍵字的使用者被封鎖一樣。",
+            regexHelper: {
+                title: "正規表示式助手",
+                placeholder: "要測試的輸入...",
+                noPatterns: "未設定任何模式"
+            },
             option: {
                 blockedWords: {
                     label: "被阻止的單字",
@@ -1635,6 +1677,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 useRegex: {
                     label: "使用正規表示式",
                     description: "檢查訊息內容時使用每個值作為正規表示式（進階）"
+                },
+                regexHelper: {
+                    label: "正規表示式助手",
+                    description: "用範例輸入測試你的正規表示式"
                 },
                 caseSensitive: {
                     label: "區分大小寫",
@@ -1778,6 +1824,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 loading: "載入中...",
                 save: "節省",
                 edit: "編輯"
+            },
+            text: {
+                unknownUser: "未知使用者"
             }
         },
         callTimer: {
@@ -2067,12 +2116,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 plusPulse: "加號按鈕脈衝",
                 mentionGlow: "提及徽章發光",
                 compactExpand: "緊湊模式擴展",
-                selectedBorder: "選定的選項卡藍色邊框",
+                selectedBorder: "所選分頁強調色邊框",
                 selectedBackground: "選定的選項卡背景顏色",
                 tabShadows: "選項卡陰影效果",
                 tabRepositioning: "選項卡重新定位（平滑位置變化）",
                 resizeHandle: "調整淡入淡出手把大小",
-                questActivate: "主動任務梯度"
+                questActivate: "進行中任務漸層"
             },
             bookmark: {
                 label: "書籤",
@@ -2110,7 +2159,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 tab: "ChannelTabs 選項卡上下文選單",
                 compact: "袖珍的",
                 bookmarkBar: "書籤欄",
-                openAll: "打開書籤中的全部內容",
+                openAll: "開啟所有書籤",
                 openNew: "在新標籤中開啟",
                 folderMenu: "書籤資料夾選單",
                 close: {
@@ -2190,6 +2239,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 tabWidthScale: {
                     label: "製表符寬度比例",
                     description: "選項卡寬度比例（百分比）- 透過拖曳選項卡邊緣進行調整"
+                },
+                tabHeightScale: {
+                    label: "分頁高度縮放",
+                    description: "分頁高度縮放（百分比）。"
                 },
                 renderAllTabs: {
                     label: "渲染所有選項卡",
@@ -2398,11 +2451,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     restore: "恢復標籤頁失敗",
                     saved: "無法載入已儲存的選項卡"
                 }
+            },
+            text: {
+                folder: "資料夾"
             }
         },
         characterCounter: {
             name: "CharacterCounter",
-            description: "在訊息框中顯示字元計數器",
+            description: "在聊天輸入框中新增字元計數器",
             option: {
                 colorEffects: {
                     label: "色彩效果",
@@ -2416,7 +2472,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         cleanChannelName: {
             name: "CleanChannelName",
-            description: "從頻道名稱中刪除所有表情符號和裝飾垃圾"
+            description: "移除頻道名稱中的表情符號與裝飾。編輯頻道時會恢復原名稱。",
+            option: {
+                ignoredChannels: {
+                    description: "以逗號分隔的保持不變的頻道 ID 清單。",
+                    label: "忽略的頻道"
+                }
+            },
+            text: {
+                keepOriginalName: "保留原始名稱"
+            }
         },
         clearURLs: {
             name: "ClearURLs",
@@ -2428,7 +2493,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 loading: "正在加載會員...",
                 noMembers: "沒有找到會員。",
-                unknown: "未知角色"
+                unknown: "未知角色",
+                andMore: "還有 {{count}} 人"
             }
         },
         clientSideBlock: {
@@ -2494,6 +2560,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     disable: "禁用硝基主題",
                     reset: "重設主題顏色"
                 }
+            },
+            text: {
+                dark: "深色",
+                light: "淺色"
             }
         },
         clipsEnhancements: {
@@ -2508,22 +2578,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     only: "僅當活動名稱的開始或結束匹配時",
                     never: "絕不"
                 },
-                enableScreenshotKeybind: {
-                    label: "啟用螢幕截圖鍵綁定",
-                    description: "啟用螢幕截圖按鍵綁定功能"
-                },
-                enableVoiceOnlyClips: {
-                    label: "啟用純語音剪輯",
-                    description: "啟用純語音剪輯（沒有視訊的音訊）"
-                },
-                enableAdvancedSignals: {
-                    label: "啟用進階訊號",
-                    description: "啟用進階剪輯訊號（自動剪輯觸發器）"
-                },
-                ignorePlatformRestriction: {
-                    label: "忽略平台限制",
-                    description: "允許平台限制剪輯（可能會導致保存錯誤）"
-                },
                 clipsLink: {
                     label: "剪輯連結",
                     link: "更改剪輯設定中的 FPS 和持續時間選項！"
@@ -2536,7 +2590,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         commandPalette: {
             name: "CommandPalette",
-            description: "允許您使用鍵盤導航 UI。",
+            description: "Raycast 風格的指令面板，可在 Discord 任何位置執行動作",
             action: {
                 command: {
                     label: "運行命令",
@@ -2990,7 +3044,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                             label: "無法運作 {{pluginName}}：{{actionLabel}}。"
                         }
                     }
-                }
+                },
+                commandDeleted: "指令已刪除。",
+                statusSetToLabel: "狀態已設為 {{label}}。",
+                themeSetToLabel: "主題已設為 {{label}}。",
+                noSettingsPageWas: "未提供設定頁面。",
+                unableToOpenLabel: "無法開啟 {{label_that_settings_page}}。",
+                failedToStartDependencies: "無法啟動相依項目：{{join}}",
+                messageSentToUsername: "已傳送訊息給 {{username}}。",
+                enabledRestart: "已啟用 {{name}}。重新啟動以套用。",
+                disabledRestart: "已停用 {{name}}。重新啟動以套用。",
+                enabled: "已啟用 {{name}}。",
+                disabled: "已停用 {{name}}。",
+                errorStarting: "啟動 {{name}} 時發生錯誤。",
+                errorStopping: "停止 {{name}} 時發生錯誤。"
             },
             display: {
                 channel: {
@@ -3026,6 +3093,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 customCommands: {
                     label: "自訂命令",
                     description: "管理自訂命令選項板條目"
+                },
+                closeAfterExecute: {
+                    description: "執行指令後關閉面板。",
+                    label: "執行後關閉"
                 }
             },
             template: {
@@ -3045,7 +3116,121 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "宏",
                     description: "運行一系列命令"
                 }
-            }
+            },
+            text: {
+                insertTextInChat: "在聊天中插入文字",
+                name: "Name",
+                commandName: "指令名稱",
+                settingsPage: "設定頁面",
+                searchSettingsPages: "搜尋設定頁面...",
+                text: "文字",
+                textToInsertInto: "要插入聊天框的文字",
+                editCommand: "編輯指令",
+                deleteCommand: "刪除指令",
+                createCustomCommand: "建立自訂指令",
+                light: "淺色",
+                ash: "灰燼",
+                dark: "深色",
+                onyx: "瑪瑙",
+                toggleMute: "切換靜音",
+                toggleDeafen: "切換拒聽",
+                setStatus: "設定狀態",
+                searchStatuses: "搜尋狀態...",
+                setLabel: "設為 {{label}}",
+                toggleTheme: "切換主題",
+                openServer: "開啟伺服器",
+                openChannel: "開啟頻道",
+                openDm: "開啟私訊",
+                goHome: "返回首頁",
+                goToServer: "前往伺服器",
+                searchServers: "搜尋伺服器...",
+                goToChannel: "前往頻道",
+                searchChannels: "搜尋頻道...",
+                searchFriends: "搜尋好友...",
+                myAccount: "我的帳號",
+                profiles: "個人資料",
+                dataPrivacy: "資料與隱私",
+                devices: "裝置",
+                connections: "連結",
+                appearance: "外觀",
+                accessibility: "無障礙",
+                voiceVideo: "語音與視訊",
+                chat: "聊天",
+                textImages: "文字與圖片",
+                notifications: "通知",
+                keybinds: "快速鍵",
+                authorizedApps: "已授權的應用程式",
+                familyCenter: "家庭中心",
+                advanced: "進階",
+                plexcord: "Plexcord",
+                plexcordPlugins: "Plexcord 外掛",
+                plexcordThemes: "Plexcord 主題",
+                plexcordUpdater: "Plexcord 更新程式",
+                plexcordChangelog: "Plexcord 更新日誌",
+                openQuickcss: "開啟 QuickCSS",
+                openUpdater: "開啟更新程式",
+                openChangelog: "開啟更新日誌",
+                restartDiscord: "重新啟動 Discord",
+                managePlugins: "管理外掛",
+                searchPlugins: "搜尋外掛...",
+                sendDm: "傳送私訊",
+                recipient: "收件人",
+                message: "訊息",
+                messageContent: "訊息內容",
+                openPaletteHotkey: "開啟面板的快速鍵",
+                actions: "動作",
+                preview: "預覽",
+                openCommand: "開啟指令",
+                copyAnswer: "複製答案",
+                openDetails: "開啟詳細資料",
+                calculator: "計算機",
+                expression: "運算式",
+                result: "結果",
+                copyExpression: "複製運算式",
+                pinned: "已釘選",
+                suggestions: "建議",
+                setAlias: "設定別名",
+                aliasForLabel: "{{label}} 的別名",
+                leaveEmptyToRemove: "留空即可移除",
+                command: "指令",
+                noResults: "沒有結果",
+                addFile: "新增檔案",
+                saveCommand: "儲存指令",
+                createCommand: "建立指令",
+                nameRequired: "名稱為必填。",
+                enterValidUrl: "請輸入有效的 URL。",
+                pickSettingsPage: "請從建議中選擇一個設定頁面。",
+                textRequired: "文字為必填。",
+                commandSaved: "指令已儲存。",
+                commandCreated: "指令已建立。",
+                editCustomCommand: "編輯自訂指令",
+                disablePlugin: "停用外掛",
+                enablePlugin: "啟用外掛",
+                pickRecipient: "請從建議中選擇一位收件者。",
+                addMessageOrFile: "請新增訊息或檔案。",
+                pressKeys: "請按鍵...",
+                answerCopied: "答案已複製到剪貼簿。",
+                calculationCopied: "計算式已複製到剪貼簿。",
+                unpinCommand: "取消釘選指令",
+                pinCommand: "釘選指令",
+                saveAlias: "儲存別名",
+                changeHotkey: "變更快速鍵",
+                recordHotkey: "錄製快速鍵",
+                pressKeyCombo: "按下組合鍵，Backspace 清除，Esc 取消",
+                searchIn: "搜尋{{title}}...",
+                searchCommands: "搜尋指令...",
+                somethingWentWrong: "發生錯誤。",
+                remove: "移除",
+                enabled: "已啟用",
+                disabled: "已停用",
+                sectionNavigation: "導覽",
+                sectionCustom: "自訂",
+                sectionPlugins: "外掛",
+                sectionMessaging: "訊息",
+                current: "目前",
+                submit: "提交"
+            },
+            description2: "Raycast 風格的指令面板，可在 Discord 任何位置執行動作"
         },
         consoleJanitor: {
             name: "ConsoleJanitor",
@@ -3056,7 +3241,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "停用 Discord 的記錄器"
                 },
                 disableSpotifyLogger: {
-                    label: "Disable Spotify Logger",
+                    label: "停用 Spotify 記錄器",
                     description: "停用 Spotify 記錄器，該記錄器會洩露帳戶資訊和存取令牌"
                 },
                 whitelistedLoggers: {
@@ -3115,11 +3300,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         copyProfileColors: {
             name: "CopyProfileColors",
             description: "一個將人們的個人資料漸層顏色複製到剪貼簿的插件。",
-            copy: "複製設定檔顏色",
+            copy: "複製伺服器個人檔案顏色",
             toast: {
                 noColor: "未找到設定檔顏色！",
                 copied: "設定檔顏色已複製到剪貼簿！",
                 error: "複製設定檔顏色時發生錯誤！"
+            },
+            text: {
+                formatted: "主色 #{{primary}}，副色 #{{secondary}}"
             }
         },
         copyStatusUrls: {
@@ -3134,8 +3322,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "CopyStickerLinks",
             description: "新增複製和開啟貼紙連結的功能",
             context: {
-                copy: "複製連結",
-                open: "打開連結"
+                copy: "複製貼圖連結",
+                open: "開啟貼圖連結"
             },
             toast: {
                 success: "連結已複製！"
@@ -3271,6 +3459,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unset: "取消設定",
                 set: "設定新圖示",
                 hover: "設定後，您可能必須將滑鼠懸停在資料夾上才能刷新它。"
+            },
+            context: {
+                changeIcon: "變更圖示"
             }
         },
         customIdle: {
@@ -3302,7 +3493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             error: {
                 appIdInvalid: "應用程式 ID 必須是有效的數字。",
                 notice: "注意",
-                sharing: "活動共享未啟用，人們將無法看到您自訂的豐富狀態！",
+                sharing: "活動分享未啟用，因此其他人將看不到你的自訂 Rich Presence！",
                 enable: "使能夠",
                 validStream: "串流連結必須是有效的 URL。",
                 mustBeURL: "必須是有效的 URL。",
@@ -3418,7 +3609,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 buttonTwoURL: {
                     label: "按鈕 2 網址",
                     description: "按鈕 2 網址"
+                },
+                enablePresence: {
+                    description: "是否顯示狀態",
+                    label: "啟用狀態"
                 }
+            },
+            toast: {
+                savedPresetName: "已儲存預設 {{name}}。",
+                loadedPresetName: "已載入預設 {{name}}。",
+                deletedPresetSelectedpreset: "已刪除預設 {{selectedPreset}}。"
+            },
+            text: {
+                presetName: "預設名稱",
+                selectAPreset: "選擇預設",
+                streamLinkTwitchOr: "直播連結（Twitch 或 YouTube，僅當活動類型為直播時）",
+                presets: "預設",
+                save: "儲存",
+                load: "載入",
+                delete: "刪除",
+                noSavedPresetsYet: "尚無儲存的預設。",
+                showCustomRpc: "顯示自訂 RPC",
+                customRpcDisabled: "自訂 RPC 已停用",
+                theEnablePresenceSetting: "「啟用狀態」設定已停用，因此你的狀態不會顯示。若非有意，請在下方啟用。",
+                activitySharingDisabled: "活動分享已停用",
+                discordDeveloperPortal: "Discord 開發者入口網站",
+                imgur: "Imgur",
+                enableActivitySharing: "啟用活動分享"
             }
         },
         customSounds: {
@@ -3460,7 +3677,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 default: "預設",
                 custom: "風俗",
-                select: "選擇一個檔案..."
+                select: "選擇一個檔案...",
+                overrides: {
+                    label: "覆寫"
+                },
+                soundpack: {
+                    label: "音效包",
+                    description: "用來取代 Discord 中所設定音效包的音效包。",
+                    default: "Discord 預設"
+                }
             },
             type: {
                 activityEnd: "活動結束",
@@ -3534,6 +3759,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 calendar: "啟用動態日期格式，例如",
                 today: "今天",
                 yesterday: "昨天",
+                or: "或",
                 relative: "為您提供諸如",
                 relativeTime: "4小時前",
                 preview: "預覽",
@@ -3555,7 +3781,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 tooltipFormat: {
                     label: "工具提示",
-                    description: "Time format to use on tooltips"
+                    description: "提示中使用的時間格式"
                 },
                 ariaLabelFormat: {
                     label: "詠嘆調標籤",
@@ -3627,6 +3853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 dearrowed: "該嵌入已被 DeArrowed；點擊恢復",
                 dearrow: "點擊去箭"
+            },
+            text: {
+                toggleDearrow: "切換 Dearrow"
             }
         },
         declutter: {
@@ -3635,6 +3864,12 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 userProfileHeader: {
                     label: "使用者資料"
+                },
+                removeAvatarDecoration: {
+                    label: "移除頭像裝飾",
+                    description: "移除頭像裝飾。若啟用了 Decor，此項會被停用。",
+                    alertBody: "已停用移除頭像裝飾功能，以避免與 Decor 外掛程式產生衝突。",
+                    ok: "確定"
                 },
                 removeNameplate: {
                     label: "移除銘牌",
@@ -3693,7 +3928,27 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeButtonTooltips: {
                     label: "刪除按鈕工具提示",
                     description: "刪除按鈕工具提示。"
+                },
+                removeProfileFrame: {
+                    description: "移除個人資料框。",
+                    label: "移除個人資料框"
+                },
+                removeDisplayNameStyles: {
+                    description: "移除成員清單中的動畫/樣式化顯示名稱。",
+                    label: "移除顯示名稱樣式"
+                },
+                removeLibraryAboveDms: {
+                    description: "移除私訊清單上方的遊戲庫。",
+                    label: "移除私訊上方的遊戲庫"
+                },
+                removeFamilyCenterAboveDms: {
+                    description: "移除私訊清單上方的家庭中心。",
+                    label: "移除私訊上方的家庭中心"
                 }
+            },
+            text: {
+                discordAlreadyHasA: "Discord 已在以下位置內建使用者名稱樣式選項：",
+                accessibilitySettings: "無障礙設定。"
             }
         },
         decodeBase64: {
@@ -3800,6 +4055,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hold: "堅持，稍等",
                 suspended: "提交裝飾即表示您同意 {{guidelines}}。不閱讀這些指南可能會導致您的帳戶在將來被暫停創建更多裝飾。",
                 guidelines: "指引"
+            },
+            toast: {
+                failedToAuthorizeMessage: "授權失敗：{{message}}"
+            },
+            text: {
+                removeDecoration: "移除 Decor 裝飾",
+                decoration: "Decor 裝飾",
+                none: "無",
+                decorationFile: "裝飾檔案"
             }
         },
         demonstration: {
@@ -3861,6 +4125,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                 starting: "啟動插件 {{plugin}} 時發生錯誤",
                 noMessage: "無錯誤訊息",
                 noReason: "沒有提供理由"
+            },
+            text: {
+                reconnect: "重新連線",
+                loadingLazyModules: "正在載入延遲模組，重新啟動可能導致錯誤",
+                loadedLazyModules: "已載入所有延遲模組",
+                failedLazyModules: "載入延遲模組失敗，請檢查主控台錯誤",
+                ok: "確定"
             }
         },
         disableCallIdle: {
@@ -3919,6 +4190,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "雜項變數",
                     newline: "換行符"
                 }
+            },
+            text: {
+                notSupported: "不支援",
+                devBuild: "開發版",
+                standalone: "獨立版"
             }
         },
         dontFilterMe: {
@@ -3935,6 +4211,23 @@ const translations: MatchStructure<typeof enTranslations> = {
         dontRoundMyTimestamps: {
             name: "DontRoundMyTimestamps",
             description: "始終向下舍入相對時間戳，因此 7.6y 變為 7y 而不是 8y"
+        },
+        downloadAllAttachments: {
+            name: "DownloadAllAttachments",
+            description: "新增一個訊息懸浮按鈕，可一次下載訊息中的所有附件。",
+            button: "下載所有附件",
+            toast: {
+                success: "已下載 {{count}} 個附件。",
+                partial: "已下載 {{total}} 個附件中的 {{succeeded}} 個，{{failed}} 個失敗。",
+                downloadedPluralizeSucceededAttachment: "已下載 {{pluralize_succeeded_attachment}}。",
+                downloadedSucceededOfLength: "已下載 {{length}} 個附件中的 {{succeeded}} 個。{{failed}} 個失敗。"
+            },
+            option: {
+                downloadAllFileTypes: {
+                    description: "同時下載非媒體附件。僅在你信任他人傳送的內容時啟用。",
+                    label: "下載所有檔案類型"
+                }
+            }
         },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
@@ -3999,7 +4292,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     created: "已建立邀請。",
                     unable: "無法創建邀請。",
                     noChannel: "沒有可供邀請的頻道。",
-                }
+                },
+                noReusableInvite: "沒有可重複使用的邀請。",
+                unableToReuseInvite: "無法重複使用邀請。"
             },
             ghost: {
                 user: "使用者",
@@ -4110,6 +4405,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "工具列開發選單",
                     description: "將說明 (?) 工具列按鈕（聊天右上角）變更為 Discord 的開發者選單"
                 }
+            },
+            text: {
+                searchExperiments: "搜尋實驗"
             }
         },
         exportMessages: {
@@ -4193,6 +4491,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportAll: "從 {{user}} 匯出所有訊息",
                 user: "使用者",
                 exportAllChannel: "匯出所有頻道訊息"
+            },
+            text: {
+                unknownError: "未知錯誤"
             }
         },
         expressionCloner: {
@@ -4206,11 +4507,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 success: "成功將 {{name}} 複製到 {{guild}}！",
                 yourServer: "你的伺服器",
                 failed: "克隆失敗：",
-                console: "出了點問題（檢查控制台！）"
+                console: "出了點問題（檢查控制台！）",
+                successfullyClonedNameTo: "已成功將 {{name}} 複製到 {{name_your_server}}！"
             },
             context: {
                 clone: "克隆 {{type}}",
                 cloneName: "克隆 {{data}}"
+            },
+            text: {
+                yourServer: "你的伺服器",
+                cloneTo: "複製到 {{name}}",
+                emoji: "表情符號",
+                sticker: "貼圖"
             }
         },
         f8break: {
@@ -4309,7 +4617,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 nitroFirst: {
-                    label: "Nitro First",
+                    label: "Nitro 優先",
                     description: "預設顏色來源（如果兩者都存在）",
                     nitro: "硝基色",
                     fake: "假色"
@@ -4413,36 +4721,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removed: "刪除別名：{{alias}}",
                 failedRemove: "刪除別名失敗",
                 duplicate: "別名重複",
-                failedSave: "保存別名失敗。"
+                failedSave: "保存別名失敗。",
+                removedAliasAlias: "已移除別名 :{{alias}}:",
+                aliasSetForGetemojidisplayname: "已為 {{getEmojiDisplayName_ref}} 設定別名。"
             },
             button: {
                 edit: "編輯別名",
                 set: "設定別名"
+            },
+            text: {
+                remove: "移除",
+                noAliasesSetYet: "尚未設定別名。",
+                aliasRequired: "別名為必填。",
+                aliasInvalid: "別名必須為 2-32 個字元，且只能包含小寫字母、數字或底線。"
             }
         },
-        favoriteGifSearch: {
-            name: "FavouriteGifSearch",
-            description: "為喜愛的 GIF 新增搜尋列。",
-            placeholder: "搜尋最喜歡的 GIF",
-            option: {
-                searchOption: {
-                    label: "搜尋選項",
-                    description: "您要搜尋的 URL 部分",
-                    url: "完整網址",
-                    path: "僅路徑 (/somegif.gif)",
-                    hostandpath: "主機和路徑 (tenor.com somgif.gif)"
-                }
-            }
-        },
-        favouriteAnything: {
-            name: "FavouriteAnything",
+        favoriteAnything: {
+            name: "FavoriteAnything",
             description: "收藏任何圖像",
             noFiles: "沒有與您的搜尋符合的檔案。",
             searchPlaceholder: "搜尋檔案",
             media: "媒體",
             demoText: "點擊星號來收藏檔案。\n收藏的檔案將顯示在這裡！",
             fetchError: "無法取得 {filename}",
-            uploadError: "無法上傳 {filename}"
+            uploadError: "無法上傳 {filename}",
+            text: {
+                clickTheStarTo: "點擊星號即可收藏檔案。",
+                favoriteFilesWillShow: "收藏的檔案會顯示在這裡！"
+            },
+            option: {
+                localThumbnails: {
+                    description: "在本機產生檔案縮圖，而不使用外部服務 (placeholder.nin0.dev)。不相容於行動裝置。切換此選項不會影響既有的收藏。",
+                    label: "本機縮圖"
+                }
+            }
         },
         fileDownloadButton: {
             name: "FileDownloadButton",
@@ -4457,7 +4769,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 navigate: "使用底部面板在回覆之間導航。",
                 container: "找不到容器元素。",
-                couldntFind: "找不到回覆訊息。"
+                couldntFind: "找不到回覆。"
             },
             option: {
                 includePings: {
@@ -4545,6 +4857,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 channelFull: {
                     label: "頻道已滿",
                     description: "當頻道不再滿時嘗試將您移至該頻道"
+                },
+                onlyWhenInVoice: {
+                    label: "僅在語音中時",
+                    description: "僅當你在語音頻道中時才跟隨該使用者"
                 }
             },
             toast: {
@@ -4589,25 +4905,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     previewText: "敏捷的棕色狐狸跳過了懶狗",
                     authors: "透過 {{authors}}"
                 }
+            },
+            text: {
+                currentFont: "目前字型：",
+                resetFont: "重設字型"
             }
         },
         forceOwnerCrown: {
             name: "ForceOwnerCrown",
             description: "即使伺服器很大，也強制將所有者冠放在使用者名稱旁邊。"
-        },
-        forwardAnywhere: {
-            name: "ForwardAnywhere",
-            description: "如果轉發失敗，則作為普通訊息發送；也允許 NSFW 轉發",
-            option: {
-                forwardPreface: {
-                    label: "前言",
-                    description: "轉發的內容應該以什麼開頭"
-                }
-            },
-            context: {
-                attachments: "附件",
-                forwarded: "轉發自"
-            }
         },
         freaky: {
             name: "Freaky",
@@ -4707,12 +5013,17 @@ const translations: MatchStructure<typeof enTranslations> = {
                     name: "Besties",
                     description: "你怎麼處理這個？ ？ ？ （5年）"
                 }
+            },
+            option: {
+                showFriendsInChat: {
+                    description: "在好友傳送的訊息上顯示好友圖示。",
+                    label: "在聊天中顯示好友"
+                }
+            },
+            text: {
+                friend: "好友",
+                rankIcon: "等級圖示"
             }
-        },
-        friendsSince: {
-            name: "FriendsSince",
-            description: "在用戶彈出視窗中顯示您何時與某人成為朋友",
-            section: "從此成為朋友"
         },
         friendTags: {
             name: "FriendTags",
@@ -4748,7 +5059,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
-            description: "在使用者彈出視窗中新增一個切換開關以顯示/隱藏您的遊戲活動",
+            description: "在麥克風與拒聽按鈕旁新增切換遊戲活動的按鈕。右鍵點擊可切換 Spotify 活動。",
             tooltip: "切換遊戲活動",
             gameActivity: {
                 enabled: "遊戲活動已啟用",
@@ -4765,6 +5076,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     panel: "靜音/失聰旁邊",
                     toolbox: "Plexcord 工具箱"
                 }
+            },
+            text: {
+                disableGameActivity: "停用遊戲動態",
+                enableGameActivity: "啟用遊戲動態",
+                shareSpotifyActivity: "分享 Spotify 動態",
+                shareSpotifyActivityAccount: "分享 Spotify 動態（{{name}}）"
             }
         },
         ghosted: {
@@ -4912,7 +5229,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "圖片連結已複製到剪貼簿！",
                 urlCopied: "網址已複製到剪貼簿！",
                 already: "該集合已經存在",
-                alreadyCollection: "該 GIF 已在該集合中"
+                alreadyCollection: "此 GIF 已在收藏集中",
+                collectionsImportedSuccessfully: "已成功匯入收藏集。",
+                failedToImportCollections: "匯入收藏集失敗：{{String_err}}"
             },
             modal: {
                 create: {
@@ -4948,6 +5267,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     remove: "消除",
                     cancel: "沒關係"
                 }
+            },
+            text: {
+                gifPickerCategoryOptions: "GIF 選擇器分類選項",
+                gifCollections: "GIF 收藏集",
+                unknown: "未知"
             }
         },
         gifPaste: {
@@ -4959,7 +5283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "添加一條命令，從您最喜歡的圖片中發送隨機 GIF，有十分之一的機會 ping 伺服器的所有者",
             command: {
                 gifRoulette: {
-                    description: "誘惑命運，發送 GIF"
+                    description: "誘惑命運，發送 GIF",
+                    restricted: "此指令在本伺服器中受限。"
                 }
             },
             option: {
@@ -4994,7 +5319,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 only: "僅顯示頂部 {{length}}/{{total}}"
             },
             modal: {
-                title: "{{user}} 的 GitHub 儲存庫",
+                title: "{{username}} 的 GitHub 儲存庫",
                 repository: "儲存庫",
                 description: "描述",
                 language: "語言",
@@ -5101,9 +5426,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         hideMessages: {
             name: "HideMessages",
-            description: "一個插件，可以暫時隱藏訊息，直到您重新啟動。",
+            description: "在重新啟動前暫時隱藏訊息和私訊。",
             button: {
-                hide: "隱藏"
+                hide: "隱藏",
+                hideDm: "隱藏私訊",
+                unhideDm: "取消隱藏私訊"
+            },
+            toggle: {
+                none: "沒有隱藏的私訊",
+                hide: "隱藏已隱藏的私訊",
+                show: "顯示已隱藏的私訊"
             },
             option: {
                 hidePopoverButton: {
@@ -5111,6 +5443,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "隱藏訊息彈出視窗中的隱藏按鈕。"
                 }
             }
+        },
+        hideMutedVoiceIndicator: {
+            name: "HideMutedVoiceIndicator",
+            description: "當活躍的語音頻道皆已靜音時，隱藏伺服器列表中的語音指示器"
         },
         hideServers: {
             name: "HideServers",
@@ -5231,10 +5567,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 refreshed: "頭像刷新成功。",
                 deletedAll: "成功刪除所有筆記。",
                 imported: "成功導入筆記。",
-                invalid: "導入筆記失敗。"
+                invalid: "導入筆記失敗。",
+                invalidJson: "無效的 JSON"
             },
             toolbox: {
                 action: "打開筆記"
+            },
+            text: {
+                holyNotes: "Holy Notes",
+                noteTag: "筆記"
             }
         },
         homeTyping: {
@@ -5342,7 +5683,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 ignoreListening: {
                     label: "忽略傾聽",
-                    description: "忽略所有收聽活動（這些通常是 Spotify 活動）"
+                    description: "忽略所有收聽活動（通常為 Spotify 活動）"
                 },
                 ignoreWatching: {
                     label: "忽略觀看",
@@ -5355,6 +5696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoredActivities: {
                     label: "被忽略的活動"
                 }
+            },
+            text: {
+                enableActivity: "啟用活動",
+                disableActivity: "停用動態"
             }
         },
         ignoreCalls: {
@@ -5440,6 +5785,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 sizeHTML: "尺寸",
                 dimensions: "方面",
                 filename: "檔案名稱"
+            },
+            text: {
+                bytes: "位元組"
             }
         },
         imgToGif: {
@@ -5558,6 +5906,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toast: "即時螢幕分享 {{state}}",
                 enabled: "啟用",
                 disabled: "殘障人士"
+            },
+            toast: {
+                instantScreenshareDisabled: "即時螢幕分享 {{disabled}}"
+            },
+            text: {
+                instantScreenshare: "Instant Screenshare"
             }
         },
         invisibleChat: {
@@ -5605,7 +5959,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "允許您在建立伺服器邀請時編輯預設值。",
             option: {
                 inviteDuration: {
-                    label: "Invite Duration",
+                    label: "邀請期限",
                     description: "伺服器邀請的預設持續時間",
                     thirtyMinutes: "30分鐘",
                     oneHour: "1小時",
@@ -5680,6 +6034,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     resetData: "重置儲存",
                     sure: "你確定嗎？"
                 }
+            },
+            text: {
+                serverOptions: "伺服器選項",
+                copyServerId: "複製伺服器 ID",
+                serverIdCopied: "伺服器 ID 已複製到剪貼簿"
             }
         },
         jumpTo: {
@@ -5746,6 +6105,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "關鍵字",
                     description: "管理關鍵字"
                 }
+            },
+            text: {
+                keywordEntryI1: "關鍵字項目 {{i_1}}",
+                listPriorityAdvanced: "清單優先順序（進階）",
+                whichListToPrioritize: "當一則訊息同時觸發兩個清單時優先使用哪個清單",
+                ifYouAreNot: "如果不確定，多數常見情況下通常設為黑名單"
             }
         },
         lastOnline: {
@@ -5819,10 +6184,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     listenbrainzLogo: "使用大 ListenBrainz 徽標",
                     generic: "使用通用佔位符"
                 },
+                showAlbumCover: {
+                    label: "顯示專輯封面",
+                    description: "顯示專輯封面。停用此選項將顯示預設預覽圖。如果您的音樂包含不當的封面，此功能會很有用"
+                },
                 useLogo: {
                     label: "使用標誌",
                     description: "在專輯封面上顯示 ListenBrainz 標誌"
                 }
+            },
+            button: {
+                profile: "ListenBrainz 個人檔案",
+                viewSong: "檢視歌曲"
             }
         },
         loadingQuotes: {
@@ -5849,6 +6222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "附加引號分隔符",
                     description: "附加引號的分隔符"
                 }
+            },
+            text: {
+                allQuotesDisabled: "你真的把所有載入語錄都關掉了？真是個小丑……"
             }
         },
         loginWithQR: {
@@ -5867,7 +6243,26 @@ const translations: MatchStructure<typeof enTranslations> = {
             stopScanning: "停止掃描",
             usingWebcam: "使用網路攝影機掃描",
             dragDrop: "將圖像拖放到此處，或點擊以選擇圖像",
-            orPaste: "或從剪貼簿貼上圖像！"
+            orPaste: "或從剪貼簿貼上圖像！",
+            verifyLogin: "驗證登入",
+            text: {
+                scanQrCode: "掃描 QR 碼"
+            }
+        },
+        markdownTables: {
+            name: "MarkdownTables",
+            description: "在 Discord 訊息中顯示 GitHub 風格的 Markdown 表格。",
+            toolbar: {
+                label: "Markdown 表格檢視",
+                table: "表格",
+                raw: "原始"
+            },
+            option: {
+                hideToggle: {
+                    label: "隱藏切換",
+                    description: "隱藏表格/原始切換，一律顯示轉譯後的表格。"
+                }
+            }
         },
         mediaPlaybackSpeed: {
             name: "MediaPlaybackSpeed",
@@ -5893,7 +6288,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         memberCount: {
             name: "MemberCount",
-            description: "在成員清單和工具提示中顯示伺服器上線上成員數、總成員數和語音頻道中的使用者數。",
+            description: "在成員清單與提示中顯示伺服器的線上成員數、總成員數與語音頻道使用者數。",
             option: {
                 toolTip: {
                     label: "工具提示",
@@ -5910,7 +6305,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             onlineThisChannel: "{{formattedOnlineCount}} 在此頻道線上",
             totalMembers: "{{formattedTotalCount}} 伺服器成員總數",
-            totalVoice: "{{formattedVoiceCount}} 成員的聲音"
+            totalVoice: "{{formattedVoiceCount}} 成員的聲音",
+            tooltip: {
+                total: "伺服器共 {{count}} 名成員"
+            }
         },
         mentionAvatars: {
             name: "MentionAvatars",
@@ -5977,7 +6375,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 doubleClickModifier: {
                     label: "雙擊修改器",
-                    description: "Modifier required for double-click action"
+                    description: "雙擊動作需要的修飾鍵"
                 },
                 tripleClickAction: {
                     label: "三擊操作",
@@ -6013,10 +6411,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 doubleClickHoldThreshold: {
                     label: "雙擊保持閾值",
-                    description: "Max hold time for double-click actions (ms). Holding longer allows text selection"
+                    description: "雙擊動作的最長按住時間（毫秒）。按住更久可選取文字"
                 },
                 deferDoubleClickForTriple: {
-                    label: "Defer Double Click for Triple",
+                    label: "延遲雙擊以偵測三擊",
                     description: "延遲雙擊以允許三次單擊操作（關閉時禁用三次單擊）"
                 },
                 selectionHoldTimeout: {
@@ -6057,7 +6455,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                 messageContent: "留言內容已複製！",
                 userId: "用戶ID已複製！"
             },
-            linkCopied: "連結已複製！"
+            linkCopied: "連結已複製！",
+            text: {
+                shift: "Shift",
+                ctrl: "Ctrl",
+                alt: "Alt",
+                backspace: "退格鍵",
+                pickEmoji: "選擇表情符號"
+            },
+            emojiSetting: {
+                pick: "選擇表情符號",
+                selectMain: "選擇用於反應的表情符號",
+                selectAdditional: "選擇額外的表情符號",
+                additionalPlaceholder: "以逗號/換行分隔，最多 {{max}} 個"
+            },
+            toast: {
+                cannotReact: "無法加入反應：缺少權限",
+                linkCopied: "連結已複製！"
+            }
         },
         messageColors: {
             name: "MessageColors",
@@ -6212,7 +6627,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         messageLogger: {
             name: "MessageLogger",
             description: "臨時記錄已刪除和編輯的訊息。",
-            removeMessage: "刪除訊息歷史記錄",
+            removeMessage: "清除訊息歷史",
             removeMessageTemporary: "刪除訊息（暫時）",
             clearMessageLog: "清除訊息日誌",
             showDiff: "顯示差異",
@@ -6276,7 +6691,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                 separatedDiffs: {
                     label: "分離的差異",
                     description: "差異中單獨的添加和刪除以獲得更具可讀性的差異"
+                },
+                logDeletedAttachments: {
+                    description: "是否記錄已刪除的附件",
+                    label: "記錄已刪除的附件"
                 }
+            },
+            text: {
+                clearHistory: "清除歷史記錄",
+                toggleDeletedHighlight: "切換已刪除醒目提示",
+                enableDiffView: "啟用差異檢視",
+                disableDiffView: "停用差異檢視",
+                noDeletedMessages: "沒有已刪除的訊息",
+                deletedMessageSuffix: " 則已刪除的訊息",
+                deletedMessagesSuffix: " 則已刪除的訊息"
             }
         },
         messageLoggerEnhanced: {
@@ -6477,12 +6905,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "啟用後，目前所選頻道中的消息不受基於時間的清理的影響。"
                 },
                 whitelistedIds: {
-                    label: "Whitelisted IDs",
-                    description: "列入白名單的伺服器、通道或使用者 ID。"
+                    label: "白名單 ID",
+                    description: "一律在訊息紀錄中顯示的伺服器、頻道或使用者 ID。"
                 },
                 blacklistedIds: {
                     label: "列入黑名單的 ID",
-                    description: "列入黑名單的伺服器、通道或使用者 ID。"
+                    description: "永不在訊息紀錄中顯示的伺服器、頻道或使用者 ID。"
                 },
                 imageCacheDir: {
                     label: "圖片快取目錄",
@@ -6520,6 +6948,25 @@ const translations: MatchStructure<typeof enTranslations> = {
                     confirmText: "清除",
                     cancel: "取消"
                 }
+            },
+            toast: {
+                clearedLogs: "記錄已清除",
+                failedToClearLogs: "清除記錄失敗",
+                failedToRemoveMessage: "移除訊息失敗。詳情請查看主控台。",
+                noMessagesFoundIn: "記錄檔中找不到訊息",
+                successfullyImportedCountLogs: "已成功匯入 {{count}} 筆記錄",
+                successfullyExportedLogs: "已成功匯出記錄",
+                successfullyExportedCountLogs: "已成功匯出 {{count}} 筆記錄",
+                errorExportingLogsCheck: "匯出記錄時發生錯誤。詳情請查看主控台"
+            },
+            text: {
+                jsonFile: "JSON 檔案",
+                clearLogs: "清除紀錄",
+                clearingLogs: "正在清除紀錄...",
+                messageLogger: "Message Logger",
+                importLogs: "匯入紀錄",
+                logs: "紀錄",
+                loadingTabLogs: "正在載入{{tab}}紀錄..."
             }
         },
         messageNotifier: {
@@ -6698,7 +7145,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                         localeUppercase: "將文字轉換為區域設定大寫",
                         same: "保持不變"
                     },
-                    repeat: "how many times to repeat",
+                    repeat: "重複次數",
                     reverse: "是否反轉文本",
                     normalize: {
                         description: "文本規範化形式",
@@ -6913,13 +7360,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     LRCLIB: "LRCLIB"
                 },
                 spotifyLyricsApiUrl: {
-                    label: "Spotify 歌詞 API 網址",
-                    description: "Spotify 歌詞 API 基礎網址。"
+                    label: "Spotify 歌詞 API 基礎 URL",
+                    description: "自訂執行個體的基礎 URL（例如：http://localhost:8080）。"
                 },
                 translateTo: {
                     label: "翻譯為",
                     description: "將歌詞翻譯為 - 更改此項目將清除現有翻譯",
-                    cleared: "翻譯已清除"
+                    cleared: "已清除翻譯"
                 },
                 lyricsConversion: {
                     label: "歌詞轉換",
@@ -6941,6 +7388,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "清除所有快取的歌詞和翻譯",
                     button: "清除快取",
                     cacheLyricsPurged: "歌詞快取已清除"
+                },
+                lyricDelay: {
+                    label: "歌詞延遲"
                 }
             },
             context: {
@@ -7025,6 +7475,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 failed: "無法渲染模態:(",
                 checkConsole: "檢查控制台是否有錯誤",
                 invalidUrlCustomApi: "自訂 API 伺服器 URL 的 URL 格式無效"
+            },
+            text: {
+                unknownArtist: "未知演出者",
+                unknownTitle: "未知標題"
             }
         },
         mutualGroupDMs: {
@@ -7045,7 +7499,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "NewGuildSettings",
             description: "加入後自動靜音新伺服器並更改各種其他設置",
             context: {
-                apply: "應用新公會設置"
+                apply: "將 NewGuildSettings 套用至資料夾"
             },
             option: {
                 guild: {
@@ -7100,7 +7554,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 dontShowAgain: "不要再顯示這個",
                 restartRequired: "需要重新啟動才能應用更改",
                 restart: "重新啟動",
-                continue: "繼續"
+                continue: "繼續",
+                supportUs: "Plexcord 是開源軟體。如果你喜歡使用它，請考慮支持我們：",
+                supportUsLink: "點此"
             }
         },
         noAppsAllowed: {
@@ -7284,7 +7740,10 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         notificationTitle: {
             name: "NotificationTitle",
-            description: "讓桌面通知資訊更豐富"
+            description: "讓桌面通知資訊更豐富",
+            text: {
+                threadInParent: "{{parent}} 中的 {{thread}}"
+            }
         },
         notificationVolume: {
             name: "NotificationVolume",
@@ -7360,6 +7819,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 vrcx: {
                     label: "虛擬實境聊天室",
                     description: "在 VRCX 應用程式中開啟 VRChat 鏈接"
+                },
+                telegram: {
+                    label: "Telegram",
+                    description: "在 Telegram 應用程式中開啟 Telegram 連結"
                 }
             },
             notification: {
@@ -7447,6 +7910,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 highest: "最高角色",
                 lowest: "最低的角色",
                 details: "角色詳情"
+            },
+            text: {
+                roleOptions: "身分組選項",
+                userOptions: "使用者選項",
+                unknownRole: "未知身分組",
+                unknownUser: "未知使用者"
             }
         },
         petpet: {
@@ -7497,7 +7966,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unnamed: "呃哦"
                 },
                 pin: {
-                    label: "引腳DM",
+                    label: "釘選私訊",
                     addCategory: "新增類別"
                 },
                 unPin: {
@@ -7534,7 +8003,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     color: "顏色",
                     save: "節省",
                     create: "創造"
-                }
+                },
+                defaultCategoryName: "釘選分類 {{number}}"
             }
         },
         pingNotifications: {
@@ -7577,13 +8047,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         platformIndicators: {
             name: "PlatformIndicators",
-            description: "Adds platform indicators (Desktop, Mobile, Web...) to users",
-            embeddedTooltip: "安慰",
+            description: "為使用者新增平台指示器（桌面、行動裝置、網頁……）",
+            embeddedTooltip: "嵌入式（主機或遊戲）",
             vrTooltip: "虛擬實境",
             option: {
                 list: {
                     label: "清單",
-                    description: "在成員清單中顯示指標"
+                    description: "在使用者個人檔案中顯示指示器"
                 },
                 badges: {
                     label: "徽章",
@@ -7606,7 +8076,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformSpoofer: {
             name: "PlatformSpoofer",
             description: "欺騙您所在的平台或設備",
-            about: "我們不能保證此外掛程式不會讓您收到警告或禁止。",
+            about: "我們無法保證此外掛不會讓你被警告或封鎖。選擇 Xbox/Playstation/VR 可能會使你的用戶端變成過時版本。",
             platform: {
                 desktop: "不和諧客戶端",
                 web: "不和諧網",
@@ -7619,7 +8089,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 platform: {
                     label: "平台",
-                    description: "顯示為什麼平台",
+                    description: "要偽裝成正在使用的平台。",
                     desktop: "桌面",
                     web: "網路",
                     android: "安卓",
@@ -7689,9 +8159,9 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         profileSets: {
             name: "ProfileSets",
-            description: "允許您透過「設定」中的「設定檔」部分儲存和載入不同的設定檔預設。",
+            description: "允許儲存與載入不同的個人檔案預設。",
             toast: {
-                importFailed: "無法匯入設定檔集。該文件可能無效。",
+                importFailed: "匯入預設失敗。檔案可能無效。",
             },
             option: {
                 avatarSize: {
@@ -7722,397 +8192,550 @@ const translations: MatchStructure<typeof enTranslations> = {
                 random: "隨機的",
                 import: "進口",
                 exportAll: "全部導出"
+            },
+            text: {
+                selectAServer: "選擇伺服器",
+                profileSets: "個人檔案集",
+                youAreNotIn: "你還沒有加入任何伺服器。",
+                mainProfile: "主要個人檔案",
+                serverProfiles: "伺服器個人檔案",
+                openProfileSets: "開啟個人檔案組"
             }
         },
         questify: {
             name: "Questify",
-            description: "透過一系列功能增強您的 Quest 體驗，或者如果您不喜歡它們，請完全停用它們。",
-            quests: "任務",
+            description: "強化特定 Quest 功能、關閉惱人的元素，或徹底移除 Quest。",
+            quests: "Quest",
             context: {
                 quest: {
-                    label: "任務按鈕選單",
-                    ignore: "標記為全部忽略",
-                    reset: "重置忽略列表",
-                    fetch: "獲取任務",
+                    label: "Quest 按鈕選單",
+                    ignore: "全部標記為已忽略",
+                    reset: "重設忽略清單",
+                    fetch: "取得 Quest",
                     markAsIgnored: "標記為已忽略",
-                    unmarkAsIgnored: "取消標記為忽略",
+                    unmarkAsIgnored: "取消忽略",
                     stopAuto: "停止自動完成",
-                    copyQuestID: "複製任務 ID",
-                    startAuto: "開始自動完成"
-                }
-            },
-            settings: {
-                questButton: {
-                    title: "任務按鈕",
-                    description: "在伺服器清單中顯示任務按鈕，並附有用於無人認領任務的選用指示器。",
-                    leftClick: "左鍵點擊操作",
-                    middleClick: "中鍵單擊操作",
-                    rightClick: "右鍵單擊操作",
-                    visibility: "按鈕可見性",
-                    unclaimedIndicator: "無人認領的指標",
-                    badgeColor: "徽章顏色",
-                    rewardDisplay: "獎勵展示",
-                    includedRewardTypes: "包含的獎勵類型",
-                    includedRewardTypesDesc: "在確定按鈕可見性、徽章計數以及播放警報聲音時，僅將具有這些獎勵類型的任務計為無人認領。",
-                    selectRewardTypes: "選擇要包含在無人認領計數中的獎勵類型...",
-                    noRewardType: "不存在支援該名稱的 Quest 功能。",
-                    default: "預設",
-                    disable: "停用"
-                },
-                questFeatures: {
-                    title: "任務特色",
-                    description: "修改特定任務功能。",
-                    popupWarning: "對於已完成的任務和任務進度跟踪，將忽略 {{disablePopup}} 選項。",
-                    videoQuestInfo: "{{completeVideo}} 選項將等待影片任務的持續時間並將其自動標記為已完成。",
-                    gameQuestInfo: "同樣，{{completeGame}} 選項將等待遊戲任務的持續時間並將其自動標記為已完成。僅官方桌面用戶端支援此選項。",
-                    manualStartWarning: "您仍然必須手動啟動任務。第一次點擊將在背景啟動任務。對於視訊任務，後續點擊將照常開啟視訊模式。若要中止任務，您可以開啟任務圖區塊上的上下文功能表並選擇 {{stopAuto}}。",
-                    tosWarning: "使用這些選項中的任何一個都違反 Discord 的服務條款。使用風險自負。",
-                    selectFeatures: "選擇要修改的任務功能。",
-                    disablePopup: "禁用帳戶面板上方的任務彈出窗口",
-                    completeVideo: "在後台完成視訊任務",
-                    completeGame: "在後台完成遊戲任務",
-                    stopAuto: "停止自動完成"
-                },
-                restyleQuests: {
-                    title: "重新設計任務",
-                    description: "使用可選主題顏色突出顯示任務以提高可見性。",
-                    precedenceNote: "即使任務被忽略，已領取和過期的任務樣式也將優先。",
-                    gradientStyle: "漸層風格",
-                    assetPreload: "資源預先載入",
-                    unclaimed: "無人認領",
-                    claimed: "聲稱",
-                    ignored: "被忽略",
-                    expired: "已到期",
-                    intenseGradient: "強烈的重新造型漸層",
-                    defaultGradient: "預設重新設定漸層樣式",
-                    blackGradient: "微妙的黑色漸變",
-                    noGradient: "無漸變",
-                    loadAllAssets: "在頁面載入時載入所有任務資源",
-                    loadDuringScroll: "在頁面滾動期間載入任務資源"
-                },
-                reorderQuests: {
-                    title: "重新排序任務",
-                    description: "依任務狀態對任務進行排序。在任務頁面上選擇“Questify”排序選項時套用。",
-                    formatNote: "以逗號分隔的清單必須包含全部：{{items}}。",
-                    placeholder: "您必須包含所有未認領、已認領、已忽略、已過期的訊息",
-                    invalidFormat: "格式無效。",
-                    unclaimedSubsort: "無人認領的亞種",
-                    claimedSubsort: "聲稱的子類別",
-                    ignoredSubsort: "忽略子排序",
-                    expiredSubsort: "已過期子類別",
-                    addedNewest: "新增（最新）",
-                    addedOldest: "添加（最舊）",
-                    expiredRecent: "已過期（最新）",
-                    expiredLeast: "已過期（最近）",
-                    expiringSoon: "即將到期（最快）",
-                    expiringLate: "即將到期（最新）",
-                    claimedRecent: "已領取（最新）",
-                    claimedLeast: "已聲明（最近）",
-                    ignoredQuestProfile: "忽略的任務簡介",
-                    sharedProfile: "共用：忽略此客戶端共用上的所有帳戶。",
-                    privateProfile: "私人：此客戶端上的所有帳戶都有單獨的忽略。",
-                    rememberSort: "記住排序選擇",
-                    rememberFilter: "記住過濾器選擇",
-                    yes: "是的",
-                    no: "不",
-                    rememberNote: "此排序和篩選選項是指任務頁面上的內建排序和篩選選項。只有在任務頁面上選擇「Questify」排序選項時，才會套用上面的自訂排序。如果停用記憶，則每次開啟任務頁面時都會重設排序或篩選選項。"
-                },
-                fetchingQuests: {
-                    title: "獲取任務",
-                    description: "配置從 Discord 取得任務的頻率並為新任務設定警報。",
-                    defaultBehavior: "預設情況下，Discord 僅在載入時和存取任務頁面時取得任務。這意味著如果沒有下面定義的獲取間隔，該插件將不知道全天新增的新任務。",
-                    requirement: "這依賴於啟用任務按鈕並將其設為 {{unclaimed}} 或設為 {{always}} 並啟用無人認領的 {{pill}}、{{badge}} 或 {{both}} 指示器。否則，沒有理由定期獲取任務。",
-                    blockWarning: "另外，如果 {{fetchingQuests}} 在 {{questFeatures}} 設定中被阻止，則這將不起作用。",
-                    fetchInterval: "取得間隔",
-                    alertSound: "警報聲",
-                    intervalPlaceholder: "選擇或輸入 30 分鐘到 12 小時之間的間隔。",
-                    intervalFeedback: "間隔必須在 30 分鐘到 12 小時之間。",
-                    soundPlaceholder: "選擇聲音或提供自訂聲音 URL。",
-                    soundFeedback: "未找到聲音，或 URL 不是來自受支援的網域。",
-                    disabled: "殘障人士",
-                    minutes: "分分鐘",
-                    minute: "分分鐘",
-                    hours: "時間",
-                    hour: "小時",
-                    thirtyMinutes: "30分鐘",
-                    oneHour: "1小時",
-                    threeHours: "3小時",
-                    sixHours: "6小時",
-                    twelveHours: "12小時",
-                    customSound: "客製化聲音"
-                },
-                disableOptions: {
-                    everything: "停用一切",
-                    discovery: "停用發現選項卡",
-                    dms: "停用 DM 中的「任務」標籤",
-                    fetching: "停用取得任務",
-                    popup: "禁用帳戶面板上方的彈出窗口",
-                    sponsored: "禁用任務頁面上的贊助橫幅",
-                    badge: "停用使用者個人資料上的徽章",
-                    inventory: "禁用禮品庫存搬遷通知",
-                    friendsList: "好友列表活躍促銷",
-                    membersList: "成員列表活躍圖標",
-                    gameQuests: "在背景完成遊戲/活動任務",
-                    videoQuests: "在後台完成觀看影片任務",
-                    achievementQuests: "在背景完成活動任務中的任務",
-                    mobileDesktop: "使行動任務與桌面相容",
-                    notifyOnComplete: "任務完成時通知"
-                },
-                options: {
-                    always: "總是",
-                    unclaimed: "無人認領",
-                    never: "絕不",
-                    pill: "丸",
-                    badge: "徽章",
-                    both: "兩個都",
-                    none: "沒有任何",
-                    openQuests: "開放任務",
-                    contextMenu: "內容選單",
-                    pluginSettings: "插件設定",
-                    nothing: "沒有什麼",
-                    orbs: "球體",
-                    nitroCodes: "硝基代碼",
-                    rewardCodes: "獎勵代碼",
-                    inGameItems: "遊戲內物品",
-                    profileCollectibles: "簡介收藏品"
-                }
-            },
-            option: {
-                disableQuests: {
-                    label: "停用任務",
-                    description: "選擇要停用的 Quest 功能。"
-                },
-                disableQuestsEverything: {
-                    label: "停用一切",
-                    description: "停用所有 Quest 功能。"
-                },
-                disableQuestsFetchingQuests: {
-                    label: "停用取得任務",
-                    description: "停用從 Discord 取得任務。"
-                },
-                disableQuestsDirectMessagesTab: {
-                    label: "停用 DM 中的「任務」標籤",
-                    description: "停用「私訊」頁面中的「任務」標籤。"
-                },
-                disableQuestsDiscoveryTab: {
-                    label: "停用發現選項卡",
-                    description: "停用「發現」頁面中的「任務」標籤。"
-                },
-                disableQuestsPageSponsoredBanner: {
-                    label: "禁用任務頁面上的贊助橫幅",
-                    description: "停用任務頁面上的贊助橫幅。"
-                },
-                disableQuestsPopupAboveAccountPanel: {
-                    label: "禁用帳戶面板上方的彈出窗口",
-                    description: "停用帳戶面板上方的 Quest 彈出視窗。"
-                },
-                disableQuestsBadgeOnUserProfiles: {
-                    label: "停用使用者個人資料上的徽章",
-                    description: "停用使用者個人資料上的 Quest 徽章。"
-                },
-                disableQuestsGiftInventoryRelocationNotice: {
-                    label: "禁用禮品庫存搬遷通知",
-                    description: "停用禮物庫存任務搬遷通知。"
-                },
-                disableFriendsListActiveNowPromotion: {
-                    label: "禁用好友清單現在活動促銷",
-                    description: "禁止推廣好友玩的遊戲的任務。"
-                },
-                disableMembersListActivelyPlayingIcons: {
-                    label: "禁用正在播放的成員清單圖標",
-                    description: "停用成員清單中正在播放的圖示。"
-                },
-                makeMobileQuestsDesktopCompatible: {
-                    label: "使行動任務與桌面相容",
-                    description: "使僅限行動裝置的任務與桌面相容。"
-                },
-                completeVideoQuestsInBackground: {
-                    label: "在後台完成視訊任務",
-                    description: "影片持續時間過後，在背景完成視訊任務。"
-                },
-                completeGameQuestsInBackground: {
-                    label: "在後台完成遊戲任務",
-                    description: "遊戲持續時間過後，在背景完成遊戲任務。"
-                },
-                completeAchievementQuestsInBackground: {
-                    label: "在背景完成活動任務中的任務",
-                    description: "在後台完成活動任務的成就。"
-                },
-                notifyOnQuestComplete: {
-                    label: "任務完成時通知",
-                    description: "當任務自動完成時顯示通知。"
-                },
-                questButton: {
-                    label: "任務按鈕",
-                    description: "在伺服器清單中顯示任務按鈕。"
-                },
-                questButtonDisplay: {
-                    label: "任務按鈕顯示",
-                    description: "伺服器清單中的任務按鈕使用哪種顯示類型。"
-                },
-                questRewardIncludeRewardCode: {
-                    label: "包含獎勵代碼",
-                    description: "顯示任務計數時包含帶有獎勵代碼的任務。"
-                },
-                questRewardIncludeNitroCode: {
-                    label: "包括 Nitro 代碼",
-                    description: "顯示任務計數時包含具有 Nitro 程式碼的任務。"
-                },
-                questRewardIncludeInGame: {
-                    label: "包括遊戲內獎勵",
-                    description: "顯示任務計數時包含有遊戲內獎勵的任務。"
-                },
-                questRewardIncludeCollectibles: {
-                    label: "包括收藏品",
-                    description: "顯示任務計數時將任務與收藏品一起包含在內。"
-                },
-                questRewardIncludeOrbs: {
-                    label: "包括球體",
-                    description: "顯示任務計數時包括帶有球體的任務。"
-                },
-                questButtonUnclaimed: {
-                    label: "任務按鈕無人認領指示器",
-                    description: "伺服器清單中任務按鈕上的無人認領指示器使用哪種顯示類型。"
-                },
-                questButtonBadgeColor: {
-                    label: "任務按鈕徽章顏色",
-                    description: "伺服器清單中任務按鈕徽章的顏色。"
-                },
-                questButtonLeftClickAction: {
-                    label: "左鍵點擊操作",
-                    description: "左鍵點選伺服器清單中的任務按鈕時要執行的動作。"
-                },
-                questButtonMiddleClickAction: {
-                    label: "中鍵單擊操作",
-                    description: "在伺服器清單中按一下任務按鈕時要執行的動作。"
-                },
-                questButtonRightClickAction: {
-                    label: "右鍵單擊操作",
-                    description: "右鍵點選伺服器清單中的任務按鈕時要執行的動作。"
-                },
-                fetchingQuests: {
-                    label: "獲取任務",
-                    description: "從 Discord 取得任務。"
-                },
-                fetchingQuestsInterval: {
-                    label: "取得任務間隔",
-                    description: "從 Discord 取得任務的時間間隔（以秒為單位）。"
-                },
-                fetchingQuestsAlert: {
-                    label: "取得任務提醒",
-                    description: "偵測到新任務時播放的聲音。"
-                },
-                fetchingQuestsAlertVolume: {
-                    label: "取得任務警報量",
-                    description: "偵測到新任務時警報聲音的音量。"
-                },
-                restyleQuests: {
-                    label: "重新設計任務",
-                    description: "自訂任務頁面中任務圖塊的外觀。"
-                },
-                restyleQuestsUnclaimed: {
-                    label: "重新設計無人認領的任務",
-                    description: "任務頁面中無人認領的任務圖塊的顏色。"
-                },
-                restyleQuestsClaimed: {
-                    label: "已領取的重新設計任務",
-                    description: "任務頁面中已領取的任務圖塊的顏色。"
-                },
-                restyleQuestsIgnored: {
-                    label: "重新設計被忽略的任務",
-                    description: "任務頁面中忽略的任務圖塊的顏色。"
-                },
-                restyleQuestsExpired: {
-                    label: "重新設計任務已過期",
-                    description: "任務頁面中過期任務圖塊的顏色。"
-                },
-                restyleQuestsGradient: {
-                    label: "重新設計任務漸層",
-                    description: "Quest 圖塊中使用的漸層樣式。"
-                },
-                restyleQuestsPreload: {
-                    label: "重新設計任務預載",
-                    description: "嘗試預先載入任務圖塊的資源。"
-                },
-                reorderQuests: {
-                    label: "重新排序任務",
-                    description: "依任務狀態對任務進行排序。留空以進行預設排序。以逗號分隔的清單必須包含以下所有內容：UNCLAIMED、CLAIMED、IGNORED、EXPIRED。"
-                },
-                unclaimedSubsort: {
-                    label: "無人認領的亞種",
-                    description: "無人認領任務的子分類方法。"
-                },
-                claimedSubsort: {
-                    label: "聲稱的子類別",
-                    description: "已聲明任務的子排序方法。"
-                },
-                ignoredSubsort: {
-                    label: "忽略子排序",
-                    description: "被忽略的任務的子排序方法。"
-                },
-                expiredSubsort: {
-                    label: "已過期子類別",
-                    description: "過期任務的子排序方法。"
-                },
-                unclaimedUnignoredQuests: {
-                    label: "無人認領且未被忽略的任務",
-                    description: "追蹤無人認領和未被忽略的任務數量。"
-                },
-                onQuestsPage: {
-                    label: "在任務頁面上",
-                    description: "使用者目前是否位於任務頁面。"
-                },
-                triggerQuestsRerender: {
-                    label: "觸發任務渲染",
-                    description: "透過切換此設定來觸發任務頁面的重新呈現。"
-                },
-                ignoredQuestProfile: {
-                    label: "忽略的任務簡介",
-                    description: "用於被忽略的任務的設定檔。"
-                },
-                rememberQuestPageSort: {
-                    label: "記住任務頁面排序",
-                    description: "記住任務頁面上最後使用的排序。"
-                },
-                rememberQuestPageFilters: {
-                    label: "記住任務頁面過濾器",
-                    description: "記住任務頁面上最後使用的篩選器。"
-                },
-                lastQuestPageSort: {
-                    label: "最後一個任務頁面排序",
-                    description: "記住任務頁面上最後使用的排序。"
-                },
-                lastQuestPageFilters: {
-                    label: "最後任務頁面過濾器",
-                    description: "記住任務頁面上最後使用的篩選器。"
-                },
-                ignoredQuestIDs: {
-                    label: "忽略的任務 ID",
-                    description: "被忽略的任務 ID 陣列。"
-                },
-                resumeQuestIDs: {
-                    label: "恢復任務 ID",
-                    description: "在背景自動完成的一系列任務 ID。"
+                    startAuto: "開始自動完成",
+                    copyQuestID: "複製 Quest ID"
                 }
             },
             button: {
-                questInProgressWithTime: "正在完成 ({{remainTime}})",
-                completing: "正在完成",
-                resume: "履歷 (~{{remainTime}})",
-                complete: "完成 {{remainTime}}",
-                completeImmediate: "完成（立即）",
-                completed: "完全的"
+                completing: "正在完成...",
+                completingWithTime: "正在完成（{{time}}）",
+                completingIn: "{{time}} 後完成",
+                queued: "排隊中（{{position}}）",
+                resuming: "正在恢復...",
+                completeNow: "立即完成",
+                complete: "完成（{{time}}）",
+                resume: "繼續（{{time}}）",
+                completed: "已完成"
             },
             reward: {
-                orbs: "{{completingText}} 代表 {{orbQuantity}} 球體。",
-                article: "{{completingText}} 代表 {{itemName}}。",
-                unrecognized: "{{completingText}} 表示無法辨識的獎勵類型。"
+                orbs: "{{status}}：{{orbQuantity}} Orbs。",
+                article: "{{status}}：{{itemName}}。",
+                unrecognized: "{{status}}：未知獎勵。"
+            },
+            toast: {
+                autoCompleteBroken: "自動完成已失效，修正即將推出。",
+                enrollmentFailed: "加入 {{questName}} Quest 失敗。",
+                enrollmentInNormalizequestnameQuest: "報名任務 {{normalizeQuestName_quest}} 失敗{{rateLimitSuffix}}。"
             },
             notification: {
                 completed: {
-                    title: "任務完成",
-                    body: "{{questName}} 任務已完成。"
+                    title: "Quest 已完成！",
+                    body: "{{questName}} Quest 已完成。"
+                },
+                newQuest: {
+                    title: "偵測到新 Quest！",
+                    body: "{{questName}} Quest 現已推出。"
+                },
+                newQuests: {
+                    title: "偵測到新 Quest！",
+                    body: "{{count}} 個新 Quest 現已推出。"
+                },
+                newExcludedQuest: {
+                    title: "偵測到新的排除 Quest！",
+                    body: "偵測到被排除的 {{questName}} Quest。ID：{{questId}}"
+                },
+                newExcludedQuests: {
+                    title: "偵測到新的排除 Quest！",
+                    body: "偵測到 {{count}} 個新的排除 Quest。請在主控台查看其 Quest ID。"
                 }
+            },
+            alert: {
+                restart: {
+                    title: "需要重新啟動",
+                    body: "你對 Questify 設定所做的變更需要重新啟動才會生效。",
+                    confirm: "重新啟動",
+                    cancel: "稍後"
+                },
+                dangerous: {
+                    title: "你確定嗎？",
+                    confirm: "繼續",
+                    cancel: "取消",
+                    disableEverything: "這將完全停用 Quest 功能。",
+                    allowDangerous: "這將允許變更危險設定。"
+                }
+            },
+            status: {
+                unclaimed: "未領取",
+                claimed: "已領取",
+                ignored: "已忽略",
+                expired: "已過期"
+            },
+            questTypes: {
+                watchVideo: "觀看影片",
+                watchVideoOnMobile: "在手機上觀看影片",
+                achievementInActivity: "活動內成就",
+                achievementInGame: "遊戲內成就",
+                playActivity: "玩活動",
+                playOnDesktop: "在桌面版遊玩",
+                playOnDesktopV2: "在桌面版遊玩 V2",
+                streamOnDesktop: "在桌面版直播",
+                playOnPlayStation: "在 PlayStation 上遊玩",
+                playOnXbox: "在 Xbox 上遊玩"
+            },
+            settings: {
+                questButton: {
+                    title: "Quest 按鈕",
+                    description: "在伺服器清單中顯示 Quest 按鈕，並可選擇為未領取且未忽略的 Quest 顯示指示器。",
+                    behavior: "按鈕行為",
+                    leftClick: "左鍵點擊動作：",
+                    middleClick: "中鍵點擊動作：",
+                    rightClick: "右鍵點擊動作：",
+                    visibility: "按鈕可見度：",
+                    visibilityTooltip: "一律：只要啟用此功能，就會顯示 Quest 按鈕。\n\n未領取：僅在你有相關的未領取 Quest 獎勵時顯示。\n\n永不：隱藏 Quest 按鈕。",
+                    unclaimedIndicator: "未領取指示器：",
+                    unclaimedIndicatorTooltip: "膠囊：在 Quest 按鈕旁顯示 Discord 的未讀標記。\n\n徽章：顯示相關未領取 Quest 獎勵的數量。\n\n兩者：同時顯示膠囊與徽章。\n\n無：隱藏指示器。",
+                    badgeColor: "徽章顏色：",
+                    relevancy: "Quest 相關性",
+                    includedRewardTypes: "包含的獎勵類型：",
+                    includedRewardTypesTooltip: "在判斷按鈕可見度、徽章數量與提醒行為時，僅將具有這些獎勵類型的 Quest 計為未領取。",
+                    includedQuestTypes: "包含的 Quest 類型：",
+                    includedQuestTypesTooltip: "在判斷按鈕可見度、徽章數量與提醒行為時，僅將具有這些任務類型的 Quest 計為未領取。",
+                    display: {
+                        always: "一律",
+                        unclaimed: "未領取",
+                        never: "永不"
+                    },
+                    indicator: {
+                        pill: "膠囊",
+                        badge: "徽章",
+                        both: "兩者",
+                        none: "無"
+                    },
+                    action: {
+                        openQuests: "開啟 Quest",
+                        contextMenu: "右鍵選單",
+                        pluginSettings: "外掛設定",
+                        nothing: "無動作"
+                    },
+                    rewardTypes: {
+                        orbs: "Orbs",
+                        nitroCodes: "Nitro 兌換碼",
+                        rewardCodes: "獎勵兌換碼",
+                        inGameItems: "遊戲內物品",
+                        profileCollectibles: "個人檔案收藏品"
+                    }
+                },
+                questFeatures: {
+                    title: "Quest 功能",
+                    description: "修改 Quest 的行為以強化或移除功能。",
+                    disableFeatures: "停用功能",
+                    disableEverything: "完全停用 Quest 功能：",
+                    disableEverythingTooltip: "這將停用所有外掛強化功能，隱藏 Quest 頁面與 Discord 各處的 Quest 元素，並阻止 Discord 取得 Quest 資料。由於 Orbs 作為次要貨幣與商店緊密相連，商店不會受到影響。",
+                    disableSpecific: "停用特定功能：",
+                    disableSpecificTooltip: "贊助橫幅是 Quest 頁面頂端的付費 Quest 橫幅。\n\n搬遷提示是指如探索頁面中提示 Quest 已移至私訊的標示。\n\n好友清單推廣是當與你共用伺服器的使用者正在玩有進行中 Quest 的遊戲時，顯示在好友清單「現正活躍」區塊的卡片。\n\n成員清單推廣是當成員正在玩有進行中 Quest 的遊戲時，在伺服器成員清單中顯示的圖示。\n\n帳號面板推廣是顯示在你的帳號面板上方的付費 Quest 推廣。\n\n帳號面板進度是顯示在你的帳號面板上方的進行中或已完成 Quest 進度。\n\nQuest 與 Orbs 徽章是分別表示某人至少完成過一個 Quest 或購買了 Orbs 徽章的個人檔案徽章。",
+                    disableOptions: {
+                        sponsoredBanner: "贊助橫幅",
+                        relocationNotices: "搬遷提示",
+                        friendsListPromo: "好友清單推廣",
+                        membersListPromo: "成員清單推廣",
+                        accountPanelPromo: "帳號面板推廣",
+                        accountPanelProgress: "帳號面板進度",
+                        orbsAndQuestsBadges: "Quest 與 Orbs 徽章"
+                    },
+                    modifyFeatures: "修改功能",
+                    warningTos: "Discord 已開始向使用修改 Quest 完成方式之腳本或外掛的使用者發出警告，這違反了其{{tos}}。",
+                    tos: "服務條款",
+                    warningEscalate: "這些警告目前似乎僅限於威脅取消 Quest 或其獎勵的存取權，但 Discord 隨時可能升級處分。",
+                    warningDetection: "由於 Discord 使用多種方式追蹤使用者，實際上無法規避偵測。如果你繼續，請明白 Discord 很可能在某個時間點偵測到。",
+                    warningRisk: "使用下方切換開關存取潛在危險的設定，風險自負。",
+                    allowDangerous: "允許變更危險設定...",
+                    disallowDangerous: "重設並禁止變更危險設定...",
+                    completeVideoQuicker: "加速影片 Quest 自動完成：",
+                    completeVideoQuickerTooltip: "Discord 允許在加入 Quest 後經過影片長度減去 24 秒的時間後完成影片 Quest。\n\n這表示長度 24 秒或更短的影片 Quest，或你加入後稍後再回來完成的 Quest，可以立即完成。\n\n此設定僅適用於影片 Quest 的自動完成，並取決於下方的自動完成設定。手動完成影片 Quest 仍需等待完整長度，且與加入時間無關。",
+                    mobileDesktop: "讓部分僅限手機的影片 Quest 可在桌面版完成：",
+                    mobileDesktopTooltip: "部分僅限手機的影片 Quest 可在桌面版加入，但仍需在手機上完成。此設定可讓你在桌面版完成它們。\n\n部分僅限手機的影片 Quest 只能在手機上加入。若要讓此設定對其生效，你必須先在手機上加入這些 Quest，再回到桌面版重新整理 Quest。\n\n單獨啟用時，此設定僅適用於手動完成影片 Quest。從桌面版自動完成手機影片 Quest 取決於下方的自動完成設定，並會隱含啟用此設定。",
+                    simultaneous: "同時而非依序自動完成 Quest：",
+                    simultaneousTooltip: "預設情況下，嘗試自動完成多個 Quest 時會將它們排隊並依序完成。\n\n此設定可讓所有自動完成的 Quest 同時執行。\n\n此設定僅適用於 Quest 的自動完成，並取決於下方的自動完成設定。",
+                    resumeInterrupted: "在重新載入或重新啟動後恢復被中斷的自動完成：",
+                    resumeInterruptedTooltip: "此設定會自動恢復因重新載入或重新啟動而中斷的自動完成，包括重新排入那些已排隊但尚未開始的 Quest。",
+                    autoCompleteTypes: "自動完成特定 Quest 類型：",
+                    autoCompleteTypesTooltip: "「在手機上觀看影片」Quest 僅適用於可在桌面版加入的手機 Quest。如果某個 Quest 只能在手機上加入，你必須先在手機上加入，再回到桌面版重新整理 Quest。\n\n所有影片相關 Quest 通常會隨進度回報傳送呼叫堆疊。這表示 Discord 能確切知道呼叫了哪些函式，進而驗證進度是否由其自身函式發起。Questify 會清除此呼叫堆疊，但其缺少與存在一樣容易露出破綻。\n\n由於 Discord 的限制，「在桌面版遊玩」、「在 PlayStation 上遊玩」、「在 Xbox 上遊玩」與「玩活動」Quest 僅在官方桌面用戶端中可用。瀏覽器擴充功能、Plextron 等第三方用戶端不支援自動完成這些類型。\n\n所有遊戲相關 Quest 通常會隨心跳回報傳送遊戲指紋。這表示 Discord 能利用數萬名使用者的資料判斷其他使用者是在執行真實遊戲還是在模擬執行檔。沒有合理的方法偽造此值，因此 Questify 將其留空，但其缺少與拙劣的偽造一樣容易露出破綻。\n\n「活動內成就」Quest 只能透過立即完成來自動完成。此方法隨時可能被修補。\n\n自動完成 Quest 需點擊 Quest 頁面上相應的按鈕。除非上方啟用了同時完成，Quest 將依排隊順序自動完成。\n\n自動完成 Quest 是風險最高的危險設定。啟用風險自負。"
+                },
+                questNotifications: {
+                    title: "Quest 通知",
+                    description: "設定 Quest 完成與偵測到新 Quest 時的通知和提醒。",
+                    questCompleted: "Quest 完成",
+                    notifyOnComplete: "Quest 完成時顯示通知：",
+                    soundOnComplete: "Quest 完成時播放音效：",
+                    volume: "音量：",
+                    newQuests: "偵測到新 Quest",
+                    notifyOnNew: "偵測到新 Quest 時顯示通知：",
+                    soundOnNew: "偵測到新 Quest 時播放音效：",
+                    notifyOnNewExcluded: "偵測到新的排除 Quest 時顯示通知：",
+                    notifyOnNewExcludedTooltip: "部分 Quest 因地區或平台限制被排除在你的可用 Quest 清單之外。\n\n啟用後，Questify 會取得它們的 Quest 設定，套用你設定的 Quest 與獎勵類型篩選，將解析後的排除 Quest 資料輸出到主控台，並為符合的排除 Quest 另外顯示通知。",
+                    soundOnNewExcluded: "偵測到新的排除 Quest 時播放音效：",
+                    soundOnNewExcludedTooltip: "部分 Quest 因地區或平台限制被排除在你的可用 Quest 清單之外。\n\n選擇音效後，Questify 會取得它們的 Quest 設定，套用你設定的 Quest 與獎勵類型篩選，將解析後的排除 Quest 資料輸出到主控台，並為符合的排除 Quest 播放此音效。",
+                    fetchInterval: "Quest 取得間隔：",
+                    fetchIntervalTooltip: "Discord 僅在啟動時和你造訪 Quest 頁面時取得 Quest。\n\n此間隔會在用戶端保持開啟時定期為你取得 Quest，讓 Quest 按鈕指示器與新 Quest 提醒全天保持最新。\n\n僅在啟用且 Quest 按鈕或 Quest 通知設定使定期取得有意義時才會執行。",
+                    disabled: "已停用",
+                    preview: "試聽 {{sound}}",
+                    intervals: {
+                        thirtyMinutes: "30 分鐘",
+                        fortyFiveMinutes: "45 分鐘",
+                        oneHour: "1 小時",
+                        threeHours: "3 小時",
+                        sixHours: "6 小時",
+                        twelveHours: "12 小時"
+                    }
+                },
+                questTiles: {
+                    title: "Quest 卡片",
+                    description: "使用可選的主題顏色突顯 Quest，使其更醒目。",
+                    behavior: "卡片行為",
+                    gradientStyle: "漸層樣式：",
+                    gradientStyleTooltip: "強烈和預設會在圖片漸層中使用所選的卡片顏色。\n\n柔和黑色保留較暗的中性漸層以增強對比。\n\n無漸層會移除圖片漸層，可能使部分 Quest 圖片較難辨識。",
+                    assetPreload: "資源預先載入：",
+                    assetPreloadTooltip: "在開啟 Quest 頁面時載入所有資源可減少捲動時的版面位移。\n\n在捲動時載入較接近 Discord 的預設行為，初始負擔可能較小。",
+                    colors: "卡片顏色",
+                    enable: "啟用",
+                    disable: "停用",
+                    gradient: {
+                        intense: "強烈重繪漸層",
+                        default: "預設重繪漸層",
+                        black: "柔和黑色漸層",
+                        hide: "無漸層"
+                    },
+                    preload: {
+                        onLoad: "頁面載入時載入所有 Quest 資源",
+                        onScroll: "頁面捲動時載入 Quest 資源"
+                    }
+                },
+                reorderQuests: {
+                    title: "重新排序 Quest",
+                    description: "在任務頁面選擇 Questify 排序時，依狀態排序任務。任何排序方式都會過濾掉隱藏的狀態。",
+                    statusOrder: "狀態順序",
+                    statusOrderTooltip: "每種狀態只能出現一次。選擇已在其他位置使用的狀態會交換這兩個位置。",
+                    positions: {
+                        first: "第一：",
+                        second: "第二：",
+                        third: "第三：",
+                        fourth: "第四："
+                    },
+                    subsorts: "子排序",
+                    unclaimedSubsort: "未領取子排序：",
+                    unclaimedSubsortTooltip: "已完成但未領取的 Quest 排在未完成的未領取 Quest 之後，接著在這些群組內套用此子排序。",
+                    claimedSubsort: "已領取子排序：",
+                    claimedSubsortTooltip: "已領取的 Quest 可依領取時間或 Quest 新增時間排序。",
+                    ignoredSubsort: "已忽略子排序：",
+                    ignoredSubsortTooltip: "已忽略的 Quest 仍保持其群組位置，此子排序控制它們在群組內的順序。",
+                    expiredSubsort: "已過期子排序：",
+                    expiredSubsortTooltip: "已過期的 Quest 可依過期時間或 Quest 新增時間排序。",
+                    subsort: {
+                        addedNewest: "新增時間（最新）",
+                        addedOldest: "新增時間（最早）",
+                        expiringSoonest: "即將過期（最早）",
+                        expiringLatest: "即將過期（最晚）",
+                        expiredMostRecent: "已過期（最近）",
+                        expiredLeastRecent: "已過期（最久）",
+                        claimedMostRecent: "已領取（最近）",
+                        claimedLeastRecent: "已領取（最久）"
+                    },
+                    memory: "Quest 頁面記憶",
+                    rememberSort: "記住所選的 Quest 頁面排序：",
+                    rememberSortTooltip: "停用後，Quest 頁面每次開啟時都使用 Questify 排序選項。",
+                    rememberFilters: "記住所選的 Quest 頁面篩選：",
+                    rememberFiltersTooltip: "停用後，Quest 頁面每次開啟時都不帶任務或獎勵篩選。"
+                }
+            },
+            option: {
+                migrationVersion: {
+                    label: "遷移版本",
+                    description: "設定的目前遷移版本。"
+                },
+                questFeatures: {
+                    label: "Quest 功能",
+                    description: "選擇要停用的 Quest 功能。"
+                },
+                disableQuestsEverything: {
+                    label: "全部停用",
+                    description: "停用所有 Quest 功能。"
+                },
+                disableRelocationNotices: {
+                    label: "停用搬遷提示",
+                    description: "停用探索頁面中的 Quest 搬遷提示。"
+                },
+                disableSponsoredBanner: {
+                    label: "停用贊助橫幅",
+                    description: "停用 Quest 頁面上的贊助橫幅。"
+                },
+                disableAccountPanelPromo: {
+                    label: "停用帳號面板推廣",
+                    description: "停用帳號面板上方的推廣 Quest 彈出視窗。"
+                },
+                disableAccountPanelQuestProgress: {
+                    label: "停用帳號面板進度",
+                    description: "停用帳號面板上方進行中與已完成 Quest 的進度。"
+                },
+                disableOrbsAndQuestsBadges: {
+                    label: "停用 Quest 與 Orbs 徽章",
+                    description: "停用使用者個人檔案上的 Quest 徽章。"
+                },
+                disableFriendsListPromo: {
+                    label: "停用好友清單推廣",
+                    description: "停用好友正在玩的遊戲之 Quest 推廣。"
+                },
+                disableMembersListPromo: {
+                    label: "停用成員清單推廣",
+                    description: "停用成員清單中的正在遊玩圖示。"
+                },
+                allowChangingDangerousSettings: {
+                    label: "允許危險設定",
+                    description: "允許變更危險設定。"
+                },
+                resumeInterruptedQuests: {
+                    label: "恢復中斷的 Quest",
+                    description: "在重新載入或重新啟動後恢復 Quest 的自動完成。"
+                },
+                makeMobileVideoQuestsDesktopCompatible: {
+                    label: "手機影片 Quest 相容桌面版",
+                    description: "讓僅限手機的影片 Quest 與桌面版相容。"
+                },
+                autoCompleteQuestsSimultaneously: {
+                    label: "同時自動完成",
+                    description: "同時而非依序完成 Quest。"
+                },
+                completeVideoQuestsQuicker: {
+                    label: "更快完成影片 Quest",
+                    description: "自動完成影片 Quest 時使用 Discord 的進度容許值與加入後經過的時間。"
+                },
+                autoCompleteQuestTypes: {
+                    label: "自動完成的 Quest 類型",
+                    description: "在背景自動完成的 Quest 類型。"
+                },
+                questButton: {
+                    label: "Quest 按鈕",
+                    description: "自訂伺服器清單中的 Quest 按鈕。"
+                },
+                questButtonDisplay: {
+                    label: "Quest 按鈕顯示",
+                    description: "伺服器清單中 Quest 按鈕使用的顯示類型。"
+                },
+                questButtonIncludedTypes: {
+                    label: "Quest 按鈕包含類型",
+                    description: "在 Quest 按鈕上顯示 Quest 數量時包含的獎勵類型與 Quest 類型。"
+                },
+                questButtonIndicator: {
+                    label: "Quest 按鈕指示器",
+                    description: "Quest 按鈕上未領取指示器使用的顯示類型。"
+                },
+                questButtonBadgeCount: {
+                    label: "徽章數量",
+                    description: "目前相關未領取 Quest 的數量。"
+                },
+                questButtonBadgeColor: {
+                    label: "徽章顏色",
+                    description: "伺服器清單中 Quest 按鈕徽章的顏色。"
+                },
+                questButtonLeftClickAction: {
+                    label: "左鍵點擊動作",
+                    description: "左鍵點擊 Quest 按鈕時執行的動作。"
+                },
+                questButtonMiddleClickAction: {
+                    label: "中鍵點擊動作",
+                    description: "中鍵點擊 Quest 按鈕時執行的動作。"
+                },
+                questButtonRightClickAction: {
+                    label: "右鍵點擊動作",
+                    description: "右鍵點擊 Quest 按鈕時執行的動作。"
+                },
+                questNotifications: {
+                    label: "Quest 通知",
+                    description: "設定 Quest 完成與偵測到新 Quest 時的通知。"
+                },
+                notifyOnQuestComplete: {
+                    label: "完成時通知",
+                    description: "Quest 完成時顯示通知。"
+                },
+                notifyOnNewQuests: {
+                    label: "新 Quest 通知",
+                    description: "偵測到新 Quest 時顯示通知。"
+                },
+                notifyOnNewExcludedQuests: {
+                    label: "新排除 Quest 通知",
+                    description: "偵測到新的排除 Quest 時顯示通知。"
+                },
+                questCompletedAlertSound: {
+                    label: "Quest 完成提示音",
+                    description: "Quest 完成時播放的音效。"
+                },
+                questCompletedAlertVolume: {
+                    label: "Quest 完成提示音音量",
+                    description: "Quest 完成提示音的音量。"
+                },
+                questFetchInterval: {
+                    label: "取得間隔",
+                    description: "從 Discord 取得 Quest 的間隔（秒）。"
+                },
+                newQuestAlertSound: {
+                    label: "新 Quest 提示音",
+                    description: "偵測到新 Quest 時播放的音效。"
+                },
+                newQuestAlertVolume: {
+                    label: "新 Quest 提示音音量",
+                    description: "新 Quest 提示音的音量。"
+                },
+                newExcludedQuestAlertSound: {
+                    label: "新排除 Quest 提示音",
+                    description: "偵測到新的排除 Quest 時播放的音效。"
+                },
+                newExcludedQuestAlertVolume: {
+                    label: "新排除 Quest 提示音音量",
+                    description: "新排除 Quest 提示音的音量。"
+                },
+                questTiles: {
+                    label: "Quest 卡片",
+                    description: "自訂 Quest 頁面中 Quest 卡片的外觀。"
+                },
+                questTileUnclaimedColor: {
+                    label: "未領取卡片顏色",
+                    description: "未領取 Quest 卡片的顏色。"
+                },
+                questTileClaimedColor: {
+                    label: "已領取卡片顏色",
+                    description: "已領取 Quest 卡片的顏色。"
+                },
+                questTileIgnoredColor: {
+                    label: "已忽略卡片顏色",
+                    description: "已忽略 Quest 卡片的顏色。"
+                },
+                questTileExpiredColor: {
+                    label: "已過期卡片顏色",
+                    description: "已過期 Quest 卡片的顏色。"
+                },
+                questTileGradient: {
+                    label: "卡片漸層",
+                    description: "Quest 卡片中使用的漸層樣式。"
+                },
+                questTilePreload: {
+                    label: "卡片預先載入",
+                    description: "嘗試預先載入 Quest 卡片的資源。"
+                },
+                reorderQuests: {
+                    label: "重新排序 Quest",
+                    description: "依狀態排序 Quest。"
+                },
+                questOrder: {
+                    label: "Quest 順序",
+                    description: "Quest 狀態群組的排序順序。"
+                },
+                unclaimedSubsort: {
+                    label: "未領取子排序",
+                    description: "未領取 Quest 的子排序方式。"
+                },
+                claimedSubsort: {
+                    label: "已領取子排序",
+                    description: "已領取 Quest 的子排序方式。"
+                },
+                ignoredSubsort: {
+                    label: "已忽略子排序",
+                    description: "已忽略 Quest 的子排序方式。"
+                },
+                expiredSubsort: {
+                    label: "已過期子排序",
+                    description: "已過期 Quest 的子排序方式。"
+                },
+                isOnQuestsPage: {
+                    label: "位於 Quest 頁面",
+                    description: "使用者目前是否位於 Quest 頁面。"
+                },
+                rememberQuestPageSort: {
+                    label: "記住排序",
+                    description: "記住 Quest 頁面上次使用的排序。"
+                },
+                rememberQuestPageFilters: {
+                    label: "記住篩選",
+                    description: "記住 Quest 頁面上次使用的篩選。"
+                },
+                lastQuestPageSort: {
+                    label: "上次排序",
+                    description: "Quest 頁面上次使用的排序。"
+                },
+                lastQuestPageFilters: {
+                    label: "上次篩選",
+                    description: "Quest 頁面上次使用的篩選。"
+                },
+                ignoredQuestIDs: {
+                    label: "已忽略的 Quest ID",
+                    description: "已忽略的 Quest ID 清單。"
+                },
+                resumeQuestIDs: {
+                    label: "待恢復的 Quest ID",
+                    description: "正在背景自動完成或排隊等候的 Quest ID 清單。"
+                },
+                acknowledgedNotices: {
+                    description: "使用者已確認的一次性通知。",
+                    label: "已確認的通知"
+                },
+                settingsSearch: {
+                    description: "搜尋 Questify 設定。",
+                    label: "設定搜尋"
+                },
+                hideNonAutoCompletableQuests: {
+                    description: "隱藏沒有受支援且已啟用的自動完成任務的未完成任務。",
+                    label: "隱藏無法自動完成的任務"
+                },
+                preventVideoQuestsPausing: {
+                    description: "防止任務視窗失去焦點時暫停影片。",
+                    label: "防止影片任務暫停"
+                },
+                hiddenQuestStatuses: {
+                    description: "要隱藏的任務狀態群組。",
+                    label: "隱藏的任務狀態"
+                }
+            },
+            text: {
+                clearQuestQueue: "清空任務佇列",
+                hideIncompleteQuestsWith: "當此平台不支援且任務類型下拉選單中未啟用任何自動完成任務時，隱藏狀態為未領取或已忽略的未完成任務。已領取、已過期與已完成的任務除外。如需隱藏它們，請使用「狀態順序隱藏」選項。",
+                discordForcesYouTo: "Discord 要求用戶端處於前景，影片任務才能播放影片。",
+                hideNonAutoCompletable: "隱藏無法自動完成的任務：",
+                preventVideoQuestsFrom: "防止影片任務在失去焦點時暫停：",
+                thePunishmentAlsoConsists: "處罰還包括帳號狀態違規記錄，每次違規持續 2 年。",
+                dueToTheVarious: "由於 Discord 使用多種方式追蹤使用者，實際上無法規避偵測。如果繼續，請明白 Discord 很可能會在某個時候偵測到你的使用。",
+                enrollInQuest: "報名任務",
+                hidden: "隱藏",
+                selectingAnOccupiedPosition: "選擇已占用的位置會交換兩個狀態。隱藏的狀態會從任務清單中移除。",
+                searchQuestifySettings: "搜尋 Questify 設定",
+                searchQuestifySettings2: "搜尋 Questify 設定...",
+                noMatchingSettings: "沒有符合的設定。",
+                questifyNoticeAugust7th: "Questify 通知 - 2026 年 8 月 7 日",
+                keepUsingDangerousQuestify: "繼續使用危險的 Questify 設定",
+                disableDangerousQuestifySettings: "停用危險的 Questify 設定",
+                questifyNoticeAugust26th: "Questify 通知 - 2026 年 8 月 26 日",
+                areYouSure: "你確定嗎？",
+                thePunishmentAppearsLimited: "處罰目前似乎僅限於失去任務及其獎勵的存取權，但 Discord 隨時可能加重。",
+                queueAllQuests: "將所有任務加入佇列",
+                inProgress: "進行中",
+                rateLimited: "已限速",
+                preventsVideoPausing: "此設定可防止影片暫停，讓完成進度正常推進。",
+                appliesOnlyToVideoQuests: "此設定僅適用於手動完成影片任務。",
+                knownToPunish: "眾所周知，Discord 會懲罰使用腳本或外掛修改任務完成狀態的使用者。修改任務完成狀態違反了 Discord 的",
+                punishmentConsists: "懲罰包括暫時或永久失去任務及其獎勵的存取權。",
+                questBanSystem: "Discord 已推出任務封鎖系統，如果發現你透過非官方方式完成任務，將暫時或永久限制你完成任務和領取獎勵。修改任務完成狀態違反了其",
+                begunPunishing: "Discord 已開始懲罰使用腳本和外掛修改任務完成狀態的使用者。修改任務完成狀態違反了其",
+                dueToRateLimits: "（受速率限制）"
             }
         },
         questionMarkReplacement: {
@@ -8230,6 +8853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "另存為 GIF",
                     description: "預設另存為 GIF"
                 }
+            },
+            text: {
+                quotePreview: "引用預覽"
             }
         },
         randomVoice: {
@@ -8287,7 +8913,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                     server: "伺服器無效"
                 }
             },
+            keybind: {
+                label: "快速鍵",
+                recording: "錄製中...",
+                reset: "重設"
+            },
             option: {
+                keybindEnabled: {
+                    label: "啟用快速鍵",
+                    description: "顯示隨機語音快速鍵設定"
+                },
                 userAmountOperation: {
                     label: "使用者數量操作",
                     description: "根據使用者數量選擇操作"
@@ -8379,6 +9014,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             alert: {
                 failed: "找不到語音頻道！"
+            },
+            toast: {
+                failedToFindA: "找不到語音頻道。",
+                voiceChannelIsUnavailable: "語音頻道無法使用。"
+            },
+            text: {
+                userCount: "{{count}} 位使用者",
+                usersCount: "{{count}} 位使用者"
             }
         },
         reactErrorDecoder: {
@@ -8426,7 +9069,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 clearRdms: {
                     label: "清除 RDMS 列表",
                     description: "測試實用程式：清除 RDM 列表",
-                    toast: "清除 RMDS 歷史記錄",
+                    toast: "已清除 RDMS 歷史記錄",
                     button: "清除 RDM 歷史記錄"
                 }
             },
@@ -8477,6 +9120,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noLongerFriend: "您不再是 {{user}} 的朋友。",
                 friendRequestRevoked: "來自 {{user}} 的好友請求已被撤銷。",
                 ok: "好的"
+            },
+            text: {
+                relationshipNotifier: "關係通知"
             }
         },
         remix: {
@@ -8500,7 +9146,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ellipse: "橢圓",
                 line: "線",
                 arrow: "箭",
-                fill: "充滿"
+                fill: "充滿",
+                image: "圖片"
             }
         },
         repeatMessages: {
@@ -8534,12 +9181,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "搜尋文字",
                 searchWith: "使用 {{name}} 搜尋"
+            },
+            text: {
+                google: "Google"
             }
         },
         replyPingControl: {
             name: "ReplyPingControl",
-            description: "使用白名單功能控制是否始終或從不收到訊息回覆 ping",
+            description: "控制在訊息回覆時是始終還是從不接收提及（ping），包含白名單和黑名單功能",
             option: {
+                replyPingBlacklist: {
+                    label: "回覆提及黑名單",
+                    description: "以逗號分隔的使用者 ID 列表，將從不接收來自這些使用者的回覆提及"
+                },
                 alwaysPingOnReply: {
                     label: "始終 Ping 回复",
                     description: "當有人回覆您的訊息時，總是會收到通知"
@@ -8564,6 +9218,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "搜尋圖片",
                 all: "搜尋全部"
+            },
+            text: {
+                all: "全部"
             }
         },
         reviewDB: {
@@ -8671,6 +9328,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             profile: {
                 optedOut: "使用者已選擇退出",
                 noReviews: "暫無評論"
+            },
+            toast: {
+                youCannotVoteOn: "你無法為自己的評價投票。",
+                networkErrorFailedTo: "網路錯誤：無法連線到 ReviewDB。",
+                pleaseAuthorizeToVote: "請授權以對評價投票。",
+                requestFailed: "ReviewDB：要求失敗，狀態碼 {{status}}"
+            },
+            text: {
+                ok: "確定",
+                updateReviewFor: "更新對 @{{name}} 的評價",
+                reviewUser: "評價 @{{name}}",
+                system: "系統",
+                reviewCount: "（{{count}} 則評價）"
             }
         },
         richMagnetLinks: {
@@ -8764,46 +9434,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
         },
-        rpcStats: {
-            name: "RPCStats",
-            description: "顯示有​​關您作為 RPC 的活動的統計信息",
-            option: {
-                assetURL: {
-                    label: "資產網址",
-                    description: "用於 RPC 的圖像。如果留空，將使用您的個人資料圖片"
-                },
-                rpcTitle: {
-                    label: "RPC 標題",
-                    description: "您的 RPC 的標題"
-                },
-                statDisplay: {
-                    label: "統計顯示",
-                    description: "RPC 應該顯示什麼？ （我很確定你只能有一行）",
-                    today: "今天發送的訊息量",
-                    alltime: "一直發送的訊息量",
-                    listened: "您本週收聽次數最多的專輯"
-                },
-                lastFMApiKey: {
-                    label: "Last.fm API 金鑰",
-                    description: "您的 Last.fm API 金鑰"
-                },
-                lastFMUsername: {
-                    label: "Last.fm 使用者名稱",
-                    description: "您的 Last.fm 使用者名稱"
-                },
-                albumCoverImage: {
-                    label: "專輯封面圖片",
-                    description: "專輯封面圖像應該用作 RPC 圖片嗎？ （如果您選擇了 Last.fm 顯示）"
-                },
-                lastFMStatFormat: {
-                    label: "Last.fm 統計格式",
-                    description: "Last.fm 統計資料該如何格式化？ $album 替換為專輯名稱，$artist 替換為藝術家名稱"
-                }
-            },
-            noInfo: "目前沒有訊息:(",
-            messagesToday: "今天發送的訊息：{{count}}",
-            messagesAllTime: "一直發送的訊息：{{count}}"
-        },
         saveFavoriteGIFs: {
             name: "SaveFavouritedGIFs",
             description: "匯出收藏的 GIF URL",
@@ -8868,7 +9498,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 maxMessagesReached: "已達到每個頻道每分鐘最多 {{max}} 則訊息",
                 messageScheduled: "已安排留言！",
                 messageRemoved: "預定訊息已刪除",
-                allCleared: "所有預定訊息已清除"
+                allCleared: "所有預定訊息已清除",
+                scheduledMessageSentTo: "已向 {{name}} 傳送排程訊息"
             },
             button: {
                 tooltipOn: "計劃模式開啟（按一下以停用，右鍵單擊查看清單）",
@@ -8924,20 +9555,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "只播放雪光暈主題"
                 }
             }
-        },
-        summaries: {
-            name: "Summaries",
-            description: "在每台伺服器上啟用 Discord 的實驗性摘要功能，顯示人工智慧產生的對話摘要",
-            option: {
-                summaryExpiryThresholdDays: {
-                    label: "摘要到期閾值（天）",
-                    description: "刪除摘要之前的時間（以天為單位）。請注意，每個頻道最多僅保留 50 個摘要"
-                }
-            }
-        },
-        selfForward: {
-            name: "SelfForward",
-            description: "將目前頻道新增至轉送清單彈出窗口"
         },
         sendTimestamps: {
             name: "SendTimestamps",
@@ -9002,7 +9619,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 serverBoosts: "伺服器提升",
                 channels: "頻道",
-                roles: "角色"
+                roles: "角色",
+                boostLevel: "{{count}}（等級 {{level}}）"
             }
         },
         serverListIndicators: {
@@ -9061,6 +9679,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bgOpacity: {
                     label: "背景不透明度",
                     description: "背景不透明度"
+                },
+                ignoredLanguages: {
+                    label: "忽略的語言",
+                    description: "交由 Discord 預設程式碼區塊處理的語言清單，以逗號分隔"
                 }
             },
             button: {
@@ -9079,6 +9701,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noShiftPin: {
                     label: "無換檔銷",
                     description: "刪除了按住 Shift 來固定訊息的要求。"
+                },
+                noQuickReacts: {
+                    description: "隱藏快速反應。預設情況下，顯示完整選單會隱藏快速反應按鈕。",
+                    label: "無快速反應"
                 }
             }
         },
@@ -9161,6 +9787,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     compact: "袖珍的",
                     cozy: "舒適",
                     roomy: "寬敞"
+                },
+                showGithubOrgs: {
+                    description: "顯示使用者所屬的 GitHub 組織",
+                    label: "顯示 GitHub 組織"
+                },
+                showOnModal: {
+                    description: "在完整個人檔案視窗中顯示已連結的帳號",
+                    label: "在視窗中顯示"
                 }
             }
         },
@@ -9295,7 +9929,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 memberList: {
                     label: "會員名單",
-                    description: "顯示成員清單中以自訂名稱格式列出的第一個可用名稱。"
+                    description: "在成員清單、私訊清單、好友清單與「目前活躍」中顯示自訂名稱格式中第一個可用的名稱。"
                 },
                 profilePopout: {
                     label: "個人資料彈出窗口",
@@ -9349,6 +9983,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "僅在私訊中自訂名稱",
                     description: "僅在 DM 中顯示自訂名稱，而不是在伺服器中顯示自訂名稱。"
                 },
+                alwaysShowEffects: {
+                    label: "一律動畫效果",
+                    description: "始終顯示效果，就像將游標懸停在上方一樣。"
+                },
                 includedNames: {
                     label: "包含的名稱",
                     description: "顯示使用者名稱、顯示名稱、暱稱和好友名稱的順序。使用以下佔位符：{user}、{display}、{nick}、{friend}。您可以提供多個名稱選項，以便在某個選項不可用時用作備用名稱，方法是用逗號分隔它們，例如：{friend, nick, display}。每個名稱最多可以有三個前綴和三個後綴。"
@@ -9376,6 +10014,42 @@ const translations: MatchStructure<typeof enTranslations> = {
                 triggerNameRerender: {
                     label: "觸發器名稱重新渲染",
                     description: "透過切換此設定來觸發名稱重新呈現。"
+                },
+                searchAutocomplete: {
+                    description: "在提及與搜尋自動完成中顯示自訂名稱格式中第一個可用的名稱。",
+                    label: "搜尋自動完成"
+                },
+                styleDirectMessagesList: {
+                    description: "無需滑過即可在未選取項目上顯示顯示名稱效果。停用時，選取與滑過的項目仍會套用樣式。",
+                    label: "美化私訊清單"
+                },
+                styleDirectMessagesMessages: {
+                    description: "無需滑過即可在訊息作者上顯示顯示名稱效果。停用時，滑過的名稱仍會套用樣式。",
+                    label: "美化私訊訊息"
+                },
+                styleFriendsList: {
+                    description: "無需滑過即可顯示顯示名稱效果。停用時，滑過的項目仍會套用樣式。",
+                    label: "美化好友清單"
+                },
+                styleActiveNow: {
+                    description: "無需滑過即可顯示顯示名稱效果。停用時，滑過的項目仍會套用樣式。",
+                    label: "美化「目前活躍」"
+                },
+                ignoreEffects: {
+                    description: "對於非主要名稱，僅使用主要身分組顏色並省略顯示名稱效果。",
+                    label: "忽略效果"
+                },
+                animateEffects: {
+                    description: "為非主要名稱的身分組漸層與顯示名稱效果加入動畫。會被「忽略效果」與減少動態效果停用。",
+                    label: "動畫效果"
+                },
+                alwaysAnimateEffects: {
+                    description: "當顯示名稱效果本就可見時，即使未滑過也強制播放動畫。",
+                    label: "一律動畫效果"
+                },
+                gradientGlow: {
+                    description: "為動畫使用者漸層加入發光效果，與伺服器身分組漸層的發光方式相同。",
+                    label: "漸層發光"
                 }
             },
             modal: {
@@ -9389,6 +10063,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nickname: "SMYN 暱稱",
                 reset: "重置 SMYN 暱稱",
                 cancel: "取消"
+            },
+            text: {
+                save: "儲存",
+                unknown: "未知"
             }
         },
         showTimeoutDuration: {
@@ -9401,6 +10079,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     tooltip: "在工具提示中",
                     inline: "逾時圖示旁邊"
                 }
+            },
+            text: {
+                timeoutRemaining: "禁言剩餘"
             }
         },
         showResourceChannels: {
@@ -9559,7 +10240,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 hidden: "隱藏鍵入 ({{location}})",
                 visible: "鍵入可見 ({{location}})",
-                global: "鍵入可見（全域）"
+                global: "鍵入可見（全域）",
+                voiceChannel: "在已連線語音頻道的聊天中始終顯示正在輸入",
+                temporary: "由於最近傳送了訊息，此頻道中暫時顯示正在輸入"
             },
             option: {
                 enabledGlobally: {
@@ -9571,15 +10254,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "從聊天列上方隱藏其他使用者的打字指示器。"
                 },
                 hideMembersListTypingIndicators: {
-                    label: "Hide Members List Typing Indicators",
+                    label: "隱藏成員清單的輸入指示器",
                     description: "從成員清單中隱藏其他使用者的鍵入指示器。"
                 },
                 chatIcon: {
                     label: "聊天圖示",
-                    description: "Show an icon in the chat bar for modifying the plugin on the go."
+                    description: "在聊天列顯示圖示，以便隨時調整外掛。"
                 },
                 chatIconLeftClickAction: {
-                    label: "Chat Icon Left Click Action",
+                    label: "聊天圖示左鍵動作",
                     description: "What to do when left-clicking the chat icon.",
                     global: "切換全域輸入",
                     channel: "Toggle 頻道輸入",
@@ -9610,6 +10293,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "預設隱藏",
                     description: "如果啟用，該外掛程式將向下面「停用位置」中未列出的任何 DM/頻道/公會中的其他人隱藏您的輸入內容。如果停用，該外掛程式將向其他未在下面的「啟用位置」中列出的 DM/頻道/公會顯示您的輸入內容。"
                 },
+                alwaysEnableInActiveVoiceChat: {
+                    label: "在活躍語音聊天中始終啟用",
+                    description: "在你已連線的語音頻道中輸入時，始終允許顯示你的正在輸入指示器。"
+                },
+                temporaryEnableThresholdServers: {
+                    label: "臨時啟用時長（伺服器）",
+                    description: "在伺服器頻道傳送訊息後，在此秒數內臨時允許顯示你的正在輸入指示器。如果該頻道中指示器已可見，此設定無效。"
+                },
+                temporaryEnableThresholdDirectMessages: {
+                    label: "臨時啟用時長（私訊）",
+                    description: "在私訊或群組私訊中傳送訊息後，在此秒數內臨時允許顯示你的正在輸入指示器。如果該頻道中指示器已可見，此設定無效。"
+                },
                 enabledLocations: {
                     label: "啟用的位置",
                     description: "啟用這些 ID 的功能。接受以逗號分隔的 DM ID、頻道 ID 和行會 ID 清單。僅在停用“預設隱藏”時使用。"
@@ -9618,6 +10313,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "殘障場所",
                     description: "停用這些 ID 的功能。接受以逗號分隔的 DM ID、頻道 ID 和行會 ID 清單。僅在啟用“預設隱藏”時使用。"
                 }
+            },
+            text: {
+                silentTyping: "靜默輸入",
+                enabled: "已啟用",
+                chatBarIndicators: "聊天列指示器",
+                membersListIndicators: "成員清單指示器",
+                guild: "伺服器",
+                channel: "頻道",
+                global: "全域"
             }
         },
         snowfall: {
@@ -9714,7 +10418,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         splitLargeMessages: {
             name: "SplitLargeMessages",
-            description: "將大訊息拆分為多個以適應 Discord 的訊息限制。",
+            description: "在傳送前將過長的訊息拆分為符合 Discord 限制的片段。",
             option: {
                 maxLength: {
                     label: "最大訊息長度",
@@ -9726,7 +10430,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 sendDelay: {
                     label: "發送延遲",
-                    description: "每個區塊之間的延遲（以秒為單位）。"
+                    description: "每段之間的最小延遲（秒）。"
                 },
                 hardSplit: {
                     label: "硬分割",
@@ -9734,32 +10438,26 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 splitInSlowmode: {
                     label: "在慢速模式下分割",
-                    description: "如果頻道啟用了慢速模式，是否應該拆分訊息？"
+                    description: "當慢速模式延遲在設定的最大值內時，允許拆分。"
                 },
                 slowmodeMax: {
                     label: "慢速模式最大",
-                    description: "如果在慢速模式下分割，則最大慢速模式時間。"
-                }
-            }
-        },
-        spotifyActivityToggle: {
-            name: "SpotifyActivityToggle",
-            description: "新增 Spotify 活動可見性的切換按鈕。",
-            tooltip: {
-                enable: "開啟 Spotify 活動",
-                disable: "關閉 Spotify 活動"
-            },
-            option: {
-                location: {
-                    label: "地點",
-                    description: "在哪裡顯示 Spotify 切換按鈕",
-                    panel: "靜音/失聰旁邊",
-                    toolbox: "Plexcord 工具箱"
+                    description: "拆分訊息時允許的最長慢速模式時長。"
                 },
-                activityStatus: {
-                    label: "活動狀態",
-                    description: "您的 Spotify 活動的目前狀態"
+                splitMode: {
+                    description: "拆分訊息時優先使用此邊界。",
+                    label: "拆分模式"
                 }
+            },
+            toast: {
+                cannotSplitThisMessage: "由於頻道的慢速模式，無法拆分此訊息。",
+                onlySentLengthMessage: "僅傳送了 {{sent}}/{{length}} 部分訊息。",
+                unsentCopied: "未傳送的訊息部分已複製到剪貼簿。"
+            },
+            text: {
+                newlines: "換行",
+                spaces: "空格",
+                strictCharacterLimit: "嚴格字元限制"
             }
         },
         spotifyCrack: {
@@ -9808,7 +10506,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 notificationsSound: {
                     label: "通知聲音",
-                    description: "Play a notification sound for status notifications?"
+                    description: "狀態通知時是否播放通知音效？"
                 },
                 usersList: {
                     label: "使用者列表",
@@ -9845,7 +10543,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             context: {
                 edit: "編輯自訂預設",
-                set: "設定自訂狀態"
+                set: "設定自訂狀態",
+                delete: "刪除預設"
             },
             notification: {
                 successfully: "已成功保存狀態"
@@ -9912,11 +10611,39 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 blockSticker: "塊貼紙",
                 unblockSticker: "解鎖貼紙"
+            },
+            text: {
+                failedToRender: "繪製失敗 :("
             }
         },
         stickerPaste: {
             name: "StickerPaste",
             description: "使得在貼紙選擇器中選擇貼紙並將其插入聊天框中而不是立即發送"
+        },
+        streaks: {
+            name: "Streaks",
+            description: "當你與某位使用者連續多天互傳私訊時，在其旁邊顯示連續天數。",
+            tooltip: "連續 {{count}} 天",
+            tooltipExpiring: "連續 {{count}} 天 — 今天傳個訊息來保持吧！",
+            option: {
+                account: {
+                    description: "登入或登出 Streaks API。連續記錄儲存在 API 上，因此需要登入才能記錄。",
+                    login: "登入 Streaks API",
+                    logout: "登出 Streaks API"
+                },
+                eliteColor: "精英連續顏色（100+ 天）",
+                diamondColor: "鑽石連續顏色（60+ 天）",
+                platinumColor: "白金連續顏色（45+ 天）",
+                goldColor: "黃金連續顏色（30+ 天）",
+                silverColor: "白銀連續顏色（14+ 天）",
+                bronzeColor: "青銅連續顏色（7+ 天）",
+                defaultColor: "預設連續顏色（1+ 天）"
+            },
+            toast: {
+                authFailed: "授權失敗：{{error}}",
+                failedToAuthorizeMessage: "授權失敗：{{message}}",
+                authorizationExpired: "Streaks 授權已過期。請在 Streaks 外掛設定中重新授權。"
+            }
         },
         streamerModeOnStream: {
             name: "StreamerModeOnStream",
@@ -9924,27 +10651,27 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         streamingCodecDisabler: {
             name: "StreamingCodecDisabler",
-            description: "停用您選擇的串流的編解碼器",
+            description: "為直播與相機停用你選擇的視訊編解碼器。",
             option: {
                 disableAv1Codec: {
                     label: "停用 AV1 編解碼器",
-                    description: "防止 Discord 考慮使用 AV1 進行串流傳輸。"
+                    description: "讓 Discord 不在直播與相機中使用 AV1。"
                 },
                 disableH265Codec: {
                     label: "停用 H265 編解碼器",
-                    description: "防止 Discord 考慮使用 H265 進行串流傳輸。"
+                    description: "讓 Discord 不在直播與相機中使用 H265。"
                 },
                 disableH264Codec: {
                     label: "停用 H264 編解碼器",
-                    description: "防止 Discord 考慮使用 H264 進行串流傳輸。"
+                    description: "讓 Discord 不在直播與相機中使用 H264。"
                 },
                 disableVP8Codec: {
                     label: "停用 VP8 編解碼器",
-                    description: "防止 Discord 考慮使用 VP8 進行串流傳輸。"
+                    description: "讓 Discord 不在直播與相機中使用 VP8。"
                 },
                 disableVP9Codec: {
                     label: "停用 VP9 編解碼器",
-                    description: "防止 Discord 考慮使用 VP9 進行串流傳輸。"
+                    description: "讓 Discord 不在直播與相機中使用 VP9。"
                 }
             }
         },
@@ -9990,6 +10717,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             modal: {
+                name: "名稱",
+                nameDescription: "可選的名稱，協助你辨識此規則。",
+                search: "搜尋規則...",
+                noResults: "沒有符合搜尋條件的規則。",
                 title: "測試規則",
                 find: "尋找",
                 findRegex: "Regex 模式",
@@ -10004,6 +10735,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 add: "新增規則",
                 empty: "空規則",
                 rule: "規則",
+            },
+            text: {
+                optionallyOnlyApplyThis: "選用：僅當訊息包含此文字時才套用此規則。",
+                emptyRule: "空規則 {{number}}",
+                ruleWithFind: "規則 {{number}} - {{find}}"
             }
         },
         themeAttributes: {
@@ -10045,12 +10781,12 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 showOwnTimezone: {
-                    label: "Show Own Timezone",
+                    label: "顯示自己的時區",
                     description: "在個人資料和訊息標題中顯示您自己的時區"
                 },
                 twentyFourHourTime: {
                     label: "24 小時制",
-                    description: "以 24 小時格式顯示時間"
+                    description: "以 24 小時制顯示時間"
                 },
                 showTimezoneInfo: {
                     label: "顯示時區資訊",
@@ -10089,6 +10825,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 askedTimezone: {
                     label: "詢問時區",
                     description: "是否要求使用者設定時區"
+                },
+                recipientTimezoneInDms: {
+                    label: "私訊中顯示對方時區",
+                    description: "在私訊中，在你的訊息上顯示對方的時區"
+                },
+                showLocalTimezone: {
+                    label: "顯示本機時區",
+                    description: "顯示本機時區，而不僅是「本機」"
                 }
             },
             modal: {
@@ -10097,6 +10841,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 selectPlaceholder: "選擇時區",
                 delete: "刪除時區",
                 save: "節省"
+            },
+            text: {
+                invalidResponseFormat: "無效的回應格式"
             }
         },
         toastNotifications: {
@@ -10157,6 +10904,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 determineServerNotifications: {
                     label: "確定伺服器通知",
                     description: "根據伺服器通知設定確定是否顯示通知"
+                },
+                respectDoNotDisturb: {
+                    label: "遵循請勿打擾",
+                    description: "當你的狀態為請勿打擾時不顯示通知。"
                 },
                 directMessages: {
                     label: "直接訊息",
@@ -10244,8 +10995,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "DeepL 需要 DeepL Pro 的付費 API 金鑰",
                     descriptionWeb: "翻譯服務（不支援網路！）",
                     google: "Google翻譯",
-                    deepl: "DeepL 免費",
-                    deeplPro: "深L Pro"
+                    deepl: "DeepL 免費版 - 需要 API 金鑰",
+                    deeplPro: "DeepL Pro - 需要 API 金鑰",
+                    kagi: "Kagi 翻譯 - 需要 API 金鑰"
+                },
+                kagiSession: {
+                    label: "Kagi 會話",
+                    description: "從 https://kagi.com/settings?p=user_details 取得您的會話權標（Token）"
                 },
                 deeplApiKey: {
                     label: "DeepL API 金鑰",
@@ -10284,6 +11040,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     cancel: "知道了",
                     secondaryConfirm: "不再顯示"
                 }
+            },
+            button: {
+                manageLanguages: "自訂翻譯語言與自動翻譯"
             }
         },
         typingIndicator: {
@@ -10596,6 +11355,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "影像尺寸",
                     description: "要使用的圖像尺寸"
                 }
+            },
+            text: {
+                viewAvatarDecoration: "檢視頭像裝飾"
             }
         },
         viewRaw: {
@@ -10616,11 +11378,23 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "更改按鈕以查看任何訊息的原始內容/數據。",
                     left: "左鍵點選可查看原始內容。",
                     right: "右鍵單擊可查看原始內容。"
+                },
+                messageContextMenu: {
+                    description: "在訊息右鍵選單中顯示",
+                    label: "訊息右鍵選單"
+                },
+                sortKeys: {
+                    description: "依字母順序排序原始資料的鍵。",
+                    label: "排序鍵"
+                },
+                stripSensitiveData: {
+                    description: "從原始資料中移除敏感資料，例如你的電子郵件與電話號碼。",
+                    label: "移除敏感資料"
                 }
             },
             modal: {
                 title: "查看原始數據",
-                content: "內容",
+                content: "訊息內容",
                 data: "{{type}} 數據",
                 copied: "{{type}} 資料已複製到剪貼簿！",
                 copy: "複製 {{type}} JSON",
@@ -10633,6 +11407,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 guild: "公會",
                 role: "角色",
                 user: "使用者"
+            },
+            text: {
+                copyTypeData: "複製 {{type}} 資料",
+                rawTypeData: "{{type}} 原始資料",
+                messageData: "訊息資料"
             }
         },
         voiceButtons: {
@@ -10811,6 +11590,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 pause: "暫停錄音",
                 recording: "記錄",
                 send: "傳送",
+            },
+            text: {
+                convertioWebConverter: "convertio 網頁轉換器"
             }
         },
         volumeBooster: {
@@ -10820,39 +11602,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 multiplier: {
                     label: "乘數",
                     description: "音量倍增器"
-                }
-            }
-        },
-        wallpaperFree: {
-            name: "WallpaperFree",
-            description: "舊DM壁紙實驗的重現；為任何頻道、使用者或伺服器設定背景圖像。",
-            option: {
-                globalDefault: {
-                    label: "全球預設",
-                    description: "為所有頻道設定全域預設壁紙。"
-                },
-                stylingTips: {
-                    label: "造型技巧"
-                }
-            },
-            context: {
-                setWallpaper: "設定壁紙",
-                removeWallpaper: "刪除壁紙"
-            },
-            modal: {
-                set: "設定壁紙",
-                image: "圖片網址",
-                cancel: "取消",
-                apply: "申請",
-                global: {
-                    set: "設定全域壁紙",
-                    remove: "刪除全域預設桌布",
-                    reset: "重置壁紙數據"
-                },
-                web: {
-                    info: "您可以透過將本機檔案放在 Plexcord 主題目錄中並使用 URL plexcord:///themes/filename.ext 來使用它們",
-                    open: "開啟主題目錄",
-                    quickCSS: "開啟 QuickCSS"
                 }
             }
         },
@@ -10868,7 +11617,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webKeybinds: {
             name: "WebKeybinds",
-            description: "重新加入網頁版 Discord 中缺少的按鍵綁定：Ctrl+T、Ctrl+Shift+T、Ctrl+Tab、Ctrl+Shift+Tab、Ctrl+1-9、Ctrl+,。只能在 Plextron/Legcord 上完全運行，不能在瀏覽器中運行"
+            description: "重新加入 Discord 網頁版缺少的快速鍵。僅在 Plextron/Legcord 中完全可用，在瀏覽器中不可用",
+            option: {
+                showNavigationButtons: {
+                    description: "在標題列顯示上一頁/下一頁導覽按鈕。",
+                    label: "顯示導覽按鈕"
+                },
+                overrideCommonKeybinds: {
+                    description: "允許 Discord 覆寫最常用的分頁導覽快速鍵（ctrl+t、ctrl+shift+t、ctrl+tab、ctrl+shift+tab、ctrl+n）。僅在少數允許網站快速鍵優先的瀏覽器中有效。",
+                    label: "覆寫常用快速鍵"
+                }
+            }
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
@@ -10887,6 +11646,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 avatarClick: {
                     label: "頭像點擊",
                     description: "切換點擊反應中的頭像"
+                },
+                clickableAvatars: {
+                    description: "啟用後，點擊做出反應的使用者頭像將開啟其個人檔案，而不是新增該反應",
+                    label: "可點擊頭像"
                 }
             }
         },
@@ -11002,6 +11765,2447 @@ const translations: MatchStructure<typeof enTranslations> = {
         youtubeDescription: {
             name: "YouTubeDescription",
             description: "為 YouTube 影片嵌入添加說明"
+        },
+        addAttachments: {
+            name: "AddAttachments",
+            description: "允許在編輯訊息時新增附件",
+            toast: {
+                youCannotAddMore: "你無法再向此訊息新增附件。",
+                youCanOnlyAdd: "此訊息最多還能新增 {{count}} 個附件。",
+                uploadingThisCanTake: "正在上傳，這可能需要一段時間...",
+                addedOne: "已成功新增附件！",
+                addedMany: "已成功新增附件！"
+            },
+            text: {
+                addAttachments: "新增附件"
+            }
+        },
+        advancedPermissions: {
+            option: {
+                simplifiedCard: {
+                    description: "如何處理 Discord 的簡化權限卡片",
+                    label: "簡化卡片",
+                    hide: "隱藏",
+                    collapse: "設為可摺疊",
+                    show: "保持可見"
+                },
+                collapsedByDefault: {
+                    description: "預設摺疊簡化權限。",
+                    label: "預設摺疊"
+                }
+            },
+            name: "AdvancedPermissions",
+            description: "預設顯示進階權限卡片。",
+            text: {
+                simplifiedPermissions: "簡化權限"
+            }
+        },
+        autoJumpToMessage: {
+            option: {
+                onlyWhenUnfocused: {
+                    description: "僅在 Discord 視窗未聚焦時自動跳至訊息。",
+                    label: "僅在未聚焦時"
+                }
+            },
+            name: "AutoJumpToMessage",
+            description: "自動開啟新訊息所在的頻道。"
+        },
+        betterForwards: {
+            text: {
+                serverIconForName: "{{name}} 的伺服器圖示",
+                messageAttachments: "訊息附件",
+                messageTextWillNot: "停用此選項時不會轉發訊息文字",
+                forwardEverything: "轉發全部",
+                viewServer: "檢視伺服器",
+                embed: "嵌入",
+                embedNumber: "嵌入 {{number}}",
+                image: "圖片",
+                video: "影片",
+                serverIcon: "{{name}} 的伺服器圖示",
+                dmIcon: "{{name}} 的私訊圖示",
+                groupDmIcon: "{{name}} 的群組私訊圖示"
+            },
+            option: {
+                resendOnFail: {
+                    description: "轉發失敗時會嘗試重新傳送轉發的訊息。可能導致意外的提及或洗版。會繞過 NSFW 限制。",
+                    label: "失敗時重新傳送"
+                },
+                forwardPreface: {
+                    description: "轉發訊息的前綴內容",
+                    label: "轉發前綴"
+                },
+                dontFollowForwards: {
+                    description: "轉發單則訊息後不跳至該訊息。按住 Shift 可忽略此行為。",
+                    label: "不跟隨轉發"
+                },
+                selfForward: {
+                    description: "在轉發清單彈出視窗中顯示目前頻道。",
+                    label: "轉發給自己"
+                }
+            },
+            name: "BetterForwards",
+            description: "訊息轉發工具，包括繞過 NSFW 與介面改進。"
+        },
+        betterImageEditor: {
+            text: {
+                search: "搜尋",
+                searchSavedPictures: "搜尋已儲存的圖片",
+                clearTheSearch: "清除搜尋",
+                savedPictures: "已儲存的圖片",
+                removeName: "移除 {{name}}",
+                removeHoldShiftTo: "移除。按住 Shift 可略過確認",
+                originals: "原圖",
+                putBackTheLast: "放回最後一張",
+                forgetEveryRememberedCrop: "忘記所有記住的裁切？",
+                yourPicturesStayEach: "你的圖片會保留。從現在起，每張圖片都會以未取景狀態開啟，直到你再次裁切。",
+                forget: "忘記",
+                cancel: "取消",
+                clearSavedPictures: "清除已儲存的圖片？",
+                everyPictureYouHave: "你在此儲存的所有圖片都會被刪除，連同每張記住的裁切。Discord 本身的封存以及你目前的頭像與橫幅不受影響。",
+                clear: "清除",
+                removeThisPicture: "移除此圖片？",
+                remove: "移除",
+                keepTheCroppedCopy: "保留裁切後的副本？",
+                itGoesOnThe: "它會放到 {{toLowerCase}} 架上，緊鄰你的原圖。",
+                keep: "保留",
+                noThanks: "不用了",
+                exportToAFile: "匯出到檔案",
+                importFromAFile: "從檔案匯入",
+                forgetRememberedFraming: "忘記記住的取景",
+                clearSavedPictures2: "清除已儲存的圖片",
+                croppedKind: "已裁切的{{kind}}",
+                unpinName: "取消釘選 {{name}}",
+                pinName: "釘選 {{name}}",
+                pinnedNeverDrops: "已釘選，永遠不會從架上掉落",
+                pinNeverDrops: "釘選，讓它永遠不會從架上掉落",
+                nothingMatches: "沒有相符的內容",
+                originalsEmpty: "你選擇、貼上或拖放的圖片會出現在這裡",
+                croppedEmpty: "你裁切的圖片會出現在這裡",
+                forgotFraming: "已清除 {{count}} 張圖片的取景",
+                nothingFramed: "沒有任何已取景的圖片",
+                pictureLibrary: "圖片庫",
+                addedPictures: "已新增 {{count}} 張圖片",
+                nothingNew: "該檔案中沒有新內容",
+                shownOfTotal: "{{shown}} / {{total}}",
+                keptCount: "已保存 {{count}} 張",
+                youAreWearingThis: "你正在使用這個",
+                removePictureBody: "{{name}} 將從已儲存的圖片中移除，連同記住的裁剪。"
+            },
+            option: {
+                librarySize: {
+                    description: "每個架子上保留的圖片數量。",
+                    label: "圖庫大小"
+                },
+                rememberCrop: {
+                    description: "還原上次用於圖片的縮放與位置。",
+                    label: "記住裁切"
+                },
+                forgetFraming: {
+                    description: "捨棄所有記住的裁切，並以 Discord 預設方式開啟每張圖片。",
+                    label: "忘記取景"
+                },
+                saveCropped: {
+                    description: "裁切後保留每張圖片的副本。",
+                    label: "儲存裁切後的圖片"
+                },
+                askBeforeSavingCropped: {
+                    description: "先詢問，而不是自動保留裁切後的副本。",
+                    label: "儲存裁切圖片前詢問"
+                },
+                transfer: {
+                    description: "將你的圖片及每張的取景轉移到另一台裝置。",
+                    label: "轉移"
+                },
+                clearLibrary: {
+                    description: "捨棄你儲存的所有圖片。",
+                    label: "清除圖庫"
+                }
+            },
+            name: "BetterImageEditor",
+            description: "在頭像與橫幅編輯器中保留你的圖片架，並記住每張圖片的裁切方式。",
+            toast: {
+                couldNotExportYour: "無法匯出你的圖片",
+                couldNotReadThat: "無法讀取該檔案",
+                thatPictureIsMissing: "該圖片遺失",
+                thatPictureIsToo: "該圖片對 Discord 來說太大",
+                couldNotUseThat: "無法使用該圖片",
+                couldNotKeepThe: "無法保留裁切後的副本"
+            },
+            kind: {
+                avatars: "頭像",
+                banners: "橫幅",
+                serverIcons: "伺服器圖示",
+                serverBanners: "伺服器橫幅",
+                eventCovers: "活動封面",
+                homeHeaders: "首頁標頭",
+                decorations: "裝飾",
+                widgetCovers: "小工具封面",
+                widgetImages: "小工具圖片"
+            }
+        },
+        cancelFriendRequest: {
+            name: "CancelFriendRequest",
+            description: "新增從個人資料取消已送出好友邀請的方式。",
+            text: {
+                cancelOutgoingFriendRequest: "取消已送出的好友邀請"
+            }
+        },
+        clipUpload: {
+            text: {
+                createdAtMustBe: "建立時間必須是有效日期。",
+                cancel: "取消",
+                uploadClipFile: "上傳剪輯檔案",
+                fileName: "檔案名稱",
+                title: "標題",
+                epicMoment: "精彩時刻",
+                message: "訊息",
+                checkOutThisClip: "快看這個剪輯！",
+                spoiler: "劇透",
+                remix: "混搭",
+                thumbnail: "縮圖",
+                file: "檔案",
+                selectFile: "選擇檔案",
+                parseClipMetadataFrom: "從檔案解析剪輯中繼資料",
+                selectFriends: "選擇好友",
+                selectAGame: "選擇遊戲",
+                customApplicationId: "自訂應用程式 ID",
+                createdAt: "建立時間",
+                participants: "參與者",
+                onlyTagPeopleWho: "僅標記在場且同意出現在此剪輯中的人。",
+                gameApplication: "遊戲/應用程式",
+                uploadClipFile2: "上傳剪輯檔案",
+                uploading: "正在上傳",
+                upload: "上傳",
+                noFileSelected: "未選擇檔案",
+                couldNotPrepare: "無法準備所選檔案。",
+                couldNotRead: "無法讀取所選檔案。",
+                couldNotUpdateMetadata: "無法更新剪輯中繼資料。",
+                notCompatible: "此檔案不相容。請使用包含 H.264 影片和 AAC 音訊的 MP4 剪輯。",
+                uploadFailed: "上傳失敗。",
+                noUploadSlot: "Discord 未傳回上傳位置。",
+                uploadCanceled: "上傳已取消。",
+                failedToUpload: "無法上傳剪輯。",
+                selectClipFile: "選擇剪輯檔案",
+                mp4Video: "MP4 影片"
+            },
+            name: "ClipUpload",
+            description: "新增按鈕，將本機影片檔案作為 Discord 剪輯上傳。",
+            toast: {
+                checkingClipFile: "正在檢查剪輯檔案。",
+                convertingClipFile: "正在轉換剪輯檔案。",
+                clipUploaded: "剪輯已上傳。"
+            }
+        },
+        collapsibleUI: {
+            name: "CollapsibleUI",
+            description: "原生可摺疊的頻道、成員、聊天按鈕與使用者區域。",
+            text: {
+                collapsibleUi: "可摺疊介面",
+                guildBar: "伺服器列",
+                channelList: "頻道清單",
+                membersList: "成員清單",
+                messageButtons: "訊息按鈕",
+                titleBar: "標題列",
+                headerBar: "頂欄",
+                userArea: "使用者區域"
+            },
+            option: {
+                detachUserArea: {
+                    description: "分離使用者區域，使其在未摺疊時可以自由移動。",
+                    label: "分離使用者區域"
+                },
+                detachedUserAreaX: {
+                    description: "儲存分離使用者區域的 x 座標。",
+                    label: "分離的使用者區域 X"
+                },
+                detachedUserAreaY: {
+                    description: "儲存分離使用者區域的 y 座標。",
+                    label: "分離的使用者區域 Y"
+                },
+                guildBarCollapsed: {
+                    description: "記住伺服器列為摺疊狀態。",
+                    label: "伺服器列已摺疊"
+                },
+                channelListCollapsed: {
+                    description: "記住頻道清單為摺疊狀態。",
+                    label: "頻道清單已摺疊"
+                },
+                membersListCollapsed: {
+                    description: "記住成員清單為摺疊狀態。",
+                    label: "成員清單已摺疊"
+                },
+                chatButtonsCollapsed: {
+                    description: "記住訊息按鈕列為摺疊狀態。",
+                    label: "聊天按鈕已摺疊"
+                },
+                titleBarCollapsed: {
+                    description: "記住標題列為摺疊狀態。",
+                    label: "標題列已摺疊"
+                },
+                headerBarCollapsed: {
+                    description: "記住頂欄為摺疊狀態。",
+                    label: "頂欄已摺疊"
+                },
+                userAreaCollapsed: {
+                    description: "記住使用者區域為摺疊狀態。",
+                    label: "使用者區域已摺疊"
+                }
+            }
+        },
+        customCommands: {
+            text: {
+                cancel: "取消",
+                name: "Name",
+                response: "回覆內容",
+                detectedArguments: "偵測到的參數",
+                exampleCommandResponse: "指令回覆範例：",
+                exampleUsage: "用法範例：",
+                exampleOutput: "輸出範例：",
+                viewArgumentsGuide: "檢視參數指南",
+                editTag: "編輯標籤",
+                deleteTag: "刪除標籤",
+                registeredTags: "已註冊的標籤",
+                createTag: "建立標籤",
+                aTagWithThe: "名為 **{{name}}** 的標籤不存在！",
+                successfullyDeletedTheTag: "已成功刪除標籤 **{{name}}**！",
+                ephemeralReserved: "參數名稱 \"ephemeral\" 為保留名稱，無法使用。",
+                createNewTag: "建立新標籤",
+                editTagSubtitle: "編輯你的自訂指令。",
+                createTagSubtitle: "建立一個將註冊為斜線指令的新標籤。",
+                save: "儲存",
+                create: "建立",
+                variablesHelp: "你的回覆可以包含以雙大括號包住的變數，它們會成為指令參數，例如",
+                defaultValuesHelp: "你可以使用等號為參數指定預設值，例如",
+                noTagsYet: "哎呀！還沒有標籤，使用 `/tags create` 建立一個吧！",
+                nameAlreadyExists: "名為 \"{{name}}\" 的標籤已存在，將被覆寫。",
+                defaultValue: "（預設：{{value}}）"
+            },
+            name: "CustomCommands",
+            description: "允許建立自訂斜線指令 / 標籤",
+            option: {
+                tagsList: {
+                    label: "標籤清單"
+                }
+            },
+            command: {
+                ephemeral: "回覆是否僅對你可見",
+                tags: "管理所有自訂指令",
+                create: "建立一個新標籤",
+                list: "列出你的所有標籤",
+                delete: "依名稱移除標籤",
+                tagName: "標籤名稱"
+            }
+        },
+        fileUpload: {
+            name: "FileUpload",
+            description: "將檔案上傳到 Zipline、Nest、S3 與 WebDAV 等託管服務",
+            toast: {
+                fileTypeNotAllowed: "目前篩選器不允許此檔案類型",
+                pleaseConfigureFileuploadSettings: "請先設定 FileUpload",
+                sharexConfigIsValid: "ShareX 設定有效",
+                importedSharexConfig: "已匯入 ShareX 設定",
+                uploadSuccessfulButNo: "上傳成功，但沒有可複製的 URL",
+                uploadSuccessfulUrlCopied: "上傳成功，URL 已複製到剪貼簿",
+                uploadSuccessfulButFailed: "上傳成功，但複製 URL 失敗",
+                uploadSuccessful: "上傳成功",
+                uploadSucceededWithServicelabels: "切換備用後透過 {{serviceLabels_service}} 上傳成功",
+                apngToGifConversion: "APNG 轉 GIF 失敗，將以 APNG 上傳",
+                uploadAlreadyInProgress: "上傳已在進行中",
+                uploadCancelled: "上傳已取消",
+                uploadFailedMessage: "上傳失敗：{{message}}",
+                invalidSharexConfig: "無效的 ShareX 設定",
+                failedToImportSharexConfig: "無法匯入 ShareX 設定"
+            },
+            text: {
+                uploadToServicename: "上傳到 {{serviceName}}",
+                uploadToHost: "上傳到託管",
+                chooseFile: "選擇檔案...",
+                zipline: "Zipline",
+                eZHost: "E-Z Host",
+                nest: "Nest",
+                encryptingHost: "Encrypting.host",
+                s3Compatible: "相容 S3",
+                catboxMoe: "Catbox.moe",
+                litterbox: "Litterbox",
+                sharexCustomUploader: "ShareX 自訂上傳器",
+                webdavNextcloudOwncloud: "WebDAV (Nextcloud/Owncloud)",
+                n1Hour: "1 小時",
+                n12Hours: "12 小時",
+                n24Hours: "24 小時",
+                n72Hours: "72 小時",
+                corsProxy: "CORS 代理",
+                query: "查詢",
+                param: "參數",
+                fakeLink: "偽裝連結",
+                embed: "嵌入",
+                n30Seconds: "30 秒",
+                n1Minute: "1 分鐘",
+                n2Minutes: "2 分鐘",
+                n5Minutes: "5 分鐘",
+                n10Minutes: "10 分鐘",
+                dragHostsToReorder: "拖曳託管以調整備用嘗試的順序。會先嘗試所選託管，再依此順序。",
+                chooseWhereFileuploadSends: "選擇 FileUpload 傳送新檔案的位置。",
+                connectionDetailsForYour: "你的 Zipline 執行個體連線資訊。",
+                theUrlOfYour: "你的 Zipline 執行個體 URL",
+                yourZiplineApiAuthorization: "你的 Zipline API 授權權杖",
+                yourZiplineApiToken: "你的 Zipline API 權杖",
+                folderIdForUploads: "上傳的資料夾 ID（留空表示不使用資料夾）",
+                leaveEmptyForNo: "留空表示不使用資料夾",
+                connectionDetailsForE: "E-Z Host 上傳的連線資訊。",
+                yourEZHost: "你的 E-Z Host API 金鑰",
+                connectionDetailsForNest: "Nest 上傳的連線資訊。",
+                yourNestApiAuthorization: "你的 Nest API 授權權杖",
+                yourNestApiToken: "你的 Nest API 權杖",
+                connectionDetailsForEncrypting: "Encrypting.host 上傳的連線資訊。",
+                yourEncryptingHostApi: "你的 Encrypting.host API 金鑰",
+                howEncryptingHostShould: "Encrypting.host 傳回連結的格式。",
+                selectUrlStyle: "選擇 URL 樣式",
+                optionalTitleForEmbed: "嵌入樣式回應的選用標題。",
+                optionalTitle: "選用標題",
+                optionalColorForEmbed: "嵌入樣式回應的選用顏色。",
+                optionalColor: "選用顏色",
+                optionalFakeLinkValue: "fakelink 樣式回應的選用偽裝連結值。",
+                optionalFakeLink: "選用偽裝連結",
+                connectionDetailsAndObject: "儲存貯體的連線資訊與物件命名。",
+                s3CompatibleEndpointE: "相容 S3 的端點（例如 https://<accountid>.r2.cloudflarestorage.com）",
+                bucketToUploadInto: "上傳目標儲存貯體",
+                awsRegionOrAuto: "AWS 區域，Cloudflare R2 請填 auto",
+                s3CompatibleAccessKey: "相容 S3 的存取金鑰",
+                yourAccessKeyId: "你的存取金鑰 ID",
+                s3CompatibleSecretKey: "相容 S3 的秘密金鑰",
+                yourSecretAccessKey: "你的秘密存取金鑰",
+                optionalTemporaryCredentialToken: "選用的暫時憑證權杖",
+                optionalSessionToken: "選用工作階段權杖",
+                optionalPublicUrlBase: "用於傳回連結的選用公開基礎 URL",
+                optionalFolderPrefixInside: "儲存貯體內的選用資料夾/前綴",
+                useEndpointBucketKey: "使用 endpoint/bucket/key 格式，建議用於 R2。",
+                optionalAccountBindingFor: "Catbox 上傳的選用帳號綁定。",
+                yourCatboxUserhashFor: "用於綁定帳號的 Catbox userhash，留空則匿名上傳。",
+                yourCatboxUserhash: "你的 Catbox userhash",
+                howLongUploadsAre: "上傳保留時長",
+                selectExpiry: "選擇到期時間",
+                optionalAccountBindingFor2: "GoFile 上傳的選用帳號綁定。",
+                optionalGofileTokenTo: "用於上傳到你帳號的選用 GoFile 權杖。",
+                optionalGofileToken: "選用 GoFile 權杖",
+                connectionDetailsForPixelvault: "PixelVault 上傳的連線資訊。",
+                yourPixelvaultAuthorizationKey: "你的 PixelVault 授權金鑰。",
+                yourPixelvaultUploadKey: "你的 PixelVault 上傳金鑰",
+                optionalAccountBindingFor3: "PixelDrain 上傳的選用帳號綁定。",
+                optionalPixeldrainApiKey: "用於驗證上傳的選用 PixelDrain API 金鑰。留空則匿名上傳。",
+                yourPixeldrainApiKey: "你的 PixelDrain API 金鑰",
+                pasteImportOrValidate: "貼上、匯入或驗證 ShareX 自訂上傳器設定。",
+                pasteYourSharexCustom: "貼上你的 ShareX 自訂上傳器 JSON（.sxcu/.json）。DestinationType 必須包含 FileUploader 或 ImageUploader。",
+                importFromFileOr: "從檔案匯入或驗證貼上的設定",
+                connectionDetailsForWebdav: "WebDAV 伺服器（Nextcloud、Owncloud 等）的連線資訊。",
+                baseWebdavUrlE: "WebDAV 基礎 URL（例如 https://nextcloud.example.com/remote.php/dav/files/username）",
+                optionalSubdirectoryOnThe: "伺服器上用於上傳的選用子目錄（例如 uploads）",
+                leaveEmptyForRoot: "留空表示根目錄",
+                selectYourWebdavServer: "選擇你的 WebDAV 伺服器類型。Nextcloud 與 ownCloud 會建立公開分享連結。通用類型會傳回原始檔案 URL。",
+                selectServerType: "選擇伺服器類型",
+                howToReturnThe: "如何傳回公開分享連結。分享頁面連到網頁；直接下載直接連到檔案；Markdown 連結會將分享頁面包裝成可點擊的檔案名稱。",
+                selectShareLinkFormat: "選擇分享連結格式",
+                controlWhatFileuploadDoes: "控制託管傳回 URL 後 FileUpload 的行為。",
+                stripQueryParametersFrom: "從上傳檔案的 URL 中移除查詢參數。",
+                wrapUploadedVideoLinks: "使用嵌入代理包裝已上傳的影片連結，以獲得更好的 Discord 預覽。",
+                chooseWhichEmbedProxy: "選擇用於已上傳影片連結的嵌入代理服務",
+                selectAnEmbedProxy: "選擇嵌入代理服務",
+                convertApngFilesTo: "將 APNG 檔案轉換為 GIF 格式。",
+                useTheOriginalFilename: "使用原始檔案名稱，而不是將上傳命名為 upload.ext。",
+                automaticallyCopyTheUploaded: "自動將上傳檔案的 URL 複製到剪貼簿。",
+                onlyUseTheSelected: "僅使用所選上傳器，不嘗試備用託管。",
+                afterUploadInsertThe: "上傳後，將取得的 URL 插入目前的聊天輸入框。",
+                wrapInsertedUrlsIn: "用角括號包住插入的 URL，以避免 Discord 產生預覽。",
+                chooseWhenFileuploadTakes: "選擇 FileUpload 何時接管 Discord 的檔案處理。",
+                useFileuploadWhenUploading: "透過 Discord 檔案選擇器上傳時使用 FileUpload。",
+                useFileuploadOnlyFor: "僅對大於你目前 Discord 上傳限制的檔案使用 FileUpload。",
+                manualDiscordFileSize: "手動設定 Discord 檔案大小限制（MB），在自動偵測錯誤時使用。留空則自動。",
+                auto: "自動",
+                commaSeparatedListOf: "以逗號分隔的副檔名清單（例如 png,jpg,gif）。留空則全部允許。",
+                configureBrowserUploadProxying: "設定瀏覽器上傳代理與逾時。",
+                corsProxyUsedFor: "用於網頁上傳的 CORS 代理。留空則使用預設代理。",
+                sourceCodeForThe: "預設 CORS 代理的原始碼",
+                maximumTimeToWait: "每次上傳嘗試在切換到備用前的最長等待時間",
+                selectTimeout: "選擇逾時",
+                drag: "拖曳",
+                importSxcuJson: "匯入 .sxcu/.json",
+                validate: "驗證",
+                resetToDefault: "重設為預設",
+                progress: "{{percent}}% - {{transferred}} / {{total}}",
+                cancel: "取消"
+            },
+            option: {
+                serviceType: {
+                    description: "所選上傳服務",
+                    label: "服務類型"
+                },
+                serviceUrl: {
+                    description: "Zipline 服務 URL",
+                    label: "服務 URL"
+                },
+                ziplineToken: {
+                    description: "Zipline 驗證權杖",
+                    label: "Zipline 權杖"
+                },
+                folderId: {
+                    description: "選用的 Zipline 資料夾 ID",
+                    label: "資料夾 ID"
+                },
+                ezHostKey: {
+                    description: "E-Z Host API 金鑰",
+                    label: "E-Z Host 金鑰"
+                },
+                nestToken: {
+                    description: "Nest API 權杖",
+                    label: "Nest 權杖"
+                },
+                encryptingHostKey: {
+                    description: "Encrypting.host API 金鑰",
+                    label: "Encrypting.host 金鑰"
+                },
+                encryptingHostUrlStyle: {
+                    description: "Encrypting.host URL 樣式",
+                    label: "Encrypting.host URL 樣式"
+                },
+                encryptingHostDomains: {
+                    description: "Encrypting.host 網域 JSON 清單",
+                    label: "Encrypting.host 網域"
+                },
+                encryptingHostTitle: {
+                    description: "選用的 Encrypting.host 嵌入標題",
+                    label: "Encrypting.host 標題"
+                },
+                encryptingHostColor: {
+                    description: "選用的 Encrypting.host 嵌入顏色",
+                    label: "Encrypting.host 顏色"
+                },
+                encryptingHostFakelink: {
+                    description: "選用的 Encrypting.host 偽裝連結",
+                    label: "Encrypting.host 偽裝連結"
+                },
+                s3Endpoint: {
+                    description: "相容 S3 的端點 URL",
+                    label: "S3 端點"
+                },
+                s3Bucket: {
+                    description: "S3 儲存貯體名稱",
+                    label: "S3 儲存貯體"
+                },
+                s3Region: {
+                    description: "S3 區域（R2 請使用 auto）",
+                    label: "S3 區域"
+                },
+                s3AccessKeyId: {
+                    description: "S3 存取金鑰 ID",
+                    label: "S3 存取金鑰 ID"
+                },
+                s3SecretAccessKey: {
+                    description: "S3 秘密存取金鑰",
+                    label: "S3 秘密存取金鑰"
+                },
+                s3SessionToken: {
+                    description: "選用的 S3 工作階段權杖",
+                    label: "S3 工作階段權杖"
+                },
+                s3PublicUrl: {
+                    description: "選用的公開基礎 URL",
+                    label: "S3 公開 URL"
+                },
+                s3Prefix: {
+                    description: "選用的 S3 物件鍵前綴",
+                    label: "S3 前綴"
+                },
+                s3ForcePathStyle: {
+                    description: "使用路徑樣式的 S3 URL",
+                    label: "強制 S3 路徑樣式"
+                },
+                litterboxExpiry: {
+                    description: "Litterbox 保留期限",
+                    label: "Litterbox 到期時間"
+                },
+                catboxUserhash: {
+                    description: "用於綁定帳號的 Catbox userhash",
+                    label: "Catbox userhash"
+                },
+                sharexConfig: {
+                    description: "ShareX 自訂上傳器 JSON",
+                    label: "ShareX 設定"
+                },
+                disableFallbacks: {
+                    description: "停用備用上傳服務",
+                    label: "停用備用"
+                },
+                autoSend: {
+                    description: "將上傳的 URL 插入聊天輸入框",
+                    label: "自動傳送"
+                },
+                autoFormat: {
+                    description: "用角括號包住插入的 URL",
+                    label: "自動格式化"
+                },
+                bypassDiscordUpload: {
+                    description: "繞過 Discord 上傳，改用 FileUpload。",
+                    label: "繞過 Discord 上傳"
+                },
+                bypassDiscordUploadOnlyOverLimit: {
+                    description: "僅在檔案超出大小限制時使用 FileUpload。",
+                    label: "僅超出限制時繞過 Discord 上傳"
+                },
+                customDiscordFileSizeLimitMB: {
+                    description: "手動設定 Discord 檔案大小限制（MB）。0 表示自動偵測。",
+                    label: "自訂 Discord 檔案大小限制（MB）"
+                },
+                gofileToken: {
+                    description: "選用的 GoFile API 權杖",
+                    label: "GoFile 權杖"
+                },
+                fallbackOrder: {
+                    description: "備用上傳器順序",
+                    label: "備用順序"
+                },
+                pixelVaultKey: {
+                    description: "PixelVault 上傳金鑰",
+                    label: "PixelVault 金鑰"
+                },
+                pixelDrainKey: {
+                    description: "選用的 PixelDrain API 金鑰",
+                    label: "PixelDrain 金鑰"
+                },
+                uploadTimeoutMs: {
+                    description: "上傳逾時（毫秒）",
+                    label: "上傳逾時 (ms)"
+                },
+                stripQueryParams: {
+                    description: "從上傳的 URL 中移除查詢參數",
+                    label: "移除查詢參數"
+                },
+                embedProxyEnabled: {
+                    description: "透過嵌入輔助服務代理已上傳的影片連結。",
+                    label: "啟用嵌入代理"
+                },
+                embedProxyService: {
+                    description: "用於包裝已上傳影片連結的嵌入輔助服務。",
+                    label: "嵌入代理服務"
+                },
+                corsProxyUrl: {
+                    description: "用於瀏覽器上傳的 CORS 代理 URL",
+                    label: "CORS 代理 URL"
+                },
+                apngToGif: {
+                    description: "將上傳的 APNG 轉換為 GIF",
+                    label: "APNG 轉 GIF"
+                },
+                preserveOriginalFilename: {
+                    description: "上傳時保留原始檔案名稱。",
+                    label: "保留原始檔案名稱"
+                },
+                autoCopy: {
+                    description: "自動複製上傳 URL",
+                    label: "自動複製"
+                },
+                autoUploadPastedFiles: {
+                    description: "在聊天輸入框貼上時，自動將剪貼簿中的檔案上傳到圖床。",
+                    label: "自動上傳貼上的檔案"
+                },
+                webdavUrl: {
+                    description: "WebDAV 伺服器 URL",
+                    label: "WebDAV URL"
+                },
+                webdavUsername: {
+                    description: "WebDAV 使用者名稱",
+                    label: "WebDAV 使用者名稱"
+                },
+                webdavPassword: {
+                    description: "WebDAV 密碼或應用程式權杖",
+                    label: "WebDAV 密碼"
+                },
+                webdavDirectory: {
+                    description: "WebDAV 伺服器上的選用子目錄",
+                    label: "WebDAV 目錄"
+                },
+                webdavServerType: {
+                    description: "WebDAV 伺服器類型",
+                    label: "WebDAV 伺服器類型",
+                    nextcloud: "Nextcloud",
+                    owncloud: "ownCloud",
+                    generic: "通用 WebDAV"
+                },
+                webdavShareType: {
+                    description: "WebDAV 分享連結格式",
+                    label: "WebDAV 分享類型",
+                    sharepage: "分享頁面",
+                    directdownload: "直接下載",
+                    markdown: "Markdown 連結"
+                },
+                uploadAllowedFileTypes: {
+                    description: "以逗號分隔的允許副檔名清單（例如 png,jpg,gif,mp4）。留空則允許所有檔案。",
+                    label: "允許上傳的檔案類型"
+                },
+                settingsComponent: {
+                    description: "設定",
+                    label: "設定元件"
+                }
+            },
+            panel: {
+                fallbackOrder: "備用順序",
+                uploadService: "上傳服務",
+                zipline: "Zipline",
+                serviceUrl: "服務 URL",
+                ziplineToken: "Zipline 權杖",
+                folderId: "資料夾 ID",
+                eZHost: "E-Z Host",
+                eZHostApiKey: "E-Z Host API 金鑰",
+                nest: "Nest",
+                nestToken: "Nest 權杖",
+                encryptingHost: "Encrypting.host",
+                encryptingHostApiKey: "Encrypting.host API 金鑰",
+                urlStyle: "URL 樣式",
+                domainsJson: "網域（JSON）",
+                embedTitle: "嵌入標題",
+                embedColor: "嵌入顏色",
+                fakeLink: "偽裝連結",
+                s3CompatibleStorage: "相容 S3 的儲存空間",
+                s3EndpointUrl: "S3 端點 URL",
+                bucketName: "儲存貯體名稱",
+                region: "區域",
+                accessKeyId: "存取金鑰 ID",
+                secretAccessKey: "秘密存取金鑰",
+                sessionToken: "工作階段權杖",
+                publicBaseUrl: "公開基礎 URL",
+                objectKeyPrefix: "物件鍵前綴",
+                usePathStyleEndpoint: "使用路徑樣式端點",
+                catbox: "Catbox",
+                catboxUserhash: "Catbox userhash",
+                litterboxExpiry: "Litterbox 到期時間",
+                gofile: "GoFile",
+                gofileToken: "GoFile 權杖",
+                pixelvault: "PixelVault",
+                pixelvaultUploadKey: "PixelVault 上傳金鑰",
+                pixeldrain: "PixelDrain",
+                pixeldrainApiKey: "PixelDrain API 金鑰",
+                sharexCustomUploader: "ShareX 自訂上傳器",
+                sharexCustomUploaderConfig: "ShareX 自訂上傳器設定",
+                sharexConfigActions: "ShareX 設定動作",
+                webdav: "WebDAV",
+                serverUrl: "伺服器 URL",
+                username: "使用者名稱",
+                passwordOrAppToken: "密碼或應用程式權杖",
+                passwordOrAppToken2: "密碼或應用程式權杖",
+                uploadDirectory: "上傳目錄",
+                serverType: "伺服器類型",
+                shareLinkFormat: "分享連結格式",
+                uploadBehavior: "上傳行為",
+                stripQueryParameters: "移除查詢參數",
+                useEmbedProxy: "使用嵌入代理",
+                embedProxyService: "嵌入代理服務",
+                convertApngToGif: "將 APNG 轉換為 GIF",
+                preserveOriginalFilename: "保留原始檔案名稱",
+                autoCopyUrl: "自動複製 URL",
+                disableFallbackUploaders: "停用備用上傳器",
+                insertUrlIntoChatInput: "將 URL 插入聊天輸入框",
+                formatInsertedUrl: "格式化插入的 URL",
+                discordIntegration: "Discord 整合",
+                bypassDiscordUploadButton: "繞過 Discord 上傳按鈕",
+                autoUploadPastedFiles: "自動上傳貼上的檔案",
+                respectDiscordFileSizeLimit: "遵守 Discord 檔案大小限制",
+                discordLimitOverrideMb: "覆寫 Discord 限制（MB）",
+                allowedFileTypes: "允許的檔案類型",
+                network: "網路",
+                corsProxyUrl: "CORS 代理 URL",
+                defaultCorsProxySource: "預設 CORS 代理原始碼",
+                uploadTimeout: "上傳逾時",
+                domainsJsonDescription: "要使用的網域 JSON 陣列，例如 [\"offensive\"]。"
+            },
+            status: {
+                cancelled: "上傳已取消。",
+                uploadingVia: "正在透過 {{service}} 上傳...",
+                uploading: "正在上傳...",
+                unknownError: "未知錯誤",
+                startingVia: "正在透過 {{service}} 開始上傳...",
+                retryingWith: "正在使用 {{service}} 重試（{{attempt}}/{{total}}）...",
+                uploadedVia: "已透過 {{service}} 成功上傳。",
+                allFailed: "所有上傳服務皆失敗。最後的錯誤：{{error}}",
+                fileReady: "檔案已就緒，開始上傳...",
+                preparing: "正在準備上傳...",
+                failed: "上傳失敗：{{message}}",
+                timedOut: "上傳逾時",
+                serviceFailed: "{{service}} 失敗：{{message}}",
+                preparingFile: "正在準備 {{name}}{{suffix}}..."
+            }
+        },
+        gifMaker: {
+            option: {
+                lastWidth: {
+                    label: "上次寬度"
+                },
+                lastHeight: {
+                    label: "上次高度"
+                },
+                lastCaptionMode: {
+                    label: "上次字幕模式"
+                },
+                lastCaptionText: {
+                    label: "上次字幕文字"
+                },
+                lastCaptionSize: {
+                    label: "上次字幕大小"
+                },
+                lastFontFamily: {
+                    label: "上次字型系列"
+                },
+                lastBubbleTipBase: {
+                    label: "上次氣泡尾端基點"
+                },
+                maxWidth: {
+                    description: "自動調整的最大寬度。",
+                    label: "最大寬度"
+                },
+                maxHeight: {
+                    description: "自動調整的最大高度。",
+                    label: "最大高度"
+                }
+            },
+            name: "GifMaker",
+            description: "從聊天或 GIF 選擇器中的任何媒體建立 GIF 並加上字幕。",
+            text: {
+                send: "傳送",
+                export: "匯出",
+                makeGif: "製作 GIF",
+                editGif: "編輯 GIF",
+                selectAFont: "選擇字型...",
+                enterCaption: "輸入字幕...",
+                width: "寬度",
+                height: "高度",
+                loadingFonts: "正在載入字型...",
+                captions: "字幕",
+                text: "文字",
+                font: "字型",
+                fontSize: "字型大小",
+                tipBase: "尾端基點",
+                dimensions: "尺寸",
+                generatingGif: "正在產生 GIF...",
+                clickOnThePreview: "點擊預覽以定位氣泡尾端",
+                gifPreview: "GIF 預覽"
+            },
+            captionMode: {
+                caption: "字幕",
+                none: "無",
+                speechbubble: "氣泡"
+            }
+        },
+        gifProviderSwitcher: {
+            name: "GifProviderSwitcher",
+            description: "允許使用 Tenor 或 Giphy 的 GIF 搜尋代替 Klipy",
+            text: {
+                tenor: "Tenor",
+                giphy: "Giphy",
+                klipy: "Klipy",
+                providers: "提供者",
+                providersCount: "{{count}} 個提供者"
+            }
+        },
+        keyboardNavigation: {
+            toast: {
+                invalidUrl: "無效的 URL",
+                copiedResponseToClipboard: "已將回應複製到剪貼簿！",
+                issueFetchingUrl: "取得 URL 時發生問題",
+                copiedGitInfoTo: "已將 Git 資訊複製到剪貼簿！",
+                noUpdatesAvailable: "沒有可用的更新",
+                enabledPlugin: "已成功啟用 {{id}}",
+                disabledPlugin: "已成功停用 {{id}}"
+            },
+            text: {
+                openPlexcordTab: "開啟 Plexcord 分頁",
+                openPluginTab: "開啟外掛分頁",
+                openThemesTab: "開啟主題分頁",
+                openUpdaterTab: "開啟更新分頁",
+                openCloudTab: "開啟雲端分頁",
+                openBackupRestoreTab: "開啟備份與還原分頁",
+                restartClient: "重新啟動用戶端",
+                openQuickCssFile: "開啟 QuickCSS 檔案",
+                openSettingsFolder: "開啟設定資料夾",
+                openInGithub: "在 GitHub 中開啟",
+                openInBrowser: "在瀏覽器中開啟",
+                togglePlugin: "切換外掛",
+                enable: "啟用",
+                disable: "停用",
+                quickFetch: "快速取得",
+                copyGitInfo: "複製 Git 資訊",
+                checkForUpdates: "檢查更新",
+                aPlexcordUpdateIs: "有可用的 Plexcord 更新！",
+                clickHereToView: "點擊此處檢視更新",
+                navigateToServer: "前往伺服器",
+                commandPalette: "指令面板",
+                searchTheCommandPalette: "搜尋指令面板",
+                multipleChoice: "多重選擇",
+                textInput: "文字輸入",
+                openDevTab: "開啟開發者分頁",
+                enterUrlToFetch: "輸入要取得的 URL（僅 GET）",
+                typeAndPressEnter: "輸入後按 Enter",
+                recording: "正在錄製...",
+                recordKeybind: "錄製快速鍵",
+                enterUrl: "輸入網址"
+            },
+            option: {
+                hotkey: {
+                    description: "開啟指令面板的快速鍵。",
+                    label: "快速鍵"
+                },
+                allowMouseControl: {
+                    description: "允許使用滑鼠控制指令面板。",
+                    label: "允許滑鼠控制"
+                }
+            },
+            name: "KeyboardNavigation",
+            description: "允許使用鍵盤瀏覽介面。"
+        },
+        lastActive: {
+            name: "LastActive",
+            description: "用於跳到你或其他使用者在頻道/伺服器中最後一則活躍訊息的外掛。",
+            toast: {
+                failedToFindMessages: "找不到訊息。詳情請查看主控台。",
+                couldnTFindAny: "找不到此使用者的近期訊息。",
+                channelInformationNotAvailable: "頻道資訊無法使用。",
+                failedToJumpTo: "跳到訊息失敗。詳情請查看主控台。"
+            },
+            text: {
+                yourLastMessage: "你的最後一則訊息",
+                userSLastMessage: "該使用者的最後一則訊息"
+            }
+        },
+        limitlessScreenshare: {
+            text: {
+                deleteTag: "刪除標籤",
+                mustBeGreaterThan: "必須 >{{value}}",
+                maxResolutionTooLow: "最大解析度不能低於 {{value}}",
+                maxResolutionRound: "啟用「解析度取整」時，最大解析度必須以 0 結尾"
+            },
+            name: "LimitlessScreenshare",
+            description: "為螢幕分享解析度與幀率新增滑桿。",
+            option: {
+                maxFPS: {
+                    description: "滑桿的最大幀率",
+                    label: "最大幀率"
+                },
+                maxResolution: {
+                    description: "滑桿的最大解析度",
+                    label: "最大解析度"
+                },
+                roundResolution: {
+                    description: "將解析度四捨五入到最接近的 10p",
+                    label: "四捨五入解析度"
+                },
+                resolutions: {
+                    label: "解析度"
+                },
+                fpss: {
+                    label: "幀率值"
+                }
+            }
+        },
+        messagePeek: {
+            option: {
+                hideMuted: {
+                    description: "隱藏已靜音私訊與群組聊天的訊息預覽和時間戳記。",
+                    label: "隱藏已靜音"
+                }
+            },
+            name: "MessagePeek",
+            description: "在私訊清單中顯示最後一則訊息的預覽和時間戳記。",
+            text: {
+                officialDiscordMessage: "Discord 官方訊息",
+                sentGif: "傳送了 GIF",
+                voiceMessage: "語音訊息",
+                membersCount: "{{count}} 位成員",
+                you: "你"
+            }
+        },
+        messageTranslate: {
+            name: "MessageTranslate",
+            description: "自動將訊息翻譯為你的語言，支援快取、依頻道切換等更多選項。",
+            option: {
+                targetLanguage: {
+                    description: "翻譯的目標語言代碼（例如 en、es、fr、de、ja）。",
+                    label: "目標語言"
+                },
+                excludedLanguages: {
+                    description: "不翻譯的語言代碼（例如 en、es、fr、de、ja）。",
+                    label: "排除的語言"
+                },
+                confidenceRequirement: {
+                    description: "顯示翻譯所需的最低信賴度（0 到 1）。",
+                    label: "信賴度要求"
+                },
+                autoTranslate: {
+                    description: "訊息出現時自動翻譯。",
+                    label: "自動翻譯"
+                },
+                skipOwnMessages: {
+                    description: "不翻譯你自己的訊息。",
+                    label: "略過自己的訊息"
+                },
+                skipBotMessages: {
+                    description: "不翻譯機器人訊息。",
+                    label: "略過機器人訊息"
+                },
+                ignoredGuilds: {
+                    description: "以逗號分隔的不進行翻譯的伺服器 ID 清單。",
+                    label: "忽略的伺服器"
+                },
+                ignoredChannels: {
+                    description: "以逗號分隔的不進行翻譯的頻道 ID 清單。",
+                    label: "忽略的頻道"
+                },
+                ignoredUsers: {
+                    description: "以逗號分隔的不翻譯的使用者 ID 清單。",
+                    label: "忽略的使用者"
+                },
+                showIndicator: {
+                    description: "在已翻譯的訊息後附加一個小的（已翻譯）標示。",
+                    label: "顯示標示"
+                },
+                showOriginal: {
+                    description: "顯示原文與譯文。",
+                    noorig: "不顯示原文。"
+                }
+            },
+            text: {
+                showOriginalInSubtext: "在副文字中顯示原文",
+                showOriginalMessageTranslation: "顯示原始訊息，譯文放在副文字中",
+                translatedFrom: "翻譯自{{lang}}"
+            }
+        },
+        moreStickers: {
+            toast: {
+                stickerPackDeleted: "已刪除貼圖包",
+                stickerPackAdded: "已新增貼圖包",
+                stickerPacksAdded: "已新增貼圖包",
+                stickerPacksExported: "已匯出貼圖包",
+                newStickerPacksAlready: "新貼圖包已存在，無需遷移",
+                oldStickerPacksNot: "找不到舊貼圖包，無需遷移",
+                migrationFailedTitleId: "遷移失敗：{{title}}（{{id}}）",
+                stickerPackMigrationComplete: "貼圖包遷移完成",
+                failedToUploadSticker: "上傳貼圖失敗"
+            },
+            text: {
+                stickerPackUrl: "貼圖包 URL",
+                pasteHtmlHere: "在此貼上 HTML",
+                delete: "刪除",
+                addStickerPackFrom: "從 URL 新增貼圖包",
+                insert: "插入",
+                addStickerPackFrom2: "從 HTML 新增貼圖包",
+                insertFromHtml: "從 HTML 插入",
+                addStickerPackFrom3: "從檔案新增貼圖包",
+                miscTools: "其他工具",
+                exportStickerPacks: "匯出貼圖包",
+                migrateFromV1: "從 v1 遷移",
+                stickersManagement: "貼圖管理",
+                theRegionLineRecognized: "由於我們使用的 CORS 代理，LINE 辨識的地區可能與你所在的地區不同。",
+                openStickerPackFile: "開啟貼圖包檔案",
+                stickers: "貼圖+",
+                categoryTitle: "分類，{{title}}",
+                searchStickers: "搜尋貼圖",
+                ffmpegstatecontextIsUndefined: "FFmpegStateContext 未定義",
+                recentlyUsed: "最近使用",
+                addFromUrl: "從 URL 新增",
+                addFromHtml: "從 HTML 新增",
+                addFromFile: "從檔案新增",
+                misc: "其他",
+                invalidUrl: "無效的 URL",
+                lineOnly: "目前僅支援 LINE 貼圖/表情符號。",
+                getTelegramStickers: "使用以下工具取得 Telegram 貼圖：",
+                htmlFallbackHelp: "如果新增貼圖包時遇到錯誤，可以嘗試使用貼圖包頁面的 HTML 原始碼來新增。",
+                htmlFallbackApplies: "這適用於有地區鎖定 / 系統鎖定等限制的貼圖。"
+            },
+            option: {
+                promptToUpload: {
+                    description: "將貼圖插入聊天列而不是立即傳送",
+                    label: "上傳前提示"
+                },
+                packs: {
+                    description: "貼圖包",
+                    label: "貼圖包"
+                }
+            },
+            name: "MoreStickers",
+            description: "新增來自其他社群媒體平台的貼圖包。（例如 LINE）"
+        },
+        musicRichPresence: {
+            option: {
+                scrobblerBackend: {
+                    description: "要使用的 Scrobbler 後端。",
+                    label: "Scrobbler 後端"
+                },
+                instanceBaseURL: {
+                    description: "你的 ListenBrainz 執行個體的基礎 URL。",
+                    label: "執行個體基礎 URL"
+                },
+                instanceAPIBaseUrl: {
+                    description: "你的 ListenBrainz API 的基礎 URL。",
+                    label: "執行個體 API 基礎 URL"
+                },
+                apiKey: {
+                    description: "Last.fm API 金鑰。非必要，但強烈建議填寫，以避免共用金鑰被限速",
+                    label: "API 金鑰"
+                },
+                username: {
+                    description: "使用者名稱",
+                    label: "使用者名稱"
+                },
+                shareUsername: {
+                    description: "顯示 Scrobbler 個人檔案連結",
+                    label: "分享使用者名稱"
+                },
+                clickableLinks: {
+                    description: "將曲目、藝人與專輯名稱設為可點擊連結",
+                    label: "可點擊連結"
+                },
+                hideWithSpotify: {
+                    description: "Spotify 執行時隱藏狀態",
+                    label: "Spotify 時隱藏"
+                },
+                hideWithActivity: {
+                    description: "有其他狀態時隱藏",
+                    label: "有活動時隱藏"
+                },
+                statusName: {
+                    description: "自訂狀態文字。可用變數：{artist} | {album} | {title}",
+                    label: "狀態名稱"
+                },
+                statusDisplayType: {
+                    description: "在成員清單中顯示曲目/藝人名稱",
+                    off: "不顯示（顯示通用收聽訊息）"
+                },
+                nameFormat: {
+                    description: "在狀態名稱中顯示歌曲與藝人名稱",
+                    statusName: "使用自訂狀態名稱"
+                },
+                missingArt: {
+                    description: "當專輯或專輯封面缺失時",
+                    logo: "使用大型 Scrobbler 標誌"
+                },
+                showLogo: {
+                    description: "在專輯封面旁顯示 Scrobbler 服務標誌",
+                    label: "顯示 Scrobbler 標誌"
+                },
+                showAlbumCover: {
+                    description: "顯示專輯封面。停用後將顯示預留位置圖。適用於音樂封面不合適的情況",
+                    label: "顯示專輯封面"
+                },
+                useListeningStatus: {
+                    description: "顯示「正在收聽」狀態而不是「正在玩」"
+                }
+            },
+            name: "MusicRichPresence",
+            description: "Last.FM/Listenbrainz 的 Rich Presence",
+            text: {
+                showArtistName: "顯示藝人名稱",
+                showTrackName: "顯示曲目名稱",
+                useMusicServiceName: "使用音樂服務名稱（回退到自訂狀態文字）",
+                useFormatArtistSong: "使用「藝人 - 歌曲」格式",
+                useFormatSongArtist: "使用「歌曲 - 藝人」格式",
+                useArtistNameOnly: "僅使用藝人名稱",
+                useSongNameOnly: "僅使用歌曲名稱",
+                useAlbumNameFalls: "使用專輯名稱（若歌曲無專輯則回退到自訂狀態文字）",
+                useGenericPlaceholder: "使用通用預留位置圖",
+                lastFm: "Last.FM",
+                howToCreateAn: "如何建立 API 金鑰",
+                set: "設定",
+                applicationName: "應用程式名稱",
+                applicationDescription: "應用程式描述",
+                toAnythingAndLeave: "為任意內容，其餘留空。",
+                createApiKey: "建立 API 金鑰",
+                invalidInstance: "無效的 ListenBrainz 相容執行個體",
+                provideBoth: "請同時提供",
+                apiBaseUrl: "API 基礎 URL",
+                andThe: "和",
+                instanceBaseUrl: "執行個體基礎 URL",
+                forYourCustomInstance: "（用於你的自訂 ListenBrainz 執行個體），或切換回 ListenBrainz/Last.FM",
+                allowConnectTitle: "允許 Plexcord 連線至 ListenBrainz 執行個體",
+                allowConnectBody: "要使用你的自訂 ListenBrainz 執行個體，必須先允許 Plexcord 連線至該執行個體。",
+                allowInstance: "允許執行個體",
+                listenBrainzCompatible: "相容 ListenBrainz（自架）",
+                and: "和"
+            }
+        },
+        noMiddleClickPaste: {
+            name: "NoMiddleClickPaste",
+            description: "停用 Linux 中鍵貼上 - 僅限 Linux"
+        },
+        orbolayBridge: {
+            option: {
+                port: {
+                    description: "要連線的連接埠",
+                    label: "連接埠"
+                }
+            },
+            name: "OrbolayBridge",
+            description: "將 Orbolay 連接到 Discord 的橋接外掛",
+            toast: {
+                connectedToOrbolayServer: "已連線到 Orbolay 伺服器"
+            }
+        },
+        plexcordHelper: {
+            name: "PlexcordHelper",
+            description: "用於提供支援並修正由 Discord 造成的當機。",
+            text: {
+                restartRequired: "需要重新啟動",
+                restartNow: "立即重新啟動",
+                later: "稍後",
+                wouldYouLikeTo: "要立即重新啟動嗎？",
+                somePluginsRequireA: "部分外掛需要重新啟動才能完全停用。",
+                alreadyEnabled: "{{plugin}} 已啟用",
+                alreadyDisabled: "{{plugin}} 已停用",
+                disablePlugin: "停用 {{plugin}}",
+                enablePlugin: "啟用 {{plugin}}",
+                errorStopping: "停止外掛 {{plugin}} 時發生錯誤",
+                errorStarting: "啟動外掛 {{plugin}} 時發生錯誤"
+            },
+            toast: {
+                failedToTolowercase: "{{toLowerCase}} 失敗",
+                aRestartIsRequired: "需要重新啟動才能使變更生效！"
+            },
+            card: {
+                notOnThisVersion: "此版本的 Plexcord 中沒有該外掛。請嘗試更新！"
+            }
+        },
+        plexcordTweaks: {
+            name: "PlexcordTweaks",
+            option: {
+                removeActivitySection: {
+                    description: "移除成員清單上方的活動區域",
+                    label: "移除活動區域"
+                },
+                showYourOwnActivityButtons: {
+                    description: "Discord 不知為何隱藏了你自己的活動按鈕",
+                    label: "顯示你自己的活動按鈕"
+                },
+                refreshSlashCommands: {
+                    description: "重新整理斜線指令，無需重新啟動用戶端即可顯示新加入的指令。",
+                    label: "重新整理斜線指令"
+                },
+                forceRoleIcon: {
+                    description: "在精簡模式下強制在訊息旁顯示身分組圖示",
+                    label: "強制身分組圖示"
+                },
+                accountStandingButton: {
+                    description: "在標題列顯示帳號狀態按鈕",
+                    label: "帳號狀態按鈕"
+                },
+                jsonGateway: {
+                    description: "在閘道重新連線時強制使用 JSON",
+                    label: "JSON 閘道"
+                },
+                enableAutoCorrect: {
+                    description: "在聊天框右鍵選單中新增原生自動校正與文字取代開關",
+                    label: "啟用自動校正"
+                },
+                autoCorrect: {
+                    description: "在訊息編輯器中使用原生自動校正與文字取代",
+                    label: "自動校正"
+                },
+                disableHolidayNotifications: {
+                    label: "停用節日通知",
+                    description: "一律使用 Discord 的預設通知音效"
+                },
+                showAllBadges: {
+                    label: "顯示所有徽章",
+                    description: "顯示所有個人檔案徽章，而不是將其餘徽章收合為 +n"
+                }
+            },
+            text: {
+                allGood: "一切正常！",
+                limited: "受限",
+                veryLimited: "嚴重受限",
+                atRisk: "有風險",
+                suspended: "已停權",
+                slashCommandsRefreshedSuccessfully: "斜線指令已成功重新整理。",
+                failedToRefreshCommands: "重新整理指令失敗。詳情請查看主控台。",
+                enableAutocorrect: "啟用自動校正"
+            },
+            command: {
+                refreshCommands: "重新整理斜線指令"
+            },
+            description: "一組針對 Discord 的小調整與修正。"
+        },
+        plextronStreamFixes: {
+            option: {
+                unlockQualityOptions: {
+                    description: "無論 Nitro 狀態為何都解鎖直播畫質選項",
+                    label: "解鎖畫質選項"
+                },
+                removeResolutionCap: {
+                    description: "允許 60fps 下超過 720p 的解析度",
+                    label: "移除解析度上限"
+                },
+                forceEncoderSettings: {
+                    description: "強制編碼器使用已設定的解析度/幀率",
+                    label: "強制編碼器設定"
+                },
+                preventDownscale: {
+                    description: "防止 Discord 降低直播解析度",
+                    label: "防止降解析度"
+                },
+                keyframeInterval: {
+                    description: "關鍵影格間隔（毫秒，0 = 編碼器預設，5000 = 每 5 秒）",
+                    label: "關鍵影格間隔"
+                },
+                minBitrate: {
+                    description: "最低編碼器位元速率（kbps）",
+                    label: "最低位元速率"
+                },
+                raiseBitrateCaps: {
+                    description: "提高桌面端預設位元速率上限（目標 600kbps → 10Mbps，最高 3.5Mbps → 40Mbps）",
+                    label: "提高位元速率上限"
+                },
+                preventFramerateReduction: {
+                    description: "防止 Discord 在你不說話時降低直播幀率",
+                    label: "防止降低幀率"
+                },
+                bitsPerPixelPct: {
+                    description: "目標位元速率的每像素位元百分比（8 = 0.08bpp，12 = 0.12bpp）",
+                    label: "每像素位元 (%)"
+                }
+            },
+            name: "PlextronStreamFixes",
+            description: "透過修補 Discord 的編碼器和畫質限制，嘗試修復 Plextron 上的直播畫質。"
+        },
+        rPCEditor: {
+            name: "RPCEditor"
+        },
+        reactionTimestamps: {
+            name: "ReactionTimestamps",
+            description: "在反應彈出視窗中顯示每個反應的時間。",
+            text: {
+                userAtTime: "{{user}} 於 {{time}}"
+            }
+        },
+        richPresence: {
+            text: {
+                useCustomStatusName: "使用自訂狀態名稱",
+                useFormatArtistSong: "使用「藝人 - 歌曲」格式",
+                useFormatSongArtist: "使用「歌曲 - 藝人」格式",
+                useArtistNameOnly: "僅使用藝人名稱",
+                useSongNameOnly: "僅使用歌曲名稱",
+                useAlbumName: "使用專輯名稱",
+                useLargeStatsFm: "使用大型 Stats.fm 標誌",
+                useGenericPlaceholder: "使用通用預留位置圖",
+                seriesMovieName: "影集/電影名稱",
+                seriesEpisodeTrackMovie: "影集 - 單集/曲目/電影名稱",
+                custom: "自訂",
+                seriesCover: "影集封面",
+                episodeCover: "單集封面",
+                season1Episode1: "第 1 季 第 1 集",
+                off: "關閉",
+                listening: "正在收聽",
+                playing: "正在玩",
+                streaming: "正在直播",
+                watching: "正在觀看",
+                none: "無",
+                navidromeInstanceExposesServer: "Navidrome 執行個體（會暴露伺服器 URL。傳送一次性驗證。）",
+                lastFmApiSends: "Last.fm API（將中繼資料傳送到 last.fm）",
+                donTShowShows: "不顯示（顯示通用收聽訊息）",
+                showStateLineContent: "顯示狀態行內容",
+                showDetailsLineContent: "顯示詳細資料行內容",
+                displayYourCurrentlyPlaying: "將你正在播放的有聲書顯示為 Discord Rich Presence。需要你的 AudioBookShelf 伺服器 URL、使用者名稱與密碼。",
+                audiobookshelfServerUrl: "AudioBookShelf 伺服器 URL。",
+                audiobookshelfUsername: "AudioBookShelf 使用者名稱。",
+                audiobookshelfPassword: "AudioBookShelf 密碼。",
+                connectsToTosuVia: "透過連接埠 24050 上的 WebSocket 連線到 tosu。無需設定，只要確保 tosu 與 osu! 同時執行即可。",
+                showWhatYouRe: "透過 stats.fm 顯示你正在收聽的內容。需要你的收聽記錄為公開。",
+                statsFmUsername: "Stats.fm 使用者名稱。",
+                customStatusText: "自訂狀態文字。",
+                statsFm: "Stats.fm",
+                nameFormat: "名稱格式。",
+                fallbackWhenArtIs: "封面缺失時的回退方式。",
+                showListeningStatus: "顯示收聽狀態。",
+                showStatsFmLogo: "在專輯封面旁顯示 Stats.fm 標誌。",
+                showLinkToStats: "顯示 stats.fm 個人檔案連結。",
+                showLinkToSong: "顯示 stats.fm 上的歌曲連結。",
+                hideStatsFmPresence: "Spotify 執行時隱藏 stats.fm 狀態。",
+                hideStatsFmPresence2: "外部 RPC 執行時隱藏 stats.fm 狀態。",
+                disableDownloadingAlbumArt: "停用下載專輯封面。",
+                showWhatYouRe2: "顯示你在 Jellyfin 上正在播放的內容。取得 API 金鑰：開啟 Jellyfin 網頁介面，按 F12 開啟開發者工具，進入「網路」分頁，尋找發往伺服器的請求，找到 Authorization 標頭（Ctrl+F 搜尋），你需要 Token='this' 中的部分。你的使用者 ID 可在個人檔案頁面 URL 中找到。",
+                jellyfinServerUrl: "Jellyfin 伺服器 URL。",
+                jellyfinApiKey: "Jellyfin API 金鑰。",
+                authorization: "Authorization",
+                jellyfinUserId: "Jellyfin 使用者 ID。",
+                userIdFromProfile: "個人檔案 URL 中的使用者 ID",
+                nameDisplayFormat: "名稱顯示格式。",
+                customNameTemplate: "自訂名稱範本。",
+                nameOnJellyfin: "Jellyfin 上的 {name}",
+                coverTypeForTv: "電視節目的封面類型。",
+                episodeNumberFormat: "集數格式。",
+                overrideRichPresenceType: "覆寫 Rich Presence 類型。",
+                showEpisodeNameAfter: "在季/集資訊後顯示單集名稱。",
+                showPresenceWhenMedia: "媒體暫停時顯示狀態。",
+                hideMediaDetails: "隱藏媒體詳細資料。",
+                discordRichPresenceFor: "Gensokyo Radio 的 Discord Rich Presence。啟用後即可收聽！",
+                refreshIntervalInSeconds: "重新整理間隔（秒）。",
+                showWhatYouRe3: "透過 Navidrome 顯示你正在收聽的內容。",
+                navidromeServerUrlMust: "Navidrome 伺服器 URL（必須是公開網域，例如 https://navidrome.example.com）。",
+                navidromeUsername: "Navidrome 使用者名稱。",
+                navidromePassword: "Navidrome 密碼。",
+                optionalDiscordApplicationClient: "選用的 Discord 應用程式用戶端 ID。",
+                howToFetchAlbum: "如何取得專輯封面。",
+                optionalProvideYourOwn: "選用：提供你自己的 Last.fm API 金鑰（留空則使用預設）。",
+                showNavidromeLogoIn: "在專輯封面右下角顯示 Navidrome 標誌。",
+                showAlbumNameIn: "在狀態中顯示專輯名稱。",
+                whichTypeOfActivity: "要顯示的活動類型。",
+                showTheStateDetails: "在成員清單中顯示狀態/詳細資料行內容",
+                hideRichPresenceWhen: "音樂暫停時隱藏 Rich Presence（而不是顯示碼錶）",
+                theListeningToText: "「正在收聽」文字（例如 {artist}）",
+                navidrome: "Navidrome",
+                theMainLineShowing: "顯示正在播放歌曲的主行（例如 {song}）",
+                song: "{song}",
+                theLineBelowThe: "歌曲名稱下方的行（例如 {artist}）",
+                artist: "{artist}",
+                theAlbumLineE: "專輯行（例如 {album}）",
+                album: "{album}",
+                enableTabLabelsCurrenttab: "啟用 {{TAB_LABELS_currentTab}} 狀態。",
+                statsFmProfile: "Stats.fm 個人檔案",
+                viewSong: "檢視歌曲",
+                showArtistName: "顯示藝人名稱",
+                showTrackName: "顯示曲目名稱",
+                enterValue: "輸入一個值"
+            },
+            name: "RichPresence",
+            description: "適用於 AudioBookShelf、osu!、stats.fm、Jellyfin、Navidrome 和 Gensokyo Radio 的統一 Rich Presence 中心。",
+            toast: {
+                audiobookshelfRpcIsNot: "AudioBookShelf RPC 尚未設定。",
+                jellyfinRpcIsNot: "Jellyfin RPC 尚未設定。",
+                jellyfinReturnedAnInvalid: "Jellyfin 傳回了無效的回應。你的 API 金鑰可能有誤。"
+            },
+            option: {
+                enabled: {
+                    description: "啟用 Rich Presence 服務。",
+                    label: "已啟用"
+                },
+                serviceSettings: {
+                    description: "服務設定。",
+                    label: "服務設定"
+                },
+                abs_enabled: {
+                    description: "啟用 AudioBookShelf 狀態。",
+                    label: "AudioBookShelf 已啟用"
+                },
+                tosu_enabled: {
+                    description: "啟用 osu!（tosu）狀態。",
+                    label: "osu!（tosu）已啟用"
+                },
+                sfm_enabled: {
+                    description: "啟用 stats.fm 狀態。",
+                    label: "Stats.fm 已啟用"
+                },
+                jf_enabled: {
+                    description: "啟用 Jellyfin 狀態。",
+                    label: "Jellyfin 已啟用"
+                },
+                gr_enabled: {
+                    description: "啟用 Gensokyo Radio 狀態。",
+                    label: "Gensokyo Radio 已啟用"
+                },
+                nd_enabled: {
+                    description: "啟用 Navidrome 狀態。",
+                    label: "Navidrome 已啟用"
+                },
+                abs_serverUrl: {
+                    description: "AudioBookShelf 伺服器 URL。",
+                    label: "AudioBookShelf 伺服器 URL"
+                },
+                abs_username: {
+                    description: "AudioBookShelf 使用者名稱。",
+                    label: "AudioBookShelf 使用者名稱"
+                },
+                abs_password: {
+                    description: "AudioBookShelf 密碼。",
+                    label: "AudioBookShelf 密碼"
+                },
+                sfm_username: {
+                    description: "Stats.fm 使用者名稱。",
+                    label: "Stats.fm 使用者名稱"
+                },
+                sfm_shareUsername: {
+                    description: "顯示 stats.fm 個人檔案連結。",
+                    label: "Stats.fm：分享使用者名稱"
+                },
+                sfm_shareSong: {
+                    description: "顯示 stats.fm 上的歌曲連結。",
+                    label: "Stats.fm：分享歌曲"
+                },
+                sfm_hideWithSpotify: {
+                    description: "Spotify 執行時隱藏 stats.fm 狀態。",
+                    label: "Stats.fm：Spotify 時隱藏"
+                },
+                sfm_hideWithExternalRPC: {
+                    description: "外部 RPC 執行時隱藏 stats.fm 狀態。",
+                    label: "Stats.fm：外部 RPC 時隱藏"
+                },
+                sfm_statusName: {
+                    description: "自訂狀態文字。",
+                    label: "Stats.fm：狀態名稱"
+                },
+                sfm_nameFormat: {
+                    description: "名稱格式。",
+                    label: "Stats.fm：名稱格式",
+                    statusName: "使用自訂狀態名稱",
+                    artistFirst: "使用「藝人 - 歌曲」格式",
+                    songFirst: "使用「歌曲 - 藝人」格式",
+                    artistOnly: "僅使用藝人名稱",
+                    songOnly: "僅使用歌曲名稱",
+                    albumName: "使用專輯名稱"
+                },
+                sfm_useListeningStatus: {
+                    description: "顯示收聽狀態。",
+                    label: "Stats.fm：使用收聽狀態"
+                },
+                sfm_missingArt: {
+                    description: "封面缺失時的回退方式。",
+                    label: "Stats.fm：缺少封面",
+                    statsFmLogo: "使用大型 Stats.fm 標誌",
+                    placeholder: "使用通用預留位置圖"
+                },
+                sfm_showLogo: {
+                    description: "在專輯封面旁顯示 Stats.fm 標誌。",
+                    label: "Stats.fm：顯示標誌"
+                },
+                sfm_alwaysHideArt: {
+                    description: "停用下載專輯封面。",
+                    label: "Stats.fm：一律隱藏封面"
+                },
+                jf_serverUrl: {
+                    description: "Jellyfin 伺服器 URL。",
+                    label: "Jellyfin 伺服器 URL"
+                },
+                jf_apiKey: {
+                    description: "Jellyfin API 金鑰。",
+                    label: "Jellyfin API 金鑰"
+                },
+                jf_userId: {
+                    description: "Jellyfin 使用者 ID。",
+                    label: "Jellyfin 使用者 ID"
+                },
+                jf_nameDisplay: {
+                    description: "名稱顯示格式。",
+                    label: "Jellyfin：名稱顯示",
+                    default: "影集/電影名稱",
+                    full: "影集 - 單集/曲目/電影名稱",
+                    custom: "自訂"
+                },
+                jf_customName: {
+                    description: "自訂名稱範本。",
+                    label: "Jellyfin：自訂名稱"
+                },
+                jf_coverType: {
+                    description: "電視節目的封面類型。",
+                    label: "Jellyfin：封面類型",
+                    series: "影集封面",
+                    episode: "單集封面"
+                },
+                jf_episodeFormat: {
+                    description: "集數格式。",
+                    label: "Jellyfin：集數格式",
+                    long: "S01E01",
+                    fulltext: "第 1 季 第 1 集"
+                },
+                jf_showEpisodeName: {
+                    description: "在季/集資訊後顯示單集名稱。",
+                    label: "Jellyfin：顯示單集名稱"
+                },
+                jf_overrideType: {
+                    description: "覆寫 Rich Presence 類型。",
+                    label: "Jellyfin：覆寫類型",
+                    off: "關閉",
+                    listening: "正在收聽",
+                    playing: "正在玩",
+                    streaming: "正在直播",
+                    watching: "正在觀看"
+                },
+                jf_showPausedState: {
+                    description: "媒體暫停時顯示狀態。",
+                    label: "Jellyfin：顯示暫停狀態"
+                },
+                jf_privacyMode: {
+                    description: "隱藏媒體詳細資料。",
+                    label: "Jellyfin：隱私模式"
+                },
+                gr_refreshInterval: {
+                    description: "重新整理間隔（秒）。",
+                    label: "Gensokyo Radio：重新整理間隔"
+                },
+                nd_serverUrl: {
+                    description: "Navidrome 伺服器 URL（例如 https://navidrome.example.com）",
+                    label: "Navidrome 伺服器 URL"
+                },
+                nd_username: {
+                    description: "Navidrome 使用者名稱",
+                    label: "Navidrome 使用者名稱"
+                },
+                nd_password: {
+                    description: "Navidrome 密碼",
+                    label: "Navidrome 密碼"
+                },
+                nd_clientId: {
+                    description: "選用的 Discord 應用程式用戶端 ID",
+                    label: "Navidrome：用戶端 ID"
+                },
+                nd_showSmallImage: {
+                    description: "在專輯封面右下角顯示 Navidrome 標誌。",
+                    label: "Navidrome：顯示小圖"
+                },
+                nd_showAlbum: {
+                    description: "在狀態中顯示專輯名稱。",
+                    label: "Navidrome：顯示專輯"
+                },
+                nd_albumArtMode: {
+                    description: "如何取得專輯封面。",
+                    label: "Navidrome：專輯封面模式",
+                    none: "無",
+                    instance: "Navidrome 執行個體（向 Discord 暴露伺服器 URL，不傳送驗證）",
+                    lastfm: "Last.fm API（將曲目中繼資料傳送到 Last.fm）"
+                },
+                nd_lastfmApiKey: {
+                    description: "選用的 Last.fm API 金鑰",
+                    label: "Navidrome：Last.fm API 金鑰"
+                },
+                nd_refreshInterval: {
+                    description: "重新整理間隔（秒）。",
+                    label: "Navidrome：重新整理間隔"
+                },
+                nd_activityType: {
+                    description: "活動類型",
+                    label: "Navidrome：活動類型",
+                    listening: "正在收聽",
+                    playingFixesHiddenLines: "正在玩（修復隱藏的行）",
+                    watching: "正在觀看"
+                },
+                nd_nameString: {
+                    description: "活動名稱格式字串",
+                    label: "Navidrome：名稱字串"
+                },
+                nd_detailsString: {
+                    description: "活動詳細資料格式字串",
+                    label: "Navidrome：詳細資料字串"
+                },
+                nd_stateString: {
+                    description: "活動狀態格式字串",
+                    label: "Navidrome：狀態字串"
+                },
+                nd_largeTextString: {
+                    description: "活動大型文字格式字串",
+                    label: "Navidrome：大型文字字串"
+                },
+                nd_statusDisplayType: {
+                    description: "在成員清單中顯示曲目/藝人名稱",
+                    off: "不顯示（顯示通用收聽訊息）"
+                },
+                nd_hideOnPause: {
+                    description: "音樂暫停時隱藏 Rich Presence",
+                    label: "Navidrome：暫停時隱藏"
+                }
+            },
+            panel: {
+                password: "密碼",
+                statsFmUsername: "stats.fm 使用者名稱",
+                customStatusText: "自訂狀態文字",
+                nameFormat: "姓名格式",
+                missingArtFallback: "缺少封面時的回退",
+                showListeningStatus: "顯示收聽狀態",
+                showStatsFmLogo: "顯示 Stats.fm 標誌",
+                showProfileLink: "顯示個人檔案連結",
+                showSongLink: "顯示歌曲連結",
+                hideWithSpotify: "Spotify 時隱藏",
+                hideWithExternalRpc: "外部 RPC 時隱藏",
+                disableAlbumArt: "停用專輯封面",
+                apiKey: "API 金鑰",
+                userId: "使用者身分",
+                nameDisplay: "名稱顯示",
+                customNameTemplate: "自訂名稱範本",
+                coverType: "封面類型",
+                episodeFormat: "集數格式",
+                overridePresenceType: "覆寫狀態類型",
+                showEpisodeName: "顯示單集名稱",
+                showWhenPaused: "暫停時顯示",
+                privacyMode: "隱私模式",
+                refreshInterval: "重新整理間隔",
+                clientId: "用戶端 ID",
+                albumArtMode: "專輯封面模式",
+                lastFmApiKey: "Last.fm API 金鑰",
+                showSmallImage: "顯示小圖",
+                showAlbum: "顯示專輯",
+                activityType: "活動類型",
+                statusDisplayType: "狀態顯示類型",
+                hideOnPause: "暫停時隱藏",
+                activityNameFormat: "活動名稱格式",
+                detailsFormat: "詳細資料格式",
+                stateFormat: "狀態格式",
+                largeTextFormat: "大型文字格式",
+                enabled: "啟用"
+            }
+        },
+        sedEnhanced: {
+            option: {
+                regexByDefault: {
+                    description: "反轉 `r` 旗標：使用 `r` 時啟用非正規表示式模式，省略時使用正規表示式模式。",
+                    label: "預設使用正規表示式"
+                }
+            },
+            name: "SedEnhanced",
+            description: "擴充 Discord 陽春的 `sed` 支援。"
+        },
+        showRolesInChat: {
+            option: {
+                showBots: {
+                    description: "是否在機器人上顯示最高身分組。",
+                    label: "顯示機器人"
+                },
+                useRoleColor: {
+                    description: "圖示使用身分組顏色。",
+                    label: "使用身分組顏色"
+                }
+            },
+            name: "ShowRolesInChat",
+            description: "在聊天訊息中於使用者名稱旁顯示其最高身分組。可在身分組的右鍵選單中隱藏/顯示特定身分組。",
+            text: {
+                chatRoleActions: "聊天身分組動作",
+                unhideRolesInChat: "在聊天中取消隱藏身分組",
+                showRoleInChat: "在聊天中顯示身分組",
+                hideRoleInChat: "在聊天中隱藏身分組"
+            }
+        },
+        silenceUsers: {
+            option: {
+                mutedUserIds: {
+                    description: "以逗號分隔的 Discord 使用者 ID，將靜音其提及與伺服器徽章。",
+                    label: "已靜音使用者 ID"
+                }
+            },
+            name: "SilenceUsers",
+            description: "靜音特定使用者的 @提及通知與伺服器徽章計數。一般訊息與私訊不受影響。"
+        },
+        songLink: {
+            text: {
+                showIfAvailable: "可用時顯示",
+                openInDesktopApp: "在桌面應用程式中開啟",
+                loadingSongLink: "正在載入歌曲連結...",
+                pleaseProvideAMusic: "請提供音樂連結。",
+                thisWillTakeA: "這需要一點時間...",
+                noAlternativePlatformsFound: "找不到此連結的其他平台。",
+                failedToResolveMusic: "無法解析音樂連結",
+                logo: "{{name}} 標誌"
+            },
+            option: {
+                servicesSettings: {
+                    description: "服務設定",
+                    label: "服務設定"
+                },
+                userCountry: {
+                    description: "用於查詢的國家/地區（兩位字母代碼）",
+                    label: "使用者國家/地區"
+                },
+                includeMetadata: {
+                    description: "將曲目標題與藝人名稱作為標題包含。",
+                    label: "包含中繼資料"
+                }
+            },
+            name: "SongLink",
+            description: "在歌曲連結下方新增串流服務按鈕",
+            command: {
+                musiclink: "將音樂連結轉換為其他串流平台的連結。",
+                url: "音樂連結（Spotify、Deezer、YouTube、Tidal、Apple Music、SoundCloud）"
+            }
+        },
+        songSpotlight: {
+            name: "SongSpotlight",
+            description: "在你的個人檔案中展示歌曲",
+            text: {
+                songSpotlight: "Song Spotlight",
+                explicit: "含不雅內容",
+                addSong: "新增歌曲",
+                addANewSong: "新增歌曲",
+                copyLink: "複製連結",
+                removeSong: "移除歌曲",
+                failedToLoad: "載入失敗！",
+                areYouSure: "確定嗎？",
+                thisWillOverwriteYour: "這將覆寫你目前的歌曲。",
+                continue: "繼續",
+                nevermind: "算了",
+                thisWillPermanentlyDelete: "這將永久刪除你的所有歌曲。",
+                delete: "刪除",
+                signInToSong: "登入 Song Spotlight",
+                songs: "歌曲",
+                authorization: "Authorization",
+                importFromClipboard: "從剪貼簿匯入",
+                copyToClipboard: "複製到剪貼簿",
+                signOut: "登出",
+                deleteSongs: "刪除歌曲",
+                more: "更多",
+                editSongs: "編輯歌曲",
+                copyJson: "複製 JSON",
+                looksLikeThereS: "這裡好像什麼都沒有！",
+                uhOhSongSpotlight: "糟糕！Song Spotlight 載入失敗。可查看主控台了解詳情。",
+                stealSong: "搶走歌曲",
+                profileSongs: "個人檔案歌曲",
+                notEnoughSpace: "空間不足",
+                alreadyAdded: "你已經新增過這首歌",
+                invalidLink: "無效的連結",
+                failedToParseLink: "無法解析連結",
+                invalidUrl: "無效的 URL",
+                goAddSongs: "還在等什麼？快在你的 Song Spotlight 加入幾首歌吧！",
+                tellUserToAddSongs: "告訴 {{name}} 在 Song Spotlight 加入幾首歌吧！",
+                supportedServices: "Song Spotlight 支援以下服務：",
+                viewSongsVia: "你也可以透過",
+                viewSongsViaSuffix: "指令查看你的歌曲！",
+                coverTooltipOwner: "{{label}} 的 {{sublabel}}",
+                coverTooltipBy: "{{sublabel}} 的 {{label}}",
+                lastUpdated: "最後更新",
+                save: "儲存",
+                showMore: "再顯示 {{count}} 個"
+            },
+            toast: {
+                youHaveBeenSigned: "你已從 Song Spotlight 登出。請重新登入。",
+                songSpotlightError: "Song Spotlight：{{error}}",
+                successfullyAuthorized: "授權成功！",
+                failedToPlaySong: "無法播放歌曲試聽！",
+                addedSong: "已新增歌曲！",
+                removedSong: "已移除歌曲！",
+                noJsonInClipboard: "剪貼簿中沒有 JSON！",
+                invalidSongSpotlightData: "剪貼簿中的 Song Spotlight 資料無效！",
+                oneOrMoreImported: "一首或多首匯入的歌曲無效。",
+                importedSongsFromClipboard: "已從剪貼簿匯入歌曲！",
+                successfullySavedSongs: "已成功儲存歌曲！",
+                successfullySignedOut: "已成功登出！",
+                successfullyDeletedSongs: "已成功刪除歌曲！",
+                youDonTHave: "你的空間不足！",
+                uhOhThisSong: "糟糕，這首歌不存在！",
+                youAlreadyHaveThis: "你已經新增過這首歌了！",
+                youDonTHave2: "你……沒有新增這首歌？",
+                fetchError: "Song Spotlight 請求出錯：{{path}}"
+            },
+            option: {
+                collapseSongList: {
+                    description: "將使用者個人檔案上的歌曲清單收合為一個開啟獨立選單的按鈕",
+                    label: "收合歌曲清單"
+                },
+                profileSongsLimit: {
+                    description: "首次點擊使用者時顯示的歌曲數量",
+                    label: "個人檔案歌曲數量上限"
+                },
+                previewVolume: {
+                    description: "歌曲試聽播放音量",
+                    label: "試聽音量"
+                }
+            }
+        },
+        stopAutoUnread: {
+            name: "StopAutoUnread",
+            description: "阻止 Discord 自動將頻道的通知設定提升為「所有訊息」"
+        },
+        themeLibrary: {
+            text: {
+                enablePlugin: "啟用外掛",
+                cancel: "取消",
+                holdOn: "等一下！",
+                thisThemeRequiresThe: "此主題需要",
+                pluginToWorkProperly: "外掛才能正常運作！",
+                doYouWantTo: "要啟用它嗎？",
+                themeInfo: "主題資訊",
+                viewSource: "檢視原始碼",
+                close: "關閉",
+                download: "下載",
+                overwrite: "覆寫",
+                keepMyFile: "保留我的檔案",
+                copyToClipboard: "複製到剪貼簿",
+                conflict: "衝突！",
+                themeSource: "主題原始碼",
+                aThemeWithThe: "同名主題",
+                alreadyExists: "已存在",
+                inYourThemesDirectory: "於你的主題目錄中！要覆寫嗎？",
+                version: "版本",
+                likes: "按讚數",
+                donate: "贊助",
+                supportServer: "支援伺服器",
+                source: "原始碼",
+                tags: "標籤",
+                youCanSupportThe: "你可以透過下方贊助支持作者！",
+                joinDiscordServer: "加入 Discord 伺服器",
+                viewThemeSource: "檢視主題原始碼",
+                showAll: "顯示全部",
+                showThemes: "顯示主題",
+                showSnippets: "顯示程式碼片段",
+                showMostLiked: "顯示最受歡迎",
+                showDark: "顯示深色",
+                showLight: "顯示淺色",
+                showEnabled: "顯示已啟用",
+                showDisabled: "顯示已停用",
+                searchForATheme: "搜尋主題...",
+                gettingTheLatestThemes: "正在取得最新主題...",
+                thisWonTTake: "馬上就好！",
+                failedToFetchThemes: "取得主題失敗",
+                couldNotFetchThe: "無法取得主題清單。請稍後再試。",
+                wantYourThemeRemoved: "想要移除你的主題？",
+                hide: "隱藏",
+                noThemeFound: "找不到主題。",
+                tryNarrowingYourSearch: "嘗試縮小搜尋範圍。",
+                themeLibrary: "主題庫",
+                successfullyAuthorizedWithThemelibrary: "已成功透過 ThemeLibrary 授權！",
+                failedToAuthorizeCheck: "授權失敗，請查看主控台",
+                successfullyDeauthorizedFromThemelibrary: "已成功取消 ThemeLibrary 授權！",
+                failedToDeauthorizeCheck: "取消授權失敗，請查看主控台",
+                themelibraryAuth: "ThemeLibrary 驗證",
+                themeRemoval: "主題移除",
+                allThemeAuthorsAre: "所有主題作者皆在主題資訊中署名，且未修改任何原始碼。如果你仍希望移除你的主題，請點擊下方提交 Issue。",
+                authorizeWithThemelibrary: "透過 ThemeLibrary 授權",
+                copyThemelibraryToken: "複製 ThemeLibrary 權杖",
+                deauthorizeThemelibrary: "取消 ThemeLibrary 授權",
+                themeDetails: "{{name}} 詳細資料",
+                mostLiked: "最多人喜歡",
+                newestAdditions: "最新加入",
+                removeTheme: "移除主題",
+                addTheme: "新增主題",
+                authors: "作者",
+                author: "作者",
+                nobodyLikedTheme: "還沒有人喜歡這個主題。",
+                nobodyLikedSnippet: "還沒有人喜歡這個片段。",
+                usersLikedTheme: "{{likes}} 位使用者喜歡這個主題！",
+                usersLikedSnippet: "{{likes}} 位使用者喜歡這個片段！",
+                openThemeLibrary: "開啟主題庫",
+                lastUpdated: "此主題最後更新於",
+                removalInfo: "如果你希望永久移除你的主題，請在以下位置提交 issue：",
+                themes: "主題",
+                requestRemoval: "申請移除主題",
+                pluginSuffix: "外掛！"
+            },
+            toast: {
+                downloadedName: "已下載 {{name}}！",
+                failedToDownloadName: "下載 {{name}} 失敗！（請查看主控台）",
+                invalidOrExpiredInvite: "邀請無效或已過期！",
+                copiedToClipboard: "已複製到剪貼簿",
+                noUniquetokenPresentTry: "沒有 uniqueToken，請先授權！",
+                noTokenToCopy: "沒有可複製的權杖，請先授權！",
+                copiedToClipboard2: "已複製到剪貼簿！"
+            },
+            name: "ThemeLibrary",
+            description: "Plexcord 的主題庫。",
+            option: {
+                hideWarningCard: {
+                    description: "隱藏主題庫分頁頂端的警告卡片",
+                    label: "隱藏警告卡片"
+                },
+                buttons: {
+                    description: "ThemeLibrary 按鈕",
+                    label: "按鈕"
+                }
+            }
+        },
+        translatePlus: {
+            name: "Translate+",
+            description: "Plexcord 的翻譯外掛，但支援人造語言！",
+            text: {
+                translate: "翻譯",
+                dismiss: "忽略",
+                translationFailedDueTo: "由於錯誤，翻譯失敗。",
+                translatedFrom: "翻譯自{{lang}}"
+            },
+            option: {
+                target: {
+                    description: "目標語言",
+                    label: "目標"
+                },
+                toki: {
+                    description: "啟用道本語",
+                    label: "道本語"
+                },
+                sitelen: {
+                    description: "啟用 Sitelen Pona",
+                    label: "Sitelen Pona"
+                },
+                shavian: {
+                    description: "啟用蕭伯納字母",
+                    label: "蕭伯納字母"
+                }
+            }
+        },
+        triviaAI: {
+            name: "TriviaAI",
+            description: "借助 AI 幫你回答知識問答題的外掛。",
+            text: {
+                answerWithAi: "用 AI 回答",
+                enterApiKeyHere: "在此輸入你的 AI 端點的 API 金鑰。",
+                enterSystemPrompt: "輸入系統提示詞。",
+                enterYourOpenaiCompatible: "在此輸入你的相容 OpenAI 的 AI 端點。",
+                status: "狀態 {{status}}"
+            },
+            option: {
+                apiKey: {
+                    description: "API 金鑰。",
+                    label: "API 金鑰"
+                },
+                model: {
+                    description: "要使用的 AI 模型。",
+                    label: "模型",
+                    placeholder: "例如 google/gemini-3-flash-preview、inception/mercury、openai/gpt-5.2-chat 等"
+                },
+                systemPrompt: {
+                    description: "AI 的系統提示詞。預留位置：{current_user}、{current_time}",
+                    label: "系統提示詞"
+                },
+                maxTokens: {
+                    description: "回應中的最大 token 數。",
+                    label: "最大 token 數"
+                },
+                endpoint: {
+                    description: "相容 OpenAI 的 AI 端點。",
+                    label: "端點"
+                },
+                context: {
+                    description: "作為上下文包含的先前訊息數量。",
+                    label: "上下文"
+                },
+                passMessageAuthorName: {
+                    description: "將訊息傳給 AI 時在內容前加上作者名稱，可協助 AI 區分對話中的不同使用者。",
+                    label: "傳遞訊息作者名稱"
+                },
+                treatSelfAsAssistant: {
+                    description: "啟用後，你自己的訊息會在上下文中被視為助理訊息。這會導致某些模型開始產生同人小說。",
+                    label: "將自己視為助理"
+                },
+                mode: {
+                    description: "如何處理回答？",
+                    label: "模式",
+                    autoreply: "自動回覆",
+                    chatbar: "取代聊天列文字",
+                    bot: "Clyde"
+                },
+                supportImages: {
+                    description: "將圖片作為上下文傳給 AI（如果有）。並非所有模型都支援。",
+                    label: "支援圖片"
+                },
+                sendImagesAsBase64: {
+                    description: "以 base64 格式將圖片傳送給 AI。",
+                    label: "以 base64 傳送圖片"
+                }
+            },
+            toast: {
+                triviaaiApiSettingsAre: "TriviaAI：API 設定不完整。",
+                errorGettingResponseFrom: "從 AI 模型取得回應時發生錯誤"
+            }
+        },
+        unreadCountBadge: {
+            option: {
+                showOnMutedChannels: {
+                    description: "在已靜音頻道上顯示未讀數",
+                    label: "在已靜音頻道上顯示"
+                },
+                notificationCountLimit: {
+                    description: "顯示 +99 而非實際數量",
+                    label: "通知數量上限"
+                }
+            },
+            name: "UnreadCountBadge",
+            description: "在頻道清單中的頻道上顯示未讀訊息數徽章"
+        },
+        userPFP: {
+            toast: {
+                gifsWebpMustBe: "GIF/WebP 必須透過 URL 新增。請將 GIF/WebP 上傳到圖床並貼上連結。"
+            },
+            text: {
+                save: "儲存",
+                delete: "刪除",
+                customAvatar: "自訂頭像",
+                original: "原始",
+                local: "本機",
+                enterPngGifUrl: "輸入 PNG/GIF URL",
+                setAvatar: "設定頭像",
+                usingTheSetAvatar: "設定頭像功能僅在本機生效，只有你能看到變化。",
+                joinUserpfpServer: "加入 UserPFP 伺服器",
+                dropHere: "拖放到這裡！",
+                dragOrClick: "⬆ 拖入圖片或點擊上傳（GIF 或 WebP 請使用 URL）",
+                uploadedFile: "（已上傳的檔案）",
+                supportHere: "在此支持 UserPFP"
+            },
+            option: {
+                overrideServerAvatars: {
+                    description: "用自訂頭像覆寫伺服器頭像；若未設定自訂頭像則使用預設使用者頭像。",
+                    label: "覆寫伺服器頭像"
+                },
+                preferNitro: {
+                    description: "當預設動態（Nitro）頭像與 UserPFP 頭像同時存在時使用哪個",
+                    label: "優先 Nitro",
+                    false: "UserPFP",
+                    true: "Nitro"
+                },
+                databaseSource: {
+                    description: "載入資料庫的 URL",
+                    label: "資料庫來源"
+                }
+            },
+            name: "UserPFP",
+            description: "允許你為自己和其他使用者設定本機靜態或動態頭像"
+        },
+        userpluginInstaller: {
+            toast: {
+                restartToApplyChanges: "重新啟動以套用變更！"
+            },
+            text: {
+                installError: "安裝錯誤",
+                done: "完成！",
+                later: "稍後",
+                updateError: "更新錯誤",
+                checkingForUpdates: "正在檢查更新...",
+                loadingPlugins: "正在載入外掛...",
+                pluginUpdatesAvailable: "有可用的外掛更新",
+                theFollowingPluginsAre: "以下外掛已過時：",
+                youCanUpdatePlugins: "你可以在下方更新外掛。",
+                installPlugin: "安裝外掛",
+                userplugininstallerNotFullyLoaded: "UserpluginInstaller 未完全載入",
+                youNeedToRestart: "需要重新啟動才能載入原生部分 :)",
+                restartNow: "立即重新啟動",
+                someUserpluginsAreOut: "部分 UserPlugins 已過時！",
+                clickToOpenThe: "點擊開啟 UserPlugin 更新程式",
+                plexcordDoesNotModerate: "Plexcord 不審核使用者外掛，也不對安裝它們可能產生的任何後果負責。",
+                onlyInstallUserpluginsFrom: "僅安裝你信任的開發者的使用者外掛。風險完全由你自行承擔。",
+                setGitPath: "設定 Git 路徑",
+                installHint: "你可以在此貼上複製 URL，從 GitHub、GitLab、Codeberg、git.nin0.dev 或 plugins.nin0.dev 安裝外掛。",
+                enableAndRestart: "啟用並重新啟動",
+                enableAndRefresh: "啟用並重新整理",
+                tabCounts: "（{{total}} 個，已啟用 {{enabled}} 個）",
+                possiblyMore: "可能還有更多，因為更新檢查尚未完成。",
+                alreadyInstalled: "外掛已安裝，請在下方更新",
+                invalidUrl: "網址無效，請閱讀上方說明",
+                install: "安裝",
+                restart: "重新啟動",
+                refresh: "重新整理",
+                update: "更新",
+                source: "原始碼",
+                support: "支援",
+                managePlugins: "管理外掛",
+                uninstalledRestart: "{{name}} 已解除安裝。需要重新啟動才能完全移除該外掛。",
+                uninstalledRefresh: "{{name}} 已解除安裝。需要重新整理才能完全移除該外掛。",
+                updatedRestart: "{{name}} 已更新。需要重新啟動才能套用更新。",
+                updatedRefresh: "{{name}} 已更新。需要重新整理才能套用更新。",
+                installedBody: "{{name}} 已成功安裝。接下來呢？",
+                installedNativeBody: "{{name}} 已成功安裝。但由於它使用原生功能，需要重新啟動用戶端。接下來呢？"
+            },
+            option: {
+                allowlistedChannels: {
+                    description: "以逗號分隔的頻道清單，在其中顯示「安裝外掛」按鈕。在 Plexcord 使用者外掛頻道中一律顯示",
+                    label: "允許的頻道"
+                },
+                notifyIfUpdate: {
+                    description: "當 UserPlugins 需要更新時顯示 Plexcord 通知",
+                    label: "有更新時通知"
+                },
+                neverNotifyForPlugins: {
+                    description: "永不為這些外掛顯示更新通知（仍可在 UserPlugins 分頁中更新）",
+                    label: "永不通知的外掛"
+                }
+            },
+            name: "UserpluginInstaller",
+            description: "一鍵安裝使用者外掛"
+        },
+        vCPanelSettings: {
+            option: {
+                title1: {
+                    label: "標題 1"
+                },
+                uncollapseSettingsByDefault: {
+                    description: "預設自動展開語音設定",
+                    label: "預設展開設定"
+                },
+                title2: {
+                    label: "標題 2"
+                },
+                outputVolume: {
+                    description: "顯示輸出音量滑桿",
+                    label: "輸出音量"
+                },
+                inputVolume: {
+                    description: "顯示輸入音量滑桿",
+                    label: "輸入音量"
+                },
+                outputDevice: {
+                    description: "顯示輸出裝置選擇器",
+                    label: "輸出裝置"
+                },
+                inputDevice: {
+                    description: "顯示輸入裝置選擇器",
+                    label: "輸入裝置"
+                },
+                camera: {
+                    description: "顯示相機選擇器",
+                    label: "相機"
+                },
+                title3: {
+                    label: "標題 3"
+                },
+                showOutputVolumeHeader: {
+                    description: "在輸出音量滑桿上方顯示標題",
+                    label: "顯示輸出音量標題"
+                },
+                showInputVolumeHeader: {
+                    description: "在輸入音量滑桿上方顯示標題",
+                    label: "顯示輸入音量標題"
+                },
+                showOutputDeviceHeader: {
+                    description: "在輸出裝置選擇器上方顯示標題",
+                    label: "顯示輸出裝置標題"
+                },
+                showInputDeviceHeader: {
+                    description: "在輸入裝置選擇器上方顯示標題",
+                    label: "顯示輸入裝置標題"
+                },
+                showVideoDeviceHeader: {
+                    description: "在相機選擇器上方顯示標題",
+                    label: "顯示視訊裝置標題"
+                }
+            },
+            name: "VCPanelSettings",
+            description: "直接在語音面板中控制語音設定",
+            text: {
+                appearance: "外觀",
+                settingsToShow: "要顯示的設定",
+                headersToShow: "要顯示的標題",
+                outputVolume: "輸出音量",
+                inputVolume: "輸入音量",
+                outputDevice: "輸出裝置",
+                inputDevice: "輸入裝置",
+                settings: "設定",
+                hide: "隱藏"
+            }
+        },
+        voiceMessageTranscriber: {
+            text: {
+                autoDetect: "自動偵測",
+                start: "開始",
+                transcriptionOptions: "轉錄選項",
+                audioLanguage: "音訊語言",
+                retry: "重試",
+                transcriptionFailed: "轉錄失敗",
+                transcribeVoiceMessage: "轉錄語音訊息",
+                close: "關閉",
+                baseRecommended: "Base（建議）",
+                small: "Small",
+                largeV3TurboBest: "Large v3 Turbo（最佳準確度，建議使用 GPU）",
+                transcribe: "轉錄",
+                translateToEnglish: "翻譯成英文",
+                voiceMessageTranslation: "語音訊息翻譯",
+                voiceMessageTranscription: "語音訊息轉錄",
+                hideTimestamps: "隱藏時間戳記",
+                showTimestamps: "顯示時間戳記",
+                copied: "已複製！",
+                copyText: "複製文字",
+                downloadingAudio: "正在下載音訊...",
+                processingAudio: "正在處理音訊...",
+                loadingModel: "正在載入模型...",
+                transcribing: "正在轉錄...",
+                transcription: "轉錄",
+                transcriptionError: "轉錄錯誤",
+                transcribingInProgress: "轉錄進行中...",
+                initializing: "正在初始化...",
+                workerCrashed: "轉錄程序已當機",
+                workerStopped: "轉錄程序已停止",
+                deleteCache: "刪除所有快取檔案（{{size}} MB）",
+                action: "操作"
+            },
+            name: "VoiceMessageTranscriber",
+            description: "由 Whisper 驅動的本機語音訊息轉錄",
+            option: {
+                embed: {
+                    description: "直接在語音訊息附件中顯示轉錄內容，而不是彈出視窗。",
+                    label: "嵌入"
+                },
+                maintainHorizontal: {
+                    description: "保持嵌入轉錄框的水平尺寸並縱向擴展。",
+                    label: "保持水平"
+                },
+                selectedModel: {
+                    description: "模型大小。",
+                    onnxcommunitywhispertiny: "Tiny（最快，準確度最低）"
+                },
+                useGpu: {
+                    description: "在支援時使用 GPU（WebGPU）執行模型。速度快得多，並讓大型模型可用。無法使用時回退到 CPU。",
+                    label: "使用 GPU"
+                },
+                quantized: {
+                    description: "在 CPU 上執行時使用量化模型（體積更小，品質略有下降）。",
+                    label: "量化"
+                },
+                deleteModalFiles: {
+                    description: "從儲存空間刪除快取的檔案。",
+                    label: "刪除模型檔案"
+                }
+            }
+        },
+        voiceMessagesInBackground: {
+            name: "VoiceMessagesInBackground",
+            description: "透過同步的迷你播放器，在切換聊天時持續播放語音訊息。",
+            text: {
+                voiceMessagesInBackground: "背景語音訊息播放器",
+                returnToChannelname: "返回 {{channelName}}",
+                voiceMessagePosition: "語音訊息位置",
+                changePlaybackSpeed: "變更播放速度",
+                playbackSpeedSpeedTimes: "播放速度 {{speed}} 倍",
+                closeVoiceMessagePlayer: "關閉語音訊息播放器",
+                voiceMessage: "語音訊息",
+                directMessage: "私人訊息",
+                resume: "繼續播放語音訊息",
+                pause: "暫停語音訊息"
+            }
+        },
+        webPWA: {
+            name: "WebPWA",
+            description: "讓 Discord 可作為應用程式（PWA）安裝。啟用通知徽章、全域快速鍵與 Discord 自訂標題列。",
+            text: {
+                activities: "活動",
+                hopIn: "加入",
+                status: "狀態",
+                emojis: "表情符號",
+                rooms: "房間",
+                discord: "Discord",
+                platforms: "平台",
+                keybindsInfoBefore: "支援自訂全域「按下 X」快捷鍵。前往",
+                keybindsInfoAfter: "進行變更。不支援「按住 X」快捷鍵。"
+            }
+        },
+        "webRichPresence (arRPC)": {
+            name: "WebRichPresence (arRPC)"
+        },
+        webScreenShare: {
+            option: {
+                resolution: {
+                    description: "解析度",
+                    label: "解析度"
+                },
+                frameRate: {
+                    description: "幀率",
+                    label: "幀率"
+                },
+                contentHint: {
+                    description: "內容提示",
+                    label: "內容提示"
+                },
+                systemAudio: {
+                    description: "靜音系統音訊",
+                    label: "系統音訊"
+                }
+            },
+            name: "WebScreenShare",
+            description: "新增螢幕分享選項選單。可變更解析度、幀率、編碼提示與系統音訊設定。",
+            text: {
+                stream: "直播",
+                streamMuted: "直播已靜音",
+                streamMode: "直播模式",
+                muteStreamAudio: "靜音直播音訊",
+                preventsSystemAudioFrom: "防止系統音訊被包含在你的直播中。",
+                showStreamPreviews: "顯示直播預覽",
+                allowsOthersToSee: "允許他人在加入前預覽你的直播。",
+                smootherVideo: "更流暢的影片",
+                cleanerText: "更清晰的文字",
+                userPreset: "使用者預設",
+                custom: "自訂",
+                gaming: "遊戲",
+                screenshare: "螢幕分享"
+            }
+        },
+        whitelistedEmojis: {
+            option: {
+                defaultEmojis: {
+                    description: "除非在白名單中，否則在自動完成中隱藏預設 Unicode 表情符號。",
+                    label: "預設表情符號"
+                },
+                serverEmojis: {
+                    description: "除非在白名單中，否則在自動完成中隱藏伺服器自訂表情符號。",
+                    label: "伺服器表情符號"
+                },
+                disableToasts: {
+                    description: "新增或移除表情符號時不顯示提示。",
+                    label: "停用提示"
+                },
+                whiteListedEmojis: {
+                    description: "白名單表情符號",
+                    label: "白名單表情符號"
+                },
+                exportEmojis: {
+                    description: "匯出表情符號",
+                    label: "匯出表情符號"
+                },
+                importEmojis: {
+                    description: "匯入表情符號",
+                    label: "匯入表情符號"
+                },
+                resetEmojis: {
+                    description: "重設表情符號",
+                    label: "重設表情符號"
+                }
+            },
+            name: "WhitelistedEmojis",
+            description: "可停用白名單以外的所有訊息表情符號。",
+            toast: {
+                addedLengthEmojisTo: "已將 {{length}} 個表情符號新增到清單，{{length}} 個已在清單中",
+                removedLengthEmojisFrom: "已從清單移除 {{length}} 個表情符號",
+                nameIsAlreadyIn: "「{{name}}」已在清單中",
+                addedNameToThe: "已將「{{name}}」新增到清單",
+                nameIsNotIn: "「{{name}}」不在清單中",
+                removedNameFromThe: "已將「{{name}}」從清單移除",
+                successfullyExportedEmojis: "已成功匯出表情符號",
+                successfullyImportedEmojis: "已成功匯入表情符號",
+                invalidJsonData: "無效的 JSON 資料",
+                failedToImportEmojis: "匯入表情符號失敗：{{err}}",
+                resetEmojis: "表情符號已重設"
+            },
+            text: {
+                areYouSure: "確定嗎？",
+                thisWillOverwriteYour: "這將覆寫你目前的白名單。",
+                import: "匯入",
+                cancel: "取消",
+                thisWillRemoveAll: "這將從白名單中移除所有表情符號。",
+                reset: "重設",
+                addAllGuildEmojis: "新增伺服器所有表情符號",
+                removeAllGuildEmojis: "移除伺服器所有表情符號",
+                noEmojisInThe: "白名單中沒有表情符號。",
+                removeAll: "全部移除",
+                removeFromWhitelist: "從白名單移除",
+                addToWhitelist: "加入白名單",
+                defaultEmojis: "預設表情符號",
+                guildEmojis: "{{name}} 的表情符號",
+                guildFallback: "伺服器 {{id}}",
+                whitelistedEmojis: "白名單表情符號",
+                remove: "移除"
+            }
+        },
+        wigglyText: {
+            option: {
+                intensity: {
+                    description: "動畫強度（px）",
+                    label: "強度"
+                }
+            },
+            name: "WigglyText",
+            description: "新增一種讓文字扭動的新 Markdown 格式。",
+            text: {
+                leftAndRight: "左右",
+                byTyping: "輸入",
+                upAndDown: "上下",
+                inACircle: "繞圈",
+                youCanMakeTextWiggle: "你可以透過以下方式讓文字搖擺："
+            }
+        },
+        fixDiscordCss: {
+            description: "修正 Discord 的 CSS 延遲"
+        },
+        directFileDownload: {
+            name: "DirectFileDownload",
+            description: "直接從 Discord 下載檔案，而不是在瀏覽器中開啟"
+        },
+        githubRepos: {
+            text: {
+                failedToFetchRepositories: "無法取得儲存庫",
+                personal: "個人",
+                unknown: "未知",
+                sortedByCount: "依儲存庫數量排序。點擊以 A-Z 排序",
+                sortedAlphabetically: "依 A-Z 排序。點擊以儲存庫數量排序",
+                mostRepos: "儲存庫最多"
+            }
         }
     }
 } as const;

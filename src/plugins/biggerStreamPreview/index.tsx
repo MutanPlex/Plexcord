@@ -72,6 +72,7 @@ export const addViewStreamContext: NavContextMenuPatchCallback = (children, { us
             label={t(plugin.biggerStreamPreview.context.viewPreview)}
             id="view-stream-preview"
             icon={ScreenshareIcon}
+            leadingAccessory={{ type: "icon", icon: ScreenshareIcon }}
             action={() => stream && handleViewPreview(stream)}
             disabled={!stream}
         />

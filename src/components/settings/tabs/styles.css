@@ -90,10 +90,7 @@
     height: 1.25em;
 }
 
-.pc-settings-modal-root {
-    background: var(--background-base-low);
-}
-
-.pc-settings-modal {
-    padding-bottom: 1em;
+.pc-settings-switches {
+    display: grid;
+    gap: 8px;
 }

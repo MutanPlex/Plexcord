@@ -8,21 +8,25 @@
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
-import { ImageIcon } from "@components/Icons";
+import { CopyIdIcon, ImageIcon } from "@components/Icons";
+import { Guild, Role } from "@plexcord/discord-types";
 import { copyToClipboard } from "@utils/clipboard";
 import { Devs } from "@utils/constants";
-import { getCurrentGuild, openImageModal } from "@utils/discord";
+import { getCurrentChannel, getCurrentGuild, getIntlMessage, openImageModal } from "@utils/discord";
+import { isTruthy } from "@utils/guards";
+import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
-import { findByPropsLazy } from "@webpack";
-import { GuildRoleStore, Menu, PermissionStore } from "@webpack/common";
+import { findByCodeLazy, findByPropsLazy, findCssClassesLazy } from "@webpack";
+import { ContextMenuApi, GuildRoleStore, Menu, PermissionStore, Popout, RoleMemberPopout, useRef } from "@webpack/common";
 
 const GuildSettingsActions = findByPropsLazy("open", "selectRole", "updateGuild");
+const MenuItemClasses = findCssClassesLazy("item", "labelContainer", "colorDefault", "label", "iconContainer");
+const loadRoleMembers = findByCodeLazy(".GUILD_ROLE_MEMBER_IDS(", "requestMembersById");
 
 const DeveloperMode = getUserSettingLazy("appearance", "developerMode")!;
 
 async function openRoleIconModal(roleId: string, roleIcon: string, roleName: string) {
     const format = settings.store.roleIconFileFormat;
-    const contentType = format === "jpg" ? "image/jpeg" : `image/${format}`;
     const original = `${location.protocol}//${window.GLOBAL_ENV.CDN_HOST}/role-icons/${roleId}/${roleIcon}.${format}`;
     const url = original.replace(`//${window.GLOBAL_ENV.CDN_HOST}/`, "//media.discordapp.net/");
 
@@ -30,18 +34,7 @@ async function openRoleIconModal(roleId: string, roleIcon: string, roleName: str
         url,
         original,
         height: 128,
-        width: 128,
-        contentType,
-        originalContentType: contentType,
-        sourceMetadata: {
-            identifier: {
-                type: "attachment",
-                attachmentId: roleId,
-                filename: `role-icon-${roleId}.${format}`,
-                title: roleName,
-                size: 1,
-            }
-        }
+        width: 128
     });
 }
 
@@ -63,6 +56,14 @@ function AppearanceIcon() {
     return (
         <svg width="18" height="18" viewBox="0 0 24 24">
             <path fill="currentColor" d="M 12,0 C 5.3733333,0 0,5.3733333 0,12 c 0,6.626667 5.3733333,12 12,12 1.106667,0 2,-0.893333 2,-2 0,-0.52 -0.2,-0.986667 -0.52,-1.346667 -0.306667,-0.346666 -0.506667,-0.813333 -0.506667,-1.32 0,-1.106666 0.893334,-2 2,-2 h 2.36 C 21.013333,17.333333 24,14.346667 24,10.666667 24,4.7733333 18.626667,0 12,0 Z M 4.6666667,12 c -1.1066667,0 -2,-0.893333 -2,-2 0,-1.1066667 0.8933333,-2 2,-2 1.1066666,0 2,0.8933333 2,2 0,1.106667 -0.8933334,2 -2,2 z M 8.666667,6.6666667 c -1.106667,0 -2.0000003,-0.8933334 -2.0000003,-2 0,-1.1066667 0.8933333,-2 2.0000003,-2 1.106666,0 2,0.8933333 2,2 0,1.1066666 -0.893334,2 -2,2 z m 6.666666,0 c -1.106666,0 -2,-0.8933334 -2,-2 0,-1.1066667 0.893334,-2 2,-2 1.106667,0 2,0.8933333 2,2 0,1.1066666 -0.893333,2 -2,2 z m 4,5.3333333 c -1.106666,0 -2,-0.893333 -2,-2 0,-1.1066667 0.893334,-2 2,-2 1.106667,0 2,0.8933333 2,2 0,1.106667 -0.893333,2 -2,2 z" />
+        </svg>
+    );
+}
+
+function RoleMembersIcon() {
+    return (
+        <svg width="18" height="18" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM11.53 11A9.53 9.53 0 0 0 2 20.53c0 .81.66 1.47 1.47 1.47h.22c.24 0 .44-.17.5-.4.29-1.12.84-2.17 1.32-2.91.14-.21.43-.1.4.15l-.26 2.61c-.02.3.2.55.5.55h11.7a.5.5 0 0 0 .5-.55l-.27-2.6c-.02-.26.27-.37.41-.16.48.74 1.03 1.8 1.32 2.9.06.24.26.41.5.41h.22c.81 0 1.47-.66 1.47-1.47A9.53 9.53 0 0 0 12.47 11h-.94Z" />
         </svg>
     );
 }
@@ -90,15 +91,152 @@ const settings = definePluginSettings({
     }
 });
 
+export function buildExtraRoleContextMenuItems(role: Role, guild: Guild, popoutRef?: React.RefObject<any>) {
+    if (!role) return { before: [], after: [] };
+
+    const before = [
+        PermissionStore.getGuildPermissionProps(guild).canManageRoles && (
+            <Menu.MenuItem
+                key="pc-edit-role"
+                id="pc-edit-role"
+                label={t(plugin.betterRoleContext.context.editRole)}
+                action={async () => {
+                    await GuildSettingsActions.open(guild.id, "ROLES");
+                    GuildSettingsActions.selectRole(role.id);
+                }}
+                icon={PencilIcon}
+                leadingAccessory={{ type: "icon", icon: PencilIcon }}
+            />
+        ),
+        role.colorString && (
+            <Menu.MenuItem
+                key="pc-copy-role-color"
+                id="pc-copy-role-color"
+                label={t(plugin.betterRoleContext.context.copyColor)}
+                action={() => copyToClipboard(role.colorString!)}
+                icon={AppearanceIcon}
+                leadingAccessory={{ type: "icon", icon: AppearanceIcon }}
+            />
+        )
+    ].filter(isTruthy);
+
+    const after = [
+        role.icon && (
+            <Menu.MenuItem
+                key="pc-view-role-icon"
+                id="pc-view-role-icon"
+                label={t(plugin.betterRoleContext.context.viewIcon)}
+                action={() => {
+                    openImageModal({
+                        url: `${location.protocol}//${window.GLOBAL_ENV.CDN_HOST}/role-icons/${role.id}/${role.icon}.${settings.store.roleIconFileFormat}`,
+                        height: 128,
+                        width: 128
+                    });
+                }}
+                icon={ImageIcon}
+                leadingAccessory={{ type: "icon", icon: ImageIcon }}
+            />
+        ),
+        popoutRef && (
+            <Menu.MenuItem
+                key="pc-view-role-members"
+                id="pc-view-role-members"
+                label={t(plugin.betterRoleContext.context.viewMembers)}
+                render={() => (
+                    <Popout
+                        position="right"
+                        align="center"
+                        targetElementRef={popoutRef}
+                        preload={() => loadRoleMembers(guild.id, role.id)}
+                        renderPopout={popoutProps => (
+                            <RoleMemberPopout
+                                popoutProps={popoutProps}
+                                guildId={guild.id}
+                                channelId={getCurrentChannel()!.id}
+                                roleId={role.id}
+                            />
+                        )}
+                    >
+                        {popoutProps => (
+                            <div
+                                className={classes(MenuItemClasses.item, MenuItemClasses.labelContainer, MenuItemClasses.colorDefault)}
+                                ref={popoutRef}
+                                role="menuitem"
+                                {...popoutProps}
+                            >
+                                <div className={MenuItemClasses.label}>{t(plugin.betterRoleContext.context.viewMembers)}</div>
+                                {/* FIXME: update to new icon style */}
+                                <div className={MenuItemClasses.iconContainer}>
+                                    <RoleMembersIcon />
+                                </div>
+                            </div>
+                        )}
+                    </Popout>
+                )}
+            />
+        )
+    ].filter(isTruthy);
+
+    return { before, after };
+}
+
+export function openRoleContextMenu(event: React.MouseEvent<HTMLElement>, { guildId, id: roleId }: { guildId: string; id: string; }) {
+    const guild = getCurrentGuild();
+    if (!guild || guild.id !== guildId) return;
+
+    const role = GuildRoleStore.getRole(guildId, roleId);
+    if (!role) return;
+
+    ContextMenuApi.openContextMenu(event, () => {
+        const popoutRef = useRef(null);
+        const { before, after } = buildExtraRoleContextMenuItems(role, guild, popoutRef);
+
+        return (
+            <Menu.Menu
+                navId="pc-better-role-context-member-list"
+                onClose={ContextMenuApi.closeContextMenu}
+                aria-label={t(plugin.betterRoleContext.text.roleActions)}
+            >
+                {before}
+                {after}
+                <Menu.MenuItem
+                    key="pc-better-role-context-copy-role-id"
+                    id="pc-better-role-context-copy-role-id"
+                    label={getIntlMessage("COPY_ID_ROLE")}
+                    icon={CopyIdIcon}
+                    leadingAccessory={{ type: "icon", icon: CopyIdIcon }}
+                    action={() => copyToClipboard(role.id)}
+                />
+            </Menu.Menu>
+        );
+    });
+}
+
 export default definePlugin({
     name: "BetterRoleContext",
     description: () => t(plugin.betterRoleContext.description),
-    authors: [Devs.Ven, Devs.goodbee],
-    dependencies: ["UserSettingsAPI"],
-
     tags: ["roles", "servers"],
-
+    authors: [Devs.Ven, Devs.goodbee, Devs.nightmaresan],
+    dependencies: ["UserSettingsAPI"],
     settings,
+    openRoleContextMenu,
+    patches: [
+        {
+            find: 'tutorialId:"whos-online',
+            replacement: {
+                match: /(?<=#{intl::CHANNEL_MEMBERS_A11Y_LABEL}.{0,400}?)children:(?=.{0,20}?(?:—|\\u2014) ",\i\])/,
+                replace: "onContextMenu:e=>$self.openRoleContextMenu(e,arguments[0]),$&"
+            }
+        },
+        // member list role headers
+        {
+            find: "?null:new Intl.NumberFormat",
+            replacement: {
+                match: /(?<=#{intl::CHANNEL_MEMBERS_A11Y_LABEL},\{title:\i,count:\i\}\)\}\),\(0,\i\.jsxs\)\("div",\{)/,
+                replace: "onContextMenu:e=>$self.openRoleContextMenu(e,arguments[0]),"
+            }
+        }
+    ],
 
     start() {
         // DeveloperMode needs to be enabled for the context menu to be shown
@@ -107,6 +245,8 @@ export default definePlugin({
 
     contextMenus: {
         "dev-context"(children, { id }: { id: string; }) {
+            const popoutRef = useRef(null);
+
             const guild = getCurrentGuild();
             if (!guild) return;
 
@@ -120,6 +260,7 @@ export default definePlugin({
                         label={t(plugin.betterRoleContext.context.copyColor)}
                         action={() => copyToClipboard(role.colorString!)}
                         icon={AppearanceIcon}
+                        leadingAccessory={{ type: "icon", icon: AppearanceIcon }}
                     />
                 );
             }
@@ -134,6 +275,7 @@ export default definePlugin({
                             GuildSettingsActions.selectRole(id);
                         }}
                         icon={PencilIcon}
+                        leadingAccessory={{ type: "icon", icon: PencilIcon }}
                     />
                 );
             }
@@ -146,6 +288,7 @@ export default definePlugin({
                         label={t(plugin.betterRoleContext.context.viewIcon)}
                         action={() => openRoleIconModal(role.id, roleIcon, role.name)}
                         icon={ImageIcon}
+                        leadingAccessory={{ type: "icon", icon: ImageIcon }}
                     />
 
                 );

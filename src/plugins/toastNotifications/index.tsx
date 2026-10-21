@@ -18,43 +18,27 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { showNotification } from "@api/Notifications";
+import { NotificationData, showNotification } from "@api/Notifications";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Channel, Message, User } from "@plexcord/discord-types";
-import { MessageType, RelationshipType } from "@plexcord/discord-types/enums";
+import { MessageType, RelationshipType, UserNotificationSetting } from "@plexcord/discord-types/enums";
 import { Devs, PcDevs } from "@utils/constants";
+import { openPrivateChannel } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy, findStore } from "@webpack";
-import { ChannelStore, GuildRoleStore, IconUtils, NavigationRouter, RelationshipStore, SelectedChannelStore, StreamerModeStore, UserStore } from "@webpack/common";
-import { ReactNode } from "react";
-
-interface NotificationData {
-    title: string;
-    body: string;
-    richBody?: ReactNode;
-    icon?: string;
-    image?: string;
-    onClick?(): void;
-    onClose?(): void;
-    color?: string;
-    permanent?: boolean;
-    noPersist?: boolean;
-    dismissOnClick?: boolean;
-    attachments: number;
-}
+import { ChannelStore, IconUtils, MessageStore, NavigationRouter, PresenceStore, RelationshipStore, SelectedChannelStore, StreamerModeStore, UserGuildSettingsStore, UserStore } from "@webpack/common";
 
 let ignoredUsers: string[] = [];
 let notifyFor: string[] = [];
 
-// Functional variables.
-const MuteStore = findByPropsLazy("isSuppressEveryoneEnabled");
 const SelectedChannelActionCreators = findByPropsLazy("selectPrivateChannel");
 const ChannelRTCActions = findByPropsLazy("updateChatOpen", "toggleParticipants");
 const UserUtils = findByPropsLazy("getGlobalName");
 
 // Adjustable variables.
-const USER_MENTION_REGEX = /<@!?(\d{17,20})>|<#(\d{17,20})>|<@&(\d{17,20})>/g; // This regex captures user, channel, and role mentions.
+const ID_REGEX = /^\d{17,20}$/;
+const EMOJI_REGEX = /<a?:(\w+):\d+>/g;
 
 export const settings = definePluginSettings({
     determineServerNotifications: {
@@ -62,6 +46,12 @@ export const settings = definePluginSettings({
         description: () => t(plugin.toastNotifications.option.determineServerNotifications.description),
         type: OptionType.BOOLEAN,
         default: true
+    },
+    respectDoNotDisturb: {
+        label: () => t(plugin.toastNotifications.option.respectDoNotDisturb.label),
+        description: () => t(plugin.toastNotifications.option.respectDoNotDisturb.description),
+        type: OptionType.BOOLEAN,
+        default: false
     },
     directMessages: {
         label: () => t(plugin.toastNotifications.option.directMessages.label),
@@ -91,15 +81,17 @@ export const settings = definePluginSettings({
         label: () => t(plugin.toastNotifications.option.notifyFor.label),
         description: () => t(plugin.toastNotifications.option.notifyFor.description),
         type: OptionType.STRING,
-        onChange: () => { notifyFor = stringToList(settings.store.notifyFor); },
-        default: ""
+        onChange: () => { notifyFor = parseIdList(settings.store.notifyFor); },
+        default: "",
+        placeholder: "000000000000000000,111111111111111111,222222222222222222"
     },
     ignoreUsers: {
         label: () => t(plugin.toastNotifications.option.ignoreUsers.label),
         description: () => t(plugin.toastNotifications.option.ignoreUsers.description),
         type: OptionType.STRING,
-        onChange: () => { ignoredUsers = stringToList(settings.store.ignoreUsers); },
-        default: ""
+        onChange: () => { ignoredUsers = parseIdList(settings.store.ignoreUsers); },
+        default: "",
+        placeholder: "000000000000000000,111111111111111111,222222222222222222"
     },
     exampleButton: {
         label: () => t(plugin.toastNotifications.option.exampleButton.label),
@@ -112,55 +104,6 @@ export const settings = definePluginSettings({
     }
 });
 
-function stringToList(str: string): string[] {
-    if (str !== "") {
-        const array: string[] = [];
-        const string = str.replace(/\s/g, "");
-        const splitArray = string.split(",");
-        splitArray.forEach(id => {
-            array.push(id);
-        });
-
-        return array;
-    }
-    return [];
-}
-
-function limitMessageLength(body: string, hasAttachments: boolean): string {
-    if (hasAttachments) {
-        if (body?.length > 30) {
-            return body.substring(0, 27) + "...";
-        }
-    }
-
-    if (body?.length > 165) {
-        return body.substring(0, 162) + "...";
-    }
-
-    return body;
-}
-
-function getName(user: User): string {
-    return RelationshipStore.getNickname(user.id) ?? UserUtils.getName(user);
-}
-
-const addMention = (id: string, type: string, guildId?: string): ReactNode => {
-    let name;
-    if (type === "user")
-        name = `@${UserStore.getUser(id)?.username || "unknown-user"}`;
-    else if (type === "channel")
-        name = `#${ChannelStore.getChannel(id)?.name || "unknown-channel"}`;
-    else if (type === "role" && guildId)
-        name = `@${GuildRoleStore.getRole(guildId, id)?.name || "unknown-role"}`;
-
-    // Return the mention as a styled span.
-    return (
-        <span key={`${type}-${id}`} className={"toastnotifications-mention-class"}>
-            {name}
-        </span>
-    );
-};
-
 export default definePlugin({
     name: "ToastNotifications",
     description: () => t(plugin.toastNotifications.description),
@@ -169,385 +112,228 @@ export default definePlugin({
     settings,
 
     flux: {
-        async MESSAGE_CREATE({ message }: { message: Message; }) {
-
+        MESSAGE_CREATE({ message }: { message: Message; }) {
             const channel: Channel = ChannelStore.getChannel(message.channel_id);
+            if (!channel) return;
+
             const currentUser = UserStore.getCurrentUser();
+            const isStreaming = findStore("ApplicationStreamingStore").getAnyStreamForUser(currentUser?.id);
 
-            const isStreaming = findStore("ApplicationStreamingStore").getAnyStreamForUser(UserStore.getCurrentUser()?.id);
-
-            const streamerMode = Settings.notifications.disableInStreamerMode;
-            const currentUserStreamerMode = StreamerModeStore.enabled;
-
-            if (streamerMode && currentUserStreamerMode) return;
-            if (isStreaming && Settings.notifications.streamingTreatment === "ignore") return;
-
+            // Check global conditions for all message types.
             if (
-                (
-                    (message.author.id === currentUser.id) // If message is from the user.
-                    || (channel.id === SelectedChannelStore.getChannelId()) // If the user is currently in the channel.
-                    || (ignoredUsers.includes(message.author.id)) // If the user is ignored.
-                )
+                (message.author.id === currentUser.id) // If message is from the user.
+                || (channel.id === SelectedChannelStore.getChannelId()) // If the user is currently in the channel.
+                || (ignoredUsers.includes(message.author.id)) // If the user is ignored.
+                || (settings.store.respectDoNotDisturb && PresenceStore.getStatus(currentUser.id) === "dnd") // If notifications are disabled while in DND.
+                || (Settings.notifications.disableInStreamerMode && StreamerModeStore.enabled) // If notifications are disabled in streamer mode.
+                || (isStreaming && Settings.notifications.streamingTreatment === "ignore") // If notifications are disabled while streaming.
             ) return;
 
-            if (channel.guild_id) { // If this is a guild message and not a private message.
-                handleGuildMessage(message);
+            // Channel type checks.
+            if (channel.guild_id) {
+                if (!shouldNotifyForGuildMessage(message, channel)) return;
+            } else {
+                if (
+                    (!settings.store.directMessages && channel.isDM()) // If DM notifications are disabled.
+                    || (!settings.store.groupMessages && channel.isGroupDM()) // If group DM notifications are disabled.
+                    || UserGuildSettingsStore.isChannelMuted(null, channel.id) // If the user has muted the DM/group channel.
+                ) return;
+            }
+
+            const notification: NotificationData = {
+                title: getNotificationTitle(message, channel),
+                body: getNotificationBody(message),
+                icon: Settings.notifications.renderImages ? IconUtils.getUserAvatarURL(message.author) : undefined,
+                permanent: false,
+                onClick: () => channel.guild_id
+                    ? navigateToChannel(channel)
+                    : SelectedChannelActionCreators.selectPrivateChannel(channel.id)
+            };
+
+            // Hide the message content while streaming.
+            if (isStreaming && Settings.notifications.streamingTreatment === "no-content") {
+                notification.body = t(plugin.toastNotifications.notification.redacted);
+                showNotification(notification);
                 return;
             }
 
-            if (!settings.store.directMessages && channel.isDM() || !settings.store.groupMessages && channel.isGroupDM() || MuteStore.isChannelMuted(null, channel.id)) return;
-
-            // Prepare the notification.
-            const Notification: NotificationData = {
-                title: getName(message.author),
-                icon: IconUtils.getUserAvatarURL(message.author),
-                body: message.content,
-                attachments: message.attachments?.length,
-                richBody: null,
-                permanent: false,
-                onClick() { SelectedChannelActionCreators.selectPrivateChannel(message.channel_id); }
-            };
-
-            const notificationText = message.content?.length > 0 ? message.content : false;
-            const richBodyElements: ReactNode[] = [];
-
-            // If this channel is a group DM, include the channel name.
-            if (channel.isGroupDM()) {
-                let channelName = channel.name?.trim() ?? false;
-                if (!channelName) { // If the channel doesn't have a set name, use the first 3 recipients.
-                    channelName = channel.rawRecipients.slice(0, 3).map(e => e.username).join(", ");
-                }
-
-                // Finally, truncate the channel name if it's too long.
-                const truncatedChannelName = channelName?.length > 20 ? channelName.substring(0, 20) + "..." : channelName;
-                Notification.title = `${message.author.username} (${truncatedChannelName})`;
-            }
-            else if (channel.guild_id) // If this is a guild message and not a private message.
-            {
-                Notification.title = `${getName(message.author)} (#${channel.name})`;
+            // Retrieve the message record so the actual message component can be rendered.
+            const mockedMessage: Message | undefined = MessageStore.getMessages(message.channel_id)?.receiveMessage(message)?.get(message.id);
+            if (mockedMessage) {
+                notification.message = message;
+                notification.mockedMessage = mockedMessage;
+                notification.channel = channel;
+            } else {
+                console.error(`[ToastNotifications] Failed to retrieve mocked message from MessageStore for message ID ${message.id}!`);
             }
 
-            // Handle specific message types.
-            switch (message.type) {
-                case MessageType.CALL: {
-                    Notification.body = t(plugin.toastNotifications.notification.call);
-                    break;
-                }
-                case MessageType.RECIPIENT_ADD: {
-                    const actor = UserStore.getUser(message.author.id);
-                    const user = message.mentions[0];
-                    const targetUser = UserStore.getUser((user as any).id);
-
-                    Notification.body = t(plugin.toastNotifications.notification.recipient.add, { target: getName(targetUser), actor: getName(actor) });
-                    break;
-                }
-                case MessageType.RECIPIENT_REMOVE: {
-                    const actor = UserStore.getUser(message.author.id);
-                    const user = message.mentions[0];
-                    const targetUser = UserStore.getUser((user as any).id);
-
-                    if (actor.id !== targetUser.id) {
-                        Notification.body = t(plugin.toastNotifications.notification.recipient.remove, { target: getName(targetUser), actor: getName(actor) });
-                    } else {
-                        Notification.body = t(plugin.toastNotifications.notification.recipient.left);
-                    }
-                    break;
-                }
-                case MessageType.CHANNEL_NAME_CHANGE: {
-                    Notification.body = t(plugin.toastNotifications.notification.channel.change.name, { name: message.content });
-                    break;
-                }
-                case MessageType.CHANNEL_ICON_CHANGE: {
-                    Notification.body = t(plugin.toastNotifications.notification.channel.change.icon);
-                    break;
-                }
-                case MessageType.CHANNEL_PINNED_MESSAGE: {
-                    Notification.body = t(plugin.toastNotifications.notification.channel.pinned);
-                    break;
-                }
-            }
-
-            // Message contains an embed.
-            if (message.embeds?.length !== 0) {
-                Notification.body = notificationText || t(plugin.toastNotifications.notification.sent.embed);
-            }
-
-            // Message contains a sticker.
-            const stickerItems = (message as any).sticker_items;
-            if (stickerItems && stickerItems.length > 0) {
-                const sticker = stickerItems[0];
-                const stickerUrl = `https://cdn.discordapp.com/stickers/${sticker.id}.png?size=160&lossless=true`;
-                Notification.body = notificationText || t(plugin.toastNotifications.notification.sent.sticker);
-                Notification.image = stickerUrl;
-            }
-
-            // Message contains an attachment.
-            if (message.attachments?.length !== 0) {
-                const images = message.attachments.filter(e => typeof e?.content_type === "string" && e?.content_type.startsWith("image"));
-                // Label the notification with the attachment type.
-                if (images?.length !== 0) {
-                    Notification.body = notificationText || ""; // Dont show any body
-                    Notification.image = images[0].url;
-                } else {
-                    Notification.body += ` [${t(plugin.toastNotifications.notification.sent.attachment)} ${message.attachments[0].filename}]`;
-                }
-            }
-
-            // TODO: Format emotes properly.
-            const matches = Notification.body.match(new RegExp("(<a?:\\w+:\\d+>)", "g"));
-            if (matches) {
-                for (const match of matches) {
-                    Notification.body = Notification.body.replace(new RegExp(`${match}`, "g"), `:${match.split(":")[1]}:`);
-                }
-            }
-
-            // Replace any mention of users, roles and channels.
-            if (message.mentions?.length !== 0 || message.mentionRoles?.length > 0) {
-                let lastIndex = 0;
-                Notification.body.replace(USER_MENTION_REGEX, (match, userId, channelId, roleId, offset) => {
-                    richBodyElements.push(Notification.body.slice(lastIndex, offset));
-
-                    // Add the mention itself as a styled span.
-                    if (userId) {
-                        richBodyElements.push(addMention(userId, "user"));
-                    } else if (channelId) {
-                        richBodyElements.push(addMention(channelId, "channel"));
-                    } else if (roleId) {
-                        richBodyElements.push(addMention(roleId, "role", channel.guild_id));
-                    }
-
-                    lastIndex = offset + match?.length;
-                    return match; // This value is not used but is necessary for the replace function
-                });
-            }
-
-            if (richBodyElements?.length > 0) {
-                const MyRichBodyComponent = () => <>{richBodyElements}</>;
-                Notification.richBody = <MyRichBodyComponent />;
-            }
-
-            Notification.body = limitMessageLength(Notification.body, Notification.attachments > 0);
-
-            if (isStreaming && Settings.notifications.streamingTreatment === "no-content") {
-                Notification.body = t(plugin.toastNotifications.notification.redacted);
-            }
-
-            if (!Settings.notifications.renderImages) {
-                Notification.icon = undefined;
-            }
-
-            showNotification(Notification);
+            showNotification(notification);
         },
 
-        async RELATIONSHIP_ADD({ relationship }) {
+        RELATIONSHIP_ADD({ relationship }) {
             if (ignoredUsers.includes(relationship.user.id)) return;
             relationshipAdd(relationship.user, relationship.type);
         }
     },
 
     start() {
-        ignoredUsers = stringToList(settings.store.ignoreUsers);
-        notifyFor = stringToList(settings.store.notifyFor);
+        ignoredUsers = parseIdList(settings.store.ignoreUsers);
+        notifyFor = parseIdList(settings.store.notifyFor);
+    },
+
+    stop() {
+        ignoredUsers = [];
+        notifyFor = [];
     }
 });
 
-function switchChannels(guildId: string | null, channelId: string) {
-    if (!ChannelStore.hasChannel(channelId)) return;
-    NavigationRouter.transitionTo(`/channels/${guildId ?? "@me"}/${channelId}/`);
+/**
+ * Splits a comma-separated string into a list of valid Discord snowflake IDs.
+ */
+function parseIdList(str: string): string[] {
+    if (!str) return [];
+    return str.replace(/\s/g, "").split(",").filter(id => ID_REGEX.test(id));
 }
 
+function getName(user: User): string {
+    return RelationshipStore.getNickname(user.id) ?? UserUtils.getName(user);
+}
+
+function limitMessageLength(body: string, hasAttachments: boolean): string {
+    if (hasAttachments && body?.length > 30) return body.substring(0, 27) + "...";
+    if (body?.length > 165) return body.substring(0, 162) + "...";
+    return body;
+}
+
+/**
+ * Builds the title used for desktop notifications and the Notification Log.
+ */
+function getNotificationTitle(message: Message, channel: Channel): string {
+    if (channel.isGroupDM()) {
+        const channelName = channel.name?.trim() || channel.rawRecipients.slice(0, 3).map(e => e.username).join(", ");
+        const truncatedChannelName = channelName.length > 20 ? channelName.substring(0, 20) + "..." : channelName;
+        return `${getName(message.author)} (${truncatedChannelName})`;
+    }
+
+    if (channel.guild_id) return `${getName(message.author)} (#${channel.name})`;
+
+    return getName(message.author);
+}
+
+/**
+ * Builds a plain text body used for desktop notifications and the Notification Log.
+ */
+function getNotificationBody(message: Message): string {
+    let body = message.content ?? "";
+
+    switch (message.type) {
+        case MessageType.CALL:
+            body = t(plugin.toastNotifications.notification.call);
+            break;
+        case MessageType.RECIPIENT_ADD:
+        case MessageType.RECIPIENT_REMOVE: {
+            const actor = UserStore.getUser(message.author.id);
+            const targetUser = UserStore.getUser((message.mentions[0] as any)?.id);
+            if (!actor || !targetUser) break;
+
+            if (message.type === MessageType.RECIPIENT_ADD)
+                body = t(plugin.toastNotifications.notification.recipient.add, { target: getName(targetUser), actor: getName(actor) });
+            else if (actor.id !== targetUser.id)
+                body = t(plugin.toastNotifications.notification.recipient.remove, { target: getName(targetUser), actor: getName(actor) });
+            else
+                body = t(plugin.toastNotifications.notification.recipient.left);
+            break;
+        }
+        case MessageType.CHANNEL_NAME_CHANGE:
+            body = t(plugin.toastNotifications.notification.channel.change.name, { name: message.content });
+            break;
+        case MessageType.CHANNEL_ICON_CHANGE:
+            body = t(plugin.toastNotifications.notification.channel.change.icon);
+            break;
+        case MessageType.CHANNEL_PINNED_MESSAGE:
+            body = t(plugin.toastNotifications.notification.channel.pinned);
+            break;
+    }
+
+    if (!body) {
+        if (message.attachments?.length) body = `[${t(plugin.toastNotifications.notification.sent.attachment)} ${message.attachments[0].filename}]`;
+        else if ((message as any).sticker_items?.length) body = t(plugin.toastNotifications.notification.sent.sticker);
+        else if (message.embeds?.length) body = t(plugin.toastNotifications.notification.sent.embed);
+    }
+
+    return limitMessageLength(body.replace(EMOJI_REGEX, ":$1:"), message.attachments?.length > 0);
+}
+
+/**
+ * Navigates the client to the given channel, opening the chat panel for voice channels.
+ */
 function navigateToChannel(channel: Channel) {
-    if (channel.isGuildVocal?.()) {
-        switchChannels(channel.guild_id, channel.id);
-        ChannelRTCActions.updateChatOpen(channel.id, true);
-        return;
-    }
-
-    switchChannels(channel.guild_id, channel.id);
+    if (!ChannelStore.hasChannel(channel.id)) return;
+    NavigationRouter.transitionTo(`/channels/${channel.guild_id ?? "@me"}/${channel.id}/`);
+    if (channel.isGuildVocal?.()) ChannelRTCActions.updateChatOpen(channel.id, true);
 }
 
-enum NotificationLevel {
-    ALL_MESSAGES = 0,
-    ONLY_MENTIONS = 1,
-    NO_MESSAGES = 2
-}
+/**
+ * Decides whether a guild message should trigger a notification based on the
+ * channel allowlist, friend-server-notifications setting, channel/guild mutes,
+ * and the user's configured notification level for the channel/guild.
+ */
+function shouldNotifyForGuildMessage(message: Message, channel: Channel): boolean {
+    // Allowlist always wins.
+    if (notifyFor.includes(channel.id)) return true;
 
-function findNotificationLevel(channel: Channel): NotificationLevel {
-    const store = findStore("UserGuildSettingsStore");
-    const userGuildSettings = store.getAllSettings().userGuildSettings[channel.guild_id];
+    // Friend-in-server toggle.
+    if (settings.store.friendServerNotifications && RelationshipStore.isFriend(message.author.id)) return true;
 
-    if (!settings.store.determineServerNotifications || MuteStore.isGuildOrCategoryOrChannelMuted(channel.guild_id, channel.id)) {
-        return NotificationLevel.NO_MESSAGES;
-    }
+    if (!settings.store.determineServerNotifications) return false;
 
-    if (userGuildSettings) {
-        const channelOverrides = userGuildSettings.channel_overrides?.[channel.id];
-        const guildDefault = userGuildSettings.message_notifications;
+    // Respect the user's mute state for the guild/category/channel.
+    if (UserGuildSettingsStore.isGuildOrCategoryOrChannelMuted(channel.guild_id, channel.id)) return false;
 
-        // Check if channel overrides exist and are in the expected format
-        if (channelOverrides && typeof channelOverrides === "object" && "message_notifications" in channelOverrides) {
-            return channelOverrides.message_notifications;
-        }
+    // Resolve the user's configured notification level for the channel/guild.
+    const userGuildSettings = UserGuildSettingsStore.getAllSettings().userGuildSettings[channel.guild_id];
+    if (!userGuildSettings) return false;
 
-        // Check if guild default is in the expected format
-        if (typeof guildDefault === "number") {
-            return guildDefault;
-        }
-    }
+    const channelOverride = userGuildSettings.channel_overrides?.[channel.id];
+    const level: UserNotificationSetting = (channelOverride && typeof channelOverride === "object" && "message_notifications" in channelOverride)
+        ? channelOverride.message_notifications
+        : (typeof userGuildSettings.message_notifications === "number" ? userGuildSettings.message_notifications : UserNotificationSetting.NO_MESSAGES);
 
-    // Return a default value if no valid overrides or guild default is found
-    return NotificationLevel.NO_MESSAGES;
-}
+    if (level === UserNotificationSetting.NO_MESSAGES) return false;
+    if (level === UserNotificationSetting.ALL_MESSAGES) return true;
 
-async function handleGuildMessage(message: Message) {
-    const c = ChannelStore.getChannel(message.channel_id);
-    const notificationLevel: number = findNotificationLevel(c);
-    let isAllOrFriend = false;
-    // 0: All messages 1: Only mentions 2: No messages
-    // todo: check if the user who sent it is a friend
-    const all = notifyFor.includes(message.channel_id);
-    const friend = settings.store.friendServerNotifications && RelationshipStore.isFriend(message.author.id);
-
-    if (!all && !friend) {
-        isAllOrFriend = true;
-        const isMention: boolean = message.content.includes(`<@${UserStore.getCurrentUser().id}>`);
-        const meetsMentionCriteria = notificationLevel !== NotificationLevel.ALL_MESSAGES && !isMention;
-
-        if (notificationLevel === NotificationLevel.NO_MESSAGES || meetsMentionCriteria) return;
-    }
-
-    const channel: Channel = ChannelStore.getChannel(message.channel_id);
-
-    const notificationText = message.content.length > 0 ? message.content : false;
-    const richBodyElements: React.ReactNode[] = [];
-
-    // Prepare the notification.
-    const Notification: NotificationData = {
-        title: `${getName(message.author)} (#${channel.name})`,
-        icon: IconUtils.getUserAvatarURL(message.author),
-        body: message.content,
-        attachments: message.attachments?.length,
-        richBody: null,
-        permanent: false,
-        onClick() { navigateToChannel(channel); }
-    };
-
-    if (message.embeds?.length !== 0) {
-        Notification.body = notificationText || t(plugin.toastNotifications.notification.sent.embed);
-    }
-
-    // Message contains a sticker.
-    const stickerItems = (message as any).sticker_items;
-    if (stickerItems && stickerItems.length > 0) {
-        const sticker = stickerItems[0];
-        const stickerUrl = `https://cdn.discordapp.com/stickers/${sticker.id}.png?size=160&lossless=true`;
-        Notification.body = notificationText || t(plugin.toastNotifications.notification.sent.sticker);
-        Notification.image = stickerUrl;
-    }
-
-    // Message contains an attachment.
-    if (message.attachments?.length !== 0) {
-        const images = message.attachments.filter(e => typeof e?.content_type === "string" && e?.content_type.startsWith("image"));
-        // Label the notification with the attachment type.
-        if (images?.length !== 0) {
-            Notification.body = notificationText || ""; // Dont show any body
-            Notification.image = images[0].url;
-        } else {
-            Notification.body += ` [${t(plugin.toastNotifications.notification.sent.attachment)} ${message.attachments[0].filename}]`;
-        }
-    }
-
-    // TODO: Format emotes properly.
-    const matches = Notification.body.match(new RegExp("(<a?:\\w+:\\d+>)", "g"));
-    if (matches) {
-        for (const match of matches) {
-            Notification.body = Notification.body.replace(new RegExp(`${match}`, "g"), `:${match.split(":")[1]}:`);
-        }
-    }
-
-    // Replace any mention of users, roles and channels.
-    if (message.mentions?.length !== 0 || message.mentionRoles?.length > 0) {
-        let lastIndex = 0;
-        Notification.body.replace(USER_MENTION_REGEX, (match, userId, channelId, roleId, offset) => {
-            richBodyElements.push(Notification.body.slice(lastIndex, offset));
-
-            // Add the mention itself as a styled span.
-            if (userId) {
-                richBodyElements.push(addMention(userId, "user"));
-            } else if (channelId) {
-                richBodyElements.push(addMention(channelId, "channel"));
-            } else if (roleId) {
-                richBodyElements.push(addMention(roleId, "role", channel.guild_id));
-            }
-
-            lastIndex = offset + match?.length;
-            return match; // This value is not used but is necessary for the replace function
-        });
-    }
-
-    if (richBodyElements?.length > 0) {
-        const MyRichBodyComponent = () => <>{richBodyElements}</>;
-        Notification.richBody = <MyRichBodyComponent />;
-    }
-
-    Notification.body = limitMessageLength(Notification.body, Notification.attachments > 0);
-
-    const isStreaming = findStore("ApplicationStreamingStore").getAnyStreamForUser(UserStore.getCurrentUser()?.id);
-
-    if (isStreaming && Settings.notifications.streamingTreatment === "no-content") {
-        Notification.body = t(plugin.toastNotifications.notification.redacted);
-    }
-
-    if (!Settings.notifications.renderImages) {
-        Notification.icon = undefined;
-    }
-
-    await showNotification(Notification);
+    // Otherwise we only notify if the user was mentioned.
+    return message.content.includes(`<@${UserStore.getCurrentUser().id}>`);
 }
 
 async function relationshipAdd(user: User, type: Number) {
     user = UserStore.getUser(user.id);
     if (!settings.store.friendActivity) return;
 
-    const Notification: NotificationData = {
+    const notification: NotificationData = {
         title: "",
-        icon: IconUtils.getUserAvatarURL(user),
         body: "",
-        attachments: 0,
+        icon: Settings.notifications.renderImages ? IconUtils.getUserAvatarURL(user) : undefined
     };
 
-    if (!Settings.notifications.renderImages) {
-        Notification.icon = undefined;
-    }
-
     if (type === RelationshipType.FRIEND) {
-        Notification.title = t(plugin.toastNotifications.notification.friend.accept, { user: user.username });
-        Notification.body = t(plugin.toastNotifications.notification.friend.acceptBody);
-        Notification.onClick = () => switchChannels(null, user.id);
-
-        await showNotification(Notification);
-
+        notification.title = t(plugin.toastNotifications.notification.friend.accept, { user: user.username });
+        notification.body = t(plugin.toastNotifications.notification.friend.acceptBody);
+        notification.onClick = () => openPrivateChannel(user.id);
     } else if (type === RelationshipType.INCOMING_REQUEST) {
+        notification.title = t(plugin.toastNotifications.notification.friend.request, { user: user.username });
+        notification.body = t(plugin.toastNotifications.notification.friend.requestBody);
+        notification.onClick = () => NavigationRouter.transitionTo("/channels/@me");
+    } else return;
 
-        Notification.title = t(plugin.toastNotifications.notification.friend.request, { user: user.username });
-        Notification.body = t(plugin.toastNotifications.notification.friend.requestBody);
-        Notification.onClick = () => switchChannels(null, "");
-
-        await showNotification(Notification);
-    }
+    await showNotification(notification);
 }
 
 function showExampleNotification(): Promise<void> {
-    const Notification: NotificationData = {
+    return showNotification({
         title: t(plugin.toastNotifications.notification.example.title),
-        icon: IconUtils.getUserAvatarURL(UserStore.getCurrentUser()),
         body: t(plugin.toastNotifications.notification.example.body),
-        attachments: 0,
+        icon: Settings.notifications.renderImages ? IconUtils.getUserAvatarURL(UserStore.getCurrentUser()) : undefined,
         permanent: false
-    };
-
-    if (!Settings.notifications.renderImages) {
-        Notification.icon = undefined;
-    }
-    return showNotification(Notification);
+    });
 }

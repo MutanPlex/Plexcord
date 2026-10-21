@@ -9,8 +9,7 @@ import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { classes } from "@utils/misc";
-import { openModal } from "@utils/modal";
-import { React, SelectedGuildStore, TextInput, useStateFromStores } from "@webpack/common";
+import { openModal, React, SelectedGuildStore, TextInput, useStateFromStores } from "@webpack/common";
 
 import { cl, settings } from "../index";
 import { exportPresets, ImportDecision, importPresets, savePreset } from "../utils/actions";
@@ -181,6 +180,29 @@ export function PresetManager({ section, guildId }: PresetManagerProps) {
                         {searchMode ? t(plugin.profileSets.modal.cancelSearch) : t(plugin.profileSets.modal.search)}
                     </Button>
                 )}
+                <Button
+                    size="small"
+                    variant="secondary"
+                    onClick={handleRandomPreset}
+                    disabled={!presets.length || !canUseGuild}
+                >
+                    {t(plugin.profileSets.modal.random)}
+                </Button>
+                <Button
+                    size="small"
+                    variant="secondary"
+                    onClick={() => importPresets(forceUpdate, showImportPrompt, resolvedSection, resolvedGuildId)}
+                    disabled={!canUseGuild}
+                >
+                    {t(plugin.profileSets.modal.importProfiles)}
+                </Button>
+                <Button
+                    size="small"
+                    variant="secondary"
+                    onClick={() => exportPresets(resolvedSection)}
+                >
+                    {t(plugin.profileSets.modal.exportAll)}
+                </Button>
             </div>
 
             {hasPresets && (
@@ -248,41 +270,6 @@ export function PresetManager({ section, guildId }: PresetManagerProps) {
                     <hr className={cl("block")} />
                 </>
             )}
-
-            <div className={cl("import")}>
-                <Button
-                    size="small"
-                    variant="secondary"
-                    onClick={handleRandomPreset}
-                    className={cl("random")}
-                    disabled={!presets.length || !canUseGuild}
-                >
-                    <span className={cl("random-content")}>
-                        <svg className={cl("random-icon")} viewBox="0 0 24 24" aria-hidden="true">
-                            <path
-                                fill="currentColor"
-                                d="M20.5 4h-5a1 1 0 0 0 0 2h2.586l-4.293 4.293a1 1 0 0 0 1.414 1.414L19.5 7.414V10a1 1 0 1 0 2 0V5a1 1 0 0 0-1-1Zm-16 1a1 1 0 0 0 0 2h2.586l4.293 4.293a1 1 0 1 0 1.414-1.414L8.414 5H4.5ZM5 15a1 1 0 0 0-1 1v5a1 1 0 1 0 2 0v-2.586l4.293 4.293a1 1 0 0 0 1.414-1.414L7.414 17H10a1 1 0 1 0 0-2H5Zm14.5 0a1 1 0 0 0 0 2h-2.586l-4.293 4.293a1 1 0 1 0 1.414 1.414L18.586 17H21a1 1 0 1 0 0-2h-1.5Z"
-                            />
-                        </svg>
-                        {t(plugin.profileSets.modal.random)}
-                    </span>
-                </Button>
-                <Button
-                    size="small"
-                    variant="secondary"
-                    onClick={() => importPresets(forceUpdate, showImportPrompt, resolvedSection, resolvedGuildId)}
-                    disabled={!canUseGuild}
-                >
-                    {t(plugin.profileSets.modal.importProfiles)}
-                </Button>
-                <Button
-                    size="small"
-                    variant="secondary"
-                    onClick={() => exportPresets(resolvedSection)}
-                >
-                    {t(plugin.profileSets.modal.exportAll)}
-                </Button>
-            </div>
             <hr className={cl("block")} />
             {resolvedSection === "server" && (
                 <hr className={cl("block")} />

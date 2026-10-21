@@ -5,9 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
+import { LinkIcon, TopRightArrow } from "@components/Icons";
 import { Message, Sticker } from "@plexcord/discord-types";
 import ExpressionClonerPlugin from "@plugins/expressionCloner";
 import { Devs } from "@utils/constants";
@@ -34,6 +35,7 @@ function buildMenuItem(sticker: PartialSticker, addBottomSeparator: boolean) {
                     id="pc-copy-sticker-link"
                     key="pc-copy-sticker-link"
                     label={t(plugin.copyStickerLinks.context.copy)}
+                    leadingAccessory={{ type: "icon", icon: LinkIcon }}
                     action={() => copyWithToast(getUrl(sticker), t(plugin.copyStickerLinks.toast.success))}
                 />
 
@@ -41,6 +43,8 @@ function buildMenuItem(sticker: PartialSticker, addBottomSeparator: boolean) {
                     id="pc-open-sticker-link"
                     key="pc-open-sticker-link"
                     label={t(plugin.copyStickerLinks.context.open)}
+                    leadingAccessory={{ type: "icon", icon: LinkIcon }}
+                    trailingIndicator={{ type: "icon", icon: TopRightArrow }}
                     action={() => PlexcordNative.native.openExternal(getUrl(sticker))}
                 />
             </Menu.MenuGroup>
@@ -58,9 +62,7 @@ const messageContextMenuPatch: NavContextMenuPatchCallback = (
     const sticker = message.stickerItems.find(s => s.id === favoriteableId);
     if (!sticker?.format_type) return;
 
-    const idx = children.findIndex(c => Array.isArray(c) && findGroupChildrenByChildId("pc-copy-sticker-url", c) != null);
-
-    children.splice(idx, 0, buildMenuItem(sticker, idx !== -1));
+    children.splice(-1, 0, buildMenuItem(sticker, false));
 };
 
 const expressionPickerPatch: NavContextMenuPatchCallback = (children, props: { target: HTMLElement; }) => {

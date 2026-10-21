@@ -9,7 +9,7 @@ import { plugin, t } from "@api/i18n";
 import type { Channel } from "@plexcord/discord-types";
 import { ChannelType } from "@plexcord/discord-types/enums";
 import { Logger } from "@utils/Logger";
-import { ChannelStore, GuildChannelStore, GuildStore, PermissionsBits, PermissionStore, RestAPI, showToast, Toasts } from "@webpack/common";
+import { ChannelStore, GuildChannelStore, GuildStore, PermissionsBits, PermissionStore, RestAPI, showToast } from "@webpack/common";
 
 const logger = new Logger("Dragify");
 
@@ -137,7 +137,7 @@ function getInviteUrl(code: string) {
 export async function createInvite(guildId: string, currentChannel: Channel, settings: InviteSettings): Promise<string | null> {
     const inviteChannel = resolveInviteChannel(guildId, currentChannel);
     if (!inviteChannel) {
-        showToast(t(plugin.dragify.toast.invite.noChannel), Toasts.Type.FAILURE);
+        showToast({ text: t(plugin.dragify.toast.invite.noChannel), variant: "critical" });
         return null;
     }
 
@@ -145,7 +145,12 @@ export async function createInvite(guildId: string, currentChannel: Channel, set
         const reused = await fetchReusableInvite(guildId, inviteChannel.id);
         if (reused.ok) return getInviteUrl(reused.code);
 
-        showToast(t(plugin.dragify.toast.invite.unable), Toasts.Type.FAILURE);
+        showToast({
+            text: reused.reason === "missing"
+                ? t(plugin.dragify.toast.noReusableInvite)
+                : t(plugin.dragify.toast.unableToReuseInvite),
+            variant: "critical"
+        });
         return null;
     }
 
@@ -171,11 +176,11 @@ export async function createInvite(guildId: string, currentChannel: Channel, set
             maxUses: maxUses === 0 ? null : maxUses,
             uses: 0,
         });
-        showToast(t(plugin.dragify.toast.invite.created), Toasts.Type.SUCCESS);
+        showToast({ text: t(plugin.dragify.toast.invite.created), variant: "success" });
         return getInviteUrl(code);
     } catch (error) {
         logger.error("Failed to create invite", error);
-        showToast(t(plugin.dragify.toast.invite.unable), Toasts.Type.FAILURE);
+        showToast({ text: t(plugin.dragify.toast.invite.unable), variant: "critical" });
         return null;
     }
 }

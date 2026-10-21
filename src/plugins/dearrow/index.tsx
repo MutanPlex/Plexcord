@@ -101,7 +101,6 @@ function DearrowButton({ component }: { component: Component<Props>; }) {
                     className={"pc-dearrow-toggle-" + (embed.dearrow.enabled ? "on" : "off")}
                     onClick={() => {
                         const { enabled, oldThumb, oldTitle } = embed.dearrow;
-                        settings.store.dearrowByDefault = !enabled;
                         embed.dearrow.enabled = !enabled;
                         if (oldTitle) {
                             embed.dearrow.oldTitle = embed.rawTitle;
@@ -121,7 +120,7 @@ function DearrowButton({ component }: { component: Component<Props>; }) {
                         width="24px"
                         height="24px"
                         viewBox="0 0 36 36"
-                        aria-label="Toggle Dearrow"
+                        aria-label={t(plugin.dearrow.text.toggleDearrow)}
                         className="pc-dearrow-icon"
                     >
                         <path

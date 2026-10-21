@@ -11,12 +11,15 @@ import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
+import { IS_MAC } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import { identity } from "@utils/misc";
 import { Select } from "@webpack/common";
 
-export function VibrancySettings() {
+export function MacOSVibrancySettings() {
     const settingsState = useSettings(["macosVibrancyStyle"]);
+
+    if (!IS_MAC || IS_WEB) return null;
 
     return (
         <>

@@ -10,4 +10,5 @@ export { ApplicationCommandInputType, ApplicationCommandOptionType, ApplicationC
 
 export interface PlexcordCommand extends Command {
     isPlexcordCommand?: boolean;
+    rootCommand?: PlexcordCommand;
 }

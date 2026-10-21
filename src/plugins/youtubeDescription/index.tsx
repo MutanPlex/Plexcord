@@ -22,10 +22,10 @@ export default definePlugin({
 
     patches: [
         {
-            find: "#{intl::SUPPRESS_ALL_EMBEDS}",
+            find: "this.renderContentPlaceholder({",
             replacement: {
-                match: /case (\i\.\i\.VIDEO):(case \i\.\i\.\i:)*break;default:(\i)=(?:(this\.renderDescription)\(\))\}/,
-                replace: "$2 break; case $1: $3 = $self.ToggleableDescriptionWrapper({ embed: this.props.embed, original: $4.bind(this) }); break; default: $3 = $4() }"
+                match: /(\i)=(\i\.\i\.has\((\i)\.type\))\?null:(?:(this\.renderDescription)\(\))/,
+                replace: '$1=$3.type==="video"?$self.ToggleableDescriptionWrapper({embed:this.props.embed,original:$4.bind(this)}):($2?null:$4())'
             }
         }
     ],

@@ -18,15 +18,15 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { Button } from "@components/Button";
-import { Heading, HeadingTertiary } from "@components/Heading";
+import { TextButton } from "@components/Button";
+import { Heading } from "@components/Heading";
+import { RenderModalProps } from "@plexcord/discord-types";
 import { SessionInfo } from "@plugins/betterSessions/types";
 import { getDefaultName, savedSessionsCache, saveSessionsToDataStore } from "@plugins/betterSessions/utils";
-import { ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
-import { React, TextInput } from "@webpack/common";
+import { Modal, React, TextInput } from "@webpack/common";
 import { KeyboardEvent } from "react";
 
-export function RenameModal({ props, session, state }: { props: ModalProps, session: SessionInfo["session"], state: [string, React.Dispatch<React.SetStateAction<string>>]; }) {
+export function RenameModal({ props, session, state }: { props: RenderModalProps, session: SessionInfo["session"], state: [string, React.Dispatch<React.SetStateAction<string>>]; }) {
     const [title, setTitle] = state;
     const [value, setValue] = React.useState(savedSessionsCache.get(session.id_hash)?.name ?? "");
 
@@ -43,13 +43,24 @@ export function RenameModal({ props, session, state }: { props: ModalProps, sess
     }
 
     return (
-        <ModalRoot {...props}>
-            <ModalHeader>
-                <HeadingTertiary>{t(plugin.betterSessions.rename)}</HeadingTertiary>
-            </ModalHeader>
-
-            <ModalContent>
-                <Heading style={{ marginTop: "10px" }}>{t(plugin.betterSessions.newDevice)}</Heading>
+        <Modal
+            {...props}
+            title={t(plugin.betterSessions.rename)}
+            actions={[
+                {
+                    text: t(plugin.betterSessions.cancel),
+                    variant: "secondary",
+                    onClick: () => props.onClose()
+                },
+                {
+                    text: t(plugin.betterSessions.save),
+                    variant: "primary",
+                    onClick: onSaveClick
+                }
+            ]}
+        >
+            <div>
+                <Heading tag="h5">{t(plugin.betterSessions.newDevice)}</Heading>
                 <TextInput
                     style={{ marginBottom: "10px" }}
                     placeholder={getDefaultName(session.client_info)}
@@ -61,37 +72,16 @@ export function RenameModal({ props, session, state }: { props: ModalProps, sess
                         }
                     }}
                 />
-                <Button
+                <TextButton
                     style={{
-                        marginBottom: "10px",
-                        paddingLeft: "5px",
-                        paddingRight: "5px",
-                        opacity: 1
+                        paddingLeft: "1px",
+                        opacity: 0.6
                     }}
-                    variant="primary"
-                    size="min"
                     onClick={() => setValue("")}
                 >
                     {t(plugin.betterSessions.resetName)}
-                </Button>
-            </ModalContent>
-
-            <ModalFooter>
-                <div className="pc-betterSessions-footer-buttons">
-                    <Button
-                        variant="primary"
-                        onClick={onSaveClick}
-                    >
-                        {t(plugin.betterSessions.save)}
-                    </Button>
-                    <Button
-                        variant="primary"
-                        onClick={() => props.onClose()}
-                    >
-                        {t(plugin.betterSessions.cancel)}
-                    </Button>
-                </div>
-            </ModalFooter>
-        </ModalRoot >
+                </TextButton>
+            </div>
+        </Modal>
     );
 }

@@ -46,11 +46,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         switches: {
             useQuickCss: {
                 label: "Activează CSS Personalizat",
-                description: "Încarcă CSS personalizat din editorul QuickCSS. Acest lucru îți permite să personalizezi aspectul Discord cu propriile stiluri."
+                description: "Aplică QuickCSS-ul configurat"
             },
             enableReactDevtools: {
                 label: "Activează React Developer Tools",
-                description: "Activează extensia React Developer Tools pentru depanarea componentelor React din Discord. Util pentru dezvoltarea de plugin-uri."
+                description: "Util în principal pentru dezvoltatorii de pluginuri. Ignoră dacă nu știi ce este"
             },
             mainWindowFrameless: {
                 label: "Dezactivează Cadrul Ferestrei Principale",
@@ -60,7 +60,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Dezactivează cadrul ferestrei",
                 description: "Elimină cadrul nativ al ferestrei pentru un aspect mai curat. Poți în continuare să muți fereastra trăgând de zona barei de titlu."
             },
-            winNativeTitleBar: {
+            nativeTitleBar: {
                 label: "Folosește bara de titlu nativă Windows în locul celei personalizate Discord",
                 description: "Înlocuiește bara de titlu personalizată a Discord cu bara de titlu standard Windows. Acest lucru poate îmbunătăți compatibilitatea cu unele instrumente de gestionare a ferestrelor."
             },
@@ -76,7 +76,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             disableMinSize: {
                 label: "Dezactivează dimensiunea minimă a ferestrei",
-                description: "Permite redimensionarea ferestrei Discord la dimensiuni mai mici decât cea minimă implicită. Util pentru manageri de ferestre de tip tiling sau ecrane mici."
+                description: "Îți permite să redimensionezi fereastra la orice mărime, chiar mai mică decât minimul Discord"
             }
         },
         quickActions: {
@@ -193,6 +193,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignore: "Ignoră - Nu arăta notificarea deloc"
             },
         },
+        windowsMaterial: {
+            title: "Material de fundal Windows (necesită repornire)",
+            description: "Efecte de fundal transparent Windows. Ai nevoie de o temă care acceptă transparența, altfel nu va avea niciun efect. După modificarea acestei setări este necesară o repornire.",
+            material: {
+                none: "Niciunul",
+                mica: "Mica (folosește tema sistemului + imaginea de fundal a desktopului pentru a colora fundalul)",
+                tabbed: "Tabbed (variantă Mica cu nuanțare mai puternică a fundalului)",
+                acrylic: "Acrylic (estompează fereastra din spatele Discord pentru un fundal translucid)"
+            }
+        },
         macVibrancy: {
             title: "Stil Vibranță Fereastră (Necesită Repornire)",
             description: "Personalizează efectul de vibranță al ferestrei pe macOS. Acesta controlează stilul de blur și transparență al ferestrei Discord. Modificările necesită repornire.",
@@ -206,12 +216,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 titlebar: "Bară de Titlu",
                 header: "Antet",
                 sidebar: "Bară Laterală",
-                tooltip: "Tooltip",
+                tooltip: "Indiciu",
                 menu: "Meniu",
                 popover: "Popover",
                 fullscreenUI: "Interfață Fullscreen (Transparent dar ușor blurat)",
                 hud: "HUD (Cea mai transparentă)"
             }
+        },
+        tabs: {
+            renderFailed: "Nu s-a putut afișa fila {{tab}}. Dacă problema persistă, încearcă reinstalarea cu programul de instalare!"
         }
     },
 
@@ -270,7 +283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             discordDesktop: "Aplicația Discord Desktop",
             plextron: "Aplicația Plextron",
             web: "Aplicația Plextron și versiunea Web a Discord",
-            dev: "Versiunea de dezvoltator a Plexcord"
+            dev: "Versiunea de dezvoltator a Plexcord",
+            browser: "Versiunea pentru browser web a Plexcord"
         },
         search: {
             looking: "Cauți cumva",
@@ -307,7 +321,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userplugins: "Arată Plugin-uri Utilizator",
                 api: "Arată Plugin-uri API",
                 type: "Filtrare după tip",
-                tags: "Filtrare după etichete"
+                tags: "Filtrare după etichete",
+                favorites: "Afișează favoritele"
             }
         },
         pluginModal: {
@@ -320,7 +335,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             enabledUser: "Plugin-uri Utilizator Active",
             totalUser: "Total Plugin-uri Utilizator",
             info: "Vezi mai multe info",
-            source: "Vezi codul sursă"
+            source: "Vezi codul sursă",
+            favorite: "Adaugă la favorite - îl fixează în partea de sus a listei de pluginuri",
+            unfavorite: "Elimină de la favorite"
         },
         metadata: {
             api: {
@@ -342,7 +359,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     userSettings: "Patch-uiește UserSettings din Discord pentru a expune grupul și numele acestora.",
                     audioPlayer: "API pentru a reda fișiere audio interne Discord sau link-uri audio externe.",
                     userArea: "API pentru a adăuga butoane în panoul zonei de utilizator.",
-                    profileCollections: "API pentru adăugarea colecțiilor în panoul de profil al utilizatorului, precum colecția de jocuri Discord."
+                    profileCollections: "API pentru adăugarea colecțiilor în panoul de profil al utilizatorului, precum colecția de jocuri Discord.",
+                    profileSections: "API pentru a adăuga secțiuni în apropierea zonei „Membru din” a panourilor de profil de utilizator.",
+                    headerBar: "API pentru a adăuga butoane în bara de antet.",
+                    surfaceClasses: "API pentru a adăuga atribute de date semantice ale pluginurilor și props limitate pe suprafețe stabile ale interfeței Discord."
                 },
                 chatButtons: {
                     context: {
@@ -389,7 +409,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             button: "Butoanele plugin-urilor activate vor apărea aici."
-        }
+        },
+        invalidInput: "Date de intrare nevalide",
+        loading: "Se încarcă...",
+        authorPrefix: "de"
     },
 
     patchHelper: {
@@ -474,7 +497,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             plugins: "Exportă Plugin",
             css: "Exportă QuickCSS",
             datastore: "Exportă DataStores"
-        }
+        },
+        backupFileType: "Copie de rezervă a setărilor Plexcord"
     },
 
     cloud: {
@@ -640,7 +664,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         newPlugins: "{{count}} Plugin-uri Noi",
         following: "Următoarele plugin-uri au fost adăugate în actualizările recente:",
-        more: "+ încă {{count}} plugin-uri"
+        more: "+ încă {{count}} plugin-uri",
+        error: {
+            retrieveRepo: "Nu s-au putut obține informațiile depozitului",
+            fetchRepo: "Nu s-au putut prelua datele din depozit",
+            connectRepo: "Nu s-a putut conecta la depozit. Verifică-ți conexiunea la internet."
+        }
     },
 
     csp: {
@@ -717,7 +746,8 @@ const translations: MatchStructure<typeof enTranslations> = {
         unknown: {
             title: "Necunoscut",
             author: "Autor Necunoscut",
-            theme: "O Temă Discord"
+            theme: "O Temă Discord",
+            description: "Nicio descriere furnizată."
         },
         required: "Următoarele plugin-uri sunt necesare, dar nu sunt activate: ",
         homepage: "Pagina principală",
@@ -778,6 +808,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             failed: {
                 download: "Eșec la descărcarea temei"
             }
+        },
+        openInFolder: "Deschide în dosar",
+        fallback: {
+            author: "Autor necunoscut",
+            description: "O temă Discord."
         }
     },
 
@@ -800,7 +835,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             check: "Eșec la verificarea actualizărilor. Verifică consola pentru info",
             occurred: "A apărut o eroare necunoscută",
             retrieve: "Eșec la preluare - verifică consola",
-            title: "Oops!",
+            title: "Hopa!",
             tryAgain: "A apărut o eroare necunoscută. Te rugăm să încerci din nou.",
             command: "Comanda {{path}} nu a fost găsită. Te rugăm să o instalezi.",
             code: "Cod {{code}}. Vezi consola pentru info.",
@@ -834,6 +869,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         repo: "Repo",
         repoDescription: "Acesta este depozitul GitHub de unde Plexcord își preia actualizările.",
         loading: "Se încarcă...",
+        unknownAuthor: "Autor necunoscut"
     },
 
     components: {
@@ -849,7 +885,29 @@ const translations: MatchStructure<typeof enTranslations> = {
             message: "Editorul QuickCSS este încă deschis în fundal.",
             detail: "Vrei să închizi Discord oricum? Această acțiune va închide și editorul.",
             cancel: "Anulează",
-            close: "Închide oricum"
+            close: "Închide oricum",
+            windowTitle: "Editor QuickCSS Plexcord"
+        },
+        messagePopover: {
+            scrollLeft: "Derulează la stânga",
+            scrollRight: "Derulează la dreapta"
+        },
+        notices: {
+            error: "Eroare la afișarea notificării"
+        },
+        tray: {
+            aboutPlexcord: "Despre Plexcord",
+            updatePlexcord: "Actualizează Plexcord",
+            noUpdateTitle: "Nicio actualizare disponibilă",
+            noUpdateBody: "Folosești deja cea mai recentă versiune Plexcord.",
+            updateFailedTitle: "Actualizare eșuată",
+            updateFailedBody: "Nu s-a putut aplica actualizarea Plexcord.",
+            updateSuccessTitle: "Actualizare reușită",
+            updateSuccessBody: "Se repornește Plexcord pentru a aplica actualizarea.",
+            updateErrorTitle: "Eroare de actualizare",
+            updateErrorBody: "A apărut o eroare la actualizarea Plexcord.\n\n{{error}}",
+            openSettingsFolder: "Deschide folderul de setări",
+            openThemesFolder: "Deschide folderul de teme"
         }
     },
 
@@ -918,7 +976,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             seconds: "secunde",
             ago: "în urmă",
             s: ""
-        }
+        },
+        detectLanguage: "Detectează limba"
     },
 
     plugin: {
@@ -945,6 +1004,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             utility: "Utilitate",
             voice: "Voce"
         },
+        concatenatedComponentExtractor: {
+            name: "ConcatenatedComponentExtractor",
+            description: "Extrage componentele care au fost concatenat de bundler"
+        },
+        concatenatedModules: {
+            name: "ConcatenatedModules",
+            description: "Extrage modulele care au fost concatenate de bundler"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Dezactivează urmărirea Discord (analytics/'science'), metricile și raportarea erorilor Sentry",
@@ -952,6 +1019,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disableAnalytics: {
                     label: "Dezactivează Analiticele",
                     description: "Dezactivează urmărirea Discord (analytics/'science'), metricile și raportarea erorilor Sentry"
+                },
+                disableStackDumping: {
+                    description: "Afișează o urmă de stivă nativă în consolă când Discord se blochează. Necesită repornire completă."
                 }
             }
         },
@@ -966,6 +1036,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsLocation: {
                     label: "Locație Setări",
                     description: "Determinul unde va fi amplasată secțiunea de setări Plexcord."
+                },
+                includePlexcordInfoWhenCopying: {
+                    label: "Include informațiile Plexcord la copiere",
+                    description: "Copiază și informațiile Plexcord (Plexcord, Electron, Chromium) atunci când apeși pe informațiile despre versiune din colțul din stânga jos al paginii Setări"
                 }
             }
         },
@@ -983,6 +1057,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Stai puțin!",
                     body: "Folosești o versiune învechită de Plexcord! Sunt șanse mari ca problema ta să fie deja rezolvată.",
                     footer: "Te rugăm să actualizezi înainte de a cere suport!",
+                    dismiss: "Dacă știi ce faci sau nu poți actualiza, poți închide acest mesaj.",
                     button: {
                         cancel: "Vezi Actualizări",
                         confirm: "Actualizează și Repornește Acum",
@@ -1180,16 +1255,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Metodă",
                     description: "Metoda de anonimizare",
                     random: "Caractere Aleatorii",
-                    consistent: "Consistent",
-                    timestamp: "Timestamp (Marcaj temporal)"
+                    consistent: "Consecvent",
+                    timestamp: "Timestamp (Marcaj temporal)",
+                    date: "Dată"
                 },
                 randomisedLength: {
                     label: "Lungime Aleatorie",
                     description: "Lungimea caracterelor aleatorii"
                 },
                 consistent: {
-                    label: "Consistent",
+                    label: "Consecvent",
                     description: "Secret de anonimizare consistent"
+                },
+                dateFormat: {
+                    description: "Formatul datei (sunt acceptate YYYY, MM, DD, HH, mm, ss, SSS)",
+                    label: "Formatul datei"
                 }
             },
             using: {
@@ -1201,76 +1281,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toggle: "Comută spoiler pentru fișierele tale (implicit activat)",
                 enabled: "Spoiler activat!",
                 disabled: "Spoiler dezactivat!"
-            }
-        },
-        appleMusic: {
-            name: "AppleMusicRichPresence",
-            description: "Discord Rich Presence pentru Apple Music-ul tău!",
-            about: "Pentru șirurile de formatare personalizate, poți folosi câteva tag-uri speciale: {{name}} este înlocuit cu numele piesei; {{artist}} este înlocuit cu numele artistului; și {{album}} este înlocuit cu numele albumului.",
-            button: {
-                listen: "Ascultă pe Apple Music",
-                songLink: "Vezi pe SongLink"
-            },
-            option: {
-                activityType: {
-                    label: "Tip Activitate",
-                    description: "Ce tip de activitate să apară",
-                    listening: "Ascultă",
-                    playing: "Se joacă"
-                },
-                statusDisplayType: {
-                    label: "Tip Afișare Status",
-                    description: "Arată numele piesei / artistului în lista de membri",
-                    off: "Nu arăta (arată mesaj generic de ascultare)",
-                    artist: "Arată numele artistului",
-                    track: "Arată numele piesei"
-                },
-                refreshInterval: {
-                    label: "Interval de Împrospătare",
-                    description: "Intervalul dintre împrospătările activității (secunde)"
-                },
-                enableTimestamps: {
-                    label: "Activează Marcajele Temporale",
-                    description: "Dacă să fie activate sau nu marcajele temporale"
-                },
-                enableButtons: {
-                    label: "Activează Butoanele",
-                    description: "Dacă să fie activate sau nu butoanele"
-                },
-                nameString: {
-                    label: "Format Nume",
-                    description: "Formatul numelui activității"
-                },
-                detailsString: {
-                    label: "Format Detalii",
-                    description: "Formatul detaliilor activității"
-                },
-                stateString: {
-                    label: "Format Stare",
-                    description: "Formatul stării activității"
-                },
-                largeImageType: {
-                    label: "Tip Imagine Mare",
-                    description: "Tipul imaginii mari din activitate",
-                    album: "Copertă album",
-                    artist: "Imagine artist",
-                    disabled: "Dezactivat"
-                },
-                largeTextString: {
-                    label: "Format Text Imagine Mare",
-                    description: "Formatul textului pentru imaginea mare"
-                },
-                smallImageType: {
-                    label: "Tip Imagine Mică",
-                    description: "Tipul imaginii mici din activitate",
-                    album: "Logo Apple Music",
-                    artist: "Imagine artist",
-                    disabled: "Dezactivat"
-                },
-                smallTextString: {
-                    label: "Format Text Imagine Mică",
-                    description: "Formatul textului pentru imaginea mică"
-                }
             }
         },
         arRpc: {
@@ -1373,6 +1383,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     left: "Stânga",
                     right: "Dreapta"
                 }
+            },
+            text: {
+                smallText: "Text mic",
+                largeText: "Text mare"
             }
         },
         betterAudioPlayer: {
@@ -1405,7 +1419,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             toast: {
-                invalidColorFormat: "Format de culoare invalid pentru {{settingKey}}, asigură-te că este 'R, G, B' sau '#RRGGBB'"
+                invalidColorFormat: "Format de culoare invalid pentru {{settingKey}}, asigură-te că este 'R, G, B' sau '#RRGGBB'",
+                invalidColorFormatFor: "Format de culoare invalid pentru {{key}}, folosește \"R, G, B\" sau \"#RRGGBB\""
             }
         },
         betterBanReasons: {
@@ -1423,7 +1438,20 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             title: "Motive",
             placeholder: "Motiv",
-            add: "Adaugă alt motiv"
+            add: "Adaugă alt motiv",
+            duration: {
+                discordDefault: "Implicit Discord",
+                none: "Nu șterge nimic",
+                hour1: "Ultima oră",
+                hours6: "Ultimele 6 ore",
+                hours12: "Ultimele 12 ore",
+                hours24: "Ultimele 24 de ore",
+                days3: "Ultimele 3 zile",
+                days7: "Ultimele 7 zile"
+            },
+            text: {
+                autoDeleteDuration: "Durata ștergerii automate a mesajelor"
+            }
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
@@ -1458,7 +1486,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Arată dosarele de servere pe un sidebar dedicat și adaugă îmbunătățiri pentru dosare",
             option: {
                 sidebar: {
-                    label: "Sidebar",
+                    label: "Bară laterală",
                     description: "Afișează serverele din dosar pe un sidebar dedicat"
                 },
                 sidebarAnim: {
@@ -1484,6 +1512,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 forceOpen: {
                     label: "Forțează Deschiderea",
                     description: "Forțează un dosar să se deschidă când treci la un server din acel dosar"
+                },
+                enableNestedFolders: {
+                    label: "Activează dosarele suprapuse",
+                    description: "Permite plasarea dosarelor în interiorul altor dosare prin tragere"
                 },
                 keepIcons: {
                     label: "Păstrează Pictogramele",
@@ -1518,6 +1550,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             render: {
                 tip: "Această invitație va expira în {{time}}",
                 header: "{{name}} te-a invitat în {{server}}",
+                headerSelf: "Ai trimis o invitație de alăturare pe {{server}}",
                 never: "nu expiră niciodată"
             }
         },
@@ -1541,7 +1574,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterRoleContext: {
             name: "BetterRoleContext",
-            description: "Adaugă opțiuni pentru a copia culoarea rolului / editare rol / vizualizare pictogramă rol la click dreapta",
+            description: "Adaugă opțiuni pentru copierea culorii rolului / editarea rolului / vizualizarea pictogramei rolului la clic dreapta pe roluri în profilul utilizatorului sau în lista de membri",
             option: {
                 roleIconFileFormat: {
                     label: "Format Fișier Pictogramă Rol",
@@ -1551,7 +1584,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 copyColor: "Copiază Culoare Rol",
                 editRole: "Editează Rol",
-                viewIcon: "Vezi Pictogramă Rol"
+                viewIcon: "Vezi Pictogramă Rol",
+                viewMembers: "Vizualizează membrii rolului"
+            },
+            text: {
+                roleActions: "Acțiuni rol"
             }
         },
         betterRoleDot: {
@@ -1627,6 +1664,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         blockKeywords: {
             name: "BlockKeywords",
             description: "Blochează mesajele care conțin cuvinte cheie definite de tine, ca și cum utilizatorul ar fi blocat.",
+            regexHelper: {
+                title: "Asistent Regex",
+                placeholder: "Text de testat...",
+                noPatterns: "Niciun tipar configurat"
+            },
             option: {
                 blockedWords: {
                     label: "Cuvinte Blocate",
@@ -1635,6 +1677,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 useRegex: {
                     label: "Folosește Regex",
                     description: "Folosește fiecare valoare ca expresie regulată (avansat)"
+                },
+                regexHelper: {
+                    label: "Asistent Regex",
+                    description: "Testează expresiile regulate pe un text de exemplu"
                 },
                 caseSensitive: {
                     label: "Sensibil la Majuscule",
@@ -1778,6 +1824,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 loading: "Se încarcă...",
                 save: "Salvează",
                 edit: "Editează"
+            },
+            text: {
+                unknownUser: "Utilizator necunoscut"
             }
         },
         callTimer: {
@@ -2067,12 +2116,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 plusPulse: "Pulsare buton plus",
                 mentionGlow: "Strălucire insignă mențiune",
                 compactExpand: "Expansiune mod compact",
-                selectedBorder: "Bordură albastră filă selectată",
+                selectedBorder: "Contur de accent pentru fila selectată",
                 selectedBackground: "Culoare fundal filă selectată",
                 tabShadows: "Efecte umbră filă",
                 tabRepositioning: "Repoziționare filă (schimbări de poziție line)",
                 resizeHandle: "Estompare mâner redimensionare",
-                questActivate: "Gradient misiune activă"
+                questActivate: "Degrade misiuni active"
             },
             bookmark: {
                 label: "Semn de carte",
@@ -2111,7 +2160,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 folderMenu: "Meniu dosar semne de carte",
                 compact: "Compact",
                 bookmarkBar: "Bară semne de carte",
-                openAll: "Deschide toate din semne de carte",
+                openAll: "Deschide toate marcajele",
                 openNew: "Deschide în filă nouă",
                 close: {
                     tab: "Închide fila",
@@ -2190,6 +2239,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 tabWidthScale: {
                     label: "Scara lățimii filei",
                     description: "Scara lățimii filei (procentaj) - reglabilă prin tragerea marginilor filei"
+                },
+                tabHeightScale: {
+                    label: "Scală înălțime file",
+                    description: "Scala înălțimii filelor (procent)."
                 },
                 renderAllTabs: {
                     label: "Randare toate filele",
@@ -2398,11 +2451,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     restore: "Restaurarea filelor a eșuat",
                     saved: "Încărcarea filelor salvate a eșuat"
                 }
+            },
+            text: {
+                folder: "Dosar"
             }
         },
         characterCounter: {
             name: "CharacterCounter",
-            description: "Afișează un contor de caractere în caseta de mesaje",
+            description: "Adaugă un contor de caractere în caseta de chat",
             option: {
                 colorEffects: {
                     label: "Efecte de culoare",
@@ -2416,7 +2472,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         cleanChannelName: {
             name: "CleanChannelName",
-            description: "Elimină toate emoji-urile și decorațiunile din numele canalelor"
+            description: "Elimină emoji-urile și decorațiunile din numele canalelor. Revine la original cât timp editezi canalul.",
+            option: {
+                ignoredChannels: {
+                    description: "Listă separată prin virgule cu ID-uri de canale care rămân neatinse.",
+                    label: "Canale ignorate"
+                }
+            },
+            text: {
+                keepOriginalName: "Păstrează numele original"
+            }
         },
         clearURLs: {
             name: "ClearURLs",
@@ -2428,7 +2493,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 loading: "Se încarcă membrii...",
                 noMembers: "Niciun membru găsit.",
-                unknown: "Rol necunoscut"
+                unknown: "Rol necunoscut",
+                andMore: "și încă {{count}}"
             }
         },
         clientSideBlock: {
@@ -2494,6 +2560,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     disable: "Dezactivează tema Nitro",
                     reset: "Resetează culoarea temei"
                 }
+            },
+            text: {
+                dark: "Întunecat",
+                light: "Luminos"
             }
         },
         clipsEnhancements: {
@@ -2508,22 +2578,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     only: "Doar când începutul sau sfârșitul numelui activității se potrivește",
                     never: "Niciodată"
                 },
-                enableScreenshotKeybind: {
-                    label: "Activare scurtătură captură ecran",
-                    description: "Activează funcția de captură de ecran prin tastatură"
-                },
-                enableVoiceOnlyClips: {
-                    label: "Activare clipuri doar audio",
-                    description: "Activează clipurile doar vocale (audio fără video)"
-                },
-                enableAdvancedSignals: {
-                    label: "Activare semnale avansate",
-                    description: "Activează semnalele avansate de clip (declanșatoare auto-clip)"
-                },
-                ignorePlatformRestriction: {
-                    label: "Ignoră restricția platformei",
-                    description: "Permite înregistrarea pe platforme restricționate (poate cauza erori de salvare)"
-                },
                 clipsLink: {
                     label: "Link Clipuri",
                     link: "Schimbă opțiunile de FPS și durată în setările Clipuri!"
@@ -2536,7 +2590,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         commandPalette: {
             name: "CommandPalette",
-            description: "Vă permite să navigați prin interfață folosind tastatura.",
+            description: "Paletă de comenzi în stil Raycast pentru a rula acțiuni oriunde în Discord",
             action: {
                 command: {
                     label: "Rulează comanda",
@@ -2778,7 +2832,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 command: {
                     palette: {
-                        label: "Command Palette",
+                        label: "Paletă de comenzi",
                         placeholder: "Scrie o comandă",
                         filtering: "Filtrare după {{tags}}",
                         noCommand: "Nicio comandă găsită",
@@ -2990,7 +3044,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                             label: "Eșec la rularea {{pluginName}}: {{actionLabel}}."
                         }
                     }
-                }
+                },
+                commandDeleted: "Comandă ștearsă.",
+                statusSetToLabel: "Starea a fost setată la {{label}}.",
+                themeSetToLabel: "Tema a fost setată la {{label}}.",
+                noSettingsPageWas: "Nu a fost furnizată nicio pagină de setări.",
+                unableToOpenLabel: "Nu se poate deschide {{label_that_settings_page}}.",
+                failedToStartDependencies: "Nu s-au putut porni dependențele: {{join}}",
+                messageSentToUsername: "Mesaj trimis către {{username}}.",
+                enabledRestart: "{{name}} activat. Repornește pentru a aplica.",
+                disabledRestart: "{{name}} dezactivat. Repornește pentru a aplica.",
+                enabled: "{{name}} activat.",
+                disabled: "{{name}} dezactivat.",
+                errorStarting: "Eroare la pornirea {{name}}.",
+                errorStopping: "Eroare la oprirea {{name}}."
             },
             display: {
                 channel: {
@@ -3026,6 +3093,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 customCommands: {
                     label: "Comenzi personalizate",
                     description: "Gestionează intrările personalizate din paleta de comenzi"
+                },
+                closeAfterExecute: {
+                    description: "Închide paleta după rularea unei comenzi.",
+                    label: "Închide după executare"
                 }
             },
             template: {
@@ -3045,7 +3116,121 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Macro",
                     description: "Rulează o secvență de comenzi"
                 }
-            }
+            },
+            text: {
+                insertTextInChat: "Inserează text în chat",
+                name: "Name",
+                commandName: "Numele comenzii",
+                settingsPage: "Pagina de setări",
+                searchSettingsPages: "Caută pagini de setări...",
+                text: "Text",
+                textToInsertInto: "Text de inserat în caseta de chat",
+                editCommand: "Editează comanda",
+                deleteCommand: "Șterge comanda",
+                createCustomCommand: "Creează o comandă personalizată",
+                light: "Luminos",
+                ash: "Cenușă",
+                dark: "Întunecat",
+                onyx: "Onix",
+                toggleMute: "Comută silențierea",
+                toggleDeafen: "Comută asurzirea",
+                setStatus: "Setează starea",
+                searchStatuses: "Caută stări...",
+                setLabel: "Setează {{label}}",
+                toggleTheme: "Comută tema",
+                openServer: "Deschide serverul",
+                openChannel: "Deschide canalul",
+                openDm: "Deschide mesaj privat",
+                goHome: "Mergi acasă",
+                goToServer: "Mergi la server",
+                searchServers: "Caută servere...",
+                goToChannel: "Mergi la canal",
+                searchChannels: "Caută canale...",
+                searchFriends: "Caută prieteni...",
+                myAccount: "Contul meu",
+                profiles: "Profiluri",
+                dataPrivacy: "Date și confidențialitate",
+                devices: "Dispozitive",
+                connections: "Conexiuni",
+                appearance: "Aspect",
+                accessibility: "Accesibilitate",
+                voiceVideo: "Voce și video",
+                chat: "Chat",
+                textImages: "Text și imagini",
+                notifications: "Notificări",
+                keybinds: "Combinații de taste",
+                authorizedApps: "Aplicații autorizate",
+                familyCenter: "Centrul familiei",
+                advanced: "Avansat",
+                plexcord: "Plexcord",
+                plexcordPlugins: "Pluginuri Plexcord",
+                plexcordThemes: "Teme Plexcord",
+                plexcordUpdater: "Actualizator Plexcord",
+                plexcordChangelog: "Jurnal de modificări Plexcord",
+                openQuickcss: "Deschide QuickCSS",
+                openUpdater: "Deschide actualizatorul",
+                openChangelog: "Deschide jurnalul de modificări",
+                restartDiscord: "Repornește Discord",
+                managePlugins: "Gestionează pluginuri",
+                searchPlugins: "Caută pluginuri...",
+                sendDm: "Trimite mesaj privat",
+                recipient: "Destinatar",
+                message: "Mesaj",
+                messageContent: "Conținutul mesajului",
+                openPaletteHotkey: "Tastă rapidă pentru deschiderea paletei",
+                actions: "Acțiuni",
+                preview: "Previzualizare",
+                openCommand: "Deschide comanda",
+                copyAnswer: "Copiază răspunsul",
+                openDetails: "Deschide detaliile",
+                calculator: "Calculator",
+                expression: "Expresie",
+                result: "Rezultat",
+                copyExpression: "Copiază expresia",
+                pinned: "Fixate",
+                suggestions: "Sugestii",
+                setAlias: "Setează alias",
+                aliasForLabel: "Alias pentru {{label}}",
+                leaveEmptyToRemove: "Lasă gol pentru a elimina",
+                command: "Comandă",
+                noResults: "Niciun rezultat",
+                addFile: "Adaugă fișier",
+                saveCommand: "Salvează comanda",
+                createCommand: "Creează comanda",
+                nameRequired: "Numele este obligatoriu.",
+                enterValidUrl: "Introdu un URL valid.",
+                pickSettingsPage: "Alege o pagină de setări din sugestii.",
+                textRequired: "Textul este obligatoriu.",
+                commandSaved: "Comandă salvată.",
+                commandCreated: "Comandă creată.",
+                editCustomCommand: "Editează comanda personalizată",
+                disablePlugin: "Dezactivează pluginul",
+                enablePlugin: "Activează pluginul",
+                pickRecipient: "Alege un destinatar din sugestii.",
+                addMessageOrFile: "Adaugă un mesaj sau un fișier.",
+                pressKeys: "Apasă tastele...",
+                answerCopied: "Răspuns copiat în clipboard.",
+                calculationCopied: "Calcul copiat în clipboard.",
+                unpinCommand: "Anulează fixarea comenzii",
+                pinCommand: "Fixează comanda",
+                saveAlias: "Salvează aliasul",
+                changeHotkey: "Schimbă scurtătura",
+                recordHotkey: "Înregistrează scurtătura",
+                pressKeyCombo: "Apasă o combinație de taste, Backspace pentru a șterge, Esc pentru a anula",
+                searchIn: "Caută în {{title}}...",
+                searchCommands: "Caută comenzi...",
+                somethingWentWrong: "Ceva nu a mers bine.",
+                remove: "Elimină",
+                enabled: "Activat",
+                disabled: "Dezactivat",
+                sectionNavigation: "Navigare",
+                sectionCustom: "Personalizat",
+                sectionPlugins: "Pluginuri",
+                sectionMessaging: "Mesagerie",
+                current: "Curent",
+                submit: "Trimite"
+            },
+            description2: "Paletă de comenzi în stil Raycast pentru a rula acțiuni oriunde în Discord"
         },
         consoleJanitor: {
             name: "ConsoleJanitor",
@@ -3115,11 +3300,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         copyProfileColors: {
             name: "CopyProfileColors",
             description: "Un plugin pentru a copia culorile gradientului de profil în clipboard.",
-            copy: "Copiază culorile profilului",
+            copy: "Copiază culorile profilului de server",
             toast: {
                 noColor: "Nu s-au găsit culori de profil!",
                 copied: "Culorile profilului au fost copiate în clipboard!",
                 error: "Eroare la copierea culorilor profilului!"
+            },
+            text: {
+                formatted: "Culoare principală #{{primary}}, Culoare secundară #{{secondary}}"
             }
         },
         copyStatusUrls: {
@@ -3134,8 +3322,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "CopyStickerLinks",
             description: "Adaugă posibilitatea de a copia și deschide linkurile abțibildurilor",
             context: {
-                copy: "Copiază linkul",
-                open: "Deschide linkul"
+                copy: "Copiază linkul stickerului",
+                open: "Deschide linkul stickerului"
             },
             toast: {
                 success: "Link copiat!"
@@ -3215,7 +3403,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     invalid: "Viteza trebuie să fie mai mare de 0"
                 },
                 fps: {
-                    label: "Framerate",
+                    label: "Rată de cadre",
                     description: "FPS-ul companionului tău",
                     invalid: "Framerate-ul trebuie să fie mai mare de 0"
                 },
@@ -3271,6 +3459,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unset: "Resetează",
                 set: "Setează o iconiță nouă",
                 hover: "S-ar putea să fie nevoie să treci cu mouse-ul peste dosar după setare pentru a se actualiza."
+            },
+            context: {
+                changeIcon: "Schimbă pictograma"
             }
         },
         customIdle: {
@@ -3302,7 +3493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             error: {
                 appIdInvalid: "ID-ul aplicației trebuie să fie un număr valid.",
                 notice: "Notă",
-                sharing: "Partajarea activității nu este activată, oamenii nu vor putea vedea prezența ta personalizată!",
+                sharing: "Partajarea activității nu este activată, așa că ceilalți nu îți vor putea vedea Rich Presence-ul personalizat!",
                 enable: "Activează",
                 validStream: "Link-ul de streaming trebuie să fie un URL valid.",
                 mustBeURL: "Trebuie să fie un URL valid.",
@@ -3418,7 +3609,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 buttonTwoURL: {
                     label: "URL Buton 2",
                     description: "URL-ul butonului 2"
+                },
+                enablePresence: {
+                    description: "Dacă să se afișeze prezența",
+                    label: "Activează prezența"
                 }
+            },
+            toast: {
+                savedPresetName: "Presetarea {{name}} a fost salvată.",
+                loadedPresetName: "Presetarea {{name}} a fost încărcată.",
+                deletedPresetSelectedpreset: "Presetarea {{selectedPreset}} a fost ștearsă."
+            },
+            text: {
+                presetName: "Numele presetării",
+                selectAPreset: "Selectează o presetare",
+                streamLinkTwitchOr: "Link de stream (Twitch sau YouTube, doar dacă tipul activității este Streaming)",
+                presets: "Presetări",
+                save: "Salvează",
+                load: "Încarcă",
+                delete: "Șterge",
+                noSavedPresetsYet: "Încă nu există presetări salvate.",
+                showCustomRpc: "Afișează RPC personalizat",
+                customRpcDisabled: "RPC personalizat dezactivat",
+                theEnablePresenceSetting: "Setarea „Activează prezența” este dezactivată, așa că prezența ta nu va fi afișată. Dacă nu a fost intenționat, activeaz-o mai jos.",
+                activitySharingDisabled: "Partajarea activității este dezactivată",
+                discordDeveloperPortal: "Portalul pentru dezvoltatori Discord",
+                imgur: "Imgur",
+                enableActivitySharing: "Activează partajarea activității"
             }
         },
         customSounds: {
@@ -3450,7 +3667,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             button: {
                 preview: "Previzualizare",
-                stop: "Stop",
+                stop: "Oprește",
                 volume: "Volum",
                 soundSource: "Sursă sunet",
                 customFile: "Fișier personalizat",
@@ -3460,7 +3677,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 default: "Implicit",
                 custom: "Personalizat",
-                select: "Selectează un fișier..."
+                select: "Selectează un fișier...",
+                overrides: {
+                    label: "Suprascrieri"
+                },
+                soundpack: {
+                    label: "Pachet de sunete",
+                    description: "Pachetul de sunete folosit în locul celui setat în Discord.",
+                    default: "Implicit Discord"
+                }
             },
             type: {
                 activityEnd: "Sfârșit activitate",
@@ -3485,7 +3710,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hangStatusSelect: "Selectare Hang Status",
                 highfiveClap: "Bate palma",
                 highfiveWhistle: "Fluierat Highfive",
-                humanMan: "Human Man",
+                humanMan: "Om uman",
                 lofiMessage: "Mesaj LoFi",
                 mention1: "Mențiune 1 (@rol)",
                 mention2: "Mențiune 2 (@everyone)",
@@ -3502,7 +3727,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 pttStart: "PTT Pornit",
                 pttStop: "PTT Oprit",
                 reconnect: "Reconectare",
-                robotMan: "Robot Man",
+                robotMan: "Om robot",
                 stageWaiting: "Așteptare Scenă",
                 streamEnded: "Stream încheiat",
                 streamStarted: "Stream început",
@@ -3534,6 +3759,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 calendar: "activează formatarea dinamică a datei precum",
                 today: "Astăzi",
                 yesterday: "Ieri",
+                or: "sau",
                 relative: "vă oferă timpi precum",
                 relativeTime: "acum 4 ore",
                 preview: "Previzualizare",
@@ -3554,7 +3780,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Formatul de timp pe modul Compact și la hover peste mesaje"
                 },
                 tooltipFormat: {
-                    label: "Tooltip",
+                    label: "Indiciu",
                     description: "Formatul de timp utilizat în ferestrele pop-up (tooltips)"
                 },
                 ariaLabelFormat: {
@@ -3627,6 +3853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 dearrowed: "Acest conținut a fost curățat prin DeArrow; click pentru a restaura",
                 dearrow: "Click pentru DeArrow"
+            },
+            text: {
+                toggleDearrow: "Comută Dearrow"
             }
         },
         declutter: {
@@ -3635,6 +3864,12 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 userProfileHeader: {
                     label: "Profil utilizator"
+                },
+                removeAvatarDecoration: {
+                    label: "Elimină decorațiunea avatarului",
+                    description: "Elimină decorațiunile avatarului. Este/va fi dezactivat dacă Decor este activat.",
+                    alertBody: "Eliminarea decorațiunii avatarului a fost dezactivată pentru a preveni conflictele cu modulul Decor.",
+                    ok: "OK"
                 },
                 removeNameplate: {
                     label: "Elimină plăcuța de nume",
@@ -3693,7 +3928,27 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeButtonTooltips: {
                     label: "Elimină tooltip-urile butoanelor",
                     description: "Elimină mesajele de ajutor care apar peste butoane."
+                },
+                removeProfileFrame: {
+                    description: "Elimină ramele de profil.",
+                    label: "Elimină rama de profil"
+                },
+                removeDisplayNameStyles: {
+                    description: "Elimină numele afișate animate/stilizate din lista de membri.",
+                    label: "Elimină stilurile numelor afișate"
+                },
+                removeLibraryAboveDms: {
+                    description: "Elimină biblioteca de deasupra listei de mesaje private.",
+                    label: "Elimină biblioteca de deasupra mesajelor private"
+                },
+                removeFamilyCenterAboveDms: {
+                    description: "Elimină centrul familiei de deasupra listei de mesaje private.",
+                    label: "Elimină centrul familiei de deasupra mesajelor private"
                 }
+            },
+            text: {
+                discordAlreadyHasA: "Discord are deja o opțiune integrată pentru stilul numelui de utilizator în",
+                accessibilitySettings: "setările de accesibilitate."
             }
         },
         decodeBase64: {
@@ -3737,7 +3992,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     profiles: "Profiluri"
                 },
                 baseUrl: {
-                    label: "Base URL",
+                    label: "URL de bază",
                     description: "URL-ul API pentru Decor"
                 },
                 agreedToGuidelines: {
@@ -3800,6 +4055,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hold: "Stai puțin",
                 suspended: "Prin trimiterea unei decorațiuni, ești de acord cu {{guidelines}}. Necitirea acestora poate duce la suspendarea contului tău pentru crearea de decorațiuni viitoare.",
                 guidelines: "regulamentul"
+            },
+            toast: {
+                failedToAuthorizeMessage: "Autorizarea a eșuat: {{message}}"
+            },
+            text: {
+                removeDecoration: "Elimină decorațiunea Decor",
+                decoration: "Decorațiune Decor",
+                none: "Niciuna",
+                decorationFile: "Fișier de decorațiune"
             }
         },
         demonstration: {
@@ -3861,6 +4125,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                 starting: "Eroare la pornirea pluginului {{plugin}}",
                 noMessage: "Niciun mesaj de eroare",
                 noReason: "Niciun motiv oferit"
+            },
+            text: {
+                reconnect: "Reconectează",
+                loadingLazyModules: "Se încarcă modulele lazy, repornirea poate cauza erori",
+                loadedLazyModules: "Toate modulele lazy au fost încărcate",
+                failedLazyModules: "Încărcarea modulelor lazy a eșuat, verifică consola",
+                ok: "OK"
             }
         },
         disableCallIdle: {
@@ -3919,6 +4190,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Variabile diverse",
                     newline: "Caracter de rând nou"
                 }
+            },
+            text: {
+                notSupported: "Neacceptat",
+                devBuild: "Versiune de dezvoltare",
+                standalone: "Independent"
             }
         },
         dontFilterMe: {
@@ -3935,6 +4211,23 @@ const translations: MatchStructure<typeof enTranslations> = {
         dontRoundMyTimestamps: {
             name: "DontRoundMyTimestamps",
             description: "Rotunjește întotdeauna timestamp-urile relative prin lipsă, astfel încât 7.6 ani devin 7 ani în loc de 8 ani"
+        },
+        downloadAllAttachments: {
+            name: "DownloadAllAttachments",
+            description: "Adaugă un buton în meniul mesajului pentru a descărca toate atașamentele deodată.",
+            button: "Descarcă toate atașamentele",
+            toast: {
+                success: "Au fost descărcate {{count}} atașament(e).",
+                partial: "Au fost descărcate {{succeeded}} din {{total}} atașamente. {{failed}} au eșuat.",
+                downloadedPluralizeSucceededAttachment: "Au fost descărcate {{pluralize_succeeded_attachment}}.",
+                downloadedSucceededOfLength: "Descărcate {{succeeded}} din {{length}} atașamente. {{failed}} au eșuat."
+            },
+            option: {
+                downloadAllFileTypes: {
+                    description: "Descarcă și atașamentele care nu sunt media. Activează doar dacă ai încredere în ce ți se trimite.",
+                    label: "Descarcă toate tipurile de fișiere"
+                }
+            }
         },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
@@ -3999,7 +4292,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     created: "Invitație creată.",
                     unable: "Imposibil de creat invitația.",
                     noChannel: "Niciun canal disponibil pentru invitații.",
-                }
+                },
+                noReusableInvite: "Nicio invitație reutilizabilă disponibilă.",
+                unableToReuseInvite: "Invitația nu poate fi reutilizată."
             },
             ghost: {
                 user: "Utilizator",
@@ -4110,6 +4405,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Meniu Dev în Toolbar",
                     description: "Schimbă butonul Ajutor (?) din bara de sus cu meniul de dezvoltator Discord"
                 }
+            },
+            text: {
+                searchExperiments: "Caută experimente"
             }
         },
         exportMessages: {
@@ -4193,6 +4491,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportAll: "Exportă toate mesajele de la {{user}}",
                 user: "Utilizator",
                 exportAllChannel: "Exportă toate mesajele din canal"
+            },
+            text: {
+                unknownError: "Eroare necunoscută"
             }
         },
         expressionCloner: {
@@ -4206,11 +4507,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 success: "S-a clonat cu succes {{name}} pe {{guild}}!",
                 yourServer: "serverul tău",
                 failed: "Clonarea a eșuat: ",
-                console: "Ceva n-a mers bine (verifică consola!)"
+                console: "Ceva n-a mers bine (verifică consola!)",
+                successfullyClonedNameTo: "{{name}} a fost clonat în {{name_your_server}}!"
             },
             context: {
                 clone: "Clonează {{type}}",
                 cloneName: "Clonează {{data}}"
+            },
+            text: {
+                yourServer: "serverul tău",
+                cloneTo: "Clonează în {{name}}",
+                emoji: "Emoji",
+                sticker: "Autocolant"
             }
         },
         f8break: {
@@ -4305,7 +4613,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 step3: "• Lipsește (Paste) textul invizibil oriunde în biografia ta",
                 pickers: "Selectoare de culoare",
                 primary: "Primar",
-                accent: "Accent"
+                accent: "Culoare de accent"
             },
             option: {
                 nitroFirst: {
@@ -4333,7 +4641,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modal: {
                 primary: "Primar",
-                accent: "Accent",
+                accent: "Culoare de accent",
                 effect: "Efect",
                 usage: {
                     title: "Utilizare",
@@ -4413,36 +4721,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removed: "Alias eliminat: {{alias}}",
                 failedRemove: "Eșec la eliminarea alias-ului",
                 duplicate: "Alias duplicat",
-                failedSave: "Eșec la salvarea alias-ului."
+                failedSave: "Eșec la salvarea alias-ului.",
+                removedAliasAlias: "Aliasul :{{alias}}: a fost eliminat",
+                aliasSetForGetemojidisplayname: "Alias setat pentru {{getEmojiDisplayName_ref}}."
             },
             button: {
                 edit: "Editează alias",
                 set: "Setează alias"
+            },
+            text: {
+                remove: "Elimină",
+                noAliasesSetYet: "Încă nu sunt setate aliasuri.",
+                aliasRequired: "Aliasul este obligatoriu.",
+                aliasInvalid: "Aliasul trebuie să aibă 2-32 de caractere și să folosească doar litere mici, cifre sau liniuțe de subliniere."
             }
         },
-        favoriteGifSearch: {
-            name: "FavouriteGifSearch",
-            description: "Adaugă o bară de căutare pentru GIF-urile preferate.",
-            placeholder: "Caută în GIF-urile preferate",
-            option: {
-                searchOption: {
-                    label: "Opțiune căutare",
-                    description: "Partea din URL pe care dorești să o cauți",
-                    url: "Întreg URL-ul",
-                    path: "Doar calea (/un-gif.gif)",
-                    hostandpath: "Host & Cale (tenor.com un-gif.gif)"
-                }
-            }
-        },
-        favouriteAnything: {
-            name: "FavouriteAnything",
+        favoriteAnything: {
+            name: "FavoriteAnything",
             description: "Adaugă la favorite orice imagine",
             noFiles: "Niciun fișier nu corespunde căutării tale.",
             searchPlaceholder: "Caută fișiere",
             media: "Media",
             demoText: "Apasă pe stea pentru a adăuga un fișier la favorite.\nFișierele favorite vor apărea aici!",
             fetchError: "Nu s-a putut obține {filename}",
-            uploadError: "Nu s-a putut încărca {filename}"
+            uploadError: "Nu s-a putut încărca {filename}",
+            text: {
+                clickTheStarTo: "Fă clic pe stea pentru a adăuga un fișier la favorite.",
+                favoriteFilesWillShow: "Fișierele favorite vor apărea aici!"
+            },
+            option: {
+                localThumbnails: {
+                    description: "Generează miniaturile fișierelor local în loc de a folosi un serviciu extern (placeholder.nin0.dev). Nu este compatibil cu mobilul. Comutarea acestei opțiuni nu afectează favoritele existente.",
+                    label: "Miniaturi locale"
+                }
+            }
         },
         fileDownloadButton: {
             name: "FileDownloadButton",
@@ -4457,7 +4769,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 navigate: "Folosește panoul de jos pentru a naviga între răspunsuri.",
                 container: "Nu s-a putut găsi elementul container.",
-                couldntFind: "Nu s-a putut găsi mesajul de răspuns."
+                couldntFind: "Nu s-a găsit niciun răspuns."
             },
             option: {
                 includePings: {
@@ -4545,6 +4857,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 channelFull: {
                     label: "Canal plin",
                     description: "Încearcă să te mute în canal atunci când acesta nu mai este plin"
+                },
+                onlyWhenInVoice: {
+                    label: "Doar în vocal",
+                    description: "Urmărește utilizatorul doar când ești într-un canal vocal"
                 }
             },
             toast: {
@@ -4586,28 +4902,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Caută pe Google Fonts",
                     description: "Selectează un font pentru a-l aplica",
                     placeholder: "Caută fonturi...",
-                    previewText: "The quick brown fox jumps over the lazy dog",
+                    previewText: "Vulpea maro sprintenă sare peste câinele leneș",
                     authors: "De {{authors}}"
                 }
+            },
+            text: {
+                currentFont: "Font curent:",
+                resetFont: "Resetează fontul"
             }
         },
         forceOwnerCrown: {
             name: "ForceOwnerCrown",
             description: "Forțează coroana de proprietar lângă numele de utilizator chiar dacă serverul este mare."
-        },
-        forwardAnywhere: {
-            name: "ForwardAnywhere",
-            description: "Dacă o redirecționare eșuează, trimite-o ca pe un mesaj normal; de asemenea, permite redirecționări NSFW",
-            option: {
-                forwardPreface: {
-                    label: "Prefață redirecționare",
-                    description: "Cu ce text ar trebui prefațat conținutul redirecționat"
-                }
-            },
-            context: {
-                attachments: "Atașamente",
-                forwarded: "Redirecționat de la"
-            }
         },
         freaky: {
             name: "Freaky",
@@ -4707,12 +5013,17 @@ const translations: MatchStructure<typeof enTranslations> = {
                     name: "Cei mai buni prieteni",
                     description: "Cum de ați reușit asta??? (5 ani)"
                 }
+            },
+            option: {
+                showFriendsInChat: {
+                    description: "Afișează o pictogramă de prieten la mesajele de la prieteni.",
+                    label: "Afișează prietenii în chat"
+                }
+            },
+            text: {
+                friend: "Prieten",
+                rankIcon: "Pictogramă rang"
             }
-        },
-        friendsSince: {
-            name: "FriendsSince",
-            description: "Arată când ați devenit prieteni în popout-ul utilizatorului",
-            section: "Prieteni din"
         },
         friendTags: {
             name: "FriendTags",
@@ -4748,7 +5059,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
-            description: "Adaugă un comutator în popout-ul utilizatorului pentru a arăta/ascunde activitatea ta de joc",
+            description: "Adaugă lângă butoanele de microfon și asurzire un buton pentru comutarea activității de joc. Clic dreapta pentru activitatea Spotify.",
             tooltip: "Comută activitatea de joc",
             gameActivity: {
                 enabled: "Activitate de joc activată",
@@ -4765,6 +5076,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     panel: "Lângă Mut/Surzire",
                     toolbox: "Plexcord Toolbox"
                 }
+            },
+            text: {
+                disableGameActivity: "Dezactivează activitatea de joc",
+                enableGameActivity: "Activează activitatea de joc",
+                shareSpotifyActivity: "Distribuie activitatea Spotify",
+                shareSpotifyActivityAccount: "Distribuie activitatea Spotify ({{name}})"
             }
         },
         ghosted: {
@@ -4912,7 +5229,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "Link-ul imaginii a fost copiat în clipboard!",
                 urlCopied: "URL-ul a fost copiat în clipboard!",
                 already: "Această colecție există deja",
-                alreadyCollection: "Acest GIF este deja în acea colecție"
+                alreadyCollection: "Acest GIF este deja în colecție",
+                collectionsImportedSuccessfully: "Colecțiile au fost importate.",
+                failedToImportCollections: "Nu s-au putut importa colecțiile: {{String_err}}"
             },
             modal: {
                 create: {
@@ -4948,6 +5267,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     remove: "Elimină",
                     cancel: "Anulează"
                 }
+            },
+            text: {
+                gifPickerCategoryOptions: "Opțiuni de categorie pentru selectorul GIF",
+                gifCollections: "Colecții GIF",
+                unknown: "Necunoscut"
             }
         },
         gifPaste: {
@@ -4959,7 +5283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Adaugă o comandă pentru a trimite un GIF aleatoriu din favorite, cu o șansă de 1 la 10 de a menționa proprietarul serverului",
             command: {
                 gifRoulette: {
-                    description: "Invocă soarta și trimite un GIF"
+                    description: "Invocă soarta și trimite un GIF",
+                    restricted: "Această comandă este restricționată pe acest server."
                 }
             },
             option: {
@@ -4994,7 +5319,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 only: "Se afișează doar primele {{length}}/{{total}}"
             },
             modal: {
-                title: "Depozitele GitHub ale lui {{user}}",
+                title: "Depozitele GitHub ale lui {{username}}",
                 repository: "Depozit",
                 description: "Descriere",
                 language: "Limbaj",
@@ -5018,7 +5343,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Dacă link-ul trimis ar trebui să fie un hyperlink cu textul căutării ca etichetă"
                 },
                 embed: {
-                    label: "Embed",
+                    label: "Înglobare",
                     description: "Dacă link-ul trimis ar trebui să randeze un embed"
                 },
                 defaultEngine: {
@@ -5101,9 +5426,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         hideMessages: {
             name: "HideMessages",
-            description: "Un plugin pentru a ascunde temporar mesajele până la repornire.",
+            description: "Ascunde temporar mesajele și DM-urile până la repornire.",
             button: {
-                hide: "Ascunde"
+                hide: "Ascunde",
+                hideDm: "Ascunde DM",
+                unhideDm: "Afișează DM"
+            },
+            toggle: {
+                none: "Niciun DM ascuns",
+                hide: "Ascunde DM-urile ascunse",
+                show: "Afișează DM-urile ascunse"
             },
             option: {
                 hidePopoverButton: {
@@ -5111,6 +5443,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Ascunde butonul de ascundere din meniul popover al mesajului."
                 }
             }
+        },
+        hideMutedVoiceIndicator: {
+            name: "HideMutedVoiceIndicator",
+            description: "Ascunde indicatorul vocal din lista de servere când singurele canale vocale active sunt dezactivate"
         },
         hideServers: {
             name: "HideServers",
@@ -5231,10 +5567,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 refreshed: "Avatarele au fost reîmprospătate cu succes.",
                 deletedAll: "Toate notițele au fost șterse.",
                 imported: "Notițele au fost importate cu succes.",
-                invalid: "Eșec la importarea notițelor."
+                invalid: "Eșec la importarea notițelor.",
+                invalidJson: "JSON nevalid"
             },
             toolbox: {
                 action: "Deschide notițele"
+            },
+            text: {
+                holyNotes: "Holy Notes",
+                noteTag: "NOTĂ"
             }
         },
         homeTyping: {
@@ -5342,7 +5683,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 ignoreListening: {
                     label: "Ignoră 'Ascultă'",
-                    description: "Ignoră toate activitățile de ascultare (acestea sunt de obicei activități Spotify)"
+                    description: "Ignoră toate activitățile de ascultare (de obicei de pe Spotify)"
                 },
                 ignoreWatching: {
                     label: "Ignoră 'Vizionează'",
@@ -5355,6 +5696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoredActivities: {
                     label: "Activități ignorate"
                 }
+            },
+            text: {
+                enableActivity: "Activează activitatea",
+                disableActivity: "Dezactivează activitatea"
             }
         },
         ignoreCalls: {
@@ -5440,6 +5785,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 sizeHTML: "Dimensiune",
                 dimensions: "Dimensiuni",
                 filename: "Nume fișier"
+            },
+            text: {
+                bytes: "Octeți"
             }
         },
         imgToGif: {
@@ -5529,15 +5877,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Include dispozitivele de intrare video (camere, plăci de captură) în lista de surse"
                 },
                 autoMute: {
-                    label: "Auto Mute",
+                    label: "Dezactivare automată a microfonului",
                     description: "Oprește automat microfonul la intrarea într-un canal vocal"
                 },
                 autoDeafen: {
-                    label: "Auto Deafen",
+                    label: "Asurzire automată",
                     description: "Oprește automat sunetul (deafen) la intrarea într-un canal vocal (te trece și pe mute)"
                 },
                 instantScreenshare: {
-                    label: "Instant Screenshare",
+                    label: "Partajare instantanee a ecranului",
                     description: "Activează funcția de partajare automată a ecranului"
                 },
                 keybindScreenshare: {
@@ -5558,6 +5906,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toast: "Instant Screenshare este {{state}}",
                 enabled: "Activat",
                 disabled: "Dezactivat"
+            },
+            toast: {
+                instantScreenshareDisabled: "Partajare instantanee a ecranului {{disabled}}"
+            },
+            text: {
+                instantScreenshare: "Instant Screenshare"
             }
         },
         invisibleChat: {
@@ -5680,6 +6034,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     resetData: "Resetează stocarea",
                     sure: "Ești sigur?"
                 }
+            },
+            text: {
+                serverOptions: "Opțiuni server",
+                copyServerId: "Copiază ID-ul serverului",
+                serverIdCopied: "ID-ul serverului a fost copiat în clipboard"
             }
         },
         jumpTo: {
@@ -5719,7 +6078,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             keywordEntry: "Introducere cuvânt cheie",
             regexHolder: "exemplu|regex",
             ignoreCase: "Ignoră majusculele",
-            whiteblackLabel: "Whitelist/Blacklist",
+            whiteblackLabel: "Listă albă/Listă neagră",
             tab: {
                 title: "Cuvinte cheie",
                 clearAll: "Șterge tot"
@@ -5729,8 +6088,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 addKeyword: "Adaugă cuvânt cheie"
             },
             listTypeSelector: {
-                blacklist: "Blacklist",
-                whitelist: "Whitelist",
+                blacklist: "Listă neagră",
+                whitelist: "Listă albă",
                 placeholder: "Selectează un tip de listă"
             },
             option: {
@@ -5746,6 +6105,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Cuvinte cheie",
                     description: "Gestionează cuvintele cheie"
                 }
+            },
+            text: {
+                keywordEntryI1: "Intrare cuvânt-cheie {{i_1}}",
+                listPriorityAdvanced: "Prioritatea listelor (avansat)",
+                whichListToPrioritize: "Ce listă să aibă prioritate dacă un mesaj declanșează ambele liste",
+                ifYouAreNot: "Dacă nu ești sigur, în majoritatea cazurilor este setat de obicei pe Listă neagră"
             }
         },
         lastOnline: {
@@ -5819,10 +6184,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     listenbrainzLogo: "Folosește logo-ul mare ListenBrainz",
                     generic: "Folosește un înlocuitor generic"
                 },
+                showAlbumCover: {
+                    label: "Arată coperta albumului",
+                    description: "Arată coperta albumului. Dezactivarea acestei opțiuni va afișa o imagine de substituent. Util dacă muzica ta are coperte inadecvate"
+                },
                 useLogo: {
                     label: "Folosește Logo",
                     description: "Arată logo-ul ListenBrainz pe coperta albumului"
                 }
+            },
+            button: {
+                profile: "Profil ListenBrainz",
+                viewSong: "Vezi piesa"
             }
         },
         loadingQuotes: {
@@ -5849,6 +6222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Delimitator citate adiționale",
                     description: "Simbolul folosit pentru a separa citatele suplimentare"
                 }
+            },
+            text: {
+                allQuotesDisabled: "Chiar ai dezactivat toate citatele de încărcare? Ce bufon ești..."
             }
         },
         loginWithQR: {
@@ -5867,7 +6243,26 @@ const translations: MatchStructure<typeof enTranslations> = {
             stopScanning: "Oprește scanarea",
             usingWebcam: "Scanează folosind camera web",
             dragDrop: "Trage și plasează o imagine aici, sau dă click pentru a selecta una",
-            orPaste: "Sau lipește o imagine din clipboard!"
+            orPaste: "Sau lipește o imagine din clipboard!",
+            verifyLogin: "Verifică autentificarea",
+            text: {
+                scanQrCode: "Scanează codul QR"
+            }
+        },
+        markdownTables: {
+            name: "MarkdownTables",
+            description: "Afișează tabele markdown în stil GitHub în mesajele Discord.",
+            toolbar: {
+                label: "Vizualizare tabel markdown",
+                table: "Tabel",
+                raw: "Brut"
+            },
+            option: {
+                hideToggle: {
+                    label: "Ascunde comutatorul",
+                    description: "Ascunde comutatorul Tabel/Brut și afișează mereu tabelele randate."
+                }
+            }
         },
         mediaPlaybackSpeed: {
             name: "MediaPlaybackSpeed",
@@ -5893,10 +6288,10 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         memberCount: {
             name: "MemberCount",
-            description: "Afișează numărul de membri online, totalul membrilor și utilizatorii din canalele vocale — în lista de membri și în tooltip.",
+            description: "Afișează numărul de membri online, numărul total de membri și utilizatorii din canalele vocale ale serverului - în lista de membri și în tooltip.",
             option: {
                 toolTip: {
-                    label: "Tooltip",
+                    label: "Indiciu",
                     description: "Arată numărul de membri în tooltip-ul serverului"
                 },
                 memberList: {
@@ -5910,7 +6305,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             onlineThisChannel: "{{formattedOnlineCount}} online în acest canal",
             totalMembers: "{{formattedTotalCount}} membri în total pe server",
-            totalVoice: "{{formattedVoiceCount}} membri în apel vocal"
+            totalVoice: "{{formattedVoiceCount}} membri în apel vocal",
+            tooltip: {
+                total: "{{count}} membri în total pe server"
+            }
         },
         mentionAvatars: {
             name: "MentionAvatars",
@@ -6057,7 +6455,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                 messageContent: "Conținut mesaj copiat!",
                 userId: "ID utilizator copiat!"
             },
-            linkCopied: "Link copiat!"
+            linkCopied: "Link copiat!",
+            text: {
+                shift: "Shift",
+                ctrl: "Ctrl",
+                alt: "Alt",
+                backspace: "Backspace",
+                pickEmoji: "Alege emoji"
+            },
+            emojiSetting: {
+                pick: "Alege emoji",
+                selectMain: "Selectează emoji pentru reacții",
+                selectAdditional: "Selectează emoji suplimentare",
+                additionalPlaceholder: "separate prin virgulă/rând nou, max. {{max}}"
+            },
+            toast: {
+                cannotReact: "Nu se poate reacționa: lipsesc permisiunile",
+                linkCopied: "Link copiat!"
+            }
         },
         messageColors: {
             name: "MessageColors",
@@ -6162,8 +6577,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 listMode: {
                     label: "Mod listă",
                     description: "Dacă să folosească lista de ID-uri ca blacklist sau whitelist",
-                    blacklist: "Blacklist",
-                    whitelist: "Whitelist"
+                    blacklist: "Listă neagră",
+                    whitelist: "Listă albă"
                 },
                 idList: {
                     label: "Listă ID-uri",
@@ -6212,7 +6627,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         messageLogger: {
             name: "MessageLogger",
             description: "Înregistrează temporar mesajele șterse și editate.",
-            removeMessage: "Elimină istoricul mesajului",
+            removeMessage: "Șterge istoricul mesajului",
             removeMessageTemporary: "Elimină mesajul (Temporar)",
             clearMessageLog: "Șterge jurnalul de mesaje",
             showDiff: "Arată diferențele",
@@ -6276,7 +6691,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                 separatedDiffs: {
                     label: "Diferențe separate",
                     description: "Separă adăugările de eliminări în diferențe pentru o citire mai ușoară"
+                },
+                logDeletedAttachments: {
+                    description: "Dacă să se înregistreze atașamentele șterse",
+                    label: "Înregistrează atașamentele șterse"
                 }
+            },
+            text: {
+                clearHistory: "Șterge istoricul",
+                toggleDeletedHighlight: "Comută evidențierea celor șterse",
+                enableDiffView: "Activează vizualizarea diferențelor",
+                disableDiffView: "Dezactivează vizualizarea diferențelor",
+                noDeletedMessages: "Niciun mesaj șters",
+                deletedMessageSuffix: " mesaj șters",
+                deletedMessagesSuffix: " mesaje șterse"
             }
         },
         messageLoggerEnhanced: {
@@ -6285,8 +6713,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             updateImageCacheDir: "Directorul cache pentru imagini a fost actualizat cu succes.",
             updateLogsDir: "Directorul pentru jurnale a fost actualizat cu succes.",
             failedUpdate: "Eșec la actualizarea directorului.",
-            blacklist: "Blacklist",
-            whitelist: "Whitelist",
+            blacklist: "Listă neagră",
+            whitelist: "Listă albă",
             failedToRemove: "Eșec la eliminarea mesajului",
             successfullyImported: "Jurnalele au fost importate cu succes",
             errorImportingLogs: "Eroare la importarea jurnalelor. Verifică consola pentru mai multe informații",
@@ -6369,7 +6797,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 title: "Filtrează mesaje",
                 deleted: "Șterse",
                 edited: "Editate",
-                ghostPing: "Ghost Pinged",
+                ghostPing: "Ping fantomă",
                 empty: "E gol",
                 importLogs: "ML Enhanced stochează acum jurnalele în indexeddb. Trebuie să imporți jurnalele vechi din directorul logs. Importarea nu va suprascrie jurnalele existente"
             },
@@ -6478,11 +6906,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 whitelistedIds: {
                     label: "ID-uri Whitelist",
-                    description: "ID-uri de servere, canale sau utilizatori permise."
+                    description: "ID-uri de server, canal sau utilizator care vor fi afișate mereu în jurnalul de mesaje."
                 },
                 blacklistedIds: {
                     label: "ID-uri Blacklist",
-                    description: "ID-uri de servere, canale sau utilizatori interzise."
+                    description: "ID-uri de server, canal sau utilizator care nu vor fi afișate niciodată în jurnalul de mesaje."
                 },
                 imageCacheDir: {
                     label: "Director Cache Imagini",
@@ -6520,6 +6948,25 @@ const translations: MatchStructure<typeof enTranslations> = {
                     confirmText: "Șterge",
                     cancel: "Anulează"
                 }
+            },
+            toast: {
+                clearedLogs: "Jurnalele au fost șterse",
+                failedToClearLogs: "Nu s-au putut șterge jurnalele",
+                failedToRemoveMessage: "Nu s-a putut elimina mesajul. Verifică consola pentru detalii.",
+                noMessagesFoundIn: "Nu s-au găsit mesaje în fișierul jurnal",
+                successfullyImportedCountLogs: "Au fost importate {{count}} jurnale",
+                successfullyExportedLogs: "Jurnalele au fost exportate",
+                successfullyExportedCountLogs: "Au fost exportate {{count}} jurnale",
+                errorExportingLogsCheck: "Eroare la exportul jurnalelor. Verifică consola pentru mai multe informații"
+            },
+            text: {
+                jsonFile: "Fișier JSON",
+                clearLogs: "Șterge jurnalele",
+                clearingLogs: "Se șterg jurnalele...",
+                messageLogger: "Message Logger",
+                importLogs: "Importă jurnalele",
+                logs: "Jurnale",
+                loadingTabLogs: "Se încarcă jurnalele: {{tab}}..."
             }
         },
         messageNotifier: {
@@ -6740,7 +7187,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Redimensionează butoanele la 75%, mărind în același timp emoji-ul interior la 125%. Recomandat să ai minim 5 coloane"
                 },
                 scroll: {
-                    label: "Scroll",
+                    label: "Derulare",
                     description: "Activează derularea listei de emoji-uri"
                 }
             }
@@ -6913,13 +7360,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     LRCLIB: "LRCLIB"
                 },
                 spotifyLyricsApiUrl: {
-                    label: "URL API Versuri Spotify",
-                    description: "URL-ul de bază al API-ului pentru versuri Spotify."
+                    label: "URL de bază API versuri Spotify",
+                    description: "URL de bază al unei instanțe personalizate (de exemplu: http://localhost:8080)."
                 },
                 translateTo: {
                     label: "Tradu în",
                     description: "Tradu versurile în limba selectată - Schimbarea acestei setări va șterge traducerile existente",
-                    cleared: "Traducere ștearsă"
+                    cleared: "Traducerile au fost șterse"
                 },
                 lyricsConversion: {
                     label: "Conversie versuri",
@@ -6941,6 +7388,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Șterge toate versurile și traducerile salvate în cache",
                     button: "Golește Cache",
                     cacheLyricsPurged: "Cache-ul de versuri a fost golit"
+                },
+                lyricDelay: {
+                    label: "Întârzierea versurilor"
                 }
             },
             context: {
@@ -7025,6 +7475,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 failed: "Eșec la randarea ferestrei modale :(",
                 checkConsole: "Verifică consola pentru erori",
                 invalidUrlCustomApi: "Format URL invalid pentru URL-ul serverului Custom API"
+            },
+            text: {
+                unknownArtist: "Artist necunoscut",
+                unknownTitle: "Titlu necunoscut"
             }
         },
         mutualGroupDMs: {
@@ -7045,7 +7499,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "NewGuildSettings",
             description: "Pune automat pe mute serverele noi și modifică diverse alte setări la intrarea pe acestea",
             context: {
-                apply: "Aplică NewGuildSettings"
+                apply: "Aplică NewGuildSettings dosarului"
             },
             option: {
                 guild: {
@@ -7100,7 +7554,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 dontShowAgain: "Nu mai afișa",
                 restartRequired: "Este necesară repornirea pentru a aplica modificările",
                 restart: "Repornește",
-                continue: "Continuă"
+                continue: "Continuă",
+                supportUs: "Plexcord este software open source. Dacă îți place să îl folosești, ia în considerare să ne susții",
+                supportUsLink: "aici"
             }
         },
         noAppsAllowed: {
@@ -7284,7 +7740,10 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         notificationTitle: {
             name: "NotificationTitle",
-            description: "Face notificările de desktop mai informative"
+            description: "Face notificările de desktop mai informative",
+            text: {
+                threadInParent: "{{thread}} în {{parent}}"
+            }
         },
         notificationVolume: {
             name: "NotificationVolume",
@@ -7360,6 +7819,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 vrcx: {
                     label: "VRChat",
                     description: "Deschide linkurile VRChat în aplicația VRCX"
+                },
+                telegram: {
+                    label: "Telegram",
+                    description: "Deschide linkurile Telegram în aplicația Telegram"
                 }
             },
             notification: {
@@ -7447,6 +7910,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 highest: "Cel mai înalt rol",
                 lowest: "Cel mai jos rol",
                 details: "Detalii rol"
+            },
+            text: {
+                roleOptions: "Opțiuni rol",
+                userOptions: "Opțiuni utilizator",
+                unknownRole: "Rol necunoscut",
+                unknownUser: "Utilizator necunoscut"
             }
         },
         petpet: {
@@ -7497,7 +7966,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unnamed: "oops"
                 },
                 pin: {
-                    label: "Fixează DM",
+                    label: "Fixează mesajele private",
                     addCategory: "Adaugă categorie"
                 },
                 unPin: {
@@ -7534,7 +8003,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     color: "Culoare",
                     save: "Salvează",
                     create: "Creează"
-                }
+                },
+                defaultCategoryName: "Categorie fixată {{number}}"
             }
         },
         pingNotifications: {
@@ -7578,12 +8048,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformIndicators: {
             name: "PlatformIndicators",
             description: "Adaugă indicatori de platformă (Desktop, Mobil, Web...) utilizatorilor",
-            embeddedTooltip: "Consolă",
+            embeddedTooltip: "Încorporat (consolă sau joc)",
             vrTooltip: "VR",
             option: {
                 list: {
                     label: "Listă",
-                    description: "Arată indicatorii în lista de membri"
+                    description: "Afișează indicatori în profilurile utilizatorilor"
                 },
                 badges: {
                     label: "Insigne",
@@ -7606,7 +8076,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformSpoofer: {
             name: "PlatformSpoofer",
             description: "Falsifică platforma sau dispozitivul pe care te afli",
-            about: "Nu garantăm că acest plugin nu îți va aduce un avertisment sau suspendarea contului.",
+            about: "Nu putem garanta că acest plugin nu îți va aduce un avertisment sau o interdicție. Alegerea Xbox/Playstation/VR poate face clientul tău o versiune învechită.",
             platform: {
                 desktop: "Client Discord",
                 web: "Discord Web",
@@ -7619,7 +8089,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 platform: {
                     label: "Platformă",
-                    description: "Sub ce platformă să apari",
+                    description: "Pe ce platformă să pretinzi că ești.",
                     desktop: "Desktop",
                     web: "Web",
                     android: "Android",
@@ -7689,9 +8159,9 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         profileSets: {
             name: "ProfileSets",
-            description: "Îți permite să salvezi și să încarci diferite profiluri predefinite din secțiunea Profil din Setări.",
+            description: "Îți permite să salvezi și să încarci diferite presetări de profil.",
             toast: {
-                importFailed: "Eșec la importarea seturilor de profil. Fișierul poate fi invalid.",
+                importFailed: "Nu s-au putut importa presetările. Fișierul poate fi nevalid.",
             },
             option: {
                 avatarSize: {
@@ -7722,397 +8192,550 @@ const translations: MatchStructure<typeof enTranslations> = {
                 random: "Aleatoriu",
                 import: "Importă",
                 exportAll: "Exportă tot"
+            },
+            text: {
+                selectAServer: "Selectează un server",
+                profileSets: "Seturi de profil",
+                youAreNotIn: "Încă nu ești pe niciun server.",
+                mainProfile: "Profil principal",
+                serverProfiles: "Profiluri de server",
+                openProfileSets: "Deschide seturile de profil"
             }
         },
         questify: {
             name: "Questify",
-            description: "Îmbunătățește-ți experiența Quest cu o suită de funcții sau dezactivează-le complet dacă nu sunt pe placul tău.",
-            quests: "Misiuni (Quests)",
+            description: "Îmbunătățește anumite funcții ale Quest-urilor, dezactivează elementele enervante sau elimină complet Quest-urile.",
+            quests: "Quest-uri",
             context: {
                 quest: {
-                    label: "Meniu buton Quest",
-                    ignore: "Marchează tot ca ignorat",
+                    label: "Meniul butonului Quest",
+                    ignore: "Marchează toate ca ignorate",
                     reset: "Resetează lista de ignorate",
-                    fetch: "Preia misiunile",
+                    fetch: "Preia Quest-urile",
                     markAsIgnored: "Marchează ca ignorat",
-                    unmarkAsIgnored: "Anulează marcarea ca ignorat",
-                    stopAuto: "Oprește completarea automată",
-                    copyQuestID: "Copiază ID misiune",
-                    startAuto: "Pornește completarea automată"
-                }
-            },
-            settings: {
-                questButton: {
-                    title: "Buton Quest",
-                    description: "Afișează un buton Quest în lista de servere cu un indicator opțional pentru misiunile nerevendicate.",
-                    leftClick: "Acțiune click stânga",
-                    middleClick: "Acțiune click mijloc",
-                    rightClick: "Acțiune click dreapta",
-                    visibility: "Vizibilitate buton",
-                    unclaimedIndicator: "Indicator nerevendicate",
-                    badgeColor: "Culoare insignă",
-                    rewardDisplay: "Afișare recompensă",
-                    includedRewardTypes: "Tipuri de recompense incluse",
-                    includedRewardTypesDesc: "Numără doar misiunile cu aceste tipuri de recompense ca fiind nerevendicate pentru vizibilitatea butonului, numărul insignei și sunetul de alertă.",
-                    selectRewardTypes: "Selectează tipurile de recompense de inclus în numărătoarea celor nerevendicate...",
-                    noRewardType: "Nu există nicio funcție Quest acceptată cu acest nume.",
-                    default: "Implicit",
-                    disable: "Dezactivează"
-                },
-                questFeatures: {
-                    title: "Funcții Quest",
-                    description: "Modifică funcții specifice ale misiunilor.",
-                    popupWarning: "Opțiunea {{disablePopup}} va fi ignorată pentru misiunile finalizate și pentru urmărirea progresului.",
-                    videoQuestInfo: "Opțiunea {{completeVideo}} va aștepta durata misiunii video și o va marca automat ca fiind finalizată.",
-                    gameQuestInfo: "În mod similar, opțiunea {{completeGame}} va aștepta durata misiunii de joc și o va marca automat ca fiind finalizată. Această opțiune este acceptată doar pe clientul oficial de desktop.",
-                    manualStartWarning: "Trebuie totuși să pornești misiunile manual. Primul click va porni misiunile în fundal. Pentru misiunile video, click-urile ulterioare vor deschide fereastra video normal. Pentru a anula, poți deschide meniul contextual pe cardul misiunii și selecta {{stopAuto}}.",
-                    tosWarning: "Utilizarea oricăreia dintre aceste opțiuni contravine Termenilor și Condițiilor Discord. Folosește-le pe propriul risc.",
-                    selectFeatures: "Selectează ce funcții Quest dorești să modifici.",
-                    disablePopup: "Dezactivează fereastra Quest deasupra panoului de cont",
-                    completeVideo: "Finalizează misiunile video în fundal",
-                    completeGame: "Finalizează misiunile de joc în fundal",
-                    stopAuto: "Oprește completarea automată"
-                },
-                restyleQuests: {
-                    title: "Restilizare Misiuni",
-                    description: "Evidențiază misiunile cu culori tematice opționale pentru o mai bună vizibilitate.",
-                    precedenceNote: "Stilurile pentru misiunile revendicate și expirate vor avea prioritate chiar dacă o misiune este ignorată.",
-                    gradientStyle: "Stil degrade (Gradient)",
-                    assetPreload: "Preîncărcare resurse",
-                    unclaimed: "Nerevendicate",
-                    claimed: "Revendicate",
-                    ignored: "Ignorate",
-                    expired: "Expirate",
-                    intenseGradient: "Degrade intens",
-                    defaultGradient: "Degrade implicit",
-                    blackGradient: "Degrade negru subtil",
-                    noGradient: "Fără degrade",
-                    loadAllAssets: "Încarcă toate resursele la încărcarea paginii",
-                    loadDuringScroll: "Încarcă resursele în timpul derulării paginii"
-                },
-                reorderQuests: {
-                    title: "Reordonare Misiuni",
-                    description: "Sortează misiunile după starea lor. Se aplică atunci când opțiunea de sortare \"Questify\" este selectată pe pagina misiunilor.",
-                    formatNote: "Lista separată prin virgulă trebuie să conțină toate elementele: {{items}}.",
-                    placeholder: "Trebuie să incluzi UNCLAIMED, CLAIMED, IGNORED, EXPIRED",
-                    invalidFormat: "Format invalid.",
-                    unclaimedSubsort: "Sub-sortare nerevendicate",
-                    claimedSubsort: "Sub-sortare revendicate",
-                    ignoredSubsort: "Sub-sortare ignorate",
-                    expiredSubsort: "Sub-sortare expirate",
-                    addedNewest: "Adăugate (cele mai noi)",
-                    addedOldest: "Adăugate (cele mai vechi)",
-                    expiredRecent: "Expirate (recent)",
-                    expiredLeast: "Expirate (cele mai vechi)",
-                    expiringSoon: "Expiră curând",
-                    expiringLate: "Expiră târziu",
-                    claimedRecent: "Revendicate (cele mai recente)",
-                    claimedLeast: "Revendicate (cele mai vechi)",
-                    ignoredQuestProfile: "Profil misiuni ignorate",
-                    sharedProfile: "Partajat: Toate conturile de pe acest client partajează lista de ignorate.",
-                    privateProfile: "Privat: Toate conturile au liste de ignorate separate.",
-                    rememberSort: "Ține minte sortarea",
-                    rememberFilter: "Ține minte filtrele",
-                    yes: "Da",
-                    no: "Nu",
-                    rememberNote: "Această alegere se referă la opțiunile de sortare și filtrare integrate pe pagina Quest. Sortarea personalizată de mai sus se aplică doar când \"Questify\" este selectat. Dacă reținerea este dezactivată, opțiunile se resetează la fiecare deschidere."
-                },
-                fetchingQuests: {
-                    title: "Preluare Misiuni",
-                    description: "Configurează cât de des să preiei misiunile de la Discord și setează alerte pentru misiuni noi.",
-                    defaultBehavior: "Implicit, Discord preia misiunile doar la încărcare sau la vizitarea paginii. Fără un interval definit mai jos, pluginul nu va detecta misiunile noi adăugate pe parcursul zilei.",
-                    requirement: "Aceasta necesită ca Butonul Quest să fie activat și setat pe {{unclaimed}} sau {{always}} cu indicatori de tip {{pill}}, {{badge}} sau {{both}} activați.",
-                    blockWarning: "De asemenea, dacă {{fetchingQuests}} este blocat în setările {{questFeatures}}, acest lucru nu va funcționa.",
-                    fetchInterval: "Interval de preluare",
-                    alertSound: "Sunet de alertă",
-                    intervalPlaceholder: "Selectează sau scrie un interval între 30 min și 12 ore.",
-                    intervalFeedback: "Intervalul trebuie să fie între 30 minute și 12 ore.",
-                    soundPlaceholder: "Selectează un sunet sau introdu un URL personalizat.",
-                    soundFeedback: "Sunetul nu a fost găsit sau URL-ul nu este dintr-un domeniu acceptat.",
-                    disabled: "Dezactivat",
-                    minutes: "Minute",
-                    minute: "Minut",
-                    hours: "Ore",
-                    hour: "Oră",
-                    thirtyMinutes: "30 Minute",
-                    oneHour: "1 Oră",
-                    threeHours: "3 Ore",
-                    sixHours: "6 Ore",
-                    twelveHours: "12 Ore",
-                    customSound: "SUNET PERSONALIZAT"
-                },
-                disableOptions: {
-                    everything: "Dezactivează tot",
-                    discovery: "Dezactivează fila Discovery",
-                    dms: "Dezactivează fila Quests în DM",
-                    fetching: "Dezactivează preluarea misiunilor",
-                    popup: "Dezactivează fereastra deasupra panoului de cont",
-                    sponsored: "Dezactivează bannerul sponsorizat",
-                    badge: "Dezactivează insigna pe profilurile de utilizator",
-                    inventory: "Dezactivează notificarea de mutare a inventarului",
-                    friendsList: "Promoție 'Activ acum' în lista de prieteni",
-                    membersList: "Pictograme 'Se joacă activ' în lista de membri",
-                    gameQuests: "Finalizează misiunile de joc în fundal",
-                    videoQuests: "Finalizează misiunile video în fundal",
-                    achievementQuests: "Finalizează misiunile de tip activitate în fundal",
-                    mobileDesktop: "Fă misiunile de mobil compatibile cu desktop",
-                    notifyOnComplete: "Notifică la finalizarea misiunii"
-                },
-                options: {
-                    always: "Mereu",
-                    unclaimed: "Nerevendicate",
-                    never: "Niciodată",
-                    pill: "Pastilă (Pill)",
-                    badge: "Insignă (Badge)",
-                    both: "Ambele",
-                    none: "Niciuna",
-                    openQuests: "Deschide misiunile",
-                    contextMenu: "Meniu contextual",
-                    pluginSettings: "Setări plugin",
-                    nothing: "Nimic",
-                    orbs: "Orb-uri",
-                    nitroCodes: "Coduri Nitro",
-                    rewardCodes: "Coduri recompensă",
-                    inGameItems: "Obiecte în joc",
-                    profileCollectibles: "Elemente de profil"
-                }
-            },
-            option: {
-                disableQuests: {
-                    label: "Dezactivează misiunile",
-                    description: "Selectează ce funcții Quest dorești să dezactivezi."
-                },
-                disableQuestsEverything: {
-                    label: "Dezactivează tot",
-                    description: "Dezactivează toate funcțiile Quest."
-                },
-                disableQuestsFetchingQuests: {
-                    label: "Dezactivează preluarea misiunilor",
-                    description: "Dezactivează preluarea misiunilor de la Discord."
-                },
-                disableQuestsDirectMessagesTab: {
-                    label: "Dezactivează fila Quests în DM",
-                    description: "Dezactivează fila de misiuni din pagina de mesaje directe."
-                },
-                disableQuestsDiscoveryTab: {
-                    label: "Dezactivează fila Discovery",
-                    description: "Dezactivează fila de misiuni din pagina Discovery."
-                },
-                disableQuestsPageSponsoredBanner: {
-                    label: "Dezactivează bannerul sponsorizat",
-                    description: "Dezactivează bannerul sponsorizat de pe pagina Quest."
-                },
-                disableQuestsPopupAboveAccountPanel: {
-                    label: "Dezactivează fereastra deasupra panoului de cont",
-                    description: "Dezactivează fereastra pop-up deasupra panoului contului tău."
-                },
-                disableQuestsBadgeOnUserProfiles: {
-                    label: "Dezactivează insigna pe profiluri",
-                    description: "Dezactivează insigna Quest de pe profilurile de utilizator."
-                },
-                disableQuestsGiftInventoryRelocationNotice: {
-                    label: "Dezactivează notificarea de mutare a inventarului",
-                    description: "Dezactivează notificarea privind mutarea secțiunii de inventar."
-                },
-                disableFriendsListActiveNowPromotion: {
-                    label: "Dezactivează promoția 'Activ acum'",
-                    description: "Dezactivează promovarea misiunilor pentru jocurile jucate de prieteni."
-                },
-                disableMembersListActivelyPlayingIcons: {
-                    label: "Dezactivează pictogramele de joc activ",
-                    description: "Dezactivează pictogramele care arată ce jocuri se joacă activ în lista de membri."
-                },
-                makeMobileQuestsDesktopCompatible: {
-                    label: "Compatibilitate desktop pentru misiuni mobil",
-                    description: "Face misiunile exclusiv de mobil compatibile cu versiunea desktop."
-                },
-                completeVideoQuestsInBackground: {
-                    label: "Finalizează misiunile video în fundal",
-                    description: "Finalizează misiunile video automat după expirarea duratei acestora."
-                },
-                completeGameQuestsInBackground: {
-                    label: "Finalizează misiunile de joc în fundal",
-                    description: "Finalizează misiunile de joc automat după expirarea duratei de joc."
-                },
-                completeAchievementQuestsInBackground: {
-                    label: "Finalizează misiunile de tip activitate în fundal",
-                    description: "Finalizează automat sarcinile din misiunile de tip activitate."
-                },
-                notifyOnQuestComplete: {
-                    label: "Notifică la finalizarea misiunii",
-                    description: "Afișează o notificare când o misiune este finalizată automat."
-                },
-                questButton: {
-                    label: "Buton Quest",
-                    description: "Afișează un buton Quest în lista de servere."
-                },
-                questButtonDisplay: {
-                    label: "Afișare buton Quest",
-                    description: "Ce tip de afișare să fie folosit pentru butonul Quest."
-                },
-                questRewardIncludeRewardCode: {
-                    label: "Include coduri de recompensă",
-                    description: "Include misiunile cu coduri de recompensă în numărătoare."
-                },
-                questRewardIncludeNitroCode: {
-                    label: "Include coduri Nitro",
-                    description: "Include misiunile cu coduri Nitro în numărătoare."
-                },
-                questRewardIncludeInGame: {
-                    label: "Include recompense în joc",
-                    description: "Include misiunile cu obiecte de joc în numărătoare."
-                },
-                questRewardIncludeCollectibles: {
-                    label: "Include elemente de colecție",
-                    description: "Include misiunile cu elemente de profil (collectibles) în numărătoare."
-                },
-                questRewardIncludeOrbs: {
-                    label: "Include Orb-uri",
-                    description: "Include misiunile cu Orb-uri în numărătoare."
-                },
-                questButtonUnclaimed: {
-                    label: "Indicator misiuni nerevendicate",
-                    description: "Tipul de afișare pentru indicatorul de misiuni nerevendicate de pe buton."
-                },
-                questButtonBadgeColor: {
-                    label: "Culoare insignă buton Quest",
-                    description: "Culoarea insignei pentru butonul Quest din lista de servere."
-                },
-                questButtonLeftClickAction: {
-                    label: "Acțiune click stânga",
-                    description: "Acțiunea executată la click stânga pe buton."
-                },
-                questButtonMiddleClickAction: {
-                    label: "Acțiune click mijloc",
-                    description: "Acțiunea executată la click mijloc pe buton."
-                },
-                questButtonRightClickAction: {
-                    label: "Acțiune click dreapta",
-                    description: "Acțiunea executată la click dreapta pe buton."
-                },
-                fetchingQuests: {
-                    label: "Preluare misiuni",
-                    description: "Preia misiunile de la Discord."
-                },
-                fetchingQuestsInterval: {
-                    label: "Interval preluare misiuni",
-                    description: "Intervalul în secunde pentru preluarea misiunilor."
-                },
-                fetchingQuestsAlert: {
-                    label: "Alertă preluare misiuni",
-                    description: "Sunetul redat la detectarea de misiuni noi."
-                },
-                fetchingQuestsAlertVolume: {
-                    label: "Volum alertă misiuni",
-                    description: "Volumul sunetului de alertă pentru misiuni noi."
-                },
-                restyleQuests: {
-                    label: "Restilizare misiuni",
-                    description: "Personalizează aspectul cardurilor de misiune."
-                },
-                restyleQuestsUnclaimed: {
-                    label: "Restilizare nerevendicate",
-                    description: "Culoarea cardurilor de misiuni nerevendicate."
-                },
-                restyleQuestsClaimed: {
-                    label: "Restilizare revendicate",
-                    description: "Culoarea cardurilor de misiuni revendicate."
-                },
-                restyleQuestsIgnored: {
-                    label: "Restilizare ignorate",
-                    description: "Culoarea cardurilor de misiuni ignorate."
-                },
-                restyleQuestsExpired: {
-                    label: "Restilizare expirate",
-                    description: "Culoarea cardurilor de misiuni expirate."
-                },
-                restyleQuestsGradient: {
-                    label: "Degrade restilizare",
-                    description: "Stilul degradeului folosit pentru cardurile de misiune."
-                },
-                restyleQuestsPreload: {
-                    label: "Preîncărcare resurse",
-                    description: "Încearcă să preîncarce resursele grafice pentru cardurile de misiune."
-                },
-                reorderQuests: {
-                    label: "Reordonare misiuni",
-                    description: "Sortează misiunile după stare. Lasă gol pentru sortarea implicită. Lista trebuie să conțină: UNCLAIMED, CLAIMED, IGNORED, EXPIRED."
-                },
-                unclaimedSubsort: {
-                    label: "Sub-sortare nerevendicate",
-                    description: "Metoda de sub-sortare pentru misiunile nerevendicate."
-                },
-                claimedSubsort: {
-                    label: "Sub-sortare revendicate",
-                    description: "Metoda de sub-sortare pentru misiunile revendicate."
-                },
-                ignoredSubsort: {
-                    label: "Sub-sortare ignorate",
-                    description: "Metoda de sub-sortare pentru misiunile ignorate."
-                },
-                expiredSubsort: {
-                    label: "Sub-sortare expirate",
-                    description: "Metoda de sub-sortare pentru misiunile expirate."
-                },
-                unclaimedUnignoredQuests: {
-                    label: "Misiuni nerevendicate și neignorate",
-                    description: "Urmărește numărul de misiuni care nu sunt nici revendicate, nici ignorate."
-                },
-                onQuestsPage: {
-                    label: "Pe pagina misiunilor",
-                    description: "Indică dacă utilizatorul se află pe pagina de misiuni."
-                },
-                triggerQuestsRerender: {
-                    label: "Forțează rerandarea",
-                    description: "Forțează o rerandare a paginii de misiuni prin comutarea acestei setări."
-                },
-                ignoredQuestProfile: {
-                    label: "Profil misiuni ignorate",
-                    description: "Profilul utilizat pentru misiunile ignorate."
-                },
-                rememberQuestPageSort: {
-                    label: "Reține sortarea paginii",
-                    description: "Reține ultima sortare folosită pe pagina de misiuni."
-                },
-                rememberQuestPageFilters: {
-                    label: "Reține filtrele paginii",
-                    description: "Reține ultimele filtre folosite pe pagina de misiuni."
-                },
-                lastQuestPageSort: {
-                    label: "Ultima sortare pagină",
-                    description: "Ultima sortare utilizată pe pagina Quest."
-                },
-                lastQuestPageFilters: {
-                    label: "Ultimele filtre pagină",
-                    description: "Ultimele filtre utilizate pe pagina Quest."
-                },
-                ignoredQuestIDs: {
-                    label: "ID-uri misiuni ignorate",
-                    description: "O listă cu ID-urile misiunilor care sunt ignorate."
-                },
-                resumeQuestIDs: {
-                    label: "ID-uri misiuni în reluare",
-                    description: "O listă cu ID-urile misiunilor care se finalizează automat în fundal."
+                    unmarkAsIgnored: "Nu mai ignora",
+                    stopAuto: "Oprește finalizarea automată",
+                    startAuto: "Pornește finalizarea automată",
+                    copyQuestID: "Copiază ID-ul Quest-ului"
                 }
             },
             button: {
-                questInProgressWithTime: "Se finalizează ({{remainTime}})",
-                completing: "Se finalizează",
-                resume: "Reluare (~{{remainTime}})",
-                complete: "Finalizează {{remainTime}}",
-                completeImmediate: "Finalizează (Imediat)",
+                completing: "Se finalizează...",
+                completingWithTime: "Se finalizează ({{time}})",
+                completingIn: "Se finalizează în {{time}}",
+                queued: "În coadă ({{position}})",
+                resuming: "Se reia...",
+                completeNow: "Finalizează acum",
+                complete: "Finalizează ({{time}})",
+                resume: "Reia ({{time}})",
                 completed: "Finalizat"
             },
             reward: {
-                orbs: "{{completingText}} pentru {{orbQuantity}} Orb-uri.",
-                article: "{{completingText}} pentru {{itemName}}.",
-                unrecognized: "{{completingText}} pentru un tip de recompensă necunoscut."
+                orbs: "{{status}} pentru {{orbQuantity}} Orbs.",
+                article: "{{status}} pentru {{itemName}}.",
+                unrecognized: "{{status}} pentru o recompensă necunoscută."
+            },
+            toast: {
+                autoCompleteBroken: "Finalizarea automată nu funcționează. O remediere va apărea în curând.",
+                enrollmentFailed: "Înscrierea în Quest-ul {{questName}} a eșuat.",
+                enrollmentInNormalizequestnameQuest: "Înscrierea în misiunea {{normalizeQuestName_quest}} a eșuat{{rateLimitSuffix}}."
             },
             notification: {
                 completed: {
-                    title: "Misiune Finalizată",
-                    body: "Misiunea {{questName}} a fost finalizată."
+                    title: "Quest finalizat!",
+                    body: "Quest-ul {{questName}} a fost finalizat."
+                },
+                newQuest: {
+                    title: "Quest nou detectat!",
+                    body: "Quest-ul {{questName}} este acum disponibil."
+                },
+                newQuests: {
+                    title: "Quest-uri noi detectate!",
+                    body: "{{count}} Quest-uri noi sunt acum disponibile."
+                },
+                newExcludedQuest: {
+                    title: "Quest exclus nou detectat!",
+                    body: "A fost detectat Quest-ul exclus {{questName}}. ID: {{questId}}"
+                },
+                newExcludedQuests: {
+                    title: "Quest-uri excluse noi detectate!",
+                    body: "Au fost detectate {{count}} Quest-uri excluse noi. Verifică consola pentru ID-urile lor."
                 }
+            },
+            alert: {
+                restart: {
+                    title: "Repornire necesară",
+                    body: "O modificare a setărilor Questify necesită o repornire.",
+                    confirm: "Repornește",
+                    cancel: "Mai târziu"
+                },
+                dangerous: {
+                    title: "Ești sigur?",
+                    confirm: "Continuă",
+                    cancel: "Anulează",
+                    disableEverything: "Aceasta va dezactiva complet funcționalitatea Quest-urilor.",
+                    allowDangerous: "Aceasta va permite modificarea setărilor periculoase."
+                }
+            },
+            status: {
+                unclaimed: "NEREVENDICATĂ",
+                claimed: "Revendicat",
+                ignored: "Ignorat",
+                expired: "Expirat"
+            },
+            questTypes: {
+                watchVideo: "Urmărește video",
+                watchVideoOnMobile: "Urmărește video pe mobil",
+                achievementInActivity: "Realizare în activitate",
+                achievementInGame: "Realizare în joc",
+                playActivity: "Joacă activitate",
+                playOnDesktop: "Joacă pe desktop",
+                playOnDesktopV2: "Joacă pe desktop V2",
+                streamOnDesktop: "Transmite pe desktop",
+                playOnPlayStation: "Joacă pe PlayStation",
+                playOnXbox: "Joacă pe Xbox"
+            },
+            settings: {
+                questButton: {
+                    title: "Butonul Quest",
+                    description: "Afișează un buton Quest în lista de servere, cu un indicator opțional pentru Quest-urile nerevendicate și neignorate.",
+                    behavior: "Comportamentul butonului",
+                    leftClick: "Acțiune la clic stânga:",
+                    middleClick: "Acțiune la clic de mijloc:",
+                    rightClick: "Acțiune la clic dreapta:",
+                    visibility: "Vizibilitatea butonului:",
+                    visibilityTooltip: "Întotdeauna afișează butonul Quest cât timp această funcție este activată.\n\nNerevendicat îl afișează doar când ai recompense Quest relevante nerevendicate.\n\nNiciodată ascunde butonul Quest.",
+                    unclaimedIndicator: "Indicator nerevendicate:",
+                    unclaimedIndicatorTooltip: "Pastilă afișează marcajul de necitit al Discord lângă butonul Quest.\n\nInsignă afișează numărul de recompense Quest relevante nerevendicate.\n\nAmbele afișează pastila și insigna împreună.\n\nNiciunul ascunde indicatorii.",
+                    badgeColor: "Culoarea insignei:",
+                    relevancy: "Relevanța Quest-urilor",
+                    includedRewardTypes: "Tipuri de recompense incluse:",
+                    includedRewardTypesTooltip: "Consideră nerevendicate doar Quest-urile cu aceste tipuri de recompense la stabilirea vizibilității butonului, a numărului de pe insignă și a alertelor.",
+                    includedQuestTypes: "Tipuri de Quest incluse:",
+                    includedQuestTypesTooltip: "Consideră nerevendicate doar Quest-urile cu aceste tipuri de sarcini la stabilirea vizibilității butonului, a numărului de pe insignă și a alertelor.",
+                    display: {
+                        always: "Întotdeauna",
+                        unclaimed: "Nerevendicat",
+                        never: "Niciodată"
+                    },
+                    indicator: {
+                        pill: "Pastilă",
+                        badge: "Insignă",
+                        both: "Ambele",
+                        none: "Niciunul"
+                    },
+                    action: {
+                        openQuests: "Deschide Quest-urile",
+                        contextMenu: "Meniu contextual",
+                        pluginSettings: "Setările pluginului",
+                        nothing: "Nimic"
+                    },
+                    rewardTypes: {
+                        orbs: "Orbs",
+                        nitroCodes: "Coduri Nitro",
+                        rewardCodes: "Coduri de recompensă",
+                        inGameItems: "Obiecte în joc",
+                        profileCollectibles: "Obiecte de colecție pentru profil"
+                    }
+                },
+                questFeatures: {
+                    title: "Funcțiile Quest-urilor",
+                    description: "Modifică comportamentul Quest-urilor pentru a îmbunătăți sau elimina funcționalități.",
+                    disableFeatures: "Dezactivează funcții",
+                    disableEverything: "Dezactivează complet funcționalitatea Quest-urilor:",
+                    disableEverythingTooltip: "Aceasta dezactivează toate îmbunătățirile pluginului, ascunde pagina Quest-urilor și elementele Quest din tot Discord-ul și împiedică Discord să preia datele Quest-urilor. Magazinul nu va fi afectat, deoarece Orbs sunt prea strâns legate de el ca monedă secundară.",
+                    disableSpecific: "Dezactivează anumite funcții:",
+                    disableSpecificTooltip: "Bannerul sponsorizat este un banner Quest plătit în partea de sus a paginii Quest-urilor.\n\nNotificările de mutare sunt indicatori, de exemplu pe pagina Descoperă, că Quest-urile au fost mutate în mesajele directe.\n\nPromo în lista de prieteni este un card afișat în secțiunea \"Activ acum\" a listei de prieteni când un utilizator cu care ai un server comun joacă un joc cu un Quest activ.\n\nPromo în lista de membri este o pictogramă afișată la membrii din lista unui server când joacă un joc cu un Quest activ.\n\nPromo în panoul contului este o promovare Quest plătită afișată deasupra panoului contului tău.\n\nProgresul din panoul contului este progresul Quest-ului activ sau finalizat afișat deasupra panoului contului tău.\n\nInsignele Quest și Orbs sunt insigne în profilurile celor care au finalizat cel puțin un Quest sau au cumpărat insigna Orbs.",
+                    disableOptions: {
+                        sponsoredBanner: "Banner sponsorizat",
+                        relocationNotices: "Notificări de mutare",
+                        friendsListPromo: "Promo în lista de prieteni",
+                        membersListPromo: "Promo în lista de membri",
+                        accountPanelPromo: "Promo în panoul contului",
+                        accountPanelProgress: "Progres în panoul contului",
+                        orbsAndQuestsBadges: "Insigne Quest și Orbs"
+                    },
+                    modifyFeatures: "Modifică funcții",
+                    warningTos: "Discord a început să trimită avertismente utilizatorilor de scripturi sau pluginuri care modifică modul de finalizare a Quest-urilor, ceea ce încalcă {{tos}}.",
+                    tos: "Termenii de utilizare",
+                    warningEscalate: "Avertismentele par limitate la amenințarea pierderii accesului la Quest-uri sau la recompensele lor, dar Discord poate înăspri măsurile oricând.",
+                    warningDetection: "Din cauza metodelor variate prin care Discord urmărește utilizatorii, nu există o modalitate realistă de a evita detectarea. Dacă continui, ia în calcul că Discord probabil o va detecta la un moment dat.",
+                    warningRisk: "Folosește comutatorul următor pentru a accesa setări potențial periculoase pe propriul risc.",
+                    allowDangerous: "Permite modificarea setărilor periculoase...",
+                    disallowDangerous: "Resetează și interzice modificarea setărilor periculoase...",
+                    completeVideoQuicker: "Accelerează finalizarea automată a Quest-urilor video:",
+                    completeVideoQuickerTooltip: "Discord permite finalizarea Quest-urilor video după ce, de la înscriere, a trecut durata videoclipului minus 24 de secunde.\n\nAstfel, un Quest video de 24 de secunde sau mai scurt, ori unul la care te înscrii și revii mai târziu, poate fi finalizat imediat.\n\nAceastă setare se aplică doar finalizării automate a Quest-urilor video și depinde de setarea de finalizare automată de mai jos. Finalizarea manuală necesită în continuare așteptarea întregii durate și nu depinde de momentul înscrierii.",
+                    mobileDesktop: "Permite finalizarea pe desktop a unor Quest-uri video doar pentru mobil:",
+                    mobileDesktopTooltip: "La unele Quest-uri video doar pentru mobil te poți înscrie de pe desktop, dar trebuie totuși finalizate pe mobil. Această setare permite finalizarea lor pe desktop.\n\nLa unele Quest-uri video doar pentru mobil te poți înscrie doar de pe mobil. Pentru ca setarea să le afecteze, înscrie-te de pe dispozitivul mobil înainte de a reveni pe desktop și a reîmprospăta Quest-urile.\n\nActivată singură, această setare se aplică doar finalizării manuale a Quest-urilor video. Finalizarea automată a Quest-urilor video mobile de pe desktop depinde de setarea de finalizare automată de mai jos și activează implicit și această setare.",
+                    simultaneous: "Finalizează automat Quest-urile simultan, nu pe rând:",
+                    simultaneousTooltip: "Implicit, finalizarea automată a mai multor Quest-uri le pune într-o coadă pentru a fi finalizate în ordine.\n\nAceastă setare permite în schimb ca toate Quest-urile cu finalizare automată să ruleze în același timp.\n\nAceastă setare se aplică doar finalizării automate și depinde de setarea de finalizare automată de mai jos.",
+                    resumeInterrupted: "Reia finalizările automate întrerupte după reîncărcare sau repornire:",
+                    resumeInterruptedTooltip: "Această setare reia automat finalizările automate întrerupte de reîncărcări sau reporniri, inclusiv repunerea în coadă a Quest-urilor care erau în coadă dar nu începuseră încă.",
+                    autoCompleteTypes: "Finalizează automat anumite tipuri de Quest:",
+                    autoCompleteTypesTooltip: "Quest-urile \"Urmărește video pe mobil\" funcționează doar cu Quest-uri mobile la care te poți înscrie de pe desktop. Dacă înscrierea e limitată la mobil, înscrie-te mai întâi de pe dispozitivul mobil, apoi revino pe desktop și reîmprospătează Quest-urile.\n\nToate Quest-urile video trimit de obicei un stack trace împreună cu rapoartele de progres. Astfel Discord știe exact ce funcții au fost apelate și poate verifica dacă progresul a fost inițiat de propriile funcții. Questify șterge acest stack trace, dar absența lui este la fel de grăitoare ca prezența.\n\nQuest-urile \"Joacă pe desktop\", \"Joacă pe PlayStation\", \"Joacă pe Xbox\" și \"Joacă activitate\" sunt disponibile doar în clienții desktop oficiali, din cauza unei limitări impuse de Discord. Clienții terți precum extensiile web, Plextron și alții nu acceptă finalizarea automată a acestor tipuri.\n\nToate Quest-urile de jocuri trimit de obicei o amprentă a jocului împreună cu rapoartele heartbeat. Astfel Discord poate folosi datele a zeci de mii de utilizatori pentru a stabili dacă alții folosesc probabil un joc real sau emulează executabilul. Nu există o metodă rezonabilă de a falsifica această valoare, așa că Questify o lasă goală, dar absența ei este la fel de grăitoare ca o falsificare proastă.\n\nQuest-urile \"Realizare în activitate\" pot fi finalizate automat doar finalizându-le imediat. Această metodă poate fi corectată oricând.\n\nFinalizarea automată se face apăsând butoanele respective de pe pagina Quest-urilor. Quest-urile vor fi finalizate în ordinea în care au fost puse în coadă, cu excepția cazului în care finalizarea simultană este activată mai sus.\n\nFinalizarea automată a Quest-urilor este cea mai riscantă setare periculoasă. Activeaz-o pe propriul risc."
+                },
+                questNotifications: {
+                    title: "Notificări Quest",
+                    description: "Configurează notificările și alertele pentru Quest-urile finalizate și cele noi detectate.",
+                    questCompleted: "Quest finalizat",
+                    notifyOnComplete: "Afișează o notificare când un Quest este finalizat:",
+                    soundOnComplete: "Redă un sunet când un Quest este finalizat:",
+                    volume: "Volum:",
+                    newQuests: "Quest-uri noi detectate",
+                    notifyOnNew: "Afișează o notificare când sunt detectate Quest-uri noi:",
+                    soundOnNew: "Redă un sunet când sunt detectate Quest-uri noi:",
+                    notifyOnNewExcluded: "Afișează o notificare când sunt detectate Quest-uri excluse noi:",
+                    notifyOnNewExcludedTooltip: "Unele Quest-uri sunt excluse din lista ta de Quest-uri disponibile din cauza restricțiilor regionale sau de platformă.\n\nCând este activat, Questify va prelua configurațiile lor, va aplica filtrele tale de tipuri de Quest și recompensă, va afișa în consolă datele Quest-urilor excluse și va arăta o notificare separată pentru cele potrivite.",
+                    soundOnNewExcluded: "Redă un sunet când sunt detectate Quest-uri excluse noi:",
+                    soundOnNewExcludedTooltip: "Unele Quest-uri sunt excluse din lista ta de Quest-uri disponibile din cauza restricțiilor regionale sau de platformă.\n\nCând este selectat un sunet, Questify va prelua configurațiile lor, va aplica filtrele tale de tipuri de Quest și recompensă, va afișa în consolă datele Quest-urilor excluse și va reda acest sunet pentru cele potrivite.",
+                    fetchInterval: "Intervalul de preluare a Quest-urilor:",
+                    fetchIntervalTooltip: "Discord preia Quest-urile doar la pornire și când vizitezi pagina Quest-urilor.\n\nAcest interval preia periodic Quest-urile cât timp clientul rămâne deschis, astfel încât indicatorii butonului Quest și alertele pentru Quest-uri noi să rămână actualizate pe parcursul zilei.\n\nRulează doar dacă este activat și dacă setările butonului sau ale notificărilor Quest fac ca preluarea periodică să aibă sens.",
+                    disabled: "DEZACTIVAT",
+                    preview: "Ascultă {{sound}}",
+                    intervals: {
+                        thirtyMinutes: "30 de minute",
+                        fortyFiveMinutes: "45 de minute",
+                        oneHour: "1 oră",
+                        threeHours: "3 ore",
+                        sixHours: "6 ore",
+                        twelveHours: "12 ore"
+                    }
+                },
+                questTiles: {
+                    title: "Plăcile Quest",
+                    description: "Evidențiază Quest-urile cu culori de temă opționale pentru vizibilitate.",
+                    behavior: "Comportamentul plăcilor",
+                    gradientStyle: "Stilul gradientului:",
+                    gradientStyleTooltip: "Intens și Implicit folosesc culoarea plăcii selectată în gradientul imaginii.\n\nNegru subtil păstrează un gradient neutru mai închis pentru contrast.\n\nFără gradient elimină gradientul imaginii, ceea ce poate face unele ilustrații Quest mai greu de citit.",
+                    assetPreload: "Preîncărcarea resurselor:",
+                    assetPreloadTooltip: "Încărcarea tuturor resurselor la deschiderea paginii Quest-urilor reduce deplasările aspectului la derulare.\n\nÎncărcarea în timpul derulării este mai apropiată de comportamentul implicit al Discord și poate necesita mai puțin efort la început.",
+                    colors: "Culorile plăcilor",
+                    enable: "Activează",
+                    disable: "Dezactivează",
+                    gradient: {
+                        intense: "Gradient de restilizare intens",
+                        default: "Gradient de restilizare implicit",
+                        black: "Gradient negru subtil",
+                        hide: "Fără gradient"
+                    },
+                    preload: {
+                        onLoad: "Încarcă toate resursele la deschiderea paginii",
+                        onScroll: "Încarcă resursele în timpul derulării"
+                    }
+                },
+                reorderQuests: {
+                    title: "Reordonează Quest-urile",
+                    description: "Sortează misiunile după stare când este selectată sortarea Questify pe pagina misiunilor. Stările ascunse sunt filtrate la orice sortare.",
+                    statusOrder: "Ordinea stărilor",
+                    statusOrderTooltip: "Fiecare stare poate apărea o singură dată. Selectarea unei stări deja folosite în altă poziție interschimbă cele două poziții.",
+                    positions: {
+                        first: "Primul:",
+                        second: "Al doilea:",
+                        third: "Al treilea:",
+                        fourth: "Al patrulea:"
+                    },
+                    subsorts: "Subsortări",
+                    unclaimedSubsort: "Subsortare nerevendicate:",
+                    unclaimedSubsortTooltip: "Quest-urile finalizate dar nerevendicate rămân sub cele nefinalizate nerevendicate, apoi această subsortare se aplică în interiorul acelor grupuri.",
+                    claimedSubsort: "Subsortare revendicate:",
+                    claimedSubsortTooltip: "Quest-urile revendicate pot fi sortate după momentul revendicării sau după momentul adăugării.",
+                    ignoredSubsort: "Subsortare ignorate:",
+                    ignoredSubsortTooltip: "Quest-urile ignorate își păstrează poziția grupului, apoi această subsortare le controlează ordinea în interiorul grupului.",
+                    expiredSubsort: "Subsortare expirate:",
+                    expiredSubsortTooltip: "Quest-urile expirate pot fi sortate după momentul expirării sau după momentul adăugării.",
+                    subsort: {
+                        addedNewest: "Adăugate (cele mai noi)",
+                        addedOldest: "Adăugate (cele mai vechi)",
+                        expiringSoonest: "Expiră (cel mai curând)",
+                        expiringLatest: "Expiră (cel mai târziu)",
+                        expiredMostRecent: "Expirate (cele mai recente)",
+                        expiredLeastRecent: "Expirate (cele mai vechi)",
+                        claimedMostRecent: "Revendicate (cele mai recente)",
+                        claimedLeastRecent: "Revendicate (cele mai vechi)"
+                    },
+                    memory: "Memoria paginii Quest",
+                    rememberSort: "Memorează sortarea selectată a paginii Quest:",
+                    rememberSortTooltip: "Când este dezactivat, pagina Quest-urilor se deschide de fiecare dată cu sortarea Questify.",
+                    rememberFilters: "Memorează filtrele selectate ale paginii Quest:",
+                    rememberFiltersTooltip: "Când este dezactivat, pagina Quest-urilor se deschide de fiecare dată fără filtre de sarcini sau recompense."
+                }
+            },
+            option: {
+                migrationVersion: {
+                    label: "Versiunea migrării",
+                    description: "Versiunea curentă de migrare a setărilor."
+                },
+                questFeatures: {
+                    label: "Funcțiile Quest-urilor",
+                    description: "Selectează ce funcții ale Quest-urilor să fie dezactivate."
+                },
+                disableQuestsEverything: {
+                    label: "Dezactivează tot",
+                    description: "Dezactivează toate funcțiile Quest-urilor."
+                },
+                disableRelocationNotices: {
+                    label: "Dezactivează notificările de mutare",
+                    description: "Dezactivează notificările de mutare a Quest-urilor pe pagina Descoperă."
+                },
+                disableSponsoredBanner: {
+                    label: "Dezactivează bannerul sponsorizat",
+                    description: "Dezactivează bannerul sponsorizat de pe pagina Quest-urilor."
+                },
+                disableAccountPanelPromo: {
+                    label: "Dezactivează promo din panoul contului",
+                    description: "Dezactivează fereastra Quest promovată de deasupra panoului contului."
+                },
+                disableAccountPanelQuestProgress: {
+                    label: "Dezactivează progresul din panoul contului",
+                    description: "Dezactivează progresul Quest-urilor active și finalizate de deasupra panoului contului."
+                },
+                disableOrbsAndQuestsBadges: {
+                    label: "Dezactivează insignele Quest și Orbs",
+                    description: "Dezactivează insigna Quest din profiluri."
+                },
+                disableFriendsListPromo: {
+                    label: "Dezactivează promo din lista de prieteni",
+                    description: "Dezactivează promovarea Quest-urilor pentru jocurile jucate de prieteni."
+                },
+                disableMembersListPromo: {
+                    label: "Dezactivează promo din lista de membri",
+                    description: "Dezactivează pictograma de joc activ din lista de membri."
+                },
+                allowChangingDangerousSettings: {
+                    label: "Permite setări periculoase",
+                    description: "Permite modificarea setărilor periculoase."
+                },
+                resumeInterruptedQuests: {
+                    label: "Reia Quest-urile întrerupte",
+                    description: "Reia finalizarea automată a Quest-urilor după reîncărcare sau repornire."
+                },
+                makeMobileVideoQuestsDesktopCompatible: {
+                    label: "Quest-uri video mobile compatibile cu desktop",
+                    description: "Face Quest-urile video doar pentru mobil compatibile cu desktopul."
+                },
+                autoCompleteQuestsSimultaneously: {
+                    label: "Finalizare automată simultană",
+                    description: "Finalizează Quest-urile simultan, nu pe rând."
+                },
+                completeVideoQuestsQuicker: {
+                    label: "Finalizează mai rapid Quest-urile video",
+                    description: "Folosește toleranța de progres a Discord și timpul scurs de la înscriere pentru finalizarea automată a Quest-urilor video."
+                },
+                autoCompleteQuestTypes: {
+                    label: "Tipuri de Quest pentru finalizare automată",
+                    description: "Ce tipuri de Quest-uri să fie finalizate automat în fundal."
+                },
+                questButton: {
+                    label: "Butonul Quest",
+                    description: "Personalizează butonul Quest din lista de servere."
+                },
+                questButtonDisplay: {
+                    label: "Afișarea butonului Quest",
+                    description: "Ce tip de afișare să folosească butonul Quest din lista de servere."
+                },
+                questButtonIncludedTypes: {
+                    label: "Tipuri incluse în butonul Quest",
+                    description: "Ce tipuri de recompense și Quest-uri să fie incluse în numărul afișat pe butonul Quest."
+                },
+                questButtonIndicator: {
+                    label: "Indicatorul butonului Quest",
+                    description: "Ce tip de afișare să folosească indicatorul de nerevendicate de pe butonul Quest."
+                },
+                questButtonBadgeCount: {
+                    label: "Numărul insignei",
+                    description: "Numărul curent de Quest-uri relevante nerevendicate."
+                },
+                questButtonBadgeColor: {
+                    label: "Culoarea insignei",
+                    description: "Culoarea insignei butonului Quest din lista de servere."
+                },
+                questButtonLeftClickAction: {
+                    label: "Acțiune la clic stânga",
+                    description: "Acțiunea la clic stânga pe butonul Quest."
+                },
+                questButtonMiddleClickAction: {
+                    label: "Acțiune la clic de mijloc",
+                    description: "Acțiunea la clic de mijloc pe butonul Quest."
+                },
+                questButtonRightClickAction: {
+                    label: "Acțiune la clic dreapta",
+                    description: "Acțiunea la clic dreapta pe butonul Quest."
+                },
+                questNotifications: {
+                    label: "Notificări Quest",
+                    description: "Configurează notificările pentru Quest-urile finalizate și cele noi detectate."
+                },
+                notifyOnQuestComplete: {
+                    label: "Notifică la finalizare",
+                    description: "Afișează o notificare când un Quest este finalizat."
+                },
+                notifyOnNewQuests: {
+                    label: "Notifică Quest-urile noi",
+                    description: "Afișează o notificare când sunt detectate Quest-uri noi."
+                },
+                notifyOnNewExcludedQuests: {
+                    label: "Notifică Quest-urile excluse noi",
+                    description: "Afișează o notificare când sunt detectate Quest-uri excluse noi."
+                },
+                questCompletedAlertSound: {
+                    label: "Sunet Quest finalizat",
+                    description: "Sunetul redat când un Quest este finalizat."
+                },
+                questCompletedAlertVolume: {
+                    label: "Volum Quest finalizat",
+                    description: "Volumul sunetului pentru Quest finalizat."
+                },
+                questFetchInterval: {
+                    label: "Interval de preluare",
+                    description: "Intervalul în secunde pentru preluarea Quest-urilor de la Discord."
+                },
+                newQuestAlertSound: {
+                    label: "Sunet Quest nou",
+                    description: "Sunetul redat când sunt detectate Quest-uri noi."
+                },
+                newQuestAlertVolume: {
+                    label: "Volum Quest nou",
+                    description: "Volumul sunetului pentru Quest nou."
+                },
+                newExcludedQuestAlertSound: {
+                    label: "Sunet Quest exclus nou",
+                    description: "Sunetul redat când sunt detectate Quest-uri excluse noi."
+                },
+                newExcludedQuestAlertVolume: {
+                    label: "Volum Quest exclus nou",
+                    description: "Volumul sunetului pentru Quest exclus nou."
+                },
+                questTiles: {
+                    label: "Plăcile Quest",
+                    description: "Personalizează aspectul plăcilor Quest de pe pagina Quest-urilor."
+                },
+                questTileUnclaimedColor: {
+                    label: "Culoarea plăcilor nerevendicate",
+                    description: "Culoarea plăcilor Quest-urilor nerevendicate."
+                },
+                questTileClaimedColor: {
+                    label: "Culoarea plăcilor revendicate",
+                    description: "Culoarea plăcilor Quest-urilor revendicate."
+                },
+                questTileIgnoredColor: {
+                    label: "Culoarea plăcilor ignorate",
+                    description: "Culoarea plăcilor Quest-urilor ignorate."
+                },
+                questTileExpiredColor: {
+                    label: "Culoarea plăcilor expirate",
+                    description: "Culoarea plăcilor Quest-urilor expirate."
+                },
+                questTileGradient: {
+                    label: "Gradientul plăcilor",
+                    description: "Stilul gradientului folosit în plăcile Quest."
+                },
+                questTilePreload: {
+                    label: "Preîncărcarea plăcilor",
+                    description: "Încearcă să preîncarce resursele plăcilor Quest."
+                },
+                reorderQuests: {
+                    label: "Reordonează Quest-urile",
+                    description: "Sortează Quest-urile după stare."
+                },
+                questOrder: {
+                    label: "Ordinea Quest-urilor",
+                    description: "Ordinea de sortare a grupurilor de stare ale Quest-urilor."
+                },
+                unclaimedSubsort: {
+                    label: "Subsortare nerevendicate",
+                    description: "Metoda de subsortare pentru Quest-urile nerevendicate."
+                },
+                claimedSubsort: {
+                    label: "Subsortare revendicate",
+                    description: "Metoda de subsortare pentru Quest-urile revendicate."
+                },
+                ignoredSubsort: {
+                    label: "Subsortare ignorate",
+                    description: "Metoda de subsortare pentru Quest-urile ignorate."
+                },
+                expiredSubsort: {
+                    label: "Subsortare expirate",
+                    description: "Metoda de subsortare pentru Quest-urile expirate."
+                },
+                isOnQuestsPage: {
+                    label: "Pe pagina Quest-urilor",
+                    description: "Dacă utilizatorul se află în prezent pe pagina Quest-urilor."
+                },
+                rememberQuestPageSort: {
+                    label: "Memorează sortarea",
+                    description: "Memorează ultima sortare folosită pe pagina Quest-urilor."
+                },
+                rememberQuestPageFilters: {
+                    label: "Memorează filtrele",
+                    description: "Memorează ultimele filtre folosite pe pagina Quest-urilor."
+                },
+                lastQuestPageSort: {
+                    label: "Ultima sortare",
+                    description: "Ultima sortare folosită pe pagina Quest-urilor."
+                },
+                lastQuestPageFilters: {
+                    label: "Ultimele filtre",
+                    description: "Ultimele filtre folosite pe pagina Quest-urilor."
+                },
+                ignoredQuestIDs: {
+                    label: "ID-urile Quest-urilor ignorate",
+                    description: "O listă cu ID-urile Quest-urilor ignorate."
+                },
+                resumeQuestIDs: {
+                    label: "ID-urile Quest-urilor de reluat",
+                    description: "O listă cu ID-urile Quest-urilor care se finalizează automat sau așteaptă în coadă în fundal."
+                },
+                acknowledgedNotices: {
+                    description: "Notificări unice confirmate de utilizator.",
+                    label: "Notificări confirmate"
+                },
+                settingsSearch: {
+                    description: "Caută în setările Questify.",
+                    label: "Căutare setări"
+                },
+                hideNonAutoCompletableQuests: {
+                    description: "Ascunde misiunile incomplete fără o sarcină de completare automată acceptată și activată.",
+                    label: "Ascunde misiunile necompletabile automat"
+                },
+                preventVideoQuestsPausing: {
+                    description: "Împiedică oprirea videoclipului când fereastra misiunii pierde focusul.",
+                    label: "Împiedică oprirea misiunilor video"
+                },
+                hiddenQuestStatuses: {
+                    description: "Grupuri de stări ale misiunilor de ascuns.",
+                    label: "Stări de misiune ascunse"
+                }
+            },
+            text: {
+                clearQuestQueue: "Golește coada misiunilor",
+                hideIncompleteQuestsWith: "Ascunde misiunile incomplete cu stare nerevendicată sau ignorată când nicio sarcină de completare automată nu este acceptată pe această platformă și activată în lista tipurilor de misiuni. Misiunile revendicate, expirate și finalizate sunt exceptate. Folosește opțiunile de ordine a stărilor ascunse pentru a le ascunde.",
+                discordForcesYouTo: "Discord te obligă să ai clientul în prim-plan pentru ca misiunile video să-și redea videoclipul.",
+                hideNonAutoCompletable: "Ascunde misiunile care nu pot fi completate automat:",
+                preventVideoQuestsFrom: "Împiedică misiunile video să se oprească la pierderea focusului:",
+                thePunishmentAlsoConsists: "Pedeapsa include și o încălcare a stării contului care durează 2 ani pentru fiecare încălcare.",
+                dueToTheVarious: "Din cauza diverselor metode prin care Discord urmărește utilizatorii, nu există o cale realistă de a evita detectarea. Dacă continui, înțelege că Discord îți va detecta probabil utilizarea la un moment dat.",
+                enrollInQuest: "Înscrie-te în misiune",
+                hidden: "Ascuns",
+                selectingAnOccupiedPosition: "Selectarea unei poziții ocupate schimbă cele două stări. Stările ascunse sunt eliminate din listele de misiuni.",
+                searchQuestifySettings: "Caută în setările Questify",
+                searchQuestifySettings2: "Caută în setările Questify...",
+                noMatchingSettings: "Nicio setare potrivită.",
+                questifyNoticeAugust7th: "Notificare Questify - 7 august 2026",
+                keepUsingDangerousQuestify: "Continuă să folosești setările periculoase Questify",
+                disableDangerousQuestifySettings: "Dezactivează setările periculoase Questify",
+                questifyNoticeAugust26th: "Notificare Questify - 26 august 2026",
+                areYouSure: "Ești sigur?",
+                thePunishmentAppearsLimited: "Pedeapsa pare limitată la pierderea accesului la misiuni și la recompensele lor, dar Discord o poate înăspri oricând.",
+                queueAllQuests: "Pune toate misiunile în coadă",
+                inProgress: "În curs",
+                rateLimited: "Limitat",
+                preventsVideoPausing: "Această setare împiedică pauza videoclipului și permite finalizarea normală.",
+                appliesOnlyToVideoQuests: "Această setare se aplică doar la finalizarea manuală a misiunilor video.",
+                knownToPunish: "Discord este cunoscut pentru sancționarea utilizatorilor de scripturi sau pluginuri care modifică finalizarea misiunilor. Modificarea finalizării misiunilor încalcă",
+                punishmentConsists: "Sancțiunea constă în pierderea temporară sau permanentă a accesului la misiuni și la recompensele lor.",
+                questBanSystem: "Discord a implementat un sistem de interdicție pentru misiuni care îți va limita temporar sau permanent accesul la finalizarea misiunilor și revendicarea recompenselor dacă se constată că le finalizezi prin mijloace neoficiale. Modificarea finalizării misiunilor încalcă",
+                begunPunishing: "Discord a început să sancționeze utilizatorii de scripturi și pluginuri care modifică finalizarea misiunilor. Modificarea finalizării misiunilor încalcă",
+                dueToRateLimits: " din cauza limitelor de rată"
             }
         },
         questionMarkReplacement: {
@@ -8215,7 +8838,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     merriWeather: "Merriweather"
                 },
                 watermark: {
-                    label: "Watermark",
+                    label: "Filigran",
                     description: "Text personalizat watermark (max 32 caractere)"
                 },
                 grayscale: {
@@ -8230,6 +8853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Salvează ca GIF",
                     description: "Salvează ca GIF implicit"
                 }
+            },
+            text: {
+                quotePreview: "Previzualizare citat"
             }
         },
         randomVoice: {
@@ -8260,7 +8886,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 filter: {
                     muted: "Mute",
-                    deafened: "Deafened",
+                    deafened: "Asurzit",
                     camera: "Cameră",
                     stream: "Stream",
                     includeFilters: "Include filtrele",
@@ -8287,7 +8913,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                     server: "Server invalid"
                 }
             },
+            keybind: {
+                label: "Comandă rapidă",
+                recording: "Se înregistrează...",
+                reset: "Resetează"
+            },
             option: {
+                keybindEnabled: {
+                    label: "Comandă rapidă activată",
+                    description: "Afișează controalele comenzii rapide pentru voce aleatorie"
+                },
                 userAmountOperation: {
                     label: "Operație număr utilizatori",
                     description: "Selectează operația pentru numărul de utilizatori"
@@ -8361,11 +8996,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Caută utilizatori care fac stream"
                 },
                 mute: {
-                    label: "Mute",
+                    label: "Dezactivare microfon",
                     description: "Caută utilizatori care au mute"
                 },
                 deafen: {
-                    label: "Deafen",
+                    label: "Asurzire",
                     description: "Caută utilizatori care au deafen"
                 },
                 includeStates: {
@@ -8379,6 +9014,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             alert: {
                 failed: "Nu s-a putut găsi un canal vocal!"
+            },
+            toast: {
+                failedToFindA: "Nu s-a găsit niciun canal vocal.",
+                voiceChannelIsUnavailable: "Canalul vocal nu este disponibil."
+            },
+            text: {
+                userCount: "{{count}} utilizator",
+                usersCount: "{{count}} utilizatori"
             }
         },
         reactErrorDecoder: {
@@ -8426,7 +9069,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 clearRdms: {
                     label: "Golește lista RDMS",
                     description: "Utilitar test: Șterge lista de DM-uri recente",
-                    toast: "Istoric RDMS șters",
+                    toast: "Istoricul RDMS a fost șters",
                     button: "Șterge istoricul RDMS"
                 }
             },
@@ -8477,6 +9120,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noLongerFriend: "Nu mai ești prieten cu {{user}}.",
                 friendRequestRevoked: "Cererea de prietenie de la {{user}} a fost retrasă.",
                 ok: "OK"
+            },
+            text: {
+                relationshipNotifier: "Notificator de relații"
             }
         },
         remix: {
@@ -8500,7 +9146,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ellipse: "Elipsă",
                 line: "Linie",
                 arrow: "Săgeată",
-                fill: "Umplere"
+                fill: "Umplere",
+                image: "Imagine"
             }
         },
         repeatMessages: {
@@ -8534,12 +9181,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Caută text",
                 searchWith: "Caută cu {{name}}"
+            },
+            text: {
+                google: "Google"
             }
         },
         replyPingControl: {
             name: "ReplyPingControl",
-            description: "Controlează dacă primești mențiuni la răspunsuri, cu funcție de listă albă",
+            description: "Controlează dacă să fii menționat întotdeauna sau niciodată la răspunsurile la mesaje, cu funcționalități de listă albă și listă neagră",
             option: {
+                replyPingBlacklist: {
+                    label: "Listă neagră mențiuni răspuns",
+                    description: "Listă separată prin virgule de ID-uri de utilizator de la care să nu primești niciodată mențiuni la răspunsuri"
+                },
                 alwaysPingOnReply: {
                     label: "Mereu mențiune la răspuns",
                     description: "Primește mereu notificare când cineva îți răspunde"
@@ -8564,6 +9218,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Caută imaginea",
                 all: "Caută peste tot"
+            },
+            text: {
+                all: "Toate"
             }
         },
         reviewDB: {
@@ -8671,6 +9328,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             profile: {
                 optedOut: "Utilizatorul a refuzat",
                 noReviews: "Nicio recenzie încă"
+            },
+            toast: {
+                youCannotVoteOn: "Nu poți vota propria recenzie.",
+                networkErrorFailedTo: "Eroare de rețea: nu s-a putut conecta la ReviewDB.",
+                pleaseAuthorizeToVote: "Autorizează pentru a vota recenziile.",
+                requestFailed: "ReviewDB: cererea a eșuat cu statusul {{status}}"
+            },
+            text: {
+                ok: "OK",
+                updateReviewFor: "Actualizează recenzia pentru @{{name}}",
+                reviewUser: "Recenzează @{{name}}",
+                system: "Sistem",
+                reviewCount: "({{count}} recenzii)"
             }
         },
         richMagnetLinks: {
@@ -8764,46 +9434,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
         },
-        rpcStats: {
-            name: "RPCStats",
-            description: "Afișează statistici despre activitatea ta într-un Rich Presence",
-            option: {
-                assetURL: {
-                    label: "URL Imagine",
-                    description: "Imaginea RPC. Dacă e gol, se folosește poza de profil"
-                },
-                rpcTitle: {
-                    label: "Titlu RPC",
-                    description: "Titlul activității tale"
-                },
-                statDisplay: {
-                    label: "Afișare statistici",
-                    description: "Ce să afișeze RPC-ul? (Doar o singură linie)",
-                    today: "Mesajele trimise azi",
-                    alltime: "Mesajele trimise de la început",
-                    listened: "Cel mai ascultat album al săptămânii"
-                },
-                lastFMApiKey: {
-                    label: "Cheie API Last.fm",
-                    description: "Cheia ta API Last.fm"
-                },
-                lastFMUsername: {
-                    label: "Utilizator Last.fm",
-                    description: "Numele de utilizator Last.fm"
-                },
-                albumCoverImage: {
-                    label: "Copertă album",
-                    description: "Folosește coperta albumului ca imagine RPC (necesită Last.fm)"
-                },
-                lastFMStatFormat: {
-                    label: "Format statistici Last.fm",
-                    description: "Cum să fie formatat? $album = nume album, $artist = nume artist"
-                }
-            },
-            noInfo: "Nicio informație disponibilă :(",
-            messagesToday: "Mesaje trimise azi: {{count}}",
-            messagesAllTime: "Mesaje trimise total: {{count}}"
-        },
         saveFavoriteGIFs: {
             name: "SaveFavouritedGIFs",
             description: "Exportă URL-urile GIF-urilor favorite",
@@ -8868,7 +9498,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 maxMessagesReached: "Limită de {{max}} mesaje pe minut atinsă",
                 messageScheduled: "Mesaj programat!",
                 messageRemoved: "Mesaj programat eliminat",
-                allCleared: "Toate mesajele programate au fost șterse"
+                allCleared: "Toate mesajele programate au fost șterse",
+                scheduledMessageSentTo: "Mesaj programat trimis către {{name}}"
             },
             button: {
                 tooltipOn: "Mod programare ACTIV (click pentru dezactivare, click-dreapta pentru listă)",
@@ -8924,20 +9555,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Redă doar tema Snow Halation"
                 }
             }
-        },
-        summaries: {
-            name: "Summaries",
-            description: "Activează funcția experimentală 'Summaries' pe orice server, afișând rezumate ale conversațiilor generate de AI",
-            option: {
-                summaryExpiryThresholdDays: {
-                    label: "Expirare rezumat (Zile)",
-                    description: "Timpul până când un rezumat e eliminat. Se păstrează max 50 pe canal."
-                }
-            }
-        },
-        selfForward: {
-            name: "SelfForward",
-            description: "Adaugă canalul curent în lista pop-up de redirecționare (forward)"
         },
         sendTimestamps: {
             name: "SendTimestamps",
@@ -9002,7 +9619,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 serverBoosts: "Boost-uri Server",
                 channels: "Canale",
-                roles: "Roluri"
+                roles: "Roluri",
+                boostLevel: "{{count}} (Nivelul {{level}})"
             }
         },
         serverListIndicators: {
@@ -9061,6 +9679,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bgOpacity: {
                     label: "Opacitate fundal",
                     description: "Nivelul de transparență al fundalului"
+                },
+                ignoredLanguages: {
+                    label: "Limbaje ignorate",
+                    description: "Listă separată prin virgulă de limbaje lăsate blocurilor de cod implicite ale Discord"
                 }
             },
             button: {
@@ -9079,6 +9701,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noShiftPin: {
                     label: "Fixare fără Shift",
                     description: "Elimină necesitatea de a ține Shift pentru a fixa un mesaj."
+                },
+                noQuickReacts: {
+                    description: "Ascunde reacțiile rapide. Implicit, afișarea meniului complet ascunde butoanele de reacție rapidă.",
+                    label: "Fără reacții rapide"
                 }
             }
         },
@@ -9161,6 +9787,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     compact: "Compact",
                     cozy: "Cozy (Aerisit)",
                     roomy: "Roomy (Spațios)"
+                },
+                showGithubOrgs: {
+                    description: "Afișează organizațiile GitHub din care face parte utilizatorul",
+                    label: "Afișează organizațiile GitHub"
+                },
+                showOnModal: {
+                    description: "Afișează conturile conectate în fereastra completă a profilului",
+                    label: "Afișează în fereastră"
                 }
             }
         },
@@ -9194,7 +9828,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 announcement: "anunțuri",
                 forum: "forum",
                 voice: "voce",
-                stage: "stage"
+                stage: "scenă"
             },
             sortOrder: {
                 latestActivity: "Ultima activitate",
@@ -9225,7 +9859,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 lastCreated: "Ultima {{type}} creată:",
                 lastPin: "Ultimul mesaj fixat:",
                 threadSlowmode: "Slowmode implicit pentru thread-uri:",
-                slowmode: "Slowmode:",
+                slowmode: "Mod lent:",
                 bitrate: "Bitrate:",
                 region: "Regiune:",
                 automatic: "Automată",
@@ -9295,7 +9929,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 memberList: {
                     label: "Lista de membri",
-                    description: "Afișează primul nume disponibil din formatul tău personalizat în lista de membri."
+                    description: "Afișează primul nume disponibil din formatul tău personalizat în lista de membri, de mesaje private, de prieteni și în Activ acum."
                 },
                 profilePopout: {
                     label: "Fereastră de profil",
@@ -9349,6 +9983,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Nume personalizat doar în DM",
                     description: "Afișează numele personalizat doar în mesajele directe, nu și pe servere."
                 },
+                alwaysShowEffects: {
+                    label: "Animează mereu efectele",
+                    description: "Arată întotdeauna efectele ca și cum ai trece cu cursorul peste."
+                },
                 includedNames: {
                     label: "Nume incluse",
                     description: "Ordinea de afișare a numelor. Folosește: {user}, {display}, {nick}, {friend}."
@@ -9376,6 +10014,42 @@ const translations: MatchStructure<typeof enTranslations> = {
                 triggerNameRerender: {
                     label: "Forțează rerandarea numelor",
                     description: "Forțează o actualizare a numelor prin comutarea acestei setări."
+                },
+                searchAutocomplete: {
+                    description: "Afișează primul nume disponibil din formatul tău personalizat în completarea automată pentru mențiuni și căutare.",
+                    label: "Completare automată la căutare"
+                },
+                styleDirectMessagesList: {
+                    description: "Afișează efectele numelui afișat pe intrările neselectate fără hover. Intrările selectate și cele sub cursor rămân stilizate când e dezactivat.",
+                    label: "Stilizează lista de mesaje directe"
+                },
+                styleDirectMessagesMessages: {
+                    description: "Afișează efectele numelui afișat la autorii mesajelor fără hover. Numele sub cursor rămân stilizate când e dezactivat.",
+                    label: "Stilizează mesajele private"
+                },
+                styleFriendsList: {
+                    description: "Afișează efectele numelui afișat fără hover. Intrările sub cursor rămân stilizate când e dezactivat.",
+                    label: "Stilizează lista de prieteni"
+                },
+                styleActiveNow: {
+                    description: "Afișează efectele numelui afișat fără hover. Intrările sub cursor rămân stilizate când e dezactivat.",
+                    label: "Stilizează Activ acum"
+                },
+                ignoreEffects: {
+                    description: "Pentru numele non-principale, folosește doar culoarea rolului principal și omite efectele numelui afișat.",
+                    label: "Ignoră efectele"
+                },
+                animateEffects: {
+                    description: "Animează degradeurile rolurilor și efectele numelui afișat pe numele non-principale. Este dezactivat de „Ignoră efectele” și mișcarea redusă.",
+                    label: "Animează efectele"
+                },
+                alwaysAnimateEffects: {
+                    description: "Forțează animarea efectelor numelui afișat când ar fi deja vizibile, chiar și fără hover.",
+                    label: "Animează mereu efectele"
+                },
+                gradientGlow: {
+                    description: "Adaugă o strălucire degradeurilor animate ale utilizatorilor, la fel ca degradeurile rolurilor de server.",
+                    label: "Strălucire degrade"
                 }
             },
             modal: {
@@ -9389,6 +10063,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nickname: "Poreclă SMYN",
                 reset: "Resetează porecla SMYN",
                 cancel: "Anulează"
+            },
+            text: {
+                save: "Salvează",
+                unknown: "Necunoscut"
             }
         },
         showTimeoutDuration: {
@@ -9401,6 +10079,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     tooltip: "În Tooltip",
                     inline: "Lângă pictograma de timeout"
                 }
+            },
+            text: {
+                timeoutRemaining: "de timeout rămas"
             }
         },
         showResourceChannels: {
@@ -9559,7 +10240,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 hidden: "Scriere ascunsă ({{location}})",
                 visible: "Scriere vizibilă ({{location}})",
-                global: "Scriere vizibilă (Global)"
+                global: "Scriere vizibilă (Global)",
+                voiceChannel: "Scrierea este mereu vizibilă în chatul canalului vocal conectat",
+                temporary: "Scrierea este temporar vizibilă în acest canal din cauza unui mesaj recent"
             },
             option: {
                 enabledGlobally: {
@@ -9610,6 +10293,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Ascuns implicit",
                     description: "Dacă este activat, pluginul va ascunde scrierea ta în toate locațiile care nu sunt listate la 'Locații dezactivate'."
                 },
+                alwaysEnableInActiveVoiceChat: {
+                    label: "Activează mereu în chatul vocal activ",
+                    description: "Permite mereu afișarea indicatorului de scriere când scrii într-un canal vocal la care ești conectat."
+                },
+                temporaryEnableThresholdServers: {
+                    label: "Prag de activare temporară (servere)",
+                    description: "Permite temporar afișarea indicatorului de scriere timp de atâtea secunde după trimiterea unui mesaj într-un canal de server. Dacă indicatorul este deja vizibil în canal, această setare nu are efect."
+                },
+                temporaryEnableThresholdDirectMessages: {
+                    label: "Prag de activare temporară (mesaje directe)",
+                    description: "Permite temporar afișarea indicatorului de scriere timp de atâtea secunde după trimiterea unui mesaj într-un DM sau DM de grup. Dacă indicatorul este deja vizibil în canal, această setare nu are efect."
+                },
                 enabledLocations: {
                     label: "Locații activate",
                     description: "Activează funcționalitatea pentru aceste ID-uri (DM, canal, server)."
@@ -9618,6 +10313,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Locații dezactivate",
                     description: "Dezactivează funcționalitatea pentru aceste ID-uri."
                 }
+            },
+            text: {
+                silentTyping: "Tastare silențioasă",
+                enabled: "Activat",
+                chatBarIndicators: "Indicatori în bara de chat",
+                membersListIndicators: "Indicatori în lista de membri",
+                guild: "Server",
+                channel: "Canal",
+                global: "Global"
             }
         },
         snowfall: {
@@ -9714,7 +10418,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         splitLargeMessages: {
             name: "SplitLargeMessages",
-            description: "Împarte mesajele lungi în mai multe mesaje pentru a se încadra în limita Discord.",
+            description: "Împarte mesajele prea mari în bucăți de dimensiunea Discord înainte de trimitere.",
             option: {
                 maxLength: {
                     label: "Lungime maximă mesaj",
@@ -9726,7 +10430,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 sendDelay: {
                     label: "Întârziere trimitere",
-                    description: "Întârzierea între fiecare segment (în secunde)."
+                    description: "Întârzierea minimă dintre bucăți, în secunde."
                 },
                 hardSplit: {
                     label: "Împărțire forțată",
@@ -9734,32 +10438,26 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 splitInSlowmode: {
                     label: "Împarte în Slowmode",
-                    description: "Dacă mesajele ar trebui împărțite pe canalele cu Slowmode activ."
+                    description: "Permite împărțirea în modul lent când întârzierea se încadrează în maximul configurat."
                 },
                 slowmodeMax: {
                     label: "Maxim Slowmode",
-                    description: "Timpul maxim de slowmode acceptat pentru împărțire."
-                }
-            }
-        },
-        spotifyActivityToggle: {
-            name: "SpotifyActivityToggle",
-            description: "Adaugă un buton de comutare pentru vizibilitatea activității Spotify.",
-            tooltip: {
-                enable: "Pornește activitatea Spotify",
-                disable: "Oprește activitatea Spotify"
-            },
-            option: {
-                location: {
-                    label: "Locație",
-                    description: "Unde să fie afișat butonul de Spotify",
-                    panel: "Lângă Mute/Deafen",
-                    toolbox: "Plexcord Toolbox"
+                    description: "Durata maximă a modului lent permisă la împărțirea mesajelor."
                 },
-                activityStatus: {
-                    label: "Stare activitate",
-                    description: "Starea curentă a activității tale Spotify"
+                splitMode: {
+                    description: "Preferă această limită la împărțirea unui mesaj.",
+                    label: "Mod de împărțire"
                 }
+            },
+            toast: {
+                cannotSplitThisMessage: "Mesajul nu poate fi împărțit din cauza modului lent al canalului.",
+                onlySentLengthMessage: "Au fost trimise doar {{sent}}/{{length}} părți ale mesajului.",
+                unsentCopied: "Părțile netrimise ale mesajului au fost copiate în clipboard."
+            },
+            text: {
+                newlines: "Rânduri noi",
+                spaces: "Spații",
+                strictCharacterLimit: "Limită strictă de caractere"
             }
         },
         spotifyCrack: {
@@ -9793,11 +10491,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 title: "Timpi de pornire",
                 ended: "Trace-ul s-a terminat la:",
-                start: "Start",
+                start: "Început",
                 interval: "Interval",
                 delta: "Delta",
                 event: "Eveniment",
-                serverTrace: "Server Trace",
+                serverTrace: "Urmă server",
                 loading: "Se încarcă..."
             }
         },
@@ -9845,7 +10543,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             context: {
                 edit: "Editează presetările",
-                set: "Setează stare personalizată"
+                set: "Setează stare personalizată",
+                delete: "Șterge presetarea"
             },
             notification: {
                 successfully: "Starea a fost salvată cu succes"
@@ -9912,11 +10611,39 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 blockSticker: "Blochează sticker",
                 unblockSticker: "Deblochează sticker"
+            },
+            text: {
+                failedToRender: "Afișarea a eșuat :("
             }
         },
         stickerPaste: {
             name: "StickerPaste",
             description: "Face ca alegerea unui sticker să îl insereze în caseta de chat în loc să îl trimită instantaneu"
+        },
+        streaks: {
+            name: "Streaks",
+            description: "Afișează o serie lângă un utilizator când schimbați mesaje directe în zile consecutive.",
+            tooltip: "Serie de {{count}} zile",
+            tooltipExpiring: "Serie de {{count}} zile — scrieți-vă azi ca să o păstrați!",
+            option: {
+                account: {
+                    description: "Autentifică-te sau deconectează-te de la API-ul Streaks. Seriile sunt stocate în API, deci trebuie să fii autentificat ca să fie numărate.",
+                    login: "Autentificare în API-ul Streaks",
+                    logout: "Deconectare de la API-ul Streaks"
+                },
+                eliteColor: "Culoare serie elită (100+ zile)",
+                diamondColor: "Culoare serie diamant (60+ zile)",
+                platinumColor: "Culoare serie platină (45+ zile)",
+                goldColor: "Culoare serie aur (30+ zile)",
+                silverColor: "Culoare serie argint (14+ zile)",
+                bronzeColor: "Culoare serie bronz (7+ zile)",
+                defaultColor: "Culoare implicită serie (1+ zile)"
+            },
+            toast: {
+                authFailed: "Autorizarea a eșuat: {{error}}",
+                failedToAuthorizeMessage: "Autorizarea a eșuat: {{message}}",
+                authorizationExpired: "Autorizarea Streaks a expirat. Autorizează din nou în setările pluginului Streaks."
+            }
         },
         streamerModeOnStream: {
             name: "StreamerModeOnStream",
@@ -9924,27 +10651,27 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         streamingCodecDisabler: {
             name: "StreamingCodecDisabler",
-            description: "Dezactivează codecurile de streaming la alegere",
+            description: "Dezactivează codecurile video alese pentru streaming și camere.",
             option: {
                 disableAv1Codec: {
                     label: "Dezactivează codecul AV1",
-                    description: "Împiedică Discord să folosească AV1 pentru streaming."
+                    description: "Fă ca Discord să nu ia în considerare AV1 pentru streaming și camere."
                 },
                 disableH265Codec: {
                     label: "Dezactivează codecul H265",
-                    description: "Împiedică Discord să folosească H265 pentru streaming."
+                    description: "Fă ca Discord să nu ia în considerare H265 pentru streaming și camere."
                 },
                 disableH264Codec: {
                     label: "Dezactivează codecul H264",
-                    description: "Împiedică Discord să folosească H264 pentru streaming."
+                    description: "Fă ca Discord să nu ia în considerare H264 pentru streaming și camere."
                 },
                 disableVP8Codec: {
                     label: "Dezactivează codecul VP8",
-                    description: "Împiedică Discord să folosească VP8 pentru streaming."
+                    description: "Fă ca Discord să nu ia în considerare VP8 pentru streaming și camere."
                 },
                 disableVP9Codec: {
                     label: "Dezactivează codecul VP9",
-                    description: "Împiedică Discord să folosească VP9 pentru streaming."
+                    description: "Fă ca Discord să nu ia în considerare VP9 pentru streaming și camere."
                 }
             }
         },
@@ -9990,6 +10717,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             modal: {
+                name: "Nume",
+                nameDescription: "Un nume opțional care te ajută să identifici această regulă.",
+                search: "Caută o regulă...",
+                noResults: "Nicio regulă nu corespunde căutării.",
                 title: "Testează regulile",
                 find: "Caută",
                 findRegex: "Model regex",
@@ -10004,6 +10735,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 add: "Adaugă regula",
                 empty: "Regulă goală",
                 rule: "Regulă",
+            },
+            text: {
+                optionallyOnlyApplyThis: "Opțional, aplică această regulă doar dacă mesajul conține acest text.",
+                emptyRule: "Regulă goală {{number}}",
+                ruleWithFind: "Regula {{number}} - {{find}}"
             }
         },
         themeAttributes: {
@@ -10089,6 +10825,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 askedTimezone: {
                     label: "Fus orar întrebat",
                     description: "Dacă utilizatorul a fost întrebat să-și seteze fusul orar"
+                },
+                recipientTimezoneInDms: {
+                    label: "Fusul orar al destinatarului în mesaje private",
+                    description: "În mesajele private, afișează fusul orar al destinatarului la mesajele tale"
+                },
+                showLocalTimezone: {
+                    label: "Afișează fusul orar local",
+                    description: "Afișează fusul orar local în loc de doar „local”"
                 }
             },
             modal: {
@@ -10097,6 +10841,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 selectPlaceholder: "Alege un fus orar",
                 delete: "Șterge fus orar",
                 save: "Salvează"
+            },
+            text: {
+                invalidResponseFormat: "Format de răspuns nevalid"
             }
         },
         toastNotifications: {
@@ -10157,6 +10904,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 determineServerNotifications: {
                     label: "Respectă setările serverului",
                     description: "Arată notificări doar dacă setările serverului permit acest lucru"
+                },
+                respectDoNotDisturb: {
+                    label: "Respectă Nu deranja",
+                    description: "Nu afișa notificări când starea ta este Nu deranja."
                 },
                 directMessages: {
                     label: "Mesaje directe",
@@ -10244,8 +10995,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "DeepL Pro necesită o cheie API plătită",
                     descriptionWeb: "Serviciu de traducere (Nu este suportat pe Web!)",
                     google: "Google Translate",
-                    deepl: "DeepL Free",
-                    deeplPro: "DeepL Pro"
+                    deepl: "DeepL Gratuit - Cheie API necesară",
+                    deeplPro: "DeepL Pro - Cheie API necesară",
+                    kagi: "Kagi Traducere - Cheie API necesară"
+                },
+                kagiSession: {
+                    label: "Sesiune Kagi",
+                    description: "Obține tokenul de sesiune de la https://kagi.com/settings?p=user_details"
                 },
                 deeplApiKey: {
                     label: "Cheie API DeepL",
@@ -10284,6 +11040,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     cancel: "Am înțeles",
                     secondaryConfirm: "Nu-mi mai arăta asta"
                 }
+            },
+            button: {
+                manageLanguages: "Personalizează limbile de traducere și traducerea automată"
             }
         },
         typingIndicator: {
@@ -10596,6 +11355,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Dimensiune imagine",
                     description: "Dimensiunea la care să se deschidă imaginea"
                 }
+            },
+            text: {
+                viewAvatarDecoration: "Vezi decorațiunea avatarului"
             }
         },
         viewRaw: {
@@ -10616,11 +11378,23 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Schimbă modul de acționare al butonului.",
                     left: "Click stânga pentru vizualizare.",
                     right: "Click dreapta pentru vizualizare."
+                },
+                messageContextMenu: {
+                    description: "Afișează în meniul contextual al mesajului",
+                    label: "Meniu contextual mesaj"
+                },
+                sortKeys: {
+                    description: "Sortează alfabetic cheile datelor brute.",
+                    label: "Sortează cheile"
+                },
+                stripSensitiveData: {
+                    description: "Elimină datele sensibile din datele brute, precum e-mailul și numărul de telefon.",
+                    label: "Elimină datele sensibile"
                 }
             },
             modal: {
                 title: "Vizualizare Raw",
-                content: "Conținut",
+                content: "Conținutul mesajului",
                 data: "Date {{type}}",
                 copied: "Datele {{type}} au fost copiate!",
                 copy: "Copiază JSON {{type}}",
@@ -10633,6 +11407,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 guild: "Server",
                 role: "Rol",
                 user: "Utilizator"
+            },
+            text: {
+                copyTypeData: "Copiază datele {{type}}",
+                rawTypeData: "Date brute {{type}}",
+                messageData: "Datele mesajului"
             }
         },
         voiceButtons: {
@@ -10652,7 +11431,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Dacă dorești afișarea butonului de deafen"
                 },
                 muteSoundboard: {
-                    label: "Mute Soundboard",
+                    label: "Dezactivează sunetul soundboard-ului",
                     description: "Oprește soundboard-ul lor la apăsarea butonului Deafen."
                 },
                 disableVideo: {
@@ -10694,10 +11473,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 yourself: "tine însuți",
                 serverMute: "Mute pe server",
                 serverDeafen: "Deafen pe server",
-                mute: "Mute",
-                deafen: "Deafen",
-                unmute: "Unmute",
-                undeafen: "Undeafen",
+                mute: "Dezactivează microfonul",
+                deafen: "Asurzire",
+                unmute: "Activează microfonul",
+                undeafen: "Anulează asurzirea",
                 serverUnmute: "Unmute pe server",
                 serverUndeafen: "Undeafen pe server"
             }
@@ -10811,6 +11590,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 pause: "Pune pauză",
                 recording: "ÎNREGISTRARE",
                 send: "Trimite",
+            },
+            text: {
+                convertioWebConverter: "convertorul web convertio"
             }
         },
         volumeBooster: {
@@ -10820,39 +11602,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 multiplier: {
                     label: "Multiplicator",
                     description: "Multiplicatorul de volum"
-                }
-            }
-        },
-        wallpaperFree: {
-            name: "WallpaperFree",
-            description: "Recrearea vechiului experiment Discord; Setează un fundal personalizat pentru orice canal, utilizator sau server.",
-            option: {
-                globalDefault: {
-                    label: "Fundal global implicit",
-                    description: "Setează un fundal implicit pentru toate canalele."
-                },
-                stylingTips: {
-                    label: "Sfaturi stilizare"
-                }
-            },
-            context: {
-                setWallpaper: "Setează fundal",
-                removeWallpaper: "Elimină fundal"
-            },
-            modal: {
-                set: "Setează fundal",
-                image: "URL-ul imaginii",
-                cancel: "Anulează",
-                apply: "Aplică",
-                global: {
-                    set: "Setează un fundal global",
-                    remove: "Elimină fundalul global",
-                    reset: "Resetează toate datele fundalurilor"
-                },
-                web: {
-                    info: "Poți folosi fișiere locale punându-le în directorul Plexcord themes sub forma plexcord:///themes/nume.ext",
-                    open: "Deschide directorul temelor",
-                    quickCSS: "Deschide QuickCSS"
                 }
             }
         },
@@ -10868,7 +11617,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webKeybinds: {
             name: "WebKeybinds",
-            description: "Readaugă scurtăturile de taste lipsă pe Web (Ctrl+T, Ctrl+Tab etc.). Funcționează complet doar în Plextron/Legcord."
+            description: "Readaugă comenzile rapide lipsă din versiunea web Discord. Funcționează complet doar pe Plextron/Legcord, nu în browser",
+            option: {
+                showNavigationButtons: {
+                    description: "Afișează butoanele de navigare înapoi/înainte în bara de titlu.",
+                    label: "Afișează butoanele de navigare"
+                },
+                overrideCommonKeybinds: {
+                    description: "Permite Discord să suprascrie cele mai comune comenzi rapide de navigare între file (ctrl+t, ctrl+shift+t, ctrl+tab, ctrl+shift+tab, ctrl+n). Funcționează doar în câteva browsere care prioritizează comenzile site-urilor.",
+                    label: "Suprascrie comenzile rapide comune"
+                }
+            }
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
@@ -10887,6 +11646,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 avatarClick: {
                     label: "Click pe avatar",
                     description: "Permite darea de click pe avatarele din reacții"
+                },
+                clickableAvatars: {
+                    description: "Când este activat, clicul pe avatarul unui utilizator care a reacționat îi deschide profilul în loc să adauge reacția",
+                    label: "Avatare clicabile"
                 }
             }
         },
@@ -11002,6 +11765,2447 @@ const translations: MatchStructure<typeof enTranslations> = {
         youtubeDescription: {
             name: "YouTubeDescription",
             description: "Adaugă descrierile videoclipurilor în embed-urile YouTube"
+        },
+        addAttachments: {
+            name: "AddAttachments",
+            description: "Îți permite să adaugi atașamente noi în timp ce editezi mesaje",
+            toast: {
+                youCannotAddMore: "Nu poți adăuga mai multe atașamente la acest mesaj.",
+                youCanOnlyAdd: "Mai poți adăuga doar {{count}} atașament(e) la acest mesaj.",
+                uploadingThisCanTake: "Se încarcă, poate dura ceva timp...",
+                addedOne: "Atașamentul a fost adăugat!",
+                addedMany: "Atașamentele au fost adăugate!"
+            },
+            text: {
+                addAttachments: "Adaugă atașamente"
+            }
+        },
+        advancedPermissions: {
+            option: {
+                simplifiedCard: {
+                    description: "Ce să faci cu cardul simplificat de permisiuni al Discord",
+                    label: "Card simplificat",
+                    hide: "Ascunde-l",
+                    collapse: "Fă-l pliabil",
+                    show: "Lasă-l vizibil"
+                },
+                collapsedByDefault: {
+                    description: "Pornește cu permisiunile simplificate pliate.",
+                    label: "Pliat implicit"
+                }
+            },
+            name: "AdvancedPermissions",
+            description: "Afișează implicit cardul de permisiuni avansate.",
+            text: {
+                simplifiedPermissions: "Permisiuni simplificate"
+            }
+        },
+        autoJumpToMessage: {
+            option: {
+                onlyWhenUnfocused: {
+                    description: "Sari automat la mesaje doar când fereastra Discord nu este activă.",
+                    label: "Doar când nu e activ"
+                }
+            },
+            name: "AutoJumpToMessage",
+            description: "Deschide automat canalul mesajelor noi."
+        },
+        betterForwards: {
+            text: {
+                serverIconForName: "Pictograma serverului {{name}}",
+                messageAttachments: "Atașamentele mesajului",
+                messageTextWillNot: "Textul mesajului nu va fi redirecționat când această opțiune este dezactivată",
+                forwardEverything: "Redirecționează tot",
+                viewServer: "Vezi serverul",
+                embed: "Încorporare",
+                embedNumber: "Încorporare {{number}}",
+                image: "Imagine",
+                video: "Videoclip",
+                serverIcon: "Pictograma serverului {{name}}",
+                dmIcon: "Pictograma DM {{name}}",
+                groupDmIcon: "Pictograma DM de grup {{name}}"
+            },
+            option: {
+                resendOnFail: {
+                    description: "Va încerca să retrimită un mesaj redirecționat dacă redirecționarea eșuează. Poate cauza menționări sau spam de text nedorite. Ocolește restricțiile NSFW.",
+                    label: "Retrimite la eșec"
+                },
+                forwardPreface: {
+                    description: "Cu ce să înceapă mesajul redirecționat",
+                    label: "Prefix redirecționare"
+                },
+                dontFollowForwards: {
+                    description: "După redirecționarea unui singur mesaj, nu sări la el. Ține apăsat Shift pentru a ignora acest comportament.",
+                    label: "Nu urmări redirecționările"
+                },
+                selfForward: {
+                    description: "Afișează canalul curent în fereastra listei de redirecționare.",
+                    label: "Redirecționare către sine"
+                }
+            },
+            name: "BetterForwards",
+            description: "Utilitare pentru redirecționarea mesajelor, inclusiv ocolirea NSFW și îmbunătățiri ale interfeței."
+        },
+        betterImageEditor: {
+            text: {
+                search: "Caută",
+                searchSavedPictures: "Caută în imaginile salvate",
+                clearTheSearch: "Șterge căutarea",
+                savedPictures: "Imagini salvate",
+                removeName: "Elimină {{name}}",
+                removeHoldShiftTo: "Elimină. Ține apăsat Shift pentru a sări peste confirmare",
+                originals: "Originale",
+                putBackTheLast: "Pune-l înapoi pe ultimul",
+                forgetEveryRememberedCrop: "Uiți toate decupările memorate?",
+                yourPicturesStayEach: "Imaginile tale rămân. De acum, fiecare se deschide fără încadrare, până când o decupezi din nou.",
+                forget: "Uită",
+                cancel: "Anulează",
+                clearSavedPictures: "Ștergi imaginile salvate?",
+                everyPictureYouHave: "Fiecare imagine salvată aici dispare, împreună cu decuparea memorată pentru ea. Arhiva Discord și avatarul și bannerul tău actual nu sunt atinse.",
+                clear: "Șterge",
+                removeThisPicture: "Elimini această imagine?",
+                remove: "Elimină",
+                keepTheCroppedCopy: "Păstrezi copia decupată?",
+                itGoesOnThe: "Merge pe raftul {{toLowerCase}}, lângă originalele tale.",
+                keep: "Păstrează",
+                noThanks: "Nu, mulțumesc",
+                exportToAFile: "Exportă într-un fișier",
+                importFromAFile: "Importă dintr-un fișier",
+                forgetRememberedFraming: "Uită încadrarea memorată",
+                clearSavedPictures2: "Șterge imaginile salvate",
+                croppedKind: "{{kind}} decupate",
+                unpinName: "Anulează fixarea {{name}}",
+                pinName: "Fixează {{name}}",
+                pinnedNeverDrops: "Fixat, nu va cădea niciodată de pe raft",
+                pinNeverDrops: "Fixează ca să nu cadă niciodată de pe raft",
+                nothingMatches: "Nimic de aici nu se potrivește",
+                originalsEmpty: "Imaginile pe care le alegi, lipești sau plasezi ajung aici",
+                croppedEmpty: "Imaginile pe care le decupezi ajung aici",
+                forgotFraming: "Încadrarea a fost uitată pentru {{count}} imagini",
+                nothingFramed: "Nimic nu era încadrat",
+                pictureLibrary: "Bibliotecă de imagini",
+                addedPictures: "Imagini adăugate: {{count}}",
+                nothingNew: "Nimic nou în acel fișier",
+                shownOfTotal: "{{shown}} din {{total}}",
+                keptCount: "{{count}} păstrate",
+                youAreWearingThis: "Folosești asta acum",
+                removePictureBody: "{{name}} va fi eliminată din imaginile salvate, împreună cu decuparea memorată."
+            },
+            option: {
+                librarySize: {
+                    description: "Câte imagini să păstrezi pe fiecare raft.",
+                    label: "Dimensiunea bibliotecii"
+                },
+                rememberCrop: {
+                    description: "Restaurează zoomul și poziția folosite ultima dată pentru o imagine.",
+                    label: "Ține minte decuparea"
+                },
+                forgetFraming: {
+                    description: "Renunță la toate decupările memorate și deschide fiecare imagine așa cum ar face Discord.",
+                    label: "Uită încadrarea"
+                },
+                saveCropped: {
+                    description: "Păstrează o copie a fiecărei imagini după ce o decupezi.",
+                    label: "Salvează decupate"
+                },
+                askBeforeSavingCropped: {
+                    description: "Întreabă mai întâi, în loc să păstrezi automat copia decupată.",
+                    label: "Întreabă înainte de a salva decupate"
+                },
+                transfer: {
+                    description: "Mută imaginile tale și încadrarea fiecăreia pe alt dispozitiv.",
+                    label: "Transfer"
+                },
+                clearLibrary: {
+                    description: "Aruncă toate imaginile pe care le-ai salvat.",
+                    label: "Golește biblioteca"
+                }
+            },
+            name: "BetterImageEditor",
+            description: "Păstrează un raft cu imaginile tale în editorul de avatar și banner și ține minte cum ai decupat fiecare.",
+            toast: {
+                couldNotExportYour: "Nu s-au putut exporta imaginile",
+                couldNotReadThat: "Nu s-a putut citi fișierul",
+                thatPictureIsMissing: "Imaginea lipsește",
+                thatPictureIsToo: "Imaginea este prea mare pentru Discord",
+                couldNotUseThat: "Nu s-a putut folosi imaginea",
+                couldNotKeepThe: "Nu s-a putut păstra copia decupată"
+            },
+            kind: {
+                avatars: "avatare",
+                banners: "bannere",
+                serverIcons: "pictograme de server",
+                serverBanners: "bannere de server",
+                eventCovers: "coperți de evenimente",
+                homeHeaders: "antete de pagină principală",
+                decorations: "decorațiuni",
+                widgetCovers: "coperți de widget",
+                widgetImages: "imagini de widget"
+            }
+        },
+        cancelFriendRequest: {
+            name: "CancelFriendRequest",
+            description: "Adaugă o modalitate de a anula cererile de prietenie trimise din profiluri.",
+            text: {
+                cancelOutgoingFriendRequest: "Anulează cererea de prietenie trimisă"
+            }
+        },
+        clipUpload: {
+            text: {
+                createdAtMustBe: "Data creării trebuie să fie o dată validă.",
+                cancel: "Anulează",
+                uploadClipFile: "Încarcă fișier clip",
+                fileName: "Nume fișier",
+                title: "Titlu",
+                epicMoment: "Moment epic",
+                message: "Mesaj",
+                checkOutThisClip: "Uită-te la acest clip!",
+                spoiler: "Spoiler",
+                remix: "Remix",
+                thumbnail: "Miniatură",
+                file: "Fișier",
+                selectFile: "Selectează fișierul",
+                parseClipMetadataFrom: "Extrage metadatele clipului din fișier",
+                selectFriends: "Selectează prieteni",
+                selectAGame: "Selectează un joc",
+                customApplicationId: "ID personalizat al aplicației",
+                createdAt: "Creat la",
+                participants: "Participanți",
+                onlyTagPeopleWho: "Etichetează doar persoanele care au fost prezente și au fost de acord să apară în acest clip.",
+                gameApplication: "Joc/Aplicație",
+                uploadClipFile2: "Încarcă fișier clip",
+                uploading: "Se încarcă",
+                upload: "Încarcă",
+                noFileSelected: "Niciun fișier selectat",
+                couldNotPrepare: "Nu s-a putut pregăti fișierul selectat.",
+                couldNotRead: "Nu s-a putut citi fișierul selectat.",
+                couldNotUpdateMetadata: "Nu s-au putut actualiza metadatele clipului.",
+                notCompatible: "Acest fișier nu este compatibil. Folosește un clip MP4 cu video H.264 și audio AAC.",
+                uploadFailed: "Încărcarea a eșuat.",
+                noUploadSlot: "Discord nu a returnat un slot de încărcare.",
+                uploadCanceled: "Încărcare anulată.",
+                failedToUpload: "Nu s-a putut încărca clipul.",
+                selectClipFile: "Selectează fișierul clipului",
+                mp4Video: "Video MP4"
+            },
+            name: "ClipUpload",
+            description: "Adaugă un buton pentru a încărca un fișier video local ca clip Discord.",
+            toast: {
+                checkingClipFile: "Se verifică fișierul clip.",
+                convertingClipFile: "Se convertește fișierul clip.",
+                clipUploaded: "Clip încărcat."
+            }
+        },
+        collapsibleUI: {
+            name: "CollapsibleUI",
+            description: "Suprafețe pliabile native pentru canale, membri, butoanele chatului și zona utilizatorului.",
+            text: {
+                collapsibleUi: "Interfață pliabilă",
+                guildBar: "Bara de servere",
+                channelList: "Lista de canale",
+                membersList: "Lista de membri",
+                messageButtons: "Butoane mesaj",
+                titleBar: "Bara de titlu",
+                headerBar: "Bara de antet",
+                userArea: "Zona utilizatorului"
+            },
+            option: {
+                detachUserArea: {
+                    description: "Detașează zona utilizatorului, ca să poată fi mutată liber când nu este pliată.",
+                    label: "Detașează zona utilizatorului"
+                },
+                detachedUserAreaX: {
+                    description: "Păstrează poziția x a zonei utilizatorului detașate.",
+                    label: "Zonă utilizator detașată X"
+                },
+                detachedUserAreaY: {
+                    description: "Păstrează poziția y a zonei utilizatorului detașate.",
+                    label: "Zonă utilizator detașată Y"
+                },
+                guildBarCollapsed: {
+                    description: "Păstrează bara de servere pliată.",
+                    label: "Bară servere pliată"
+                },
+                channelListCollapsed: {
+                    description: "Păstrează lista de canale pliată.",
+                    label: "Listă canale pliată"
+                },
+                membersListCollapsed: {
+                    description: "Păstrează lista de membri pliată.",
+                    label: "Listă membri pliată"
+                },
+                chatButtonsCollapsed: {
+                    description: "Păstrează rândul de butoane de mesaj pliat.",
+                    label: "Butoane chat pliate"
+                },
+                titleBarCollapsed: {
+                    description: "Păstrează bara de titlu pliată.",
+                    label: "Bară de titlu pliată"
+                },
+                headerBarCollapsed: {
+                    description: "Păstrează bara de antet pliată.",
+                    label: "Bară de antet pliată"
+                },
+                userAreaCollapsed: {
+                    description: "Păstrează zona utilizatorului pliată.",
+                    label: "Zonă utilizator pliată"
+                }
+            }
+        },
+        customCommands: {
+            text: {
+                cancel: "Anulează",
+                name: "Name",
+                response: "Răspuns",
+                detectedArguments: "Argumente detectate",
+                exampleCommandResponse: "Exemplu de răspuns al comenzii:",
+                exampleUsage: "Exemplu de utilizare:",
+                exampleOutput: "Exemplu de rezultat:",
+                viewArgumentsGuide: "Vezi ghidul argumentelor",
+                editTag: "Editează eticheta",
+                deleteTag: "Șterge eticheta",
+                registeredTags: "Etichete înregistrate",
+                createTag: "Creează etichetă",
+                aTagWithThe: "Nu există o etichetă cu numele **{{name}}**!",
+                successfullyDeletedTheTag: "Eticheta **{{name}}** a fost ștearsă!",
+                ephemeralReserved: "Numele de argument \"ephemeral\" este rezervat și nu poate fi folosit.",
+                createNewTag: "Creează o etichetă nouă",
+                editTagSubtitle: "Editează comanda ta personalizată.",
+                createTagSubtitle: "Creează o etichetă nouă care va fi înregistrată ca comandă slash.",
+                save: "Salvează",
+                create: "Creează",
+                variablesHelp: "Răspunsul tău poate include variabile între acolade duble, care vor deveni argumente ale comenzii, de exemplu",
+                defaultValuesHelp: "Poți specifica argumente cu valori implicite folosind semnul egal, de exemplu",
+                noTagsYet: "Ups! Încă nu există etichete, folosește `/tags create` pentru a crea una!",
+                nameAlreadyExists: "O etichetă cu numele \"{{name}}\" există deja și va fi suprascrisă.",
+                defaultValue: "(implicit: {{value}})"
+            },
+            name: "CustomCommands",
+            description: "Îți permite să creezi comenzi slash / etichete personalizate",
+            option: {
+                tagsList: {
+                    label: "Lista etichetelor"
+                }
+            },
+            command: {
+                ephemeral: "Dacă răspunsul trebuie să fie vizibil doar pentru tine",
+                tags: "Gestionează toate comenzile personalizate",
+                create: "Creează o etichetă nouă",
+                list: "Listează toate etichetele tale",
+                delete: "Elimină o etichetă după nume",
+                tagName: "Numele etichetei"
+            }
+        },
+        fileUpload: {
+            name: "FileUpload",
+            description: "Încarcă fișiere pe servicii de găzduire precum Zipline, Nest, S3 și WebDAV",
+            toast: {
+                fileTypeNotAllowed: "Tipul de fișier nu este permis de filtrul curent",
+                pleaseConfigureFileuploadSettings: "Configurează mai întâi setările FileUpload",
+                sharexConfigIsValid: "Configurația ShareX este validă",
+                importedSharexConfig: "Configurația ShareX a fost importată",
+                uploadSuccessfulButNo: "Încărcare reușită, dar nu a fost disponibil niciun URL de copiat",
+                uploadSuccessfulUrlCopied: "Încărcare reușită, URL copiat în clipboard",
+                uploadSuccessfulButFailed: "Încărcare reușită, dar URL-ul nu a putut fi copiat",
+                uploadSuccessful: "Încărcare reușită",
+                uploadSucceededWithServicelabels: "Încărcare reușită cu {{serviceLabels_service}} după rezervă",
+                apngToGifConversion: "Conversia APNG în GIF a eșuat, se încarcă ca APNG",
+                uploadAlreadyInProgress: "Încărcarea este deja în curs",
+                uploadCancelled: "Încărcare anulată",
+                uploadFailedMessage: "Încărcarea a eșuat: {{message}}",
+                invalidSharexConfig: "Configurație ShareX nevalidă",
+                failedToImportSharexConfig: "Nu s-a putut importa configurația ShareX"
+            },
+            text: {
+                uploadToServicename: "Încarcă pe {{serviceName}}",
+                uploadToHost: "Încarcă pe gazdă",
+                chooseFile: "Alege fișierul...",
+                zipline: "Zipline",
+                eZHost: "E-Z Host",
+                nest: "Nest",
+                encryptingHost: "Encrypting.host",
+                s3Compatible: "Compatibil S3",
+                catboxMoe: "Catbox.moe",
+                litterbox: "Litterbox",
+                sharexCustomUploader: "Încărcător personalizat ShareX",
+                webdavNextcloudOwncloud: "WebDAV (Nextcloud/Owncloud)",
+                n1Hour: "1 oră",
+                n12Hours: "12 ore",
+                n24Hours: "24 de ore",
+                n72Hours: "72 de ore",
+                corsProxy: "Proxy CORS",
+                query: "Interogare",
+                param: "Parametru",
+                fakeLink: "Link fals",
+                embed: "Înglobare",
+                n30Seconds: "30 de secunde",
+                n1Minute: "1 minut",
+                n2Minutes: "2 minute",
+                n5Minutes: "5 minute",
+                n10Minutes: "10 minute",
+                dragHostsToReorder: "Trage gazdele pentru a reordona încercările de rezervă. Gazda selectată este încercată prima, apoi se folosește această ordine.",
+                chooseWhereFileuploadSends: "Alege unde trimite FileUpload fișierele noi.",
+                connectionDetailsForYour: "Detaliile de conectare pentru instanța ta Zipline.",
+                theUrlOfYour: "URL-ul instanței tale Zipline",
+                yourZiplineApiAuthorization: "Token-ul tău de autorizare API Zipline",
+                yourZiplineApiToken: "Token-ul tău API Zipline",
+                folderIdForUploads: "ID dosar pentru încărcări (lasă gol pentru niciun dosar)",
+                leaveEmptyForNo: "Lasă gol pentru niciun dosar",
+                connectionDetailsForE: "Detaliile de conectare pentru încărcările pe E-Z Host.",
+                yourEZHost: "Cheia ta API E-Z Host",
+                connectionDetailsForNest: "Detaliile de conectare pentru încărcările pe Nest.",
+                yourNestApiAuthorization: "Token-ul tău de autorizare API Nest",
+                yourNestApiToken: "Token-ul tău API Nest",
+                connectionDetailsForEncrypting: "Detaliile de conectare pentru încărcările pe Encrypting.host.",
+                yourEncryptingHostApi: "Cheia ta API Encrypting.host",
+                howEncryptingHostShould: "Cum să formateze Encrypting.host linkurile returnate.",
+                selectUrlStyle: "Selectează stilul URL",
+                optionalTitleForEmbed: "Titlu opțional pentru răspunsurile în stil înglobare.",
+                optionalTitle: "Titlu opțional",
+                optionalColorForEmbed: "Culoare opțională pentru răspunsurile în stil înglobare.",
+                optionalColor: "Culoare opțională",
+                optionalFakeLinkValue: "Valoare opțională a linkului fals pentru răspunsurile în stil fakelink.",
+                optionalFakeLink: "Link fals opțional",
+                connectionDetailsAndObject: "Detaliile de conectare și denumirea obiectelor pentru bucket-ul tău.",
+                s3CompatibleEndpointE: "Endpoint compatibil S3 (ex. https://<accountid>.r2.cloudflarestorage.com)",
+                bucketToUploadInto: "Bucket-ul în care se încarcă",
+                awsRegionOrAuto: "Regiune AWS sau auto pentru Cloudflare R2",
+                s3CompatibleAccessKey: "Cheie de acces compatibilă S3",
+                yourAccessKeyId: "ID-ul cheii tale de acces",
+                s3CompatibleSecretKey: "Cheie secretă compatibilă S3",
+                yourSecretAccessKey: "Cheia ta secretă de acces",
+                optionalTemporaryCredentialToken: "Token opțional de acreditare temporară",
+                optionalSessionToken: "Token de sesiune opțional",
+                optionalPublicUrlBase: "URL de bază public opțional pentru linkurile returnate",
+                optionalFolderPrefixInside: "Dosar/prefix opțional în bucket",
+                useEndpointBucketKey: "Folosește formatul endpoint/bucket/cheie, recomandat pentru R2.",
+                optionalAccountBindingFor: "Asociere opțională a contului pentru încărcările pe Catbox.",
+                yourCatboxUserhashFor: "Userhash-ul tău Catbox pentru asocierea contului; lasă gol pentru încărcări anonime.",
+                yourCatboxUserhash: "Userhash-ul tău Catbox",
+                howLongUploadsAre: "Cât timp sunt păstrate încărcările",
+                selectExpiry: "Selectează expirarea",
+                optionalAccountBindingFor2: "Asociere opțională a contului pentru încărcările pe GoFile.",
+                optionalGofileTokenTo: "Token GoFile opțional pentru a încărca în contul tău.",
+                optionalGofileToken: "Token GoFile opțional",
+                connectionDetailsForPixelvault: "Detaliile de conectare pentru încărcările pe PixelVault.",
+                yourPixelvaultAuthorizationKey: "Cheia ta de autorizare PixelVault.",
+                yourPixelvaultUploadKey: "Cheia ta de încărcare PixelVault",
+                optionalAccountBindingFor3: "Asociere opțională a contului pentru încărcările pe PixelDrain.",
+                optionalPixeldrainApiKey: "Cheie API PixelDrain opțională pentru încărcări autentificate. Lasă gol pentru încărcări anonime.",
+                yourPixeldrainApiKey: "Cheia ta API PixelDrain",
+                pasteImportOrValidate: "Lipește, importă sau validează o configurație de încărcător personalizat ShareX.",
+                pasteYourSharexCustom: "Lipește JSON-ul încărcătorului tău personalizat ShareX (.sxcu/.json). DestinationType trebuie să includă FileUploader sau ImageUploader.",
+                importFromFileOr: "Importă din fișier sau validează configurația lipită",
+                connectionDetailsForWebdav: "Detaliile de conectare pentru servere WebDAV (Nextcloud, Owncloud etc.).",
+                baseWebdavUrlE: "URL WebDAV de bază (ex. https://nextcloud.example.com/remote.php/dav/files/username)",
+                optionalSubdirectoryOnThe: "Subdirector opțional pe server pentru încărcare (ex. uploads)",
+                leaveEmptyForRoot: "Lasă gol pentru directorul rădăcină",
+                selectYourWebdavServer: "Selectează tipul serverului WebDAV. Nextcloud și ownCloud vor crea un link public de partajare. Generic returnează URL-ul brut al fișierului.",
+                selectServerType: "Selectează tipul serverului",
+                howToReturnThe: "Cum se returnează linkul public de partajare. Pagina de partajare duce la o pagină web; Descărcarea directă duce direct la fișier; Linkul Markdown încadrează pagina într-un nume de fișier pe care se poate face clic.",
+                selectShareLinkFormat: "Selectează formatul linkului",
+                controlWhatFileuploadDoes: "Controlează ce face FileUpload după ce o gazdă returnează un URL.",
+                stripQueryParametersFrom: "Elimină parametrii de interogare din URL-ul fișierului încărcat.",
+                wrapUploadedVideoLinks: "Încadrează linkurile video încărcate cu un proxy de înglobare pentru previzualizări mai bune în Discord.",
+                chooseWhichEmbedProxy: "Alege ce serviciu proxy de înglobare să fie folosit pentru linkurile video încărcate",
+                selectAnEmbedProxy: "Selectează un serviciu proxy de înglobare",
+                convertApngFilesTo: "Convertește fișierele APNG în format GIF.",
+                useTheOriginalFilename: "Folosește numele original al fișierului în loc să denumești încărcările upload.ext.",
+                automaticallyCopyTheUploaded: "Copiază automat URL-ul fișierului încărcat în clipboard.",
+                onlyUseTheSelected: "Folosește doar încărcătorul selectat fără a încerca gazde de rezervă.",
+                afterUploadInsertThe: "După încărcare, inserează URL-ul rezultat în caseta de chat curentă.",
+                wrapInsertedUrlsIn: "Încadrează URL-urile inserate între paranteze unghiulare pentru a evita previzualizarea Discord.",
+                chooseWhenFileuploadTakes: "Alege când preia FileUpload gestionarea fișierelor Discord.",
+                useFileuploadWhenUploading: "Folosește FileUpload la încărcarea prin selectorul de fișiere Discord.",
+                useFileuploadOnlyFor: "Folosește FileUpload doar pentru fișierele mai mari decât limita ta actuală de încărcare Discord.",
+                manualDiscordFileSize: "Limită manuală a dimensiunii fișierelor Discord în MB, folosită când detectarea automată greșește. Lasă gol pentru automat.",
+                auto: "Automat",
+                commaSeparatedListOf: "Listă de extensii separate prin virgule (ex. png,jpg,gif). Lasă gol pentru a le permite pe toate.",
+                configureBrowserUploadProxying: "Configurează proxy-ul și timpii limită pentru încărcările din browser.",
+                corsProxyUsedFor: "Proxy CORS folosit pentru încărcările web. Lasă gol pentru proxy-ul implicit.",
+                sourceCodeForThe: "Codul sursă al proxy-ului CORS implicit",
+                maximumTimeToWait: "Timpul maxim de așteptare per încercare de încărcare înainte de a trece la rezervă",
+                selectTimeout: "Selectează timpul limită",
+                drag: "Trage",
+                importSxcuJson: "Importă .sxcu/.json",
+                validate: "Validează",
+                resetToDefault: "Resetează la implicit",
+                progress: "{{percent}}% - {{transferred}} din {{total}}",
+                cancel: "Anulează"
+            },
+            option: {
+                serviceType: {
+                    description: "Serviciul de încărcare selectat",
+                    label: "Tipul serviciului"
+                },
+                serviceUrl: {
+                    description: "URL-ul serviciului Zipline",
+                    label: "URL serviciu"
+                },
+                ziplineToken: {
+                    description: "Token de autentificare Zipline",
+                    label: "Token Zipline"
+                },
+                folderId: {
+                    description: "ID opțional pentru dosarul Zipline",
+                    label: "ID dosar"
+                },
+                ezHostKey: {
+                    description: "Cheie API E-Z Host",
+                    label: "Cheie E-Z Host"
+                },
+                nestToken: {
+                    description: "Token API Nest",
+                    label: "Token Nest"
+                },
+                encryptingHostKey: {
+                    description: "Cheie API Encrypting.host",
+                    label: "Cheie Encrypting.host"
+                },
+                encryptingHostUrlStyle: {
+                    description: "Stil URL Encrypting.host",
+                    label: "Stil URL Encrypting.host"
+                },
+                encryptingHostDomains: {
+                    description: "Listă JSON de domenii Encrypting.host",
+                    label: "Domenii Encrypting.host"
+                },
+                encryptingHostTitle: {
+                    description: "Titlu opțional pentru înglobarea Encrypting.host",
+                    label: "Titlu Encrypting.host"
+                },
+                encryptingHostColor: {
+                    description: "Culoare opțională pentru înglobarea Encrypting.host",
+                    label: "Culoare Encrypting.host"
+                },
+                encryptingHostFakelink: {
+                    description: "Link fals opțional Encrypting.host",
+                    label: "Link fals Encrypting.host"
+                },
+                s3Endpoint: {
+                    description: "URL endpoint compatibil S3",
+                    label: "Endpoint S3"
+                },
+                s3Bucket: {
+                    description: "Numele bucket-ului S3",
+                    label: "Bucket S3"
+                },
+                s3Region: {
+                    description: "Regiune S3 (folosește auto pentru R2)",
+                    label: "Regiune S3"
+                },
+                s3AccessKeyId: {
+                    description: "ID cheie de acces S3",
+                    label: "ID cheie acces S3"
+                },
+                s3SecretAccessKey: {
+                    description: "Cheie de acces secretă S3",
+                    label: "Cheie de acces secretă S3"
+                },
+                s3SessionToken: {
+                    description: "Token de sesiune S3 opțional",
+                    label: "Token sesiune S3"
+                },
+                s3PublicUrl: {
+                    description: "URL de bază public opțional",
+                    label: "URL public S3"
+                },
+                s3Prefix: {
+                    description: "Prefix opțional pentru cheile obiectelor S3",
+                    label: "Prefix S3"
+                },
+                s3ForcePathStyle: {
+                    description: "Folosește URL-uri S3 în stil cale",
+                    label: "Forțează stilul cale S3"
+                },
+                litterboxExpiry: {
+                    description: "Perioada de păstrare Litterbox",
+                    label: "Expirare Litterbox"
+                },
+                catboxUserhash: {
+                    description: "Userhash Catbox pentru asocierea contului",
+                    label: "Userhash Catbox"
+                },
+                sharexConfig: {
+                    description: "JSON pentru încărcătorul personalizat ShareX",
+                    label: "Configurație ShareX"
+                },
+                disableFallbacks: {
+                    description: "Dezactivează serviciile de încărcare de rezervă",
+                    label: "Dezactivează rezervele"
+                },
+                autoSend: {
+                    description: "Inserează URL-ul încărcat în caseta de chat",
+                    label: "Trimite automat"
+                },
+                autoFormat: {
+                    description: "Încadrează URL-ul inserat între paranteze unghiulare",
+                    label: "Formatare automată"
+                },
+                bypassDiscordUpload: {
+                    description: "Ocolește încărcările Discord și folosește FileUpload în schimb.",
+                    label: "Ocolește încărcarea Discord"
+                },
+                bypassDiscordUploadOnlyOverLimit: {
+                    description: "Folosește FileUpload doar dacă fișierele depășesc limita de dimensiune.",
+                    label: "Ocolește încărcarea Discord doar peste limită"
+                },
+                customDiscordFileSizeLimitMB: {
+                    description: "Limită manuală a dimensiunii fișierelor Discord în MB. 0 înseamnă detectare automată.",
+                    label: "Limită personalizată dimensiune Discord (MB)"
+                },
+                gofileToken: {
+                    description: "Token API GoFile opțional",
+                    label: "Token GoFile"
+                },
+                fallbackOrder: {
+                    description: "Ordinea încărcătoarelor de rezervă",
+                    label: "Ordine de rezervă"
+                },
+                pixelVaultKey: {
+                    description: "Cheie de încărcare PixelVault",
+                    label: "Cheie PixelVault"
+                },
+                pixelDrainKey: {
+                    description: "Cheie API PixelDrain opțională",
+                    label: "Cheie PixelDrain"
+                },
+                uploadTimeoutMs: {
+                    description: "Timp limită de încărcare în milisecunde",
+                    label: "Timp limită încărcare (ms)"
+                },
+                stripQueryParams: {
+                    description: "Elimină parametrii de interogare din URL-urile încărcate",
+                    label: "Elimină parametrii de interogare"
+                },
+                embedProxyEnabled: {
+                    description: "Trimite linkurile video încărcate printr-un serviciu ajutător de înglobare.",
+                    label: "Proxy de înglobare activat"
+                },
+                embedProxyService: {
+                    description: "Serviciu ajutător de înglobare care încapsulează linkurile video încărcate.",
+                    label: "Serviciu proxy de înglobare"
+                },
+                corsProxyUrl: {
+                    description: "URL proxy CORS folosit pentru încărcările din browser",
+                    label: "URL proxy CORS"
+                },
+                apngToGif: {
+                    description: "Convertește încărcările APNG în GIF",
+                    label: "APNG în GIF"
+                },
+                preserveOriginalFilename: {
+                    description: "Păstrează numele original al fișierului la încărcare.",
+                    label: "Păstrează numele original"
+                },
+                autoCopy: {
+                    description: "Copiază automat URL-ul încărcării",
+                    label: "Copiere automată"
+                },
+                autoUploadPastedFiles: {
+                    description: "Încarcă automat fișierele din clipboard pe gazda de imagini când lipești în chat.",
+                    label: "Încarcă automat fișierele lipite"
+                },
+                webdavUrl: {
+                    description: "URL server WebDAV",
+                    label: "URL WebDAV"
+                },
+                webdavUsername: {
+                    description: "Nume utilizator WebDAV",
+                    label: "Utilizator WebDAV"
+                },
+                webdavPassword: {
+                    description: "Parolă WebDAV sau token de aplicație",
+                    label: "Parolă WebDAV"
+                },
+                webdavDirectory: {
+                    description: "Subdirector opțional pe serverul WebDAV",
+                    label: "Director WebDAV"
+                },
+                webdavServerType: {
+                    description: "Tipul serverului WebDAV",
+                    label: "Tip server WebDAV",
+                    nextcloud: "Nextcloud",
+                    owncloud: "ownCloud",
+                    generic: "WebDAV generic"
+                },
+                webdavShareType: {
+                    description: "Formatul linkului de partajare WebDAV",
+                    label: "Tip partajare WebDAV",
+                    sharepage: "Pagină de partajare",
+                    directdownload: "Descărcare directă",
+                    markdown: "Link Markdown"
+                },
+                uploadAllowedFileTypes: {
+                    description: "Listă separată prin virgule de extensii permise (ex. png,jpg,gif,mp4). Lasă gol pentru a permite toate fișierele.",
+                    label: "Tipuri de fișiere permise la încărcare"
+                },
+                settingsComponent: {
+                    description: "Setări",
+                    label: "Componentă setări"
+                }
+            },
+            panel: {
+                fallbackOrder: "Ordine de rezervă",
+                uploadService: "Serviciu de încărcare",
+                zipline: "Zipline",
+                serviceUrl: "URL serviciu",
+                ziplineToken: "Token Zipline",
+                folderId: "ID dosar",
+                eZHost: "E-Z Host",
+                eZHostApiKey: "Cheie API E-Z Host",
+                nest: "Nest",
+                nestToken: "Token Nest",
+                encryptingHost: "Encrypting.host",
+                encryptingHostApiKey: "Cheie API Encrypting.host",
+                urlStyle: "Stil URL",
+                domainsJson: "Domenii (JSON)",
+                embedTitle: "Titlul înglobării",
+                embedColor: "Culoarea înglobării",
+                fakeLink: "Link fals",
+                s3CompatibleStorage: "Stocare compatibilă S3",
+                s3EndpointUrl: "URL endpoint S3",
+                bucketName: "Numele bucket-ului",
+                region: "Regiune",
+                accessKeyId: "ID cheie de acces",
+                secretAccessKey: "Cheie de acces secretă",
+                sessionToken: "Token de sesiune",
+                publicBaseUrl: "URL de bază public",
+                objectKeyPrefix: "Prefix cheie obiect",
+                usePathStyleEndpoint: "Folosește endpoint în stil cale",
+                catbox: "Catbox",
+                catboxUserhash: "Userhash Catbox",
+                litterboxExpiry: "Expirare Litterbox",
+                gofile: "GoFile",
+                gofileToken: "Token GoFile",
+                pixelvault: "PixelVault",
+                pixelvaultUploadKey: "Cheie de încărcare PixelVault",
+                pixeldrain: "PixelDrain",
+                pixeldrainApiKey: "Cheie API PixelDrain",
+                sharexCustomUploader: "Încărcător personalizat ShareX",
+                sharexCustomUploaderConfig: "Configurația încărcătorului personalizat ShareX",
+                sharexConfigActions: "Acțiuni configurație ShareX",
+                webdav: "WebDAV",
+                serverUrl: "URL server",
+                username: "Nume utilizator",
+                passwordOrAppToken: "Parolă sau token de aplicație",
+                passwordOrAppToken2: "parolă sau token de aplicație",
+                uploadDirectory: "Director de încărcare",
+                serverType: "Tip server",
+                shareLinkFormat: "Formatul linkului de partajare",
+                uploadBehavior: "Comportament de încărcare",
+                stripQueryParameters: "Elimină parametrii de interogare",
+                useEmbedProxy: "Folosește proxy de înglobare",
+                embedProxyService: "Serviciu proxy de înglobare",
+                convertApngToGif: "Convertește APNG în GIF",
+                preserveOriginalFilename: "Păstrează numele original",
+                autoCopyUrl: "Copiază URL-ul automat",
+                disableFallbackUploaders: "Dezactivează încărcătoarele de rezervă",
+                insertUrlIntoChatInput: "Inserează URL-ul în caseta de chat",
+                formatInsertedUrl: "Formatează URL-ul inserat",
+                discordIntegration: "Integrare Discord",
+                bypassDiscordUploadButton: "Ocolește butonul de încărcare Discord",
+                autoUploadPastedFiles: "Încarcă automat fișierele lipite",
+                respectDiscordFileSizeLimit: "Respectă limita de dimensiune Discord",
+                discordLimitOverrideMb: "Suprascrie limita Discord (MB)",
+                allowedFileTypes: "Tipuri de fișiere permise",
+                network: "Rețea",
+                corsProxyUrl: "URL proxy CORS",
+                defaultCorsProxySource: "Sursa proxy-ului CORS implicit",
+                uploadTimeout: "Timp limită de încărcare",
+                domainsJsonDescription: "Array JSON de domenii de folosit, de exemplu [\"offensive\"]."
+            },
+            status: {
+                cancelled: "Încărcare anulată.",
+                uploadingVia: "Se încarcă prin {{service}}...",
+                uploading: "Se încarcă...",
+                unknownError: "Eroare necunoscută",
+                startingVia: "Se pornește încărcarea prin {{service}}...",
+                retryingWith: "Se reîncearcă cu {{service}} ({{attempt}}/{{total}})...",
+                uploadedVia: "Încărcat cu succes prin {{service}}.",
+                allFailed: "Toate serviciile de încărcare au eșuat. Ultima eroare: {{error}}",
+                fileReady: "Fișier pregătit, se pornește încărcarea...",
+                preparing: "Se pregătește încărcarea...",
+                failed: "Încărcarea a eșuat: {{message}}",
+                timedOut: "Încărcarea a expirat",
+                serviceFailed: "{{service}} a eșuat: {{message}}",
+                preparingFile: "Se pregătește {{name}}{{suffix}}..."
+            }
+        },
+        gifMaker: {
+            option: {
+                lastWidth: {
+                    label: "Ultima lățime"
+                },
+                lastHeight: {
+                    label: "Ultima înălțime"
+                },
+                lastCaptionMode: {
+                    label: "Ultimul mod de legendă"
+                },
+                lastCaptionText: {
+                    label: "Ultimul text de legendă"
+                },
+                lastCaptionSize: {
+                    label: "Ultima dimensiune a legendei"
+                },
+                lastFontFamily: {
+                    label: "Ultima familie de fonturi"
+                },
+                lastBubbleTipBase: {
+                    label: "Ultima bază a vârfului bulei"
+                },
+                maxWidth: {
+                    description: "Lățimea maximă la potrivirea automată.",
+                    label: "Lățime maximă"
+                },
+                maxHeight: {
+                    description: "Înălțimea maximă la potrivirea automată.",
+                    label: "Înălțime maximă"
+                }
+            },
+            name: "GifMaker",
+            description: "Creează și adaugă legende la GIF-uri din orice media din chat sau din selectorul GIF.",
+            text: {
+                send: "Trimite",
+                export: "Exportă",
+                makeGif: "Creează GIF",
+                editGif: "Editează GIF",
+                selectAFont: "Selectează un font...",
+                enterCaption: "Introdu legenda...",
+                width: "Lățime",
+                height: "Înălțime",
+                loadingFonts: "Se încarcă fonturile...",
+                captions: "Legende",
+                text: "Text",
+                font: "Font",
+                fontSize: "Dimensiune font",
+                tipBase: "Baza vârfului",
+                dimensions: "Dimensiuni",
+                generatingGif: "Se generează GIF-ul...",
+                clickOnThePreview: "Fă clic pe previzualizare pentru a poziționa vârful bulei",
+                gifPreview: "Previzualizare GIF"
+            },
+            captionMode: {
+                caption: "Legendă",
+                none: "Niciunul",
+                speechbubble: "Balon"
+            }
+        },
+        gifProviderSwitcher: {
+            name: "GifProviderSwitcher",
+            description: "Îți permite să folosești căutarea GIF Tenor sau Giphy în loc de Klipy",
+            text: {
+                tenor: "Tenor",
+                giphy: "Giphy",
+                klipy: "Klipy",
+                providers: "Furnizori",
+                providersCount: "{{count}} furnizori"
+            }
+        },
+        keyboardNavigation: {
+            toast: {
+                invalidUrl: "URL nevalid",
+                copiedResponseToClipboard: "Răspuns copiat în clipboard!",
+                issueFetchingUrl: "Problemă la preluarea URL-ului",
+                copiedGitInfoTo: "Informațiile Git au fost copiate în clipboard!",
+                noUpdatesAvailable: "Nu sunt actualizări disponibile",
+                enabledPlugin: "{{id}} a fost activat",
+                disabledPlugin: "{{id}} a fost dezactivat"
+            },
+            text: {
+                openPlexcordTab: "Deschide fila Plexcord",
+                openPluginTab: "Deschide fila pluginuri",
+                openThemesTab: "Deschide fila teme",
+                openUpdaterTab: "Deschide fila actualizator",
+                openCloudTab: "Deschide fila cloud",
+                openBackupRestoreTab: "Deschide fila Backup și restaurare",
+                restartClient: "Repornește clientul",
+                openQuickCssFile: "Deschide fișierul QuickCSS",
+                openSettingsFolder: "Deschide dosarul setărilor",
+                openInGithub: "Deschide pe GitHub",
+                openInBrowser: "Deschide în browser",
+                togglePlugin: "Comută pluginul",
+                enable: "Activează",
+                disable: "Dezactivează",
+                quickFetch: "Preluare rapidă",
+                copyGitInfo: "Copiază informațiile Git",
+                checkForUpdates: "Caută actualizări",
+                aPlexcordUpdateIs: "Este disponibilă o actualizare Plexcord!",
+                clickHereToView: "Fă clic aici pentru a vedea actualizarea",
+                navigateToServer: "Navighează la server",
+                commandPalette: "Paletă de comenzi",
+                searchTheCommandPalette: "Caută în paleta de comenzi",
+                multipleChoice: "Alegere multiplă",
+                textInput: "Introducere text",
+                openDevTab: "Deschide fila dezvoltator",
+                enterUrlToFetch: "Introdu URL-ul de preluat (doar GET)",
+                typeAndPressEnter: "Scrie și apasă Enter",
+                recording: "Se înregistrează...",
+                recordKeybind: "Înregistrează scurtătura",
+                enterUrl: "Introdu un URL"
+            },
+            option: {
+                hotkey: {
+                    description: "Tasta rapidă pentru deschiderea paletei de comenzi.",
+                    label: "Tastă rapidă"
+                },
+                allowMouseControl: {
+                    description: "Permite mouse-ului să controleze paleta de comenzi.",
+                    label: "Permite controlul cu mouse-ul"
+                }
+            },
+            name: "KeyboardNavigation",
+            description: "Îți permite să navighezi în interfață cu tastatura."
+        },
+        lastActive: {
+            name: "LastActive",
+            description: "Un plugin pentru a sări la ultimul mesaj activ al tău sau al altui utilizator într-un canal/server.",
+            toast: {
+                failedToFindMessages: "Nu s-au găsit mesaje. Verifică consola pentru detalii.",
+                couldnTFindAny: "Nu s-au găsit mesaje recente de la acest utilizator.",
+                channelInformationNotAvailable: "Informațiile canalului nu sunt disponibile.",
+                failedToJumpTo: "Nu s-a putut sări la mesaj. Verifică consola pentru detalii."
+            },
+            text: {
+                yourLastMessage: "Ultimul tău mesaj",
+                userSLastMessage: "Ultimul mesaj al utilizatorului"
+            }
+        },
+        limitlessScreenshare: {
+            text: {
+                deleteTag: "Șterge eticheta",
+                mustBeGreaterThan: "Trebuie să fie >{{value}}",
+                maxResolutionTooLow: "Rezoluția maximă nu poate fi mai mică de {{value}}",
+                maxResolutionRound: "Rezoluția maximă trebuie să se termine cu 0 dacă Rotunjire rezoluție este activată"
+            },
+            name: "LimitlessScreenshare",
+            description: "Adaugă un glisor pentru rezoluția și fps-ul partajării ecranului.",
+            option: {
+                maxFPS: {
+                    description: "FPS maxim pentru glisor",
+                    label: "FPS maxim"
+                },
+                maxResolution: {
+                    description: "Rezoluția maximă pentru glisor",
+                    label: "Rezoluție maximă"
+                },
+                roundResolution: {
+                    description: "Rotunjește rezoluția la cel mai apropiat 10p",
+                    label: "Rotunjește rezoluția"
+                },
+                resolutions: {
+                    label: "Rezoluții"
+                },
+                fpss: {
+                    label: "Valori FPS"
+                }
+            }
+        },
+        messagePeek: {
+            option: {
+                hideMuted: {
+                    description: "Ascunde previzualizările și marcajele temporale pentru mesajele private și grupurile dezactivate.",
+                    label: "Ascunde cele dezactivate"
+                }
+            },
+            name: "MessagePeek",
+            description: "Afișează previzualizarea și marcajul temporal al ultimului mesaj în lista de mesaje directe.",
+            text: {
+                officialDiscordMessage: "Mesaj oficial Discord",
+                sentGif: "a trimis un GIF",
+                voiceMessage: "mesaj vocal",
+                membersCount: "{{count}} membri",
+                you: "Tu"
+            }
+        },
+        messageTranslate: {
+            name: "MessageTranslate",
+            description: "Traduce automat mesajele în limba ta, cu cache, comutatoare per canal și alte opțiuni.",
+            option: {
+                targetLanguage: {
+                    description: "Codul limbii țintă pentru traduceri (ex. en, es, fr, de, ja).",
+                    label: "Limba țintă"
+                },
+                excludedLanguages: {
+                    description: "Coduri de limbă excluse de la traducere (ex. en, es, fr, de, ja).",
+                    label: "Limbi excluse"
+                },
+                confidenceRequirement: {
+                    description: "Încrederea minimă (0–1) necesară pentru a afișa o traducere.",
+                    label: "Încredere necesară"
+                },
+                autoTranslate: {
+                    description: "Traduce automat mesajele pe măsură ce apar.",
+                    label: "Traducere automată"
+                },
+                skipOwnMessages: {
+                    description: "Nu traduce propriile mesaje.",
+                    label: "Omite mesajele proprii"
+                },
+                skipBotMessages: {
+                    description: "Nu traduce mesajele boților.",
+                    label: "Omite mesajele boților"
+                },
+                ignoredGuilds: {
+                    description: "Listă de ID-uri de server separate prin virgule în care nu se traduce.",
+                    label: "Servere ignorate"
+                },
+                ignoredChannels: {
+                    description: "Listă de ID-uri de canal separate prin virgule în care nu se traduce.",
+                    label: "Canale ignorate"
+                },
+                ignoredUsers: {
+                    description: "Listă de ID-uri de utilizator separate prin virgule care nu se traduc.",
+                    label: "Utilizatori ignorați"
+                },
+                showIndicator: {
+                    description: "Adaugă un mic indicator (tradus) la mesajele traduse.",
+                    label: "Afișează indicatorul"
+                },
+                showOriginal: {
+                    description: "Afișează textul original și cel tradus.",
+                    noorig: "Nu afișa originalul."
+                }
+            },
+            text: {
+                showOriginalInSubtext: "Afișează originalul în subtext",
+                showOriginalMessageTranslation: "Afișează mesajul original, traducerea în subtext",
+                translatedFrom: "tradus din {{lang}}"
+            }
+        },
+        moreStickers: {
+            toast: {
+                stickerPackDeleted: "Pachetul de stickere a fost șters",
+                stickerPackAdded: "Pachetul de stickere a fost adăugat",
+                stickerPacksAdded: "Pachetele de stickere au fost adăugate",
+                stickerPacksExported: "Pachetele de stickere au fost exportate",
+                newStickerPacksAlready: "Există deja pachete noi de stickere, migrarea nu este necesară",
+                oldStickerPacksNot: "Nu s-au găsit pachete vechi de stickere, nimic de migrat",
+                migrationFailedTitleId: "Migrarea a eșuat: {{title}} ({{id}})",
+                stickerPackMigrationComplete: "Migrarea pachetelor de stickere s-a încheiat",
+                failedToUploadSticker: "Nu s-a putut încărca stickerul"
+            },
+            text: {
+                stickerPackUrl: "URL pachet de stickere",
+                pasteHtmlHere: "Lipește HTML aici",
+                delete: "Șterge",
+                addStickerPackFrom: "Adaugă pachet de stickere din URL",
+                insert: "Inserează",
+                addStickerPackFrom2: "Adaugă pachet de stickere din HTML",
+                insertFromHtml: "Inserează din HTML",
+                addStickerPackFrom3: "Adaugă pachet de stickere din fișier",
+                miscTools: "Instrumente diverse",
+                exportStickerPacks: "Exportă pachetele de stickere",
+                migrateFromV1: "Migrează din v1",
+                stickersManagement: "Gestionarea stickerelor",
+                theRegionLineRecognized: "Regiunea recunoscută de LINE poate diferi de cea în care te afli din cauza proxy-ului CORS folosit.",
+                openStickerPackFile: "Deschide fișierul pachetului de stickere",
+                stickers: "Stickere+",
+                categoryTitle: "Categorie, {{title}}",
+                searchStickers: "Caută stickere",
+                ffmpegstatecontextIsUndefined: "FFmpegStateContext nu este definit",
+                recentlyUsed: "Folosite recent",
+                addFromUrl: "Adaugă din URL",
+                addFromHtml: "Adaugă din HTML",
+                addFromFile: "Adaugă din fișier",
+                misc: "Diverse",
+                invalidUrl: "URL nevalid",
+                lineOnly: "Momentan sunt acceptate doar stickerele/emoji-urile LINE.",
+                getTelegramStickers: "Obține stickere Telegram cu",
+                htmlFallbackHelp: "Dacă întâmpini erori la adăugarea unui pachet de stickere, poți încerca să îl adaugi folosind codul sursă HTML al paginii pachetului.",
+                htmlFallbackApplies: "Acest lucru se aplică stickerelor blocate regional / de sistemul de operare / etc."
+            },
+            option: {
+                promptToUpload: {
+                    description: "Inserează stickerul în bara de chat în loc să-l trimită imediat",
+                    label: "Întreabă înainte de încărcare"
+                },
+                packs: {
+                    description: "Pachete",
+                    label: "Pachete"
+                }
+            },
+            name: "MoreStickers",
+            description: "Adaugă pachete de stickere de pe alte platforme sociale. (ex. LINE)"
+        },
+        musicRichPresence: {
+            option: {
+                scrobblerBackend: {
+                    description: "Backend-ul de scrobbler de folosit.",
+                    label: "Backend scrobbler"
+                },
+                instanceBaseURL: {
+                    description: "URL-ul de bază al instanței tale ListenBrainz.",
+                    label: "URL de bază al instanței"
+                },
+                instanceAPIBaseUrl: {
+                    description: "URL-ul de bază al API-ului tău ListenBrainz.",
+                    label: "URL de bază API al instanței"
+                },
+                apiKey: {
+                    description: "Cheie API Last.fm. Nu este obligatorie, dar este foarte recomandată pentru a evita limitarea ratei cu cheia noastră comună",
+                    label: "Cheie API"
+                },
+                username: {
+                    description: "Nume de utilizator",
+                    label: "Nume de utilizator"
+                },
+                shareUsername: {
+                    description: "Afișează linkul către profilul scrobbler",
+                    label: "Partajează numele de utilizator"
+                },
+                clickableLinks: {
+                    description: "Transformă numele piesei, artistului și albumului în linkuri",
+                    label: "Linkuri clicabile"
+                },
+                hideWithSpotify: {
+                    description: "Ascunde prezența dacă rulează Spotify",
+                    label: "Ascunde cu Spotify"
+                },
+                hideWithActivity: {
+                    description: "Ascunde prezența dacă ai altă prezență",
+                    label: "Ascunde la activitate"
+                },
+                statusName: {
+                    description: "Text de stare personalizat. Poți folosi variabilele: {artist} | {album} | {title}",
+                    label: "Numele stării"
+                },
+                statusDisplayType: {
+                    description: "Afișează numele piesei / artistului în lista de membri",
+                    off: "Nu afișa (afișează mesajul generic de ascultare)"
+                },
+                nameFormat: {
+                    description: "Afișează numele piesei și al artistului în numele stării",
+                    statusName: "Folosește nume de stare personalizat"
+                },
+                missingArt: {
+                    description: "Când lipsește albumul sau coperta",
+                    logo: "Folosește logoul mare al scrobblerului"
+                },
+                showLogo: {
+                    description: "Afișează logoul serviciului scrobbler lângă copertă",
+                    label: "Afișează logoul scrobblerului"
+                },
+                showAlbumCover: {
+                    description: "Afișează coperta albumului. Dezactivarea va afișa un substituent. Util dacă muzica ta are coperte nepotrivite",
+                    label: "Afișează coperta albumului"
+                },
+                useListeningStatus: {
+                    description: "Afișează starea „Ascultă” în loc de „Joacă”"
+                }
+            },
+            name: "MusicRichPresence",
+            description: "Rich Presence pentru Last.FM/Listenbrainz",
+            text: {
+                showArtistName: "Afișează numele artistului",
+                showTrackName: "Afișează numele piesei",
+                useMusicServiceName: "Folosește numele serviciului de muzică (revine la textul de stare personalizat)",
+                useFormatArtistSong: "Folosește formatul „artist - piesă”",
+                useFormatSongArtist: "Folosește formatul „piesă - artist”",
+                useArtistNameOnly: "Folosește doar numele artistului",
+                useSongNameOnly: "Folosește doar numele piesei",
+                useAlbumNameFalls: "Folosește numele albumului (revine la textul de stare personalizat dacă piesa nu are album)",
+                useGenericPlaceholder: "Folosește un substituent generic",
+                lastFm: "Last.FM",
+                howToCreateAn: "Cum creezi o cheie API",
+                set: "Setează",
+                applicationName: "Numele aplicației",
+                applicationDescription: "Descrierea aplicației",
+                toAnythingAndLeave: "la orice valoare și lasă restul gol.",
+                createApiKey: "Creează cheie API",
+                invalidInstance: "Instanță compatibilă ListenBrainz nevalidă",
+                provideBoth: "Furnizează atât",
+                apiBaseUrl: "URL de bază API",
+                andThe: "cât și",
+                instanceBaseUrl: "URL-ul de bază al instanței",
+                forYourCustomInstance: "pentru instanța ta ListenBrainz personalizată sau revino la ListenBrainz/Last.FM",
+                allowConnectTitle: "Permite Plexcord să se conecteze la instanța ListenBrainz",
+                allowConnectBody: "Pentru a folosi instanța ta ListenBrainz personalizată, trebuie mai întâi să permiți Plexcord să se conecteze la ea.",
+                allowInstance: "Permite instanța",
+                listenBrainzCompatible: "Compatibil ListenBrainz (găzduit propriu)",
+                and: "și"
+            }
+        },
+        noMiddleClickPaste: {
+            name: "NoMiddleClickPaste",
+            description: "Dezactivează lipirea cu clic mijlociu în Linux - doar Linux"
+        },
+        orbolayBridge: {
+            option: {
+                port: {
+                    description: "Portul la care să se conecteze",
+                    label: "Port"
+                }
+            },
+            name: "OrbolayBridge",
+            description: "Plugin punte pentru conectarea Orbolay la Discord",
+            toast: {
+                connectedToOrbolayServer: "Conectat la serverul Orbolay"
+            }
+        },
+        plexcordHelper: {
+            name: "PlexcordHelper",
+            description: "Folosit pentru a oferi asistență și a remedia blocările cauzate de Discord.",
+            text: {
+                restartRequired: "Repornire necesară",
+                restartNow: "Repornește acum",
+                later: "Mai târziu",
+                wouldYouLikeTo: "Vrei să repornești acum?",
+                somePluginsRequireA: "Unele pluginuri necesită o repornire pentru a fi dezactivate complet.",
+                alreadyEnabled: "{{plugin}} este deja activat",
+                alreadyDisabled: "{{plugin}} este deja dezactivat",
+                disablePlugin: "Dezactivează {{plugin}}",
+                enablePlugin: "Activează {{plugin}}",
+                errorStopping: "Eroare la oprirea pluginului {{plugin}}",
+                errorStarting: "Eroare la pornirea pluginului {{plugin}}"
+            },
+            toast: {
+                failedToTolowercase: "Nu s-a putut {{toLowerCase}}",
+                aRestartIsRequired: "Este necesară o repornire pentru ca modificarea să aibă efect!"
+            },
+            card: {
+                notOnThisVersion: "Acest plugin nu există în această versiune de Plexcord. Încearcă să actualizezi!"
+            }
+        },
+        plexcordTweaks: {
+            name: "PlexcordTweaks",
+            option: {
+                removeActivitySection: {
+                    description: "Elimină secțiunea de activitate de deasupra listei de membri",
+                    label: "Elimină secțiunea de activitate"
+                },
+                showYourOwnActivityButtons: {
+                    description: "Discord ascunde dintr-un motiv butoanele propriei activități",
+                    label: "Afișează butoanele propriei activități"
+                },
+                refreshSlashCommands: {
+                    description: "Reîmprospătează comenzile slash pentru a afișa comenzile noi fără a reporni clientul.",
+                    label: "Reîmprospătează comenzile slash"
+                },
+                forceRoleIcon: {
+                    description: "Forțează afișarea pictogramelor de rol lângă mesaje în modul compact",
+                    label: "Forțează pictograma rolului"
+                },
+                accountStandingButton: {
+                    description: "Afișează un buton pentru starea contului în bara de antet",
+                    label: "Buton stare cont"
+                },
+                jsonGateway: {
+                    description: "Forțează JSON la reconectarea la gateway",
+                    label: "Gateway JSON"
+                },
+                enableAutoCorrect: {
+                    description: "Adaugă în meniul contextual al casetei de chat un comutator pentru corectarea automată nativă și înlocuirile de text",
+                    label: "Activează corectarea automată"
+                },
+                autoCorrect: {
+                    description: "Folosește corectarea automată nativă și înlocuirile de text în editoarele de mesaje",
+                    label: "Corectare automată"
+                },
+                disableHolidayNotifications: {
+                    label: "Dezactivează notificările de sărbători",
+                    description: "Folosește mereu sunetele de notificare implicite ale Discord"
+                },
+                showAllBadges: {
+                    label: "Afișează toate insignele",
+                    description: "Afișează toate insignele profilului în loc să le restrângă pe celelalte în +n"
+                }
+            },
+            text: {
+                allGood: "Totul e în regulă!",
+                limited: "Limitat",
+                veryLimited: "Foarte limitat",
+                atRisk: "În pericol",
+                suspended: "Suspendat",
+                slashCommandsRefreshedSuccessfully: "Comenzile slash au fost reîmprospătate.",
+                failedToRefreshCommands: "Nu s-au putut reîmprospăta comenzile. Verifică consola pentru detalii.",
+                enableAutocorrect: "Activează corectarea automată"
+            },
+            command: {
+                refreshCommands: "Reîmprospătează comenzile slash"
+            },
+            description: "O colecție de mici ajustări și remedieri pentru Discord."
+        },
+        plextronStreamFixes: {
+            option: {
+                unlockQualityOptions: {
+                    description: "Deblochează opțiunile de calitate a streamului indiferent de starea Nitro",
+                    label: "Deblochează opțiunile de calitate"
+                },
+                removeResolutionCap: {
+                    description: "Permite rezoluții peste 720p la 60 fps",
+                    label: "Elimină limita de rezoluție"
+                },
+                forceEncoderSettings: {
+                    description: "Forțează encoderul să folosească rezoluția/fps-ul configurat",
+                    label: "Forțează setările encoderului"
+                },
+                preventDownscale: {
+                    description: "Împiedică Discord să micșoreze rezoluția streamului",
+                    label: "Împiedică micșorarea"
+                },
+                keyframeInterval: {
+                    description: "Interval keyframe în ms (0 = implicit encoder, 5000 = la fiecare 5 s)",
+                    label: "Interval keyframe"
+                },
+                minBitrate: {
+                    description: "Bitrate minim al encoderului în kbps",
+                    label: "Bitrate minim"
+                },
+                raiseBitrateCaps: {
+                    description: "Crește limitele implicite de bitrate pe desktop (țintă 600 kbps → 10 Mbps, max 3,5 Mbps → 40 Mbps)",
+                    label: "Crește limitele de bitrate"
+                },
+                preventFramerateReduction: {
+                    description: "Împiedică Discord să reducă framerate-ul streamului când nu vorbești",
+                    label: "Împiedică reducerea framerate-ului"
+                },
+                bitsPerPixelPct: {
+                    description: "Procent biți pe pixel pentru bitrate-ul țintă (8 = 0,08 bpp, 12 = 0,12 bpp)",
+                    label: "Biți pe pixel (%)"
+                }
+            },
+            name: "PlextronStreamFixes",
+            description: "Încearcă să repare calitatea streamului în Plextron modificând encoderul și restricțiile de calitate ale Discord."
+        },
+        rPCEditor: {
+            name: "RPCEditor"
+        },
+        reactionTimestamps: {
+            name: "ReactionTimestamps",
+            description: "Afișează ora fiecărei reacții în fereastra reacțiilor.",
+            text: {
+                userAtTime: "{{user}} la {{time}}"
+            }
+        },
+        richPresence: {
+            text: {
+                useCustomStatusName: "Folosește nume de stare personalizat",
+                useFormatArtistSong: "Folosește formatul „artist - piesă”",
+                useFormatSongArtist: "Folosește formatul „piesă - artist”",
+                useArtistNameOnly: "Folosește doar numele artistului",
+                useSongNameOnly: "Folosește doar numele piesei",
+                useAlbumName: "Folosește numele albumului",
+                useLargeStatsFm: "Folosește logoul mare Stats.fm",
+                useGenericPlaceholder: "Folosește un substituent generic",
+                seriesMovieName: "Nume serial/film",
+                seriesEpisodeTrackMovie: "Serial - nume episod/piesă/film",
+                custom: "Personalizat",
+                seriesCover: "Copertă serial",
+                episodeCover: "Copertă episod",
+                season1Episode1: "Sezonul 1 episodul 1",
+                off: "Dezactivat",
+                listening: "Ascultă",
+                playing: "Joacă",
+                streaming: "Transmite",
+                watching: "Urmărește",
+                none: "Niciunul",
+                navidromeInstanceExposesServer: "Instanță Navidrome (expune URL-ul serverului. Autentificare unică trimisă.)",
+                lastFmApiSends: "API Last.fm (trimite metadate către last.fm)",
+                donTShowShows: "Nu afișa (afișează mesajul generic de ascultare)",
+                showStateLineContent: "Afișează conținutul liniei de stare",
+                showDetailsLineContent: "Afișează conținutul liniei de detalii",
+                displayYourCurrentlyPlaying: "Afișează audiobook-urile pe care le asculți ca Rich Presence Discord. Necesită URL-ul, numele de utilizator și parola serverului AudioBookShelf.",
+                audiobookshelfServerUrl: "URL-ul serverului AudioBookShelf.",
+                audiobookshelfUsername: "Numele de utilizator AudioBookShelf.",
+                audiobookshelfPassword: "Parola AudioBookShelf.",
+                connectsToTosuVia: "Se conectează la tosu prin WebSocket pe portul 24050. Nu necesită configurare, asigură-te doar că tosu rulează alături de osu!.",
+                showWhatYouRe: "Arată ce asculți prin stats.fm. Istoricul de ascultare trebuie să fie public.",
+                statsFmUsername: "Numele de utilizator Stats.fm.",
+                customStatusText: "Text de stare personalizat.",
+                statsFm: "Stats.fm",
+                nameFormat: "Formatul numelui.",
+                fallbackWhenArtIs: "Rezervă când lipsește coperta.",
+                showListeningStatus: "Afișează starea de ascultare.",
+                showStatsFmLogo: "Afișează logoul Stats.fm lângă copertă.",
+                showLinkToStats: "Afișează linkul către profilul stats.fm.",
+                showLinkToSong: "Afișează linkul către piesă pe stats.fm.",
+                hideStatsFmPresence: "Ascunde prezența stats.fm dacă rulează Spotify.",
+                hideStatsFmPresence2: "Ascunde prezența stats.fm dacă rulează un RPC extern.",
+                disableDownloadingAlbumArt: "Dezactivează descărcarea copertelor.",
+                showWhatYouRe2: "Arată ce redai pe Jellyfin. Pentru a obține cheia API: deschide interfața web Jellyfin, apasă F12 pentru instrumentele de dezvoltare, mergi la fila Rețea, caută cererile către server, găsește antetul Authorization (Ctrl+F pentru căutare) și ai nevoie de partea din Token='this'. ID-ul tău de utilizator se află în URL-ul paginii de profil.",
+                jellyfinServerUrl: "URL-ul serverului Jellyfin.",
+                jellyfinApiKey: "Cheie API Jellyfin.",
+                authorization: "Authorization",
+                jellyfinUserId: "ID utilizator Jellyfin.",
+                userIdFromProfile: "ID utilizator din URL-ul profilului",
+                nameDisplayFormat: "Formatul de afișare a numelui.",
+                customNameTemplate: "Șablon de nume personalizat.",
+                nameOnJellyfin: "{name} pe Jellyfin",
+                coverTypeForTv: "Tipul copertei pentru seriale TV.",
+                episodeNumberFormat: "Formatul numărului episodului.",
+                overrideRichPresenceType: "Suprascrie tipul Rich Presence.",
+                showEpisodeNameAfter: "Afișează numele episodului după informațiile sezon/episod.",
+                showPresenceWhenMedia: "Afișează prezența când media este pe pauză.",
+                hideMediaDetails: "Ascunde detaliile media.",
+                discordRichPresenceFor: "Rich Presence Discord pentru Gensokyo Radio. Activează și ascultă!",
+                refreshIntervalInSeconds: "Interval de reîmprospătare în secunde.",
+                showWhatYouRe3: "Arată ce asculți prin Navidrome.",
+                navidromeServerUrlMust: "URL-ul serverului Navidrome (trebuie să fie un domeniu public, ex. https://navidrome.example.com).",
+                navidromeUsername: "Numele de utilizator Navidrome.",
+                navidromePassword: "Parola Navidrome.",
+                optionalDiscordApplicationClient: "ID client opțional al aplicației Discord.",
+                howToFetchAlbum: "Cum se preiau copertele albumelor.",
+                optionalProvideYourOwn: "Opțional: furnizează propria cheie API Last.fm (rămâne implicită dacă e goală).",
+                showNavidromeLogoIn: "Afișează logoul Navidrome în dreapta jos a copertei.",
+                showAlbumNameIn: "Afișează numele albumului în prezență.",
+                whichTypeOfActivity: "Ce tip de activitate să fie afișat.",
+                showTheStateDetails: "Afișează conținutul liniei de stare / detalii în lista de membri",
+                hideRichPresenceWhen: "Ascunde Rich Presence când muzica e pe pauză (în loc să afișeze un cronometru)",
+                theListeningToText: "Textul „Ascultă” (ex. {artist})",
+                navidrome: "Navidrome",
+                theMainLineShowing: "Linia principală care arată piesa redată (ex. {song})",
+                song: "{song}",
+                theLineBelowThe: "Linia de sub numele piesei (ex. {artist})",
+                artist: "{artist}",
+                theAlbumLineE: "Linia albumului (ex. {album})",
+                album: "{album}",
+                enableTabLabelsCurrenttab: "Activează prezența {{TAB_LABELS_currentTab}}.",
+                statsFmProfile: "Profil Stats.fm",
+                viewSong: "Vezi piesa",
+                showArtistName: "Afișează numele artistului",
+                showTrackName: "Afișează numele piesei",
+                enterValue: "Introdu o valoare"
+            },
+            name: "RichPresence",
+            description: "Hub unificat de Rich Presence pentru AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome și Gensokyo Radio.",
+            toast: {
+                audiobookshelfRpcIsNot: "RPC AudioBookShelf nu este configurat.",
+                jellyfinRpcIsNot: "RPC Jellyfin nu este configurat.",
+                jellyfinReturnedAnInvalid: "Jellyfin a returnat un răspuns nevalid. Cheia API poate fi greșită."
+            },
+            option: {
+                enabled: {
+                    description: "Activează serviciile Rich Presence.",
+                    label: "Activat"
+                },
+                serviceSettings: {
+                    description: "Configurația serviciului.",
+                    label: "Setările serviciului"
+                },
+                abs_enabled: {
+                    description: "Activează prezența AudioBookShelf.",
+                    label: "AudioBookShelf activat"
+                },
+                tosu_enabled: {
+                    description: "Activează prezența osu! (tosu).",
+                    label: "osu! (tosu) activat"
+                },
+                sfm_enabled: {
+                    description: "Activează prezența stats.fm.",
+                    label: "Stats.fm activat"
+                },
+                jf_enabled: {
+                    description: "Activează prezența Jellyfin.",
+                    label: "Jellyfin activat"
+                },
+                gr_enabled: {
+                    description: "Activează prezența Gensokyo Radio.",
+                    label: "Gensokyo Radio activat"
+                },
+                nd_enabled: {
+                    description: "Activează prezența Navidrome.",
+                    label: "Navidrome activat"
+                },
+                abs_serverUrl: {
+                    description: "URL-ul serverului AudioBookShelf.",
+                    label: "URL server AudioBookShelf"
+                },
+                abs_username: {
+                    description: "Numele de utilizator AudioBookShelf.",
+                    label: "Utilizator AudioBookShelf"
+                },
+                abs_password: {
+                    description: "Parola AudioBookShelf.",
+                    label: "Parolă AudioBookShelf"
+                },
+                sfm_username: {
+                    description: "Numele de utilizator Stats.fm.",
+                    label: "Utilizator Stats.fm"
+                },
+                sfm_shareUsername: {
+                    description: "Afișează linkul către profilul stats.fm.",
+                    label: "Stats.fm: partajează utilizatorul"
+                },
+                sfm_shareSong: {
+                    description: "Afișează linkul către piesă pe stats.fm.",
+                    label: "Stats.fm: partajează piesa"
+                },
+                sfm_hideWithSpotify: {
+                    description: "Ascunde prezența stats.fm dacă rulează Spotify.",
+                    label: "Stats.fm: ascunde cu Spotify"
+                },
+                sfm_hideWithExternalRPC: {
+                    description: "Ascunde prezența stats.fm dacă rulează un RPC extern.",
+                    label: "Stats.fm: ascunde la RPC extern"
+                },
+                sfm_statusName: {
+                    description: "Text de stare personalizat.",
+                    label: "Stats.fm: numele stării"
+                },
+                sfm_nameFormat: {
+                    description: "Formatul numelui.",
+                    label: "Stats.fm: formatul numelui",
+                    statusName: "Folosește nume de stare personalizat",
+                    artistFirst: "Folosește formatul „artist - piesă”",
+                    songFirst: "Folosește formatul „piesă - artist”",
+                    artistOnly: "Folosește doar numele artistului",
+                    songOnly: "Folosește doar numele piesei",
+                    albumName: "Folosește numele albumului"
+                },
+                sfm_useListeningStatus: {
+                    description: "Afișează starea de ascultare.",
+                    label: "Stats.fm: folosește starea de ascultare"
+                },
+                sfm_missingArt: {
+                    description: "Rezervă când lipsește coperta.",
+                    label: "Stats.fm: copertă lipsă",
+                    statsFmLogo: "Folosește logoul mare Stats.fm",
+                    placeholder: "Folosește un substituent generic"
+                },
+                sfm_showLogo: {
+                    description: "Afișează logoul Stats.fm lângă copertă.",
+                    label: "Stats.fm: afișează logoul"
+                },
+                sfm_alwaysHideArt: {
+                    description: "Dezactivează descărcarea copertelor.",
+                    label: "Stats.fm: ascunde mereu coperta"
+                },
+                jf_serverUrl: {
+                    description: "URL-ul serverului Jellyfin.",
+                    label: "URL server Jellyfin"
+                },
+                jf_apiKey: {
+                    description: "Cheie API Jellyfin.",
+                    label: "Cheie API Jellyfin"
+                },
+                jf_userId: {
+                    description: "ID utilizator Jellyfin.",
+                    label: "ID utilizator Jellyfin"
+                },
+                jf_nameDisplay: {
+                    description: "Formatul de afișare a numelui.",
+                    label: "Jellyfin: afișarea numelui",
+                    default: "Nume serial/film",
+                    full: "Serial - nume episod/piesă/film",
+                    custom: "Personalizat"
+                },
+                jf_customName: {
+                    description: "Șablon de nume personalizat.",
+                    label: "Jellyfin: nume personalizat"
+                },
+                jf_coverType: {
+                    description: "Tipul copertei pentru seriale TV.",
+                    label: "Jellyfin: tipul copertei",
+                    series: "Copertă serial",
+                    episode: "Copertă episod"
+                },
+                jf_episodeFormat: {
+                    description: "Formatul numărului episodului.",
+                    label: "Jellyfin: formatul episodului",
+                    long: "S01E01",
+                    fulltext: "Sezonul 1 episodul 1"
+                },
+                jf_showEpisodeName: {
+                    description: "Afișează numele episodului după informațiile sezon/episod.",
+                    label: "Jellyfin: afișează numele episodului"
+                },
+                jf_overrideType: {
+                    description: "Suprascrie tipul Rich Presence.",
+                    label: "Jellyfin: suprascrie tipul",
+                    off: "Dezactivat",
+                    listening: "Ascultă",
+                    playing: "Joacă",
+                    streaming: "Transmite",
+                    watching: "Urmărește"
+                },
+                jf_showPausedState: {
+                    description: "Afișează prezența când media este pe pauză.",
+                    label: "Jellyfin: afișează starea de pauză"
+                },
+                jf_privacyMode: {
+                    description: "Ascunde detaliile media.",
+                    label: "Jellyfin: mod confidențialitate"
+                },
+                gr_refreshInterval: {
+                    description: "Interval de reîmprospătare în secunde.",
+                    label: "Gensokyo Radio: interval de reîmprospătare"
+                },
+                nd_serverUrl: {
+                    description: "URL-ul serverului Navidrome (ex. https://navidrome.example.com)",
+                    label: "URL server Navidrome"
+                },
+                nd_username: {
+                    description: "Numele de utilizator Navidrome",
+                    label: "Utilizator Navidrome"
+                },
+                nd_password: {
+                    description: "Parola Navidrome",
+                    label: "Parolă Navidrome"
+                },
+                nd_clientId: {
+                    description: "ID client opțional al aplicației Discord",
+                    label: "Navidrome: ID client"
+                },
+                nd_showSmallImage: {
+                    description: "Afișează logoul Navidrome în dreapta jos a copertei.",
+                    label: "Navidrome: afișează imaginea mică"
+                },
+                nd_showAlbum: {
+                    description: "Afișează numele albumului în prezență.",
+                    label: "Navidrome: afișează albumul"
+                },
+                nd_albumArtMode: {
+                    description: "Cum se preiau copertele albumelor.",
+                    label: "Navidrome: modul copertei",
+                    none: "Niciunul",
+                    instance: "Instanță Navidrome (expune URL-ul serverului către Discord, fără autentificare)",
+                    lastfm: "API Last.fm (trimite metadatele piesei către Last.fm)"
+                },
+                nd_lastfmApiKey: {
+                    description: "Cheie API Last.fm opțională",
+                    label: "Navidrome: cheie API Last.fm"
+                },
+                nd_refreshInterval: {
+                    description: "Interval de reîmprospătare în secunde.",
+                    label: "Navidrome: interval de reîmprospătare"
+                },
+                nd_activityType: {
+                    description: "Ce tip de activitate",
+                    label: "Navidrome: tipul activității",
+                    listening: "Ascultă",
+                    playingFixesHiddenLines: "Joacă (repară liniile ascunse)",
+                    watching: "Urmărește"
+                },
+                nd_nameString: {
+                    description: "Șir de format pentru numele activității",
+                    label: "Navidrome: șirul numelui"
+                },
+                nd_detailsString: {
+                    description: "Șir de format pentru detaliile activității",
+                    label: "Navidrome: șirul detaliilor"
+                },
+                nd_stateString: {
+                    description: "Șir de format pentru starea activității",
+                    label: "Navidrome: șirul stării"
+                },
+                nd_largeTextString: {
+                    description: "Șir de format pentru textul mare al activității",
+                    label: "Navidrome: șirul textului mare"
+                },
+                nd_statusDisplayType: {
+                    description: "Afișează numele piesei / artistului în lista de membri",
+                    off: "Nu afișa (afișează mesajul generic de ascultare)"
+                },
+                nd_hideOnPause: {
+                    description: "Ascunde Rich Presence când muzica e pe pauză",
+                    label: "Navidrome: ascunde la pauză"
+                }
+            },
+            panel: {
+                password: "Parolă",
+                statsFmUsername: "utilizator stats.fm",
+                customStatusText: "Text de stare personalizat",
+                nameFormat: "Format nume",
+                missingArtFallback: "Rezervă la copertă lipsă",
+                showListeningStatus: "Afișează starea de ascultare",
+                showStatsFmLogo: "Afișează logoul Stats.fm",
+                showProfileLink: "Afișează linkul profilului",
+                showSongLink: "Afișează linkul piesei",
+                hideWithSpotify: "Ascunde cu Spotify",
+                hideWithExternalRpc: "Ascunde la RPC extern",
+                disableAlbumArt: "Dezactivează copertele",
+                apiKey: "Cheie API",
+                userId: "ID Utilizator",
+                nameDisplay: "Afișarea numelui",
+                customNameTemplate: "Șablon de nume personalizat",
+                coverType: "Tipul copertei",
+                episodeFormat: "Formatul episodului",
+                overridePresenceType: "Suprascrie tipul prezenței",
+                showEpisodeName: "Afișează numele episodului",
+                showWhenPaused: "Afișează la pauză",
+                privacyMode: "Mod confidențialitate",
+                refreshInterval: "Interval de reîmprospătare",
+                clientId: "ID client",
+                albumArtMode: "Modul copertei",
+                lastFmApiKey: "Cheie API Last.fm",
+                showSmallImage: "Afișează imaginea mică",
+                showAlbum: "Afișează albumul",
+                activityType: "Tipul activității",
+                statusDisplayType: "Tip afișare stare",
+                hideOnPause: "Ascunde la pauză",
+                activityNameFormat: "Formatul numelui activității",
+                detailsFormat: "Formatul detaliilor",
+                stateFormat: "Formatul stării",
+                largeTextFormat: "Formatul textului mare",
+                enabled: "Activat"
+            }
+        },
+        sedEnhanced: {
+            option: {
+                regexByDefault: {
+                    description: "Inversează indicatorul `r`: folosirea lui activează modul fără regex, iar omiterea folosește modul regex.",
+                    label: "Regex implicit"
+                }
+            },
+            name: "SedEnhanced",
+            description: "Extinde suportul rudimentar pentru `sed` al Discord."
+        },
+        showRolesInChat: {
+            option: {
+                showBots: {
+                    description: "Dacă să se afișeze cel mai înalt rol la boți.",
+                    label: "Afișează boții"
+                },
+                useRoleColor: {
+                    description: "Folosește culoarea rolului pentru pictogramă.",
+                    label: "Folosește culoarea rolului"
+                }
+            },
+            name: "ShowRolesInChat",
+            description: "Afișează cel mai înalt rol al unui utilizator lângă numele său în mesaje. Ascunde/afișează roluri anume din meniul contextual (clic dreapta).",
+            text: {
+                chatRoleActions: "Acțiuni rol în chat",
+                unhideRolesInChat: "Reafișează rolurile în chat",
+                showRoleInChat: "Afișează rolul în chat",
+                hideRoleInChat: "Ascunde rolul în chat"
+            }
+        },
+        silenceUsers: {
+            option: {
+                mutedUserIds: {
+                    description: "ID-uri de utilizator Discord separate prin virgule pentru a dezactiva ping-urile și insignele serverului.",
+                    label: "ID-uri utilizatori dezactivați"
+                }
+            },
+            name: "SilenceUsers",
+            description: "Dezactivează ping-urile @mențiune și contoarele insignelor de server de la anumiți utilizatori. Mesajele obișnuite și cele private nu sunt afectate."
+        },
+        songLink: {
+            text: {
+                showIfAvailable: "Afișează dacă e disponibil",
+                openInDesktopApp: "Deschide în aplicația desktop",
+                loadingSongLink: "Se încarcă linkul piesei...",
+                pleaseProvideAMusic: "Furnizează un link de muzică.",
+                thisWillTakeA: "Va dura un moment...",
+                noAlternativePlatformsFound: "Nu s-au găsit platforme alternative pentru acest link.",
+                failedToResolveMusic: "Nu s-a putut rezolva linkul de muzică",
+                logo: "Sigla {{name}}"
+            },
+            option: {
+                servicesSettings: {
+                    description: "setări pentru servicii",
+                    label: "Setări servicii"
+                },
+                userCountry: {
+                    description: "Țara folosită pentru căutare (cod de țară din două litere)",
+                    label: "Țara utilizatorului"
+                },
+                includeMetadata: {
+                    description: "Include titlul piesei și numele artistului ca antet.",
+                    label: "Include metadatele"
+                }
+            },
+            name: "SongLink",
+            description: "Adaugă butoane pentru servicii de streaming sub linkurile pieselor",
+            command: {
+                musiclink: "Convertește un link de muzică pentru alte platforme de streaming.",
+                url: "Link de muzică (Spotify, Deezer, YouTube, Tidal, Apple Music, SoundCloud)"
+            }
+        },
+        songSpotlight: {
+            name: "SongSpotlight",
+            description: "Arată piese pe profilul tău",
+            text: {
+                songSpotlight: "Song Spotlight",
+                explicit: "Explicit",
+                addSong: "Adaugă piesă",
+                addANewSong: "Adaugă o piesă nouă",
+                copyLink: "Copiază linkul",
+                removeSong: "Elimină piesa",
+                failedToLoad: "Încărcarea a eșuat!",
+                areYouSure: "Ești sigur?",
+                thisWillOverwriteYour: "Aceasta va suprascrie piesele tale actuale.",
+                continue: "Continuă",
+                nevermind: "Las-o baltă",
+                thisWillPermanentlyDelete: "Aceasta va șterge definitiv toate piesele tale.",
+                delete: "Șterge",
+                signInToSong: "Conectează-te la Song Spotlight",
+                songs: "Piese",
+                authorization: "Authorization",
+                importFromClipboard: "Importă din clipboard",
+                copyToClipboard: "Copiază în clipboard",
+                signOut: "Deconectare",
+                deleteSongs: "Șterge piesele",
+                more: "Mai mult",
+                editSongs: "Editează piesele",
+                copyJson: "Copiază JSON",
+                looksLikeThereS: "Se pare că aici nu e nimic!",
+                uhOhSongSpotlight: "Hopa! Song Spotlight nu s-a putut încărca. Verifică consola pentru mai multe detalii.",
+                stealSong: "Fură piesa",
+                profileSongs: "Piesele profilului",
+                notEnoughSpace: "Spațiu insuficient",
+                alreadyAdded: "Ai adăugat deja această melodie",
+                invalidLink: "Link nevalid",
+                failedToParseLink: "Nu s-a putut analiza linkul",
+                invalidUrl: "URL nevalid",
+                goAddSongs: "Ei? Ce mai aștepți? Adaugă câteva melodii în Song Spotlight-ul tău!",
+                tellUserToAddSongs: "Spune-i lui {{name}} să adauge câteva melodii în Song Spotlight!",
+                supportedServices: "Song Spotlight acceptă aceste servicii:",
+                viewSongsVia: "Îți poți vedea melodiile și prin comanda",
+                viewSongsViaSuffix: "!",
+                coverTooltipOwner: "{{sublabel}} - {{label}}",
+                coverTooltipBy: "{{label}} de {{sublabel}}",
+                lastUpdated: "Ultima actualizare",
+                save: "Salvează",
+                showMore: "Arată încă {{count}}"
+            },
+            toast: {
+                youHaveBeenSigned: "Ai fost deconectat de la Song Spotlight. Conectează-te din nou.",
+                songSpotlightError: "Song Spotlight: {{error}}",
+                successfullyAuthorized: "Autorizare reușită!",
+                failedToPlaySong: "Nu s-a putut reda previzualizarea piesei!",
+                addedSong: "Piesă adăugată!",
+                removedSong: "Piesă eliminată!",
+                noJsonInClipboard: "Nu există JSON în clipboard!",
+                invalidSongSpotlightData: "Date Song Spotlight nevalide în clipboard!",
+                oneOrMoreImported: "Una sau mai multe piese importate erau nevalide.",
+                importedSongsFromClipboard: "Piese importate din clipboard!",
+                successfullySavedSongs: "Piesele au fost salvate!",
+                successfullySignedOut: "Deconectare reușită!",
+                successfullyDeletedSongs: "Piesele au fost șterse!",
+                youDonTHave: "Nu ai suficient spațiu!",
+                uhOhThisSong: "Hopa, această piesă nu există!",
+                youAlreadyHaveThis: "Ai adăugat deja această piesă!",
+                youDonTHave2: "Tu... nu ai adăugat această piesă?",
+                fetchError: "Eroare Song Spotlight la preluarea {{path}}"
+            },
+            option: {
+                collapseSongList: {
+                    description: "Restrânge lista de piese din profiluri într-un buton care deschide un meniu separat",
+                    label: "Restrânge lista de piese"
+                },
+                profileSongsLimit: {
+                    description: "Câte piese se afișează la primul clic pe un utilizator",
+                    label: "Limita pieselor din profil"
+                },
+                previewVolume: {
+                    description: "Volumul previzualizărilor pieselor",
+                    label: "Volum previzualizare"
+                }
+            }
+        },
+        stopAutoUnread: {
+            name: "StopAutoUnread",
+            description: "Împiedică Discord să schimbe automat setarea de notificări a unui canal la „Toate mesajele”"
+        },
+        themeLibrary: {
+            text: {
+                enablePlugin: "Activează pluginul",
+                cancel: "Anulează",
+                holdOn: "Stai puțin!",
+                thisThemeRequiresThe: "Această temă necesită",
+                pluginToWorkProperly: "pluginul pentru a funcționa corect!",
+                doYouWantTo: "Vrei să-l activezi?",
+                themeInfo: "Informații temă",
+                viewSource: "Vezi sursa",
+                close: "Închide",
+                download: "Descarcă",
+                overwrite: "Suprascrie",
+                keepMyFile: "Păstrează fișierul meu",
+                copyToClipboard: "Copiază în clipboard",
+                conflict: "Conflict!",
+                themeSource: "Sursa temei",
+                aThemeWithThe: "O temă cu același nume",
+                alreadyExists: "există deja",
+                inYourThemesDirectory: "în dosarul de teme! Vrei să o suprascrii?",
+                version: "Versiune",
+                likes: "Aprecieri",
+                donate: "Donează",
+                supportServer: "Server de asistență",
+                source: "Sursă",
+                tags: "Etichete",
+                youCanSupportThe: "Poți susține autorul donând mai jos!",
+                joinDiscordServer: "Alătură-te serverului Discord",
+                viewThemeSource: "Vezi sursa temei",
+                showAll: "Afișează tot",
+                showThemes: "Afișează temele",
+                showSnippets: "Afișează fragmentele",
+                showMostLiked: "Afișează cele mai apreciate",
+                showDark: "Afișează cele întunecate",
+                showLight: "Afișează cele luminoase",
+                showEnabled: "Afișează cele activate",
+                showDisabled: "Afișează cele dezactivate",
+                searchForATheme: "Caută o temă...",
+                gettingTheLatestThemes: "Se preiau cele mai noi teme...",
+                thisWonTTake: "Nu va dura mult!",
+                failedToFetchThemes: "Nu s-au putut prelua temele",
+                couldNotFetchThe: "Nu s-a putut prelua lista de teme. Încearcă mai târziu.",
+                wantYourThemeRemoved: "Vrei ca tema ta să fie eliminată?",
+                hide: "Ascunde",
+                noThemeFound: "Nu s-a găsit nicio temă.",
+                tryNarrowingYourSearch: "Încearcă să restrângi căutarea.",
+                themeLibrary: "Bibliotecă de teme",
+                successfullyAuthorizedWithThemelibrary: "Autorizare reușită cu ThemeLibrary!",
+                failedToAuthorizeCheck: "Autorizarea a eșuat, verifică consola",
+                successfullyDeauthorizedFromThemelibrary: "Autorizarea ThemeLibrary a fost revocată!",
+                failedToDeauthorizeCheck: "Revocarea autorizării a eșuat, verifică consola",
+                themelibraryAuth: "Autentificare ThemeLibrary",
+                themeRemoval: "Eliminarea temei",
+                allThemeAuthorsAre: "Toți autorii temelor sunt creditați în informațiile temei și nicio sursă nu a fost modificată. Dacă tot vrei ca tema să fie eliminată, deschide un issue făcând clic mai jos.",
+                authorizeWithThemelibrary: "Autorizează cu ThemeLibrary",
+                copyThemelibraryToken: "Copiază token-ul ThemeLibrary",
+                deauthorizeThemelibrary: "Revocă autorizarea ThemeLibrary",
+                themeDetails: "Detalii {{name}}",
+                mostLiked: "Cele mai apreciate",
+                newestAdditions: "Cele mai noi adăugiri",
+                removeTheme: "Elimină tema",
+                addTheme: "Adaugă tema",
+                authors: "Autori",
+                author: "Autor",
+                nobodyLikedTheme: "Nimeni nu a apreciat încă această temă.",
+                nobodyLikedSnippet: "Nimeni nu a apreciat încă acest fragment.",
+                usersLikedTheme: "{{likes}} utilizatori au apreciat această temă!",
+                usersLikedSnippet: "{{likes}} utilizatori au apreciat acest fragment!",
+                openThemeLibrary: "Deschide biblioteca de teme",
+                lastUpdated: "Această temă a fost actualizată ultima dată la",
+                removalInfo: "Dacă vrei ca temele tale să fie eliminate definitiv, deschide un issue pe",
+                themes: "Teme",
+                requestRemoval: "Solicită eliminarea temei",
+                pluginSuffix: "plugin!"
+            },
+            toast: {
+                downloadedName: "{{name}} a fost descărcat!",
+                failedToDownloadName: "Nu s-a putut descărca {{name}}! (verifică consola)",
+                invalidOrExpiredInvite: "Invitație nevalidă sau expirată!",
+                copiedToClipboard: "Copiat în clipboard",
+                noUniquetokenPresentTry: "Nu există uniqueToken, încearcă mai întâi autorizarea!",
+                noTokenToCopy: "Nu există token de copiat, încearcă mai întâi autorizarea!",
+                copiedToClipboard2: "Copiat în clipboard!"
+            },
+            name: "ThemeLibrary",
+            description: "O bibliotecă de teme pentru Plexcord.",
+            option: {
+                hideWarningCard: {
+                    description: "Ascunde cardul de avertizare din partea de sus a filei bibliotecii de teme",
+                    label: "Ascunde cardul de avertizare"
+                },
+                buttons: {
+                    description: "Butoane ThemeLibrary",
+                    label: "Butoane"
+                }
+            }
+        },
+        translatePlus: {
+            name: "Translate+",
+            description: "Pluginul de traducere Plexcord, dar cu suport pentru limbi artistice!",
+            text: {
+                translate: "Traduce",
+                dismiss: "Închide",
+                translationFailedDueTo: "Traducerea a eșuat din cauza unei erori.",
+                translatedFrom: "tradus din {{lang}}"
+            },
+            option: {
+                target: {
+                    description: "Limba țintă",
+                    label: "Țintă"
+                },
+                toki: {
+                    description: "Activează Toki Pona",
+                    label: "Toki Pona"
+                },
+                sitelen: {
+                    description: "Activează Sitelen Pona",
+                    label: "Sitelen Pona"
+                },
+                shavian: {
+                    description: "Activează alfabetul Shavian",
+                    label: "Shavian"
+                }
+            }
+        },
+        triviaAI: {
+            name: "TriviaAI",
+            description: "Un plugin care te ajută să răspunzi la întrebări de trivia folosind AI.",
+            text: {
+                answerWithAi: "Răspunde cu AI",
+                enterApiKeyHere: "Introdu aici cheia API pentru endpoint-ul AI.",
+                enterSystemPrompt: "Introdu promptul de sistem.",
+                enterYourOpenaiCompatible: "Introdu aici endpoint-ul AI compatibil OpenAI.",
+                status: "Stare {{status}}"
+            },
+            option: {
+                apiKey: {
+                    description: "Cheie API.",
+                    label: "Cheie API"
+                },
+                model: {
+                    description: "Modelul AI de folosit.",
+                    label: "Model",
+                    placeholder: "ex. google/gemini-3-flash-preview, inception/mercury, openai/gpt-5.2-chat etc."
+                },
+                systemPrompt: {
+                    description: "Prompt de sistem pentru AI. Substituenți: {current_user}, {current_time}",
+                    label: "Prompt de sistem"
+                },
+                maxTokens: {
+                    description: "Numărul maxim de tokenuri în răspuns.",
+                    label: "Tokenuri maxime"
+                },
+                endpoint: {
+                    description: "Endpoint AI compatibil OpenAI.",
+                    label: "Endpoint"
+                },
+                context: {
+                    description: "Numărul de mesaje anterioare incluse drept context.",
+                    label: "Context"
+                },
+                passMessageAuthorName: {
+                    description: "Adaugă numele autorului înaintea conținutului mesajului când este trimis către AI. Poate ajuta AI-ul să distingă utilizatorii dintr-o conversație.",
+                    label: "Transmite numele autorului"
+                },
+                treatSelfAsAssistant: {
+                    description: "Când este activat, propriile mesaje vor fi tratate ca mesaje ale asistentului în context. Unele modele încep astfel să genereze fanfiction.",
+                    label: "Tratează-mă drept asistent"
+                },
+                mode: {
+                    description: "Cum să fie gestionate răspunsurile?",
+                    label: "Mod",
+                    autoreply: "Răspuns automat",
+                    chatbar: "Înlocuiește textul din bara de chat",
+                    bot: "Clyde"
+                },
+                supportImages: {
+                    description: "Trimite imaginile către AI ca context (dacă există). Nu toate modelele acceptă acest lucru.",
+                    label: "Acceptă imagini"
+                },
+                sendImagesAsBase64: {
+                    description: "Trimite imaginile către AI ca base64.",
+                    label: "Trimite imaginile ca base64"
+                }
+            },
+            toast: {
+                triviaaiApiSettingsAre: "TriviaAI: setările API sunt incomplete.",
+                errorGettingResponseFrom: "Eroare la obținerea răspunsului de la modelul AI"
+            }
+        },
+        unreadCountBadge: {
+            option: {
+                showOnMutedChannels: {
+                    description: "Afișează numărul de necitite pe canalele dezactivate",
+                    label: "Afișează pe canalele dezactivate"
+                },
+                notificationCountLimit: {
+                    description: "Afișează +99 în loc de numărul real",
+                    label: "Limita numărului de notificări"
+                }
+            },
+            name: "UnreadCountBadge",
+            description: "Afișează insigne cu numărul de mesaje necitite pe canalele din listă"
+        },
+        userPFP: {
+            toast: {
+                gifsWebpMustBe: "GIF-urile/WebP trebuie adăugate prin URL. Încarcă GIF-ul/WebP-ul pe un serviciu de găzduire a imaginilor și lipește linkul."
+            },
+            text: {
+                save: "Salvează",
+                delete: "Șterge",
+                customAvatar: "Avatar personalizat",
+                original: "Original",
+                local: "Local",
+                enterPngGifUrl: "Introdu URL-ul PNG/GIF",
+                setAvatar: "Setează avatarul",
+                usingTheSetAvatar: "Funcția de setare a avatarului este doar locală, deci doar tu vezi schimbarea.",
+                joinUserpfpServer: "Alătură-te serverului UserPFP",
+                dropHere: "Plasează aici!",
+                dragOrClick: "⬆ Trage o imagine sau dă click pentru a încărca (pentru GIF sau WebP folosește un URL)",
+                uploadedFile: "(fișier încărcat)",
+                supportHere: "Susține UserPFP aici"
+            },
+            option: {
+                overrideServerAvatars: {
+                    description: "Înlocuiește avatarele de server cu cele personalizate sau cu avatarul implicit dacă nu este setat unul personalizat.",
+                    label: "Suprascrie avatarele de server"
+                },
+                preferNitro: {
+                    description: "Ce avatar să fie folosit dacă există atât avatarul animat implicit (Nitro), cât și cel UserPFP",
+                    label: "Preferă Nitro",
+                    false: "UserPFP",
+                    true: "Nitro"
+                },
+                databaseSource: {
+                    description: "URL-ul de la care se încarcă baza de date",
+                    label: "Sursa bazei de date"
+                }
+            },
+            name: "UserPFP",
+            description: "Îți permite să setezi avatare locale statice sau animate pentru tine și alți utilizatori"
+        },
+        userpluginInstaller: {
+            toast: {
+                restartToApplyChanges: "Repornește pentru a aplica modificările!"
+            },
+            text: {
+                installError: "Eroare de instalare",
+                done: "Gata!",
+                later: "Mai târziu",
+                updateError: "Eroare de actualizare",
+                checkingForUpdates: "Se caută actualizări...",
+                loadingPlugins: "Se încarcă pluginurile...",
+                pluginUpdatesAvailable: "Actualizări de pluginuri disponibile",
+                theFollowingPluginsAre: "Următoarele pluginuri sunt învechite:",
+                youCanUpdatePlugins: "Poți actualiza pluginurile mai jos.",
+                installPlugin: "Instalează pluginul",
+                userplugininstallerNotFullyLoaded: "UserpluginInstaller nu este încărcat complet",
+                youNeedToRestart: "Trebuie să repornești pentru a încărca partea nativă :)",
+                restartNow: "Repornește acum",
+                someUserpluginsAreOut: "Unele UserPlugins sunt învechite!",
+                clickToOpenThe: "Fă clic pentru a deschide actualizatorul UserPlugin",
+                plexcordDoesNotModerate: "Plexcord nu moderează userplugin-urile și nu își asumă nicio responsabilitate pentru urmările instalării lor.",
+                onlyInstallUserpluginsFrom: "Instalează userplugin-uri doar de la dezvoltatori de încredere. O faci complet pe propriul risc.",
+                setGitPath: "Setează calea Git",
+                installHint: "Poți instala un plugin de pe GitHub, GitLab, Codeberg, git.nin0.dev sau plugins.nin0.dev lipind aici URL-ul de clonare.",
+                enableAndRestart: "Activează și repornește",
+                enableAndRefresh: "Activează și reîmprospătează",
+                tabCounts: "({{total}}, {{enabled}} activate)",
+                possiblyMore: "și posibil altele, deoarece verificarea actualizărilor nu s-a terminat. ",
+                alreadyInstalled: "Pluginul este deja instalat, actualizează-l mai jos",
+                invalidUrl: "URL invalid, citește nota de mai sus",
+                install: "Instalează",
+                restart: "Repornește",
+                refresh: "Reîmprospătează",
+                update: "Actualizează",
+                source: "Sursă",
+                support: "Asistență",
+                managePlugins: "Gestionează pluginurile",
+                uninstalledRestart: "{{name}} a fost dezinstalat. Este necesară o repornire pentru a elimina complet pluginul.",
+                uninstalledRefresh: "{{name}} a fost dezinstalat. Este necesară o reîmprospătare pentru a elimina complet pluginul.",
+                updatedRestart: "{{name}} a fost actualizat. Este necesară o repornire pentru a aplica actualizarea.",
+                updatedRefresh: "{{name}} a fost actualizat. Este necesară o reîmprospătare pentru a aplica actualizarea.",
+                installedBody: "{{name}} a fost instalat cu succes. Și acum?",
+                installedNativeBody: "{{name}} a fost instalat cu succes. Totuși, deoarece folosește funcții native, este necesară repornirea clientului. Și acum?"
+            },
+            option: {
+                allowlistedChannels: {
+                    description: "Listă de canale separate prin virgule în care să fie afișat butonul Instalează pluginul. Este afișat mereu în canalele de userplugin Plexcord",
+                    label: "Canale permise"
+                },
+                notifyIfUpdate: {
+                    description: "Afișează o notificare Plexcord dacă UserPlugins trebuie actualizate",
+                    label: "Notifică la actualizare"
+                },
+                neverNotifyForPlugins: {
+                    description: "Nu afișa niciodată notificări de actualizare pentru aceste pluginuri (le poți actualiza în continuare din fila UserPlugins)",
+                    label: "Nu notifica niciodată pentru pluginuri"
+                }
+            },
+            name: "UserpluginInstaller",
+            description: "Instalează userplugin-uri cu un simplu clic"
+        },
+        vCPanelSettings: {
+            option: {
+                title1: {
+                    label: "Titlu 1"
+                },
+                uncollapseSettingsByDefault: {
+                    description: "Extinde automat setările vocale în mod implicit",
+                    label: "Extinde setările implicit"
+                },
+                title2: {
+                    label: "Titlu 2"
+                },
+                outputVolume: {
+                    description: "Afișează un glisor pentru volumul de ieșire",
+                    label: "Volum de ieșire"
+                },
+                inputVolume: {
+                    description: "Afișează un glisor pentru volumul de intrare",
+                    label: "Volum de intrare"
+                },
+                outputDevice: {
+                    description: "Afișează un selector pentru dispozitivul de ieșire",
+                    label: "Dispozitiv de ieșire"
+                },
+                inputDevice: {
+                    description: "Afișează un selector pentru dispozitivul de intrare",
+                    label: "Dispozitiv de intrare"
+                },
+                camera: {
+                    description: "Afișează un selector de cameră",
+                    label: "Cameră"
+                },
+                title3: {
+                    label: "Titlu 3"
+                },
+                showOutputVolumeHeader: {
+                    description: "Afișează antet deasupra glisorului de volum de ieșire",
+                    label: "Afișează antetul volumului de ieșire"
+                },
+                showInputVolumeHeader: {
+                    description: "Afișează antet deasupra glisorului de volum de intrare",
+                    label: "Afișează antetul volumului de intrare"
+                },
+                showOutputDeviceHeader: {
+                    description: "Afișează antet deasupra selectorului de dispozitiv de ieșire",
+                    label: "Afișează antetul dispozitivului de ieșire"
+                },
+                showInputDeviceHeader: {
+                    description: "Afișează antet deasupra selectorului de dispozitiv de intrare",
+                    label: "Afișează antetul dispozitivului de intrare"
+                },
+                showVideoDeviceHeader: {
+                    description: "Afișează antet deasupra selectorului de cameră",
+                    label: "Afișează antetul dispozitivului video"
+                }
+            },
+            name: "VCPanelSettings",
+            description: "Controlează setările vocale direct din panoul vocal",
+            text: {
+                appearance: "Aspect",
+                settingsToShow: "Setări de afișat",
+                headersToShow: "Antete de afișat",
+                outputVolume: "Volum de ieșire",
+                inputVolume: "Volum de intrare",
+                outputDevice: "Dispozitiv de ieșire",
+                inputDevice: "Dispozitiv de intrare",
+                settings: "Setări",
+                hide: "Ascunde"
+            }
+        },
+        voiceMessageTranscriber: {
+            text: {
+                autoDetect: "Detectare automată",
+                start: "Pornește",
+                transcriptionOptions: "Opțiuni de transcriere",
+                audioLanguage: "Limba audio",
+                retry: "Reîncearcă",
+                transcriptionFailed: "Transcrierea a eșuat",
+                transcribeVoiceMessage: "Transcrie mesajul vocal",
+                close: "Închide",
+                baseRecommended: "Base (recomandat)",
+                small: "Small",
+                largeV3TurboBest: "Large v3 Turbo (cea mai bună precizie, GPU recomandat)",
+                transcribe: "Transcrie",
+                translateToEnglish: "Tradu în engleză",
+                voiceMessageTranslation: "Traducerea mesajului vocal",
+                voiceMessageTranscription: "Transcrierea mesajului vocal",
+                hideTimestamps: "Ascunde marcajele de timp",
+                showTimestamps: "Afișează marcajele de timp",
+                copied: "Copiat!",
+                copyText: "Copiază textul",
+                downloadingAudio: "Se descarcă audio...",
+                processingAudio: "Se procesează audio...",
+                loadingModel: "Se încarcă modelul...",
+                transcribing: "Se transcrie...",
+                transcription: "Transcriere",
+                transcriptionError: "Eroare de transcriere",
+                transcribingInProgress: "Transcriere în curs...",
+                initializing: "Se inițializează...",
+                workerCrashed: "Procesul de transcriere s-a blocat",
+                workerStopped: "Procesul de transcriere a fost oprit",
+                deleteCache: "Șterge toate fișierele din cache ({{size}} MB)",
+                action: "Acțiune"
+            },
+            name: "VoiceMessageTranscriber",
+            description: "Transcrieri pe dispozitiv ale mesajelor vocale, bazate pe Whisper",
+            option: {
+                embed: {
+                    description: "Afișează transcrierea direct în atașamentul mesajului vocal în loc de o fereastră.",
+                    label: "Înglobare"
+                },
+                maintainHorizontal: {
+                    description: "Păstrează dimensiunea orizontală a casetei de transcriere înglobate și extinde pe verticală.",
+                    label: "Păstrează orizontal"
+                },
+                selectedModel: {
+                    description: "Dimensiunea modelului.",
+                    onnxcommunitywhispertiny: "Tiny (cel mai rapid, precizie minimă)"
+                },
+                useGpu: {
+                    description: "Rulează modelul pe GPU (WebGPU) când este acceptat. Mult mai rapid și face utilizabile modelele mai mari. Revine la CPU dacă nu e disponibil.",
+                    label: "Folosește GPU"
+                },
+                quantized: {
+                    description: "Folosește modele cuantizate pe CPU (dimensiune mai mică, ușoară pierdere de calitate).",
+                    label: "Cuantizat"
+                },
+                deleteModalFiles: {
+                    description: "Șterge fișierele din cache din stocare.",
+                    label: "Șterge fișierele modelului"
+                }
+            }
+        },
+        voiceMessagesInBackground: {
+            name: "VoiceMessagesInBackground",
+            description: "Menține redarea mesajelor vocale între chaturi cu un mini player sincronizat.",
+            text: {
+                voiceMessagesInBackground: "Player de mesaje vocale în fundal",
+                returnToChannelname: "Înapoi la {{channelName}}",
+                voiceMessagePosition: "Poziția mesajului vocal",
+                changePlaybackSpeed: "Schimbă viteza de redare",
+                playbackSpeedSpeedTimes: "Viteză de redare de {{speed}} ori",
+                closeVoiceMessagePlayer: "Închide playerul de mesaje vocale",
+                voiceMessage: "Mesaj vocal",
+                directMessage: "Mesaj direct",
+                resume: "Reia mesajul vocal",
+                pause: "Pune pe pauză mesajul vocal"
+            }
+        },
+        webPWA: {
+            name: "WebPWA",
+            description: "Face Discord instalabil ca aplicație (PWA). Activează insignele de notificare, comenzile rapide globale și bara de titlu proprie Discord.",
+            text: {
+                activities: "Activități",
+                hopIn: "Intră",
+                status: "Stare",
+                emojis: "Emoji",
+                rooms: "Camere",
+                discord: "Discord",
+                platforms: "Platforme",
+                keybindsInfoBefore: "Sunt acceptate combinații globale personalizate Apasă pentru X. Accesează",
+                keybindsInfoAfter: "pentru a le schimba. Combinațiile Ține apăsat pentru X nu sunt acceptate."
+            }
+        },
+        "webRichPresence (arRPC)": {
+            name: "WebRichPresence (arRPC)"
+        },
+        webScreenShare: {
+            option: {
+                resolution: {
+                    description: "Rezoluție",
+                    label: "Rezoluție"
+                },
+                frameRate: {
+                    description: "Rata de cadre",
+                    label: "Rata de cadre"
+                },
+                contentHint: {
+                    description: "Indiciu de conținut",
+                    label: "Indiciu de conținut"
+                },
+                systemAudio: {
+                    description: "Dezactivează sunetul sistemului",
+                    label: "Sunetul sistemului"
+                }
+            },
+            name: "WebScreenShare",
+            description: "Adaugă un meniu de opțiuni pentru partajarea ecranului. Permite modificarea rezoluției, ratei de cadre, indiciilor de codare și sunetului sistemului.",
+            text: {
+                stream: "Stream",
+                streamMuted: "Stream dezactivat",
+                streamMode: "Mod stream",
+                muteStreamAudio: "Dezactivează sunetul streamului",
+                preventsSystemAudioFrom: "Împiedică includerea sunetului sistemului în stream.",
+                showStreamPreviews: "Afișează previzualizările streamului",
+                allowsOthersToSee: "Permite altora să vadă o previzualizare a streamului înainte de a intra.",
+                smootherVideo: "Video mai fluid",
+                cleanerText: "Text mai clar",
+                userPreset: "Presetare utilizator",
+                custom: "Personalizat",
+                gaming: "Gaming",
+                screenshare: "Partajare ecran"
+            }
+        },
+        whitelistedEmojis: {
+            option: {
+                defaultEmojis: {
+                    description: "Ascunde emoji-urile Unicode implicite din completarea automată, dacă nu sunt pe lista albă.",
+                    label: "Emoji implicite"
+                },
+                serverEmojis: {
+                    description: "Ascunde emoji-urile personalizate ale serverului din completarea automată, dacă nu sunt pe lista albă.",
+                    label: "Emoji de server"
+                },
+                disableToasts: {
+                    description: "Nu afișa notificări la adăugarea sau eliminarea emoji-urilor.",
+                    label: "Dezactivează notificările"
+                },
+                whiteListedEmojis: {
+                    description: "Emoji pe lista albă",
+                    label: "Emoji pe lista albă"
+                },
+                exportEmojis: {
+                    description: "Exportă emoji-urile",
+                    label: "Exportă emoji-urile"
+                },
+                importEmojis: {
+                    description: "Importă emoji-uri",
+                    label: "Importă emoji-uri"
+                },
+                resetEmojis: {
+                    description: "Resetează emoji-urile",
+                    label: "Resetează emoji-urile"
+                }
+            },
+            name: "WhitelistedEmojis",
+            description: "Permite dezactivarea tuturor emoji-urilor din mesaje, cu excepția unui set de pe lista albă.",
+            toast: {
+                addedLengthEmojisTo: "Au fost adăugate {{length}} emoji-uri în listă, {{length}} erau deja în listă",
+                removedLengthEmojisFrom: "Au fost eliminate {{length}} emoji-uri din listă",
+                nameIsAlreadyIn: "„{{name}}” este deja în listă",
+                addedNameToThe: "„{{name}}” a fost adăugat în listă",
+                nameIsNotIn: "„{{name}}” nu este în listă",
+                removedNameFromThe: "„{{name}}” a fost eliminat din listă",
+                successfullyExportedEmojis: "Emoji-urile au fost exportate",
+                successfullyImportedEmojis: "Emoji-urile au fost importate",
+                invalidJsonData: "Date JSON nevalide",
+                failedToImportEmojis: "Nu s-au putut importa emoji-urile: {{err}}",
+                resetEmojis: "Emoji-urile au fost resetate"
+            },
+            text: {
+                areYouSure: "Ești sigur?",
+                thisWillOverwriteYour: "Aceasta va suprascrie lista albă actuală.",
+                import: "Importă",
+                cancel: "Anulează",
+                thisWillRemoveAll: "Aceasta va elimina toate emoji-urile din lista albă.",
+                reset: "Resetează",
+                addAllGuildEmojis: "Adaugă toate emoji-urile serverului",
+                removeAllGuildEmojis: "Elimină toate emoji-urile serverului",
+                noEmojisInThe: "Nu există emoji-uri pe lista albă.",
+                removeAll: "Elimină tot",
+                removeFromWhitelist: "Elimină din lista albă",
+                addToWhitelist: "Adaugă în lista albă",
+                defaultEmojis: "Emoji implicite",
+                guildEmojis: "Emoji din {{name}}",
+                guildFallback: "Server {{id}}",
+                whitelistedEmojis: "Emoji din lista albă",
+                remove: "Elimină"
+            }
+        },
+        wigglyText: {
+            option: {
+                intensity: {
+                    description: "Intensitatea animației în px",
+                    label: "Intensitate"
+                }
+            },
+            name: "WigglyText",
+            description: "Adaugă o nouă formatare markdown care face textul să se legene.",
+            text: {
+                leftAndRight: "stânga și dreapta",
+                byTyping: "tastând",
+                upAndDown: "sus și jos",
+                inACircle: "în cerc",
+                youCanMakeTextWiggle: "Poți face textul să se legene astfel:"
+            }
+        },
+        fixDiscordCss: {
+            description: "Remediază întârzierea CSS din Discord"
+        },
+        directFileDownload: {
+            name: "DirectFileDownload",
+            description: "Descarcă fișierele direct din Discord în loc să le deschidă în browser"
+        },
+        githubRepos: {
+            text: {
+                failedToFetchRepositories: "Nu s-au putut obține depozitele",
+                personal: "Personal",
+                unknown: "Necunoscut",
+                sortedByCount: "Sortat după numărul de depozite. Click pentru sortare A-Z",
+                sortedAlphabetically: "Sortat A-Z. Click pentru sortare după numărul de depozite",
+                mostRepos: "Cele mai multe depozite"
+            }
         }
     }
 } as const;

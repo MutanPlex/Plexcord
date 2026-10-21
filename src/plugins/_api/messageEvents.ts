@@ -31,7 +31,7 @@ export default definePlugin({
         {
             find: "#{intl::EDIT_TEXTAREA_HELP}",
             replacement: {
-                match: /(?<=,channel:\i\}\)\.then\().+?(?=\i\.content!==this\.props\.message\.content&&\i\((.+?)\)\})/,
+                match: /(?<=,channel:\i,message:\i\}\)\.then\().+?(?=\i\.content!==this\.props\.message\.content&&\i\((.+?)\)\})/,
                 replace: (match, args) => "" +
                     `async ${match}` +
                     `if(await Plexcord.Api.MessageEvents._handlePreEdit(${args}))` +
@@ -41,10 +41,9 @@ export default definePlugin({
         {
             find: ".handleSendMessage,onResize:",
             replacement: {
-                // https://regex101.com/r/7iswuk/1
-                match: /let (\i)=\i\.\i\.parse\((\i),.+?\.getSendMessageOptions\(\{.+?\}\)?;(?=.+?(\i)\.flags=)(?<=\)\(({.+?})\)\.then.+?)/,
-                replace: (m, parsedMessage, channel, replyOptions, extra) => m +
-                    `if(await Plexcord.Api.MessageEvents._handlePreSend(${channel}.id,${parsedMessage},${extra},${replyOptions}))` +
+                match: /(?<=channel:\i\}\)\.then\()(?:async )?(\i=>.+?let (\i)=\i\.\i\.parse\((\i),.+?\.getSendMessageOptions\((\{.+?\})\),.{0,100}?\};)(?=.+?(\i)\.flags=)(?<=\)\(({.+?})\)\.then.+?)/,
+                replace: (m, restCode, parsedMessage, channel, contentOptions, options, props) => "async " + restCode +
+                    `if(await Plexcord.Api.MessageEvents._handlePreSend(${channel}.id,${parsedMessage},${options},${props},${contentOptions}))` +
                     "return{shouldClear:false,shouldRefocus:true};"
             }
         },

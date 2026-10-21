@@ -51,14 +51,14 @@ app.on("browser-window-created", (_, win) => {
             }
         });
     });
+});
 
-    RendererSettings.addChangeListener("plugins.FixSpotifyEmbeds.volume", newVolume => {
-        try {
-            cleanUpAndGetSpotifyFrames().forEach(frame =>
-                frame.executeJavaScript(`globalThis._pcVolume = ${newVolume / 100}`)
-            );
-        } catch (e) {
-            console.error("FixSpotifyEmbeds: Failed to update volume", e);
-        }
-    });
+RendererSettings.addChangeListener("plugins.FixSpotifyEmbeds.volume", newVolume => {
+    try {
+        cleanUpAndGetSpotifyFrames().forEach(frame =>
+            frame.executeJavaScript(`globalThis._pcVolume = ${newVolume / 100}`)
+        );
+    } catch (e) {
+        console.error("FixSpotifyEmbeds: Failed to update volume", e);
+    }
 });

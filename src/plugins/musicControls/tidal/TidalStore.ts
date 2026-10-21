@@ -5,6 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { plugin, t } from "@api/i18n";
+import { SYM_LAZY_CACHED } from "@utils/lazy";
 import { Logger } from "@utils/Logger";
 import { proxyLazyWebpack } from "@webpack";
 import { Flux, FluxDispatcher } from "@webpack/common";
@@ -64,10 +66,10 @@ function mapApiResponseToTrack(apiData: any): Track | null {
     if (!apiData?.track) return null;
 
     const { track } = apiData;
-    const artist = track.artist?.name || (track.artists?.[0]?.name) || "Unknown Artist";
+    const artist = track.artist?.name || (track.artists?.[0]?.name) || t(plugin.musicControls.text.unknownArtist);
 
     return {
-        name: track.title || "Unknown Title",
+        name: track.title || t(plugin.musicControls.text.unknownTitle),
         artist,
         imageSrc: apiData.coverUrl || null,
         songDuration: apiData.duration || track.duration || 0,
@@ -84,8 +86,10 @@ type Message = { type: "update"; all: boolean; fields?: any; field?: string; val
 class TidalSocket {
     public onChange: (e: Message) => void;
     public ready = false;
+    public destroyed = false;
 
     public socket: WebSocket | undefined;
+    private reconnectTimeout: ReturnType<typeof setTimeout> | undefined;
 
     constructor(onChange: typeof this.onChange) {
         this.reconnect();
@@ -93,7 +97,7 @@ class TidalSocket {
     }
 
     public reconnect() {
-        if (this.ready) return;
+        if (this.ready || this.destroyed) return;
         try {
             this.initWs();
         } catch (e) {
@@ -101,6 +105,12 @@ class TidalSocket {
             return;
         }
         this.ready = true;
+    }
+
+    public close() {
+        this.destroyed = true;
+        clearTimeout(this.reconnectTimeout);
+        this.socket?.close();
     }
 
     get routes() {
@@ -130,13 +140,13 @@ class TidalSocket {
         });
 
         this.socket.addEventListener("error", e => {
-            if (!this.ready) setTimeout(() => this.reconnect(), 5_000);
+            if (!this.ready && !this.destroyed) this.reconnectTimeout = setTimeout(() => this.reconnect(), 5_000);
             this.onChange({ type: "update", all: true, fields: { playing: false, track: null, currentTime: 0, repeatMode: 0, shuffle: false, volume: 100 } });
         });
 
         this.socket.addEventListener("close", e => {
             this.ready = false;
-            if (!this.ready) setTimeout(() => this.reconnect(), 10_000);
+            if (!this.destroyed) this.reconnectTimeout = setTimeout(() => this.reconnect(), 10_000);
             this.onChange({ type: "update", all: true, fields: { playing: false, track: null, currentTime: 0, repeatMode: 0, shuffle: false, volume: 100 } });
         });
 
@@ -267,9 +277,17 @@ export const TidalStore: ReturnType<typeof proxyLazyWebpack<ITidalStore>> = prox
             }
             return true;
         }
+
+        public destroy() {
+            this.socket.close();
+        }
     }
 
     const store = new TidalStore(FluxDispatcher);
 
     return store;
 });
+
+export function stopTidalStore() {
+    TidalStore[SYM_LAZY_CACHED]?.destroy();
+}

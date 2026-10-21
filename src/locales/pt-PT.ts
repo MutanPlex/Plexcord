@@ -46,11 +46,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         switches: {
             useQuickCss: {
                 label: "Ativar CSS Personalizado",
-                description: "Carregar CSS personalizado do editor QuickCSS. Isto permite-lhe personalizar a aparência do Discord com os seus próprios estilos."
+                description: "Aplica o teu QuickCSS configurado"
             },
             enableReactDevtools: {
                 label: "Ativar React Developer Tools",
-                description: "Ativar a extensão React Developer Tools para depurar os componentes React do Discord. Útil para o desenvolvimento de plugins."
+                description: "Útil sobretudo para programadores de plugins. Ignora se não souberes o que é"
             },
             mainWindowFrameless: {
                 label: "Desativar a Moldura da Janela Principal",
@@ -60,7 +60,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Desativar a moldura da janela",
                 description: "Remover a moldura nativa da janela para um aspeto mais limpo. Ainda pode mover a janela arrastando a área da barra de título."
             },
-            winNativeTitleBar: {
+            nativeTitleBar: {
                 label: "Usar a barra de título nativa do Windows em vez da personalizada do Discord",
                 description: "Substituir a barra de título personalizada do Discord pela barra de título padrão do Windows. Isto pode melhorar a compatibilidade com algumas ferramentas de gestão de janelas."
             },
@@ -76,7 +76,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             disableMinSize: {
                 label: "Desativar tamanho mínimo da janela",
-                description: "Permitir que a janela do Discord seja redimensionada para dimensões inferiores ao seu tamanho mínimo padrão. Útil para gestores de janelas em mosaico ou ecrãs pequenos."
+                description: "Permite redimensionar a janela para qualquer tamanho, mesmo inferior ao tamanho mínimo do Discord"
             }
         },
         quickActions: {
@@ -193,6 +193,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignore: "Ignorar - Não mostrar a notificação"
             },
         },
+        windowsMaterial: {
+            title: "Material de fundo do Windows (requer reinício)",
+            description: "Efeitos de fundo transparente do Windows. Precisa de um tema com suporte para transparência, caso contrário isto não fará nada. É necessário reiniciar após alterar esta definição.",
+            material: {
+                none: "Nenhum",
+                mica: "Mica (usa o tema do sistema + imagem de fundo do ambiente de trabalho para pintar o fundo)",
+                tabbed: "Tabbed (variante do Mica com tonalidade de fundo mais forte)",
+                acrylic: "Acrylic (desfoca a janela atrás do Discord para um fundo translúcido)"
+            }
+        },
         macVibrancy: {
             title: "Estilo de Vibrância da Janela (Requer Reinício)",
             description: "Personalize o efeito de vibrância da janela no macOS. Isto controla o estilo de desfoque e transparência da janela do Discord. As alterações requerem um reinício para surtirem efeito.",
@@ -212,6 +222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 fullscreenUI: "UI em Ecrã Inteiro (Transparente mas ligeiramente desfocado)",
                 hud: "HUD (Mais Transparente)"
             }
+        },
+        tabs: {
+            renderFailed: "Falha ao mostrar o separador {{tab}}. Se o problema persistir, tenta reinstalar com o instalador!"
         }
     },
 
@@ -270,7 +283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             discordDesktop: "App Discord Desktop",
             plextron: "App Plextron",
             web: "App Plextron e a versão Web do Discord",
-            dev: "Versão de programador do Plexcord"
+            dev: "Versão de programador do Plexcord",
+            browser: "Versão para navegador web do Plexcord"
         },
         search: {
             looking: "Está à procura de",
@@ -307,7 +321,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userplugins: "Mostrar Plugins de Utilizador",
                 api: "Mostrar Plugins de API",
                 type: "Filtrar por tipo",
-                tags: "Filtrar por etiquetas"
+                tags: "Filtrar por etiquetas",
+                favorites: "Mostrar favoritos"
             }
         },
         pluginModal: {
@@ -320,7 +335,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             enabledUser: "Plugins de Utilizador Ativados",
             totalUser: "Total de Plugins de Utilizador",
             info: "Ver mais informações",
-            source: "Ver código fonte"
+            source: "Ver código fonte",
+            favorite: "Adicionar aos favoritos - fixa-o no topo da lista de plugins",
+            unfavorite: "Remover dos favoritos"
         },
         metadata: {
             api: {
@@ -342,7 +359,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     userSettings: "Aplica patches às Definições de Utilizador do Discord para expor o seu grupo e nome.",
                     audioPlayer: "API para reproduzir ficheiros de áudio internos do Discord ou links de áudio externos.",
                     userArea: "API para adicionar botões ao painel da área de utilizador.",
-                    profileCollections: "API para adicionar coleções ao painel de perfil do utilizador, como a coleção de jogos do Discord."
+                    profileCollections: "API para adicionar coleções ao painel de perfil do utilizador, como a coleção de jogos do Discord.",
+                    profileSections: "API para adicionar secções perto da área 'Membro desde' dos painéis de perfil de utilizador.",
+                    headerBar: "API para adicionar botões à barra superior.",
+                    surfaceClasses: "API para adicionar atributos de dados semânticos do plugin e props limitadas a superfícies estáveis do layout do Discord."
                 },
                 chatButtons: {
                     context: {
@@ -389,7 +409,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             button: "Os botões dos plugins ativados aparecerão aqui."
-        }
+        },
+        invalidInput: "Entrada inválida",
+        loading: "A carregar...",
+        authorPrefix: "por"
     },
 
     patchHelper: {
@@ -474,7 +497,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             plugins: "Exportar Plugin",
             css: "Exportar QuickCSS",
             datastore: "Exportar DataStores"
-        }
+        },
+        backupFileType: "Cópia de segurança das definições do Plexcord"
     },
 
     cloud: {
@@ -640,7 +664,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         newPlugins: "{{count}} Novo(s) Plugin(s)",
         following: "Os seguintes plugins foram adicionados em atualizações recentes:",
-        more: "+{{count}} mais plugins"
+        more: "+{{count}} mais plugins",
+        error: {
+            retrieveRepo: "Não foi possível obter as informações do repositório",
+            fetchRepo: "Não foi possível buscar dados do repositório",
+            connectRepo: "Não foi possível ligar ao repositório. Verifica a tua ligação à internet."
+        }
     },
 
     csp: {
@@ -717,7 +746,8 @@ const translations: MatchStructure<typeof enTranslations> = {
         unknown: {
             title: "Desconhecido",
             author: "Autor Desconhecido",
-            theme: "Um Tema de Discord"
+            theme: "Um Tema de Discord",
+            description: "Nenhuma descrição fornecida."
         },
         required: "Os seguintes plugins são necessários, mas não estão ativados: ",
         homepage: "Página Inicial",
@@ -778,6 +808,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             failed: {
                 download: "Falha ao descarregar o tema"
             }
+        },
+        openInFolder: "Abrir na pasta",
+        fallback: {
+            author: "Autor desconhecido",
+            description: "Um tema do Discord."
         }
     },
 
@@ -834,6 +869,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         repo: "Repo",
         repoDescription: "Este é o repositório GitHub de onde o Plexcord obtém as atualizações.",
         loading: "A carregar...",
+        unknownAuthor: "Autor desconhecido"
     },
 
     components: {
@@ -849,7 +885,29 @@ const translations: MatchStructure<typeof enTranslations> = {
             message: "O editor QuickCSS ainda está aberto em segundo plano.",
             detail: "Deseja fechar o Discord de qualquer forma? Isto também fechará o editor QuickCSS.",
             cancel: "Cancelar",
-            close: "Fechar de qualquer forma"
+            close: "Fechar de qualquer forma",
+            windowTitle: "Editor QuickCSS do Plexcord"
+        },
+        messagePopover: {
+            scrollLeft: "Deslocar para a esquerda",
+            scrollRight: "Deslocar para a direita"
+        },
+        notices: {
+            error: "Erro ao exibir o aviso"
+        },
+        tray: {
+            aboutPlexcord: "Sobre o Plexcord",
+            updatePlexcord: "Atualizar Plexcord",
+            noUpdateTitle: "Nenhuma atualização disponível",
+            noUpdateBody: "Já estás a usar a versão mais recente do Plexcord.",
+            updateFailedTitle: "Falha na atualização",
+            updateFailedBody: "Não foi possível aplicar a atualização do Plexcord.",
+            updateSuccessTitle: "Atualização concluída",
+            updateSuccessBody: "A reiniciar o Plexcord para aplicar a atualização.",
+            updateErrorTitle: "Erro de atualização",
+            updateErrorBody: "Ocorreu um erro ao atualizar o Plexcord.\n\n{{error}}",
+            openSettingsFolder: "Abrir pasta de definições",
+            openThemesFolder: "Abrir pasta de temas"
         }
     },
 
@@ -918,7 +976,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             seconds: "segundos",
             ago: "atrás",
             s: "s"
-        }
+        },
+        detectLanguage: "Detetar idioma"
     },
 
     plugin: {
@@ -945,6 +1004,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             utility: "Utilitário",
             voice: "Voz"
         },
+        concatenatedComponentExtractor: {
+            name: "ConcatenatedComponentExtractor",
+            description: "Extrair componentes que foram concatenados pelo empacotador (bundler)"
+        },
+        concatenatedModules: {
+            name: "ConcatenatedModules",
+            description: "Extrair módulos que foram concatenados pelo empacotador (bundler)"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Desativa o rastreio do Discord (analytics/'science'), métricas e relatórios de erro do Sentry",
@@ -952,6 +1019,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disableAnalytics: {
                     label: "Desativar Analíticas",
                     description: "Desativa o rastreio do Discord (analytics/'science'), métricas e relatórios de erro do Sentry"
+                },
+                disableStackDumping: {
+                    description: "Imprimir um rastreio de pilha nativo na consola quando o Discord falhar. Requer reinício completo."
                 }
             }
         },
@@ -966,6 +1036,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsLocation: {
                     label: "Localização das Definições",
                     description: "Determina onde a secção de definições do Plexcord será localizada."
+                },
+                includePlexcordInfoWhenCopying: {
+                    label: "Incluir informações do Plexcord ao copiar",
+                    description: "Também copia as informações do Plexcord (Plexcord, Electron, Chromium) ao clicar nas informações de versão no canto inferior esquerdo da página de Definições"
                 }
             }
         },
@@ -983,6 +1057,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Espere um pouco!",
                     body: "Está a utilizar uma versão desatualizada do Plexcord! É provável que o seu problema já tenha sido resolvido.",
                     footer: "Por favor, atualize primeiro antes de solicitar suporte!",
+                    dismiss: "Se sabe o que está a fazer ou não pode atualizar, pode fechar este aviso.",
                     button: {
                         cancel: "Ver Atualizações",
                         confirm: "Atualizar e Reiniciar Agora",
@@ -1181,7 +1256,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Método de anonimização",
                     random: "Caracteres Aleatórios",
                     consistent: "Consistente",
-                    timestamp: "Marca Temporal (Timestamp)"
+                    timestamp: "Marca Temporal (Timestamp)",
+                    date: "Data"
                 },
                 randomisedLength: {
                     label: "Comprimento Aleatório",
@@ -1190,6 +1266,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 consistent: {
                     label: "Consistente",
                     description: "Segredo de anonimização consistente"
+                },
+                dateFormat: {
+                    description: "Formato de data (YYYY, MM, DD, HH, mm, ss, SSS são suportados)",
+                    label: "Formato de data"
                 }
             },
             using: {
@@ -1201,76 +1281,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toggle: "Alternar spoiler para os seus ficheiros (ligado por defeito)",
                 enabled: "Spoiler ativado!",
                 disabled: "Spoiler desativado!"
-            }
-        },
-        appleMusic: {
-            name: "AppleMusicRichPresence",
-            description: "Rich Presence do Discord para o seu Apple Music!",
-            about: "Para as strings de formato de atividade personalizáveis, pode usar várias strings especiais para incluir dados da faixa! {{name}} é substituído pelo nome da faixa; {{artist}} é substituído pelo(s) nome(s) do(s) artista(s); e {{album}} é substituído pelo nome do álbum.",
-            button: {
-                listen: "Ouvir no Apple Music",
-                songLink: "Ver no SongLink"
-            },
-            option: {
-                activityType: {
-                    label: "Tipo de Atividade",
-                    description: "Qual o tipo de atividade",
-                    listening: "A ouvir",
-                    playing: "A jogar"
-                },
-                statusDisplayType: {
-                    label: "Tipo de Exibição de Estado",
-                    description: "Mostrar o nome da faixa / artista na lista de membros",
-                    off: "Não mostrar (mostra mensagem genérica de 'a ouvir')",
-                    artist: "Mostrar nome do artista",
-                    track: "Mostrar nome da faixa"
-                },
-                refreshInterval: {
-                    label: "Intervalo de Atualização",
-                    description: "O intervalo entre atualizações de atividade (segundos)"
-                },
-                enableTimestamps: {
-                    label: "Ativar Marcas Temporais",
-                    description: "Se deve ou não ativar as marcas temporais"
-                },
-                enableButtons: {
-                    label: "Ativar Botões",
-                    description: "Se deve ou não ativar os botões"
-                },
-                nameString: {
-                    label: "String de Nome",
-                    description: "String de formato do nome da atividade"
-                },
-                detailsString: {
-                    label: "String de Detalhes",
-                    description: "String de formato dos detalhes da atividade"
-                },
-                stateString: {
-                    label: "String de Estado",
-                    description: "String de formato do estado da atividade"
-                },
-                largeImageType: {
-                    label: "Tipo de Imagem Grande",
-                    description: "Tipo de imagem grande dos recursos de atividade",
-                    album: "Capa do álbum",
-                    artist: "Imagem do artista",
-                    disabled: "Desativado"
-                },
-                largeTextString: {
-                    label: "String de Texto Grande",
-                    description: "String de formato do texto grande dos recursos de atividade"
-                },
-                smallImageType: {
-                    label: "Tipo de Imagem Pequena",
-                    description: "Tipo de imagem pequena dos recursos de atividade",
-                    album: "Logótipo do Apple Music",
-                    artist: "Imagem do artista",
-                    disabled: "Desativado"
-                },
-                smallTextString: {
-                    label: "String de Texto Pequena",
-                    description: "String de formato do texto pequeno dos recursos de atividade"
-                }
             }
         },
         arRpc: {
@@ -1373,6 +1383,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     left: "Esquerda",
                     right: "Direita"
                 }
+            },
+            text: {
+                smallText: "Texto pequeno",
+                largeText: "Texto grande"
             }
         },
         betterAudioPlayer: {
@@ -1405,7 +1419,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             toast: {
-                invalidColorFormat: "Formato de cor inválido para {{settingKey}}, certifique-se de que está no formato 'R, G, B' ou '#RRGGBB'"
+                invalidColorFormat: "Formato de cor inválido para {{settingKey}}, certifique-se de que está no formato 'R, G, B' ou '#RRGGBB'",
+                invalidColorFormatFor: "Formato de cor inválido para {{key}}, usa \"R, G, B\" ou \"#RRGGBB\""
             }
         },
         betterBanReasons: {
@@ -1423,7 +1438,20 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             title: "Motivos",
             placeholder: "Motivo",
-            add: "Adicionar outro motivo"
+            add: "Adicionar outro motivo",
+            duration: {
+                discordDefault: "Predefinição do Discord",
+                none: "Não eliminar nada",
+                hour1: "Última hora",
+                hours6: "Últimas 6 horas",
+                hours12: "Últimas 12 horas",
+                hours24: "Últimas 24 horas",
+                days3: "Últimos 3 dias",
+                days7: "Últimos 7 dias"
+            },
+            text: {
+                autoDeleteDuration: "Duração da eliminação automática de mensagens"
+            }
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
@@ -1485,6 +1513,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Forçar Abertura",
                     description: "Forçar a abertura de uma pasta ao mudar para um servidor dessa pasta"
                 },
+                enableNestedFolders: {
+                    label: "Ativar pastas aninhadas",
+                    description: "Permite aninhar pastas dentro de outras pastas ao arrastar"
+                },
                 keepIcons: {
                     label: "Manter Ícones",
                     description: "Manter a exibição dos ícones das guildas na barra principal quando a pasta está aberta na barra lateral do BetterFolders"
@@ -1518,6 +1550,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             render: {
                 tip: "Este convite expira em {{time}}",
                 header: "{{name}} convidou-o para {{server}}",
+                headerSelf: "Enviaste um convite para te juntares a {{server}}",
                 never: "não expira"
             }
         },
@@ -1541,7 +1574,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterRoleContext: {
             name: "BetterRoleContext",
-            description: "Adiciona opções para copiar cor do cargo / editar cargo / ver ícone do cargo ao clicar com o botão direito nos cargos do perfil",
+            description: "Adiciona opções para copiar a cor do cargo / editar o cargo / ver o ícone do cargo ao clicar com o botão direito em cargos no perfil do utilizador ou na lista de membros",
             option: {
                 roleIconFileFormat: {
                     label: "Formato de Ficheiro do Ícone de Cargo",
@@ -1551,7 +1584,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 copyColor: "Copiar Cor do Cargo",
                 editRole: "Editar Cargo",
-                viewIcon: "Ver Ícone do Cargo"
+                viewIcon: "Ver Ícone do Cargo",
+                viewMembers: "Ver membros do cargo"
+            },
+            text: {
+                roleActions: "Ações do cargo"
             }
         },
         betterRoleDot: {
@@ -1627,6 +1664,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         blockKeywords: {
             name: "BlockKeywords",
             description: "Bloqueia mensagens que contenham palavras-chave específicas, como se o utilizador estivesse bloqueado.",
+            regexHelper: {
+                title: "Assistente de Regex",
+                placeholder: "Texto para testar...",
+                noPatterns: "Nenhum padrão configurado"
+            },
             option: {
                 blockedWords: {
                     label: "Palavras Bloqueadas",
@@ -1635,6 +1677,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 useRegex: {
                     label: "Usar Regex",
                     description: "Usar cada valor como uma expressão regular ao verificar o conteúdo da mensagem (avançado)"
+                },
+                regexHelper: {
+                    label: "Assistente de Regex",
+                    description: "Teste as suas expressões regulares com uma entrada de exemplo"
                 },
                 caseSensitive: {
                     label: "Diferenciar Maiúsculas",
@@ -1778,6 +1824,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 loading: "A carregar...",
                 save: "Guardar",
                 edit: "Editar"
+            },
+            text: {
+                unknownUser: "Utilizador desconhecido"
             }
         },
         callTimer: {
@@ -2067,12 +2116,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 plusPulse: "Pulsação do Botão Mais (+)",
                 mentionGlow: "Brilho do Crachá de Menção",
                 compactExpand: "Expansão em Modo Compacto",
-                selectedBorder: "Borda Azul no Separador Selecionado",
+                selectedBorder: "Contorno de destaque do separador selecionado",
                 selectedBackground: "Cor de Fundo do Separador Selecionado",
                 tabShadows: "Efeitos de Sombra no Separador",
                 tabRepositioning: "Reposicionamento de Separadores (mudanças suaves)",
                 resizeHandle: "Desvanecimento da Pega de Redimensionamento",
-                questActivate: "Gradiente de Missão Ativa"
+                questActivate: "Gradiente de missões ativas"
             },
             bookmark: {
                 label: "Marcador",
@@ -2111,7 +2160,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 folderMenu: "Menu de Pasta de Marcadores",
                 compact: "Compacto",
                 bookmarkBar: "Barra de Marcadores",
-                openAll: "Abrir Tudo nos Marcadores",
+                openAll: "Abrir todos os marcadores",
                 openNew: "Abrir em Novo Separador",
                 close: {
                     tab: "Fechar Separador",
@@ -2190,6 +2239,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 tabWidthScale: {
                     label: "Escala de Largura do Separador",
                     description: "Escala da largura do separador (percentagem) - ajustável ao arrastar as bordas"
+                },
+                tabHeightScale: {
+                    label: "Escala de altura dei separadores",
+                    description: "Escala de altura dei separadores (percentagem)."
                 },
                 renderAllTabs: {
                     label: "Renderizar Todos os Separadores",
@@ -2398,11 +2451,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     restore: "Falha ao restaurar separadores",
                     saved: "Falha ao carregar separadores guardados"
                 }
+            },
+            text: {
+                folder: "Pasta"
             }
         },
         characterCounter: {
             name: "CharacterCounter",
-            description: "Exibe um contador de caracteres na caixa de mensagem",
+            description: "Adiciona um contador de caracteres à caixa de chat",
             option: {
                 colorEffects: {
                     label: "Efeitos de Cor",
@@ -2416,7 +2472,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         cleanChannelName: {
             name: "CleanChannelName",
-            description: "Remove todos os emojis e decorações desnecessárias dos nomes dos canais"
+            description: "Remove emojis e decorações dos nomes dos canais. Volta ao original enquanto editas o canal.",
+            option: {
+                ignoredChannels: {
+                    description: "Lista separada por vírgulas de IDs de canais a não alterar.",
+                    label: "Canais ignorados"
+                }
+            },
+            text: {
+                keepOriginalName: "Manter nome original"
+            }
         },
         clearURLs: {
             name: "ClearURLs",
@@ -2428,7 +2493,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 loading: "A carregar membros...",
                 noMembers: "Nenhum membro encontrado.",
-                unknown: "Cargo Desconhecido"
+                unknown: "Cargo Desconhecido",
+                andMore: "e mais {{count}}"
             }
         },
         clientSideBlock: {
@@ -2494,6 +2560,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     disable: "Desativar Tema Nitro",
                     reset: "Repor Cor do Tema"
                 }
+            },
+            text: {
+                dark: "Escuro",
+                light: "Claro"
             }
         },
         clipsEnhancements: {
@@ -2508,22 +2578,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     only: "Apenas quando o início ou fim do nome da atividade coincidir",
                     never: "Nunca"
                 },
-                enableScreenshotKeybind: {
-                    label: "Ativar Atalho de Captura de Ecrã",
-                    description: "Ativar a funcionalidade de atalho para captura de ecrã"
-                },
-                enableVoiceOnlyClips: {
-                    label: "Ativar Clipes Só de Voz",
-                    description: "Ativar clipes apenas de voz (áudio sem vídeo)"
-                },
-                enableAdvancedSignals: {
-                    label: "Ativar Sinais Avançados",
-                    description: "Ativar sinais de clipe avançados (gatilhos de auto-clipe)"
-                },
-                ignorePlatformRestriction: {
-                    label: "Ignorar Restrição de Plataforma",
-                    description: "Permitir Gravação Restrita por Plataforma (pode causar erros ao guardar)"
-                },
                 clipsLink: {
                     label: "Link de Clipes",
                     link: "Mude as opções de FPS e duração nas definições de Clipes!"
@@ -2536,7 +2590,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         commandPalette: {
             name: "CommandPalette",
-            description: "Permite-lhe navegar na interface com um teclado.",
+            description: "Paleta de comandos ao estilo Raycast para executar ações em qualquer lugar do Discord",
             action: {
                 command: {
                     label: "Executar Comando",
@@ -2990,7 +3044,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                             label: "Falha ao executar {{pluginName}}: {{actionLabel}}."
                         }
                     }
-                }
+                },
+                commandDeleted: "Comando eliminado.",
+                statusSetToLabel: "Estado definido como {{label}}.",
+                themeSetToLabel: "Tema definido como {{label}}.",
+                noSettingsPageWas: "Não foi indicada nenhuma página de definições.",
+                unableToOpenLabel: "Não foi possível abrir {{label_that_settings_page}}.",
+                failedToStartDependencies: "Falha ao iniciar dependências: {{join}}",
+                messageSentToUsername: "Mensagem enviada para {{username}}.",
+                enabledRestart: "{{name}} ativado. Reinicia para aplicar.",
+                disabledRestart: "{{name}} desativado. Reinicia para aplicar.",
+                enabled: "{{name}} ativado.",
+                disabled: "{{name}} desativado.",
+                errorStarting: "Erro ao iniciar {{name}}.",
+                errorStopping: "Erro ao parar {{name}}."
             },
             display: {
                 channel: {
@@ -3026,6 +3093,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 customCommands: {
                     label: "Comandos Personalizados",
                     description: "Gerir entradas personalizadas da paleta de comandos"
+                },
+                closeAfterExecute: {
+                    description: "Fechar a paleta depois de executar um comando.",
+                    label: "Fechar após executar"
                 }
             },
             template: {
@@ -3045,7 +3116,121 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Macro",
                     description: "Executar uma sequência de comandos"
                 }
-            }
+            },
+            text: {
+                insertTextInChat: "Inserir texto no chat",
+                name: "Name",
+                commandName: "Nome do comando",
+                settingsPage: "Página de definições",
+                searchSettingsPages: "Pesquisar páginas de definições...",
+                text: "Texto",
+                textToInsertInto: "Texto a inserir na caixa de chat",
+                editCommand: "Editar comando",
+                deleteCommand: "Eliminar comando",
+                createCustomCommand: "Criar comando personalizado",
+                light: "Claro",
+                ash: "Cinza",
+                dark: "Escuro",
+                onyx: "Ónix",
+                toggleMute: "Alternar silêncio",
+                toggleDeafen: "Alternar ensurdecer",
+                setStatus: "Definir estado",
+                searchStatuses: "Pesquisar estados...",
+                setLabel: "Definir {{label}}",
+                toggleTheme: "Alternar tema",
+                openServer: "Abrir servidor",
+                openChannel: "Abrir canal",
+                openDm: "Abrir MP",
+                goHome: "Ir para o início",
+                goToServer: "Ir para o servidor",
+                searchServers: "Pesquisar servidores...",
+                goToChannel: "Ir para o canal",
+                searchChannels: "Pesquisar canais...",
+                searchFriends: "Pesquisar amigos...",
+                myAccount: "A minha conta",
+                profiles: "Perfis",
+                dataPrivacy: "Dados e privacidade",
+                devices: "Dispositivos",
+                connections: "Ligações",
+                appearance: "Aspeto",
+                accessibility: "Acessibilidade",
+                voiceVideo: "Voz e vídeo",
+                chat: "Chat",
+                textImages: "Texto e imagens",
+                notifications: "Notificações",
+                keybinds: "Atalhos de teclado",
+                authorizedApps: "Aplicações autorizadas",
+                familyCenter: "Centro familiar",
+                advanced: "Avançado",
+                plexcord: "Plexcord",
+                plexcordPlugins: "Plugins do Plexcord",
+                plexcordThemes: "Temas do Plexcord",
+                plexcordUpdater: "Atualizador do Plexcord",
+                plexcordChangelog: "Registo de alterações do Plexcord",
+                openQuickcss: "Abrir QuickCSS",
+                openUpdater: "Abrir atualizador",
+                openChangelog: "Abrir registo de alterações",
+                restartDiscord: "Reiniciar o Discord",
+                managePlugins: "Gerir plugins",
+                searchPlugins: "Pesquisar plugins...",
+                sendDm: "Enviar MP",
+                recipient: "Destinatário",
+                message: "Mensagem",
+                messageContent: "Conteúdo da mensagem",
+                openPaletteHotkey: "Atalho para abrir a paleta",
+                actions: "Ações",
+                preview: "Pré-visualização",
+                openCommand: "Abrir comando",
+                copyAnswer: "Copiar resposta",
+                openDetails: "Abrir detalhes",
+                calculator: "Calculadora",
+                expression: "Expressão",
+                result: "Resultado",
+                copyExpression: "Copiar expressão",
+                pinned: "Afixado",
+                suggestions: "Sugestões",
+                setAlias: "Definir alcunha",
+                aliasForLabel: "Alcunha para {{label}}",
+                leaveEmptyToRemove: "Deixa vazio para remover",
+                command: "Comando",
+                noResults: "Sem resultados",
+                addFile: "Adicionar ficheiro",
+                saveCommand: "Guardar comando",
+                createCommand: "Criar comando",
+                nameRequired: "O nome é obrigatório.",
+                enterValidUrl: "Introduz uma URL válida.",
+                pickSettingsPage: "Escolhe uma página de definições nas sugestões.",
+                textRequired: "O texto é obrigatório.",
+                commandSaved: "Comando guardado.",
+                commandCreated: "Comando criado.",
+                editCustomCommand: "Editar comando personalizado",
+                disablePlugin: "Desativar plugin",
+                enablePlugin: "Ativar plugin",
+                pickRecipient: "Escolhe um destinatário nas sugestões.",
+                addMessageOrFile: "Adiciona uma mensagem ou um ficheiro.",
+                pressKeys: "Prima as teclas...",
+                answerCopied: "Resposta copiada para a área de transferência.",
+                calculationCopied: "Cálculo copiado para a área de transferência.",
+                unpinCommand: "Desafixar comando",
+                pinCommand: "Fixar comando",
+                saveAlias: "Guardar apelido",
+                changeHotkey: "Alterar atalho",
+                recordHotkey: "Gravar atalho",
+                pressKeyCombo: "Prima uma combinação de teclas, Backspace para limpar, Esc para cancelar",
+                searchIn: "Pesquisar em {{title}}...",
+                searchCommands: "Pesquisar comandos...",
+                somethingWentWrong: "Algo correu mal.",
+                remove: "Remover",
+                enabled: "Ativado",
+                disabled: "Desativado",
+                sectionNavigation: "Navegação",
+                sectionCustom: "Personalizado",
+                sectionPlugins: "Plugins",
+                sectionMessaging: "Mensagens",
+                current: "Atual",
+                submit: "Submeter"
+            },
+            description2: "Paleta de comandos ao estilo Raycast para executar ações em qualquer lugar do Discord"
         },
         consoleJanitor: {
             name: "ConsoleJanitor",
@@ -3115,11 +3300,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         copyProfileColors: {
             name: "CopyProfileColors",
             description: "Um plugin para copiar as cores de gradiente do perfil das pessoas para a área de transferência.",
-            copy: "Copiar Cores do Perfil",
+            copy: "Copiar cores do perfil do servidor",
             toast: {
                 noColor: "Nenhuma cor de perfil encontrada!",
                 copied: "Cores do perfil copiadas para a área de transferência!",
                 error: "Erro ao copiar cores do perfil!"
+            },
+            text: {
+                formatted: "Cor primária #{{primary}}, Cor secundária #{{secondary}}"
             }
         },
         copyStatusUrls: {
@@ -3134,8 +3322,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "CopyStickerLinks",
             description: "Adiciona a capacidade de copiar e abrir links de Autocolantes",
             context: {
-                copy: "Copiar Link",
-                open: "Abrir Link"
+                copy: "Copiar ligação do autocolante",
+                open: "Abrir ligação do autocolante"
             },
             toast: {
                 success: "Link copiado!"
@@ -3271,6 +3459,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unset: "Remover",
                 set: "Definir Novo Ícone",
                 hover: "Pode ter de passar o rato sobre a pasta após definir para que esta atualize."
+            },
+            context: {
+                changeIcon: "Alterar ícone"
             }
         },
         customIdle: {
@@ -3302,7 +3493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             error: {
                 appIdInvalid: "O ID da aplicação deve ser um número válido.",
                 notice: "Aviso",
-                sharing: "A partilha de atividade não está ativada, as pessoas não poderão ver o seu rich presence!",
+                sharing: "A partilha de atividade não está ativada, por isso as pessoas não poderão ver o teu Rich Presence personalizado!",
                 enable: "Ativar",
                 validStream: "O link de transmissão deve ser um URL válido.",
                 mustBeURL: "Deve ser um URL válido.",
@@ -3418,7 +3609,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 buttonTwoURL: {
                     label: "URL do Botão 2",
                     description: "URL do botão 2"
+                },
+                enablePresence: {
+                    description: "Se a presença deve ser mostrada",
+                    label: "Ativar presença"
                 }
+            },
+            toast: {
+                savedPresetName: "Predefinição {{name}} guardada.",
+                loadedPresetName: "Predefinição {{name}} carregada.",
+                deletedPresetSelectedpreset: "Predefinição {{selectedPreset}} eliminada."
+            },
+            text: {
+                presetName: "Nome da predefinição",
+                selectAPreset: "Seleciona uma predefinição",
+                streamLinkTwitchOr: "Ligação da transmissão (Twitch ou YouTube, apenas se o tipo de atividade for A transmitir)",
+                presets: "Predefinições",
+                save: "Guardar",
+                load: "Carregar",
+                delete: "Eliminar",
+                noSavedPresetsYet: "Ainda não há predefinições guardadas.",
+                showCustomRpc: "Mostrar RPC personalizado",
+                customRpcDisabled: "RPC personalizado desativado",
+                theEnablePresenceSetting: "A opção \"Ativar presença\" está desativada, por isso a tua presença não será mostrada. Se não foi intencional, ativa-a abaixo.",
+                activitySharingDisabled: "Partilha de atividade desativada",
+                discordDeveloperPortal: "Portal de Programadores do Discord",
+                imgur: "Imgur",
+                enableActivitySharing: "Ativar partilha de atividade"
             }
         },
         customSounds: {
@@ -3460,7 +3677,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 default: "Padrão",
                 custom: "Personalizado",
-                select: "Selecione um ficheiro..."
+                select: "Selecione um ficheiro...",
+                overrides: {
+                    label: "Substituições"
+                },
+                soundpack: {
+                    label: "Pacote de sons",
+                    description: "Pacote de sons a utilizar em vez do definido no Discord.",
+                    default: "Predefinição do Discord"
+                }
             },
             type: {
                 activityEnd: "Fim de Atividade",
@@ -3534,6 +3759,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 calendar: "permite formatação dinâmica como",
                 today: "Hoje",
                 yesterday: "Ontem",
+                or: "ou",
                 relative: "mostra tempos como",
                 relativeTime: "há 4 horas",
                 preview: "Pré-visualização",
@@ -3627,6 +3853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 dearrowed: "Este vídeo incorporado foi processado pelo DeArrow; clique para restaurar",
                 dearrow: "Clique para processar com DeArrow"
+            },
+            text: {
+                toggleDearrow: "Alternar Dearrow"
             }
         },
         declutter: {
@@ -3635,6 +3864,12 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 userProfileHeader: {
                     label: "Perfil de Utilizador"
+                },
+                removeAvatarDecoration: {
+                    label: "Remover decoração de avatar",
+                    description: "Remover decorações de avatar. Fica desativado se o Decor estiver ativado.",
+                    alertBody: "A remoção de decoração de avatar foi desativada para evitar conflitos com o plugin Decor.",
+                    ok: "OK"
                 },
                 removeNameplate: {
                     label: "Remover Placa de Identificação",
@@ -3693,7 +3928,27 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeButtonTooltips: {
                     label: "Remover Dicas de Botões",
                     description: "Remove as dicas (tooltips) dos botões."
+                },
+                removeProfileFrame: {
+                    description: "Remove molduras de perfil.",
+                    label: "Remover moldura de perfil"
+                },
+                removeDisplayNameStyles: {
+                    description: "Remove nomes de apresentação animados/estilizados da lista de membros.",
+                    label: "Remover estilos de nome de apresentação"
+                },
+                removeLibraryAboveDms: {
+                    description: "Remove a biblioteca acima da lista de MPs.",
+                    label: "Remover biblioteca acima das MPs"
+                },
+                removeFamilyCenterAboveDms: {
+                    description: "Remove o centro familiar acima da lista de MPs.",
+                    label: "Remover centro familiar acima das MPs"
                 }
+            },
+            text: {
+                discordAlreadyHasA: "O Discord já tem uma opção integrada de estilo do nome de utilizador em",
+                accessibilitySettings: "definições de acessibilidade."
             }
         },
         decodeBase64: {
@@ -3800,6 +4055,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hold: "Espere um pouco",
                 suspended: "Ao submeter uma decoração, concorda com as {{guidelines}}. Não ler estas diretrizes pode resultar na suspensão da sua conta para criar mais decorações no futuro.",
                 guidelines: "diretrizes"
+            },
+            toast: {
+                failedToAuthorizeMessage: "Falha ao autorizar: {{message}}"
+            },
+            text: {
+                removeDecoration: "Remover decoração do Decor",
+                decoration: "Decoração do Decor",
+                none: "Nenhuma",
+                decorationFile: "Ficheiro de decoração"
             }
         },
         demonstration: {
@@ -3861,6 +4125,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                 starting: "Erro ao iniciar o plugin {{plugin}}",
                 noMessage: "Sem Mensagem de Erro",
                 noReason: "Nenhuma Razão Fornecida"
+            },
+            text: {
+                reconnect: "Voltar a ligar",
+                loadingLazyModules: "A carregar módulos lazy, reiniciar pode causar erros",
+                loadedLazyModules: "Todos os módulos lazy foram carregados",
+                failedLazyModules: "Falha ao carregar módulos lazy, verifique a consola",
+                ok: "OK"
             }
         },
         disableCallIdle: {
@@ -3919,6 +4190,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Variáveis Diversas",
                     newline: "Carácter de nova linha"
                 }
+            },
+            text: {
+                notSupported: "Não suportado",
+                devBuild: "Versão de desenvolvimento",
+                standalone: "Independente"
             }
         },
         dontFilterMe: {
@@ -3935,6 +4211,23 @@ const translations: MatchStructure<typeof enTranslations> = {
         dontRoundMyTimestamps: {
             name: "DontRoundMyTimestamps",
             description: "Arredonda sempre os carimbos de data/hora relativos para baixo, para que 7.6a se torne 7a em vez de 8a"
+        },
+        downloadAllAttachments: {
+            name: "DownloadAllAttachments",
+            description: "Adiciona um botão no menu da mensagem para transferir todos os anexos de uma vez.",
+            button: "Transferir todos os anexos",
+            toast: {
+                success: "{{count}} anexo(s) transferido(s).",
+                partial: "{{succeeded}} de {{total}} anexos transferidos. {{failed}} falharam.",
+                downloadedPluralizeSucceededAttachment: "{{pluralize_succeeded_attachment}} transferido(s).",
+                downloadedSucceededOfLength: "{{succeeded}} de {{length}} anexos transferidos. {{failed}} falharam."
+            },
+            option: {
+                downloadAllFileTypes: {
+                    description: "Transferir também anexos que não sejam multimédia. Ativa apenas se confiares no que te enviam.",
+                    label: "Transferir todos os tipos de ficheiro"
+                }
+            }
         },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
@@ -3999,7 +4292,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     created: "Convite criado.",
                     unable: "Não foi possível criar o convite.",
                     noChannel: "Nenhum canal disponível para convites.",
-                }
+                },
+                noReusableInvite: "Nenhum convite reutilizável disponível.",
+                unableToReuseInvite: "Não foi possível reutilizar o convite."
             },
             ghost: {
                 user: "Utilizador",
@@ -4110,6 +4405,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Menu Dev na Barra de Ferramentas",
                     description: "Altera o botão de Ajuda (?) na barra de ferramentas para o menu de programador do Discord"
                 }
+            },
+            text: {
+                searchExperiments: "Pesquisar experiências"
             }
         },
         exportMessages: {
@@ -4193,6 +4491,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportAll: "Exportar todas as mensagens de {{user}}",
                 user: "Utilizador",
                 exportAllChannel: "Exportar Todas as Mensagens do Canal"
+            },
+            text: {
+                unknownError: "Erro desconhecido"
             }
         },
         expressionCloner: {
@@ -4206,11 +4507,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 success: "Clonado {{name}} com sucesso para {{guild}}!",
                 yourServer: "o seu servidor",
                 failed: "Falha ao clonar: ",
-                console: "Algo correu mal (verifique a consola!)"
+                console: "Algo correu mal (verifique a consola!)",
+                successfullyClonedNameTo: "{{name}} clonado com sucesso para {{name_your_server}}!"
             },
             context: {
                 clone: "Clonar {{type}}",
                 cloneName: "Clonar {{data}}"
+            },
+            text: {
+                yourServer: "o teu servidor",
+                cloneTo: "Clonar para {{name}}",
+                emoji: "Emoji",
+                sticker: "Autocolante"
             }
         },
         f8break: {
@@ -4413,36 +4721,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removed: "Pseudónimo removido: {{alias}}",
                 failedRemove: "Falha ao remover pseudónimo",
                 duplicate: "Pseudónimo duplicado",
-                failedSave: "Falha ao guardar pseudónimo."
+                failedSave: "Falha ao guardar pseudónimo.",
+                removedAliasAlias: "Alcunha :{{alias}}: removida",
+                aliasSetForGetemojidisplayname: "Alcunha definida para {{getEmojiDisplayName_ref}}."
             },
             button: {
                 edit: "Editar pseudónimo",
                 set: "Definir pseudónimo"
+            },
+            text: {
+                remove: "Remover",
+                noAliasesSetYet: "Ainda não há alcunhas definidas.",
+                aliasRequired: "O apelido é obrigatório.",
+                aliasInvalid: "O apelido deve ter de 2 a 32 caracteres e usar apenas letras minúsculas, números ou sublinhados."
             }
         },
-        favoriteGifSearch: {
-            name: "FavouriteGifSearch",
-            description: "Adiciona uma barra de pesquisa aos GIFs favoritos.",
-            placeholder: "Pesquisar GIFs favoritos",
-            option: {
-                searchOption: {
-                    label: "Opção de Pesquisa",
-                    description: "A parte do URL que deseja pesquisar",
-                    url: "URL Completo",
-                    path: "Apenas o Caminho (/algumgif.gif)",
-                    hostandpath: "Host e Caminho (tenor.com algumgif.gif)"
-                }
-            }
-        },
-        favouriteAnything: {
-            name: "FavouriteAnything",
+        favoriteAnything: {
+            name: "FavoriteAnything",
             description: "Permite marcar qualquer imagem como favorita",
             noFiles: "Nenhum ficheiro corresponde à sua pesquisa.",
             searchPlaceholder: "Pesquisar ficheiros",
             media: "Média",
             demoText: "Clique na estrela para adicionar um ficheiro aos favoritos.\nOs ficheiros favoritos aparecerão aqui!",
             fetchError: "Não foi possível obter {filename}",
-            uploadError: "Não foi possível carregar {filename}"
+            uploadError: "Não foi possível carregar {filename}",
+            text: {
+                clickTheStarTo: "Clica na estrela para adicionar um ficheiro aos favoritos.",
+                favoriteFilesWillShow: "Os ficheiros favoritos aparecerão aqui!"
+            },
+            option: {
+                localThumbnails: {
+                    description: "Gerar miniaturas de ficheiros localmente em vez de usar um serviço externo (placeholder.nin0.dev). Não é compatível com telemóvel. Alterar esta opção não afeta os favoritos existentes.",
+                    label: "Miniaturas locais"
+                }
+            }
         },
         fileDownloadButton: {
             name: "FileDownloadButton",
@@ -4457,7 +4769,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 navigate: "Use o painel inferior para navegar entre respostas.",
                 container: "Não foi possível encontrar o elemento contentor.",
-                couldntFind: "Não foi possível encontrar a mensagem de resposta."
+                couldntFind: "Não foi possível encontrar uma resposta."
             },
             option: {
                 includePings: {
@@ -4545,6 +4857,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 channelFull: {
                     label: "Canal Cheio",
                     description: "Tenta movê-lo para o canal quando este deixar de estar cheio"
+                },
+                onlyWhenInVoice: {
+                    label: "Apenas em voz",
+                    description: "Seguir o utilizador apenas quando estiveres num canal de voz"
                 }
             },
             toast: {
@@ -4589,25 +4905,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     previewText: "A matilha de raposas famintas saltou sobre o cão preguiçoso",
                     authors: "Por {{authors}}"
                 }
+            },
+            text: {
+                currentFont: "Tipo de letra atual:",
+                resetFont: "Repor tipo de letra"
             }
         },
         forceOwnerCrown: {
             name: "ForceOwnerCrown",
             description: "Força a coroa de dono ao lado dos nomes de utilizador, mesmo em servidores grandes."
-        },
-        forwardAnywhere: {
-            name: "ForwardAnywhere",
-            description: "Se uma mensagem encaminhada falhar, envia-a como uma mensagem normal; também permite encaminhamentos NSFW",
-            option: {
-                forwardPreface: {
-                    label: "Prefácio de Encaminhamento",
-                    description: "O que deve anteceder o conteúdo encaminhado"
-                }
-            },
-            context: {
-                attachments: "Anexos",
-                forwarded: "Encaminhado de"
-            }
         },
         freaky: {
             name: "Freaky",
@@ -4707,12 +5013,17 @@ const translations: MatchStructure<typeof enTranslations> = {
                     name: "Melhores Amigos",
                     description: "Como é que conseguem isto??? (5 anos)"
                 }
+            },
+            option: {
+                showFriendsInChat: {
+                    description: "Mostrar um ícone de amigo nas mensagens de amigos.",
+                    label: "Mostrar amigos no chat"
+                }
+            },
+            text: {
+                friend: "Amigo",
+                rankIcon: "Ícone de classificação"
             }
-        },
-        friendsSince: {
-            name: "FriendsSince",
-            description: "Mostra quando se tornou amigo de alguém na janela flutuante do utilizador",
-            section: "Amigos desde"
         },
         friendTags: {
             name: "FriendTags",
@@ -4748,7 +5059,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
-            description: "Adiciona um interruptor ao popout de utilizador para mostrar/ocultar a sua atividade de jogo",
+            description: "Adiciona um botão junto aos botões de microfone e ensurdecer para alternar a atividade de jogo. Clica com o botão direito para alternar a atividade do Spotify.",
             tooltip: "Alternar Atividade de Jogo",
             gameActivity: {
                 enabled: "Atividade de Jogo Ativada",
@@ -4765,6 +5076,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     panel: "Ao lado de Silenciar/Ensurdecer",
                     toolbox: "Plexcord Toolbox"
                 }
+            },
+            text: {
+                disableGameActivity: "Desativar atividade de jogo",
+                enableGameActivity: "Ativar atividade de jogo",
+                shareSpotifyActivity: "Partilhar atividade do Spotify",
+                shareSpotifyActivityAccount: "Partilhar atividade do Spotify ({{name}})"
             }
         },
         ghosted: {
@@ -4912,7 +5229,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "Link da imagem copiado!",
                 urlCopied: "URL copiado!",
                 already: "Essa coleção já existe",
-                alreadyCollection: "Esse GIF já está nessa coleção"
+                alreadyCollection: "Este GIF já está na coleção",
+                collectionsImportedSuccessfully: "Coleções importadas com sucesso.",
+                failedToImportCollections: "Falha ao importar coleções: {{String_err}}"
             },
             modal: {
                 create: {
@@ -4948,6 +5267,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     remove: "Remover",
                     cancel: "Agora não"
                 }
+            },
+            text: {
+                gifPickerCategoryOptions: "Opções de categoria do seletor de GIF",
+                gifCollections: "Coleções de GIFs",
+                unknown: "Desconhecido"
             }
         },
         gifPaste: {
@@ -4959,7 +5283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Adiciona um comando para enviar um GIF aleatório dos seus favoritos, com uma probabilidade de 1 em 10 de mencionar o dono do servidor",
             command: {
                 gifRoulette: {
-                    description: "Tente a sua sorte e envie um GIF"
+                    description: "Tente a sua sorte e envie um GIF",
+                    restricted: "Este comando está restrito neste servidor."
                 }
             },
             option: {
@@ -4994,7 +5319,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 only: "A mostrar apenas os principais {{length}}/{{total}}"
             },
             modal: {
-                title: "Repositórios do GitHub de {{user}}",
+                title: "Repositórios do GitHub de {{username}}",
                 repository: "Repositório",
                 description: "Descrição",
                 language: "Linguagem",
@@ -5101,9 +5426,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         hideMessages: {
             name: "HideMessages",
-            description: "Um plugin para ocultar mensagens temporariamente até reiniciar.",
+            description: "Oculta temporariamente mensagens e DMs até reiniciar.",
             button: {
-                hide: "Ocultar"
+                hide: "Ocultar",
+                hideDm: "Ocultar DM",
+                unhideDm: "Mostrar DM"
+            },
+            toggle: {
+                none: "Nenhuma DM oculta",
+                hide: "Ocultar DMs ocultas",
+                show: "Mostrar DMs ocultas"
             },
             option: {
                 hidePopoverButton: {
@@ -5111,6 +5443,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Oculta o botão de ocultar no menu flutuante da mensagem."
                 }
             }
+        },
+        hideMutedVoiceIndicator: {
+            name: "HideMutedVoiceIndicator",
+            description: "Oculta o indicador de voz na lista de servidores quando os únicos canais de voz ativos estão silenciados"
         },
         hideServers: {
             name: "HideServers",
@@ -5231,10 +5567,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 refreshed: "Avatares atualizados com sucesso.",
                 deletedAll: "Todas as notas eliminadas com sucesso.",
                 imported: "Notas importadas com sucesso.",
-                invalid: "Falha ao importar notas."
+                invalid: "Falha ao importar notas.",
+                invalidJson: "JSON inválido"
             },
             toolbox: {
                 action: "Abrir Notas"
+            },
+            text: {
+                holyNotes: "Holy Notes",
+                noteTag: "NOTA"
             }
         },
         homeTyping: {
@@ -5342,7 +5683,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 ignoreListening: {
                     label: "Ignorar 'A Ouvir'",
-                    description: "Ignora todas as atividades de audição (geralmente Spotify)"
+                    description: "Ignorar todas as atividades de audição (geralmente do Spotify)"
                 },
                 ignoreWatching: {
                     label: "Ignorar 'A Ver'",
@@ -5355,6 +5696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoredActivities: {
                     label: "Atividades Ignoradas"
                 }
+            },
+            text: {
+                enableActivity: "Ativar atividade",
+                disableActivity: "Desativar atividade"
             }
         },
         ignoreCalls: {
@@ -5440,6 +5785,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 sizeHTML: "Tamanho",
                 dimensions: "Dimensões",
                 filename: "Nome do Ficheiro"
+            },
+            text: {
+                bytes: "Bytes"
             }
         },
         imgToGif: {
@@ -5558,6 +5906,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toast: "Partilha Instantânea {{state}}",
                 enabled: "Ativada",
                 disabled: "Desativada"
+            },
+            toast: {
+                instantScreenshareDisabled: "Partilha de ecrã instantânea {{disabled}}"
+            },
+            text: {
+                instantScreenshare: "Instant Screenshare"
             }
         },
         invisibleChat: {
@@ -5680,6 +6034,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     resetData: "Repor Armazenamento",
                     sure: "Tem a certeza?"
                 }
+            },
+            text: {
+                serverOptions: "Opções do servidor",
+                copyServerId: "Copiar ID do servidor",
+                serverIdCopied: "ID do servidor copiado para a área de transferência"
             }
         },
         jumpTo: {
@@ -5746,6 +6105,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Palavras-Chave",
                     description: "Gerir palavras-chave"
                 }
+            },
+            text: {
+                keywordEntryI1: "Entrada de palavra-chave {{i_1}}",
+                listPriorityAdvanced: "Prioridade das listas (avançado)",
+                whichListToPrioritize: "Que lista priorizar caso uma mensagem acione ambas as listas",
+                ifYouAreNot: "Se não tiveres a certeza, na maioria dos casos costuma ficar em Lista negra"
             }
         },
         lastOnline: {
@@ -5819,10 +6184,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     listenbrainzLogo: "Usar logo grande do ListenBrainz",
                     generic: "Usar imagem genérica"
                 },
+                showAlbumCover: {
+                    label: "Mostrar capa do álbum",
+                    description: "Mostrar capa do álbum. Desativar isto irá mostrar uma imagem genérica. Útil se a tua música tiver capas inadequada"
+                },
                 useLogo: {
                     label: "Usar Logo",
                     description: "Mostrar logo do ListenBrainz sobre a arte do álbum"
                 }
+            },
+            button: {
+                profile: "Perfil do ListenBrainz",
+                viewSong: "Ver música"
             }
         },
         loadingQuotes: {
@@ -5849,6 +6222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Delimitador de Frases",
                     description: "Carácter usado para separar frases"
                 }
+            },
+            text: {
+                allQuotesDisabled: "Desativaste mesmo todas as frases de carregamento? Que palhaço..."
             }
         },
         loginWithQR: {
@@ -5867,7 +6243,26 @@ const translations: MatchStructure<typeof enTranslations> = {
             stopScanning: "Parar Leitura",
             usingWebcam: "Ler usando webcam",
             dragDrop: "Arraste uma imagem para aqui, ou clique para selecionar",
-            orPaste: "Ou cole uma imagem da área de transferência!"
+            orPaste: "Ou cole uma imagem da área de transferência!",
+            verifyLogin: "Verificar início de sessão",
+            text: {
+                scanQrCode: "Digitalizar código QR"
+            }
+        },
+        markdownTables: {
+            name: "MarkdownTables",
+            description: "Apresenta tabelas markdown ao estilo do GitHub nas mensagens do Discord.",
+            toolbar: {
+                label: "Vista de tabela markdown",
+                table: "Tabela",
+                raw: "Bruto"
+            },
+            option: {
+                hideToggle: {
+                    label: "Ocultar alternador",
+                    description: "Oculta o alternador Tabela/Bruto e mostra sempre as tabelas apresentadas."
+                }
+            }
         },
         mediaPlaybackSpeed: {
             name: "MediaPlaybackSpeed",
@@ -5893,7 +6288,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         memberCount: {
             name: "MemberCount",
-            description: "Mostra o número de membros online, total e em voz — na lista de membros e na dica do servidor.",
+            description: "Mostra o número de membros online, total de membros e utilizadores em canais de voz do servidor - na lista de membros e na dica.",
             option: {
                 toolTip: {
                     label: "Dica (Tooltip)",
@@ -5910,7 +6305,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             onlineThisChannel: "{{formattedOnlineCount}} online neste canal",
             totalMembers: "{{formattedTotalCount}} membros no servidor",
-            totalVoice: "{{formattedVoiceCount}} membros em voz"
+            totalVoice: "{{formattedVoiceCount}} membros em voz",
+            tooltip: {
+                total: "{{count}} membros no total no servidor"
+            }
         },
         mentionAvatars: {
             name: "MentionAvatars",
@@ -6057,7 +6455,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                 messageContent: "Conteúdo da mensagem copiado!",
                 userId: "ID do utilizador copiado!"
             },
-            linkCopied: "Link copiado!"
+            linkCopied: "Link copiado!",
+            text: {
+                shift: "Shift",
+                ctrl: "Ctrl",
+                alt: "Alt",
+                backspace: "Backspace",
+                pickEmoji: "Escolher emoji"
+            },
+            emojiSetting: {
+                pick: "Escolher emoji",
+                selectMain: "Selecionar emoji para reações",
+                selectAdditional: "Selecionar emojis adicionais",
+                additionalPlaceholder: "separados por vírgula/quebra de linha, máx. {{max}}"
+            },
+            toast: {
+                cannotReact: "Não é possível reagir: permissões ausentes",
+                linkCopied: "Link copiado!"
+            }
         },
         messageColors: {
             name: "MessageColors",
@@ -6212,7 +6627,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         messageLogger: {
             name: "MessageLogger",
             description: "Regista temporariamente mensagens eliminadas e editadas.",
-            removeMessage: "Remover Histórico de Mensagens",
+            removeMessage: "Limpar histórico da mensagem",
             removeMessageTemporary: "Remover Mensagem (Temporário)",
             clearMessageLog: "Limpar Registo de Mensagens",
             showDiff: "Mostrar diferenças",
@@ -6276,7 +6691,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                 separatedDiffs: {
                     label: "Diferenças Separadas",
                     description: "Separar adições e remoções nas diferenças para uma leitura mais clara"
+                },
+                logDeletedAttachments: {
+                    description: "Se deve registar anexos eliminados",
+                    label: "Registar anexos eliminados"
                 }
+            },
+            text: {
+                clearHistory: "Limpar histórico",
+                toggleDeletedHighlight: "Alternar destaque de eliminadas",
+                enableDiffView: "Ativar visualização de diferenças",
+                disableDiffView: "Desativar visualização de diferenças",
+                noDeletedMessages: "Nenhuma mensagem excluída",
+                deletedMessageSuffix: " mensagem excluída",
+                deletedMessagesSuffix: " mensagens excluídas"
             }
         },
         messageLoggerEnhanced: {
@@ -6478,11 +6906,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 whitelistedIds: {
                     label: "IDs na Lista Branca",
-                    description: "IDs de servidores, canais ou utilizadores na lista branca."
+                    description: "IDs de servidor, canal ou utilizador a mostrar sempre no registo de mensagens."
                 },
                 blacklistedIds: {
                     label: "IDs na Lista Negra",
-                    description: "IDs de servidores, canais ou utilizadores na lista negra."
+                    description: "IDs de servidor, canal ou utilizador a nunca mostrar no registo de mensagens."
                 },
                 imageCacheDir: {
                     label: "Diretório de Cache de Imagens",
@@ -6520,6 +6948,25 @@ const translations: MatchStructure<typeof enTranslations> = {
                     confirmText: "Limpar",
                     cancel: "Cancelar"
                 }
+            },
+            toast: {
+                clearedLogs: "Registos limpos",
+                failedToClearLogs: "Falha ao limpar registos",
+                failedToRemoveMessage: "Falha ao remover a mensagem. Verifica a consola para mais detalhes.",
+                noMessagesFoundIn: "Nenhuma mensagem encontrada no ficheiro de registo",
+                successfullyImportedCountLogs: "{{count}} registos importados com sucesso",
+                successfullyExportedLogs: "Registos exportados com sucesso",
+                successfullyExportedCountLogs: "{{count}} registos exportados com sucesso",
+                errorExportingLogsCheck: "Erro ao exportar registos. Verifica a consola para mais informações"
+            },
+            text: {
+                jsonFile: "Ficheiro JSON",
+                clearLogs: "Limpar registos",
+                clearingLogs: "A limpar registos...",
+                messageLogger: "Message Logger",
+                importLogs: "Importar registos",
+                logs: "Registos",
+                loadingTabLogs: "A carregar registos: {{tab}}..."
             }
         },
         messageNotifier: {
@@ -6740,7 +7187,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Redimensiona os botões para 75% da escala original, enquanto aumenta o emoji interno para 125%. Recomendado um mínimo de 5 colunas"
                 },
                 scroll: {
-                    label: "Scroll",
+                    label: "Deslocar",
                     description: "Ativar o scroll na lista de emojis"
                 }
             }
@@ -6913,13 +7360,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     LRCLIB: "LRCLIB"
                 },
                 spotifyLyricsApiUrl: {
-                    label: "URL da API de Letras do Spotify",
-                    description: "URL base da API de letras do Spotify."
+                    label: "URL base da API de letras do Spotify",
+                    description: "URL base de instância personalizada (por exemplo: http://localhost:8080)."
                 },
                 translateTo: {
                     label: "Traduzir Para",
                     description: "Traduzir letras para - Mudar isto limpará as traduções existentes",
-                    cleared: "Tradução Limpa"
+                    cleared: "Traduções limpas"
                 },
                 lyricsConversion: {
                     label: "Conversão de Letras",
@@ -6941,6 +7388,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Limpar todas as letras e traduções em cache",
                     button: "Purgar Cache",
                     cacheLyricsPurged: "Cache de letras purgada"
+                },
+                lyricDelay: {
+                    label: "Atraso da letra"
                 }
             },
             context: {
@@ -7025,6 +7475,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 failed: "Falha ao renderizar Modal :(",
                 checkConsole: "Verifique a consola para erros",
                 invalidUrlCustomApi: "Formato de URL inválido para o URL do Servidor API Custom"
+            },
+            text: {
+                unknownArtist: "Artista desconhecido",
+                unknownTitle: "Título desconhecido"
             }
         },
         mutualGroupDMs: {
@@ -7045,7 +7499,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "NewGuildSettings",
             description: "Silencia automaticamente novos servidores e altera várias outras definições ao entrar",
             context: {
-                apply: "Aplicar NewGuildSettings"
+                apply: "Aplicar NewGuildSettings à pasta"
             },
             option: {
                 guild: {
@@ -7100,7 +7554,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 dontShowAgain: "Não mostrar isto novamente",
                 restartRequired: "É necessário reiniciar para aplicar as mudanças",
                 restart: "Reiniciar",
-                continue: "Continuar"
+                continue: "Continuar",
+                supportUs: "O Plexcord é software de código aberto. Se gostas de o usar, considera apoiar-nos",
+                supportUsLink: "aqui"
             }
         },
         noAppsAllowed: {
@@ -7284,7 +7740,10 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         notificationTitle: {
             name: "NotificationTitle",
-            description: "Torna as notificações de desktop mais informativas"
+            description: "Torna as notificações de desktop mais informativas",
+            text: {
+                threadInParent: "{{thread}} em {{parent}}"
+            }
         },
         notificationVolume: {
             name: "NotificationVolume",
@@ -7360,6 +7819,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 vrcx: {
                     label: "VRChat",
                     description: "Abrir links de VRChat na aplicação VRCX"
+                },
+                telegram: {
+                    label: "Telegram",
+                    description: "Abrir ligações do Telegram na aplicação do Telegram"
                 }
             },
             notification: {
@@ -7447,6 +7910,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 highest: "Cargo Mais Alto",
                 lowest: "Cargo Mais Baixo",
                 details: "Detalhes do Cargo"
+            },
+            text: {
+                roleOptions: "Opções do cargo",
+                userOptions: "Opções do utilizador",
+                unknownRole: "Cargo desconhecido",
+                unknownUser: "Utilizador desconhecido"
             }
         },
         petpet: {
@@ -7494,10 +7963,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     up: "Mover para Cima",
                     down: "Mover para Baixo",
                     delete: "Eliminar Categoria",
-                    unnamed: "uh oh"
+                    unnamed: "ups"
                 },
                 pin: {
-                    label: "Fixar DM",
+                    label: "Afixar MPs",
                     addCategory: "Adicionar Categoria"
                 },
                 unPin: {
@@ -7534,7 +8003,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     color: "Cor",
                     save: "Guardar",
                     create: "Criar"
-                }
+                },
+                defaultCategoryName: "Categoria afixada {{number}}"
             }
         },
         pingNotifications: {
@@ -7550,7 +8020,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Notificar quando alguém te @menciona diretamente"
                 },
                 dms: {
-                    label: "DMs",
+                    label: "Mensagens privadas",
                     description: "Notificar para mensagens diretas (DMs)"
                 },
                 showInActive: {
@@ -7578,12 +8048,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformIndicators: {
             name: "PlatformIndicators",
             description: "Adiciona indicadores de plataforma (Desktop, Telemóvel, Web...) aos utilizadores",
-            embeddedTooltip: "Consola",
+            embeddedTooltip: "Integrado (consola ou jogo)",
             vrTooltip: "VR",
             option: {
                 list: {
                     label: "Lista",
-                    description: "Mostrar indicadores na lista de membros"
+                    description: "Mostrar indicadores nos perfis de utilizador"
                 },
                 badges: {
                     label: "Emblemas",
@@ -7606,7 +8076,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformSpoofer: {
             name: "PlatformSpoofer",
             description: "Falsifica a plataforma ou dispositivo em que estás",
-            about: "Não podemos garantir que este plugin não resulte num aviso ou banimento.",
+            about: "Não podemos garantir que este plugin não te faça receber um aviso ou banimento. Escolher Xbox/Playstation/VR pode tornar o teu cliente uma versão desatualizada.",
             platform: {
                 desktop: "Cliente Discord",
                 web: "Discord Web",
@@ -7619,7 +8089,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 platform: {
                     label: "Plataforma",
-                    description: "Qual a plataforma que deve aparecer",
+                    description: "Em que plataforma fingir que estás.",
                     desktop: "Desktop",
                     web: "Web",
                     android: "Android",
@@ -7689,9 +8159,9 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         profileSets: {
             name: "ProfileSets",
-            description: "Permite-te guardar e carregar diferentes predefinições de perfil através da secção de Perfil nas Definições.",
+            description: "Permite guardar e carregar diferentes predefinições de perfil.",
             toast: {
-                importFailed: "Falha ao importar conjuntos de perfis. O ficheiro pode ser inválido.",
+                importFailed: "Falha ao importar predefinições. O ficheiro pode ser inválido.",
             },
             option: {
                 avatarSize: {
@@ -7722,397 +8192,550 @@ const translations: MatchStructure<typeof enTranslations> = {
                 random: "Aleatório",
                 import: "Importar",
                 exportAll: "Exportar Tudo"
+            },
+            text: {
+                selectAServer: "Seleciona um servidor",
+                profileSets: "Conjuntos de perfil",
+                youAreNotIn: "Ainda não estás em nenhum servidor.",
+                mainProfile: "Perfil principal",
+                serverProfiles: "Perfis de servidor",
+                openProfileSets: "Abrir conjuntos de perfil"
             }
         },
         questify: {
             name: "Questify",
-            description: "Melhora a tua experiência de Quests com um conjunto de funcionalidades, ou desativa-as inteiramente se não fores fã.",
+            description: "Melhore recursos específicos das Quests, desative incômodos ou remova as Quests completamente.",
             quests: "Quests",
             context: {
                 quest: {
-                    label: "Menu do Botão de Quest",
-                    ignore: "Marcar Todas como Ignoradas",
-                    reset: "Repor Lista de Ignoradas",
-                    fetch: "Obter Quests",
-                    markAsIgnored: "Marcar como Ignorada",
-                    unmarkAsIgnored: "Desmarcar como Ignorada",
-                    stopAuto: "Parar Auto-Conclusão",
-                    copyQuestID: "Copiar ID da Quest",
-                    startAuto: "Iniciar Auto-Conclusão"
-                }
-            },
-            settings: {
-                questButton: {
-                    title: "Botão de Quest",
-                    description: "Mostra um botão de Quest na lista de servidores com um indicador opcional para Quests não reclamadas.",
-                    leftClick: "Ação de Clique Esquerdo",
-                    middleClick: "Ação de Clique Central",
-                    rightClick: "Ação de Clique Direito",
-                    visibility: "Visibilidade do Botão",
-                    unclaimedIndicator: "Indicador de Não Reclamadas",
-                    badgeColor: "Cor do Emblema",
-                    rewardDisplay: "Exibição de Recompensa",
-                    includedRewardTypes: "Tipos de Recompensa Incluídos",
-                    includedRewardTypesDesc: "Apenas contar Quests com estes tipos de recompensa como não reclamadas ao determinar a visibilidade do botão, contagem do emblema e ao reproduzir o som de alerta.",
-                    selectRewardTypes: "Seleciona os tipos de recompensa a incluir na contagem de não reclamadas...",
-                    noRewardType: "Não existe nenhuma funcionalidade de Quest suportada com esse nome.",
-                    default: "Padrão",
-                    disable: "Desativar"
-                },
-                questFeatures: {
-                    title: "Funcionalidades de Quest",
-                    description: "Modifica funcionalidades específicas de Quests.",
-                    popupWarning: "A opção {{disablePopup}} será ignorada para Quests concluídas e para a monitorização do progresso das Quests.",
-                    videoQuestInfo: "A opção {{completeVideo}} aguardará a duração da Video Quest e marcará como concluída automaticamente.",
-                    gameQuestInfo: "Da mesma forma, a opção {{completeGame}} aguardará a duração da Game Quest e marcará como concluída automaticamente. Esta opção apenas é suportada no cliente desktop oficial.",
-                    manualStartWarning: "Ainda tens de iniciar as Quests manualmente. O primeiro clique iniciará a Quest em segundo plano. Para Video Quests, cliques subsequentes abrirão o modal de vídeo normalmente. Para abortar, podes usar o menu de contexto no bloco da Quest e selecionar {{stopAuto}}.",
-                    tosWarning: "Usar qualquer uma destas opções vai contra os Termos de Serviço do Discord. Usa por tua conta e risco.",
-                    selectFeatures: "Seleciona quais as funcionalidades de Quest a modificar.",
-                    disablePopup: "Desativar Popup de Quest Acima do Painel de Conta",
-                    completeVideo: "Concluir Video Quests em Segundo Plano",
-                    completeGame: "Concluir Play Game Quests em Segundo Plano",
-                    stopAuto: "Parar Auto-Conclusão"
-                },
-                restyleQuests: {
-                    title: "Estilizar Quests",
-                    description: "Destaca Quests com cores de tema opcionais para melhor visibilidade.",
-                    precedenceNote: "Os estilos de Quest Reclamada e Expirada terão precedência mesmo que uma Quest seja ignorada.",
-                    gradientStyle: "Estilo de Gradiente",
-                    assetPreload: "Pré-carregamento de Ativos",
-                    unclaimed: "Não Reclamadas",
-                    claimed: "Reclamadas",
-                    ignored: "Ignoradas",
-                    expired: "Expiradas",
-                    intenseGradient: "Gradiente de Estilo Intenso",
-                    defaultGradient: "Gradiente de Estilo Padrão",
-                    blackGradient: "Gradiente Preto Subtil",
-                    noGradient: "Sem Gradiente",
-                    loadAllAssets: "Carregar todos os ativos de Quest ao abrir a página",
-                    loadDuringScroll: "Carregar ativos de Quest durante o scroll da página"
-                },
-                reorderQuests: {
-                    title: "Reordenar Quests",
-                    description: "Ordena Quests pelo seu estado. Aplicado quando a opção de ordenação \"Questify\" está selecionada na página de Quests.",
-                    formatNote: "A lista separada por vírgulas deve conter todos os seguintes: {{items}}.",
-                    placeholder: "Deves incluir todos: UNCLAIMED, CLAIMED, IGNORED, EXPIRED",
-                    invalidFormat: "Formato inválido.",
-                    unclaimedSubsort: "Sub-ordenação de Não Reclamadas",
-                    claimedSubsort: "Sub-ordenação de Reclamadas",
-                    ignoredSubsort: "Sub-ordenação de Ignoradas",
-                    expiredSubsort: "Sub-ordenação de Expiradas",
-                    addedNewest: "Adicionada (Mais Recente)",
-                    addedOldest: "Adicionada (Mais Antiga)",
-                    expiredRecent: "Expirada (Mais Recente)",
-                    expiredLeast: "Expirada (Mais Antiga)",
-                    expiringSoon: "A Expirar (Brevemente)",
-                    expiringLate: "A Expirar (Mais Tarde)",
-                    claimedRecent: "Reclamada (Mais Recente)",
-                    claimedLeast: "Reclamada (Mais Antiga)",
-                    ignoredQuestProfile: "Perfil de Quests Ignoradas",
-                    sharedProfile: "Partilhado: Todas as contas neste cliente partilham as ignoradas.",
-                    privateProfile: "Privado: Todas as contas neste cliente têm ignoradas separadas.",
-                    rememberSort: "Lembrar Escolha de Ordenação",
-                    rememberFilter: "Lembrar Escolha de Filtro",
-                    yes: "Sim",
-                    no: "Não",
-                    rememberNote: "Esta escolha refere-se às opções nativas da página de Quests. A ordenação personalizada acima só se aplica com a opção \"Questify\". Se a memória estiver desativada, as opções serão repostas ao abrir a página."
-                },
-                fetchingQuests: {
-                    title: "Obtenção de Quests",
-                    description: "Configura a frequência com que as Quests são obtidas do Discord e define alertas para novas Quests.",
-                    defaultBehavior: "Por padrão, o Discord apenas obtém Quests ao carregar e ao visitar a página de Quests. Sem um intervalo definido abaixo, o plugin não saberá de novas Quests adicionadas durante o dia.",
-                    requirement: "Isto depende do Botão de Quest estar ativado e definido para {{unclaimed}}, ou {{always}} com indicadores ativos. Caso contrário, não há razão para obter Quests periodicamente.",
-                    blockWarning: "Além disso, se {{fetchingQuests}} estiver bloqueado nas definições de {{questFeatures}}, isto não funcionará.",
-                    fetchInterval: "Intervalo de Obtenção",
-                    alertSound: "Som de Alerta",
-                    intervalPlaceholder: "Seleciona ou digita um intervalo entre 30 minutos e 12 horas.",
-                    intervalFeedback: "Os intervalos devem ser entre 30 minutos e 12 horas.",
-                    soundPlaceholder: "Seleciona um som ou fornece um URL de som personalizado.",
-                    soundFeedback: "Som não encontrado, ou o URL não é de um domínio suportado.",
-                    disabled: "Desativado",
-                    minutes: "Minutos",
-                    minute: "Minuto",
-                    hours: "Horas",
-                    hour: "Hora",
-                    thirtyMinutes: "30 Minutos",
-                    oneHour: "1 Hora",
-                    threeHours: "3 Horas",
-                    sixHours: "6 Horas",
-                    twelveHours: "12 Horas",
-                    customSound: "SOM PERSONALIZADO"
-                },
-                disableOptions: {
-                    everything: "Desativar Tudo",
-                    discovery: "Desativar Separador de Descoberta",
-                    dms: "Desativar Separador de Quests em DMs",
-                    fetching: "Desativar Obtenção de Quests",
-                    popup: "Desativar Popup Acima do Painel de Conta",
-                    sponsored: "Desativar Banner Patrocinado na Página de Quests",
-                    badge: "Desativar Emblema nos Perfis de Utilizador",
-                    inventory: "Desativar Aviso de Relocalização do Inventário de Presentes",
-                    friendsList: "Promoção 'Ativo Agora' na Lista de Amigos",
-                    membersList: "Ícones de 'Ativamente a Jogar' na Lista de Membros",
-                    gameQuests: "Concluir Play Game/Activity Quests em Segundo Plano",
-                    videoQuests: "Concluir Watch Video Quests em Segundo Plano",
-                    achievementQuests: "Concluir Task in Activity Quests em Segundo Plano",
-                    mobileDesktop: "Tornar Quests Mobile compatíveis com Desktop",
-                    notifyOnComplete: "Notificar ao Concluir Quest"
-                },
-                options: {
-                    always: "Sempre",
-                    unclaimed: "Não Reclamadas",
-                    never: "Nunca",
-                    pill: "Pílula",
-                    badge: "Emblema",
-                    both: "Ambos",
-                    none: "Nenhum",
-                    openQuests: "Abrir Quests",
-                    contextMenu: "Menu de Contexto",
-                    pluginSettings: "Definições do Plugin",
-                    nothing: "Nada",
-                    orbs: "Orbs",
-                    nitroCodes: "Códigos Nitro",
-                    rewardCodes: "Códigos de Recompensa",
-                    inGameItems: "Itens de Jogo",
-                    profileCollectibles: "Colecionáveis de Perfil"
-                }
-            },
-            option: {
-                disableQuests: {
-                    label: "Desativar Quests",
-                    description: "Seleciona quais as funcionalidades de Quest a desativar."
-                },
-                disableQuestsEverything: {
-                    label: "Desativar Tudo",
-                    description: "Desativa todas as funcionalidades de Quest."
-                },
-                disableQuestsFetchingQuests: {
-                    label: "Desativar Obtenção de Quests",
-                    description: "Desativa a obtenção de Quests do Discord."
-                },
-                disableQuestsDirectMessagesTab: {
-                    label: "Desativar Separador de Quests em DMs",
-                    description: "Desativa o separador de Quests na página de Mensagens Diretas."
-                },
-                disableQuestsDiscoveryTab: {
-                    label: "Desativar Separador de Descoberta",
-                    description: "Desativa o separador de Quests na página de Descoberta."
-                },
-                disableQuestsPageSponsoredBanner: {
-                    label: "Desativar Banner Patrocinado na Página de Quests",
-                    description: "Desativa o banner patrocinado na página de Quests."
-                },
-                disableQuestsPopupAboveAccountPanel: {
-                    label: "Desativar Popup Acima do Painel de Conta",
-                    description: "Desativa o popup de Quest acima do teu painel de conta."
-                },
-                disableQuestsBadgeOnUserProfiles: {
-                    label: "Desativar Emblema nos Perfis de Utilizador",
-                    description: "Desativa o emblema de Quest nos perfis de utilizador."
-                },
-                disableQuestsGiftInventoryRelocationNotice: {
-                    label: "Desativar Aviso de Relocalização do Inventário de Presentes",
-                    description: "Desativa o aviso de relocalização de Quests no inventário de presentes."
-                },
-                disableFriendsListActiveNowPromotion: {
-                    label: "Desativar Promoção 'Ativo Agora' na Lista de Amigos",
-                    description: "Desativa a promoção de Quests para jogos jogados por amigos."
-                },
-                disableMembersListActivelyPlayingIcons: {
-                    label: "Desativar Ícones de 'Ativamente a Jogar' na Lista de Membros",
-                    description: "Desativa os ícones de atividade de jogo na lista de membros."
-                },
-                makeMobileQuestsDesktopCompatible: {
-                    label: "Tornar Quests Mobile compatíveis com Desktop",
-                    description: "Torna Quests exclusivas de dispositivos móveis compatíveis com o desktop."
-                },
-                completeVideoQuestsInBackground: {
-                    label: "Concluir Video Quests em Segundo Plano",
-                    description: "Conclui Video Quests em segundo plano após passar a duração do vídeo."
-                },
-                completeGameQuestsInBackground: {
-                    label: "Concluir Game Quests em Segundo Plano",
-                    description: "Conclui Game Quests em segundo plano após passar a duração do jogo."
-                },
-                completeAchievementQuestsInBackground: {
-                    label: "Concluir Task in Activity Quests em Segundo Plano",
-                    description: "Conclui Quests de conquistas em atividades em segundo plano."
-                },
-                notifyOnQuestComplete: {
-                    label: "Notificar ao Concluir Quest",
-                    description: "Mostra uma notificação quando uma Quest é concluída automaticamente."
-                },
-                questButton: {
-                    label: "Botão de Quest",
-                    description: "Mostra um botão de Quest na lista de servidores."
-                },
-                questButtonDisplay: {
-                    label: "Exibição do Botão de Quest",
-                    description: "Que tipo de exibição usar para o botão de Quest na lista de servidores."
-                },
-                questRewardIncludeRewardCode: {
-                    label: "Incluir Códigos de Recompensa",
-                    description: "Incluir Quests com Códigos de Recompensa ao exibir contagens de Quests."
-                },
-                questRewardIncludeNitroCode: {
-                    label: "Incluir Códigos Nitro",
-                    description: "Incluir Quests com Códigos Nitro ao exibir contagens de Quests."
-                },
-                questRewardIncludeInGame: {
-                    label: "Incluir Recompensas de Jogo",
-                    description: "Incluir Quests com recompensas in-game ao exibir contagens de Quests."
-                },
-                questRewardIncludeCollectibles: {
-                    label: "Incluir Colecionáveis",
-                    description: "Incluir Quests com Colecionáveis ao exibir contagens de Quests."
-                },
-                questRewardIncludeOrbs: {
-                    label: "Incluir Orbs",
-                    description: "Incluir Quests com Orbs ao exibir contagens de Quests."
-                },
-                questButtonUnclaimed: {
-                    label: "Indicador de Não Reclamadas no Botão",
-                    description: "Que tipo de indicador usar para Quests não reclamadas no botão de Quest."
-                },
-                questButtonBadgeColor: {
-                    label: "Cor do Emblema do Botão de Quest",
-                    description: "A cor do emblema do botão de Quest na lista de servidores."
-                },
-                questButtonLeftClickAction: {
-                    label: "Ação de Clique Esquerdo",
-                    description: "A ação a realizar ao clicar com o botão esquerdo no botão de Quest."
-                },
-                questButtonMiddleClickAction: {
-                    label: "Ação de Clique Central",
-                    description: "A ação a realizar ao clicar com o botão central no botão de Quest."
-                },
-                questButtonRightClickAction: {
-                    label: "Ação de Clique Direito",
-                    description: "A ação a realizar ao clicar com o botão direito no botão de Quest."
-                },
-                fetchingQuests: {
-                    label: "Obtenção de Quests",
-                    description: "Obter Quests do Discord."
-                },
-                fetchingQuestsInterval: {
-                    label: "Intervalo de Obtenção de Quests",
-                    description: "O intervalo em segundos para obter Quests do Discord."
-                },
-                fetchingQuestsAlert: {
-                    label: "Alerta de Obtenção de Quests",
-                    description: "O som a reproduzir quando novas Quests são detetadas."
-                },
-                fetchingQuestsAlertVolume: {
-                    label: "Volume de Alerta de Obtenção de Quests",
-                    description: "O volume do som de alerta quando novas Quests são detetadas."
-                },
-                restyleQuests: {
-                    label: "Estilizar Quests",
-                    description: "Personalizar a aparência dos blocos de Quest na página de Quests."
-                },
-                restyleQuestsUnclaimed: {
-                    label: "Estilizar Quests Não Reclamadas",
-                    description: "A cor dos blocos de Quest não reclamadas na página de Quests."
-                },
-                restyleQuestsClaimed: {
-                    label: "Estilizar Quests Reclamadas",
-                    description: "A cor dos blocos de Quest reclamadas na página de Quests."
-                },
-                restyleQuestsIgnored: {
-                    label: "Estilizar Quests Ignoradas",
-                    description: "A cor dos blocos de Quest ignoradas na página de Quests."
-                },
-                restyleQuestsExpired: {
-                    label: "Estilizar Quests Expiradas",
-                    description: "A cor dos blocos de Quest expiradas na página de Quests."
-                },
-                restyleQuestsGradient: {
-                    label: "Gradiente de Estilização",
-                    description: "Estilo do gradiente usado nos blocos de Quest."
-                },
-                restyleQuestsPreload: {
-                    label: "Pré-carregar Estilização",
-                    description: "Tentar pré-carregar os ativos para os blocos de Quest."
-                },
-                reorderQuests: {
-                    label: "Reordenar Quests",
-                    description: "Ordena Quests pelo seu estado. Deixa vazio para ordenação padrão. A lista deve conter: UNCLAIMED, CLAIMED, IGNORED, EXPIRED."
-                },
-                unclaimedSubsort: {
-                    label: "Sub-ordenação de Não Reclamadas",
-                    description: "Método de sub-ordenação para Quests não reclamadas."
-                },
-                claimedSubsort: {
-                    label: "Sub-ordenação de Reclamadas",
-                    description: "Método de sub-ordenação para Quests reclamadas."
-                },
-                ignoredSubsort: {
-                    label: "Sub-ordenação de Ignoradas",
-                    description: "Método de sub-ordenação para Quests ignoradas."
-                },
-                expiredSubsort: {
-                    label: "Sub-ordenação de Expiradas",
-                    description: "Método de sub-ordenação para Quests expiradas."
-                },
-                unclaimedUnignoredQuests: {
-                    label: "Quests Não Reclamadas e Não Ignoradas",
-                    description: "Monitoriza o número de Quests que não foram reclamadas nem ignoradas."
-                },
-                onQuestsPage: {
-                    label: "Na Página de Quests",
-                    description: "Se o utilizador está atualmente na página de Quests."
-                },
-                triggerQuestsRerender: {
-                    label: "Forçar Re-renderização de Quests",
-                    description: "Força uma nova renderização da página de Quests ao alternar esta definição."
-                },
-                ignoredQuestProfile: {
-                    label: "Perfil de Quests Ignoradas",
-                    description: "O perfil usado para as Quests ignoradas."
-                },
-                rememberQuestPageSort: {
-                    label: "Lembrar Ordenação da Página de Quests",
-                    description: "Lembra a última ordenação usada na página de Quests."
-                },
-                rememberQuestPageFilters: {
-                    label: "Lembrar Filtros da Página de Quests",
-                    description: "Lembra os últimos filtros usados na página de Quests."
-                },
-                lastQuestPageSort: {
-                    label: "Última Ordenação da Página de Quests",
-                    description: "Guarda a última ordenação usada na página de Quests."
-                },
-                lastQuestPageFilters: {
-                    label: "Últimos Filtros da Página de Quests",
-                    description: "Guarda os últimos filtros usados na página de Quests."
-                },
-                ignoredQuestIDs: {
-                    label: "IDs de Quests Ignoradas",
-                    description: "Uma lista de IDs de Quests que estão ignoradas."
-                },
-                resumeQuestIDs: {
-                    label: "IDs de Quests a Retomar",
-                    description: "Uma lista de IDs de Quests que estão a ser auto-concluídas em segundo plano."
+                    label: "Menu do botão de Quests",
+                    ignore: "Marcar todas como ignoradas",
+                    reset: "Redefinir lista de ignoradas",
+                    fetch: "Buscar Quests",
+                    markAsIgnored: "Marcar como ignorada",
+                    unmarkAsIgnored: "Deixar de ignorar",
+                    stopAuto: "Parar conclusão automática",
+                    startAuto: "Iniciar conclusão automática",
+                    copyQuestID: "Copiar ID da Quest"
                 }
             },
             button: {
-                questInProgressWithTime: "A concluir ({{remainTime}})",
-                completing: "A concluir",
-                resume: "Retomar (~{{remainTime}})",
-                complete: "Concluir {{remainTime}}",
-                completeImmediate: "Concluir (Imediato)",
+                completing: "A concluir...",
+                completingWithTime: "A concluir ({{time}})",
+                completingIn: "A concluir em {{time}}",
+                queued: "Na fila ({{position}})",
+                resuming: "A retomar...",
+                completeNow: "Concluir agora",
+                complete: "Concluir ({{time}})",
+                resume: "Retomar ({{time}})",
                 completed: "Concluída"
             },
             reward: {
-                orbs: "{{completingText}} para {{orbQuantity}} Orbs.",
-                article: "{{completingText}} para {{itemName}}.",
-                unrecognized: "{{completingText}} para um tipo de recompensa não reconhecido."
+                orbs: "{{status}} por {{orbQuantity}} Orbs.",
+                article: "{{status}} por {{itemName}}.",
+                unrecognized: "{{status}} por uma recompensa não reconhecida."
+            },
+            toast: {
+                autoCompleteBroken: "A conclusão automática não está a funcionar. Uma correção será lançada em breve.",
+                enrollmentFailed: "Falha ao se inscrever na Quest {{questName}}.",
+                enrollmentInNormalizequestnameQuest: "Falha na inscrição na missão {{normalizeQuestName_quest}}{{rateLimitSuffix}}."
             },
             notification: {
                 completed: {
-                    title: "Quest Concluída",
+                    title: "Quest concluída!",
                     body: "A Quest {{questName}} foi concluída."
+                },
+                newQuest: {
+                    title: "Nova Quest detectada!",
+                    body: "A Quest {{questName}} já está disponível."
+                },
+                newQuests: {
+                    title: "Novas Quests detectadas!",
+                    body: "{{count}} novas Quests já estão disponíveis."
+                },
+                newExcludedQuest: {
+                    title: "Nova Quest excluída detectada!",
+                    body: "A Quest excluída {{questName}} foi detectada. ID: {{questId}}"
+                },
+                newExcludedQuests: {
+                    title: "Novas Quests excluídas detectadas!",
+                    body: "{{count}} novas Quests excluídas foram detectadas. Verifique o consola para ver os IDs."
                 }
+            },
+            alert: {
+                restart: {
+                    title: "É necessário reiniciar",
+                    body: "Uma alteração feita nas definições do Questify requer um reinício.",
+                    confirm: "Reiniciar",
+                    cancel: "Mais tarde"
+                },
+                dangerous: {
+                    title: "Tem a certeza?",
+                    confirm: "Continuar",
+                    cancel: "Cancelar",
+                    disableEverything: "Isso desativará completamente a funcionalidade das Quests.",
+                    allowDangerous: "Isso permitirá alterar definições perigosas."
+                }
+            },
+            status: {
+                unclaimed: "NÃO RESGATADA",
+                claimed: "Resgatada",
+                ignored: "Ignorada",
+                expired: "Expirada"
+            },
+            questTypes: {
+                watchVideo: "Assistir vídeo",
+                watchVideoOnMobile: "Assistir vídeo no telemóvel",
+                achievementInActivity: "Conquista em atividade",
+                achievementInGame: "Conquista no jogo",
+                playActivity: "Jogar atividade",
+                playOnDesktop: "Jogar no computador",
+                playOnDesktopV2: "Jogar no computador V2",
+                streamOnDesktop: "Transmitir no computador",
+                playOnPlayStation: "Jogar no PlayStation",
+                playOnXbox: "Jogar no Xbox"
+            },
+            settings: {
+                questButton: {
+                    title: "Botão de Quests",
+                    description: "Mostra um botão de Quests na lista de servidores com um indicador opcional para Quests não resgatadas e não ignoradas.",
+                    behavior: "Comportamento do botão",
+                    leftClick: "Ação do clique esquerdo:",
+                    middleClick: "Ação do clique do meio:",
+                    rightClick: "Ação do clique direito:",
+                    visibility: "Visibilidade do botão:",
+                    visibilityTooltip: "Sempre mostra o botão de Quests enquanto este recurso estiver ativado.\n\nNão resgatada só o mostra quando você tem recompensas de Quests relevantes não resgatadas.\n\nNunca oculta o botão de Quests.",
+                    unclaimedIndicator: "Indicador de não resgatadas:",
+                    unclaimedIndicatorTooltip: "Pílula mostra o marcador de não lido do Discord ao lado do botão de Quests.\n\nEmblema mostra o número de recompensas de Quests relevantes não resgatadas.\n\nAmbos mostra a pílula e o emblema juntos.\n\nNenhum oculta os indicadores.",
+                    badgeColor: "Cor do emblema:",
+                    relevancy: "Relevância das Quests",
+                    includedRewardTypes: "Tipos de recompensa incluídos:",
+                    includedRewardTypesTooltip: "Contar como não resgatadas apenas as Quests com estes tipos de recompensa ao determinar a visibilidade do botão, a contagem do emblema e o comportamento dos alertas.",
+                    includedQuestTypes: "Tipos de Quest incluídos:",
+                    includedQuestTypesTooltip: "Contar como não resgatadas apenas as Quests com estes tipos de tarefa ao determinar a visibilidade do botão, a contagem do emblema e o comportamento dos alertas.",
+                    display: {
+                        always: "Sempre",
+                        unclaimed: "Não resgatada",
+                        never: "Nunca"
+                    },
+                    indicator: {
+                        pill: "Pílula",
+                        badge: "Emblema",
+                        both: "Ambos",
+                        none: "Nenhum"
+                    },
+                    action: {
+                        openQuests: "Abrir Quests",
+                        contextMenu: "Menu de contexto",
+                        pluginSettings: "Definições do plugin",
+                        nothing: "Nada"
+                    },
+                    rewardTypes: {
+                        orbs: "Orbs",
+                        nitroCodes: "Códigos de Nitro",
+                        rewardCodes: "Códigos de recompensa",
+                        inGameItems: "Itens no jogo",
+                        profileCollectibles: "Colecionáveis de perfil"
+                    }
+                },
+                questFeatures: {
+                    title: "Recursos das Quests",
+                    description: "Modifique o comportamento das Quests para melhorar ou remover funcionalidades.",
+                    disableFeatures: "Desativar recursos",
+                    disableEverything: "Desativar completamente a funcionalidade das Quests:",
+                    disableEverythingTooltip: "Isso desativará todas as melhorias do plugin, ocultará a página de Quests e os elementos de Quests em todo o Discord e impedirá o Discord de buscar dados de Quests. A loja não será afetada, pois os Orbs estão ligados demais a ela como moeda secundária.",
+                    disableSpecific: "Desativar recursos específicos:",
+                    disableSpecificTooltip: "O banner patrocinado é um banner de Quest pago no topo da página de Quests.\n\nOs avisos de mudança são indicadores, como na página Explorar, de que as Quests foram movidas para as DMs.\n\nA promoção da lista de amigos é um cartão exibido na seção \"Ativo agora\" da sua lista de amigos enquanto um utilizador com quem você compartilha um servidor joga um jogo com uma Quest ativa.\n\nA promoção da lista de membros é um ícone exibido nos membros da lista de um servidor enquanto eles jogam um jogo com uma Quest ativa.\n\nA promoção do painel da conta é uma promoção de Quest paga exibida acima do seu painel de conta.\n\nO progresso do painel da conta é o progresso da Quest ativa ou concluída exibido acima do seu painel de conta.\n\nOs emblemas de Quests e Orbs são emblemas nos perfis de quem concluiu pelo menos uma Quest ou comprou o emblema de Orbs, respectivamente.",
+                    disableOptions: {
+                        sponsoredBanner: "Banner patrocinado",
+                        relocationNotices: "Avisos de mudança",
+                        friendsListPromo: "Promoção da lista de amigos",
+                        membersListPromo: "Promoção da lista de membros",
+                        accountPanelPromo: "Promoção do painel da conta",
+                        accountPanelProgress: "Progresso do painel da conta",
+                        orbsAndQuestsBadges: "Emblemas de Quests e Orbs"
+                    },
+                    modifyFeatures: "Modificar recursos",
+                    warningTos: "O Discord começou a emitir avisos para utilizadores de scripts ou plugins que modificam como as Quests são concluídas, o que vai contra os {{tos}}.",
+                    tos: "Termos de Serviço",
+                    warningEscalate: "Os avisos parecem limitados à ameaça de perda de acesso às Quests ou às suas recompensas, mas o Discord pode endurecer a qualquer momento.",
+                    warningDetection: "Devido aos vários métodos que o Discord usa para rastrear utilizadores, não há maneira realista de evitar a detecção. Se continuar, entenda que o Discord provavelmente detectará isso em algum momento.",
+                    warningRisk: "Use a opção a seguir para acessar definições potencialmente perigosas por sua conta e risco.",
+                    allowDangerous: "Permitir alterar definições perigosas...",
+                    disallowDangerous: "Redefinir e proibir alterar definições perigosas...",
+                    completeVideoQuicker: "Acelerar a conclusão automática de Quests de vídeo:",
+                    completeVideoQuickerTooltip: "O Discord permite concluir Quests de vídeo quando, desde a inscrição, já passou a duração do vídeo menos 24 segundos.\n\nIsso significa que, se uma Quest de vídeo tiver 24 segundos ou menos, ou se você se inscrever e voltar depois para concluí-la, ela poderá ser concluída imediatamente.\n\nEsta definição só se aplica à conclusão automática de Quests de vídeo e depende da definição de conclusão automática abaixo. Concluir manualmente ainda exige esperar a duração completa e não depende do momento da inscrição.",
+                    mobileDesktop: "Tornar algumas Quests de vídeo exclusivas do telemóvel concluíveis no computador:",
+                    mobileDesktopTooltip: "Algumas Quests de vídeo exclusivas do telemóvel permitem inscrição no computador, mas ainda precisam ser concluídas no telemóvel. Esta definição permite concluí-las no computador.\n\nAlgumas Quests de vídeo exclusivas do telemóvel só permitem inscrição pelo telemóvel. Para que esta definição as afete, você deve se inscrever nelas pelo telemóvel antes de voltar ao computador e atualizar suas Quests.\n\nQuando ativada sozinha, esta definição só se aplica à conclusão manual de Quests de vídeo. A conclusão automática de Quests de vídeo do telemóvel pelo computador depende da definição de conclusão automática abaixo e ativará esta definição implicitamente.",
+                    simultaneous: "Concluir Quests automaticamente ao mesmo tempo em vez de em sequência:",
+                    simultaneousTooltip: "Por padrão, tentar concluir várias Quests automaticamente as coloca em uma fila para serem concluídas em ordem.\n\nEsta definição permite, em vez disso, que todas as Quests de conclusão automática rodem ao mesmo tempo.\n\nEsta definição só se aplica à conclusão automática e depende da definição de conclusão automática abaixo.",
+                    resumeInterrupted: "Retomar conclusões automáticas interrompidas após recarregar ou reiniciar:",
+                    resumeInterruptedTooltip: "Esta definição retomará automaticamente qualquer conclusão automática interrompida por recarregamentos ou reinícios, incluindo recolocar na fila Quests que estavam na fila mas ainda não tinham começado.",
+                    autoCompleteTypes: "Concluir automaticamente tipos específicos de Quest:",
+                    autoCompleteTypesTooltip: "Quests de \"Assistir vídeo no telemóvel\" só funcionam com Quests móveis que permitem inscrição no computador. Se a inscrição estiver restrita ao telemóvel, você precisa se inscrever pelo telemóvel antes de voltar ao computador e atualizar suas Quests.\n\nTodas as Quests de vídeo normalmente enviam um stack trace com os relatórios de progresso. Assim o Discord sabe exatamente quais funções foram chamadas e pode verificar se suas próprias funções iniciaram o progresso. O Questify apaga esse stack trace, mas a ausência dele é tão reveladora quanto a presença.\n\nQuests de \"Jogar no computador\", \"Jogar no PlayStation\", \"Jogar no Xbox\" e \"Jogar atividade\" só estão disponíveis em clientes oficiais para computador devido a uma limitação imposta pelo Discord. Clientes de terceiros como extensões web, Plextron e outros não suportam a conclusão automática desses tipos.\n\nTodas as Quests de jogos normalmente enviam uma impressão digital do jogo com os relatórios de heartbeat. Assim o Discord pode usar dados de dezenas de milhares de utilizadores para determinar se outros utilizadores provavelmente usam um jogo real ou emulam o executável. Não há método razoável para falsificar esse valor, então o Questify o deixa em branco, mas a ausência dele é tão reveladora quanto uma falsificação malfeita.\n\nQuests de \"Conquista em atividade\" só podem ser concluídas automaticamente concluindo-as imediatamente. Esse método pode ser corrigido a qualquer momento.\n\nA conclusão automática é feita clicando nos respectivos botões na página de Quests. As Quests serão concluídas na ordem em que entraram na fila, a menos que a conclusão simultânea esteja ativada acima.\n\nConcluir Quests automaticamente é a definição perigosa mais arriscada disponível. Ative-a por sua conta e risco."
+                },
+                questNotifications: {
+                    title: "Notificações de Quests",
+                    description: "Configure notificações e alertas de Quests concluídas e de novas Quests detectadas.",
+                    questCompleted: "Quest concluída",
+                    notifyOnComplete: "Mostrar uma notificação quando uma Quest for concluída:",
+                    soundOnComplete: "Tocar um som quando uma Quest for concluída:",
+                    volume: "Volume:",
+                    newQuests: "Novas Quests detectadas",
+                    notifyOnNew: "Mostrar uma notificação quando novas Quests forem detectadas:",
+                    soundOnNew: "Tocar um som quando novas Quests forem detectadas:",
+                    notifyOnNewExcluded: "Mostrar uma notificação quando novas Quests excluídas forem detectadas:",
+                    notifyOnNewExcludedTooltip: "Algumas Quests são excluídas da sua lista de Quests disponíveis devido a restrições de região ou plataforma.\n\nQuando ativado, o Questify buscará as definições dessas Quests, aplicará seus filtros de tipos de Quest e recompensa, exibirá no consola os dados das Quests excluídas e mostrará uma notificação separada para as Quests excluídas correspondentes.",
+                    soundOnNewExcluded: "Tocar um som quando novas Quests excluídas forem detectadas:",
+                    soundOnNewExcludedTooltip: "Algumas Quests são excluídas da sua lista de Quests disponíveis devido a restrições de região ou plataforma.\n\nQuando um som é selecionado, o Questify buscará as definições dessas Quests, aplicará seus filtros de tipos de Quest e recompensa, exibirá no consola os dados das Quests excluídas e tocará este som para as Quests excluídas correspondentes.",
+                    fetchInterval: "Intervalo de busca de Quests:",
+                    fetchIntervalTooltip: "O Discord só busca Quests ao carregar e quando você visita a página de Quests.\n\nEste intervalo busca Quests periodicamente enquanto o cliente estiver aberto, para que os indicadores do botão de Quests e os alertas de novas Quests fiquem atualizados ao longo do dia.\n\nIsso só funciona se estiver ativado e se as definições do botão ou das notificações de Quests tornarem a busca periódica útil.",
+                    disabled: "DESATIVADO",
+                    preview: "Ouvir {{sound}}",
+                    intervals: {
+                        thirtyMinutes: "30 minutos",
+                        fortyFiveMinutes: "45 minutos",
+                        oneHour: "1 hora",
+                        threeHours: "3 horas",
+                        sixHours: "6 horas",
+                        twelveHours: "12 horas"
+                    }
+                },
+                questTiles: {
+                    title: "Cartões de Quests",
+                    description: "Destaque as Quests com cores de tema opcionais para melhor visibilidade.",
+                    behavior: "Comportamento dos cartões",
+                    gradientStyle: "Estilo do gradiente:",
+                    gradientStyleTooltip: "Intenso e Padrão usam a cor do cartão selecionada no gradiente da imagem.\n\nPreto sutil mantém um gradiente neutro mais escuro para contraste.\n\nSem gradiente remove o gradiente da imagem, o que pode dificultar a leitura de algumas artes de Quest.",
+                    assetPreload: "Pré-carregamento de recursos:",
+                    assetPreloadTooltip: "Carregar todos os recursos ao abrir a página de Quests reduz os deslocamentos de layout ao rolar.\n\nCarregar durante a rolagem é mais próximo do comportamento padrão do Discord e pode exigir menos trabalho no início.",
+                    colors: "Cores dos cartões",
+                    enable: "Ativar",
+                    disable: "Desativar",
+                    gradient: {
+                        intense: "Gradiente de reestilo intenso",
+                        default: "Gradiente de reestilo padrão",
+                        black: "Gradiente preto sutil",
+                        hide: "Sem gradiente"
+                    },
+                    preload: {
+                        onLoad: "Carregar todos os recursos ao abrir a página",
+                        onScroll: "Carregar os recursos durante a rolagem"
+                    }
+                },
+                reorderQuests: {
+                    title: "Reordenar Quests",
+                    description: "Ordenar missões pelo estado quando a ordenação do Questify estiver selecionada na página de missões. Estados ocultos são filtrados em qualquer ordenação.",
+                    statusOrder: "Ordem dos status",
+                    statusOrderTooltip: "Cada status só pode aparecer uma vez. Selecionar um status já usado em outra posição troca as duas posições.",
+                    positions: {
+                        first: "Primeiro:",
+                        second: "Segundo:",
+                        third: "Terceiro:",
+                        fourth: "Quarto:"
+                    },
+                    subsorts: "Subordenações",
+                    unclaimedSubsort: "Subordenação de não resgatadas:",
+                    unclaimedSubsortTooltip: "Quests concluídas mas não resgatadas ficam abaixo das não resgatadas incompletas; depois esta subordenação é aplicada dentro desses grupos.",
+                    claimedSubsort: "Subordenação de resgatadas:",
+                    claimedSubsortTooltip: "Quests resgatadas podem ser ordenadas pela data de resgate ou por quando a Quest foi adicionada.",
+                    ignoredSubsort: "Subordenação de ignoradas:",
+                    ignoredSubsortTooltip: "Quests ignoradas mantêm a posição do seu grupo; esta subordenação controla a ordem dentro dele.",
+                    expiredSubsort: "Subordenação de expiradas:",
+                    expiredSubsortTooltip: "Quests expiradas podem ser ordenadas pela data de expiração ou por quando a Quest foi adicionada.",
+                    subsort: {
+                        addedNewest: "Adicionadas (mais recentes)",
+                        addedOldest: "Adicionadas (mais antigas)",
+                        expiringSoonest: "Expiram (mais cedo)",
+                        expiringLatest: "Expiram (mais tarde)",
+                        expiredMostRecent: "Expiradas (mais recentes)",
+                        expiredLeastRecent: "Expiradas (mais antigas)",
+                        claimedMostRecent: "Resgatadas (mais recentes)",
+                        claimedLeastRecent: "Resgatadas (mais antigas)"
+                    },
+                    memory: "Memória da página de Quests",
+                    rememberSort: "Lembrar a ordenação selecionada na página de Quests:",
+                    rememberSortTooltip: "Quando desativado, a página de Quests sempre abre com a opção de ordenação do Questify.",
+                    rememberFilters: "Lembrar os filtros selecionados na página de Quests:",
+                    rememberFiltersTooltip: "Quando desativado, a página de Quests sempre abre sem filtros de tarefa ou recompensa."
+                }
+            },
+            option: {
+                migrationVersion: {
+                    label: "Versão de migração",
+                    description: "A versão de migração atual das definições."
+                },
+                questFeatures: {
+                    label: "Recursos das Quests",
+                    description: "Selecione quais recursos das Quests desativar."
+                },
+                disableQuestsEverything: {
+                    label: "Desativar tudo",
+                    description: "Desativa todos os recursos das Quests."
+                },
+                disableRelocationNotices: {
+                    label: "Desativar avisos de mudança",
+                    description: "Desativa os avisos de mudança das Quests na página Explorar."
+                },
+                disableSponsoredBanner: {
+                    label: "Desativar banner patrocinado",
+                    description: "Desativa o banner patrocinado na página de Quests."
+                },
+                disableAccountPanelPromo: {
+                    label: "Desativar promoção do painel da conta",
+                    description: "Desativa o pop-up de Quest promovida acima do seu painel de conta."
+                },
+                disableAccountPanelQuestProgress: {
+                    label: "Desativar progresso do painel da conta",
+                    description: "Desativa o progresso de Quests ativas e concluídas acima do seu painel de conta."
+                },
+                disableOrbsAndQuestsBadges: {
+                    label: "Desativar emblemas de Quests e Orbs",
+                    description: "Desativa o emblema de Quests nos perfis."
+                },
+                disableFriendsListPromo: {
+                    label: "Desativar promoção da lista de amigos",
+                    description: "Desativa a promoção de Quests de jogos que seus amigos jogam."
+                },
+                disableMembersListPromo: {
+                    label: "Desativar promoção da lista de membros",
+                    description: "Desativa o ícone de jogando ativamente na lista de membros."
+                },
+                allowChangingDangerousSettings: {
+                    label: "Permitir definições perigosas",
+                    description: "Permite alterar definições perigosas."
+                },
+                resumeInterruptedQuests: {
+                    label: "Retomar Quests interrompidas",
+                    description: "Retoma a conclusão automática de Quests após recarregar ou reiniciar."
+                },
+                makeMobileVideoQuestsDesktopCompatible: {
+                    label: "Tornar Quests de vídeo do telemóvel compatíveis",
+                    description: "Torna Quests de vídeo exclusivas do telemóvel compatíveis com o computador."
+                },
+                autoCompleteQuestsSimultaneously: {
+                    label: "Concluir ao mesmo tempo",
+                    description: "Conclui Quests ao mesmo tempo em vez de em sequência."
+                },
+                completeVideoQuestsQuicker: {
+                    label: "Concluir Quests de vídeo mais rápido",
+                    description: "Usa a margem de progresso do Discord e o tempo desde a inscrição na conclusão automática de Quests de vídeo."
+                },
+                autoCompleteQuestTypes: {
+                    label: "Tipos de Quest para concluir automaticamente",
+                    description: "Quais tipos de Quests concluir automaticamente em segundo plano."
+                },
+                questButton: {
+                    label: "Botão de Quests",
+                    description: "Personalize o botão de Quests na lista de servidores."
+                },
+                questButtonDisplay: {
+                    label: "Exibição do botão de Quests",
+                    description: "Qual tipo de exibição usar para o botão de Quests na lista de servidores."
+                },
+                questButtonIncludedTypes: {
+                    label: "Tipos incluídos no botão de Quests",
+                    description: "Quais tipos de recompensa e de Quest incluir na contagem exibida no botão de Quests."
+                },
+                questButtonIndicator: {
+                    label: "Indicador do botão de Quests",
+                    description: "Qual tipo de exibição usar para o indicador de não resgatadas no botão de Quests."
+                },
+                questButtonBadgeCount: {
+                    label: "Contagem do emblema",
+                    description: "O número atual de Quests relevantes não resgatadas."
+                },
+                questButtonBadgeColor: {
+                    label: "Cor do emblema",
+                    description: "A cor do emblema do botão de Quests na lista de servidores."
+                },
+                questButtonLeftClickAction: {
+                    label: "Ação do clique esquerdo",
+                    description: "A ação ao clicar com o botão esquerdo no botão de Quests."
+                },
+                questButtonMiddleClickAction: {
+                    label: "Ação do clique do meio",
+                    description: "A ação ao clicar com o botão do meio no botão de Quests."
+                },
+                questButtonRightClickAction: {
+                    label: "Ação do clique direito",
+                    description: "A ação ao clicar com o botão direito no botão de Quests."
+                },
+                questNotifications: {
+                    label: "Notificações de Quests",
+                    description: "Configure notificações de Quests concluídas e de novas Quests detectadas."
+                },
+                notifyOnQuestComplete: {
+                    label: "Notificar ao concluir",
+                    description: "Mostra uma notificação quando uma Quest é concluída."
+                },
+                notifyOnNewQuests: {
+                    label: "Notificar novas Quests",
+                    description: "Mostra uma notificação quando novas Quests são detectadas."
+                },
+                notifyOnNewExcludedQuests: {
+                    label: "Notificar novas Quests excluídas",
+                    description: "Mostra uma notificação quando novas Quests excluídas são detectadas."
+                },
+                questCompletedAlertSound: {
+                    label: "Som de Quest concluída",
+                    description: "O som tocado quando uma Quest é concluída."
+                },
+                questCompletedAlertVolume: {
+                    label: "Volume de Quest concluída",
+                    description: "O volume do som de Quest concluída."
+                },
+                questFetchInterval: {
+                    label: "Intervalo de busca",
+                    description: "O intervalo em segundos para buscar Quests do Discord."
+                },
+                newQuestAlertSound: {
+                    label: "Som de nova Quest",
+                    description: "O som tocado quando novas Quests são detectadas."
+                },
+                newQuestAlertVolume: {
+                    label: "Volume de nova Quest",
+                    description: "O volume do som de nova Quest."
+                },
+                newExcludedQuestAlertSound: {
+                    label: "Som de nova Quest excluída",
+                    description: "O som tocado quando novas Quests excluídas são detectadas."
+                },
+                newExcludedQuestAlertVolume: {
+                    label: "Volume de nova Quest excluída",
+                    description: "O volume do som de nova Quest excluída."
+                },
+                questTiles: {
+                    label: "Cartões de Quests",
+                    description: "Personalize a aparência dos cartões de Quests na página de Quests."
+                },
+                questTileUnclaimedColor: {
+                    label: "Cor dos cartões não resgatados",
+                    description: "A cor dos cartões de Quests não resgatadas."
+                },
+                questTileClaimedColor: {
+                    label: "Cor dos cartões resgatados",
+                    description: "A cor dos cartões de Quests resgatadas."
+                },
+                questTileIgnoredColor: {
+                    label: "Cor dos cartões ignorados",
+                    description: "A cor dos cartões de Quests ignoradas."
+                },
+                questTileExpiredColor: {
+                    label: "Cor dos cartões expirados",
+                    description: "A cor dos cartões de Quests expiradas."
+                },
+                questTileGradient: {
+                    label: "Gradiente dos cartões",
+                    description: "Estilo do gradiente usado nos cartões de Quests."
+                },
+                questTilePreload: {
+                    label: "Pré-carregamento dos cartões",
+                    description: "Tenta pré-carregar os recursos dos cartões de Quests."
+                },
+                reorderQuests: {
+                    label: "Reordenar Quests",
+                    description: "Ordena as Quests pelo status."
+                },
+                questOrder: {
+                    label: "Ordem das Quests",
+                    description: "Ordem dos grupos de status das Quests."
+                },
+                unclaimedSubsort: {
+                    label: "Subordenação de não resgatadas",
+                    description: "Método de subordenação para Quests não resgatadas."
+                },
+                claimedSubsort: {
+                    label: "Subordenação de resgatadas",
+                    description: "Método de subordenação para Quests resgatadas."
+                },
+                ignoredSubsort: {
+                    label: "Subordenação de ignoradas",
+                    description: "Método de subordenação para Quests ignoradas."
+                },
+                expiredSubsort: {
+                    label: "Subordenação de expiradas",
+                    description: "Método de subordenação para Quests expiradas."
+                },
+                isOnQuestsPage: {
+                    label: "Na página de Quests",
+                    description: "Se o utilizador está atualmente na página de Quests."
+                },
+                rememberQuestPageSort: {
+                    label: "Lembrar ordenação",
+                    description: "Lembra a última ordenação usada na página de Quests."
+                },
+                rememberQuestPageFilters: {
+                    label: "Lembrar filtros",
+                    description: "Lembra os últimos filtros usados na página de Quests."
+                },
+                lastQuestPageSort: {
+                    label: "Última ordenação",
+                    description: "A última ordenação usada na página de Quests."
+                },
+                lastQuestPageFilters: {
+                    label: "Últimos filtros",
+                    description: "Os últimos filtros usados na página de Quests."
+                },
+                ignoredQuestIDs: {
+                    label: "IDs de Quests ignoradas",
+                    description: "Uma lista de IDs de Quests ignoradas."
+                },
+                resumeQuestIDs: {
+                    label: "IDs de Quests a retomar",
+                    description: "Uma lista de IDs de Quests a ser concluídas automaticamente ou na fila em segundo plano."
+                },
+                acknowledgedNotices: {
+                    description: "Avisos únicos que o utilizador confirmou.",
+                    label: "Avisos confirmados"
+                },
+                settingsSearch: {
+                    description: "Pesquisar definições do Questify.",
+                    label: "Pesquisa de definições"
+                },
+                hideNonAutoCompletableQuests: {
+                    description: "Ocultar missões incompletas sem uma tarefa de conclusão automática suportada e ativada.",
+                    label: "Ocultar missões sem conclusão automática"
+                },
+                preventVideoQuestsPausing: {
+                    description: "Impedir que o vídeo pause quando a janela da missão perder o foco.",
+                    label: "Impedir pausa de missões de vídeo"
+                },
+                hiddenQuestStatuses: {
+                    description: "Grupos de estado de missões a ocultar.",
+                    label: "Estados de missão ocultos"
+                }
+            },
+            text: {
+                clearQuestQueue: "Limpar fila de missões",
+                hideIncompleteQuestsWith: "Ocultar missões incompletas com estado não resgatado ou ignorado quando nenhuma tarefa de conclusão automática for suportada nesta plataforma e estiver ativada na lista de tipos de missão. Missões resgatadas, expiradas e concluídas estão isentas. Usa as opções de ordem de estado ocultas para as ocultar.",
+                discordForcesYouTo: "O Discord obriga-te a manter o cliente em foco para que as missões de vídeo reproduzam o vídeo.",
+                hideNonAutoCompletable: "Ocultar missões sem conclusão automática:",
+                preventVideoQuestsFrom: "Impedir que missões de vídeo pausem ao perder o foco:",
+                thePunishmentAlsoConsists: "A punição inclui também uma violação no estado da conta que dura 2 anos por violação.",
+                dueToTheVarious: "Devido aos vários métodos que o Discord usa para rastrear utilizadores, não há forma realista de evitar a deteção. Se continuares, percebe que o Discord provavelmente detetará a tua utilização a certa altura.",
+                enrollInQuest: "Inscrever-se na missão",
+                hidden: "Oculto",
+                selectingAnOccupiedPosition: "Selecionar uma posição ocupada troca os dois estados. Estados ocultos são removidos das listas de missões.",
+                searchQuestifySettings: "Pesquisar definições do Questify",
+                searchQuestifySettings2: "Pesquisar definições do Questify...",
+                noMatchingSettings: "Nenhuma definição correspondente.",
+                questifyNoticeAugust7th: "Aviso do Questify - 7 de agosto de 2026",
+                keepUsingDangerousQuestify: "Continuar a usar definições perigosas do Questify",
+                disableDangerousQuestifySettings: "Desativar definições perigosas do Questify",
+                questifyNoticeAugust26th: "Aviso do Questify - 26 de agosto de 2026",
+                areYouSure: "Tens a certeza?",
+                thePunishmentAppearsLimited: "A punição parece limitada à perda de acesso às missões e às suas recompensas, mas o Discord pode agravá-la a qualquer momento.",
+                queueAllQuests: "Pôr em fila todas as missões",
+                inProgress: "Em curso",
+                rateLimited: "Limitado",
+                preventsVideoPausing: "Esta definição impede que o vídeo pause e permite que a conclusão avance normalmente.",
+                appliesOnlyToVideoQuests: "Esta definição se aplica apenas à conclusão manual de missões de vídeo.",
+                knownToPunish: "O Discord é conhecido por punir utilizadores de scripts ou plugins que modificam a conclusão de missões. Modificar a conclusão de missões viola os",
+                punishmentConsists: "A punição consiste na perda temporária ou permanente do acesso às missões e às suas recompensas.",
+                questBanSystem: "O Discord implementou um sistema de banimento de missões que limitará temporária ou permanentemente o teu acesso para concluir missões e resgatar as suas recompensas caso descubra que as concluis por meios não oficiais. Modificar a conclusão de missões viola os",
+                begunPunishing: "O Discord começou a punir utilizadores de scripts e plugins que modificam a conclusão de missões. Modificar a conclusão de missões viola os",
+                dueToRateLimits: " devido a limites de taxa"
             }
         },
         questionMarkReplacement: {
@@ -8230,6 +8853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Guardar como GIF",
                     description: "Guardar como GIF por padrão"
                 }
+            },
+            text: {
+                quotePreview: "Pré-visualização da citação"
             }
         },
         randomVoice: {
@@ -8287,7 +8913,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                     server: "Servidor inválido"
                 }
             },
+            keybind: {
+                label: "Atalho de teclado",
+                recording: "A gravar...",
+                reset: "Repor"
+            },
             option: {
+                keybindEnabled: {
+                    label: "Atalho ativado",
+                    description: "Mostra os controlos do atalho de voz aleatória"
+                },
                 userAmountOperation: {
                     label: "Operação de Quantidade de Utilizadores",
                     description: "Seleciona uma operação para as quantidades de utilizadores"
@@ -8379,6 +9014,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             alert: {
                 failed: "Falha ao encontrar um Canal de Voz!"
+            },
+            toast: {
+                failedToFindA: "Falha ao encontrar um canal de voz.",
+                voiceChannelIsUnavailable: "O canal de voz está indisponível."
+            },
+            text: {
+                userCount: "{{count}} utilizador",
+                usersCount: "{{count}} utilizadores"
             }
         },
         reactErrorDecoder: {
@@ -8426,7 +9069,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 clearRdms: {
                     label: "Limpar Lista RDMS",
                     description: "Utilitário de teste: Limpar lista RDMs",
-                    toast: "Histórico RDMS limpo",
+                    toast: "Histórico do RDMS limpo",
                     button: "Limpar Histórico RDMs"
                 }
             },
@@ -8477,6 +9120,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noLongerFriend: "Já não és amigo de {{user}}.",
                 friendRequestRevoked: "O pedido de amizade de {{user}} foi revogado.",
                 ok: "OK"
+            },
+            text: {
+                relationshipNotifier: "Notificador de relações"
             }
         },
         remix: {
@@ -8500,7 +9146,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ellipse: "Elipse",
                 line: "Linha",
                 arrow: "Seta",
-                fill: "Preenchimento"
+                fill: "Preenchimento",
+                image: "Imagem"
             }
         },
         repeatMessages: {
@@ -8534,12 +9181,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Pesquisar Texto",
                 searchWith: "Pesquisar com {{name}}"
+            },
+            text: {
+                google: "Google"
             }
         },
         replyPingControl: {
             name: "ReplyPingControl",
-            description: "Controla se deves sempre ou nunca receber menções (pings) em respostas a mensagens, com uma funcionalidade de lista branca",
+            description: "Controla se queres receber sempre ou nunca menções nas respostas a mensagens, com funcionalidades de lista de permissões e de bloqueio",
             option: {
+                replyPingBlacklist: {
+                    label: "Lista de bloqueio de menções em respostas",
+                    description: "Lista separada por vírgulas de IDs de utilizador para nunca receberes menções de resposta deles"
+                },
                 alwaysPingOnReply: {
                     label: "Mencionar Sempre em Respostas",
                     description: "Receber sempre uma menção quando alguém responde às tuas mensagens"
@@ -8564,6 +9218,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Pesquisar Imagem",
                 all: "Pesquisar Tudo"
+            },
+            text: {
+                all: "Todos"
             }
         },
         reviewDB: {
@@ -8671,6 +9328,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             profile: {
                 optedOut: "Utilizador recusou",
                 noReviews: "Sem análises ainda"
+            },
+            toast: {
+                youCannotVoteOn: "Não podes votar na tua própria avaliação.",
+                networkErrorFailedTo: "Erro de rede: falha ao ligar ao ReviewDB.",
+                pleaseAuthorizeToVote: "Autoriza para votar em avaliações.",
+                requestFailed: "ReviewDB: a solicitação falhou com o status {{status}}"
+            },
+            text: {
+                ok: "OK",
+                updateReviewFor: "Atualizar avaliação de @{{name}}",
+                reviewUser: "Avaliar @{{name}}",
+                system: "Sistema",
+                reviewCount: "({{count}} avaliações)"
             }
         },
         richMagnetLinks: {
@@ -8764,46 +9434,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
         },
-        rpcStats: {
-            name: "RPCStats",
-            description: "Exibe estatísticas sobre a tua atividade como um RPC",
-            option: {
-                assetURL: {
-                    label: "URL do Ativo",
-                    description: "A imagem a usar para o teu RPC. A tua foto de perfil é usada se deixares em branco"
-                },
-                rpcTitle: {
-                    label: "Título do RPC",
-                    description: "O título do teu RPC"
-                },
-                statDisplay: {
-                    label: "Exibição de Estatística",
-                    description: "O que deve o RPC exibir? (Apenas uma linha, creio eu)",
-                    today: "A quantidade de mensagens enviadas hoje",
-                    alltime: "A quantidade de mensagens enviadas desde sempre",
-                    listened: "O teu álbum mais ouvido da semana"
-                },
-                lastFMApiKey: {
-                    label: "Chave API Last.fm",
-                    description: "A tua chave API do Last.fm"
-                },
-                lastFMUsername: {
-                    label: "Utilizador Last.fm",
-                    description: "O teu nome de utilizador do Last.fm"
-                },
-                albumCoverImage: {
-                    label: "Imagem de Capa do Álbum",
-                    description: "A imagem de capa do álbum deve ser usada como imagem do RPC? (Se escolheres a exibição Last.fm)"
-                },
-                lastFMStatFormat: {
-                    label: "Formato de Estatística Last.fm",
-                    description: "Como deve ser formatada a estatística do Last.fm? $album é substituído pelo nome do álbum, e $artist pelo nome do artista"
-                }
-            },
-            noInfo: "Sem informações de momento :(",
-            messagesToday: "Mensagens enviadas hoje: {{count}}",
-            messagesAllTime: "Mensagens enviadas desde sempre: {{count}}"
-        },
         saveFavoriteGIFs: {
             name: "SaveFavouritedGIFs",
             description: "Exportar URLs de GIFs favoritos",
@@ -8868,7 +9498,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 maxMessagesReached: "Limite de {{max}} mensagens por canal por minuto atingido",
                 messageScheduled: "Mensagem agendada!",
                 messageRemoved: "Mensagem agendada removida",
-                allCleared: "Todas as mensagens agendadas foram limpas"
+                allCleared: "Todas as mensagens agendadas foram limpas",
+                scheduledMessageSentTo: "Mensagem agendada enviada para {{name}}"
             },
             button: {
                 tooltipOn: "Modo Agendamento ATIVADO (clica para desativar, botão direito para a lista)",
@@ -8924,20 +9555,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Reproduzir apenas o tema Snow Halation"
                 }
             }
-        },
-        summaries: {
-            name: "Summaries",
-            description: "Ativa a funcionalidade experimental de Sumários do Discord em todos os servidores, exibindo resumos de conversas gerados por IA",
-            option: {
-                summaryExpiryThresholdDays: {
-                    label: "Limite de Expiração de Sumários (Dias)",
-                    description: "O tempo em dias antes de um sumário ser removido. Nota que apenas são mantidos até 50 sumários por canal"
-                }
-            }
-        },
-        selfForward: {
-            name: "SelfForward",
-            description: "Adiciona o canal atual à lista de popups de reencaminhamento"
         },
         sendTimestamps: {
             name: "SendTimestamps",
@@ -9002,7 +9619,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 serverBoosts: "Impulsos do Servidor",
                 channels: "Canais",
-                roles: "Cargos"
+                roles: "Cargos",
+                boostLevel: "{{count}} (Nível {{level}})"
             }
         },
         serverListIndicators: {
@@ -9061,6 +9679,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bgOpacity: {
                     label: "Opacidade do Fundo",
                     description: "Opacidade do fundo"
+                },
+                ignoredLanguages: {
+                    label: "Linguagens ignoradas",
+                    description: "Lista separada por vírgulas de linguagens a deixar para os blocos de código predefinidos do Discord"
                 }
             },
             button: {
@@ -9079,6 +9701,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noShiftPin: {
                     label: "Fixar Sem Shift",
                     description: "Remove a necessidade de segurar Shift para fixar uma mensagem."
+                },
+                noQuickReacts: {
+                    description: "Ocultar reações rápidas. Por predefinição, mostrar o menu completo oculta os botões de reação rápida.",
+                    label: "Sem reações rápidas"
                 }
             }
         },
@@ -9161,6 +9787,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     compact: "Compacto",
                     cozy: "Agradável",
                     roomy: "Espaçoso"
+                },
+                showGithubOrgs: {
+                    description: "Mostrar organizações do GitHub de que o utilizador é membro",
+                    label: "Mostrar organizações do GitHub"
+                },
+                showOnModal: {
+                    description: "Mostrar contas associadas na janela de perfil completa",
+                    label: "Mostrar na janela"
                 }
             }
         },
@@ -9295,7 +9929,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 memberList: {
                     label: "Lista de Membros",
-                    description: "Exibir o primeiro nome disponível do teu formato personalizado na lista de membros."
+                    description: "Mostrar o primeiro nome disponível do teu formato de nome personalizado na lista de membros, de MPs, de amigos e em Ativo agora."
                 },
                 profilePopout: {
                     label: "Popout de Perfil",
@@ -9349,6 +9983,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Nome Personalizado Apenas em Mensagens Diretas",
                     description: "Exibir apenas nomes personalizados quando estiver em DMs, e não em servidores."
                 },
+                alwaysShowEffects: {
+                    label: "Animar sempre os efeitos",
+                    description: "Mostrar sempre efeitos como se estivesse a passar o cursor por cima."
+                },
                 includedNames: {
                     label: "Nomes Incluídos",
                     description: "A ordem para exibir nomes de utilizador, nomes de exibição, alcunhas e nomes de amigos. Usa os marcadores: {user}, {display}, {nick}, {friend}. Podes separar por vírgulas para definir suplentes."
@@ -9376,6 +10014,42 @@ const translations: MatchStructure<typeof enTranslations> = {
                 triggerNameRerender: {
                     label: "Forçar Re-renderização de Nomes",
                     description: "Força a atualização dos nomes ao alternar esta definição."
+                },
+                searchAutocomplete: {
+                    description: "Mostrar o primeiro nome disponível do teu formato de nome personalizado no preenchimento automático de menções e pesquisa.",
+                    label: "Preenchimento automático da pesquisa"
+                },
+                styleDirectMessagesList: {
+                    description: "Mostrar efeitos de nome de apresentação em itens não selecionados sem passar o rato. Itens selecionados e sob o rato continuam estilizados quando desativado.",
+                    label: "Estilizar lista de mensagens privadas"
+                },
+                styleDirectMessagesMessages: {
+                    description: "Mostrar efeitos de nome de apresentação nos autores das mensagens sem passar o rato. Nomes sob o rato continuam estilizados quando desativado.",
+                    label: "Estilizar mensagens nas MPs"
+                },
+                styleFriendsList: {
+                    description: "Mostrar efeitos de nome de apresentação sem passar o rato. Itens sob o rato continuam estilizados quando desativado.",
+                    label: "Estilizar lista de amigos"
+                },
+                styleActiveNow: {
+                    description: "Mostrar efeitos de nome de apresentação sem passar o rato. Itens sob o rato continuam estilizados quando desativado.",
+                    label: "Estilizar Ativo agora"
+                },
+                ignoreEffects: {
+                    description: "Para nomes não principais, usar apenas a cor do cargo principal e omitir efeitos de nome de apresentação.",
+                    label: "Ignorar efeitos"
+                },
+                animateEffects: {
+                    description: "Animar gradientes de cargo e efeitos de nome de apresentação em nomes não principais. Isto é desativado por \"Ignorar efeitos\" e movimento reduzido.",
+                    label: "Animar efeitos"
+                },
+                alwaysAnimateEffects: {
+                    description: "Forçar a animação dos efeitos de nome de apresentação quando já estiverem visíveis, mesmo sem passar o rato.",
+                    label: "Animar sempre os efeitos"
+                },
+                gradientGlow: {
+                    description: "Adicionar um brilho aos gradientes animados de utilizador, tal como os gradientes de cargo do servidor brilham.",
+                    label: "Brilho do gradiente"
                 }
             },
             modal: {
@@ -9389,6 +10063,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nickname: "Alcunha SMYN",
                 reset: "Repor Alcunha SMYN",
                 cancel: "Cancelar"
+            },
+            text: {
+                save: "Guardar",
+                unknown: "Desconhecido"
             }
         },
         showTimeoutDuration: {
@@ -9401,6 +10079,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     tooltip: "Na Dica de Ferramenta (Tooltip)",
                     inline: "Ao lado do ícone de castigo"
                 }
+            },
+            text: {
+                timeoutRemaining: "de castigo restante"
             }
         },
         showResourceChannels: {
@@ -9559,7 +10240,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 hidden: "Escrita Oculta ({{location}})",
                 visible: "Escrita Visível ({{location}})",
-                global: "Escrita Visível (Global)"
+                global: "Escrita Visível (Global)",
+                voiceChannel: "Escrita sempre visível no chat do canal de voz ligado",
+                temporary: "Escrita temporariamente visível neste canal devido a uma mensagem recente"
             },
             option: {
                 enabledGlobally: {
@@ -9610,6 +10293,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Oculto por Padrão",
                     description: "Se ativado, o plugin ocultará a tua escrita em todos os locais não listados em 'Localizações Desativadas'. Se desativado, mostrará a escrita em todos os locais não listados em 'Localizações Ativadas'."
                 },
+                alwaysEnableInActiveVoiceChat: {
+                    label: "Ativar sempre no chat de voz ativo",
+                    description: "Permite sempre que o teu indicador de escrita apareça ao escreveres num canal de voz ao qual estás ligado."
+                },
+                temporaryEnableThresholdServers: {
+                    label: "Limite de ativação temporária (servidores)",
+                    description: "Permite temporariamente que o teu indicador de escrita apareça durante estes segundos após enviares uma mensagem num canal de servidor. Se o indicador já estiver visível no canal, esta definição não terá efeito."
+                },
+                temporaryEnableThresholdDirectMessages: {
+                    label: "Limite de ativação temporária (mensagens diretas)",
+                    description: "Permite temporariamente que o teu indicador de escrita apareça durante estes segundos após enviares uma mensagem numa MD ou MD de grupo. Se o indicador já estiver visível no canal, esta definição não terá efeito."
+                },
                 enabledLocations: {
                     label: "Localizações Ativadas",
                     description: "Ativar funcionalidade para estes IDs. Aceita lista separada por vírgulas de IDs de DMs, canais e servidores. Só usado se 'Oculto por Padrão' estiver desativado."
@@ -9618,6 +10313,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Localizações Desativadas",
                     description: "Desativar funcionalidade para estes IDs. Aceita lista separada por vírgulas de IDs de DMs, canais e servidores. Só usado se 'Oculto por Padrão' estiver ativado."
                 }
+            },
+            text: {
+                silentTyping: "Escrita silenciosa",
+                enabled: "Ativado",
+                chatBarIndicators: "Indicadores na barra de chat",
+                membersListIndicators: "Indicadores na lista de membros",
+                guild: "Servidor",
+                channel: "Canal",
+                global: "Global"
             }
         },
         snowfall: {
@@ -9714,7 +10418,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         splitLargeMessages: {
             name: "SplitLargeMessages",
-            description: "Divide mensagens grandes em várias para caber no limite de caracteres do Discord.",
+            description: "Divide mensagens demasiado grandes em partes do tamanho do Discord antes de enviar.",
             option: {
                 maxLength: {
                     label: "Comprimento Máximo da Mensagem",
@@ -9726,7 +10430,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 sendDelay: {
                     label: "Atraso de Envio",
-                    description: "Atraso entre cada parte enviada, em segundos."
+                    description: "Atraso mínimo entre cada parte, em segundos."
                 },
                 hardSplit: {
                     label: "Divisão Rígida",
@@ -9734,32 +10438,26 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 splitInSlowmode: {
                     label: "Dividir em Modo Lento",
-                    description: "As mensagens devem ser divididas se o canal tiver o modo lento (slowmode) ativado?"
+                    description: "Permitir dividir no modo lento quando o atraso estiver dentro do máximo configurado."
                 },
                 slowmodeMax: {
                     label: "Máximo de Modo Lento",
-                    description: "Tempo máximo de modo lento permitido para efetuar a divisão."
-                }
-            }
-        },
-        spotifyActivityToggle: {
-            name: "SpotifyActivityToggle",
-            description: "Adiciona um botão de alternância para a visibilidade da atividade do Spotify.",
-            tooltip: {
-                enable: "Ligar atividade do Spotify",
-                disable: "Desligar atividade do Spotify"
-            },
-            option: {
-                location: {
-                    label: "Localização",
-                    description: "Onde mostrar o botão de alternância do Spotify",
-                    panel: "Ao lado de Silenciar/Ensurdecer",
-                    toolbox: "Plexcord Toolbox"
+                    description: "Duração máxima do modo lento permitida ao dividir mensagens."
                 },
-                activityStatus: {
-                    label: "Estado da Atividade",
-                    description: "O estado atual da tua atividade do Spotify"
+                splitMode: {
+                    description: "Preferir este limite ao dividir uma mensagem.",
+                    label: "Modo de divisão"
                 }
+            },
+            toast: {
+                cannotSplitThisMessage: "Não é possível dividir esta mensagem devido ao modo lento do canal.",
+                onlySentLengthMessage: "Apenas {{sent}}/{{length}} partes da mensagem foram enviadas.",
+                unsentCopied: "Partes não enviadas da mensagem copiadas para a área de transferência."
+            },
+            text: {
+                newlines: "Quebras de linha",
+                spaces: "Espaços",
+                strictCharacterLimit: "Limite estrito de caracteres"
             }
         },
         spotifyCrack: {
@@ -9845,7 +10543,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             context: {
                 edit: "Editar Predefinições Personalizadas",
-                set: "Definir Estado Personalizado"
+                set: "Definir Estado Personalizado",
+                delete: "Eliminar predefinição"
             },
             notification: {
                 successfully: "Estado guardado com sucesso"
@@ -9912,11 +10611,39 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 blockSticker: "Bloquear Autocolante",
                 unblockSticker: "Desbloquear Autocolante"
+            },
+            text: {
+                failedToRender: "Falha ao apresentar :("
             }
         },
         stickerPaste: {
             name: "StickerPaste",
             description: "Faz com que ao escolher um autocolante no seletor, este seja inserido na caixa de chat em vez de ser enviado instantaneamente"
+        },
+        streaks: {
+            name: "Streaks",
+            description: "Mostra uma sequência ao lado de um utilizador quando trocam MD em dias consecutivos.",
+            tooltip: "Sequência de {{count}} dias",
+            tooltipExpiring: "Sequência de {{count}} dias — conversem hoje para a manter!",
+            option: {
+                account: {
+                    description: "Inicie ou termine sessão na API de Streaks. As sequências são guardadas na API, por isso precisa de iniciar sessão para serem contadas.",
+                    login: "Iniciar sessão na API de Streaks",
+                    logout: "Terminar sessão na API de Streaks"
+                },
+                eliteColor: "Cor da sequência elite (100+ dias)",
+                diamondColor: "Cor da sequência diamante (60+ dias)",
+                platinumColor: "Cor da sequência platina (45+ dias)",
+                goldColor: "Cor da sequência ouro (30+ dias)",
+                silverColor: "Cor da sequência prata (14+ dias)",
+                bronzeColor: "Cor da sequência bronze (7+ dias)",
+                defaultColor: "Cor predefinida da sequência (1+ dias)"
+            },
+            toast: {
+                authFailed: "Falha na autorização: {{error}}",
+                failedToAuthorizeMessage: "Falha ao autorizar: {{message}}",
+                authorizationExpired: "A autorização do Streaks expirou. Autoriza novamente nas definições do plugin Streaks."
+            }
         },
         streamerModeOnStream: {
             name: "StreamerModeOnStream",
@@ -9924,27 +10651,27 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         streamingCodecDisabler: {
             name: "StreamingCodecDisabler",
-            description: "Desativa os codecs de transmissão à tua escolha",
+            description: "Desativa os codecs de vídeo que quiseres para transmissões e câmaras.",
             option: {
                 disableAv1Codec: {
                     label: "Desativar Codec AV1",
-                    description: "Impede o Discord de considerar o uso de AV1 para transmissão."
+                    description: "Fazer o Discord não considerar usar AV1 para transmissões e câmaras."
                 },
                 disableH265Codec: {
                     label: "Desativar Codec H265",
-                    description: "Impede o Discord de considerar o uso de H265 para transmissão."
+                    description: "Fazer o Discord não considerar usar H265 para transmissões e câmaras."
                 },
                 disableH264Codec: {
                     label: "Desativar Codec H264",
-                    description: "Impede o Discord de considerar o uso de H264 para transmissão."
+                    description: "Fazer o Discord não considerar usar H264 para transmissões e câmaras."
                 },
                 disableVP8Codec: {
                     label: "Desativar Codec VP8",
-                    description: "Impede o Discord de considerar o uso de VP8 para transmissão."
+                    description: "Fazer o Discord não considerar usar VP8 para transmissões e câmaras."
                 },
                 disableVP9Codec: {
                     label: "Desativar Codec VP9",
-                    description: "Impede o Discord de considerar o uso de VP9 para transmissão."
+                    description: "Fazer o Discord não considerar usar VP9 para transmissões e câmaras."
                 }
             }
         },
@@ -9990,6 +10717,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             modal: {
+                name: "Nome",
+                nameDescription: "Um nome opcional para ajudar a identificar esta regra.",
+                search: "Pesquisar uma regra...",
+                noResults: "Nenhuma regra corresponde à sua pesquisa.",
                 title: "Testar Regras",
                 find: "Procurar",
                 findRegex: "Padrão regex",
@@ -10004,6 +10735,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 add: "Adicionar regra",
                 empty: "Regra vazia",
                 rule: "Regra",
+            },
+            text: {
+                optionallyOnlyApplyThis: "Opcionalmente, aplicar esta regra apenas se a mensagem incluir este texto.",
+                emptyRule: "Regra vazia {{number}}",
+                ruleWithFind: "Regra {{number}} - {{find}}"
             }
         },
         themeAttributes: {
@@ -10050,7 +10786,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 twentyFourHourTime: {
                     label: "Formato 24 Horas",
-                    description: "Mostrar a hora no formato de 24 horas"
+                    description: "Mostrar a hora no formato 24 h"
                 },
                 showTimezoneInfo: {
                     label: "Mostrar Info do Fuso Horário",
@@ -10089,6 +10825,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 askedTimezone: {
                     label: "Fuso Horário Solicitado",
                     description: "Se o utilizador já foi questionado para definir o seu fuso horário"
+                },
+                recipientTimezoneInDms: {
+                    label: "Fuso horário do destinatário nas MPs",
+                    description: "Nas MPs, mostrar o fuso horário do destinatário nas tuas mensagens"
+                },
+                showLocalTimezone: {
+                    label: "Mostrar fuso horário local",
+                    description: "Mostrar o fuso horário local em vez de apenas \"local\""
                 }
             },
             modal: {
@@ -10097,6 +10841,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 selectPlaceholder: "Escolhe um Fuso Horário",
                 delete: "Eliminar Fuso Horário",
                 save: "Guardar"
+            },
+            text: {
+                invalidResponseFormat: "Formato de resposta inválido"
             }
         },
         toastNotifications: {
@@ -10157,6 +10904,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 determineServerNotifications: {
                     label: "Respeitar Notificações do Servidor",
                     description: "Determinar se deve mostrar notificações com base nas definições de notificação do servidor"
+                },
+                respectDoNotDisturb: {
+                    label: "Respeitar Não incomodar",
+                    description: "Não mostrar notificações quando o teu estado for Não incomodar."
                 },
                 directMessages: {
                     label: "Mensagens Diretas",
@@ -10244,8 +10995,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "O DeepL requer uma chave API paga do DeepL Pro",
                     descriptionWeb: "Serviço de tradução (Não suportado na Web!)",
                     google: "Google Tradutor",
-                    deepl: "DeepL Grátis",
-                    deeplPro: "DeepL Pro"
+                    deepl: "DeepL Gratuito - Chave de API necessária",
+                    deeplPro: "DeepL Pro - Chave de API necessária",
+                    kagi: "Kagi Tradutor - Chave de API necessária"
+                },
+                kagiSession: {
+                    label: "Sessão do Kagi",
+                    description: "Obtém o teu token de sessão em https://kagi.com/settings?p=user_details"
                 },
                 deeplApiKey: {
                     label: "Chave API DeepL",
@@ -10284,6 +11040,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     cancel: "Entendido",
                     secondaryConfirm: "Não mostrar novamente"
                 }
+            },
+            button: {
+                manageLanguages: "Personalizar idiomas de tradução e tradução automática"
             }
         },
         typingIndicator: {
@@ -10596,6 +11355,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Tamanho da Imagem",
                     description: "O tamanho de imagem a usar"
                 }
+            },
+            text: {
+                viewAvatarDecoration: "Ver decoração do avatar"
             }
         },
         viewRaw: {
@@ -10616,11 +11378,23 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Alterar o botão para ver o conteúdo bruto de qualquer mensagem.",
                     left: "Clique esquerdo para ver o conteúdo bruto.",
                     right: "Clique direito para ver o conteúdo bruto."
+                },
+                messageContextMenu: {
+                    description: "Mostrar no menu de contexto da mensagem",
+                    label: "Menu de contexto da mensagem"
+                },
+                sortKeys: {
+                    description: "Ordenar alfabeticamente as chaves dos dados brutos.",
+                    label: "Ordenar chaves"
+                },
+                stripSensitiveData: {
+                    description: "Remover dados sensíveis dos dados brutos, como o teu e-mail e número de telefone.",
+                    label: "Remover dados sensíveis"
                 }
             },
             modal: {
                 title: "Ver Raw",
-                content: "Conteúdo",
+                content: "Conteúdo da mensagem",
                 data: "Dados de {{type}}",
                 copied: "Dados de {{type}} copiados!",
                 copy: "Copiar JSON de {{type}}",
@@ -10633,6 +11407,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 guild: "Servidor",
                 role: "Cargo",
                 user: "Utilizador"
+            },
+            text: {
+                copyTypeData: "Copiar dados de {{type}}",
+                rawTypeData: "Dados brutos de {{type}}",
+                messageData: "Dados da mensagem"
             }
         },
         voiceButtons: {
@@ -10811,6 +11590,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 pause: "Pausar gravação",
                 recording: "A GRAVAR",
                 send: "Enviar",
+            },
+            text: {
+                convertioWebConverter: "conversor web do convertio"
             }
         },
         volumeBooster: {
@@ -10820,39 +11602,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 multiplier: {
                     label: "Multiplicador",
                     description: "Multiplicador de Volume"
-                }
-            }
-        },
-        wallpaperFree: {
-            name: "WallpaperFree",
-            description: "Recriação da antiga experiência de papel de parede de DMs; define uma imagem de fundo para qualquer canal, utilizador ou servidor.",
-            option: {
-                globalDefault: {
-                    label: "Padrão Global",
-                    description: "Define um papel de parede global padrão para todos os canais."
-                },
-                stylingTips: {
-                    label: "Dicas de Estilo"
-                }
-            },
-            context: {
-                setWallpaper: "Definir Papel de Parede",
-                removeWallpaper: "Remover Papel de Parede"
-            },
-            modal: {
-                set: "Definir papel de parede",
-                image: "O URL da imagem",
-                cancel: "Cancelar",
-                apply: "Aplicar",
-                global: {
-                    set: "Definir um papel de parede global",
-                    remove: "Remover papel de parede global padrão",
-                    reset: "Repor dados de papéis de parede"
-                },
-                web: {
-                    info: "Podes usar ficheiros locais colocando-os no diretório de temas da Plexcord e usando o URL plexcord:///themes/nomeficheiro.ext",
-                    open: "Abrir Diretório de Temas",
-                    quickCSS: "Abrir QuickCSS"
                 }
             }
         },
@@ -10868,7 +11617,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webKeybinds: {
             name: "WebKeybinds",
-            description: "Adiciona novamente os atalhos de teclado que faltam na versão web do Discord: Ctrl+T, Ctrl+Shift+T, Ctrl+Tab, Ctrl+Shift+Tab, Ctrl+1-9, Ctrl+,. Só funciona totalmente no Plextron/Legcord, não dentro do teu navegador comum"
+            description: "Volta a adicionar atalhos em falta na versão web do Discord. Só funciona totalmente no Plextron/Legcord, não no navegador",
+            option: {
+                showNavigationButtons: {
+                    description: "Mostrar os botões de navegação retroceder/avançar na barra de título.",
+                    label: "Mostrar botões de navegação"
+                },
+                overrideCommonKeybinds: {
+                    description: "Permite que o Discord substitua os atalhos mais comuns de navegação entre separadores (ctrl+t, ctrl+shift+t, ctrl+tab, ctrl+shift+tab, ctrl+n). Só funciona em alguns navegadores que dão prioridade aos atalhos de sites.",
+                    label: "Substituir atalhos comuns"
+                }
+            }
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
@@ -10887,6 +11646,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 avatarClick: {
                     label: "Clique no Avatar",
                     description: "Ativar/desativar o clique nos avatares das reações"
+                },
+                clickableAvatars: {
+                    description: "Quando ativado, clicar no avatar de quem reagiu abre o perfil em vez de adicionar a reação",
+                    label: "Avatares clicáveis"
                 }
             }
         },
@@ -11002,6 +11765,2447 @@ const translations: MatchStructure<typeof enTranslations> = {
         youtubeDescription: {
             name: "YouTubeDescription",
             description: "Adiciona descrições às incorporações de vídeos do YouTube"
+        },
+        addAttachments: {
+            name: "AddAttachments",
+            description: "Permite adicionar novos anexos ao editar mensagens",
+            toast: {
+                youCannotAddMore: "Não podes adicionar mais anexos a esta mensagem.",
+                youCanOnlyAdd: "Só podes adicionar mais {{count}} anexo(s) a esta mensagem.",
+                uploadingThisCanTake: "A carregar, isto pode demorar algum tempo...",
+                addedOne: "Anexo adicionado com sucesso!",
+                addedMany: "Anexos adicionados com sucesso!"
+            },
+            text: {
+                addAttachments: "Adicionar anexos"
+            }
+        },
+        advancedPermissions: {
+            option: {
+                simplifiedCard: {
+                    description: "O que fazer com o cartão de permissões simplificado do Discord",
+                    label: "Cartão simplificado",
+                    hide: "Ocultar",
+                    collapse: "Tornar recolhível",
+                    show: "Deixar visível"
+                },
+                collapsedByDefault: {
+                    description: "Iniciar com as permissões simplificadas recolhidas.",
+                    label: "Recolhido por predefinição"
+                }
+            },
+            name: "AdvancedPermissions",
+            description: "Mostra o cartão de permissões avançadas por predefinição.",
+            text: {
+                simplifiedPermissions: "Permissões simplificadas"
+            }
+        },
+        autoJumpToMessage: {
+            option: {
+                onlyWhenUnfocused: {
+                    description: "Saltar automaticamente para mensagens apenas quando a janela do Discord não estiver em foco.",
+                    label: "Apenas sem foco"
+                }
+            },
+            name: "AutoJumpToMessage",
+            description: "Abre automaticamente o canal das novas mensagens."
+        },
+        betterForwards: {
+            text: {
+                serverIconForName: "Ícone do servidor de {{name}}",
+                messageAttachments: "Anexos da mensagem",
+                messageTextWillNot: "O texto da mensagem não será reencaminhado quando esta opção estiver desativada",
+                forwardEverything: "Reencaminhar tudo",
+                viewServer: "Ver servidor",
+                embed: "Incorporação",
+                embedNumber: "Incorporação {{number}}",
+                image: "Imagem",
+                video: "Vídeo",
+                serverIcon: "Ícone do servidor {{name}}",
+                dmIcon: "Ícone de MD de {{name}}",
+                groupDmIcon: "Ícone da MD de grupo {{name}}"
+            },
+            option: {
+                resendOnFail: {
+                    description: "Tentará reenviar uma mensagem reencaminhada se o reencaminhamento falhar. Pode causar menções ou spam de texto não intencionais. Contorna as restrições NSFW.",
+                    label: "Reenviar em caso de falha"
+                },
+                forwardPreface: {
+                    description: "Com o que a mensagem reencaminhada deve começar",
+                    label: "Prefixo de reencaminhamento"
+                },
+                dontFollowForwards: {
+                    description: "Depois de reencaminhar uma única mensagem, não saltar para ela. Mantém Shift premido para ignorar este comportamento.",
+                    label: "Não seguir reencaminhamentos"
+                },
+                selfForward: {
+                    description: "Mostrar o canal atual no pop-up da lista de reencaminhamento.",
+                    label: "Reencaminhar para si"
+                }
+            },
+            name: "BetterForwards",
+            description: "Utilitários de reencaminhamento de mensagens, incluindo contorno de NSFW e melhorias na interface."
+        },
+        betterImageEditor: {
+            text: {
+                search: "Pesquisar",
+                searchSavedPictures: "Pesquisar imagens guardadas",
+                clearTheSearch: "Limpar a pesquisa",
+                savedPictures: "Imagens guardadas",
+                removeName: "Remover {{name}}",
+                removeHoldShiftTo: "Remover. Mantém Shift premido para ignorar a confirmação",
+                originals: "Originais",
+                putBackTheLast: "Repor o último",
+                forgetEveryRememberedCrop: "Esquecer todos os recortes memorizados?",
+                yourPicturesStayEach: "As tuas imagens ficam. Cada uma abrirá sem enquadramento a partir de agora, até a recortares novamente.",
+                forget: "Esquecer",
+                cancel: "Cancelar",
+                clearSavedPictures: "Limpar imagens guardadas?",
+                everyPictureYouHave: "Todas as imagens guardadas aqui serão removidas, juntamente com o recorte memorizado de cada uma. O arquivo do próprio Discord e o teu avatar e faixa atuais não são afetados.",
+                clear: "Limpar",
+                removeThisPicture: "Remover esta imagem?",
+                remove: "Remover",
+                keepTheCroppedCopy: "Manter a cópia recortada?",
+                itGoesOnThe: "Vai para a prateleira {{toLowerCase}}, ao lado dos teus originais.",
+                keep: "Manter",
+                noThanks: "Não, obrigado",
+                exportToAFile: "Exportar para um ficheiro",
+                importFromAFile: "Importar de um ficheiro",
+                forgetRememberedFraming: "Esquecer enquadramento memorizado",
+                clearSavedPictures2: "Limpar imagens guardadas",
+                croppedKind: "{{kind}} recortados",
+                unpinName: "Desafixar {{name}}",
+                pinName: "Fixar {{name}}",
+                pinnedNeverDrops: "Fixado, nunca sai da prateleira",
+                pinNeverDrops: "Fixa para que nunca saia da prateleira",
+                nothingMatches: "Nada aqui corresponde a isso",
+                originalsEmpty: "As imagens que escolhes, colas ou largas aparecem aqui",
+                croppedEmpty: "As imagens que recortas aparecem aqui",
+                forgotFraming: "Enquadramento esquecido em {{count}} imagem(ns)",
+                nothingFramed: "Nada estava enquadrado",
+                pictureLibrary: "Biblioteca de imagens",
+                addedPictures: "{{count}} imagem(ns) adicionada(s)",
+                nothingNew: "Nada de novo nesse ficheiro",
+                shownOfTotal: "{{shown}} de {{total}}",
+                keptCount: "{{count}} guardadas",
+                youAreWearingThis: "Está a usar isto",
+                removePictureBody: "{{name}} será removida das suas imagens guardadas, juntamente com o corte memorizado."
+            },
+            option: {
+                librarySize: {
+                    description: "Quantas imagens manter em cada prateleira.",
+                    label: "Tamanho da biblioteca"
+                },
+                rememberCrop: {
+                    description: "Restaura o zoom e a posição que usaste por último numa imagem.",
+                    label: "Lembrar recorte"
+                },
+                forgetFraming: {
+                    description: "Descarta todos os recortes memorizados e abre cada imagem como o Discord faria.",
+                    label: "Esquecer enquadramento"
+                },
+                saveCropped: {
+                    description: "Mantém uma cópia de cada imagem depois de a recortares.",
+                    label: "Guardar recortadas"
+                },
+                askBeforeSavingCropped: {
+                    description: "Perguntar primeiro em vez de manter automaticamente a cópia recortada.",
+                    label: "Perguntar antes de guardar recortadas"
+                },
+                transfer: {
+                    description: "Leva as tuas imagens, e o enquadramento de cada uma, para outro dispositivo.",
+                    label: "Transferir"
+                },
+                clearLibrary: {
+                    description: "Descarta todas as imagens que guardaste.",
+                    label: "Limpar biblioteca"
+                }
+            },
+            name: "BetterImageEditor",
+            description: "Mantém uma prateleira com as tuas imagens no editor de avatar e faixa, e lembra como recortaste cada uma.",
+            toast: {
+                couldNotExportYour: "Não foi possível exportar as tuas imagens",
+                couldNotReadThat: "Não foi possível ler esse ficheiro",
+                thatPictureIsMissing: "Essa imagem está em falta",
+                thatPictureIsToo: "Essa imagem é demasiado grande para o Discord",
+                couldNotUseThat: "Não foi possível usar essa imagem",
+                couldNotKeepThe: "Não foi possível manter a cópia recortada"
+            },
+            kind: {
+                avatars: "avatares",
+                banners: "banners",
+                serverIcons: "ícones de servidor",
+                serverBanners: "banners de servidor",
+                eventCovers: "capas de eventos",
+                homeHeaders: "cabeçalhos da página inicial",
+                decorations: "decorações",
+                widgetCovers: "capas de widgets",
+                widgetImages: "imagens de widgets"
+            }
+        },
+        cancelFriendRequest: {
+            name: "CancelFriendRequest",
+            description: "Adiciona uma forma de cancelar pedidos de amizade enviados a partir dos perfis.",
+            text: {
+                cancelOutgoingFriendRequest: "Cancelar pedido de amizade enviado"
+            }
+        },
+        clipUpload: {
+            text: {
+                createdAtMustBe: "A data de criação tem de ser uma data válida.",
+                cancel: "Cancelar",
+                uploadClipFile: "Carregar ficheiro de clip",
+                fileName: "Nome do ficheiro",
+                title: "Título",
+                epicMoment: "Momento épico",
+                message: "Mensagem",
+                checkOutThisClip: "Vê este clip!",
+                spoiler: "Spoiler",
+                remix: "Remix",
+                thumbnail: "Miniatura",
+                file: "Ficheiro",
+                selectFile: "Selecionar ficheiro",
+                parseClipMetadataFrom: "Extrair metadados do clip do ficheiro",
+                selectFriends: "Selecionar amigos",
+                selectAGame: "Selecionar um jogo",
+                customApplicationId: "ID de aplicação personalizado",
+                createdAt: "Criado em",
+                participants: "Participantes",
+                onlyTagPeopleWho: "Identifica apenas pessoas que estavam presentes e consentiram em aparecer neste clip.",
+                gameApplication: "Jogo/Aplicação",
+                uploadClipFile2: "Carregar ficheiro de clip",
+                uploading: "A enviar",
+                upload: "Enviar",
+                noFileSelected: "Nenhum ficheiro selecionado",
+                couldNotPrepare: "Não foi possível preparar o ficheiro selecionado.",
+                couldNotRead: "Não foi possível ler o ficheiro selecionado.",
+                couldNotUpdateMetadata: "Não foi possível atualizar os metadados do clipe.",
+                notCompatible: "Este ficheiro não é compatível. Usa um clipe MP4 com vídeo H.264 e áudio AAC.",
+                uploadFailed: "Falha no envio.",
+                noUploadSlot: "O Discord não retornou um espaço de envio.",
+                uploadCanceled: "Envio cancelado.",
+                failedToUpload: "Falha ao enviar o clipe.",
+                selectClipFile: "Selecionar ficheiro de clipe",
+                mp4Video: "Vídeo MP4"
+            },
+            name: "ClipUpload",
+            description: "Adiciona um botão para carregar um ficheiro de vídeo local como clip do Discord.",
+            toast: {
+                checkingClipFile: "A verificar o ficheiro do clip.",
+                convertingClipFile: "A converter o ficheiro do clip.",
+                clipUploaded: "Clip carregado."
+            }
+        },
+        collapsibleUI: {
+            name: "CollapsibleUI",
+            description: "Superfícies recolhíveis nativas para canais, membros, botões do chat e área do utilizador.",
+            text: {
+                collapsibleUi: "Interface recolhível",
+                guildBar: "Barra de servidores",
+                channelList: "Lista de canais",
+                membersList: "Lista de membros",
+                messageButtons: "Botões de mensagem",
+                titleBar: "Barra de título",
+                headerBar: "Barra de cabeçalho",
+                userArea: "Área do utilizador"
+            },
+            option: {
+                detachUserArea: {
+                    description: "Desacopla a área do utilizador para poder ser movida livremente quando não está recolhida.",
+                    label: "Desacoplar área do utilizador"
+                },
+                detachedUserAreaX: {
+                    description: "Guarda a posição x da área do utilizador desacoplada.",
+                    label: "Área do utilizador desacoplada X"
+                },
+                detachedUserAreaY: {
+                    description: "Guarda a posição y da área do utilizador desacoplada.",
+                    label: "Área do utilizador desacoplada Y"
+                },
+                guildBarCollapsed: {
+                    description: "Mantém a barra de servidores recolhida.",
+                    label: "Barra de servidores recolhida"
+                },
+                channelListCollapsed: {
+                    description: "Mantém a lista de canais recolhida.",
+                    label: "Lista de canais recolhida"
+                },
+                membersListCollapsed: {
+                    description: "Mantém a lista de membros recolhida.",
+                    label: "Lista de membros recolhida"
+                },
+                chatButtonsCollapsed: {
+                    description: "Mantém a linha de botões de mensagem recolhida.",
+                    label: "Botões do chat recolhidos"
+                },
+                titleBarCollapsed: {
+                    description: "Mantém a barra de título recolhida.",
+                    label: "Barra de título recolhida"
+                },
+                headerBarCollapsed: {
+                    description: "Mantém a barra de cabeçalho recolhida.",
+                    label: "Barra de cabeçalho recolhida"
+                },
+                userAreaCollapsed: {
+                    description: "Mantém a área do utilizador recolhida.",
+                    label: "Área do utilizador recolhida"
+                }
+            }
+        },
+        customCommands: {
+            text: {
+                cancel: "Cancelar",
+                name: "Name",
+                response: "Resposta",
+                detectedArguments: "Argumentos detetados",
+                exampleCommandResponse: "Exemplo de resposta do comando:",
+                exampleUsage: "Exemplo de utilização:",
+                exampleOutput: "Exemplo de resultado:",
+                viewArgumentsGuide: "Ver guia de argumentos",
+                editTag: "Editar etiqueta",
+                deleteTag: "Eliminar etiqueta",
+                registeredTags: "Etiquetas registadas",
+                createTag: "Criar etiqueta",
+                aTagWithThe: "Não existe uma etiqueta com o nome **{{name}}**!",
+                successfullyDeletedTheTag: "A etiqueta **{{name}}** foi eliminada com sucesso!",
+                ephemeralReserved: "O nome de argumento \"ephemeral\" é reservado e não pode ser usado.",
+                createNewTag: "Criar nova tag",
+                editTagSubtitle: "Edita o teu comando personalizado.",
+                createTagSubtitle: "Cria uma nova tag que será registrada como comando de barra.",
+                save: "Guardar",
+                create: "Criar",
+                variablesHelp: "A tua resposta pode incluir variáveis entre chaves duplas, que se tornarão argumentos do comando, por exemplo",
+                defaultValuesHelp: "Podes definir argumentos com valores predefinidos usando um sinal de igual, por exemplo",
+                noTagsYet: "Ups! Ainda não há tags, usa `/tags create` para criar uma!",
+                nameAlreadyExists: "Já existe uma etiqueta com o nome \"{{name}}\" e será substituída.",
+                defaultValue: "(predefinição: {{value}})"
+            },
+            name: "CustomCommands",
+            description: "Permite criar comandos de barra / etiquetas personalizados",
+            option: {
+                tagsList: {
+                    label: "Lista de etiquetas"
+                }
+            },
+            command: {
+                ephemeral: "Se a resposta deve ser visível apenas para ti",
+                tags: "Gerir todos os comandos personalizados",
+                create: "Criar uma nova tag",
+                list: "Listar todas as tuas etiquetas",
+                delete: "Remover uma etiqueta pelo nome",
+                tagName: "O nome da etiqueta"
+            }
+        },
+        fileUpload: {
+            name: "FileUpload",
+            description: "Carrega ficheiros para serviços de alojamento como Zipline, Nest, S3 e WebDAV",
+            toast: {
+                fileTypeNotAllowed: "Tipo de ficheiro não permitido pelo filtro atual",
+                pleaseConfigureFileuploadSettings: "Configura primeiro as definições do FileUpload",
+                sharexConfigIsValid: "A configuração do ShareX é válida",
+                importedSharexConfig: "Configuração do ShareX importada",
+                uploadSuccessfulButNo: "Carregamento concluído, mas não havia URL disponível para copiar",
+                uploadSuccessfulUrlCopied: "Carregamento concluído, URL copiado para a área de transferência",
+                uploadSuccessfulButFailed: "Carregamento concluído, mas falha ao copiar o URL",
+                uploadSuccessful: "Carregamento concluído",
+                uploadSucceededWithServicelabels: "Carregamento concluído com {{serviceLabels_service}} após alternativa",
+                apngToGifConversion: "Falha na conversão de APNG para GIF, a carregar como APNG",
+                uploadAlreadyInProgress: "Carregamento já em curso",
+                uploadCancelled: "Carregamento cancelado",
+                uploadFailedMessage: "Falha no carregamento: {{message}}",
+                invalidSharexConfig: "Configuração do ShareX inválida",
+                failedToImportSharexConfig: "Não foi possível importar a configuração do ShareX"
+            },
+            text: {
+                uploadToServicename: "Carregar para {{serviceName}}",
+                uploadToHost: "Carregar para o alojamento",
+                chooseFile: "Escolher ficheiro...",
+                zipline: "Zipline",
+                eZHost: "E-Z Host",
+                nest: "Nest",
+                encryptingHost: "Encrypting.host",
+                s3Compatible: "Compatível com S3",
+                catboxMoe: "Catbox.moe",
+                litterbox: "Litterbox",
+                sharexCustomUploader: "Carregador personalizado do ShareX",
+                webdavNextcloudOwncloud: "WebDAV (Nextcloud/Owncloud)",
+                n1Hour: "1 hora",
+                n12Hours: "12 horas",
+                n24Hours: "24 horas",
+                n72Hours: "72 horas",
+                corsProxy: "Proxy CORS",
+                query: "Consulta",
+                param: "Parâmetro",
+                fakeLink: "Ligação falsa",
+                embed: "Incorporação",
+                n30Seconds: "30 segundos",
+                n1Minute: "1 minuto",
+                n2Minutes: "2 minutos",
+                n5Minutes: "5 minutos",
+                n10Minutes: "10 minutos",
+                dragHostsToReorder: "Arrasta os serviços para reordenar as tentativas alternativas. O serviço selecionado é tentado primeiro e depois é usada esta ordem.",
+                chooseWhereFileuploadSends: "Escolhe para onde o FileUpload envia novos ficheiros.",
+                connectionDetailsForYour: "Detalhes de ligação da tua instância Zipline.",
+                theUrlOfYour: "O URL da tua instância Zipline",
+                yourZiplineApiAuthorization: "O teu token de autorização da API do Zipline",
+                yourZiplineApiToken: "O teu token de API do Zipline",
+                folderIdForUploads: "ID da pasta para carregamentos (deixa vazio para nenhuma pasta)",
+                leaveEmptyForNo: "Deixa vazio para nenhuma pasta",
+                connectionDetailsForE: "Detalhes de ligação para carregamentos no E-Z Host.",
+                yourEZHost: "A tua chave de API do E-Z Host",
+                connectionDetailsForNest: "Detalhes de ligação para carregamentos no Nest.",
+                yourNestApiAuthorization: "O teu token de autorização da API do Nest",
+                yourNestApiToken: "O teu token de API do Nest",
+                connectionDetailsForEncrypting: "Detalhes de ligação para carregamentos no Encrypting.host.",
+                yourEncryptingHostApi: "A tua chave de API do Encrypting.host",
+                howEncryptingHostShould: "Como o Encrypting.host deve formatar as ligações devolvidas.",
+                selectUrlStyle: "Seleciona o estilo de URL",
+                optionalTitleForEmbed: "Título opcional para respostas no estilo de incorporação.",
+                optionalTitle: "Título opcional",
+                optionalColorForEmbed: "Cor opcional para respostas no estilo de incorporação.",
+                optionalColor: "Cor opcional",
+                optionalFakeLinkValue: "Valor de ligação falsa opcional para respostas no estilo fakelink.",
+                optionalFakeLink: "Ligação falsa opcional",
+                connectionDetailsAndObject: "Detalhes de ligação e nomes de objetos do teu bucket.",
+                s3CompatibleEndpointE: "Endpoint compatível com S3 (ex.: https://<accountid>.r2.cloudflarestorage.com)",
+                bucketToUploadInto: "Bucket de destino",
+                awsRegionOrAuto: "Região da AWS ou auto para Cloudflare R2",
+                s3CompatibleAccessKey: "Chave de acesso compatível com S3",
+                yourAccessKeyId: "O teu ID de chave de acesso",
+                s3CompatibleSecretKey: "Chave secreta compatível com S3",
+                yourSecretAccessKey: "A tua chave de acesso secreta",
+                optionalTemporaryCredentialToken: "Token de credencial temporária opcional",
+                optionalSessionToken: "Token de sessão opcional",
+                optionalPublicUrlBase: "URL base pública opcional para as ligações devolvidas",
+                optionalFolderPrefixInside: "Pasta/prefixo opcional dentro do bucket",
+                useEndpointBucketKey: "Usar o formato endpoint/bucket/chave, recomendado para R2.",
+                optionalAccountBindingFor: "Associação de conta opcional para carregamentos no Catbox.",
+                yourCatboxUserhashFor: "O teu userhash do Catbox para associar a conta; deixa vazio para carregamentos anónimos.",
+                yourCatboxUserhash: "O teu userhash do Catbox",
+                howLongUploadsAre: "Durante quanto tempo os carregamentos são mantidos",
+                selectExpiry: "Seleciona a expiração",
+                optionalAccountBindingFor2: "Associação de conta opcional para carregamentos no GoFile.",
+                optionalGofileTokenTo: "Token do GoFile opcional para carregar para a tua conta.",
+                optionalGofileToken: "Token do GoFile opcional",
+                connectionDetailsForPixelvault: "Detalhes de ligação para carregamentos no PixelVault.",
+                yourPixelvaultAuthorizationKey: "A tua chave de autorização do PixelVault.",
+                yourPixelvaultUploadKey: "A tua chave de carregamento do PixelVault",
+                optionalAccountBindingFor3: "Associação de conta opcional para carregamentos no PixelDrain.",
+                optionalPixeldrainApiKey: "Chave de API do PixelDrain opcional para carregamentos autenticados. Deixa vazio para carregamentos anónimos.",
+                yourPixeldrainApiKey: "A tua chave de API do PixelDrain",
+                pasteImportOrValidate: "Cola, importa ou valida uma configuração de carregador personalizado do ShareX.",
+                pasteYourSharexCustom: "Cola o JSON do teu carregador personalizado do ShareX (.sxcu/.json). DestinationType tem de incluir FileUploader ou ImageUploader.",
+                importFromFileOr: "Importar de ficheiro ou validar a configuração colada",
+                connectionDetailsForWebdav: "Detalhes de ligação para servidores WebDAV (Nextcloud, Owncloud, etc.).",
+                baseWebdavUrlE: "URL base do WebDAV (ex.: https://nextcloud.example.com/remote.php/dav/files/username)",
+                optionalSubdirectoryOnThe: "Subdiretório opcional no servidor para carregamento (ex.: uploads)",
+                leaveEmptyForRoot: "Deixa vazio para o diretório raiz",
+                selectYourWebdavServer: "Seleciona o tipo de servidor WebDAV. Nextcloud e ownCloud criam uma ligação pública de partilha. Genérico devolve o URL direto do ficheiro.",
+                selectServerType: "Seleciona o tipo de servidor",
+                howToReturnThe: "Como devolver a ligação pública de partilha. Página de partilha leva a uma página web; Transferência direta leva diretamente ao ficheiro; Ligação Markdown envolve a página num nome de ficheiro clicável.",
+                selectShareLinkFormat: "Seleciona o formato da ligação",
+                controlWhatFileuploadDoes: "Controla o que o FileUpload faz depois de um serviço devolver um URL.",
+                stripQueryParametersFrom: "Remover parâmetros de consulta do URL do ficheiro carregado.",
+                wrapUploadedVideoLinks: "Envolver ligações de vídeo carregadas com um proxy de incorporação para melhores pré-visualizações no Discord.",
+                chooseWhichEmbedProxy: "Escolhe que serviço de proxy de incorporação usar para ligações de vídeo carregadas",
+                selectAnEmbedProxy: "Seleciona um serviço de proxy de incorporação",
+                convertApngFilesTo: "Converter ficheiros APNG para o formato GIF.",
+                useTheOriginalFilename: "Usar o nome original do ficheiro em vez de nomear os carregamentos como upload.ext.",
+                automaticallyCopyTheUploaded: "Copiar automaticamente o URL do ficheiro carregado para a área de transferência.",
+                onlyUseTheSelected: "Usar apenas o carregador selecionado sem tentar serviços alternativos.",
+                afterUploadInsertThe: "Após o carregamento, inserir o URL resultante na caixa de chat atual.",
+                wrapInsertedUrlsIn: "Envolver URLs inseridos entre parênteses angulares para evitar a pré-visualização do Discord.",
+                chooseWhenFileuploadTakes: "Escolhe quando o FileUpload assume o tratamento de ficheiros do Discord.",
+                useFileuploadWhenUploading: "Usar o FileUpload ao carregar pelo seletor de ficheiros do Discord.",
+                useFileuploadOnlyFor: "Usar o FileUpload apenas para ficheiros maiores do que o teu limite atual de carregamento do Discord.",
+                manualDiscordFileSize: "Limite manual de tamanho de ficheiro do Discord em MB, usado quando a deteção automática está errada. Deixa vazio para automático.",
+                auto: "Automático",
+                commaSeparatedListOf: "Lista de extensões separadas por vírgulas (ex.: png,jpg,gif). Deixa vazio para permitir todas.",
+                configureBrowserUploadProxying: "Configura o proxy e os tempos limite dos carregamentos pelo navegador.",
+                corsProxyUsedFor: "Proxy CORS usado para carregamentos web. Deixa vazio para usar o proxy predefinido.",
+                sourceCodeForThe: "Código-fonte do proxy CORS predefinido",
+                maximumTimeToWait: "Tempo máximo de espera por tentativa de carregamento antes de mudar para o alternativo",
+                selectTimeout: "Seleciona o tempo limite",
+                drag: "Arrastar",
+                importSxcuJson: "Importar .sxcu/.json",
+                validate: "Validar",
+                resetToDefault: "Repor predefinição",
+                progress: "{{percent}}% - {{transferred}} de {{total}}",
+                cancel: "Cancelar"
+            },
+            option: {
+                serviceType: {
+                    description: "Serviço de carregamento selecionado",
+                    label: "Tipo de serviço"
+                },
+                serviceUrl: {
+                    description: "URL do serviço Zipline",
+                    label: "URL do serviço"
+                },
+                ziplineToken: {
+                    description: "Token de autenticação do Zipline",
+                    label: "Token do Zipline"
+                },
+                folderId: {
+                    description: "ID da pasta do Zipline (opcional)",
+                    label: "ID da pasta"
+                },
+                ezHostKey: {
+                    description: "Chave de API do E-Z Host",
+                    label: "Chave do E-Z Host"
+                },
+                nestToken: {
+                    description: "Token de API do Nest",
+                    label: "Token do Nest"
+                },
+                encryptingHostKey: {
+                    description: "Chave de API do Encrypting.host",
+                    label: "Chave do Encrypting.host"
+                },
+                encryptingHostUrlStyle: {
+                    description: "Estilo de URL do Encrypting.host",
+                    label: "Estilo de URL do Encrypting.host"
+                },
+                encryptingHostDomains: {
+                    description: "Lista JSON de domínios do Encrypting.host",
+                    label: "Domínios do Encrypting.host"
+                },
+                encryptingHostTitle: {
+                    description: "Título opcional da incorporação do Encrypting.host",
+                    label: "Título do Encrypting.host"
+                },
+                encryptingHostColor: {
+                    description: "Cor opcional da incorporação do Encrypting.host",
+                    label: "Cor do Encrypting.host"
+                },
+                encryptingHostFakelink: {
+                    description: "Ligação falsa opcional do Encrypting.host",
+                    label: "Ligação falsa do Encrypting.host"
+                },
+                s3Endpoint: {
+                    description: "URL do endpoint compatível com S3",
+                    label: "Endpoint S3"
+                },
+                s3Bucket: {
+                    description: "Nome do bucket S3",
+                    label: "Bucket S3"
+                },
+                s3Region: {
+                    description: "Região do S3 (usa auto para R2)",
+                    label: "Região do S3"
+                },
+                s3AccessKeyId: {
+                    description: "ID da chave de acesso do S3",
+                    label: "ID da chave de acesso S3"
+                },
+                s3SecretAccessKey: {
+                    description: "Chave de acesso secreta do S3",
+                    label: "Chave de acesso secreta S3"
+                },
+                s3SessionToken: {
+                    description: "Token de sessão do S3 (opcional)",
+                    label: "Token de sessão S3"
+                },
+                s3PublicUrl: {
+                    description: "URL base pública (opcional)",
+                    label: "URL pública do S3"
+                },
+                s3Prefix: {
+                    description: "Prefixo da chave de objeto do S3 (opcional)",
+                    label: "Prefixo do S3"
+                },
+                s3ForcePathStyle: {
+                    description: "Usar URLs do S3 no estilo de caminho",
+                    label: "Forçar estilo de caminho do S3"
+                },
+                litterboxExpiry: {
+                    description: "Período de retenção do Litterbox",
+                    label: "Expiração do Litterbox"
+                },
+                catboxUserhash: {
+                    description: "Userhash do Catbox para associar a conta",
+                    label: "Userhash do Catbox"
+                },
+                sharexConfig: {
+                    description: "JSON do carregador personalizado do ShareX",
+                    label: "Configuração do ShareX"
+                },
+                disableFallbacks: {
+                    description: "Desativar serviços de carregamento alternativos",
+                    label: "Desativar alternativas"
+                },
+                autoSend: {
+                    description: "Inserir o URL carregado na caixa do chat",
+                    label: "Enviar automaticamente"
+                },
+                autoFormat: {
+                    description: "Envolver o URL inserido entre parênteses angulares",
+                    label: "Formatar automaticamente"
+                },
+                bypassDiscordUpload: {
+                    description: "Contornar os carregamentos do Discord e usar o FileUpload em vez disso.",
+                    label: "Contornar carregamento do Discord"
+                },
+                bypassDiscordUploadOnlyOverLimit: {
+                    description: "Usar o FileUpload apenas se os ficheiros excederem o limite de tamanho.",
+                    label: "Contornar carregamento do Discord só acima do limite"
+                },
+                customDiscordFileSizeLimitMB: {
+                    description: "Limite manual de tamanho de ficheiro do Discord em MB. 0 significa deteção automática.",
+                    label: "Limite de tamanho do Discord personalizado (MB)"
+                },
+                gofileToken: {
+                    description: "Token de API do GoFile (opcional)",
+                    label: "Token do GoFile"
+                },
+                fallbackOrder: {
+                    description: "Ordem dos carregadores alternativos",
+                    label: "Ordem alternativa"
+                },
+                pixelVaultKey: {
+                    description: "Chave de carregamento do PixelVault",
+                    label: "Chave do PixelVault"
+                },
+                pixelDrainKey: {
+                    description: "Chave de API do PixelDrain (opcional)",
+                    label: "Chave do PixelDrain"
+                },
+                uploadTimeoutMs: {
+                    description: "Tempo limite de carregamento em milissegundos",
+                    label: "Tempo limite de carregamento (ms)"
+                },
+                stripQueryParams: {
+                    description: "Remover parâmetros de consulta dos URLs carregados",
+                    label: "Remover parâmetros de consulta"
+                },
+                embedProxyEnabled: {
+                    description: "Encaminhar ligações de vídeo carregadas através de um serviço auxiliar de incorporação.",
+                    label: "Proxy de incorporação ativado"
+                },
+                embedProxyService: {
+                    description: "Serviço auxiliar de incorporação que envolve as ligações de vídeo carregadas.",
+                    label: "Serviço de proxy de incorporação"
+                },
+                corsProxyUrl: {
+                    description: "URL do proxy CORS usado para carregamentos pelo navegador",
+                    label: "URL do proxy CORS"
+                },
+                apngToGif: {
+                    description: "Converter carregamentos APNG em GIF",
+                    label: "APNG para GIF"
+                },
+                preserveOriginalFilename: {
+                    description: "Manter o nome original do ficheiro ao carregar.",
+                    label: "Manter nome original do ficheiro"
+                },
+                autoCopy: {
+                    description: "Copiar automaticamente o URL do carregamento",
+                    label: "Copiar automaticamente"
+                },
+                autoUploadPastedFiles: {
+                    description: "Carregar automaticamente ficheiros da área de transferência para o alojamento de imagens ao colar no chat.",
+                    label: "Carregar automaticamente ficheiros colados"
+                },
+                webdavUrl: {
+                    description: "URL do servidor WebDAV",
+                    label: "URL do WebDAV"
+                },
+                webdavUsername: {
+                    description: "Nome de utilizador do WebDAV",
+                    label: "Utilizador do WebDAV"
+                },
+                webdavPassword: {
+                    description: "Palavra-passe do WebDAV ou token de aplicação",
+                    label: "Palavra-passe do WebDAV"
+                },
+                webdavDirectory: {
+                    description: "Subdiretório opcional no servidor WebDAV",
+                    label: "Diretório do WebDAV"
+                },
+                webdavServerType: {
+                    description: "Tipo de servidor WebDAV",
+                    label: "Tipo de servidor WebDAV",
+                    nextcloud: "Nextcloud",
+                    owncloud: "ownCloud",
+                    generic: "WebDAV genérico"
+                },
+                webdavShareType: {
+                    description: "Formato da ligação de partilha WebDAV",
+                    label: "Tipo de partilha WebDAV",
+                    sharepage: "Página de partilha",
+                    directdownload: "Transferência direta",
+                    markdown: "Ligação Markdown"
+                },
+                uploadAllowedFileTypes: {
+                    description: "Lista separada por vírgulas de extensões permitidas (ex.: png,jpg,gif,mp4). Deixa vazio para permitir todos os ficheiros.",
+                    label: "Tipos de ficheiro permitidos para carregamento"
+                },
+                settingsComponent: {
+                    description: "Definições",
+                    label: "Componente de definições"
+                }
+            },
+            panel: {
+                fallbackOrder: "Ordem alternativa",
+                uploadService: "Serviço de carregamento",
+                zipline: "Zipline",
+                serviceUrl: "URL do serviço",
+                ziplineToken: "Token do Zipline",
+                folderId: "ID da pasta",
+                eZHost: "E-Z Host",
+                eZHostApiKey: "Chave de API do E-Z Host",
+                nest: "Nest",
+                nestToken: "Token do Nest",
+                encryptingHost: "Encrypting.host",
+                encryptingHostApiKey: "Chave de API do Encrypting.host",
+                urlStyle: "Estilo de URL",
+                domainsJson: "Domínios (JSON)",
+                embedTitle: "Título da incorporação",
+                embedColor: "Cor da incorporação",
+                fakeLink: "Ligação falsa",
+                s3CompatibleStorage: "Armazenamento compatível com S3",
+                s3EndpointUrl: "URL do endpoint S3",
+                bucketName: "Nome do bucket",
+                region: "Região",
+                accessKeyId: "ID da chave de acesso",
+                secretAccessKey: "Chave de acesso secreta",
+                sessionToken: "Token de sessão",
+                publicBaseUrl: "URL base pública",
+                objectKeyPrefix: "Prefixo da chave de objeto",
+                usePathStyleEndpoint: "Usar endpoint no estilo de caminho",
+                catbox: "Catbox",
+                catboxUserhash: "Userhash do Catbox",
+                litterboxExpiry: "Expiração do Litterbox",
+                gofile: "GoFile",
+                gofileToken: "Token do GoFile",
+                pixelvault: "PixelVault",
+                pixelvaultUploadKey: "Chave de carregamento do PixelVault",
+                pixeldrain: "PixelDrain",
+                pixeldrainApiKey: "Chave de API do PixelDrain",
+                sharexCustomUploader: "Carregador personalizado do ShareX",
+                sharexCustomUploaderConfig: "Configuração do carregador personalizado do ShareX",
+                sharexConfigActions: "Ações de configuração do ShareX",
+                webdav: "WebDAV",
+                serverUrl: "URL do servidor",
+                username: "Nome de Utilizador",
+                passwordOrAppToken: "Palavra-passe ou token de aplicação",
+                passwordOrAppToken2: "palavra-passe ou token de aplicação",
+                uploadDirectory: "Diretório de carregamento",
+                serverType: "Tipo de servidor",
+                shareLinkFormat: "Formato da ligação de partilha",
+                uploadBehavior: "Comportamento de carregamento",
+                stripQueryParameters: "Remover parâmetros de consulta",
+                useEmbedProxy: "Usar proxy de incorporação",
+                embedProxyService: "Serviço de proxy de incorporação",
+                convertApngToGif: "Converter APNG em GIF",
+                preserveOriginalFilename: "Manter nome original do ficheiro",
+                autoCopyUrl: "Copiar URL automaticamente",
+                disableFallbackUploaders: "Desativar carregadores alternativos",
+                insertUrlIntoChatInput: "Inserir URL na caixa de chat",
+                formatInsertedUrl: "Formatar URL inserido",
+                discordIntegration: "Integração com o Discord",
+                bypassDiscordUploadButton: "Contornar botão de carregamento do Discord",
+                autoUploadPastedFiles: "Carregar automaticamente ficheiros colados",
+                respectDiscordFileSizeLimit: "Respeitar limite de tamanho do Discord",
+                discordLimitOverrideMb: "Substituir limite do Discord (MB)",
+                allowedFileTypes: "Tipos de ficheiro permitidos",
+                network: "Rede",
+                corsProxyUrl: "URL do proxy CORS",
+                defaultCorsProxySource: "Fonte do proxy CORS predefinido",
+                uploadTimeout: "Tempo limite de carregamento",
+                domainsJsonDescription: "Array JSON de domínios a usar, por exemplo [\"offensive\"]."
+            },
+            status: {
+                cancelled: "Envio cancelado.",
+                uploadingVia: "A enviar via {{service}}...",
+                uploading: "A enviar...",
+                unknownError: "Erro desconhecido",
+                startingVia: "A iniciar envio via {{service}}...",
+                retryingWith: "A tentar novamente com {{service}} ({{attempt}}/{{total}})...",
+                uploadedVia: "Enviado com sucesso via {{service}}.",
+                allFailed: "Todos os serviços de envio falharam. Último erro: {{error}}",
+                fileReady: "Ficheiro pronto, iniciando envio...",
+                preparing: "A preparar envio...",
+                failed: "Falha no envio: {{message}}",
+                timedOut: "O envio expirou",
+                serviceFailed: "{{service}} falhou: {{message}}",
+                preparingFile: "A preparar {{name}}{{suffix}}..."
+            }
+        },
+        gifMaker: {
+            option: {
+                lastWidth: {
+                    label: "Última largura"
+                },
+                lastHeight: {
+                    label: "Última altura"
+                },
+                lastCaptionMode: {
+                    label: "Último modo de legenda"
+                },
+                lastCaptionText: {
+                    label: "Último texto de legenda"
+                },
+                lastCaptionSize: {
+                    label: "Último tamanho de legenda"
+                },
+                lastFontFamily: {
+                    label: "Última família de tipo de letra"
+                },
+                lastBubbleTipBase: {
+                    label: "Última base da ponta do balão"
+                },
+                maxWidth: {
+                    description: "Largura máxima do ajuste automático.",
+                    label: "Largura máxima"
+                },
+                maxHeight: {
+                    description: "Altura máxima do ajuste automático.",
+                    label: "Altura máxima"
+                }
+            },
+            name: "GifMaker",
+            description: "Cria e legenda GIFs a partir de qualquer multimédia no chat ou no seletor de GIF.",
+            text: {
+                send: "Enviar",
+                export: "Exportar",
+                makeGif: "Criar GIF",
+                editGif: "Editar GIF",
+                selectAFont: "Seleciona um tipo de letra...",
+                enterCaption: "Escreve a legenda...",
+                width: "Largura",
+                height: "Altura",
+                loadingFonts: "A carregar tipos de letra...",
+                captions: "Legendas",
+                text: "Texto",
+                font: "Tipo de letra",
+                fontSize: "Tamanho do tipo de letra",
+                tipBase: "Base da ponta",
+                dimensions: "Dimensões",
+                generatingGif: "A gerar GIF...",
+                clickOnThePreview: "Clica na pré-visualização para posicionar a ponta do balão",
+                gifPreview: "Pré-visualização do GIF"
+            },
+            captionMode: {
+                caption: "Legenda",
+                none: "Nenhum",
+                speechbubble: "Balão"
+            }
+        },
+        gifProviderSwitcher: {
+            name: "GifProviderSwitcher",
+            description: "Permite usar a pesquisa de GIFs do Tenor ou Giphy em vez do Klipy",
+            text: {
+                tenor: "Tenor",
+                giphy: "Giphy",
+                klipy: "Klipy",
+                providers: "Fornecedores",
+                providersCount: "{{count}} fornecedores"
+            }
+        },
+        keyboardNavigation: {
+            toast: {
+                invalidUrl: "URL inválido",
+                copiedResponseToClipboard: "Resposta copiada para a área de transferência!",
+                issueFetchingUrl: "Problema ao obter o URL",
+                copiedGitInfoTo: "Informações do Git copiadas para a área de transferência!",
+                noUpdatesAvailable: "Nenhuma atualização disponível",
+                enabledPlugin: "{{id}} ativado com sucesso",
+                disabledPlugin: "{{id}} desativado com sucesso"
+            },
+            text: {
+                openPlexcordTab: "Abrir separador do Plexcord",
+                openPluginTab: "Abrir separador de plugins",
+                openThemesTab: "Abrir separador de temas",
+                openUpdaterTab: "Abrir separador do atualizador",
+                openCloudTab: "Abrir separador da nuvem",
+                openBackupRestoreTab: "Abrir separador de cópia de segurança e restauro",
+                restartClient: "Reiniciar cliente",
+                openQuickCssFile: "Abrir ficheiro QuickCSS",
+                openSettingsFolder: "Abrir pasta de definições",
+                openInGithub: "Abrir no GitHub",
+                openInBrowser: "Abrir no navegador",
+                togglePlugin: "Alternar plugin",
+                enable: "Ativar",
+                disable: "Desativar",
+                quickFetch: "Obtenção rápida",
+                copyGitInfo: "Copiar informações do Git",
+                checkForUpdates: "Procurar atualizações",
+                aPlexcordUpdateIs: "Está disponível uma atualização do Plexcord!",
+                clickHereToView: "Clica aqui para ver a atualização",
+                navigateToServer: "Ir para o servidor",
+                commandPalette: "Paleta de comandos",
+                searchTheCommandPalette: "Pesquisar na paleta de comandos",
+                multipleChoice: "Escolha múltipla",
+                textInput: "Entrada de texto",
+                openDevTab: "Abrir separador de programação",
+                enterUrlToFetch: "Introduz a URL a buscar (somente GET)",
+                typeAndPressEnter: "Escreva e prima Enter",
+                recording: "A gravar...",
+                recordKeybind: "Gravar atalho",
+                enterUrl: "Introduza um URL"
+            },
+            option: {
+                hotkey: {
+                    description: "O atalho para abrir a paleta de comandos.",
+                    label: "Atalho"
+                },
+                allowMouseControl: {
+                    description: "Permitir que o rato controle a paleta de comandos.",
+                    label: "Permitir controlo pelo rato"
+                }
+            },
+            name: "KeyboardNavigation",
+            description: "Permite navegar pela interface com o teclado."
+        },
+        lastActive: {
+            name: "LastActive",
+            description: "Um plugin para saltar para a última mensagem ativa tua ou de outro utilizador num canal/servidor.",
+            toast: {
+                failedToFindMessages: "Falha ao encontrar mensagens. Verifica a consola para mais detalhes.",
+                couldnTFindAny: "Não foram encontradas mensagens recentes deste utilizador.",
+                channelInformationNotAvailable: "Informações do canal indisponíveis.",
+                failedToJumpTo: "Falha ao saltar para a mensagem. Verifica a consola para mais detalhes."
+            },
+            text: {
+                yourLastMessage: "A tua última mensagem",
+                userSLastMessage: "Última mensagem do utilizador"
+            }
+        },
+        limitlessScreenshare: {
+            text: {
+                deleteTag: "Eliminar etiqueta",
+                mustBeGreaterThan: "Deve ser >{{value}}",
+                maxResolutionTooLow: "A resolução máxima não pode ser menor que {{value}}",
+                maxResolutionRound: "A resolução máxima deve terminar em 0 se Arredondar resolução estiver ativado"
+            },
+            name: "LimitlessScreenshare",
+            description: "Adiciona um controlo deslizante para resolução e fps da partilha de ecrã.",
+            option: {
+                maxFPS: {
+                    description: "FPS máximo do controlo deslizante",
+                    label: "FPS máximo"
+                },
+                maxResolution: {
+                    description: "Resolução máxima do controlo deslizante",
+                    label: "Resolução máxima"
+                },
+                roundResolution: {
+                    description: "Arredondar a resolução para os 10p mais próximos",
+                    label: "Arredondar resolução"
+                },
+                resolutions: {
+                    label: "Resoluções"
+                },
+                fpss: {
+                    label: "Valores de FPS"
+                }
+            }
+        },
+        messagePeek: {
+            option: {
+                hideMuted: {
+                    description: "Ocultar pré-visualizações e horas de MPs e grupos silenciados.",
+                    label: "Ocultar silenciados"
+                }
+            },
+            name: "MessagePeek",
+            description: "Mostra a pré-visualização e a hora da última mensagem na lista de mensagens privadas.",
+            text: {
+                officialDiscordMessage: "Mensagem oficial do Discord",
+                sentGif: "enviou um GIF",
+                voiceMessage: "mensagem de voz",
+                membersCount: "{{count}} membros",
+                you: "Tu"
+            }
+        },
+        messageTranslate: {
+            name: "MessageTranslate",
+            description: "Traduz mensagens automaticamente para o teu idioma com cache, alternância por canal e mais opções.",
+            option: {
+                targetLanguage: {
+                    description: "Código do idioma de destino das traduções (ex.: en, es, fr, de, ja).",
+                    label: "Idioma de destino"
+                },
+                excludedLanguages: {
+                    description: "Códigos de idioma a excluir da tradução (ex.: en, es, fr, de, ja).",
+                    label: "Idiomas excluídos"
+                },
+                confidenceRequirement: {
+                    description: "Confiança mínima (0 a 1) necessária para mostrar uma tradução.",
+                    label: "Confiança necessária"
+                },
+                autoTranslate: {
+                    description: "Traduzir mensagens automaticamente à medida que aparecem.",
+                    label: "Traduzir automaticamente"
+                },
+                skipOwnMessages: {
+                    description: "Não traduzir as tuas próprias mensagens.",
+                    label: "Ignorar mensagens próprias"
+                },
+                skipBotMessages: {
+                    description: "Não traduzir mensagens de bots.",
+                    label: "Ignorar mensagens de bots"
+                },
+                ignoredGuilds: {
+                    description: "Lista de IDs de servidores separados por vírgulas onde não traduzir.",
+                    label: "Servidores ignorados"
+                },
+                ignoredChannels: {
+                    description: "Lista de IDs de canais separados por vírgulas onde não traduzir.",
+                    label: "Canais ignorados"
+                },
+                ignoredUsers: {
+                    description: "Lista de IDs de utilizadores separados por vírgulas que não serão traduzidos.",
+                    label: "Utilizadores ignorados"
+                },
+                showIndicator: {
+                    description: "Adicionar um pequeno indicador (traduzido) às mensagens traduzidas.",
+                    label: "Mostrar indicador"
+                },
+                showOriginal: {
+                    description: "Mostrar o texto original e o traduzido.",
+                    noorig: "Não mostrar o original."
+                }
+            },
+            text: {
+                showOriginalInSubtext: "Mostrar o original no subtexto",
+                showOriginalMessageTranslation: "Mostrar a mensagem original e a tradução no subtexto",
+                translatedFrom: "traduzido de {{lang}}"
+            }
+        },
+        moreStickers: {
+            toast: {
+                stickerPackDeleted: "Pacote de autocolantes eliminado",
+                stickerPackAdded: "Pacote de autocolantes adicionado",
+                stickerPacksAdded: "Pacotes de autocolantes adicionados",
+                stickerPacksExported: "Pacotes de autocolantes exportados",
+                newStickerPacksAlready: "Já existem novos pacotes de autocolantes, migração desnecessária",
+                oldStickerPacksNot: "Pacotes de autocolantes antigos não encontrados, nada a migrar",
+                migrationFailedTitleId: "Falha na migração: {{title}} ({{id}})",
+                stickerPackMigrationComplete: "Migração de pacotes de autocolantes concluída",
+                failedToUploadSticker: "Falha ao carregar o autocolante"
+            },
+            text: {
+                stickerPackUrl: "URL do pacote de autocolantes",
+                pasteHtmlHere: "Cola o HTML aqui",
+                delete: "Eliminar",
+                addStickerPackFrom: "Adicionar pacote de autocolantes por URL",
+                insert: "Inserir",
+                addStickerPackFrom2: "Adicionar pacote de autocolantes por HTML",
+                insertFromHtml: "Inserir a partir do HTML",
+                addStickerPackFrom3: "Adicionar pacote de autocolantes por ficheiro",
+                miscTools: "Ferramentas diversas",
+                exportStickerPacks: "Exportar pacotes de autocolantes",
+                migrateFromV1: "Migrar da v1",
+                stickersManagement: "Gestão de autocolantes",
+                theRegionLineRecognized: "A região reconhecida pelo LINE pode ser diferente da tua devido ao proxy CORS que usamos.",
+                openStickerPackFile: "Abrir ficheiro de pacote de autocolantes",
+                stickers: "Autocolantes+",
+                categoryTitle: "Categoria, {{title}}",
+                searchStickers: "Pesquisar autocolantes",
+                ffmpegstatecontextIsUndefined: "FFmpegStateContext não está definido",
+                recentlyUsed: "Usados recentemente",
+                addFromUrl: "Adicionar por URL",
+                addFromHtml: "Adicionar por HTML",
+                addFromFile: "Adicionar por ficheiro",
+                misc: "Diversos",
+                invalidUrl: "URL inválida",
+                lineOnly: "Atualmente, apenas autocolantes/emojis do LINE são suportados.",
+                getTelegramStickers: "Obtém autocolantes do Telegram com",
+                htmlFallbackHelp: "Se encontrares erros ao adicionar um pacote de autocolantes, tenta adicioná-lo usando o código-fonte HTML da página do pacote.",
+                htmlFallbackApplies: "Isto aplica-se a autocolantes bloqueados por região / sistema operativo / etc."
+            },
+            option: {
+                promptToUpload: {
+                    description: "Insere o autocolante na barra de chat em vez de o enviar de imediato",
+                    label: "Perguntar antes de carregar"
+                },
+                packs: {
+                    description: "Pacotes",
+                    label: "Pacotes"
+                }
+            },
+            name: "MoreStickers",
+            description: "Adiciona pacotes de autocolantes de outras redes sociais. (ex.: LINE)"
+        },
+        musicRichPresence: {
+            option: {
+                scrobblerBackend: {
+                    description: "O backend de scrobbler a usar.",
+                    label: "Backend de scrobbler"
+                },
+                instanceBaseURL: {
+                    description: "O URL base da tua instância ListenBrainz.",
+                    label: "URL base da instância"
+                },
+                instanceAPIBaseUrl: {
+                    description: "O URL base da tua API do ListenBrainz.",
+                    label: "URL base da API da instância"
+                },
+                apiKey: {
+                    description: "Chave de API do Last.fm. Não é obrigatória, mas é altamente recomendada para evitar limites de pedidos com a nossa chave partilhada",
+                    label: "Chave de API"
+                },
+                username: {
+                    description: "Nome de utilizador",
+                    label: "Nome de utilizador"
+                },
+                shareUsername: {
+                    description: "Mostrar ligação para o perfil do scrobbler",
+                    label: "Partilhar nome de utilizador"
+                },
+                clickableLinks: {
+                    description: "Transformar nomes de faixa, artista e álbum em ligações clicáveis",
+                    label: "Ligações clicáveis"
+                },
+                hideWithSpotify: {
+                    description: "Ocultar presença se o Spotify estiver em execução",
+                    label: "Ocultar com Spotify"
+                },
+                hideWithActivity: {
+                    description: "Ocultar presença se tiveres outra presença",
+                    label: "Ocultar com atividade"
+                },
+                statusName: {
+                    description: "Texto de estado personalizado. Podes usar as variáveis: {artist} | {album} | {title}",
+                    label: "Nome do estado"
+                },
+                statusDisplayType: {
+                    description: "Mostrar nome da faixa / artista na lista de membros",
+                    off: "Não mostrar (mostra mensagem genérica de audição)"
+                },
+                nameFormat: {
+                    description: "Mostrar nome da música e do artista no nome do estado",
+                    statusName: "Usar nome de estado personalizado"
+                },
+                missingArt: {
+                    description: "Quando o álbum ou a capa estiver em falta",
+                    logo: "Usar logótipo grande do scrobbler"
+                },
+                showLogo: {
+                    description: "Mostrar o logótipo do serviço de scrobbler junto à capa",
+                    label: "Mostrar logótipo do scrobbler"
+                },
+                showAlbumCover: {
+                    description: "Mostrar a capa do álbum. Desativar mostrará um marcador de posição. Útil se a tua música tiver capas inadequadas",
+                    label: "Mostrar capa do álbum"
+                },
+                useListeningStatus: {
+                    description: "Mostrar estado \"A ouvir\" em vez de \"A jogar\""
+                }
+            },
+            name: "MusicRichPresence",
+            description: "Rich Presence para Last.FM/Listenbrainz",
+            text: {
+                showArtistName: "Mostrar nome do artista",
+                showTrackName: "Mostrar nome da faixa",
+                useMusicServiceName: "Usar nome do serviço de música (recorre ao texto de estado personalizado)",
+                useFormatArtistSong: "Usar o formato 'artista - música'",
+                useFormatSongArtist: "Usar o formato 'música - artista'",
+                useArtistNameOnly: "Usar apenas o nome do artista",
+                useSongNameOnly: "Usar apenas o nome da música",
+                useAlbumNameFalls: "Usar nome do álbum (recorre ao texto de estado personalizado se a música não tiver álbum)",
+                useGenericPlaceholder: "Usar marcador de posição genérico",
+                lastFm: "Last.FM",
+                howToCreateAn: "Como criar uma chave de API",
+                set: "Define",
+                applicationName: "Nome da aplicação",
+                applicationDescription: "Descrição da aplicação",
+                toAnythingAndLeave: "com qualquer valor e deixa o resto em branco.",
+                createApiKey: "Criar chave de API",
+                invalidInstance: "Instância compatível com ListenBrainz inválida",
+                provideBoth: "Indica tanto o",
+                apiBaseUrl: "URL base da API",
+                andThe: "como o",
+                instanceBaseUrl: "URL base da instância",
+                forYourCustomInstance: "da tua instância personalizada do ListenBrainz ou volta para ListenBrainz/Last.FM",
+                allowConnectTitle: "Permitir que o Plexcord se ligue à instância do ListenBrainz",
+                allowConnectBody: "Para usar a tua instância personalizada do ListenBrainz, tens primeiro de permitir que o Plexcord se ligue a ela.",
+                allowInstance: "Permitir instância",
+                listenBrainzCompatible: "Compatível com ListenBrainz (auto-hospedado)",
+                and: "e"
+            }
+        },
+        noMiddleClickPaste: {
+            name: "NoMiddleClickPaste",
+            description: "Desativar o colar com clique do meio do Linux - apenas Linux"
+        },
+        orbolayBridge: {
+            option: {
+                port: {
+                    description: "Porta para ligar",
+                    label: "Porta"
+                }
+            },
+            name: "OrbolayBridge",
+            description: "Plugin ponte para ligar o Orbolay ao Discord",
+            toast: {
+                connectedToOrbolayServer: "Ligado ao servidor do Orbolay"
+            }
+        },
+        plexcordHelper: {
+            name: "PlexcordHelper",
+            description: "Usado para fornecer suporte e corrigir falhas causadas pelo Discord.",
+            text: {
+                restartRequired: "Reinício necessário",
+                restartNow: "Reiniciar agora",
+                later: "Mais tarde",
+                wouldYouLikeTo: "Queres reiniciar agora?",
+                somePluginsRequireA: "Alguns plugins requerem reinício para serem totalmente desativados.",
+                alreadyEnabled: "{{plugin}} já está ativado",
+                alreadyDisabled: "{{plugin}} já está desativado",
+                disablePlugin: "Desativar {{plugin}}",
+                enablePlugin: "Ativar {{plugin}}",
+                errorStopping: "Erro ao parar o plugin {{plugin}}",
+                errorStarting: "Erro ao iniciar o plugin {{plugin}}"
+            },
+            toast: {
+                failedToTolowercase: "Falha ao {{toLowerCase}}",
+                aRestartIsRequired: "É necessário reiniciar para a alteração ter efeito!"
+            },
+            card: {
+                notOnThisVersion: "Este plugin não está nesta versão do Plexcord. Tenta atualizar!"
+            }
+        },
+        plexcordTweaks: {
+            name: "PlexcordTweaks",
+            option: {
+                removeActivitySection: {
+                    description: "Remove a secção de atividade acima da lista de membros",
+                    label: "Remover secção de atividade"
+                },
+                showYourOwnActivityButtons: {
+                    description: "O Discord oculta os teus próprios botões de atividade por algum motivo",
+                    label: "Mostrar os teus próprios botões de atividade"
+                },
+                refreshSlashCommands: {
+                    description: "Atualiza os comandos de barra para mostrar os novos sem reiniciar o cliente.",
+                    label: "Atualizar comandos de barra"
+                },
+                forceRoleIcon: {
+                    description: "Força os ícones de cargo a aparecerem ao lado das mensagens no modo compacto",
+                    label: "Forçar ícone de cargo"
+                },
+                accountStandingButton: {
+                    description: "Mostrar um botão de estado da conta na barra superior",
+                    label: "Botão de estado da conta"
+                },
+                jsonGateway: {
+                    description: "Força JSON ao voltar a ligar ao gateway",
+                    label: "Gateway JSON"
+                },
+                enableAutoCorrect: {
+                    description: "Adiciona no menu de contexto da caixa de chat uma opção para a correção automática nativa e substituições de texto",
+                    label: "Ativar correção automática"
+                },
+                autoCorrect: {
+                    description: "Usar correção automática nativa e substituições de texto nos editores de mensagem",
+                    label: "Correção automática"
+                },
+                disableHolidayNotifications: {
+                    label: "Desativar notificações festivas",
+                    description: "Usar sempre os sons de notificação predefinidos do Discord"
+                },
+                showAllBadges: {
+                    label: "Mostrar todos os emblemas",
+                    description: "Mostra todos os emblemas do perfil em vez de agrupar os restantes em +n"
+                }
+            },
+            text: {
+                allGood: "Está tudo bem!",
+                limited: "Limitada",
+                veryLimited: "Muito limitada",
+                atRisk: "Em risco",
+                suspended: "Suspensa",
+                slashCommandsRefreshedSuccessfully: "Comandos de barra atualizados com sucesso.",
+                failedToRefreshCommands: "Falha ao atualizar comandos. Verifica a consola para mais detalhes.",
+                enableAutocorrect: "Ativar correção automática"
+            },
+            command: {
+                refreshCommands: "Atualizar comandos de barra"
+            },
+            description: "Uma coleção de pequenos ajustes e correções para o Discord."
+        },
+        plextronStreamFixes: {
+            option: {
+                unlockQualityOptions: {
+                    description: "Desbloquear opções de qualidade da transmissão independentemente do estado do Nitro",
+                    label: "Desbloquear opções de qualidade"
+                },
+                removeResolutionCap: {
+                    description: "Permitir resoluções acima de 720p a 60 fps",
+                    label: "Remover limite de resolução"
+                },
+                forceEncoderSettings: {
+                    description: "Forçar o codificador a usar a resolução/fps configurados",
+                    label: "Forçar definições do codificador"
+                },
+                preventDownscale: {
+                    description: "Impedir que o Discord reduza a resolução da transmissão",
+                    label: "Impedir redução"
+                },
+                keyframeInterval: {
+                    description: "Intervalo de fotogramas-chave em ms (0 = predefinição do codificador, 5000 = a cada 5 s)",
+                    label: "Intervalo de fotogramas-chave"
+                },
+                minBitrate: {
+                    description: "Taxa de bits mínima do codificador em kbps",
+                    label: "Taxa de bits mínima"
+                },
+                raiseBitrateCaps: {
+                    description: "Aumentar os limites predefinidos de taxa de bits no computador (alvo de 600 kbps → 10 Mbps, máx. de 3,5 Mbps → 40 Mbps)",
+                    label: "Aumentar limites de taxa de bits"
+                },
+                preventFramerateReduction: {
+                    description: "Impedir que o Discord reduza a taxa de fotogramas da transmissão quando não estás a falar",
+                    label: "Impedir redução da taxa de fotogramas"
+                },
+                bitsPerPixelPct: {
+                    description: "Percentagem de bits por píxel para a taxa de bits alvo (8 = 0,08 bpp, 12 = 0,12 bpp)",
+                    label: "Bits por píxel (%)"
+                }
+            },
+            name: "PlextronStreamFixes",
+            description: "Tenta corrigir a qualidade da transmissão no Plextron alterando o codificador e as restrições de qualidade do Discord."
+        },
+        rPCEditor: {
+            name: "RPCEditor"
+        },
+        reactionTimestamps: {
+            name: "ReactionTimestamps",
+            description: "Mostra a hora de cada reação na janela de reações.",
+            text: {
+                userAtTime: "{{user}} às {{time}}"
+            }
+        },
+        richPresence: {
+            text: {
+                useCustomStatusName: "Usar nome de estado personalizado",
+                useFormatArtistSong: "Usar o formato 'artista - música'",
+                useFormatSongArtist: "Usar o formato 'música - artista'",
+                useArtistNameOnly: "Usar apenas o nome do artista",
+                useSongNameOnly: "Usar apenas o nome da música",
+                useAlbumName: "Usar o nome do álbum",
+                useLargeStatsFm: "Usar logótipo grande do Stats.fm",
+                useGenericPlaceholder: "Usar marcador de posição genérico",
+                seriesMovieName: "Nome da série/filme",
+                seriesEpisodeTrackMovie: "Série - nome do episódio/faixa/filme",
+                custom: "Personalizado",
+                seriesCover: "Capa da série",
+                episodeCover: "Capa do episódio",
+                season1Episode1: "Temporada 1 episódio 1",
+                off: "Desativado",
+                listening: "A ouvir",
+                playing: "A jogar",
+                streaming: "A transmitir",
+                watching: "A ver",
+                none: "Nenhum",
+                navidromeInstanceExposesServer: "Instância do Navidrome (expõe o URL do servidor. Autenticação única enviada.)",
+                lastFmApiSends: "API do Last.fm (envia metadados para o last.fm)",
+                donTShowShows: "Não mostrar (mostra mensagem genérica de audição)",
+                showStateLineContent: "Mostrar conteúdo da linha de estado",
+                showDetailsLineContent: "Mostrar conteúdo da linha de detalhes",
+                displayYourCurrentlyPlaying: "Mostra os audiolivros que estás a ouvir como Rich Presence do Discord. Requer URL, nome de utilizador e palavra-passe do teu servidor AudioBookShelf.",
+                audiobookshelfServerUrl: "URL do servidor AudioBookShelf.",
+                audiobookshelfUsername: "Nome de utilizador do AudioBookShelf.",
+                audiobookshelfPassword: "Palavra-passe do AudioBookShelf.",
+                connectsToTosuVia: "Liga-se ao tosu via WebSocket na porta 24050. Não é necessária configuração, garante apenas que o tosu está a correr juntamente com o osu!.",
+                showWhatYouRe: "Mostra o que estás a ouvir via stats.fm. Requer que o teu histórico de audição seja público.",
+                statsFmUsername: "Nome de utilizador do Stats.fm.",
+                customStatusText: "Texto de estado personalizado.",
+                statsFm: "Stats.fm",
+                nameFormat: "Formato do nome.",
+                fallbackWhenArtIs: "Alternativa quando a capa estiver em falta.",
+                showListeningStatus: "Mostrar estado de audição.",
+                showStatsFmLogo: "Mostrar o logótipo do Stats.fm ao lado da capa.",
+                showLinkToStats: "Mostrar ligação para o perfil do stats.fm.",
+                showLinkToSong: "Mostrar ligação para a música no stats.fm.",
+                hideStatsFmPresence: "Ocultar presença do stats.fm se o Spotify estiver em execução.",
+                hideStatsFmPresence2: "Ocultar presença do stats.fm se um RPC externo estiver em execução.",
+                disableDownloadingAlbumArt: "Desativar a transferência de capas de álbum.",
+                showWhatYouRe2: "Mostra o que estás a reproduzir no Jellyfin. Para obter a tua chave de API: abre a interface web do Jellyfin, prime F12 para abrir as Ferramentas de Programador, vai ao separador Rede, procura pedidos ao teu servidor, encontra o cabeçalho Authorization (Ctrl+F para pesquisar) e precisas da parte de Token='this'. O teu ID de utilizador está no URL da tua página de perfil.",
+                jellyfinServerUrl: "URL do servidor Jellyfin.",
+                jellyfinApiKey: "Chave de API do Jellyfin.",
+                authorization: "Authorization",
+                jellyfinUserId: "ID de utilizador do Jellyfin.",
+                userIdFromProfile: "ID de utilizador do URL do perfil",
+                nameDisplayFormat: "Formato de apresentação do nome.",
+                customNameTemplate: "Modelo de nome personalizado.",
+                nameOnJellyfin: "{name} no Jellyfin",
+                coverTypeForTv: "Tipo de capa para séries de TV.",
+                episodeNumberFormat: "Formato do número do episódio.",
+                overrideRichPresenceType: "Substituir o tipo de Rich Presence.",
+                showEpisodeNameAfter: "Mostrar nome do episódio após as informações de temporada/episódio.",
+                showPresenceWhenMedia: "Mostrar presença quando o conteúdo estiver em pausa.",
+                hideMediaDetails: "Ocultar detalhes do conteúdo.",
+                discordRichPresenceFor: "Rich Presence do Discord para a Gensokyo Radio. Basta ativar e ouvir!",
+                refreshIntervalInSeconds: "Intervalo de atualização em segundos.",
+                showWhatYouRe3: "Mostra o que estás a ouvir via Navidrome.",
+                navidromeServerUrlMust: "URL do servidor Navidrome (tem de ser um domínio público, ex.: https://navidrome.example.com).",
+                navidromeUsername: "Nome de utilizador do Navidrome.",
+                navidromePassword: "Palavra-passe do Navidrome.",
+                optionalDiscordApplicationClient: "ID de cliente da aplicação do Discord (opcional).",
+                howToFetchAlbum: "Como obter capas de álbum.",
+                optionalProvideYourOwn: "Opcional: fornece a tua própria chave de API do Last.fm (mantém a predefinição se vazio).",
+                showNavidromeLogoIn: "Mostrar o logótipo do Navidrome no canto inferior direito da capa.",
+                showAlbumNameIn: "Mostrar nome do álbum na presença.",
+                whichTypeOfActivity: "Que tipo de atividade mostrar.",
+                showTheStateDetails: "Mostrar conteúdo da linha de estado / detalhes na lista de membros",
+                hideRichPresenceWhen: "Ocultar Rich Presence quando a música estiver em pausa (em vez de mostrar um cronómetro)",
+                theListeningToText: "O texto 'A ouvir' (ex.: {artist})",
+                navidrome: "Navidrome",
+                theMainLineShowing: "A linha principal que mostra a música em reprodução (ex.: {song})",
+                song: "{song}",
+                theLineBelowThe: "A linha abaixo do nome da música (ex.: {artist})",
+                artist: "{artist}",
+                theAlbumLineE: "A linha do álbum (ex.: {album})",
+                album: "{album}",
+                enableTabLabelsCurrenttab: "Ativar presença do {{TAB_LABELS_currentTab}}.",
+                statsFmProfile: "Perfil do Stats.fm",
+                viewSong: "Ver música",
+                showArtistName: "Mostrar nome do artista",
+                showTrackName: "Mostrar nome da faixa",
+                enterValue: "Introduza um valor"
+            },
+            name: "RichPresence",
+            description: "Central unificada de Rich Presence para AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome e Gensokyo Radio.",
+            toast: {
+                audiobookshelfRpcIsNot: "O RPC do AudioBookShelf não está configurado.",
+                jellyfinRpcIsNot: "O RPC do Jellyfin não está configurado.",
+                jellyfinReturnedAnInvalid: "O Jellyfin devolveu uma resposta inválida. A tua chave de API pode estar errada."
+            },
+            option: {
+                enabled: {
+                    description: "Ativar serviços de Rich Presence.",
+                    label: "Ativado"
+                },
+                serviceSettings: {
+                    description: "Configuração do serviço.",
+                    label: "Definições do serviço"
+                },
+                abs_enabled: {
+                    description: "Ativar presença do AudioBookShelf.",
+                    label: "AudioBookShelf ativado"
+                },
+                tosu_enabled: {
+                    description: "Ativar presença do osu! (tosu).",
+                    label: "osu! (tosu) ativado"
+                },
+                sfm_enabled: {
+                    description: "Ativar presença do stats.fm.",
+                    label: "Stats.fm ativado"
+                },
+                jf_enabled: {
+                    description: "Ativar presença do Jellyfin.",
+                    label: "Jellyfin ativado"
+                },
+                gr_enabled: {
+                    description: "Ativar presença da Gensokyo Radio.",
+                    label: "Gensokyo Radio ativada"
+                },
+                nd_enabled: {
+                    description: "Ativar presença do Navidrome.",
+                    label: "Navidrome ativado"
+                },
+                abs_serverUrl: {
+                    description: "URL do servidor AudioBookShelf.",
+                    label: "URL do servidor AudioBookShelf"
+                },
+                abs_username: {
+                    description: "Nome de utilizador do AudioBookShelf.",
+                    label: "Utilizador do AudioBookShelf"
+                },
+                abs_password: {
+                    description: "Palavra-passe do AudioBookShelf.",
+                    label: "Palavra-passe do AudioBookShelf"
+                },
+                sfm_username: {
+                    description: "Nome de utilizador do Stats.fm.",
+                    label: "Utilizador do Stats.fm"
+                },
+                sfm_shareUsername: {
+                    description: "Mostrar ligação para o perfil do stats.fm.",
+                    label: "Stats.fm: partilhar utilizador"
+                },
+                sfm_shareSong: {
+                    description: "Mostrar ligação para a música no stats.fm.",
+                    label: "Stats.fm: partilhar música"
+                },
+                sfm_hideWithSpotify: {
+                    description: "Ocultar presença do stats.fm se o Spotify estiver em execução.",
+                    label: "Stats.fm: ocultar com Spotify"
+                },
+                sfm_hideWithExternalRPC: {
+                    description: "Ocultar presença do stats.fm se um RPC externo estiver em execução.",
+                    label: "Stats.fm: ocultar com RPC externo"
+                },
+                sfm_statusName: {
+                    description: "Texto de estado personalizado.",
+                    label: "Stats.fm: nome do estado"
+                },
+                sfm_nameFormat: {
+                    description: "Formato do nome.",
+                    label: "Stats.fm: formato do nome",
+                    statusName: "Usar nome de estado personalizado",
+                    artistFirst: "Usar o formato 'artista - música'",
+                    songFirst: "Usar o formato 'música - artista'",
+                    artistOnly: "Usar apenas o nome do artista",
+                    songOnly: "Usar apenas o nome da música",
+                    albumName: "Usar o nome do álbum"
+                },
+                sfm_useListeningStatus: {
+                    description: "Mostrar estado de audição.",
+                    label: "Stats.fm: usar estado de audição"
+                },
+                sfm_missingArt: {
+                    description: "Alternativa quando a capa estiver em falta.",
+                    label: "Stats.fm: capa em falta",
+                    statsFmLogo: "Usar logótipo grande do Stats.fm",
+                    placeholder: "Usar marcador de posição genérico"
+                },
+                sfm_showLogo: {
+                    description: "Mostrar o logótipo do Stats.fm ao lado da capa.",
+                    label: "Stats.fm: mostrar logótipo"
+                },
+                sfm_alwaysHideArt: {
+                    description: "Desativar a transferência de capas de álbum.",
+                    label: "Stats.fm: ocultar sempre a capa"
+                },
+                jf_serverUrl: {
+                    description: "URL do servidor Jellyfin.",
+                    label: "URL do servidor Jellyfin"
+                },
+                jf_apiKey: {
+                    description: "Chave de API do Jellyfin.",
+                    label: "Chave de API do Jellyfin"
+                },
+                jf_userId: {
+                    description: "ID de utilizador do Jellyfin.",
+                    label: "ID de utilizador do Jellyfin"
+                },
+                jf_nameDisplay: {
+                    description: "Formato de apresentação do nome.",
+                    label: "Jellyfin: apresentação do nome",
+                    default: "Nome da série/filme",
+                    full: "Série - nome do episódio/faixa/filme",
+                    custom: "Personalizado"
+                },
+                jf_customName: {
+                    description: "Modelo de nome personalizado.",
+                    label: "Jellyfin: nome personalizado"
+                },
+                jf_coverType: {
+                    description: "Tipo de capa para séries de TV.",
+                    label: "Jellyfin: tipo de capa",
+                    series: "Capa da série",
+                    episode: "Capa do episódio"
+                },
+                jf_episodeFormat: {
+                    description: "Formato do número do episódio.",
+                    label: "Jellyfin: formato do episódio",
+                    long: "S01E01",
+                    fulltext: "Temporada 1 episódio 1"
+                },
+                jf_showEpisodeName: {
+                    description: "Mostrar nome do episódio após as informações de temporada/episódio.",
+                    label: "Jellyfin: mostrar nome do episódio"
+                },
+                jf_overrideType: {
+                    description: "Substituir o tipo de Rich Presence.",
+                    label: "Jellyfin: substituir tipo",
+                    off: "Desativado",
+                    listening: "A ouvir",
+                    playing: "A jogar",
+                    streaming: "A transmitir",
+                    watching: "A ver"
+                },
+                jf_showPausedState: {
+                    description: "Mostrar presença quando o conteúdo estiver em pausa.",
+                    label: "Jellyfin: mostrar estado em pausa"
+                },
+                jf_privacyMode: {
+                    description: "Ocultar detalhes do conteúdo.",
+                    label: "Jellyfin: modo de privacidade"
+                },
+                gr_refreshInterval: {
+                    description: "Intervalo de atualização em segundos.",
+                    label: "Gensokyo Radio: intervalo de atualização"
+                },
+                nd_serverUrl: {
+                    description: "URL do servidor Navidrome (ex.: https://navidrome.example.com)",
+                    label: "URL do servidor Navidrome"
+                },
+                nd_username: {
+                    description: "Nome de utilizador do Navidrome",
+                    label: "Utilizador do Navidrome"
+                },
+                nd_password: {
+                    description: "Palavra-passe do Navidrome",
+                    label: "Palavra-passe do Navidrome"
+                },
+                nd_clientId: {
+                    description: "ID de cliente da aplicação do Discord (opcional)",
+                    label: "Navidrome: ID de cliente"
+                },
+                nd_showSmallImage: {
+                    description: "Mostrar o logótipo do Navidrome no canto inferior direito da capa.",
+                    label: "Navidrome: mostrar imagem pequena"
+                },
+                nd_showAlbum: {
+                    description: "Mostrar nome do álbum na presença.",
+                    label: "Navidrome: mostrar álbum"
+                },
+                nd_albumArtMode: {
+                    description: "Como obter capas de álbum.",
+                    label: "Navidrome: modo de capa do álbum",
+                    none: "Nenhum",
+                    instance: "Instância do Navidrome (expõe o URL do servidor ao Discord, sem enviar autenticação)",
+                    lastfm: "API do Last.fm (envia metadados da faixa para o Last.fm)"
+                },
+                nd_lastfmApiKey: {
+                    description: "Chave de API do Last.fm (opcional)",
+                    label: "Navidrome: chave de API do Last.fm"
+                },
+                nd_refreshInterval: {
+                    description: "Intervalo de atualização em segundos.",
+                    label: "Navidrome: intervalo de atualização"
+                },
+                nd_activityType: {
+                    description: "Que tipo de atividade",
+                    label: "Navidrome: tipo de atividade",
+                    listening: "A ouvir",
+                    playingFixesHiddenLines: "A jogar (corrige linhas ocultas)",
+                    watching: "A ver"
+                },
+                nd_nameString: {
+                    description: "Cadeia de formato do nome da atividade",
+                    label: "Navidrome: cadeia do nome"
+                },
+                nd_detailsString: {
+                    description: "Cadeia de formato dos detalhes da atividade",
+                    label: "Navidrome: cadeia de detalhes"
+                },
+                nd_stateString: {
+                    description: "Cadeia de formato do estado da atividade",
+                    label: "Navidrome: cadeia de estado"
+                },
+                nd_largeTextString: {
+                    description: "Cadeia de formato do texto grande da atividade",
+                    label: "Navidrome: cadeia do texto grande"
+                },
+                nd_statusDisplayType: {
+                    description: "Mostrar nome da faixa / artista na lista de membros",
+                    off: "Não mostrar (mostra mensagem genérica de audição)"
+                },
+                nd_hideOnPause: {
+                    description: "Ocultar Rich Presence quando a música estiver em pausa",
+                    label: "Navidrome: ocultar em pausa"
+                }
+            },
+            panel: {
+                password: "Palavra-passe",
+                statsFmUsername: "utilizador do stats.fm",
+                customStatusText: "Texto de estado personalizado",
+                nameFormat: "Formato do Nome",
+                missingArtFallback: "Alternativa sem capa",
+                showListeningStatus: "Mostrar estado de audição",
+                showStatsFmLogo: "Mostrar logótipo do Stats.fm",
+                showProfileLink: "Mostrar ligação do perfil",
+                showSongLink: "Mostrar ligação da música",
+                hideWithSpotify: "Ocultar com Spotify",
+                hideWithExternalRpc: "Ocultar com RPC externo",
+                disableAlbumArt: "Desativar capas de álbum",
+                apiKey: "Chave de API",
+                userId: "ID de Utilizador",
+                nameDisplay: "Apresentação do nome",
+                customNameTemplate: "Modelo de nome personalizado",
+                coverType: "Tipo de capa",
+                episodeFormat: "Formato do episódio",
+                overridePresenceType: "Substituir tipo de presença",
+                showEpisodeName: "Mostrar nome do episódio",
+                showWhenPaused: "Mostrar em pausa",
+                privacyMode: "Modo de privacidade",
+                refreshInterval: "Intervalo de atualização",
+                clientId: "ID de cliente",
+                albumArtMode: "Modo de capa do álbum",
+                lastFmApiKey: "Chave de API do Last.fm",
+                showSmallImage: "Mostrar imagem pequena",
+                showAlbum: "Mostrar álbum",
+                activityType: "Tipo de atividade",
+                statusDisplayType: "Tipo de apresentação do estado",
+                hideOnPause: "Ocultar em pausa",
+                activityNameFormat: "Formato do nome da atividade",
+                detailsFormat: "Formato dos detalhes",
+                stateFormat: "Formato do estado",
+                largeTextFormat: "Formato do texto grande",
+                enabled: "Ativada"
+            }
+        },
+        sedEnhanced: {
+            option: {
+                regexByDefault: {
+                    description: "Inverte a flag `r`, pelo que usar `r` ativa o modo sem regex e omiti-la usa o modo regex.",
+                    label: "Regex por predefinição"
+                }
+            },
+            name: "SedEnhanced",
+            description: "Expande o suporte rudimentar ao `sed` do Discord."
+        },
+        showRolesInChat: {
+            option: {
+                showBots: {
+                    description: "Se deve mostrar o cargo mais alto em bots.",
+                    label: "Mostrar bots"
+                },
+                useRoleColor: {
+                    description: "Usar a cor do cargo no ícone.",
+                    label: "Usar cor do cargo"
+                }
+            },
+            name: "ShowRolesInChat",
+            description: "Mostra o cargo mais alto de um utilizador ao lado do nome nas mensagens. Oculta/mostra cargos específicos pelo menu de contexto (clique direito).",
+            text: {
+                chatRoleActions: "Ações de cargo no chat",
+                unhideRolesInChat: "Voltar a mostrar cargos no chat",
+                showRoleInChat: "Mostrar cargo no chat",
+                hideRoleInChat: "Ocultar cargo no chat"
+            }
+        },
+        silenceUsers: {
+            option: {
+                mutedUserIds: {
+                    description: "IDs de utilizadores do Discord separados por vírgulas para silenciar menções e indicadores do servidor.",
+                    label: "IDs de utilizadores silenciados"
+                }
+            },
+            name: "SilenceUsers",
+            description: "Silencia menções @ e contadores de indicadores do servidor de utilizadores específicos. Mensagens normais e MPs não são afetadas."
+        },
+        songLink: {
+            text: {
+                showIfAvailable: "Mostrar se disponível",
+                openInDesktopApp: "Abrir na aplicação de computador",
+                loadingSongLink: "A carregar ligação da música...",
+                pleaseProvideAMusic: "Indica uma ligação de música.",
+                thisWillTakeA: "Isto vai demorar um momento...",
+                noAlternativePlatformsFound: "Nenhuma plataforma alternativa encontrada para esta ligação.",
+                failedToResolveMusic: "Falha ao resolver a ligação de música",
+                logo: "Logótipo do {{name}}"
+            },
+            option: {
+                servicesSettings: {
+                    description: "definições dos serviços",
+                    label: "Definições dos serviços"
+                },
+                userCountry: {
+                    description: "País usado na pesquisa (código de país de duas letras)",
+                    label: "País do utilizador"
+                },
+                includeMetadata: {
+                    description: "Incluir o título da faixa e o nome do artista como cabeçalho.",
+                    label: "Incluir metadados"
+                }
+            },
+            name: "SongLink",
+            description: "Adiciona botões de serviços de streaming abaixo das ligações de músicas",
+            command: {
+                musiclink: "Converter uma ligação de música para outras plataformas de streaming.",
+                url: "Ligação de música (Spotify, Deezer, YouTube, Tidal, Apple Music, SoundCloud)"
+            }
+        },
+        songSpotlight: {
+            name: "SongSpotlight",
+            description: "Mostra músicas no teu perfil",
+            text: {
+                songSpotlight: "Song Spotlight",
+                explicit: "Explícito",
+                addSong: "Adicionar música",
+                addANewSong: "Adicionar uma nova música",
+                copyLink: "Copiar ligação",
+                removeSong: "Remover música",
+                failedToLoad: "Falha ao carregar!",
+                areYouSure: "Tens a certeza?",
+                thisWillOverwriteYour: "Isto vai substituir as tuas músicas atuais.",
+                continue: "Continuar",
+                nevermind: "Esquece",
+                thisWillPermanentlyDelete: "Isto vai eliminar permanentemente todas as tuas músicas.",
+                delete: "Eliminar",
+                signInToSong: "Iniciar sessão no Song Spotlight",
+                songs: "Músicas",
+                authorization: "Authorization",
+                importFromClipboard: "Importar da área de transferência",
+                copyToClipboard: "Copiar para a área de transferência",
+                signOut: "Terminar sessão",
+                deleteSongs: "Eliminar músicas",
+                more: "Mais",
+                editSongs: "Editar músicas",
+                copyJson: "Copiar JSON",
+                looksLikeThereS: "Parece que não há nada aqui!",
+                uhOhSongSpotlight: "Ups! O Song Spotlight falhou ao carregar. Verifica a consola para mais detalhes.",
+                stealSong: "Roubar música",
+                profileSongs: "Músicas do perfil",
+                notEnoughSpace: "Espaço insuficiente",
+                alreadyAdded: "Já adicionaste esta música",
+                invalidLink: "Link inválido",
+                failedToParseLink: "Não foi possível analisar o link",
+                invalidUrl: "URL inválida",
+                goAddSongs: "Então? Estás à espera de quê? Adiciona algumas músicas ao teu Song Spotlight!",
+                tellUserToAddSongs: "Pede a {{name}} para adicionar algumas músicas ao Song Spotlight!",
+                supportedServices: "O Song Spotlight suporta estes serviços:",
+                viewSongsVia: "Também podes ver as tuas músicas com o comando",
+                viewSongsViaSuffix: "!",
+                coverTooltipOwner: "{{sublabel}} de {{label}}",
+                coverTooltipBy: "{{label}} de {{sublabel}}",
+                lastUpdated: "Última atualização",
+                save: "Guardar",
+                showMore: "Mostrar mais {{count}}"
+            },
+            toast: {
+                youHaveBeenSigned: "Terminaste sessão no Song Spotlight. Inicia sessão novamente.",
+                songSpotlightError: "Song Spotlight: {{error}}",
+                successfullyAuthorized: "Autorizado com sucesso!",
+                failedToPlaySong: "Falha ao reproduzir a pré-visualização da música!",
+                addedSong: "Música adicionada!",
+                removedSong: "Música removida!",
+                noJsonInClipboard: "Nenhum JSON na área de transferência!",
+                invalidSongSpotlightData: "Dados do Song Spotlight inválidos na área de transferência!",
+                oneOrMoreImported: "Uma ou mais músicas importadas eram inválidas.",
+                importedSongsFromClipboard: "Músicas importadas da área de transferência!",
+                successfullySavedSongs: "Músicas guardadas com sucesso!",
+                successfullySignedOut: "Sessão terminada com sucesso!",
+                successfullyDeletedSongs: "Músicas eliminadas com sucesso!",
+                youDonTHave: "Não tens espaço suficiente!",
+                uhOhThisSong: "Ups, esta música não existe!",
+                youAlreadyHaveThis: "Já adicionaste esta música!",
+                youDonTHave2: "Tu... não adicionaste esta música?",
+                fetchError: "Erro do Song Spotlight ao obter {{path}}"
+            },
+            option: {
+                collapseSongList: {
+                    description: "Recolhe a lista de músicas nos perfis num botão que abre um menu separado",
+                    label: "Recolher lista de músicas"
+                },
+                profileSongsLimit: {
+                    description: "Quantas músicas são mostradas ao clicar num utilizador",
+                    label: "Limite de músicas do perfil"
+                },
+                previewVolume: {
+                    description: "Volume das pré-visualizações de músicas",
+                    label: "Volume da pré-visualização"
+                }
+            }
+        },
+        stopAutoUnread: {
+            name: "StopAutoUnread",
+            description: "Impede que o Discord mude automaticamente a definição de notificação de um canal para \"Todas as mensagens\""
+        },
+        themeLibrary: {
+            text: {
+                enablePlugin: "Ativar plugin",
+                cancel: "Cancelar",
+                holdOn: "Espera!",
+                thisThemeRequiresThe: "Este tema requer o",
+                pluginToWorkProperly: "plugin para funcionar corretamente!",
+                doYouWantTo: "Queres ativá-lo?",
+                themeInfo: "Informações do tema",
+                viewSource: "Ver código-fonte",
+                close: "Fechar",
+                download: "Transferir",
+                overwrite: "Substituir",
+                keepMyFile: "Manter o meu ficheiro",
+                copyToClipboard: "Copiar para a área de transferência",
+                conflict: "Conflito!",
+                themeSource: "Fonte do tema",
+                aThemeWithThe: "Um tema com o mesmo nome",
+                alreadyExists: "já existe",
+                inYourThemesDirectory: "na tua pasta de temas! Queres substituí-lo?",
+                version: "Versão",
+                likes: "Gostos",
+                donate: "Doar",
+                supportServer: "Servidor de suporte",
+                source: "Fonte",
+                tags: "Etiquetas",
+                youCanSupportThe: "Podes apoiar o autor fazendo um donativo abaixo!",
+                joinDiscordServer: "Entrar no servidor do Discord",
+                viewThemeSource: "Ver a fonte do tema",
+                showAll: "Mostrar todos",
+                showThemes: "Mostrar temas",
+                showSnippets: "Mostrar excertos",
+                showMostLiked: "Mostrar os mais gostados",
+                showDark: "Mostrar escuros",
+                showLight: "Mostrar claros",
+                showEnabled: "Mostrar ativados",
+                showDisabled: "Mostrar desativados",
+                searchForATheme: "Pesquisar um tema...",
+                gettingTheLatestThemes: "A obter os temas mais recentes...",
+                thisWonTTake: "Não vai demorar!",
+                failedToFetchThemes: "Falha ao obter temas",
+                couldNotFetchThe: "Não foi possível obter a lista de temas. Tenta novamente mais tarde.",
+                wantYourThemeRemoved: "Queres que o teu tema seja removido?",
+                hide: "Ocultar",
+                noThemeFound: "Nenhum tema encontrado.",
+                tryNarrowingYourSearch: "Tenta restringir a pesquisa.",
+                themeLibrary: "Biblioteca de temas",
+                successfullyAuthorizedWithThemelibrary: "Autorizado com sucesso no ThemeLibrary!",
+                failedToAuthorizeCheck: "Falha ao autorizar, verifica a consola",
+                successfullyDeauthorizedFromThemelibrary: "Autorização do ThemeLibrary revogada com sucesso!",
+                failedToDeauthorizeCheck: "Falha ao revogar a autorização, verifica a consola",
+                themelibraryAuth: "Autenticação do ThemeLibrary",
+                themeRemoval: "Remoção de tema",
+                allThemeAuthorsAre: "Todos os autores de temas recebem crédito nas informações do tema e nenhuma fonte foi modificada. Se mesmo assim quiseres que o teu tema seja removido, abre uma issue clicando abaixo.",
+                authorizeWithThemelibrary: "Autorizar com o ThemeLibrary",
+                copyThemelibraryToken: "Copiar token do ThemeLibrary",
+                deauthorizeThemelibrary: "Revogar autorização do ThemeLibrary",
+                themeDetails: "Detalhes de {{name}}",
+                mostLiked: "Mais gostados",
+                newestAdditions: "Adições mais recentes",
+                removeTheme: "Remover tema",
+                addTheme: "Adicionar tema",
+                authors: "Autores",
+                author: "Autor",
+                nobodyLikedTheme: "Ninguém gostou deste tema ainda.",
+                nobodyLikedSnippet: "Ninguém gostou deste snippet ainda.",
+                usersLikedTheme: "{{likes}} utilizadores gostaram deste tema!",
+                usersLikedSnippet: "{{likes}} utilizadores gostaram deste snippet!",
+                openThemeLibrary: "Abrir biblioteca de temas",
+                lastUpdated: "Este tema foi atualizado pela última vez em",
+                removalInfo: "Se quiser que os seus temas sejam removidos permanentemente, abra uma issue no",
+                themes: "Temas",
+                requestRemoval: "Pedir remoção do tema",
+                pluginSuffix: "plugin!"
+            },
+            toast: {
+                downloadedName: "{{name}} transferido!",
+                failedToDownloadName: "Falha ao transferir {{name}}! (verifica a consola)",
+                invalidOrExpiredInvite: "Convite inválido ou expirado!",
+                copiedToClipboard: "Copiado para a área de transferência",
+                noUniquetokenPresentTry: "Nenhum uniqueToken presente, tenta autorizar primeiro!",
+                noTokenToCopy: "Nenhum token para copiar, tenta autorizar primeiro!",
+                copiedToClipboard2: "Copiado para a área de transferência!"
+            },
+            name: "ThemeLibrary",
+            description: "Uma biblioteca de temas para o Plexcord.",
+            option: {
+                hideWarningCard: {
+                    description: "Ocultar o cartão de aviso no topo do separador da biblioteca de temas",
+                    label: "Ocultar cartão de aviso"
+                },
+                buttons: {
+                    description: "Botões do ThemeLibrary",
+                    label: "Botões"
+                }
+            }
+        },
+        translatePlus: {
+            name: "Translate+",
+            description: "O plugin de tradução do Plexcord, mas com suporte para idiomas artísticos!",
+            text: {
+                translate: "Traduzir",
+                dismiss: "Dispensar",
+                translationFailedDueTo: "A tradução falhou devido a um erro.",
+                translatedFrom: "traduzido de {{lang}}"
+            },
+            option: {
+                target: {
+                    description: "Idioma de destino",
+                    label: "Destino"
+                },
+                toki: {
+                    description: "Ativar toki pona",
+                    label: "Toki pona"
+                },
+                sitelen: {
+                    description: "Ativar sitelen pona",
+                    label: "Sitelen pona"
+                },
+                shavian: {
+                    description: "Ativar alfabeto shaviano",
+                    label: "Shaviano"
+                }
+            }
+        },
+        triviaAI: {
+            name: "TriviaAI",
+            description: "Um plugin que te ajuda a responder a perguntas de trivia com IA.",
+            text: {
+                answerWithAi: "Responder com IA",
+                enterApiKeyHere: "Introduz aqui a chave de API do teu endpoint de IA.",
+                enterSystemPrompt: "Introduz o prompt do sistema.",
+                enterYourOpenaiCompatible: "Introduz aqui o teu endpoint de IA compatível com OpenAI.",
+                status: "Estado {{status}}"
+            },
+            option: {
+                apiKey: {
+                    description: "Chave de API.",
+                    label: "Chave de API"
+                },
+                model: {
+                    description: "Modelo de IA a usar.",
+                    label: "Modelo",
+                    placeholder: "ex.: google/gemini-3-flash-preview, inception/mercury, openai/gpt-5.2-chat, etc."
+                },
+                systemPrompt: {
+                    description: "Prompt do sistema para a IA. Marcadores: {current_user}, {current_time}",
+                    label: "Prompt do sistema"
+                },
+                maxTokens: {
+                    description: "Número máximo de tokens na resposta.",
+                    label: "Máximo de tokens"
+                },
+                endpoint: {
+                    description: "Endpoint de IA compatível com OpenAI.",
+                    label: "Endpoint"
+                },
+                context: {
+                    description: "Número de mensagens anteriores a incluir como contexto.",
+                    label: "Contexto"
+                },
+                passMessageAuthorName: {
+                    description: "Adicionar o nome do autor antes do conteúdo da mensagem ao enviá-la para a IA. Isto pode ajudar a IA a distinguir utilizadores diferentes numa conversa.",
+                    label: "Enviar nome do autor da mensagem"
+                },
+                treatSelfAsAssistant: {
+                    description: "Quando ativado, as tuas próprias mensagens serão tratadas como mensagens do assistente no contexto. Isto faz com que alguns modelos comecem a gerar fanfics.",
+                    label: "Tratar-me como assistente"
+                },
+                mode: {
+                    description: "Como devem as respostas ser tratadas?",
+                    label: "Modo",
+                    autoreply: "Resposta automática",
+                    chatbar: "Substituir o texto da barra de chat",
+                    bot: "Clyde"
+                },
+                supportImages: {
+                    description: "Enviar imagens para a IA como contexto (se houver). Nem todos os modelos suportam isto.",
+                    label: "Suportar imagens"
+                },
+                sendImagesAsBase64: {
+                    description: "Enviar imagens para a IA em base64.",
+                    label: "Enviar imagens em base64"
+                }
+            },
+            toast: {
+                triviaaiApiSettingsAre: "TriviaAI: as definições da API estão incompletas.",
+                errorGettingResponseFrom: "Erro ao obter resposta do modelo de IA"
+            }
+        },
+        unreadCountBadge: {
+            option: {
+                showOnMutedChannels: {
+                    description: "Mostrar contagem de não lidas em canais silenciados",
+                    label: "Mostrar em canais silenciados"
+                },
+                notificationCountLimit: {
+                    description: "Mostrar +99 em vez da quantidade real",
+                    label: "Limite da contagem de notificações"
+                }
+            },
+            name: "UnreadCountBadge",
+            description: "Mostra indicadores de contagem de mensagens não lidas nos canais da lista"
+        },
+        userPFP: {
+            toast: {
+                gifsWebpMustBe: "GIFs/WebP têm de ser adicionados por URL. Carrega o teu GIF/WebP para um serviço de alojamento de imagens e cola a ligação."
+            },
+            text: {
+                save: "Guardar",
+                delete: "Eliminar",
+                customAvatar: "Avatar personalizado",
+                original: "Original",
+                local: "Local",
+                enterPngGifUrl: "Introduz o URL do PNG/GIF",
+                setAvatar: "Definir avatar",
+                usingTheSetAvatar: "A funcionalidade de definir avatar é apenas local, ou seja, só tu vês a alteração.",
+                joinUserpfpServer: "Entrar no servidor UserPFP",
+                dropHere: "Larga aqui!",
+                dragOrClick: "⬆ Arrasta uma imagem ou clica para enviar (para GIFs ou WebP, usa uma URL)",
+                uploadedFile: "(ficheiro enviado)",
+                supportHere: "Apoie o UserPFP aqui"
+            },
+            option: {
+                overrideServerAvatars: {
+                    description: "Substituir avatares de servidor por avatares personalizados ou pelo avatar predefinido se nenhum personalizado estiver definido.",
+                    label: "Substituir avatares de servidor"
+                },
+                preferNitro: {
+                    description: "Que avatar usar se existirem tanto o avatar animado predefinido (Nitro) como o do UserPFP",
+                    label: "Preferir Nitro",
+                    false: "UserPFP",
+                    true: "Nitro"
+                },
+                databaseSource: {
+                    description: "URL de onde carregar a base de dados",
+                    label: "Origem da base de dados"
+                }
+            },
+            name: "UserPFP",
+            description: "Permite definir avatares locais estáticos ou animados para ti e para outros utilizadores"
+        },
+        userpluginInstaller: {
+            toast: {
+                restartToApplyChanges: "Reinicia para aplicar as alterações!"
+            },
+            text: {
+                installError: "Erro de instalação",
+                done: "Concluído!",
+                later: "Mais tarde",
+                updateError: "Erro de atualização",
+                checkingForUpdates: "A procurar atualizações...",
+                loadingPlugins: "A carregar plugins...",
+                pluginUpdatesAvailable: "Atualizações de plugins disponíveis",
+                theFollowingPluginsAre: "Os seguintes plugins estão desatualizados:",
+                youCanUpdatePlugins: "Podes atualizar os plugins abaixo.",
+                installPlugin: "Instalar plugin",
+                userplugininstallerNotFullyLoaded: "UserpluginInstaller não foi totalmente carregado",
+                youNeedToRestart: "Precisas de reiniciar para carregar a parte nativa :)",
+                restartNow: "Reiniciar agora",
+                someUserpluginsAreOut: "Alguns UserPlugins estão desatualizados!",
+                clickToOpenThe: "Clica para abrir o atualizador de UserPlugins",
+                plexcordDoesNotModerate: "O Plexcord não modera userplugins e não assume qualquer responsabilidade pelo que possa resultar da sua instalação.",
+                onlyInstallUserpluginsFrom: "Instala apenas userplugins de programadores em quem confias. Fazê-lo é inteiramente por tua conta e risco.",
+                setGitPath: "Definir caminho do Git",
+                installHint: "Podes instalar um plugin do GitHub, GitLab, Codeberg, git.nin0.dev ou plugins.nin0.dev colando aqui o URL de clonagem.",
+                enableAndRestart: "Ativar e reiniciar",
+                enableAndRefresh: "Ativar e recarregar",
+                tabCounts: "({{total}}, {{enabled}} ativados)",
+                possiblyMore: "e possivelmente mais, pois a verificação de atualizações ainda não terminou. ",
+                alreadyInstalled: "Plugin já instalado, atualize abaixo",
+                invalidUrl: "URL inválido, leia o aviso acima",
+                install: "Instalar",
+                restart: "Reiniciar",
+                refresh: "Atualizar",
+                update: "Atualizar",
+                source: "Código-fonte",
+                support: "Suporte",
+                managePlugins: "Gerir plugins",
+                uninstalledRestart: "{{name}} foi desinstalado. É necessário reiniciar para remover o plugin completamente.",
+                uninstalledRefresh: "{{name}} foi desinstalado. É necessário atualizar para remover o plugin completamente.",
+                updatedRestart: "{{name}} foi atualizado. É necessário reiniciar para aplicar a atualização.",
+                updatedRefresh: "{{name}} foi atualizado. É necessário atualizar para aplicar a atualização.",
+                installedBody: "{{name}} foi instalado com sucesso. E agora?",
+                installedNativeBody: "{{name}} foi instalado com sucesso. No entanto, como usa funções nativas, é necessário reiniciar o cliente. E agora?"
+            },
+            option: {
+                allowlistedChannels: {
+                    description: "Lista de canais separados por vírgulas onde o botão Instalar plugin deve aparecer. É sempre mostrado nos canais de userplugins do Plexcord",
+                    label: "Canais permitidos"
+                },
+                notifyIfUpdate: {
+                    description: "Mostrar uma notificação do Plexcord se os UserPlugins precisarem de ser atualizados",
+                    label: "Notificar se houver atualização"
+                },
+                neverNotifyForPlugins: {
+                    description: "Nunca mostrar notificações de atualização para estes plugins (podes continuar a atualizá-los no separador UserPlugins)",
+                    label: "Nunca notificar para plugins"
+                }
+            },
+            name: "UserpluginInstaller",
+            description: "Instala userplugins com um simples clique"
+        },
+        vCPanelSettings: {
+            option: {
+                title1: {
+                    label: "Título 1"
+                },
+                uncollapseSettingsByDefault: {
+                    description: "Expandir automaticamente as definições de voz por predefinição",
+                    label: "Expandir definições por predefinição"
+                },
+                title2: {
+                    label: "Título 2"
+                },
+                outputVolume: {
+                    description: "Mostrar um controlo deslizante de volume de saída",
+                    label: "Volume de saída"
+                },
+                inputVolume: {
+                    description: "Mostrar um controlo deslizante de volume de entrada",
+                    label: "Volume de entrada"
+                },
+                outputDevice: {
+                    description: "Mostrar um seletor de dispositivo de saída",
+                    label: "Dispositivo de saída"
+                },
+                inputDevice: {
+                    description: "Mostrar um seletor de dispositivo de entrada",
+                    label: "Dispositivo de entrada"
+                },
+                camera: {
+                    description: "Mostrar um seletor de câmara",
+                    label: "Câmara"
+                },
+                title3: {
+                    label: "Título 3"
+                },
+                showOutputVolumeHeader: {
+                    description: "Mostrar cabeçalho acima do controlo de volume de saída",
+                    label: "Mostrar cabeçalho do volume de saída"
+                },
+                showInputVolumeHeader: {
+                    description: "Mostrar cabeçalho acima do controlo de volume de entrada",
+                    label: "Mostrar cabeçalho do volume de entrada"
+                },
+                showOutputDeviceHeader: {
+                    description: "Mostrar cabeçalho acima do seletor de dispositivo de saída",
+                    label: "Mostrar cabeçalho do dispositivo de saída"
+                },
+                showInputDeviceHeader: {
+                    description: "Mostrar cabeçalho acima do seletor de dispositivo de entrada",
+                    label: "Mostrar cabeçalho do dispositivo de entrada"
+                },
+                showVideoDeviceHeader: {
+                    description: "Mostrar cabeçalho acima do seletor de câmara",
+                    label: "Mostrar cabeçalho do dispositivo de vídeo"
+                }
+            },
+            name: "VCPanelSettings",
+            description: "Controla as definições de voz diretamente no painel de voz",
+            text: {
+                appearance: "Aspeto",
+                settingsToShow: "Definições a mostrar",
+                headersToShow: "Cabeçalhos a mostrar",
+                outputVolume: "Volume de saída",
+                inputVolume: "Volume de entrada",
+                outputDevice: "Dispositivo de saída",
+                inputDevice: "Dispositivo de entrada",
+                settings: "Definições",
+                hide: "Ocultar"
+            }
+        },
+        voiceMessageTranscriber: {
+            text: {
+                autoDetect: "Deteção automática",
+                start: "Iniciar",
+                transcriptionOptions: "Opções de transcrição",
+                audioLanguage: "Idioma do áudio",
+                retry: "Tentar novamente",
+                transcriptionFailed: "Falha na transcrição",
+                transcribeVoiceMessage: "Transcrever mensagem de voz",
+                close: "Fechar",
+                baseRecommended: "Base (recomendado)",
+                small: "Small",
+                largeV3TurboBest: "Large v3 Turbo (melhor precisão, GPU recomendada)",
+                transcribe: "Transcrever",
+                translateToEnglish: "Traduzir para o inglês",
+                voiceMessageTranslation: "Tradução da mensagem de voz",
+                voiceMessageTranscription: "Transcrição da mensagem de voz",
+                hideTimestamps: "Ocultar marcações de tempo",
+                showTimestamps: "Mostrar marcações de tempo",
+                copied: "Copiado!",
+                copyText: "Copiar texto",
+                downloadingAudio: "A transferir áudio...",
+                processingAudio: "A processar áudio...",
+                loadingModel: "A carregar modelo...",
+                transcribing: "A transcrever...",
+                transcription: "Transcrição",
+                transcriptionError: "Erro de transcrição",
+                transcribingInProgress: "Transcrição em curso...",
+                initializing: "A inicializar...",
+                workerCrashed: "O processo de transcrição falhou",
+                workerStopped: "O processo de transcrição foi interrompido",
+                deleteCache: "Eliminar todos os ficheiros em cache ({{size}} MB)",
+                action: "Ação"
+            },
+            name: "VoiceMessageTranscriber",
+            description: "Transcrições de mensagens de voz no dispositivo com tecnologia Whisper",
+            option: {
+                embed: {
+                    description: "Mostrar a transcrição diretamente no anexo da mensagem de voz em vez de numa janela.",
+                    label: "Incorporação"
+                },
+                maintainHorizontal: {
+                    description: "Manter o tamanho horizontal da caixa de transcrição incorporada e expandir verticalmente.",
+                    label: "Manter horizontal"
+                },
+                selectedModel: {
+                    description: "Tamanho do modelo.",
+                    onnxcommunitywhispertiny: "Tiny (mais rápido, menor precisão)"
+                },
+                useGpu: {
+                    description: "Executar o modelo na tua GPU (WebGPU) quando suportado. Muito mais rápido e torna os modelos maiores utilizáveis. Recorre à CPU se não estiver disponível.",
+                    label: "Usar GPU"
+                },
+                quantized: {
+                    description: "Usar modelos quantizados ao executar na CPU (menor tamanho, ligeira perda de qualidade).",
+                    label: "Quantizado"
+                },
+                deleteModalFiles: {
+                    description: "Eliminar ficheiros em cache do armazenamento.",
+                    label: "Eliminar ficheiros do modelo"
+                }
+            }
+        },
+        voiceMessagesInBackground: {
+            name: "VoiceMessagesInBackground",
+            description: "Mantém as mensagens de voz a tocar entre chats com um minileitor sincronizado.",
+            text: {
+                voiceMessagesInBackground: "Leitor de mensagens de voz em segundo plano",
+                returnToChannelname: "Voltar a {{channelName}}",
+                voiceMessagePosition: "Posição da mensagem de voz",
+                changePlaybackSpeed: "Alterar velocidade de reprodução",
+                playbackSpeedSpeedTimes: "Velocidade de reprodução {{speed}} vezes",
+                closeVoiceMessagePlayer: "Fechar o leitor de mensagens de voz",
+                voiceMessage: "Mensagem de voz",
+                directMessage: "Mensagem direta",
+                resume: "Retomar mensagem de voz",
+                pause: "Pausar mensagem de voz"
+            }
+        },
+        webPWA: {
+            name: "WebPWA",
+            description: "Torna o Discord instalável como aplicação (PWA). Ativa indicadores de notificação, atalhos globais e a barra de título personalizada do Discord.",
+            text: {
+                activities: "Atividades",
+                hopIn: "Entra",
+                status: "Estado",
+                emojis: "Emojis",
+                rooms: "Salas",
+                discord: "Discord",
+                platforms: "Plataformas",
+                keybindsInfoBefore: "Atalhos globais personalizados de Premir para X são suportados. Aceda a",
+                keybindsInfoAfter: "para os alterar. Atalhos de Manter para X não são suportados."
+            }
+        },
+        "webRichPresence (arRPC)": {
+            name: "WebRichPresence (arRPC)"
+        },
+        webScreenShare: {
+            option: {
+                resolution: {
+                    description: "Resolução",
+                    label: "Resolução"
+                },
+                frameRate: {
+                    description: "Taxa de fotogramas",
+                    label: "Taxa de fotogramas"
+                },
+                contentHint: {
+                    description: "Sugestão de conteúdo",
+                    label: "Sugestão de conteúdo"
+                },
+                systemAudio: {
+                    description: "Silenciar áudio do sistema",
+                    label: "Áudio do sistema"
+                }
+            },
+            name: "WebScreenShare",
+            description: "Adiciona um menu de opções de partilha de ecrã. Permite alterar a resolução, a taxa de fotogramas, sugestões de codificação e o áudio do sistema.",
+            text: {
+                stream: "Transmissão",
+                streamMuted: "Transmissão silenciada",
+                streamMode: "Modo de transmissão",
+                muteStreamAudio: "Silenciar áudio da transmissão",
+                preventsSystemAudioFrom: "Impede que o áudio do sistema seja incluído na tua transmissão.",
+                showStreamPreviews: "Mostrar pré-visualizações da transmissão",
+                allowsOthersToSee: "Permite que outros vejam uma pré-visualização da tua transmissão antes de entrarem.",
+                smootherVideo: "Vídeo mais fluido",
+                cleanerText: "Texto mais nítido",
+                userPreset: "Predefinição do utilizador",
+                custom: "Personalizado",
+                gaming: "Jogos",
+                screenshare: "Partilha de ecrã"
+            }
+        },
+        whitelistedEmojis: {
+            option: {
+                defaultEmojis: {
+                    description: "Ocultar emojis Unicode predefinidos do preenchimento automático, exceto se estiverem na lista de permissões.",
+                    label: "Emojis predefinidos"
+                },
+                serverEmojis: {
+                    description: "Ocultar emojis personalizados do servidor do preenchimento automático, exceto se estiverem na lista de permissões.",
+                    label: "Emojis do servidor"
+                },
+                disableToasts: {
+                    description: "Não mostrar avisos ao adicionar ou remover emojis.",
+                    label: "Desativar avisos"
+                },
+                whiteListedEmojis: {
+                    description: "Emojis na lista de permissões",
+                    label: "Emojis na lista de permissões"
+                },
+                exportEmojis: {
+                    description: "Exportar emojis",
+                    label: "Exportar emojis"
+                },
+                importEmojis: {
+                    description: "Importar emojis",
+                    label: "Importar emojis"
+                },
+                resetEmojis: {
+                    description: "Repor emojis",
+                    label: "Repor emojis"
+                }
+            },
+            name: "WhitelistedEmojis",
+            description: "Permite desativar todos os emojis de mensagens, exceto um conjunto na lista de permissões.",
+            toast: {
+                addedLengthEmojisTo: "{{length}} emojis adicionados à lista, {{length}} já estavam na lista",
+                removedLengthEmojisFrom: "{{length}} emojis removidos da lista",
+                nameIsAlreadyIn: "\"{{name}}\" já está na lista",
+                addedNameToThe: "\"{{name}}\" adicionado à lista",
+                nameIsNotIn: "\"{{name}}\" não está na lista",
+                removedNameFromThe: "\"{{name}}\" removido da lista",
+                successfullyExportedEmojis: "Emojis exportados com sucesso",
+                successfullyImportedEmojis: "Emojis importados com sucesso",
+                invalidJsonData: "Dados JSON inválidos",
+                failedToImportEmojis: "Falha ao importar emojis: {{err}}",
+                resetEmojis: "Emojis repostos"
+            },
+            text: {
+                areYouSure: "Tens a certeza?",
+                thisWillOverwriteYour: "Isto vai substituir a tua lista de permissões atual.",
+                import: "Importar",
+                cancel: "Cancelar",
+                thisWillRemoveAll: "Isto vai remover todos os emojis da tua lista de permissões.",
+                reset: "Repor",
+                addAllGuildEmojis: "Adicionar todos os emojis do servidor",
+                removeAllGuildEmojis: "Remover todos os emojis do servidor",
+                noEmojisInThe: "Nenhum emoji na lista de permissões.",
+                removeAll: "Remover todos",
+                removeFromWhitelist: "Remover da lista de permissões",
+                addToWhitelist: "Adicionar à lista de permissões",
+                defaultEmojis: "Emojis predefinidos",
+                guildEmojis: "Emojis de {{name}}",
+                guildFallback: "Servidor {{id}}",
+                whitelistedEmojis: "Emojis na lista de permissões",
+                remove: "Remover"
+            }
+        },
+        wigglyText: {
+            option: {
+                intensity: {
+                    description: "Intensidade da animação em px",
+                    label: "Intensidade"
+                }
+            },
+            name: "WigglyText",
+            description: "Adiciona uma nova formatação markdown que faz o texto ondular.",
+            text: {
+                leftAndRight: "esquerda e direita",
+                byTyping: "escrevendo",
+                upAndDown: "cima e baixo",
+                inACircle: "em círculo",
+                youCanMakeTextWiggle: "Podes fazer o texto abanar assim:"
+            }
+        },
+        fixDiscordCss: {
+            description: "Corrige o atraso do CSS do Discord"
+        },
+        directFileDownload: {
+            name: "DirectFileDownload",
+            description: "Transfere ficheiros diretamente do Discord em vez de os abrir no navegador"
+        },
+        githubRepos: {
+            text: {
+                failedToFetchRepositories: "Não foi possível obter os repositórios",
+                personal: "Pessoal",
+                unknown: "Desconhecido",
+                sortedByCount: "Ordenado por número de repositórios. Clica para ordenar de A-Z",
+                sortedAlphabetically: "Ordenado de A-Z. Clica para ordenar por número de repositórios",
+                mostRepos: "Mais repositórios"
+            }
         }
     }
 } as const;

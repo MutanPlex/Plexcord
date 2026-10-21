@@ -5,12 +5,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { ModalProps } from "@utils/modal";
+import { RenderModalProps } from "@plexcord/discord-types";
 
 export type SetAliasSaveResult = { ok: true; } | { ok: false; error: string; };
 
 export interface SetAliasModalProps {
-    modalProps: ModalProps;
+    modalProps: RenderModalProps;
     emojiDisplayName: string;
     initialAlias: string;
     getValidationError: (input: string) => string | null;
@@ -19,6 +19,6 @@ export interface SetAliasModalProps {
 }
 
 export interface ClearAliasesConfirmModalProps {
-    modalProps: ModalProps;
+    modalProps: RenderModalProps;
     onConfirm: () => Promise<void>;
 }

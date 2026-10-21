@@ -25,7 +25,7 @@ import { DEFAULT_IMAGE_CACHE_DIR } from "@plugins/messageLoggerEnhanced/utils/co
 import { copyWithToast } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { findCssClassesLazy } from "@webpack";
-import { Toasts } from "@webpack/common";
+import { showToast } from "@webpack/common";
 const inputClasses = findCssClassesLazy("input", "inputWrapper", "editable") as Record<string, string>;
 
 function createDirSelector(settingKey: "logsDir" | "imageCacheDir", successMessage: string) {
@@ -66,17 +66,9 @@ export function SelectFolderInput({ settingsKey, successMessage }: Props) {
             const res = await Native.chooseDir(settingsKey);
             settings.store[settingsKey] = res;
 
-            return Toasts.show({
-                id: Toasts.genId(),
-                type: Toasts.Type.SUCCESS,
-                message: successMessage
-            });
+            return showToast({ text: successMessage, variant: "success" });
         } catch (err) {
-            Toasts.show({
-                id: Toasts.genId(),
-                type: Toasts.Type.FAILURE,
-                message: t(plugin.messageLoggerEnhanced.failedUpdate)
-            });
+            showToast({ text: t(plugin.messageLoggerEnhanced.failedUpdate), variant: "critical" });
         }
     }
 

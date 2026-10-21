@@ -19,7 +19,6 @@
 
 import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
-import { Settings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import type { Channel, RoleOrUserPermission } from "@plexcord/discord-types";
@@ -28,9 +27,10 @@ import PermissionsViewerPlugin from "@plugins/permissionsViewer";
 import openRolesAndUsersPermissionsModal from "@plugins/permissionsViewer/components/RolesAndUsersPermissions";
 import { sortPermissionOverwrites } from "@plugins/permissionsViewer/utils";
 import { classes } from "@utils/misc";
-import { formatDuration } from "@utils/text";
+import { formatDurationVerbose } from "@utils/text";
 import { findByPropsLazy, findComponentByCodeLazy, findCssClassesLazy } from "@webpack";
 import { EmojiStore, FluxDispatcher, GuildMemberStore, GuildStore, Parser, PermissionsBits, PermissionStore, SnowflakeUtils, Timestamp, Tooltip, useEffect, useState } from "@webpack/common";
+import { ComponentType } from "react";
 
 import { cl, settings } from "..";
 
@@ -40,8 +40,9 @@ const enum SortOrderTypes {
 }
 
 const ChatScrollClasses = findCssClassesLazy("auto", "managedReactiveScroller", "customTheme");
-const ChannelBeginHeader = findComponentByCodeLazy("#{intl::ROLE_REQUIRED_SINGLE_USER_MESSAGE}");
 const TagComponent = findComponentByCodeLazy("#{intl::FORUM_TAG_A11Y_FILTER_BY_TAG}");
+let ChannelBeginHeader: ComponentType<any> = () => null;
+export const setChannelBeginHeader = v => ChannelBeginHeader = v;
 
 const EmojiParser = findByPropsLazy("convertSurrogateToName");
 const EmojiUtils = findByPropsLazy("getURL", "getEmojiColors");
@@ -129,7 +130,7 @@ function HiddenChannelLockScreen({ channel }: { channel: Channel; }) {
             });
         }
 
-        if (Settings.plugins.PermissionsViewer.enabled) {
+        if (isPluginEnabled(PermissionsViewerPlugin.name)) {
             setPermissions(sortPermissionOverwrites(Object.values(permissionOverwrites).map(overwrite => ({
                 type: overwrite.type,
                 id: overwrite.id,
@@ -189,11 +190,11 @@ function HiddenChannelLockScreen({ channel }: { channel: Channel; }) {
                     <BaseText size="md">{t(plugin.showHiddenChannels.modal.lastPin)} <Timestamp timestamp={new Date(lastPinTimestamp)} /></BaseText>
                 }
                 {(rateLimitPerUser ?? 0) > 0 &&
-                    <BaseText size="md">{t(plugin.showHiddenChannels.modal.slowmode)} {formatDuration(rateLimitPerUser!, "seconds")}</BaseText>
+                    <BaseText size="md">{t(plugin.showHiddenChannels.modal.slowmode)} {formatDurationVerbose(rateLimitPerUser!, "seconds")}</BaseText>
                 }
                 {(defaultThreadRateLimitPerUser ?? 0) > 0 &&
                     <BaseText size="md">
-                        {t(plugin.showHiddenChannels.modal.threadSlowmode)} {formatDuration(defaultThreadRateLimitPerUser!, "seconds")}
+                        {t(plugin.showHiddenChannels.modal.threadSlowmode)} {formatDurationVerbose(defaultThreadRateLimitPerUser!, "seconds")}
                     </BaseText>
                 }
                 {((channel.isGuildVoice() || channel.isGuildStageVoice()) && bitrate != null) &&
@@ -208,7 +209,7 @@ function HiddenChannelLockScreen({ channel }: { channel: Channel; }) {
                 {(defaultAutoArchiveDuration ?? 0) > 0 &&
                     <BaseText size="md">
                         {t(plugin.showHiddenChannels.modal.inactiveArchiveDuration, { type: channel.isForumChannel() ? t(plugin.showHiddenChannels.modal.posts) : t(plugin.showHiddenChannels.modal.threads) })}
-                        {" " + formatDuration(defaultAutoArchiveDuration!, "minutes")}
+                        {" " + formatDurationVerbose(defaultAutoArchiveDuration!, "minutes")}
                     </BaseText>
                 }
                 {defaultForumLayout != null &&

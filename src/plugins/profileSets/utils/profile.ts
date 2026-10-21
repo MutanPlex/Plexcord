@@ -7,10 +7,8 @@
 
 import { getUserSettingLazy } from "@api/UserSettings";
 import { AvatarDecorationData, CustomStatus, DisplayNameStyles, Nameplate, ProfileEffect, ProfilePreset } from "@plexcord/discord-types";
-import { findStoreLazy } from "@webpack";
-import { FluxDispatcher, GuildMemberStore, IconUtils, UserProfileStore, UserStore } from "@webpack/common";
+import { FluxDispatcher, GuildMemberStore, IconUtils, UserProfileSettingsStore, UserProfileStore, UserStore } from "@webpack/common";
 
-const UserProfileSettingsStore = findStoreLazy("UserProfileSettingsStore");
 const CustomStatusSettings = getUserSettingLazy("status", "customStatus")!;
 
 type PendingChanges = Record<string, unknown> & {
@@ -56,6 +54,29 @@ function dispatch(type: string, payload: Record<string, unknown>) {
 
 function setPendingChanges(payload: Record<string, unknown>, guildId?: string) {
     dispatch("USER_PROFILE_SETTINGS_SET_PENDING_CHANGES", guildId ? { guildId, ...payload } : payload);
+}
+
+function openProfileImagePreview(
+    uploadType: "AVATAR" | "BANNER",
+    image: Extract<ImageInput, { imageUri: string; }>,
+    guildId?: string
+) {
+    const mimeType = /^data:([^;,]+)/.exec(image.imageUri)?.[1] ?? "";
+    dispatch("PROFILE_CUSTOMIZATION_OPEN_PREVIEW_MODAL", {
+        pendingImage: {
+            assetOrigin: "NEW_ASSET",
+            imageUri: image.imageUri,
+            staticImageUri: undefined,
+            description: image.description,
+            originalAsset: undefined,
+            originalMd5: null
+        },
+        file: { type: mimeType },
+        uploadType,
+        guildId,
+        analyticsSource: guildId ? "user settings guild profile" : "user settings user profile",
+        isTryItOut: false
+    });
 }
 
 function isNonEmptyString(value: unknown): value is string {
@@ -341,7 +362,14 @@ export async function loadPresetAsPending(preset: ProfilePreset, guildId?: strin
                             description: `profilesets-${preset.name ?? "preset"}`
                         }
                         : avatarValue;
-                setPending({ pendingAvatar: avatarPayload });
+                const avatarImageUri = avatarPayload != null && "imageUri" in Object(avatarPayload)
+                    ? (avatarPayload as { imageUri?: unknown; }).imageUri
+                    : null;
+                if (isNonEmptyString(avatarImageUri)) {
+                    openProfileImagePreview("AVATAR", { ...Object(avatarPayload), imageUri: avatarImageUri }, guildId);
+                } else {
+                    setPending({ pendingAvatar: avatarPayload });
+                }
             }
         }
 
@@ -353,7 +381,15 @@ export async function loadPresetAsPending(preset: ProfilePreset, guildId?: strin
                     description: `profilesets-${preset.name ?? "preset"}`
                 }
                 : preset.bannerDataUrl;
-            setPending({ pendingBanner: bannerPayload });
+
+            const bannerImageUri = bannerPayload != null && "imageUri" in Object(bannerPayload)
+                ? (bannerPayload as { imageUri?: unknown; }).imageUri
+                : null;
+            if (isNonEmptyString(bannerImageUri)) {
+                openProfileImagePreview("BANNER", { ...Object(bannerPayload), imageUri: bannerImageUri }, guildId);
+            } else {
+                setPending({ pendingBanner: bannerPayload });
+            }
         }
 
         if (!options.skipBio && preset?.bio !== current?.bio) {

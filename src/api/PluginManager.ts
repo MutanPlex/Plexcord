@@ -18,7 +18,7 @@
 */
 
 import { addProfileBadge, removeProfileBadge } from "@api/Badges";
-import { addChatBarButton, removeChatBarButton } from "@api/ChatButtons";
+import { addChatBarButton, addChatBarButtonWrapper, removeChatBarButton, removeChatBarButtonWrapper } from "@api/ChatButtons";
 import { registerCommand, unregisterCommand } from "@api/Commands";
 import { addContextMenuPatch, removeContextMenuPatch } from "@api/ContextMenu";
 import { addMemberListDecorator, removeMemberListDecorator } from "@api/MemberListDecorators";
@@ -35,11 +35,12 @@ export { Plugins as plugins };
 import { addAudioProcessor, removeAudioProcessor } from "@api/AudioPlayer";
 import { addChannelToolbarButton, addHeaderBarButton, removeChannelToolbarButton, removeHeaderBarButton } from "@api/HeaderBar";
 import { addProfileCollection, removeProfileCollection } from "@api/ProfileCollections";
+import { addProfileSection, removeProfileSection } from "@api/ProfileSections";
 import { addUserAreaButton, removeUserAreaButton } from "@api/UserArea";
 import { traceFunction } from "@debug/Tracer";
 import { onlyOnce } from "@utils/onlyOnce";
 import { canonicalizeFind, canonicalizeReplacement } from "@utils/patches";
-import { Patch, Plugin, PluginDef, ReporterTestable, StartAt } from "@utils/types";
+import { DefinedSettings, Patch, Plugin, PluginDef, PluginSettingDef, ReporterTestable, StartAt } from "@utils/types";
 import { FluxDispatcher } from "@webpack/common";
 import { patches } from "@webpack/patcher";
 
@@ -49,7 +50,7 @@ const logger = new Logger("PluginManager", "#a6d189");
 
 export const PMLogger = logger;
 
-function getName(name: string | (() => string)): string {
+export function getName(name: string | (() => string)): string {
     return typeof name === "function" ? name() : name;
 }
 
@@ -71,7 +72,30 @@ export function isPluginRequired(p: string) {
     ) ?? false;
 }
 
+export function isSettingHidden(settings: DefinedSettings, setting: PluginSettingDef) {
+    if (!("hidden" in setting)) return false;
+
+    return typeof setting.hidden === "function"
+        ? setting.hidden.call(settings)
+        : Boolean(setting.hidden);
+}
+
+export function isSettingDisabled(settings: DefinedSettings, setting: PluginSettingDef) {
+    if (!("disabled" in setting)) return false;
+
+    return typeof setting.disabled === "function"
+        ? setting.disabled.call(settings)
+        : Boolean(setting.disabled);
+}
+
+export function hasAnyVisibleSettings({ settings }: Plugin) {
+    return !!settings && Object.values(settings.def).some(s => !isSettingHidden(settings, s));
+}
+
 export function addPatch(newPatch: Omit<Patch, "plugin">, pluginName: string, pluginPath = `Plexcord.Plugins.plugins[${JSON.stringify(pluginName)}]`) {
+    // TODO: this causes crashes
+    if (pluginName === "Plextron" && newPatch.find === ".STREAMING_AUTO_STREAMER_MODE,") return;
+
     const patch = newPatch as Patch;
     patch.plugin = pluginName;
 
@@ -203,7 +227,8 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
         onBeforeMessageEdit, onBeforeMessageSend, onMessageClick,
         chatBarButton, renderMemberListDecorator, renderMessageAccessory, renderMessageDecoration, messagePopoverButton,
         // Custom
-        renderNicknameIcon, headerBarButton, audioProcessor, userAreaButton, renderProfileCollection
+        renderNicknameIcon, headerBarButton, audioProcessor, userAreaButton, renderProfileCollection, chatBarButtonWrapper,
+        renderProfileSection
     } = p;
     const pluginName = getName(name);
 
@@ -271,7 +296,9 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
     if (audioProcessor) addAudioProcessor(pluginName, audioProcessor);
     if (userAreaButton) addUserAreaButton(pluginName, userAreaButton.render, userAreaButton.priority);
     if (messagePopoverButton) addMessagePopoverButton(pluginName, messagePopoverButton.render, messagePopoverButton.icon);
-    if (renderProfileCollection) addProfileCollection(pluginName, renderProfileCollection);
+    if (renderProfileCollection) addProfileCollection(pluginName, renderProfileCollection.render, renderProfileCollection.priority);
+    if (chatBarButtonWrapper) addChatBarButtonWrapper(pluginName, chatBarButtonWrapper.wrapper, chatBarButtonWrapper.priority);
+    if (renderProfileSection) addProfileSection(pluginName, renderProfileSection.render, renderProfileSection.priority);
 
     return true;
 }, p => `startPlugin ${getName(p.name)}`);
@@ -282,7 +309,8 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
         onBeforeMessageEdit, onBeforeMessageSend, onMessageClick,
         chatBarButton, renderMemberListDecorator, renderMessageAccessory, renderMessageDecoration, messagePopoverButton,
         // Custom
-        renderNicknameIcon, headerBarButton, audioProcessor, userAreaButton, renderProfileCollection
+        renderNicknameIcon, headerBarButton, audioProcessor, userAreaButton, renderProfileCollection, chatBarButtonWrapper,
+        renderProfileSection
     } = p;
     const pluginName = getName(name);
 
@@ -349,6 +377,8 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
     if (userAreaButton) removeUserAreaButton(pluginName);
     if (messagePopoverButton) removeMessagePopoverButton(pluginName);
     if (renderProfileCollection) removeProfileCollection(pluginName);
+    if (chatBarButtonWrapper) removeChatBarButtonWrapper(pluginName);
+    if (renderProfileSection) removeProfileSection(pluginName);
 
     return true;
 }, p => `stopPlugin ${getName(p.name)}`);
@@ -361,7 +391,7 @@ export const initPluginManager = onlyOnce(function init() {
         "onBeforeMessageEdit", "onBeforeMessageSend", "onMessageClick",
         "renderMemberListDecorator", "renderMessageAccessory", "renderMessageDecoration",
         // Custom
-        "renderNicknameIcon", "renderProfileCollection"
+        "renderNicknameIcon"
     ];
 
     const neededApiPlugins = new Set<string>();
@@ -404,9 +434,11 @@ export const initPluginManager = onlyOnce(function init() {
         if (p.audioProcessor) neededApiPlugins.add("AudioPlayerAPI");
         if (p.userAreaButton) neededApiPlugins.add("UserAreaAPI");
         if (p.renderProfileCollection) neededApiPlugins.add("ProfileCollectionsAPI");
+        if (p.chatBarButtonWrapper) neededApiPlugins.add("ChatInputButtonAPI");
+        if (p.renderProfileSection) neededApiPlugins.add("ProfileSectionsAPI");
 
         for (const key of pluginKeysToBind) {
-            p[key] &&= p[key].bind(p) as any;
+            p[key] &&= (p[key] as Function).bind(p) as any;
         }
     }
 
@@ -417,22 +449,11 @@ export const initPluginManager = onlyOnce(function init() {
 
     for (const p of pluginsValues) {
         if (p.settings) {
-            p.options ??= {};
-
             p.settings.pluginName = getName(p.name);
-            for (const name in p.settings.def) {
-                const def = p.settings.def[name];
-                const checks = p.settings.checks?.[name];
-                p.options[name] = { ...def, ...checks };
-            }
-        }
 
-        if (p.options) {
-            for (const name in p.options) {
-                const opt = p.options[name];
-                if (opt.onChange != null) {
-                    SettingsStore.addChangeListener(`plugins.${getName(p.name)}.${name}`, opt.onChange);
-                }
+            for (const [key, def] of Object.entries(p.settings.def)) {
+                if (def.onChange)
+                    SettingsStore.addChangeListener(`plugins.${getName(p.name)}.${key}`, def.onChange);
             }
         }
 

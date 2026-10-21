@@ -18,10 +18,10 @@ import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { getIntlMessage, openUserProfile } from "@utils/discord";
 import { Margins } from "@utils/margins";
-import { classes } from "@utils/misc";
+import { classes, getUserAvatarUrl } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
-import { findComponentByCodeLazy, findCssClassesLazy, findStoreLazy } from "@webpack";
-import { Clickable, RelationshipStore, Tooltip, UserStore, useStateFromStores } from "@webpack/common";
+import { findComponentByCodeLazy, findCssClassesLazy } from "@webpack";
+import { ApplicationStreamingStore, Clickable, RelationshipStore, Tooltip, UserStore, useStateFromStores } from "@webpack/common";
 import { JSX } from "react";
 
 interface WatchingProps {
@@ -29,7 +29,6 @@ interface WatchingProps {
     guildId?: string;
 }
 
-const ApplicationStreamingStore = findStoreLazy("ApplicationStreamingStore");
 const UserSummaryItem = findComponentByCodeLazy("defaultRenderUser", "showDefaultAvatarsForNullUsers");
 const AvatarStyles = findCssClassesLazy("moreUsers", "clickableAvatar", "avatar");
 const cl = classNameFactory("pc-whos-watching-");
@@ -50,7 +49,7 @@ function Watching({ userIds, guildId }: WatchingProps): JSX.Element {
                         <Flex flexDirection="column" style={{ gap: 6 }} >
                             {users.map(user => (
                                 <Flex key={user.id} flexDirection="row" gap="6" alignContent="center">
-                                    <img className={cl("user-avatar")} src={user.getAvatarURL(guildId)} alt="" />
+                                    <img className={cl("user-avatar")} src={getUserAvatarUrl(user, guildId, true, 80)} alt="" />
                                     {getUsername(user)}
                                 </Flex>
                             ))}
@@ -98,9 +97,9 @@ export default definePlugin({
             }
         },
         {
-            find: "this.renderEmbeddedActivity()",
+            find: ",setIsForceShowSharingPopout:",
             replacement: {
-                match: /"div"(?=.{0,40}?,this.renderActions\(\))/,
+                match: /"div"(?=.{0,50}stream:\i,canGoLive:\i)/,
                 replace: "$self.WrapperComponent"
             }
         }
@@ -112,11 +111,12 @@ export default definePlugin({
         let missingUsers = 0;
         const userIds: string[] = ApplicationStreamingStore.getViewerIds(stream);
         const users = userIds.map(id => UserStore.getUser(id)).filter(user => Boolean(user) ? true : (missingUsers += 1, false));
+        const guildId = stream?.guildId ?? "";
 
         function renderMoreUsers(_label: string, count: number) {
             const sliced = users.slice(count - 1);
             return (
-                <Tooltip text={<Watching userIds={userIds} guildId={stream.guildId} />}>
+                <Tooltip text={<Watching userIds={userIds} guildId={guildId} />}>
                     {({ onMouseEnter, onMouseLeave }) => (
                         <div
                             className={AvatarStyles.moreUsers}
@@ -154,7 +154,7 @@ export default definePlugin({
                                     >
                                         <img
                                             className={AvatarStyles.avatar}
-                                            src={user.getAvatarURL(void 0, 80, true)}
+                                            src={getUserAvatarUrl(user, guildId, true, 80)}
                                             alt={user.username}
                                             title={user.username}
                                         />
@@ -176,7 +176,9 @@ export default definePlugin({
             if (!stream) return null;
 
             const viewers = ApplicationStreamingStore.getViewerIds(stream);
-            return <Tooltip text={<Watching userIds={viewers} guildId={stream.guildId} />}>
+            const guildId = stream?.guildId ?? "";
+
+            return <Tooltip text={<Watching userIds={viewers} guildId={guildId} />}>
                 {({ onMouseEnter, onMouseLeave }) => (
                     <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
                         <OriginalComponent {...props} />

@@ -9,6 +9,7 @@ import "./ui/styles.css";
 
 import { plugin, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { UserStore } from "@webpack/common";
@@ -18,8 +19,8 @@ import { useAuthorizationStore } from "./lib/stores/AuthorizationStore";
 import { useCurrentUserDecorationsStore } from "./lib/stores/CurrentUserDecorationsStore";
 import { useUserDecorAvatarDecoration, useUsersDecorationsStore } from "./lib/stores/UsersDecorationsStore";
 import { settings } from "./settings";
-import { setDecorationGridDecoration, setDecorationGridItem } from "./ui/components";
-import DecorSection from "./ui/components/DecorSection";
+import { setAvatarDecorationModalPreview, setDecorationGridDecoration, setDecorationGridItem } from "./ui/components";
+import DecorSection, { DecorSectionProps } from "./ui/components/DecorSection";
 
 export interface AvatarDecoration {
     asset: string;
@@ -54,16 +55,16 @@ export default definePlugin({
             find: "80,onlyAnimateOnHoverOrFocus:!",
             replacement: [
                 {
-                    match: /(?<==)\i=>{let{children.{20,200}isSelected:\i.{0,5}\}=\i/,
-                    replace: "$self.DecorationGridItem=$&",
+                    match: /(?=function (\i)\(\i\){let{children.{20,200}isSelected:\i,\.\.\.\i\}=\i)/,
+                    replace: "$self.DecorationGridItem=$1;",
                 },
                 {
-                    match: /(?<==)\i=>{let{user:\i,avatarDecoration/,
-                    replace: "$self.DecorationGridDecoration=$&",
+                    match: /(?<=(?:(\i)=)?)(?:\i=>|function (\i)\(\i\)){let{user:\i,avatarDecoration/,
+                    replace: (m, arrowFunctionName, functionName) => `$self.DecorationGridDecoration=${arrowFunctionName ?? functionName}${arrowFunctionName ? "" : ";"}${m}`,
                 },
                 // Remove NEW label from decor avatar decorations
                 {
-                    match: /(?<=\.\i\.PURCHASE)(?=,)(?<=avatarDecoration:(\i).+?)/,
+                    match: /(?<=\i\.PURCHASE)(?=,)(?<=avatarDecoration:(\i).+?)/,
                     replace: "||$1.skuId===$self.SKU_ID"
                 }
             ]
@@ -91,7 +92,7 @@ export default definePlugin({
         },
         // Current user area, at bottom of channels/dm list
         {
-            find: ".DISPLAY_NAME_STYLES_COACHMARK)",
+            find: "#{intl::USER_PROFILE_ACCOUNT_POPOUT_BUTTON_A11Y_LABEL}",
             replacement: [
                 // Use Decor avatar decoration hook
                 {
@@ -102,7 +103,6 @@ export default definePlugin({
             noWarn: true
         },
         ...[
-            "#{intl::GUILD_COMMUNICATION_DISABLED_ICON_TOOLTIP_BODY}", // Messages
             "#{intl::COLLECTIBLES_NAMEPLATE_PREVIEW_A11Y}", // Nameplate preview
             "#{intl::COLLECTIBLES_PROFILE_PREVIEW_A11Y}", // Avatar preview
         ].map(find => ({
@@ -115,9 +115,28 @@ export default definePlugin({
         // Patch avatar decoration preview to display Decor avatar decorations as if they are purchased
         {
             find: "#{intl::PREMIUM_UPSELL_PROFILE_AVATAR_DECO_INLINE_UPSELL_DESCRIPTION}",
+            replacement: [
+                {
+                    match: /(?<==)function\(\i\){let{user:\i,guildId:\i,avatarDecoration:/,
+                    replace: "$self.AvatarDecorationModalPreview=$&"
+                }
+            ]
+        },
+        // 2026-03-wysiwyg-user-profile-editing
+        {
+            find: '("UserProfileModalV2EditingPanel")',
+            replacement: [
+                {
+                    match: /disabled:(\i\|\|\i),avatarErrorMessage:\i,avatarDecorationErrorMessage:\i\}\),/,
+                    replace: "$&$self.ExperimentDecorSection({disabled:$1}),"
+                }
+            ]
+        },
+        {
+            find: "isPreviewingMainProfileFallback:",
             replacement: {
-                match: /(#{intl::PREMIUM_UPSELL_PROFILE_AVATAR_DECO_INLINE_UPSELL_DESCRIPTION}.+?return null!=(\i)&&\()(null==\i)/,
-                replace: (_, rest, avatarDecoration, hasPurchase) => `${rest}(${avatarDecoration}.skuId!==$self.SKU_ID&&${avatarDecoration}.skuId!==$self.RAW_SKU_ID&&${hasPurchase})`
+                match: /(?<=avatarDecorationSrc:(\i),.{0,150}userId:(\i)\.id,.{0,100}avatarDecorationOverride:(\i\?\i:\i\?\i:void 0),animateOnHover:!\i\}\))/,
+                replace: ",vcDecorTileDecoration=($1=$self.useDiscordTileDecorationSrc($2,$1,$3))"
             }
         }
     ],
@@ -142,10 +161,19 @@ export default definePlugin({
         setDecorationGridDecoration(e);
     },
 
+    set AvatarDecorationModalPreview(e: any) {
+        setAvatarDecorationModalPreview(e);
+    },
+
     SKU_ID,
     RAW_SKU_ID,
 
     useUserDecorAvatarDecoration,
+
+    useDiscordTileDecorationSrc(user: User, src: string | null, override: unknown) {
+        const hasDecorDecoration = useUsersDecorationsStore(state => state.getAsset(user.id) != null);
+        return override === undefined && hasDecorDecoration ? null : src;
+    },
 
     async start() {
         await setBaseUrl(settings.store.baseUrl);
@@ -164,5 +192,9 @@ export default definePlugin({
         }
     },
 
-    DecorSection: ErrorBoundary.wrap(DecorSection, { noop: true })
+    DecorSection: ErrorBoundary.wrap(DecorSection, { noop: true }),
+    ExperimentDecorSection: ErrorBoundary.wrap(
+        (props: DecorSectionProps) => <DecorSection {...props} useNewSection />,
+        { noop: true }
+    ),
 });

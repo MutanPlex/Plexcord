@@ -1,0 +1,24 @@
+.mt-icon {
+    vertical-align: -2px;
+    margin-right: 0.25em;
+    color: var(--text-muted);
+}
+
+.mt-subtext {
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.15em;
+}
+
+.mt-indicator {
+    color: var(--text-muted);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.7rem;
+    line-height: 1;
+    margin-top: 0.15em;
+    opacity: 0.75;
+}

@@ -46,11 +46,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         switches: {
             useQuickCss: {
                 label: "Aktivera anpassad CSS",
-                description: "Ladda anpassad CSS från QuickCSS-redigeraren. Detta gör att du kan anpassa Discords utseende med dina egna stilar."
+                description: "Tillämpa din konfigurerade QuickCSS"
             },
             enableReactDevtools: {
                 label: "Aktivera React Developer Tools",
-                description: "Aktivera tillägget React Developer Tools för att felsöka Discords React-komponenter. Användbar för pluginutveckling."
+                description: "Främst användbart för pluginutvecklare. Ignorera detta om du inte vet vad det är"
             },
             mainWindowFrameless: {
                 label: "Inaktivera huvudfönsterramen",
@@ -60,7 +60,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Inaktivera fönsterramen",
                 description: "Ta bort den inbyggda fönsterramen för ett renare utseende. Du kan fortfarande flytta fönstret genom att dra i namnlistens område."
             },
-            winNativeTitleBar: {
+            nativeTitleBar: {
                 label: "Använd Windows inbyggda namnlist istället för Discords anpassade",
                 description: "Ersätt Discords anpassade namnlist med standardnamnlisten i Windows. Detta kan förbättra kompatibiliteten med vissa fönsterhanteringsverktyg."
             },
@@ -76,7 +76,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             disableMinSize: {
                 label: "Inaktivera minsta fönsterstorlek",
-                description: "Tillåt att storleken på Discord-fönstret ändras mindre än dess standardminimistorlek. Användbar för kakelsättning av fönsterhanterare eller små skärmar."
+                description: "Låter dig ändra fönstrets storlek fritt, även mindre än Discords minsta storlek"
             }
         },
         quickActions: {
@@ -193,6 +193,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignore: "Ignorera - Visa inte aviseringen alls"
             },
         },
+        windowsMaterial: {
+            title: "Windows-bakgrundsmaterial (kräver omstart)",
+            description: "Genomskinliga bakgrundseffekter i Windows. Du behöver ett tema som stöder genomskinlighet, annars gör detta ingenting. En omstart krävs efter att inställningen ändrats.",
+            material: {
+                none: "Ingen",
+                mica: "Mica (använder systemtema + skrivbordsbakgrund för att måla bakgrunden)",
+                tabbed: "Tabbed (variant av Mica med kraftigare bakgrundstoning)",
+                acrylic: "Acrylic (gör fönstret bakom Discord suddigt för en genomskinlig bakgrund)"
+            }
+        },
         macVibrancy: {
             title: "Window Vibrancy Style (kräver omstart)",
             description: "Anpassa macOS-fönstereffekten. Detta styr discord-fönstrets oskärpa och transparensstil. Ändringar kräver en omstart för att träda i kraft.",
@@ -212,6 +222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 fullscreenUI: "Helskärmsgränssnitt (Transparent men något suddigt)",
                 hud: "HUD (mest transparent)"
             }
+        },
+        tabs: {
+            renderFailed: "Det gick inte att visa fliken {{tab}}. Om problemet kvarstår, prova att installera om med installationsprogrammet!"
         }
     },
 
@@ -268,9 +281,10 @@ const translations: MatchStructure<typeof enTranslations> = {
         excluded: {
             desktop: "Discord Desktop-app eller Plextron",
             discordDesktop: "Discord Desktop-appen",
-            plextron: "Plextron app",
+            plextron: "Plextron-appen",
             web: "Plextron-appen och webbversionen av Discord",
-            dev: "Utvecklarversion av Plexcord"
+            dev: "Utvecklarversion av Plexcord",
+            browser: "Webbläsarversionen av Plexcord"
         },
         search: {
             looking: "Letar du efter",
@@ -307,7 +321,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userplugins: "Visa användarinsticksprogram",
                 api: "Visa API-plugins",
                 type: "Filtrera efter typ",
-                tags: "Filtrera efter taggar"
+                tags: "Filtrera efter taggar",
+                favorites: "Visa favoriter"
             }
         },
         pluginModal: {
@@ -320,7 +335,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             enabledUser: "Aktiverade användarinsticksprogram",
             totalUser: "Totalt antal användarinsticksprogram",
             info: "Se mer info",
-            source: "Se källkoden"
+            source: "Se källkoden",
+            favorite: "Favoritmarkera plugin - fäster det överst i pluginlistan",
+            unfavorite: "Ta bort från favoriter"
         },
         metadata: {
             api: {
@@ -342,7 +359,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     userSettings: "Patchar Discords användarinställningar för att exponera deras grupp och namn.",
                     audioPlayer: "API för att spela interna Discord-ljudfiler eller externa ljudlänkar.",
                     userArea: "API för att lägga till knappar i användarområdespanelen.",
-                    profileCollections: "API för att lägga till samlingar i användarens profilpanel, likt Discords spelsamling."
+                    profileCollections: "API för att lägga till samlingar i användarens profilpanel, likt Discords spelsamling.",
+                    profileSections: "API för att lägga till sektioner nära området 'Medlem sedan' i användarprofilpaneler.",
+                    headerBar: "API för att lägga till knappar i rubrikfältet.",
+                    surfaceClasses: "API för att lägga till pluginägda semantiska dataattribut och begränsade props på stabila layoutytor i Discord."
                 },
                 chatButtons: {
                     context: {
@@ -355,7 +375,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 contributor: {
                     plexcord: "Plexcord-bidragsgivare",
                     vencord: "Vencord-bidragsgivare",
-                    userPlugin: "User Plugin Contributor"
+                    userPlugin: "Bidragsgivare för användarplugin"
                 },
                 context: {
                     title: "Alternativ för märken",
@@ -389,23 +409,26 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             button: "Knappar för aktiverade plugins kommer att visas här."
-        }
+        },
+        invalidInput: "Ogiltig inmatning",
+        loading: "Laddar...",
+        authorPrefix: "av"
     },
 
     patchHelper: {
-        title: "Patch Helper",
+        title: "Patch-hjälpare",
         description: "Ett utvecklarverktyg som hjälper dig att skapa patchar för Plexcord-plugins.",
         fullPatch: {
             label: "Full patch",
             description: "Klistra in din fullständiga JSON-patch här för att fylla i fälten"
         },
         find: "Hitta",
-        match: "Match",
+        match: "Matchning",
         replacement: "Ersättning",
         preview: "Förhandsvisning",
         generatedCode: "Genererad kod",
         group: "Grupp",
-        diff: "Diff",
+        diff: "Skillnad",
         module: "Modul",
         compile: "Sammanställa",
         compiled: "Sammanställningen lyckades",
@@ -474,13 +497,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             plugins: "Exportera plugin",
             css: "Exportera QuickCSS",
             datastore: "Exportera databutiker"
-        }
+        },
+        backupFileType: "Plexcord-inställningsbackup"
     },
 
     cloud: {
         text: "Moln",
         title: "Inställningar Synk",
-        override: "Cloud Sync",
+        override: "Molnsynkronisering",
         description: "Synkronisera dina Plexcord-inställningar till molnet. Detta gör det enkelt att hålla din konfiguration konsekvent över flera enheter utan manuell import/export.",
         switchDescription: "När det är aktiverat kan dina inställningar synkroniseras till och från molnet. Använd åtgärderna nedan för att synkronisera manuellt.",
         settings: "Molninställningar",
@@ -553,7 +577,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         overview: "Plexcord kommer med en molnintegration som lägger till godsaker som synkronisering av inställningar mellan enheter. Den {{privacy}} och {{source}} är AGPL 3.0 licensierad så att du kan vara värd för den själv.",
         authorization: "Anslut till molnets backend för synkronisering av inställningar. Detta kommer att begära auktorisering om du inte har konfigurerat molnintegration ännu.",
         backend: {
-            title: "Cloud Backend",
+            title: "Molnbackend",
             description: "Välj hur dina inställningar lagras i molnet. Som standard används Plexcord Cloud, men du kan även ansluta din egen självvärdade molntjänst.",
             invalid: "Ogiltig URL"
         },
@@ -640,7 +664,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         newPlugins: "{{count}} Ny plugin{{s}}",
         following: "Följande plugins har lagts till i de senaste uppdateringarna:",
-        more: "+{{count}} fler plugins"
+        more: "+{{count}} fler plugins",
+        error: {
+            retrieveRepo: "Kunde inte hämta information om repot",
+            fetchRepo: "Kunde inte hämta från repot",
+            connectRepo: "Kunde inte ansluta till repot. Kontrollera din internetanslutning."
+        }
     },
 
     csp: {
@@ -717,7 +746,8 @@ const translations: MatchStructure<typeof enTranslations> = {
         unknown: {
             title: "Okänd",
             author: "Okänd författare",
-            theme: "Ett discord-tema"
+            theme: "Ett discord-tema",
+            description: "Ingen beskrivning angiven."
         },
         required: "Följande plugins krävs, men är inte aktiverade:",
         homepage: "Hemsida",
@@ -778,6 +808,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             failed: {
                 download: "Det gick inte att ladda ner temat"
             }
+        },
+        openInFolder: "Öppna i mapp",
+        fallback: {
+            author: "Okänd upphovsperson",
+            description: "Ett Discord-tema."
         }
     },
 
@@ -834,6 +869,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         repo: "Repo",
         repoDescription: "Detta är GitHub-förrådet där Plexcord hämtar uppdateringar från.",
         loading: "Belastning...",
+        unknownAuthor: "Okänd upphovsperson"
     },
 
     components: {
@@ -849,7 +885,29 @@ const translations: MatchStructure<typeof enTranslations> = {
             message: "QuickCSS-redigeraren är fortfarande öppen i bakgrunden.",
             detail: "Vill du stänga Discord ändå? Detta kommer också att stänga QuickCSS-redigeraren.",
             cancel: "Avboka",
-            close: "Stäng i alla fall"
+            close: "Stäng i alla fall",
+            windowTitle: "Plexcord QuickCSS-redigerare"
+        },
+        messagePopover: {
+            scrollLeft: "Rulla åt vänster",
+            scrollRight: "Rulla åt höger"
+        },
+        notices: {
+            error: "Fel vid visning av meddelande"
+        },
+        tray: {
+            aboutPlexcord: "Om Plexcord",
+            updatePlexcord: "Uppdatera Plexcord",
+            noUpdateTitle: "Ingen uppdatering tillgänglig",
+            noUpdateBody: "Du använder redan den senaste versionen av Plexcord.",
+            updateFailedTitle: "Uppdateringen misslyckades",
+            updateFailedBody: "Kunde inte tillämpa uppdateringen för Plexcord.",
+            updateSuccessTitle: "Uppdateringen lyckades",
+            updateSuccessBody: "Startar om Plexcord för att tillämpa uppdateringen.",
+            updateErrorTitle: "Uppdateringsfel",
+            updateErrorBody: "Ett fel uppstod när Plexcord uppdaterades.\n\n{{error}}",
+            openSettingsFolder: "Öppna inställningsmappen",
+            openThemesFolder: "Öppna temamappen"
         }
     },
 
@@ -918,7 +976,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             seconds: "sekunder",
             ago: "sedan",
             s: "s"
-        }
+        },
+        detectLanguage: "Identifiera språk"
     },
 
     plugin: {
@@ -936,7 +995,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             fun: "Kul",
             media: "Media",
             notifications: "Aviseringar",
-            organisation: "Organisation",
+            organisation: "Organisering",
             privacy: "Sekretess",
             reactions: "Reaktioner",
             roles: "Roller",
@@ -945,6 +1004,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             utility: "Verktyg",
             voice: "Röst"
         },
+        concatenatedComponentExtractor: {
+            name: "ConcatenatedComponentExtractor",
+            description: "Extrahera komponenter som har sammanfogats av bundlern"
+        },
+        concatenatedModules: {
+            name: "ConcatenatedModules",
+            description: "Extrahera moduler som har sammanfogats av bundlern"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Inaktivera Discords spårning (analytics/'vetenskap'), mätvärden och Sentry-kraschrapportering",
@@ -952,6 +1019,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disableAnalytics: {
                     label: "Inaktivera Analytics",
                     description: "Inaktivera Discords spårning (analytics/'vetenskap'), mätvärden och Sentry-kraschrapportering"
+                },
+                disableStackDumping: {
+                    description: "Skriv ut en inbyggd stackspårning i konsolen när Discord kraschar. Kräver fullständig omstart."
                 }
             }
         },
@@ -966,6 +1036,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsLocation: {
                     label: "Inställningar Plats",
                     description: "Bestämmer var avsnittet Plexcord-inställningar kommer att finnas."
+                },
+                includePlexcordInfoWhenCopying: {
+                    label: "Inkludera Plexcord-information vid kopiering",
+                    description: "Kopiera även Plexcord-information (Plexcord, Electron, Chromium) när du klickar på versionsinformationen längst ned till vänster på inställningssidan"
                 }
             }
         },
@@ -983,6 +1057,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Hålla fast!",
                     body: "Du använder en föråldrad version av Plexcord! Chansen är stor att ditt problem redan är åtgärdat.",
                     footer: "Uppdatera först innan du ber om support!",
+                    dismiss: "Om du vet vad du gör eller inte kan uppdatera kan du stänga det här meddelandet.",
                     button: {
                         cancel: "Visa uppdateringar",
                         confirm: "Uppdatera och starta om nu",
@@ -1071,7 +1146,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Animera alltid serverikoner, avatarer, dekor och mer"
                 },
                 statusEmojis: {
-                    label: "Status Emojis",
+                    label: "Statusemojier",
                     description: "Animera alltid statusemojis"
                 },
                 serverBanners: {
@@ -1130,7 +1205,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Ljudkvalitet",
                     description: "Ljudkvalitet att använda",
                     high: "Hög",
-                    med: "Medium",
+                    med: "Medel",
                     low: "Låg",
                     lowest: "Lägst"
                 }
@@ -1181,7 +1256,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Anonymiseringsmetod",
                     random: "Slumpmässiga karaktärer",
                     consistent: "Konsekvent",
-                    timestamp: "Tidsstämpel"
+                    timestamp: "Tidsstämpel",
+                    date: "Datum"
                 },
                 randomisedLength: {
                     label: "Randomiserad längd",
@@ -1190,6 +1266,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 consistent: {
                     label: "Konsekvent",
                     description: "Konsekvent anonymiseringshemlighet"
+                },
+                dateFormat: {
+                    description: "Datumformat (YYYY, MM, DD, HH, mm, ss, SSS stöds)",
+                    label: "Datumformat"
                 }
             },
             using: {
@@ -1201,76 +1281,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toggle: "Växla spoiler för dina filer (standard på)",
                 enabled: "Spoiler aktiverad!",
                 disabled: "Spoiler inaktiverad!"
-            }
-        },
-        appleMusic: {
-            name: "AppleMusicRichPresence",
-            description: "Discord rik närvaro för din Apple Music!",
-            about: "För de anpassningsbara aktivitetsformatsträngarna kan du använda flera specialsträngar för att inkludera spårdata i aktiviteter! {{name}} ersätts med spårnamnet; {{artist}} ersätts med artistens/konstnärernas namn; och {{album}} ersätts med albumnamnet.",
-            button: {
-                listen: "Lyssna på Apple Music",
-                songLink: "Se på SongLink"
-            },
-            option: {
-                activityType: {
-                    label: "Aktivitetstyp",
-                    description: "Vilken typ av aktivitet",
-                    listening: "Lyssnande",
-                    playing: "Spelar"
-                },
-                statusDisplayType: {
-                    label: "Statusvisningstyp",
-                    description: "Visa spåret/artistnamnet i medlemslistan",
-                    off: "Visa inte (visar generiskt avlyssningsmeddelande)",
-                    artist: "Visa artistnamn",
-                    track: "Visa spårnamn"
-                },
-                refreshInterval: {
-                    label: "Uppdateringsintervall",
-                    description: "Intervallet mellan aktivitetsuppdateringar (sekunder)"
-                },
-                enableTimestamps: {
-                    label: "Aktivera tidsstämplar",
-                    description: "Om tidsstämplar ska aktiveras eller inte"
-                },
-                enableButtons: {
-                    label: "Aktivera knappar",
-                    description: "Om knappar ska aktiveras eller inte"
-                },
-                nameString: {
-                    label: "Namnsträng",
-                    description: "Aktivitetsnamnformatsträng"
-                },
-                detailsString: {
-                    label: "Detaljer String",
-                    description: "Aktivitetsinformation formatsträng"
-                },
-                stateString: {
-                    label: "State String",
-                    description: "Aktivitetstillståndsformatsträng"
-                },
-                largeImageType: {
-                    label: "Stor bildtyp",
-                    description: "Aktivitetstillgångar stor bildtyp",
-                    album: "Albumkonstverk",
-                    artist: "Konstnär konstverk",
-                    disabled: "Inaktiverad"
-                },
-                largeTextString: {
-                    label: "Stor textsträng",
-                    description: "Aktivitetstillgångar stor textformatsträng"
-                },
-                smallImageType: {
-                    label: "Liten bildtyp",
-                    description: "Aktivitetstillgångar liten bildtyp",
-                    album: "Apple Music-logotyp",
-                    artist: "Konstnär konstverk",
-                    disabled: "Inaktiverad"
-                },
-                smallTextString: {
-                    label: "Liten textsträng",
-                    description: "Aktivitetstillgångar liten textformatsträng"
-                }
             }
         },
         arRpc: {
@@ -1373,6 +1383,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     left: "Vänster",
                     right: "Rätt"
                 }
+            },
+            text: {
+                smallText: "Liten text",
+                largeText: "Stor text"
             }
         },
         betterAudioPlayer: {
@@ -1396,7 +1410,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Färg på oscilloskopet när solid färg är aktiverat"
                 },
                 spectrographSolidColor: {
-                    label: "Spectrograph Solid Color",
+                    label: "Enfärgat spektrogram",
                     description: "Använd en enfärgad färg för spektrografen istället för en gradient"
                 },
                 spectrographColor: {
@@ -1405,7 +1419,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             toast: {
-                invalidColorFormat: "Ogiltigt färgformat för {{settingKey}}, se till att det är i formatet \"R, G, B\" eller \"#RRGGBB\""
+                invalidColorFormat: "Ogiltigt färgformat för {{settingKey}}, se till att det är i formatet \"R, G, B\" eller \"#RRGGBB\"",
+                invalidColorFormatFor: "Ogiltigt färgformat för {{key}}, använd \"R, G, B\" eller \"#RRGGBB\""
             }
         },
         betterBanReasons: {
@@ -1423,7 +1438,20 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             title: "Skäl",
             placeholder: "Resonera",
-            add: "Lägg till ytterligare ett skäl"
+            add: "Lägg till ytterligare ett skäl",
+            duration: {
+                discordDefault: "Discords standard",
+                none: "Ta inte bort något",
+                hour1: "Senaste timmen",
+                hours6: "Senaste 6 timmarna",
+                hours12: "Senaste 12 timmarna",
+                hours24: "Senaste 24 timmarna",
+                days3: "Senaste 3 dagarna",
+                days7: "Senaste 7 dagarna"
+            },
+            text: {
+                autoDeleteDuration: "Varaktighet för automatisk borttagning av meddelanden"
+            }
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
@@ -1482,8 +1510,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Stäng mappen när du väljer en server i den mappen"
                 },
                 forceOpen: {
-                    label: "Force Open",
+                    label: "Tvinga öppen",
                     description: "Tvinga en mapp att öppna när du byter till en server för den mappen"
+                },
+                enableNestedFolders: {
+                    label: "Aktivera nästlade mappar",
+                    description: "Tillåt att nästla mappar i andra mappar genom att dra"
                 },
                 keepIcons: {
                     label: "Behåll ikoner",
@@ -1518,6 +1550,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             render: {
                 tip: "Den här inbjudan upphör att gälla {{time}}",
                 header: "{{name}} bjöd in dig till {{server}}",
+                headerSelf: "Du skickade en inbjudan att gå med i {{server}}",
                 never: "inte löpa ut"
             }
         },
@@ -1541,7 +1574,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterRoleContext: {
             name: "BetterRoleContext",
-            description: "Lägger till alternativ för att kopiera rollfärg / redigera roll / visa rollikon när du högerklickar på roller i användarprofilen",
+            description: "Lägger till alternativ för att kopiera rollfärg / redigera roll / visa rollikon när du högerklickar på roller i användarprofilen eller i medlemslistan",
             option: {
                 roleIconFileFormat: {
                     label: "Rollikon Filformat",
@@ -1551,7 +1584,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 copyColor: "Kopiera rollfärg",
                 editRole: "Redigera roll",
-                viewIcon: "Visa rollikon"
+                viewIcon: "Visa rollikon",
+                viewMembers: "Visa rollmedlemmar"
+            },
+            text: {
+                roleActions: "Rollåtgärder"
             }
         },
         betterRoleDot: {
@@ -1627,6 +1664,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         blockKeywords: {
             name: "BlockKeywords",
             description: "Blockerar meddelanden som innehåller specifika användardefinierade nyckelord, som om användaren som skickade dem var blockerad.",
+            regexHelper: {
+                title: "Regex-hjälp",
+                placeholder: "Text att testa...",
+                noPatterns: "Inga mönster konfigurerade"
+            },
             option: {
                 blockedWords: {
                     label: "Blockerade ord",
@@ -1635,6 +1677,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 useRegex: {
                     label: "Använd Regex",
                     description: "Använd varje värde som ett reguljärt uttryck när du kontrollerar meddelandeinnehåll (avancerat)"
+                },
+                regexHelper: {
+                    label: "Regex-hjälp",
+                    description: "Testa dina reguljära uttryck mot en exempeltext"
                 },
                 caseSensitive: {
                     label: "Skiftlägeskänslig",
@@ -1778,6 +1824,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 loading: "Belastning...",
                 save: "Spara",
                 edit: "Redigera"
+            },
+            text: {
+                unknownUser: "Okänd användare"
             }
         },
         callTimer: {
@@ -1814,7 +1863,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Spåra användare i stora skrån. Detta kan orsaka fördröjning om du är i många stora guilder med aktiva röstanvändare. Testad med upp till 2000 aktiva röstanvändare utan problem."
                 },
                 fixUI: {
-                    label: "UI Fix",
+                    label: "Gränssnittsfix",
                     description: "I vissa fall kan timern bryta användargränssnittet. Aktivera det här alternativet för att fixa det."
                 }
             }
@@ -2067,12 +2116,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 plusPulse: "Plusknappspuls",
                 mentionGlow: "Nämn Badge Glow",
                 compactExpand: "Kompakt lägesexpansion",
-                selectedBorder: "Vald flik Blå kant",
+                selectedBorder: "Accentkant på vald flik",
                 selectedBackground: "Vald flikbakgrundsfärg",
                 tabShadows: "Tabskuggeffekter",
                 tabRepositioning: "Flikompositionering (smidiga positionsändringar)",
                 resizeHandle: "Ändra storlek Handtag Tona",
-                questActivate: "Aktiv Quest Gradient"
+                questActivate: "Gradient för aktiva uppdrag"
             },
             bookmark: {
                 label: "Bokmärke",
@@ -2111,7 +2160,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 folderMenu: "Bokmärkesmapp Meny",
                 compact: "Kompakt",
                 bookmarkBar: "Bokmärkesfältet",
-                openAll: "Öppna Alla i Bokmärken",
+                openAll: "Öppna alla bokmärken",
                 openNew: "Öppna i Ny flik",
                 close: {
                     tab: "Stäng flik",
@@ -2191,6 +2240,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Tabbbreddskala",
                     description: "Flikbreddskala (procent) - justerbar genom att dra flikkanterna"
                 },
+                tabHeightScale: {
+                    label: "Flikhöjdskala",
+                    description: "Flikhöjdskala (procent)."
+                },
                 renderAllTabs: {
                     label: "Rendera alla flikar",
                     description: "Behåll alla flikar cachade i minnet för snabbare växling (caches rullningsposition och status)"
@@ -2238,7 +2291,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Aktivera kortkommandon för flikcykling"
                 },
                 keybindsSection: {
-                    label: "Keybinds",
+                    label: "Kortkommandon",
                     description: "Klicka på en knapp och tryck på önskad tangentkombination. Modifierare som CTRL, SHIFT och ALT stöds.",
                     title: "Kortkommandon",
                     reset: "Återställ alla till standard",
@@ -2271,11 +2324,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Kortkommando för att öppna en ny flik"
                 },
                 cycleTabForwardKeybind: {
-                    label: "Cycle Tab Forward Keybind",
+                    label: "Kortkommando för nästa flik",
                     description: "Kortkommando för att gå till nästa flik"
                 },
                 cycleTabBackwardKeybind: {
-                    label: "Cycle Tab Backward Keybind",
+                    label: "Kortkommando för föregående flik",
                     description: "Kortkommando för att gå till föregående flik"
                 },
                 showTabNumbers: {
@@ -2398,11 +2451,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     restore: "Det gick inte att återställa flikarna",
                     saved: "Det gick inte att läsa in sparade flikar"
                 }
+            },
+            text: {
+                folder: "Mapp"
             }
         },
         characterCounter: {
             name: "CharacterCounter",
-            description: "Visar en teckenräknare i meddelanderutan",
+            description: "Lägger till en teckenräknare i chattfältet",
             option: {
                 colorEffects: {
                     label: "Färgeffekter",
@@ -2416,7 +2472,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         cleanChannelName: {
             name: "CleanChannelName",
-            description: "Ta bort all emoji och dekorskit från kanalnamn"
+            description: "Tar bort emojier och dekorationer från kanalnamn. Återgår till originalet medan du redigerar kanalen.",
+            option: {
+                ignoredChannels: {
+                    description: "Kommaseparerad lista med kanal-ID:n som ska lämnas orörda.",
+                    label: "Ignorerade kanaler"
+                }
+            },
+            text: {
+                keepOriginalName: "Behåll ursprungligt namn"
+            }
         },
         clearURLs: {
             name: "ClearURLs",
@@ -2428,7 +2493,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 loading: "Laddar medlemmar...",
                 noMembers: "Inga medlemmar hittades.",
-                unknown: "Okänd roll"
+                unknown: "Okänd roll",
+                andMore: "och {{count}} till"
             }
         },
         clientSideBlock: {
@@ -2463,11 +2529,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     hideReply: "Bokstavligen ingenting"
                 },
                 guildBlackList: {
-                    label: "Guild Blacklist",
+                    label: "Svartlista för servrar",
                     description: "Guild ID:n för att inaktivera funktionalitet i"
                 },
                 guildWhiteList: {
-                    label: "Guild Whitelist",
+                    label: "Vitlista för servrar",
                     description: "Guild ID för att aktivera funktionalitet i"
                 }
             }
@@ -2487,13 +2553,17 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             error: {
                 modal: {
-                    title: "Your theme won't look good!",
+                    title: "Ditt tema kommer inte att se bra ut!",
                     contrast: "Vald färg kommer inte att kontrastera bra med text",
                     nitro: "Nitro-teman stöds inte",
                     switch: "Växla till läge {{oppositeTheme}}",
                     disable: "Inaktivera Nitro-tema",
                     reset: "Återställ temafärg"
                 }
+            },
+            text: {
+                dark: "Mörkt",
+                light: "Ljust"
             }
         },
         clipsEnhancements: {
@@ -2503,26 +2573,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 richPresenceTagging: {
                     label: "Rich närvarotaggning",
-                    description: "When should clips be tagged with the current Rich Presence?",
+                    description: "När ska klipp taggas med aktuell Rich Presence?",
                     always: "Alltid",
                     only: "Endast när början eller slutet av aktivitetens namn matchar",
                     never: "Aldrig"
-                },
-                enableScreenshotKeybind: {
-                    label: "Aktivera Screenshot Keybind",
-                    description: "Aktivera tangentbindningsfunktionen för skärmdump"
-                },
-                enableVoiceOnlyClips: {
-                    label: "Aktivera endast röstklipp",
-                    description: "Aktivera endast röstklipp (ljud utan video)"
-                },
-                enableAdvancedSignals: {
-                    label: "Aktivera avancerade signaler",
-                    description: "Aktivera avancerade klippsignaler (autoklipputlösare)"
-                },
-                ignorePlatformRestriction: {
-                    label: "Ignorera plattformsbegränsning",
-                    description: "Tillåt plattformsbegränsad klippning (kan orsaka lagringsfel)"
                 },
                 clipsLink: {
                     label: "Klipplänk",
@@ -2536,7 +2590,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         commandPalette: {
             name: "CommandPalette",
-            description: "Låter dig navigera i användargränssnittet med ett tangentbord.",
+            description: "Kommandopalett i Raycast-stil för att köra åtgärder var som helst i Discord",
             action: {
                 command: {
                     label: "Kör kommando",
@@ -2932,7 +2986,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     failed: "Det gick inte att markera kanalen som läst."
                 },
                 route: {
-                    unable: "Unable to open {{destination}}.",
+                    unable: "Det gick inte att öppna {{destination}}.",
                 },
                 notification: {
                     cleared: "Rensat alla aviseringar.",
@@ -2990,7 +3044,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                             label: "Det gick inte att köra {{pluginName}}: {{actionLabel}}."
                         }
                     }
-                }
+                },
+                commandDeleted: "Kommandot har tagits bort.",
+                statusSetToLabel: "Status inställd på {{label}}.",
+                themeSetToLabel: "Tema inställt på {{label}}.",
+                noSettingsPageWas: "Ingen inställningssida angavs.",
+                unableToOpenLabel: "Det gick inte att öppna {{label_that_settings_page}}.",
+                failedToStartDependencies: "Det gick inte att starta beroenden: {{join}}",
+                messageSentToUsername: "Meddelande skickat till {{username}}.",
+                enabledRestart: "{{name}} aktiverat. Starta om för att tillämpa.",
+                disabledRestart: "{{name}} inaktiverat. Starta om för att tillämpa.",
+                enabled: "{{name}} aktiverat.",
+                disabled: "{{name}} inaktiverat.",
+                errorStarting: "Fel vid start av {{name}}.",
+                errorStopping: "Fel vid stopp av {{name}}."
             },
             display: {
                 channel: {
@@ -3026,6 +3093,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 customCommands: {
                     label: "Anpassade kommandon",
                     description: "Hantera anpassade kommandopalettposter"
+                },
+                closeAfterExecute: {
+                    description: "Stäng paletten efter att ett kommando har körts.",
+                    label: "Stäng efter körning"
                 }
             },
             template: {
@@ -3045,7 +3116,121 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Makro",
                     description: "Kör en sekvens av kommandon"
                 }
-            }
+            },
+            text: {
+                insertTextInChat: "Infoga text i chatten",
+                name: "Name",
+                commandName: "Kommandonamn",
+                settingsPage: "Inställningssida",
+                searchSettingsPages: "Sök inställningssidor...",
+                text: "Text",
+                textToInsertInto: "Text som ska infogas i chattrutan",
+                editCommand: "Redigera kommando",
+                deleteCommand: "Ta bort kommando",
+                createCustomCommand: "Skapa anpassat kommando",
+                light: "Ljust",
+                ash: "Aska",
+                dark: "Mörkt",
+                onyx: "Onyx",
+                toggleMute: "Växla ljud av",
+                toggleDeafen: "Växla döv",
+                setStatus: "Ange status",
+                searchStatuses: "Sök statusar...",
+                setLabel: "Ange {{label}}",
+                toggleTheme: "Växla tema",
+                openServer: "Öppna server",
+                openChannel: "Öppna kanal",
+                openDm: "Öppna DM",
+                goHome: "Gå till startsidan",
+                goToServer: "Gå till server",
+                searchServers: "Sök servrar...",
+                goToChannel: "Gå till kanal",
+                searchChannels: "Sök kanaler...",
+                searchFriends: "Sök vänner...",
+                myAccount: "Mitt konto",
+                profiles: "Profiler",
+                dataPrivacy: "Data och integritet",
+                devices: "Enheter",
+                connections: "Anslutningar",
+                appearance: "Utseende",
+                accessibility: "Tillgänglighet",
+                voiceVideo: "Röst och video",
+                chat: "Chatt",
+                textImages: "Text och bilder",
+                notifications: "Aviseringar",
+                keybinds: "Kortkommandon",
+                authorizedApps: "Auktoriserade appar",
+                familyCenter: "Familjecenter",
+                advanced: "Avancerat",
+                plexcord: "Plexcord",
+                plexcordPlugins: "Plexcord-pluginer",
+                plexcordThemes: "Plexcord-teman",
+                plexcordUpdater: "Plexcord-uppdaterare",
+                plexcordChangelog: "Plexcord-ändringslogg",
+                openQuickcss: "Öppna QuickCSS",
+                openUpdater: "Öppna uppdateraren",
+                openChangelog: "Öppna ändringsloggen",
+                restartDiscord: "Starta om Discord",
+                managePlugins: "Hantera pluginer",
+                searchPlugins: "Sök pluginer...",
+                sendDm: "Skicka DM",
+                recipient: "Mottagare",
+                message: "Meddelande",
+                messageContent: "Meddelandeinnehåll",
+                openPaletteHotkey: "Snabbtangent för att öppna paletten",
+                actions: "Åtgärder",
+                preview: "Förhandsvisning",
+                openCommand: "Öppna kommando",
+                copyAnswer: "Kopiera svar",
+                openDetails: "Öppna detaljer",
+                calculator: "Miniräknare",
+                expression: "Uttryck",
+                result: "Resultat",
+                copyExpression: "Kopiera uttryck",
+                pinned: "Fäst",
+                suggestions: "Förslag",
+                setAlias: "Ange alias",
+                aliasForLabel: "Alias för {{label}}",
+                leaveEmptyToRemove: "Lämna tomt för att ta bort",
+                command: "Kommando",
+                noResults: "Inga resultat",
+                addFile: "Lägg till fil",
+                saveCommand: "Spara kommando",
+                createCommand: "Skapa kommando",
+                nameRequired: "Namn krävs.",
+                enterValidUrl: "Ange en giltig URL.",
+                pickSettingsPage: "Välj en inställningssida bland förslagen.",
+                textRequired: "Text krävs.",
+                commandSaved: "Kommando sparat.",
+                commandCreated: "Kommando skapat.",
+                editCustomCommand: "Redigera anpassat kommando",
+                disablePlugin: "Inaktivera plugin",
+                enablePlugin: "Aktivera plugin",
+                pickRecipient: "Välj en mottagare bland förslagen.",
+                addMessageOrFile: "Lägg till ett meddelande eller en fil.",
+                pressKeys: "Tryck på tangenter...",
+                answerCopied: "Svaret kopierades till urklipp.",
+                calculationCopied: "Beräkningen kopierades till urklipp.",
+                unpinCommand: "Lossa kommando",
+                pinCommand: "Fäst kommando",
+                saveAlias: "Spara alias",
+                changeHotkey: "Ändra snabbtangent",
+                recordHotkey: "Spela in snabbtangent",
+                pressKeyCombo: "Tryck på en tangentkombination, Backsteg för att rensa, Esc för att avbryta",
+                searchIn: "Sök i {{title}}...",
+                searchCommands: "Sök efter kommandon...",
+                somethingWentWrong: "Något gick fel.",
+                remove: "Ta bort",
+                enabled: "Aktiverad",
+                disabled: "Inaktiverad",
+                sectionNavigation: "Navigering",
+                sectionCustom: "Anpassat",
+                sectionPlugins: "Plugins",
+                sectionMessaging: "Meddelanden",
+                current: "Nuvarande",
+                submit: "Skicka"
+            },
+            description2: "Kommandopalett i Raycast-stil för att köra åtgärder var som helst i Discord"
         },
         consoleJanitor: {
             name: "ConsoleJanitor",
@@ -3115,11 +3300,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         copyProfileColors: {
             name: "CopyProfileColors",
             description: "Ett plugin för att kopiera människors profilgradientfärger till urklipp.",
-            copy: "Kopiera profilfärger",
+            copy: "Kopiera serverprofilens färger",
             toast: {
                 noColor: "Inga profilfärger hittades!",
                 copied: "Profilfärger kopierade till urklipp!",
                 error: "Fel vid kopiering av profilfärger!"
+            },
+            text: {
+                formatted: "Primär färg #{{primary}}, Sekundär färg #{{secondary}}"
             }
         },
         copyStatusUrls: {
@@ -3134,8 +3322,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "CopyStickerLinks",
             description: "Lägger till möjligheten att kopiera och öppna Sticker-länkar",
             context: {
-                copy: "Kopiera länk",
-                open: "Öppna länken"
+                copy: "Kopiera klistermärkeslänk",
+                open: "Öppna klistermärkeslänk"
             },
             toast: {
                 success: "Länken kopierad!"
@@ -3215,7 +3403,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     invalid: "Hastigheten måste vara större än 0"
                 },
                 fps: {
-                    label: "Framerate",
+                    label: "Bildfrekvens",
                     description: "Framerate av din kompis",
                     invalid: "Framerate måste vara större än 0"
                 },
@@ -3243,7 +3431,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Om hästen skulle blekna när markören är nära"
                 },
                 freeroam: {
-                    label: "Freeroam",
+                    label: "Fri rörelse",
                     description: "Om hästen ska ströva fritt på tomgång"
                 },
                 shake: {
@@ -3271,6 +3459,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unset: "Avaktiverad",
                 set: "Ställ in en ny ikon",
                 hover: "Du kanske måste hålla muspekaren över mappen efter inställningen för att den ska uppdateras."
+            },
+            context: {
+                changeIcon: "Ändra ikon"
             }
         },
         customIdle: {
@@ -3302,7 +3493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             error: {
                 appIdInvalid: "App-ID måste vara ett giltigt nummer.",
                 notice: "Varsel",
-                sharing: "Aktivitetsdelning är inte aktiverat, andra kommer inte att kunna se din anpassade rika närvaro!",
+                sharing: "Aktivitetsdelning är inte aktiverad, så andra kommer inte att kunna se din anpassade Rich Presence!",
                 enable: "Aktivera",
                 validStream: "Strömmande länk måste vara en giltig URL.",
                 mustBeURL: "Måste vara en giltig webbadress.",
@@ -3354,7 +3545,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Aktivitetstyp",
                     description: "Aktivitetstyp",
                     playing: "Spelar",
-                    streaming: "Streaming",
+                    streaming: "Streamar",
                     listening: "Lyssnande",
                     watching: "Tittar på",
                     competing: "Tävlande"
@@ -3418,7 +3609,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 buttonTwoURL: {
                     label: "Knapp 2 URL",
                     description: "Knapp 2 URL"
+                },
+                enablePresence: {
+                    description: "Om närvaron ska visas",
+                    label: "Aktivera närvaro"
                 }
+            },
+            toast: {
+                savedPresetName: "Förinställningen {{name}} har sparats.",
+                loadedPresetName: "Förinställningen {{name}} har lästs in.",
+                deletedPresetSelectedpreset: "Förinställningen {{selectedPreset}} har tagits bort."
+            },
+            text: {
+                presetName: "Namn på förinställning",
+                selectAPreset: "Välj en förinställning",
+                streamLinkTwitchOr: "Strömningslänk (Twitch eller YouTube, endast om aktivitetstypen är Strömmar)",
+                presets: "Förinställningar",
+                save: "Spara",
+                load: "Läs in",
+                delete: "Ta bort",
+                noSavedPresetsYet: "Inga sparade förinställningar än.",
+                showCustomRpc: "Visa anpassad RPC",
+                customRpcDisabled: "Anpassad RPC avstängd",
+                theEnablePresenceSetting: "Inställningen \"Aktivera närvaro\" är avstängd, så din närvaro visas inte. Om det inte var meningen, aktivera den nedan.",
+                activitySharingDisabled: "Aktivitetsdelning avstängd",
+                discordDeveloperPortal: "Discords utvecklarportal",
+                imgur: "Imgur",
+                enableActivitySharing: "Aktivera aktivitetsdelning"
             }
         },
         customSounds: {
@@ -3460,7 +3677,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 default: "Standard",
                 custom: "Beställnings",
-                select: "Välj en fil..."
+                select: "Välj en fil...",
+                overrides: {
+                    label: "Åsidosättningar"
+                },
+                soundpack: {
+                    label: "Ljudpaket",
+                    description: "Ljudpaket som ska användas i stället för det som är inställt i Discord.",
+                    default: "Discords standard"
+                }
             },
             type: {
                 activityEnd: "Aktivitet slut",
@@ -3484,7 +3709,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 duckyMessage: "Ducky meddelande",
                 hangStatusSelect: "Häng Status Välj",
                 highfiveClap: "Highfive klapp",
-                highfiveWhistle: "Highfive Whistle",
+                highfiveWhistle: "Highfive-vissling",
                 humanMan: "Mänsklig man",
                 lofiMessage: "LoFi meddelande",
                 mention1: "Nämn 1 (@roll)",
@@ -3495,11 +3720,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 message3: "Meddelande 3 (DM och grupp-DM)",
                 mute: "Stum",
                 overlayUnlock: "Lås upp överlägg",
-                poggermodeAchievement: "Poggermode Achievement",
+                poggermodeAchievement: "Poggermode-prestation",
                 poggermodeApplause: "Poggermode-applåder",
                 poggermodeEnabled: "Poggermode aktiverat",
                 poggermodeMessage: "Poggermode meddelande",
-                pttStart: "PTT Start",
+                pttStart: "PTT-start",
                 pttStop: "PTT Stopp",
                 reconnect: "Återanslut",
                 robotMan: "Robotman",
@@ -3534,6 +3759,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 calendar: "möjliggör dynamisk datumformatering som t.ex",
                 today: "I dag",
                 yesterday: "I går",
+                or: "eller",
                 relative: "ger dig tider som t.ex",
                 relativeTime: "4 timmar sedan",
                 preview: "Förhandsvisning",
@@ -3627,6 +3853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 dearrowed: "Denna inbäddning har deArrowed; klicka för att återställa",
                 dearrow: "Klicka för att DeArrow"
+            },
+            text: {
+                toggleDearrow: "Växla Dearrow"
             }
         },
         declutter: {
@@ -3635,6 +3864,12 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 userProfileHeader: {
                     label: "Användarprofil"
+                },
+                removeAvatarDecoration: {
+                    label: "Ta bort avatardekoration",
+                    description: "Ta bort avatardekorationer. Detta är/blir inaktiverat om Decor är aktiverat.",
+                    alertBody: "Borttagning av avatardekoration har inaktiverats för att förhindra konflikter med Decor-insticksprogrammet.",
+                    ok: "OK"
                 },
                 removeNameplate: {
                     label: "Ta bort namnskylten",
@@ -3693,7 +3928,27 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeButtonTooltips: {
                     label: "Ta bort knappverktygstips",
                     description: "Ta bort knappverktygstips."
+                },
+                removeProfileFrame: {
+                    description: "Ta bort profilramar.",
+                    label: "Ta bort profilram"
+                },
+                removeDisplayNameStyles: {
+                    description: "Ta bort animerade/stiliserade visningsnamn i medlemslistan.",
+                    label: "Ta bort stilar för visningsnamn"
+                },
+                removeLibraryAboveDms: {
+                    description: "Ta bort biblioteket ovanför DM-listan.",
+                    label: "Ta bort bibliotek ovanför DM"
+                },
+                removeFamilyCenterAboveDms: {
+                    description: "Ta bort familjecentret ovanför DM-listan.",
+                    label: "Ta bort familjecenter ovanför DM"
                 }
+            },
+            text: {
+                discordAlreadyHasA: "Discord har redan ett inbyggt alternativ för användarnamnsstil i",
+                accessibilitySettings: "tillgänglighetsinställningarna."
             }
         },
         decodeBase64: {
@@ -3794,12 +4049,21 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             help: {
                 update: "För att få uppdateringar om din dekorationsrecension, gå med i {{server}} och tillåt direktmeddelanden.",
-                server: "Decor's Discord Server"
+                server: "Decors Discord-server"
             },
             guidelines: {
                 hold: "Hålla fast",
                 suspended: "Genom att skicka in en dekoration godkänner du {{guidelines}}. Att inte läsa dessa riktlinjer kan leda till att ditt konto stängs av från att skapa fler dekorationer i framtiden.",
                 guidelines: "riktlinjerna"
+            },
+            toast: {
+                failedToAuthorizeMessage: "Auktoriseringen misslyckades: {{message}}"
+            },
+            text: {
+                removeDecoration: "Ta bort Decor-dekoration",
+                decoration: "Decor-dekoration",
+                none: "Ingen",
+                decorationFile: "Dekorationsfil"
             }
         },
         demonstration: {
@@ -3861,6 +4125,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                 starting: "Fel vid start av plugin {{plugin}}",
                 noMessage: "Inget felmeddelande",
                 noReason: "Ingen anledning ges"
+            },
+            text: {
+                reconnect: "Återanslut",
+                loadingLazyModules: "Laddar lazy-moduler, omstart kan leda till fel",
+                loadedLazyModules: "Alla lazy-moduler har laddats",
+                failedLazyModules: "Kunde inte ladda lazy-moduler, kontrollera konsolen",
+                ok: "OK"
             }
         },
         disableCallIdle: {
@@ -3919,6 +4190,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Diverse variabler",
                     newline: "Newline karaktär"
                 }
+            },
+            text: {
+                notSupported: "Stöds inte",
+                devBuild: "Utvecklingsversion",
+                standalone: "Fristående"
             }
         },
         dontFilterMe: {
@@ -3935,6 +4211,23 @@ const translations: MatchStructure<typeof enTranslations> = {
         dontRoundMyTimestamps: {
             name: "DontRoundMyTimestamps",
             description: "Avrundar alltid relativa tidsstämplar nedåt, så 7,6y blir 7y istället för 8y"
+        },
+        downloadAllAttachments: {
+            name: "DownloadAllAttachments",
+            description: "Lägger till en popover-knapp för att ladda ner alla bilagor i ett meddelande på en gång.",
+            button: "Ladda ner alla bilagor",
+            toast: {
+                success: "Laddade ner {{count}} bilaga/bilagor.",
+                partial: "Laddade ner {{succeeded}} av {{total}} bilagor. {{failed}} misslyckades.",
+                downloadedPluralizeSucceededAttachment: "Laddade ned {{pluralize_succeeded_attachment}}.",
+                downloadedSucceededOfLength: "Laddade ned {{succeeded}} av {{length}} bilagor. {{failed}} misslyckades."
+            },
+            option: {
+                downloadAllFileTypes: {
+                    description: "Ladda även ned bilagor som inte är media. Aktivera bara om du litar på det folk skickar dig.",
+                    label: "Ladda ned alla filtyper"
+                }
+            }
         },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
@@ -3999,7 +4292,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     created: "Inbjudan har skapats.",
                     unable: "Det gick inte att skapa inbjudan.",
                     noChannel: "Ingen kanal tillgänglig för inbjudningar.",
-                }
+                },
+                noReusableInvite: "Ingen återanvändbar inbjudan tillgänglig.",
+                unableToReuseInvite: "Kan inte återanvända inbjudan."
             },
             ghost: {
                 user: "Användare",
@@ -4078,7 +4373,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 soundGuildId: {
-                    label: "Sound Guild ID",
+                    label: "Server-ID för ljud",
                     description: "Välj servern som innehåller ljudet.",
                     placeholder: "Välj en server..."
                 },
@@ -4110,6 +4405,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Verktygsfältets Dev-meny",
                     description: "Ändra verktygsfältsknappen Hjälp (?) (överst till höger i chatten) till Discords utvecklarmeny"
                 }
+            },
+            text: {
+                searchExperiments: "Sök experiment"
             }
         },
         exportMessages: {
@@ -4193,6 +4491,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportAll: "Exportera alla meddelanden från {{user}}",
                 user: "Användare",
                 exportAllChannel: "Exportera alla kanalmeddelanden"
+            },
+            text: {
+                unknownError: "Okänt fel"
             }
         },
         expressionCloner: {
@@ -4206,11 +4507,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 success: "Klonad {{name}} till {{guild}} framgångsrikt!",
                 yourServer: "din server",
                 failed: "Det gick inte att klona:",
-                console: "Något gick fel (kolla konsolen!)"
+                console: "Något gick fel (kolla konsolen!)",
+                successfullyClonedNameTo: "{{name}} har klonats till {{name_your_server}}!"
             },
             context: {
                 clone: "Klona {{type}}",
                 cloneName: "Klona {{data}}"
+            },
+            text: {
+                yourServer: "din server",
+                cloneTo: "Klona till {{name}}",
+                emoji: "Emoji",
+                sticker: "Klistermärke"
             }
         },
         f8break: {
@@ -4305,7 +4613,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 step3: "• Klistra in den osynliga texten var som helst i din biografi",
                 pickers: "Färgväljare",
                 primary: "Primär",
-                accent: "Accent"
+                accent: "Accentfärg"
             },
             option: {
                 nitroFirst: {
@@ -4327,13 +4635,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     aboutMe: "Om mig"
                 },
                 hideBuilder: {
-                    label: "Hide Builder",
+                    label: "Dölj byggaren",
                     description: "Göm FPTE Builder på inställningssidorna för användarprofil och serverprofiler"
                 }
             },
             modal: {
                 primary: "Primär",
-                accent: "Accent",
+                accent: "Accentfärg",
                 effect: "Effekt",
                 usage: {
                     title: "Användande",
@@ -4352,7 +4660,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             button: {
                 copyFPTE: "Kopiera FPTE",
                 reset: "Återställa",
-                preview: "FPTE Builder Preview",
+                preview: "Förhandsvisning av FPTE-byggaren",
                 buildBackwards: "Bygg bakåtkompatibel FPTE",
                 moreCharacters: "Kommer att använda fler tecken"
             }
@@ -4413,36 +4721,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removed: "Borttaget alias: {{alias}}",
                 failedRemove: "Det gick inte att ta bort alias",
                 duplicate: "Duplicera alias",
-                failedSave: "Det gick inte att spara aliaset."
+                failedSave: "Det gick inte att spara aliaset.",
+                removedAliasAlias: "Tog bort alias :{{alias}}:",
+                aliasSetForGetemojidisplayname: "Alias angivet för {{getEmojiDisplayName_ref}}."
             },
             button: {
                 edit: "Redigera alias",
                 set: "Ange alias"
+            },
+            text: {
+                remove: "Ta bort",
+                noAliasesSetYet: "Inga alias angivna än.",
+                aliasRequired: "Alias krävs.",
+                aliasInvalid: "Alias måste vara 2-32 tecken och får bara innehålla gemener, siffror eller understreck."
             }
         },
-        favoriteGifSearch: {
-            name: "FavouriteGifSearch",
-            description: "Lägger till ett sökfält till favorit-GIF-filer.",
-            placeholder: "Sök efter favorit-GIF-filer",
-            option: {
-                searchOption: {
-                    label: "Sökalternativ",
-                    description: "Den del av webbadressen du vill söka efter",
-                    url: "Hela webbadressen",
-                    path: "Endast sökväg (/somegif.gif)",
-                    hostandpath: "Host & Path (tenor.com somgif.gif)"
-                }
-            }
-        },
-        favouriteAnything: {
-            name: "FavouriteAnything",
+        favoriteAnything: {
+            name: "FavoriteAnything",
             description: "Favorita vilken bild som helst",
             noFiles: "Inga filer matchar din sökning.",
             searchPlaceholder: "Sök filer",
             media: "Media",
             demoText: "Klicka på stjärnan för att favoritmarkera en fil.\nFavoritfiler visas här!",
             fetchError: "Kunde inte hämta {filename}",
-            uploadError: "Kunde inte ladda upp {filename}"
+            uploadError: "Kunde inte ladda upp {filename}",
+            text: {
+                clickTheStarTo: "Klicka på stjärnan för att favoritmarkera en fil.",
+                favoriteFilesWillShow: "Favoritfiler visas här!"
+            },
+            option: {
+                localThumbnails: {
+                    description: "Skapa filminiatyrer lokalt i stället för att använda en extern tjänst (placeholder.nin0.dev). Inte kompatibelt med mobil. Att växla alternativet påverkar inte befintliga favoriter.",
+                    label: "Lokala miniatyrer"
+                }
+            }
         },
         fileDownloadButton: {
             name: "FileDownloadButton",
@@ -4457,7 +4769,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 navigate: "Använd den nedre panelen för att navigera mellan svaren.",
                 container: "Det gick inte att hitta behållarelementet.",
-                couldntFind: "Kunde inte hitta svarsmeddelandet."
+                couldntFind: "Det gick inte att hitta något svar."
             },
             option: {
                 includePings: {
@@ -4545,6 +4857,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 channelFull: {
                     label: "Kanalen är full",
                     description: "Försök att flytta dig till kanalen när den inte längre är full"
+                },
+                onlyWhenInVoice: {
+                    label: "Endast i röst",
+                    description: "Följ bara användaren när du är i en röstkanal"
                 }
             },
             toast: {
@@ -4589,25 +4905,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     previewText: "Den kvicka bruna räven hoppar över den lata hunden",
                     authors: "Av {{authors}}"
                 }
+            },
+            text: {
+                currentFont: "Nuvarande typsnitt:",
+                resetFont: "Återställ typsnitt"
             }
         },
         forceOwnerCrown: {
             name: "ForceOwnerCrown",
             description: "Tvinga ägarkronan bredvid användarnamn även om servern är stor."
-        },
-        forwardAnywhere: {
-            name: "ForwardAnywhere",
-            description: "Om en vidarebefordran misslyckas, skicka den som ett vanligt meddelande; tillåter också NSFW forwards",
-            option: {
-                forwardPreface: {
-                    label: "Framåt Förord",
-                    description: "Vad ska det vidarebefordrade innehållet inledas med"
-                }
-            },
-            context: {
-                attachments: "Bilagor",
-                forwarded: "Vidarebefordrat från"
-            }
         },
         freaky: {
             name: "Freaky",
@@ -4707,12 +5013,17 @@ const translations: MatchStructure<typeof enTranslations> = {
                     name: "Besties",
                     description: "Hur klarar du ens detta??? (5 år)"
                 }
+            },
+            option: {
+                showFriendsInChat: {
+                    description: "Visa en vänikon på meddelanden från vänner.",
+                    label: "Visa vänner i chatten"
+                }
+            },
+            text: {
+                friend: "Vän",
+                rankIcon: "Rangikon"
             }
-        },
-        friendsSince: {
-            name: "FriendsSince",
-            description: "Visar när du blev vän med någon i användarens popout",
-            section: "Vänner sedan"
         },
         friendTags: {
             name: "FriendTags",
@@ -4748,7 +5059,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
-            description: "Lägger till en växling till användarens popout för att visa/dölja din spelaktivitet",
+            description: "Lägger till en knapp bredvid mikrofon- och dövknappen för att växla spelaktivitet. Högerklicka för att växla Spotify-aktivitet.",
             tooltip: "Växla spelaktivitet",
             gameActivity: {
                 enabled: "Spelaktivitet aktiverad",
@@ -4765,6 +5076,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     panel: "Bredvid Mute/Deafen",
                     toolbox: "Plexcord verktygslåda"
                 }
+            },
+            text: {
+                disableGameActivity: "Inaktivera spelaktivitet",
+                enableGameActivity: "Aktivera spelaktivitet",
+                shareSpotifyActivity: "Dela Spotify-aktivitet",
+                shareSpotifyActivityAccount: "Dela Spotify-aktivitet ({{name}})"
             }
         },
         ghosted: {
@@ -4773,7 +5090,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 title: "Spökade användare",
                 no: "Inga spökade användare",
-                unghost: "unghost",
+                unghost: "ta bort ghosting",
                 unknown: "Okänd",
                 unnamedGroup: "Namnlös grupp",
                 unknownUser: "Okänd användare",
@@ -4912,7 +5229,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "Bildlänk kopierad till urklipp!",
                 urlCopied: "URL kopierad till urklipp!",
                 already: "Den samlingen finns redan",
-                alreadyCollection: "Den GIF finns redan i den samlingen"
+                alreadyCollection: "Den här GIF:en finns redan i samlingen",
+                collectionsImportedSuccessfully: "Samlingarna har importerats.",
+                failedToImportCollections: "Det gick inte att importera samlingar: {{String_err}}"
             },
             modal: {
                 create: {
@@ -4948,6 +5267,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     remove: "Ta bort",
                     cancel: "Strunt i det"
                 }
+            },
+            text: {
+                gifPickerCategoryOptions: "Kategorialternativ för GIF-väljaren",
+                gifCollections: "GIF-samlingar",
+                unknown: "Okänt"
             }
         },
         gifPaste: {
@@ -4959,7 +5283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Lägger till ett kommando för att skicka en slumpmässig GIF från dina favoriter, med en av tio chans att pinga serverns ägare",
             command: {
                 gifRoulette: {
-                    description: "Fresta ödet och skicka en GIF"
+                    description: "Fresta ödet och skicka en GIF",
+                    restricted: "Det här kommandot är begränsat på den här servern."
                 }
             },
             option: {
@@ -4994,7 +5319,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 only: "Visar endast topp {{length}}/{{total}}"
             },
             modal: {
-                title: "{{user}}s GitHub-förråd",
+                title: "{{username}}s GitHub-repon",
                 repository: "Förvar",
                 description: "Beskrivning",
                 language: "Språk",
@@ -5101,9 +5426,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         hideMessages: {
             name: "HideMessages",
-            description: "Ett plugin för att tillfälligt dölja meddelanden tills du startar om.",
+            description: "Dölj meddelanden och DM tillfälligt tills du startar om.",
             button: {
-                hide: "Dölja"
+                hide: "Dölja",
+                hideDm: "Dölj DM",
+                unhideDm: "Visa DM"
+            },
+            toggle: {
+                none: "Inga dolda DM",
+                hide: "Dölj dolda DM",
+                show: "Visa dolda DM"
             },
             option: {
                 hidePopoverButton: {
@@ -5111,6 +5443,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Göm dölj-knappen i meddelandefönstret."
                 }
             }
+        },
+        hideMutedVoiceIndicator: {
+            name: "HideMutedVoiceIndicator",
+            description: "Döljer röstindikatorn i serverlistan när de enda aktiva röstkanalerna är tystade"
         },
         hideServers: {
             name: "HideServers",
@@ -5129,7 +5465,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Visa meny för att visa servrar längst ner i listan"
                 },
                 guildsList: {
-                    label: "Guilds List",
+                    label: "Serverlista",
                     description: "Ta bort dolda servrar"
                 },
                 resetHidden: {
@@ -5151,7 +5487,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         holyNotes: {
             name: "HolyNotes",
             description: "Holy Notes låter dig spara meddelanden",
-            main: "Main",
+            main: "Huvud",
             button: {
                 tooltip: "Heliga anteckningar",
                 save: "Spara anteckning",
@@ -5231,10 +5567,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 refreshed: "Uppdaterade avatarer framgångsrikt.",
                 deletedAll: "Alla anteckningar har raderats.",
                 imported: "Anteckningar har importerats.",
-                invalid: "Det gick inte att importera anteckningar."
+                invalid: "Det gick inte att importera anteckningar.",
+                invalidJson: "Ogiltig JSON"
             },
             toolbox: {
                 action: "Öppna Anteckningar"
+            },
+            text: {
+                holyNotes: "Holy Notes",
+                noteTag: "ANTECKNING"
             }
         },
         homeTyping: {
@@ -5342,7 +5683,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 ignoreListening: {
                     label: "Ignorera att lyssna",
-                    description: "Ignorera alla lyssningsaktiviteter (dessa är vanligtvis Spotify-aktiviteter)"
+                    description: "Ignorera alla lyssningsaktiviteter (oftast Spotify-aktiviteter)"
                 },
                 ignoreWatching: {
                     label: "Ignorera tittar",
@@ -5355,6 +5696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoredActivities: {
                     label: "Ignorerade aktiviteter"
                 }
+            },
+            text: {
+                enableActivity: "Aktivera aktivitet",
+                disableActivity: "Inaktivera aktivitet"
             }
         },
         ignoreCalls: {
@@ -5440,6 +5785,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 sizeHTML: "Storlek",
                 dimensions: "Mått",
                 filename: "Filnamn"
+            },
+            text: {
+                bytes: "Byte"
             }
         },
         imgToGif: {
@@ -5529,11 +5877,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Inkludera videoingångsenheter (kameror, inspelningskort) i källlistan"
                 },
                 autoMute: {
-                    label: "Auto Mute",
+                    label: "Tysta automatiskt",
                     description: "Stäng av mikrofonen automatiskt när du går med i en röstkanal"
                 },
                 autoDeafen: {
-                    label: "Auto Deafen",
+                    label: "Döva automatiskt",
                     description: "Automatiskt döva när du går med i en röstkanal (stänger också av dig)"
                 },
                 instantScreenshare: {
@@ -5541,7 +5889,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Aktiverar automatisk skärmdelningsfunktion"
                 },
                 keybindScreenshare: {
-                    label: "Keybind Screenshare",
+                    label: "Kortkommando för skärmdelning",
                     description: "Skärmdelning med tangentbindning i Discord-nyckelbindningsinställningar"
                 },
                 focusDiscord: {
@@ -5558,6 +5906,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toast: "Omedelbar skärmdelning {{state}}",
                 enabled: "Aktiverad",
                 disabled: "Inaktiverad"
+            },
+            toast: {
+                instantScreenshareDisabled: "Direkt skärmdelning {{disabled}}"
+            },
+            text: {
+                instantScreenshare: "Instant Screenshare"
             }
         },
         invisibleChat: {
@@ -5572,7 +5926,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             button: {
                 encrypt: "Kryptera meddelande",
                 decrypt: "Dekryptera meddelande",
-                hidden: "Hidden Message Indicator (InvisibleChat)"
+                hidden: "Indikator för dolt meddelande (InvisibleChat)"
             },
             tooltip: {
                 hidden: "Detta meddelande har ett dolt meddelande! (InvisibleChat)"
@@ -5680,6 +6034,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     resetData: "Återställ lagring",
                     sure: "Är du säker?"
                 }
+            },
+            text: {
+                serverOptions: "Serveralternativ",
+                copyServerId: "Kopiera server-ID",
+                serverIdCopied: "Server-ID kopierat till urklipp"
             }
         },
         jumpTo: {
@@ -5746,6 +6105,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Nyckelord",
                     description: "Hantera sökord"
                 }
+            },
+            text: {
+                keywordEntryI1: "Nyckelordspost {{i_1}}",
+                listPriorityAdvanced: "Listprioritet (avancerat)",
+                whichListToPrioritize: "Vilken lista som ska prioriteras om ett meddelande utlöser båda listorna",
+                ifYouAreNot: "Om du är osäker är den i de flesta vanliga fall inställd på Svartlista"
             }
         },
         lastOnline: {
@@ -5819,10 +6184,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     listenbrainzLogo: "Använd den stora ListenBrainz-logotypen",
                     generic: "Använd generisk platshållare"
                 },
+                showAlbumCover: {
+                    label: "Visa albumomslag",
+                    description: "Visa albumomslag. Inaktivering av detta visar en platsmärkare. Användbart om din musik har olämpliga omslag"
+                },
                 useLogo: {
                     label: "Använd logotyp",
                     description: "Visa ListenBrainz logotyp på albumomslaget"
                 }
+            },
+            button: {
+                profile: "ListenBrainz-profil",
+                viewSong: "Visa låt"
             }
         },
         loadingQuotes: {
@@ -5849,6 +6222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Ytterligare citatavgränsare",
                     description: "Avgränsare för ytterligare offerter"
                 }
+            },
+            text: {
+                allQuotesDisabled: "Stängde du verkligen av alla laddningscitat? Vilken pajas du är..."
             }
         },
         loginWithQR: {
@@ -5863,11 +6239,30 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             neverScan: "Skanna aldrig en QR-kod för inloggning från en annan användare eller applikation.",
             hold: "Håll ned för att bekräfta inloggningen",
-            scanning: "Scanning...",
+            scanning: "Skannar...",
             stopScanning: "Sluta skanna",
             usingWebcam: "Skanna med webbkamera",
             dragDrop: "Dra och släpp en bild här, eller klicka för att välja en bild",
-            orPaste: "Eller klistra in en bild från ditt urklipp!"
+            orPaste: "Eller klistra in en bild från ditt urklipp!",
+            verifyLogin: "Verifiera inloggning",
+            text: {
+                scanQrCode: "Skanna QR-kod"
+            }
+        },
+        markdownTables: {
+            name: "MarkdownTables",
+            description: "Visar markdown-tabeller i GitHub-stil i Discord-meddelanden.",
+            toolbar: {
+                label: "Markdown-tabellvy",
+                table: "Tabell",
+                raw: "Rå"
+            },
+            option: {
+                hideToggle: {
+                    label: "Dölj växlare",
+                    description: "Döljer växlaren Tabell/Rå och visar alltid renderade tabeller."
+                }
+            }
         },
         mediaPlaybackSpeed: {
             name: "MediaPlaybackSpeed",
@@ -5893,7 +6288,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         memberCount: {
             name: "MemberCount",
-            description: "Visar antalet onlinemedlemmar, totalt antal medlemmar och användare i röstkanaler på servern — i medlemslistan och verktygstipset.",
+            description: "Visar antalet medlemmar online, totalt antal medlemmar och användare i röstkanaler på servern - i medlemslistan och verktygstipset.",
             option: {
                 toolTip: {
                     label: "Verktygstips",
@@ -5910,7 +6305,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             onlineThisChannel: "{{formattedOnlineCount}} online i den här kanalen",
             totalMembers: "{{formattedTotalCount}} totalt servermedlemmar",
-            totalVoice: "{{formattedVoiceCount}} medlemmar i rösten"
+            totalVoice: "{{formattedVoiceCount}} medlemmar i rösten",
+            tooltip: {
+                total: "{{count}} servermedlemmar totalt"
+            }
         },
         mentionAvatars: {
             name: "MentionAvatars",
@@ -5956,7 +6354,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Åtgärd vid ett enda klick (dina meddelanden)"
                 },
                 singleClickModifier: {
-                    label: "Single Click Modifier",
+                    label: "Modifierare för enkelklick",
                     description: "Modifierare krävs för enkelklicksåtgärd (dina meddelanden)"
                 },
                 singleClickOthersAction: {
@@ -5980,11 +6378,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Modifierare krävs för dubbelklicksåtgärder"
                 },
                 tripleClickAction: {
-                    label: "Triple Click Action",
+                    label: "Åtgärd vid trippelklick",
                     description: "Åtgärd vid trippelklick"
                 },
                 tripleClickModifier: {
-                    label: "Triple Click Modifier",
+                    label: "Modifierare för trippelklick",
                     description: "Modifierare krävs för trippelklick"
                 },
                 reactEmoji: {
@@ -6057,7 +6455,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                 messageContent: "Meddelandets innehåll har kopierats!",
                 userId: "Användar-ID kopierat!"
             },
-            linkCopied: "Länken kopierad!"
+            linkCopied: "Länken kopierad!",
+            text: {
+                shift: "Skift",
+                ctrl: "Ctrl",
+                alt: "Alt",
+                backspace: "Backsteg",
+                pickEmoji: "Välj emoji"
+            },
+            emojiSetting: {
+                pick: "Välj emoji",
+                selectMain: "Välj emoji för reaktioner",
+                selectAdditional: "Välj ytterligare emojier",
+                additionalPlaceholder: "separerade med komma/radbrytning, max {{max}}"
+            },
+            toast: {
+                cannotReact: "Kan inte reagera: Behörigheter saknas",
+                linkCopied: "Länken kopierades!"
+            }
         },
         messageColors: {
             name: "MessageColors",
@@ -6212,7 +6627,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         messageLogger: {
             name: "MessageLogger",
             description: "Loggar tillfälligt borttagna och redigerade meddelanden.",
-            removeMessage: "Ta bort meddelandehistorik",
+            removeMessage: "Rensa meddelandehistorik",
             removeMessageTemporary: "Ta bort meddelande (tillfälligt)",
             clearMessageLog: "Rensa meddelandelogg",
             showDiff: "Visa skillnader",
@@ -6276,7 +6691,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                 separatedDiffs: {
                     label: "Separerade Diff",
                     description: "Separat tillägg och borttagningar i diff för en mer läsbar differential"
+                },
+                logDeletedAttachments: {
+                    description: "Om borttagna bilagor ska loggas",
+                    label: "Logga borttagna bilagor"
                 }
+            },
+            text: {
+                clearHistory: "Rensa historik",
+                toggleDeletedHighlight: "Växla markering av borttagna",
+                enableDiffView: "Aktivera skillnadsvy",
+                disableDiffView: "Inaktivera skillnadsvy",
+                noDeletedMessages: "Inga raderade meddelanden",
+                deletedMessageSuffix: " raderat meddelande",
+                deletedMessagesSuffix: " raderade meddelanden"
             }
         },
         messageLoggerEnhanced: {
@@ -6478,11 +6906,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 whitelistedIds: {
                     label: "Vitlistade ID",
-                    description: "Vitlistade server, kanal eller användar-ID."
+                    description: "Server-, kanal- eller användar-ID:n som alltid ska visas i meddelandeloggen."
                 },
                 blacklistedIds: {
                     label: "Svartlistade ID",
-                    description: "Svartlistade server-, kanal- eller användar-ID."
+                    description: "Server-, kanal- eller användar-ID:n som aldrig ska visas i meddelandeloggen."
                 },
                 imageCacheDir: {
                     label: "Bildcachekatalog",
@@ -6520,6 +6948,25 @@ const translations: MatchStructure<typeof enTranslations> = {
                     confirmText: "Rensa",
                     cancel: "Avboka"
                 }
+            },
+            toast: {
+                clearedLogs: "Loggar rensade",
+                failedToClearLogs: "Det gick inte att rensa loggar",
+                failedToRemoveMessage: "Det gick inte att ta bort meddelandet. Se konsolen för detaljer.",
+                noMessagesFoundIn: "Inga meddelanden hittades i loggfilen",
+                successfullyImportedCountLogs: "Importerade {{count}} loggar",
+                successfullyExportedLogs: "Loggar exporterade",
+                successfullyExportedCountLogs: "Exporterade {{count}} loggar",
+                errorExportingLogsCheck: "Fel vid export av loggar. Se konsolen för mer information"
+            },
+            text: {
+                jsonFile: "JSON-fil",
+                clearLogs: "Rensa loggar",
+                clearingLogs: "Rensar loggar...",
+                messageLogger: "Message Logger",
+                importLogs: "Importera loggar",
+                logs: "Loggar",
+                loadingTabLogs: "Laddar loggar: {{tab}}..."
             }
         },
         messageNotifier: {
@@ -6587,7 +7034,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         micLoopbackTester: {
             name: "MicLoopbackTester",
             description: "Lägger till ikon för test av återkoppling av mikrofon till användarpanelen",
-            button: "Mic Test Loopback"
+            button: "Mikrofontest (loopback)"
         },
         middleClickTweaks: {
             name: "MiddleClickTweaks",
@@ -6889,7 +7336,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Visa musikkontroller för YouTube Music"
                 },
                 YoutubeMusicApiUrl: {
-                    label: "YouTube Music API URL",
+                    label: "API-URL för YouTube Music",
                     description: "URL:en för YouTube Music API-servern du använder"
                 },
                 hoverControls: {
@@ -6897,11 +7344,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Visa kontroller när du håller muspekaren"
                 },
                 showMusicNoteOnNoLyrics: {
-                    label: "Show Music Note On No Lyrics",
+                    label: "Visa musiknot när låttext saknas",
                     description: "Visa en notikon när ingen text hittas"
                 },
                 lyricsPosition: {
-                    label: "Lyrics Position",
+                    label: "Låttextens position",
                     description: "Placering av textpanelen",
                     above: "Ovan spelare",
                     below: "Nedanstående spelare"
@@ -6913,13 +7360,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     LRCLIB: "LRCLIB"
                 },
                 spotifyLyricsApiUrl: {
-                    label: "Spotify Lyrics API-URL",
-                    description: "Bas-URL för Spotify lyrics API."
+                    label: "Bas-URL för Spotify Lyrics API",
+                    description: "Bas-URL för anpassad instans (till exempel: http://localhost:8080)."
                 },
                 translateTo: {
                     label: "Översätt till",
                     description: "Översätt texter till - Om du ändrar detta rensas befintliga översättningar",
-                    cleared: "Översättning rensad"
+                    cleared: "Översättningar rensade"
                 },
                 lyricsConversion: {
                     label: "Textkonvertering",
@@ -6941,6 +7388,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Rensa alla cachade texter och översättningar",
                     button: "Rensa cache",
                     cacheLyricsPurged: "Textens cache har rensats"
+                },
+                lyricDelay: {
+                    label: "Fördröjning av låttext"
                 }
             },
             context: {
@@ -7025,6 +7475,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 failed: "Det gick inte att återge Modal :(",
                 checkConsole: "Kontrollera konsolen för fel",
                 invalidUrlCustomApi: "Ogiltigt URL-format för Custom API Server URL"
+            },
+            text: {
+                unknownArtist: "Okänd artist",
+                unknownTitle: "Okänd titel"
             }
         },
         mutualGroupDMs: {
@@ -7045,11 +7499,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "NewGuildSettings",
             description: "Stäng automatiskt av nya servrar och ändra olika andra inställningar när du går med",
             context: {
-                apply: "Använd NewGuildSettings"
+                apply: "Tillämpa NewGuildSettings på mapp"
             },
             option: {
                 guild: {
-                    label: "Mute Guild",
+                    label: "Tysta servern",
                     description: "Stäng av Guild automatiskt"
                 },
                 messages: {
@@ -7100,7 +7554,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 dontShowAgain: "Visa inte detta igen",
                 restartRequired: "Omstart krävs för att tillämpa ändringar",
                 restart: "Starta om",
-                continue: "Fortsätta"
+                continue: "Fortsätta",
+                supportUs: "Plexcord är programvara med öppen källkod. Om du gillar att använda den, överväg att stödja oss",
+                supportUsLink: "här"
             }
         },
         noAppsAllowed: {
@@ -7284,7 +7740,10 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         notificationTitle: {
             name: "NotificationTitle",
-            description: "Gör skrivbordsaviseringar mer informativa"
+            description: "Gör skrivbordsaviseringar mer informativa",
+            text: {
+                threadInParent: "{{thread}} i {{parent}}"
+            }
         },
         notificationVolume: {
             name: "NotificationVolume",
@@ -7360,6 +7819,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 vrcx: {
                     label: "VRChat",
                     description: "Öppna VRChat-länkar i VRCX-appen"
+                },
+                telegram: {
+                    label: "Telegram",
+                    description: "Öppna Telegram-länkar i Telegram-appen"
                 }
             },
             notification: {
@@ -7407,7 +7870,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Inaktiverar klientsidans begränsningar för kanalbehörighetshantering.",
             option: {
                 lockout: {
-                    label: "Lockout",
+                    label: "Utelåsning",
                     description: "Förbigå skyddet av behörighetslåset ('Ganska säker på att du inte vill göra det här')"
                 },
                 onboarding: {
@@ -7447,6 +7910,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 highest: "Högsta roll",
                 lowest: "Lägsta roll",
                 details: "Rolldetaljer"
+            },
+            text: {
+                roleOptions: "Rollalternativ",
+                userOptions: "Användaralternativ",
+                unknownRole: "Okänd roll",
+                unknownUser: "Okänd användare"
             }
         },
         petpet: {
@@ -7497,7 +7966,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unnamed: "oj oj"
                 },
                 pin: {
-                    label: "Pin DM",
+                    label: "Fäst DM",
                     addCategory: "Lägg till kategori"
                 },
                 unPin: {
@@ -7534,7 +8003,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     color: "Färg",
                     save: "Spara",
                     create: "Skapa"
-                }
+                },
+                defaultCategoryName: "Fäst kategori {{number}}"
             }
         },
         pingNotifications: {
@@ -7578,12 +8048,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformIndicators: {
             name: "PlatformIndicators",
             description: "Lägger till plattformsindikatorer (Desktop, Mobile, Web...) till användare",
-            embeddedTooltip: "Trösta",
+            embeddedTooltip: "Inbäddad (konsol eller spel)",
             vrTooltip: "VR",
             option: {
                 list: {
                     label: "Lista",
-                    description: "Visa indikatorer i medlemslistan"
+                    description: "Visa indikatorer i användarprofiler"
                 },
                 badges: {
                     label: "Märken",
@@ -7606,7 +8076,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformSpoofer: {
             name: "PlatformSpoofer",
             description: "Förfalska vilken plattform eller enhet du är på",
-            about: "Vi kan inte garantera att detta plugin inte får dig varnad eller förbjuden.",
+            about: "Vi kan inte garantera att detta plugin inte ger dig en varning eller avstängning. Att välja Xbox/Playstation/VR kan göra din klient till en föråldrad version.",
             platform: {
                 desktop: "Discord-klient",
                 web: "Discord webben",
@@ -7619,7 +8089,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 platform: {
                     label: "Plattform",
-                    description: "Vilken plattform man ska dyka upp som",
+                    description: "Vilken plattform du ska låtsas använda.",
                     desktop: "Skrivbord",
                     web: "Web",
                     android: "Android",
@@ -7689,9 +8159,9 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         profileSets: {
             name: "ProfileSets",
-            description: "Låter dig spara och ladda olika profilförinställningar via profilsektionen i Inställningar.",
+            description: "Låter dig spara och läsa in olika profilförinställningar.",
             toast: {
-                importFailed: "Det gick inte att importera profiluppsättningar. Filen kan vara ogiltig.",
+                importFailed: "Det gick inte att importera förinställningar. Filen kan vara ogiltig.",
             },
             option: {
                 avatarSize: {
@@ -7722,397 +8192,550 @@ const translations: MatchStructure<typeof enTranslations> = {
                 random: "Slumpmässig",
                 import: "Importera",
                 exportAll: "Exportera alla"
+            },
+            text: {
+                selectAServer: "Välj en server",
+                profileSets: "Profiluppsättningar",
+                youAreNotIn: "Du är inte med i någon server än.",
+                mainProfile: "Huvudprofil",
+                serverProfiles: "Serverprofiler",
+                openProfileSets: "Öppna profiluppsättningar"
             }
         },
         questify: {
             name: "Questify",
-            description: "Förbättra din Quest-upplevelse med en uppsättning funktioner, eller inaktivera dem helt om de inte är din grej.",
-            quests: "Uppdrag",
+            description: "Förbättra utvalda Quest-funktioner, stäng av störande inslag eller ta bort Quests helt.",
+            quests: "Quests",
             context: {
                 quest: {
-                    label: "Quest-knappsmeny",
-                    ignore: "Markera alla ignorerade",
-                    reset: "Återställ ignorerad lista",
-                    fetch: "Hämta uppdrag",
+                    label: "Quest-knappens meny",
+                    ignore: "Markera alla som ignorerade",
+                    reset: "Återställ ignoreringslistan",
+                    fetch: "Hämta Quests",
                     markAsIgnored: "Markera som ignorerad",
-                    unmarkAsIgnored: "Avmarkera som ignorerad",
-                    stopAuto: "Stoppa Auto-Complete",
-                    copyQuestID: "Kopiera Quest ID",
-                    startAuto: "Starta Auto-Complete"
-                }
-            },
-            settings: {
-                questButton: {
-                    title: "Quest-knappen",
-                    description: "Visa en Quest-knapp i serverlistan med en valfri indikator för uppdrag utan anspråk.",
-                    leftClick: "Vänsterklicka Åtgärd",
-                    middleClick: "Mellanklickåtgärd",
-                    rightClick: "Högerklicka Åtgärd",
-                    visibility: "Knapp Synlighet",
-                    unclaimedIndicator: "Indikator för ohävd",
-                    badgeColor: "Badge färg",
-                    rewardDisplay: "Belöningsvisning",
-                    includedRewardTypes: "Inkluderade belöningstyper",
-                    includedRewardTypesDesc: "Räkna endast uppdrag med dessa belöningstyper som outtagna när man bestämmer knappsynlighet, märkesantal och när man spelar upp varningsljudet.",
-                    selectRewardTypes: "Välj vilka belöningstyper som ska inkluderas i antalet outtagna...",
-                    noRewardType: "Det finns ingen Quest-funktion med det namnet som stöds.",
-                    default: "Standard",
-                    disable: "Inaktivera"
-                },
-                questFeatures: {
-                    title: "Quest funktioner",
-                    description: "Ändra specifika Quest-funktioner.",
-                    popupWarning: "Alternativet {{disablePopup}} kommer att ignoreras för slutförda uppdrag och spårning av Quest-förlopp.",
-                    videoQuestInfo: "Alternativet {{completeVideo}} väntar så länge videouppdraget pågår och markerar det som avslutat automatiskt.",
-                    gameQuestInfo: "På samma sätt kommer alternativet {{completeGame}} att vänta under speluppdraget och markera det som avslutat automatiskt. Det här alternativet stöds endast på den officiella skrivbordsklienten.",
-                    manualStartWarning: "Du måste fortfarande starta uppdragen manuellt. Det första klicket startar uppdragen i bakgrunden. För videouppdrag kommer efterföljande klick att öppna videomodalen som vanligt. För att avbryta uppdragen kan du öppna snabbmenyn på uppdragsrutan och välja {{stopAuto}}.",
-                    tosWarning: "Att använda något av dessa alternativ är emot Discords ToS. Användning på egen risk.",
-                    selectFeatures: "Välj vilka Quest-funktioner som ska ändras.",
-                    disablePopup: "Inaktivera Quest Popup Above Account Panel",
-                    completeVideo: "Slutför videouppdrag i bakgrunden",
-                    completeGame: "Slutför speluppdrag i bakgrunden",
-                    stopAuto: "Stoppa Auto-Complete"
-                },
-                restyleQuests: {
-                    title: "Styla om uppdrag",
-                    description: "Markera uppdrag med valfria temafärger för synlighet.",
-                    precedenceNote: "Anspråkade och utgångna Quest-stilar kommer att ha företräde även om en Quest ignoreras.",
-                    gradientStyle: "Gradientstil",
-                    assetPreload: "Asset Preload",
-                    unclaimed: "Ohämtad",
-                    claimed: "Påstod",
-                    ignored: "Ignorerade",
-                    expired: "Utgått",
-                    intenseGradient: "Intensiv Restyle Gradient",
-                    defaultGradient: "Standard omstilsgradient",
-                    blackGradient: "Subtil svart gradient",
-                    noGradient: "Ingen gradient",
-                    loadAllAssets: "Ladda alla Quest-tillgångar vid sidladdning",
-                    loadDuringScroll: "Ladda Quest-tillgångar under sidrullning"
-                },
-                reorderQuests: {
-                    title: "Ordna om uppdrag",
-                    description: "Sortera uppdragen efter deras status. Tillämpas när sorteringsalternativet \"Questify\" är valt på Quest-sidan.",
-                    formatNote: "Kommaseparerad lista måste innehålla alla: {{items}}.",
-                    placeholder: "Du måste inkludera allt AVSÄTTAT, KRÄVAT, IGNORERAD, UTGÅTT",
-                    invalidFormat: "Ogiltigt format.",
-                    unclaimedSubsort: "Unclaimed Subsort",
-                    claimedSubsort: "Påstådd underordnad",
-                    ignoredSubsort: "Ignorerad underordnad",
-                    expiredSubsort: "Utgått underordnad",
-                    addedNewest: "Tillagd (nyast)",
-                    addedOldest: "Tillagd (äldst)",
-                    expiredRecent: "Utgått (senast)",
-                    expiredLeast: "Utgått (senast nyligen)",
-                    expiringSoon: "Utgår (snarast)",
-                    expiringLate: "Utgår (senaste)",
-                    claimedRecent: "Gjorde anspråk (senast)",
-                    claimedLeast: "Anspråk på (senast senaste)",
-                    ignoredQuestProfile: "Ignorerad Quest-profil",
-                    sharedProfile: "Delad: Alla konton på denna kundandel ignoreras.",
-                    privateProfile: "Privat: Alla konton på denna klient har separata ignoreringar.",
-                    rememberSort: "Kom ihåg Sorteringsval",
-                    rememberFilter: "Kom ihåg filterval",
-                    yes: "Ja",
-                    no: "Inga",
-                    rememberNote: "Detta sorterings- och filterval hänvisar till de inbyggda sorterings- och filteralternativen på Quest-sidan. Den anpassade sorteringen ovan tillämpas endast när sorteringsalternativet \"Questify\" är valt på Quest-sidan. Om att komma ihåg är inaktiverat kommer sorterings- eller filteralternativen att återställas varje gång du öppnar Quest-sidan."
-                },
-                fetchingQuests: {
-                    title: "Hämta uppdrag",
-                    description: "Konfigurera hur ofta du vill hämta uppdrag från Discord och ställ in varningar för nya uppdrag.",
-                    defaultBehavior: "Som standard hämtar Discord endast uppdrag vid laddning och när man besöker uppdragssidan. Detta innebär att utan ett hämtningsintervall definierat nedan, kommer detta plugin att bli omedvetet om nya uppdrag som läggs till under dagen.",
-                    requirement: "Detta förlitar sig på att Quest-knappen är aktiverad och inställd på antingen {{unclaimed}}, eller inställd på {{always}} med indikatorerna {{pill}}, {{badge}} eller {{both}} som inte har gjorts anspråk på aktiverade. Annars finns det ingen anledning att regelbundet hämta uppdrag.",
-                    blockWarning: "Dessutom, om {{fetchingQuests}} är blockerad i {{questFeatures}}-inställningen, kommer detta inte att fungera.",
-                    fetchInterval: "Hämtningsintervall",
-                    alertSound: "Varningsljud",
-                    intervalPlaceholder: "Välj eller skriv ett intervall mellan 30 minuter och 12 timmar.",
-                    intervalFeedback: "Intervaller måste vara mellan 30 minuter och 12 timmar.",
-                    soundPlaceholder: "Välj ett ljud eller ange en anpassad ljud-URL.",
-                    soundFeedback: "Ljudet hittades inte, eller så kommer webbadressen inte från en domän som stöds.",
-                    disabled: "Inaktiverad",
-                    minutes: "Minuter",
-                    minute: "Minut",
-                    hours: "Timmar",
-                    hour: "Timme",
-                    thirtyMinutes: "30 minuter",
-                    oneHour: "1 timme",
-                    threeHours: "3 timmar",
-                    sixHours: "6 timmar",
-                    twelveHours: "12 timmar",
-                    customSound: "ANPASSAT LJUD"
-                },
-                disableOptions: {
-                    everything: "Inaktivera allt",
-                    discovery: "Inaktivera Discovery-fliken",
-                    dms: "Inaktivera uppdragsfliken i DM",
-                    fetching: "Inaktivera hämtning av uppdrag",
-                    popup: "Inaktivera Popup Above Account Panel",
-                    sponsored: "Inaktivera sponsrad banner på uppdragssidan",
-                    badge: "Inaktivera märke på användarprofiler",
-                    inventory: "Inaktivera meddelande om flytt av presentlager",
-                    friendsList: "Vänlista Aktiv nu-kampanj",
-                    membersList: "Medlemslista aktivt spelar ikoner",
-                    gameQuests: "Slutför spel-/aktivitetsuppdrag i bakgrunden",
-                    videoQuests: "Slutför titta på videouppdrag i bakgrunden",
-                    achievementQuests: "Slutför uppgiften i aktivitetsuppdrag i bakgrunden",
-                    mobileDesktop: "Gör Mobile Quests Desktop-kompatibel",
-                    notifyOnComplete: "Meddela när uppdraget är slutfört"
-                },
-                options: {
-                    always: "Alltid",
-                    unclaimed: "Ohämtad",
-                    never: "Aldrig",
-                    pill: "Piller",
-                    badge: "Emblem",
-                    both: "Både",
-                    none: "Ingen",
-                    openQuests: "Öppna uppdrag",
-                    contextMenu: "Snabbmeny",
-                    pluginSettings: "Plugin-inställningar",
-                    nothing: "Ingenting",
-                    orbs: "Orbs",
-                    nitroCodes: "Nitrokoder",
-                    rewardCodes: "Belöningskoder",
-                    inGameItems: "Föremål i spelet",
-                    profileCollectibles: "Profil Samlarföremål"
-                }
-            },
-            option: {
-                disableQuests: {
-                    label: "Inaktivera uppdrag",
-                    description: "Välj vilka Quest-funktioner som ska inaktiveras."
-                },
-                disableQuestsEverything: {
-                    label: "Inaktivera allt",
-                    description: "Inaktivera alla Quest-funktioner."
-                },
-                disableQuestsFetchingQuests: {
-                    label: "Inaktivera hämtning av uppdrag",
-                    description: "Inaktivera hämtning av uppdrag från Discord."
-                },
-                disableQuestsDirectMessagesTab: {
-                    label: "Inaktivera uppdragsfliken i DM",
-                    description: "Inaktivera Quest-fliken på sidan Direktmeddelanden."
-                },
-                disableQuestsDiscoveryTab: {
-                    label: "Inaktivera Discovery-fliken",
-                    description: "Inaktivera Quest-fliken på Discovery-sidan."
-                },
-                disableQuestsPageSponsoredBanner: {
-                    label: "Inaktivera sponsrad banner på uppdragssidan",
-                    description: "Inaktivera den sponsrade bannern på Quest-sidan."
-                },
-                disableQuestsPopupAboveAccountPanel: {
-                    label: "Inaktivera Popup Above Account Panel",
-                    description: "Inaktivera Quest-popupen ovanför din kontopanel."
-                },
-                disableQuestsBadgeOnUserProfiles: {
-                    label: "Inaktivera märke på användarprofiler",
-                    description: "Inaktivera Quest-märket på användarprofiler."
-                },
-                disableQuestsGiftInventoryRelocationNotice: {
-                    label: "Inaktivera meddelande om flytt av presentlager",
-                    description: "Inaktivera presentinventeringen Quest omlokaliseringsmeddelande."
-                },
-                disableFriendsListActiveNowPromotion: {
-                    label: "Inaktivera kampanj för vänlistan Active Now",
-                    description: "Inaktivera marknadsföringen av uppdrag för spel som spelas av vänner."
-                },
-                disableMembersListActivelyPlayingIcons: {
-                    label: "Inaktivera ikoner för aktivt spelande medlemslista",
-                    description: "Inaktivera de aktivt spelade ikonerna i medlemslistan."
-                },
-                makeMobileQuestsDesktopCompatible: {
-                    label: "Gör Mobile Quests Desktop-kompatibel",
-                    description: "Gör mobiluppdrag kompatibla med datorer."
-                },
-                completeVideoQuestsInBackground: {
-                    label: "Kompletta videouppdrag i bakgrunden",
-                    description: "Slutför videouppdrag i bakgrunden efter att videons längd har passerat."
-                },
-                completeGameQuestsInBackground: {
-                    label: "Slutför speluppdrag i bakgrunden",
-                    description: "Slutför speluppdrag i bakgrunden efter att speltiden har passerat."
-                },
-                completeAchievementQuestsInBackground: {
-                    label: "Slutför uppgiften i aktivitetsuppdrag i bakgrunden",
-                    description: "Fullständig prestation i aktivitetsuppdrag i bakgrunden."
-                },
-                notifyOnQuestComplete: {
-                    label: "Meddela när uppdraget är slutfört",
-                    description: "Visa ett meddelande när ett uppdrag slutförs automatiskt."
-                },
-                questButton: {
-                    label: "Quest-knappen",
-                    description: "Visa en Quest-knapp i serverlistan."
-                },
-                questButtonDisplay: {
-                    label: "Quest-knappdisplay",
-                    description: "Vilken visningstyp som ska användas för Quest-knappen i serverlistan."
-                },
-                questRewardIncludeRewardCode: {
-                    label: "Inkludera belöningskoder",
-                    description: "Inkludera uppdrag med belöningskoder när du visar antal uppdrag."
-                },
-                questRewardIncludeNitroCode: {
-                    label: "Inkludera nitrokoder",
-                    description: "Inkludera uppdrag med nitrokoder när du visar antal uppdrag."
-                },
-                questRewardIncludeInGame: {
-                    label: "Inkludera belöningar i spelet",
-                    description: "Inkludera uppdrag med belöningar i spelet när du visar antal uppdrag."
-                },
-                questRewardIncludeCollectibles: {
-                    label: "Inkludera samlarföremål",
-                    description: "Inkludera uppdrag med samlarobjekt när du visar antalet uppdrag."
-                },
-                questRewardIncludeOrbs: {
-                    label: "Inkludera klot",
-                    description: "Inkludera uppdrag med klot när du visar antal uppdrag."
-                },
-                questButtonUnclaimed: {
-                    label: "Quest-knapp Indikator för oupphämtad",
-                    description: "Vilken visningstyp som ska användas för den outtagna indikatorn på Quest-knappen i serverlistan."
-                },
-                questButtonBadgeColor: {
-                    label: "Quest Button Badge Färg",
-                    description: "Färgen på Quest-knappmärket i serverlistan."
-                },
-                questButtonLeftClickAction: {
-                    label: "Vänsterklicka Åtgärd",
-                    description: "Åtgärden som ska utföras när du vänsterklickar på Quest-knappen i serverlistan."
-                },
-                questButtonMiddleClickAction: {
-                    label: "Mellanklickåtgärd",
-                    description: "Åtgärden som ska utföras när du mittklickar på Quest-knappen i serverlistan."
-                },
-                questButtonRightClickAction: {
-                    label: "Högerklicka Åtgärd",
-                    description: "Åtgärden som ska utföras när du högerklickar på Quest-knappen i serverlistan."
-                },
-                fetchingQuests: {
-                    label: "Hämta uppdrag",
-                    description: "Hämta uppdrag från Discord."
-                },
-                fetchingQuestsInterval: {
-                    label: "Intervall för hämtning av uppdrag",
-                    description: "Intervallet i sekunder för att hämta uppdrag från Discord."
-                },
-                fetchingQuestsAlert: {
-                    label: "Varning för att hämta uppdrag",
-                    description: "Ljudet att spela när nya uppdrag upptäcks."
-                },
-                fetchingQuestsAlertVolume: {
-                    label: "Hämtar quests varningsvolym",
-                    description: "Volymen på varningsljudet när nya uppdrag upptäcks."
-                },
-                restyleQuests: {
-                    label: "Styla om uppdrag",
-                    description: "Anpassa utseendet på Quest-brickorna på sidan Uppdrag."
-                },
-                restyleQuestsUnclaimed: {
-                    label: "Restyle quests Unclaimed",
-                    description: "Färgen på outtagna Quest-brickor på uppdragssidan."
-                },
-                restyleQuestsClaimed: {
-                    label: "Restyle-uppdrag begärda",
-                    description: "Färgen på questbrickor som gjorts anspråk på på uppdragssidan."
-                },
-                restyleQuestsIgnored: {
-                    label: "Restyle-uppdrag ignorerade",
-                    description: "Färgen på ignorerade Quest-brickor på uppdragssidan."
-                },
-                restyleQuestsExpired: {
-                    label: "Restyle-uppdrag har löpt ut",
-                    description: "Färgen på utgångna Quest-brickor på uppdragssidan."
-                },
-                restyleQuestsGradient: {
-                    label: "Restyle Quests Gradient",
-                    description: "Stil för gradienten som används i Quest-brickorna."
-                },
-                restyleQuestsPreload: {
-                    label: "Restyle quests Preload",
-                    description: "Försök att förladda tillgångarna för Quest-brickorna."
-                },
-                reorderQuests: {
-                    label: "Ordna om uppdrag",
-                    description: "Sortera uppdragen efter deras status. Lämna tomt för standardsortering. Kommaseparerad lista måste innehålla alla: EJ KRÄVAT, KRÄVAT, IGNORERAD, UTGÅTT."
-                },
-                unclaimedSubsort: {
-                    label: "Unclaimed Subsort",
-                    description: "Subsorteringsmetod för uppdrag utan anspråk."
-                },
-                claimedSubsort: {
-                    label: "Påstådd underordnad",
-                    description: "Subsorteringsmetod för påstådda uppdrag."
-                },
-                ignoredSubsort: {
-                    label: "Ignorerad underordnad",
-                    description: "Subsorteringsmetod för ignorerade uppdrag."
-                },
-                expiredSubsort: {
-                    label: "Utgått underordnad",
-                    description: "Subsorteringsmetod för utgångna uppdrag."
-                },
-                unclaimedUnignoredQuests: {
-                    label: "Obekräftade och ignorerade uppdrag",
-                    description: "Spårar antalet outtagna och ej ignorerade uppdrag."
-                },
-                onQuestsPage: {
-                    label: "På uppdragssidan",
-                    description: "Om användaren för närvarande är på sidan Uppdrag."
-                },
-                triggerQuestsRerender: {
-                    label: "Utlösa uppdrag Återrendera",
-                    description: "Utlösa en återgivning av uppdragssidan genom att växla mellan den här inställningen."
-                },
-                ignoredQuestProfile: {
-                    label: "Ignorerad Quest-profil",
-                    description: "Profilen som används för ignorerade uppdrag."
-                },
-                rememberQuestPageSort: {
-                    label: "Kom ihåg Quest Page Sort",
-                    description: "Kom ihåg den senast använda sorteringen på uppdragssidan."
-                },
-                rememberQuestPageFilters: {
-                    label: "Kom ihåg Quest Page Filter",
-                    description: "Kom ihåg de senast använda filtren på sidan Uppdrag."
-                },
-                lastQuestPageSort: {
-                    label: "Sidsortering för sista uppdrag",
-                    description: "Kom ihåg den senast använda sorteringen på uppdragssidan."
-                },
-                lastQuestPageFilters: {
-                    label: "Filter för sista uppdragssidan",
-                    description: "Kom ihåg de senast använda filtren på sidan Uppdrag."
-                },
-                ignoredQuestIDs: {
-                    label: "Ignorerade uppdrags-ID:n",
-                    description: "En uppsättning uppdrags-ID:n som ignoreras."
-                },
-                resumeQuestIDs: {
-                    label: "Återuppta uppdrags-ID:n",
-                    description: "En rad uppdrags-ID:n som automatiskt slutförs i bakgrunden."
+                    unmarkAsIgnored: "Sluta ignorera",
+                    stopAuto: "Stoppa automatisk slutförning",
+                    startAuto: "Starta automatisk slutförning",
+                    copyQuestID: "Kopiera Quest-ID"
                 }
             },
             button: {
-                questInProgressWithTime: "Slutför ({{remainTime}})",
-                completing: "Slutför",
-                resume: "Återuppta (~{{remainTime}})",
-                complete: "Slutför {{remainTime}}",
-                completeImmediate: "Komplett (Omedelbart)",
-                completed: "Avslutad"
+                completing: "Slutför...",
+                completingWithTime: "Slutför ({{time}})",
+                completingIn: "Slutförs om {{time}}",
+                queued: "I kö ({{position}})",
+                resuming: "Återupptar...",
+                completeNow: "Slutför nu",
+                complete: "Slutför ({{time}})",
+                resume: "Återuppta ({{time}})",
+                completed: "Slutförd"
             },
             reward: {
-                orbs: "{{completingText}} för {{orbQuantity}} Orbs.",
-                article: "{{completingText}} för {{itemName}}.",
-                unrecognized: "{{completingText}} för en okänd belöningstyp."
+                orbs: "{{status}} för {{orbQuantity}} Orbs.",
+                article: "{{status}} för {{itemName}}.",
+                unrecognized: "{{status}} för en okänd belöning."
+            },
+            toast: {
+                autoCompleteBroken: "Automatisk slutförning fungerar inte. En åtgärd kommer snart.",
+                enrollmentFailed: "Anmälan till Questen {{questName}} misslyckades.",
+                enrollmentInNormalizequestnameQuest: "Anmälan till uppdraget {{normalizeQuestName_quest}} misslyckades{{rateLimitSuffix}}."
             },
             notification: {
                 completed: {
-                    title: "Uppdraget avslutat",
-                    body: "{{questName}}-uppdraget har slutförts."
+                    title: "Quest slutförd!",
+                    body: "Questen {{questName}} har slutförts."
+                },
+                newQuest: {
+                    title: "Ny Quest upptäckt!",
+                    body: "Questen {{questName}} är nu tillgänglig."
+                },
+                newQuests: {
+                    title: "Nya Quests upptäckta!",
+                    body: "{{count}} nya Quests är nu tillgängliga."
+                },
+                newExcludedQuest: {
+                    title: "Ny utesluten Quest upptäckt!",
+                    body: "Den uteslutna Questen {{questName}} upptäcktes. ID: {{questId}}"
+                },
+                newExcludedQuests: {
+                    title: "Nya uteslutna Quests upptäckta!",
+                    body: "{{count}} nya uteslutna Quests upptäcktes. Se konsolen för deras Quest-ID:n."
                 }
+            },
+            alert: {
+                restart: {
+                    title: "Omstart krävs",
+                    body: "En ändring i Questifys inställningar kräver en omstart.",
+                    confirm: "Starta om",
+                    cancel: "Senare"
+                },
+                dangerous: {
+                    title: "Är du säker?",
+                    confirm: "Fortsätt",
+                    cancel: "Avbryt",
+                    disableEverything: "Detta stänger av Quest-funktionaliteten helt.",
+                    allowDangerous: "Detta tillåter ändring av farliga inställningar."
+                }
+            },
+            status: {
+                unclaimed: "EJ INLÖST",
+                claimed: "Inlöst",
+                ignored: "Ignorerad",
+                expired: "Utgången"
+            },
+            questTypes: {
+                watchVideo: "Titta på video",
+                watchVideoOnMobile: "Titta på video i mobilen",
+                achievementInActivity: "Prestation i aktivitet",
+                achievementInGame: "Prestation i spel",
+                playActivity: "Spela aktivitet",
+                playOnDesktop: "Spela på dator",
+                playOnDesktopV2: "Spela på dator V2",
+                streamOnDesktop: "Streama på dator",
+                playOnPlayStation: "Spela på PlayStation",
+                playOnXbox: "Spela på Xbox"
+            },
+            settings: {
+                questButton: {
+                    title: "Quest-knapp",
+                    description: "Visa en Quest-knapp i serverlistan med en valfri indikator för ej inlösta och ej ignorerade Quests.",
+                    behavior: "Knappens beteende",
+                    leftClick: "Åtgärd vid vänsterklick:",
+                    middleClick: "Åtgärd vid mittenklick:",
+                    rightClick: "Åtgärd vid högerklick:",
+                    visibility: "Knappens synlighet:",
+                    visibilityTooltip: "Alltid visar Quest-knappen så länge funktionen är på.\n\nEj inlöst visar den bara när du har relevanta ej inlösta Quest-belöningar.\n\nAldrig döljer Quest-knappen.",
+                    unclaimedIndicator: "Indikator för ej inlösta:",
+                    unclaimedIndicatorTooltip: "Piller visar Discords oläst-markering bredvid Quest-knappen.\n\nBricka visar antalet relevanta ej inlösta Quest-belöningar.\n\nBåda visar piller och bricka tillsammans.\n\nIngen döljer indikatorerna.",
+                    badgeColor: "Brickfärg:",
+                    relevancy: "Quest-relevans",
+                    includedRewardTypes: "Inkluderade belöningstyper:",
+                    includedRewardTypesTooltip: "Räkna bara Quests med dessa belöningstyper som ej inlösta när knappens synlighet, brickans antal och aviseringar bestäms.",
+                    includedQuestTypes: "Inkluderade Quest-typer:",
+                    includedQuestTypesTooltip: "Räkna bara Quests med dessa uppgiftstyper som ej inlösta när knappens synlighet, brickans antal och aviseringar bestäms.",
+                    display: {
+                        always: "Alltid",
+                        unclaimed: "Ej inlöst",
+                        never: "Aldrig"
+                    },
+                    indicator: {
+                        pill: "Piller",
+                        badge: "Bricka",
+                        both: "Båda",
+                        none: "Ingen"
+                    },
+                    action: {
+                        openQuests: "Öppna Quests",
+                        contextMenu: "Snabbmeny",
+                        pluginSettings: "Plugininställningar",
+                        nothing: "Inget"
+                    },
+                    rewardTypes: {
+                        orbs: "Orbs",
+                        nitroCodes: "Nitro-koder",
+                        rewardCodes: "Belöningskoder",
+                        inGameItems: "Föremål i spelet",
+                        profileCollectibles: "Profilsamlarobjekt"
+                    }
+                },
+                questFeatures: {
+                    title: "Quest-funktioner",
+                    description: "Ändra hur Quests beter sig för att förbättra eller ta bort funktionalitet.",
+                    disableFeatures: "Stäng av funktioner",
+                    disableEverything: "Stäng av Quest-funktionaliteten helt:",
+                    disableEverythingTooltip: "Detta stänger av alla pluginförbättringar, döljer Quest-sidan och Quest-element i hela Discord och hindrar Discord från att hämta Quest-data. Butiken påverkas inte, eftersom Orbs som sekundär valuta är för tätt knutna till den.",
+                    disableSpecific: "Stäng av vissa funktioner:",
+                    disableSpecificTooltip: "Sponsrad banner är en betald Quest-banner högst upp på Quest-sidan.\n\nFlyttaviseringar är indikatorer, t.ex. på Utforska-sidan, om att Quests har flyttats till DM.\n\nVänlistepromo är ett kort i avsnittet \"Aktiv nu\" i din vänlista medan en användare du delar en server med spelar ett spel med en aktiv Quest.\n\nMedlemslistepromo är en ikon vid medlemmar i en servers medlemslista medan de spelar ett spel med en aktiv Quest.\n\nKontopanelpromo är en betald Quest-kampanj ovanför din kontopanel.\n\nKontopanelens framsteg är framstegen för den aktiva eller slutförda Questen ovanför din kontopanel.\n\nQuest- och Orbs-brickor är brickor på profiler för den som har slutfört minst en Quest eller köpt Orbs-brickan.",
+                    disableOptions: {
+                        sponsoredBanner: "Sponsrad banner",
+                        relocationNotices: "Flyttaviseringar",
+                        friendsListPromo: "Vänlistepromo",
+                        membersListPromo: "Medlemslistepromo",
+                        accountPanelPromo: "Kontopanelpromo",
+                        accountPanelProgress: "Kontopanelens framsteg",
+                        orbsAndQuestsBadges: "Quest- och Orbs-brickor"
+                    },
+                    modifyFeatures: "Ändra funktioner",
+                    warningTos: "Discord har börjat varna användare av skript eller plugins som ändrar hur Quests slutförs, vilket strider mot deras {{tos}}.",
+                    tos: "Användarvillkor",
+                    warningEscalate: "Varningarna verkar begränsade till hot om att förlora åtkomst till Quests eller deras belöningar, men Discord kan skärpa åtgärderna när som helst.",
+                    warningDetection: "På grund av de många metoder Discord använder för att spåra användare finns det realistiskt sett inget sätt att undgå upptäckt. Om du fortsätter, var medveten om att Discord troligen kommer att upptäcka det någon gång.",
+                    warningRisk: "Använd följande reglage för att komma åt potentiellt farliga inställningar på egen risk.",
+                    allowDangerous: "Tillåt ändring av farliga inställningar...",
+                    disallowDangerous: "Återställ och förbjud ändring av farliga inställningar...",
+                    completeVideoQuicker: "Snabba upp automatisk slutförning av video-Quests:",
+                    completeVideoQuickerTooltip: "Discord tillåter att video-Quests slutförs när videons längd minus 24 sekunder har passerat sedan anmälan.\n\nDet betyder att en video-Quest på 24 sekunder eller kortare, eller en som du anmäler dig till och återvänder till senare, kan slutföras direkt.\n\nDenna inställning gäller bara automatisk slutförning av video-Quests och beror på inställningen för automatisk slutförning nedan. Manuell slutförning kräver fortfarande att hela längden inväntas och beror inte på anmälningstiden.",
+                    mobileDesktop: "Gör vissa mobil-only video-Quests slutförbara på dator:",
+                    mobileDesktopTooltip: "Till vissa mobil-only video-Quests kan man anmäla sig på dator, men de måste ändå slutföras i mobilen. Denna inställning tillåter slutförning på dator.\n\nTill vissa mobil-only video-Quests kan man bara anmäla sig i mobilen. För att inställningen ska påverka dem måste du anmäla dig i mobilen innan du återvänder till datorn och uppdaterar dina Quests.\n\nPåslagen ensam gäller inställningen bara manuell slutförning av video-Quests. Automatisk slutförning av mobila video-Quests från datorn beror på inställningen för automatisk slutförning nedan och slår implicit på även denna inställning.",
+                    simultaneous: "Slutför Quests automatiskt samtidigt i stället för i följd:",
+                    simultaneousTooltip: "Som standard köas flera Quests för automatisk slutförning och slutförs i ordning.\n\nDenna inställning låter i stället alla automatiskt slutförda Quests köras samtidigt.\n\nDenna inställning gäller bara automatisk slutförning och beror på inställningen för automatisk slutförning nedan.",
+                    resumeInterrupted: "Återuppta avbrutna automatiska slutförningar efter omladdning eller omstart:",
+                    resumeInterruptedTooltip: "Denna inställning återupptar automatiskt slutförningar som avbrutits av omladdningar eller omstarter, inklusive att köa om Quests som stod i kö men ännu inte hade startat.",
+                    autoCompleteTypes: "Slutför vissa Quest-typer automatiskt:",
+                    autoCompleteTypesTooltip: "\"Titta på video i mobilen\"-Quests fungerar bara för mobila Quests som man kan anmäla sig till på dator. Om anmälan är begränsad till mobil måste du först anmäla dig i mobilen innan du återvänder till datorn och uppdaterar dina Quests.\n\nAlla videorelaterade Quests skickar normalt en stack trace med framstegsrapporterna. Discord vet alltså exakt vilka funktioner som anropades och kan kontrollera att deras egna funktioner startade framstegen. Questify raderar denna stack trace, men frånvaron avslöjar lika mycket som närvaron.\n\n\"Spela på dator\", \"Spela på PlayStation\", \"Spela på Xbox\" och \"Spela aktivitet\"-Quests är bara tillgängliga i officiella datorklienter på grund av en begränsning från Discord. Tredjepartsklienter som webbtillägg, Plextron och andra stöder inte automatisk slutförning av dessa typer.\n\nAlla spelrelaterade Quests skickar normalt ett spelfingeravtryck med heartbeat-rapporterna. Discord kan alltså använda data från tiotusentals användare för att avgöra om andra troligen använder ett riktigt spel eller emulerar den körbara filen. Det finns inget rimligt sätt att förfalska värdet, så Questify lämnar det tomt, men frånvaron avslöjar lika mycket som en dålig förfalskning.\n\n\"Prestation i aktivitet\"-Quests kan bara slutföras automatiskt genom att slutföras omedelbart. Metoden kan täppas till när som helst.\n\nAutomatisk slutförning sker genom att klicka på respektive knappar på Quest-sidan. Quests slutförs i den ordning de köades, om inte samtidig slutförning är påslagen ovan.\n\nAutomatisk slutförning av Quests är den mest riskabla farliga inställningen. Slå på den på egen risk."
+                },
+                questNotifications: {
+                    title: "Quest-aviseringar",
+                    description: "Konfigurera aviseringar och varningar för slutförda och nyupptäckta Quests.",
+                    questCompleted: "Quest slutförd",
+                    notifyOnComplete: "Visa en avisering när en Quest har slutförts:",
+                    soundOnComplete: "Spela upp ett ljud när en Quest har slutförts:",
+                    volume: "Volym:",
+                    newQuests: "Nya Quests upptäckta",
+                    notifyOnNew: "Visa en avisering när nya Quests upptäcks:",
+                    soundOnNew: "Spela upp ett ljud när nya Quests upptäcks:",
+                    notifyOnNewExcluded: "Visa en avisering när nya uteslutna Quests upptäcks:",
+                    notifyOnNewExcludedTooltip: "Vissa Quests är uteslutna från din lista över tillgängliga Quests på grund av region- eller plattformsbegränsningar.\n\nNär detta är på hämtar Questify deras konfigurationer, tillämpar dina filter för Quest- och belöningstyper, skriver ut de uteslutna Questsens data i konsolen och visar en separat avisering för matchande uteslutna Quests.",
+                    soundOnNewExcluded: "Spela upp ett ljud när nya uteslutna Quests upptäcks:",
+                    soundOnNewExcludedTooltip: "Vissa Quests är uteslutna från din lista över tillgängliga Quests på grund av region- eller plattformsbegränsningar.\n\nNär ett ljud är valt hämtar Questify deras konfigurationer, tillämpar dina filter för Quest- och belöningstyper, skriver ut de uteslutna Questsens data i konsolen och spelar upp detta ljud för matchande uteslutna Quests.",
+                    fetchInterval: "Intervall för hämtning av Quests:",
+                    fetchIntervalTooltip: "Discord hämtar bara Quests vid start och när du besöker Quest-sidan.\n\nDetta intervall hämtar Quests regelbundet medan klienten är öppen, så att Quest-knappens indikatorer och varningar om nya Quests hålls uppdaterade under dagen.\n\nDet körs bara om det är påslaget och om Quest-knappens eller Quest-aviseringarnas inställningar gör regelbunden hämtning meningsfull.",
+                    disabled: "AVSTÄNGD",
+                    preview: "Lyssna på {{sound}}",
+                    intervals: {
+                        thirtyMinutes: "30 minuter",
+                        fortyFiveMinutes: "45 minuter",
+                        oneHour: "1 timme",
+                        threeHours: "3 timmar",
+                        sixHours: "6 timmar",
+                        twelveHours: "12 timmar"
+                    }
+                },
+                questTiles: {
+                    title: "Quest-rutor",
+                    description: "Markera Quests med valfria temafärger för bättre synlighet.",
+                    behavior: "Rutornas beteende",
+                    gradientStyle: "Gradientstil:",
+                    gradientStyleTooltip: "Intensiv och Standard använder den valda rutfärgen i bildgradienten.\n\nDiskret svart behåller en mörkare neutral gradient för kontrast.\n\nIngen gradient tar bort bildgradienten, vilket kan göra vissa Quest-illustrationer svårare att läsa.",
+                    assetPreload: "Förinläsning av resurser:",
+                    assetPreloadTooltip: "Att läsa in alla resurser när Quest-sidan öppnas minskar layoutförskjutningar vid rullning.\n\nInläsning vid rullning ligger närmare Discords standardbeteende och kräver mindre arbete från början.",
+                    colors: "Rutfärger",
+                    enable: "Slå på",
+                    disable: "Stäng av",
+                    gradient: {
+                        intense: "Intensiv restyle-gradient",
+                        default: "Standard restyle-gradient",
+                        black: "Diskret svart gradient",
+                        hide: "Ingen gradient"
+                    },
+                    preload: {
+                        onLoad: "Läs in alla Quest-resurser när sidan öppnas",
+                        onScroll: "Läs in Quest-resurser vid rullning"
+                    }
+                },
+                reorderQuests: {
+                    title: "Ordna om Quests",
+                    description: "Sortera uppdrag efter status när Questify-sorteringen är vald på uppdragssidan. Dolda statusar filtreras bort vid all sortering.",
+                    statusOrder: "Statusordning",
+                    statusOrderTooltip: "Varje status kan bara förekomma en gång. Väljer du en status som redan används på en annan position byter de två positionerna plats.",
+                    positions: {
+                        first: "Första:",
+                        second: "Andra:",
+                        third: "Tredje:",
+                        fourth: "Fjärde:"
+                    },
+                    subsorts: "Undersorteringar",
+                    unclaimedSubsort: "Undersortering av ej inlösta:",
+                    unclaimedSubsortTooltip: "Slutförda men ej inlösta Quests hamnar under ofullständiga ej inlösta Quests, därefter tillämpas denna undersortering inom grupperna.",
+                    claimedSubsort: "Undersortering av inlösta:",
+                    claimedSubsortTooltip: "Inlösta Quests kan sorteras efter inlösningstid eller efter när Questen lades till.",
+                    ignoredSubsort: "Undersortering av ignorerade:",
+                    ignoredSubsortTooltip: "Ignorerade Quests behåller sin gruppposition, och denna undersortering styr deras ordning inom gruppen.",
+                    expiredSubsort: "Undersortering av utgångna:",
+                    expiredSubsortTooltip: "Utgångna Quests kan sorteras efter utgångstid eller efter när Questen lades till.",
+                    subsort: {
+                        addedNewest: "Tillagda (nyaste)",
+                        addedOldest: "Tillagda (äldsta)",
+                        expiringSoonest: "Går ut (snarast)",
+                        expiringLatest: "Går ut (senast)",
+                        expiredMostRecent: "Utgångna (senaste)",
+                        expiredLeastRecent: "Utgångna (äldsta)",
+                        claimedMostRecent: "Inlösta (senaste)",
+                        claimedLeastRecent: "Inlösta (äldsta)"
+                    },
+                    memory: "Quest-sidans minne",
+                    rememberSort: "Kom ihåg vald sortering på Quest-sidan:",
+                    rememberSortTooltip: "När detta är avstängt öppnas Quest-sidan varje gång med Questify-sorteringen.",
+                    rememberFilters: "Kom ihåg valda filter på Quest-sidan:",
+                    rememberFiltersTooltip: "När detta är avstängt öppnas Quest-sidan varje gång utan uppgifts- eller belöningsfilter."
+                }
+            },
+            option: {
+                migrationVersion: {
+                    label: "Migreringsversion",
+                    description: "Inställningarnas nuvarande migreringsversion."
+                },
+                questFeatures: {
+                    label: "Quest-funktioner",
+                    description: "Välj vilka Quest-funktioner som ska stängas av."
+                },
+                disableQuestsEverything: {
+                    label: "Stäng av allt",
+                    description: "Stänger av alla Quest-funktioner."
+                },
+                disableRelocationNotices: {
+                    label: "Stäng av flyttaviseringar",
+                    description: "Stänger av Quest-flyttaviseringar på Utforska-sidan."
+                },
+                disableSponsoredBanner: {
+                    label: "Stäng av sponsrad banner",
+                    description: "Stänger av den sponsrade bannern på Quest-sidan."
+                },
+                disableAccountPanelPromo: {
+                    label: "Stäng av kontopanelpromo",
+                    description: "Stänger av den marknadsförda Quest-popupen ovanför din kontopanel."
+                },
+                disableAccountPanelQuestProgress: {
+                    label: "Stäng av kontopanelens framsteg",
+                    description: "Stänger av framsteg för aktiva och slutförda Quests ovanför din kontopanel."
+                },
+                disableOrbsAndQuestsBadges: {
+                    label: "Stäng av Quest- och Orbs-brickor",
+                    description: "Stänger av Quest-brickan på profiler."
+                },
+                disableFriendsListPromo: {
+                    label: "Stäng av vänlistepromo",
+                    description: "Stänger av marknadsföring av Quests för spel som vänner spelar."
+                },
+                disableMembersListPromo: {
+                    label: "Stäng av medlemslistepromo",
+                    description: "Stänger av ikonen för aktivt spelande i medlemslistan."
+                },
+                allowChangingDangerousSettings: {
+                    label: "Tillåt farliga inställningar",
+                    description: "Tillåter ändring av farliga inställningar."
+                },
+                resumeInterruptedQuests: {
+                    label: "Återuppta avbrutna Quests",
+                    description: "Återupptar automatisk slutförning av Quests efter omladdning eller omstart."
+                },
+                makeMobileVideoQuestsDesktopCompatible: {
+                    label: "Gör mobila video-Quests datorkompatibla",
+                    description: "Gör mobil-only video-Quests kompatibla med dator."
+                },
+                autoCompleteQuestsSimultaneously: {
+                    label: "Slutför samtidigt",
+                    description: "Slutför Quests samtidigt i stället för i följd."
+                },
+                completeVideoQuestsQuicker: {
+                    label: "Slutför video-Quests snabbare",
+                    description: "Använder Discords framstegsmarginal och tiden sedan anmälan vid automatisk slutförning av video-Quests."
+                },
+                autoCompleteQuestTypes: {
+                    label: "Quest-typer för automatisk slutförning",
+                    description: "Vilka Quest-typer som slutförs automatiskt i bakgrunden."
+                },
+                questButton: {
+                    label: "Quest-knapp",
+                    description: "Anpassa Quest-knappen i serverlistan."
+                },
+                questButtonDisplay: {
+                    label: "Visning av Quest-knapp",
+                    description: "Vilken visningstyp Quest-knappen i serverlistan använder."
+                },
+                questButtonIncludedTypes: {
+                    label: "Inkluderade typer för Quest-knapp",
+                    description: "Vilka belönings- och Quest-typer som räknas med i antalet på Quest-knappen."
+                },
+                questButtonIndicator: {
+                    label: "Quest-knappens indikator",
+                    description: "Vilken visningstyp indikatorn för ej inlösta på Quest-knappen använder."
+                },
+                questButtonBadgeCount: {
+                    label: "Brickans antal",
+                    description: "Nuvarande antal relevanta ej inlösta Quests."
+                },
+                questButtonBadgeColor: {
+                    label: "Brickfärg",
+                    description: "Färgen på Quest-knappens bricka i serverlistan."
+                },
+                questButtonLeftClickAction: {
+                    label: "Åtgärd vid vänsterklick",
+                    description: "Åtgärden vid vänsterklick på Quest-knappen."
+                },
+                questButtonMiddleClickAction: {
+                    label: "Åtgärd vid mittenklick",
+                    description: "Åtgärden vid mittenklick på Quest-knappen."
+                },
+                questButtonRightClickAction: {
+                    label: "Åtgärd vid högerklick",
+                    description: "Åtgärden vid högerklick på Quest-knappen."
+                },
+                questNotifications: {
+                    label: "Quest-aviseringar",
+                    description: "Konfigurera aviseringar för slutförda och nyupptäckta Quests."
+                },
+                notifyOnQuestComplete: {
+                    label: "Avisera vid slutförning",
+                    description: "Visar en avisering när en Quest har slutförts."
+                },
+                notifyOnNewQuests: {
+                    label: "Avisera om nya Quests",
+                    description: "Visar en avisering när nya Quests upptäcks."
+                },
+                notifyOnNewExcludedQuests: {
+                    label: "Avisera om nya uteslutna Quests",
+                    description: "Visar en avisering när nya uteslutna Quests upptäcks."
+                },
+                questCompletedAlertSound: {
+                    label: "Ljud vid slutförd Quest",
+                    description: "Ljudet som spelas upp när en Quest har slutförts."
+                },
+                questCompletedAlertVolume: {
+                    label: "Volym vid slutförd Quest",
+                    description: "Volymen för ljudet vid slutförd Quest."
+                },
+                questFetchInterval: {
+                    label: "Hämtningsintervall",
+                    description: "Intervallet i sekunder för hämtning av Quests från Discord."
+                },
+                newQuestAlertSound: {
+                    label: "Ljud vid ny Quest",
+                    description: "Ljudet som spelas upp när nya Quests upptäcks."
+                },
+                newQuestAlertVolume: {
+                    label: "Volym vid ny Quest",
+                    description: "Volymen för ljudet vid nya Quests."
+                },
+                newExcludedQuestAlertSound: {
+                    label: "Ljud vid ny utesluten Quest",
+                    description: "Ljudet som spelas upp när nya uteslutna Quests upptäcks."
+                },
+                newExcludedQuestAlertVolume: {
+                    label: "Volym vid ny utesluten Quest",
+                    description: "Volymen för ljudet vid nya uteslutna Quests."
+                },
+                questTiles: {
+                    label: "Quest-rutor",
+                    description: "Anpassa utseendet på Quest-rutorna på Quest-sidan."
+                },
+                questTileUnclaimedColor: {
+                    label: "Färg för ej inlösta rutor",
+                    description: "Färgen på rutor för ej inlösta Quests."
+                },
+                questTileClaimedColor: {
+                    label: "Färg för inlösta rutor",
+                    description: "Färgen på rutor för inlösta Quests."
+                },
+                questTileIgnoredColor: {
+                    label: "Färg för ignorerade rutor",
+                    description: "Färgen på rutor för ignorerade Quests."
+                },
+                questTileExpiredColor: {
+                    label: "Färg för utgångna rutor",
+                    description: "Färgen på rutor för utgångna Quests."
+                },
+                questTileGradient: {
+                    label: "Rutgradient",
+                    description: "Stilen på gradienten i Quest-rutorna."
+                },
+                questTilePreload: {
+                    label: "Förinläs rutor",
+                    description: "Försöker förinläsa resurserna för Quest-rutorna."
+                },
+                reorderQuests: {
+                    label: "Ordna om Quests",
+                    description: "Sorterar Quests efter status."
+                },
+                questOrder: {
+                    label: "Quest-ordning",
+                    description: "Sorteringsordning för Quest-statusgrupper."
+                },
+                unclaimedSubsort: {
+                    label: "Undersortering av ej inlösta",
+                    description: "Undersorteringsmetod för ej inlösta Quests."
+                },
+                claimedSubsort: {
+                    label: "Undersortering av inlösta",
+                    description: "Undersorteringsmetod för inlösta Quests."
+                },
+                ignoredSubsort: {
+                    label: "Undersortering av ignorerade",
+                    description: "Undersorteringsmetod för ignorerade Quests."
+                },
+                expiredSubsort: {
+                    label: "Undersortering av utgångna",
+                    description: "Undersorteringsmetod för utgångna Quests."
+                },
+                isOnQuestsPage: {
+                    label: "På Quest-sidan",
+                    description: "Om användaren för närvarande är på Quest-sidan."
+                },
+                rememberQuestPageSort: {
+                    label: "Kom ihåg sortering",
+                    description: "Kommer ihåg den senast använda sorteringen på Quest-sidan."
+                },
+                rememberQuestPageFilters: {
+                    label: "Kom ihåg filter",
+                    description: "Kommer ihåg de senast använda filtren på Quest-sidan."
+                },
+                lastQuestPageSort: {
+                    label: "Senaste sortering",
+                    description: "Den senast använda sorteringen på Quest-sidan."
+                },
+                lastQuestPageFilters: {
+                    label: "Senaste filter",
+                    description: "De senast använda filtren på Quest-sidan."
+                },
+                ignoredQuestIDs: {
+                    label: "Ignorerade Quest-ID:n",
+                    description: "En lista med ignorerade Quest-ID:n."
+                },
+                resumeQuestIDs: {
+                    label: "Quest-ID:n att återuppta",
+                    description: "En lista med Quest-ID:n som slutförs automatiskt eller står i kö i bakgrunden."
+                },
+                acknowledgedNotices: {
+                    description: "Engångsmeddelanden som användaren har bekräftat.",
+                    label: "Bekräftade meddelanden"
+                },
+                settingsSearch: {
+                    description: "Sök i Questify-inställningar.",
+                    label: "Inställningssökning"
+                },
+                hideNonAutoCompletableQuests: {
+                    description: "Dölj ofullständiga uppdrag utan en stödd och aktiverad autoslutförandeuppgift.",
+                    label: "Dölj uppdrag som inte kan autoslutföras"
+                },
+                preventVideoQuestsPausing: {
+                    description: "Förhindra att videon pausas när uppdragsfönstret förlorar fokus.",
+                    label: "Förhindra paus i videouppdrag"
+                },
+                hiddenQuestStatuses: {
+                    description: "Uppdragsstatusgrupper som ska döljas.",
+                    label: "Dolda uppdragsstatusar"
+                }
+            },
+            text: {
+                clearQuestQueue: "Rensa uppdragskö",
+                hideIncompleteQuestsWith: "Dölj ofullständiga uppdrag med status ej inlöst eller ignorerad när ingen autoslutförandeuppgift stöds på den här plattformen och är aktiverad i listan över uppdragstyper. Inlösta, utgångna och slutförda uppdrag undantas. Använd alternativen för dold statusordning för att dölja dem.",
+                discordForcesYouTo: "Discord tvingar dig att ha klienten i fokus för att videouppdrag ska spela upp sin video.",
+                hideNonAutoCompletable: "Dölj uppdrag som inte kan autoslutföras:",
+                preventVideoQuestsFrom: "Förhindra att videouppdrag pausas när fokus förloras:",
+                thePunishmentAlsoConsists: "Straffet innebär även en överträdelse av kontostatusen som varar i 2 år per överträdelse.",
+                dueToTheVarious: "På grund av de olika metoder Discord använder för att spåra användare finns det inget realistiskt sätt att undgå upptäckt. Om du fortsätter, förstå att Discord troligen kommer att upptäcka din användning någon gång.",
+                enrollInQuest: "Anmäl dig till uppdrag",
+                hidden: "Dold",
+                selectingAnOccupiedPosition: "Om du väljer en upptagen position byts de två statusarna. Dolda statusar tas bort från uppdragslistorna.",
+                searchQuestifySettings: "Sök i Questify-inställningar",
+                searchQuestifySettings2: "Sök i Questify-inställningar...",
+                noMatchingSettings: "Inga matchande inställningar.",
+                questifyNoticeAugust7th: "Questify-meddelande – 7 augusti 2026",
+                keepUsingDangerousQuestify: "Fortsätt använda farliga Questify-inställningar",
+                disableDangerousQuestifySettings: "Inaktivera farliga Questify-inställningar",
+                questifyNoticeAugust26th: "Questify-meddelande – 26 augusti 2026",
+                areYouSure: "Är du säker?",
+                thePunishmentAppearsLimited: "Straffet verkar begränsat till förlorad åtkomst till uppdrag och deras belöningar, men Discord kan skärpa det när som helst.",
+                queueAllQuests: "Köa alla uppdrag",
+                inProgress: "Pågår",
+                rateLimited: "Begränsad",
+                preventsVideoPausing: "Den här inställningen hindrar videon från att pausas så att slutförandet fortskrider som vanligt.",
+                appliesOnlyToVideoQuests: "Den här inställningen gäller endast vid manuellt slutförande av videouppdrag.",
+                knownToPunish: "Discord är känt för att straffa användare av skript eller plugins som ändrar slutförandet av uppdrag. Att ändra slutförandet av uppdrag strider mot Discords",
+                punishmentConsists: "Straffet består av tillfällig eller permanent förlust av åtkomst till uppdrag och deras belöningar.",
+                questBanSystem: "Discord har infört ett system för uppdragsavstängning som tillfälligt eller permanent begränsar din åtkomst till att slutföra uppdrag och hämta belöningar om det upptäcks att du slutför dem på inofficiella sätt. Att ändra slutförandet av uppdrag strider mot deras",
+                begunPunishing: "Discord har börjat straffa användare av skript och plugins som ändrar slutförandet av uppdrag. Att ändra slutförandet av uppdrag strider mot deras",
+                dueToRateLimits: " på grund av hastighetsbegränsning"
             }
         },
         questionMarkReplacement: {
@@ -8199,7 +8822,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 grayscale: "Gråskala",
                 export: "Exportera",
                 send: "Skicka",
-                saveAsGIF: "Save as GIF",
+                saveAsGIF: "Spara som GIF",
                 saveDescription: "Sparar/skickas bilden som en GIF istället för en PNG",
                 showWatermark: "Visa vattenstämpel",
                 watermarkText: "Vattenstämpeltext (max 32 tecken)"
@@ -8230,6 +8853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Spara som gif",
                     description: "Spara som GIF som standard"
                 }
+            },
+            text: {
+                quotePreview: "Förhandsvisning av citat"
             }
         },
         randomVoice: {
@@ -8273,8 +8899,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Röstalternativ",
                     joinSettings: "Anslutningsinställningar",
                     auto: {
-                        mute: "Auto Mute",
-                        deafen: "Auto Deafen",
+                        mute: "Tysta automatiskt",
+                        deafen: "Döva automatiskt",
                         camera: "Autokamera",
                         stream: "Automatisk strömning",
                         leaveWhenEmpty: "Lämna när det är tomt",
@@ -8287,7 +8913,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                     server: "Ogiltig server"
                 }
             },
+            keybind: {
+                label: "Kortkommando",
+                recording: "Spelar in...",
+                reset: "Återställ"
+            },
             option: {
+                keybindEnabled: {
+                    label: "Kortkommando aktiverat",
+                    description: "Visa kortkommandoinställningar för slumpmässig röstkanal"
+                },
                 userAmountOperation: {
                     label: "Användarbeloppshantering",
                     description: "Välj en operation för antalet användare"
@@ -8329,11 +8964,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Slår på stream automatiskt"
                 },
                 selfMute: {
-                    label: "Auto Mute",
+                    label: "Tysta automatiskt",
                     description: "Stänger automatiskt av din mikrofon när du går med i en röstkanal."
                 },
                 selfDeafen: {
-                    label: "Auto Deafen",
+                    label: "Döva automatiskt",
                     description: "Dövar automatiskt ditt ljud när du går med i en röstkanal."
                 },
                 leaveEmpty: {
@@ -8379,6 +9014,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             alert: {
                 failed: "Det gick inte att hitta en röstkanal!"
+            },
+            toast: {
+                failedToFindA: "Det gick inte att hitta en röstkanal.",
+                voiceChannelIsUnavailable: "Röstkanalen är inte tillgänglig."
+            },
+            text: {
+                userCount: "{{count}} användare",
+                usersCount: "{{count}} användare"
             }
         },
         reactErrorDecoder: {
@@ -8426,7 +9069,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 clearRdms: {
                     label: "Rensa RDMS-listan",
                     description: "Testverktyg: Rensa RDM-listan",
-                    toast: "Rensad RMDS-historik",
+                    toast: "RDMS-historiken rensad",
                     button: "Rensa RDM-historik"
                 }
             },
@@ -8477,6 +9120,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noLongerFriend: "Du är inte längre vän med {{user}}.",
                 friendRequestRevoked: "Vänförfrågan från {{user}} har återkallats.",
                 ok: "OK"
+            },
+            text: {
+                relationshipNotifier: "Relationsaviserare"
             }
         },
         remix: {
@@ -8500,7 +9146,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ellipse: "Ellips",
                 line: "Linje",
                 arrow: "Pil",
-                fill: "Fylla"
+                fill: "Fylla",
+                image: "Bild"
             }
         },
         repeatMessages: {
@@ -8534,12 +9181,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Sök text",
                 searchWith: "Sök med {{name}}"
+            },
+            text: {
+                google: "Google"
             }
         },
         replyPingControl: {
             name: "ReplyPingControl",
-            description: "Styr om du alltid eller aldrig ska bli pingad på meddelandesvar, med en vitlistasfunktion",
+            description: "Styr om du alltid eller aldrig vill bli pingad vid meddelandesvar, med funktioner för vitlista och svartlista",
             option: {
+                replyPingBlacklist: {
+                    label: "Svartlista för svars-ping",
+                    description: "Kommaseparerad lista över användar-ID:n som du aldrig vill ta emot svars-pings från"
+                },
                 alwaysPingOnReply: {
                     label: "Pinga alltid på svar",
                     description: "Blir alltid pingad när någon svarar på dina meddelanden"
@@ -8564,6 +9218,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Sök bild",
                 all: "Sök alla"
+            },
+            text: {
+                all: "Alla"
             }
         },
         reviewDB: {
@@ -8671,6 +9328,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             profile: {
                 optedOut: "Användare valde att hoppa av",
                 noReviews: "Inga recensioner ännu"
+            },
+            toast: {
+                youCannotVoteOn: "Du kan inte rösta på din egen recension.",
+                networkErrorFailedTo: "Nätverksfel: Det gick inte att ansluta till ReviewDB.",
+                pleaseAuthorizeToVote: "Auktorisera för att rösta på recensioner.",
+                requestFailed: "ReviewDB: Begäran misslyckades med status {{status}}"
+            },
+            text: {
+                ok: "OK",
+                updateReviewFor: "Uppdatera recension för @{{name}}",
+                reviewUser: "Recensera @{{name}}",
+                system: "System",
+                reviewCount: "({{count}} recensioner)"
             }
         },
         richMagnetLinks: {
@@ -8744,7 +9414,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                         watching: "Tittar på",
                         listening: "Lyssnande",
                         competing: "Tävlande",
-                        streaming: "Streaming"
+                        streaming: "Streamar"
                     },
                     streamUrl: "Stream URL (måste vara YouTube eller Twitch)",
                     invalidStreamUrl: "Ogiltig webbadress för stream",
@@ -8763,46 +9433,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     hideTimestamps: "Dölj tidsstämplar"
                 }
             },
-        },
-        rpcStats: {
-            name: "RPCStats",
-            description: "Visar statistik om din aktivitet som en RPC",
-            option: {
-                assetURL: {
-                    label: "Tillgångens URL",
-                    description: "Bilden som ska användas för din RPC. Din profilbild används om den lämnas tom"
-                },
-                rpcTitle: {
-                    label: "RPC-titel",
-                    description: "Titeln på din RPC"
-                },
-                statDisplay: {
-                    label: "Statisk display",
-                    description: "Vad ska RPC visa? (Du kan bara ha en rad, det är jag ganska säker på)",
-                    today: "Antalet meddelanden som skickats idag",
-                    alltime: "Antalet meddelanden som skickas hela tiden",
-                    listened: "Ditt mest lyssnade album för veckan"
-                },
-                lastFMApiKey: {
-                    label: "Last.fm API-nyckel",
-                    description: "Din Last.fm API-nyckel"
-                },
-                lastFMUsername: {
-                    label: "Last.fm användarnamn",
-                    description: "Ditt Last.fm användarnamn"
-                },
-                albumCoverImage: {
-                    label: "Albumomslagsbild",
-                    description: "Bör skivomslagsbilden användas som RPC-bild? (Om du har valt Last.fm-skärmen)"
-                },
-                lastFMStatFormat: {
-                    label: "Last.fm Stat-format",
-                    description: "Hur ska Last.fm-statistiken formateras? $album ersätts med albumnamnet och $artist ersätts med artistnamnet"
-                }
-            },
-            noInfo: "Ingen info just nu :(",
-            messagesToday: "Meddelanden skickade idag: {{count}}",
-            messagesAllTime: "Meddelanden skickade hela tiden: {{count}}"
         },
         saveFavoriteGIFs: {
             name: "SaveFavouritedGIFs",
@@ -8868,7 +9498,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 maxMessagesReached: "Maximalt antal {{max}} meddelanden per kanal och minut nått",
                 messageScheduled: "Meddelande schemalagt!",
                 messageRemoved: "Schemalagt meddelande har tagits bort",
-                allCleared: "Alla schemalagda meddelanden raderades"
+                allCleared: "Alla schemalagda meddelanden raderades",
+                scheduledMessageSentTo: "Schemalagt meddelande skickat till {{name}}"
             },
             button: {
                 tooltipOn: "Schemaläge PÅ (klicka för att inaktivera, högerklicka för lista)",
@@ -8925,20 +9556,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        summaries: {
-            name: "Summaries",
-            description: "Aktiverar Discords experimentella sammanfattningar-funktion på varje server och visar AI-genererade sammanfattningar av konversationer",
-            option: {
-                summaryExpiryThresholdDays: {
-                    label: "Sammanfattning utgångströskel (dagar)",
-                    description: "Tiden i dagar innan en sammanfattning tas bort. Observera att endast upp till 50 sammanfattningar sparas per kanal"
-                }
-            }
-        },
-        selfForward: {
-            name: "SelfForward",
-            description: "Lägger till den aktuella kanalen i popup-fönstret för vidarebefordran"
-        },
         sendTimestamps: {
             name: "SendTimestamps",
             description: "Skicka tidsstämplar enkelt via chatbox-knapp och textgenvägar. Läs den utökade beskrivningen!",
@@ -8990,19 +9607,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                 loading: "Belastning...",
                 createdAt: "Skapad på",
                 joinedAt: "Anslöt sig till",
-                vanityLink: "Vanity Link",
+                vanityLink: "Anpassad länk",
                 preferredLocale: "Önskad plats",
                 verification: {
                     level: "Verifieringsnivå",
                     none: "Ingen",
                     low: "Låg",
-                    medium: "Medium",
+                    medium: "Medel",
                     high: "Hög",
                     highest: "Högsta"
                 },
                 serverBoosts: "Serverförstärkningar",
                 channels: "Kanaler",
-                roles: "Roller"
+                roles: "Roller",
+                boostLevel: "{{count}} (Nivå {{level}})"
             }
         },
         serverListIndicators: {
@@ -9061,6 +9679,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bgOpacity: {
                     label: "Bakgrund Opacitet",
                     description: "Bakgrundens opacitet"
+                },
+                ignoredLanguages: {
+                    label: "Ignorerade språk",
+                    description: "Kommaseparerad lista över språk som lämnas åt Discords standardkodblock"
                 }
             },
             button: {
@@ -9079,6 +9701,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noShiftPin: {
                     label: "Ingen Shift Pin",
                     description: "Ta bort kravet på att hålla shift för att fästa ett meddelande."
+                },
+                noQuickReacts: {
+                    description: "Dölj snabbreaktioner. Som standard döljer hela menyn snabbreaktionsknapparna.",
+                    label: "Inga snabbreaktioner"
                 }
             }
         },
@@ -9115,7 +9741,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Aktivera för att visa Discord Nitro-märken i chatten."
                 },
                 discordNitroPosition: {
-                    label: "Discord Nitro Badge Position",
+                    label: "Position för Discord Nitro-märke",
                     description: "Placeringen av Discord Nitro-märkena."
                 },
                 badgeSettings: {
@@ -9161,6 +9787,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     compact: "Kompakt",
                     cozy: "Mysig",
                     roomy: "Rymlig"
+                },
+                showGithubOrgs: {
+                    description: "Visa GitHub-organisationer som användaren är medlem i",
+                    label: "Visa GitHub-organisationer"
+                },
+                showOnModal: {
+                    description: "Visa anslutna konton i profilfönstret i full storlek",
+                    label: "Visa i fönster"
                 }
             }
         },
@@ -9295,7 +9929,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 memberList: {
                     label: "Medlemslista",
-                    description: "Visa det första tillgängliga namnet i ditt anpassade namnformat i medlemslistan."
+                    description: "Visa det första tillgängliga namnet från ditt anpassade namnformat i medlemslistan, DM-listan, vänlistan och Aktiv nu."
                 },
                 profilePopout: {
                     label: "Profil Popout",
@@ -9349,6 +9983,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Anpassat namn endast i direktmeddelanden",
                     description: "Visa endast anpassade namn i DM och inte på servrar."
                 },
+                alwaysShowEffects: {
+                    label: "Animera alltid effekter",
+                    description: "Visa alltid effekter som om du förde muspekaren över."
+                },
                 includedNames: {
                     label: "Inkluderade namn",
                     description: "Ordningen för att visa användarnamn, visningsnamn, smeknamn och vännamn. Använd följande platshållare: {user}, {display}, {nick}, {friend}. Du kan tillhandahålla flera namnalternativ att använda som reservdelar om ett inte är tillgängligt genom att separera dem med kommatecken som sådana: {vän, smeknamn, display}. Du kan ha upp till tre prefix och tre suffix per namn."
@@ -9376,6 +10014,42 @@ const translations: MatchStructure<typeof enTranslations> = {
                 triggerNameRerender: {
                     label: "Utlösa namnåtergivning",
                     description: "Utlösa en namnåtergivning genom att växla den här inställningen."
+                },
+                searchAutocomplete: {
+                    description: "Visa det första tillgängliga namnet från ditt anpassade namnformat i autokomplettering för omnämnanden och sökning.",
+                    label: "Autokomplettering i sökning"
+                },
+                styleDirectMessagesList: {
+                    description: "Visa effekter för visningsnamn på ej valda poster utan att hovra. Valda och hovrade poster stylas fortfarande när det är avstängt.",
+                    label: "Styla listan med direktmeddelanden"
+                },
+                styleDirectMessagesMessages: {
+                    description: "Visa effekter för visningsnamn på meddelandeförfattare utan att hovra. Hovrade namn stylas fortfarande när det är avstängt.",
+                    label: "Styla meddelanden i direktmeddelanden"
+                },
+                styleFriendsList: {
+                    description: "Visa effekter för visningsnamn utan att hovra. Hovrade poster stylas fortfarande när det är avstängt.",
+                    label: "Styla vänlistan"
+                },
+                styleActiveNow: {
+                    description: "Visa effekter för visningsnamn utan att hovra. Hovrade poster stylas fortfarande när det är avstängt.",
+                    label: "Styla Aktiv nu"
+                },
+                ignoreEffects: {
+                    description: "För icke-primära namn: använd endast den primära rollfärgen och utelämna effekter för visningsnamn.",
+                    label: "Ignorera effekter"
+                },
+                animateEffects: {
+                    description: "Animera rollgradienter och effekter för visningsnamn på icke-primära namn. Inaktiveras av \"Ignorera effekter\" och reducerad rörelse.",
+                    label: "Animera effekter"
+                },
+                alwaysAnimateEffects: {
+                    description: "Tvinga effekter för visningsnamn att animeras när de redan skulle vara synliga, även utan hovring.",
+                    label: "Animera alltid effekter"
+                },
+                gradientGlow: {
+                    description: "Lägg till ett sken på animerade användargradienter på samma sätt som serverrollgradienter lyser.",
+                    label: "Gradientsken"
                 }
             },
             modal: {
@@ -9389,6 +10063,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nickname: "Smeknamn SMYN",
                 reset: "Återställ SMYN smeknamn",
                 cancel: "Avboka"
+            },
+            text: {
+                save: "Spara",
+                unknown: "Okänd"
             }
         },
         showTimeoutDuration: {
@@ -9401,6 +10079,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     tooltip: "I verktygstipset",
                     inline: "Bredvid timeout-ikonen"
                 }
+            },
+            text: {
+                timeoutRemaining: "timeout kvar"
             }
         },
         showResourceChannels: {
@@ -9445,7 +10126,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Håll popout-chattfönster ovanför alla andra."
                 },
                 patchCommunity: {
-                    label: "Patch Community",
+                    label: "Patcha community",
                     description: "Lagra funktioner som kanalbläddraren eller fliken Medlemmar som communityservrar har."
                 },
                 persistedPopoutWindowIds: {
@@ -9559,7 +10240,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 hidden: "Skriver dold ({{location}})",
                 visible: "Skriver synligt ({{location}})",
-                global: "Skriver synligt (globalt)"
+                global: "Skriver synligt (globalt)",
+                voiceChannel: "Skrivande alltid synligt i chatten för den anslutna röstkanalen",
+                temporary: "Skrivande tillfälligt synligt i denna kanal på grund av ett nyligen skickat meddelande"
             },
             option: {
                 enabledGlobally: {
@@ -9610,6 +10293,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Standard Dold",
                     description: "Om det är aktiverat, kommer plugin-programmet att dölja ditt skrivande från andra i alla DM/kanaler/guilds som inte är listade i \"Inaktiverade platser\" nedan. Om insticksprogrammet är inaktiverat kommer insticksprogrammet att visa dina skrivningar för andra för alla DM/kanaler/skrån som inte är listade i \"Aktiverade platser\" nedan."
                 },
+                alwaysEnableInActiveVoiceChat: {
+                    label: "Aktivera alltid i aktiv röstchatt",
+                    description: "Tillåt alltid att din skrivindikator visas när du skriver i en röstkanal du är ansluten till."
+                },
+                temporaryEnableThresholdServers: {
+                    label: "Tillfällig aktiveringsgräns (servrar)",
+                    description: "Tillåt tillfälligt att din skrivindikator visas i så många sekunder efter att du skickat ett meddelande i en serverkanal. Om skrivindikatorn redan är synlig i kanalen har denna inställning ingen effekt."
+                },
+                temporaryEnableThresholdDirectMessages: {
+                    label: "Tillfällig aktiveringsgräns (direktmeddelanden)",
+                    description: "Tillåt tillfälligt att din skrivindikator visas i så många sekunder efter att du skickat ett meddelande i ett DM eller grupp-DM. Om skrivindikatorn redan är synlig i kanalen har denna inställning ingen effekt."
+                },
                 enabledLocations: {
                     label: "Aktiverade platser",
                     description: "Aktivera funktionalitet för dessa ID:n. Accepterar en kommaseparerad lista med DM-ID, kanal-ID och guild-ID. Används endast om 'Default Hidden' är inaktiverat."
@@ -9618,6 +10313,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Inaktiverade platser",
                     description: "Inaktivera funktionalitet för dessa ID:n. Accepterar en kommaseparerad lista med DM-ID, kanal-ID och guild-ID. Används endast om 'Default Hidden' är aktiverat."
                 }
+            },
+            text: {
+                silentTyping: "Tyst skrivning",
+                enabled: "Aktiverad",
+                chatBarIndicators: "Indikatorer i chattfältet",
+                membersListIndicators: "Indikatorer i medlemslistan",
+                guild: "Server",
+                channel: "Kanal",
+                global: "Global"
             }
         },
         snowfall: {
@@ -9714,7 +10418,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         splitLargeMessages: {
             name: "SplitLargeMessages",
-            description: "Delar upp stora meddelanden i flera för att passa Discords meddelandegräns.",
+            description: "Delar upp för stora meddelanden i bitar i Discord-storlek innan de skickas.",
             option: {
                 maxLength: {
                     label: "Maximal meddelandelängd",
@@ -9726,7 +10430,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 sendDelay: {
                     label: "Skicka fördröjning",
-                    description: "Fördröjning mellan varje bit i sekunder."
+                    description: "Minsta fördröjning mellan varje del i sekunder."
                 },
                 hardSplit: {
                     label: "Hård Split",
@@ -9734,32 +10438,26 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 splitInSlowmode: {
                     label: "Dela i långsamt läge",
-                    description: "Ska meddelanden delas om kanalen har aktiverat långsamt läge?"
+                    description: "Tillåt delning i långsamt läge när fördröjningen ligger inom det konfigurerade maxvärdet."
                 },
                 slowmodeMax: {
-                    label: "Slowmode Max",
-                    description: "Maximal slowmodetid vid delning i slowmode."
-                }
-            }
-        },
-        spotifyActivityToggle: {
-            name: "SpotifyActivityToggle",
-            description: "Lägger till en växlingsknapp för synlighet av Spotify-aktivitet.",
-            tooltip: {
-                enable: "Slå på Spotify-aktivitet",
-                disable: "Stäng av Spotify-aktivitet"
-            },
-            option: {
-                location: {
-                    label: "Plats",
-                    description: "Var ska du visa Spotify-växlingsknappen",
-                    panel: "Bredvid Mute/Deafen",
-                    toolbox: "Plexcord verktygslåda"
+                    label: "Max för långsamt läge",
+                    description: "Maximal varaktighet för långsamt läge som tillåts vid delning av meddelanden."
                 },
-                activityStatus: {
-                    label: "Aktivitetsstatus",
-                    description: "Aktuell status för din Spotify-aktivitet"
+                splitMode: {
+                    description: "Föredra den här gränsen när ett meddelande delas.",
+                    label: "Delningsläge"
                 }
+            },
+            toast: {
+                cannotSplitThisMessage: "Kan inte dela meddelandet på grund av kanalens långsamma läge.",
+                onlySentLengthMessage: "Endast {{sent}}/{{length}} meddelandedelar skickades.",
+                unsentCopied: "Oskickade meddelandedelar kopierades till urklipp."
+            },
+            text: {
+                newlines: "Radbrytningar",
+                spaces: "Mellanslag",
+                strictCharacterLimit: "Strikt teckengräns"
             }
         },
         spotifyCrack: {
@@ -9845,7 +10543,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             context: {
                 edit: "Redigera anpassade förinställningar",
-                set: "Ställ in anpassad status"
+                set: "Ställ in anpassad status",
+                delete: "Ta bort förinställning"
             },
             notification: {
                 successfully: "Statusen har sparats"
@@ -9912,11 +10611,39 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 blockSticker: "Block klistermärke",
                 unblockSticker: "Avblockera klistermärke"
+            },
+            text: {
+                failedToRender: "Kunde inte visas :("
             }
         },
         stickerPaste: {
             name: "StickerPaste",
             description: "Gör att man väljer ett klistermärke i klistermärkesväljaren att det infogas i chattboxen istället för att skicka det direkt"
+        },
+        streaks: {
+            name: "Streaks",
+            description: "Visar en svit bredvid en användare när ni utbyter DM flera dagar i rad.",
+            tooltip: "Svit på {{count}} dagar",
+            tooltipExpiring: "Svit på {{count}} dagar – skriv i dag för att hålla den vid liv!",
+            option: {
+                account: {
+                    description: "Logga in eller ut från Streaks-API:t. Sviter lagras i API:t, så du måste vara inloggad för att de ska räknas.",
+                    login: "Logga in på Streaks-API",
+                    logout: "Logga ut från Streaks-API"
+                },
+                eliteColor: "Elitsvitens färg (100+ dagar)",
+                diamondColor: "Diamantsvitens färg (60+ dagar)",
+                platinumColor: "Platinasvitens färg (45+ dagar)",
+                goldColor: "Guldsvitens färg (30+ dagar)",
+                silverColor: "Silversvitens färg (14+ dagar)",
+                bronzeColor: "Bronssvitens färg (7+ dagar)",
+                defaultColor: "Standardfärg för svit (1+ dagar)"
+            },
+            toast: {
+                authFailed: "Auktorisering misslyckades: {{error}}",
+                failedToAuthorizeMessage: "Auktoriseringen misslyckades: {{message}}",
+                authorizationExpired: "Streaks-auktoriseringen har gått ut. Auktorisera igen i Streaks-pluginets inställningar."
+            }
         },
         streamerModeOnStream: {
             name: "StreamerModeOnStream",
@@ -9924,27 +10651,27 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         streamingCodecDisabler: {
             name: "StreamingCodecDisabler",
-            description: "Inaktivera codecs för strömning av ditt val",
+            description: "Inaktivera valfria videokodekar för strömning och kameror.",
             option: {
                 disableAv1Codec: {
                     label: "Inaktivera AV1 Codec",
-                    description: "Förhindra att Discord överväger att använda AV1 för streaming."
+                    description: "Få Discord att inte överväga AV1 för strömning och kameror."
                 },
                 disableH265Codec: {
                     label: "Inaktivera H265 Codec",
-                    description: "Förhindra att Discord överväger att använda H265 för streaming."
+                    description: "Få Discord att inte överväga H265 för strömning och kameror."
                 },
                 disableH264Codec: {
                     label: "Inaktivera H264 Codec",
-                    description: "Förhindra att Discord överväger att använda H264 för streaming."
+                    description: "Få Discord att inte överväga H264 för strömning och kameror."
                 },
                 disableVP8Codec: {
                     label: "Inaktivera VP8 Codec",
-                    description: "Förhindra att Discord överväger att använda VP8 för streaming."
+                    description: "Få Discord att inte överväga VP8 för strömning och kameror."
                 },
                 disableVP9Codec: {
                     label: "Inaktivera VP9 Codec",
-                    description: "Förhindra att Discord överväger att använda VP9 för streaming."
+                    description: "Få Discord att inte överväga VP9 för strömning och kameror."
                 }
             }
         },
@@ -9990,6 +10717,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             modal: {
+                name: "Namn",
+                nameDescription: "Ett valfritt namn som hjälper dig att känna igen regeln.",
+                search: "Sök efter en regel...",
+                noResults: "Inga regler matchar din sökning.",
                 title: "Testregler",
                 find: "Hitta",
                 findRegex: "Regex-mönster",
@@ -10004,6 +10735,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 add: "Lägg till regel",
                 empty: "Tom regel",
                 rule: "Regel",
+            },
+            text: {
+                optionallyOnlyApplyThis: "Tillämpa valfritt bara regeln om meddelandet innehåller den här texten.",
+                emptyRule: "Tom regel {{number}}",
+                ruleWithFind: "Regel {{number}} - {{find}}"
             }
         },
         themeAttributes: {
@@ -10089,6 +10825,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 askedTimezone: {
                     label: "Frågade tidszon",
                     description: "Om användaren har blivit ombedd att ställa in sin tidszon"
+                },
+                recipientTimezoneInDms: {
+                    label: "Mottagarens tidszon i DM",
+                    description: "Visa mottagarens tidszon på dina meddelanden i DM"
+                },
+                showLocalTimezone: {
+                    label: "Visa lokal tidszon",
+                    description: "Visa lokal tidszon i stället för bara \"lokal\""
                 }
             },
             modal: {
@@ -10097,6 +10841,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 selectPlaceholder: "Välj en tidszon",
                 delete: "Ta bort tidszon",
                 save: "Spara"
+            },
+            text: {
+                invalidResponseFormat: "Ogiltigt svarsformat"
             }
         },
         toastNotifications: {
@@ -10147,7 +10894,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     bottomLeft: "Längst ner till vänster"
                 },
                 timeout: {
-                    label: "Timeout",
+                    label: "Tidsgräns",
                     description: "Tid i sekunder aviseringar kommer att visas för"
                 },
                 opacity: {
@@ -10157,6 +10904,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 determineServerNotifications: {
                     label: "Bestäm servermeddelanden",
                     description: "Bestäm om du vill visa aviseringar baserat på serveraviseringsinställningar"
+                },
+                respectDoNotDisturb: {
+                    label: "Respektera Stör ej",
+                    description: "Visa inte aviseringar när din status är Stör ej."
                 },
                 directMessages: {
                     label: "Direktmeddelanden",
@@ -10194,7 +10945,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Lägger till en anpassningsbar bindning för att växla webbkamera.",
             option: {
                 keyBind: {
-                    label: "Keybind",
+                    label: "Kortkommando",
                     description: "Nyckeln för att växla webbkamera när den trycks ned."
                 },
                 reqCtrl: {
@@ -10244,8 +10995,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "DeepL kräver en betald API-nyckel från DeepL Pro",
                     descriptionWeb: "Översättningstjänst (stöds inte på webben!)",
                     google: "Google Översätt",
-                    deepl: "DeepL gratis",
-                    deeplPro: "DeepL Pro"
+                    deepl: "DeepL Gratis - API-nyckel krävs",
+                    deeplPro: "DeepL Pro - API-nyckel krävs",
+                    kagi: "Kagi Översätt - API-nyckel krävs"
+                },
+                kagiSession: {
+                    label: "Kagi-session",
+                    description: "Hämta din sessionstoken från https://kagi.com/settings?p=user_details"
                 },
                 deeplApiKey: {
                     label: "DeepL API-nyckel",
@@ -10284,6 +11040,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     cancel: "Jag förstår",
                     secondaryConfirm: "Visa inte igen"
                 }
+            },
+            button: {
+                manageLanguages: "Anpassa översättningsspråk och automatisk översättning"
             }
         },
         typingIndicator: {
@@ -10596,6 +11355,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Bildstorlek",
                     description: "Bildstorleken som ska användas"
                 }
+            },
+            text: {
+                viewAvatarDecoration: "Visa avatardekoration"
             }
         },
         viewRaw: {
@@ -10616,12 +11378,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Ändra knappen för att visa råinnehållet/data för alla meddelanden.",
                     left: "Vänsterklicka för att se det råa innehållet.",
                     right: "Högerklicka för att se det råa innehållet."
+                },
+                messageContextMenu: {
+                    description: "Visa i meddelandets snabbmeny",
+                    label: "Snabbmeny för meddelanden"
+                },
+                sortKeys: {
+                    description: "Sortera nycklarna i rådata alfabetiskt.",
+                    label: "Sortera nycklar"
+                },
+                stripSensitiveData: {
+                    description: "Ta bort känsliga data från rådata, t.ex. din e-post och ditt telefonnummer.",
+                    label: "Ta bort känsliga data"
                 }
             },
             modal: {
                 title: "Visa Raw",
-                content: "Innehåll",
-                data: "{{type}} Data",
+                content: "Meddelandeinnehåll",
+                data: "{{type}}-data",
                 copied: "{{type}} data kopierad till urklipp!",
                 copy: "Kopiera {{type}} JSON",
                 copiedContent: "Innehållet har kopierats till urklipp!",
@@ -10633,6 +11407,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 guild: "Gille",
                 role: "Roll",
                 user: "Användare"
+            },
+            text: {
+                copyTypeData: "Kopiera {{type}}-data",
+                rawTypeData: "Rå {{type}}-data",
+                messageData: "Meddelandedata"
             }
         },
         voiceButtons: {
@@ -10693,13 +11472,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                 open: "Öppna DM med {{username}}",
                 yourself: "själv",
                 serverMute: "Ljud av servern",
-                serverDeafen: "Server Deafen",
+                serverDeafen: "Döva på servern",
                 mute: "Stum",
                 deafen: "Döva",
                 unmute: "Slå på ljudet",
                 undeafen: "Odöva",
                 serverUnmute: "Slå på ljudet för servern",
-                serverUndeafen: "Server Undeafen"
+                serverUndeafen: "Avdöva på servern"
             }
         },
         voiceChannelLog: {
@@ -10714,7 +11493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 movedTo: "Flyttade till <#{{channel}}>",
                 movedFrom: "Flyttade från <#{{channel}}>",
                 noLogs: "Inga loggar att visa.",
-                logs: "{{channel}} logs"
+                logs: "Loggar för {{channel}}"
             },
             option: {
                 mode: {
@@ -10811,6 +11590,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 pause: "Pausa inspelningen",
                 recording: "INSPELNING",
                 send: "Skicka",
+            },
+            text: {
+                convertioWebConverter: "convertios webbkonverterare"
             }
         },
         volumeBooster: {
@@ -10820,39 +11602,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 multiplier: {
                     label: "Multiplikator",
                     description: "Volymmultiplikator"
-                }
-            }
-        },
-        wallpaperFree: {
-            name: "WallpaperFree",
-            description: "Rekreation av det gamla DM tapetexperimentet; Ställ in en bakgrundsbild för valfri kanal, användare eller server.",
-            option: {
-                globalDefault: {
-                    label: "Global standard",
-                    description: "Ställ in en global standardbakgrund för alla kanaler."
-                },
-                stylingTips: {
-                    label: "Styling tips"
-                }
-            },
-            context: {
-                setWallpaper: "Ställ in Bakgrund",
-                removeWallpaper: "Ta bort tapeter"
-            },
-            modal: {
-                set: "Ställ in tapeter",
-                image: "Bildens URL",
-                cancel: "Avboka",
-                apply: "Tillämpas",
-                global: {
-                    set: "Ställ in en global bakgrund",
-                    remove: "Ta bort global standardbakgrund",
-                    reset: "Återställ bakgrundsdata"
-                },
-                web: {
-                    info: "Du kan använda lokala filer genom att ha dem i Plexcords temakatalog och använda URL:en plexcord:///themes/filename.ext",
-                    open: "Öppna temakatalogen",
-                    quickCSS: "Öppna QuickCSS"
                 }
             }
         },
@@ -10868,7 +11617,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webKeybinds: {
             name: "WebKeybinds",
-            description: "Återlägger nyckelbindningar som saknas i webbversionen av Discord: Ctrl+T, Ctrl+Skift+T, Ctrl+Tab, Ctrl+Skift+Tab, Ctrl+1-9, Ctrl+,. Fungerar endast fullt ut på Plextron/Legcord, inte i din webbläsare"
+            description: "Lägger tillbaka kortkommandon som saknas i webbversionen av Discord. Fungerar bara fullt ut i Plextron/Legcord, inte i webbläsaren",
+            option: {
+                showNavigationButtons: {
+                    description: "Visa navigeringsknapparna bakåt/framåt i namnlisten.",
+                    label: "Visa navigeringsknappar"
+                },
+                overrideCommonKeybinds: {
+                    description: "Låter Discord åsidosätta de vanligaste kortkommandona för fliknavigering (ctrl+t, ctrl+shift+t, ctrl+tab, ctrl+shift+tab, ctrl+n). Fungerar bara i några få webbläsare som prioriterar webbplatsers kortkommandon.",
+                    label: "Åsidosätt vanliga kortkommandon"
+                }
+            }
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
@@ -10887,6 +11646,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 avatarClick: {
                     label: "Avatar Klicka",
                     description: "Växla klickande avatarer i reaktioner"
+                },
+                clickableAvatars: {
+                    description: "När detta är aktiverat öppnar ett klick på en reagerande användares avatar deras profil i stället för att lägga till reaktionen",
+                    label: "Klickbara avatarer"
                 }
             }
         },
@@ -10978,7 +11741,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Aviseringsljud (standard/varning/fel)"
                 },
                 timeout: {
-                    label: "Timeout",
+                    label: "Tidsgräns",
                     description: "Aviseringslängd (sekunder)"
                 },
                 lengthBasedTimeout: {
@@ -11002,6 +11765,2447 @@ const translations: MatchStructure<typeof enTranslations> = {
         youtubeDescription: {
             name: "YouTubeDescription",
             description: "Lägger till beskrivningar till YouTube-videoinbäddningar"
+        },
+        addAttachments: {
+            name: "AddAttachments",
+            description: "Låter dig lägga till nya bilagor när du redigerar meddelanden",
+            toast: {
+                youCannotAddMore: "Du kan inte lägga till fler bilagor i det här meddelandet.",
+                youCanOnlyAdd: "Du kan bara lägga till {{count}} bilaga/bilagor till i det här meddelandet.",
+                uploadingThisCanTake: "Laddar upp, det kan ta en stund...",
+                addedOne: "Bilagan har lagts till!",
+                addedMany: "Bilagorna har lagts till!"
+            },
+            text: {
+                addAttachments: "Lägg till bilagor"
+            }
+        },
+        advancedPermissions: {
+            option: {
+                simplifiedCard: {
+                    description: "Vad som ska hända med Discords förenklade behörighetskort",
+                    label: "Förenklat kort",
+                    hide: "Dölj det",
+                    collapse: "Gör det hopfällbart",
+                    show: "Låt det vara synligt"
+                },
+                collapsedByDefault: {
+                    description: "Börja med de förenklade behörigheterna hopfällda.",
+                    label: "Hopfälld som standard"
+                }
+            },
+            name: "AdvancedPermissions",
+            description: "Visa kortet med avancerade behörigheter som standard.",
+            text: {
+                simplifiedPermissions: "Förenklade behörigheter"
+            }
+        },
+        autoJumpToMessage: {
+            option: {
+                onlyWhenUnfocused: {
+                    description: "Hoppa bara automatiskt till meddelanden när Discords fönster inte är i fokus.",
+                    label: "Endast när ej i fokus"
+                }
+            },
+            name: "AutoJumpToMessage",
+            description: "Öppnar automatiskt kanalen för nya meddelanden."
+        },
+        betterForwards: {
+            text: {
+                serverIconForName: "Serverikon för {{name}}",
+                messageAttachments: "Meddelandebilagor",
+                messageTextWillNot: "Meddelandetexten vidarebefordras inte när det här alternativet är avstängt",
+                forwardEverything: "Vidarebefordra allt",
+                viewServer: "Visa server",
+                embed: "Inbäddning",
+                embedNumber: "Inbäddning {{number}}",
+                image: "Bild",
+                video: "Video",
+                serverIcon: "Serverikon för {{name}}",
+                dmIcon: "DM-ikon för {{name}}",
+                groupDmIcon: "Grupp-DM-ikon för {{name}}"
+            },
+            option: {
+                resendOnFail: {
+                    description: "Försöker skicka ett vidarebefordrat meddelande igen om vidarebefordringen misslyckas. Kan orsaka oavsiktliga pingar eller textspam. Kringgår NSFW-begränsningar.",
+                    label: "Skicka igen vid fel"
+                },
+                forwardPreface: {
+                    description: "Vad det vidarebefordrade meddelandet ska inledas med",
+                    label: "Prefix för vidarebefordran"
+                },
+                dontFollowForwards: {
+                    description: "Hoppa inte till meddelandet efter att ha vidarebefordrat ett enskilt meddelande. Håll ned Skift för att ignorera detta beteende.",
+                    label: "Följ inte vidarebefordringar"
+                },
+                selfForward: {
+                    description: "Visa den aktuella kanalen i popupfönstret med vidarebefordringslistan.",
+                    label: "Vidarebefordra till sig själv"
+                }
+            },
+            name: "BetterForwards",
+            description: "Verktyg för vidarebefordran av meddelanden, inklusive NSFW-kringgående och förbättringar av gränssnittet."
+        },
+        betterImageEditor: {
+            text: {
+                search: "Sök",
+                searchSavedPictures: "Sök bland sparade bilder",
+                clearTheSearch: "Rensa sökningen",
+                savedPictures: "Sparade bilder",
+                removeName: "Ta bort {{name}}",
+                removeHoldShiftTo: "Ta bort. Håll ned Skift för att hoppa över bekräftelsen",
+                originals: "Original",
+                putBackTheLast: "Lägg tillbaka den senaste",
+                forgetEveryRememberedCrop: "Glömma alla ihågkomna beskärningar?",
+                yourPicturesStayEach: "Dina bilder finns kvar. Varje bild öppnas utan inramning från och med nu, tills du beskär den igen.",
+                forget: "Glöm",
+                cancel: "Avbryt",
+                clearSavedPictures: "Rensa sparade bilder?",
+                everyPictureYouHave: "Alla bilder du har sparat här försvinner, tillsammans med den beskärning som sparats för varje bild. Discords eget arkiv och din nuvarande avatar och banner påverkas inte.",
+                clear: "Rensa",
+                removeThisPicture: "Ta bort den här bilden?",
+                remove: "Ta bort",
+                keepTheCroppedCopy: "Behålla den beskurna kopian?",
+                itGoesOnThe: "Den hamnar på hyllan {{toLowerCase}}, bredvid dina original.",
+                keep: "Behåll",
+                noThanks: "Nej tack",
+                exportToAFile: "Exportera till en fil",
+                importFromAFile: "Importera från en fil",
+                forgetRememberedFraming: "Glöm ihågkommen inramning",
+                clearSavedPictures2: "Rensa sparade bilder",
+                croppedKind: "Beskurna {{kind}}",
+                unpinName: "Lossa {{name}}",
+                pinName: "Fäst {{name}}",
+                pinnedNeverDrops: "Fäst, så den faller aldrig av hyllan",
+                pinNeverDrops: "Fäst så att den aldrig faller av hyllan",
+                nothingMatches: "Inget här matchar det",
+                originalsEmpty: "Bilder du väljer, klistrar in eller släpper hamnar här",
+                croppedEmpty: "Bilder du beskär hamnar här",
+                forgotFraming: "Glömde beskärningen på {{count}} bild(er)",
+                nothingFramed: "Inget var beskuret",
+                pictureLibrary: "Bildbibliotek",
+                addedPictures: "Lade till {{count}} bild(er)",
+                nothingNew: "Inget nytt i den filen",
+                shownOfTotal: "{{shown}} av {{total}}",
+                keptCount: "{{count}} sparade",
+                youAreWearingThis: "Du använder den här",
+                removePictureBody: "{{name}} tas bort från dina sparade bilder tillsammans med den sparade beskärningen."
+            },
+            option: {
+                librarySize: {
+                    description: "Hur många bilder som ska sparas på varje hylla.",
+                    label: "Bibliotekets storlek"
+                },
+                rememberCrop: {
+                    description: "Återställ zoomen och positionen du senast använde för en bild.",
+                    label: "Kom ihåg beskärning"
+                },
+                forgetFraming: {
+                    description: "Släpp alla ihågkomna beskärningar och öppna varje bild som Discord skulle göra.",
+                    label: "Glöm inramning"
+                },
+                saveCropped: {
+                    description: "Behåll en kopia av varje bild efter att du har beskurit den.",
+                    label: "Spara beskurna"
+                },
+                askBeforeSavingCropped: {
+                    description: "Fråga först i stället för att automatiskt behålla den beskurna kopian.",
+                    label: "Fråga innan beskurna sparas"
+                },
+                transfer: {
+                    description: "Ta med dina bilder, och hur varje bild är inramad, till en annan enhet.",
+                    label: "Överför"
+                },
+                clearLibrary: {
+                    description: "Släng alla bilder du har sparat.",
+                    label: "Rensa bibliotek"
+                }
+            },
+            name: "BetterImageEditor",
+            description: "Håller en hylla med dina bilder i avatar- och bannerredigeraren och kommer ihåg hur du beskar varje bild.",
+            toast: {
+                couldNotExportYour: "Det gick inte att exportera dina bilder",
+                couldNotReadThat: "Det gick inte att läsa filen",
+                thatPictureIsMissing: "Bilden saknas",
+                thatPictureIsToo: "Bilden är för stor för Discord",
+                couldNotUseThat: "Det gick inte att använda bilden",
+                couldNotKeepThe: "Det gick inte att behålla den beskurna kopian"
+            },
+            kind: {
+                avatars: "avatarer",
+                banners: "banderoller",
+                serverIcons: "serverikoner",
+                serverBanners: "serverbanderoller",
+                eventCovers: "evenemangsomslag",
+                homeHeaders: "startsidesrubriker",
+                decorations: "dekorationer",
+                widgetCovers: "widgetomslag",
+                widgetImages: "widgetbilder"
+            }
+        },
+        cancelFriendRequest: {
+            name: "CancelFriendRequest",
+            description: "Lägger till ett sätt att avbryta utgående vänförfrågningar från profiler.",
+            text: {
+                cancelOutgoingFriendRequest: "Avbryt utgående vänförfrågan"
+            }
+        },
+        clipUpload: {
+            text: {
+                createdAtMustBe: "Skapad den måste vara ett giltigt datum.",
+                cancel: "Avbryt",
+                uploadClipFile: "Ladda upp klippfil",
+                fileName: "Filnamn",
+                title: "Titel",
+                epicMoment: "Episkt ögonblick",
+                message: "Meddelande",
+                checkOutThisClip: "Kolla in det här klippet!",
+                spoiler: "Spoiler",
+                remix: "Remix",
+                thumbnail: "Miniatyr",
+                file: "Fil",
+                selectFile: "Välj fil",
+                parseClipMetadataFrom: "Läs klippmetadata från fil",
+                selectFriends: "Välj vänner",
+                selectAGame: "Välj ett spel",
+                customApplicationId: "Anpassat program-ID",
+                createdAt: "Skapad",
+                participants: "Deltagare",
+                onlyTagPeopleWho: "Tagga bara personer som var med och har samtyckt till att vara med i det här klippet.",
+                gameApplication: "Spel/program",
+                uploadClipFile2: "Ladda upp klippfil",
+                uploading: "Laddar upp",
+                upload: "Ladda upp",
+                noFileSelected: "Ingen fil vald",
+                couldNotPrepare: "Kunde inte förbereda den valda filen.",
+                couldNotRead: "Kunde inte läsa den valda filen.",
+                couldNotUpdateMetadata: "Kunde inte uppdatera klippets metadata.",
+                notCompatible: "Filen är inte kompatibel. Använd ett MP4-klipp med H.264-video och AAC-ljud.",
+                uploadFailed: "Uppladdningen misslyckades.",
+                noUploadSlot: "Discord returnerade ingen uppladdningsplats.",
+                uploadCanceled: "Uppladdningen avbröts.",
+                failedToUpload: "Kunde inte ladda upp klippet.",
+                selectClipFile: "Välj klippfil",
+                mp4Video: "MP4-video"
+            },
+            name: "ClipUpload",
+            description: "Lägger till en knapp för att ladda upp en lokal videofil som ett Discord-klipp.",
+            toast: {
+                checkingClipFile: "Kontrollerar klippfil.",
+                convertingClipFile: "Konverterar klippfil.",
+                clipUploaded: "Klipp uppladdat."
+            }
+        },
+        collapsibleUI: {
+            name: "CollapsibleUI",
+            description: "Inbyggda hopfällbara ytor för kanaler, medlemmar, chattknappar och användarområde.",
+            text: {
+                collapsibleUi: "Hopfällbart gränssnitt",
+                guildBar: "Serverfält",
+                channelList: "Kanallista",
+                membersList: "Medlemslista",
+                messageButtons: "Meddelandeknappar",
+                titleBar: "Namnlist",
+                headerBar: "Rubrikfält",
+                userArea: "Användarområde"
+            },
+            option: {
+                detachUserArea: {
+                    description: "Lossa användarområdet så att det kan flyttas fritt när det inte är hopfällt.",
+                    label: "Lossa användarområde"
+                },
+                detachedUserAreaX: {
+                    description: "Spara x-positionen för det lossade användarområdet.",
+                    label: "Lossat användarområde X"
+                },
+                detachedUserAreaY: {
+                    description: "Spara y-positionen för det lossade användarområdet.",
+                    label: "Lossat användarområde Y"
+                },
+                guildBarCollapsed: {
+                    description: "Kom ihåg serverfältet som hopfällt.",
+                    label: "Serverfält hopfällt"
+                },
+                channelListCollapsed: {
+                    description: "Kom ihåg kanallistan som hopfälld.",
+                    label: "Kanallista hopfälld"
+                },
+                membersListCollapsed: {
+                    description: "Kom ihåg medlemslistan som hopfälld.",
+                    label: "Medlemslista hopfälld"
+                },
+                chatButtonsCollapsed: {
+                    description: "Kom ihåg raden med meddelandeknappar som hopfälld.",
+                    label: "Chattknappar hopfällda"
+                },
+                titleBarCollapsed: {
+                    description: "Kom ihåg namnlisten som hopfälld.",
+                    label: "Namnlist hopfälld"
+                },
+                headerBarCollapsed: {
+                    description: "Kom ihåg rubrikfältet som hopfällt.",
+                    label: "Rubrikfält hopfällt"
+                },
+                userAreaCollapsed: {
+                    description: "Kom ihåg användarområdet som hopfällt.",
+                    label: "Användarområde hopfällt"
+                }
+            }
+        },
+        customCommands: {
+            text: {
+                cancel: "Avbryt",
+                name: "Name",
+                response: "Svar",
+                detectedArguments: "Upptäckta argument",
+                exampleCommandResponse: "Exempel på kommandosvar:",
+                exampleUsage: "Exempel på användning:",
+                exampleOutput: "Exempel på utdata:",
+                viewArgumentsGuide: "Visa guide för argument",
+                editTag: "Redigera tagg",
+                deleteTag: "Ta bort tagg",
+                registeredTags: "Registrerade taggar",
+                createTag: "Skapa tagg",
+                aTagWithThe: "En tagg med namnet **{{name}}** finns inte!",
+                successfullyDeletedTheTag: "Taggen **{{name}}** har tagits bort!",
+                ephemeralReserved: "Argumentnamnet \"ephemeral\" är reserverat och kan inte användas.",
+                createNewTag: "Skapa ny tagg",
+                editTagSubtitle: "Redigera ditt anpassade kommando.",
+                createTagSubtitle: "Skapa en ny tagg som registreras som ett snedstreckskommando.",
+                save: "Spara",
+                create: "Skapa",
+                variablesHelp: "Ditt svar kan innehålla variabler inom dubbla klammerparenteser som blir kommandoargument, till exempel",
+                defaultValuesHelp: "Du kan ange argument med standardvärden genom att använda ett likhetstecken, till exempel",
+                noTagsYet: "Hoppsan! Det finns inga taggar än, använd `/tags create` för att skapa en!",
+                nameAlreadyExists: "En tagg med namnet \"{{name}}\" finns redan och kommer att skrivas över.",
+                defaultValue: "(standard: {{value}})"
+            },
+            name: "CustomCommands",
+            description: "Låter dig skapa anpassade snedstreckskommandon / taggar",
+            option: {
+                tagsList: {
+                    label: "Tagglista"
+                }
+            },
+            command: {
+                ephemeral: "Om svaret bara ska vara synligt för dig",
+                tags: "Hantera alla anpassade kommandon",
+                create: "Skapa en ny tagg",
+                list: "Lista alla dina taggar",
+                delete: "Ta bort en tagg via namn",
+                tagName: "Taggens namn"
+            }
+        },
+        fileUpload: {
+            name: "FileUpload",
+            description: "Ladda upp filer till värdtjänster som Zipline, Nest, S3 och WebDAV",
+            toast: {
+                fileTypeNotAllowed: "Filtypen tillåts inte av det aktuella filtret",
+                pleaseConfigureFileuploadSettings: "Konfigurera FileUpload-inställningarna först",
+                sharexConfigIsValid: "ShareX-konfigurationen är giltig",
+                importedSharexConfig: "ShareX-konfigurationen har importerats",
+                uploadSuccessfulButNo: "Uppladdningen lyckades, men ingen URL fanns att kopiera",
+                uploadSuccessfulUrlCopied: "Uppladdningen lyckades, URL kopierad till urklipp",
+                uploadSuccessfulButFailed: "Uppladdningen lyckades, men URL:en kunde inte kopieras",
+                uploadSuccessful: "Uppladdningen lyckades",
+                uploadSucceededWithServicelabels: "Uppladdningen lyckades med {{serviceLabels_service}} efter reserv",
+                apngToGifConversion: "Konverteringen från APNG till GIF misslyckades, laddar upp som APNG",
+                uploadAlreadyInProgress: "Uppladdning pågår redan",
+                uploadCancelled: "Uppladdningen avbröts",
+                uploadFailedMessage: "Uppladdningen misslyckades: {{message}}",
+                invalidSharexConfig: "Ogiltig ShareX-konfiguration",
+                failedToImportSharexConfig: "Kunde inte importera ShareX-konfigurationen"
+            },
+            text: {
+                uploadToServicename: "Ladda upp till {{serviceName}}",
+                uploadToHost: "Ladda upp till värd",
+                chooseFile: "Välj fil...",
+                zipline: "Zipline",
+                eZHost: "E-Z Host",
+                nest: "Nest",
+                encryptingHost: "Encrypting.host",
+                s3Compatible: "S3-kompatibel",
+                catboxMoe: "Catbox.moe",
+                litterbox: "Litterbox",
+                sharexCustomUploader: "Anpassad ShareX-uppladdare",
+                webdavNextcloudOwncloud: "WebDAV (Nextcloud/Owncloud)",
+                n1Hour: "1 timme",
+                n12Hours: "12 timmar",
+                n24Hours: "24 timmar",
+                n72Hours: "72 timmar",
+                corsProxy: "CORS-proxy",
+                query: "Fråga",
+                param: "Parameter",
+                fakeLink: "Falsk länk",
+                embed: "Inbäddning",
+                n30Seconds: "30 sekunder",
+                n1Minute: "1 minut",
+                n2Minutes: "2 minuter",
+                n5Minutes: "5 minuter",
+                n10Minutes: "10 minuter",
+                dragHostsToReorder: "Dra värdar för att ändra ordningen på reservförsök. Den valda värden provas först, sedan används den här ordningen.",
+                chooseWhereFileuploadSends: "Välj vart FileUpload skickar nya filer.",
+                connectionDetailsForYour: "Anslutningsuppgifter för din Zipline-instans.",
+                theUrlOfYour: "URL:en till din Zipline-instans",
+                yourZiplineApiAuthorization: "Din Zipline API-auktoriseringstoken",
+                yourZiplineApiToken: "Din Zipline API-token",
+                folderIdForUploads: "Mapp-ID för uppladdningar (lämna tomt för ingen mapp)",
+                leaveEmptyForNo: "Lämna tomt för ingen mapp",
+                connectionDetailsForE: "Anslutningsuppgifter för E-Z Host-uppladdningar.",
+                yourEZHost: "Din E-Z Host API-nyckel",
+                connectionDetailsForNest: "Anslutningsuppgifter för Nest-uppladdningar.",
+                yourNestApiAuthorization: "Din Nest API-auktoriseringstoken",
+                yourNestApiToken: "Din Nest API-token",
+                connectionDetailsForEncrypting: "Anslutningsuppgifter för Encrypting.host-uppladdningar.",
+                yourEncryptingHostApi: "Din Encrypting.host API-nyckel",
+                howEncryptingHostShould: "Hur Encrypting.host ska formatera returnerade länkar.",
+                selectUrlStyle: "Välj URL-stil",
+                optionalTitleForEmbed: "Valfri titel för svar i inbäddningsstil.",
+                optionalTitle: "Valfri titel",
+                optionalColorForEmbed: "Valfri färg för svar i inbäddningsstil.",
+                optionalColor: "Valfri färg",
+                optionalFakeLinkValue: "Valfritt värde för falsk länk för svar i fakelink-stil.",
+                optionalFakeLink: "Valfri falsk länk",
+                connectionDetailsAndObject: "Anslutningsuppgifter och objektnamn för din bucket.",
+                s3CompatibleEndpointE: "S3-kompatibel slutpunkt (t.ex. https://<accountid>.r2.cloudflarestorage.com)",
+                bucketToUploadInto: "Bucket att ladda upp till",
+                awsRegionOrAuto: "AWS-region eller auto för Cloudflare R2",
+                s3CompatibleAccessKey: "S3-kompatibel åtkomstnyckel",
+                yourAccessKeyId: "Ditt åtkomstnyckel-ID",
+                s3CompatibleSecretKey: "S3-kompatibel hemlig nyckel",
+                yourSecretAccessKey: "Din hemliga åtkomstnyckel",
+                optionalTemporaryCredentialToken: "Valfri tillfällig autentiseringstoken",
+                optionalSessionToken: "Valfri sessionstoken",
+                optionalPublicUrlBase: "Valfri offentlig bas-URL för returnerade länkar",
+                optionalFolderPrefixInside: "Valfri mapp/prefix i bucketen",
+                useEndpointBucketKey: "Använd formatet slutpunkt/bucket/nyckel, rekommenderas för R2.",
+                optionalAccountBindingFor: "Valfri kontokoppling för Catbox-uppladdningar.",
+                yourCatboxUserhashFor: "Din Catbox-userhash för kontokoppling, lämna tomt för anonyma uppladdningar.",
+                yourCatboxUserhash: "Din Catbox-userhash",
+                howLongUploadsAre: "Hur länge uppladdningar sparas",
+                selectExpiry: "Välj utgång",
+                optionalAccountBindingFor2: "Valfri kontokoppling för GoFile-uppladdningar.",
+                optionalGofileTokenTo: "Valfri GoFile-token för att ladda upp till ditt konto.",
+                optionalGofileToken: "Valfri GoFile-token",
+                connectionDetailsForPixelvault: "Anslutningsuppgifter för PixelVault-uppladdningar.",
+                yourPixelvaultAuthorizationKey: "Din PixelVault-auktoriseringsnyckel.",
+                yourPixelvaultUploadKey: "Din PixelVault-uppladdningsnyckel",
+                optionalAccountBindingFor3: "Valfri kontokoppling för PixelDrain-uppladdningar.",
+                optionalPixeldrainApiKey: "Valfri PixelDrain API-nyckel för autentiserade uppladdningar. Lämna tomt för anonyma uppladdningar.",
+                yourPixeldrainApiKey: "Din PixelDrain API-nyckel",
+                pasteImportOrValidate: "Klistra in, importera eller validera en anpassad ShareX-uppladdarkonfiguration.",
+                pasteYourSharexCustom: "Klistra in JSON för din anpassade ShareX-uppladdare (.sxcu/.json). DestinationType måste innehålla FileUploader eller ImageUploader.",
+                importFromFileOr: "Importera från fil eller validera inklistrad konfiguration",
+                connectionDetailsForWebdav: "Anslutningsuppgifter för WebDAV-servrar (Nextcloud, Owncloud osv.).",
+                baseWebdavUrlE: "Bas-URL för WebDAV (t.ex. https://nextcloud.example.com/remote.php/dav/files/username)",
+                optionalSubdirectoryOnThe: "Valfri underkatalog på servern att ladda upp till (t.ex. uploads)",
+                leaveEmptyForRoot: "Lämna tomt för rotkatalogen",
+                selectYourWebdavServer: "Välj din WebDAV-servertyp. Nextcloud och ownCloud skapar en offentlig delningslänk. Generisk returnerar den råa fil-URL:en.",
+                selectServerType: "Välj servertyp",
+                howToReturnThe: "Hur den offentliga delningslänken returneras. Delningssida länkar till en webbsida; Direktnedladdning länkar direkt till filen; Markdown-länk omsluter delningssidan i ett klickbart filnamn.",
+                selectShareLinkFormat: "Välj format för delningslänk",
+                controlWhatFileuploadDoes: "Styr vad FileUpload gör när en värd returnerar en URL.",
+                stripQueryParametersFrom: "Ta bort frågeparametrar från den uppladdade filens URL.",
+                wrapUploadedVideoLinks: "Omslut uppladdade videolänkar med en inbäddningsproxy för bättre förhandsvisningar i Discord.",
+                chooseWhichEmbedProxy: "Välj vilken inbäddningsproxytjänst som ska användas för uppladdade videolänkar",
+                selectAnEmbedProxy: "Välj en inbäddningsproxytjänst",
+                convertApngFilesTo: "Konvertera APNG-filer till GIF-format.",
+                useTheOriginalFilename: "Använd det ursprungliga filnamnet i stället för att namnge uppladdningar som upload.ext.",
+                automaticallyCopyTheUploaded: "Kopiera automatiskt den uppladdade filens URL till urklipp.",
+                onlyUseTheSelected: "Använd bara den valda uppladdaren utan att prova reservvärdar.",
+                afterUploadInsertThe: "Infoga den resulterande URL:en i det aktuella chattfältet efter uppladdning.",
+                wrapInsertedUrlsIn: "Omge infogade URL:er med vinkelparenteser för att undvika Discords förhandsvisning.",
+                chooseWhenFileuploadTakes: "Välj när FileUpload tar över Discords filhantering.",
+                useFileuploadWhenUploading: "Använd FileUpload vid uppladdning via Discords filväljare.",
+                useFileuploadOnlyFor: "Använd bara FileUpload för filer som är större än din nuvarande uppladdningsgräns i Discord.",
+                manualDiscordFileSize: "Manuell filstorleksgräns för Discord i MB, används när den automatiska identifieringen är fel. Lämna tomt för automatiskt.",
+                auto: "Automatiskt",
+                commaSeparatedListOf: "Kommaseparerad lista med filändelser (t.ex. png,jpg,gif). Lämna tomt för att tillåta alla.",
+                configureBrowserUploadProxying: "Konfigurera proxy och tidsgränser för webbläsaruppladdningar.",
+                corsProxyUsedFor: "CORS-proxy som används för webbuppladdningar. Lämna tomt för att använda standardproxyn.",
+                sourceCodeForThe: "Källkod för standard-CORS-proxyn",
+                maximumTimeToWait: "Maximal väntetid per uppladdningsförsök innan byte till reserv",
+                selectTimeout: "Välj tidsgräns",
+                drag: "Dra",
+                importSxcuJson: "Importera .sxcu/.json",
+                validate: "Validera",
+                resetToDefault: "Återställ till standard",
+                progress: "{{percent}} % - {{transferred}} av {{total}}",
+                cancel: "Avbryt"
+            },
+            option: {
+                serviceType: {
+                    description: "Vald uppladdningstjänst",
+                    label: "Tjänsttyp"
+                },
+                serviceUrl: {
+                    description: "URL för Zipline-tjänsten",
+                    label: "Tjänst-URL"
+                },
+                ziplineToken: {
+                    description: "Zipline-autentiseringstoken",
+                    label: "Zipline-token"
+                },
+                folderId: {
+                    description: "Valfritt Zipline-mapp-ID",
+                    label: "Mapp-ID"
+                },
+                ezHostKey: {
+                    description: "E-Z Host API-nyckel",
+                    label: "E-Z Host-nyckel"
+                },
+                nestToken: {
+                    description: "Nest API-token",
+                    label: "Nest-token"
+                },
+                encryptingHostKey: {
+                    description: "Encrypting.host API-nyckel",
+                    label: "Encrypting.host-nyckel"
+                },
+                encryptingHostUrlStyle: {
+                    description: "URL-stil för Encrypting.host",
+                    label: "Encrypting.host URL-stil"
+                },
+                encryptingHostDomains: {
+                    description: "JSON-lista med Encrypting.host-domäner",
+                    label: "Encrypting.host-domäner"
+                },
+                encryptingHostTitle: {
+                    description: "Valfri titel för Encrypting.host-inbäddning",
+                    label: "Encrypting.host-titel"
+                },
+                encryptingHostColor: {
+                    description: "Valfri färg för Encrypting.host-inbäddning",
+                    label: "Encrypting.host-färg"
+                },
+                encryptingHostFakelink: {
+                    description: "Valfri falsk länk för Encrypting.host",
+                    label: "Encrypting.host falsk länk"
+                },
+                s3Endpoint: {
+                    description: "S3-kompatibel slutpunkts-URL",
+                    label: "S3-slutpunkt"
+                },
+                s3Bucket: {
+                    description: "Namn på S3-bucket",
+                    label: "S3-bucket"
+                },
+                s3Region: {
+                    description: "S3-region (använd auto för R2)",
+                    label: "S3-region"
+                },
+                s3AccessKeyId: {
+                    description: "S3-åtkomstnyckel-ID",
+                    label: "S3-åtkomstnyckel-ID"
+                },
+                s3SecretAccessKey: {
+                    description: "Hemlig S3-åtkomstnyckel",
+                    label: "Hemlig S3-åtkomstnyckel"
+                },
+                s3SessionToken: {
+                    description: "Valfri S3-sessionstoken",
+                    label: "S3-sessionstoken"
+                },
+                s3PublicUrl: {
+                    description: "Valfri offentlig bas-URL",
+                    label: "Offentlig S3-URL"
+                },
+                s3Prefix: {
+                    description: "Valfritt prefix för S3-objektnycklar",
+                    label: "S3-prefix"
+                },
+                s3ForcePathStyle: {
+                    description: "Använd S3-URL:er i sökvägsstil",
+                    label: "Tvinga S3-sökvägsstil"
+                },
+                litterboxExpiry: {
+                    description: "Lagringsperiod för Litterbox",
+                    label: "Litterbox-utgång"
+                },
+                catboxUserhash: {
+                    description: "Catbox-userhash för kontokoppling",
+                    label: "Catbox-userhash"
+                },
+                sharexConfig: {
+                    description: "JSON för anpassad ShareX-uppladdare",
+                    label: "ShareX-konfiguration"
+                },
+                disableFallbacks: {
+                    description: "Inaktivera reservtjänster för uppladdning",
+                    label: "Inaktivera reserver"
+                },
+                autoSend: {
+                    description: "Infoga uppladdad URL i chattfältet",
+                    label: "Skicka automatiskt"
+                },
+                autoFormat: {
+                    description: "Omge den infogade URL:en med vinkelparenteser",
+                    label: "Formatera automatiskt"
+                },
+                bypassDiscordUpload: {
+                    description: "Gå förbi Discord-uppladdningar och använd FileUpload i stället.",
+                    label: "Gå förbi Discord-uppladdning"
+                },
+                bypassDiscordUploadOnlyOverLimit: {
+                    description: "Använd bara FileUpload om filen/filerna överskrider storleksgränsen.",
+                    label: "Gå förbi Discord-uppladdning endast över gränsen"
+                },
+                customDiscordFileSizeLimitMB: {
+                    description: "Manuell filstorleksgräns för Discord i MB. 0 betyder automatisk identifiering.",
+                    label: "Anpassad filstorleksgräns för Discord (MB)"
+                },
+                gofileToken: {
+                    description: "Valfri GoFile API-token",
+                    label: "GoFile-token"
+                },
+                fallbackOrder: {
+                    description: "Ordning för reservuppladdare",
+                    label: "Reservordning"
+                },
+                pixelVaultKey: {
+                    description: "PixelVault-uppladdningsnyckel",
+                    label: "PixelVault-nyckel"
+                },
+                pixelDrainKey: {
+                    description: "Valfri PixelDrain API-nyckel",
+                    label: "PixelDrain-nyckel"
+                },
+                uploadTimeoutMs: {
+                    description: "Tidsgräns för uppladdning i millisekunder",
+                    label: "Uppladdningens tidsgräns (ms)"
+                },
+                stripQueryParams: {
+                    description: "Ta bort frågeparametrar från uppladdade URL:er",
+                    label: "Ta bort frågeparametrar"
+                },
+                embedProxyEnabled: {
+                    description: "Skicka uppladdade videolänkar via en hjälptjänst för inbäddning.",
+                    label: "Inbäddningsproxy aktiverad"
+                },
+                embedProxyService: {
+                    description: "Hjälptjänst för inbäddning som omsluter uppladdade videolänkar.",
+                    label: "Inbäddningsproxytjänst"
+                },
+                corsProxyUrl: {
+                    description: "CORS-proxy-URL som används för webbläsaruppladdningar",
+                    label: "CORS-proxy-URL"
+                },
+                apngToGif: {
+                    description: "Konvertera APNG-uppladdningar till GIF",
+                    label: "APNG till GIF"
+                },
+                preserveOriginalFilename: {
+                    description: "Behåll det ursprungliga filnamnet vid uppladdning.",
+                    label: "Behåll ursprungligt filnamn"
+                },
+                autoCopy: {
+                    description: "Kopiera uppladdnings-URL automatiskt",
+                    label: "Kopiera automatiskt"
+                },
+                autoUploadPastedFiles: {
+                    description: "Ladda automatiskt upp filer från urklipp till bildvärden när du klistrar in i chattfältet.",
+                    label: "Ladda upp inklistrade filer automatiskt"
+                },
+                webdavUrl: {
+                    description: "URL till WebDAV-server",
+                    label: "WebDAV-URL"
+                },
+                webdavUsername: {
+                    description: "WebDAV-användarnamn",
+                    label: "WebDAV-användarnamn"
+                },
+                webdavPassword: {
+                    description: "WebDAV-lösenord eller apptoken",
+                    label: "WebDAV-lösenord"
+                },
+                webdavDirectory: {
+                    description: "Valfri underkatalog på WebDAV-servern",
+                    label: "WebDAV-katalog"
+                },
+                webdavServerType: {
+                    description: "WebDAV-servertyp",
+                    label: "WebDAV-servertyp",
+                    nextcloud: "Nextcloud",
+                    owncloud: "ownCloud",
+                    generic: "Generisk WebDAV"
+                },
+                webdavShareType: {
+                    description: "Format för WebDAV-delningslänk",
+                    label: "WebDAV-delningstyp",
+                    sharepage: "Delningssida",
+                    directdownload: "Direktnedladdning",
+                    markdown: "Markdown-länk"
+                },
+                uploadAllowedFileTypes: {
+                    description: "Kommaseparerad lista med tillåtna filändelser (t.ex. png,jpg,gif,mp4). Lämna tomt för att tillåta alla filer.",
+                    label: "Tillåtna filtyper för uppladdning"
+                },
+                settingsComponent: {
+                    description: "Inställningar",
+                    label: "Inställningskomponent"
+                }
+            },
+            panel: {
+                fallbackOrder: "Reservordning",
+                uploadService: "Uppladdningstjänst",
+                zipline: "Zipline",
+                serviceUrl: "Tjänst-URL",
+                ziplineToken: "Zipline-token",
+                folderId: "Mapp-ID",
+                eZHost: "E-Z Host",
+                eZHostApiKey: "E-Z Host API-nyckel",
+                nest: "Nest",
+                nestToken: "Nest-token",
+                encryptingHost: "Encrypting.host",
+                encryptingHostApiKey: "Encrypting.host API-nyckel",
+                urlStyle: "URL-stil",
+                domainsJson: "Domäner (JSON)",
+                embedTitle: "Titel på inbäddning",
+                embedColor: "Färg på inbäddning",
+                fakeLink: "Falsk länk",
+                s3CompatibleStorage: "S3-kompatibel lagring",
+                s3EndpointUrl: "URL för S3-slutpunkt",
+                bucketName: "Bucketnamn",
+                region: "Region",
+                accessKeyId: "Åtkomstnyckel-ID",
+                secretAccessKey: "Hemlig åtkomstnyckel",
+                sessionToken: "Sessionstoken",
+                publicBaseUrl: "Offentlig bas-URL",
+                objectKeyPrefix: "Prefix för objektnycklar",
+                usePathStyleEndpoint: "Använd slutpunkt i sökvägsstil",
+                catbox: "Catbox",
+                catboxUserhash: "Catbox-userhash",
+                litterboxExpiry: "Litterbox-utgång",
+                gofile: "GoFile",
+                gofileToken: "GoFile-token",
+                pixelvault: "PixelVault",
+                pixelvaultUploadKey: "PixelVault-uppladdningsnyckel",
+                pixeldrain: "PixelDrain",
+                pixeldrainApiKey: "PixelDrain API-nyckel",
+                sharexCustomUploader: "Anpassad ShareX-uppladdare",
+                sharexCustomUploaderConfig: "Konfiguration för anpassad ShareX-uppladdare",
+                sharexConfigActions: "Åtgärder för ShareX-konfiguration",
+                webdav: "WebDAV",
+                serverUrl: "Server-URL",
+                username: "Användarnamn",
+                passwordOrAppToken: "Lösenord eller apptoken",
+                passwordOrAppToken2: "lösenord eller apptoken",
+                uploadDirectory: "Uppladdningskatalog",
+                serverType: "Servertyp",
+                shareLinkFormat: "Format för delningslänk",
+                uploadBehavior: "Uppladdningsbeteende",
+                stripQueryParameters: "Ta bort frågeparametrar",
+                useEmbedProxy: "Använd inbäddningsproxy",
+                embedProxyService: "Inbäddningsproxytjänst",
+                convertApngToGif: "Konvertera APNG till GIF",
+                preserveOriginalFilename: "Behåll ursprungligt filnamn",
+                autoCopyUrl: "Kopiera URL automatiskt",
+                disableFallbackUploaders: "Inaktivera reservuppladdare",
+                insertUrlIntoChatInput: "Infoga URL i chattfältet",
+                formatInsertedUrl: "Formatera infogad URL",
+                discordIntegration: "Discord-integration",
+                bypassDiscordUploadButton: "Gå förbi Discords uppladdningsknapp",
+                autoUploadPastedFiles: "Ladda upp inklistrade filer automatiskt",
+                respectDiscordFileSizeLimit: "Respektera Discords filstorleksgräns",
+                discordLimitOverrideMb: "Åsidosätt Discord-gräns (MB)",
+                allowedFileTypes: "Tillåtna filtyper",
+                network: "Nätverk",
+                corsProxyUrl: "CORS-proxy-URL",
+                defaultCorsProxySource: "Källa för standard-CORS-proxy",
+                uploadTimeout: "Tidsgräns för uppladdning",
+                domainsJsonDescription: "JSON-array med domäner att använda, till exempel [\"offensive\"]."
+            },
+            status: {
+                cancelled: "Uppladdningen avbröts.",
+                uploadingVia: "Laddar upp via {{service}}...",
+                uploading: "Laddar upp...",
+                unknownError: "Okänt fel",
+                startingVia: "Startar uppladdning via {{service}}...",
+                retryingWith: "Försöker igen med {{service}} ({{attempt}}/{{total}})...",
+                uploadedVia: "Uppladdat via {{service}}.",
+                allFailed: "Alla uppladdningstjänster misslyckades. Senaste fel: {{error}}",
+                fileReady: "Filen är klar, startar uppladdning...",
+                preparing: "Förbereder uppladdning...",
+                failed: "Uppladdningen misslyckades: {{message}}",
+                timedOut: "Uppladdningen tog för lång tid",
+                serviceFailed: "{{service}} misslyckades: {{message}}",
+                preparingFile: "Förbereder {{name}}{{suffix}}..."
+            }
+        },
+        gifMaker: {
+            option: {
+                lastWidth: {
+                    label: "Senaste bredd"
+                },
+                lastHeight: {
+                    label: "Senaste höjd"
+                },
+                lastCaptionMode: {
+                    label: "Senaste bildtextläge"
+                },
+                lastCaptionText: {
+                    label: "Senaste bildtext"
+                },
+                lastCaptionSize: {
+                    label: "Senaste bildtextstorlek"
+                },
+                lastFontFamily: {
+                    label: "Senaste typsnittsfamilj"
+                },
+                lastBubbleTipBase: {
+                    label: "Senaste bas för bubbelspets"
+                },
+                maxWidth: {
+                    description: "Maximal bredd vid automatisk anpassning.",
+                    label: "Max bredd"
+                },
+                maxHeight: {
+                    description: "Maximal höjd vid automatisk anpassning.",
+                    label: "Max höjd"
+                }
+            },
+            name: "GifMaker",
+            description: "Skapa och texta GIF:ar från valfri media i chatten eller GIF-väljaren.",
+            text: {
+                send: "Skicka",
+                export: "Exportera",
+                makeGif: "Skapa GIF",
+                editGif: "Redigera GIF",
+                selectAFont: "Välj ett typsnitt...",
+                enterCaption: "Ange bildtext...",
+                width: "Bredd",
+                height: "Höjd",
+                loadingFonts: "Läser in typsnitt...",
+                captions: "Bildtexter",
+                text: "Text",
+                font: "Typsnitt",
+                fontSize: "Teckenstorlek",
+                tipBase: "Spetsbas",
+                dimensions: "Mått",
+                generatingGif: "Genererar GIF...",
+                clickOnThePreview: "Klicka på förhandsvisningen för att placera bubbelspetsen",
+                gifPreview: "GIF-förhandsvisning"
+            },
+            captionMode: {
+                caption: "Bildtext",
+                none: "Ingen",
+                speechbubble: "Pratbubbla"
+            }
+        },
+        gifProviderSwitcher: {
+            name: "GifProviderSwitcher",
+            description: "Låter dig använda GIF-sökning från Tenor eller Giphy i stället för Klipy",
+            text: {
+                tenor: "Tenor",
+                giphy: "Giphy",
+                klipy: "Klipy",
+                providers: "Leverantörer",
+                providersCount: "{{count}} leverantörer"
+            }
+        },
+        keyboardNavigation: {
+            toast: {
+                invalidUrl: "Ogiltig URL",
+                copiedResponseToClipboard: "Svaret har kopierats till urklipp!",
+                issueFetchingUrl: "Problem med att hämta URL",
+                copiedGitInfoTo: "Git-info har kopierats till urklipp!",
+                noUpdatesAvailable: "Inga uppdateringar tillgängliga",
+                enabledPlugin: "{{id}} har aktiverats",
+                disabledPlugin: "{{id}} har inaktiverats"
+            },
+            text: {
+                openPlexcordTab: "Öppna Plexcord-fliken",
+                openPluginTab: "Öppna pluginfliken",
+                openThemesTab: "Öppna temafliken",
+                openUpdaterTab: "Öppna uppdateringsfliken",
+                openCloudTab: "Öppna molnfliken",
+                openBackupRestoreTab: "Öppna fliken Säkerhetskopiering och återställning",
+                restartClient: "Starta om klienten",
+                openQuickCssFile: "Öppna QuickCSS-fil",
+                openSettingsFolder: "Öppna inställningsmappen",
+                openInGithub: "Öppna på GitHub",
+                openInBrowser: "Öppna i webbläsaren",
+                togglePlugin: "Växla plugin",
+                enable: "Aktivera",
+                disable: "Inaktivera",
+                quickFetch: "Snabbhämtning",
+                copyGitInfo: "Kopiera Git-info",
+                checkForUpdates: "Sök efter uppdateringar",
+                aPlexcordUpdateIs: "En Plexcord-uppdatering finns tillgänglig!",
+                clickHereToView: "Klicka här för att visa uppdateringen",
+                navigateToServer: "Gå till server",
+                commandPalette: "Kommandopalett",
+                searchTheCommandPalette: "Sök i kommandopaletten",
+                multipleChoice: "Flerval",
+                textInput: "Textinmatning",
+                openDevTab: "Öppna utvecklarfliken",
+                enterUrlToFetch: "Ange URL att hämta (endast GET)",
+                typeAndPressEnter: "Skriv och tryck på Enter",
+                recording: "Spelar in...",
+                recordKeybind: "Spela in snabbtangent",
+                enterUrl: "Ange en URL"
+            },
+            option: {
+                hotkey: {
+                    description: "Snabbtangenten för att öppna kommandopaletten.",
+                    label: "Snabbtangent"
+                },
+                allowMouseControl: {
+                    description: "Tillåt musen att styra kommandopaletten.",
+                    label: "Tillåt musstyrning"
+                }
+            },
+            name: "KeyboardNavigation",
+            description: "Låter dig navigera i gränssnittet med tangentbordet."
+        },
+        lastActive: {
+            name: "LastActive",
+            description: "Ett plugin för att hoppa till det senaste aktiva meddelandet från dig själv eller en annan användare i en kanal/server.",
+            toast: {
+                failedToFindMessages: "Det gick inte att hitta meddelanden. Se konsolen för detaljer.",
+                couldnTFindAny: "Hittade inga nya meddelanden från den här användaren.",
+                channelInformationNotAvailable: "Kanalinformation är inte tillgänglig.",
+                failedToJumpTo: "Det gick inte att hoppa till meddelandet. Se konsolen för detaljer."
+            },
+            text: {
+                yourLastMessage: "Ditt senaste meddelande",
+                userSLastMessage: "Användarens senaste meddelande"
+            }
+        },
+        limitlessScreenshare: {
+            text: {
+                deleteTag: "Ta bort tagg",
+                mustBeGreaterThan: "Måste vara >{{value}}",
+                maxResolutionTooLow: "Maxupplösningen kan inte vara lägre än {{value}}",
+                maxResolutionRound: "Maxupplösningen måste sluta på 0 om Avrunda upplösning är på"
+            },
+            name: "LimitlessScreenshare",
+            description: "Lägger till ett skjutreglage för upplösning och fps vid skärmdelning.",
+            option: {
+                maxFPS: {
+                    description: "Max FPS för skjutreglaget",
+                    label: "Max FPS"
+                },
+                maxResolution: {
+                    description: "Max upplösning för skjutreglaget",
+                    label: "Max upplösning"
+                },
+                roundResolution: {
+                    description: "Avrunda upplösningen till närmaste 10p",
+                    label: "Avrunda upplösning"
+                },
+                resolutions: {
+                    label: "Upplösningar"
+                },
+                fpss: {
+                    label: "FPS-värden"
+                }
+            }
+        },
+        messagePeek: {
+            option: {
+                hideMuted: {
+                    description: "Dölj förhandsvisningar och tidsstämplar för tystade DM och gruppchattar.",
+                    label: "Dölj tystade"
+                }
+            },
+            name: "MessagePeek",
+            description: "Visar förhandsvisning och tidsstämpel för det senaste meddelandet i listan med direktmeddelanden.",
+            text: {
+                officialDiscordMessage: "Officiellt Discord-meddelande",
+                sentGif: "skickade en GIF",
+                voiceMessage: "röstmeddelande",
+                membersCount: "{{count}} medlemmar",
+                you: "Du"
+            }
+        },
+        messageTranslate: {
+            name: "MessageTranslate",
+            description: "Översätt meddelanden automatiskt till ditt språk med cachning, växlar per kanal och fler alternativ.",
+            option: {
+                targetLanguage: {
+                    description: "Målspråkskod för översättningar (t.ex. en, es, fr, de, ja).",
+                    label: "Målspråk"
+                },
+                excludedLanguages: {
+                    description: "Språkkoder som ska undantas från översättning (t.ex. en, es, fr, de, ja).",
+                    label: "Undantagna språk"
+                },
+                confidenceRequirement: {
+                    description: "Minsta säkerhet (0 till 1) som krävs för att visa en översättning.",
+                    label: "Krav på säkerhet"
+                },
+                autoTranslate: {
+                    description: "Översätt meddelanden automatiskt när de visas.",
+                    label: "Översätt automatiskt"
+                },
+                skipOwnMessages: {
+                    description: "Översätt inte dina egna meddelanden.",
+                    label: "Hoppa över egna meddelanden"
+                },
+                skipBotMessages: {
+                    description: "Översätt inte botmeddelanden.",
+                    label: "Hoppa över botmeddelanden"
+                },
+                ignoredGuilds: {
+                    description: "Kommaseparerad lista med server-ID:n där inget ska översättas.",
+                    label: "Ignorerade servrar"
+                },
+                ignoredChannels: {
+                    description: "Kommaseparerad lista med kanal-ID:n där inget ska översättas.",
+                    label: "Ignorerade kanaler"
+                },
+                ignoredUsers: {
+                    description: "Kommaseparerad lista med användar-ID:n som inte ska översättas.",
+                    label: "Ignorerade användare"
+                },
+                showIndicator: {
+                    description: "Lägg till en liten (översatt)-indikator till översatta meddelanden.",
+                    label: "Visa indikator"
+                },
+                showOriginal: {
+                    description: "Visa originaltexten och den översatta texten.",
+                    noorig: "Visa inte originalet."
+                }
+            },
+            text: {
+                showOriginalInSubtext: "Visa originalet i undertext",
+                showOriginalMessageTranslation: "Visa originalmeddelandet, översättningen i undertext",
+                translatedFrom: "översatt från {{lang}}"
+            }
+        },
+        moreStickers: {
+            toast: {
+                stickerPackDeleted: "Klistermärkespaket borttaget",
+                stickerPackAdded: "Klistermärkespaket tillagt",
+                stickerPacksAdded: "Klistermärkespaket tillagda",
+                stickerPacksExported: "Klistermärkespaket exporterade",
+                newStickerPacksAlready: "Nya klistermärkespaket finns redan, migrering behövs inte",
+                oldStickerPacksNot: "Gamla klistermärkespaket hittades inte, inget att migrera",
+                migrationFailedTitleId: "Migreringen misslyckades: {{title}} ({{id}})",
+                stickerPackMigrationComplete: "Migreringen av klistermärkespaket är klar",
+                failedToUploadSticker: "Det gick inte att ladda upp klistermärket"
+            },
+            text: {
+                stickerPackUrl: "URL till klistermärkespaket",
+                pasteHtmlHere: "Klistra in HTML här",
+                delete: "Ta bort",
+                addStickerPackFrom: "Lägg till klistermärkespaket från URL",
+                insert: "Infoga",
+                addStickerPackFrom2: "Lägg till klistermärkespaket från HTML",
+                insertFromHtml: "Infoga från HTML",
+                addStickerPackFrom3: "Lägg till klistermärkespaket från fil",
+                miscTools: "Diverse verktyg",
+                exportStickerPacks: "Exportera klistermärkespaket",
+                migrateFromV1: "Migrera från v1",
+                stickersManagement: "Hantering av klistermärken",
+                theRegionLineRecognized: "Regionen som LINE känner igen kan skilja sig från den du befinner dig i på grund av CORS-proxyn vi använder.",
+                openStickerPackFile: "Öppna klistermärkespaketfil",
+                stickers: "Klistermärken+",
+                categoryTitle: "Kategori, {{title}}",
+                searchStickers: "Sök klistermärken",
+                ffmpegstatecontextIsUndefined: "FFmpegStateContext är inte definierad",
+                recentlyUsed: "Senast använda",
+                addFromUrl: "Lägg till från URL",
+                addFromHtml: "Lägg till från HTML",
+                addFromFile: "Lägg till från fil",
+                misc: "Övrigt",
+                invalidUrl: "Ogiltig URL",
+                lineOnly: "För närvarande stöds endast LINE-klistermärken/-emojis.",
+                getTelegramStickers: "Hämta Telegram-klistermärken med",
+                htmlFallbackHelp: "Om du stöter på fel när du lägger till ett klistermärkespaket kan du försöka lägga till det med HTML-källkoden för paketets sida.",
+                htmlFallbackApplies: "Detta gäller klistermärken som är region-/OS-låsta osv."
+            },
+            option: {
+                promptToUpload: {
+                    description: "Infogar klistermärket i chattfältet i stället för att skicka det direkt",
+                    label: "Fråga före uppladdning"
+                },
+                packs: {
+                    description: "Paket",
+                    label: "Paket"
+                }
+            },
+            name: "MoreStickers",
+            description: "Lägger till klistermärkespaket från andra sociala medier. (t.ex. LINE)"
+        },
+        musicRichPresence: {
+            option: {
+                scrobblerBackend: {
+                    description: "Scrobbler-backend som ska användas.",
+                    label: "Scrobbler-backend"
+                },
+                instanceBaseURL: {
+                    description: "Bas-URL:en för din ListenBrainz-instans.",
+                    label: "Instansens bas-URL"
+                },
+                instanceAPIBaseUrl: {
+                    description: "Bas-URL:en för ditt ListenBrainz-API.",
+                    label: "Instansens API-bas-URL"
+                },
+                apiKey: {
+                    description: "Last.fm API-nyckel. Inte obligatorisk men starkt rekommenderad för att undvika hastighetsbegränsning med vår delade nyckel",
+                    label: "API-nyckel"
+                },
+                username: {
+                    description: "Användarnamn",
+                    label: "Användarnamn"
+                },
+                shareUsername: {
+                    description: "Visa länk till scrobbler-profil",
+                    label: "Dela användarnamn"
+                },
+                clickableLinks: {
+                    description: "Gör spår-, artist- och albumnamn till klickbara länkar",
+                    label: "Klickbara länkar"
+                },
+                hideWithSpotify: {
+                    description: "Dölj närvaro om Spotify körs",
+                    label: "Dölj med Spotify"
+                },
+                hideWithActivity: {
+                    description: "Dölj närvaro om du har en annan närvaro",
+                    label: "Dölj vid aktivitet"
+                },
+                statusName: {
+                    description: "Anpassad statustext. Du kan använda följande variabler: {artist} | {album} | {title}",
+                    label: "Statusnamn"
+                },
+                statusDisplayType: {
+                    description: "Visa spår-/artistnamn i medlemslistan",
+                    off: "Visa inte (visar allmänt lyssningsmeddelande)"
+                },
+                nameFormat: {
+                    description: "Visa låtens och artistens namn i statusnamnet",
+                    statusName: "Använd anpassat statusnamn"
+                },
+                missingArt: {
+                    description: "När album eller albumomslag saknas",
+                    logo: "Använd stor scrobbler-logotyp"
+                },
+                showLogo: {
+                    description: "Visa scrobblertjänstens logotyp vid albumomslaget",
+                    label: "Visa scrobbler-logotyp"
+                },
+                showAlbumCover: {
+                    description: "Visa albumomslag. Om det stängs av visas en platshållare. Användbart om din musik har olämpliga omslag",
+                    label: "Visa albumomslag"
+                },
+                useListeningStatus: {
+                    description: "Visa status \"Lyssnar på\" i stället för \"Spelar\""
+                }
+            },
+            name: "MusicRichPresence",
+            description: "Rich Presence för Last.FM/Listenbrainz",
+            text: {
+                showArtistName: "Visa artistnamn",
+                showTrackName: "Visa spårnamn",
+                useMusicServiceName: "Använd musiktjänstens namn (faller tillbaka på anpassad statustext)",
+                useFormatArtistSong: "Använd formatet 'artist - låt'",
+                useFormatSongArtist: "Använd formatet 'låt - artist'",
+                useArtistNameOnly: "Använd endast artistnamn",
+                useSongNameOnly: "Använd endast låtnamn",
+                useAlbumNameFalls: "Använd albumnamn (faller tillbaka på anpassad statustext om låten saknar album)",
+                useGenericPlaceholder: "Använd generisk platshållare",
+                lastFm: "Last.FM",
+                howToCreateAn: "Så skapar du en API-nyckel",
+                set: "Ange",
+                applicationName: "Applikationsnamn",
+                applicationDescription: "Applikationsbeskrivning",
+                toAnythingAndLeave: "till vad som helst och lämna resten tomt.",
+                createApiKey: "Skapa API-nyckel",
+                invalidInstance: "Ogiltig ListenBrainz-kompatibel instans",
+                provideBoth: "Ange både",
+                apiBaseUrl: "API-bas-URL",
+                andThe: "och",
+                instanceBaseUrl: "instansens bas-URL",
+                forYourCustomInstance: "för din egen ListenBrainz-instans, eller byt tillbaka till ListenBrainz/Last.FM",
+                allowConnectTitle: "Tillåt Plexcord att ansluta till ListenBrainz-instansen",
+                allowConnectBody: "För att använda din egen ListenBrainz-instans måste du först tillåta Plexcord att ansluta till den.",
+                allowInstance: "Tillåt instans",
+                listenBrainzCompatible: "ListenBrainz-kompatibel (egen server)",
+                and: "och"
+            }
+        },
+        noMiddleClickPaste: {
+            name: "NoMiddleClickPaste",
+            description: "Inaktivera inklistring med mittenklick i Linux - endast Linux"
+        },
+        orbolayBridge: {
+            option: {
+                port: {
+                    description: "Port att ansluta till",
+                    label: "Port"
+                }
+            },
+            name: "OrbolayBridge",
+            description: "Bryggplugin för att ansluta Orbolay till Discord",
+            toast: {
+                connectedToOrbolayServer: "Ansluten till Orbolay-servern"
+            }
+        },
+        plexcordHelper: {
+            name: "PlexcordHelper",
+            description: "Används för att ge support och åtgärda krascher orsakade av Discord.",
+            text: {
+                restartRequired: "Omstart krävs",
+                restartNow: "Starta om nu",
+                later: "Senare",
+                wouldYouLikeTo: "Vill du starta om nu?",
+                somePluginsRequireA: "Vissa pluginer kräver en omstart för att inaktiveras helt.",
+                alreadyEnabled: "{{plugin}} är redan aktiverad",
+                alreadyDisabled: "{{plugin}} är redan inaktiverad",
+                disablePlugin: "Inaktivera {{plugin}}",
+                enablePlugin: "Aktivera {{plugin}}",
+                errorStopping: "Fel när pluginet {{plugin}} stoppades",
+                errorStarting: "Fel när pluginet {{plugin}} startades"
+            },
+            toast: {
+                failedToTolowercase: "Det gick inte att {{toLowerCase}}",
+                aRestartIsRequired: "En omstart krävs för att ändringen ska gälla!"
+            },
+            card: {
+                notOnThisVersion: "Detta plugin finns inte i den här versionen av Plexcord. Prova att uppdatera!"
+            }
+        },
+        plexcordTweaks: {
+            name: "PlexcordTweaks",
+            option: {
+                removeActivitySection: {
+                    description: "Tar bort aktivitetsavsnittet ovanför medlemslistan",
+                    label: "Ta bort aktivitetsavsnitt"
+                },
+                showYourOwnActivityButtons: {
+                    description: "Discord döljer av någon anledning dina egna aktivitetsknappar",
+                    label: "Visa dina egna aktivitetsknappar"
+                },
+                refreshSlashCommands: {
+                    description: "Uppdaterar snedstreckskommandon så att nya kommandon visas utan att starta om klienten.",
+                    label: "Uppdatera snedstreckskommandon"
+                },
+                forceRoleIcon: {
+                    description: "Tvingar rollikoner att visas vid meddelanden i kompakt läge",
+                    label: "Tvinga rollikon"
+                },
+                accountStandingButton: {
+                    description: "Visa en knapp för kontostatus i rubrikfältet",
+                    label: "Knapp för kontostatus"
+                },
+                jsonGateway: {
+                    description: "Tvingar JSON vid återanslutning till gateway",
+                    label: "JSON-gateway"
+                },
+                enableAutoCorrect: {
+                    description: "Lägger till en växel i chattrutans snabbmeny för inbyggd autokorrigering och textersättningar",
+                    label: "Aktivera autokorrigering"
+                },
+                autoCorrect: {
+                    description: "Använd inbyggd autokorrigering och textersättningar i meddelanderedigerare",
+                    label: "Autokorrigering"
+                },
+                disableHolidayNotifications: {
+                    label: "Inaktivera högtidsaviseringar",
+                    description: "Använd alltid Discords standardljud för aviseringar"
+                },
+                showAllBadges: {
+                    label: "Visa alla märken",
+                    description: "Visar alla profilmärken i stället för att dölja resten bakom +n"
+                }
+            },
+            text: {
+                allGood: "Allt är bra!",
+                limited: "Begränsad",
+                veryLimited: "Mycket begränsad",
+                atRisk: "I riskzonen",
+                suspended: "Avstängd",
+                slashCommandsRefreshedSuccessfully: "Snedstreckskommandon har uppdaterats.",
+                failedToRefreshCommands: "Det gick inte att uppdatera kommandon. Se konsolen för detaljer.",
+                enableAutocorrect: "Aktivera autokorrigering"
+            },
+            command: {
+                refreshCommands: "Uppdatera snedstreckskommandon"
+            },
+            description: "En samling små justeringar och rättningar för Discord."
+        },
+        plextronStreamFixes: {
+            option: {
+                unlockQualityOptions: {
+                    description: "Lås upp alternativ för strömkvalitet oavsett Nitro-status",
+                    label: "Lås upp kvalitetsalternativ"
+                },
+                removeResolutionCap: {
+                    description: "Tillåt upplösningar över 720p vid 60 fps",
+                    label: "Ta bort upplösningsgräns"
+                },
+                forceEncoderSettings: {
+                    description: "Tvinga kodaren att använda konfigurerad upplösning/fps",
+                    label: "Tvinga kodarinställningar"
+                },
+                preventDownscale: {
+                    description: "Hindra Discord från att skala ned strömmens upplösning",
+                    label: "Förhindra nedskalning"
+                },
+                keyframeInterval: {
+                    description: "Nyckelbildsintervall i ms (0 = kodarens standard, 5000 = var 5:e s)",
+                    label: "Nyckelbildsintervall"
+                },
+                minBitrate: {
+                    description: "Minsta kodarbithastighet i kbps",
+                    label: "Min bithastighet"
+                },
+                raiseBitrateCaps: {
+                    description: "Höj standardgränserna för bithastighet på datorn (mål 600 kbps → 10 Mbps, max 3,5 Mbps → 40 Mbps)",
+                    label: "Höj bithastighetsgränser"
+                },
+                preventFramerateReduction: {
+                    description: "Hindra Discord från att sänka strömmens bildfrekvens när du inte pratar",
+                    label: "Förhindra sänkt bildfrekvens"
+                },
+                bitsPerPixelPct: {
+                    description: "Bitar per pixel i procent för målbithastigheten (8 = 0,08 bpp, 12 = 0,12 bpp)",
+                    label: "Bitar per pixel (%)"
+                }
+            },
+            name: "PlextronStreamFixes",
+            description: "Försöker åtgärda strömkvaliteten i Plextron genom att patcha Discords kodare och kvalitetsbegränsningar."
+        },
+        rPCEditor: {
+            name: "RPCEditor"
+        },
+        reactionTimestamps: {
+            name: "ReactionTimestamps",
+            description: "Visar tiden för varje reaktion i reaktionsfönstret.",
+            text: {
+                userAtTime: "{{user}} kl. {{time}}"
+            }
+        },
+        richPresence: {
+            text: {
+                useCustomStatusName: "Använd anpassat statusnamn",
+                useFormatArtistSong: "Använd formatet 'artist - låt'",
+                useFormatSongArtist: "Använd formatet 'låt - artist'",
+                useArtistNameOnly: "Använd endast artistnamn",
+                useSongNameOnly: "Använd endast låtnamn",
+                useAlbumName: "Använd albumnamn",
+                useLargeStatsFm: "Använd stor Stats.fm-logotyp",
+                useGenericPlaceholder: "Använd generisk platshållare",
+                seriesMovieName: "Serie-/filmnamn",
+                seriesEpisodeTrackMovie: "Serie - avsnitts-/spår-/filmnamn",
+                custom: "Anpassad",
+                seriesCover: "Serieomslag",
+                episodeCover: "Avsnittsomslag",
+                season1Episode1: "Säsong 1 avsnitt 1",
+                off: "Av",
+                listening: "Lyssnar",
+                playing: "Spelar",
+                streaming: "Streamar",
+                watching: "Tittar",
+                none: "Ingen",
+                navidromeInstanceExposesServer: "Navidrome-instans (exponerar server-URL. Engångsautentisering skickas.)",
+                lastFmApiSends: "Last.fm-API (skickar metadata till last.fm)",
+                donTShowShows: "Visa inte (visar allmänt lyssningsmeddelande)",
+                showStateLineContent: "Visa innehåll från tillståndsraden",
+                showDetailsLineContent: "Visa innehåll från detaljraden",
+                displayYourCurrentlyPlaying: "Visa ljudböckerna du spelar som Discord Rich Presence. Kräver URL, användarnamn och lösenord för din AudioBookShelf-server.",
+                audiobookshelfServerUrl: "URL till AudioBookShelf-servern.",
+                audiobookshelfUsername: "AudioBookShelf-användarnamn.",
+                audiobookshelfPassword: "AudioBookShelf-lösenord.",
+                connectsToTosuVia: "Ansluter till tosu via WebSocket på port 24050. Ingen konfiguration behövs, se bara till att tosu körs tillsammans med osu!.",
+                showWhatYouRe: "Visa vad du lyssnar på via stats.fm. Kräver att din lyssningshistorik är offentlig.",
+                statsFmUsername: "Stats.fm-användarnamn.",
+                customStatusText: "Anpassad statustext.",
+                statsFm: "Stats.fm",
+                nameFormat: "Namnformat.",
+                fallbackWhenArtIs: "Reserv när omslag saknas.",
+                showListeningStatus: "Visa lyssningsstatus.",
+                showStatsFmLogo: "Visa Stats.fm-logotyp bredvid albumomslaget.",
+                showLinkToStats: "Visa länk till stats.fm-profil.",
+                showLinkToSong: "Visa länk till låten på stats.fm.",
+                hideStatsFmPresence: "Dölj stats.fm-närvaro om Spotify körs.",
+                hideStatsFmPresence2: "Dölj stats.fm-närvaro om en extern RPC körs.",
+                disableDownloadingAlbumArt: "Inaktivera nedladdning av albumomslag.",
+                showWhatYouRe2: "Visa vad du spelar på Jellyfin. Så får du din API-nyckel: öppna Jellyfins webbgränssnitt, tryck på F12 för att öppna utvecklarverktygen, gå till fliken Nätverk, leta efter förfrågningar till din server, hitta Authorization-headern (Ctrl+F för att söka) och du behöver delen från Token='this'. Ditt användar-ID finns i URL:en till din profilsida.",
+                jellyfinServerUrl: "Jellyfin-serverns URL.",
+                jellyfinApiKey: "Jellyfin API-nyckel.",
+                authorization: "Authorization",
+                jellyfinUserId: "Jellyfin-användar-ID.",
+                userIdFromProfile: "Användar-ID från profil-URL",
+                nameDisplayFormat: "Format för namnvisning.",
+                customNameTemplate: "Anpassad namnmall.",
+                nameOnJellyfin: "{name} på Jellyfin",
+                coverTypeForTv: "Omslagstyp för tv-serier.",
+                episodeNumberFormat: "Format för avsnittsnummer.",
+                overrideRichPresenceType: "Åsidosätt typ av Rich Presence.",
+                showEpisodeNameAfter: "Visa avsnittsnamn efter säsongs-/avsnittsinfo.",
+                showPresenceWhenMedia: "Visa närvaro när media är pausad.",
+                hideMediaDetails: "Dölj mediedetaljer.",
+                discordRichPresenceFor: "Discord Rich Presence för Gensokyo Radio. Aktivera och lyssna!",
+                refreshIntervalInSeconds: "Uppdateringsintervall i sekunder.",
+                showWhatYouRe3: "Visa vad du lyssnar på via Navidrome.",
+                navidromeServerUrlMust: "Navidrome-serverns URL (måste vara en offentlig domän, t.ex. https://navidrome.example.com).",
+                navidromeUsername: "Navidrome-användarnamn.",
+                navidromePassword: "Navidrome-lösenord.",
+                optionalDiscordApplicationClient: "Valfritt klient-ID för Discord-applikation.",
+                howToFetchAlbum: "Hur albumomslag hämtas.",
+                optionalProvideYourOwn: "Valfritt: Ange din egen Last.fm API-nyckel (standard används om tomt).",
+                showNavidromeLogoIn: "Visa Navidrome-logotyp nere till höger på albumomslaget.",
+                showAlbumNameIn: "Visa albumnamn i närvaron.",
+                whichTypeOfActivity: "Vilken aktivitetstyp som ska visas.",
+                showTheStateDetails: "Visa innehåll från tillstånds-/detaljraden i medlemslistan",
+                hideRichPresenceWhen: "Dölj Rich Presence när musiken är pausad (i stället för att visa ett stoppur)",
+                theListeningToText: "Texten 'Lyssnar på' (t.ex. {artist})",
+                navidrome: "Navidrome",
+                theMainLineShowing: "Huvudraden som visar vilken låt som spelas (t.ex. {song})",
+                song: "{song}",
+                theLineBelowThe: "Raden under låtnamnet (t.ex. {artist})",
+                artist: "{artist}",
+                theAlbumLineE: "Albumraden (t.ex. {album})",
+                album: "{album}",
+                enableTabLabelsCurrenttab: "Aktivera {{TAB_LABELS_currentTab}}-närvaro.",
+                statsFmProfile: "Stats.fm-profil",
+                viewSong: "Visa låt",
+                showArtistName: "Visa artistnamn",
+                showTrackName: "Visa spårnamn",
+                enterValue: "Ange ett värde"
+            },
+            name: "RichPresence",
+            description: "Samlad Rich Presence-hubb för AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome och Gensokyo Radio.",
+            toast: {
+                audiobookshelfRpcIsNot: "AudioBookShelf-RPC är inte konfigurerad.",
+                jellyfinRpcIsNot: "Jellyfin-RPC är inte konfigurerad.",
+                jellyfinReturnedAnInvalid: "Jellyfin returnerade ett ogiltigt svar. Din API-nyckel kan vara fel."
+            },
+            option: {
+                enabled: {
+                    description: "Aktivera Rich Presence-tjänster.",
+                    label: "Aktiverad"
+                },
+                serviceSettings: {
+                    description: "Tjänstkonfiguration.",
+                    label: "Tjänstinställningar"
+                },
+                abs_enabled: {
+                    description: "Aktivera AudioBookShelf-närvaro.",
+                    label: "AudioBookShelf aktiverad"
+                },
+                tosu_enabled: {
+                    description: "Aktivera osu! (tosu)-närvaro.",
+                    label: "osu! (tosu) aktiverad"
+                },
+                sfm_enabled: {
+                    description: "Aktivera stats.fm-närvaro.",
+                    label: "Stats.fm aktiverad"
+                },
+                jf_enabled: {
+                    description: "Aktivera Jellyfin-närvaro.",
+                    label: "Jellyfin aktiverad"
+                },
+                gr_enabled: {
+                    description: "Aktivera Gensokyo Radio-närvaro.",
+                    label: "Gensokyo Radio aktiverad"
+                },
+                nd_enabled: {
+                    description: "Aktivera Navidrome-närvaro.",
+                    label: "Navidrome aktiverad"
+                },
+                abs_serverUrl: {
+                    description: "URL till AudioBookShelf-servern.",
+                    label: "AudioBookShelf-server-URL"
+                },
+                abs_username: {
+                    description: "AudioBookShelf-användarnamn.",
+                    label: "AudioBookShelf-användarnamn"
+                },
+                abs_password: {
+                    description: "AudioBookShelf-lösenord.",
+                    label: "AudioBookShelf-lösenord"
+                },
+                sfm_username: {
+                    description: "Stats.fm-användarnamn.",
+                    label: "Stats.fm-användarnamn"
+                },
+                sfm_shareUsername: {
+                    description: "Visa länk till stats.fm-profil.",
+                    label: "Stats.fm: dela användarnamn"
+                },
+                sfm_shareSong: {
+                    description: "Visa länk till låten på stats.fm.",
+                    label: "Stats.fm: dela låt"
+                },
+                sfm_hideWithSpotify: {
+                    description: "Dölj stats.fm-närvaro om Spotify körs.",
+                    label: "Stats.fm: dölj med Spotify"
+                },
+                sfm_hideWithExternalRPC: {
+                    description: "Dölj stats.fm-närvaro om en extern RPC körs.",
+                    label: "Stats.fm: dölj vid extern RPC"
+                },
+                sfm_statusName: {
+                    description: "Anpassad statustext.",
+                    label: "Stats.fm: statusnamn"
+                },
+                sfm_nameFormat: {
+                    description: "Namnformat.",
+                    label: "Stats.fm: namnformat",
+                    statusName: "Använd anpassat statusnamn",
+                    artistFirst: "Använd formatet 'artist - låt'",
+                    songFirst: "Använd formatet 'låt - artist'",
+                    artistOnly: "Använd endast artistnamn",
+                    songOnly: "Använd endast låtnamn",
+                    albumName: "Använd albumnamn"
+                },
+                sfm_useListeningStatus: {
+                    description: "Visa lyssningsstatus.",
+                    label: "Stats.fm: använd lyssningsstatus"
+                },
+                sfm_missingArt: {
+                    description: "Reserv när omslag saknas.",
+                    label: "Stats.fm: saknat omslag",
+                    statsFmLogo: "Använd stor Stats.fm-logotyp",
+                    placeholder: "Använd generisk platshållare"
+                },
+                sfm_showLogo: {
+                    description: "Visa Stats.fm-logotyp bredvid albumomslaget.",
+                    label: "Stats.fm: visa logotyp"
+                },
+                sfm_alwaysHideArt: {
+                    description: "Inaktivera nedladdning av albumomslag.",
+                    label: "Stats.fm: dölj alltid omslag"
+                },
+                jf_serverUrl: {
+                    description: "Jellyfin-serverns URL.",
+                    label: "Jellyfin-server-URL"
+                },
+                jf_apiKey: {
+                    description: "Jellyfin API-nyckel.",
+                    label: "Jellyfin API-nyckel"
+                },
+                jf_userId: {
+                    description: "Jellyfin-användar-ID.",
+                    label: "Jellyfin-användar-ID"
+                },
+                jf_nameDisplay: {
+                    description: "Format för namnvisning.",
+                    label: "Jellyfin: namnvisning",
+                    default: "Serie-/filmnamn",
+                    full: "Serie - avsnitts-/spår-/filmnamn",
+                    custom: "Anpassad"
+                },
+                jf_customName: {
+                    description: "Anpassad namnmall.",
+                    label: "Jellyfin: anpassat namn"
+                },
+                jf_coverType: {
+                    description: "Omslagstyp för tv-serier.",
+                    label: "Jellyfin: omslagstyp",
+                    series: "Serieomslag",
+                    episode: "Avsnittsomslag"
+                },
+                jf_episodeFormat: {
+                    description: "Format för avsnittsnummer.",
+                    label: "Jellyfin: avsnittsformat",
+                    long: "S01E01",
+                    fulltext: "Säsong 1 avsnitt 1"
+                },
+                jf_showEpisodeName: {
+                    description: "Visa avsnittsnamn efter säsongs-/avsnittsinfo.",
+                    label: "Jellyfin: visa avsnittsnamn"
+                },
+                jf_overrideType: {
+                    description: "Åsidosätt typ av Rich Presence.",
+                    label: "Jellyfin: åsidosätt typ",
+                    off: "Av",
+                    listening: "Lyssnar",
+                    playing: "Spelar",
+                    streaming: "Streamar",
+                    watching: "Tittar"
+                },
+                jf_showPausedState: {
+                    description: "Visa närvaro när media är pausad.",
+                    label: "Jellyfin: visa pausat läge"
+                },
+                jf_privacyMode: {
+                    description: "Dölj mediedetaljer.",
+                    label: "Jellyfin: integritetsläge"
+                },
+                gr_refreshInterval: {
+                    description: "Uppdateringsintervall i sekunder.",
+                    label: "Gensokyo Radio: uppdateringsintervall"
+                },
+                nd_serverUrl: {
+                    description: "Navidrome-serverns URL (t.ex. https://navidrome.example.com)",
+                    label: "Navidrome-server-URL"
+                },
+                nd_username: {
+                    description: "Navidrome-användarnamn",
+                    label: "Navidrome-användarnamn"
+                },
+                nd_password: {
+                    description: "Navidrome-lösenord",
+                    label: "Navidrome-lösenord"
+                },
+                nd_clientId: {
+                    description: "Valfritt klient-ID för Discord-applikation",
+                    label: "Navidrome: klient-ID"
+                },
+                nd_showSmallImage: {
+                    description: "Visa Navidrome-logotyp nere till höger på albumomslaget.",
+                    label: "Navidrome: visa liten bild"
+                },
+                nd_showAlbum: {
+                    description: "Visa albumnamn i närvaron.",
+                    label: "Navidrome: visa album"
+                },
+                nd_albumArtMode: {
+                    description: "Hur albumomslag hämtas.",
+                    label: "Navidrome: läge för albumomslag",
+                    none: "Ingen",
+                    instance: "Navidrome-instans (exponerar server-URL för Discord, ingen autentisering skickas)",
+                    lastfm: "Last.fm-API (skickar spårmetadata till Last.fm)"
+                },
+                nd_lastfmApiKey: {
+                    description: "Valfri Last.fm API-nyckel",
+                    label: "Navidrome: Last.fm API-nyckel"
+                },
+                nd_refreshInterval: {
+                    description: "Uppdateringsintervall i sekunder.",
+                    label: "Navidrome: uppdateringsintervall"
+                },
+                nd_activityType: {
+                    description: "Vilken aktivitetstyp",
+                    label: "Navidrome: aktivitetstyp",
+                    listening: "Lyssnar",
+                    playingFixesHiddenLines: "Spelar (åtgärdar dolda rader)",
+                    watching: "Tittar"
+                },
+                nd_nameString: {
+                    description: "Formatsträng för aktivitetsnamn",
+                    label: "Navidrome: namnsträng"
+                },
+                nd_detailsString: {
+                    description: "Formatsträng för aktivitetsdetaljer",
+                    label: "Navidrome: detaljsträng"
+                },
+                nd_stateString: {
+                    description: "Formatsträng för aktivitetstillstånd",
+                    label: "Navidrome: tillståndssträng"
+                },
+                nd_largeTextString: {
+                    description: "Formatsträng för aktivitetens stora text",
+                    label: "Navidrome: sträng för stor text"
+                },
+                nd_statusDisplayType: {
+                    description: "Visa spår-/artistnamn i medlemslistan",
+                    off: "Visa inte (visar allmänt lyssningsmeddelande)"
+                },
+                nd_hideOnPause: {
+                    description: "Dölj Rich Presence när musiken är pausad",
+                    label: "Navidrome: dölj vid paus"
+                }
+            },
+            panel: {
+                password: "Lösenord",
+                statsFmUsername: "stats.fm-användarnamn",
+                customStatusText: "Anpassad statustext",
+                nameFormat: "Namnformat",
+                missingArtFallback: "Reserv vid saknat omslag",
+                showListeningStatus: "Visa lyssningsstatus",
+                showStatsFmLogo: "Visa Stats.fm-logotyp",
+                showProfileLink: "Visa profillänk",
+                showSongLink: "Visa låtlänk",
+                hideWithSpotify: "Dölj med Spotify",
+                hideWithExternalRpc: "Dölj vid extern RPC",
+                disableAlbumArt: "Inaktivera albumomslag",
+                apiKey: "API-nyckel",
+                userId: "Användar-ID",
+                nameDisplay: "Namnvisning",
+                customNameTemplate: "Anpassad namnmall",
+                coverType: "Omslagstyp",
+                episodeFormat: "Avsnittsformat",
+                overridePresenceType: "Åsidosätt närvarotyp",
+                showEpisodeName: "Visa avsnittsnamn",
+                showWhenPaused: "Visa vid paus",
+                privacyMode: "Integritetsläge",
+                refreshInterval: "Uppdateringsintervall",
+                clientId: "Klient-ID",
+                albumArtMode: "Läge för albumomslag",
+                lastFmApiKey: "Last.fm API-nyckel",
+                showSmallImage: "Visa liten bild",
+                showAlbum: "Visa album",
+                activityType: "Aktivitetstyp",
+                statusDisplayType: "Visningstyp för status",
+                hideOnPause: "Dölj vid paus",
+                activityNameFormat: "Format för aktivitetsnamn",
+                detailsFormat: "Format för detaljer",
+                stateFormat: "Format för tillstånd",
+                largeTextFormat: "Format för stor text",
+                enabled: "Aktiverad"
+            }
+        },
+        sedEnhanced: {
+            option: {
+                regexByDefault: {
+                    description: "Inverterar `r`-flaggan, så att `r` aktiverar icke-regex-läge och utan den används regex-läge.",
+                    label: "Regex som standard"
+                }
+            },
+            name: "SedEnhanced",
+            description: "Utökar Discords grundläggande stöd för `sed`."
+        },
+        showRolesInChat: {
+            option: {
+                showBots: {
+                    description: "Om den högsta rollen ska visas för botar.",
+                    label: "Visa botar"
+                },
+                useRoleColor: {
+                    description: "Använd rollens färg för ikonen.",
+                    label: "Använd rollfärg"
+                }
+            },
+            name: "ShowRolesInChat",
+            description: "Visar en användares högsta roll bredvid namnet i chattmeddelanden. Dölj/visa specifika roller i deras snabbmeny (högerklick).",
+            text: {
+                chatRoleActions: "Rollåtgärder i chatten",
+                unhideRolesInChat: "Visa roller i chatten igen",
+                showRoleInChat: "Visa roll i chatten",
+                hideRoleInChat: "Dölj roll i chatten"
+            }
+        },
+        silenceUsers: {
+            option: {
+                mutedUserIds: {
+                    description: "Kommaseparerade Discord-användar-ID:n vars pingar och servermärken ska tystas.",
+                    label: "Tystade användar-ID:n"
+                }
+            },
+            name: "SilenceUsers",
+            description: "Tystar @omnämnandepingar och servermärkesräknare från specifika användare. Vanliga meddelanden och DM påverkas inte."
+        },
+        songLink: {
+            text: {
+                showIfAvailable: "Visa om tillgänglig",
+                openInDesktopApp: "Öppna i skrivbordsappen",
+                loadingSongLink: "Läser in låtlänk...",
+                pleaseProvideAMusic: "Ange en musiklänk.",
+                thisWillTakeA: "Det här tar en stund...",
+                noAlternativePlatformsFound: "Inga alternativa plattformar hittades för den här länken.",
+                failedToResolveMusic: "Det gick inte att lösa musiklänken",
+                logo: "{{name}}-logotyp"
+            },
+            option: {
+                servicesSettings: {
+                    description: "inställningar för tjänster",
+                    label: "Tjänstinställningar"
+                },
+                userCountry: {
+                    description: "Land som används för sökning (landskod med två bokstäver)",
+                    label: "Användarens land"
+                },
+                includeMetadata: {
+                    description: "Inkludera spårets titel och artistnamn som rubrik.",
+                    label: "Inkludera metadata"
+                }
+            },
+            name: "SongLink",
+            description: "Lägger till knappar för strömningstjänster under låtlänkar",
+            command: {
+                musiclink: "Konvertera en musiklänk till andra strömningsplattformar.",
+                url: "Musiklänk (Spotify, Deezer, YouTube, Tidal, Apple Music, SoundCloud)"
+            }
+        },
+        songSpotlight: {
+            name: "SongSpotlight",
+            description: "Visa upp låtar på din profil",
+            text: {
+                songSpotlight: "Song Spotlight",
+                explicit: "Explicit",
+                addSong: "Lägg till låt",
+                addANewSong: "Lägg till en ny låt",
+                copyLink: "Kopiera länk",
+                removeSong: "Ta bort låt",
+                failedToLoad: "Det gick inte att läsa in!",
+                areYouSure: "Är du säker?",
+                thisWillOverwriteYour: "Detta skriver över dina nuvarande låtar.",
+                continue: "Fortsätt",
+                nevermind: "Glöm det",
+                thisWillPermanentlyDelete: "Detta tar bort alla dina låtar permanent.",
+                delete: "Ta bort",
+                signInToSong: "Logga in på Song Spotlight",
+                songs: "Låtar",
+                authorization: "Authorization",
+                importFromClipboard: "Importera från urklipp",
+                copyToClipboard: "Kopiera till urklipp",
+                signOut: "Logga ut",
+                deleteSongs: "Ta bort låtar",
+                more: "Mer",
+                editSongs: "Redigera låtar",
+                copyJson: "Kopiera JSON",
+                looksLikeThereS: "Det verkar inte finnas något här!",
+                uhOhSongSpotlight: "Hoppsan! Song Spotlight kunde inte läsas in. Se konsolen för mer information.",
+                stealSong: "Stjäl låt",
+                profileSongs: "Profillåtar",
+                notEnoughSpace: "Inte tillräckligt med utrymme",
+                alreadyAdded: "Du har redan lagt till den här låten",
+                invalidLink: "Ogiltig länk",
+                failedToParseLink: "Kunde inte tolka länken",
+                invalidUrl: "Ogiltig URL",
+                goAddSongs: "Nå? Vad väntar du på? Lägg till några låtar i din Song Spotlight!",
+                tellUserToAddSongs: "Be {{name}} att lägga till några låtar i sin Song Spotlight!",
+                supportedServices: "Song Spotlight stöder dessa tjänster:",
+                viewSongsVia: "Du kan också se dina låtar via kommandot",
+                viewSongsViaSuffix: "!",
+                coverTooltipOwner: "{{label}}s {{sublabel}}",
+                coverTooltipBy: "{{label}} av {{sublabel}}",
+                lastUpdated: "Senast uppdaterad",
+                save: "Spara",
+                showMore: "Visa {{count}} till"
+            },
+            toast: {
+                youHaveBeenSigned: "Du har loggats ut från Song Spotlight. Logga in igen.",
+                songSpotlightError: "Song Spotlight: {{error}}",
+                successfullyAuthorized: "Auktoriseringen lyckades!",
+                failedToPlaySong: "Det gick inte att spela upp låtförhandsvisningen!",
+                addedSong: "Låt tillagd!",
+                removedSong: "Låt borttagen!",
+                noJsonInClipboard: "Ingen JSON i urklipp!",
+                invalidSongSpotlightData: "Ogiltig Song Spotlight-data i urklipp!",
+                oneOrMoreImported: "En eller flera importerade låtar var ogiltiga.",
+                importedSongsFromClipboard: "Låtar importerade från urklipp!",
+                successfullySavedSongs: "Låtarna har sparats!",
+                successfullySignedOut: "Utloggningen lyckades!",
+                successfullyDeletedSongs: "Låtarna har tagits bort!",
+                youDonTHave: "Du har inte tillräckligt med plats!",
+                uhOhThisSong: "Hoppsan, den här låten finns inte!",
+                youAlreadyHaveThis: "Du har redan lagt till den här låten!",
+                youDonTHave2: "Du... har inte lagt till den här låten?",
+                fetchError: "Song Spotlight-hämtningsfel vid {{path}}"
+            },
+            option: {
+                collapseSongList: {
+                    description: "Fäller ihop låtlistan på profiler till en knapp som öppnar en separat meny",
+                    label: "Fäll ihop låtlista"
+                },
+                profileSongsLimit: {
+                    description: "Hur många låtar som visas när man först klickar på en användare",
+                    label: "Gräns för profillåtar"
+                },
+                previewVolume: {
+                    description: "Volym för låtförhandsvisningar",
+                    label: "Förhandsvisningsvolym"
+                }
+            }
+        },
+        stopAutoUnread: {
+            name: "StopAutoUnread",
+            description: "Hindrar Discord från att automatiskt ändra en kanals aviseringsinställning till \"Alla meddelanden\""
+        },
+        themeLibrary: {
+            text: {
+                enablePlugin: "Aktivera plugin",
+                cancel: "Avbryt",
+                holdOn: "Vänta lite!",
+                thisThemeRequiresThe: "Det här temat kräver",
+                pluginToWorkProperly: "plugin för att fungera korrekt!",
+                doYouWantTo: "Vill du aktivera det?",
+                themeInfo: "Temainfo",
+                viewSource: "Visa källa",
+                close: "Stäng",
+                download: "Ladda ned",
+                overwrite: "Skriv över",
+                keepMyFile: "Behåll min fil",
+                copyToClipboard: "Kopiera till urklipp",
+                conflict: "Konflikt!",
+                themeSource: "Temakälla",
+                aThemeWithThe: "Ett tema med samma namn",
+                alreadyExists: "finns redan",
+                inYourThemesDirectory: "i din temamapp! Vill du skriva över det?",
+                version: "Version",
+                likes: "Gillanden",
+                donate: "Donera",
+                supportServer: "Supportserver",
+                source: "Källa",
+                tags: "Taggar",
+                youCanSupportThe: "Du kan stödja upphovspersonen genom att donera nedan!",
+                joinDiscordServer: "Gå med i Discord-servern",
+                viewThemeSource: "Visa temakälla",
+                showAll: "Visa alla",
+                showThemes: "Visa teman",
+                showSnippets: "Visa kodsnuttar",
+                showMostLiked: "Visa mest gillade",
+                showDark: "Visa mörka",
+                showLight: "Visa ljusa",
+                showEnabled: "Visa aktiverade",
+                showDisabled: "Visa inaktiverade",
+                searchForATheme: "Sök efter ett tema...",
+                gettingTheLatestThemes: "Hämtar de senaste temana...",
+                thisWonTTake: "Det tar inte lång tid!",
+                failedToFetchThemes: "Det gick inte att hämta teman",
+                couldNotFetchThe: "Det gick inte att hämta temalistan. Försök igen senare.",
+                wantYourThemeRemoved: "Vill du att ditt tema tas bort?",
+                hide: "Dölj",
+                noThemeFound: "Inget tema hittades.",
+                tryNarrowingYourSearch: "Försök att begränsa sökningen.",
+                themeLibrary: "Temabibliotek",
+                successfullyAuthorizedWithThemelibrary: "Auktoriserad med ThemeLibrary!",
+                failedToAuthorizeCheck: "Auktoriseringen misslyckades, se konsolen",
+                successfullyDeauthorizedFromThemelibrary: "Auktoriseringen hos ThemeLibrary har återkallats!",
+                failedToDeauthorizeCheck: "Det gick inte att återkalla, se konsolen",
+                themelibraryAuth: "ThemeLibrary-autentisering",
+                themeRemoval: "Borttagning av tema",
+                allThemeAuthorsAre: "Alla temaförfattare krediteras i temainfon och ingen källa har ändrats. Om du ändå vill att ditt tema tas bort kan du öppna ett ärende genom att klicka nedan.",
+                authorizeWithThemelibrary: "Auktorisera med ThemeLibrary",
+                copyThemelibraryToken: "Kopiera ThemeLibrary-token",
+                deauthorizeThemelibrary: "Återkalla auktorisering hos ThemeLibrary",
+                themeDetails: "Detaljer om {{name}}",
+                mostLiked: "Mest gillade",
+                newestAdditions: "Senaste tilläggen",
+                removeTheme: "Ta bort tema",
+                addTheme: "Lägg till tema",
+                authors: "Upphovspersoner",
+                author: "Upphovsperson",
+                nobodyLikedTheme: "Ingen har gillat det här temat än.",
+                nobodyLikedSnippet: "Ingen har gillat det här snippet än.",
+                usersLikedTheme: "{{likes}} användare gillade det här temat!",
+                usersLikedSnippet: "{{likes}} användare gillade det här snippet!",
+                openThemeLibrary: "Öppna temabiblioteket",
+                lastUpdated: "Det här temat uppdaterades senast",
+                removalInfo: "Om du vill att dina teman tas bort permanent, öppna ett ärende på",
+                themes: "Teman",
+                requestRemoval: "Begär borttagning av tema",
+                pluginSuffix: "pluginet!"
+            },
+            toast: {
+                downloadedName: "{{name}} har laddats ned!",
+                failedToDownloadName: "Det gick inte att ladda ned {{name}}! (se konsolen)",
+                invalidOrExpiredInvite: "Ogiltig eller utgången inbjudan!",
+                copiedToClipboard: "Kopierat till urklipp",
+                noUniquetokenPresentTry: "Ingen uniqueToken finns, försök auktorisera först!",
+                noTokenToCopy: "Ingen token att kopiera, försök auktorisera först!",
+                copiedToClipboard2: "Kopierat till urklipp!"
+            },
+            name: "ThemeLibrary",
+            description: "Ett bibliotek med teman för Plexcord.",
+            option: {
+                hideWarningCard: {
+                    description: "Dölj varningskortet högst upp på fliken Temabibliotek",
+                    label: "Dölj varningskort"
+                },
+                buttons: {
+                    description: "ThemeLibrary-knappar",
+                    label: "Knappar"
+                }
+            }
+        },
+        translatePlus: {
+            name: "Translate+",
+            description: "Plexcords översättningsplugin, men med stöd för konstspråk!",
+            text: {
+                translate: "Översätt",
+                dismiss: "Avfärda",
+                translationFailedDueTo: "Översättningen misslyckades på grund av ett fel.",
+                translatedFrom: "översatt från {{lang}}"
+            },
+            option: {
+                target: {
+                    description: "Målspråk",
+                    label: "Mål"
+                },
+                toki: {
+                    description: "Aktivera Toki Pona",
+                    label: "Toki Pona"
+                },
+                sitelen: {
+                    description: "Aktivera Sitelen Pona",
+                    label: "Sitelen Pona"
+                },
+                shavian: {
+                    description: "Aktivera Shavian",
+                    label: "Shavian"
+                }
+            }
+        },
+        triviaAI: {
+            name: "TriviaAI",
+            description: "Ett plugin som hjälper dig att svara på frågesportfrågor med AI.",
+            text: {
+                answerWithAi: "Svara med AI",
+                enterApiKeyHere: "Ange API-nyckeln för din AI-slutpunkt här.",
+                enterSystemPrompt: "Ange systemprompt.",
+                enterYourOpenaiCompatible: "Ange din OpenAI-kompatibla AI-slutpunkt här.",
+                status: "Status {{status}}"
+            },
+            option: {
+                apiKey: {
+                    description: "API-nyckel.",
+                    label: "API-nyckel"
+                },
+                model: {
+                    description: "AI-modell som ska användas.",
+                    label: "Modell",
+                    placeholder: "t.ex. google/gemini-3-flash-preview, inception/mercury, openai/gpt-5.2-chat osv."
+                },
+                systemPrompt: {
+                    description: "Systemprompt för AI:n. Platshållare: {current_user}, {current_time}",
+                    label: "Systemprompt"
+                },
+                maxTokens: {
+                    description: "Maximalt antal token i svaret.",
+                    label: "Max token"
+                },
+                endpoint: {
+                    description: "OpenAI-kompatibel AI-slutpunkt.",
+                    label: "Slutpunkt"
+                },
+                context: {
+                    description: "Antal tidigare meddelanden som tas med som kontext.",
+                    label: "Kontext"
+                },
+                passMessageAuthorName: {
+                    description: "Lägg till författarens namn före meddelandeinnehållet när det skickas till AI:n. Det kan hjälpa AI:n att skilja på användare i en konversation.",
+                    label: "Skicka meddelandeförfattarens namn"
+                },
+                treatSelfAsAssistant: {
+                    description: "När det är aktiverat behandlas dina egna meddelanden som assistentmeddelanden i kontexten. Det får vissa modeller att börja skriva fanfiction.",
+                    label: "Behandla mig som assistent"
+                },
+                mode: {
+                    description: "Hur ska svar hanteras?",
+                    label: "Läge",
+                    autoreply: "Svara automatiskt",
+                    chatbar: "Ersätt text i chattfältet",
+                    bot: "Clyde"
+                },
+                supportImages: {
+                    description: "Skicka bilder till AI:n som kontext (om det finns några). Stöds inte av alla modeller.",
+                    label: "Stöd för bilder"
+                },
+                sendImagesAsBase64: {
+                    description: "Skicka bilder till AI:n som base64.",
+                    label: "Skicka bilder som base64"
+                }
+            },
+            toast: {
+                triviaaiApiSettingsAre: "TriviaAI: API-inställningarna är ofullständiga.",
+                errorGettingResponseFrom: "Fel vid hämtning av svar från AI-modellen"
+            }
+        },
+        unreadCountBadge: {
+            option: {
+                showOnMutedChannels: {
+                    description: "Visa antal olästa i tystade kanaler",
+                    label: "Visa i tystade kanaler"
+                },
+                notificationCountLimit: {
+                    description: "Visa +99 i stället för det faktiska antalet",
+                    label: "Gräns för aviseringsantal"
+                }
+            },
+            name: "UnreadCountBadge",
+            description: "Visar märken med antal olästa meddelanden på kanaler i kanallistan"
+        },
+        userPFP: {
+            toast: {
+                gifsWebpMustBe: "GIF/WebP måste läggas till via URL. Ladda upp din GIF/WebP till en bildvärdtjänst och klistra in länken."
+            },
+            text: {
+                save: "Spara",
+                delete: "Ta bort",
+                customAvatar: "Anpassad avatar",
+                original: "Original",
+                local: "Lokal",
+                enterPngGifUrl: "Ange PNG/GIF-URL",
+                setAvatar: "Ange avatar",
+                usingTheSetAvatar: "Funktionen för att ange avatar är endast lokal, så bara du ser ändringen.",
+                joinUserpfpServer: "Gå med i UserPFP-servern",
+                dropHere: "Släpp här!",
+                dragOrClick: "⬆ Dra en bild eller klicka för att ladda upp (använd en URL för GIF:ar eller WebP)",
+                uploadedFile: "(uppladdad fil)",
+                supportHere: "Stöd UserPFP här"
+            },
+            option: {
+                overrideServerAvatars: {
+                    description: "Åsidosätt serveravatarer med anpassade avatarer eller standardavataren om ingen anpassad har angetts.",
+                    label: "Åsidosätt serveravatarer"
+                },
+                preferNitro: {
+                    description: "Vilken avatar som används om både standard animerad (Nitro) profilbild och UserPFP-avatar finns",
+                    label: "Föredra Nitro",
+                    false: "UserPFP",
+                    true: "Nitro"
+                },
+                databaseSource: {
+                    description: "URL som databasen läses in från",
+                    label: "Databaskälla"
+                }
+            },
+            name: "UserPFP",
+            description: "Låter dig ange lokala statiska eller animerade avatarer för dig själv och andra användare"
+        },
+        userpluginInstaller: {
+            toast: {
+                restartToApplyChanges: "Starta om för att tillämpa ändringarna!"
+            },
+            text: {
+                installError: "Installationsfel",
+                done: "Klart!",
+                later: "Senare",
+                updateError: "Uppdateringsfel",
+                checkingForUpdates: "Söker efter uppdateringar...",
+                loadingPlugins: "Läser in pluginer...",
+                pluginUpdatesAvailable: "Pluginuppdateringar tillgängliga",
+                theFollowingPluginsAre: "Följande pluginer är inaktuella:",
+                youCanUpdatePlugins: "Du kan uppdatera pluginer nedan.",
+                installPlugin: "Installera plugin",
+                userplugininstallerNotFullyLoaded: "UserpluginInstaller är inte helt inläst",
+                youNeedToRestart: "Du måste starta om för att den inbyggda delen ska läsas in :)",
+                restartNow: "Starta om nu",
+                someUserpluginsAreOut: "Vissa UserPlugins är inaktuella!",
+                clickToOpenThe: "Klicka för att öppna UserPlugin-uppdateraren",
+                plexcordDoesNotModerate: "Plexcord modererar inte userplugins och tar inget ansvar för något som kan bli följden av att installera dem.",
+                onlyInstallUserpluginsFrom: "Installera bara userplugins från utvecklare du litar på. Det sker helt på egen risk.",
+                setGitPath: "Ange Git-sökväg",
+                installHint: "Du kan installera ett plugin från GitHub, GitLab, Codeberg, git.nin0.dev eller plugins.nin0.dev genom att klistra in dess klon-URL här.",
+                enableAndRestart: "Aktivera och starta om",
+                enableAndRefresh: "Aktivera och uppdatera",
+                tabCounts: "({{total}}, {{enabled}} aktiverade)",
+                possiblyMore: "och möjligen fler, eftersom uppdateringskontrollen inte är klar. ",
+                alreadyInstalled: "Pluginet är redan installerat, uppdatera nedan",
+                invalidUrl: "Ogiltig URL, läs informationen ovan",
+                install: "Installera",
+                restart: "Starta om",
+                refresh: "Uppdatera",
+                update: "Uppdatera",
+                source: "Källa",
+                support: "Support",
+                managePlugins: "Hantera plugins",
+                uninstalledRestart: "{{name}} har avinstallerats. En omstart krävs för att ta bort pluginet helt.",
+                uninstalledRefresh: "{{name}} har avinstallerats. En uppdatering krävs för att ta bort pluginet helt.",
+                updatedRestart: "{{name}} har uppdaterats. En omstart krävs för att tillämpa uppdateringen.",
+                updatedRefresh: "{{name}} har uppdaterats. En uppdatering krävs för att tillämpa uppdateringen.",
+                installedBody: "{{name}} har installerats. Vad nu?",
+                installedNativeBody: "{{name}} har installerats. Eftersom det använder native-funktioner krävs dock en omstart av klienten. Vad nu?"
+            },
+            option: {
+                allowlistedChannels: {
+                    description: "Kommaseparerad lista med kanaler där knappen Installera plugin ska visas. Den visas alltid i Plexcords userplugin-kanaler",
+                    label: "Tillåtna kanaler"
+                },
+                notifyIfUpdate: {
+                    description: "Visa en Plexcord-avisering om UserPlugins behöver uppdateras",
+                    label: "Meddela vid uppdatering"
+                },
+                neverNotifyForPlugins: {
+                    description: "Visa aldrig uppdateringsaviseringar för dessa pluginer (du kan fortfarande uppdatera dem från fliken UserPlugins)",
+                    label: "Meddela aldrig för pluginer"
+                }
+            },
+            name: "UserpluginInstaller",
+            description: "Installera userplugins med ett enkelt knapptryck"
+        },
+        vCPanelSettings: {
+            option: {
+                title1: {
+                    label: "Titel 1"
+                },
+                uncollapseSettingsByDefault: {
+                    description: "Fäll automatiskt ut röstinställningar som standard",
+                    label: "Fäll ut inställningar som standard"
+                },
+                title2: {
+                    label: "Titel 2"
+                },
+                outputVolume: {
+                    description: "Visa ett skjutreglage för utgångsvolym",
+                    label: "Utgångsvolym"
+                },
+                inputVolume: {
+                    description: "Visa ett skjutreglage för ingångsvolym",
+                    label: "Ingångsvolym"
+                },
+                outputDevice: {
+                    description: "Visa en väljare för utgångsenhet",
+                    label: "Utgångsenhet"
+                },
+                inputDevice: {
+                    description: "Visa en väljare för ingångsenhet",
+                    label: "Ingångsenhet"
+                },
+                camera: {
+                    description: "Visa en kameraväljare",
+                    label: "Kamera"
+                },
+                title3: {
+                    label: "Titel 3"
+                },
+                showOutputVolumeHeader: {
+                    description: "Visa rubrik ovanför skjutreglaget för utgångsvolym",
+                    label: "Visa rubrik för utgångsvolym"
+                },
+                showInputVolumeHeader: {
+                    description: "Visa rubrik ovanför skjutreglaget för ingångsvolym",
+                    label: "Visa rubrik för ingångsvolym"
+                },
+                showOutputDeviceHeader: {
+                    description: "Visa rubrik ovanför väljaren för utgångsenhet",
+                    label: "Visa rubrik för utgångsenhet"
+                },
+                showInputDeviceHeader: {
+                    description: "Visa rubrik ovanför väljaren för ingångsenhet",
+                    label: "Visa rubrik för ingångsenhet"
+                },
+                showVideoDeviceHeader: {
+                    description: "Visa rubrik ovanför kameraväljaren",
+                    label: "Visa rubrik för videoenhet"
+                }
+            },
+            name: "VCPanelSettings",
+            description: "Styr röstinställningar direkt från röstpanelen",
+            text: {
+                appearance: "Utseende",
+                settingsToShow: "Inställningar som ska visas",
+                headersToShow: "Rubriker som ska visas",
+                outputVolume: "Utgångsvolym",
+                inputVolume: "Ingångsvolym",
+                outputDevice: "Utgångsenhet",
+                inputDevice: "Ingångsenhet",
+                settings: "Inställningar",
+                hide: "Dölj"
+            }
+        },
+        voiceMessageTranscriber: {
+            text: {
+                autoDetect: "Identifiera automatiskt",
+                start: "Starta",
+                transcriptionOptions: "Transkriberingsalternativ",
+                audioLanguage: "Ljudspråk",
+                retry: "Försök igen",
+                transcriptionFailed: "Transkriberingen misslyckades",
+                transcribeVoiceMessage: "Transkribera röstmeddelande",
+                close: "Stäng",
+                baseRecommended: "Base (rekommenderas)",
+                small: "Small",
+                largeV3TurboBest: "Large v3 Turbo (bäst noggrannhet, GPU rekommenderas)",
+                transcribe: "Transkribera",
+                translateToEnglish: "Översätt till engelska",
+                voiceMessageTranslation: "Översättning av röstmeddelande",
+                voiceMessageTranscription: "Transkription av röstmeddelande",
+                hideTimestamps: "Dölj tidsstämplar",
+                showTimestamps: "Visa tidsstämplar",
+                copied: "Kopierat!",
+                copyText: "Kopiera text",
+                downloadingAudio: "Laddar ner ljud...",
+                processingAudio: "Bearbetar ljud...",
+                loadingModel: "Laddar modell...",
+                transcribing: "Transkriberar...",
+                transcription: "Transkription",
+                transcriptionError: "Transkriptionsfel",
+                transcribingInProgress: "Transkribering pågår...",
+                initializing: "Initierar...",
+                workerCrashed: "Transkriberingsprocessen kraschade",
+                workerStopped: "Transkriberingsprocessen stoppades",
+                deleteCache: "Ta bort alla cachade filer ({{size}} MB)",
+                action: "Åtgärd"
+            },
+            name: "VoiceMessageTranscriber",
+            description: "Transkribering av röstmeddelanden på enheten med Whisper",
+            option: {
+                embed: {
+                    description: "Visa transkriberingen direkt i röstmeddelandets bilaga i stället för i ett fönster.",
+                    label: "Inbäddning"
+                },
+                maintainHorizontal: {
+                    description: "Behåll den vågräta storleken för den inbäddade transkriberingsrutan och expandera lodrätt.",
+                    label: "Behåll vågrätt"
+                },
+                selectedModel: {
+                    description: "Modellstorlek.",
+                    onnxcommunitywhispertiny: "Tiny (snabbast, lägst noggrannhet)"
+                },
+                useGpu: {
+                    description: "Kör modellen på din GPU (WebGPU) när det stöds. Mycket snabbare och gör de större modellerna användbara. Faller tillbaka på CPU om det inte är tillgängligt.",
+                    label: "Använd GPU"
+                },
+                quantized: {
+                    description: "Använd kvantiserade modeller vid körning på CPU (mindre storlek, viss kvalitetsförlust).",
+                    label: "Kvantiserad"
+                },
+                deleteModalFiles: {
+                    description: "Ta bort cachade filer från lagringen.",
+                    label: "Ta bort modellfiler"
+                }
+            }
+        },
+        voiceMessagesInBackground: {
+            name: "VoiceMessagesInBackground",
+            description: "Fortsätter spela röstmeddelanden mellan chattar med en synkroniserad minispelare.",
+            text: {
+                voiceMessagesInBackground: "Bakgrundsspelare för röstmeddelanden",
+                returnToChannelname: "Tillbaka till {{channelName}}",
+                voiceMessagePosition: "Position i röstmeddelande",
+                changePlaybackSpeed: "Ändra uppspelningshastighet",
+                playbackSpeedSpeedTimes: "Uppspelningshastighet {{speed}} gånger",
+                closeVoiceMessagePlayer: "Stäng spelaren för röstmeddelanden",
+                voiceMessage: "Röstmeddelande",
+                directMessage: "Direktmeddelande",
+                resume: "Återuppta röstmeddelande",
+                pause: "Pausa röstmeddelande"
+            }
+        },
+        webPWA: {
+            name: "WebPWA",
+            description: "Gör Discord installerbart som en app (PWA). Aktiverar aviseringsmärken, globala kortkommandon och Discords egen namnlist.",
+            text: {
+                activities: "Aktiviteter",
+                hopIn: "Hoppa in",
+                status: "Status",
+                emojis: "Emojier",
+                rooms: "Rum",
+                discord: "Discord",
+                platforms: "Plattformar",
+                keybindsInfoBefore: "Anpassade globala Tryck för X-kortkommandon stöds. Gå till",
+                keybindsInfoAfter: "för att ändra dem. Håll för X-kortkommandon stöds inte."
+            }
+        },
+        "webRichPresence (arRPC)": {
+            name: "WebRichPresence (arRPC)"
+        },
+        webScreenShare: {
+            option: {
+                resolution: {
+                    description: "Upplösning",
+                    label: "Upplösning"
+                },
+                frameRate: {
+                    description: "Bildfrekvens",
+                    label: "Bildfrekvens"
+                },
+                contentHint: {
+                    description: "Innehållstips",
+                    label: "Innehållstips"
+                },
+                systemAudio: {
+                    description: "Tysta systemljud",
+                    label: "Systemljud"
+                }
+            },
+            name: "WebScreenShare",
+            description: "Lägger till en meny med alternativ för skärmdelning. Gör det möjligt att ändra upplösning, bildfrekvens, kodningstips och systemljud.",
+            text: {
+                stream: "Ström",
+                streamMuted: "Ström tystad",
+                streamMode: "Strömläge",
+                muteStreamAudio: "Tysta strömljud",
+                preventsSystemAudioFrom: "Förhindrar att systemljud tas med i din ström.",
+                showStreamPreviews: "Visa förhandsvisningar av strömmen",
+                allowsOthersToSee: "Låter andra se en förhandsvisning av din ström innan de går med.",
+                smootherVideo: "Mjukare video",
+                cleanerText: "Skarpare text",
+                userPreset: "Användarförinställning",
+                custom: "Anpassad",
+                gaming: "Spel",
+                screenshare: "Skärmdelning"
+            }
+        },
+        whitelistedEmojis: {
+            option: {
+                defaultEmojis: {
+                    description: "Dölj standard-Unicode-emojier från autokomplettering om de inte är vitlistade.",
+                    label: "Standardemojier"
+                },
+                serverEmojis: {
+                    description: "Dölj anpassade serveremojier från autokomplettering om de inte är vitlistade.",
+                    label: "Serveremojier"
+                },
+                disableToasts: {
+                    description: "Visa inte notiser när emojier läggs till eller tas bort.",
+                    label: "Inaktivera notiser"
+                },
+                whiteListedEmojis: {
+                    description: "Vitlistade emojier",
+                    label: "Vitlistade emojier"
+                },
+                exportEmojis: {
+                    description: "Exportera emojier",
+                    label: "Exportera emojier"
+                },
+                importEmojis: {
+                    description: "Importera emojier",
+                    label: "Importera emojier"
+                },
+                resetEmojis: {
+                    description: "Återställ emojier",
+                    label: "Återställ emojier"
+                }
+            },
+            name: "WhitelistedEmojis",
+            description: "Gör det möjligt att inaktivera alla meddelandeemojier utom en vitlistad uppsättning.",
+            toast: {
+                addedLengthEmojisTo: "Lade till {{length}} emojier i listan, {{length}} fanns redan",
+                removedLengthEmojisFrom: "Tog bort {{length}} emojier från listan",
+                nameIsAlreadyIn: "\"{{name}}\" finns redan i listan",
+                addedNameToThe: "Lade till \"{{name}}\" i listan",
+                nameIsNotIn: "\"{{name}}\" finns inte i listan",
+                removedNameFromThe: "Tog bort \"{{name}}\" från listan",
+                successfullyExportedEmojis: "Emojier exporterade",
+                successfullyImportedEmojis: "Emojier importerade",
+                invalidJsonData: "Ogiltiga JSON-data",
+                failedToImportEmojis: "Det gick inte att importera emojier: {{err}}",
+                resetEmojis: "Emojier återställda"
+            },
+            text: {
+                areYouSure: "Är du säker?",
+                thisWillOverwriteYour: "Detta skriver över din nuvarande vitlista.",
+                import: "Importera",
+                cancel: "Avbryt",
+                thisWillRemoveAll: "Detta tar bort alla emojier från din vitlista.",
+                reset: "Återställ",
+                addAllGuildEmojis: "Lägg till alla serverns emojier",
+                removeAllGuildEmojis: "Ta bort alla serverns emojier",
+                noEmojisInThe: "Inga emojier i vitlistan.",
+                removeAll: "Ta bort alla",
+                removeFromWhitelist: "Ta bort från vitlistan",
+                addToWhitelist: "Lägg till i vitlistan",
+                defaultEmojis: "Standardemojis",
+                guildEmojis: "Emojis från {{name}}",
+                guildFallback: "Server {{id}}",
+                whitelistedEmojis: "Vitlistade emojis",
+                remove: "Ta bort"
+            }
+        },
+        wigglyText: {
+            option: {
+                intensity: {
+                    description: "Animationsintensitet i px",
+                    label: "Intensitet"
+                }
+            },
+            name: "WigglyText",
+            description: "Lägger till en ny markdown-formatering som får text att vicka.",
+            text: {
+                leftAndRight: "vänster och höger",
+                byTyping: "genom att skriva",
+                upAndDown: "upp och ned",
+                inACircle: "i en cirkel",
+                youCanMakeTextWiggle: "Så här kan du få text att vicka:"
+            }
+        },
+        fixDiscordCss: {
+            description: "Åtgärdar Discords CSS-fördröjning"
+        },
+        directFileDownload: {
+            name: "DirectFileDownload",
+            description: "Ladda ner filer direkt från Discord i stället för att öppna dem i webbläsaren"
+        },
+        githubRepos: {
+            text: {
+                failedToFetchRepositories: "Kunde inte hämta repon",
+                personal: "Personligt",
+                unknown: "Okänd",
+                sortedByCount: "Sorterat efter antal repon. Klicka för att sortera A-Ö",
+                sortedAlphabetically: "Sorterat A-Ö. Klicka för att sortera efter antal repon",
+                mostRepos: "Flest repon"
+            }
         }
     }
 } as const;

@@ -6,11 +6,11 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { Button } from "@components/Button";
-import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
-import { ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
-interface ConfirmModalProps extends ModalProps {
+import { RenderModalProps } from "@plexcord/discord-types";
+import { Modal } from "@webpack/common";
+
+interface ConfirmModalProps extends RenderModalProps {
     title: string;
     message: string;
     confirmText: string;
@@ -19,7 +19,7 @@ interface ConfirmModalProps extends ModalProps {
     onCancel: () => void;
 }
 
-interface ImportProfilesModalProps extends ModalProps {
+interface ImportProfilesModalProps extends RenderModalProps {
     title: string;
     message: string;
     onOverride: () => void;
@@ -27,57 +27,65 @@ interface ImportProfilesModalProps extends ModalProps {
     onCancel: () => void;
 }
 
-export function ConfirmModal({ title, message, confirmText, cancelText, onConfirm, onCancel, onClose, transitionState }: ConfirmModalProps) {
+export function ConfirmModal({ title, message, confirmText, cancelText, onConfirm, onCancel, ...props }: ConfirmModalProps) {
     const closeAfter = (action: () => void) => () => {
         action();
-        onClose();
+        props.onClose();
     };
 
     return (
-        <ModalRoot transitionState={transitionState}>
-            <ModalHeader>
-                <Heading tag="h2">{title}</Heading>
-            </ModalHeader>
-            <ModalContent>
-                <Paragraph>{message}</Paragraph>
-            </ModalContent>
-            <ModalFooter>
-                <Button onClick={closeAfter(onConfirm)}>
-                    {confirmText}
-                </Button>
-                <Button variant="secondary" onClick={closeAfter(onCancel)}>
-                    {cancelText}
-                </Button>
-            </ModalFooter>
-        </ModalRoot>
+        <Modal
+            {...props}
+            size="sm"
+            title={title}
+            actions={[
+                {
+                    text: confirmText,
+                    variant: "primary",
+                    onClick: closeAfter(onConfirm)
+                },
+                {
+                    text: cancelText,
+                    variant: "secondary",
+                    onClick: closeAfter(onCancel)
+                }
+            ]}
+        >
+            <Paragraph>{message}</Paragraph>
+        </Modal>
     );
 }
 
-export function ImportProfilesModal({ title, message, onOverride, onMerge, onCancel, onClose, transitionState }: ImportProfilesModalProps) {
+export function ImportProfilesModal({ title, message, onOverride, onMerge, onCancel, ...props }: ImportProfilesModalProps) {
     const closeAfter = (action: () => void) => () => {
         action();
-        onClose();
+        props.onClose();
     };
 
     return (
-        <ModalRoot transitionState={transitionState}>
-            <ModalHeader>
-                <Heading tag="h2">{title}</Heading>
-            </ModalHeader>
-            <ModalContent>
-                <Paragraph>{message}</Paragraph>
-            </ModalContent>
-            <ModalFooter>
-                <Button onClick={closeAfter(onOverride)}>
-                    {t(plugin.profileSets.modal.override)}
-                </Button>
-                <Button onClick={closeAfter(onMerge)}>
-                    {t(plugin.profileSets.modal.merge)}
-                </Button>
-                <Button variant="secondary" onClick={closeAfter(onCancel)}>
-                    {t(plugin.profileSets.modal.cancel)}
-                </Button>
-            </ModalFooter>
-        </ModalRoot>
+        <Modal
+            {...props}
+            size="sm"
+            title={title}
+            actions={[
+                {
+                    text: t(plugin.profileSets.modal.override),
+                    variant: "primary",
+                    onClick: closeAfter(onOverride)
+                },
+                {
+                    text: t(plugin.profileSets.modal.merge),
+                    variant: "primary",
+                    onClick: closeAfter(onMerge)
+                },
+                {
+                    text: t(plugin.profileSets.modal.cancel),
+                    variant: "secondary",
+                    onClick: closeAfter(onCancel)
+                }
+            ]}
+        >
+            <Paragraph>{message}</Paragraph>
+        </Modal>
     );
 }

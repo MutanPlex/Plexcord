@@ -10,7 +10,8 @@ import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
-import { BookmarkIcon, CircleQuestionIcon, cl } from "@plugins/holyNotes";
+import { BookmarkIcon } from "@components/Icons";
+import { CircleQuestionIcon, cl } from "@plugins/holyNotes";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
 import { Note, Notebook } from "@plugins/holyNotes/types";
 import { CloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
@@ -94,7 +95,7 @@ export function NoteModal({ onClose, transitionState }: ModalProps) {
             <ModalHeader separator={false} className={cl("header")}>
                 <div className={cl("header-content")}>
                     <Flex alignItems="center" style={{ gap: "12px" }}>
-                        <BookmarkIcon size="md" />
+                        <BookmarkIcon width="24" height="24" />
                         <BaseText tag="h2" size="lg" weight="semibold" className={cl("title")}>{t(plugin.holyNotes.modal.notebook.title)}</BaseText>
                     </Flex>
 

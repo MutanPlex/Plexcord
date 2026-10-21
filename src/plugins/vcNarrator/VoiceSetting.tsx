@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { plugin, t } from "@api/i18n";
+import { getLanguageName, plugin, t } from "@api/i18n";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { SearchableSelect, useMemo, useState } from "@webpack/common";
@@ -47,8 +47,6 @@ function SimplePicker({ voice, voices }: PickerProps) {
     );
 }
 
-const languageNames = new Intl.DisplayNames(["en"], { type: "language" });
-
 function ComplexPicker({ voice, voices }: PickerProps) {
     const groupedVoices = useMemo(() => groupBy(voices, voice => voice.lang), [voices]);
 
@@ -57,7 +55,7 @@ function ComplexPicker({ voice, voices }: PickerProps) {
 
         for (const name in groupedVoices) {
             try {
-                const friendlyName = languageNames.of(name);
+                const friendlyName = getLanguageName(name);
                 if (friendlyName) {
                     list.push({ name, friendlyName });
                 }

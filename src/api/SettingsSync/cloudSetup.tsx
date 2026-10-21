@@ -10,9 +10,8 @@ import { cloud, t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { Settings } from "@api/Settings";
 import { Logger } from "@utils/Logger";
-import { openModal } from "@utils/modal";
-import { relaunch } from "@utils/native";
-import { Alerts, OAuth2AuthorizeModal, UserStore } from "@webpack/common";
+import { promptToRestart } from "@utils/promptToRestart";
+import { OAuth2AuthorizeModal, openModal, UserStore } from "@webpack/common";
 
 export const logger = new Logger("SettingsSync:CloudSetup", "#39b7e0");
 
@@ -31,12 +30,11 @@ export async function checkCloudUrlCsp() {
 
     const res = await PlexcordNative.csp.requestAddOverride(Settings.cloud.url, ["connect-src"], t(cloud.override));
     if (res === "ok") {
-        Alerts.show({
+        promptToRestart("relaunch", {
             title: t(cloud.notification.enabled),
-            body: t(cloud.notification.host, { host }),
+            subtitle: t(cloud.notification.host, { host }),
             confirmText: t(cloud.button.confirm),
-            cancelText: t(cloud.button.later),
-            onConfirm: relaunch
+            cancelText: t(cloud.button.later)
         });
     }
     return false;
@@ -75,6 +73,12 @@ async function setAuthorization(secret: string) {
         secrets ??= {};
         secrets[`${getCloudUrlOrigin()}:${getUserId()}`] = secret;
         return secrets;
+    });
+    // a cached v1 fallback may be stale (server gained v2), so probe v2 again
+    await DataStore.update<Record<string, string>>("Plexcord_cloudApiVersions", versions => {
+        versions ??= {};
+        delete versions[getCloudUrlOrigin()];
+        return versions;
     });
 }
 

@@ -18,17 +18,18 @@
 */
 
 import { plugins, t } from "@api/i18n";
-import { PluginOptionString } from "@utils/types";
+import { isSettingDisabled } from "@api/PluginManager";
+import { PluginSettingStringDef } from "@utils/types";
 import { React, TextArea, TextInput, useState } from "@webpack/common";
 
 import { resolveError, SettingProps, SettingsSection } from "./Common";
 
-export function TextSetting({ option, pluginSettings, definedSettings, id, onChange }: SettingProps<PluginOptionString>) {
-    const [state, setState] = useState(pluginSettings[id] ?? option.default ?? null);
+export function TextSetting({ setting, pluginSettings, definedSettings, id, onChange }: SettingProps<PluginSettingStringDef>) {
+    const [state, setState] = useState(pluginSettings[id] ?? setting.default ?? null);
     const [error, setError] = useState<string | null>(null);
 
     function handleChange(newValue: string) {
-        const isValid = option.isValid?.call(definedSettings, newValue) ?? true;
+        const isValid = setting.isValid?.call(definedSettings, newValue) ?? true;
 
         setState(newValue);
         setError(resolveError(isValid));
@@ -39,22 +40,22 @@ export function TextSetting({ option, pluginSettings, definedSettings, id, onCha
     }
 
     return (
-        <SettingsSection name={id} description={option.description} label={option.label} error={error}>
-            {option.multiline
+        <SettingsSection name={id} description={setting.description} label={setting.label} error={error}>
+            {setting.multiline
                 ? <TextArea
-                    placeholder={(option.placeholder ? (typeof option.placeholder === "function" ? option.placeholder() : option.placeholder) : undefined) ?? t(plugins.placeholder.text)}
+                    placeholder={(setting.placeholder ? (typeof setting.placeholder === "function" ? setting.placeholder() : setting.placeholder) : undefined) ?? t(plugins.placeholder.text)}
                     value={state}
                     onChange={handleChange}
-                    disabled={option.disabled?.call(definedSettings) ?? false}
-                    {...option.componentProps} />
+                    disabled={isSettingDisabled(definedSettings, setting)}
+                    {...setting.componentProps} />
                 : <TextInput
                     type="text"
-                    placeholder={(option.placeholder ? (typeof option.placeholder === "function" ? option.placeholder() : option.placeholder) : undefined) ?? t(plugins.placeholder.text)}
+                    placeholder={(setting.placeholder ? (typeof setting.placeholder === "function" ? setting.placeholder() : setting.placeholder) : undefined) ?? t(plugins.placeholder.text)}
                     value={state}
                     onChange={handleChange}
                     maxLength={null}
-                    disabled={option.disabled?.call(definedSettings) ?? false}
-                    {...option.componentProps}
+                    disabled={isSettingDisabled(definedSettings, setting)}
+                    {...setting.componentProps}
                 />
             }
         </SettingsSection>

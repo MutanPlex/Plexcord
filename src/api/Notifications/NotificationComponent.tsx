@@ -22,10 +22,55 @@ import "./styles.css";
 import { notifications, t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Channel } from "@plexcord/discord-types";
 import { classes } from "@utils/misc";
-import { React, useEffect, useLayoutEffect, useRef, useState } from "@webpack/common";
+import { findComponentByCodeLazy } from "@webpack";
+import { FluxDispatcher, GuildStore, IconUtils, React, useEffect, useRef, useState } from "@webpack/common";
 
 import { NotificationData } from "./Notifications";
+
+const MessageComponent = findComponentByCodeLazy("childrenExecutedCommand:", ".hideAccessories");
+
+function renderContextHeader(channel: Channel): React.ReactNode {
+    if (channel.isGroupDM()) {
+        const icon = channel.icon
+            ? IconUtils.getChannelIconURL?.({ id: channel.id, icon: channel.icon, size: 32 })
+            : undefined;
+        const rawName = channel.name?.trim() || channel.rawRecipients.slice(0, 3).map(e => e.username).join(", ");
+        const name = rawName.length > 20 ? rawName.substring(0, 20) + "..." : rawName;
+
+        return (
+            <div className="pc-notification-context-header">
+                {icon && <img className="pc-notification-context-header-icon" src={icon} alt="" />}
+                <span className="pc-notification-context-header-name">{name}</span>
+            </div>
+        );
+    }
+
+    if (channel.guild_id) {
+        const guild = GuildStore.getGuild(channel.guild_id);
+        const icon = guild?.icon
+            ? IconUtils.getGuildIconURL({ id: guild.id, icon: guild.icon, size: 32 })
+            : undefined;
+
+        return (
+            <div className="pc-notification-context-header">
+                {icon && <img className="pc-notification-context-header-icon" src={icon} alt="" />}
+                <span className="pc-notification-context-header-name">
+                    {guild?.name}
+                    {channel.name && (
+                        <>
+                            {guild?.name && <span className="pc-notification-context-header-separator">{" › "}</span>}
+                            <span className="pc-notification-context-header-channel">#{channel.name}</span>
+                        </>
+                    )}
+                </span>
+            </div>
+        );
+    }
+
+    return null;
+}
 
 export default ErrorBoundary.wrap(function NotificationComponent({
     title,
@@ -39,25 +84,17 @@ export default ErrorBoundary.wrap(function NotificationComponent({
     permanent,
     className,
     dismissOnClick,
-    index = 0,
-    offsetY = 0,
-    onHeightChange
-}: NotificationData & { className?: string; index?: number; offsetY?: number; onHeightChange?: (height: number) => void; }) {
-    const { timeout, position, opacity } = useSettings(["notifications.timeout", "notifications.position", "notifications.opacity"]).notifications;
+    message,
+    mockedMessage,
+    channel
+}: NotificationData & { className?: string; }) {
+    const { timeout, opacity } = useSettings(["notifications.timeout", "notifications.opacity"]).notifications;
 
     const [isHover, setIsHover] = useState(false);
     const [elapsed, setElapsed] = useState(0);
-    const containerRef = useRef<HTMLButtonElement>(null);
 
     const start = useRef(Date.now());
     const pause = useRef<number | null>(null);
-
-    useLayoutEffect(() => {
-        if (containerRef.current && onHeightChange) {
-            const height = containerRef.current.offsetHeight;
-            onHeightChange(height);
-        }
-    }, [onHeightChange, body, richBody, image]);
 
     useEffect(() => {
         if (timeout === 0 || permanent) return;
@@ -86,26 +123,12 @@ export default ErrorBoundary.wrap(function NotificationComponent({
     }, [timeout, isHover, permanent]);
 
     const timeoutProgress = elapsed / timeout;
-
-    const getPositionStyle = () => {
-        const gap = 10;
-        const basePosition = position.includes("bottom") ? 16 : 48;
-        const totalOffset = basePosition + offsetY + (gap * index);
-
-        if (position === "bottom-right") return { bottom: `${totalOffset}px`, right: "1rem" };
-        if (position === "bottom-left") return { bottom: `${totalOffset}px`, left: "1rem" };
-        if (position === "top-left") return { top: `${totalOffset}px`, left: "1rem" };
-        return { top: `${totalOffset}px`, right: "1rem" };
-    };
+    const isMessage = !!(message && mockedMessage && channel);
 
     return (
         <button
-            ref={containerRef}
-            className={classes("pc-notification-root", className)}
-            style={{
-                ...getPositionStyle(),
-                opacity: opacity / 100
-            }}
+            className={classes("pc-notification-root", isMessage && "pc-notification-message", className)}
+            style={{ opacity: opacity / 100 }}
             onClick={() => {
                 onClick?.();
                 if (dismissOnClick !== false)
@@ -114,40 +137,68 @@ export default ErrorBoundary.wrap(function NotificationComponent({
             onContextMenu={e => {
                 e.preventDefault();
                 e.stopPropagation();
+
+                // Also marks the message as read.
+                if (isMessage) {
+                    FluxDispatcher.dispatch({
+                        type: "BULK_ACK",
+                        context: "APP",
+                        channels: [{
+                            channelId: channel!.id,
+                            messageId: message!.id,
+                            readStateType: 0
+                        }]
+                    });
+                }
+
                 onClose!();
             }}
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
         >
-            <div className="pc-notification">
-                {icon && <img className="pc-notification-icon" src={icon} alt="" />}
-                <div className="pc-notification-content">
-                    <div className="pc-notification-header">
-                        <h2 className="pc-notification-title">{title}</h2>
-                        <button
-                            className="pc-notification-close-btn"
-                            onClick={e => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                onClose!();
-                            }}
-                        >
-                            <svg
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                role="img"
-                                aria-labelledby="pc-notification-dismiss-title"
-                            >
-                                <title id="pc-notification-dismiss-title">{t(notifications.dismiss)}</title>
-                                <path fill="currentColor" d="M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z" />
-                            </svg>
-                        </button>
-                    </div>
-                    {richBody ?? <p className="pc-notification-p">{body}</p>}
+            <button
+                className="pc-notification-close-btn"
+                onClick={e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onClose!();
+                }}
+            >
+                <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    role="img"
+                    aria-labelledby="pc-notification-dismiss-title"
+                >
+                    <title id="pc-notification-dismiss-title">{t(notifications.dismiss)}</title>
+                    <path fill="currentColor" d="M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z" />
+                </svg>
+            </button>
+            {isMessage ? (
+                <div className="pc-notification-message-content">
+                    {renderContextHeader(channel!)}
+                    <MessageComponent
+                        id={`pc-notification-mock-${message!.id}`}
+                        message={mockedMessage}
+                        channel={channel}
+                        subscribeToComponentDispatch={false}
+                    />
                 </div>
-            </div>
-            {image && <img className="pc-notification-img" src={image} alt="" />}
+            ) : (
+                <>
+                    <div className="pc-notification">
+                        {icon && <img className="pc-notification-icon" src={icon} alt="" />}
+                        <div className="pc-notification-content">
+                            <div className="pc-notification-header">
+                                <h2 className="pc-notification-title">{title}</h2>
+                            </div>
+                            {richBody ?? <p className="pc-notification-p">{body}</p>}
+                        </div>
+                    </div>
+                    {image && <img className="pc-notification-img" src={image} alt="" />}
+                </>
+            )}
             {timeout !== 0 && !permanent && (
                 <div
                     className="pc-notification-progressbar"

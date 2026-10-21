@@ -1,15 +1,3 @@
-.pc-trans-modal-content {
-    padding: 1em;
-}
-
-.pc-trans-modal-header {
-    place-content: center space-between;
-}
-
-.pc-trans-modal-title {
-    margin: 0;
-}
-
 .pc-trans-accessory {
     color: var(--text-muted);
     margin-top: 0.5em;

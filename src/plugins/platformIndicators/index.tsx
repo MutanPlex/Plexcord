@@ -28,8 +28,8 @@ import { DiscordPlatform, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
-import { filters, findStoreLazy, mapMangledModuleLazy } from "@webpack";
-import { AuthenticationStore, PresenceStore, Tooltip, UserStore, useStateFromStores } from "@webpack/common";
+import { filters, mapMangledModuleLazy } from "@webpack";
+import { AuthenticationStore, PresenceStore, SessionsStore, Tooltip, UserStore, useStateFromStores } from "@webpack/common";
 import desktopIcon from "file://icons/desktopIcon.svg";
 import embeddedIcon from "file://icons/embeddedIcon.svg";
 import mobileIcon from "file://icons/mobileIcon.svg";
@@ -37,20 +37,6 @@ import vrIcon from "file://icons/vrIcon.svg";
 import webIcon from "file://icons/webIcon.svg";
 import type { JSX } from "react";
 
-export interface Session {
-    sessionId: string;
-    status: string;
-    active: boolean;
-    clientInfo: {
-        version: number;
-        os: string;
-        client: string;
-    };
-}
-
-const SessionsStore = findStoreLazy("SessionsStore") as {
-    getSessions(): Record<string, Session>;
-};
 const { useStatusFillColor } = mapMangledModuleLazy([".5625*", "translate"], {
     useStatusFillColor: filters.byCode(".hex")
 });
@@ -107,12 +93,9 @@ const PlatformIcon = ({ platform, status, small }) => {
 };
 
 function useEnsureOwnStatus(user: User) {
-    if (user.id !== AuthenticationStore.getId()) {
-        return;
-    }
-
-    const sessions = useStateFromStores([SessionsStore], () => SessionsStore.getSessions());
-    if (typeof sessions !== "object") return null;
+    const isOwnUser = user.id === AuthenticationStore.getId();
+    const sessions = useStateFromStores([SessionsStore], () => isOwnUser ? SessionsStore.getSessions() : null);
+    if (!isOwnUser || typeof sessions !== "object" || sessions == null) return;
     const sortedSessions = Object.values(sessions).sort(({ status: a }, { status: b }) => {
         if (a === b) return 0;
         if (a === "online") return 1;
@@ -138,8 +121,13 @@ interface PlatformIndicatorProps {
     isMemberList?: boolean;
 }
 
-const PlatformIndicator = ({ user, isProfile, isMessage, isMemberList }: PlatformIndicatorProps) => {
+const PlatformIndicator = (props: PlatformIndicatorProps) => {
+    const { user } = props;
     if (user == null || (user.bot && !settings.store.showBots)) return null;
+    return <PlatformIndicatorInner {...props} />;
+};
+
+const PlatformIndicatorInner = ({ user, isProfile, isMessage, isMemberList }: PlatformIndicatorProps) => {
     useEnsureOwnStatus(user);
 
     const status = useStateFromStores([PresenceStore], () => PresenceStore.getClientStatus(user.id));

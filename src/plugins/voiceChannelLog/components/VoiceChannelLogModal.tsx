@@ -6,18 +6,13 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
-import { Channel } from "@plexcord/discord-types";
+import { Channel, RenderModalProps } from "@plexcord/discord-types";
 import { getVcLogs, vcLogSubscribe } from "@plugins/voiceChannelLog/logs";
 import { classes } from "@utils/misc";
-import { ModalCloseButton, ModalContent, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
-import { findStoreLazy } from "@webpack";
-import { React, ScrollerThin } from "@webpack/common";
+import { AccessibilityStore, Modal, openModal, React, ScrollerThin } from "@webpack/common";
 
 import { cl } from "..";
 import { VoiceChannelLogEntryComponent } from "./VoiceChannelLogEntryComponent";
-
-const AccessibilityStore = findStoreLazy("AccessibilityStore");
 
 export function openVoiceChannelLog(channel: Channel) {
     return openModal(props => (
@@ -28,7 +23,7 @@ export function openVoiceChannelLog(channel: Channel) {
     ));
 }
 
-export function VoiceChannelLogModal({ channel, props }: { channel: Channel; props: ModalProps; }) {
+export function VoiceChannelLogModal({ channel, props }: { channel: Channel; props: RenderModalProps; }) {
     React.useSyncExternalStore(vcLogSubscribe, () => getVcLogs(channel.id));
     const vcLogs = getVcLogs(channel.id);
     const logElements: (React.ReactNode)[] = [];
@@ -51,20 +46,14 @@ export function VoiceChannelLogModal({ channel, props }: { channel: Channel; pro
     }
 
     return (
-        <ModalRoot
+        <Modal
             {...props}
-            size={ModalSize.LARGE}
+            size="lg"
+            title={t(plugin.voiceChannelLog.modal.logs, { channel: channel.name })}
         >
-            <ModalHeader>
-                <BaseText className={cl("header")} size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t(plugin.voiceChannelLog.modal.logs, { channel: channel.name })}</BaseText>
-                <ModalCloseButton onClick={props.onClose} />
-            </ModalHeader>
-
-            <ModalContent>
-                <ScrollerThin fade className={classes(cl("scroller"), `group-spacing-${AccessibilityStore.messageGroupSpacing}`)}>
-                    {logElements}
-                </ScrollerThin>
-            </ModalContent>
-        </ModalRoot>
+            <ScrollerThin fade className={classes(cl("scroller"), `group-spacing-${AccessibilityStore.messageGroupSpacing}`)}>
+                {logElements}
+            </ScrollerThin>
+        </Modal>
     );
 }

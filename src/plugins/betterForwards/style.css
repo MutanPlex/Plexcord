@@ -1,0 +1,102 @@
+.pc-betterforwards-footer {
+    margin-top: 3px;
+    margin-left: -2px;
+
+    .pc-betterforwards-footer-text {
+        font-weight: 400;
+        font-size: 14px;
+        color: var(--text-muted);
+    }
+
+    .pc-betterforwards-guild-icon,
+    .pc-betterforwards-widget-guild-icon,
+    .pc-betterforwards-user-icon,
+    .pc-betterforwards-guild-acronym {
+        margin-right: 2px;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+    }
+
+    .pc-betterforwards-guild-icon {
+        border-radius: 4px;
+    }
+
+    .pc-betterforwards-user-icon,
+    .pc-betterforwards-widget-guild-icon {
+        border-radius: 9999px;
+    }
+
+    .pc-betterforwards-guild-acronym {
+        line-height: 16px;
+        text-align: center;
+        overflow: hidden;
+        font-size: 9.6px;
+        border-radius: 4px;
+        white-space: nowrap;
+        background-color: var(--background-base-lower);
+        color: var(--text-default);
+    }
+
+    .pc-betterforwards-footer-element {
+        &:hover {
+            .pc-betterforwards-footer-text {
+                color: var(--interactive-text-hover);
+            }
+
+            svg path {
+                fill: var(--interactive-text-hover) !important;
+            }
+
+            background-color: var(--interactive-background-hover);
+            cursor: pointer;
+        }
+
+        &:first-of-type {
+            margin-left: 0;
+        }
+
+        align-items: center;
+        align-self: flex-start;
+        display: inline-flex;
+        gap: 2px;
+        padding: 1px 0 1px 2px;
+        border-radius: 4px;
+        vertical-align: middle;
+        color: var(--text-muted);
+
+        svg,
+        img {
+            flex-shrink: 0;
+        }
+    }
+}
+
+.pc-betterforwards-embed-name {
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+}
+
+[class^="forwardPreview"] {
+    height: fit-content;
+
+    > [class^="contentWrapper"] {
+        max-height: 250px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+
+        > [class^="forwardPreviewMessage"] {
+            flex-shrink: 0;
+        }
+
+        [class^="tagList"] > [class^="tag"] {
+            min-width: 0;
+
+            [data-text-variant] {
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+    }
+}

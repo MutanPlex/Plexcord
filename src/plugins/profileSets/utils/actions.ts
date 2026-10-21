@@ -8,13 +8,10 @@
 import { plugin, t } from "@api/i18n";
 import { ProfilePreset } from "@plexcord/discord-types";
 import { isNonNullish } from "@utils/guards";
-import { findStoreLazy } from "@webpack";
-import { showToast, Toasts } from "@webpack/common";
+import { showToast, UserProfileSettingsStore } from "@webpack/common";
 
 import { getCurrentProfile } from "./profile";
 import { addPreset, movePresetInArray, presets, PresetSection, type ProfilePresetEx, removePreset, replaceAllPresets, savePresetsData, updatePreset } from "./storage";
-
-const UserProfileSettingsStore = findStoreLazy("UserProfileSettingsStore");
 
 function isImageInput(value: unknown): value is string | { imageUri: string; } {
     if (typeof value === "string") return value.length > 0;
@@ -139,7 +136,7 @@ export async function importPresets(
             await savePresetsData(section);
             forceUpdate();
         } catch {
-            showToast(t(plugin.profileSets.toast.importFailed), Toasts.Type.FAILURE);
+            showToast({ text: t(plugin.profileSets.toast.importFailed), variant: "critical" });
         }
     };
     input.click();

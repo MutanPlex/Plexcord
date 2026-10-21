@@ -21,21 +21,12 @@ import * as DataStore from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
 import { popNotice, showNotice } from "@api/Notices";
 import { showNotification } from "@api/Notifications";
-import { FluxStore } from "@plexcord/discord-types";
 import { ChannelType, RelationshipType } from "@plexcord/discord-types/enums";
 import { getUniqueUsername, openUserProfile } from "@utils/discord";
-import { findStoreLazy } from "@webpack";
-import { ChannelStore, GuildMemberStore, GuildStore, RelationshipStore, UserStore, UserUtils } from "@webpack/common";
+import { ChannelStore, GuildAvailabilityStore, GuildMemberStore, GuildStore, RelationshipStore, UserStore, UserUtils } from "@webpack/common";
 
 import settings from "./settings";
 import { SimpleGroupChannel, SimpleGuild } from "./types";
-
-export const GuildAvailabilityStore = findStoreLazy("GuildAvailabilityStore") as FluxStore & {
-    totalGuilds: number;
-    totalUnavailableGuilds: number;
-    unavailableGuilds: string[];
-    isUnavailable(guildId: string): boolean;
-};
 
 const guilds = new Map<string, SimpleGuild>();
 const groups = new Map<string, SimpleGroupChannel>();
@@ -117,7 +108,7 @@ export function notify(text: string, icon?: string, onClick?: () => void) {
         showNotice(text, t(plugin.relationshipNotifier.notification.ok), () => popNotice());
 
     showNotification({
-        title: "Relationship Notifier",
+        title: t(plugin.relationshipNotifier.text.relationshipNotifier),
         body: text,
         icon,
         onClick

@@ -21,8 +21,8 @@ import DataUI from "./components/ui";
 export default definePlugin({
     name: "IRememberYou",
     description: () => t(plugin.iRememberYou.description),
-    authors: [PcDevs.zoodogood, PcDevs.keircn, PcDevs.MutanPlex],
     tags: ["friends", "organisation", "utility"],
+    authors: [PcDevs.zoodogood, PcDevs.keircn, PcDevs.tt],
     dependencies: ["MessageEventsAPI"],
     patches: [],
 

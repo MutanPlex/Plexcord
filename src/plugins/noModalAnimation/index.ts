@@ -24,13 +24,6 @@ export default definePlugin({
             }
         },
         {
-            find: 'backdropFilter:"blur(0px)"',
-            replacement: {
-                match: /\?0:200/,
-                replace: "?0:0",
-            }
-        },
-        {
             find: '="ABOVE"',
             replacement: {
                 match: /\?\?300/,
@@ -38,7 +31,7 @@ export default definePlugin({
             }
         },
         {
-            find: "renderLurkerModeUpsellPopout,position:",
+            find: ".SWITCH_THUMB_BACKGROUND_SELECTED_DEFAULT)",
             replacement: {
                 match: /200:300/g,
                 replace: "0:0",

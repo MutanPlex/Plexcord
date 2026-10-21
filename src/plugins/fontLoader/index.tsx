@@ -8,16 +8,20 @@
 import "./styles.css";
 
 import { plugin, t } from "@api/i18n";
+import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
+import { managedStyleRootNode } from "@api/Styles";
+import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { HeadingSecondary, HeadingTertiary } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { debounce } from "@shared/debounce";
 import { PcDevs } from "@utils/constants";
+import { createAndAppendStyle } from "@utils/css";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
-import { React, TextInput, useEffect } from "@webpack/common";
+import { React, TextInput } from "@webpack/common";
 
 interface GoogleFontMetadata {
     family: string;
@@ -34,13 +38,8 @@ interface GoogleFontMetadata {
     }>;
 }
 
-const createGoogleFontUrl = (family: string, options = "") =>
-    `https://fonts.googleapis.com/css2?family=${encodeURIComponent(family)}${options}&display=swap`;
-
-const loadFontStyle = (url: string) => {
-    document.head.insertAdjacentHTML("beforeend", `<link rel="stylesheet" href="${url}">`);
-    return document.createElement("style");
-};
+const fontImport = (family: string, weights: string) =>
+    `@import url("https://fonts.googleapis.com/css2?family=${encodeURIComponent(family)}:wght@${weights}&display=swap");`;
 
 async function searchGoogleFonts(query: string) {
     try {
@@ -72,47 +71,35 @@ async function searchGoogleFonts(query: string) {
     }
 }
 
-const preloadFont = (family: string) =>
-    loadFontStyle(createGoogleFontUrl(family, "&text=The quick brown fox jumps over the lazy dog"));
+let fontStyle: HTMLStyleElement | null = null;
 
-let styleElement: HTMLStyleElement | null = null;
-
-const applyFont = async (fontFamily: string) => {
+function applyFont(fontFamily: string) {
     if (!fontFamily) {
-        styleElement?.remove();
-        styleElement = null;
+        fontStyle?.remove();
+        fontStyle = null;
         return;
     }
 
-    try {
-        if (!styleElement) {
-            styleElement = document.createElement("style");
-            document.head.appendChild(styleElement);
+    fontStyle ??= createAndAppendStyle("pc-fontloader", managedStyleRootNode);
+    fontStyle.textContent = `
+        ${fontImport(fontFamily, "300;400;500;600;700")}
+        * {
+            --font-primary: '${fontFamily}', sans-serif !important;
+            --font-display: '${fontFamily}', sans-serif !important;
+            --font-headline: '${fontFamily}', sans-serif !important;
+            ${settings.store.applyOnCodeBlocks ? `--font-code: '${fontFamily}', monospace !important;` : ""}
         }
-
-        loadFontStyle(createGoogleFontUrl(fontFamily, ":wght@300;400;500;600;700"));
-        styleElement.textContent = `
-            * {
-                --font-primary: '${fontFamily}', sans-serif !important;
-                --font-display: '${fontFamily}', sans-serif !important;
-                --font-headline: '${fontFamily}', sans-serif !important;
-                ${settings.store.applyOnCodeBlocks ? "--font-code: '${fontFamily}', monospace !important;" : ""}
-            }
-        `;
-    } catch (err) {
-        console.error("Failed to load font:", err);
-    }
-};
+    `;
+}
 
 function GoogleFontSearch({ onSelect }: { onSelect: (font: GoogleFontMetadata) => void; }) {
     const [query, setQuery] = React.useState("");
     const [results, setResults] = React.useState<GoogleFontMetadata[]>([]);
     const [loading, setLoading] = React.useState(false);
-    const previewStyles = React.useRef<HTMLStyleElement[]>([]);
+    const previewStyle = React.useRef<HTMLStyleElement | null>(null);
+    const { selectedFont } = settings.use(["selectedFont"]);
 
-    useEffect(() => () => {
-        previewStyles.current.forEach(style => style.remove());
-    }, []);
+    React.useEffect(() => () => previewStyle.current?.remove(), []);
 
     const debouncedSearch = debounce(async (value: string) => {
         setLoading(true);
@@ -123,8 +110,8 @@ function GoogleFontSearch({ onSelect }: { onSelect: (font: GoogleFontMetadata) =
         }
 
         const fonts = await searchGoogleFonts(value);
-        previewStyles.current.forEach(style => style.remove());
-        previewStyles.current = await Promise.all(fonts.map(f => preloadFont(f.family)));
+        previewStyle.current ??= createAndAppendStyle("pc-fontloader-previews", managedStyleRootNode);
+        previewStyle.current.textContent = fonts.map(f => fontImport(f.family, "400;700")).join("\n");
         setResults(fonts);
         setLoading(false);
     }, 300);
@@ -137,14 +124,29 @@ function GoogleFontSearch({ onSelect }: { onSelect: (font: GoogleFontMetadata) =
     return (
         <section>
             <HeadingSecondary>{t(plugin.fontLoader.modal.settings.title)}</HeadingSecondary>
-            <Paragraph>{t(plugin.fontLoader.modal.settings.description)}</Paragraph>
+            <Paragraph className={Margins.bottom8}>{t(plugin.fontLoader.modal.settings.description)}</Paragraph>
+
+            {selectedFont && (
+                <div className={classes(Margins.bottom8, "pc-googlefonts-current")}>
+                    <Paragraph>{t(plugin.fontLoader.text.currentFont)} <strong>{selectedFont}</strong></Paragraph>
+                    <Button
+                        variant="secondary"
+                        size="small"
+                        onClick={() => {
+                            settings.store.selectedFont = "";
+                            applyFont("");
+                        }}
+                    >
+                        {t(plugin.fontLoader.text.resetFont)}
+                    </Button>
+                </div>
+            )}
 
             <TextInput
                 value={query}
                 onChange={e => handleSearch(e)}
                 placeholder={t(plugin.fontLoader.modal.settings.placeholder)}
                 disabled={loading}
-                className={Margins.bottom16}
             />
 
             {results.length > 0 && (
@@ -188,7 +190,7 @@ const settings = definePluginSettings({
             <GoogleFontSearch
                 onSelect={font => {
                     settings.store.selectedFont = font.family;
-                    applyFont(font.family);
+                    if (isPluginEnabled("FontLoader")) applyFont(font.family);
                 }}
             />
         )
@@ -208,17 +210,11 @@ export default definePlugin({
     tags: ["appearance", "customisation"],
     settings,
 
-    async start() {
-        const savedFont = settings.store.selectedFont;
-        if (savedFont) {
-            await applyFont(savedFont);
-        }
+    start() {
+        applyFont(settings.store.selectedFont);
     },
 
     stop() {
-        if (styleElement) {
-            styleElement.remove();
-            styleElement = null;
-        }
+        applyFont("");
     }
 });

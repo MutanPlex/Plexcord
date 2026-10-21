@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { plugin, t } from "@api/i18n";
+import { getLanguageName, plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { Button } from "@components/Button";
@@ -13,7 +13,7 @@ import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsSection } from "@components/settings/tabs/plugins/components/Common";
 import { makeRange, OptionType } from "@utils/types";
-import { MaskedLink, Select, showToast, TextInput, Toasts } from "@webpack/common";
+import { MaskedLink, Select, showToast, TextInput } from "@webpack/common";
 
 import hoverOnlyStyle from "./hoverOnly.css?managed";
 import { clearLyricsCache, removeTranslations } from "./spotify/lyrics/api";
@@ -43,35 +43,34 @@ function InstallInstructions() {
 }
 
 function LyricsProviderSettings() {
-    const { store } = settings;
-
     return (
         <>
-            <SettingsSection name={t(plugin.musicControls.option.lyricsProvider.label)} description={t(plugin.musicControls.option.lyricsProvider.description)}>
+            <SettingsSection name="lyricsProvider" label={t(plugin.musicControls.option.lyricsProvider.label)} description={t(plugin.musicControls.option.lyricsProvider.description)}>
                 <Select
                     options={[
                         { value: Provider.Lrclib, label: () => t(plugin.musicControls.option.lyricsProvider.LRCLIB), default: true },
                         { value: Provider.Spotify, label: () => t(plugin.musicControls.option.lyricsProvider.spotify) },
                     ]}
-                    isSelected={v => v === store.lyricsProvider}
-                    select={v => { store.lyricsProvider = v as Provider; }}
+                    isSelected={v => v === settings.store.lyricsProvider}
+                    select={v => { settings.store.lyricsProvider = v as Provider; }}
                     serialize={v => v}
                     placeholder={t(plugin.musicControls.option.lyricsProvider.label)}
                 />
             </SettingsSection>
 
-            {store.lyricsProvider === Provider.Spotify && (
+            {settings.store.lyricsProvider === Provider.Spotify && (
                 <SettingsSection
-                    name={t(plugin.musicControls.option.spotifyLyricsApiUrl.label)}
+                    name="spotifyLyricsApiUrl"
+                    label={t(plugin.musicControls.option.spotifyLyricsApiUrl.label)}
                     description={t(plugin.musicControls.option.spotifyLyricsApiUrl.description)}
                 >
                     <TextInput
                         type="text"
-                        value={store.spotifyLyricsApiUrl}
+                        value={settings.store.spotifyLyricsApiUrl}
                         onChange={v => {
-                            store.spotifyLyricsApiUrl = v;
+                            settings.store.spotifyLyricsApiUrl = v;
                             void clearLyricsCache();
-                            showToast(t(plugin.musicControls.option.purgeLyricsCache.cacheLyricsPurged), Toasts.Type.SUCCESS);
+                            showToast({ text: t(plugin.musicControls.option.purgeLyricsCache.cacheLyricsPurged), variant: "success" });
                         }}
                         placeholder="https://spotify-lyrics-api-pi.vercel.app"
                         maxLength={null}
@@ -191,7 +190,7 @@ export const settings = definePluginSettings({
         default: "https://spotify-lyrics-api-pi.vercel.app",
         onChange: async () => {
             await clearLyricsCache();
-            showToast(t(plugin.musicControls.option.purgeLyricsCache.cacheLyricsPurged), Toasts.Type.SUCCESS);
+            showToast({ text: t(plugin.musicControls.option.purgeLyricsCache.cacheLyricsPurged), variant: "success" });
         }
     },
     lyricsProviderSettings: {
@@ -202,10 +201,10 @@ export const settings = definePluginSettings({
         label: () => t(plugin.musicControls.option.translateTo.label),
         description: () => t(plugin.musicControls.option.translateTo.description),
         type: OptionType.SELECT,
-        options: languages,
+        options: languages.map(o => ({ ...o, label: () => getLanguageName(o.value, o.label) })),
         onChange: async () => {
             await removeTranslations();
-            showToast(t(plugin.musicControls.option.translateTo.cleared), Toasts.Type.SUCCESS);
+            showToast({ text: t(plugin.musicControls.option.translateTo.cleared), variant: "success" });
         }
     },
     lyricsConversion: {
@@ -231,6 +230,7 @@ export const settings = definePluginSettings({
         default: true,
     },
     lyricDelay: {
+        label: () => t(plugin.musicControls.option.lyricDelay.label),
         description: "",
         type: OptionType.SLIDER,
         default: 0,
@@ -245,7 +245,7 @@ export const settings = definePluginSettings({
                 variant="dangerPrimary"
                 onClick={() => {
                     clearLyricsCache();
-                    showToast(t(plugin.musicControls.option.purgeLyricsCache.cacheLyricsPurged), Toasts.Type.SUCCESS);
+                    showToast({ text: t(plugin.musicControls.option.purgeLyricsCache.cacheLyricsPurged), variant: "success" });
                 }}
             >
                 {t(plugin.musicControls.option.purgeLyricsCache.button)}

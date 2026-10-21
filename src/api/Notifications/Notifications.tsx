@@ -19,6 +19,7 @@
 
 import { settings, t } from "@api/i18n";
 import { Settings } from "@api/Settings";
+import { Channel, Message } from "@plexcord/discord-types";
 import { createRoot, React, WindowStore } from "@webpack/common";
 import type { ReactNode } from "react";
 import type { Root } from "react-dom/client";
@@ -29,14 +30,13 @@ import { openNotificationLogModal, persistNotification } from "./notificationLog
 interface NotificationItem {
     id: number;
     data: NotificationData;
-    height: number;
 }
 
 let activeNotifications: NotificationItem[] = [];
 let reactRoot: Root;
+let container: HTMLDivElement;
 let id = 42;
 let missedCount = 0;
-const ESTIMATED_NOTIFICATION_HEIGHT = 120;
 
 window.addEventListener("focus", () => {
     const { missed, timeout, useNative } = Settings.notifications;
@@ -53,11 +53,15 @@ window.addEventListener("focus", () => {
 
 function getRoot() {
     if (!reactRoot) {
-        const container = document.createElement("div");
+        container = document.createElement("div");
         container.id = "pc-notification-container";
         document.body.append(container);
         reactRoot = createRoot(container);
     }
+
+    // Keep the container's position class in sync with the user's setting.
+    container.className = `pc-notification-position-${Settings.notifications.position ?? "bottom-right"}`;
+
     return reactRoot;
 }
 
@@ -82,41 +86,36 @@ export interface NotificationData {
     noPersist?: boolean;
     /** Whether this notification should be dismissed when clicked (defaults to true) */
     dismissOnClick?: boolean;
+    /**
+     * The original message. When provided together with mockedMessage and channel,
+     * the notification renders the actual Discord message instead of title/body.
+     * title and body are still used for desktop notifications and the Notification Log.
+     */
+    message?: Message;
+    /** The message as a record from the MessageStore, used for rendering */
+    mockedMessage?: Message;
+    /** The channel the message was sent in */
+    channel?: Channel;
 }
 
 function renderNotifications() {
     const root = getRoot();
     const { maxNotifications } = Settings.notifications;
     const notificationsToShow = activeNotifications.slice(-maxNotifications);
-    let cumulativeOffset = 0;
 
     root.render(
         <>
-            {notificationsToShow.map((item, index) => {
-                const currentOffset = cumulativeOffset;
-                cumulativeOffset += item.height;
-
-                return (
-                    <NotificationComponent
-                        key={item.id}
-                        index={index}
-                        offsetY={currentOffset}
-                        {...item.data}
-                        onHeightChange={height => {
-                            const notification = activeNotifications.find(n => n.id === item.id);
-                            if (notification && notification.height !== height) {
-                                notification.height = height;
-                                renderNotifications();
-                            }
-                        }}
-                        onClose={() => {
-                            item.data.onClose?.();
-                            activeNotifications = activeNotifications.filter(n => n.id !== item.id);
-                            renderNotifications();
-                        }}
-                    />
-                );
-            })}
+            {notificationsToShow.map(item => (
+                <NotificationComponent
+                    key={item.id}
+                    {...item.data}
+                    onClose={() => {
+                        item.data.onClose?.();
+                        activeNotifications = activeNotifications.filter(n => n.id !== item.id);
+                        renderNotifications();
+                    }}
+                />
+            ))}
         </>
     );
 }
@@ -154,11 +153,9 @@ export async function showNotification(data: NotificationData) {
         if (!WindowStore.isFocused()) missedCount++;
     } else {
         const notificationId = id++;
-        const estimatedHeight = data.image ? ESTIMATED_NOTIFICATION_HEIGHT + 100 : ESTIMATED_NOTIFICATION_HEIGHT;
 
         activeNotifications.push({
             id: notificationId,
-            height: estimatedHeight,
             data: {
                 ...data,
                 onClose: () => {

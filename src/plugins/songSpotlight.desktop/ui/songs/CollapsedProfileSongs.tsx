@@ -1,0 +1,124 @@
+/*
+ * Plexcord, a modification for Discord's desktop app
+ * Copyright (c) 2026 Vendicated and contributors
+ * Copyright (c) 2026 MutanPlex
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+import { plugin, t } from "@api/i18n";
+import { BaseText } from "@components/index";
+import { User } from "@plexcord/discord-types";
+import { Native } from "@plugins/songSpotlight.desktop/service";
+import {
+    ContainerClasses,
+    DMSideBarClasses,
+    OverlayClasses,
+    ProfileCardClasses,
+    Spinner,
+} from "@plugins/songSpotlight.desktop/ui/common";
+import { RenderSongInfo } from "@song-spotlight/api/handlers";
+import { UserData } from "@song-spotlight/api/structs";
+import { sid } from "@song-spotlight/api/util";
+import { classes } from "@utils/misc";
+import {
+    openUserProfileModal,
+    SelectedChannelStore,
+    SelectedGuildStore,
+    useEffect,
+    useMemo,
+    UserStore,
+    useState,
+} from "@webpack/common";
+
+const shownSongs = 4;
+
+interface CollapsedProfileSongsProps {
+    data?: UserData;
+    user: User;
+    isSideBar: boolean;
+    isRedesignEnabled?: boolean;
+}
+
+export default function CollapsedProfileSongs({ data, user, isSideBar, isRedesignEnabled = false }: CollapsedProfileSongsProps) {
+    const [renders, setRenders] = useState(new Map<string, RenderSongInfo>());
+    const previews = useMemo(() => data?.slice(0, shownSongs), [data]);
+    const userId = user?.id;
+
+    useEffect(() => {
+        setRenders(new Map());
+        if (!previews) return;
+
+        for (const song of previews) {
+            Native.renderSong(song)
+                .catch(() => null)
+                .then(info => {
+                    if (!info) return;
+                    setRenders(renders => new Map(renders).set(sid(song), info));
+                });
+        }
+    }, [previews]);
+
+    const songsSection = (
+        <section className={ProfileCardClasses.container}>
+            <ul className={ProfileCardClasses.cardsList} tabIndex={-1}>
+                <li className={ProfileCardClasses.firstCardContainer}>
+                    <div
+                        className={ContainerClasses.breadcrumb}
+                        aria-label={t(plugin.songSpotlight.text.songSpotlight)}
+                        role="button"
+                        tabIndex={0}
+                        onClick={() => {
+                            const user = UserStore.getUser(userId);
+                            if (!user) return;
+
+                            const guildId = SelectedGuildStore.getGuildId();
+                            openUserProfileModal({
+                                userId,
+                                guildId,
+                                channelId: SelectedChannelStore.getChannelId(),
+                                sourceAnalyticsLocations: [
+                                    "username",
+                                    "user profile popout",
+                                ],
+                                tabSection: "SONG_SPOTLIGHT",
+                            });
+                        }}
+                    >
+                        <div className={classes(OverlayClasses.overlay, ContainerClasses.innerContainer, ProfileCardClasses.card)}>
+                            <BaseText size={isSideBar ? "sm" : "xs"} weight="medium">{t(plugin.songSpotlight.text.songSpotlight)}</BaseText>
+                            <div className={ContainerClasses.icons}>
+                                {previews && data
+                                    ? previews.map((song, i) => {
+                                        const render = renders.get(sid(song));
+                                        const extra = i === shownSongs - 1 && data.length > shownSongs;
+
+                                        return (
+                                            <div className={ContainerClasses.icon} key={i}>
+                                                {render?.thumbnailUrl && (
+                                                    <img
+                                                        src={render.thumbnailUrl}
+                                                        alt={render.label}
+                                                        className={classes(extra && ContainerClasses.displayCount)}
+                                                    />
+                                                )}
+                                                {extra && (
+                                                    <div className={ContainerClasses.displayCountText}>
+                                                        <BaseText size={isSideBar ? "sm" : "xs"} weight="medium">+{data.length - shownSongs}</BaseText>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+                                    })
+                                    : <Spinner type={Spinner.Type.SPINNING_CIRCLE} />}
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    );
+
+    return isSideBar && !isRedesignEnabled
+        ? <div className={DMSideBarClasses.widgetPreviews}>{songsSection}</div>
+        : songsSection;
+}

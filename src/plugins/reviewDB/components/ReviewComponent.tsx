@@ -20,12 +20,12 @@
 import { plugin, t } from "@api/i18n";
 import { Auth, getToken } from "@plugins/reviewDB/auth";
 import { Review, ReviewType } from "@plugins/reviewDB/entities";
-import { blockUser, deleteReview, reportReview, unblockUser } from "@plugins/reviewDB/reviewDbApi";
+import { blockUser, deleteReview, deleteReviewVote, reportReview, unblockUser, voteReview } from "@plugins/reviewDB/reviewDbApi";
 import { settings } from "@plugins/reviewDB/settings";
 import { canBlockReviewAuthor, canDeleteReview, canReportReview, cl, showToast } from "@plugins/reviewDB/utils";
 import { openUserProfile } from "@utils/discord";
 import { classes } from "@utils/misc";
-import { Alerts, IconUtils, Parser, Timestamp, useState } from "@webpack/common";
+import { ConfirmModal, IconUtils, openModal as openPlexcordModal, Parser, Timestamp, useEffect, useState } from "@webpack/common";
 import { findCssClassesLazy } from "webpack";
 
 import { openBlockModal } from "./BlockedUserModal";
@@ -42,46 +42,54 @@ const dateFormat = new Intl.DateTimeFormat();
 
 export default function ReviewComponent({ review, refetch, profileId }: { review: Review; refetch(): void; profileId: string; }) {
     const [showAll, setShowAll] = useState(false);
+    const [localVote, setLocalVote] = useState<boolean | null>(review.userVote ?? null);
+    const [score, setScore] = useState(review.score ?? 0);
+    const [isVoting, setIsVoting] = useState(false);
+
+    useEffect(() => {
+        setLocalVote(review.userVote ?? null);
+        setScore(review.score ?? 0);
+    }, [review.score, review.userVote]);
 
     function openModal() {
         openUserProfile(review.sender.discordID);
     }
 
     function delReview() {
-        Alerts.show({
-            title: t(plugin.reviewDB.modal.delete.title),
-            body: t(plugin.reviewDB.modal.delete.description),
-            confirmText: t(plugin.reviewDB.modal.delete.confirm),
-            cancelText: t(plugin.reviewDB.modal.delete.cancel),
-            onConfirm: async () => {
-                if (!(await getToken())) {
-                    return showToast(t(plugin.reviewDB.modal.delete.error));
-                } else {
-                    deleteReview(review.id).then(res => {
-                        if (res) {
-                            refetch();
-                        }
-                    });
-                }
-            }
-        });
+        openPlexcordModal(props => (
+            <ConfirmModal
+                {...props}
+                title={t(plugin.reviewDB.modal.delete.title)}
+                subtitle={t(plugin.reviewDB.modal.delete.description)}
+                confirmText={t(plugin.reviewDB.modal.delete.confirm)}
+                cancelText={t(plugin.reviewDB.modal.delete.cancel)}
+                onConfirm={async () => {
+                    if (!(await getToken())) {
+                        return showToast({ text: t(plugin.reviewDB.modal.delete.error), variant: "critical" });
+                    }
+                    const res = await deleteReview(review.id);
+                    if (res) refetch();
+                }}
+            />
+        ));
     }
 
     function reportRev() {
-        Alerts.show({
-            title: t(plugin.reviewDB.modal.report.title),
-            body: t(plugin.reviewDB.modal.report.description),
-            confirmText: t(plugin.reviewDB.modal.report.confirm),
-            cancelText: t(plugin.reviewDB.modal.report.cancel),
-            // confirmColor: "red", this just adds a class name and breaks the submit button guh
-            onConfirm: async () => {
-                if (!(await getToken())) {
-                    return showToast(t(plugin.reviewDB.modal.report.error));
-                } else {
-                    reportReview(review.id);
-                }
-            }
-        });
+        openPlexcordModal(props => (
+            <ConfirmModal
+                {...props}
+                title={t(plugin.reviewDB.modal.report.title)}
+                subtitle={t(plugin.reviewDB.modal.report.description)}
+                confirmText={t(plugin.reviewDB.modal.report.confirm)}
+                cancelText={t(plugin.reviewDB.modal.report.cancel)}
+                onConfirm={async () => {
+                    if (!(await getToken())) {
+                        return showToast({ text: t(plugin.reviewDB.modal.report.error), variant: "critical" });
+                    }
+                    await reportReview(review.id);
+                }}
+            />
+        ));
     }
 
     const isAuthorBlocked = Auth?.user?.blockedUsers?.includes(review.sender.discordID) ?? false;
@@ -90,35 +98,97 @@ export default function ReviewComponent({ review, refetch, profileId }: { review
         if (isAuthorBlocked)
             return unblockUser(review.sender.discordID);
 
-        Alerts.show({
-            title: t(plugin.reviewDB.modal.block.title),
-            body: t(plugin.reviewDB.modal.block.description),
-            confirmText: t(plugin.reviewDB.modal.block.confirm),
-            cancelText: t(plugin.reviewDB.modal.block.cancel),
-            // confirmColor: "red", this just adds a class name and breaks the submit button guh
-            onConfirm: async () => {
-                if (!(await getToken())) {
-                    return showToast(t(plugin.reviewDB.modal.block.error));
-                } else {
-                    blockUser(review.sender.discordID);
+        openPlexcordModal(props => (
+            <ConfirmModal
+                {...props}
+                title={t(plugin.reviewDB.modal.block.title)}
+                subtitle={t(plugin.reviewDB.modal.block.description)}
+                confirmText={t(plugin.reviewDB.modal.block.confirm)}
+                cancelText={t(plugin.reviewDB.modal.block.cancel)}
+                onConfirm={async () => {
+                    if (!(await getToken())) {
+                        return showToast({ text: t(plugin.reviewDB.modal.block.error), variant: "critical" });
+                    }
+                    await blockUser(review.sender.discordID);
+                }}
+            />
+        ));
+    }
+
+    async function submitVote(isUpvote: boolean) {
+        if (isVoting) return;
+
+        if (review.sender.discordID === Auth.user?.discordID) {
+            return showToast({ text: t(plugin.reviewDB.toast.youCannotVoteOn), variant: "critical" });
+        }
+
+        setIsVoting(true);
+
+        try {
+            if (localVote === isUpvote) {
+                if (await deleteReviewVote(review.id)) {
+                    setLocalVote(null);
+                    setScore(currentScore => currentScore + (isUpvote ? -1 : 1));
                 }
+                return;
             }
-        });
+
+            if (await voteReview(review.id, isUpvote)) {
+                const delta = localVote == null
+                    ? isUpvote ? 1 : -1
+                    : isUpvote ? 2 : -2;
+
+                setLocalVote(isUpvote);
+                setScore(currentScore => currentScore + delta);
+            }
+        } finally {
+            setIsVoting(false);
+        }
     }
 
     return (
         <div className={classes(cl("review"), MessageClasses.cozyMessage, AvatarClasses.wrapper, MessageClasses.message, MessageClasses.groupStart, AvatarClasses.cozy)} style={
             {
                 marginLeft: "0px",
-                paddingLeft: "52px", // wth is this
+                paddingLeft: "52px",
                 // nobody knows anymore
             }
         }>
 
+            {review.id !== 0 && (
+                <div className={cl("vote-column")}>
+                    <span className={classes(cl("vote-column-score"), score > 0 && cl("vote-column-score-positive"), score < 0 && cl("vote-column-score-negative"))}>
+                        {score}
+                    </span>
+                    <div className={cl("vote-column-buttons")}>
+                        <button
+                            className={classes(cl("vote-column-button"), !!localVote && cl("vote-column-up-selected"))}
+                            disabled={isVoting}
+                            onClick={() => submitVote(true)}
+                            type="button"
+                        >
+                            <svg height="20" viewBox="0 0 12 12" width="20" fill="none">
+                                <path d="M3 7.5 6 4.5l3 3" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
+                            </svg>
+                        </button>
+                        <button
+                            className={classes(cl("vote-column-button"), localVote === false && cl("vote-column-down-selected"))}
+                            disabled={isVoting}
+                            onClick={() => submitVote(false)}
+                            type="button"
+                        >
+                            <svg height="20" viewBox="0 0 12 12" width="20" fill="none">
+                                <path d="M3 4.5 6 7.5l3-3" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            )}
+
             <img
                 className={classes(AvatarClasses.avatar, AvatarClasses.clickable)}
                 onClick={openModal}
-                src={review.sender.profilePhoto || IconUtils.getDefaultAvatarURL(review.sender.discordID)}
+                src={review.sender.profilePhoto ?? IconUtils.getDefaultAvatarURL(review.sender.discordID)}
                 style={{ left: "0px", zIndex: 0 }}
                 onError={e => e.currentTarget.src = IconUtils.getDefaultAvatarURL(review.sender.discordID)}
             />
@@ -136,7 +206,7 @@ export default function ReviewComponent({ review, refetch, profileId }: { review
                         className={classes(BotTagClasses.botTagVerified, BotTagClasses.botTagRegular, BotTagClasses.px, BotTagClasses.rem)}
                         style={{ marginLeft: "4px" }}>
                         <span className={BotTagClasses.botText}>
-                            System
+                            {t(plugin.reviewDB.text.system)}
                         </span>
                     </span>
                 )}
@@ -158,14 +228,13 @@ export default function ReviewComponent({ review, refetch, profileId }: { review
                         {dateFormat.format(review.timestamp * 1000)}
                     </Timestamp>)
             }
-
             <div className={cl("review-comment")}>
                 {(review.comment.length > 200 && !showAll)
                     ? (
                         <>
                             {Parser.parseGuildEventDescription(review.comment.substring(0, 200))}...
                             <br />
-                            <a onClick={() => setShowAll(true)}>{t(plugin.reviewDB.button.more)}</a>]
+                            <a onClick={() => setShowAll(true)}>{t(plugin.reviewDB.button.more)}</a>
                         </>
                     )
                     : Parser.parseGuildEventDescription(review.comment)}

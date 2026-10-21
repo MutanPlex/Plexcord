@@ -19,7 +19,6 @@
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { disableStyle, enableStyle } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { ErrorCard } from "@components/ErrorCard";
 import { Heading } from "@components/Heading";
@@ -27,13 +26,10 @@ import { Paragraph } from "@components/Paragraph";
 import { Devs, IS_MAC, PcDevs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import definePlugin, { OptionType } from "@utils/types";
-import { findByPropsLazy, findLazy } from "@webpack";
+import { findByPropsLazy } from "@webpack";
 import { React } from "@webpack/common";
 
-import hideBugReport from "./hideBugReport.css?managed";
-
 const KbdStyles = findByPropsLazy("key", "combo");
-const BugReporterExperiment = findLazy(m => m?.definition?.name === "2026-01-bug-reporter");
 
 const modKey = IS_MAC ? "cmd" : "ctrl";
 const altKey = IS_MAC ? "opt" : "alt";
@@ -135,9 +131,9 @@ export default definePlugin({
         // dev://playground/mana, dev://playground/payments, dev://playground/virtual-currency,
         // dev://playground/nitro, dev://playground/mfa, dev://playground/cms, dev://playground/void
         {
-            find: "{PlaygroundEmbed:()=>",
+            find: ".useComponentPlaygroundConfigs)()",
             replacement: {
-                match: /PotionIcon.{0,250}getCurrentUser\(\);return/,
+                match: /"Revenue".{0,250}getCurrentUser\(\);return/,
                 replace: "$& true||"
             }
         },
@@ -145,7 +141,7 @@ export default definePlugin({
             // Expands the experiment regex to allow negative numbers as well as text in the last segment of the URL.
             find: '"^dev://experiment/',
             replacement: {
-                match: /(\[0-9\]\+)/,
+                match: /\[0-9\]\+(?=\)\)\?\$")/,
                 replace: "[a-zA-Z0-9-]+"
             }
         },
@@ -168,9 +164,6 @@ export default definePlugin({
         return !!labelCleaned && urlEndCleaned !== undefined && labelCleaned === urlEndCleaned;
     },
 
-    start: () => !BugReporterExperiment.getConfig().hasBugReporterAccess && enableStyle(hideBugReport),
-    stop: () => disableStyle(hideBugReport),
-
     settingsAboutComponent: () => {
         return (
             <React.Fragment>
@@ -178,8 +171,8 @@ export default definePlugin({
                 <Paragraph size="md">
                     {t(plugin.experiments.modal.about.body, {
                         key: <div className={KbdStyles.combo} style={{ display: "inline-flex" }}>
-                            <kbd className={KbdStyles.key}>{modKey}</kbd> +{" "}
-                            <kbd className={KbdStyles.key}>{altKey}</kbd> +{" "}
+                            <kbd className={KbdStyles.key}>{modKey}</kbd>{" "}
+                            <kbd className={KbdStyles.key}>{altKey}</kbd>{" "}
                             <kbd className={KbdStyles.key}>O</kbd>{" "}
                         </div>
                     })}

@@ -21,8 +21,9 @@ import { Dirent, readdirSync, readFileSync, writeFileSync } from "fs";
 import { access, readFile } from "fs/promises";
 import { join, sep } from "path";
 import { normalize as posixNormalize, sep as posixSep } from "path/posix";
-import { ArrowFunction, AsExpression, BigIntLiteral, createSourceFile, FunctionExpression, Identifier, isArrowFunction, isArrayLiteralExpression, isAsExpression, isCallExpression, isExportAssignment, isFunctionExpression, isIdentifier, isObjectLiteralExpression, isPropertyAccessExpression, isPropertyAssignment, isSatisfiesExpression, isStringLiteral, isVariableStatement, NamedDeclaration, NodeArray, ObjectLiteralExpression, ScriptTarget, StringLiteral, SyntaxKind } from "typescript";
+import { ArrowFunction, AsExpression, BigIntLiteral, createSourceFile, FunctionExpression, Identifier, isArrayLiteralExpression, isArrowFunction, isAsExpression, isCallExpression, isExportAssignment, isFunctionExpression, isIdentifier, isObjectLiteralExpression, isPropertyAccessExpression, isPropertyAssignment, isSatisfiesExpression, isStringLiteral, isVariableStatement, NamedDeclaration, NodeArray, ObjectLiteralExpression, ScriptTarget, StringLiteral, SyntaxKind } from "typescript";
 
+import { PluginTarget, PluginTargets } from "../src/utils/pluginTargets";
 import { getPluginTarget } from "./utils.mjs";
 
 interface BaseDev {
@@ -44,7 +45,7 @@ interface PluginData {
     hasCommands: boolean;
     required: boolean;
     enabledByDefault: boolean;
-    target: "discordDesktop" | "plextron" | "desktop" | "web" | "dev";
+    target?: PluginTarget;
     filePath: string;
     readme?: string;
 }
@@ -286,7 +287,7 @@ async function parseFile(fileName: string) {
 
         const target = getPluginTarget(fileName);
         if (target) {
-            if (!["web", "discordDesktop", "plextron", "desktop", "dev"].includes(target)) throw fail(`invalid target ${target}`);
+            if (!PluginTargets.includes(target as PluginTarget)) throw fail(`invalid target ${target}`);
             data.target = target as any;
         }
 

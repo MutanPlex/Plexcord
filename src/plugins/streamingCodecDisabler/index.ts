@@ -6,26 +6,10 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { definePluginSettings, Settings } from "@api/Settings";
+import { definePluginSettings } from "@api/Settings";
+import { CodecInfo } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { MediaEngineStore } from "@webpack/common";
-
-interface Codecs {
-    AV1: boolean;
-    H265: boolean,
-    H264: boolean;
-    VP8: boolean;
-    VP9: boolean;
-}
-
-const originalCodecStatuses: Codecs = {
-    AV1: true,
-    H265: true,
-    H264: true,
-    VP8: true,
-    VP9: true,
-};
 
 const settings = definePluginSettings({
     disableAv1Codec: {
@@ -63,32 +47,28 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "StreamingCodecDisabler",
     description: () => t(plugin.streamingCodecDisabler.description),
-    authors: [PcDevs.davidkra230],
     tags: ["voice", "utility"],
+    authors: [PcDevs.davidkra230],
     settings,
 
     patches: [
         {
-            find: "setVideoBroadcast(this.shouldConnectionBroadcastVideo",
+            find: "lastOverrideCodecDenylist.length",
             replacement: {
-                match: /setGoLiveSource\(.,.\)\{/,
-                replace: "$&$self.updateDisabledCodecs();"
+                match: /(let \i=)(\i\(\i\))(?=,\i=this\.lastOverrideCodecDenylist\.length)/,
+                replace: "$1$self.filterCodecs($2)"
             },
         }
     ],
 
-    async updateDisabledCodecs() {
-        const mediaEngine = MediaEngineStore.getMediaEngine();
-        const options = Object.keys(originalCodecStatuses);
-        const CodecCapabilities = JSON.parse(await new Promise(res => mediaEngine.getCodecCapabilities(res)));
-        CodecCapabilities.forEach((codec: { codec: string; encode: boolean; }) => {
-            if (options.includes(codec.codec)) {
-                originalCodecStatuses[codec.codec] = codec.encode;
-            }
-        });
-
-        mediaEngine.setAv1Enabled(originalCodecStatuses.AV1 && !Settings.plugins.StreamingCodecDisabler.disableAv1Codec);
-        mediaEngine.setH265Enabled(originalCodecStatuses.H265 && !Settings.plugins.StreamingCodecDisabler.disableH265Codec);
-        mediaEngine.setH264Enabled(originalCodecStatuses.H264 && !Settings.plugins.StreamingCodecDisabler.disableH264Codec);
+    filterCodecs(codecs: CodecInfo[]) {
+        const disabled: Record<string, boolean> = {
+            AV1: settings.store.disableAv1Codec,
+            H265: settings.store.disableH265Codec,
+            H264: settings.store.disableH264Codec,
+            VP8: settings.store.disableVP8Codec,
+            VP9: settings.store.disableVP9Codec,
+        };
+        return codecs.map(c => disabled[c.name] ? { ...c, encode: false } : c);
     },
 });

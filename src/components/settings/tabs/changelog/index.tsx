@@ -22,27 +22,11 @@ import { Margins } from "@utils/margins";
 import { useAwaiter } from "@utils/react";
 import { formatTimestamp } from "@utils/text";
 import { getRepo, UpdateLogger } from "@utils/updater";
-import { Alerts, React, Toasts, useEffect } from "@webpack/common";
+import { Alerts, React, showToast, useEffect } from "@webpack/common";
 
 import gitHash from "~git-hash";
 
-import {
-    ChangelogEntry,
-    ChangelogHistory,
-    clearChangelogHistory,
-    clearIndividualLog,
-    getChangelogHistory,
-    getCommitsSinceLastSeen,
-    getLastRepositoryCheckHash,
-    getNewPlugins,
-    getNewSettings,
-    getNewSettingsEntries,
-    getNewSettingsSize,
-    getUpdatedPlugins,
-    initializeChangelog,
-    saveUpdateSession,
-    UpdateSession,
-} from "./changelogManager";
+import { ChangelogEntry, ChangelogHistory, clearChangelogHistory, clearIndividualLog, getChangelogHistory, getCommitsSinceLastSeen, getLastRepositoryCheckHash, getNewPlugins, getNewSettings, getNewSettingsEntries, getNewSettingsSize, getUpdatedPlugins, initializeChangelog, saveUpdateSession, UpdateSession } from "./changelogManager";
 import { NewPluginsCompact, NewPluginsSection } from "./NewPluginsSection";
 
 function ChangelogCard({
@@ -259,7 +243,7 @@ function ChangelogContent() {
     useEffect(() => {
         if (repoErr) {
             UpdateLogger.error("Failed to retrieve repo", repoErr);
-            setError("Failed to retrieve repository information");
+            setError(t(changelog.error.retrieveRepo));
         }
     }, [repoErr]);
 
@@ -356,13 +340,9 @@ function ChangelogContent() {
                 const logged = await ensureLocalUpdateLogged();
                 if (!logged) {
                     setChangelogEntries([]);
-                    Toasts.show({
-                        message: t(changelog.toast.already),
-                        id: Toasts.genId(),
-                        type: Toasts.Type.MESSAGE,
-                        options: {
-                            position: Toasts.Position.BOTTOM,
-                        },
+                    showToast({
+                        text: t(changelog.toast.already),
+                        position: "bottom"
                     });
                 }
                 return;
@@ -388,26 +368,20 @@ function ChangelogContent() {
                     await loadChangelogHistory();
                     setRecentlyChecked(true);
 
-                    Toasts.show({
-                        message: t(changelog.toast.found, { count: updates.value.length, s: updates.value.length === 1 ? "" : "s" }),
-                        id: Toasts.genId(),
-                        type: Toasts.Type.SUCCESS,
-                        options: {
-                            position: Toasts.Position.BOTTOM,
-                        },
+                    showToast({
+                        text: t(changelog.toast.found, { count: updates.value.length, s: updates.value.length === 1 ? "" : "s" }),
+                        variant: "success",
+                        position: "bottom"
                     });
                 } else {
                     const logged = await ensureLocalUpdateLogged();
                     setRecentlyChecked(true);
-                    Toasts.show({
-                        message: logged
+                    showToast({
+                        text: logged
                             ? t(changelog.toast.yourLatest)
                             : t(changelog.toast.local),
-                        id: Toasts.genId(),
-                        type: logged ? Toasts.Type.SUCCESS : Toasts.Type.MESSAGE,
-                        options: {
-                            position: Toasts.Position.BOTTOM,
-                        },
+                        variant: logged ? "success" : "default",
+                        position: "bottom"
                     });
                     if (!logged) {
                         setChangelogEntries([]);
@@ -415,24 +389,21 @@ function ChangelogContent() {
                 }
             } else if (!updates.ok) {
                 throw new Error(
-                    updates.error?.message || "Failed to fetch from repository",
+                    updates.error?.message || t(changelog.error.fetchRepo),
                 );
             }
         } catch (err: any) {
             UpdateLogger.error("Failed to fetch commits from repository", err);
             const errorMessage =
                 err?.message ||
-                "Failed to connect to repository. Check your internet connection.";
+                t(changelog.error.connectRepo);
             setError(errorMessage);
 
             // funny little error toast hopefully doesn't happen!
-            Toasts.show({
-                message: t(changelog.toast.failed),
-                id: Toasts.genId(),
-                type: Toasts.Type.FAILURE,
-                options: {
-                    position: Toasts.Position.BOTTOM,
-                },
+            showToast({
+                text: t(changelog.toast.failed),
+                variant: "critical",
+                position: "bottom"
             });
         } finally {
             setIsLoading(false);
@@ -524,13 +495,10 @@ function ChangelogContent() {
                                         await clearChangelogHistory();
                                         await loadChangelogHistory();
                                         setShowHistory(false);
-                                        Toasts.show({
-                                            message: t(changelog.toast.cleared),
-                                            id: Toasts.genId(),
-                                            type: Toasts.Type.SUCCESS,
-                                            options: {
-                                                position: Toasts.Position.BOTTOM,
-                                            },
+                                        showToast({
+                                            text: t(changelog.toast.cleared),
+                                            variant: "success",
+                                            position: "bottom"
                                         });
                                     },
                                 });
@@ -664,13 +632,10 @@ function ChangelogContent() {
                                                     Array.from(expandedLogs).filter(id => id !== logId),
                                                 ),
                                             );
-                                            Toasts.show({
-                                                message: t(changelog.toast.logCleared),
-                                                id: Toasts.genId(),
-                                                type: Toasts.Type.SUCCESS,
-                                                options: {
-                                                    position: Toasts.Position.BOTTOM,
-                                                },
+                                            showToast({
+                                                text: t(changelog.toast.logCleared),
+                                                variant: "success",
+                                                position: "bottom"
                                             });
                                         },
                                     });

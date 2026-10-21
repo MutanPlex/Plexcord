@@ -96,7 +96,7 @@
 }
 
 .pc-holy-note [class*="botText"]::after {
-    content: "NOTE";
+    content: var(--pc-holy-note-tag, "NOTE");
     font-size: 0.625rem;
     line-height: 1.3;
     font-weight: 600;

@@ -11,7 +11,7 @@ import { copyToClipboard } from "@utils/clipboard";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findByCodeLazy } from "@webpack";
-import { Toasts } from "@webpack/common";
+import { showToast } from "@webpack/common";
 
 interface MakeContextMenuProps {
     user: User,
@@ -46,23 +46,17 @@ export default definePlugin({
                     throw new Error("button_urls does not contain index");
                 }
                 copyToClipboard(button_urls[index]);
-                Toasts.show({
-                    id: Toasts.genId(),
-                    message: t(plugin.copyStatusUrls.toast.copied),
-                    type: Toasts.Type.SUCCESS,
-                    options: {
-                        position: Toasts.Position.TOP
-                    }
+                showToast({
+                    text: t(plugin.copyStatusUrls.toast.copied),
+                    variant: "success",
+                    position: "top"
                 });
             } catch (e) {
                 console.error(e);
-                Toasts.show({
-                    id: Toasts.genId(),
-                    message: t(plugin.copyStatusUrls.toast.error),
-                    type: Toasts.Type.FAILURE,
-                    options: {
-                        position: Toasts.Position.TOP
-                    }
+                showToast({
+                    text: t(plugin.copyStatusUrls.toast.error),
+                    variant: "critical",
+                    position: "top"
                 });
             }
         };

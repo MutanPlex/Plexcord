@@ -24,10 +24,7 @@ import { containsBlockedKeywords } from "@plugins/blockKeywords";
 import { Devs, PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
-import { MessageStore, RelationshipStore } from "@webpack/common";
-import { findStoreLazy } from "webpack";
-
-const ReferencedMessageStore = findStoreLazy("ReferencedMessageStore");
+import { MessageStore, ReferencedMessageStore, RelationshipStore } from "@webpack/common";
 
 interface ChannelStreamDividerProps {
     type: "DIVIDER",
@@ -99,18 +96,24 @@ export default definePlugin({
     settings,
 
     patches: [
-        ...[
-            '"MessageStore"',
-            '"ReadStateStore"'
-        ].map(find => ({
-            find,
+        {
+            find: '"MessageStore"',
             replacement: [
                 {
-                    match: /(?<=function (\i)\((\i)\){)(?=.*MESSAGE_CREATE:\1)/,
-                    replace: (_, _funcName, props) => `if($self.disableNotification(${props}.message)){return;};`
+                    match: /(?<=MESSAGE_CREATE:function\((\i)\){)/,
+                    replace: (_, props) => `if($self.disableNotification(${props}.message))return;`
                 }
             ]
-        })),
+        },
+        {
+            find: '"ReadStateStore"',
+            replacement: [
+                {
+                    match: /(?<=MESSAGE_CREATE:function\((\i)\){)/,
+                    replace: (_, props) => `if($self.disableNotification(${props}.message))return;`
+                }
+            ]
+        },
         {
             find: "`forum-post-action-bar-",
             replacement: [

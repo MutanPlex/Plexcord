@@ -16,12 +16,14 @@ export default definePlugin({
     tags: ["appearance", "friends", "utility"],
     patches: [
         {
-            find: /\.POPOUT,onClose:\i}\),nicknameIcons:.+?\.isProvisional/,
+            // message and member list popouts
+            find: '"UserProfilePopout");',
             replacement: {
                 match: /user:\i,widgets:.{0,100}?\}\),/,
                 replace: "$&Plexcord.Api.ProfileCollections.renderProfileCollections(arguments[0]),",
             }
         },
+        // user panel popout
         {
             find: '"UserProfileAccountPopout"',
             replacement: {
@@ -29,12 +31,19 @@ export default definePlugin({
                 replace: "$&Plexcord.Api.ProfileCollections.renderProfileCollections(arguments[0]),",
             },
         },
+        // dm sidebar
         {
             find: ".SIDEBAR,disableToolbar:",
-            replacement: {
-                match: /user:(\i),widgets:.{0,100}?\}\),/,
-                replace: "$&Plexcord.Api.ProfileCollections.renderProfileCollections({...arguments[0],isSideBar:true}),"
-            }
+            replacement: [
+                {
+                    match: /user:\i,widgets:.{0,100}?\}\),(?=.{0,100}user:\i,currentUser:\i)/,
+                    replace: "$&arguments[0]?.isRedesignEnabled&&Plexcord.Api.ProfileCollections.renderProfileCollections({...arguments[0],isSideBar:true}),"
+                },
+                {
+                    match: /user:\i,widgets:.{0,100}?\}\),(?=.{0,100}unownedWishlistItems:\i,wishlistId:\i)/,
+                    replace: "$&!arguments[0]?.isRedesignEnabled&&Plexcord.Api.ProfileCollections.renderProfileCollections({...arguments[0],isSideBar:true}),"
+                }
+            ]
         }
     ]
 });

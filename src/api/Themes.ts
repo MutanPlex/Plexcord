@@ -18,14 +18,18 @@
 */
 
 import { Settings, SettingsStore, type ThemeActivationMode } from "@api/Settings";
+import { rewriteLegacyClasses } from "@main/themes/rewrite";
 import { ThemeStore } from "@plexcord/discord-types";
 import { createAndAppendStyle } from "@utils/css";
+import { isNonNullish } from "@utils/guards";
 import { PopoutWindowStore } from "@webpack/common";
 
 import { coreStyleRootNode, managedStyleRootNode, plexcordRootNode, userStyleRootNode } from "./Styles";
 
 let style: HTMLStyleElement;
 let themesStyle: HTMLStyleElement;
+
+const themeChangeListeners = new Set<() => void>();
 
 function getThemeActivationMode(themeId: string) {
     return Settings.themeActivationModes?.[themeId] ?? "always";
@@ -52,6 +56,9 @@ async function toggle(isEnabled: boolean) {
         style.disabled = !isEnabled;
 }
 
+// for cleanup
+let previousThemeBlobObjectURLs = [] as string[];
+
 async function initThemes() {
     themesStyle ??= createAndAppendStyle("plexcord-themes", userStyleRootNode);
 
@@ -69,24 +76,32 @@ async function initThemes() {
 
     for (const rawLink of enabledThemeLinks) {
         const match = /^@(light|dark) (.*)/.exec(rawLink);
-        const link = match?.[2] ?? rawLink;
+        const link = (match?.[2] ?? rawLink).trim();
         const mode = getThemeActivationMode(rawLink);
 
         if (shouldApplyTheme(mode, activeTheme)) {
-            links.add(link);
+            // on desktop the main process fetches it and rewrites vc-/vc_ classes, see rewriteThemeCss
+            links.add(IS_WEB ? link : `plexcord:///online-themes/${encodeURIComponent(link)}`);
         }
     }
 
     if (IS_WEB) {
-        for (const theme of enabledThemes) {
-            const mode = getThemeActivationMode(theme);
-            if (!shouldApplyTheme(mode, activeTheme)) continue;
+        previousThemeBlobObjectURLs.forEach(url => URL.revokeObjectURL(url));
 
+        const themesToApply = enabledThemes.filter(theme =>
+            shouldApplyTheme(getThemeActivationMode(theme), activeTheme)
+        );
+
+        const objectUrls = await Promise.all(themesToApply.map(async theme => {
             const themeData = await PlexcordNative.themes.getThemeData(theme);
-            if (!themeData) continue;
-            const blob = new Blob([themeData], { type: "text/css" });
-            links.add(URL.createObjectURL(blob));
-        }
+            if (!themeData) return null;
+
+            const blob = new Blob([rewriteLegacyClasses(themeData)], { type: "text/css" });
+            return URL.createObjectURL(blob);
+        }));
+
+        previousThemeBlobObjectURLs = objectUrls.filter(isNonNullish);
+        previousThemeBlobObjectURLs.forEach(url => links.add(url));
     } else {
         const version = Date.now();
         for (const theme of enabledThemes) {
@@ -98,6 +113,7 @@ async function initThemes() {
 
     themesStyle.textContent = Array.from(links).map(link => `@import url("${link.trim()}");`).join("\n");
     updatePopoutWindows();
+    themeChangeListeners.forEach(listener => listener());
 }
 
 function applyToPopout(popoutWindow: Window | undefined, key: string) {
@@ -165,4 +181,12 @@ export function initQuickCssThemeStore(themeStore: ThemeStore) {
         currentTheme = themeStore.theme;
         initThemes();
     });
+}
+
+export function addThemeChangeListener(listener: () => void) {
+    themeChangeListeners.add(listener);
+}
+
+export function removeThemeChangeListener(listener: () => void) {
+    themeChangeListeners.delete(listener);
 }

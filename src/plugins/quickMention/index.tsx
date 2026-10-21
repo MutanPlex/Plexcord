@@ -54,8 +54,6 @@ export default definePlugin({
             return {
                 label: t(plugin.quickMention.tooltip),
                 icon: Icon,
-                message: msg,
-                channel,
                 onClick: () => insertTextIntoChatInputBox(`<@${msg.author.id}> `)
             };
         }

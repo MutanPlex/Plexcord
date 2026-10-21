@@ -10,7 +10,7 @@ import { plugin, t } from "@api/i18n";
 import { Message } from "@plexcord/discord-types";
 import { CloudUploadPlatform } from "@plexcord/discord-types/enums";
 import { Logger } from "@utils/Logger";
-import { ChannelStore, CloudUploader, Constants, FluxDispatcher, GuildStore, IconUtils, MessageActions, MessageStore, RestAPI, showToast, SnowflakeUtils, Toasts, UserStore } from "@webpack/common";
+import { ChannelStore, CloudUploader, Constants, FluxDispatcher, GuildStore, IconUtils, MessageActions, MessageStore, RestAPI, showToast, SnowflakeUtils, UserStore } from "@webpack/common";
 
 import { settings } from ".";
 import { PhantomMessageData, ScheduledAttachment, ScheduledMessage, ScheduledReaction } from "./types";
@@ -376,11 +376,11 @@ async function sendScheduledMessage(msg: ScheduledMessage): Promise<boolean> {
         }
 
         if (settings.store.showNotifications) {
-            showToast(t(plugin.scheduledMessages.toast.messageSent, { channel: getChannelDisplayInfo(msg.channelId).name }), Toasts.Type.SUCCESS);
+            showToast({ text: t(plugin.scheduledMessages.toast.scheduledMessageSentTo, { name: getChannelDisplayInfo(msg.channelId).name }), variant: "success" });
         }
         return true;
     } catch {
-        if (settings.store.showNotifications) showToast(t(plugin.scheduledMessages.toast.messageFailed), Toasts.Type.FAILURE);
+        if (settings.store.showNotifications) showToast({ text: t(plugin.scheduledMessages.toast.messageFailed), variant: "critical" });
         return false;
     }
 }

@@ -10,6 +10,7 @@ import "./style.css";
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { LinkIcon } from "@components/Icons";
 import { Channel, Message } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -19,6 +20,7 @@ import { JSX } from "react";
 import ChannelsTabsContainer from "./components/ChannelTabsContainer";
 import * as ChannelTabsUtils from "./util";
 import { BasicChannelTabsProps, createTab, handleChannelSwitch, settings } from "./util";
+import { clearTabState, useScrollManager } from "./util/scroll";
 
 const contextMenuPatch: NavContextMenuPatchCallback = (children, props: { channel: Channel, messageId?: string; }) => {
     const { channel, messageId } = props;
@@ -26,6 +28,8 @@ const contextMenuPatch: NavContextMenuPatchCallback = (children, props: { channe
         <Menu.MenuItem
             label={t(plugin.channelTabs.open)}
             id="open-link-in-tab"
+            icon={LinkIcon}
+            leadingAccessory={{ type: "icon", icon: LinkIcon }}
             action={() => createTab({
                 guildId: channel.guild_id || "@me", // Normalize for DMs/Group Chats
                 channelId: channel.id
@@ -48,9 +52,9 @@ const contextMenuPatch: NavContextMenuPatchCallback = (children, props: { channe
 export default definePlugin({
     name: "ChannelTabs",
     description: () => t(plugin.channelTabs.description),
-    authors: [Devs.TheSun, Devs.TheKodeToad, PcDevs.keifufu, Devs.Nickyux, PcDevs.DiabeloDEV, PcDevs.MutanPlex],
+    authors: [Devs.TheSun, Devs.TheKodeToad, PcDevs.keifufu, Devs.Nickyux, PcDevs.DiabeloDEV, PcDevs.MutanPlex, PcDevs.keircn],
     tags: ["organisation", "utility", "shortcuts"],
-    dependencies: ["ContextMenuAPI"],
+    dependencies: ["ContextMenuAPI", "ConcatenatedModules"],
     contextMenus: {
         "channel-mention-context": contextMenuPatch,
         "channel-context": contextMenuPatch,
@@ -64,13 +68,13 @@ export default definePlugin({
             find: '"AppView"',
             replacement: [
                 {
-                    match: /((\i\?.params)\?\.channelId.{0,600})"div",{(?=className:\i\.\i)/,
+                    match: /((\i\?\.params)\.guildId===.{0,300}?)"div",{(?=className:\i\.\i,children:\[)/,
                     replace: "$1$self.render,{currentChannel:$2,",
                     predicate: () => settings.store.tabBarPosition === "top"
                 },
                 {
-                    match: /((\i\?.params)\?.channelId.{0,300})"div",{/,
-                    replace: "$1$self.render,{currentChannel:$2,",
+                    match: /"div",{(?=.{0,80}(\i\?\.params))/,
+                    replace: "$self.render,{currentChannel:$1,",
                     predicate: () => settings.store.tabBarPosition === "bottom"
                 }
             ]
@@ -83,20 +87,12 @@ export default definePlugin({
                 replace: "$1$self.handleNavigation($2,$3);$4"
             }
         },
-        // ctrl click to open in new tab in inbox unread
-        {
-            find: '[data-recents-channel="',
-            replacement: {
-                match: /(?<=className:\i.\i,onJump:)\i=>(\i)\(\i,(\i)\.id\)/,
-                replace: "event => { if (event.ctrlKey) $self.open($2); else $1(event, $2.id) }"
-            }
-        },
         // ctrl click to open in new tab in inbox mentions
         {
             find: ".deleteRecentMention(",
             replacement: {
-                match: /(?<=className:\i.\i,onJump:)(\i)(?=.{0,20}message:(\i))/,
-                replace: "event => { if (event.ctrlKey) $self.open($2); else $1(event) }"
+                match: /(?<=className:\i.\i,onJump:)(\i)=>(\i\(\i,\i\.id\))(?=.{0,40}message:(\i))/,
+                replace: "$1 => { if ($1?.ctrlKey) $self.open($3); else $2 }"
             }
         },
         // ctrl click to open in new tab in search results
@@ -107,17 +103,28 @@ export default definePlugin({
                 replace: "$&if ($1.ctrlKey) return $self.open($2);"
             }
         },
-        // prevent issues with the pins/inbox popouts being too tall
         {
-            find: "#{intl::JUMP}),onClick:",
+            find: "#{intl::CHANNEL_CHAT_HEADING}",
             replacement: {
-                match: /\i&&\((\i).maxHeight.{0,5}\)/,
-                replace: "$&;$1.maxHeight-=$self.containerHeight"
+                match: /hideSummaries:(\i)===(\i\.\i)\.OVERLAY/,
+                replace: "$&,pcChannelTabsMain:$1===$2.NORMAL"
+            }
+        },
+        {
+            find: "#{intl::CHANNEL_MESSAGES_A11Y_LABEL}",
+            replacement: {
+                match: /onScroll:(\i)\.handleScroll(?=,onMouseDown:\i\.handleMouseDown)/,
+                replace: "onScroll:$self.useScrollManager($1,arguments[0].pcChannelTabsMain).handleScroll"
             }
         }
     ],
 
     settings,
+    useScrollManager,
+
+    stop() {
+        clearTabState();
+    },
 
     start() {
         // migrate old settings to new granular keybind settings

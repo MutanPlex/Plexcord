@@ -1,27 +1,12 @@
 .pc-plugin-modal-header {
-    align-items: flex-start;
-    position: relative;
-    padding: 16px 16px 0 24px;
-}
-
-.pc-plugin-modal-header-content {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: 8px;
-    flex: 1;
-}
-
-.pc-plugin-modal-header-trailing {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
 }
 
 .pc-settings-modal-content {
+    display: flex;
+    flex-direction: column;
     padding-bottom: 24px;
 }
 
@@ -36,7 +21,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
-    margin-block: 8px 16px;
+    margin-top: 8px;
 }
 
 .pc-plugin-modal-tag {
@@ -51,12 +36,10 @@
 
 .pc-plugin-modal-title {
     color: var(--text-strong);
-    padding-right: 32px;
 }
 
 .pc-plugin-modal-description {
     color: var(--text-subtle);
-    padding-right: 60px;
 }
 
 .pc-plugin-modal-links {
@@ -81,4 +64,10 @@
     align-items: center;
     gap: 4px;
     color: var(--text-feedback-critical);
+}
+
+.pc-plugin-modal-about-box {
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-normal, var(--background-modifier-accent));
 }

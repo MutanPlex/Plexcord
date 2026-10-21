@@ -111,7 +111,7 @@ class MainI18n {
         if (newLocale) {
             this.currentLocale = newLocale;
         } else {
-            const settings = RendererSettings.plain?.language;
+            const settings = RendererSettings?.plain?.language;
             if (settings?.locale) this.currentLocale = settings.locale;
             if (settings?.fallbackLocale) this.fallbackLocale = settings.fallbackLocale;
         }
@@ -125,6 +125,10 @@ class MainI18n {
 }
 
 export const mainI18n = new MainI18n();
+
+// Initialised here instead of in settings.ts so it works no matter which of the two circularly imported modules loads first.
+// The locale is read asynchronously after translations load, by which point RendererSettings is ready.
+mainI18n.initialize();
 
 if (!IS_WEB) {
     (globalThis as any).__plexcord_main_i18n = mainI18n;

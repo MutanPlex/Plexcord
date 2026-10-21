@@ -22,7 +22,7 @@ import { addMessagesBulkIDB, iterateAllMessagesIDB } from "@plugins/messageLogge
 import { LoggedMessageJSON } from "@plugins/messageLoggerEnhanced/types";
 import JSONParser from "@streamparser/json/jsonparser.js";
 import { chooseFile as chooseFileWeb } from "@utils/web";
-import { Toasts } from "@webpack/common";
+import { showToast } from "@webpack/common";
 import { showSaveFilePicker } from "native-file-system-adapter";
 
 import { clearLogs, Native } from "..";
@@ -62,27 +62,15 @@ export async function importLogs() {
         }
 
         if (count === 0) {
-            Toasts.show({
-                id: Toasts.genId(),
-                message: "No messages found in log file",
-                type: Toasts.Type.FAILURE
-            });
+            showToast({ text: t(plugin.messageLoggerEnhanced.toast.noMessagesFoundIn), variant: "critical" });
             return;
         }
 
-        Toasts.show({
-            id: Toasts.genId(),
-            message: t(plugin.messageLoggerEnhanced.successfullyImported),
-            type: Toasts.Type.SUCCESS
-        });
+        showToast({ text: t(plugin.messageLoggerEnhanced.toast.successfullyImportedCountLogs, { count }), variant: "success" });
     } catch (e) {
         console.error(e);
 
-        Toasts.show({
-            id: Toasts.genId(),
-            message: t(plugin.messageLoggerEnhanced.errorImportingLogs),
-            type: Toasts.Type.FAILURE
-        });
+        showToast({ text: t(plugin.messageLoggerEnhanced.errorImportingLogs), variant: "critical" });
     }
 
 }
@@ -109,11 +97,7 @@ export async function exportLogs() {
             await Native.writeNativeLogChunk(streamId, "\n  ]\n}");
             await Native.finishNativeLogExport(streamId);
 
-            Toasts.show({
-                id: Toasts.genId(),
-                message: "Successfully exported logs",
-                type: Toasts.Type.SUCCESS
-            });
+            showToast({ text: t(plugin.messageLoggerEnhanced.toast.successfullyExportedLogs), variant: "success" });
             return;
         }
 
@@ -122,7 +106,7 @@ export async function exportLogs() {
             const handle = await showSaveFilePicker({
                 suggestedName: filename,
                 types: [{
-                    description: "JSON File",
+                    description: t(plugin.messageLoggerEnhanced.text.jsonFile),
                     accept: { "application/json": [".json"] },
                 }],
             });
@@ -146,20 +130,12 @@ export async function exportLogs() {
             await writer.write(encoder.encode("\n  ]\n}"));
             await writer.close();
 
-            Toasts.show({
-                id: Toasts.genId(),
-                message: `Successfully exported ${count} logs`,
-                type: Toasts.Type.SUCCESS
-            });
+            showToast({ text: t(plugin.messageLoggerEnhanced.toast.successfullyExportedCountLogs, { count }), variant: "success" });
         }
     } catch (e) {
         console.error(e);
 
-        Toasts.show({
-            id: Toasts.genId(),
-            message: "Error exporting logs. Check the console for more information",
-            type: Toasts.Type.FAILURE
-        });
+        showToast({ text: t(plugin.messageLoggerEnhanced.toast.errorExportingLogsCheck), variant: "critical" });
     }
 }
 

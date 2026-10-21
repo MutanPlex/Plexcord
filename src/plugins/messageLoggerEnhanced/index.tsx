@@ -11,10 +11,11 @@ import "./styles.css";
 
 import { HeaderBarButton } from "@api/HeaderBar";
 import { plugin, t } from "@api/i18n";
+import { LogsIcon } from "@components/Icons";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { Logger } from "@utils/Logger";
-import definePlugin, { IconComponent } from "@utils/types";
+import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
 import { FluxDispatcher, MessageStore, React, SelectedChannelStore, UserStore } from "@webpack/common";
 
@@ -42,44 +43,16 @@ let didClearLogsOnStartup = false;
 
 const cacheThing = findByPropsLazy("commit", "getOrCreate");
 
-export async function clearLogs(showToast = true) {
-    await idb.clearMessagesIDB(showToast);
+export async function clearLogs(toast = true) {
+    await idb.clearMessagesIDB(toast);
     cacheSentMessages.clear();
 }
 
 let oldGetMessage: typeof MessageStore.getMessage;
 
-const OpenLogsIcon: IconComponent = ({ height = 24, width = 24, className }) => {
-    return (
-        <svg
-            stroke="currentColor"
-            fill="none"
-            strokeWidth="0"
-            viewBox="0 0 15 15"
-            height={height}
-            width={width}
-            xmlns="http://www.w3.org/2000/svg"
-            className={className}
-        >
-            <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                fill="currentColor"
-                d="M3 2.5C3 2.22386 3.22386 2 3.5 2H9.08579C9.21839 2 9.34557 2.05268 9.43934 2.14645L11.8536 4.56066C11.9473 4.65443 12 4.78161 12 4.91421V12.5C12 12.7761 11.7761 13 11.5 13H3.5C3.22386 13 3 12.7761 3 12.5V2.5ZM3.5 1C2.67157 1 2 1.67157 2 2.5V12.5C2 13.3284 2.67157 14 3.5 14H11.5C12.3284 14 13 13.3284 13 12.5V4.91421C13 4.51639 12.842 4.13486 12.5607 3.85355L10.1464 1.43934C9.86514 1.15804 9.48361 1 9.08579 1H3.5ZM4.5 4C4.22386 4 4 4.22386 4 4.5C4 4.77614 4.22386 5 4.5 5H7.5C7.77614 5 8 4.77614 8 4.5C8 4.22386 7.77614 4 7.5 4H4.5ZM4.5 7C4.22386 7 4 7.22386 4 7.5C4 7.77614 4.22386 8 4.5 8H10.5C10.7761 8 11 7.77614 11 7.5C11 7.22386 10.7761 7 10.5 7H4.5ZM4.5 10C4.22386 10 4 10.2239 4 10.5C4 10.7761 4.22386 11 4.5 11H10.5C10.7761 11 11 10.7761 11 10.5C11 10.2239 10.7761 10 10.5 10H4.5Z"
-            >
-            </path>
-        </svg>
-    );
-};
-
 const handledMessageIds = new Set();
 async function messageDeleteHandler(payload: MessageDeletePayload & { isBulk: boolean; }) {
-    if (payload.mlDeleted) {
-        if (settings.store.permanentlyRemoveLogByDefault)
-            await idb.deleteMessageIDB(payload.id);
-
-        return;
-    }
+    if (payload.mlDeleted) return;
 
     if (handledMessageIds.has(payload.id)) {
         return;
@@ -283,7 +256,7 @@ function MessageLogButton() {
     return (
         <HeaderBarButton
             tooltip={t(plugin.messageLoggerEnhanced.context.title)}
-            icon={OpenLogsIcon}
+            icon={LogsIcon}
             className={cl("toolbox-btn")}
             onClick={() => openLogModal()}
         />
@@ -318,14 +291,6 @@ export default definePlugin({
                 replace: "deleted:$self.getDeleted(...arguments), editHistory:$self.getEdited(...arguments),"
             }
         },
-        // MessagePreview component in LogsModal
-        {
-            find: "=!0,disableInteraction:",
-            replacement: {
-                match: /childrenHeader:.{0,100}childrenMessageContent/,
-                replace: "childrenAccessories:arguments[0].childrenAccessories || null,$&"
-            }
-        },
         // fix vidoes failing because there are no thumbnails
         {
             find: ".handleImageLoad)",
@@ -348,7 +313,7 @@ export default definePlugin({
 
         // only check for expired attachments if the message is not deleted
         {
-            find: "\"/ephemeral-attachments/\"",
+            find: ".ATTACHMENTS_REFRESH_URLS,",
             replacement: {
                 match: /\i\.attachments\.some\(\i\)\|\|\i\.embeds\.some/,
                 replace: "!arguments[0].deleted && $&"
@@ -357,7 +322,7 @@ export default definePlugin({
     ],
 
     headerBarButton: {
-        icon: OpenLogsIcon,
+        icon: LogsIcon,
         render: MessageLogButton,
         priority: 300
     },
@@ -365,7 +330,7 @@ export default definePlugin({
     settings,
 
     toolboxActions: () => ({
-        "Message Logger"() {
+        [t(plugin.messageLoggerEnhanced.text.messageLogger)]() {
             openLogModal();
         }
     }),
@@ -401,10 +366,7 @@ export default definePlugin({
     },
 
     getEdited(m1, m2) {
-        const editHistory = m2?.editHistory;
-        if (editHistory == null && m1?.editHistory != null && m1.editHistory.length > 0)
-            return m1.editHistory.map(mapTimestamp);
-        return editHistory;
+        return m2?.editHistory ?? m1?.editHistory?.map(mapTimestamp) ?? [];
     },
 
     flux: {
@@ -447,9 +409,10 @@ export default definePlugin({
             }
         }
 
-        const { imageCacheDir, logsDir } = await Native.getSettings();
+        const { imageCacheDir, logsDir, attachmentFileExtensions } = await Native.getSettings();
         settings.store.imageCacheDir = imageCacheDir;
         settings.store.logsDir = logsDir;
+        settings.store.attachmentFileExtensions = attachmentFileExtensions ?? "none";
 
         setupContextMenuPatches();
     },

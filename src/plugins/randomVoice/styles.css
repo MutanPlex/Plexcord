@@ -1,0 +1,15 @@
+.pc-random-voice-record {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pc-random-voice-keybind {
+    color: var(--text-muted);
+}
+
+.pc-random-voice-recording {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}

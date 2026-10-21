@@ -18,6 +18,7 @@
 */
 
 import * as DataStore from "@api/DataStore";
+import { classNameFactory } from "@utils/css";
 import { UserStore } from "@webpack/common";
 
 import { ChromeIcon, DiscordIcon, EdgeIcon, FirefoxIcon, IEIcon, MobileIcon, OperaIcon, SafariIcon, UnknownIcon } from "./components/icons";
@@ -25,6 +26,7 @@ import { SessionInfo } from "./types";
 
 const getDataKey = () => `BetterSessions_savedSessions_${UserStore.getCurrentUser().id}`;
 
+export const cl = classNameFactory("pc-betterSessions-");
 export const savedSessionsCache: Map<string, { name: string, isNew: boolean; }> = new Map();
 
 export function getDefaultName(clientInfo: SessionInfo["session"]["client_info"]) {
@@ -54,6 +56,8 @@ export function GetOsColor(os: string) {
         case "Mac OS X":
         case "iOS":
             return ""; // Default to white/black (theme-dependent)
+        case "Horizon OS": // For Meta Quest (not to be confused with Horizon OS for the Nintendo Switch)
+            return "#0081fb"; // A bright blue, more vibrant and strong and a bit darker than Windows
         default:
             return "#f3799a"; // Pink
     }
@@ -64,6 +68,7 @@ export function GetPlatformIcon(platform: string) {
         case "Discord Android":
         case "Discord iOS":
         case "Discord Client":
+        case "Discord VR":
             return DiscordIcon;
         case "Android Chrome":
         case "Chrome iOS":

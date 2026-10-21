@@ -2,17 +2,28 @@
     opacity: 0.5;
 }
 
-.pc-sp-item:hover {
-    background-color: var(--menu-item-default-hover-bg) !important;
-    color: var(--white) !important;
-}
-
 .pc-sp-icon {
     transform: rotate(45deg);
-    margin-top: 4px;
+    width: 16px;
+    height: 16px;
+    color: var(--interactive-normal);
+    opacity: 0;
+}
+
+[data-menu-item="true"]:hover .pc-sp-icon {
+    opacity: 1;
 }
 
 .pc-sp-item img {
     width: 20px;
     height: 20px;
+}
+
+[data-menu-item="true"]:hover .pc-sp-icon:hover {
+    color: var(--status-danger);
+}
+
+[data-menu-item="true"][id^="sp-custom-status-submenu"] img.emoji {
+    width: 16px !important;
+    height: 16px !important;
 }

@@ -10,17 +10,16 @@ import "./styles.css";
 import { plugin, plugins, t } from "@api/i18n";
 import { Settings, useSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
-import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Flex } from "@components/Flex";
+import { Link } from "@components/Link";
+import { Notice } from "@components/Notice";
 import { PluginDependencyList } from "@components/settings/tabs/plugins";
 import { PluginCard } from "@components/settings/tabs/plugins/PluginCard";
+import { RenderModalProps } from "@plexcord/discord-types";
 import { ChangeList } from "@utils/ChangeList";
 import { classNameFactory } from "@utils/css";
-import { CloseButton, closeModal, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { useForceUpdater } from "@utils/react";
-import { findComponentByCodeLazy } from "@webpack";
-import { Tooltip, useMemo } from "@webpack/common";
+import { closeModal, Modal, openModal, Tooltip, useMemo } from "@webpack/common";
 import { ReactNode } from "react";
 
 import Plugins from "~plugins";
@@ -29,12 +28,10 @@ import { getNewPlugins, getNewSettings, KnownPluginSettingsMap, writeKnownSettin
 
 const cl = classNameFactory("pc-new-plugins-");
 
-const Checkbox = findComponentByCodeLazy('"data-toggleable-component":"checkbox');
-
 let hasSeen = false;
 
 interface ModalComponentProps {
-    modalProps: ModalProps;
+    modalProps: RenderModalProps;
     newPlugins: Set<string>;
     newSettings: KnownPluginSettingsMap;
 }
@@ -127,63 +124,47 @@ function NewPluginsModal({ modalProps, newPlugins, newSettings }: ModalComponent
     };
 
     return (
-        <ModalRoot {...modalProps} size={ModalSize.MEDIUM}>
-            <ModalHeader separator={false} className={cl("header")}>
+        <Modal
+            {...modalProps}
+            size="md"
+            title={
                 <div className={cl("header-content")}>
                     <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>
                         {t(plugin.newPluginsManager.modal.title)} ({totalCount})
                     </BaseText>
+                </div>
+            }
+            subtitle={
+                <>
                     <BaseText size="sm" className={cl("description")}>
                         {t(plugin.newPluginsManager.modal.description)}
                     </BaseText>
-                </div>
-                <div className={cl("header-trailing")}>
-                    <CloseButton onClick={modalProps.onClose} />
-                </div>
-            </ModalHeader>
-
-            <ModalContent>
-                <div className={cl("grid")}>
-                    {pluginCards}
-                    {requiredPluginCards}
-                </div>
-            </ModalContent>
-
-            <ModalFooter>
-                <Flex className={cl("footer")}>
-                    <Tooltip
-                        text={
-                            <>
-                                {t(plugin.newPluginsManager.modal.restartRequired)}
-                                <ul className={cl("restart-list")}>
-                                    {changes.map(p => <li key={p}>{p}</li>)}
-                                </ul>
-                            </>
-                        }
-                        shouldShow={changes.hasChanges}
-                    >
-                        {tooltipProps => (
-                            <Button
-                                {...tooltipProps}
-                                onClick={handleContinue}
-                            >
-                                {changes.hasChanges ? t(plugin.newPluginsManager.modal.restart) : t(plugin.newPluginsManager.modal.continue)}
-                            </Button>
-                        )}
-                    </Tooltip>
-
-                    <Checkbox
-                        type="inverted"
-                        value={!settings?.plugins?.NewPluginsManager?.enabled}
-                        onChange={() => {
-                            Settings.plugins.NewPluginsManager.enabled = !settings?.plugins?.NewPluginsManager?.enabled;
-                        }}
-                    >
-                        <BaseText>{t(plugin.newPluginsManager.modal.dontShowAgain)}</BaseText>
-                    </Checkbox>
-                </Flex>
-            </ModalFooter>
-        </ModalRoot>
+                    <br />
+                    <Notice.Info className={cl("notice")}>
+                        {t(plugin.newPluginsManager.modal.supportUs)} <Link href="https://github.com/sponsors/MutanPlex" target="_blank" rel="noopener noreferrer">{t(plugin.newPluginsManager.modal.supportUsLink)}</Link>.
+                    </Notice.Info>
+                </>
+            }
+            actions={[
+                {
+                    text: t(plugin.newPluginsManager.modal.dontShowAgain),
+                    onClick: () => {
+                        Settings.plugins.NewPluginsManager.enabled = !settings?.plugins?.NewPluginsManager?.enabled;
+                    },
+                    variant: "secondary"
+                },
+                {
+                    text: changes.hasChanges ? t(plugin.newPluginsManager.modal.restart) : t(plugin.newPluginsManager.modal.continue),
+                    onClick: handleContinue,
+                    variant: "primary"
+                }
+            ]}
+        >
+            <div className={cl("grid")}>
+                {pluginCards}
+                {requiredPluginCards}
+            </div>
+        </Modal >
     );
 }
 

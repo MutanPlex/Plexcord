@@ -7,12 +7,12 @@
 
 import { plugins, t } from "@api/i18n";
 import { showNotice } from "@api/Notices";
-import { isPluginEnabled, pluginRequiresRestart, startDependenciesRecursive, startPlugin, stopPlugin } from "@api/PluginManager";
+import { hasAnyVisibleSettings, isPluginEnabled, pluginRequiresRestart, startDependenciesRecursive, startPlugin, stopPlugin } from "@api/PluginManager";
 import { Settings } from "@api/Settings";
 import { CogWheel, InfoIcon } from "@components/Icons";
 import { AddonCard } from "@components/settings/AddonCard";
-import { OptionType, Plugin } from "@utils/types";
-import { React, showToast, Toasts } from "@webpack/common";
+import { Plugin } from "@utils/types";
+import { React, showToast } from "@webpack/common";
 
 import { cl, logger } from ".";
 import { openPluginModal } from "./PluginModal";
@@ -52,7 +52,7 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
 
             if (failures.length) {
                 logger.error(`Failed to start dependencies for ${pluginName}: ${failures.join(", ")}`);
-                showNotice(t(plugins.error.startDependency, { failures: failures.join(", ") }), "Close", () => null);
+                showNotice(t(plugins.error.startDependency, { failures: failures.join(", ") }), t(plugins.restart.button.close), () => null);
                 return;
             }
 
@@ -83,8 +83,10 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
             settings.enabled = false;
 
             const msg = wasEnabled ? t(plugins.error.stopping, { plugin: pluginName }) : t(plugins.error.starting, { plugin: pluginName });
-            showToast(msg, Toasts.Type.FAILURE, {
-                position: Toasts.Position.BOTTOM,
+            showToast({
+                text: msg,
+                variant: "critical",
+                position: "bottom"
             });
 
             return;
@@ -109,7 +111,7 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
                     onClick={() => openPluginModal(plugin, onRestartNeeded)}
                     className={cl("info-button")}
                 >
-                    {plugin.settings?.def && Object.values(plugin.settings.def).some(s => s.type !== OptionType.CUSTOM && !s.hidden)
+                    {hasAnyVisibleSettings(plugin)
                         ? <CogWheel className={cl("info-icon")} />
                         : <InfoIcon className={cl("info-icon")} />
                     }

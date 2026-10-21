@@ -13,10 +13,9 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { Channel, User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
-import { openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
 import { extractAndLoadChunksLazy } from "@webpack";
-import { ChannelStore, Menu, SelectedChannelStore } from "@webpack/common";
+import { ChannelStore, Menu, openModal, SelectedChannelStore } from "@webpack/common";
 
 import { SetColorModal } from "./SetColorModal";
 
@@ -51,6 +50,7 @@ const userContextMenuPatch: NavContextMenuPatchCallback = (children, { user }: {
             label={t(plugin.customUserColors.context.setColor)}
             id="set-color"
             icon={ColorIcon}
+            leadingAccessory={{ type: "icon", icon: ColorIcon }}
             action={async () => {
                 await requireSettingsMenu();
                 openModal(modalProps => <SetColorModal id={user.id} modalProps={modalProps} />);
@@ -69,6 +69,7 @@ const channelContextMenuPatch: NavContextMenuPatchCallback = (children, { channe
             label={t(plugin.customUserColors.context.setColor)}
             id="set-color"
             icon={ColorIcon}
+            leadingAccessory={{ type: "icon", icon: ColorIcon }}
             action={async () => {
                 await requireSettingsMenu();
                 openModal(modalProps => <SetColorModal id={channel.id} modalProps={modalProps} />);
@@ -159,9 +160,10 @@ export default definePlugin({
 
     wrapMessageColorProps(colorProps: { colorString: string, colorStrings?: Record<"primaryColor" | "secondaryColor" | "tertiaryColor", string>; }, context: any) {
         try {
-            const channelId = SelectedChannelStore.getChannelId();
-            const channel = ChannelStore.getChannel(channelId);
-            const isDM = channel.isDM() || channel.isMultiUserDM();
+            const channel = context?.channel
+                ?? ChannelStore.getChannel(context?.message?.channel_id)
+                ?? ChannelStore.getChannel(SelectedChannelStore.getChannelId());
+            const isDM = !!(channel?.isDM?.() || channel?.isMultiUserDM?.());
             const colorString = this.colorIfServer(context);
             if (colorString === colorProps.colorString) return colorProps;
             if (!settings.store.colorInServers && !isDM) return colorProps;

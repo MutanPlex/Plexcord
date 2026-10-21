@@ -14,31 +14,50 @@ import { getBuildNumber, patches, patchTimings } from "@webpack/patcher";
 import { loadLazyChunks } from "./loadLazyChunks";
 import { reporterData } from "./reporterData";
 
+const LazySearchNames: Partial<Record<Webpack.TypeWebpackSearchHistory, string>> = {
+    find: "findLazy",
+    findByProps: "findByPropsLazy",
+    findByCode: "findByCodeLazy",
+    findStore: "findStoreLazy",
+    findComponent: "findComponentLazy",
+    findComponentByCode: "findComponentByCodeLazy",
+    findExportedComponent: "findExportedComponentLazy",
+    findCssClasses: "findCssClassesLazy",
+    mapMangledModule: "mapMangledModuleLazy",
+    extractAndLoadChunks: "extractAndLoadChunksLazy"
+};
+
 async function runReporter() {
     const ReporterLogger = new Logger("Reporter");
 
     try {
         ReporterLogger.log("Starting test...");
 
-        const { promise: loadLazyChunksDone, resolve: loadLazyChunksResolve } = Promise.withResolvers<void>();
+        const { promise: loadLazyChunksDone, resolve: loadLazyChunksDoneResolve } = Promise.withResolvers<void>();
 
         // The main patch for starting the reporter chunk loading
         addPatch({
             find: '"Could not find app-mount"',
             replacement: {
-                match: /(?<="use strict";)/,
-                replace: "Plexcord.Webpack._initReporter();"
+                match: /"Could not find app-mount"/,
+                replace: "(Plexcord.Webpack._initReporter(),$&)"
             }
         }, "Plexcord Reporter");
 
+        // initReporter is called in the patched entry point of Discord
         // @ts-expect-error
         Plexcord.Webpack._initReporter = function () {
-            // initReporter is called in the patched entry point of Discord
-            // setImmediate to only start searching for lazy chunks after Discord initialized the app
-            setTimeout(() => loadLazyChunks().then(loadLazyChunksResolve), 0);
+            loadLazyChunks().then(loadLazyChunksDoneResolve);
         };
 
         await loadLazyChunksDone;
+
+        // Manually require all modules to make sure all lazily required modules are patched
+        for (const moduleId of Object.keys(Webpack.wreq.m)) {
+            try {
+                Webpack.wreq(moduleId);
+            } catch { }
+        }
 
         if (IS_REPORTER && IS_WEB && !IS_PLEXTRON) {
             console.log("[REPORTER_META]", {
@@ -56,12 +75,12 @@ async function runReporter() {
         }
 
         for (const [plugin, moduleId, match, totalTime] of patchTimings) {
-            if (totalTime > 5) {
+            if (totalTime > 10) {
                 new Logger("WebpackPatcher").warn(`Patch by ${plugin} took ${Math.round(totalTime * 100) / 100}ms (Module id is ${String(moduleId)}): ${match}`);
             }
         }
 
-        for (const [searchType, args] of Webpack.lazyWebpackSearchHistory) {
+        for (const [searchType, args, stack] of Webpack.lazyWebpackSearchHistory) {
             let method = searchType;
 
             if (searchType === "findComponent") method = "find";
@@ -71,7 +90,6 @@ async function runReporter() {
                 else method = "find";
             }
             if (searchType === "waitForStore") method = "findStore";
-            if (searchType === "waitForStore" && args[0] === "PermissionStore") continue;
 
             let result: any;
             try {
@@ -94,7 +112,7 @@ async function runReporter() {
 
                 if (result == null || (result.$$plexcordGetWrappedComponent != null && result.$$plexcordGetWrappedComponent() == null)) throw new Error("Webpack Find Fail");
             } catch (e) {
-                let logMessage = searchType;
+                let logMessage = LazySearchNames[searchType] ?? searchType;
                 if (method === "find" || method === "proxyLazyWebpack" || method === "LazyComponentWebpack") {
                     if (args[0].$$plexcordProps != null) {
                         logMessage += `(${args[0].$$plexcordProps.map(arg => `"${arg}"`).join(", ")})`;
@@ -105,14 +123,20 @@ async function runReporter() {
                     logMessage += `([${args[0].map(arg => `"${arg}"`).join(", ")}], ${args[1].toString()})`;
                 } else if (method === "mapMangledModule") {
                     const failedMappings = Object.keys(args[1]).filter(key => result?.[key] == null);
+                    const mappings = failedMappings.map(mapping => {
+                        const filter = args[1][mapping];
+                        if (filter.$$plexcordProps == null) return `\t${mapping}: ${filter.toString().slice(0, 147)}...`;
 
-                    logMessage += `("${args[0]}", {\n${failedMappings.map(mapping => `\t${mapping}: ${args[1][mapping].toString().slice(0, 147)}...`).join(",\n")}\n})`;
+                        return `\t${mapping}: filters.${filter.$$plexcordFilter}(${filter.$$plexcordProps.map(arg => `'${arg}'`).join(", ")})`;
+                    });
+
+                    logMessage += `('${args[0]}', {\n${mappings.join(",\n")}\n})`;
                 } else {
                     logMessage += `(${args.map(arg => `"${arg}"`).join(", ")})`;
                 }
                 if (IS_COMPANION_TEST)
                     reporterData.failedWebpack[method].push(args.map(a => String(a)));
-                ReporterLogger.log("Webpack Find Fail:", logMessage);
+                ReporterLogger.log("Webpack Find Fail:", logMessage, stack?.split("\n")[2]);
             }
         }
 

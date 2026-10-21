@@ -87,7 +87,7 @@ export function RenderMessage({ note, notebook, updateParent, fromDeleteModal, c
     return (
         <div
             className="pc-holy-note"
-            style={{ margin: "8px 0", padding: "4px 0" }}
+            style={{ margin: "8px 0", padding: "4px 0", ["--pc-holy-note-tag" as any]: JSON.stringify(t(plugin.holyNotes.text.noteTag)) }}
             onClick={handleClick}
             onContextMenu={handleContextMenu}
         >
@@ -122,7 +122,7 @@ function NoteContextMenu({ note, notebook, updateParent, closeModal }: ContextMe
         <Menu.Menu
             navId="holynotes"
             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-            aria-label="Holy Notes"
+            aria-label={t(plugin.holyNotes.text.holyNotes)}
         >
             <Menu.MenuItem
                 label={t(plugin.holyNotes.modal.help.jumpToMessage)}

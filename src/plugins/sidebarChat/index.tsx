@@ -5,58 +5,21 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import "./styles.css";
-
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { HeaderBarButton } from "@api/HeaderBar";
 import { plugin, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel, Guild, User } from "@plexcord/discord-types";
-import { Devs } from "@utils/constants";
+import { ChannelType } from "@plexcord/discord-types/enums";
+import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { getCurrentChannel } from "@utils/discord";
 import definePlugin from "@utils/types";
-import {
-    DefaultExtractAndLoadChunksRegex,
-    extractAndLoadChunksLazy,
-    findByPropsLazy,
-    findComponentByCodeLazy,
-    findCssClassesLazy,
-    findStoreLazy
-} from "@webpack";
-import {
-    ChannelActionCreators,
-    ChannelStore,
-    FluxDispatcher,
-    GuildStore,
-    Menu,
-    MessageActions,
-    MessageStore,
-    NavigationRouter,
-    PermissionsBits,
-    PermissionStore,
-    PopoutActions,
-    PopoutWindowStore,
-    RelationshipStore,
-    SelectedChannelStore,
-    SelectedGuildStore,
-    useCallback,
-    useEffect,
-    useLayoutEffect,
-    UserStore,
-    useState,
-    useStateFromStores
-} from "@webpack/common";
+import { extractAndLoadChunksLazy, findByPropsLazy, findComponentByCodeLazy, findCssClassesLazy, mapMangledModuleLazy } from "@webpack";
+import { ChannelActionCreators, ChannelRouter, ChannelSectionStore, ChannelStore, FluxDispatcher, GuildStore, Menu, MessageActions, MessageStore, PermissionsBits, PermissionStore, PopoutActions, PopoutWindowStore, RelationshipStore, SelectedChannelStore, SelectedGuildStore, useCallback, useEffect, useLayoutEffect, UserStore, useState, useStateFromStores } from "@webpack/common";
 
-import {
-    getOpenPopoutWindowKeys,
-    getPersistedPopoutChannelIds,
-    getPopoutWindowKey,
-    isPopoutWindowOpen,
-    settings,
-    SidebarStore,
-    syncPersistedPopoutWindows
-} from "./store";
+import { getOpenPopoutWindowKeys, getPersistedPopoutChannelIds, getPopoutWindowKey, isPopoutWindowOpen, settings, SidebarStore, syncPersistedPopoutWindows } from "./store";
+import style from "./styles.css?managed";
 
 const cl = classNameFactory("pc-sidebar-chat-");
 
@@ -80,20 +43,21 @@ const ArrowsLeftRightIcon = ({ color, ...rest }) => {
 const WindowLaunchIcon = findComponentByCodeLazy("1-1h6a1 1 0 1 0 0-2H5Z");
 const XSmallIcon = findComponentByCodeLazy("1.4L12 13.42l5.3 5.3Z");
 const Chat = findComponentByCodeLazy("filterAfterTimestamp:", "chatInputType");
-const Resize = findComponentByCodeLazy("sidebarType:", "RESIZE_HANDLE_WIDTH)");
-const ChannelHeader = findComponentByCodeLazy(".GUILD_ANNOUNCEMENT", "`channel-");
+const SidebarComponents = mapMangledModuleLazy("ChannelChatResizableSidebar", {
+    Resize: (value: unknown) => typeof value === "function"
+});
+const ChannelHeader = findComponentByCodeLazy("`channel-${");
 const PopoutWindow = findComponentByCodeLazy("Missing guestWindow reference");
-const FullChannelView = findComponentByCodeLazy(/showFollowButton:\i\?\.type===/);
+const FullChannelView = findComponentByCodeLazy("showFollowButton:");
 const WanderingCubesLoading = findComponentByCodeLazy('="wanderingCubes"');
 
 const ChatInputTypes = findByPropsLazy("FORM", "NORMAL");
 const Sidebars = findByPropsLazy("ThreadSidebar", "MessageRequestSidebar");
 const ChatClasses = findCssClassesLazy("threadSidebarOpen", "loader");
-const ChannelSectionStore = findStoreLazy("ChannelSectionStore");
 
 const requireForumView = extractAndLoadChunksLazy(
     ["Missing channel in Channel.renderHeaderToolbar"],
-    new RegExp(DefaultExtractAndLoadChunksRegex.source + '.{1,150}name:"ForumChannel"')
+    /Promise\.all\(\[((?:\i\.e\("\d+"\),?)+)\]\)\.then\(\i\.bind\(\i,(\d+)\)\)[^}]{0,100}?name:"ForumChannel"/
 );
 
 function getChannelTitle(channel: Channel | null | undefined) {
@@ -116,7 +80,15 @@ function getChannelTitle(channel: Channel | null | undefined) {
 
 function canOpenPopout(channel: Channel) {
     if (channel.isPrivate()) return true;
-    return !channel.isCategory() && !channel.isDirectory() && !channel.isVocal();
+    return !channel.isCategory() && !channel.isDirectory();
+}
+
+function getMainChatChannelId() {
+    const channelId = SelectedChannelStore.getChannelId();
+    const sidebar = ChannelSectionStore.getSidebarState(channelId);
+    return sidebar && typeof sidebar === "object" && "channelId" in sidebar && typeof sidebar.channelId === "string"
+        ? sidebar.channelId
+        : channelId;
 }
 
 function getPopoutMenuLabel(channelId: string) {
@@ -299,8 +271,8 @@ const UserContextPatch: NavContextMenuPatchCallback = (children, args: { user: U
 const ChannelContextPatch: NavContextMenuPatchCallback = (children, args: { channel: Channel; }) => {
     const checks = [
         args.channel,
-        args.channel.type !== 4, // categories
-        PermissionStore.can(PermissionsBits.VIEW_CHANNEL, args.channel),
+        args.channel.type !== ChannelType.GUILD_CATEGORY,
+        PermissionStore.can(PermissionsBits.VIEW_CHANNEL, args.channel) || args.channel.type === ChannelType.GROUP_DM,
     ];
     if (checks.some(check => !check)) return;
     children.push(createSidebarChatContextMenuItem(args.channel.id, args.channel.guild_id));
@@ -311,16 +283,9 @@ const ChannelContextPatch: NavContextMenuPatchCallback = (children, args: { chan
     ));
 };
 
-const handleToggle = () => {
-    FluxDispatcher.dispatch({
-        // @ts-ignore
-        type: "PC_SIDEBAR_CHAT_PREVIOUS",
-    });
-};
-
 export default definePlugin({
     name: "SidebarChat",
-    authors: [Devs.Joona],
+    authors: [Devs.Joona, PcDevs.MutanPlex, PcDevs.justjxke],
     tags: ["chat", "utility"],
     description: () => t(plugin.sidebarChat.description),
     dependencies: ["HeaderBarAPI"],
@@ -331,21 +296,31 @@ export default definePlugin({
             group: true,
             replacement: [
                 {
-                    match: /if\(null!=.{0,50}ROLE_SUBSCRIPTIONS/,
-                    replace: "const pc_SidebarChat=$self.renderSidebar();$&"
+                    match: /ChannelRenderer"\),/,
+                    replace: "$&pc_SidebarChat=$self.renderSidebar(),"
                 },
                 {
-                    match: /return(\(0,\i\.jsxs?\)\(\i\.\i,{}\))}/,
-                    replace: "return [$1, pc_SidebarChat]}"
+                    match: /(?<=return)\(0,\i\.jsx\)\(\i,\{\}\)(?=\},)/,
+                    replace: "[$&,pc_SidebarChat]"
+                },
+            ],
+        },
+        {
+            find: "loadComplete: resetting state for channelId=",
+            group: true,
+            replacement: [
+                {
+                    match: /truncateTop\(\i\)\{(?=.{0,100}?this\._array\.length-\i;return)/,
+                    replace: "$&if($self.hasMultipleChatViews(this.channelId))return this;"
                 },
                 {
-                    match: /(case \i\.\i.+?return)(.+?);(?=.+?params\.messageId)(?<=guild_products".+?)/g,
-                    replace: "$1[$2, pc_SidebarChat];",
-                    predicate: () => settings.store.patchCommunity
+                    match: /truncateBottom\(\i\)\{(?=.{0,100}?return this\._array\.length<=\i\?this:this\.mutate\()/,
+                    replace: "$&if($self.hasMultipleChatViews(this.channelId))return this;"
                 }
             ]
         },
     ],
+    managedStyle: style,
     settings,
     contextMenus: {
         "user-context": UserContextPatch,
@@ -353,9 +328,47 @@ export default definePlugin({
         "thread-context": ChannelContextPatch,
         "gdm-context": ChannelContextPatch,
     },
-    toolboxActions: () => ({
-        [t(plugin.sidebarChat.toolbox.label)]: (() => handleToggle())
-    }),
+
+    toolboxActions: {
+        [t(plugin.sidebarChat.toolbox.label)]: (() => {
+            FluxDispatcher.dispatch({
+                // @ts-ignore
+                type: "PC_SIDEBAR_CHAT_PREVIOUS",
+            });
+        })
+    },
+
+    headerBarButton: {
+        icon: WindowLaunchIcon,
+        render: () => (
+            <>
+                <PopoutPersistenceSync />
+                <WrappedPopoutHeaderButton />
+            </>
+        )
+    },
+
+    stop() {
+        clearPersistedPopoutRestoreLoop();
+        syncPersistedPopoutWindows();
+        for (const windowKey of getOpenPopoutWindowKeys()) {
+            PopoutActions.close(windowKey);
+        }
+    },
+
+    async start() {
+        restorePersistedPopouts();
+    },
+
+    hasMultipleChatViews(channelId: string) {
+        const mainChannelId = SelectedChannelStore.getChannelId();
+        const sidebarHidden = ChannelSectionStore.getSidebarState(mainChannelId)
+            || ChannelSectionStore.getGuildSidebarState(SelectedGuildStore.getGuildId() ?? undefined);
+        const views = Number(channelId === mainChannelId || channelId === getMainChatChannelId())
+            + Number(!sidebarHidden && channelId === SidebarStore.getState().channelId)
+            + Number(isPopoutWindowOpen(channelId));
+        return views > 1;
+    },
 
     renderSidebar() {
         const { guild, channel /* width*/ } = useStateFromStores(
@@ -371,7 +384,7 @@ export default definePlugin({
         const [channelSidebar, guildSidebar] = useStateFromStores(
             [ChannelSectionStore, SelectedChannelStore, ChannelStore], () => {
                 const currentChannelId = SelectedChannelStore.getChannelId();
-                const currentGuildId = SelectedGuildStore.getGuildId();
+                const currentGuildId = SelectedGuildStore.getGuildId()!;
                 return [
                     ChannelSectionStore.getSidebarState(currentChannelId),
                     ChannelSectionStore.getGuildSidebarState(currentGuildId),
@@ -431,38 +444,21 @@ export default definePlugin({
 
         return (
             <ErrorBoundary noop>
-                <Resize
+                <SidebarComponents.Resize
                     sidebarType={Sidebars.MessageRequestSidebar}
                     maxWidth={~~(width * 0.31)/* width - 690*/}
                 >
                     <Header channel={channel} guild={guild} />
                     {View}
-                </Resize>
+                </SidebarComponents.Resize>
             </ErrorBoundary>
         );
     },
-    headerBarButton: {
-        icon: WindowLaunchIcon,
-        render: () => (
-            <>
-                <PopoutPersistenceSync />
-                <WrappedPopoutHeaderButton />
-            </>
-        )
-    },
-    stop() {
-        clearPersistedPopoutRestoreLoop();
-        syncPersistedPopoutWindows();
-        for (const windowKey of getOpenPopoutWindowKeys()) {
-            PopoutActions.close(windowKey);
-        }
-    },
-    async start() {
-        restorePersistedPopouts();
-    }
 });
 
 const Header = ({ guild, channel }: { guild: Guild; channel: Channel; }) => {
+    const recipientId = channel.isPrivate() ? channel.getRecipientId() as string : null;
+
     const name = useStateFromStores([UserStore, RelationshipStore], () => getChannelTitle(channel), [channel.id, channel.name]);
 
     const parentChannel = useStateFromStores(
@@ -470,7 +466,6 @@ const Header = ({ guild, channel }: { guild: Guild; channel: Channel; }) => {
         [channel?.parent_id]
     );
 
-    // @ts-ignore
     const closeSidebar = () => FluxDispatcher.dispatch({ type: "PC_SIDEBAR_CHAT_CLOSE", });
 
     const isPopoutOpen = useStateFromStores(
@@ -485,12 +480,11 @@ const Header = ({ guild, channel }: { guild: Guild; channel: Channel; }) => {
         FluxDispatcher.dispatch({
             // @ts-ignore
             type: "PC_SIDEBAR_CHAT_NEW",
-            guildId: mainChannel.guild_id ?? "@me",
+            guildId: mainChannel.guild_id,
             id: mainChannel.id,
         });
-
-        NavigationRouter.transitionTo(`/channels/${channel.guild_id ?? "@me"}/${channel.id}`);
-    }, [channel.id, channel.guild_id]);
+        ChannelRouter.transitionToChannel(channel.id);
+    }, [channel.id]);
 
     return (
         <HeaderBar
@@ -536,10 +530,11 @@ const RenderPopout = ErrorBoundary.wrap(({ channel, name, windowKey }: { channel
             windowKey={windowKey}
             title={name || "Plexcord"}
             channelId={channel.id}
-            contentClassName={cl("popout")}
         >
             <div className={cl("window")}>
-                <FullChannelView providedChannel={channel} />
+                {channel.isGuildVocal()
+                    ? <Chat channel={channel} guild={GuildStore.getGuild(channel.guild_id)} chatInputType={ChatInputTypes.NORMAL} />
+                    : <FullChannelView providedChannel={channel} />}
             </div>
         </PopoutWindow>
     );
@@ -547,9 +542,9 @@ const RenderPopout = ErrorBoundary.wrap(({ channel, name, windowKey }: { channel
 
 function PopoutHeaderButton() {
     const channelState = useStateFromStores(
-        [SelectedChannelStore, ChannelStore, PopoutWindowStore],
+        [SelectedChannelStore, ChannelSectionStore, ChannelStore, PopoutWindowStore],
         () => {
-            const channelId = SelectedChannelStore.getChannelId();
+            const channelId = getMainChatChannelId();
             const channel = channelId ? ChannelStore.getChannel(channelId) : null;
 
             return {

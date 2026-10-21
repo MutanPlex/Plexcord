@@ -14,7 +14,7 @@ import unusedImports from "eslint-plugin-unused-imports";
 import tseslint from "typescript-eslint";
 
 export default defineConfig(
-    { ignores: ["dist", "browser", "packages/plexcord-types"] },
+    { ignores: ["dist", "browser", "packages/plexcord-types", "misc/bundle", "misc/scripts"] },
     {
         files: ["src/**/*.{tsx,ts,mts,mjs,js,jsx}", "eslint.config.mjs"],
         settings: {
@@ -120,6 +120,8 @@ export default defineConfig(
             "use-isnan": "error",
             "prefer-const": ["error", { destructuring: "all" }],
             "prefer-spread": "error",
+            // These are old deprecated browser globals which may be used by mistake, e.g. `addEventListener(e => console.log(event))`
+            "no-restricted-globals": ["error", "event", "name"],
 
             // Plugin Rules
             "simple-import-sort/imports": "error",

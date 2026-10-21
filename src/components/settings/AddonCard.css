@@ -32,7 +32,7 @@
 }
 
 .pc-addon-note {
-    height: 36px;
+    height: 34px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -58,10 +58,6 @@
 
 .pc-addon-author {
     font-size: 0.8em;
-}
-
-.pc-addon-author::before {
-    content: "by ";
 }
 
 .pc-addon-title-container {

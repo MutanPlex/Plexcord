@@ -65,13 +65,13 @@ export default definePlugin({
 
     patches: [
         {
-            find: "#{intl::MESSAGE_UTILITIES_A11Y_LABEL}",
+            find: "#{intl::MESSAGE_UTILITIES_A11Y_LABEL}),children",
             replacement: {
                 match: /(?<=length>=3\?.{0,40})\.slice\(0,3\)/,
                 replace: ".slice(0,$self.reactionCount)"
             }
         },
-        // Remove favourite emojis from being inserted at the start of the reaction list
+        // Remove favorite emojis from being inserted at the start of the reaction list
         {
             find: "this.favoriteEmojisWithoutFetchingLatest.concat",
             replacement: {
@@ -90,13 +90,17 @@ export default definePlugin({
                 },
                 // Override limit of emojis to display with offset hook.
                 {
-                    match: /(\i)\.length>4&&\((\i)\.length=4\);/,
-                    replace: "let [moreQuickReactionsScrollValue,setMoreQuickReactionsScrollValue]=Plexcord.Webpack.Common.React.useState(0);moreQuickReactionsScrollValue;"
+                    match: /"MessageContextMenu"\},\{autoTrackExposure.{0,5}\}\),/,
+                    replace: "$&[moreQuickReactionsScrollValue,setMoreQuickReactionsScrollValue]=Plexcord.Webpack.Common.React.useState(0),"
+                },
+                {
+                    match: /\.length>4&&\(\i\.length=4\)/,
+                    replace: ""
                 },
                 // Add a custom class to identify the quick reactions have been modified and a CSS variable for the number of columns to display
                 {
                     match: /className:(\i\.\i),(?=children:)/,
-                    replace: "className:\"pc-better-quick-react \"+($self.settings.store.compactMode?\"pc-better-quick-react-compact \":\"\")+$1,style:{\"--pc-better-quick-react-columns\":$self.settings.store.columns},"
+                    replace: 'className:"pc-better-quick-react "+($self.settings.store.compactMode?"pc-better-quick-react-compact ":"")+$1,style:{"--pc-better-quick-react-columns":$self.settings.store.columns},'
                 },
                 // Scroll handler + Apply the emoji count limit from earlier with custom logic
                 {
@@ -111,6 +115,13 @@ export default definePlugin({
             replacement: {
                 match: /role:"group",/,
                 replace: "$&style:arguments[0].style,onWheel:arguments[0].onWheel,"
+            }
+        },
+        {
+            find: '"--custom-menu-viewport-padding"',
+            replacement: {
+                match: /className:\i\(\)\(\i\.menu/,
+                replace: '$&,"pc-better-quick-react-padding"'
             }
         }
     ],

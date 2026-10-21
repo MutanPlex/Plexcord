@@ -1,0 +1,31 @@
+name: autofix.ci
+permissions:
+    contents: read
+on:
+    pull_request:
+jobs:
+    autofix:
+        name: autofix
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v6
+
+            - name: Use Node.js 24
+              uses: actions/setup-node@v6
+              with:
+                  node-version: 24
+
+            - name: Install pnpm
+              run: npm install -g pnpm@10.31.0
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Run lint fix
+              run: pnpm lint:fix
+
+            - name: Run stylelint fix
+              run: pnpm lint-styles:fix
+
+            - uses: autofix-ci/action@v1

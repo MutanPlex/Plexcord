@@ -1,0 +1,6 @@
+.pc-viewRaw-codeBlock,
+.pc-viewRaw-codeBlock :is(pre, code, [class*="codeContainer"]) {
+    max-width: unset;
+    width: 100%;
+    box-sizing: border-box;
+}

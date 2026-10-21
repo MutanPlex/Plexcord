@@ -19,8 +19,10 @@
 
 // DO NOT REMOVE UNLESS YOU WISH TO FACE THE WRATH OF THE CIRCULAR DEPENDENCY DEMON!!!!!!!
 import "~plugins";
+import "./fixWeirdAppRegionBug.css";
 
 import { cloud, i18n, t, updater } from "./api/i18n";
+import nativeTitleBarStyles from "./nativeTitleBar.css?managed";
 
 export * as Api from "./api";
 export * as Plugins from "./api/PluginManager";
@@ -28,15 +30,14 @@ export * as QuickCss from "./api/Themes";
 export * as Components from "./components";
 export * as Util from "./utils";
 export * as Updater from "./utils/updater";
-import { popNotice, showNotice } from "./api/Notices";
+import { showNotice } from "./api/Notices";
 export * as Webpack from "./webpack";
 export * as WebpackPatcher from "./webpack/patchWebpack";
 export { PlainSettings, Settings };
-import { coreStyleRootNode, initStyles } from "@api/Styles";
+
+import { enableStyle, initStyles } from "@api/Styles";
 import { openSettingsTabModal, UpdaterTab } from "@components/settings";
 import { debounce } from "@shared/debounce";
-import { IS_WINDOWS } from "@utils/constants";
-import { createAndAppendStyle } from "@utils/css";
 import { StartAt } from "@utils/types";
 import { SettingsRouter } from "@webpack/common";
 
@@ -45,10 +46,9 @@ import { LocaleLoader } from "./api/LocaleLoader";
 import { NotificationData, showNotification } from "./api/Notifications";
 import { initPluginManager, PMLogger, startAllPlugins } from "./api/PluginManager";
 import { PlainSettings, Settings, SettingsStore } from "./api/Settings";
-import { getCloudSettings, putCloudSettings, shouldCloudSync } from "./api/SettingsSync/cloudSync";
-import { localStorage } from "./utils/localStorage";
+import { areLocalSettingsDirty, getCloudSettings, getCloudSyncDirection, markLocalSettingsDirty, putCloudSettings, shouldCloudSync } from "./api/SettingsSync/cloudSync";
 import { relaunch } from "./utils/native";
-import { checkForUpdates, isOutdated as getIsOutdated, update, UpdateLogger } from "./utils/updater";
+import { checkForUpdates, update, UpdateLogger } from "./utils/updater";
 import { onceReady } from "./webpack";
 import { patches } from "./webpack/patchWebpack";
 
@@ -57,11 +57,6 @@ if (IS_REPORTER) {
 }
 
 async function syncSettings() {
-    // Check if cloud auth exists for current user before attempting sync
-    if (localStorage.Plexcord_cloudSyncDirection === undefined) {
-        // by default, sync bi-directionally
-        localStorage.Plexcord_cloudSyncDirection = "both";
-    }
     const hasCloudAuth = await dsGet("Plexcord_cloudSecret");
     if (!hasCloudAuth) {
         if (Settings.cloud.authenticated) {
@@ -88,7 +83,8 @@ async function syncSettings() {
             title: t(cloud.notification.title),
             body: t(cloud.reauth),
             color: "var(--yellow-360)",
-            onClick: () => SettingsRouter.openUserSettings("plexcord_cloud_panel")
+            onClick: () => SettingsRouter.openUserSettings("plexcord_cloud_panel"),
+            noPersist: true
         });
         return;
     }
@@ -96,9 +92,9 @@ async function syncSettings() {
     if (
         Settings.cloud.settingsSync && // if it's enabled
         Settings.cloud.authenticated && // if cloud integrations are enabled
-        localStorage.Plexcord_cloudSyncDirection !== "manual" // if we're not in manual mode
+        getCloudSyncDirection() !== "manual" // if we're not in manual mode
     ) {
-        if (localStorage.Plexcord_settingsDirty) {
+        if (areLocalSettingsDirty() && shouldCloudSync("push")) {
             await putCloudSettings();
         } else if (shouldCloudSync("pull") && await getCloudSettings(false)) { // if we synchronized something (false means no sync)
             // we show a notification here instead of allowing getCloudSettings() to show one to declutter the amount of
@@ -121,7 +117,7 @@ async function syncSettings() {
     }, 60_000);
 
     SettingsStore.addGlobalChangeListener(() => {
-        localStorage.Plexcord_settingsDirty = true;
+        markLocalSettingsDirty();
         saveSettingsOnFrequentAction();
     });
 }
@@ -144,7 +140,6 @@ async function runUpdateCheck() {
 
     try {
         const isOutdated = await checkForUpdates();
-        if (IS_DISCORD_DESKTOP) PlexcordNative.tray.setUpdateState(isOutdated);
         if (!isOutdated) return;
 
         if (Settings.autoUpdate) {
@@ -175,37 +170,6 @@ async function runUpdateCheck() {
     }
 }
 
-function initTrayIpc() {
-    if (IS_WEB || IS_UPDATER_DISABLED) return;
-
-    PlexcordNative.tray.onCheckUpdates(async () => {
-        try {
-            const isOutdated = await checkForUpdates();
-            PlexcordNative.tray.setUpdateState(isOutdated);
-
-            if (isOutdated) {
-                showNotice(t(updater.updateAvailable), t(updater.click), () => openSettingsTabModal(UpdaterTab!));
-            } else {
-                showNotice(t(updater.current), t(updater.ok), popNotice);
-            }
-        } catch (err) {
-            UpdateLogger.error("Failed to check for updates from tray", err);
-            showNotice(t(updater.error.check), t(updater.ok), popNotice);
-        }
-    });
-
-    PlexcordNative.tray.onRepair(async () => {
-        try {
-            await update();
-            relaunch();
-        } catch (err) {
-            UpdateLogger.error("Failed to repair Plexcord", err);
-        }
-    });
-
-    PlexcordNative.tray.setUpdateState(getIsOutdated);
-}
-
 async function init() {
     await onceReady;
 
@@ -218,7 +182,6 @@ async function init() {
     startAllPlugins(StartAt.WebpackReady);
 
     syncSettings();
-    initTrayIpc();
 
     if (!IS_WEB && !IS_UPDATER_DISABLED) {
         runUpdateCheck();
@@ -260,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     startAllPlugins(StartAt.DOMContentLoaded);
 
-    if (IS_DISCORD_DESKTOP && Settings.winNativeTitleBar && IS_WINDOWS) {
-        createAndAppendStyle("plexcord-native-titlebar-style", coreStyleRootNode).textContent = "[class*=titleBar]{display: none!important}";
+    if (IS_DISCORD_DESKTOP && Settings.nativeTitleBar) {
+        enableStyle(nativeTitleBarStyles);
     }
 }, { once: true });

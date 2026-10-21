@@ -7,8 +7,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
-import { closeModal, ModalContent, ModalHeader, ModalRoot, openModalLazy } from "@utils/modal";
-import { Menu, Slider, TextInput, useState } from "@webpack/common";
+import { closeModal, Menu, Modal, openModalLazy, Slider, TextInput, useState } from "@webpack/common";
 
 import { folderIconsData, settings } from "./settings";
 import { folderProp, int2rgba, setFolderData } from "./util";
@@ -99,28 +98,23 @@ export function makeContextItem(a: folderProp) {
         <Menu.MenuItem
             id="custom-folder-icons"
             key="custom-folder-icons"
-            label="Change Icon"
+            label={t(plugin.customFolderIcons.context.changeIcon)}
             action={() => {
                 openModalLazy(async () => {
                     return props => (
-                        <ModalRoot {...props}>
-                            <ModalHeader >
-                                <div style={{
-                                    color: "white"
-                                }}>
-                                    {t(plugin.customFolderIcons.modal.set)}
-                                </div>
-                            </ModalHeader>
-                            <ModalContent>
-                                <ImageModal folderId={a.folderId} folderColor={a.folderColor} />
-                            </ModalContent>
+                        <Modal
+                            {...props}
+                            size="sm"
+                            title={t(plugin.customFolderIcons.modal.set)}
+                        >
+                            <ImageModal folderId={a.folderId} folderColor={a.folderColor} />
                             <div style={{
                                 color: "white",
                                 margin: "24px",
                             }}>
                                 {t(plugin.customFolderIcons.modal.hover)}
                             </div>
-                        </ModalRoot>
+                        </Modal>
                     );
                 },
                     {

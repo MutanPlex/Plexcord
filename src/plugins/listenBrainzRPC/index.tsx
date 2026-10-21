@@ -158,6 +158,12 @@ const settings = definePluginSettings({
             },
         ]
     },
+    showAlbumCover: {
+        label: () => t(plugin.listenBrainzRPC.option.showAlbumCover.label),
+        description: () => t(plugin.listenBrainzRPC.option.showAlbumCover.description),
+        type: OptionType.BOOLEAN,
+        default: true,
+    },
     useLogo: {
         label: () => t(plugin.listenBrainzRPC.option.useLogo.label),
         description: () => t(plugin.listenBrainzRPC.option.useLogo.description),
@@ -273,7 +279,7 @@ export default definePlugin({
     },
 
     getLargeImage(track: TrackData): string | undefined {
-        if (track.imageUrl && !track.imageUrl.includes(placeholderId))
+        if (settings.store.showAlbumCover && track.imageUrl && !track.imageUrl.includes(placeholderId))
             return track.imageUrl;
 
         if (settings.store.missingArt === "placeholder") return "placeholder";
@@ -325,13 +331,13 @@ export default definePlugin({
 
         if (settings.store.shareUsername)
             buttons.push({
-                label: "ListenBrainz Profile",
+                label: t(plugin.listenBrainzRPC.button.profile),
                 url: `https://www.listenbrainz.org/user/${settings.store.username}`,
             });
 
         if (settings.store.shareSong)
             buttons.push({
-                label: "View Song",
+                label: t(plugin.listenBrainzRPC.button.viewSong),
                 url: trackData.url,
             });
 
@@ -346,9 +352,15 @@ export default definePlugin({
                 case NameFormat.SongOnly:
                     return trackData.name;
                 case NameFormat.AlbumName:
-                    return trackData.album || settings.store.statusName;
+                    return trackData.album || settings.store.statusName
+                        .replaceAll("{artist}", trackData.artist || "")
+                        .replaceAll("{album}", trackData.album || "")
+                        .replaceAll("{title}", trackData.name || "");
                 default:
-                    return settings.store.statusName;
+                    return settings.store.statusName
+                        .replaceAll("{artist}", trackData.artist || "")
+                        .replaceAll("{album}", trackData.album || "")
+                        .replaceAll("{title}", trackData.name || "");
             }
         })();
 

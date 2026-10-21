@@ -105,11 +105,7 @@ export default definePlugin({
             quotes.push(...additionalQuotes.split(additionalQuotesDelimiter).filter(Boolean));
 
             if (!quotes.length) {
-                if (Settings.language.locale.startsWith("tr")) {
-                    quotes.push("Tüm yükleme alıntılarını gerçekten devre dışı mı bıraktınız? Ne aptalca bir hareket...");
-                } else {
-                    quotes.push("Did you really disable all loading quotes? What a buffoon you are...");
-                }
+                quotes.push(t(plugin.loadingQuotes.text.allQuotesDisabled));
             }
 
             console.log(quotes);

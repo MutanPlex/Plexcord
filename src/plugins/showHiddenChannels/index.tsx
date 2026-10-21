@@ -23,13 +23,13 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import type { Channel, Role } from "@plexcord/discord-types";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
 import { ChannelStore, PermissionsBits, PermissionStore, Tooltip } from "@webpack/common";
 
-import HiddenChannelLockScreen from "./components/HiddenChannelLockScreen";
+import HiddenChannelLockScreen, { setChannelBeginHeader } from "./components/HiddenChannelLockScreen";
 
 export const cl = classNameFactory("pc-shc-");
 
@@ -87,8 +87,8 @@ function isUncategorized(objChannel: { channel: Channel; comparator: number; }) 
 export default definePlugin({
     name: "ShowHiddenChannels",
     description: () => t(plugin.showHiddenChannels.description),
-    authors: [Devs.BigDuck, Devs.AverageReactEnjoyer, Devs.D3SOX, Devs.Ven, Devs.Nuckyz, Devs.Nickyux, Devs.dzshn],
     tags: ["servers", "utility"],
+    authors: [Devs.BigDuck, Devs.AverageReactEnjoyer, Devs.D3SOX, Devs.Ven, Devs.Nuckyz, Devs.Nickyux, Devs.Rini, PcDevs.Oggetto],
     settings,
 
     patches: [
@@ -124,7 +124,7 @@ export default definePlugin({
             replacement: [
                 {
                     // Do not show confirmation to join a voice channel when already connected to another if clicking on a hidden voice channel
-                    match: /(?<=getIgnoredUsersForVoiceChannel\((\i)\.id\)[^;]+?;return\()/,
+                    match: /(?<=getIgnoredUsersForVoiceChannel\((\i)\.id\)[^;]{0,300}?;return\()/,
                     replace: (_, channel) => `!$self.isHiddenChannel(${channel})&&`
                 },
                 {
@@ -156,7 +156,7 @@ export default definePlugin({
                     "renderInviteButton",
                 ].map(func => ({
                     match: new RegExp(`(?<=${func}\\(\\){)`, "g"), // Global because Discord has multiple declarations of the same functions
-                    replace: "if($self.isHiddenChannel(this.props.channel))return null;"
+                    replace: "if($self.isHiddenChannel(this?.props?.channel))return null;"
                 }))
             ]
         },
@@ -166,7 +166,7 @@ export default definePlugin({
             // Render null instead of the buttons if the channel is hidden
             replacement: {
                 match: /(?<=renderOpenChatButton(?:",|=)\(\)=>{)/,
-                replace: "if($self.isHiddenChannel(this.props.channel))return null;"
+                replace: "if($self.isHiddenChannel(this?.props?.channel))return null;"
             }
         },
         {
@@ -174,8 +174,8 @@ export default definePlugin({
             predicate: () => settings.store.showMode === ShowMode.LockIcon,
             replacement: {
                 // Lock Icon
-                match: /(?=switch\((\i)\.type\).{0,30}\.GUILD_ANNOUNCEMENT.{0,70}\(0,\i\.\i\))/,
-                replace: (_, channel) => `if($self.isHiddenChannel(${channel}))return $self.LockIcon;`
+                match: /(?<=(\i)\.isNSFW\(\);)switch\(\i\.type\).{0,15}\.GUILD_ANNOUNCEMENT/,
+                replace: (m, channel) => `if($self.isHiddenChannel(${channel}))return $self.LockIcon;${m}`
             }
         },
         {
@@ -245,7 +245,7 @@ export default definePlugin({
         },
         {
             // Make the state of the old version of unreads box not include hidden channels
-            find: "ignoreRecents:!0",
+            find: "GUILD_EVENT)}),[",
             replacement: {
                 match: /(?<=\.id\)\))(?=&&\(0,\i\.\i\)\((\i)\))/,
                 replace: "&&!$self.isHiddenChannel($1)"
@@ -273,11 +273,11 @@ export default definePlugin({
                 },
                 {
                     match: /(?<=renderSidebar\(\){)/,
-                    replace: "if($self.isHiddenChannel(this.props.channel))return null;"
+                    replace: "if($self.isHiddenChannel(this?.props?.channel))return null;"
                 },
                 {
                     match: /(?<=renderChat\(\){)/,
-                    replace: "if($self.isHiddenChannel(this.props.channel))return $self.HiddenChannelLockScreen(this.props.channel);"
+                    replace: "if($self.isHiddenChannel(this?.props?.channel))return $self.HiddenChannelLockScreen(this?.props?.channel);"
                 }
             ]
         },
@@ -330,7 +330,7 @@ export default definePlugin({
                 },
                 {
                     // Patch the header to only return allowed users and roles if it's a hidden channel or locked channel (Like when it's used on the HiddenChannelLockScreen)
-                    match: /return\(0,\i\.jsxs?\)\(\i\.\i,{channelId:(\i)\.id(?=.+?(\(0,\i\.jsxs?\)\("div",{className:\i\.\i,children:\[.{0,100}\i\.length>0.+?\]}\)),)/,
+                    match: /return\(0,\i\.jsxs?\)\(\i\.\i,{channelId:(\i)\.id,children:\[(?=.{0,1000}?(\(0,\i\.jsxs?\)\("div",{className:\i\.\i,children:\[.{0,100}\i\.length>0.+?\]}\)),)/,
                     replace: (m, channel, allowedUsersAndRolesComponent) => `if($self.isHiddenChannel(${channel},true)){return${allowedUsersAndRolesComponent};}${m}`
                 },
                 {
@@ -383,27 +383,27 @@ export default definePlugin({
                 {
                     // Render our HiddenChannelLockScreen component instead of the main voice channel component
                     match: /renderContent\(\i\){.+?this\.renderVoiceChannelEffects.+?children:/,
-                    replace: "$&!this.props.inCall&&$self.isHiddenChannel(this.props.channel,true)?$self.HiddenChannelLockScreen(this.props.channel):"
+                    replace: "$&!this?.props?.inCall&&$self.isHiddenChannel(this?.props?.channel,true)?$self.HiddenChannelLockScreen(this?.props?.channel):"
                 },
                 {
                     // Disable gradients for the HiddenChannelLockScreen of voice channels
                     match: /renderContent\(\i\){.+?disableGradients:/,
-                    replace: "$&!this.props.inCall&&$self.isHiddenChannel(this.props.channel,true)||"
+                    replace: "$&!this?.props?.inCall&&$self.isHiddenChannel(this?.props?.channel,true)||"
                 },
                 {
                     // Disable useless components for the HiddenChannelLockScreen of voice channels
                     match: /(?:{|,)render(?!Header|ExternalHeader).{0,30}?:/g,
-                    replace: "$&!this.props.inCall&&$self.isHiddenChannel(this.props.channel,true)?()=>null:"
+                    replace: "$&!this?.props?.inCall&&$self.isHiddenChannel(this?.props?.channel,true)?()=>null:"
                 },
                 {
                     // Disable bad CSS class which mess up hidden voice channels styling
                     match: /(?=\i\|\|\i!==\i\.\i\.FULL_SCREEN.{0,100}?this\._callContainerRef)/,
-                    replace: '$&!this.props.inCall&&$self.isHiddenChannel(this.props.channel,true)?"":'
+                    replace: '$&!this?.props?.inCall&&$self.isHiddenChannel(this?.props?.channel,true)?"":'
                 }
             ]
         },
         {
-            find: '"HasBeenInStageChannel"',
+            find: "audience-header-",
             replacement: [
                 {
                     // Render our HiddenChannelLockScreen component instead of the main stage channel component
@@ -424,12 +424,7 @@ export default definePlugin({
                     // Disable strange styles applied to the header for the HiddenChannelLockScreen of stage channels
                     match: /"124px".+?style:(?<=let \i,{channel:(\i).+?)/,
                     replace: (m, channel) => `${m}$self.isHiddenChannel(${channel})?void 0:`
-                }
-            ]
-        },
-        {
-            find: "#{intl::STAGE_FULL_MODERATOR_TITLE}",
-            replacement: [
+                },
                 {
                     // Remove the divider and amount of users in stage channel components for the HiddenChannelLockScreen
                     match: /\(0,\i\.jsx\)\(\i\.\i\.Divider.+?}\)]}\)(?=.+?:(\i)\.guild_id)/,
@@ -504,8 +499,26 @@ export default definePlugin({
                 match: /(getVoiceStateForUser.{0,150}?)&&\i\.\i\.canWithPartialContext.{0,20}VIEW_CHANNEL.+?}\)(?=\?)/,
                 replace: "$1"
             }
+        },
+        {
+            find: "#{intl::ROLE_REQUIRED_SINGLE_USER_MESSAGE}",
+            replacement: {
+                match: /(?=function (\i)\(\i\){let{channel:.{0,200}?getSortedRoles\()/,
+                replace: "$self.ChannelBeginHeader=$1;"
+            }
+        },
+        {
+            find: "2026-02-private-channel-hiding",
+            replacement: {
+                match: /(?<=enableObfuscation|enableIntegrityCheck):!0/g,
+                replace: ":false"
+            }
         }
     ],
+
+    set ChannelBeginHeader(value: any) {
+        setChannelBeginHeader(value);
+    },
 
     swapViewChannelWithConnectPermission(mergedPermissions: bigint, channel: Channel) {
         if (!PermissionStore.can(PermissionsBits.CONNECT, channel)) {
@@ -576,7 +589,7 @@ export default definePlugin({
             aria-hidden={true}
             role="img"
         >
-            <path fill="currentcolor" fillRule="evenodd" d="M17 11V7C17 4.243 14.756 2 12 2C9.242 2 7 4.243 7 7V11C5.897 11 5 11.896 5 13V20C5 21.103 5.897 22 7 22H17C18.103 22 19 21.103 19 20V13C19 11.896 18.103 11 17 11ZM12 18C11.172 18 10.5 17.328 10.5 16.5C10.5 15.672 11.172 15 12 15C12.828 15 13.5 15.672 13.5 16.5C13.5 17.328 12.828 18 12 18ZM15 11H9V7C9 5.346 10.346 4 12 4C13.654 4 15 5.346 15 7V11Z" />
+            <path fillRule="evenodd" d="M17 11V7C17 4.243 14.756 2 12 2C9.242 2 7 4.243 7 7V11C5.897 11 5 11.896 5 13V20C5 21.103 5.897 22 7 22H17C18.103 22 19 21.103 19 20V13C19 11.896 18.103 11 17 11ZM12 18C11.172 18 10.5 17.328 10.5 16.5C10.5 15.672 11.172 15 12 15C12.828 15 13.5 15.672 13.5 16.5C13.5 17.328 12.828 18 12 18ZM15 11H9V7C9 5.346 10.346 4 12 4C13.654 4 15 5.346 15 7V11Z" />
         </svg>
     ), { noop: true }),
 
@@ -593,7 +606,7 @@ export default definePlugin({
                     aria-hidden={true}
                     role="img"
                 >
-                    <path fill="currentcolor" fillRule="evenodd" d="m19.8 22.6-4.2-4.15q-.875.275-1.762.413Q12.95 19 12 19q-3.775 0-6.725-2.087Q2.325 14.825 1 11.5q.525-1.325 1.325-2.463Q3.125 7.9 4.15 7L1.4 4.2l1.4-1.4 18.4 18.4ZM12 16q.275 0 .512-.025.238-.025.513-.1l-5.4-5.4q-.075.275-.1.513-.025.237-.025.512 0 1.875 1.312 3.188Q10.125 16 12 16Zm7.3.45-3.175-3.15q.175-.425.275-.862.1-.438.1-.938 0-1.875-1.312-3.188Q13.875 7 12 7q-.5 0-.938.1-.437.1-.862.3L7.65 4.85q1.025-.425 2.1-.638Q10.825 4 12 4q3.775 0 6.725 2.087Q21.675 8.175 23 11.5q-.575 1.475-1.512 2.738Q20.55 15.5 19.3 16.45Zm-4.625-4.6-3-3q.7-.125 1.288.112.587.238 1.012.688.425.45.613 1.038.187.587.087 1.162Z" />
+                    <path fillRule="evenodd" d="m19.8 22.6-4.2-4.15q-.875.275-1.762.413Q12.95 19 12 19q-3.775 0-6.725-2.087Q2.325 14.825 1 11.5q.525-1.325 1.325-2.463Q3.125 7.9 4.15 7L1.4 4.2l1.4-1.4 18.4 18.4ZM12 16q.275 0 .512-.025.238-.025.513-.1l-5.4-5.4q-.075.275-.1.513-.025.237-.025.512 0 1.875 1.312 3.188Q10.125 16 12 16Zm7.3.45-3.175-3.15q.175-.425.275-.862.1-.438.1-.938 0-1.875-1.312-3.188Q13.875 7 12 7q-.5 0-.938.1-.437.1-.862.3L7.65 4.85q1.025-.425 2.1-.638Q10.825 4 12 4q3.775 0 6.725 2.087Q21.675 8.175 23 11.5q-.575 1.475-1.512 2.738Q20.55 15.5 19.3 16.45Zm-4.625-4.6-3-3q.7-.125 1.288.112.587.238 1.012.688.425.45.613 1.038.187.587.087 1.162Z" />
                 </svg>
             )}
         </Tooltip>
@@ -612,7 +625,7 @@ export default definePlugin({
                     aria-hidden={true}
                     role="img"
                 >
-                    <path fill="currentcolor" className="shc-evenodd-fill-current-color" d="M17 11V7C17 4.243 14.756 2 12 2C9.242 2 7 4.243 7 7V11C5.897 11 5 11.896 5 13V20C5 21.103 5.897 22 7 22H17C18.103 22 19 21.103 19 20V13C19 11.896 18.103 11 17 11ZM12 18C11.172 18 10.5 17.328 10.5 16.5C10.5 15.672 11.172 15 12 15C12.828 15 13.5 15.672 13.5 16.5C13.5 17.328 12.828 18 12 18ZM15 11H9V7C9 5.346 10.346 4 12 4C13.654 4 15 5.346 15 7V11Z" />
+                    <path className="shc-evenodd-fill-current-color" d="M17 11V7C17 4.243 14.756 2 12 2C9.242 2 7 4.243 7 7V11C5.897 11 5 11.896 5 13V20C5 21.103 5.897 22 7 22H17C18.103 22 19 21.103 19 20V13C19 11.896 18.103 11 17 11ZM12 18C11.172 18 10.5 17.328 10.5 16.5C10.5 15.672 11.172 15 12 15C12.828 15 13.5 15.672 13.5 16.5C13.5 17.328 12.828 18 12 18ZM15 11H9V7C9 5.346 10.346 4 12 4C13.654 4 15 5.346 15 7V11Z" />
                 </svg>
             )}
         </Tooltip>

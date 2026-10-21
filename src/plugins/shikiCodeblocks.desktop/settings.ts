@@ -77,6 +77,12 @@ export const settings = definePluginSettings({
             },
         ]
     },
+    ignoredLanguages: {
+        label: () => t(plugin.shikiCodeblocks.option.ignoredLanguages.label),
+        description: () => t(plugin.shikiCodeblocks.option.ignoredLanguages.description),
+        type: OptionType.STRING,
+        default: "ansi",
+    },
     useDevIcon: {
         label: () => t(plugin.shikiCodeblocks.option.useDevIcon.label),
         description: () => t(plugin.shikiCodeblocks.option.useDevIcon.description),

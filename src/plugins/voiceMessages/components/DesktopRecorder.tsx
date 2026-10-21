@@ -20,7 +20,7 @@
 import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { PluginNative } from "@utils/types";
-import { MediaEngineStore, showToast, Toasts, useState } from "@webpack/common";
+import { MediaEngineStore, showToast, useState } from "@webpack/common";
 
 import { settings, type VoiceRecorder } from "..";
 
@@ -49,7 +49,7 @@ export const VoiceRecorderDesktop: VoiceRecorder = ({ setAudioBlob, onRecordingC
                     if (success)
                         changeRecording(true);
                     else
-                        showToast(t(plugin.voiceMessages.notification.failed.start), Toasts.Type.FAILURE);
+                        showToast({ text: t(plugin.voiceMessages.notification.failed.start), variant: "critical" });
                 }
             );
         } else {
@@ -59,7 +59,7 @@ export const VoiceRecorderDesktop: VoiceRecorder = ({ setAudioBlob, onRecordingC
                     if (buf)
                         setAudioBlob(new Blob([new Uint8Array(buf)], { type: "audio/ogg; codecs=opus" }));
                     else
-                        showToast(t(plugin.voiceMessages.notification.failed.finish), Toasts.Type.FAILURE);
+                        showToast({ text: t(plugin.voiceMessages.notification.failed.finish), variant: "critical" });
                 }
                 changeRecording(false);
             });

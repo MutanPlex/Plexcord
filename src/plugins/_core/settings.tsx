@@ -110,6 +110,12 @@ const pluginSettings = definePluginSettings({
             { label: () => t(settingsI18n.location.bottom), value: "bottom" },
         ]
     },
+    includePlexcordInfoWhenCopying: {
+        label: () => t(plugin.settings.option.includePlexcordInfoWhenCopying.label),
+        description: () => t(plugin.settings.option.includePlexcordInfoWhenCopying.description),
+        type: OptionType.BOOLEAN,
+        default: true
+    }
 });
 
 export default definePlugin({
@@ -129,10 +135,9 @@ export default definePlugin({
                     replace: "$&.replace(/^./, c => c.toUpperCase())"
                 },
                 {
-                    match: /"text-xxs\/normal".{0,300}?(?=null!=(\i)&&(.{0,20}\i\.Text.{0,200}?,children:).{0,15}?("span"),({className:\i\.\i,children:\["Build Override: ",\1\.id\]\})\)\}\))/,
-                    replace: (m, _buildOverride, makeRow, component, props) => {
-                        props = props.replace(/children:\[.+\]/, "");
-                        return `${m},$self.makeInfoElements(${component},${props}).map(e=>${makeRow}e})),`;
+                    match: /"text-xxs\/normal".{0,300}?(?=null!=(\i)&&(.{0,20}\i\.\i.{0,200}?,children:).{0,15}?("span"),{className:(\i\.\i),children:\["Build Override: ",\1\.id,\i\]\}\)\}\))/,
+                    replace: (m, _buildOverride, makeRow, component, className) => {
+                        return `${m},$self.makeInfoElements(${component},${className}).map(e=>${makeRow}e})),`;
                     }
                 },
                 {
@@ -234,7 +239,7 @@ export default definePlugin({
                 Component: BackupAndRestoreTab,
                 Icon: BackupRestoreIcon
             }),
-            IS_DEV && PatchHelperTab && buildEntry({
+            !IS_STANDALONE && PatchHelperTab && buildEntry({
                 key: "plexcord_patch_helper",
                 title: t(patchHelper.title),
                 Component: PatchHelperTab,
@@ -260,7 +265,7 @@ export default definePlugin({
             belowNitro: "billing_section",
             aboveActivity: "activity_section",
             belowActivity: "activity_section",
-            bottom: "logout_section"
+            bottom: "utility_section"
         };
 
         const key = places[settingsLocation] ?? places.top;
@@ -298,10 +303,10 @@ export default definePlugin({
     getVersionInfo(support = true) {
         let version = "";
 
-        if (IS_DEV) version = "Dev Build";
+        if (IS_DEV) version = t(plugin.discordDevBanner.text.devBuild);
         if (IS_WEB) version = "Web";
         if (IS_PLEXTRON) version = `Plextron v${PlextronNative.app.getVersion()}`;
-        if (IS_STANDALONE) version = "Standalone";
+        if (IS_STANDALONE) version = t(plugin.discordDevBanner.text.standalone);
 
         return support && version ? ` (${version})` : version;
     },
@@ -318,12 +323,13 @@ export default definePlugin({
     },
 
     getInfoString() {
+        if (!pluginSettings.store.includePlexcordInfoWhenCopying) return "";
         return "\n" + this.getInfoRows().join("\n");
     },
 
-    makeInfoElements(Component: ComponentType<PropsWithChildren>, props: PropsWithChildren) {
+    makeInfoElements(Component: ComponentType<PropsWithChildren<{ className?: string; }>>, className: string) {
         return this.getInfoRows().map((text, i) =>
-            <Component key={i} {...props}>{text}</Component>
+            <Component key={i} className={className}>{text}</Component>
         );
     }
 });

@@ -4,28 +4,29 @@
  * Copyright (c) 2025 MutanPlex
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
+
 import "./styles.css";
 
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Message } from "@plexcord/discord-types";
-import { ModalCloseButton } from "@utils/modal";
-import { findCssClassesLazy } from "@webpack";
-import { Paginator, React, useEffect, useRef, useState } from "@webpack/common";
-import { MutableRefObject } from "react";
+import { Paginator, requirePaginator } from "@plugins/reviewDB/components/ReviewModal";
+import { findComponentByCodeLazy } from "@webpack";
+import { React, useRef, useState } from "@webpack/common";
+
+const CloseButton = findComponentByCodeLazy("CLOSE_BUTTON_LABEL");
+import type { RefObject } from "react";
 
 import { jumper } from "./index";
-
-const containerStyles = findCssClassesLazy("containerBottom", "containerTop");
 
 export default function ReplyNavigator({ replies }: { replies: Message[]; }) {
     const [page, setPage] = useState(1);
     const [visible, setVisible] = useState(true);
-    const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
-    useEffect(() => {
+    const ref: RefObject<HTMLDivElement | null> = useRef(null);
+    React.useEffect(() => {
         setPage(1);
         setVisible(true);
     }, [replies]);
-    useEffect(() => {
+    React.useEffect(() => {
         // https://stackoverflow.com/a/42234988
         function onMouseDown(event: MouseEvent) {
             if (ref.current && event.target instanceof Element && !ref.current.contains(event.target)) {
@@ -38,9 +39,10 @@ export default function ReplyNavigator({ replies }: { replies: Message[]; }) {
             document.removeEventListener("mousedown", onMouseDown);
         };
     }, [ref]);
+    requirePaginator();
     return (
         <ErrorBoundary>
-            <div ref={ref} className={containerStyles.containerBottom + " pc-findreply-div"} style={{
+            <div ref={ref} className="pc-findreply-div" style={{
                 display: visible ? "flex" : "none",
             }}>
                 <Paginator
@@ -51,7 +53,7 @@ export default function ReplyNavigator({ replies }: { replies: Message[]; }) {
                     totalCount={replies.length}
                     onPageChange={processPageChange}
                 />
-                <ModalCloseButton className={"pc-findreply-close"} onClick={() => setVisible(false)} />
+                <CloseButton className={"pc-findreply-close"} onClick={() => setVisible(false)} />
             </div>
         </ErrorBoundary>
     );

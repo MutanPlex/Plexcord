@@ -57,7 +57,7 @@ export function InviteButton({
             onClick={async e => {
                 e.preventDefault();
                 openInviteModal("HQGYXm5XSh").catch(() =>
-                    showToast(t(settings.specialCards.donations.invalid))
+                    showToast({ text: t(settings.specialCards.donations.invalid) })
                 );
             }}
             className={className || "pc-donate-button"}

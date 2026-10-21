@@ -13,8 +13,7 @@ import { addServerListElement, removeServerListElement, ServerListRenderPosition
 import { Guild } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
-import { findStoreLazy } from "@webpack";
-import { Menu, React, useStateFromStores } from "@webpack/common";
+import { Menu, React, SortedGuildStore, useStateFromStores } from "@webpack/common";
 
 import hiddenServersButton from "./components/HiddenServersButton";
 import { HiddenServersStore } from "./HiddenServersStore";
@@ -33,8 +32,6 @@ type qsResult = {
         guild_id?: string;
     };
 };
-
-export const SortedGuildStore = findStoreLazy("SortedGuildStore");
 
 const Patch: NavContextMenuPatchCallback = (
     children,
@@ -121,7 +118,7 @@ export default definePlugin({
             ]
         },
         {
-            find: "#{intl::QUICKSWITCHER_PROTIP}",
+            find: "#{intl::MfbDzS::raw}",
             replacement: {
                 match: /(?<=renderResults\(\){.{0,100})let{query/,
                 replace: "this.props.results = $self.filteredGuildResults(this.props.results);$&",

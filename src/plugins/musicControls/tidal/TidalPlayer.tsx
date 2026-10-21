@@ -85,6 +85,7 @@ function CopyContextMenu({ name, path }: { name: string; path: string; }) {
                 label={t(plugin.musicControls.context.tidal.copy, { name })}
                 action={() => copyWithToast(path.replace("http://", "https://"))}
                 icon={LinkIcon}
+                leadingAccessory={{ type: "icon", icon: LinkIcon }}
             />
             <Menu.MenuItem
                 key={openId}
@@ -92,6 +93,7 @@ function CopyContextMenu({ name, path }: { name: string; path: string; }) {
                 label={t(plugin.musicControls.context.tidal.open, { name })}
                 action={() => TidalStore.openExternal(path)}
                 icon={OpenExternalIcon}
+                leadingAccessory={{ type: "icon", icon: OpenExternalIcon }}
             />
         </Menu.Menu>
     );
@@ -225,6 +227,7 @@ function AlbumContextMenu({ track }: { track: PlayerState["track"]; }) {
                 label={t(plugin.musicControls.modal.album.viewCover)}
                 action={() => track?.imageSrc && openImageModal({ url: track.imageSrc })}
                 icon={ImageIcon}
+                leadingAccessory={{ type: "icon", icon: ImageIcon }}
             />
             <Menu.MenuControlItem
                 id="tdl-volume"

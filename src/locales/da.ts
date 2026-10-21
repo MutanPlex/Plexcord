@@ -46,11 +46,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         switches: {
             useQuickCss: {
                 label: "Aktiver brugerdefineret CSS",
-                description: "Indlæs brugerdefineret CSS fra QuickCSS-editoren. Dette giver dig mulighed for at tilpasse Discords udseende med dine egne styles."
+                description: "Anvend din konfigurerede QuickCSS"
             },
             enableReactDevtools: {
                 label: "Aktiver React Developer Tools",
-                description: "Aktiver React Developer Tools-udvidelsen til fejlfinding af Discords React-komponenter. Nyttigt til plugin-udvikling."
+                description: "Primært nyttigt for plugin-udviklere. Ignorer dette, hvis du ikke ved, hvad det er"
             },
             mainWindowFrameless: {
                 label: "Deaktiver hovedvinduets ramme",
@@ -60,7 +60,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Deaktiver vinduesrammen",
                 description: "Fjern den indfødte vinduesramme for et renere look. Du kan stadig flytte vinduet ved at trække i titellinjen."
             },
-            winNativeTitleBar: {
+            nativeTitleBar: {
                 label: "Brug Windows' indfødte titellinje i stedet for Discords brugerdefinerede",
                 description: "Erstat Discords brugerdefinerede titellinje med standard Windows-titellinjen. Dette kan forbedre kompatibiliteten med visse vindueshåndteringsværktøjer."
             },
@@ -76,7 +76,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             disableMinSize: {
                 label: "Deaktiver minimum vinduesstørrelse",
-                description: "Tillad Discord-vinduet at blive gjort mindre end dets standard minimumstørrelse. Nyttigt til tiling window managers eller små skærme."
+                description: "Gør det muligt at ændre vinduets størrelse til enhver størrelse, selv mindre end Discords minimumsstørrelse"
             }
         },
         quickActions: {
@@ -193,6 +193,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignore: "Ignorer - Vis slet ikke notifikationen"
             },
         },
+        windowsMaterial: {
+            title: "Windows-baggrundsmateriale (kræver genstart)",
+            description: "Gennemsigtige baggrundseffekter i Windows. Du skal bruge et tema, der understøtter gennemsigtighed, ellers gør dette ingenting. Genstart er påkrævet efter ændring af denne indstilling.",
+            material: {
+                none: "Ingen",
+                mica: "Mica (bruger systemtema + skrivebordsbaggrund til at male baggrunden)",
+                tabbed: "Tabbed (variant af Mica med kraftigere baggrundstoning)",
+                acrylic: "Acrylic (slører vinduet bag Discord for en gennemskinnelig baggrund)"
+            }
+        },
         macVibrancy: {
             title: "Vinduesvibrationsstil (Kræver genstart)",
             description: "Tilpas macOS-vinduets vibrationseffekt. Dette styrer slørings- og gennemsigtighedsstilen for Discord-vinduet. Ændringer kræver en genstart for at træde i kraft.",
@@ -212,6 +222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 fullscreenUI: "Fuldskærms-UI (Gennemsigtig men let sløret)",
                 hud: "HUD (Mest gennemsigtig)"
             }
+        },
+        tabs: {
+            renderFailed: "Kunne ikke vise fanen {{tab}}. Hvis problemet fortsætter, kan du prøve at geninstallere med installationsprogrammet!"
         }
     },
 
@@ -270,7 +283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             discordDesktop: "Discord Desktop-app",
             plextron: "Plextron-app",
             web: "Plextron-app og webversionen af Discord",
-            dev: "Udviklerversion af Plexcord"
+            dev: "Udviklerversion af Plexcord",
+            browser: "Webbrowserversionen af Plexcord"
         },
         search: {
             looking: "Leder du efter",
@@ -307,7 +321,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userplugins: "Vis bruger-plugins",
                 api: "Vis API-plugins",
                 type: "Filtrer efter type",
-                tags: "Filtrer efter tags"
+                tags: "Filtrer efter tags",
+                favorites: "Vis favoritter"
             }
         },
         pluginModal: {
@@ -320,7 +335,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             enabledUser: "Aktiverede bruger-plugins",
             totalUser: "Antal bruger-plugins i alt",
             info: "Se mere info",
-            source: "Se kildekode"
+            source: "Se kildekode",
+            favorite: "Gør til favorit - fastgør det øverst på plugin-listen",
+            unfavorite: "Fjern fra favoritter"
         },
         metadata: {
             api: {
@@ -342,7 +359,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     userSettings: "Patcher Discords UserSettings for at eksponere deres gruppe og navn.",
                     audioPlayer: "API til at afspille interne Discord-lydfiler eller eksterne lydlinks.",
                     userArea: "API til at tilføje knapper til brugerområdepanelet.",
-                    profileCollections: "API til at tilføje samlinger til brugerens profilpanel, ligesom Discords spilsamling."
+                    profileCollections: "API til at tilføje samlinger til brugerens profilpanel, ligesom Discords spilsamling.",
+                    profileSections: "API til at tilføje sektioner i nærheden af området 'Medlem siden' på brugerprofilpaneler.",
+                    headerBar: "API til at tilføje knapper til overskriftslinjen.",
+                    surfaceClasses: "API til at tilføje plugin-ejede semantiske dataattributter og begrænsede props til stabile Discord-layoutflader."
                 },
                 chatButtons: {
                     context: {
@@ -389,11 +409,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             button: "Knapper fra aktiverede plugins vises her."
-        }
+        },
+        invalidInput: "Ugyldigt input",
+        loading: "Indlæser...",
+        authorPrefix: "af"
     },
 
     patchHelper: {
-        title: "Patch Helper",
+        title: "Patch-hjælper",
         description: "Et udviklerværktøj til at hjælpe dig med at oprette patches til Plexcord-plugins.",
         fullPatch: {
             label: "Fuld Patch",
@@ -405,7 +428,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         preview: "Forhåndsvisning",
         generatedCode: "Genereret kode",
         group: "Gruppe",
-        diff: "Diff",
+        diff: "Forskel",
         module: "Modul",
         compile: "Kompiler",
         compiled: "Kompilering lykkedes",
@@ -474,36 +497,37 @@ const translations: MatchStructure<typeof enTranslations> = {
             plugins: "Eksporter plugin",
             css: "Eksporter QuickCSS",
             datastore: "Eksporter DataStores"
-        }
+        },
+        backupFileType: "Plexcord-indstillingsbackup"
     },
 
     cloud: {
         text: "Cloud",
-        title: "Settings Sync",
-        override: "Cloud Sync",
+        title: "Synkronisering af indstillinger",
+        override: "Skysynkronisering",
         description: "Synchronise your Plexcord settings to the cloud. This makes it easy to keep your configuration consistent across multiple devices without manual import/export.",
         switchDescription: "When enabled, your settings can be synchronised to and from the cloud. Use the actions below to manually sync.",
-        settings: "Cloud Settings",
+        settings: "Skyindstillinger",
         successful: "Synchronised settings to the cloud!",
-        updated: "Your settings have been updated! Click here to restart to fully apply changes!",
-        deleted: "Settings deleted from cloud!",
+        updated: "Dine indstillinger er opdateret! Klik her for at genstarte og anvende ændringerne fuldt ud!",
+        deleted: "Indstillingerne er slettet fra skyen!",
         integration: {
-            title: "Cloud Integration",
+            title: "Skyintegration",
             description: "Plexcord's cloud integration allows you to synchronise your settings across multiple devices and Discord installations. Your data is securely stored and can be easily restored at any time.",
         },
         reauth: "We've noticed you have cloud integrations enabled in another client! Due to limitations, you will need to re-authorise to continue using them. Click here to go to the settings page to do so!",
         error: {
-            setup: "Setup failed (couldn't retrieve OAuth configuration).",
-            secret: "Setup failed (no secret returned).",
-            string: "Setup failed ({{error}}).",
-            connect: "Cloud sync was disabled because this account isn't connected to the Plexcord Cloud App. You can enable it again by connecting this account in Cloud Settings. (note: it will store your preferences separately)",
-            noSettings: "There are no settings in the cloud.",
-            uptodate: "Your settings are up to date.",
-            localNewer: "Your local settings are newer than the cloud ones.",
-            delete: "Could not delete settings ({{error}}).",
+            setup: "Opsætningen mislykkedes (kunne ikke hente OAuth-konfiguration).",
+            secret: "Opsætningen mislykkedes (ingen hemmelighed returneret).",
+            string: "Opsætningen mislykkedes ({{error}}).",
+            connect: "Skysynkronisering blev deaktiveret, fordi denne konto ikke er forbundet til Plexcord Cloud-appen. Du kan aktivere den igen ved at forbinde kontoen i skyindstillingerne. (bemærk: dine præferencer gemmes separat)",
+            noSettings: "Der er ingen indstillinger i skyen.",
+            uptodate: "Dine indstillinger er opdaterede.",
+            localNewer: "Dine lokale indstillinger er nyere end dem i skyen.",
+            delete: "Kunne ikke slette indstillinger ({{error}}).",
             api: {
                 returned: {
-                    delete: "Could not delete settings (API returned {{status}}).",
+                    delete: "Kunne ikke slette indstillinger (API returnerede {{status}}).",
                     to: "Could not synchronise settings to cloud (API returned {{status}}).",
                     from: "Could not synchronise settings from the cloud (API returned {{status}}).",
                     manifest: "Kunne ikke hente manifest til sletning (API returnerede {{status}})."
@@ -515,56 +539,56 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         warning: {
-            enableCloudIntegration: "Enable cloud integration above to use settings sync features."
+            enableCloudIntegration: "Aktivér skyintegration ovenfor for at bruge synkronisering af indstillinger."
         },
         danger: {
-            title: "Danger Zone",
+            title: "Farezone",
             description: "Permanently delete all your data from the cloud. This action cannot be undone and will remove all synchronised settings and any other data stored on the cloud backend.",
             delete: {
                 account: {
-                    title: "Delete Cloud Account",
-                    description: "Are you sure you want to permanently delete your cloud account and all associated data? This action cannot be undone.",
-                    confirm: "Delete Account",
-                    cancel: "Cancel"
+                    title: "Slet skykonto",
+                    description: "Er du sikker på, at du vil slette din skykonto og alle tilknyttede data permanent? Dette kan ikke fortrydes.",
+                    confirm: "Slet konto",
+                    cancel: "Annuller"
                 }
             }
         },
         notification: {
-            title: "Cloud Integration",
-            enabled: "Cloud integration Enabled",
-            host: "{{host}} has been added to the whitelist. Please restart the app for the changes to take effect.",
+            title: "Skyintegration",
+            enabled: "Skyintegration aktiveret",
+            host: "{{host}} er tilføjet til hvidlisten. Genstart appen, for at ændringerne træder i kraft.",
             erase: {
-                successful: "Cloud data successfully erased",
-                failed: "Failed to erase all data (API {{status}} returned), please contact support."
+                successful: "Skydata er slettet",
+                failed: "Kunne ikke slette alle data (API returnerede {{status}}), kontakt venligst support."
             }
         },
         button: {
-            to: "Sync to Cloud",
-            from: "Sync from Cloud",
-            fromDescription: "This will overwrite your local settings with the ones on the cloud. Use wisely!",
-            delete: "Delete Cloud Data",
-            enable: "Enable Cloud Integrations",
+            to: "Synkronisér til skyen",
+            from: "Synkronisér fra skyen",
+            fromDescription: "Dette overskriver dine lokale indstillinger med dem i skyen. Brug det med omtanke!",
+            delete: "Slet skydata",
+            enable: "Aktivér skyintegrationer",
             reauthorize: "Reauthorise",
-            confirm: "Restart now",
-            later: "Later!"
+            confirm: "Genstart nu",
+            later: "Senere!"
         },
-        privacy: "respects your privacy",
-        source: "source code",
-        overview: "Plexcord comes with a cloud integration that adds goodies like settings sync across devices. It {{privacy}}, and the {{source}} is AGPL 3.0 licensed so you can host it yourself.",
+        privacy: "respekterer dit privatliv",
+        source: "kildekoden",
+        overview: "Plexcord har en skyintegration, der tilføjer ekstra funktioner som synkronisering af indstillinger på tværs af enheder. Den {{privacy}}, og {{source}} er AGPL 3.0-licenseret, så du kan hoste den selv.",
         authorization: "Connect to the cloud backend for settings synchronisation. This will request authorisation if you haven't set up cloud integration yet.",
         backend: {
-            title: "Cloud Backend",
-            description: "Choose how your settings are stored in the cloud. By default, Plexcord Cloud is used, but you can also connect your own self-hosted cloud service.",
-            invalid: "Invalid URL"
+            title: "Sky-backend",
+            description: "Vælg, hvordan dine indstillinger gemmes i skyen. Som standard bruges Plexcord Cloud, men du kan også forbinde din egen selvhostede skytjeneste.",
+            invalid: "Ugyldig URL"
         },
         sync: {
-            title: "Sync Rules for This Device",
-            description: "This setting controls how settings move between this device and the cloud. You can let changes flow both ways, or choose one place to be the main source of truth.",
+            title: "Synkroniseringsregler for denne enhed",
+            description: "Denne indstilling styrer, hvordan indstillinger flyttes mellem denne enhed og skyen. Du kan lade ændringer gå begge veje eller vælge ét sted som den primære kilde.",
             direction: {
-                both: "Two-way sync (changes go both directions)",
-                push: "This device is the source (upload only)",
-                pull: "The cloud is the source (download only)",
-                manual: "Do not sync automatically (manual sync via buttons below only)"
+                both: "Tovejssynkronisering (ændringer går begge veje)",
+                push: "Denne enhed er kilden (kun upload)",
+                pull: "Skyen er kilden (kun download)",
+                manual: "Synkronisér ikke automatisk (kun manuel synkronisering via knapperne nedenfor)"
             }
         }
     },
@@ -572,137 +596,142 @@ const translations: MatchStructure<typeof enTranslations> = {
     changelog: {
         text: "Change log",
         title: "Change log",
-        description: "You can find the latest changes and updates to Plexcord here.",
-        by: "by",
-        check: "Repository check",
-        uptodate: "up to date",
-        update: "Update",
-        noMessage: "No message",
-        unknown: "Unknown",
-        updatedPlugins: "Updated Plugins",
-        newSettings: "New Settings",
-        newSettingTooltip: "New setting in {{plugin}}",
-        loading: "Loading...",
-        repoUptodate: "Repository up to date",
-        fetch: "Fetch from Repository",
-        clear: "Clear All Logs",
+        description: "Her kan du finde de seneste ændringer og opdateringer til Plexcord.",
+        by: "af",
+        check: "Tjek af repository",
+        uptodate: "opdateret",
+        update: "Opdater",
+        noMessage: "Ingen besked",
+        unknown: "Ukendt",
+        updatedPlugins: "Opdaterede plugins",
+        newSettings: "Nye indstillinger",
+        newSettingTooltip: "Ny indstilling i {{plugin}}",
+        loading: "Indlæser...",
+        repoUptodate: "Repositoryet er opdateret",
+        fetch: "Hent fra repository",
+        clear: "Ryd alle logfiler",
         internet: "Make sure you have an Internet connection and try again.",
-        recent: "Recent Changes",
-        codeChanges: "Code Changes {{count}} new commit{{s}}",
-        updateLogs: "Update Logs ({{count}})",
-        noCommit: "No commits available ahead of your current version. Click 'Fetch from Repository' to check for new changes.",
-        previous: "Previous update sessions with their commit history and plugin changes.",
+        recent: "Seneste ændringer",
+        codeChanges: "Kodeændringer: {{count}} nye commit{{s}}",
+        updateLogs: "Opdateringslogfiler ({{count}})",
+        noCommit: "Der er ingen commits efter din nuværende version. Klik på 'Hent fra repository' for at søge efter nye ændringer.",
+        previous: "Tidligere opdateringssessioner med deres commit-historik og plugin-ændringer.",
         modal: {
-            description: "View the most recent changes to Plexcord. This fetches commits directly from the repository to show you what's new.",
+            description: "Se de seneste ændringer i Plexcord. Dette henter commits direkte fra repositoryet for at vise dig, hvad der er nyt.",
             repository: "Repository",
-            failed: "Failed to retrieve - check console",
-            current: "Current:",
-            hide: "Hide logs",
-            show: "Show logs",
+            failed: "Kunne ikke hente – se konsollen",
+            current: "Nuværende:",
+            hide: "Skjul logfiler",
+            show: "Vis logfiler",
             fetch: {
-                title: "Fetch Changes",
-                description: "Check the repository for new commits, plugin updates, and code changes. This will compare your current version with the latest available and show you what's new.",
-                newCommit: "These are the new commits and plugin updates since your last version. You can see what features were added, bugs were fixed, and which plugins received updates.",
-                confirm: "Fetch",
+                title: "Hent ændringer",
+                description: "Tjek repositoryet for nye commits, plugin-opdateringer og kodeændringer. Din nuværende version sammenlignes med den nyeste tilgængelige, og du får vist, hvad der er nyt.",
+                newCommit: "Dette er de nye commits og plugin-opdateringer siden din seneste version. Du kan se, hvilke funktioner der er tilføjet, hvilke fejl der er rettet, og hvilke plugins der er opdateret.",
+                confirm: "Hent",
             }
         },
         commit: {
-            available: "commits available",
-            no: "No new commits",
-            new: "new plugins",
-            updated: "updated plugins",
-            settings: "new settings"
+            available: "commits tilgængelige",
+            no: "Ingen nye commits",
+            new: "nye plugins",
+            updated: "opdaterede plugins",
+            settings: "nye indstillinger"
         },
         toast: {
-            already: "Already up to date with repository",
-            found: "Found {{count}} new commit{{s}} from repository",
-            local: "Repository is up to date with your local copy",
-            failed: "Failed to fetch from repository :(",
-            cleared: "All logs have been cleared",
-            logCleared: "Log has been cleared",
-            yourLatest: "Logged commits from your latest update"
+            already: "Allerede opdateret i forhold til repositoryet",
+            found: "Fandt {{count}} nye commit{{s}} i repositoryet",
+            local: "Repositoryet svarer til din lokale kopi",
+            failed: "Kunne ikke hente fra repositoryet :(",
+            cleared: "Alle logfiler er ryddet",
+            logCleared: "Loggen er ryddet",
+            yourLatest: "Commits fra din seneste opdatering er logget"
         },
         alert: {
             clear: {
-                title: "Clear All Logs",
+                title: "Ryd alle logfiler",
                 body: "Are you sure you would like to clear all logs? This cannot be undone.",
-                confirm: "Clear All",
+                confirm: "Ryd alle",
                 confirmColor: "danger",
-                cancel: "Cancel"
+                cancel: "Annuller"
             },
             log: {
-                title: "Clear Log",
+                title: "Ryd log",
                 body: "Are you sure you would like to clear this log? This cannot be undone.",
-                confirm: "Clear Log",
+                confirm: "Ryd log",
                 confirmColor: "danger",
-                cancel: "Cancel"
+                cancel: "Annuller"
             }
         },
-        newPlugins: "{{count}} New Plugin{{s}}",
-        following: "The following plugins have been added in recent updates:",
-        more: "+{{count}} more plugins"
+        newPlugins: "{{count}} nye plugin{{s}}",
+        following: "Følgende plugins er tilføjet i de seneste opdateringer:",
+        more: "+{{count}} flere plugins",
+        error: {
+            retrieveRepo: "Kunne ikke hente repository-oplysninger",
+            fetchRepo: "Kunne ikke hente fra repository",
+            connectRepo: "Kunne ikke oprette forbindelse til repository. Tjek din internetforbindelse."
+        }
     },
 
     csp: {
-        restart: "A restart is required to apply this change",
+        restart: "En genstart er nødvendig for at anvende denne ændring",
         blocked: {
-            resources: "Blocked Resources",
-            disallowed: "Some images, styles, or fonts were blocked because they come from disallowed domains.",
-            recommended: "It is highly recommended to move them to GitHub or Imgur. But you may also allow domains if you fully trust them.",
-            afterAllow: "After allowing a domain, you have to fully close (from tray / task manager) and restart {{platform}} to apply the change.",
-            allow: "Allow",
-            url: "Blocked URLs"
+            resources: "Blokerede ressourcer",
+            disallowed: "Nogle billeder, stilarter eller skrifttyper blev blokeret, fordi de kommer fra ikke-tilladte domæner.",
+            recommended: "Det anbefales kraftigt at flytte dem til GitHub eller Imgur. Du kan også tillade domæner, hvis du stoler fuldt ud på dem.",
+            afterAllow: "Når du har tilladt et domæne, skal du lukke {{platform}} helt (fra bakken / Jobliste) og starte det igen, for at ændringen træder i kraft.",
+            allow: "Tillad",
+            url: "Blokerede URL'er"
         },
         imgur: {
-            direct: "Imgur links should be direct links in the form of {{etc}}",
-            copy: "To obtain a direct link, right-click the image and select 'Copy image address'."
+            direct: "Imgur-links skal være direkte links i formen {{etc}}",
+            copy: "For at få et direkte link skal du højreklikke på billedet og vælge 'Kopiér billedadresse'."
         },
         wants: {
-            caller: "{{callerName}} wants to allow connections to {{domain}}",
-            detail: "Unless you recognise and fully trust {{domain}}, you should cancel this request!",
-            restart: "You will have to fully close and restart {{appName}} for the changes to take effect.",
+            caller: "{{callerName}} vil tillade forbindelser til {{domain}}",
+            detail: "Medmindre du genkender og stoler fuldt ud på {{domain}}, bør du annullere denne anmodning!",
+            restart: "Du skal lukke {{appName}} helt og starte den igen, for at ændringerne træder i kraft.",
             type: {
-                images: "Images",
-                styles: "CSS & Themes",
-                fonts: "Fonts"
+                images: "Billeder",
+                styles: "CSS og temaer",
+                fonts: "Skrifttyper"
             },
-            content: "The following types of content will be allowed to load from {{domain}}:",
-            understand: "I fully trust {{domain}} and understand the risks of allowing connections to it.",
+            content: "Følgende typer indhold vil kunne indlæses fra {{domain}}:",
+            understand: "Jeg stoler fuldt ud på {{domain}} og forstår risikoen ved at tillade forbindelser til det.",
             button: {
-                cancel: "Cancel",
-                allow: "Allow"
+                cancel: "Annuller",
+                allow: "Tillad"
             },
-            title: "Host Permissions"
+            title: "Værtstilladelser"
         }
     },
 
     themes: {
-        title: "Themes",
-        management: "Theme Management",
+        title: "Temaer",
+        management: "Temaadministration",
         description: "Customise Discord's appearance with themes. Add local .css files or load themes directly from URLs. Themes with a cog wheel icon have customisable settings you can modify.",
-        local: "Local Themes",
-        new: "NEW",
-        pinned: "Pinned",
-        stylus: "Stylus extension",
-        bd: "BetterDiscord Themes",
+        local: "Lokale temaer",
+        new: "NY",
+        pinned: "Fastgjort",
+        stylus: "Stylus-udvidelsen",
+        bd: "BetterDiscord-temaer",
         github: "GitHub",
-        download: "Looking for themes? Check out {{bd}} or search on {{github}}. When downloading from BetterDiscord, click 'Download' and place the .theme.css file into your themes folder.",
-        add: "Add",
-        reset: "Reset settings to default",
-        notCSS: "Not a CSS file. Remember to use the raw link!",
+        download: "Leder du efter temaer? Se {{bd}} eller søg på {{github}}. Når du downloader fra BetterDiscord, så klik på 'Download' og læg .theme.css-filen i din temamappe.",
+        add: "Tilføj",
+        reset: "Nulstil indstillinger til standard",
+        notCSS: "Ikke en CSS-fil. Husk at bruge det rå link!",
         okay: "Okay!",
-        checking: "Checking...",
-        valid: "Valid!",
-        upload: "Upload Theme",
-        openFolder: "Open Themes Folder",
-        loadMissing: "Load Missing Themes",
-        editQuickCSS: "Edit QuickCSS",
-        editClient: "Edit ClientTheme",
-        website: "Open Website",
-        discord: "Discord Server",
+        checking: "Tjekker...",
+        valid: "Gyldig!",
+        upload: "Upload tema",
+        openFolder: "Åbn temamappe",
+        loadMissing: "Indlæs manglende temaer",
+        editQuickCSS: "Redigér QuickCSS",
+        editClient: "Redigér ClientTheme",
+        website: "Åbn websted",
+        discord: "Discord-server",
         downloadTheme: "Download",
-        refresh: "Refresh",
-        delete: "Delete",
+        refresh: "Opdater",
+        delete: "Slet",
         activation: {
             title: "Temaaktivering",
             always: "Altid aktiv",
@@ -715,141 +744,170 @@ const translations: MatchStructure<typeof enTranslations> = {
             editSettings: "Rediger indstillinger"
         },
         unknown: {
-            title: "Unknown",
-            author: "Unknown Author",
-            theme: "A Discord Theme"
+            title: "Ukendt",
+            author: "Ukendt forfatter",
+            theme: "Et Discord-tema",
+            description: "Ingen beskrivelse angivet."
         },
-        required: "The following plugins are required, but aren't enabled: ",
-        homepage: "Homepage",
+        required: "Følgende plugins er påkrævet, men er ikke aktiveret:",
+        homepage: "Hjemmeside",
         support: "Support",
         online: {
-            title: "Online Themes",
-            description: "Load themes directly from URLs instead of local files. Online themes auto-update when the source changes, so you always have the latest version without manual downloads.",
-            enable: "Enable Online Themes",
-            enableDescription: "Toggle online theme loading. When disabled, all online themes will be turned off and you won't be able to add new ones.",
+            title: "Onlinetemaer",
+            description: "Indlæs temaer direkte fra URL'er i stedet for lokale filer. Onlinetemaer opdateres automatisk, når kilden ændres, så du altid har den nyeste version uden at downloade manuelt.",
+            enable: "Aktivér onlinetemaer",
+            enableDescription: "Slå indlæsning af onlinetemaer til/fra. Når det er slået fra, deaktiveres alle onlinetemaer, og du kan ikke tilføje nye.",
             placeholder: "https://eksempel.dk/tema.css"
         },
         quickActions: {
-            title: "Quick Actions",
-            description: "Shortcuts for managing your themes. Open your themes folder to add new themes, use QuickCSS for quick style tweaks, or reload themes after making changes."
+            title: "Hurtige handlinger",
+            description: "Genveje til at administrere dine temaer. Åbn temamappen for at tilføje nye temaer, brug QuickCSS til hurtige stiljusteringer, eller genindlæs temaer efter ændringer."
         },
         error: {
-            userscript: "Themes are not supported on the Userscript!",
+            userscript: "Temaer understøttes ikke i userscriptet!",
             stylus: "You can instead install themes with the {{stylus}}!",
-            expired: "Invalid or expired link",
-            text: "Error:"
+            expired: "Ugyldigt eller udløbet link",
+            text: "Fejl:"
         },
         copy: {
-            url: "Copy URL",
-            copied: "Theme URL copied!",
-            settings: "Copy theme settings",
-            copiedSettings: "Copied theme settings to clipboard."
+            url: "Kopiér URL",
+            copied: "Tema-URL kopieret!",
+            settings: "Kopiér temaindstillinger",
+            copiedSettings: "Temaindstillinger kopieret til udklipsholderen."
         },
         paste: {
-            settings: "Paste theme settings",
-            empty: "Your clipboard is empty.",
-            invalid: "Your clipboard doesn't have valid settings data.",
-            pasted: "Pasted theme settings from clipboard."
+            settings: "Indsæt temaindstillinger",
+            empty: "Din udklipsholder er tom.",
+            invalid: "Din udklipsholder indeholder ikke gyldige indstillingsdata.",
+            pasted: "Temaindstillinger indsat fra udklipsholderen."
         },
         settings: {
-            for: "Settings for {{themeName}}",
+            for: "Indstillinger for {{themeName}}",
         },
         installed: {
-            title: "Installed Themes",
+            title: "Installerede temaer",
             description: "Manage your themes here. Local themes load from your themes folder, online themes from URLs. Themes with a cog wheel icon have customisable settings.",
-            count: "{{count}} theme{{s}} installed ({{localCount}} local, {{onlineCount}} online) · {{enabledCount}} enabled",
-            search: "Search for a theme...",
-            loading: "Loading themes...",
-            none: "No themes installed yet. Add theme files to your themes folder or add an online theme above to get started.",
-            noCriteria: "No themes match your search or filter criteria."
+            count: "{{count}} tema{{s}} installeret ({{localCount}} lokale, {{onlineCount}} online) · {{enabledCount}} aktiveret",
+            search: "Søg efter et tema...",
+            loading: "Indlæser temaer...",
+            none: "Ingen temaer installeret endnu. Læg temafiler i din temamappe, eller tilføj et onlinetema ovenfor for at komme i gang.",
+            noCriteria: "Ingen temaer matcher din søgning eller dine filtre."
         },
         filter: {
-            all: "Show All",
-            online: "Online Themes",
-            local: "Local Themes",
-            enabled: "Enabled",
-            disabled: "Disabled"
+            all: "Vis alle",
+            online: "Onlinetemaer",
+            local: "Lokale temaer",
+            enabled: "Aktiveret",
+            disabled: "Deaktiveret"
         },
         notification: {
             refresh: {
-                title: "Theme Refreshed",
-                error: "Failed to refresh theme"
+                title: "Tema opdateret",
+                error: "Kunne ikke opdatere temaet"
             },
             failed: {
-                download: "Failed to download theme"
+                download: "Kunne ikke downloade temaet"
             }
+        },
+        openInFolder: "Åbn i mappe",
+        fallback: {
+            author: "Ukendt forfatter",
+            description: "Et Discord-tema."
         }
     },
 
     updater: {
-        title: "Updater",
-        settings: "Updater Settings",
-        updates: "Updates",
-        updated: "has been updated!",
-        restart: "Click here to restart",
-        repaired: "Plexcord has been repaired!",
+        title: "Opdatering",
+        settings: "Opdateringsindstillinger",
+        updates: "Opdateringer",
+        updated: "er blevet opdateret!",
+        restart: "Klik her for at genstarte",
+        repaired: "Plexcord er blevet repareret!",
         ok: "OK",
         preferences: {
-            title: "Update Preferences",
-            description: "Control how Plexcord keeps itself up to date. You can choose to update automatically in the background or be notified when new updates are available.",
+            title: "Opdateringspræferencer",
+            description: "Styr, hvordan Plexcord holder sig opdateret. Du kan vælge at opdatere automatisk i baggrunden eller få besked, når nye opdateringer er tilgængelige.",
         },
         github: {
-            local: "Your local copy has more recent commits than the remote repository. This usually happens when you've made local changes. Please stash or reset them before updating."
+            local: "Din lokale kopi har nyere commits end fjern-repositoryet. Det sker typisk, når du har lavet lokale ændringer. Gem dem med stash eller nulstil dem, før du opdaterer."
         },
         error: {
-            check: "Failed to check updates. Check the console for more info",
-            occurred: "An unknown error occurred",
-            retrieve: "Failed to retrieve - check console",
-            title: "Oops!",
-            tryAgain: "An unknown error occurred. Please try again or see the console for more info.",
-            command: "Command {{path}} not found. Please install it and try again.",
-            code: "Code {{code}}. See the console for more info.",
-            running: "An error occurred while running {{cmd}}: {{error}}",
-            failed: "That also failed :( Try updating or re-installing with the installer!"
+            check: "Kunne ikke søge efter opdateringer. Se konsollen for flere oplysninger",
+            occurred: "Der opstod en ukendt fejl",
+            retrieve: "Kunne ikke hente – se konsollen",
+            title: "Ups!",
+            tryAgain: "Der opstod en ukendt fejl. Prøv igen, eller se konsollen for flere oplysninger.",
+            command: "Kommandoen {{path}} blev ikke fundet. Installér den, og prøv igen.",
+            code: "Kode {{code}}. Se konsollen for flere oplysninger.",
+            running: "Der opstod en fejl under kørsel af {{cmd}}: {{error}}",
+            failed: "Det mislykkedes også :( Prøv at opdatere eller geninstallere med installationsprogrammet!"
         },
-        available: "There is 1 update",
-        updateAvailable: "A Plexcord update is available!",
-        click: "Click here to view the update",
-        available_plural: "There are {{count}} updates",
-        current: "Up to Date!",
+        available: "Der er 1 opdatering",
+        updateAvailable: "En Plexcord-opdatering er tilgængelig!",
+        click: "Klik her for at se opdateringen",
+        available_plural: "Der er {{count}} opdateringer",
+        current: "Opdateret!",
         successful: {
-            title: "Update Success!",
-            body: "Successfully updated. Restart now to apply the changes?",
+            title: "Opdatering lykkedes!",
+            body: "Opdateringen lykkedes. Vil du genstarte nu for at anvende ændringerne?",
             button: {
-                confirm: "Restart",
-                cancel: "Not now!",
-                update: "Update Now",
-                check: "Check for Updates"
+                confirm: "Genstart",
+                cancel: "Ikke nu!",
+                update: "Opdater nu",
+                check: "Søg efter opdateringer"
             },
-            noFound: "No updates found"
+            noFound: "Ingen opdateringer fundet"
         },
         automatically: {
-            label: "Automatically update",
-            description: "Automatically update Plexcord without confirmation prompt"
+            label: "Opdater automatisk",
+            description: "Opdater Plexcord automatisk uden at spørge først"
         },
         notify: {
-            label: "Get notified when an automatic update completes",
-            description: "Shows a notification when Plexcord automatically updates"
+            label: "Få besked, når en automatisk opdatering er færdig",
+            description: "Viser en notifikation, når Plexcord opdateres automatisk"
         },
         repo: "Repo",
-        repoDescription: "This is the GitHub repository where Plexcord fetches updates from.",
-        loading: "Loading...",
+        repoDescription: "Dette er GitHub-repositoryet, som Plexcord henter opdateringer fra.",
+        loading: "Indlæser...",
+        unknownAuthor: "Ukendt forfatter"
     },
 
     components: {
         error: {
-            title: "Oh no!",
-            render: "An error occurred while rendering this Component. More info can be found below and in your console."
+            title: "Åh nej!",
+            render: "Der opstod en fejl under visning af denne komponent. Flere oplysninger findes nedenfor og i din konsol."
         },
         componentFailed: {
-            message: "Uh Oh! Failed to render this Page. However, there is an update available that might fix it. Would you like to update and restart now?"
+            message: "Åh nej! Siden kunne ikke vises. Der er dog en opdatering tilgængelig, som måske løser det. Vil du opdatere og genstarte nu?"
         },
         quickCSS: {
-            title: "QuickCSS Editor Open",
-            message: "QuickCSS editor is still open in the background.",
-            detail: "Do you want to close Discord anyway? This will also close the QuickCSS editor.",
-            cancel: "Cancel",
-            close: "Close Anyway"
+            title: "QuickCSS-editoren er åben",
+            message: "QuickCSS-editoren er stadig åben i baggrunden.",
+            detail: "Vil du lukke Discord alligevel? Det lukker også QuickCSS-editoren.",
+            cancel: "Annuller",
+            close: "Luk alligevel",
+            windowTitle: "Plexcord QuickCSS-editor"
+        },
+        messagePopover: {
+            scrollLeft: "Rul til venstre",
+            scrollRight: "Rul til højre"
+        },
+        notices: {
+            error: "Fejl ved visning af meddelelse"
+        },
+        tray: {
+            aboutPlexcord: "Om Plexcord",
+            updatePlexcord: "Opdater Plexcord",
+            noUpdateTitle: "Ingen opdatering tilgængelig",
+            noUpdateBody: "Du bruger allerede den nyeste version af Plexcord.",
+            updateFailedTitle: "Opdatering mislykkedes",
+            updateFailedBody: "Kunne ikke anvende opdateringen til Plexcord.",
+            updateSuccessTitle: "Opdatering gennemført",
+            updateSuccessBody: "Genstarter Plexcord for at anvende opdateringen.",
+            updateErrorTitle: "Opdateringsfejl",
+            updateErrorBody: "Der opstod en fejl under opdatering af Plexcord.\n\n{{error}}",
+            openSettingsFolder: "Åbn indstillingsmappe",
+            openThemesFolder: "Åbn temamappe"
         }
     },
 
@@ -860,65 +918,66 @@ const translations: MatchStructure<typeof enTranslations> = {
     },
 
     notifications: {
-        dismiss: "Dismiss Notification",
-        noYet: "No notifications yet",
-        settings: "Notification Settings",
+        dismiss: "Afvis notifikation",
+        noYet: "Ingen notifikationer endnu",
+        settings: "Notifikationsindstillinger",
         log: {
-            title: "Notification Log",
-            clear: "Clear Notification Log",
-            sure: "Are you sure?",
+            title: "Notifikationslog",
+            clear: "Ryd notifikationslog",
+            sure: "Er du sikker?",
             permamently: "This will permanently remove {{count}} notification{{s}}. This action cannot be undone.",
             button: {
-                confirm: "Do it!",
-                cancel: "Nevermind"
+                confirm: "Gør det!",
+                cancel: "Glem det"
             }
         }
     },
 
     memberlist: {
         error: {
-            render: "Failed to render {{key}} Member List Decorator"
+            render: "Kunne ikke vise medlemslistedekorationen {{key}}"
         }
     },
 
     message: {
         accessory: {
             error: {
-                render: "Failed to render {{key}} Message Accessory"
+                render: "Kunne ikke vise beskedtilbehøret {{key}}"
             }
         },
         decoration: {
             error: {
-                render: "Failed to render {{key}} Message Decoration"
+                render: "Kunne ikke vise beskeddekorationen {{key}}"
             }
         }
     },
 
     utils: {
         toast: {
-            copied: "Copied to clipboard!"
+            copied: "Kopieret til udklipsholderen!"
         }
     },
 
     common: {
         unit: {
-            year: "year",
-            years: "years",
-            month: "month",
-            months: "months",
-            week: "week",
-            weeks: "weeks",
-            day: "day",
-            days: "days",
-            hour: "hour",
-            hours: "hours",
-            minute: "minute",
-            minutes: "minutes",
-            second: "second",
-            seconds: "seconds",
-            ago: "ago",
+            year: "år",
+            years: "år",
+            month: "måned",
+            months: "måneder",
+            week: "uge",
+            weeks: "uger",
+            day: "dag",
+            days: "dage",
+            hour: "time",
+            hours: "timer",
+            minute: "minut",
+            minutes: "minutter",
+            second: "sekund",
+            seconds: "sekunder",
+            ago: "siden",
             s: "s"
-        }
+        },
+        detectLanguage: "Registrer sprog"
     },
 
     plugin: {
@@ -936,7 +995,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             fun: "Sjov",
             media: "Medier",
             notifications: "Notifikationer",
-            organisation: "Organisation",
+            organisation: "Organisering",
             privacy: "Privatliv",
             reactions: "Reaktioner",
             roles: "Roller",
@@ -945,6 +1004,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             utility: "Værktøjer",
             voice: "Stemme"
         },
+        concatenatedComponentExtractor: {
+            name: "ConcatenatedComponentExtractor",
+            description: "Udtag komponenter, der er blevet sammenkædet af bundleren"
+        },
+        concatenatedModules: {
+            name: "ConcatenatedModules",
+            description: "Udtag moduler, der er blevet sammenkædet af bundleren"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Deaktiver Discords sporing (analytics/'science'), metrikker og Sentry-fejlrapportering",
@@ -952,6 +1019,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disableAnalytics: {
                     label: "Deaktiver analyse",
                     description: "Deaktiver Discords sporing (analytics/'science'), metrikker og Sentry-fejlrapportering"
+                },
+                disableStackDumping: {
+                    description: "Udskriv en indbygget stakspore i konsollen, når Discord går ned. Kræver fuld genstart."
                 }
             }
         },
@@ -966,6 +1036,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsLocation: {
                     label: "Placering af indstillinger",
                     description: "Bestemmer hvor Plexcord-indstillingssektionen skal placeres."
+                },
+                includePlexcordInfoWhenCopying: {
+                    label: "Inkludér Plexcord-oplysninger ved kopiering",
+                    description: "Kopiér også Plexcord-oplysninger (Plexcord, Electron, Chromium), når du klikker på versionsoplysningerne nederst til venstre på siden Indstillinger"
                 }
             }
         },
@@ -983,6 +1057,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Vent lidt!",
                     body: "Du bruger en forældet version af Plexcord! Chancerne er, at dit problem allerede er løst.",
                     footer: "Opdater venligst først, før du beder om support!",
+                    dismiss: "Hvis du ved, hvad du laver, eller ikke kan opdatere, kan du lukke denne meddelelse.",
                     button: {
                         cancel: "Vis opdateringer",
                         confirm: "Opdater og genstart nu",
@@ -1181,7 +1256,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Anonymiseringsmetode",
                     random: "Tilfældige tegn",
                     consistent: "Konsistent",
-                    timestamp: "Tidsstempel"
+                    timestamp: "Tidsstempel",
+                    date: "Dato"
                 },
                 randomisedLength: {
                     label: "Tilfældig længde",
@@ -1190,6 +1266,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 consistent: {
                     label: "Konsistent",
                     description: "Konsistent anonymiserings-hemmelighed"
+                },
+                dateFormat: {
+                    description: "Datoformat (YYYY, MM, DD, HH, mm, ss, SSS understøttes)",
+                    label: "Datoformat"
                 }
             },
             using: {
@@ -1201,76 +1281,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toggle: "Slå spoiler til/fra for dine filer (standard er til)",
                 enabled: "Spoiler aktiveret!",
                 disabled: "Spoiler deaktiveret!"
-            }
-        },
-        appleMusic: {
-            name: "AppleMusicRichPresence",
-            description: "Discord Rich Presence til dit Apple Music!",
-            about: "For de brugerdefinerede aktivitetsformatstrenge kan du bruge flere specielle strenge til at inkludere sangdata! {{name}} erstattes med sangens navn; {{artist}} erstattes med kunstnerens navn(e); og {{album}} erstattes med albummets navn.",
-            button: {
-                listen: "Lyt på Apple Music",
-                songLink: "Vis på SongLink"
-            },
-            option: {
-                activityType: {
-                    label: "Aktivitetstype",
-                    description: "Hvilken type aktivitet",
-                    listening: "Lytter til",
-                    playing: "Spiller"
-                },
-                statusDisplayType: {
-                    label: "Statusvisningstype",
-                    description: "Vis sang- / kunstnernavn i medlemslisten",
-                    off: "Vis ikke (viser generisk lytter-besked)",
-                    artist: "Vis kunstnernavn",
-                    track: "Vis sangnavn"
-                },
-                refreshInterval: {
-                    label: "Opdateringsinterval",
-                    description: "Intervallet mellem aktivitetsopdateringer (sekunder)"
-                },
-                enableTimestamps: {
-                    label: "Aktiver tidsstempler",
-                    description: "Hvorvidt tidsstempler skal aktiveres"
-                },
-                enableButtons: {
-                    label: "Aktiver knapper",
-                    description: "Hvorvidt knapper skal aktiveres"
-                },
-                nameString: {
-                    label: "Navnestreng",
-                    description: "Formatstreng for aktivitetsnavn"
-                },
-                detailsString: {
-                    label: "Detaljestreng",
-                    description: "Formatstreng for aktivitetsdetaljer"
-                },
-                stateString: {
-                    label: "Tilstandsstreng",
-                    description: "Formatstreng for aktivitetstilstand"
-                },
-                largeImageType: {
-                    label: "Stor billedtype",
-                    description: "Type af stort billede til aktiviteten",
-                    album: "Albumcover",
-                    artist: "Kunstnerbillede",
-                    disabled: "Deaktiveret"
-                },
-                largeTextString: {
-                    label: "Stor tekststreng",
-                    description: "Formatstreng for stor tekst til aktiviteten"
-                },
-                smallImageType: {
-                    label: "Lille billedtype",
-                    description: "Type af lille billede til aktiviteten",
-                    album: "Apple Music-logo",
-                    artist: "Kunstnerbillede",
-                    disabled: "Deaktiveret"
-                },
-                smallTextString: {
-                    label: "Lille tekststreng",
-                    description: "Formatstreng for lille tekst til aktiviteten"
-                }
             }
         },
         arRpc: {
@@ -1373,6 +1383,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     left: "Venstre",
                     right: "Højre"
                 }
+            },
+            text: {
+                smallText: "Lille tekst",
+                largeText: "Stor tekst"
             }
         },
         betterAudioPlayer: {
@@ -1405,7 +1419,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             toast: {
-                invalidColorFormat: "Ugyldigt farveformat for {{settingKey}}, sørg for at det er i formatet 'R, G, B' eller '#RRGGBB'"
+                invalidColorFormat: "Ugyldigt farveformat for {{settingKey}}, sørg for at det er i formatet 'R, G, B' eller '#RRGGBB'",
+                invalidColorFormatFor: "Ugyldigt farveformat for {{key}}, brug \"R, G, B\" eller \"#RRGGBB\""
             }
         },
         betterBanReasons: {
@@ -1423,7 +1438,20 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             title: "Årsager",
             placeholder: "Årsag",
-            add: "Tilføj en anden årsag"
+            add: "Tilføj en anden årsag",
+            duration: {
+                discordDefault: "Discord-standard",
+                none: "Slet ingen",
+                hour1: "Seneste time",
+                hours6: "Seneste 6 timer",
+                hours12: "Seneste 12 timer",
+                hours24: "Seneste 24 timer",
+                days3: "Seneste 3 dage",
+                days7: "Seneste 7 dage"
+            },
+            text: {
+                autoDeleteDuration: "Varighed for automatisk sletning af beskeder"
+            }
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
@@ -1485,6 +1513,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Tving åben",
                     description: "Tving en mappe til at åbne, når du skifter til en server i den mappe"
                 },
+                enableNestedFolders: {
+                    label: "Aktivér indlejrede mapper",
+                    description: "Tillad at indlejre mapper i andre mapper ved at trække dem"
+                },
                 keepIcons: {
                     label: "Behold ikoner",
                     description: "Behold serverikonerne i den primære serverliste, når mappen er åben i BetterFolders-sidebjælken"
@@ -1518,6 +1550,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             render: {
                 tip: "Denne invitation udløber {{time}}",
                 header: "{{name}} inviterede dig til {{server}}",
+                headerSelf: "Du har sendt en invitation til at deltage i {{server}}",
                 never: "udløber aldrig"
             }
         },
@@ -1541,7 +1574,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterRoleContext: {
             name: "BetterRoleContext",
-            description: "Tilføjer muligheder for at kopiere rollefarve / redigere rolle / se rolle-ikon, når du højreklikker på roller i brugerprofilen",
+            description: "Tilføjer muligheder for at kopiere rollefarve / redigere rolle / se rolleikon, når du højreklikker på roller i brugerprofilen eller i medlemslisten",
             option: {
                 roleIconFileFormat: {
                     label: "Filformat for rolle-ikon",
@@ -1551,7 +1584,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 copyColor: "Kopier rollefarve",
                 editRole: "Rediger rolle",
-                viewIcon: "Vis rolle-ikon"
+                viewIcon: "Vis rolle-ikon",
+                viewMembers: "Vis rollemedlemmer"
+            },
+            text: {
+                roleActions: "Rollehandlinger"
             }
         },
         betterRoleDot: {
@@ -1627,6 +1664,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         blockKeywords: {
             name: "BlockKeywords",
             description: "Blokerer beskeder der indeholder specifikke brugerdefinerede nøgleord, som hvis brugeren der sendte dem var blokeret.",
+            regexHelper: {
+                title: "Regex-hjælper",
+                placeholder: "Input til test...",
+                noPatterns: "Ingen mønstre konfigureret"
+            },
             option: {
                 blockedWords: {
                     label: "Blokerede ord",
@@ -1635,6 +1677,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 useRegex: {
                     label: "Brug Regex",
                     description: "Brug hver værdi som et regulært udtryk ved tjek af beskedindhold (avanceret)"
+                },
+                regexHelper: {
+                    label: "Regex-hjælper",
+                    description: "Test dine regulære udtryk mod et eksempelinput"
                 },
                 caseSensitive: {
                     label: "Forskel på store/små bogstaver",
@@ -1778,6 +1824,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 loading: "Indlæser...",
                 save: "Gem",
                 edit: "Rediger"
+            },
+            text: {
+                unknownUser: "Ukendt bruger"
             }
         },
         callTimer: {
@@ -2067,12 +2116,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 plusPulse: "Plus-knap-puls",
                 mentionGlow: "Mention-mærke-glød",
                 compactExpand: "Kompakt tilstand-udvidelse",
-                selectedBorder: "Valgt fane blå kant",
+                selectedBorder: "Accentkant på valgt fane",
                 selectedBackground: "Valgt fane baggrundsfarve",
                 tabShadows: "Fane-skyggeeffekter",
                 tabRepositioning: "Fane-repositionering (glatte positionsskift)",
                 resizeHandle: "Størrelseshåndtag-fading",
-                questActivate: "Aktiv Quest-gradient"
+                questActivate: "Gradient for aktive quests"
             },
             bookmark: {
                 label: "Bogmærke",
@@ -2111,7 +2160,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 folderMenu: "Bogmærkemappe Menu",
                 compact: "Kompakt",
                 bookmarkBar: "Bogmærkelinje",
-                openAll: "Åbn alle i bogmærker",
+                openAll: "Åbn alle bogmærker",
                 openNew: "Åbn i ny fane",
                 close: {
                     tab: "Luk fane",
@@ -2191,6 +2240,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Fanebredde-skala",
                     description: "Fanebredde-skala (procent) - kan justeres ved at trække i fanekanter"
                 },
+                tabHeightScale: {
+                    label: "탭 높이 배율",
+                    description: "탭 높이 배율 (백분율)."
+                },
                 renderAllTabs: {
                     label: "Render alle faner",
                     description: "Hold alle faner i hukommelsen for hurtigere skift (gemmer scroll-position og tilstand)"
@@ -2214,7 +2267,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 tabBarPosition: {
                     label: "Fanelinje-position",
                     description: "Position af fanelinjen",
-                    top: "Top",
+                    top: "Øverst",
                     bottom: "Bund"
                 },
                 enableNumberKeySwitching: {
@@ -2398,11 +2451,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     restore: "Kunne ikke gendanne faner",
                     saved: "Kunne ikke indlæse gemte faner"
                 }
+            },
+            text: {
+                folder: "Mappe"
             }
         },
         characterCounter: {
             name: "CharacterCounter",
-            description: "Viser en tegntæller i beskedfeltet",
+            description: "Tilføjer en tegntæller til chatfeltet",
             option: {
                 colorEffects: {
                     label: "Farveeffekter",
@@ -2416,7 +2472,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         cleanChannelName: {
             name: "CleanChannelName",
-            description: "Fjern alle emoji og dekoration fra kanalnavne"
+            description: "Fjern emojis og dekoration fra kanalnavne. Vender tilbage til originalen, mens du redigerer kanalen.",
+            option: {
+                ignoredChannels: {
+                    description: "Kommasepareret liste over kanal-id'er, der skal lades urørt.",
+                    label: "Ignorerede kanaler"
+                }
+            },
+            text: {
+                keepOriginalName: "Behold oprindeligt navn"
+            }
         },
         clearURLs: {
             name: "ClearURLs",
@@ -2428,7 +2493,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 loading: "Indlæser medlemmer...",
                 noMembers: "Ingen medlemmer fundet.",
-                unknown: "Ukendt rolle"
+                unknown: "Ukendt rolle",
+                andMore: "og {{count}} mere"
             }
         },
         clientSideBlock: {
@@ -2494,6 +2560,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     disable: "Deaktiver Nitro-tema",
                     reset: "Nulstil temafarve"
                 }
+            },
+            text: {
+                dark: "Mørk",
+                light: "Lys"
             }
         },
         clipsEnhancements: {
@@ -2502,30 +2572,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             minutes: "Minutter",
             option: {
                 richPresenceTagging: {
-                    label: "Rich Presence Tagging",
+                    label: "Tagging med Rich Presence",
                     description: "Hvornår skal clips tagges med den nuværende Rich Presence?",
                     always: "Altid",
                     only: "Kun når start eller slut af aktivitetsnavnet matcher",
                     never: "Aldrig"
                 },
-                enableScreenshotKeybind: {
-                    label: "Aktiver genvej til skærmbillede",
-                    description: "Aktiver genvejsfunktionen til skærmbilleder"
-                },
-                enableVoiceOnlyClips: {
-                    label: "Aktiver clips med kun lyd",
-                    description: "Aktiver clips med kun lyd (uden video)"
-                },
-                enableAdvancedSignals: {
-                    label: "Aktiver avancerede signaler",
-                    description: "Aktiver avancerede clip-signaler (auto-clip triggers)"
-                },
-                ignorePlatformRestriction: {
-                    label: "Ignorer platformsbegrænsning",
-                    description: "Tillad clipping på begrænsede platforme (kan forårsage gemmefejl)"
-                },
                 clipsLink: {
-                    label: "Clips Link",
+                    label: "Link til klip",
                     link: "Skift FPS og varighed i Clips-indstillingerne!"
                 }
             }
@@ -2536,7 +2590,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         commandPalette: {
             name: "CommandPalette",
-            description: "Gør det muligt at navigere i brugerfladen med et tastatur.",
+            description: "Kommandopalette i Raycast-stil til at køre handlinger hvor som helst i Discord",
             action: {
                 command: {
                     label: "Kør kommando",
@@ -2681,12 +2735,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 channel: {
                     mute: {
-                        label: "Mute {{channelLabel}}",
+                        label: "Slå {{channelLabel}} lydløs",
                         oneHour: "Mute {{channelLabel}} i 1 time",
                         untilTomorrow: "Mute {{channelLabel}} indtil i morgen",
                     },
                     unmute: {
-                        label: "Unmute {{channelLabel}}",
+                        label: "Slå lyd til for {{channelLabel}}",
                     },
                     reopen: {
                         label: "Genåbn sidste lukkede DM"
@@ -2778,7 +2832,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 command: {
                     palette: {
-                        label: "Command Palette",
+                        label: "Kommandopalette",
                         placeholder: "Skriv en kommando",
                         filtering: "Filtrerer efter {{tags}}",
                         noCommand: "Ingen kommandoer fundet",
@@ -2990,7 +3044,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                             label: "Kunne ikke køre {{pluginName}}: {{actionLabel}}."
                         }
                     }
-                }
+                },
+                commandDeleted: "Kommando slettet.",
+                statusSetToLabel: "Status sat til {{label}}.",
+                themeSetToLabel: "Tema sat til {{label}}.",
+                noSettingsPageWas: "Der blev ikke angivet nogen indstillingsside.",
+                unableToOpenLabel: "Kunne ikke åbne {{label_that_settings_page}}.",
+                failedToStartDependencies: "Kunne ikke starte afhængigheder: {{join}}",
+                messageSentToUsername: "Besked sendt til {{username}}.",
+                enabledRestart: "{{name}} aktiveret. Genstart for at anvende.",
+                disabledRestart: "{{name}} deaktiveret. Genstart for at anvende.",
+                enabled: "{{name}} aktiveret.",
+                disabled: "{{name}} deaktiveret.",
+                errorStarting: "Fejl under start af {{name}}.",
+                errorStopping: "Fejl under stop af {{name}}."
             },
             display: {
                 channel: {
@@ -3026,6 +3093,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 customCommands: {
                     label: "Brugerdefinerede kommandoer",
                     description: "Administrer brugerdefinerede kommandoer i paletten"
+                },
+                closeAfterExecute: {
+                    description: "Luk paletten efter at have kørt en kommando.",
+                    label: "Luk efter kørsel"
                 }
             },
             template: {
@@ -3045,7 +3116,121 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Makro",
                     description: "Kør en sekvens af kommandoer"
                 }
-            }
+            },
+            text: {
+                insertTextInChat: "Indsæt tekst i chat",
+                name: "Name",
+                commandName: "Kommandonavn",
+                settingsPage: "Indstillingsside",
+                searchSettingsPages: "Søg i indstillingssider...",
+                text: "Tekst",
+                textToInsertInto: "Tekst der skal indsættes i chatfeltet",
+                editCommand: "Redigér kommando",
+                deleteCommand: "Slet kommando",
+                createCustomCommand: "Opret brugerdefineret kommando",
+                light: "Lys",
+                ash: "Aske",
+                dark: "Mørk",
+                onyx: "Onyx",
+                toggleMute: "Slå mute til/fra",
+                toggleDeafen: "Slå døv til/fra",
+                setStatus: "Angiv status",
+                searchStatuses: "Søg i statusser...",
+                setLabel: "Angiv {{label}}",
+                toggleTheme: "Skift tema",
+                openServer: "Åbn server",
+                openChannel: "Åbn kanal",
+                openDm: "Åbn DM",
+                goHome: "Gå hjem",
+                goToServer: "Gå til server",
+                searchServers: "Søg i servere...",
+                goToChannel: "Gå til kanal",
+                searchChannels: "Søg i kanaler...",
+                searchFriends: "Søg i venner...",
+                myAccount: "Min konto",
+                profiles: "Profiler",
+                dataPrivacy: "Data og privatliv",
+                devices: "Enheder",
+                connections: "Forbindelser",
+                appearance: "Udseende",
+                accessibility: "Tilgængelighed",
+                voiceVideo: "Stemme og video",
+                chat: "Chat",
+                textImages: "Tekst og billeder",
+                notifications: "Notifikationer",
+                keybinds: "Tastaturgenveje",
+                authorizedApps: "Godkendte apps",
+                familyCenter: "Familiecenter",
+                advanced: "Avanceret",
+                plexcord: "Plexcord",
+                plexcordPlugins: "Plexcord-plugins",
+                plexcordThemes: "Plexcord-temaer",
+                plexcordUpdater: "Plexcord-opdatering",
+                plexcordChangelog: "Plexcord-ændringslog",
+                openQuickcss: "Åbn QuickCSS",
+                openUpdater: "Åbn opdatering",
+                openChangelog: "Åbn ændringslog",
+                restartDiscord: "Genstart Discord",
+                managePlugins: "Administrér plugins",
+                searchPlugins: "Søg i plugins...",
+                sendDm: "Send DM",
+                recipient: "Modtager",
+                message: "Besked",
+                messageContent: "Beskedindhold",
+                openPaletteHotkey: "Genvejstast til at åbne paletten",
+                actions: "Handlinger",
+                preview: "Forhåndsvisning",
+                openCommand: "Åbn kommando",
+                copyAnswer: "Kopiér svar",
+                openDetails: "Åbn detaljer",
+                calculator: "Lommeregner",
+                expression: "Udtryk",
+                result: "Resultat",
+                copyExpression: "Kopiér udtryk",
+                pinned: "Fastgjort",
+                suggestions: "Forslag",
+                setAlias: "Angiv alias",
+                aliasForLabel: "Alias for {{label}}",
+                leaveEmptyToRemove: "Lad stå tomt for at fjerne",
+                command: "Kommando",
+                noResults: "Ingen resultater",
+                addFile: "Tilføj fil",
+                saveCommand: "Gem kommando",
+                createCommand: "Opret kommando",
+                nameRequired: "Navn er påkrævet.",
+                enterValidUrl: "Indtast en gyldig URL.",
+                pickSettingsPage: "Vælg en indstillingsside fra forslagene.",
+                textRequired: "Tekst er påkrævet.",
+                commandSaved: "Kommando gemt.",
+                commandCreated: "Kommando oprettet.",
+                editCustomCommand: "Rediger brugerdefineret kommando",
+                disablePlugin: "Deaktiver plugin",
+                enablePlugin: "Aktiver plugin",
+                pickRecipient: "Vælg en modtager fra forslagene.",
+                addMessageOrFile: "Tilføj en besked eller en fil.",
+                pressKeys: "Tryk på taster...",
+                answerCopied: "Svar kopieret til udklipsholderen.",
+                calculationCopied: "Beregning kopieret til udklipsholderen.",
+                unpinCommand: "Frigør kommando",
+                pinCommand: "Fastgør kommando",
+                saveAlias: "Gem alias",
+                changeHotkey: "Skift genvej",
+                recordHotkey: "Optag genvej",
+                pressKeyCombo: "Tryk på en tastekombination, Backspace for at rydde, Esc for at annullere",
+                searchIn: "Søg i {{title}}...",
+                searchCommands: "Søg efter kommandoer...",
+                somethingWentWrong: "Noget gik galt.",
+                remove: "Fjern",
+                enabled: "Aktiveret",
+                disabled: "Deaktiveret",
+                sectionNavigation: "Navigation",
+                sectionCustom: "Brugerdefineret",
+                sectionPlugins: "Plugins",
+                sectionMessaging: "Beskeder",
+                current: "Nuværende",
+                submit: "Send"
+            },
+            description2: "Kommandopalette i Raycast-stil til at køre handlinger hvor som helst i Discord"
         },
         consoleJanitor: {
             name: "ConsoleJanitor",
@@ -3115,11 +3300,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         copyProfileColors: {
             name: "CopyProfileColors",
             description: "Et plugin til at kopiere folks profil-gradientfarver til udklipsholderen.",
-            copy: "Kopier profilfarver",
+            copy: "Kopiér farver for serverprofil",
             toast: {
                 noColor: "Ingen profilfarver fundet!",
                 copied: "Profilfarver kopieret til udklipsholder!",
                 error: "Fejl ved kopiering af profilfarver!"
+            },
+            text: {
+                formatted: "Primær farve #{{primary}}, Sekundær farve #{{secondary}}"
             }
         },
         copyStatusUrls: {
@@ -3134,8 +3322,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "CopyStickerLinks",
             description: "Tilføjer muligheden for at kopiere og åbne Sticker-links",
             context: {
-                copy: "Kopier link",
-                open: "Åbn link"
+                copy: "Kopiér klistermærkelink",
+                open: "Åbn klistermærkelink"
             },
             toast: {
                 success: "Link kopieret!"
@@ -3271,6 +3459,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unset: "Fjern",
                 set: "Indstil et nyt ikon",
                 hover: "Du skal muligvis holde musen over mappen efter indstilling for at den opdateres."
+            },
+            context: {
+                changeIcon: "Skift ikon"
             }
         },
         customIdle: {
@@ -3302,7 +3493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             error: {
                 appIdInvalid: "App-ID skal være et gyldigt nummer.",
                 notice: "Bemærk",
-                sharing: "Aktivitetsdeling er ikke aktiveret, folk vil ikke kunne se din brugerdefinerede rich presence!",
+                sharing: "Aktivitetsdeling er ikke aktiveret, så folk vil ikke kunne se din brugerdefinerede Rich Presence!",
                 enable: "Aktiver",
                 validStream: "Streaming-link skal være en gyldig URL.",
                 mustBeURL: "Skal være en gyldig URL.",
@@ -3418,7 +3609,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 buttonTwoURL: {
                     label: "Knap 2 URL",
                     description: "URL for knap 2"
+                },
+                enablePresence: {
+                    description: "Om aktiviteten skal vises",
+                    label: "Aktivér aktivitet"
                 }
+            },
+            toast: {
+                savedPresetName: "Forudindstillingen {{name}} er gemt.",
+                loadedPresetName: "Forudindstillingen {{name}} er indlæst.",
+                deletedPresetSelectedpreset: "Forudindstillingen {{selectedPreset}} er slettet."
+            },
+            text: {
+                presetName: "Navn på forudindstilling",
+                selectAPreset: "Vælg en forudindstilling",
+                streamLinkTwitchOr: "Stream-link (Twitch eller YouTube, kun hvis aktivitetstypen er Streaming)",
+                presets: "Forudindstillinger",
+                save: "Gem",
+                load: "Indlæs",
+                delete: "Slet",
+                noSavedPresetsYet: "Ingen gemte forudindstillinger endnu.",
+                showCustomRpc: "Vis brugerdefineret RPC",
+                customRpcDisabled: "Brugerdefineret RPC er slået fra",
+                theEnablePresenceSetting: "Indstillingen \"Aktivér aktivitet\" er slået fra, så din aktivitet bliver ikke vist. Hvis det var utilsigtet, så aktivér den nedenfor.",
+                activitySharingDisabled: "Aktivitetsdeling er slået fra",
+                discordDeveloperPortal: "Discords udviklerportal",
+                imgur: "Imgur",
+                enableActivitySharing: "Aktivér aktivitetsdeling"
             }
         },
         customSounds: {
@@ -3460,7 +3677,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 default: "Standard",
                 custom: "Brugerdefineret",
-                select: "Vælg en fil..."
+                select: "Vælg en fil...",
+                overrides: {
+                    label: "Tilsidesættelser"
+                },
+                soundpack: {
+                    label: "Lydpakke",
+                    description: "Lydpakke, der skal bruges i stedet for den, der er valgt i Discord.",
+                    default: "Discord-standard"
+                }
             },
             type: {
                 activityEnd: "Aktivitet slut",
@@ -3478,7 +3703,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ddrLeft: "DDR Venstre",
                 ddrRight: "DDR Højre",
                 ddrUp: "DDR Op",
-                deafen: "Deafen",
+                deafen: "Slå hørelse fra",
                 discodo: "Discodo",
                 disconnect: "Forbindelse afbrudt",
                 duckyMessage: "Ducky-besked",
@@ -3488,19 +3713,19 @@ const translations: MatchStructure<typeof enTranslations> = {
                 humanMan: "Menneskemand",
                 lofiMessage: "LoFi-besked",
                 mention1: "Mention 1 (@rolle)",
-                mention2: "Mention 2 (@everyone)",
-                mention3: "Mention 3 (@here)",
+                mention2: "Omtale 2 (@everyone)",
+                mention3: "Omtale 3 (@here)",
                 message1: "Besked 1 (Generisk)",
                 message2: "Besked 2 (Svar i server)",
                 message3: "Besked 3 (DM'er og gruppe-DM'er)",
-                mute: "Mute",
+                mute: "Slå lyd fra",
                 overlayUnlock: "Overlay låst op",
                 poggermodeAchievement: "Poggermode Bedrift",
                 poggermodeApplause: "Poggermode Applaus",
                 poggermodeEnabled: "Poggermode Aktiveret",
                 poggermodeMessage: "Poggermode Besked",
-                pttStart: "PTT Start",
-                pttStop: "PTT Stop",
+                pttStart: "PTT start",
+                pttStop: "PTT stop",
                 reconnect: "Forbindelse genoprettet",
                 robotMan: "Robotmand",
                 stageWaiting: "Scene venter",
@@ -3509,8 +3734,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 streamUserJoined: "Bruger deltog i stream",
                 streamUserLeft: "Bruger forlod stream",
                 success: "Succes",
-                undeafen: "Undeafen",
-                unmute: "Unmute",
+                undeafen: "Slå hørelse til",
+                unmute: "Slå lyd til",
                 userJoin: "Bruger deltager",
                 userLeave: "Bruger forlader",
                 userMoved: "Bruger flyttet",
@@ -3534,6 +3759,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 calendar: "aktiverer dynamisk datoformatering såsom",
                 today: "I dag",
                 yesterday: "I går",
+                or: "eller",
                 relative: "giver dig tider som",
                 relativeTime: "for 4 timer siden",
                 preview: "Forhåndsvisning",
@@ -3617,7 +3843,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Vælg hvilke elementer i embeddet, der skal erstattes",
                     everything: "Alt (Titler og Thumbnails)",
                     title: "Titler",
-                    thumbnail: "Thumbnails"
+                    thumbnail: "Miniaturer"
                 },
                 dearrowByDefault: {
                     label: "DeArrow som standard",
@@ -3627,6 +3853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 dearrowed: "Dette embed er blevet DeArrowed; klik for at gendanne",
                 dearrow: "Klik for at DeArrow"
+            },
+            text: {
+                toggleDearrow: "Slå Dearrow til/fra"
             }
         },
         declutter: {
@@ -3635,6 +3864,12 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 userProfileHeader: {
                     label: "Brugerprofil"
+                },
+                removeAvatarDecoration: {
+                    label: "Fjern avatar-dekoration",
+                    description: "Fjern avatardekorationer. Dette er/bliver deaktiveret, hvis Decor er aktiveret.",
+                    alertBody: "Fjernelse af avatar-dekoration er blevet deaktiveret for at forhindre konflikter med Decor-pluginnet.",
+                    ok: "OK"
                 },
                 removeNameplate: {
                     label: "Fjern navneskilt",
@@ -3693,7 +3928,27 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeButtonTooltips: {
                     label: "Fjern knap-værktøjstip",
                     description: "Fjern værktøjstip (tooltips) fra knapper."
+                },
+                removeProfileFrame: {
+                    description: "Fjern profilrammer.",
+                    label: "Fjern profilramme"
+                },
+                removeDisplayNameStyles: {
+                    description: "Fjern animerede/stylede visningsnavne i medlemslisten.",
+                    label: "Fjern stilarter for visningsnavne"
+                },
+                removeLibraryAboveDms: {
+                    description: "Fjern biblioteket over DM-listen.",
+                    label: "Fjern bibliotek over DM'er"
+                },
+                removeFamilyCenterAboveDms: {
+                    description: "Fjern familiecenteret over DM-listen.",
+                    label: "Fjern familiecenter over DM'er"
                 }
+            },
+            text: {
+                discordAlreadyHasA: "Discord har allerede en indbygget indstilling til brugernavnsstil i",
+                accessibilitySettings: "tilgængelighedsindstillingerne."
             }
         },
         decodeBase64: {
@@ -3737,7 +3992,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     profiles: "Profiler"
                 },
                 baseUrl: {
-                    label: "Base URL",
+                    label: "Basis-URL",
                     description: "Decor API URL"
                 },
                 agreedToGuidelines: {
@@ -3780,7 +4035,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             join: {
                 tooltip: "Deltag i Decors Discord-server for notifikationer om din dekorations gennemsyn, og når nye præsæt udgives",
-                button: "Discord Server"
+                button: "Discord-server"
             },
             create: {
                 title: "Opret dekoration",
@@ -3800,6 +4055,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hold: "Vent lige lidt",
                 suspended: "Ved at indsende en dekoration accepterer du {{guidelines}}. Hvis du ikke læser disse retningslinjer, kan det resultere i, at din konto udelukkes fra at oprette flere dekorationer i fremtiden.",
                 guidelines: "retningslinjerne"
+            },
+            toast: {
+                failedToAuthorizeMessage: "Godkendelse mislykkedes: {{message}}"
+            },
+            text: {
+                removeDecoration: "Fjern Decor-dekoration",
+                decoration: "Decor-dekoration",
+                none: "Ingen",
+                decorationFile: "Dekorationsfil"
             }
         },
         demonstration: {
@@ -3861,6 +4125,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                 starting: "Fejl under start af plugin {{plugin}}",
                 noMessage: "Ingen fejlbesked",
                 noReason: "Ingen årsag angivet"
+            },
+            text: {
+                reconnect: "Genopret forbindelse",
+                loadingLazyModules: "Indlæser lazy-moduler, genstart kan føre til fejl",
+                loadedLazyModules: "Alle lazy-moduler er indlæst",
+                failedLazyModules: "Kunne ikke indlæse lazy-moduler, tjek konsollen for fejl",
+                ok: "OK"
             }
         },
         disableCallIdle: {
@@ -3919,6 +4190,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Diverse variabler",
                     newline: "Linjeskift-tegn"
                 }
+            },
+            text: {
+                notSupported: "Ikke understøttet",
+                devBuild: "Dev-build",
+                standalone: "Selvstændig"
             }
         },
         dontFilterMe: {
@@ -3936,6 +4212,23 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "DontRoundMyTimestamps",
             description: "Runder altid relative tidsstempler ned, så 7.6 år bliver til 7 år i stedet for 8 år"
         },
+        downloadAllAttachments: {
+            name: "DownloadAllAttachments",
+            description: "Tilføjer en popover-knap til at downloade alle vedhæftninger i en besked på én gang.",
+            button: "Download alle vedhæftninger",
+            toast: {
+                success: "Downloadede {{count}} vedhæftning(er).",
+                partial: "Downloadede {{succeeded}} af {{total}} vedhæftninger. {{failed}} mislykkedes.",
+                downloadedPluralizeSucceededAttachment: "Downloadede {{pluralize_succeeded_attachment}}.",
+                downloadedSucceededOfLength: "Downloadede {{succeeded}} af {{length}} vedhæftede filer. {{failed}} mislykkedes."
+            },
+            option: {
+                downloadAllFileTypes: {
+                    description: "Download også vedhæftede filer, der ikke er medier. Aktivér kun dette, hvis du stoler på det, folk sender dig.",
+                    label: "Download alle filtyper"
+                }
+            }
+        },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
             description: "Tilføjer træk-og-slip funktionalitet til favorit-emotes"
@@ -3947,7 +4240,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userOutput: {
                     label: "Bruger-output",
                     description: "Output ved bruger-drop.",
-                    mention: "Mention",
+                    mention: "Omtale",
                     id: "Bruger-ID"
                 },
                 channelOutput: {
@@ -3999,7 +4292,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     created: "Invitation oprettet.",
                     unable: "Kunne ikke oprette invitation.",
                     noChannel: "Ingen kanal tilgængelig for invitationer.",
-                }
+                },
+                noReusableInvite: "Ingen genbrugelig invitation tilgængelig.",
+                unableToReuseInvite: "Kan ikke genbruge invitationen."
             },
             ghost: {
                 user: "Bruger",
@@ -4110,6 +4405,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Værktøjslinje Udvikler-menu",
                     description: "Skift Hjælp (?)-knappen (øverst til højre i chatten) til Discords udvikler-menu"
                 }
+            },
+            text: {
+                searchExperiments: "Søg i eksperimenter"
             }
         },
         exportMessages: {
@@ -4144,7 +4442,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 attachments: "Vedhæftninger",
                 unknown: "Ukendt",
                 noUrl: "Ingen URL",
-                embeds: "Embeds",
+                embeds: "Indlejringer",
                 title: "Titel",
                 description: "Beskrivelse",
                 url: "URL",
@@ -4193,6 +4491,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportAll: "Eksporter alle beskeder fra {{user}}",
                 user: "Bruger",
                 exportAllChannel: "Eksporter alle kanalbeskeder"
+            },
+            text: {
+                unknownError: "Ukendt fejl"
             }
         },
         expressionCloner: {
@@ -4206,11 +4507,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 success: "Klonede {{name}} til {{guild}}!",
                 yourServer: "din server",
                 failed: "Kunne ikke klone: ",
-                console: "Noget gik galt (tjek konsollen!)"
+                console: "Noget gik galt (tjek konsollen!)",
+                successfullyClonedNameTo: "{{name}} blev klonet til {{name_your_server}}!"
             },
             context: {
                 clone: "Klon {{type}}",
                 cloneName: "Klon {{data}}"
+            },
+            text: {
+                yourServer: "din server",
+                cloneTo: "Klon til {{name}}",
+                emoji: "Emoji",
+                sticker: "Klistermærke"
             }
         },
         f8break: {
@@ -4305,7 +4613,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 step3: "• Indsæt den usynlige tekst hvor som helst i din bio",
                 pickers: "Farvevælgere",
                 primary: "Primær",
-                accent: "Accent"
+                accent: "Accentfarve"
             },
             option: {
                 nitroFirst: {
@@ -4333,7 +4641,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modal: {
                 primary: "Primær",
-                accent: "Accent",
+                accent: "Accentfarve",
                 effect: "Effekt",
                 usage: {
                     title: "Anvendelse",
@@ -4413,36 +4721,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removed: "Fjernede alias: {{alias}}",
                 failedRemove: "Kunne ikke fjerne alias",
                 duplicate: "Alias findes allerede",
-                failedSave: "Kunne ikke gemme alias."
+                failedSave: "Kunne ikke gemme alias.",
+                removedAliasAlias: "Fjernede aliasset :{{alias}}:",
+                aliasSetForGetemojidisplayname: "Alias angivet for {{getEmojiDisplayName_ref}}."
             },
             button: {
                 edit: "Rediger alias",
                 set: "Indstil alias"
+            },
+            text: {
+                remove: "Fjern",
+                noAliasesSetYet: "Ingen aliasser angivet endnu.",
+                aliasRequired: "Alias er påkrævet.",
+                aliasInvalid: "Alias skal være 2-32 tegn og må kun bruge små bogstaver, tal eller understregninger."
             }
         },
-        favoriteGifSearch: {
-            name: "FavouriteGifSearch",
-            description: "Tilføjer en søgelinje til favorit-GIF'er.",
-            placeholder: "Søg i favorit-GIF'er",
-            option: {
-                searchOption: {
-                    label: "Søgemulighed",
-                    description: "Den del af URL'en du vil søge i",
-                    url: "Hele URL'en",
-                    path: "Kun stien (/en-gif.gif)",
-                    hostandpath: "Host og sti (tenor.com en-gif.gif)"
-                }
-            }
-        },
-        favouriteAnything: {
-            name: "FavouriteAnything",
+        favoriteAnything: {
+            name: "FavoriteAnything",
             description: "Gør ethvert billede til en favorit",
             noFiles: "Ingen filer matcher din søgning.",
             searchPlaceholder: "Søg filer",
             media: "Medier",
             demoText: "Klik på stjernen for at gøre en fil til favorit.\nFavoritfiler vil vises her!",
             fetchError: "Kunne ikke hente {filename}",
-            uploadError: "Kunne ikke uploade {filename}"
+            uploadError: "Kunne ikke uploade {filename}",
+            text: {
+                clickTheStarTo: "Klik på stjernen for at gøre en fil til favorit.",
+                favoriteFilesWillShow: "Favoritfiler vises her!"
+            },
+            option: {
+                localThumbnails: {
+                    description: "Generér filminiaturer lokalt i stedet for at bruge en ekstern tjeneste (placeholder.nin0.dev). Ikke kompatibelt med mobil. At slå denne indstilling til/fra påvirker ikke eksisterende favoritter.",
+                    label: "Lokale miniaturer"
+                }
+            }
         },
         fileDownloadButton: {
             name: "FileDownloadButton",
@@ -4457,7 +4769,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 navigate: "Brug bundpanelet til at navigere mellem svar.",
                 container: "Kunne ikke finde container-elementet.",
-                couldntFind: "Kunne ikke finde svarbeskeden."
+                couldntFind: "Kunne ikke finde et svar."
             },
             option: {
                 includePings: {
@@ -4545,6 +4857,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 channelFull: {
                     label: "Kanal fuld",
                     description: "Forsøg at flytte dig til kanalen, når den ikke længere er fuld"
+                },
+                onlyWhenInVoice: {
+                    label: "Kun når i tale",
+                    description: "Følg kun brugeren, når du er i en talekanal"
                 }
             },
             toast: {
@@ -4589,25 +4905,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     previewText: "Den hurtige brune ræv hopper over den dovne hund",
                     authors: "Af {{authors}}"
                 }
+            },
+            text: {
+                currentFont: "Aktuel skrifttype:",
+                resetFont: "Nulstil skrifttype"
             }
         },
         forceOwnerCrown: {
             name: "ForceOwnerCrown",
             description: "Tvinger ejer-kronen frem ved siden af brugernavne, selv i store servere."
-        },
-        forwardAnywhere: {
-            name: "ForwardAnywhere",
-            description: "Hvis en videresendelse fejler, sendes den som en normal besked; tillader også videresendelse af NSFW-indhold",
-            option: {
-                forwardPreface: {
-                    label: "Videresendelses-præfiks",
-                    description: "Hvilken tekst skal videresendt indhold indledes med"
-                }
-            },
-            context: {
-                attachments: "Vedhæftninger",
-                forwarded: "Videresendt fra"
-            }
         },
         freaky: {
             name: "Freaky",
@@ -4707,12 +5013,17 @@ const translations: MatchStructure<typeof enTranslations> = {
                     name: "Besties",
                     description: "Hvordan gør I det overhovedet??? (5 år)"
                 }
+            },
+            option: {
+                showFriendsInChat: {
+                    description: "Vis et venneikon på beskeder fra venner.",
+                    label: "Vis venner i chat"
+                }
+            },
+            text: {
+                friend: "Ven",
+                rankIcon: "Rangikon"
             }
-        },
-        friendsSince: {
-            name: "FriendsSince",
-            description: "Viser hvornår I blev venner i brugerens popout",
-            section: "Venner siden"
         },
         friendTags: {
             name: "FriendTags",
@@ -4748,7 +5059,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
-            description: "Tilføjer en kontakt til bruger-popouten for at vise/skjule din spilaktivitet",
+            description: "Tilføjer en knap ved siden af mikrofon- og lydløs-knappen til at slå spilaktivitet til/fra. Højreklik for at slå Spotify-aktivitet til/fra.",
             tooltip: "Skift spilaktivitet",
             gameActivity: {
                 enabled: "Spilaktivitet aktiveret",
@@ -4765,6 +5076,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     panel: "Ved siden af Mute/Deafen",
                     toolbox: "Plexcord Værktøjskasse"
                 }
+            },
+            text: {
+                disableGameActivity: "Deaktiver spilaktivitet",
+                enableGameActivity: "Aktiver spilaktivitet",
+                shareSpotifyActivity: "Del Spotify-aktivitet",
+                shareSpotifyActivityAccount: "Del Spotify-aktivitet ({{name}})"
             }
         },
         ghosted: {
@@ -4773,7 +5090,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 title: "Ghostede brugere",
                 no: "Ingen ghostede brugere",
-                unghost: "unghost",
+                unghost: "fjern ghosting",
                 unknown: "Ukendt",
                 unnamedGroup: "Navnløs gruppe",
                 unknownUser: "Ukendt bruger",
@@ -4912,7 +5229,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "Billedlink kopieret til udklipsholder!",
                 urlCopied: "URL kopieret til udklipsholder!",
                 already: "Den samling findes allerede",
-                alreadyCollection: "Den GIF er allerede i den samling"
+                alreadyCollection: "Denne GIF er allerede i samlingen",
+                collectionsImportedSuccessfully: "Samlingerne blev importeret.",
+                failedToImportCollections: "Kunne ikke importere samlinger: {{String_err}}"
             },
             modal: {
                 create: {
@@ -4948,6 +5267,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     remove: "Fjern",
                     cancel: "Glem det"
                 }
+            },
+            text: {
+                gifPickerCategoryOptions: "Kategoriindstillinger for GIF-vælger",
+                gifCollections: "GIF-samlinger",
+                unknown: "Ukendt"
             }
         },
         gifPaste: {
@@ -4959,7 +5283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Tilføjer en kommando til at sende en tilfældig GIF fra dine favoritter, med en 1/10 chance for at ping'e serverens ejer",
             command: {
                 gifRoulette: {
-                    description: "Udfordr skæbnen og send en GIF"
+                    description: "Udfordr skæbnen og send en GIF",
+                    restricted: "Denne kommando er begrænset på denne server."
                 }
             },
             option: {
@@ -4994,7 +5319,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 only: "Viser kun de øverste {{length}}/{{total}}"
             },
             modal: {
-                title: "{{user}}s GitHub-repositories",
+                title: "{{username}}s GitHub-repositories",
                 repository: "Repository",
                 description: "Beskrivelse",
                 language: "Sprog",
@@ -5018,7 +5343,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Om det sendte link skal være et hyperlink med søgeordet som tekst"
                 },
                 embed: {
-                    label: "Embed",
+                    label: "Indlejring",
                     description: "Om det sendte link skal generere et embed"
                 },
                 defaultEngine: {
@@ -5050,7 +5375,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Hilsen-sticker vælger",
                 mode: "Hilsen-tilstand",
                 stickers: "Hilsen-stickers",
-                multi: "Unholy Multi-Greet",
+                multi: "Uhellig multihilsen",
                 send: "Send hilsner"
             }
         },
@@ -5101,9 +5426,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         hideMessages: {
             name: "HideMessages",
-            description: "Et plugin til midlertidigt at skjule beskeder, indtil du genstarter.",
+            description: "Skjul beskeder og DM'er midlertidigt, indtil du genstarter.",
             button: {
-                hide: "Skjul"
+                hide: "Skjul",
+                hideDm: "Skjul DM",
+                unhideDm: "Vis DM"
+            },
+            toggle: {
+                none: "Ingen skjulte DM'er",
+                hide: "Skjul skjulte DM'er",
+                show: "Vis skjulte DM'er"
             },
             option: {
                 hidePopoverButton: {
@@ -5111,6 +5443,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Skjul 'skjul'-knappen i beskedens popover-menu."
                 }
             }
+        },
+        hideMutedVoiceIndicator: {
+            name: "HideMutedVoiceIndicator",
+            description: "Skjuler stemmeindikatoren i serverlisten, når de eneste aktive stemmekanaler er slået fra"
         },
         hideServers: {
             name: "HideServers",
@@ -5231,10 +5567,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 refreshed: "Avatarer er blevet opdateret.",
                 deletedAll: "Alle noter er blevet slettet.",
                 imported: "Noter er blevet importeret.",
-                invalid: "Kunne ikke importere noter."
+                invalid: "Kunne ikke importere noter.",
+                invalidJson: "Ugyldig JSON"
             },
             toolbox: {
                 action: "Åbn noter"
+            },
+            text: {
+                holyNotes: "Holy Notes",
+                noteTag: "NOTE"
             }
         },
         homeTyping: {
@@ -5342,7 +5683,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 ignoreListening: {
                     label: "Ignorer 'Lytter'",
-                    description: "Ignorer alle 'lytter'-aktiviteter (f.eks. Spotify)"
+                    description: "Ignorer alle lytteaktiviteter (det er som regel Spotify-aktiviteter)"
                 },
                 ignoreWatching: {
                     label: "Ignorer 'Ser'",
@@ -5355,6 +5696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoredActivities: {
                     label: "Ignorerede aktiviteter"
                 }
+            },
+            text: {
+                enableActivity: "Aktivér aktivitet",
+                disableActivity: "Deaktiver aktivitet"
             }
         },
         ignoreCalls: {
@@ -5440,6 +5785,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 sizeHTML: "Størrelse",
                 dimensions: "Dimensioner",
                 filename: "Filnavn"
+            },
+            text: {
+                bytes: "Bytes"
             }
         },
         imgToGif: {
@@ -5503,7 +5851,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Del din skærm med det samme, når du går ind i en stemmekanal, med understøttelse af skriveborde, vinduer og kameraer",
             modal: {
                 linux: {
-                    title: "For Linux",
+                    title: "Til Linux",
                     body: "For Wayland åbnes kun skærmdelings-vælgeren",
                     bodyTwo: "For X11 virker det måske, eller måske ikke :shrug:"
                 },
@@ -5529,19 +5877,19 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Inkluder kameraer og capture cards i listen over kilder"
                 },
                 autoMute: {
-                    label: "Auto Mute",
+                    label: "Slå lyd fra automatisk",
                     description: "Slå automatisk din mikrofon fra, når du går ind i en kanal"
                 },
                 autoDeafen: {
-                    label: "Auto Deafen",
+                    label: "Slå hørelse fra automatisk",
                     description: "Slå automatisk lyden fra (deafen), når du går ind i en kanal (slår også mikrofonen fra)"
                 },
                 instantScreenshare: {
-                    label: "Instant Screenshare",
+                    label: "Øjeblikkelig skærmdeling",
                     description: "Aktiverer den automatiske skærmdelings-funktion"
                 },
                 keybindScreenshare: {
-                    label: "Keybind Screenshare",
+                    label: "Genvejstast til skærmdeling",
                     description: "Del skærm via en genvejstast indstillet i Discord"
                 },
                 focusDiscord: {
@@ -5558,6 +5906,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toast: "Instant Screenshare {{state}}",
                 enabled: "Aktiveret",
                 disabled: "Deaktiveret"
+            },
+            toast: {
+                instantScreenshareDisabled: "Øjeblikkelig skærmdeling {{disabled}}"
+            },
+            text: {
+                instantScreenshare: "Instant Screenshare"
             }
         },
         invisibleChat: {
@@ -5680,6 +6034,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     resetData: "Nulstil lager",
                     sure: "Er du sikker?"
                 }
+            },
+            text: {
+                serverOptions: "Serverindstillinger",
+                copyServerId: "Kopiér server-id",
+                serverIdCopied: "Server-ID kopieret til udklipsholderen"
             }
         },
         jumpTo: {
@@ -5746,6 +6105,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Nøgleord",
                     description: "Administrer nøgleord"
                 }
+            },
+            text: {
+                keywordEntryI1: "Nøgleordspost {{i_1}}",
+                listPriorityAdvanced: "Listeprioritet (avanceret)",
+                whichListToPrioritize: "Hvilken liste der skal prioriteres, hvis en besked udløser begge lister",
+                ifYouAreNot: "Hvis du er i tvivl, er den i de fleste almindelige tilfælde sat til Sortliste"
             }
         },
         lastOnline: {
@@ -5819,10 +6184,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     listenbrainzLogo: "Brug stort ListenBrainz-logo",
                     generic: "Brug generisk pladsholder"
                 },
+                showAlbumCover: {
+                    label: "Vis albumcover",
+                    description: "Vis albumcover. Deaktivering af dette vil vise et pladsholderbillede. Nyttigt, hvis din musik har upassende albumcovers"
+                },
                 useLogo: {
                     label: "Brug logo",
                     description: "Vis ListenBrainz-logo på albumcoveret"
                 }
+            },
+            button: {
+                profile: "ListenBrainz-profil",
+                viewSong: "Vis sang"
             }
         },
         loadingQuotes: {
@@ -5849,6 +6222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Skilletegn for citater",
                     description: "Skilletegn brugt til ekstra citater"
                 }
+            },
+            text: {
+                allQuotesDisabled: "Har du virkelig slået alle indlæsningscitater fra? Sikke en klovn du er..."
             }
         },
         loginWithQR: {
@@ -5867,7 +6243,26 @@ const translations: MatchStructure<typeof enTranslations> = {
             stopScanning: "Stop scanning",
             usingWebcam: "Scan med webcam",
             dragDrop: "Træk og slip et billede her, eller klik for at vælge et",
-            orPaste: "Eller indsæt et billede fra din udklipsholder!"
+            orPaste: "Eller indsæt et billede fra din udklipsholder!",
+            verifyLogin: "Bekræft login",
+            text: {
+                scanQrCode: "Scan QR-kode"
+            }
+        },
+        markdownTables: {
+            name: "MarkdownTables",
+            description: "Viser markdown-tabeller i GitHub-stil i Discord-beskeder.",
+            toolbar: {
+                label: "Markdown-tabelvisning",
+                table: "Tabel",
+                raw: "Rå"
+            },
+            option: {
+                hideToggle: {
+                    label: "Skjul skift",
+                    description: "Skjul Tabel/Rå-skiftet og vis altid tabeller gengivet."
+                }
+            }
         },
         mediaPlaybackSpeed: {
             name: "MediaPlaybackSpeed",
@@ -5893,7 +6288,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         memberCount: {
             name: "MemberCount",
-            description: "Viser antallet af online medlemmer, totalt antal medlemmer og brugere i stemmekanaler — i medlemslisten og som værktøjstip.",
+            description: "Viser antallet af online medlemmer, samlede medlemmer og brugere i talekanaler på serveren - i medlemslisten og værktøjstip.",
             option: {
                 toolTip: {
                     label: "Værktøjstip",
@@ -5910,7 +6305,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             onlineThisChannel: "{{formattedOnlineCount}} online i denne kanal",
             totalMembers: "{{formattedTotalCount}} medlemmer i alt på serveren",
-            totalVoice: "{{formattedVoiceCount}} medlemmer i stemmekanaler"
+            totalVoice: "{{formattedVoiceCount}} medlemmer i stemmekanaler",
+            tooltip: {
+                total: "{{count}} medlemmer i alt på serveren"
+            }
         },
         mentionAvatars: {
             name: "MentionAvatars",
@@ -6057,7 +6455,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                 messageContent: "Beskedindhold kopieret!",
                 userId: "Bruger-ID kopieret!"
             },
-            linkCopied: "Link kopieret!"
+            linkCopied: "Link kopieret!",
+            text: {
+                shift: "Shift",
+                ctrl: "Ctrl",
+                alt: "Alt",
+                backspace: "Backspace",
+                pickEmoji: "Vælg emoji"
+            },
+            emojiSetting: {
+                pick: "Vælg emoji",
+                selectMain: "Vælg emoji til reaktioner",
+                selectAdditional: "Vælg yderligere emojis",
+                additionalPlaceholder: "adskilt med komma/linjeskift, maks. {{max}}"
+            },
+            toast: {
+                cannotReact: "Kan ikke reagere: Manglende tilladelser",
+                linkCopied: "Link kopieret!"
+            }
         },
         messageColors: {
             name: "MessageColors",
@@ -6153,7 +6568,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Baggrundsfarve for beskeder i rich embeds"
                 },
                 automodEmbeds: {
-                    label: "Automod Embeds",
+                    label: "AutoMod-indlejringer",
                     description: "Brug automod embeds i stedet for rich embeds (mindre, men færre info)",
                     always: "Brug altid automod embeds",
                     prefer: "Foretræk automod embeds, men brug rich embeds hvis indholdet kræver det",
@@ -6212,7 +6627,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         messageLogger: {
             name: "MessageLogger",
             description: "Logger midlertidigt slettede og redigerede beskeder.",
-            removeMessage: "Fjern beskedhistorik",
+            removeMessage: "Ryd beskedhistorik",
             removeMessageTemporary: "Fjern besked (Midlertidigt)",
             clearMessageLog: "Ryd beskedlog",
             showDiff: "Vis forskelle",
@@ -6276,7 +6691,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                 separatedDiffs: {
                     label: "Separerede ændringer",
                     description: "Adskil tilføjelser og fjernelser i ændringsvisningen for bedre læsbarhed"
+                },
+                logDeletedAttachments: {
+                    description: "Om slettede vedhæftede filer skal logges",
+                    label: "Log slettede vedhæftede filer"
                 }
+            },
+            text: {
+                clearHistory: "Ryd historik",
+                toggleDeletedHighlight: "Slå fremhævning af slettede til/fra",
+                enableDiffView: "Aktiver forskelsvisning",
+                disableDiffView: "Deaktiver forskelsvisning",
+                noDeletedMessages: "Ingen slettede beskeder",
+                deletedMessageSuffix: " slettet besked",
+                deletedMessagesSuffix: " slettede beskeder"
             }
         },
         messageLoggerEnhanced: {
@@ -6369,7 +6797,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 title: "Filtrer beskeder",
                 deleted: "Slettet",
                 edited: "Redigeret",
-                ghostPing: "Ghost Pinged",
+                ghostPing: "Ghost-pinget",
                 empty: "Tomt her",
                 importLogs: "ML Enhanced gemmer nu logs i indexeddb. Du skal importere dine gamle logs fra log-mappen. Import vil ikke overskrive eksisterende logs."
             },
@@ -6478,11 +6906,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 whitelistedIds: {
                     label: "Hvidlistede ID'er",
-                    description: "ID'er på servere, kanaler eller brugere der altid logges."
+                    description: "Server-, kanal- eller bruger-ID'er, der altid skal vises i beskedloggen."
                 },
                 blacklistedIds: {
                     label: "Sortlistede ID'er",
-                    description: "ID'er på servere, kanaler eller brugere der aldrig logges."
+                    description: "Server-, kanal- eller bruger-ID'er, der aldrig skal vises i beskedloggen."
                 },
                 imageCacheDir: {
                     label: "Mappe til billed-cache",
@@ -6520,6 +6948,25 @@ const translations: MatchStructure<typeof enTranslations> = {
                     confirmText: "Ryd",
                     cancel: "Annuller"
                 }
+            },
+            toast: {
+                clearedLogs: "Logfiler ryddet",
+                failedToClearLogs: "Kunne ikke rydde logfiler",
+                failedToRemoveMessage: "Kunne ikke fjerne beskeden. Se konsollen for detaljer.",
+                noMessagesFoundIn: "Ingen beskeder fundet i logfilen",
+                successfullyImportedCountLogs: "Importerede {{count}} logfiler",
+                successfullyExportedLogs: "Logfiler eksporteret",
+                successfullyExportedCountLogs: "Eksporterede {{count}} logfiler",
+                errorExportingLogsCheck: "Fejl ved eksport af logfiler. Se konsollen for flere oplysninger"
+            },
+            text: {
+                jsonFile: "JSON-fil",
+                clearLogs: "Ryd logs",
+                clearingLogs: "Rydder logs...",
+                messageLogger: "Message Logger",
+                importLogs: "Importer logs",
+                logs: "Logs",
+                loadingTabLogs: "Indlæser logfiler: {{tab}}..."
             }
         },
         messageNotifier: {
@@ -6740,7 +7187,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Skalerer knapperne ned til 75% for at få plads til flere."
                 },
                 scroll: {
-                    label: "Scroll",
+                    label: "Rul",
                     description: "Aktiver scrolling i listen over emojis"
                 }
             }
@@ -6889,7 +7336,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Vis knapper til at styre YouTube Music"
                 },
                 YoutubeMusicApiUrl: {
-                    label: "YouTube Music API URL",
+                    label: "API-URL til YouTube Music",
                     description: "URL til YouTube Music API-serveren"
                 },
                 hoverControls: {
@@ -6913,13 +7360,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     LRCLIB: "LRCLIB"
                 },
                 spotifyLyricsApiUrl: {
-                    label: "Spotify Lyrics API-URL",
-                    description: "Spotify lyrics API-basis-URL."
+                    label: "Basis-URL til Spotify Lyrics API",
+                    description: "Basis-URL for brugerdefineret instans (for eksempel: http://localhost:8080)."
                 },
                 translateTo: {
                     label: "Oversæt til",
                     description: "Oversæt sangtekster til dette sprog",
-                    cleared: "Oversættelse ryddet"
+                    cleared: "Oversættelser ryddet"
                 },
                 lyricsConversion: {
                     label: "Tekst-konvertering",
@@ -6941,6 +7388,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Slet alle gemte sangtekster og oversættelser",
                     button: "Ryd cache",
                     cacheLyricsPurged: "Sangtekst-cache ryddet"
+                },
+                lyricDelay: {
+                    label: "Forsinkelse af sangtekst"
                 }
             },
             context: {
@@ -7025,6 +7475,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 failed: "Kunne ikke indlæse vinduet :(",
                 checkConsole: "Tjek konsollen for fejl",
                 invalidUrlCustomApi: "Ugyldigt URL-format for brugerdefineret API"
+            },
+            text: {
+                unknownArtist: "Ukendt kunstner",
+                unknownTitle: "Ukendt titel"
             }
         },
         mutualGroupDMs: {
@@ -7045,7 +7499,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "NewGuildSettings",
             description: "Sætter automatisk nye servere på lydløs og ændrer forskellige andre indstillinger, når du tilslutter dig",
             context: {
-                apply: "Anvend NewGuildSettings"
+                apply: "Anvend NewGuildSettings på mappe"
             },
             option: {
                 guild: {
@@ -7100,7 +7554,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 dontShowAgain: "Vis ikke dette igen",
                 restartRequired: "Genstart påkrævet for at anvende ændringer",
                 restart: "Genstart",
-                continue: "Fortsæt"
+                continue: "Fortsæt",
+                supportUs: "Plexcord er open source-software. Hvis du kan lide at bruge det, så overvej at støtte os",
+                supportUsLink: "her"
             }
         },
         noAppsAllowed: {
@@ -7284,7 +7740,10 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         notificationTitle: {
             name: "NotificationTitle",
-            description: "Gør desktop-notifikationer mere informative"
+            description: "Gør desktop-notifikationer mere informative",
+            text: {
+                threadInParent: "{{thread}} i {{parent}}"
+            }
         },
         notificationVolume: {
             name: "NotificationVolume",
@@ -7360,6 +7819,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 vrcx: {
                     label: "VRChat",
                     description: "Åbn VRChat-links i VRCX-appen"
+                },
+                telegram: {
+                    label: "Telegram",
+                    description: "Åbn Telegram-links i Telegram-appen"
                 }
             },
             notification: {
@@ -7389,7 +7852,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Giver dig mulighed for at bruge Party Mode, fordi festen aldrig slutter ✨",
             option: {
                 superIntensePartyMode: {
-                    label: "Super Intense Party Mode",
+                    label: "Superintens festtilstand",
                     description: "Fest-intensitet",
                     normal: "Normal",
                     better: "Bedre",
@@ -7407,7 +7870,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Deaktiverer klient-side restriktioner for styring af kanal-tilladelser.",
             option: {
                 lockout: {
-                    label: "Lockout",
+                    label: "Udelukkelse",
                     description: "Omgå beskyttelse mod udelukkelse fra tilladelser ('Er du sikker på, at du vil gøre dette?')"
                 },
                 onboarding: {
@@ -7447,6 +7910,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 highest: "Højeste rolle",
                 lowest: "Laveste rolle",
                 details: "Rolledetaljer"
+            },
+            text: {
+                roleOptions: "Rolleindstillinger",
+                userOptions: "Brugerindstillinger",
+                unknownRole: "Ukendt rolle",
+                unknownUser: "Ukendt bruger"
             }
         },
         petpet: {
@@ -7479,7 +7948,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: "Slå Picture-in-Picture til/fra",
             option: {
                 loop: {
-                    label: "Loop",
+                    label: "Gentag",
                     description: "Om PiP-videoen skal køre i ring"
                 }
             }
@@ -7497,7 +7966,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unnamed: "ups"
                 },
                 pin: {
-                    label: "Fastgør DM",
+                    label: "Fastgør DM'er",
                     addCategory: "Tilføj kategori"
                 },
                 unPin: {
@@ -7534,7 +8003,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     color: "Farve",
                     save: "Gem",
                     create: "Opret"
-                }
+                },
+                defaultCategoryName: "Fastgjort kategori {{number}}"
             }
         },
         pingNotifications: {
@@ -7546,7 +8016,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Giv besked når venner sender beskeder på servere"
                 },
                 mentions: {
-                    label: "Mentions",
+                    label: "Omtaler",
                     description: "Giv besked når nogen @nævner dig direkte"
                 },
                 dms: {
@@ -7578,15 +8048,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformIndicators: {
             name: "PlatformIndicators",
             description: "Tilføjer indikatorer for platform (Computer, Mobil, Web...) til brugere",
-            embeddedTooltip: "Konsol",
+            embeddedTooltip: "Indlejret (konsol eller spil)",
             vrTooltip: "VR",
             option: {
                 list: {
                     label: "Liste",
-                    description: "Vis indikatorer i medlemslisten"
+                    description: "Vis indikatorer i brugerprofiler"
                 },
                 badges: {
-                    label: "Badges",
+                    label: "Mærker",
                     description: "Vis indikatorer som badges i brugerprofiler"
                 },
                 messages: {
@@ -7606,7 +8076,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformSpoofer: {
             name: "PlatformSpoofer",
             description: "Snyd med hvilken platform eller enhed du er på",
-            about: "Vi kan ikke garantere, at dette plugin ikke vil resultere i en advarsel eller udelukkelse.",
+            about: "Vi kan ikke garantere, at dette plugin ikke giver dig en advarsel eller udelukkelse. Hvis du vælger Xbox/Playstation/VR, kan din klient blive en forældet version.",
             platform: {
                 desktop: "Discord Klient",
                 web: "Discord Web",
@@ -7619,7 +8089,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 platform: {
                     label: "Platform",
-                    description: "Hvilken platform du skal fremstå som",
+                    description: "Hvilken platform du vil lade som om, du bruger.",
                     desktop: "Computer",
                     web: "Web",
                     android: "Android",
@@ -7689,9 +8159,9 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         profileSets: {
             name: "ProfileSets",
-            description: "Giver dig mulighed for at gemme og indlæse forskellige profil-presets via Profil-sektionen i Indstillinger.",
+            description: "Gør det muligt at gemme og indlæse forskellige profilforudindstillinger.",
             toast: {
-                importFailed: "Kunne ikke importere profil-sæt. Filen er muligvis ugyldig.",
+                importFailed: "Kunne ikke importere forudindstillinger. Filen kan være ugyldig.",
             },
             option: {
                 avatarSize: {
@@ -7722,397 +8192,550 @@ const translations: MatchStructure<typeof enTranslations> = {
                 random: "Tilfældig",
                 import: "Importer",
                 exportAll: "Eksporter alle"
+            },
+            text: {
+                selectAServer: "Vælg en server",
+                profileSets: "Profilsæt",
+                youAreNotIn: "Du er ikke på nogen servere endnu.",
+                mainProfile: "Hovedprofil",
+                serverProfiles: "Serverprofiler",
+                openProfileSets: "Åbn profilsæt"
             }
         },
         questify: {
             name: "Questify",
-            description: "Forbedr din Quest-oplevelse med en række funktioner, eller deaktiver dem helt, hvis de ikke er noget for dig.",
+            description: "Forbedr udvalgte Quest-funktioner, slå irriterende elementer fra, eller fjern Quests helt.",
             quests: "Quests",
             context: {
                 quest: {
-                    label: "Quest-knap menu",
-                    ignore: "Marker alle som ignoreret",
-                    reset: "Nulstil ignoreret-liste",
+                    label: "Quest-knapmenu",
+                    ignore: "Markér alle som ignoreret",
+                    reset: "Nulstil ignoreringsliste",
                     fetch: "Hent Quests",
-                    markAsIgnored: "Marker som ignoreret",
-                    unmarkAsIgnored: "Fjern markering som ignoreret",
-                    stopAuto: "Stop auto-fuldførelse",
-                    copyQuestID: "Kopier Quest-ID",
-                    startAuto: "Start auto-fuldførelse"
+                    markAsIgnored: "Markér som ignoreret",
+                    unmarkAsIgnored: "Fjern ignorering",
+                    stopAuto: "Stop automatisk fuldførelse",
+                    startAuto: "Start automatisk fuldførelse",
+                    copyQuestID: "Kopiér Quest-ID"
                 }
+            },
+            button: {
+                completing: "Fuldfører...",
+                completingWithTime: "Fuldfører ({{time}})",
+                completingIn: "Fuldføres om {{time}}",
+                queued: "I kø ({{position}})",
+                resuming: "Genoptager...",
+                completeNow: "Fuldfør nu",
+                complete: "Fuldfør ({{time}})",
+                resume: "Genoptag ({{time}})",
+                completed: "Fuldført"
+            },
+            reward: {
+                orbs: "{{status}} for {{orbQuantity}} Orbs.",
+                article: "{{status}} for {{itemName}}.",
+                unrecognized: "{{status}} for en ukendt belønning."
+            },
+            toast: {
+                autoCompleteBroken: "Automatisk fuldførelse virker ikke. En rettelse kommer snart.",
+                enrollmentFailed: "Tilmelding til Questen {{questName}} mislykkedes.",
+                enrollmentInNormalizequestnameQuest: "Tilmelding til questen {{normalizeQuestName_quest}} mislykkedes{{rateLimitSuffix}}."
+            },
+            notification: {
+                completed: {
+                    title: "Quest fuldført!",
+                    body: "Questen {{questName}} er fuldført."
+                },
+                newQuest: {
+                    title: "Ny Quest fundet!",
+                    body: "Questen {{questName}} er nu tilgængelig."
+                },
+                newQuests: {
+                    title: "Nye Quests fundet!",
+                    body: "{{count}} nye Quests er nu tilgængelige."
+                },
+                newExcludedQuest: {
+                    title: "Ny udelukket Quest fundet!",
+                    body: "Den udelukkede Quest {{questName}} blev fundet. ID: {{questId}}"
+                },
+                newExcludedQuests: {
+                    title: "Nye udelukkede Quests fundet!",
+                    body: "{{count}} nye udelukkede Quests blev fundet. Se konsollen for deres Quest-ID'er."
+                }
+            },
+            alert: {
+                restart: {
+                    title: "Genstart påkrævet",
+                    body: "En ændring i Questifys indstillinger kræver en genstart.",
+                    confirm: "Genstart",
+                    cancel: "Senere"
+                },
+                dangerous: {
+                    title: "Er du sikker?",
+                    confirm: "Fortsæt",
+                    cancel: "Annuller",
+                    disableEverything: "Dette slår Quest-funktionaliteten helt fra.",
+                    allowDangerous: "Dette tillader ændring af farlige indstillinger."
+                }
+            },
+            status: {
+                unclaimed: "IKKE INDLØST",
+                claimed: "Indløst",
+                ignored: "Ignoreret",
+                expired: "Udløbet"
+            },
+            questTypes: {
+                watchVideo: "Se video",
+                watchVideoOnMobile: "Se video på mobil",
+                achievementInActivity: "Præstation i aktivitet",
+                achievementInGame: "Præstation i spil",
+                playActivity: "Spil aktivitet",
+                playOnDesktop: "Spil på computer",
+                playOnDesktopV2: "Spil på computer V2",
+                streamOnDesktop: "Stream på computer",
+                playOnPlayStation: "Spil på PlayStation",
+                playOnXbox: "Spil på Xbox"
             },
             settings: {
                 questButton: {
                     title: "Quest-knap",
-                    description: "Vis en Quest-knap i serverlisten med en valgfri indikator for uafhentede Quests.",
-                    leftClick: "Venstreklik-handling",
-                    middleClick: "Midterklik-handling",
-                    rightClick: "Højreklik-handling",
-                    visibility: "Knappens synlighed",
-                    unclaimedIndicator: "Uafhentet-indikator",
-                    badgeColor: "Badge-farve",
-                    rewardDisplay: "Visning af belønning",
-                    includedRewardTypes: "Inkluderede belønningstyper",
-                    includedRewardTypesDesc: "Tæl kun Quests med disse belønningstyper som uafhentede ved beregning af synlighed, badge-antal og lyd.",
-                    selectRewardTypes: "Vælg hvilke belønningstyper der skal tælles med...",
-                    noRewardType: "Der er ingen understøttet Quest-funktion med det navn.",
-                    default: "Standard",
-                    disable: "Deaktiver"
+                    description: "Vis en Quest-knap i serverlisten med en valgfri indikator for ikke-indløste og ikke-ignorerede Quests.",
+                    behavior: "Knappens adfærd",
+                    leftClick: "Handling ved venstreklik:",
+                    middleClick: "Handling ved midterklik:",
+                    rightClick: "Handling ved højreklik:",
+                    visibility: "Knappens synlighed:",
+                    visibilityTooltip: "Altid viser Quest-knappen, så længe denne funktion er slået til.\n\nIkke indløst viser den kun, når du har relevante ikke-indløste Quest-belønninger.\n\nAldrig skjuler Quest-knappen.",
+                    unclaimedIndicator: "Indikator for ikke-indløste:",
+                    unclaimedIndicatorTooltip: "Pille viser Discords ulæst-markering ved siden af Quest-knappen.\n\nBadge viser antallet af relevante ikke-indløste Quest-belønninger.\n\nBegge viser pille og badge sammen.\n\nIngen skjuler indikatorerne.",
+                    badgeColor: "Badgefarve:",
+                    relevancy: "Quest-relevans",
+                    includedRewardTypes: "Medtagne belønningstyper:",
+                    includedRewardTypesTooltip: "Tæl kun Quests med disse belønningstyper som ikke indløst, når knappens synlighed, badgetal og advarsler bestemmes.",
+                    includedQuestTypes: "Medtagne Quest-typer:",
+                    includedQuestTypesTooltip: "Tæl kun Quests med disse opgavetyper som ikke indløst, når knappens synlighed, badgetal og advarsler bestemmes.",
+                    display: {
+                        always: "Altid",
+                        unclaimed: "Ikke indløst",
+                        never: "Aldrig"
+                    },
+                    indicator: {
+                        pill: "Pille",
+                        badge: "Mærke",
+                        both: "Begge",
+                        none: "Ingen"
+                    },
+                    action: {
+                        openQuests: "Åbn Quests",
+                        contextMenu: "Kontekstmenu",
+                        pluginSettings: "Plugin-indstillinger",
+                        nothing: "Intet"
+                    },
+                    rewardTypes: {
+                        orbs: "Orbs",
+                        nitroCodes: "Nitro-koder",
+                        rewardCodes: "Belønningskoder",
+                        inGameItems: "Genstande i spil",
+                        profileCollectibles: "Profilsamleobjekter"
+                    }
                 },
                 questFeatures: {
                     title: "Quest-funktioner",
-                    description: "Rediger specifikke Quest-funktioner.",
-                    popupWarning: "{{disablePopup}}-indstillingen vil blive ignoreret for gennemførte Quests og sporing af fremskridt.",
-                    videoQuestInfo: "{{completeVideo}}-indstillingen vil vente på varigheden af Video-Questen og markere den som gennemført automatisk.",
-                    gameQuestInfo: "Ligeledes vil {{completeGame}}-indstillingen vente på varigheden af Spil-Questen og markere den som gennemført automatisk. Denne funktion understøttes kun på den officielle desktop-klient.",
-                    manualStartWarning: "Du skal stadig starte Quests manuelt. Det første klik starter dem i baggrunden. For Video-Quests vil efterfølgende klik åbne videoen som normalt. For at afbryde, kan du bruge kontekstmenuen og vælge {{stopAuto}}.",
-                    tosWarning: "Brug af disse funktioner er imod Discords Servicevilkår (ToS). Brug på eget ansvar.",
-                    selectFeatures: "Vælg hvilke Quest-funktioner der skal ændres.",
-                    disablePopup: "Deaktiver Quest-popup over kontopanelet",
-                    completeVideo: "Fuldfør Video-Quests i baggrunden",
-                    completeGame: "Fuldfør Spil-Quests i baggrunden",
-                    stopAuto: "Stop auto-fuldførelse"
+                    description: "Ændr hvordan Quests fungerer for at forbedre eller fjerne funktionalitet.",
+                    disableFeatures: "Slå funktioner fra",
+                    disableEverything: "Slå Quest-funktionaliteten helt fra:",
+                    disableEverythingTooltip: "Dette slår alle plugin-forbedringer fra, skjuler Quest-siden og Quest-elementer i hele Discord og forhindrer Discord i at hente Quest-data. Butikken påvirkes ikke, da Orbs som sekundær valuta er for tæt knyttet til den.",
+                    disableSpecific: "Slå bestemte funktioner fra:",
+                    disableSpecificTooltip: "Sponsoreret banner er et betalt Quest-banner øverst på Quest-siden.\n\nFlyttemeddelelser er indikatorer, f.eks. på Opdag-siden, om at Quests er flyttet til DM'er.\n\nVenneliste-promo er et kort i sektionen \"Aktiv nu\" på din venneliste, mens en bruger, du deler en server med, spiller et spil med en aktiv Quest.\n\nMedlemsliste-promo er et ikon ved medlemmer i en servers medlemsliste, mens de spiller et spil med en aktiv Quest.\n\nKontopanel-promo er en betalt Quest-promovering over dit kontopanel.\n\nKontopanel-fremskridt er det aktive eller fuldførte Quest-fremskridt over dit kontopanel.\n\nQuest- og Orbs-badges er badges på profiler for dem, der har fuldført mindst én Quest eller købt Orbs-badget.",
+                    disableOptions: {
+                        sponsoredBanner: "Sponsoreret banner",
+                        relocationNotices: "Flyttemeddelelser",
+                        friendsListPromo: "Venneliste-promo",
+                        membersListPromo: "Medlemsliste-promo",
+                        accountPanelPromo: "Kontopanel-promo",
+                        accountPanelProgress: "Kontopanel-fremskridt",
+                        orbsAndQuestsBadges: "Quest- og Orbs-badges"
+                    },
+                    modifyFeatures: "Ændr funktioner",
+                    warningTos: "Discord er begyndt at advare brugere af scripts eller plugins, der ændrer hvordan Quests fuldføres, hvilket strider mod deres {{tos}}.",
+                    tos: "Servicevilkår",
+                    warningEscalate: "Advarslerne ser ud til at være begrænset til trussel om at miste adgang til Quests eller deres belønninger, men Discord kan skærpe det når som helst.",
+                    warningDetection: "På grund af de mange metoder, Discord bruger til at spore brugere, er der realistisk set ingen måde at undgå opdagelse på. Hvis du fortsætter, så vær klar over, at Discord sandsynligvis vil opdage det på et tidspunkt.",
+                    warningRisk: "Brug følgende kontakt for at få adgang til potentielt farlige indstillinger på egen risiko.",
+                    allowDangerous: "Tillad ændring af farlige indstillinger...",
+                    disallowDangerous: "Nulstil og forbyd ændring af farlige indstillinger...",
+                    completeVideoQuicker: "Fremskynd automatisk fuldførelse af video-Quests:",
+                    completeVideoQuickerTooltip: "Discord tillader, at video-Quests fuldføres, når videoens varighed minus 24 sekunder er gået siden tilmeldingen.\n\nDet betyder, at en video-Quest på 24 sekunder eller mindre, eller en du tilmelder dig og vender tilbage til senere, kan fuldføres med det samme.\n\nDenne indstilling gælder kun automatisk fuldførelse af video-Quests og afhænger af indstillingen for automatisk fuldførelse nedenfor. Manuel fuldførelse kræver stadig, at hele varigheden afventes, og afhænger ikke af tilmeldingstidspunktet.",
+                    mobileDesktop: "Gør visse mobil-only video-Quests fuldførbare på computer:",
+                    mobileDesktopTooltip: "Visse mobil-only video-Quests kan man tilmelde sig på computer, men de skal stadig fuldføres på mobil. Denne indstilling tillader fuldførelse på computer.\n\nVisse mobil-only video-Quests kan man kun tilmelde sig på mobil. For at indstillingen skal påvirke dem, skal du tilmelde dig på din mobil, før du vender tilbage til computeren og opdaterer dine Quests.\n\nSlået til alene gælder denne indstilling kun manuel fuldførelse af video-Quests. Automatisk fuldførelse af mobile video-Quests fra computeren afhænger af indstillingen for automatisk fuldførelse nedenfor og slår implicit også denne indstilling til.",
+                    simultaneous: "Fuldfør Quests automatisk samtidigt i stedet for efter hinanden:",
+                    simultaneousTooltip: "Som standard sættes flere Quests til automatisk fuldførelse i kø og fuldføres i rækkefølge.\n\nDenne indstilling lader i stedet alle automatisk fuldførte Quests køre på samme tid.\n\nDenne indstilling gælder kun automatisk fuldførelse og afhænger af indstillingen for automatisk fuldførelse nedenfor.",
+                    resumeInterrupted: "Genoptag afbrudte automatiske fuldførelser efter genindlæsning eller genstart:",
+                    resumeInterruptedTooltip: "Denne indstilling genoptager automatisk fuldførelser, der er afbrudt af genindlæsninger eller genstarter, inklusive at sætte Quests i kø igen, som stod i kø men endnu ikke var startet.",
+                    autoCompleteTypes: "Fuldfør bestemte Quest-typer automatisk:",
+                    autoCompleteTypesTooltip: "\"Se video på mobil\"-Quests virker kun for mobile Quests, man kan tilmelde sig på computer. Er tilmelding begrænset til mobil, skal du først tilmelde dig på din mobil, før du vender tilbage til computeren og opdaterer dine Quests.\n\nAlle videorelaterede Quests sender normalt et stack trace med fremskridtsrapporterne. Discord ved altså præcis, hvilke funktioner der blev kaldt, og kan kontrollere, at deres egne funktioner startede fremskridtet. Questify sletter dette stack trace, men fraværet afslører lige så meget som tilstedeværelsen.\n\n\"Spil på computer\", \"Spil på PlayStation\", \"Spil på Xbox\" og \"Spil aktivitet\"-Quests er kun tilgængelige i officielle computerklienter på grund af en begrænsning fra Discord. Tredjepartsklienter som webudvidelser, Plextron og andre understøtter ikke automatisk fuldførelse af disse typer.\n\nAlle spilrelaterede Quests sender normalt et spilfingeraftryk med heartbeat-rapporterne. Discord kan derfor bruge data fra titusindvis af brugere til at afgøre, om andre sandsynligvis bruger et rigtigt spil eller emulerer den eksekverbare fil. Der er ingen fornuftig måde at forfalske værdien på, så Questify lader den stå tom, men fraværet afslører lige så meget som en dårlig forfalskning.\n\n\"Præstation i aktivitet\"-Quests kan kun fuldføres automatisk ved at fuldføre dem med det samme. Denne metode kan blive lukket når som helst.\n\nAutomatisk fuldførelse sker ved at klikke på de respektive knapper på Quest-siden. Quests fuldføres i den rækkefølge, de blev sat i kø, medmindre samtidig fuldførelse er slået til ovenfor.\n\nAutomatisk fuldførelse af Quests er den mest risikable af de farlige indstillinger. Slå den til på egen risiko."
                 },
-                restyleQuests: {
-                    title: "Quest-stil",
+                questNotifications: {
+                    title: "Quest-notifikationer",
+                    description: "Konfigurer notifikationer og advarsler for fuldførte og nyfundne Quests.",
+                    questCompleted: "Quest fuldført",
+                    notifyOnComplete: "Vis en notifikation, når en Quest er fuldført:",
+                    soundOnComplete: "Afspil en lyd, når en Quest er fuldført:",
+                    volume: "Lydstyrke:",
+                    newQuests: "Nye Quests fundet",
+                    notifyOnNew: "Vis en notifikation, når nye Quests findes:",
+                    soundOnNew: "Afspil en lyd, når nye Quests findes:",
+                    notifyOnNewExcluded: "Vis en notifikation, når nye udelukkede Quests findes:",
+                    notifyOnNewExcludedTooltip: "Visse Quests er udelukket fra din liste over tilgængelige Quests på grund af regions- eller platformsbegrænsninger.\n\nNår det er slået til, henter Questify deres konfigurationer, anvender dine filtre for Quest- og belønningstyper, skriver de udelukkede Quests' data til konsollen og viser en separat notifikation for matchende udelukkede Quests.",
+                    soundOnNewExcluded: "Afspil en lyd, når nye udelukkede Quests findes:",
+                    soundOnNewExcludedTooltip: "Visse Quests er udelukket fra din liste over tilgængelige Quests på grund af regions- eller platformsbegrænsninger.\n\nNår en lyd er valgt, henter Questify deres konfigurationer, anvender dine filtre for Quest- og belønningstyper, skriver de udelukkede Quests' data til konsollen og afspiller denne lyd for matchende udelukkede Quests.",
+                    fetchInterval: "Interval for hentning af Quests:",
+                    fetchIntervalTooltip: "Discord henter kun Quests ved opstart, og når du besøger Quest-siden.\n\nDette interval henter Quests løbende, så længe klienten er åben, så Quest-knappens indikatorer og advarsler om nye Quests holdes opdateret hele dagen.\n\nDet kører kun, hvis det er slået til, og hvis Quest-knappens eller Quest-notifikationernes indstillinger gør periodisk hentning meningsfuld.",
+                    disabled: "SLÅET FRA",
+                    preview: "Afspil {{sound}}",
+                    intervals: {
+                        thirtyMinutes: "30 minutter",
+                        fortyFiveMinutes: "45 minutter",
+                        oneHour: "1 time",
+                        threeHours: "3 timer",
+                        sixHours: "6 timer",
+                        twelveHours: "12 timer"
+                    }
+                },
+                questTiles: {
+                    title: "Quest-felter",
                     description: "Fremhæv Quests med valgfrie temafarver for bedre synlighed.",
-                    precedenceNote: "Stilen for afhentede og udløbne Quests vil have forrang, selvom en Quest er ignoreret.",
-                    gradientStyle: "Gradient-stil",
-                    assetPreload: "Præ-indlæsning af filer",
-                    unclaimed: "Uafhentet",
-                    claimed: "Afhentet",
-                    ignored: "Ignoreret",
-                    expired: "Udløbet",
-                    intenseGradient: "Intens gradient",
-                    defaultGradient: "Standard gradient",
-                    blackGradient: "Diskret sort gradient",
-                    noGradient: "Ingen gradient",
-                    loadAllAssets: "Indlæs alle filer ved indlæsning af siden",
-                    loadDuringScroll: "Indlæs filer mens der scrolles"
+                    behavior: "Feltadfærd",
+                    gradientStyle: "Gradientstil:",
+                    gradientStyleTooltip: "Intens og Standard bruger den valgte feltfarve i billedgradienten.\n\nDiskret sort bevarer en mørkere neutral gradient for kontrast.\n\nIngen gradient fjerner billedgradienten, hvilket kan gøre visse Quest-illustrationer sværere at læse.",
+                    assetPreload: "Forudindlæsning af ressourcer:",
+                    assetPreloadTooltip: "Indlæsning af alle ressourcer, når Quest-siden åbnes, mindsker layoutforskydninger under rulning.\n\nIndlæsning under rulning ligger tættere på Discords standardadfærd og kræver mindre arbejde fra start.",
+                    colors: "Feltfarver",
+                    enable: "Slå til",
+                    disable: "Slå fra",
+                    gradient: {
+                        intense: "Intens restyle-gradient",
+                        default: "Standard restyle-gradient",
+                        black: "Diskret sort gradient",
+                        hide: "Ingen gradient"
+                    },
+                    preload: {
+                        onLoad: "Indlæs alle Quest-ressourcer ved sideindlæsning",
+                        onScroll: "Indlæs Quest-ressourcer under rulning"
+                    }
                 },
                 reorderQuests: {
-                    title: "Omorganiser Quests",
-                    description: "Sorter Quests efter deres status. Anvendes når sorteringen 'Questify' er valgt på Quest-siden.",
-                    formatNote: "Komma-separeret liste skal indeholde alle disse: {{items}}.",
-                    placeholder: "Du skal inkludere alle: UNCLAIMED, CLAIMED, IGNORED, EXPIRED",
-                    invalidFormat: "Ugyldigt format.",
-                    unclaimedSubsort: "Sub-sortering for uafhentede",
-                    claimedSubsort: "Sub-sortering for afhentede",
-                    ignoredSubsort: "Sub-sortering for ignorerede",
-                    expiredSubsort: "Sub-sortering for udløbne",
-                    addedNewest: "Tilføjet (Nyeste)",
-                    addedOldest: "Tilføjet (Ældste)",
-                    expiredRecent: "Udløbet (Senest)",
-                    expiredLeast: "Udløbet (Længst siden)",
-                    expiringSoon: "Udløber (Snarest)",
-                    expiringLate: "Udløber (Senest)",
-                    claimedRecent: "Afhentet (Senest)",
-                    claimedLeast: "Afhentet (Længst siden)",
-                    ignoredQuestProfile: "Ignoreret Quest-profil",
-                    sharedProfile: "Delt: Alle konti på denne klient deler ignoreringer.",
-                    privateProfile: "Privat: Alle konti har separate ignoreringer.",
-                    rememberSort: "Husk sorteringsvalg",
-                    rememberFilter: "Husk filtervalg",
-                    yes: "Ja",
-                    no: "Nej",
-                    rememberNote: "Dette husker Discords indbyggede valg. Hvis deaktiveret, nulstilles de hver gang siden åbnes."
-                },
-                fetchingQuests: {
-                    title: "Hentning af Quests",
-                    description: "Konfigurer hvor ofte der skal tjekkes for Quests hos Discord og opsæt alarmer.",
-                    defaultBehavior: "Som standard henter Discord kun Quests ved opstart. Uden et interval her, vil pluginnet ikke opdage nye Quests i løbet af dagen.",
-                    requirement: "Dette kræver at Quest-knappen er aktiveret med indikatorer. Ellers er der ingen grund til at tjekke periodisk.",
-                    blockWarning: "Hvis {{fetchingQuests}} er blokeret i {{questFeatures}}, vil dette ikke virke.",
-                    fetchInterval: "Interval for tjek",
-                    alertSound: "Alarmlyd",
-                    intervalPlaceholder: "Vælg eller skriv et interval mellem 30 minutter og 12 timer.",
-                    intervalFeedback: "Intervallet skal være mellem 30 minutter og 12 timer.",
-                    soundPlaceholder: "Vælg en lyd eller angiv en URL.",
-                    soundFeedback: "Lyd ikke fundet, eller URL er ikke fra et understøttet domæne.",
-                    disabled: "Deaktiveret",
-                    minutes: "Minutter",
-                    minute: "Minut",
-                    hours: "Timer",
-                    hour: "Time",
-                    thirtyMinutes: "30 minutter",
-                    oneHour: "1 time",
-                    threeHours: "3 timer",
-                    sixHours: "6 timer",
-                    twelveHours: "12 timer",
-                    customSound: "EGEN LYD"
-                },
-                disableOptions: {
-                    everything: "Deaktiver alt",
-                    discovery: "Deaktiver Discovery-fane",
-                    dms: "Deaktiver Quests-fane i DM'er",
-                    fetching: "Deaktiver hentning af Quests",
-                    popup: "Deaktiver popup over kontopanel",
-                    sponsored: "Deaktiver reklame-banner på Quest-siden",
-                    badge: "Deaktiver badge på brugerprofiler",
-                    inventory: "Deaktiver notifikation om flytning af inventar",
-                    friendsList: "Fremme af spil i vennelisten",
-                    membersList: "Ikoner for aktivt spil i medlemslisten",
-                    gameQuests: "Fuldfør Spil-Quests i baggrunden",
-                    videoQuests: "Fuldfør Video-Quests i baggrunden",
-                    achievementQuests: "Fuldfør opgave-Quests i baggrunden",
-                    mobileDesktop: "Gør mobil-Quests computer-kompatible",
-                    notifyOnComplete: "Giv besked ved fuldførelse"
-                },
-                options: {
-                    always: "Altid",
-                    unclaimed: "Uafhentet",
-                    never: "Aldrig",
-                    pill: "Pille-indikator",
-                    badge: "Badge",
-                    both: "Begge",
-                    none: "Ingen",
-                    openQuests: "Åbn Quests",
-                    contextMenu: "Kontekstmenu",
-                    pluginSettings: "Plugin-indstillinger",
-                    nothing: "Ingen handling",
-                    orbs: "Orbs",
-                    nitroCodes: "Nitro-koder",
-                    rewardCodes: "Belønningskoder",
-                    inGameItems: "Genstande i spil",
-                    profileCollectibles: "Profil-samleobjekter"
+                    title: "Omsortér Quests",
+                    description: "Sortér quests efter status, når Questify-sorteringen er valgt på quest-siden. Skjulte statusser filtreres fra ved enhver sortering.",
+                    statusOrder: "Statusrækkefølge",
+                    statusOrderTooltip: "Hver status kan kun optræde én gang. Vælger du en status, der allerede bruges på en anden position, byttes de to positioner.",
+                    positions: {
+                        first: "Første:",
+                        second: "Anden:",
+                        third: "Tredje:",
+                        fourth: "Fjerde:"
+                    },
+                    subsorts: "Undersorteringer",
+                    unclaimedSubsort: "Undersortering af ikke-indløste:",
+                    unclaimedSubsortTooltip: "Fuldførte men ikke-indløste Quests forbliver under ufuldførte ikke-indløste Quests, hvorefter denne undersortering anvendes inden for grupperne.",
+                    claimedSubsort: "Undersortering af indløste:",
+                    claimedSubsortTooltip: "Indløste Quests kan sorteres efter indløsningstidspunkt eller efter hvornår Questen blev tilføjet.",
+                    ignoredSubsort: "Undersortering af ignorerede:",
+                    ignoredSubsortTooltip: "Ignorerede Quests beholder deres gruppeposition, og denne undersortering styrer rækkefølgen inden for gruppen.",
+                    expiredSubsort: "Undersortering af udløbne:",
+                    expiredSubsortTooltip: "Udløbne Quests kan sorteres efter udløbstidspunkt eller efter hvornår Questen blev tilføjet.",
+                    subsort: {
+                        addedNewest: "Tilføjet (nyeste)",
+                        addedOldest: "Tilføjet (ældste)",
+                        expiringSoonest: "Udløber (snarest)",
+                        expiringLatest: "Udløber (senest)",
+                        expiredMostRecent: "Udløbet (nyligst)",
+                        expiredLeastRecent: "Udløbet (længst siden)",
+                        claimedMostRecent: "Indløst (nyligst)",
+                        claimedLeastRecent: "Indløst (længst siden)"
+                    },
+                    memory: "Quest-sidens hukommelse",
+                    rememberSort: "Husk den valgte sortering på Quest-siden:",
+                    rememberSortTooltip: "Når det er slået fra, åbner Quest-siden hver gang med Questify-sorteringen.",
+                    rememberFilters: "Husk de valgte filtre på Quest-siden:",
+                    rememberFiltersTooltip: "Når det er slået fra, åbner Quest-siden hver gang uden opgave- eller belønningsfiltre."
                 }
             },
             option: {
-                disableQuests: {
-                    label: "Deaktiver Quests",
-                    description: "Vælg hvilke Quest-funktioner der skal deaktiveres."
+                migrationVersion: {
+                    label: "Migreringsversion",
+                    description: "Indstillingernes nuværende migreringsversion."
+                },
+                questFeatures: {
+                    label: "Quest-funktioner",
+                    description: "Vælg hvilke Quest-funktioner der skal slås fra."
                 },
                 disableQuestsEverything: {
-                    label: "Deaktiver alt",
-                    description: "Deaktiver alle Quest-funktioner."
+                    label: "Slå alt fra",
+                    description: "Slår alle Quest-funktioner fra."
                 },
-                disableQuestsFetchingQuests: {
-                    label: "Deaktiver hentning",
-                    description: "Stop med at hente Quests fra Discord."
+                disableRelocationNotices: {
+                    label: "Slå flyttemeddelelser fra",
+                    description: "Slår Quest-flyttemeddelelser på Opdag-siden fra."
                 },
-                disableQuestsDirectMessagesTab: {
-                    label: "Deaktiver fane i DM'er",
-                    description: "Fjern Quest-fanen fra siden med direkte beskeder."
+                disableSponsoredBanner: {
+                    label: "Slå sponsoreret banner fra",
+                    description: "Slår det sponsorerede banner på Quest-siden fra."
                 },
-                disableQuestsDiscoveryTab: {
-                    label: "Deaktiver fane i Discovery",
-                    description: "Fjern Quest-fanen fra Discovery-siden."
+                disableAccountPanelPromo: {
+                    label: "Slå kontopanel-promo fra",
+                    description: "Slår den promoverede Quest-popup over dit kontopanel fra."
                 },
-                disableQuestsPageSponsoredBanner: {
-                    label: "Deaktiver reklame-banner",
-                    description: "Fjern reklame-banneret fra Quest-siden."
+                disableAccountPanelQuestProgress: {
+                    label: "Slå kontopanel-fremskridt fra",
+                    description: "Slår fremskridt for aktive og fuldførte Quests over dit kontopanel fra."
                 },
-                disableQuestsPopupAboveAccountPanel: {
-                    label: "Deaktiver popup",
-                    description: "Fjern Quest-popup'en over dit kontopanel."
+                disableOrbsAndQuestsBadges: {
+                    label: "Slå Quest- og Orbs-badges fra",
+                    description: "Slår Quest-badget på profiler fra."
                 },
-                disableQuestsBadgeOnUserProfiles: {
-                    label: "Deaktiver badge på profiler",
-                    description: "Fjern Quest-badget fra brugerprofiler."
+                disableFriendsListPromo: {
+                    label: "Slå venneliste-promo fra",
+                    description: "Slår promovering af Quests for spil, venner spiller, fra."
                 },
-                disableQuestsGiftInventoryRelocationNotice: {
-                    label: "Deaktiver flytnings-notifikation",
-                    description: "Fjern notifikationen om at gave-inventaret er flyttet."
+                disableMembersListPromo: {
+                    label: "Slå medlemsliste-promo fra",
+                    description: "Slår ikonet for aktivt spil i medlemslisten fra."
                 },
-                disableFriendsListActiveNowPromotion: {
-                    label: "Deaktiver venner-promotion",
-                    description: "Stop promovering af Quests baseret på hvad venner spiller."
+                allowChangingDangerousSettings: {
+                    label: "Tillad farlige indstillinger",
+                    description: "Tillader ændring af farlige indstillinger."
                 },
-                disableMembersListActivelyPlayingIcons: {
-                    label: "Deaktiver medlemsliste-ikoner",
-                    description: "Fjern ikoner for aktive spil i medlemslisten."
+                resumeInterruptedQuests: {
+                    label: "Genoptag afbrudte Quests",
+                    description: "Genoptager automatisk fuldførelse af Quests efter genindlæsning eller genstart."
                 },
-                makeMobileQuestsDesktopCompatible: {
-                    label: "Mobil-til-Computer kompatibilitet",
-                    description: "Gør Quests, der kun er til mobil, tilgængelige på computer."
+                makeMobileVideoQuestsDesktopCompatible: {
+                    label: "Gør mobile video-Quests computerkompatible",
+                    description: "Gør mobil-only video-Quests kompatible med computer."
                 },
-                completeVideoQuestsInBackground: {
-                    label: "Fuldfør Video-Quests i baggrunden",
-                    description: "Fuldfør Video-Quests automatisk når tiden er gået."
+                autoCompleteQuestsSimultaneously: {
+                    label: "Fuldfør samtidigt",
+                    description: "Fuldfører Quests samtidigt i stedet for efter hinanden."
                 },
-                completeGameQuestsInBackground: {
-                    label: "Fuldfør Spil-Quests i baggrunden",
-                    description: "Fuldfør Spil-Quests automatisk når tiden er gået."
+                completeVideoQuestsQuicker: {
+                    label: "Fuldfør video-Quests hurtigere",
+                    description: "Bruger Discords fremskridtsmargin og tiden siden tilmelding ved automatisk fuldførelse af video-Quests."
                 },
-                completeAchievementQuestsInBackground: {
-                    label: "Fuldfør Achievement-Quests i baggrunden",
-                    description: "Fuldfør opgaver i aktiviteter automatisk i baggrunden."
-                },
-                notifyOnQuestComplete: {
-                    label: "Besked ved fuldførelse",
-                    description: "Vis en notifikation når en Quest fuldføres automatisk."
+                autoCompleteQuestTypes: {
+                    label: "Quest-typer til automatisk fuldførelse",
+                    description: "Hvilke Quest-typer der fuldføres automatisk i baggrunden."
                 },
                 questButton: {
                     label: "Quest-knap",
-                    description: "Vis en Quest-knap i serverlisten."
+                    description: "Tilpas Quest-knappen i serverlisten."
                 },
                 questButtonDisplay: {
                     label: "Visning af Quest-knap",
-                    description: "Vælg visningstype for knappen i serverlisten."
+                    description: "Hvilken visningstype Quest-knappen i serverlisten bruger."
                 },
-                questRewardIncludeRewardCode: {
-                    label: "Inkluder belønningskoder",
-                    description: "Tæl Quests med belønningskoder med i oversigten."
+                questButtonIncludedTypes: {
+                    label: "Medtagne typer for Quest-knap",
+                    description: "Hvilke belønnings- og Quest-typer der medtages i antallet på Quest-knappen."
                 },
-                questRewardIncludeNitroCode: {
-                    label: "Inkluder Nitro-koder",
-                    description: "Tæl Quests med Nitro-koder med i oversigten."
+                questButtonIndicator: {
+                    label: "Quest-knappens indikator",
+                    description: "Hvilken visningstype indikatoren for ikke-indløste på Quest-knappen bruger."
                 },
-                questRewardIncludeInGame: {
-                    label: "Inkluder belønninger i spil",
-                    description: "Tæl Quests med ting til spil med i oversigten."
-                },
-                questRewardIncludeCollectibles: {
-                    label: "Inkluder samleobjekter",
-                    description: "Tæl Quests med profil-samleobjekter med i oversigten."
-                },
-                questRewardIncludeOrbs: {
-                    label: "Inkluder Orbs",
-                    description: "Tæl Quests med Orbs med i oversigten."
-                },
-                questButtonUnclaimed: {
-                    label: "Uafhentet-indikator på knap",
-                    description: "Vælg stil for indikatoren på Quest-knappen."
+                questButtonBadgeCount: {
+                    label: "Badgetal",
+                    description: "Det nuværende antal relevante ikke-indløste Quests."
                 },
                 questButtonBadgeColor: {
-                    label: "Farve på knap-badge",
-                    description: "Farven på badget på Quest-knappen i serverlisten."
+                    label: "Badgefarve",
+                    description: "Farven på Quest-knappens badge i serverlisten."
                 },
                 questButtonLeftClickAction: {
-                    label: "Venstreklik-handling",
-                    description: "Hvad der sker ved venstreklik på knappen."
+                    label: "Handling ved venstreklik",
+                    description: "Handlingen ved venstreklik på Quest-knappen."
                 },
                 questButtonMiddleClickAction: {
-                    label: "Midterklik-handling",
-                    description: "Hvad der sker ved midterklik på knappen."
+                    label: "Handling ved midterklik",
+                    description: "Handlingen ved midterklik på Quest-knappen."
                 },
                 questButtonRightClickAction: {
-                    label: "Højreklik-handling",
-                    description: "Hvad der sker ved højreklik på knappen."
+                    label: "Handling ved højreklik",
+                    description: "Handlingen ved højreklik på Quest-knappen."
                 },
-                fetchingQuests: {
-                    label: "Hentning af Quests",
-                    description: "Hent Quests fra Discord."
+                questNotifications: {
+                    label: "Quest-notifikationer",
+                    description: "Konfigurer notifikationer for fuldførte og nyfundne Quests."
                 },
-                fetchingQuestsInterval: {
-                    label: "Interval for hentning",
-                    description: "Interval i sekunder for tjek af nye Quests."
+                notifyOnQuestComplete: {
+                    label: "Giv besked ved fuldførelse",
+                    description: "Viser en notifikation, når en Quest er fuldført."
                 },
-                fetchingQuestsAlert: {
-                    label: "Alarmlyd",
-                    description: "Lyden der afspilles når nye Quests opdages."
+                notifyOnNewQuests: {
+                    label: "Giv besked om nye Quests",
+                    description: "Viser en notifikation, når nye Quests findes."
                 },
-                fetchingQuestsAlertVolume: {
-                    label: "Lydstyrke for alarm",
-                    description: "Lydstyrken for alarmen ved nye Quests."
+                notifyOnNewExcludedQuests: {
+                    label: "Giv besked om nye udelukkede Quests",
+                    description: "Viser en notifikation, når nye udelukkede Quests findes."
                 },
-                restyleQuests: {
-                    label: "Quest-stil",
-                    description: "Tilpas udseendet af Quest-felter på siden."
+                questCompletedAlertSound: {
+                    label: "Lyd ved fuldført Quest",
+                    description: "Lyden, der afspilles, når en Quest er fuldført."
                 },
-                restyleQuestsUnclaimed: {
-                    label: "Farve for uafhentede",
-                    description: "Farven for uafhentede Quests."
+                questCompletedAlertVolume: {
+                    label: "Lydstyrke ved fuldført Quest",
+                    description: "Lydstyrken for lyden ved fuldført Quest."
                 },
-                restyleQuestsClaimed: {
-                    label: "Farve for afhentede",
-                    description: "Farven for afhentede Quests."
+                questFetchInterval: {
+                    label: "Henteinterval",
+                    description: "Intervallet i sekunder for hentning af Quests fra Discord."
                 },
-                restyleQuestsIgnored: {
-                    label: "Farve for ignorerede",
-                    description: "Farven for ignorerede Quests."
+                newQuestAlertSound: {
+                    label: "Lyd ved ny Quest",
+                    description: "Lyden, der afspilles, når nye Quests findes."
                 },
-                restyleQuestsExpired: {
-                    label: "Farve for udløbne",
-                    description: "Farven for udløbne Quests."
+                newQuestAlertVolume: {
+                    label: "Lydstyrke ved ny Quest",
+                    description: "Lydstyrken for lyden ved nye Quests."
                 },
-                restyleQuestsGradient: {
-                    label: "Gradient-stil",
-                    description: "Stilen for gradienten i Quest-felterne."
+                newExcludedQuestAlertSound: {
+                    label: "Lyd ved ny udelukket Quest",
+                    description: "Lyden, der afspilles, når nye udelukkede Quests findes."
                 },
-                restyleQuestsPreload: {
-                    label: "Præ-indlæsning",
-                    description: "Forsøg at indlæse billeder til Quests på forhånd."
+                newExcludedQuestAlertVolume: {
+                    label: "Lydstyrke ved ny udelukket Quest",
+                    description: "Lydstyrken for lyden ved nye udelukkede Quests."
+                },
+                questTiles: {
+                    label: "Quest-felter",
+                    description: "Tilpas udseendet af Quest-felter på Quest-siden."
+                },
+                questTileUnclaimedColor: {
+                    label: "Farve for ikke-indløste felter",
+                    description: "Farven på felter for ikke-indløste Quests."
+                },
+                questTileClaimedColor: {
+                    label: "Farve for indløste felter",
+                    description: "Farven på felter for indløste Quests."
+                },
+                questTileIgnoredColor: {
+                    label: "Farve for ignorerede felter",
+                    description: "Farven på felter for ignorerede Quests."
+                },
+                questTileExpiredColor: {
+                    label: "Farve for udløbne felter",
+                    description: "Farven på felter for udløbne Quests."
+                },
+                questTileGradient: {
+                    label: "Feltgradient",
+                    description: "Stilen på gradienten i Quest-felterne."
+                },
+                questTilePreload: {
+                    label: "Forudindlæs felter",
+                    description: "Forsøger at forudindlæse ressourcerne til Quest-felterne."
                 },
                 reorderQuests: {
-                    label: "Omorganiser Quests",
-                    description: "Sorter efter status. Efterlad tom for standard."
+                    label: "Omsortér Quests",
+                    description: "Sorterer Quests efter status."
+                },
+                questOrder: {
+                    label: "Quest-rækkefølge",
+                    description: "Sorteringsrækkefølge for Quest-statusgrupper."
                 },
                 unclaimedSubsort: {
-                    label: "Uafhentede sub-sortering",
-                    description: "Metode til sub-sortering af uafhentede."
+                    label: "Undersortering af ikke-indløste",
+                    description: "Undersorteringsmetode for ikke-indløste Quests."
                 },
                 claimedSubsort: {
-                    label: "Afhentede sub-sortering",
-                    description: "Metode til sub-sortering af afhentede."
+                    label: "Undersortering af indløste",
+                    description: "Undersorteringsmetode for indløste Quests."
                 },
                 ignoredSubsort: {
-                    label: "Ignorerede sub-sortering",
-                    description: "Metode til sub-sortering af ignorerede."
+                    label: "Undersortering af ignorerede",
+                    description: "Undersorteringsmetode for ignorerede Quests."
                 },
                 expiredSubsort: {
-                    label: "Udløbne sub-sortering",
-                    description: "Metode til sub-sortering af udløbne."
+                    label: "Undersortering af udløbne",
+                    description: "Undersorteringsmetode for udløbne Quests."
                 },
-                unclaimedUnignoredQuests: {
-                    label: "Uafhentede/ikke-ignorerede tæller",
-                    description: "Holder styr på antallet af uafhentede og ikke-ignorerede Quests."
-                },
-                onQuestsPage: {
+                isOnQuestsPage: {
                     label: "På Quest-siden",
-                    description: "Om brugeren befinder sig på Quest-siden."
-                },
-                triggerQuestsRerender: {
-                    label: "Gennemtving gen-indlæsning",
-                    description: "Gennemtving en opdatering af Quest-visningen."
-                },
-                ignoredQuestProfile: {
-                    label: "Ignoreret Quest-profil",
-                    description: "Profilen der bruges til ignorerede Quests."
+                    description: "Om brugeren i øjeblikket er på Quest-siden."
                 },
                 rememberQuestPageSort: {
                     label: "Husk sortering",
-                    description: "Husk den sidst brugte sortering."
+                    description: "Husker den senest brugte sortering på Quest-siden."
                 },
                 rememberQuestPageFilters: {
                     label: "Husk filtre",
-                    description: "Husk de sidst brugte filtre."
+                    description: "Husker de senest brugte filtre på Quest-siden."
                 },
                 lastQuestPageSort: {
-                    label: "Sidst brugte sortering",
-                    description: "Husker den seneste sortering."
+                    label: "Seneste sortering",
+                    description: "Den senest brugte sortering på Quest-siden."
                 },
                 lastQuestPageFilters: {
-                    label: "Sidst brugte filtre",
-                    description: "Husker de seneste filtre."
+                    label: "Seneste filtre",
+                    description: "De senest brugte filtre på Quest-siden."
                 },
                 ignoredQuestIDs: {
                     label: "Ignorerede Quest-ID'er",
-                    description: "En liste over ID'er der er ignoreret."
+                    description: "En liste over ignorerede Quest-ID'er."
                 },
                 resumeQuestIDs: {
-                    label: "Genoptag Quest-ID'er",
-                    description: "En liste over ID'er der er ved at blive auto-fuldført."
+                    label: "Quest-ID'er til genoptagelse",
+                    description: "En liste over Quest-ID'er, der fuldføres automatisk eller står i kø i baggrunden."
+                },
+                acknowledgedNotices: {
+                    description: "Engangsmeddelelser, som brugeren har bekræftet.",
+                    label: "Bekræftede meddelelser"
+                },
+                settingsSearch: {
+                    description: "Søg i Questify-indstillinger.",
+                    label: "Søgning i indstillinger"
+                },
+                hideNonAutoCompletableQuests: {
+                    description: "Skjul ufuldførte quests uden en understøttet og aktiveret auto-fuldførelsesopgave.",
+                    label: "Skjul quests, der ikke kan auto-fuldføres"
+                },
+                preventVideoQuestsPausing: {
+                    description: "Forhindr, at videoen pauses, når quest-vinduet mister fokus.",
+                    label: "Forhindr pause i videoquests"
+                },
+                hiddenQuestStatuses: {
+                    description: "Quest-statusgrupper, der skal skjules.",
+                    label: "Skjulte quest-statusser"
                 }
             },
-            button: {
-                questInProgressWithTime: "Fuldfører ({{remainTime}})",
-                completing: "Fuldfører",
-                resume: "Genoptag (~{{remainTime}})",
-                complete: "Fuldfør {{remainTime}}",
-                completeImmediate: "Fuldfør (Straks)",
-                completed: "Gennemført"
-            },
-            reward: {
-                orbs: "{{completingText}} for {{orbQuantity}} Orbs.",
-                article: "{{completingText}} for {{itemName}}.",
-                unrecognized: "{{completingText}} for en ukendt belønningstype."
-            },
-            notification: {
-                completed: {
-                    title: "Quest Gennemført",
-                    body: "Questen {{questName}} er blevet fuldført."
-                }
+            text: {
+                clearQuestQueue: "Ryd quest-kø",
+                hideIncompleteQuestsWith: "Skjul ufuldførte quests med status ikke-indløst eller ignoreret, når ingen auto-fuldførelsesopgave understøttes på denne platform og er aktiveret i rullemenuen for quest-typer. Indløste, udløbne og fuldførte quests er undtaget. Brug indstillingerne for skjult statusrækkefølge til at skjule disse quests.",
+                discordForcesYouTo: "Discord tvinger dig til at have klienten i fokus, for at videoquests kan afspille deres video.",
+                hideNonAutoCompletable: "Skjul quests, der ikke kan auto-fuldføres:",
+                preventVideoQuestsFrom: "Forhindr videoquests i at pause, når fokus mistes:",
+                thePunishmentAlsoConsists: "Straffen består også af en overtrædelse af kontostatus, der varer 2 år pr. overtrædelse.",
+                dueToTheVarious: "På grund af de forskellige metoder, Discord bruger til at spore brugere, er det ikke realistisk at undgå at blive opdaget. Hvis du fortsætter, skal du forstå, at Discord sandsynligvis vil opdage din brug på et tidspunkt.",
+                enrollInQuest: "Tilmeld dig quest",
+                hidden: "Skjult",
+                selectingAnOccupiedPosition: "Hvis du vælger en optaget position, byttes de to statusser. Skjulte statusser fjernes fra quest-listerne.",
+                searchQuestifySettings: "Søg i Questify-indstillinger",
+                searchQuestifySettings2: "Søg i Questify-indstillinger...",
+                noMatchingSettings: "Ingen matchende indstillinger.",
+                questifyNoticeAugust7th: "Questify-meddelelse – 7. august 2026",
+                keepUsingDangerousQuestify: "Bliv ved med at bruge farlige Questify-indstillinger",
+                disableDangerousQuestifySettings: "Slå farlige Questify-indstillinger fra",
+                questifyNoticeAugust26th: "Questify-meddelelse – 26. august 2026",
+                areYouSure: "Er du sikker?",
+                thePunishmentAppearsLimited: "Straffen ser ud til at være begrænset til tab af adgang til quests og deres belønninger, men Discord kan skærpe den når som helst.",
+                queueAllQuests: "Sæt alle quests i kø",
+                inProgress: "I gang",
+                rateLimited: "Begrænset",
+                preventsVideoPausing: "Denne indstilling forhindrer videoen i at pause og lader fuldførelsen skride normalt frem.",
+                appliesOnlyToVideoQuests: "Denne indstilling gælder kun ved manuel fuldførelse af videoquests.",
+                knownToPunish: "Discord er kendt for at straffe brugere af scripts eller plugins, der ændrer fuldførelsen af quests. At ændre fuldførelsen af quests er imod Discords",
+                punishmentConsists: "Straffen består af midlertidigt eller permanent tab af adgang til quests og deres belønninger.",
+                questBanSystem: "Discord har indført et quest-ban-system, som midlertidigt eller permanent begrænser din adgang til at fuldføre quests og hente belønninger, hvis det opdages, at du fuldfører dem på uofficielle måder. At ændre fuldførelsen af quests er imod deres",
+                begunPunishing: "Discord er begyndt at straffe brugere af scripts og plugins, der ændrer fuldførelsen af quests. At ændre fuldførelsen af quests er imod deres",
+                dueToRateLimits: " på grund af hastighedsbegrænsning"
             }
         },
         questionMarkReplacement: {
@@ -8230,6 +8853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Gem som GIF",
                     description: "Gem som GIF som standard"
                 }
+            },
+            text: {
+                quotePreview: "Forhåndsvisning af citat"
             }
         },
         randomVoice: {
@@ -8259,8 +8885,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     voice: "Stemmegrænse"
                 },
                 filter: {
-                    muted: "Muted",
-                    deafened: "Deafened",
+                    muted: "Lyd slået fra",
+                    deafened: "Hørelse slået fra",
                     camera: "Kamera",
                     stream: "Stream",
                     includeFilters: "Inkluder filtre",
@@ -8273,10 +8899,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Stemme-indstillinger",
                     joinSettings: "Deltag indstillinger",
                     auto: {
-                        mute: "Auto Mute",
-                        deafen: "Auto Deafen",
+                        mute: "Slå lyd fra automatisk",
+                        deafen: "Slå hørelse fra automatisk",
                         camera: "Auto Kamera",
-                        stream: "Auto Stream",
+                        stream: "Stream automatisk",
                         leaveWhenEmpty: "Forlad når tom",
                         navigate: "Auto Navigering",
                         stage: "Undgå Stage",
@@ -8287,7 +8913,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                     server: "Ugyldig server"
                 }
             },
+            keybind: {
+                label: "Genvejstast",
+                recording: "Optager...",
+                reset: "Nulstil"
+            },
             option: {
+                keybindEnabled: {
+                    label: "Genvejstast aktiveret",
+                    description: "Vis genvejstastkontroller for tilfældig stemmekanal"
+                },
                 userAmountOperation: {
                     label: "Brugerantal operation",
                     description: "Vælg en operation for antallet af brugere"
@@ -8325,15 +8960,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Tænder automatisk for kameraet"
                 },
                 autoStream: {
-                    label: "Auto Stream",
+                    label: "Stream automatisk",
                     description: "Tænder automatisk for stream"
                 },
                 selfMute: {
-                    label: "Auto Mute",
+                    label: "Slå lyd fra automatisk",
                     description: "Sætter automatisk din mikrofon på lydløs ved deltagelse."
                 },
                 selfDeafen: {
-                    label: "Auto Deafen",
+                    label: "Slå hørelse fra automatisk",
                     description: "Deaktiverer automatisk lyd ved deltagelse."
                 },
                 leaveEmpty: {
@@ -8379,6 +9014,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             alert: {
                 failed: "Kunne ikke finde en stemmekanal!"
+            },
+            toast: {
+                failedToFindA: "Kunne ikke finde en talekanal.",
+                voiceChannelIsUnavailable: "Talekanalen er ikke tilgængelig."
+            },
+            text: {
+                userCount: "{{count}} bruger",
+                usersCount: "{{count}} brugere"
             }
         },
         reactErrorDecoder: {
@@ -8426,7 +9069,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 clearRdms: {
                     label: "Ryd RDMS-liste",
                     description: "Værktøj: Ryd listen over seneste DM'er",
-                    toast: "Ryddede RMDS-historik",
+                    toast: "RDMS-historik ryddet",
                     button: "Ryd RDMS-historik"
                 }
             },
@@ -8477,6 +9120,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noLongerFriend: "Du er ikke længere venner med {{user}}.",
                 friendRequestRevoked: "Venneanmodning fra {{user}} er blevet trukket tilbage.",
                 ok: "OK"
+            },
+            text: {
+                relationshipNotifier: "Relationsnotifikator"
             }
         },
         remix: {
@@ -8500,7 +9146,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ellipse: "Ellipse",
                 line: "Linje",
                 arrow: "Pil",
-                fill: "Udfyld"
+                fill: "Udfyld",
+                image: "Billede"
             }
         },
         repeatMessages: {
@@ -8534,12 +9181,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Søg efter tekst",
                 searchWith: "Søg med {{name}}"
+            },
+            text: {
+                google: "Google"
             }
         },
         replyPingControl: {
             name: "ReplyPingControl",
-            description: "Kontroller om du altid eller aldrig skal pinges ved svar, med en hvidliste-funktion",
+            description: "Styr, om du altid eller aldrig vil modtage pings ved beskedsvar, med hvidliste- og sortliste-funktioner",
             option: {
+                replyPingBlacklist: {
+                    label: "Sortliste for svar-pings",
+                    description: "Kommasepareret liste over bruger-ID'er, som du aldrig vil modtage svar-pings fra"
+                },
                 alwaysPingOnReply: {
                     label: "Ping altid ved svar",
                     description: "Bliv altid pinget, når nogen svarer på dine beskeder"
@@ -8564,6 +9218,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Søg efter billede",
                 all: "Søg overalt"
+            },
+            text: {
+                all: "Alle"
             }
         },
         reviewDB: {
@@ -8671,6 +9328,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             profile: {
                 optedOut: "Bruger fravalgt",
                 noReviews: "Ingen anmeldelser endnu"
+            },
+            toast: {
+                youCannotVoteOn: "Du kan ikke stemme på din egen anmeldelse.",
+                networkErrorFailedTo: "Netværksfejl: Kunne ikke forbinde til ReviewDB.",
+                pleaseAuthorizeToVote: "Godkend for at stemme på anmeldelser.",
+                requestFailed: "ReviewDB: Anmodning mislykkedes med status {{status}}"
+            },
+            text: {
+                ok: "OK",
+                updateReviewFor: "Opdater anmeldelse for @{{name}}",
+                reviewUser: "Anmeld @{{name}}",
+                system: "System",
+                reviewCount: "({{count}} anmeldelser)"
             }
         },
         richMagnetLinks: {
@@ -8683,7 +9353,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Tilføjer farven fra den højeste rolle overalt hvor det er muligt",
             option: {
                 chatMentions: {
-                    label: "Chat Mentions",
+                    label: "Omtaler i chat",
                     description: "Vis rollefarver i @nævnelser (inklusiv i skrivefeltet)"
                 },
                 memberList: {
@@ -8764,46 +9434,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
         },
-        rpcStats: {
-            name: "RPCStats",
-            description: "Viser statistikker om din aktivitet som en RPC-status",
-            option: {
-                assetURL: {
-                    label: "Billed-URL",
-                    description: "Billedet der skal bruges. Dit profilbillede bruges hvis feltet er tomt"
-                },
-                rpcTitle: {
-                    label: "RPC-titel",
-                    description: "Titlen på din RPC-status"
-                },
-                statDisplay: {
-                    label: "Statistik-visning",
-                    description: "Hvad skal statussen vise?",
-                    today: "Antal beskeder sendt i dag",
-                    alltime: "Antal beskeder sendt i alt",
-                    listened: "Dit mest hørte album i denne uge"
-                },
-                lastFMApiKey: {
-                    label: "Last.fm API-nøgle",
-                    description: "Din Last.fm API-nøgle"
-                },
-                lastFMUsername: {
-                    label: "Last.fm brugernavn",
-                    description: "Dit Last.fm brugernavn"
-                },
-                albumCoverImage: {
-                    label: "Brug albumcover",
-                    description: "Skal albumcoveret bruges som billede? (Hvis Last.fm er valgt)"
-                },
-                lastFMStatFormat: {
-                    label: "Last.fm format",
-                    description: "Hvordan skal statistikken formateres? $album og $artist erstattes automatisk"
-                }
-            },
-            noInfo: "Ingen information lige nu :(",
-            messagesToday: "Beskeder sendt i dag: {{count}}",
-            messagesAllTime: "Beskeder sendt i alt: {{count}}"
-        },
         saveFavoriteGIFs: {
             name: "SaveFavouritedGIFs",
             description: "Eksporter URL'er på dine favorit-GIF'er",
@@ -8868,7 +9498,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 maxMessagesReached: "Maksimum på {{max}} beskeder pr. kanal pr. minut er nået",
                 messageScheduled: "Besked planlagt!",
                 messageRemoved: "Planlagt besked fjernet",
-                allCleared: "Alle planlagte beskeder er slettet"
+                allCleared: "Alle planlagte beskeder er slettet",
+                scheduledMessageSentTo: "Planlagt besked sendt til {{name}}"
             },
             button: {
                 tooltipOn: "Planlægningstilstand TIL (klik for at deaktivere, højreklik for liste)",
@@ -8924,20 +9555,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Afspil kun 'Snow Halation'-temaet"
                 }
             }
-        },
-        summaries: {
-            name: "Summaries",
-            description: "Aktiverer Discords eksperimentelle 'Summaries'-funktion på alle servere (AI-genererede overblik over samtaler)",
-            option: {
-                summaryExpiryThresholdDays: {
-                    label: "Tærskel for udløb af resumé (Dage)",
-                    description: "Antal dage før et resumé fjernes. Bemærk at kun op til 50 resuméer gemmes pr. kanal"
-                }
-            }
-        },
-        selfForward: {
-            name: "SelfForward",
-            description: "Tilføjer den nuværende kanal til listen over destinationer, når du videresender beskeder"
         },
         sendTimestamps: {
             name: "SendTimestamps",
@@ -8996,13 +9613,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     level: "Verifikationsniveau",
                     none: "Ingen",
                     low: "Lav",
-                    medium: "Medium",
+                    medium: "Mellem",
                     high: "Høj",
                     highest: "Højeste"
                 },
-                serverBoosts: "Server Boosts",
+                serverBoosts: "Serverboosts",
                 channels: "Kanaler",
-                roles: "Roller"
+                roles: "Roller",
+                boostLevel: "{{count}} (Niveau {{level}})"
             }
         },
         serverListIndicators: {
@@ -9061,6 +9679,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bgOpacity: {
                     label: "Baggrundsgennemsigtighed",
                     description: "Gennemsigtighed for baggrunden"
+                },
+                ignoredLanguages: {
+                    label: "Ignorerede sprog",
+                    description: "Kommasepareret liste over sprog, der skal overlades til Discords standard-kodeblokke"
                 }
             },
             button: {
@@ -9079,6 +9701,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noShiftPin: {
                     label: "Fastgør uden Shift",
                     description: "Fjern kravet om at holde Shift for at fastgøre en besked."
+                },
+                noQuickReacts: {
+                    description: "Skjul hurtigreaktioner. Som standard skjuler visning af hele menuen knapperne til hurtigreaktioner.",
+                    label: "Ingen hurtigreaktioner"
                 }
             }
         },
@@ -9129,19 +9755,19 @@ const translations: MatchStructure<typeof enTranslations> = {
                 contributor: "Plexcord contributor-badge",
                 discordProfile: "Discord profilbadges (HypeSquad, Staff, Active Developer osv.)",
                 nitro: "Nitro-badge",
-                staff: "Discord Staff",
-                partner: "Partnered Server Owner",
+                staff: "Discord-medarbejder",
+                partner: "Ejer af partnerserver",
                 events: "HypeSquad Events",
                 bravery: "HypeSquad Bravery",
                 brilliance: "HypeSquad Brilliance",
                 balance: "HypeSquad Balance",
                 bugHunter: "Discord Bug Hunter",
-                earlyVerifiedBotDeveloper: "Early Verified Bot Developer",
-                earlySupporter: "Early Supporter",
-                moderatorProgram: "Moderator Program Alumni"
+                earlyVerifiedBotDeveloper: "Tidlig verificeret botudvikler",
+                earlySupporter: "Tidlig supporter",
+                moderatorProgram: "Tidligere deltager i moderatorprogrammet"
             },
             modal: {
-                plexcordContributor: "Plexcord Contributor",
+                plexcordContributor: "Plexcord-bidragyder",
                 discordNitro: "Discord Nitro",
                 basic: "Basic",
                 classic: "Classic"
@@ -9161,6 +9787,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     compact: "Kompakt",
                     cozy: "Hyggelig",
                     roomy: "Rummelig"
+                },
+                showGithubOrgs: {
+                    description: "Vis GitHub-organisationer, som brugeren er medlem af",
+                    label: "Vis GitHub-organisationer"
+                },
+                showOnModal: {
+                    description: "Vis tilknyttede konti i profilvinduet i fuld størrelse",
+                    label: "Vis i profilvindue"
                 }
             }
         },
@@ -9194,7 +9828,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 announcement: "bekendtgørelse",
                 forum: "forum",
                 voice: "stemme",
-                stage: "stage"
+                stage: "scene"
             },
             sortOrder: {
                 latestActivity: "Seneste aktivitet",
@@ -9225,7 +9859,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 lastCreated: "Sidst oprettet {{type}}:",
                 lastPin: "Sidst fastgjorte besked:",
                 threadSlowmode: "Standard slowmode for tråde:",
-                slowmode: "Slowmode:",
+                slowmode: "Langsom tilstand:",
                 bitrate: "Bitrate:",
                 region: "Region:",
                 automatic: "Automatisk",
@@ -9286,7 +9920,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Brug brugerdefineret navneformat i svar."
                 },
                 mentions: {
-                    label: "Mentions",
+                    label: "Omtaler",
                     description: "Brug brugerdefineret navneformat i mentions."
                 },
                 typingIndicator: {
@@ -9295,7 +9929,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 memberList: {
                     label: "Medlemsliste",
-                    description: "Vis det første tilgængelige navn i medlemslisten."
+                    description: "Vis det første tilgængelige navn fra dit brugerdefinerede navneformat i medlemslisten, DM-listen, vennelisten og Aktiv nu."
                 },
                 profilePopout: {
                     label: "Profil-popout",
@@ -9349,6 +9983,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Eget navn kun i DM",
                     description: "Vis kun brugerdefinerede navne i DM'er."
                 },
+                alwaysShowEffects: {
+                    label: "Animér altid effekter",
+                    description: "Vis altid effekter, som om du holdt musen over."
+                },
                 includedNames: {
                     label: "Inkluderede navne",
                     description: "Rækkefølgen af navne. Brug: {user}, {display}, {nick}, {friend}. Adskil med komma for at bruge som fallback."
@@ -9376,6 +10014,42 @@ const translations: MatchStructure<typeof enTranslations> = {
                 triggerNameRerender: {
                     label: "Gennemtving opdatering af navne",
                     description: "Opdater visningen af navne ved at trykke her."
+                },
+                searchAutocomplete: {
+                    description: "Vis det første tilgængelige navn fra dit brugerdefinerede navneformat i autofuldførelse for omtaler og søgning.",
+                    label: "Autofuldførelse i søgning"
+                },
+                styleDirectMessagesList: {
+                    description: "Vis effekter for visningsnavne på ikke-valgte poster uden at kræve hover. Valgte poster og poster under markøren styles stadig, når det er slået fra.",
+                    label: "Style listen over direkte beskeder"
+                },
+                styleDirectMessagesMessages: {
+                    description: "Vis effekter for visningsnavne på beskedforfattere uden at kræve hover. Navne under markøren styles stadig, når det er slået fra.",
+                    label: "Style beskeder i direkte beskeder"
+                },
+                styleFriendsList: {
+                    description: "Vis effekter for visningsnavne uden at kræve hover. Poster under markøren styles stadig, når det er slået fra.",
+                    label: "Style vennelisten"
+                },
+                styleActiveNow: {
+                    description: "Vis effekter for visningsnavne uden at kræve hover. Poster under markøren styles stadig, når det er slået fra.",
+                    label: "Style Aktiv nu"
+                },
+                ignoreEffects: {
+                    description: "For ikke-primære navne: brug kun den primære rollefarve, og udelad effekter for visningsnavne.",
+                    label: "Ignorer effekter"
+                },
+                animateEffects: {
+                    description: "Animér rollegradienter og effekter for visningsnavne på ikke-primære navne. Dette deaktiveres af \"Ignorer effekter\" og reduceret bevægelse.",
+                    label: "Animér effekter"
+                },
+                alwaysAnimateEffects: {
+                    description: "Tving effekter for visningsnavne til at animere, når de allerede ville være synlige, selv uden hover.",
+                    label: "Animér altid effekter"
+                },
+                gradientGlow: {
+                    description: "Tilføj en glød til animerede brugergradienter på samme måde, som serverrollegradienter gløder.",
+                    label: "Gradientglød"
                 }
             },
             modal: {
@@ -9389,6 +10063,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nickname: "SMYN-kaldenavn",
                 reset: "Nulstil SMYN-kaldenavn",
                 cancel: "Annuller"
+            },
+            text: {
+                save: "Gem",
+                unknown: "Ukendt"
             }
         },
         showTimeoutDuration: {
@@ -9401,6 +10079,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     tooltip: "I værktøjstippet",
                     inline: "Ved siden af ikonet"
                 }
+            },
+            text: {
+                timeoutRemaining: "timeout tilbage"
             }
         },
         showResourceChannels: {
@@ -9445,7 +10126,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Hold chatvinduer oven på alle andre vinduer."
                 },
                 patchCommunity: {
-                    label: "Patch Community",
+                    label: "Patch fællesskab",
                     description: "Retter fejl i Community-funktioner som Channel Browser eller Medlems-fanen."
                 },
                 persistedPopoutWindowIds: {
@@ -9559,7 +10240,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 hidden: "Skrivning skjult ({{location}})",
                 visible: "Skrivning synlig ({{location}})",
-                global: "Skrivning synlig (Globalt)"
+                global: "Skrivning synlig (Globalt)",
+                voiceChannel: "Skrivning altid synlig i chatten for den tilsluttede stemmekanal",
+                temporary: "Skrivning midlertidigt synlig i denne kanal på grund af en nylig besked"
             },
             option: {
                 enabledGlobally: {
@@ -9610,6 +10293,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Standard skjult",
                     description: "Hvis aktiveret, skjules din skrivning overalt, undtagen de steder du vælger i listen 'Deaktiverede steder' nedenfor."
                 },
+                alwaysEnableInActiveVoiceChat: {
+                    label: "Altid aktiver i aktiv stemmechat",
+                    description: "Tillad altid, at din skriveindikator vises, når du skriver i en stemmekanal, du er tilsluttet."
+                },
+                temporaryEnableThresholdServers: {
+                    label: "Midlertidig aktiveringsgrænse (servere)",
+                    description: "Tillad midlertidigt, at din skriveindikator vises i så mange sekunder efter at have sendt en besked i en serverkanal. Hvis skriveindikatoren allerede er synlig i kanalen, har denne indstilling ingen effekt."
+                },
+                temporaryEnableThresholdDirectMessages: {
+                    label: "Midlertidig aktiveringsgrænse (direkte beskeder)",
+                    description: "Tillad midlertidigt, at din skriveindikator vises i så mange sekunder efter at have sendt en besked i en DM eller gruppe-DM. Hvis skriveindikatoren allerede er synlig i kanalen, har denne indstilling ingen effekt."
+                },
                 enabledLocations: {
                     label: "Aktiverede steder",
                     description: "ID'er på kanaler/servere hvor funktionen skal være aktiv."
@@ -9618,6 +10313,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Deaktiverede steder",
                     description: "ID'er på kanaler/servere hvor funktionen skal være deaktiveret."
                 }
+            },
+            text: {
+                silentTyping: "Lydløs skrivning",
+                enabled: "Aktiveret",
+                chatBarIndicators: "Indikatorer i chatlinjen",
+                membersListIndicators: "Indikatorer i medlemslisten",
+                guild: "Server",
+                channel: "Kanal",
+                global: "Global"
             }
         },
         snowfall: {
@@ -9714,7 +10418,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         splitLargeMessages: {
             name: "SplitLargeMessages",
-            description: "Opdeler store beskeder i flere dele, så de passer til Discords grænse.",
+            description: "Opdeler for store beskeder i bidder i Discord-størrelse før afsendelse.",
             option: {
                 maxLength: {
                     label: "Maks. beskedlængde",
@@ -9726,7 +10430,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 sendDelay: {
                     label: "Forsinkelse ved afsendelse",
-                    description: "Pause mellem hver del i sekunder."
+                    description: "Mindste forsinkelse mellem hver del i sekunder."
                 },
                 hardSplit: {
                     label: "Hård opdeling",
@@ -9734,32 +10438,26 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 splitInSlowmode: {
                     label: "Opdel i slowmode",
-                    description: "Skal beskeder opdeles selvom kanalen har slowmode?"
+                    description: "Tillad opdeling i langsom tilstand, når forsinkelsen er inden for det konfigurerede maksimum."
                 },
                 slowmodeMax: {
                     label: "Slowmode maks.",
-                    description: "Maksimal slowmode-tid hvor opdeling stadig er tilladt."
-                }
-            }
-        },
-        spotifyActivityToggle: {
-            name: "SpotifyActivityToggle",
-            description: "Tilføjer en knap til at slå synlighed af Spotify-aktivitet til/fra.",
-            tooltip: {
-                enable: "Slå Spotify-aktivitet til",
-                disable: "Slå Spotify-aktivitet fra"
-            },
-            option: {
-                location: {
-                    label: "Placering",
-                    description: "Hvor knappen skal vises",
-                    panel: "Ved siden af Mute/Deafen",
-                    toolbox: "Plexcord-værktøjskasse"
+                    description: "Maksimal varighed for langsom tilstand, der tillades ved opdeling af beskeder."
                 },
-                activityStatus: {
-                    label: "Aktivitetsstatus",
-                    description: "Nuværende status for din Spotify-aktivitet"
+                splitMode: {
+                    description: "Foretræk denne grænse, når en besked opdeles.",
+                    label: "Opdelingstilstand"
                 }
+            },
+            toast: {
+                cannotSplitThisMessage: "Kan ikke opdele denne besked på grund af kanalens langsom tilstand.",
+                onlySentLengthMessage: "Kun {{sent}}/{{length}} beskeddele blev sendt.",
+                unsentCopied: "Ikke-sendte beskeddele kopieret til udklipsholderen."
+            },
+            text: {
+                newlines: "Linjeskift",
+                spaces: "Mellemrum",
+                strictCharacterLimit: "Streng tegngrænse"
             }
         },
         spotifyCrack: {
@@ -9845,7 +10543,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             context: {
                 edit: "Rediger skabeloner",
-                set: "Sæt brugerdefineret status"
+                set: "Sæt brugerdefineret status",
+                delete: "Slet forudindstilling",
             },
             notification: {
                 successfully: "Status gemt med succes"
@@ -9912,11 +10611,39 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 blockSticker: "Bloker sticker",
                 unblockSticker: "Fjern blokering af sticker"
+            },
+            text: {
+                failedToRender: "Kunne ikke vises :("
             }
         },
         stickerPaste: {
             name: "StickerPaste",
             description: "Gør at valg af en sticker indsætter den i chatfeltet i stedet for at sende den med det samme"
+        },
+        streaks: {
+            name: "Streaks",
+            description: "Viser en stime ved siden af en bruger, når I udveksler DM'er på flere dage i træk.",
+            tooltip: "{{count}} dages stime",
+            tooltipExpiring: "{{count}} dages stime – skriv i dag for at holde den i gang!",
+            option: {
+                account: {
+                    description: "Log ind eller ud af Streaks-API'et. Stimer gemmes i API'et, så du skal være logget ind, for at de bliver registreret.",
+                    login: "Log ind på Streaks-API",
+                    logout: "Log ud af Streaks-API"
+                },
+                eliteColor: "Elite-stimefarve (100+ dage)",
+                diamondColor: "Diamant-stimefarve (60+ dage)",
+                platinumColor: "Platin-stimefarve (45+ dage)",
+                goldColor: "Guld-stimefarve (30+ dage)",
+                silverColor: "Sølv-stimefarve (14+ dage)",
+                bronzeColor: "Bronze-stimefarve (7+ dage)",
+                defaultColor: "Standard-stimefarve (1+ dage)"
+            },
+            toast: {
+                authFailed: "Godkendelse mislykkedes: {{error}}",
+                failedToAuthorizeMessage: "Godkendelse mislykkedes: {{message}}",
+                authorizationExpired: "Streaks-godkendelsen er udløbet. Godkend igen i Streaks-pluginets indstillinger."
+            }
         },
         streamerModeOnStream: {
             name: "StreamerModeOnStream",
@@ -9924,27 +10651,27 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         streamingCodecDisabler: {
             name: "StreamingCodecDisabler",
-            description: "Deaktiver specifikke codecs til streaming",
+            description: "Deaktivér videocodecs efter eget valg til streaming og kameraer.",
             option: {
                 disableAv1Codec: {
                     label: "Deaktiver AV1 Codec",
-                    description: "Forhindrer Discord i at bruge AV1 til streaming."
+                    description: "Få Discord til ikke at overveje AV1 til streaming og kameraer."
                 },
                 disableH265Codec: {
                     label: "Deaktiver H265 Codec",
-                    description: "Forhindrer Discord i at bruge H265 til streaming."
+                    description: "Få Discord til ikke at overveje H265 til streaming og kameraer."
                 },
                 disableH264Codec: {
                     label: "Deaktiver H264 Codec",
-                    description: "Forhindrer Discord i at bruge H264 til streaming."
+                    description: "Få Discord til ikke at overveje H264 til streaming og kameraer."
                 },
                 disableVP8Codec: {
                     label: "Deaktiver VP8 Codec",
-                    description: "Forhindrer Discord i at bruge VP8 til streaming."
+                    description: "Få Discord til ikke at overveje VP8 til streaming og kameraer."
                 },
                 disableVP9Codec: {
                     label: "Deaktiver VP9 Codec",
-                    description: "Forhindrer Discord i at bruge VP9 til streaming."
+                    description: "Få Discord til ikke at overveje VP9 til streaming og kameraer."
                 }
             }
         },
@@ -9990,6 +10717,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             modal: {
+                name: "Navn",
+                nameDescription: "Et valgfrit navn, der hjælper dig med at genkende denne regel.",
+                search: "Søg efter en regel...",
+                noResults: "Ingen regler matcher din søgning.",
                 title: "Test regler",
                 find: "Find",
                 findRegex: "Regex-mønster",
@@ -10004,6 +10735,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 add: "Tilføj regel",
                 empty: "Tom regel",
                 rule: "Regel",
+            },
+            text: {
+                optionallyOnlyApplyThis: "Anvend eventuelt kun denne regel, hvis beskeden indeholder denne tekst.",
+                emptyRule: "Tom regel {{number}}",
+                ruleWithFind: "Regel {{number}} - {{find}}"
             }
         },
         themeAttributes: {
@@ -10089,6 +10825,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 askedTimezone: {
                     label: "Er blevet spurgt",
                     description: "Om brugeren er blevet bedt om at sætte sin tidszone"
+                },
+                recipientTimezoneInDms: {
+                    label: "Modtagerens tidszone i DM'er",
+                    description: "Vis modtagerens tidszone på dine beskeder i DM'er"
+                },
+                showLocalTimezone: {
+                    label: "Vis lokal tidszone",
+                    description: "Vis den lokale tidszone i stedet for blot \"lokal\""
                 }
             },
             modal: {
@@ -10097,6 +10841,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 selectPlaceholder: "Vælg en tidszone fra listen",
                 delete: "Slet tidszone",
                 save: "Gem"
+            },
+            text: {
+                invalidResponseFormat: "Ugyldigt svarformat"
             }
         },
         toastNotifications: {
@@ -10157,6 +10904,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 determineServerNotifications: {
                     label: "Følg serverindstillinger",
                     description: "Vis kun notifikationer hvis de også er tilladt af serverens indstillinger"
+                },
+                respectDoNotDisturb: {
+                    label: "Respekter Forstyr ikke",
+                    description: "Vis ikke notifikationer, når din status er Forstyr ikke."
                 },
                 directMessages: {
                     label: "Direkte beskeder",
@@ -10244,8 +10995,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "DeepL kræver en API-nøgle fra DeepL Pro",
                     descriptionWeb: "Tjeneste (Ikke understøttet på Web!)",
                     google: "Google Translate",
-                    deepl: "DeepL Free",
-                    deeplPro: "DeepL Pro"
+                    deepl: "DeepL Gratis - API-nøgle påkrævet",
+                    deeplPro: "DeepL Pro - API-nøgle påkrævet",
+                    kagi: "Kagi Översæt - API-nøgle påkrævet"
+                },
+                kagiSession: {
+                    label: "Kagi-session",
+                    description: "Hent din sessionstoken fra https://kagi.com/settings?p=user_details"
                 },
                 deeplApiKey: {
                     label: "DeepL API-nøgle",
@@ -10284,6 +11040,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     cancel: "Forstået",
                     secondaryConfirm: "Vis ikke igen"
                 }
+            },
+            button: {
+                manageLanguages: "Tilpas oversættelsessprog og automatisk oversættelse"
             }
         },
         typingIndicator: {
@@ -10494,16 +11253,16 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Retter mentions for ukendte brugere, der vises som '@unknown-user' (hold musen over en mention for at rette den).",
             badges: {
                 discordBugHunter: "Discord Bug Hunter",
-                moderatorProgramsAlumni: "Moderator Programs Alumni",
-                discordStaff: "Discord Staff",
+                moderatorProgramsAlumni: "Tidligere deltager i moderatorprogrammerne",
+                discordStaff: "Discord-medarbejder",
                 hypeSquadEvents: "HypeSquad Events",
                 bravery: "HypeSquad Bravery",
                 brilliance: "HypeSquad Brilliance",
                 balance: "HypeSquad Balance",
-                partneredServerOwner: "Partnered Server Owner",
+                partneredServerOwner: "Ejer af partnerserver",
                 nitro: "Discord Nitro",
-                earlySupporter: "Early Supporter",
-                earlyVerifiedBotDeveloper: "Early Verified Bot Developer"
+                earlySupporter: "Tidlig supporter",
+                earlyVerifiedBotDeveloper: "Tidlig verificeret botudvikler"
             }
         },
         voiceChatDoubleClick: {
@@ -10596,6 +11355,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Billedstørrelse",
                     description: "Den billedstørrelse der skal bruges"
                 }
+            },
+            text: {
+                viewAvatarDecoration: "Vis avatardekoration"
             }
         },
         viewRaw: {
@@ -10616,12 +11378,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Skift hvordan knappen til rå data fungerer.",
                     left: "Venstreklik for at se råt indhold.",
                     right: "Højreklik for at se råt indhold."
+                },
+                messageContextMenu: {
+                    description: "Vis i beskedens kontekstmenu",
+                    label: "Kontekstmenu for beskeder"
+                },
+                sortKeys: {
+                    description: "Sortér nøglerne i rådataene alfabetisk.",
+                    label: "Sortér nøgler"
+                },
+                stripSensitiveData: {
+                    description: "Fjern følsomme data fra rådataene, f.eks. din e-mail og dit telefonnummer.",
+                    label: "Fjern følsomme data"
                 }
             },
             modal: {
                 title: "Vis rå data",
-                content: "Indhold",
-                data: "{{type}} Data",
+                content: "Beskedindhold",
+                data: "{{type}}-data",
                 copied: "{{type}} data kopieret til udklipsholder!",
                 copy: "Kopier {{type}} JSON",
                 copiedContent: "Indhold kopieret til udklipsholder!",
@@ -10633,6 +11407,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 guild: "Server",
                 role: "Rolle",
                 user: "Bruger"
+            },
+            text: {
+                copyTypeData: "Kopiér {{type}}-data",
+                rawTypeData: "Rå {{type}}-data",
+                messageData: "Beskeddata"
             }
         },
         voiceButtons: {
@@ -10652,7 +11431,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Om du vil have vist deafen-knappen"
                 },
                 muteSoundboard: {
-                    label: "Mute Soundboard",
+                    label: "Slå lyd fra for soundboard",
                     description: "Slår deres soundboard fra når du trykker på Deafen-knappen."
                 },
                 disableVideo: {
@@ -10694,10 +11473,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 yourself: "dig selv",
                 serverMute: "Server-mute",
                 serverDeafen: "Server-deafen",
-                mute: "Mute",
-                deafen: "Deafen",
-                unmute: "Unmute",
-                undeafen: "Undeafen",
+                mute: "Slå lyd fra",
+                deafen: "Slå hørelse fra",
+                unmute: "Slå lyd til",
+                undeafen: "Slå hørelse til",
                 serverUnmute: "Fjern server-mute",
                 serverUndeafen: "Fjern server-deafen"
             }
@@ -10779,11 +11558,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 noiseSuppression: {
                     label: "Støjreduktion",
-                    description: "Noise Suppression"
+                    description: "Støjdæmpning"
                 },
                 echoCancellation: {
                     label: "Ekko-annullering",
-                    description: "Echo Cancellation"
+                    description: "Ekkoannullering"
                 }
             },
             notification: {
@@ -10811,6 +11590,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 pause: "Pause optagelse",
                 recording: "OPTAGER",
                 send: "Send",
+            },
+            text: {
+                convertioWebConverter: "convertios webkonverter"
             }
         },
         volumeBooster: {
@@ -10820,39 +11602,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 multiplier: {
                     label: "Multiplikator",
                     description: "Lydstyrke-multiplikator"
-                }
-            }
-        },
-        wallpaperFree: {
-            name: "WallpaperFree",
-            description: "Genskabelse af det gamle 'DM wallpaper'-eksperiment. Sæt et baggrundsbillede for enhver kanal, bruger eller server.",
-            option: {
-                globalDefault: {
-                    label: "Global standard",
-                    description: "Sæt et standardbaggrundsbillede for alle kanaler."
-                },
-                stylingTips: {
-                    label: "Styling-tips"
-                }
-            },
-            context: {
-                setWallpaper: "Sæt baggrundsbillede",
-                removeWallpaper: "Fjern baggrundsbillede"
-            },
-            modal: {
-                set: "Sæt baggrund",
-                image: "Billed-URL",
-                cancel: "Annuller",
-                apply: "Anvend",
-                global: {
-                    set: "Sæt global baggrund",
-                    remove: "Fjern global standardbaggrund",
-                    reset: "Nulstil alle baggrundsdata"
-                },
-                web: {
-                    info: "Du kan bruge lokale filer ved at lægge dem i din Plexcord theme-mappe og bruge URL'en plexcord:///themes/filnavn.ext",
-                    open: "Åbn theme-mappe",
-                    quickCSS: "Åbn QuickCSS"
                 }
             }
         },
@@ -10868,7 +11617,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webKeybinds: {
             name: "WebKeybinds",
-            description: "Genskaber genvejstaster der mangler i web-versionen (Ctrl+T, Ctrl+Tab osv.). Virker bedst i Plextron/Legcord."
+            description: "Genindfører genvejstaster, der mangler i webversionen af Discord. Virker kun fuldt ud på Plextron/Legcord, ikke i din browser",
+            option: {
+                showNavigationButtons: {
+                    description: "Vis navigationsknapperne tilbage/frem i titellinjen.",
+                    label: "Vis navigationsknapper"
+                },
+                overrideCommonKeybinds: {
+                    description: "Lader Discord tilsidesætte de mest almindelige genvejstaster til fanenavigation (ctrl+t, ctrl+shift+t, ctrl+tab, ctrl+shift+tab, ctrl+n). Virker kun i få udvalgte browsere, der lader webstedets genvejstaster gå forud for de indbyggede.",
+                    label: "Tilsidesæt almindelige genvejstaster"
+                }
+            }
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
@@ -10887,6 +11646,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 avatarClick: {
                     label: "Avatar-klik",
                     description: "Gør det muligt at klikke på avatarer i reaktionerne."
+                },
+                clickableAvatars: {
+                    description: "Når dette er aktiveret, åbner et klik på en reagerende brugers avatar deres profil i stedet for at tilføje reaktionen",
+                    label: "Klikbare avatarer"
                 }
             }
         },
@@ -10925,7 +11688,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     reply: " (svar)",
                     embed: " [embed] ",
                     onlyEmbed: "Sendte besked-embed(s)",
-                    sticker: " [sticker] ",
+                    sticker: " [klistermærke]",
                     onlySticker: "Sendte en sticker",
                     image: "billede",
                     attachment: "vedhæftning"
@@ -10938,7 +11701,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 webSocketPort: {
-                    label: "WebSocket Port",
+                    label: "WebSocket-port",
                     description: "WebSocket port"
                 },
                 preferUDP: {
@@ -11003,6 +11766,2447 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "YouTubeDescription",
             description: "Tilføjer beskrivelser til YouTube-video embeds."
         },
+        addAttachments: {
+            name: "AddAttachments",
+            description: "Gør det muligt at tilføje nye vedhæftede filer, mens du redigerer beskeder",
+            toast: {
+                youCannotAddMore: "Du kan ikke tilføje flere vedhæftede filer til denne besked.",
+                youCanOnlyAdd: "Du kan kun tilføje {{count}} vedhæftning(er) mere til denne besked.",
+                uploadingThisCanTake: "Uploader, det kan tage et stykke tid...",
+                addedOne: "Vedhæftet fil tilføjet!",
+                addedMany: "Vedhæftede filer tilføjet!"
+            },
+            text: {
+                addAttachments: "Tilføj vedhæftede filer"
+            }
+        },
+        advancedPermissions: {
+            option: {
+                simplifiedCard: {
+                    description: "Hvad der skal ske med Discords forenklede tilladelseskort",
+                    label: "Forenklet kort",
+                    hide: "Skjul det",
+                    collapse: "Gør det sammenfoldeligt",
+                    show: "Lad det være synligt"
+                },
+                collapsedByDefault: {
+                    description: "Start med de forenklede tilladelser sammenfoldet.",
+                    label: "Sammenfoldet som standard"
+                }
+            },
+            name: "AdvancedPermissions",
+            description: "Vis det avancerede tilladelseskort som standard.",
+            text: {
+                simplifiedPermissions: "Forenklede tilladelser"
+            }
+        },
+        autoJumpToMessage: {
+            option: {
+                onlyWhenUnfocused: {
+                    description: "Hop kun automatisk til beskeder, når Discords vindue ikke er i fokus.",
+                    label: "Kun når ikke i fokus"
+                }
+            },
+            name: "AutoJumpToMessage",
+            description: "Åbner automatisk kanalen fra nye beskeder."
+        },
+        betterForwards: {
+            text: {
+                serverIconForName: "Serverikon for {{name}}",
+                messageAttachments: "Vedhæftede filer i beskeden",
+                messageTextWillNot: "Beskedtekst videresendes ikke, når denne indstilling er slået fra",
+                forwardEverything: "Videresend alt",
+                viewServer: "Se server",
+                embed: "Indlejring",
+                embedNumber: "Indlejring {{number}}",
+                image: "Billede",
+                video: "Video",
+                serverIcon: "Serverikon for {{name}}",
+                dmIcon: "DM-ikon for {{name}}",
+                groupDmIcon: "Gruppe-DM-ikon for {{name}}"
+            },
+            option: {
+                resendOnFail: {
+                    description: "Forsøger at sende en videresendt besked igen, hvis videresendelsen mislykkes. Kan forårsage utilsigtede pings eller tekstspam. Omgår NSFW-begrænsninger.",
+                    label: "Send igen ved fejl"
+                },
+                forwardPreface: {
+                    description: "Hvad den videresendte besked skal indledes med",
+                    label: "Indledning til videresendelse"
+                },
+                dontFollowForwards: {
+                    description: "Hop ikke til den efter at have videresendt en enkelt besked. Hold Shift nede for at ignorere denne adfærd.",
+                    label: "Følg ikke videresendelser"
+                },
+                selfForward: {
+                    description: "Vis den aktuelle kanal i pop op-vinduet med listen over videresendelser.",
+                    label: "Videresend til sig selv"
+                }
+            },
+            name: "BetterForwards",
+            description: "Værktøjer til videresendelse af beskeder, inklusive NSFW-omgåelse og forbedringer af brugerfladen."
+        },
+        betterImageEditor: {
+            text: {
+                search: "Søg",
+                searchSavedPictures: "Søg i gemte billeder",
+                clearTheSearch: "Ryd søgningen",
+                savedPictures: "Gemte billeder",
+                removeName: "Fjern {{name}}",
+                removeHoldShiftTo: "Fjern. Hold Shift nede for at springe bekræftelsen over",
+                originals: "Originaler",
+                putBackTheLast: "Læg den sidste tilbage",
+                forgetEveryRememberedCrop: "Glem alle huskede beskæringer?",
+                yourPicturesStayEach: "Dine billeder bliver. Hvert billede åbnes uden indramning fra nu af, indtil du beskærer det igen.",
+                forget: "Glem",
+                cancel: "Annuller",
+                clearSavedPictures: "Ryd gemte billeder?",
+                everyPictureYouHave: "Alle billeder, du har gemt her, forsvinder sammen med den beskæring, der er husket for hvert enkelt. Discords eget arkiv og din nuværende avatar og dit banner berøres ikke.",
+                clear: "Ryd",
+                removeThisPicture: "Fjern dette billede?",
+                remove: "Fjern",
+                keepTheCroppedCopy: "Behold den beskårne kopi?",
+                itGoesOnThe: "Den kommer på hylden {{toLowerCase}} ved siden af dine originaler.",
+                keep: "Behold",
+                noThanks: "Nej tak",
+                exportToAFile: "Eksportér til en fil",
+                importFromAFile: "Importér fra en fil",
+                forgetRememberedFraming: "Glem husket indramning",
+                clearSavedPictures2: "Ryd gemte billeder",
+                croppedKind: "Beskårne {{kind}}",
+                unpinName: "Frigør {{name}}",
+                pinName: "Fastgør {{name}}",
+                pinnedNeverDrops: "Fastgjort, så det aldrig falder af hylden",
+                pinNeverDrops: "Fastgør, så det aldrig falder af hylden",
+                nothingMatches: "Intet her matcher det",
+                originalsEmpty: "Billeder, du vælger, indsætter eller slipper, havner her",
+                croppedEmpty: "Billeder, du beskærer, havner her",
+                forgotFraming: "Glemte beskæringen på {{count}} billede(r)",
+                nothingFramed: "Intet var beskåret",
+                pictureLibrary: "Billedbibliotek",
+                addedPictures: "Tilføjede {{count}} billede(r)",
+                nothingNew: "Intet nyt i den fil",
+                shownOfTotal: "{{shown}} af {{total}}",
+                keptCount: "{{count}} gemt",
+                youAreWearingThis: "Du bruger denne",
+                removePictureBody: "{{name}} fjernes fra dine gemte billeder sammen med den gemte beskæring."
+            },
+            option: {
+                librarySize: {
+                    description: "Hvor mange billeder der skal gemmes på hver hylde.",
+                    label: "Bibliotekets størrelse"
+                },
+                rememberCrop: {
+                    description: "Gendan den zoom og position, du sidst brugte til et billede.",
+                    label: "Husk beskæring"
+                },
+                forgetFraming: {
+                    description: "Glem alle huskede beskæringer, og åbn hvert billede, som Discord ville.",
+                    label: "Glem indramning"
+                },
+                saveCropped: {
+                    description: "Gem en kopi af hvert billede, efter du har beskåret det.",
+                    label: "Gem beskåret"
+                },
+                askBeforeSavingCropped: {
+                    description: "Spørg først i stedet for automatisk at gemme den beskårne kopi.",
+                    label: "Spørg før gemning af beskåret"
+                },
+                transfer: {
+                    description: "Flyt dine billeder, og hvordan hvert enkelt er indrammet, til en anden enhed.",
+                    label: "Overførsel"
+                },
+                clearLibrary: {
+                    description: "Smid alle de billeder væk, du har gemt.",
+                    label: "Ryd bibliotek"
+                }
+            },
+            name: "BetterImageEditor",
+            description: "Gemmer en hylde med dine billeder i avatar- og bannereditoren og husker, hvordan du beskar hvert enkelt.",
+            toast: {
+                couldNotExportYour: "Kunne ikke eksportere dine billeder",
+                couldNotReadThat: "Kunne ikke læse den fil",
+                thatPictureIsMissing: "Det billede mangler",
+                thatPictureIsToo: "Det billede er for stort til Discord",
+                couldNotUseThat: "Kunne ikke bruge det billede",
+                couldNotKeepThe: "Kunne ikke gemme den beskårne kopi"
+            },
+            kind: {
+                avatars: "avatarer",
+                banners: "bannere",
+                serverIcons: "serverikoner",
+                serverBanners: "serverbannere",
+                eventCovers: "begivenhedscovers",
+                homeHeaders: "startsideoverskrifter",
+                decorations: "dekorationer",
+                widgetCovers: "widgetcovers",
+                widgetImages: "widgetbilleder"
+            }
+        },
+        cancelFriendRequest: {
+            name: "CancelFriendRequest",
+            description: "Tilføjer en måde at annullere udgående venneanmodninger fra profiler.",
+            text: {
+                cancelOutgoingFriendRequest: "Annuller udgående venneanmodning"
+            }
+        },
+        clipUpload: {
+            text: {
+                createdAtMustBe: "Oprettelsesdatoen skal være en gyldig dato.",
+                cancel: "Annuller",
+                uploadClipFile: "Upload klipfil",
+                fileName: "Filnavn",
+                title: "Titel",
+                epicMoment: "Episk øjeblik",
+                message: "Besked",
+                checkOutThisClip: "Se dette klip!",
+                spoiler: "Spoiler",
+                remix: "Remix",
+                thumbnail: "Miniature",
+                file: "Fil",
+                selectFile: "Vælg fil",
+                parseClipMetadataFrom: "Udtræk klipmetadata fra fil",
+                selectFriends: "Vælg venner",
+                selectAGame: "Vælg et spil",
+                customApplicationId: "Brugerdefineret program-id",
+                createdAt: "Oprettet",
+                participants: "Deltagere",
+                onlyTagPeopleWho: "Tag kun personer, der var til stede og har givet samtykke til at være med i dette klip.",
+                gameApplication: "Spil/program",
+                uploadClipFile2: "Upload klipfil",
+                uploading: "Uploader",
+                upload: "Upload",
+                noFileSelected: "Ingen fil valgt",
+                couldNotPrepare: "Kunne ikke forberede den valgte fil.",
+                couldNotRead: "Kunne ikke læse den valgte fil.",
+                couldNotUpdateMetadata: "Kunne ikke opdatere klippets metadata.",
+                notCompatible: "Denne fil er ikke kompatibel. Brug et MP4-klip med H.264-video og AAC-lyd.",
+                uploadFailed: "Upload mislykkedes.",
+                noUploadSlot: "Discord returnerede ikke en upload-plads.",
+                uploadCanceled: "Upload annulleret.",
+                failedToUpload: "Kunne ikke uploade klip.",
+                selectClipFile: "Vælg klipfil",
+                mp4Video: "MP4-video"
+            },
+            name: "ClipUpload",
+            description: "Tilføjer en knap til at uploade en lokal videofil som et Discord-klip.",
+            toast: {
+                checkingClipFile: "Kontrollerer klipfil.",
+                convertingClipFile: "Konverterer klipfil.",
+                clipUploaded: "Klip uploadet."
+            }
+        },
+        collapsibleUI: {
+            name: "CollapsibleUI",
+            description: "Indbyggede sammenfoldelige flader til kanal, medlemmer, chatknapper og brugerområde.",
+            text: {
+                collapsibleUi: "Sammenfoldelig brugerflade",
+                guildBar: "Serverlinje",
+                channelList: "Kanalliste",
+                membersList: "Medlemsliste",
+                messageButtons: "Beskedknapper",
+                titleBar: "Titellinje",
+                headerBar: "Overskriftslinje",
+                userArea: "Brugerområde"
+            },
+            option: {
+                detachUserArea: {
+                    description: "Frigør brugerområdet, så det kan flyttes frit, når det ikke er sammenfoldet.",
+                    label: "Frigør brugerområde"
+                },
+                detachedUserAreaX: {
+                    description: "Gem x-positionen for det frigjorte brugerområde.",
+                    label: "Frigjort brugerområde X"
+                },
+                detachedUserAreaY: {
+                    description: "Gem y-positionen for det frigjorte brugerområde.",
+                    label: "Frigjort brugerområde Y"
+                },
+                guildBarCollapsed: {
+                    description: "Husk serverlinjen som sammenfoldet.",
+                    label: "Serverlinje sammenfoldet"
+                },
+                channelListCollapsed: {
+                    description: "Husk kanallisten som sammenfoldet.",
+                    label: "Kanalliste sammenfoldet"
+                },
+                membersListCollapsed: {
+                    description: "Husk medlemslisten som sammenfoldet.",
+                    label: "Medlemsliste sammenfoldet"
+                },
+                chatButtonsCollapsed: {
+                    description: "Husk rækken med beskedknapper som sammenfoldet.",
+                    label: "Chatknapper sammenfoldet"
+                },
+                titleBarCollapsed: {
+                    description: "Husk titellinjen som sammenfoldet.",
+                    label: "Titellinje sammenfoldet"
+                },
+                headerBarCollapsed: {
+                    description: "Husk overskriftslinjen som sammenfoldet.",
+                    label: "Overskriftslinje sammenfoldet"
+                },
+                userAreaCollapsed: {
+                    description: "Husk brugerområdet som sammenfoldet.",
+                    label: "Brugerområde sammenfoldet"
+                }
+            }
+        },
+        customCommands: {
+            text: {
+                cancel: "Annuller",
+                name: "Name",
+                response: "Svar",
+                detectedArguments: "Fundne argumenter",
+                exampleCommandResponse: "Eksempel på kommandosvar:",
+                exampleUsage: "Eksempel på brug:",
+                exampleOutput: "Eksempel på output:",
+                viewArgumentsGuide: "Se vejledning til argumenter",
+                editTag: "Redigér tag",
+                deleteTag: "Slet tag",
+                registeredTags: "Registrerede tags",
+                createTag: "Opret tag",
+                aTagWithThe: "Et tag med navnet **{{name}}** findes ikke!",
+                successfullyDeletedTheTag: "Tagget **{{name}}** blev slettet!",
+                ephemeralReserved: "Argumentnavnet \"ephemeral\" er reserveret og kan ikke bruges.",
+                createNewTag: "Opret nyt tag",
+                editTagSubtitle: "Rediger din brugerdefinerede kommando.",
+                createTagSubtitle: "Opret et nyt tag, der registreres som en skråstregskommando.",
+                save: "Gem",
+                create: "Opret",
+                variablesHelp: "Dit svar kan indeholde variabler i dobbelte krøllede parenteser, som bliver til kommandoargumenter, for eksempel",
+                defaultValuesHelp: "Du kan angive argumenter med standardværdier ved hjælp af et lighedstegn, for eksempel",
+                noTagsYet: "Ups! Der er ingen tags endnu, brug `/tags create` til at oprette et!",
+                nameAlreadyExists: "Et tag med navnet \"{{name}}\" findes allerede og vil blive overskrevet.",
+                defaultValue: "(standard: {{value}})"
+            },
+            name: "CustomCommands",
+            description: "Gør det muligt at oprette brugerdefinerede skråstregskommandoer / tags",
+            option: {
+                tagsList: {
+                    label: "Tagliste"
+                }
+            },
+            command: {
+                ephemeral: "Om svaret kun skal være synligt for dig",
+                tags: "Administrér alle brugerdefinerede kommandoer",
+                create: "Opret et nyt tag",
+                list: "Vis alle dine tags",
+                delete: "Fjern et tag efter navn",
+                tagName: "Navnet på tagget"
+            }
+        },
+        fileUpload: {
+            name: "FileUpload",
+            description: "Upload filer til hostingtjenester som Zipline, Nest, S3 og WebDAV",
+            toast: {
+                fileTypeNotAllowed: "Filtypen er ikke tilladt af det aktuelle filter",
+                pleaseConfigureFileuploadSettings: "Konfigurer først FileUpload-indstillingerne",
+                sharexConfigIsValid: "ShareX-konfigurationen er gyldig",
+                importedSharexConfig: "ShareX-konfiguration importeret",
+                uploadSuccessfulButNo: "Upload lykkedes, men ingen URL var tilgængelig til kopiering",
+                uploadSuccessfulUrlCopied: "Upload lykkedes, URL kopieret til udklipsholderen",
+                uploadSuccessfulButFailed: "Upload lykkedes, men URL'en kunne ikke kopieres",
+                uploadSuccessful: "Upload lykkedes",
+                uploadSucceededWithServicelabels: "Upload lykkedes med {{serviceLabels_service}} efter reserve",
+                apngToGifConversion: "Konvertering fra APNG til GIF mislykkedes, uploader som APNG",
+                uploadAlreadyInProgress: "Upload er allerede i gang",
+                uploadCancelled: "Upload annulleret",
+                uploadFailedMessage: "Upload mislykkedes: {{message}}",
+                invalidSharexConfig: "Ugyldig ShareX-konfiguration",
+                failedToImportSharexConfig: "Kunne ikke importere ShareX-konfiguration"
+            },
+            text: {
+                uploadToServicename: "Upload til {{serviceName}}",
+                uploadToHost: "Upload til vært",
+                chooseFile: "Vælg fil...",
+                zipline: "Zipline",
+                eZHost: "E-Z Host",
+                nest: "Nest",
+                encryptingHost: "Encrypting.host",
+                s3Compatible: "S3-kompatibel",
+                catboxMoe: "Catbox.moe",
+                litterbox: "Litterbox",
+                sharexCustomUploader: "Brugerdefineret ShareX-uploader",
+                webdavNextcloudOwncloud: "WebDAV (Nextcloud/Owncloud)",
+                n1Hour: "1 time",
+                n12Hours: "12 timer",
+                n24Hours: "24 timer",
+                n72Hours: "72 timer",
+                corsProxy: "CORS-proxy",
+                query: "Forespørgsel",
+                param: "Parameter",
+                fakeLink: "Falsk link",
+                embed: "Indlejring",
+                n30Seconds: "30 sekunder",
+                n1Minute: "1 minut",
+                n2Minutes: "2 minutter",
+                n5Minutes: "5 minutter",
+                n10Minutes: "10 minutter",
+                dragHostsToReorder: "Træk værter for at ændre rækkefølgen af reserveforsøg. Den valgte vært prøves først, derefter bruges denne rækkefølge.",
+                chooseWhereFileuploadSends: "Vælg, hvor FileUpload sender nye filer hen.",
+                connectionDetailsForYour: "Forbindelsesoplysninger for din Zipline-instans.",
+                theUrlOfYour: "URL'en til din Zipline-instans",
+                yourZiplineApiAuthorization: "Dit Zipline API-godkendelsestoken",
+                yourZiplineApiToken: "Dit Zipline API-token",
+                folderIdForUploads: "Mappe-id til uploads (lad stå tomt for ingen mappe)",
+                leaveEmptyForNo: "Lad stå tomt for ingen mappe",
+                connectionDetailsForE: "Forbindelsesoplysninger for E-Z Host-uploads.",
+                yourEZHost: "Din E-Z Host API-nøgle",
+                connectionDetailsForNest: "Forbindelsesoplysninger for Nest-uploads.",
+                yourNestApiAuthorization: "Dit Nest API-godkendelsestoken",
+                yourNestApiToken: "Dit Nest API-token",
+                connectionDetailsForEncrypting: "Forbindelsesoplysninger for Encrypting.host-uploads.",
+                yourEncryptingHostApi: "Din Encrypting.host API-nøgle",
+                howEncryptingHostShould: "Hvordan Encrypting.host skal formatere returnerede links.",
+                selectUrlStyle: "Vælg URL-stil",
+                optionalTitleForEmbed: "Valgfri titel til svar i indlejringsstil.",
+                optionalTitle: "Valgfri titel",
+                optionalColorForEmbed: "Valgfri farve til svar i indlejringsstil.",
+                optionalColor: "Valgfri farve",
+                optionalFakeLinkValue: "Valgfri værdi for falsk link til svar i fakelink-stil.",
+                optionalFakeLink: "Valgfrit falsk link",
+                connectionDetailsAndObject: "Forbindelsesoplysninger og objektnavngivning for din bucket.",
+                s3CompatibleEndpointE: "S3-kompatibelt endpoint (f.eks. https://<accountid>.r2.cloudflarestorage.com)",
+                bucketToUploadInto: "Bucket der skal uploades til",
+                awsRegionOrAuto: "AWS-region eller auto for Cloudflare R2",
+                s3CompatibleAccessKey: "S3-kompatibel adgangsnøgle",
+                yourAccessKeyId: "Dit adgangsnøgle-id",
+                s3CompatibleSecretKey: "S3-kompatibel hemmelig nøgle",
+                yourSecretAccessKey: "Din hemmelige adgangsnøgle",
+                optionalTemporaryCredentialToken: "Valgfrit midlertidigt legitimationstoken",
+                optionalSessionToken: "Valgfrit sessionstoken",
+                optionalPublicUrlBase: "Valgfri offentlig basis-URL til returnerede links",
+                optionalFolderPrefixInside: "Valgfri mappe/præfiks i bucket'en",
+                useEndpointBucketKey: "Brug formatet endpoint/bucket/key, anbefales til R2.",
+                optionalAccountBindingFor: "Valgfri kontotilknytning for Catbox-uploads.",
+                yourCatboxUserhashFor: "Din Catbox-userhash til kontotilknytning, lad stå tomt for anonyme uploads.",
+                yourCatboxUserhash: "Din Catbox-userhash",
+                howLongUploadsAre: "Hvor længe uploads gemmes",
+                selectExpiry: "Vælg udløb",
+                optionalAccountBindingFor2: "Valgfri kontotilknytning for GoFile-uploads.",
+                optionalGofileTokenTo: "Valgfrit GoFile-token til at uploade til din konto.",
+                optionalGofileToken: "Valgfrit GoFile-token",
+                connectionDetailsForPixelvault: "Forbindelsesoplysninger for PixelVault-uploads.",
+                yourPixelvaultAuthorizationKey: "Din PixelVault-godkendelsesnøgle.",
+                yourPixelvaultUploadKey: "Din PixelVault-uploadnøgle",
+                optionalAccountBindingFor3: "Valgfri kontotilknytning for PixelDrain-uploads.",
+                optionalPixeldrainApiKey: "Valgfri PixelDrain API-nøgle til godkendte uploads. Lad stå tomt for anonyme uploads.",
+                yourPixeldrainApiKey: "Din PixelDrain API-nøgle",
+                pasteImportOrValidate: "Indsæt, importér eller validér en brugerdefineret ShareX-uploaderkonfiguration.",
+                pasteYourSharexCustom: "Indsæt din brugerdefinerede ShareX-uploader-JSON (.sxcu/.json). DestinationType skal indeholde FileUploader eller ImageUploader.",
+                importFromFileOr: "Importér fra fil eller validér den indsatte konfiguration",
+                connectionDetailsForWebdav: "Forbindelsesoplysninger for WebDAV-servere (Nextcloud, Owncloud osv.).",
+                baseWebdavUrlE: "Basis-WebDAV-URL (f.eks. https://nextcloud.example.com/remote.php/dav/files/username)",
+                optionalSubdirectoryOnThe: "Valgfri undermappe på serveren, der skal uploades til (f.eks. uploads)",
+                leaveEmptyForRoot: "Lad stå tomt for rodmappen",
+                selectYourWebdavServer: "Vælg din WebDAV-servertype. Nextcloud og ownCloud opretter et offentligt delingslink. Generisk returnerer den rå fil-URL.",
+                selectServerType: "Vælg servertype",
+                howToReturnThe: "Hvordan det offentlige delingslink returneres. Delingsside linker til en webside; Direkte download linker direkte til filen; Markdown-link omslutter delingssiden i et klikbart filnavn.",
+                selectShareLinkFormat: "Vælg format for delingslink",
+                controlWhatFileuploadDoes: "Styr, hvad FileUpload gør, når en vært returnerer en URL.",
+                stripQueryParametersFrom: "Fjern forespørgselsparametre fra den uploadede fils URL.",
+                wrapUploadedVideoLinks: "Omslut uploadede videolinks med en indlejringsproxy for bedre Discord-forhåndsvisninger.",
+                chooseWhichEmbedProxy: "Vælg, hvilken indlejringsproxytjeneste der skal bruges til uploadede videolinks",
+                selectAnEmbedProxy: "Vælg en indlejringsproxytjeneste",
+                convertApngFilesTo: "Konvertér APNG-filer til GIF-format.",
+                useTheOriginalFilename: "Brug det oprindelige filnavn i stedet for at navngive uploads som upload.ext.",
+                automaticallyCopyTheUploaded: "Kopiér automatisk den uploadede fils URL til udklipsholderen.",
+                onlyUseTheSelected: "Brug kun den valgte uploader uden at prøve reserveværter.",
+                afterUploadInsertThe: "Indsæt den resulterende URL i det aktuelle chatfelt efter upload.",
+                wrapInsertedUrlsIn: "Omgiv indsatte URL'er med vinkelparenteser for at undgå Discords forhåndsvisning.",
+                chooseWhenFileuploadTakes: "Vælg, hvornår FileUpload overtager Discords filhåndtering.",
+                useFileuploadWhenUploading: "Brug FileUpload ved upload via Discords filvælger.",
+                useFileuploadOnlyFor: "Brug kun FileUpload til filer, der er større end din nuværende Discord-uploadgrænse.",
+                manualDiscordFileSize: "Manuel filstørrelsesgrænse for Discord i MB, bruges når den automatiske registrering er forkert. Lad stå tomt for automatisk.",
+                auto: "Automatisk",
+                commaSeparatedListOf: "Kommasepareret liste over filendelser (f.eks. png,jpg,gif). Lad stå tomt for at tillade alle.",
+                configureBrowserUploadProxying: "Konfigurer proxy og tidsgrænser for browseruploads.",
+                corsProxyUsedFor: "CORS-proxy brugt til webuploads. Lad stå tomt for at bruge standardproxyen.",
+                sourceCodeForThe: "Kildekode til standard-CORS-proxyen",
+                maximumTimeToWait: "Maksimal ventetid pr. uploadforsøg, før der skiftes til reserve",
+                selectTimeout: "Vælg tidsgrænse",
+                drag: "Træk",
+                importSxcuJson: "Importér .sxcu/.json",
+                validate: "Validér",
+                resetToDefault: "Nulstil til standard",
+                progress: "{{percent}} % - {{transferred}} af {{total}}",
+                cancel: "Annuller"
+            },
+            option: {
+                serviceType: {
+                    description: "Valgt uploadtjeneste",
+                    label: "Tjenestetype"
+                },
+                serviceUrl: {
+                    description: "URL til Zipline-tjenesten",
+                    label: "Tjeneste-URL"
+                },
+                ziplineToken: {
+                    description: "Zipline-godkendelsestoken",
+                    label: "Zipline-token"
+                },
+                folderId: {
+                    description: "Valgfrit Zipline-mappe-id",
+                    label: "Mappe-id"
+                },
+                ezHostKey: {
+                    description: "E-Z Host API-nøgle",
+                    label: "E-Z Host-nøgle"
+                },
+                nestToken: {
+                    description: "Nest API-token",
+                    label: "Nest-token"
+                },
+                encryptingHostKey: {
+                    description: "Encrypting.host API-nøgle",
+                    label: "Encrypting.host-nøgle"
+                },
+                encryptingHostUrlStyle: {
+                    description: "URL-stil for Encrypting.host",
+                    label: "Encrypting.host URL-stil"
+                },
+                encryptingHostDomains: {
+                    description: "JSON-liste over Encrypting.host-domæner",
+                    label: "Encrypting.host-domæner"
+                },
+                encryptingHostTitle: {
+                    description: "Valgfri titel til Encrypting.host-indlejring",
+                    label: "Encrypting.host-titel"
+                },
+                encryptingHostColor: {
+                    description: "Valgfri farve til Encrypting.host-indlejring",
+                    label: "Encrypting.host-farve"
+                },
+                encryptingHostFakelink: {
+                    description: "Valgfrit falsk link til Encrypting.host",
+                    label: "Encrypting.host falsk link"
+                },
+                s3Endpoint: {
+                    description: "S3-kompatibel endpoint-URL",
+                    label: "S3-endpoint"
+                },
+                s3Bucket: {
+                    description: "Navn på S3-bucket",
+                    label: "S3-bucket"
+                },
+                s3Region: {
+                    description: "S3-region (brug auto for R2)",
+                    label: "S3-region"
+                },
+                s3AccessKeyId: {
+                    description: "S3-adgangsnøgle-id",
+                    label: "S3-adgangsnøgle-id"
+                },
+                s3SecretAccessKey: {
+                    description: "Hemmelig S3-adgangsnøgle",
+                    label: "Hemmelig S3-adgangsnøgle"
+                },
+                s3SessionToken: {
+                    description: "Valgfrit S3-sessionstoken",
+                    label: "S3-sessionstoken"
+                },
+                s3PublicUrl: {
+                    description: "Valgfri offentlig basis-URL",
+                    label: "S3 offentlig URL"
+                },
+                s3Prefix: {
+                    description: "Valgfrit præfiks for S3-objektnøgler",
+                    label: "S3-præfiks"
+                },
+                s3ForcePathStyle: {
+                    description: "Brug S3-URL'er i sti-stil",
+                    label: "Tving sti-stil for S3"
+                },
+                litterboxExpiry: {
+                    description: "Opbevaringsperiode for Litterbox",
+                    label: "Litterbox-udløb"
+                },
+                catboxUserhash: {
+                    description: "Catbox-userhash til kontotilknytning",
+                    label: "Catbox-userhash"
+                },
+                sharexConfig: {
+                    description: "JSON til brugerdefineret ShareX-uploader",
+                    label: "ShareX-konfiguration"
+                },
+                disableFallbacks: {
+                    description: "Slå reserveuploadtjenester fra",
+                    label: "Slå reserver fra"
+                },
+                autoSend: {
+                    description: "Indsæt den uploadede URL i chatfeltet",
+                    label: "Send automatisk"
+                },
+                autoFormat: {
+                    description: "Omgiv den indsatte URL med vinkelparenteser",
+                    label: "Formatér automatisk"
+                },
+                bypassDiscordUpload: {
+                    description: "Gå uden om Discord-uploads, og brug FileUpload i stedet.",
+                    label: "Gå uden om Discord-upload"
+                },
+                bypassDiscordUploadOnlyOverLimit: {
+                    description: "Brug kun FileUpload, hvis filen/filerne overskrider grænsen for filstørrelse.",
+                    label: "Gå kun uden om Discord-upload over grænsen"
+                },
+                customDiscordFileSizeLimitMB: {
+                    description: "Manuel filstørrelsesgrænse for Discord i MB. 0 betyder automatisk registrering.",
+                    label: "Brugerdefineret filstørrelsesgrænse for Discord (MB)"
+                },
+                gofileToken: {
+                    description: "Valgfrit GoFile API-token",
+                    label: "GoFile-token"
+                },
+                fallbackOrder: {
+                    description: "Rækkefølge for reserveuploadere",
+                    label: "Reserverækkefølge"
+                },
+                pixelVaultKey: {
+                    description: "PixelVault-uploadnøgle",
+                    label: "PixelVault-nøgle"
+                },
+                pixelDrainKey: {
+                    description: "Valgfri PixelDrain API-nøgle",
+                    label: "PixelDrain-nøgle"
+                },
+                uploadTimeoutMs: {
+                    description: "Tidsgrænse for upload i millisekunder",
+                    label: "Upload-tidsgrænse (ms)"
+                },
+                stripQueryParams: {
+                    description: "Fjern forespørgselsparametre fra uploadede URL'er",
+                    label: "Fjern forespørgselsparametre"
+                },
+                embedProxyEnabled: {
+                    description: "Send uploadede videolinks gennem en tjeneste til indlejring.",
+                    label: "Indlejringsproxy aktiveret"
+                },
+                embedProxyService: {
+                    description: "Tjeneste til indlejring, der omslutter uploadede videolinks.",
+                    label: "Indlejringsproxytjeneste"
+                },
+                corsProxyUrl: {
+                    description: "CORS-proxy-URL, der bruges til browseruploads",
+                    label: "CORS-proxy-URL"
+                },
+                apngToGif: {
+                    description: "Konvertér APNG-uploads til GIF",
+                    label: "APNG til GIF"
+                },
+                preserveOriginalFilename: {
+                    description: "Bevar det oprindelige filnavn ved upload.",
+                    label: "Bevar oprindeligt filnavn"
+                },
+                autoCopy: {
+                    description: "Kopiér upload-URL automatisk",
+                    label: "Kopiér automatisk"
+                },
+                autoUploadPastedFiles: {
+                    description: "Upload automatisk filer fra udklipsholderen til billedvært, når du indsætter i chatfeltet.",
+                    label: "Upload indsatte filer automatisk"
+                },
+                webdavUrl: {
+                    description: "URL til WebDAV-server",
+                    label: "WebDAV-URL"
+                },
+                webdavUsername: {
+                    description: "WebDAV-brugernavn",
+                    label: "WebDAV-brugernavn"
+                },
+                webdavPassword: {
+                    description: "WebDAV-adgangskode eller apptoken",
+                    label: "WebDAV-adgangskode"
+                },
+                webdavDirectory: {
+                    description: "Valgfri undermappe på WebDAV-serveren",
+                    label: "WebDAV-mappe"
+                },
+                webdavServerType: {
+                    description: "WebDAV-servertype",
+                    label: "WebDAV-servertype",
+                    nextcloud: "Nextcloud",
+                    owncloud: "ownCloud",
+                    generic: "Generisk WebDAV"
+                },
+                webdavShareType: {
+                    description: "Format for WebDAV-delingslink",
+                    label: "WebDAV-delingstype",
+                    sharepage: "Delingsside",
+                    directdownload: "Direkte download",
+                    markdown: "Markdown-link"
+                },
+                uploadAllowedFileTypes: {
+                    description: "Kommasepareret liste over tilladte filendelser (f.eks. png,jpg,gif,mp4). Lad stå tomt for at tillade alle filer.",
+                    label: "Tilladte filtyper til upload"
+                },
+                settingsComponent: {
+                    description: "Indstillinger",
+                    label: "Indstillingskomponent"
+                }
+            },
+            panel: {
+                fallbackOrder: "Reserverækkefølge",
+                uploadService: "Uploadtjeneste",
+                zipline: "Zipline",
+                serviceUrl: "Tjeneste-URL",
+                ziplineToken: "Zipline-token",
+                folderId: "Mappe-id",
+                eZHost: "E-Z Host",
+                eZHostApiKey: "E-Z Host API-nøgle",
+                nest: "Nest",
+                nestToken: "Nest-token",
+                encryptingHost: "Encrypting.host",
+                encryptingHostApiKey: "Encrypting.host API-nøgle",
+                urlStyle: "URL-stil",
+                domainsJson: "Domæner (JSON)",
+                embedTitle: "Titel på indlejring",
+                embedColor: "Farve på indlejring",
+                fakeLink: "Falsk link",
+                s3CompatibleStorage: "S3-kompatibelt lager",
+                s3EndpointUrl: "S3-endpoint-URL",
+                bucketName: "Bucket-navn",
+                region: "Region",
+                accessKeyId: "Adgangsnøgle-id",
+                secretAccessKey: "Hemmelig adgangsnøgle",
+                sessionToken: "Sessionstoken",
+                publicBaseUrl: "Offentlig basis-URL",
+                objectKeyPrefix: "Præfiks for objektnøgler",
+                usePathStyleEndpoint: "Brug endpoint i sti-stil",
+                catbox: "Catbox",
+                catboxUserhash: "Catbox-userhash",
+                litterboxExpiry: "Litterbox-udløb",
+                gofile: "GoFile",
+                gofileToken: "GoFile-token",
+                pixelvault: "PixelVault",
+                pixelvaultUploadKey: "PixelVault-uploadnøgle",
+                pixeldrain: "PixelDrain",
+                pixeldrainApiKey: "PixelDrain API-nøgle",
+                sharexCustomUploader: "Brugerdefineret ShareX-uploader",
+                sharexCustomUploaderConfig: "Konfiguration af brugerdefineret ShareX-uploader",
+                sharexConfigActions: "ShareX-konfigurationshandlinger",
+                webdav: "WebDAV",
+                serverUrl: "Server-URL",
+                username: "Brugernavn",
+                passwordOrAppToken: "Adgangskode eller apptoken",
+                passwordOrAppToken2: "adgangskode eller apptoken",
+                uploadDirectory: "Uploadmappe",
+                serverType: "Servertype",
+                shareLinkFormat: "Format for delingslink",
+                uploadBehavior: "Uploadadfærd",
+                stripQueryParameters: "Fjern forespørgselsparametre",
+                useEmbedProxy: "Brug indlejringsproxy",
+                embedProxyService: "Indlejringsproxytjeneste",
+                convertApngToGif: "Konvertér APNG til GIF",
+                preserveOriginalFilename: "Bevar oprindeligt filnavn",
+                autoCopyUrl: "Kopiér URL automatisk",
+                disableFallbackUploaders: "Deaktivér reserveuploadere",
+                insertUrlIntoChatInput: "Indsæt URL i chatfeltet",
+                formatInsertedUrl: "Formatér indsat URL",
+                discordIntegration: "Discord-integration",
+                bypassDiscordUploadButton: "Gå uden om Discords uploadknap",
+                autoUploadPastedFiles: "Upload indsatte filer automatisk",
+                respectDiscordFileSizeLimit: "Respektér Discords grænse for filstørrelse",
+                discordLimitOverrideMb: "Tilsidesæt Discord-grænse (MB)",
+                allowedFileTypes: "Tilladte filtyper",
+                network: "Netværk",
+                corsProxyUrl: "CORS-proxy-URL",
+                defaultCorsProxySource: "Kilde til standard-CORS-proxy",
+                uploadTimeout: "Tidsgrænse for upload",
+                domainsJsonDescription: "JSON-array med domæner, der skal bruges, f.eks. [\"offensive\"]."
+            },
+            status: {
+                cancelled: "Upload annulleret.",
+                uploadingVia: "Uploader via {{service}}...",
+                uploading: "Uploader...",
+                unknownError: "Ukendt fejl",
+                startingVia: "Starter upload via {{service}}...",
+                retryingWith: "Prøver igen med {{service}} ({{attempt}}/{{total}})...",
+                uploadedVia: "Uploadet via {{service}}.",
+                allFailed: "Alle uploadtjenester mislykkedes. Seneste fejl: {{error}}",
+                fileReady: "Fil klar, starter upload...",
+                preparing: "Forbereder upload...",
+                failed: "Upload mislykkedes: {{message}}",
+                timedOut: "Upload fik timeout",
+                serviceFailed: "{{service}} mislykkedes: {{message}}",
+                preparingFile: "Forbereder {{name}}{{suffix}}..."
+            }
+        },
+        gifMaker: {
+            option: {
+                lastWidth: {
+                    label: "Sidste bredde"
+                },
+                lastHeight: {
+                    label: "Sidste højde"
+                },
+                lastCaptionMode: {
+                    label: "Sidste billedtekst-tilstand"
+                },
+                lastCaptionText: {
+                    label: "Sidste billedtekst"
+                },
+                lastCaptionSize: {
+                    label: "Sidste billedtekststørrelse"
+                },
+                lastFontFamily: {
+                    label: "Sidste skrifttypefamilie"
+                },
+                lastBubbleTipBase: {
+                    label: "Sidste boblespidsbase"
+                },
+                maxWidth: {
+                    description: "Maksimal bredde ved automatisk tilpasning.",
+                    label: "Maks. bredde"
+                },
+                maxHeight: {
+                    description: "Maksimal højde ved automatisk tilpasning.",
+                    label: "Maks. højde"
+                }
+            },
+            name: "GifMaker",
+            description: "Opret og tilføj billedtekst til GIF'er fra ethvert medie i chatten eller GIF-vælgeren.",
+            text: {
+                send: "Send",
+                export: "Eksportér",
+                makeGif: "Lav GIF",
+                editGif: "Redigér GIF",
+                selectAFont: "Vælg en skrifttype...",
+                enterCaption: "Indtast billedtekst...",
+                width: "Bredde",
+                height: "Højde",
+                loadingFonts: "Indlæser skrifttyper...",
+                captions: "Billedtekster",
+                text: "Tekst",
+                font: "Skrifttype",
+                fontSize: "Skriftstørrelse",
+                tipBase: "Spidsbase",
+                dimensions: "Dimensioner",
+                generatingGif: "Genererer GIF...",
+                clickOnThePreview: "Klik på forhåndsvisningen for at placere boblespidsen",
+                gifPreview: "GIF-forhåndsvisning"
+            },
+            captionMode: {
+                caption: "Billedtekst",
+                none: "Ingen",
+                speechbubble: "Taleboble"
+            }
+        },
+        gifProviderSwitcher: {
+            name: "GifProviderSwitcher",
+            description: "Gør det muligt at bruge Tenor- eller Giphy-GIF-søgning i stedet for Klipy",
+            text: {
+                tenor: "Tenor",
+                giphy: "Giphy",
+                klipy: "Klipy",
+                providers: "Udbydere",
+                providersCount: "{{count}} udbydere"
+            }
+        },
+        keyboardNavigation: {
+            toast: {
+                invalidUrl: "Ugyldig URL",
+                copiedResponseToClipboard: "Svaret er kopieret til udklipsholderen!",
+                issueFetchingUrl: "Problem med at hente URL",
+                copiedGitInfoTo: "Git-info er kopieret til udklipsholderen!",
+                noUpdatesAvailable: "Ingen opdateringer tilgængelige",
+                enabledPlugin: "{{id}} blev aktiveret",
+                disabledPlugin: "{{id}} blev deaktiveret"
+            },
+            text: {
+                openPlexcordTab: "Åbn Plexcord-fanen",
+                openPluginTab: "Åbn plugin-fanen",
+                openThemesTab: "Åbn tema-fanen",
+                openUpdaterTab: "Åbn opdateringsfanen",
+                openCloudTab: "Åbn sky-fanen",
+                openBackupRestoreTab: "Åbn fanen Sikkerhedskopiering og gendannelse",
+                restartClient: "Genstart klient",
+                openQuickCssFile: "Åbn QuickCSS-fil",
+                openSettingsFolder: "Åbn indstillingsmappe",
+                openInGithub: "Åbn på GitHub",
+                openInBrowser: "Åbn i browser",
+                togglePlugin: "Slå plugin til/fra",
+                enable: "Aktivér",
+                disable: "Deaktivér",
+                quickFetch: "Hurtig hentning",
+                copyGitInfo: "Kopiér Git-info",
+                checkForUpdates: "Søg efter opdateringer",
+                aPlexcordUpdateIs: "En Plexcord-opdatering er tilgængelig!",
+                clickHereToView: "Klik her for at se opdateringen",
+                navigateToServer: "Gå til server",
+                commandPalette: "Kommandopalette",
+                searchTheCommandPalette: "Søg i kommandopaletten",
+                multipleChoice: "Multiple choice",
+                textInput: "Tekstinput",
+                openDevTab: "Åbn udviklerfanen",
+                enterUrlToFetch: "Indtast URL, der skal hentes (kun GET)",
+                typeAndPressEnter: "Skriv og tryk på Enter",
+                recording: "Optager...",
+                recordKeybind: "Optag genvej",
+                enterUrl: "Indtast en URL"
+            },
+            option: {
+                hotkey: {
+                    description: "Genvejstasten til at åbne kommandopaletten.",
+                    label: "Genvejstast"
+                },
+                allowMouseControl: {
+                    description: "Tillad musen at styre kommandopaletten.",
+                    label: "Tillad musestyring"
+                }
+            },
+            name: "KeyboardNavigation",
+            description: "Gør det muligt at navigere i brugerfladen med tastaturet."
+        },
+        lastActive: {
+            name: "LastActive",
+            description: "Et plugin til at hoppe til den seneste aktive besked fra dig selv eller en anden bruger i en kanal/server.",
+            toast: {
+                failedToFindMessages: "Kunne ikke finde beskeder. Se konsollen for detaljer.",
+                couldnTFindAny: "Kunne ikke finde nogen nylige beskeder fra denne bruger.",
+                channelInformationNotAvailable: "Kanalinformation er ikke tilgængelig.",
+                failedToJumpTo: "Kunne ikke hoppe til beskeden. Se konsollen for detaljer."
+            },
+            text: {
+                yourLastMessage: "Din seneste besked",
+                userSLastMessage: "Brugerens seneste besked"
+            }
+        },
+        limitlessScreenshare: {
+            text: {
+                deleteTag: "Slet tag",
+                mustBeGreaterThan: "Skal være >{{value}}",
+                maxResolutionTooLow: "Maksimal opløsning kan ikke være lavere end {{value}}",
+                maxResolutionRound: "Maksimal opløsning skal ende på 0, hvis Afrund opløsning er slået til"
+            },
+            name: "LimitlessScreenshare",
+            description: "Tilføjer en skyder til opløsning og fps for skærmdeling.",
+            option: {
+                maxFPS: {
+                    description: "Maks. FPS for skyderen",
+                    label: "Maks. FPS"
+                },
+                maxResolution: {
+                    description: "Maks. opløsning for skyderen",
+                    label: "Maks. opløsning"
+                },
+                roundResolution: {
+                    description: "Rund opløsningen af til nærmeste 10p",
+                    label: "Rund opløsning af"
+                },
+                resolutions: {
+                    label: "Opløsninger"
+                },
+                fpss: {
+                    label: "FPS-værdier"
+                }
+            }
+        },
+        messagePeek: {
+            option: {
+                hideMuted: {
+                    description: "Skjul beskedforhåndsvisninger og tidsstempler for slåede DM'er og gruppechats.",
+                    label: "Skjul slåede fra"
+                }
+            },
+            name: "MessagePeek",
+            description: "Viser forhåndsvisning og tidsstempel for den seneste besked i listen over direkte beskeder.",
+            text: {
+                officialDiscordMessage: "Officiel Discord-besked",
+                sentGif: "sendte en GIF",
+                voiceMessage: "talebesked",
+                membersCount: "{{count}} medlemmer",
+                you: "Dig"
+            }
+        },
+        messageTranslate: {
+            name: "MessageTranslate",
+            description: "Oversæt automatisk beskeder til dit sprog med caching, til/fra pr. kanal og flere indstillinger.",
+            option: {
+                targetLanguage: {
+                    description: "Målsprogskode for oversættelser (f.eks. en, es, fr, de, ja).",
+                    label: "Målsprog"
+                },
+                excludedLanguages: {
+                    description: "Sprogkoder, der skal udelades fra oversættelse (f.eks. en, es, fr, de, ja).",
+                    label: "Udelukkede sprog"
+                },
+                confidenceRequirement: {
+                    description: "Mindste sikkerhed (0 til 1), der kræves for at vise en oversættelse.",
+                    label: "Krav til sikkerhed"
+                },
+                autoTranslate: {
+                    description: "Oversæt automatisk beskeder, når de vises.",
+                    label: "Oversæt automatisk"
+                },
+                skipOwnMessages: {
+                    description: "Oversæt ikke dine egne beskeder.",
+                    label: "Spring egne beskeder over"
+                },
+                skipBotMessages: {
+                    description: "Oversæt ikke bot-beskeder.",
+                    label: "Spring bot-beskeder over"
+                },
+                ignoredGuilds: {
+                    description: "Kommasepareret liste over server-id'er, der ikke skal oversættes i.",
+                    label: "Ignorerede servere"
+                },
+                ignoredChannels: {
+                    description: "Kommasepareret liste over kanal-id'er, der ikke skal oversættes i.",
+                    label: "Ignorerede kanaler"
+                },
+                ignoredUsers: {
+                    description: "Kommasepareret liste over bruger-id'er, der ikke skal oversættes.",
+                    label: "Ignorerede brugere"
+                },
+                showIndicator: {
+                    description: "Tilføj en lille (oversat)-indikator til oversatte beskeder.",
+                    label: "Vis indikator"
+                },
+                showOriginal: {
+                    description: "Vis den oprindelige og den oversatte tekst.",
+                    noorig: "Vis ikke originalen."
+                }
+            },
+            text: {
+                showOriginalInSubtext: "Vis originalen i undertekst",
+                showOriginalMessageTranslation: "Vis den oprindelige besked, oversættelsen i undertekst",
+                translatedFrom: "oversat fra {{lang}}"
+            }
+        },
+        moreStickers: {
+            toast: {
+                stickerPackDeleted: "Klistermærkepakke slettet",
+                stickerPackAdded: "Klistermærkepakke tilføjet",
+                stickerPacksAdded: "Klistermærkepakker tilføjet",
+                stickerPacksExported: "Klistermærkepakker eksporteret",
+                newStickerPacksAlready: "Nye klistermærkepakker findes allerede, migrering er ikke nødvendig",
+                oldStickerPacksNot: "Gamle klistermærkepakker blev ikke fundet, intet at migrere",
+                migrationFailedTitleId: "Migrering mislykkedes: {{title}} ({{id}})",
+                stickerPackMigrationComplete: "Migrering af klistermærkepakker fuldført",
+                failedToUploadSticker: "Kunne ikke uploade klistermærke"
+            },
+            text: {
+                stickerPackUrl: "URL til klistermærkepakke",
+                pasteHtmlHere: "Indsæt HTML her",
+                delete: "Slet",
+                addStickerPackFrom: "Tilføj klistermærkepakke fra URL",
+                insert: "Indsæt",
+                addStickerPackFrom2: "Tilføj klistermærkepakke fra HTML",
+                insertFromHtml: "Indsæt fra HTML",
+                addStickerPackFrom3: "Tilføj klistermærkepakke fra fil",
+                miscTools: "Diverse værktøjer",
+                exportStickerPacks: "Eksportér klistermærkepakker",
+                migrateFromV1: "Migrér fra v1",
+                stickersManagement: "Administration af klistermærker",
+                theRegionLineRecognized: "Den region, LINE genkender, kan afvige fra den region, du befinder dig i, på grund af den CORS-proxy, vi bruger.",
+                openStickerPackFile: "Åbn klistermærkepakkefil",
+                stickers: "Klistermærker+",
+                categoryTitle: "Kategori, {{title}}",
+                searchStickers: "Søg i klistermærker",
+                ffmpegstatecontextIsUndefined: "FFmpegStateContext er ikke defineret",
+                recentlyUsed: "Senest brugt",
+                addFromUrl: "Tilføj fra URL",
+                addFromHtml: "Tilføj fra HTML",
+                addFromFile: "Tilføj fra fil",
+                misc: "Diverse",
+                invalidUrl: "Ugyldig URL",
+                lineOnly: "I øjeblikket understøttes kun LINE-klistermærker/-emojis.",
+                getTelegramStickers: "Hent Telegram-klistermærker med",
+                htmlFallbackHelp: "Hvis du støder på fejl, når du tilføjer en klistermærkepakke, kan du prøve at tilføje den via HTML-kildekoden på pakkens side.",
+                htmlFallbackApplies: "Dette gælder for klistermærker, der er regions-/OS-låste osv."
+            },
+            option: {
+                promptToUpload: {
+                    description: "Indsætter klistermærket i chatfeltet i stedet for at sende det med det samme",
+                    label: "Spørg før upload"
+                },
+                packs: {
+                    description: "Pakker",
+                    label: "Pakker"
+                }
+            },
+            name: "MoreStickers",
+            description: "Tilføjer klistermærkepakker fra andre sociale medieplatforme. (f.eks. LINE)"
+        },
+        musicRichPresence: {
+            option: {
+                scrobblerBackend: {
+                    description: "Den scrobbler-backend, der skal bruges.",
+                    label: "Scrobbler-backend"
+                },
+                instanceBaseURL: {
+                    description: "Basis-URL'en til din ListenBrainz-instans.",
+                    label: "Instansens basis-URL"
+                },
+                instanceAPIBaseUrl: {
+                    description: "Basis-URL'en til din ListenBrainz-API.",
+                    label: "Instansens API-basis-URL"
+                },
+                apiKey: {
+                    description: "Last.fm API-nøgle. Ikke påkrævet, men stærkt anbefalet for at undgå hastighedsbegrænsning med vores delte nøgle",
+                    label: "API-nøgle"
+                },
+                username: {
+                    description: "Brugernavn",
+                    label: "Brugernavn"
+                },
+                shareUsername: {
+                    description: "Vis link til scrobbler-profil",
+                    label: "Del brugernavn"
+                },
+                clickableLinks: {
+                    description: "Gør nummer-, kunstner- og albumnavne til klikbare links",
+                    label: "Klikbare links"
+                },
+                hideWithSpotify: {
+                    description: "Skjul aktivitet, hvis Spotify kører",
+                    label: "Skjul med Spotify"
+                },
+                hideWithActivity: {
+                    description: "Skjul aktivitet, hvis du har en anden aktivitet",
+                    label: "Skjul ved anden aktivitet"
+                },
+                statusName: {
+                    description: "Brugerdefineret statustekst. Du kan bruge følgende variabler: {artist} | {album} | {title}",
+                    label: "Statusnavn"
+                },
+                statusDisplayType: {
+                    description: "Vis nummer-/kunstnernavn i medlemslisten",
+                    off: "Vis ikke (viser generel lyttebesked)"
+                },
+                nameFormat: {
+                    description: "Vis sangens og kunstnerens navn i statusnavnet",
+                    statusName: "Brug brugerdefineret statusnavn"
+                },
+                missingArt: {
+                    description: "Når album eller albumbillede mangler",
+                    logo: "Brug stort scrobbler-logo"
+                },
+                showLogo: {
+                    description: "Vis scrobbler-tjenestens logo ved albumcoveret",
+                    label: "Vis scrobbler-logo"
+                },
+                showAlbumCover: {
+                    description: "Vis albumcover. Hvis det slås fra, vises en pladsholder. Nyttigt, hvis din musik har upassende billeder",
+                    label: "Vis albumcover"
+                },
+                useListeningStatus: {
+                    description: "Vis status \"Lytter til\" i stedet for \"Spiller\""
+                }
+            },
+            name: "MusicRichPresence",
+            description: "Rich Presence til Last.FM/Listenbrainz",
+            text: {
+                showArtistName: "Vis kunstnernavn",
+                showTrackName: "Vis nummernavn",
+                useMusicServiceName: "Brug musiktjenestens navn (falder tilbage til brugerdefineret statustekst)",
+                useFormatArtistSong: "Brug formatet 'kunstner - sang'",
+                useFormatSongArtist: "Brug formatet 'sang - kunstner'",
+                useArtistNameOnly: "Brug kun kunstnernavn",
+                useSongNameOnly: "Brug kun sangnavn",
+                useAlbumNameFalls: "Brug albumnavn (falder tilbage til brugerdefineret statustekst, hvis sangen ikke har et album)",
+                useGenericPlaceholder: "Brug generisk pladsholder",
+                lastFm: "Last.FM",
+                howToCreateAn: "Sådan opretter du en API-nøgle",
+                set: "Sæt",
+                applicationName: "Applikationsnavn",
+                applicationDescription: "Applikationsbeskrivelse",
+                toAnythingAndLeave: "til hvad som helst og lad resten være tomt.",
+                createApiKey: "Opret API-nøgle",
+                invalidInstance: "Ugyldig ListenBrainz-kompatibel instans",
+                provideBoth: "Angiv både",
+                apiBaseUrl: "API-basis-URL",
+                andThe: "og",
+                instanceBaseUrl: "instans-basis-URL",
+                forYourCustomInstance: "for din egen ListenBrainz-instans, eller skift tilbage til ListenBrainz/Last.FM",
+                allowConnectTitle: "Tillad Plexcord at oprette forbindelse til ListenBrainz-instansen",
+                allowConnectBody: "For at bruge din egen ListenBrainz-instans skal du først tillade Plexcord at oprette forbindelse til den.",
+                allowInstance: "Tillad instans",
+                listenBrainzCompatible: "ListenBrainz-kompatibel (selvhostet)",
+                and: "og"
+            }
+        },
+        noMiddleClickPaste: {
+            name: "NoMiddleClickPaste",
+            description: "Deaktiver Linux' indsæt med midterklik - kun Linux"
+        },
+        orbolayBridge: {
+            option: {
+                port: {
+                    description: "Port, der skal forbindes til",
+                    label: "Port"
+                }
+            },
+            name: "OrbolayBridge",
+            description: "Bro-plugin, der forbinder Orbolay med Discord",
+            toast: {
+                connectedToOrbolayServer: "Forbundet til Orbolay-serveren"
+            }
+        },
+        plexcordHelper: {
+            name: "PlexcordHelper",
+            description: "Bruges til at yde support og rette nedbrud forårsaget af Discord.",
+            text: {
+                restartRequired: "Genstart påkrævet",
+                restartNow: "Genstart nu",
+                later: "Senere",
+                wouldYouLikeTo: "Vil du genstarte nu?",
+                somePluginsRequireA: "Nogle plugins kræver en genstart for at blive helt deaktiveret.",
+                alreadyEnabled: "{{plugin}} er allerede aktiveret",
+                alreadyDisabled: "{{plugin}} er allerede deaktiveret",
+                disablePlugin: "Deaktiver {{plugin}}",
+                enablePlugin: "Aktiver {{plugin}}",
+                errorStopping: "Fejl ved stop af pluginet {{plugin}}",
+                errorStarting: "Fejl ved start af pluginet {{plugin}}"
+            },
+            toast: {
+                failedToTolowercase: "Kunne ikke {{toLowerCase}}",
+                aRestartIsRequired: "En genstart er nødvendig, før ændringen træder i kraft!"
+            },
+            card: {
+                notOnThisVersion: "Dette plugin findes ikke i denne version af Plexcord. Prøv at opdatere!"
+            }
+        },
+        plexcordTweaks: {
+            name: "PlexcordTweaks",
+            option: {
+                removeActivitySection: {
+                    description: "Fjerner aktivitetsafsnittet over medlemslisten",
+                    label: "Fjern aktivitetsafsnit"
+                },
+                showYourOwnActivityButtons: {
+                    description: "Discord skjuler af en eller anden grund dine egne aktivitetsknapper",
+                    label: "Vis dine egne aktivitetsknapper"
+                },
+                refreshSlashCommands: {
+                    description: "Opdaterer skråstregskommandoer, så nyligt tilføjede kommandoer vises uden at genstarte klienten.",
+                    label: "Opdatér skråstregskommandoer"
+                },
+                forceRoleIcon: {
+                    description: "Tvinger rolleikoner til at blive vist ved beskeder i kompakt tilstand",
+                    label: "Tving rolleikon"
+                },
+                accountStandingButton: {
+                    description: "Vis en knap til kontostatus i overskriftslinjen",
+                    label: "Knap til kontostatus"
+                },
+                jsonGateway: {
+                    description: "Tvinger JSON ved genforbindelse til gateway",
+                    label: "JSON-gateway"
+                },
+                enableAutoCorrect: {
+                    description: "Tilføjer en kontekstmenu-knap i chatboksen til indbygget autokorrektur og teksterstatninger",
+                    label: "Aktivér autokorrektur"
+                },
+                autoCorrect: {
+                    description: "Brug indbygget autokorrektur og teksterstatninger i beskededitorer",
+                    label: "Autokorrektur"
+                },
+                disableHolidayNotifications: {
+                    label: "Deaktiver højtidsnotifikationer",
+                    description: "Brug altid Discords standard notifikationslyde"
+                },
+                showAllBadges: {
+                    label: "Vis alle badges",
+                    description: "Viser alle profilbadges i stedet for at skjule resten bag +n"
+                }
+            },
+            text: {
+                allGood: "Alt er godt!",
+                limited: "Begrænset",
+                veryLimited: "Meget begrænset",
+                atRisk: "I fare",
+                suspended: "Suspenderet",
+                slashCommandsRefreshedSuccessfully: "Skråstregskommandoer blev opdateret.",
+                failedToRefreshCommands: "Kunne ikke opdatere kommandoer. Se konsollen for detaljer.",
+                enableAutocorrect: "Aktivér autokorrektur"
+            },
+            command: {
+                refreshCommands: "Opdatér skråstregskommandoer"
+            },
+            description: "En samling af små justeringer og rettelser til Discord."
+        },
+        plextronStreamFixes: {
+            option: {
+                unlockQualityOptions: {
+                    description: "Lås op for streamkvalitetsindstillinger uanset Nitro-status",
+                    label: "Lås kvalitetsindstillinger op"
+                },
+                removeResolutionCap: {
+                    description: "Tillad opløsninger over 720p ved 60 fps",
+                    label: "Fjern opløsningsgrænse"
+                },
+                forceEncoderSettings: {
+                    description: "Tving koderen til at bruge den konfigurerede opløsning/fps",
+                    label: "Tving koderindstillinger"
+                },
+                preventDownscale: {
+                    description: "Forhindr Discord i at nedskalere streamens opløsning",
+                    label: "Forhindr nedskalering"
+                },
+                keyframeInterval: {
+                    description: "Keyframe-interval i ms (0 = koderens standard, 5000 = hvert 5. sekund)",
+                    label: "Keyframe-interval"
+                },
+                minBitrate: {
+                    description: "Mindste koderbithastighed i kbps",
+                    label: "Min. bithastighed"
+                },
+                raiseBitrateCaps: {
+                    description: "Hæv standardgrænserne for bithastighed på desktop (600 kbps mål → 10 Mbps, 3,5 Mbps maks. → 40 Mbps)",
+                    label: "Hæv grænser for bithastighed"
+                },
+                preventFramerateReduction: {
+                    description: "Forhindr Discord i at sænke streamens billedhastighed, når du ikke taler",
+                    label: "Forhindr sænkning af billedhastighed"
+                },
+                bitsPerPixelPct: {
+                    description: "Bits pr. pixel i procent for målbithastigheden (8 = 0,08 bpp, 12 = 0,12 bpp)",
+                    label: "Bits pr. pixel (%)"
+                }
+            },
+            name: "PlextronStreamFixes",
+            description: "Forsøger at forbedre streamkvaliteten på Plextron ved at patche Discords koder og kvalitetsbegrænsninger."
+        },
+        rPCEditor: {
+            name: "RPCEditor"
+        },
+        reactionTimestamps: {
+            name: "ReactionTimestamps",
+            description: "Viser tidspunktet for hver reaktion i reaktionsvinduet.",
+            text: {
+                userAtTime: "{{user}} kl. {{time}}"
+            }
+        },
+        richPresence: {
+            text: {
+                useCustomStatusName: "Brug brugerdefineret statusnavn",
+                useFormatArtistSong: "Brug formatet 'kunstner - sang'",
+                useFormatSongArtist: "Brug formatet 'sang - kunstner'",
+                useArtistNameOnly: "Brug kun kunstnernavn",
+                useSongNameOnly: "Brug kun sangnavn",
+                useAlbumName: "Brug albumnavn",
+                useLargeStatsFm: "Brug stort Stats.fm-logo",
+                useGenericPlaceholder: "Brug generisk pladsholder",
+                seriesMovieName: "Serie-/filmnavn",
+                seriesEpisodeTrackMovie: "Serie - episode-/spor-/filmnavn",
+                custom: "Brugerdefineret",
+                seriesCover: "Seriecover",
+                episodeCover: "Episodecover",
+                season1Episode1: "Sæson 1 episode 1",
+                off: "Fra",
+                listening: "Lytter",
+                playing: "Spiller",
+                streaming: "Streamer",
+                watching: "Ser",
+                none: "Ingen",
+                navidromeInstanceExposesServer: "Navidrome-instans (afslører server-URL. Engangsgodkendelse sendt.)",
+                lastFmApiSends: "Last.fm-API (sender metadata til last.fm)",
+                donTShowShows: "Vis ikke (viser generel lyttebesked)",
+                showStateLineContent: "Vis indhold fra state-linjen",
+                showDetailsLineContent: "Vis indhold fra detaljelinjen",
+                displayYourCurrentlyPlaying: "Vis de lydbøger, du afspiller, som Discord Rich Presence. Kræver URL, brugernavn og adgangskode til din AudioBookShelf-server.",
+                audiobookshelfServerUrl: "URL til AudioBookShelf-server.",
+                audiobookshelfUsername: "AudioBookShelf-brugernavn.",
+                audiobookshelfPassword: "AudioBookShelf-adgangskode.",
+                connectsToTosuVia: "Forbinder til tosu via WebSocket på port 24050. Ingen konfiguration nødvendig, sørg bare for, at tosu kører sammen med osu!.",
+                showWhatYouRe: "Vis, hvad du lytter til via stats.fm. Kræver, at din lyttehistorik er offentlig.",
+                statsFmUsername: "Stats.fm-brugernavn.",
+                customStatusText: "Brugerdefineret statustekst.",
+                statsFm: "Stats.fm",
+                nameFormat: "Navneformat.",
+                fallbackWhenArtIs: "Reserve, når billede mangler.",
+                showListeningStatus: "Vis lyttestatus.",
+                showStatsFmLogo: "Vis Stats.fm-logo ved siden af albumbilledet.",
+                showLinkToStats: "Vis link til stats.fm-profil.",
+                showLinkToSong: "Vis link til sangen på stats.fm.",
+                hideStatsFmPresence: "Skjul stats.fm-aktivitet, hvis Spotify kører.",
+                hideStatsFmPresence2: "Skjul stats.fm-aktivitet, hvis en ekstern RPC kører.",
+                disableDownloadingAlbumArt: "Slå download af albumbilleder fra.",
+                showWhatYouRe2: "Vis, hvad du afspiller på Jellyfin. Sådan får du din API-nøgle: Åbn Jellyfins webbrugerflade, tryk på F12 for at åbne udviklerværktøjerne, gå til fanen Netværk, find forespørgsler til din server, find Authorization-headeren (Ctrl+F for at søge), og du skal bruge delen fra Token='this'. Dit bruger-id kan findes i URL'en til din profilside.",
+                jellyfinServerUrl: "Jellyfin-server-URL.",
+                jellyfinApiKey: "Jellyfin API-nøgle.",
+                authorization: "Authorization",
+                jellyfinUserId: "Jellyfin-bruger-id.",
+                userIdFromProfile: "Bruger-id fra profil-URL",
+                nameDisplayFormat: "Format for navnevisning.",
+                customNameTemplate: "Brugerdefineret navneskabelon.",
+                nameOnJellyfin: "{name} på Jellyfin",
+                coverTypeForTv: "Covertype for tv-serier.",
+                episodeNumberFormat: "Format for episodenummer.",
+                overrideRichPresenceType: "Tilsidesæt rich presence-type.",
+                showEpisodeNameAfter: "Vis episodenavn efter sæson-/episodeinfo.",
+                showPresenceWhenMedia: "Vis aktivitet, når mediet er sat på pause.",
+                hideMediaDetails: "Skjul mediedetaljer.",
+                discordRichPresenceFor: "Discord Rich Presence til Gensokyo Radio. Aktivér det og lyt!",
+                refreshIntervalInSeconds: "Opdateringsinterval i sekunder.",
+                showWhatYouRe3: "Vis, hvad du lytter til via Navidrome.",
+                navidromeServerUrlMust: "Navidrome-server-URL (skal være et offentligt domæne, f.eks. https://navidrome.example.com).",
+                navidromeUsername: "Navidrome-brugernavn.",
+                navidromePassword: "Navidrome-adgangskode.",
+                optionalDiscordApplicationClient: "Valgfrit klient-id for Discord-applikation.",
+                howToFetchAlbum: "Hvordan albumbilleder hentes.",
+                optionalProvideYourOwn: "Valgfrit: Angiv din egen Last.fm API-nøgle (bruger standard, hvis tom).",
+                showNavidromeLogoIn: "Vis Navidrome-logo nederst til højre på albumbilledet.",
+                showAlbumNameIn: "Vis albumnavn i aktiviteten.",
+                whichTypeOfActivity: "Hvilken aktivitetstype der skal vises.",
+                showTheStateDetails: "Vis indholdet af state-/detaljelinjen i medlemslisten",
+                hideRichPresenceWhen: "Skjul Rich Presence, når musikken er sat på pause (i stedet for at vise et stopur)",
+                theListeningToText: "Teksten \"Lytter til\" (f.eks. {artist})",
+                navidrome: "Navidrome",
+                theMainLineShowing: "Hovedlinjen, der viser, hvilken sang der spilles (f.eks. {song})",
+                song: "{song}",
+                theLineBelowThe: "Linjen under sangnavnet (f.eks. {artist})",
+                artist: "{artist}",
+                theAlbumLineE: "Albumlinjen (f.eks. {album})",
+                album: "{album}",
+                enableTabLabelsCurrenttab: "Aktivér {{TAB_LABELS_currentTab}}-aktivitet.",
+                statsFmProfile: "Stats.fm-profil",
+                viewSong: "Vis sang",
+                showArtistName: "Vis kunstnernavn",
+                showTrackName: "Vis nummernavn",
+                enterValue: "Indtast en værdi"
+            },
+            name: "RichPresence",
+            description: "Samlet Rich Presence-hub til AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome og Gensokyo Radio.",
+            toast: {
+                audiobookshelfRpcIsNot: "AudioBookShelf RPC er ikke konfigureret.",
+                jellyfinRpcIsNot: "Jellyfin RPC er ikke konfigureret.",
+                jellyfinReturnedAnInvalid: "Jellyfin returnerede et ugyldigt svar. Din API-nøgle kan være forkert."
+            },
+            option: {
+                enabled: {
+                    description: "Aktivér Rich Presence-tjenester.",
+                    label: "Aktiveret"
+                },
+                serviceSettings: {
+                    description: "Tjenestekonfiguration.",
+                    label: "Tjenesteindstillinger"
+                },
+                abs_enabled: {
+                    description: "Aktivér AudioBookShelf-aktivitet.",
+                    label: "AudioBookShelf aktiveret"
+                },
+                tosu_enabled: {
+                    description: "Aktivér osu! (tosu)-aktivitet.",
+                    label: "osu! (tosu) aktiveret"
+                },
+                sfm_enabled: {
+                    description: "Aktivér stats.fm-aktivitet.",
+                    label: "Stats.fm aktiveret"
+                },
+                jf_enabled: {
+                    description: "Aktivér Jellyfin-aktivitet.",
+                    label: "Jellyfin aktiveret"
+                },
+                gr_enabled: {
+                    description: "Aktivér Gensokyo Radio-aktivitet.",
+                    label: "Gensokyo Radio aktiveret"
+                },
+                nd_enabled: {
+                    description: "Aktivér Navidrome-aktivitet.",
+                    label: "Navidrome aktiveret"
+                },
+                abs_serverUrl: {
+                    description: "URL til AudioBookShelf-server.",
+                    label: "AudioBookShelf-server-URL"
+                },
+                abs_username: {
+                    description: "AudioBookShelf-brugernavn.",
+                    label: "AudioBookShelf-brugernavn"
+                },
+                abs_password: {
+                    description: "AudioBookShelf-adgangskode.",
+                    label: "AudioBookShelf-adgangskode"
+                },
+                sfm_username: {
+                    description: "Stats.fm-brugernavn.",
+                    label: "Stats.fm-brugernavn"
+                },
+                sfm_shareUsername: {
+                    description: "Vis link til stats.fm-profil.",
+                    label: "Stats.fm: del brugernavn"
+                },
+                sfm_shareSong: {
+                    description: "Vis link til sangen på stats.fm.",
+                    label: "Stats.fm: del sang"
+                },
+                sfm_hideWithSpotify: {
+                    description: "Skjul stats.fm-aktivitet, hvis Spotify kører.",
+                    label: "Stats.fm: skjul med Spotify"
+                },
+                sfm_hideWithExternalRPC: {
+                    description: "Skjul stats.fm-aktivitet, hvis en ekstern RPC kører.",
+                    label: "Stats.fm: skjul ved ekstern RPC"
+                },
+                sfm_statusName: {
+                    description: "Brugerdefineret statustekst.",
+                    label: "Stats.fm: statusnavn"
+                },
+                sfm_nameFormat: {
+                    description: "Navneformat.",
+                    label: "Stats.fm: navneformat",
+                    statusName: "Brug brugerdefineret statusnavn",
+                    artistFirst: "Brug formatet 'kunstner - sang'",
+                    songFirst: "Brug formatet 'sang - kunstner'",
+                    artistOnly: "Brug kun kunstnernavn",
+                    songOnly: "Brug kun sangnavn",
+                    albumName: "Brug albumnavn"
+                },
+                sfm_useListeningStatus: {
+                    description: "Vis lyttestatus.",
+                    label: "Stats.fm: brug lyttestatus"
+                },
+                sfm_missingArt: {
+                    description: "Reserve, når billede mangler.",
+                    label: "Stats.fm: manglende billede",
+                    statsFmLogo: "Brug stort Stats.fm-logo",
+                    placeholder: "Brug generisk pladsholder"
+                },
+                sfm_showLogo: {
+                    description: "Vis Stats.fm-logo ved siden af albumbilledet.",
+                    label: "Stats.fm: vis logo"
+                },
+                sfm_alwaysHideArt: {
+                    description: "Slå download af albumbilleder fra.",
+                    label: "Stats.fm: skjul altid billede"
+                },
+                jf_serverUrl: {
+                    description: "Jellyfin-server-URL.",
+                    label: "Jellyfin-server-URL"
+                },
+                jf_apiKey: {
+                    description: "Jellyfin API-nøgle.",
+                    label: "Jellyfin API-nøgle"
+                },
+                jf_userId: {
+                    description: "Jellyfin-bruger-id.",
+                    label: "Jellyfin-bruger-id"
+                },
+                jf_nameDisplay: {
+                    description: "Format for navnevisning.",
+                    label: "Jellyfin: navnevisning",
+                    default: "Serie-/filmnavn",
+                    full: "Serie - episode-/spor-/filmnavn",
+                    custom: "Brugerdefineret"
+                },
+                jf_customName: {
+                    description: "Brugerdefineret navneskabelon.",
+                    label: "Jellyfin: brugerdefineret navn"
+                },
+                jf_coverType: {
+                    description: "Covertype for tv-serier.",
+                    label: "Jellyfin: covertype",
+                    series: "Seriecover",
+                    episode: "Episodecover"
+                },
+                jf_episodeFormat: {
+                    description: "Format for episodenummer.",
+                    label: "Jellyfin: episodeformat",
+                    long: "S01E01",
+                    fulltext: "Sæson 1 episode 1"
+                },
+                jf_showEpisodeName: {
+                    description: "Vis episodenavn efter sæson-/episodeinfo.",
+                    label: "Jellyfin: vis episodenavn"
+                },
+                jf_overrideType: {
+                    description: "Tilsidesæt rich presence-type.",
+                    label: "Jellyfin: tilsidesæt type",
+                    off: "Fra",
+                    listening: "Lytter",
+                    playing: "Spiller",
+                    streaming: "Streamer",
+                    watching: "Ser"
+                },
+                jf_showPausedState: {
+                    description: "Vis aktivitet, når mediet er sat på pause.",
+                    label: "Jellyfin: vis pausetilstand"
+                },
+                jf_privacyMode: {
+                    description: "Skjul mediedetaljer.",
+                    label: "Jellyfin: privatlivstilstand"
+                },
+                gr_refreshInterval: {
+                    description: "Opdateringsinterval i sekunder.",
+                    label: "Gensokyo Radio: opdateringsinterval"
+                },
+                nd_serverUrl: {
+                    description: "Navidrome-server-URL (f.eks. https://navidrome.example.com)",
+                    label: "Navidrome-server-URL"
+                },
+                nd_username: {
+                    description: "Navidrome-brugernavn",
+                    label: "Navidrome-brugernavn"
+                },
+                nd_password: {
+                    description: "Navidrome-adgangskode",
+                    label: "Navidrome-adgangskode"
+                },
+                nd_clientId: {
+                    description: "Valgfrit klient-id for Discord-applikation",
+                    label: "Navidrome: klient-id"
+                },
+                nd_showSmallImage: {
+                    description: "Vis Navidrome-logo nederst til højre på albumbilledet.",
+                    label: "Navidrome: vis lille billede"
+                },
+                nd_showAlbum: {
+                    description: "Vis albumnavn i aktiviteten.",
+                    label: "Navidrome: vis album"
+                },
+                nd_albumArtMode: {
+                    description: "Hvordan albumbilleder hentes.",
+                    label: "Navidrome: tilstand for albumbillede",
+                    none: "Ingen",
+                    instance: "Navidrome-instans (afslører server-URL for Discord, ingen godkendelse sendes)",
+                    lastfm: "Last.fm-API (sender nummermetadata til Last.fm)"
+                },
+                nd_lastfmApiKey: {
+                    description: "Valgfri Last.fm API-nøgle",
+                    label: "Navidrome: Last.fm API-nøgle"
+                },
+                nd_refreshInterval: {
+                    description: "Opdateringsinterval i sekunder.",
+                    label: "Navidrome: opdateringsinterval"
+                },
+                nd_activityType: {
+                    description: "Hvilken aktivitetstype",
+                    label: "Navidrome: aktivitetstype",
+                    listening: "Lytter",
+                    playingFixesHiddenLines: "Spiller (retter skjulte linjer)",
+                    watching: "Ser"
+                },
+                nd_nameString: {
+                    description: "Formatstreng for aktivitetsnavn",
+                    label: "Navidrome: navnestreng"
+                },
+                nd_detailsString: {
+                    description: "Formatstreng for aktivitetsdetaljer",
+                    label: "Navidrome: detaljestreng"
+                },
+                nd_stateString: {
+                    description: "Formatstreng for aktivitetstilstand",
+                    label: "Navidrome: tilstandsstreng"
+                },
+                nd_largeTextString: {
+                    description: "Formatstreng for aktivitetens store tekst",
+                    label: "Navidrome: streng for stor tekst"
+                },
+                nd_statusDisplayType: {
+                    description: "Vis nummer-/kunstnernavn i medlemslisten",
+                    off: "Vis ikke (viser generel lyttebesked)"
+                },
+                nd_hideOnPause: {
+                    description: "Skjul Rich Presence, når musikken er sat på pause",
+                    label: "Navidrome: skjul ved pause"
+                }
+            },
+            panel: {
+                password: "Adgangskode",
+                statsFmUsername: "stats.fm-brugernavn",
+                customStatusText: "Brugerdefineret statustekst",
+                nameFormat: "Navneformat",
+                missingArtFallback: "Reserve ved manglende billede",
+                showListeningStatus: "Vis lyttestatus",
+                showStatsFmLogo: "Vis Stats.fm-logo",
+                showProfileLink: "Vis profillink",
+                showSongLink: "Vis sanglink",
+                hideWithSpotify: "Skjul med Spotify",
+                hideWithExternalRpc: "Skjul ved ekstern RPC",
+                disableAlbumArt: "Deaktivér albumbilleder",
+                apiKey: "API-nøgle",
+                userId: "Bruger-ID",
+                nameDisplay: "Navnevisning",
+                customNameTemplate: "Brugerdefineret navneskabelon",
+                coverType: "Covertype",
+                episodeFormat: "Episodeformat",
+                overridePresenceType: "Tilsidesæt aktivitetstype",
+                showEpisodeName: "Vis episodenavn",
+                showWhenPaused: "Vis ved pause",
+                privacyMode: "Privatlivstilstand",
+                refreshInterval: "Opdateringsinterval",
+                clientId: "Klient-id",
+                albumArtMode: "Tilstand for albumbillede",
+                lastFmApiKey: "Last.fm API-nøgle",
+                showSmallImage: "Vis lille billede",
+                showAlbum: "Vis album",
+                activityType: "Aktivitetstype",
+                statusDisplayType: "Visningstype for status",
+                hideOnPause: "Skjul ved pause",
+                activityNameFormat: "Format for aktivitetsnavn",
+                detailsFormat: "Format for detaljer",
+                stateFormat: "Format for tilstand",
+                largeTextFormat: "Format for stor tekst",
+                enabled: "Aktiveret"
+            }
+        },
+        sedEnhanced: {
+            option: {
+                regexByDefault: {
+                    description: "Inverterer `r`-flaget, så brug af `r`-flaget aktiverer ikke-regex-tilstand, og udeladelse af det bruger regex-tilstand.",
+                    label: "Regex som standard"
+                }
+            },
+            name: "SedEnhanced",
+            description: "Udvider Discords grundlæggende `sed`-understøttelse."
+        },
+        showRolesInChat: {
+            option: {
+                showBots: {
+                    description: "Om den højeste rolle skal vises på bots.",
+                    label: "Vis bots"
+                },
+                useRoleColor: {
+                    description: "Brug rollens farve til ikonet.",
+                    label: "Brug rollefarve"
+                }
+            },
+            name: "ShowRolesInChat",
+            description: "Viser en brugers højeste rolle ved siden af navnet i chatbeskeder. Skjul/vis bestemte roller i deres kontekstmenu (højreklik).",
+            text: {
+                chatRoleActions: "Rollehandlinger i chat",
+                unhideRolesInChat: "Vis roller i chat igen",
+                showRoleInChat: "Vis rolle i chat",
+                hideRoleInChat: "Skjul rolle i chat"
+            }
+        },
+        silenceUsers: {
+            option: {
+                mutedUserIds: {
+                    description: "Kommaseparerede Discord-bruger-id'er, hvis pings og servermærker skal dæmpes.",
+                    label: "Dæmpede bruger-id'er"
+                }
+            },
+            name: "SilenceUsers",
+            description: "Dæmper @omtale-pings og servermærketællere fra bestemte brugere. Almindelige beskeder og DM'er påvirkes ikke."
+        },
+        songLink: {
+            text: {
+                showIfAvailable: "Vis, hvis tilgængelig",
+                openInDesktopApp: "Åbn i skrivebordsappen",
+                loadingSongLink: "Indlæser sanglink...",
+                pleaseProvideAMusic: "Angiv et musiklink.",
+                thisWillTakeA: "Dette tager et øjeblik...",
+                noAlternativePlatformsFound: "Ingen alternative platforme fundet for dette link.",
+                failedToResolveMusic: "Kunne ikke slå musiklinket op",
+                logo: "{{name}}-logo"
+            },
+            option: {
+                servicesSettings: {
+                    description: "indstillinger for tjenester",
+                    label: "Tjenesteindstillinger"
+                },
+                userCountry: {
+                    description: "Land brugt til opslag (landekode på to bogstaver)",
+                    label: "Brugerens land"
+                },
+                includeMetadata: {
+                    description: "Medtag nummerets titel og kunstnernavn som overskrift.",
+                    label: "Medtag metadata"
+                }
+            },
+            name: "SongLink",
+            description: "Tilføjer knapper til streamingtjenester under sanglinks",
+            command: {
+                musiclink: "Konvertér et musiklink til andre streamingplatforme.",
+                url: "Musiklink (Spotify, Deezer, YouTube, Tidal, Apple Music, SoundCloud)"
+            }
+        },
+        songSpotlight: {
+            name: "SongSpotlight",
+            description: "Vis sange frem på din profil",
+            text: {
+                songSpotlight: "Song Spotlight",
+                explicit: "Eksplicit",
+                addSong: "Tilføj sang",
+                addANewSong: "Tilføj en ny sang",
+                copyLink: "Kopiér link",
+                removeSong: "Fjern sang",
+                failedToLoad: "Kunne ikke indlæse!",
+                areYouSure: "Er du sikker?",
+                thisWillOverwriteYour: "Dette overskriver dine nuværende sange.",
+                continue: "Fortsæt",
+                nevermind: "Glem det",
+                thisWillPermanentlyDelete: "Dette sletter alle dine sange permanent.",
+                delete: "Slet",
+                signInToSong: "Log ind på Song Spotlight",
+                songs: "Sange",
+                authorization: "Authorization",
+                importFromClipboard: "Importér fra udklipsholder",
+                copyToClipboard: "Kopiér til udklipsholder",
+                signOut: "Log ud",
+                deleteSongs: "Slet sange",
+                more: "Mere",
+                editSongs: "Redigér sange",
+                copyJson: "Kopiér JSON",
+                looksLikeThereS: "Det ser ud til, at der ikke er noget her!",
+                uhOhSongSpotlight: "Åh nej! Song Spotlight kunne ikke indlæses. Se konsollen for flere detaljer.",
+                stealSong: "Stjæl sang",
+                profileSongs: "Profilsange",
+                notEnoughSpace: "Ikke nok plads",
+                alreadyAdded: "Du har allerede tilføjet denne sang",
+                invalidLink: "Ugyldigt link",
+                failedToParseLink: "Kunne ikke fortolke linket",
+                invalidUrl: "Ugyldig URL",
+                goAddSongs: "Nå? Hvad venter du på? Tilføj nogle sange til dit Song Spotlight!",
+                tellUserToAddSongs: "Bed {{name}} om at tilføje nogle sange til sit Song Spotlight!",
+                supportedServices: "Song Spotlight understøtter disse tjenester:",
+                viewSongsVia: "Du kan også se dine sange via kommandoen",
+                viewSongsViaSuffix: "!",
+                coverTooltipOwner: "{{label}}s {{sublabel}}",
+                coverTooltipBy: "{{label}} af {{sublabel}}",
+                lastUpdated: "Sidst opdateret",
+                save: "Gem",
+                showMore: "Vis {{count}} mere"
+            },
+            toast: {
+                youHaveBeenSigned: "Du er blevet logget ud af Song Spotlight. Log ind igen.",
+                songSpotlightError: "Song Spotlight: {{error}}",
+                successfullyAuthorized: "Godkendt!",
+                failedToPlaySong: "Kunne ikke afspille sangforhåndsvisning!",
+                addedSong: "Sang tilføjet!",
+                removedSong: "Sang fjernet!",
+                noJsonInClipboard: "Ingen JSON i udklipsholderen!",
+                invalidSongSpotlightData: "Ugyldige Song Spotlight-data i udklipsholderen!",
+                oneOrMoreImported: "En eller flere importerede sange var ugyldige.",
+                importedSongsFromClipboard: "Sange importeret fra udklipsholderen!",
+                successfullySavedSongs: "Sangene blev gemt!",
+                successfullySignedOut: "Du er logget ud!",
+                successfullyDeletedSongs: "Sangene blev slettet!",
+                youDonTHave: "Du har ikke nok plads!",
+                uhOhThisSong: "Åh nej, denne sang findes ikke!",
+                youAlreadyHaveThis: "Du har allerede tilføjet denne sang!",
+                youDonTHave2: "Du... har ikke tilføjet denne sang?",
+                fetchError: "Song Spotlight-hentningsfejl ved {{path}}"
+            },
+            option: {
+                collapseSongList: {
+                    description: "Folder sanglisten på brugerprofiler sammen til en knap, der åbner en separat menu",
+                    label: "Fold sangliste sammen"
+                },
+                profileSongsLimit: {
+                    description: "Hvor mange sange der vises, når man først klikker på en bruger",
+                    label: "Grænse for profilsange"
+                },
+                previewVolume: {
+                    description: "Lydstyrke for sangforhåndsvisninger ved afspilning",
+                    label: "Forhåndsvisningslydstyrke"
+                }
+            }
+        },
+        stopAutoUnread: {
+            name: "StopAutoUnread",
+            description: "Forhindrer Discord i automatisk at ændre en kanals notifikationsindstilling til \"Alle beskeder\""
+        },
+        themeLibrary: {
+            text: {
+                enablePlugin: "Aktivér plugin",
+                cancel: "Annuller",
+                holdOn: "Vent lidt!",
+                thisThemeRequiresThe: "Dette tema kræver",
+                pluginToWorkProperly: "plugin for at fungere korrekt!",
+                doYouWantTo: "Vil du aktivere det?",
+                themeInfo: "Temainfo",
+                viewSource: "Se kilde",
+                close: "Luk",
+                download: "Download",
+                overwrite: "Overskriv",
+                keepMyFile: "Behold min fil",
+                copyToClipboard: "Kopiér til udklipsholder",
+                conflict: "Konflikt!",
+                themeSource: "Temakilde",
+                aThemeWithThe: "Et tema med samme navn",
+                alreadyExists: "findes allerede",
+                inYourThemesDirectory: "i din temamappe! Vil du overskrive den?",
+                version: "Version",
+                likes: "Synes godt om",
+                donate: "Donér",
+                supportServer: "Supportserver",
+                source: "Kilde",
+                tags: "Tags",
+                youCanSupportThe: "Du kan støtte forfatteren ved at donere nedenfor!",
+                joinDiscordServer: "Tilslut Discord-server",
+                viewThemeSource: "Se temakilde",
+                showAll: "Vis alle",
+                showThemes: "Vis temaer",
+                showSnippets: "Vis snippets",
+                showMostLiked: "Vis mest populære",
+                showDark: "Vis mørke",
+                showLight: "Vis lyse",
+                showEnabled: "Vis aktiverede",
+                showDisabled: "Vis deaktiverede",
+                searchForATheme: "Søg efter et tema...",
+                gettingTheLatestThemes: "Henter de nyeste temaer...",
+                thisWonTTake: "Det tager ikke lang tid!",
+                failedToFetchThemes: "Kunne ikke hente temaer",
+                couldNotFetchThe: "Kunne ikke hente temalisten. Prøv igen senere.",
+                wantYourThemeRemoved: "Vil du have dit tema fjernet?",
+                hide: "Skjul",
+                noThemeFound: "Intet tema fundet.",
+                tryNarrowingYourSearch: "Prøv at indsnævre din søgning.",
+                themeLibrary: "Temabibliotek",
+                successfullyAuthorizedWithThemelibrary: "Godkendt med ThemeLibrary!",
+                failedToAuthorizeCheck: "Godkendelse mislykkedes, se konsollen",
+                successfullyDeauthorizedFromThemelibrary: "Godkendelsen hos ThemeLibrary blev fjernet!",
+                failedToDeauthorizeCheck: "Kunne ikke fjerne godkendelse, se konsollen",
+                themelibraryAuth: "ThemeLibrary-godkendelse",
+                themeRemoval: "Fjernelse af tema",
+                allThemeAuthorsAre: "Alle temaforfattere krediteres i temainfoen, og ingen kilde er ændret. Hvis du alligevel ønsker dit tema fjernet, kan du oprette et issue ved at klikke nedenfor.",
+                authorizeWithThemelibrary: "Godkend med ThemeLibrary",
+                copyThemelibraryToken: "Kopiér ThemeLibrary-token",
+                deauthorizeThemelibrary: "Fjern godkendelse hos ThemeLibrary",
+                themeDetails: "Detaljer om {{name}}",
+                mostLiked: "Mest likede",
+                newestAdditions: "Nyeste tilføjelser",
+                removeTheme: "Fjern tema",
+                addTheme: "Tilføj tema",
+                authors: "Forfattere",
+                author: "Forfatter",
+                nobodyLikedTheme: "Ingen har liket dette tema endnu.",
+                nobodyLikedSnippet: "Ingen har liket dette snippet endnu.",
+                usersLikedTheme: "{{likes}} brugere har liket dette tema!",
+                usersLikedSnippet: "{{likes}} brugere har liket dette snippet!",
+                openThemeLibrary: "Åbn temabibliotek",
+                lastUpdated: "Dette tema blev sidst opdateret",
+                removalInfo: "Hvis du vil have dine temaer fjernet permanent, så opret et issue på",
+                themes: "Temaer",
+                requestRemoval: "Anmod om fjernelse af tema",
+                pluginSuffix: "pluginet!"
+            },
+            toast: {
+                downloadedName: "{{name}} downloadet!",
+                failedToDownloadName: "Kunne ikke downloade {{name}}! (se konsollen)",
+                invalidOrExpiredInvite: "Ugyldig eller udløbet invitation!",
+                copiedToClipboard: "Kopieret til udklipsholder",
+                noUniquetokenPresentTry: "Ingen uniqueToken til stede, prøv at godkende først!",
+                noTokenToCopy: "Intet token at kopiere, prøv at godkende først!",
+                copiedToClipboard2: "Kopieret til udklipsholder!"
+            },
+            name: "ThemeLibrary",
+            description: "Et bibliotek med temaer til Plexcord.",
+            option: {
+                hideWarningCard: {
+                    description: "Skjul advarselskortet øverst på fanen Temabibliotek",
+                    label: "Skjul advarselskort"
+                },
+                buttons: {
+                    description: "ThemeLibrary-knapper",
+                    label: "Knapper"
+                }
+            }
+        },
+        translatePlus: {
+            name: "Translate+",
+            description: "Plexcords oversættelsesplugin, men med understøttelse af kunstige sprog!",
+            text: {
+                translate: "Oversæt",
+                dismiss: "Afvis",
+                translationFailedDueTo: "Oversættelsen mislykkedes på grund af en fejl.",
+                translatedFrom: "oversat fra {{lang}}"
+            },
+            option: {
+                target: {
+                    description: "Målsprog",
+                    label: "Mål"
+                },
+                toki: {
+                    description: "Aktivér Toki Pona",
+                    label: "Toki Pona"
+                },
+                sitelen: {
+                    description: "Aktivér Sitelen Pona",
+                    label: "Sitelen Pona"
+                },
+                shavian: {
+                    description: "Aktivér Shavian",
+                    label: "Shavian"
+                }
+            }
+        },
+        triviaAI: {
+            name: "TriviaAI",
+            description: "Et plugin, der hjælper dig med at besvare quizspørgsmål ved hjælp af AI.",
+            text: {
+                answerWithAi: "Svar med AI",
+                enterApiKeyHere: "Indtast API-nøglen til dit AI-endpoint her.",
+                enterSystemPrompt: "Indtast systemprompt.",
+                enterYourOpenaiCompatible: "Indtast dit OpenAI-kompatible AI-endpoint her.",
+                status: "Status {{status}}"
+            },
+            option: {
+                apiKey: {
+                    description: "API-nøgle.",
+                    label: "API-nøgle"
+                },
+                model: {
+                    description: "AI-model, der skal bruges.",
+                    label: "Model",
+                    placeholder: "f.eks. google/gemini-3-flash-preview, inception/mercury, openai/gpt-5.2-chat osv."
+                },
+                systemPrompt: {
+                    description: "Systemprompt til AI'en. Pladsholdere: {current_user}, {current_time}",
+                    label: "Systemprompt"
+                },
+                maxTokens: {
+                    description: "Maksimalt antal tokens i svaret.",
+                    label: "Maks. tokens"
+                },
+                endpoint: {
+                    description: "OpenAI-kompatibelt AI-endpoint.",
+                    label: "Endpoint"
+                },
+                context: {
+                    description: "Antal tidligere beskeder, der medtages som kontekst.",
+                    label: "Kontekst"
+                },
+                passMessageAuthorName: {
+                    description: "Sæt forfatterens navn foran beskedindholdet, når det sendes til AI'en. Det kan hjælpe AI'en med at skelne mellem forskellige brugere i en samtale.",
+                    label: "Send beskedforfatterens navn"
+                },
+                treatSelfAsAssistant: {
+                    description: "Når det er aktiveret, behandles dine egne beskeder som assistentbeskeder i konteksten. Det får nogle modeller til at begynde at skrive fanfiktion.",
+                    label: "Behandl mig selv som assistent"
+                },
+                mode: {
+                    description: "Hvordan skal svar håndteres?",
+                    label: "Tilstand",
+                    autoreply: "Automatisk svar",
+                    chatbar: "Erstat tekst i chatlinjen",
+                    bot: "Clyde"
+                },
+                supportImages: {
+                    description: "Send billeder til AI'en som kontekst (hvis der er nogen). Det understøttes ikke af alle modeller.",
+                    label: "Understøt billeder"
+                },
+                sendImagesAsBase64: {
+                    description: "Send billeder til AI'en som base64.",
+                    label: "Send billeder som base64"
+                }
+            },
+            toast: {
+                triviaaiApiSettingsAre: "TriviaAI: API-indstillingerne er ufuldstændige.",
+                errorGettingResponseFrom: "Fejl ved hentning af svar fra AI-modellen"
+            }
+        },
+        unreadCountBadge: {
+            option: {
+                showOnMutedChannels: {
+                    description: "Vis antal ulæste på slåede kanaler",
+                    label: "Vis på slåede kanaler"
+                },
+                notificationCountLimit: {
+                    description: "Vis +99 i stedet for det faktiske antal",
+                    label: "Grænse for notifikationsantal"
+                }
+            },
+            name: "UnreadCountBadge",
+            description: "Viser mærker med antal ulæste beskeder på kanaler i kanallisten"
+        },
+        userPFP: {
+            toast: {
+                gifsWebpMustBe: "GIF'er/WebP skal tilføjes via URL. Upload din GIF/WebP til en billedhostingtjeneste, og indsæt linket."
+            },
+            text: {
+                save: "Gem",
+                delete: "Slet",
+                customAvatar: "Brugerdefineret avatar",
+                original: "Original",
+                local: "Lokal",
+                enterPngGifUrl: "Indtast PNG/GIF-URL",
+                setAvatar: "Angiv avatar",
+                usingTheSetAvatar: "Funktionen til at angive avatar er kun lokal, så det kun er dig, der ser ændringen.",
+                joinUserpfpServer: "Tilslut UserPFP-serveren",
+                dropHere: "Slip her!",
+                dragOrClick: "⬆ Træk et billede eller klik for at uploade (brug en URL til GIF'er eller WebP)",
+                uploadedFile: "(uploadet fil)",
+                supportHere: "Støt UserPFP her"
+            },
+            option: {
+                overrideServerAvatars: {
+                    description: "Tilsidesæt serveravatarer med brugerdefinerede avatarer eller standardbrugeravataren, hvis ingen brugerdefineret avatar er angivet.",
+                    label: "Tilsidesæt serveravatarer"
+                },
+                preferNitro: {
+                    description: "Hvilken avatar der skal bruges, hvis både standard animeret (Nitro) profilbillede og UserPFP-avatar findes",
+                    label: "Foretræk Nitro",
+                    false: "UserPFP",
+                    true: "Nitro"
+                },
+                databaseSource: {
+                    description: "URL, som databasen indlæses fra",
+                    label: "Databasekilde"
+                }
+            },
+            name: "UserPFP",
+            description: "Lader dig angive lokale statiske eller animerede avatarer for dig selv og andre brugere"
+        },
+        userpluginInstaller: {
+            toast: {
+                restartToApplyChanges: "Genstart for at anvende ændringerne!"
+            },
+            text: {
+                installError: "Installationsfejl",
+                done: "Færdig!",
+                later: "Senere",
+                updateError: "Opdateringsfejl",
+                checkingForUpdates: "Søger efter opdateringer...",
+                loadingPlugins: "Indlæser plugins...",
+                pluginUpdatesAvailable: "Plugin-opdateringer tilgængelige",
+                theFollowingPluginsAre: "Følgende plugins er forældede:",
+                youCanUpdatePlugins: "Du kan opdatere plugins nedenfor.",
+                installPlugin: "Installér plugin",
+                userplugininstallerNotFullyLoaded: "UserpluginInstaller er ikke fuldt indlæst",
+                youNeedToRestart: "Du skal genstarte, så den indbyggede del kan indlæses :)",
+                restartNow: "Genstart nu",
+                someUserpluginsAreOut: "Nogle UserPlugins er forældede!",
+                clickToOpenThe: "Klik for at åbne UserPlugin-opdateringen",
+                plexcordDoesNotModerate: "Plexcord modererer ikke userplugins og tager intet ansvar for noget, der måtte følge af at installere dem.",
+                onlyInstallUserpluginsFrom: "Installér kun userplugins fra udviklere, du stoler på. Det sker helt på egen risiko.",
+                setGitPath: "Angiv Git-sti",
+                installHint: "Du kan installere et plugin fra GitHub, GitLab, Codeberg, git.nin0.dev eller plugins.nin0.dev ved at indsætte dets klon-URL her.",
+                enableAndRestart: "Aktivér og genstart",
+                enableAndRefresh: "Aktivér og genindlæs",
+                tabCounts: "({{total}}, {{enabled}} aktiveret)",
+                possiblyMore: "og muligvis flere, da opdateringstjekket ikke er færdigt. ",
+                alreadyInstalled: "Plugin er allerede installeret, opdater nedenfor",
+                invalidUrl: "Ugyldig URL, læs bemærkningen ovenfor",
+                install: "Installer",
+                restart: "Genstart",
+                refresh: "Opdater",
+                update: "Opdater",
+                source: "Kilde",
+                support: "Support",
+                managePlugins: "Administrer plugins",
+                uninstalledRestart: "{{name}} er afinstalleret. En genstart er nødvendig for at fjerne pluginet helt.",
+                uninstalledRefresh: "{{name}} er afinstalleret. En opdatering er nødvendig for at fjerne pluginet helt.",
+                updatedRestart: "{{name}} er opdateret. En genstart er nødvendig for at anvende opdateringen.",
+                updatedRefresh: "{{name}} er opdateret. En opdatering er nødvendig for at anvende opdateringen.",
+                installedBody: "{{name}} er blevet installeret. Hvad nu?",
+                installedNativeBody: "{{name}} er blevet installeret. Da det bruger native funktioner, kræves dog en genstart af klienten. Hvad nu?"
+            },
+            option: {
+                allowlistedChannels: {
+                    description: "Kommasepareret liste over kanaler, hvor knappen Installér plugin skal vises. Den vises altid i Plexcords userplugin-kanaler",
+                    label: "Tilladte kanaler"
+                },
+                notifyIfUpdate: {
+                    description: "Vis en Plexcord-notifikation, hvis UserPlugins skal opdateres",
+                    label: "Giv besked ved opdatering"
+                },
+                neverNotifyForPlugins: {
+                    description: "Vis aldrig opdateringsnotifikationer for disse plugins (du kan stadig opdatere dem fra fanen UserPlugins)",
+                    label: "Giv aldrig besked for plugins"
+                }
+            },
+            name: "UserpluginInstaller",
+            description: "Installér userplugins med et enkelt klik på en knap"
+        },
+        vCPanelSettings: {
+            option: {
+                title1: {
+                    label: "Titel 1"
+                },
+                uncollapseSettingsByDefault: {
+                    description: "Fold taleindstillinger automatisk ud som standard",
+                    label: "Fold indstillinger ud som standard"
+                },
+                title2: {
+                    label: "Titel 2"
+                },
+                outputVolume: {
+                    description: "Vis en skyder til outputlydstyrke",
+                    label: "Outputlydstyrke"
+                },
+                inputVolume: {
+                    description: "Vis en skyder til inputlydstyrke",
+                    label: "Inputlydstyrke"
+                },
+                outputDevice: {
+                    description: "Vis en vælger til outputenhed",
+                    label: "Outputenhed"
+                },
+                inputDevice: {
+                    description: "Vis en vælger til inputenhed",
+                    label: "Inputenhed"
+                },
+                camera: {
+                    description: "Vis en kameravælger",
+                    label: "Kamera"
+                },
+                title3: {
+                    label: "Titel 3"
+                },
+                showOutputVolumeHeader: {
+                    description: "Vis overskrift over skyderen til outputlydstyrke",
+                    label: "Vis overskrift for outputlydstyrke"
+                },
+                showInputVolumeHeader: {
+                    description: "Vis overskrift over skyderen til inputlydstyrke",
+                    label: "Vis overskrift for inputlydstyrke"
+                },
+                showOutputDeviceHeader: {
+                    description: "Vis overskrift over vælgeren til outputenhed",
+                    label: "Vis overskrift for outputenhed"
+                },
+                showInputDeviceHeader: {
+                    description: "Vis overskrift over vælgeren til inputenhed",
+                    label: "Vis overskrift for inputenhed"
+                },
+                showVideoDeviceHeader: {
+                    description: "Vis overskrift over kameravælgeren",
+                    label: "Vis overskrift for videoenhed"
+                }
+            },
+            name: "VCPanelSettings",
+            description: "Styr taleindstillinger direkte fra talepanelet",
+            text: {
+                appearance: "Udseende",
+                settingsToShow: "Indstillinger, der skal vises",
+                headersToShow: "Overskrifter, der skal vises",
+                outputVolume: "Outputlydstyrke",
+                inputVolume: "Inputlydstyrke",
+                outputDevice: "Outputenhed",
+                inputDevice: "Inputenhed",
+                settings: "Indstillinger",
+                hide: "Skjul"
+            }
+        },
+        voiceMessageTranscriber: {
+            text: {
+                autoDetect: "Registrér automatisk",
+                start: "Start",
+                transcriptionOptions: "Transskriptionsindstillinger",
+                audioLanguage: "Lydsprog",
+                retry: "Prøv igen",
+                transcriptionFailed: "Transskription mislykkedes",
+                transcribeVoiceMessage: "Transskribér talebesked",
+                close: "Luk",
+                baseRecommended: "Base (anbefalet)",
+                small: "Small",
+                largeV3TurboBest: "Large v3 Turbo (bedste nøjagtighed, GPU anbefales)",
+                transcribe: "Transskriber",
+                translateToEnglish: "Oversæt til engelsk",
+                voiceMessageTranslation: "Oversættelse af talebesked",
+                voiceMessageTranscription: "Transskription af talebesked",
+                hideTimestamps: "Skjul tidsstempler",
+                showTimestamps: "Vis tidsstempler",
+                copied: "Kopieret!",
+                copyText: "Kopier tekst",
+                downloadingAudio: "Downloader lyd...",
+                processingAudio: "Behandler lyd...",
+                loadingModel: "Indlæser model...",
+                transcribing: "Transskriberer...",
+                transcription: "Transskription",
+                transcriptionError: "Transskriptionsfejl",
+                transcribingInProgress: "Transskribering i gang...",
+                initializing: "Initialiserer...",
+                workerCrashed: "Transskriptions-worker gik ned",
+                workerStopped: "Transskriptions-worker blev stoppet",
+                deleteCache: "Slet alle cachelagrede filer ({{size}} MB)",
+                action: "Handling"
+            },
+            name: "VoiceMessageTranscriber",
+            description: "Transskriptioner af talebeskeder på enheden drevet af Whisper",
+            option: {
+                embed: {
+                    description: "Vis transskription direkte i talebeskedens vedhæftning i stedet for et vindue.",
+                    label: "Indlejring"
+                },
+                maintainHorizontal: {
+                    description: "Bevar den vandrette størrelse for den indlejrede transskriptionsboks, og udvid lodret.",
+                    label: "Bevar vandret"
+                },
+                selectedModel: {
+                    description: "Modelstørrelse.",
+                    onnxcommunitywhispertiny: "Tiny (hurtigst, lavest nøjagtighed)"
+                },
+                useGpu: {
+                    description: "Kør modellen på din GPU (WebGPU), når det understøttes. Meget hurtigere og gør de større modeller brugbare. Falder tilbage til CPU, hvis det ikke er tilgængeligt.",
+                    label: "Brug GPU"
+                },
+                quantized: {
+                    description: "Brug kvantiserede modeller, når der køres på CPU (mindre størrelse, lille kvalitetstab).",
+                    label: "Kvantiseret"
+                },
+                deleteModalFiles: {
+                    description: "Slet cachelagrede filer fra lageret.",
+                    label: "Slet modelfiler"
+                }
+            }
+        },
+        voiceMessagesInBackground: {
+            name: "VoiceMessagesInBackground",
+            description: "Holder talebeskeder i gang på tværs af chats med en synkroniseret miniafspiller.",
+            text: {
+                voiceMessagesInBackground: "Baggrundsafspiller til talebeskeder",
+                returnToChannelname: "Tilbage til {{channelName}}",
+                voiceMessagePosition: "Position i talebesked",
+                changePlaybackSpeed: "Skift afspilningshastighed",
+                playbackSpeedSpeedTimes: "Afspilningshastighed {{speed}} gange",
+                closeVoiceMessagePlayer: "Luk afspilleren til talebeskeder",
+                voiceMessage: "Talebesked",
+                directMessage: "Direkte besked",
+                resume: "Genoptag talebesked",
+                pause: "Sæt talebesked på pause"
+            }
+        },
+        webPWA: {
+            name: "WebPWA",
+            description: "Gør Discord installerbar som en app (PWA). Aktiverer notifikationsmærker, globale genvejstaster og Discords egen titellinje.",
+            text: {
+                activities: "Aktiviteter",
+                hopIn: "Hop ind",
+                status: "Status",
+                emojis: "Emojis",
+                rooms: "Rum",
+                discord: "Discord",
+                platforms: "Platforme",
+                keybindsInfoBefore: "Brugerdefinerede globale Tryk for X-genveje understøttes. Gå til",
+                keybindsInfoAfter: "for at ændre dem. Hold for X-genveje understøttes ikke."
+            }
+        },
+        "webRichPresence (arRPC)": {
+            name: "WebRichPresence (arRPC)"
+        },
+        webScreenShare: {
+            option: {
+                resolution: {
+                    description: "Opløsning",
+                    label: "Opløsning"
+                },
+                frameRate: {
+                    description: "Billedhastighed",
+                    label: "Billedhastighed"
+                },
+                contentHint: {
+                    description: "Indholdstip",
+                    label: "Indholdstip"
+                },
+                systemAudio: {
+                    description: "Slå systemlyd fra",
+                    label: "Systemlyd"
+                }
+            },
+            name: "WebScreenShare",
+            description: "Tilføjer en menu med skærmdelingsindstillinger. Gør det muligt at ændre opløsning, billedhastighed, kodningstip og systemlyd.",
+            text: {
+                stream: "Stream",
+                streamMuted: "Stream slået fra",
+                streamMode: "Streamtilstand",
+                muteStreamAudio: "Slå streamlyd fra",
+                preventsSystemAudioFrom: "Forhindrer systemlyd i at blive medtaget i din stream.",
+                showStreamPreviews: "Vis streamforhåndsvisninger",
+                allowsOthersToSee: "Lader andre se en forhåndsvisning af din stream, før de deltager.",
+                smootherVideo: "Glattere video",
+                cleanerText: "Skarpere tekst",
+                userPreset: "Brugerforudindstilling",
+                custom: "Brugerdefineret",
+                gaming: "Gaming",
+                screenshare: "Skærmdeling"
+            }
+        },
+        whitelistedEmojis: {
+            option: {
+                defaultEmojis: {
+                    description: "Skjul standard Unicode-emojis fra autofuldførelse, medmindre de er på hvidlisten.",
+                    label: "Standard-emojis"
+                },
+                serverEmojis: {
+                    description: "Skjul brugerdefinerede serveremojis fra autofuldførelse, medmindre de er på hvidlisten.",
+                    label: "Serveremojis"
+                },
+                disableToasts: {
+                    description: "Vis ikke toasts, når emojis tilføjes eller fjernes.",
+                    label: "Slå toasts fra"
+                },
+                whiteListedEmojis: {
+                    description: "Hvidlistede emojis",
+                    label: "Hvidlistede emojis"
+                },
+                exportEmojis: {
+                    description: "Eksportér emojis",
+                    label: "Eksportér emojis"
+                },
+                importEmojis: {
+                    description: "Importér emojis",
+                    label: "Importér emojis"
+                },
+                resetEmojis: {
+                    description: "Nulstil emojis",
+                    label: "Nulstil emojis"
+                }
+            },
+            name: "WhitelistedEmojis",
+            description: "Gør det muligt at slå alle beskedemojis fra undtagen et hvidlistet sæt.",
+            toast: {
+                addedLengthEmojisTo: "Tilføjede {{length}} emojis til listen, {{length}} var allerede på listen",
+                removedLengthEmojisFrom: "Fjernede {{length}} emojis fra listen",
+                nameIsAlreadyIn: "\"{{name}}\" er allerede på listen",
+                addedNameToThe: "Tilføjede \"{{name}}\" til listen",
+                nameIsNotIn: "\"{{name}}\" er ikke på listen",
+                removedNameFromThe: "Fjernede \"{{name}}\" fra listen",
+                successfullyExportedEmojis: "Emojis eksporteret",
+                successfullyImportedEmojis: "Emojis importeret",
+                invalidJsonData: "Ugyldige JSON-data",
+                failedToImportEmojis: "Kunne ikke importere emojis: {{err}}",
+                resetEmojis: "Emojis nulstillet"
+            },
+            text: {
+                areYouSure: "Er du sikker?",
+                thisWillOverwriteYour: "Dette overskriver din nuværende hvidliste.",
+                import: "Importér",
+                cancel: "Annuller",
+                thisWillRemoveAll: "Dette fjerner alle emojis fra din hvidliste.",
+                reset: "Nulstil",
+                addAllGuildEmojis: "Tilføj alle serverens emojis",
+                removeAllGuildEmojis: "Fjern alle serverens emojis",
+                noEmojisInThe: "Ingen emojis på hvidlisten.",
+                removeAll: "Fjern alle",
+                removeFromWhitelist: "Fjern fra whitelist",
+                addToWhitelist: "Tilføj til whitelist",
+                defaultEmojis: "Standard-emojis",
+                guildEmojis: "{{name}}-emojis",
+                guildFallback: "Server {{id}}",
+                whitelistedEmojis: "Emojis på whitelist",
+                remove: "Fjern"
+            }
+        },
+        wigglyText: {
+            option: {
+                intensity: {
+                    description: "Animationsintensitet i px",
+                    label: "Intensitet"
+                }
+            },
+            name: "WigglyText",
+            description: "Tilføjer en ny markdown-formatering, der får tekst til at vrikke.",
+            text: {
+                leftAndRight: "venstre og højre",
+                byTyping: "ved at skrive",
+                upAndDown: "op og ned",
+                inACircle: "i en cirkel",
+                youCanMakeTextWiggle: "Sådan kan du få tekst til at vrikke:"
+            }
+        },
+        fixDiscordCss: {
+            description: "Retter Discords CSS-forsinkelse"
+        },
+        directFileDownload: {
+            name: "DirectFileDownload",
+            description: "Download filer direkte fra Discord i stedet for at åbne dem i browseren"
+        },
+        githubRepos: {
+            text: {
+                failedToFetchRepositories: "Kunne ikke hente repositories",
+                personal: "Personlig",
+                unknown: "Ukendt",
+                sortedByCount: "Sorteret efter antal repos. Klik for at sortere A-Z",
+                sortedAlphabetically: "Sorteret A-Z. Klik for at sortere efter antal repos",
+                mostRepos: "Flest repos"
+            }
+        }
     }
 } as const;
 

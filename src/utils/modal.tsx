@@ -21,12 +21,14 @@ import { plugins, t } from "@api/i18n";
 import { showNotice } from "@api/Notices";
 import { Settings } from "@api/Settings";
 import { showErrorToast } from "@components/settings/tabs/plugins";
-import { filters, findByCodeLazy, findComponentByCodeLazy, mapMangledModuleLazy } from "@webpack";
-import { Alerts } from "@webpack/common";
-import type { ComponentType, PropsWithChildren, ReactNode, Ref } from "react";
+import type { MediaModalItem as NewMediaModalItem, MediaModalProps as NewMediaModalProps, ModalOptions as NewModalOptions, RenderModalProps } from "@plexcord/discord-types";
+import { filters, findComponentByCodeLazy, mapMangledModuleLazy } from "@webpack";
+import { Alerts, closeAllModals, closeModal, openMediaModal, openModal, openModalLazy } from "@webpack/common";
+import type { ComponentType, PropsWithChildren, Ref } from "react";
 
 import { LazyComponent } from "./react";
 
+/** @deprecated Migrate to new Modals */
 export const enum ModalSize {
     SMALL = "small",
     MEDIUM = "medium",
@@ -34,30 +36,21 @@ export const enum ModalSize {
     DYNAMIC = "dynamic",
 }
 
-const enum ModalTransitionState {
-    ENTERING,
-    ENTERED,
-    EXITING,
-    EXITED,
-    HIDDEN,
-}
+/** @deprecated Use RenderModalProps from @plexcord/discord-types */
+export type ModalProps = RenderModalProps;
 
-export interface ModalProps {
-    transitionState: ModalTransitionState;
-    onClose(): void;
-}
+/** @deprecated Use ModalOptions from @plexcord/discord-types */
+export type ModalOptions = NewModalOptions;
 
-export interface ModalOptions {
-    modalKey?: string;
-    onCloseRequest?: (() => void);
-    onCloseCallback?: (() => void);
-}
+/** @deprecated Use MediaModalItem from @plexcord/discord-types */
+export type MediaModalItem = NewMediaModalItem & Record<PropertyKey, any>;
 
-type RenderFunction = (props: ModalProps) => ReactNode | Promise<ReactNode>;
+/** @deprecated Use MediaModalProps from @plexcord/discord-types */
+export type MediaModalProps = Omit<NewMediaModalProps, "items"> & { items: MediaModalItem[]; };
 
 interface Modals {
     ModalRoot: ComponentType<PropsWithChildren<{
-        transitionState: ModalTransitionState;
+        transitionState: number;
         size?: ModalSize;
         role?: "alertdialog" | "dialog";
         className?: string;
@@ -107,7 +100,7 @@ interface Modals {
     }>;
 }
 
-// TODO: move to new modal api
+/** @deprecated Migrate to new Modals (Modal / ConfirmModal from @webpack/common) */
 export const Modals: Modals = mapMangledModuleLazy(".MODAL_ROOT_LEGACY,", {
     ModalRoot: filters.componentByCode('.MODAL,"aria-labelledby":'),
     ModalHeader: filters.componentByCode(",id:"),
@@ -116,69 +109,25 @@ export const Modals: Modals = mapMangledModuleLazy(".MODAL_ROOT_LEGACY,", {
     ModalCloseButton: filters.componentByCode(".withCircleBackground")
 });
 
+/** @deprecated Migrate to new Modals */
 export const ModalRoot = LazyComponent(() => Modals.ModalRoot);
+/** @deprecated Migrate to new Modals */
 export const ModalHeader = LazyComponent(() => Modals.ModalHeader);
+/** @deprecated Migrate to new Modals */
 export const ModalContent = LazyComponent(() => Modals.ModalContent);
+/** @deprecated Migrate to new Modals */
 export const ModalFooter = LazyComponent(() => Modals.ModalFooter);
+/** @deprecated Migrate to new Modals */
 export const ModalCloseButton = LazyComponent(() => Modals.ModalCloseButton);
 export const CloseButton = findComponentByCodeLazy("CLOSE_BUTTON_LABEL");
 
-export type MediaModalItem = {
-    url: string;
-    type: "IMAGE" | "VIDEO";
-    original?: string;
-    alt?: string;
-    width?: number;
-    height?: number;
-    animated?: boolean;
-    maxWidth?: number;
-    maxHeight?: number;
-} & Record<PropertyKey, any>;
-
-export type MediaModalProps = {
-    location?: string;
-    contextKey?: string;
-    onCloseCallback?: () => void;
-    className?: string;
-    items: MediaModalItem[];
-    startingIndex?: number;
-    onIndexChange?: (...args: any[]) => void;
-    fit?: string;
-    shouldRedactExplicitContent?: boolean;
-    shouldHideMediaOptions?: boolean;
+/** @deprecated Import the modal functions from @webpack/common */
+export const ModalAPI = {
+    openModal,
+    openModalLazy,
+    closeModal,
+    closeAllModals
 };
-
-// Modal key: "Media Viewer Modal"
-export const openMediaModal: (props: MediaModalProps) => void = findByCodeLazy("hasMediaOptions", "shouldHideMediaOptions");
-
-interface ModalAPI {
-    /**
-     * Wait for the render promise to resolve, then open a modal with it.
-     * This is equivalent to render().then(openModal)
-     * You should use the Modal components exported by this file
-     */
-    openModalLazy: (render: () => Promise<RenderFunction>, options?: ModalOptions & { contextKey?: string; }) => Promise<string>;
-    /**
-     * Open a Modal with the given render function.
-     * You should use the Modal components exported by this file
-     */
-    openModal: (render: RenderFunction, options?: ModalOptions, contextKey?: string) => string;
-    /**
-     * Close a modal by its key
-     */
-    closeModal: (modalKey: string, contextKey?: string) => void;
-    /**
-     * Close all open modals
-     */
-    closeAllModals: () => void;
-}
-
-export const ModalAPI: ModalAPI = mapMangledModuleLazy(".modalKey?", {
-    openModalLazy: filters.byCode(".modalKey?"),
-    openModal: filters.byCode(",instant:"),
-    closeModal: filters.byCode(".onCloseCallback()"),
-    closeAllModals: filters.byCode(".getState();for")
-});
 
 function restartPrompt(): Promise<boolean> {
     return new Promise(resolve => {
@@ -262,4 +211,15 @@ export async function toggleEnabled(name: string) {
     return await beforeReturn(settings, wasEnabled);
 }
 
-export const { openModalLazy, openModal, closeModal, closeAllModals } = ModalAPI;
+export {
+    /** @deprecated Import from @webpack/common */
+    closeAllModals,
+    /** @deprecated Import from @webpack/common */
+    closeModal,
+    /** @deprecated Import from @webpack/common */
+    openMediaModal,
+    /** @deprecated Import from @webpack/common */
+    openModal,
+    /** @deprecated Import from @webpack/common */
+    openModalLazy
+};

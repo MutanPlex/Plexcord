@@ -9,24 +9,17 @@ import { sync, t } from "@api/i18n";
 import { PlainSettings } from "@api/Settings";
 import { Logger } from "@utils/Logger";
 import { chooseFile, saveFile } from "@utils/web";
-import { moment, Toasts } from "@webpack/common";
+import { moment, showToast } from "@webpack/common";
 
 import { DataStore } from "..";
 
 type BackupType = "all" | "plugins" | "css" | "datastore";
 
-const toast = (type: string, message: string) =>
-    Toasts.show({
-        type,
-        message,
-        id: Toasts.genId()
-    });
-
 const toastSuccess = () =>
-    toast(Toasts.Type.SUCCESS, t(sync.successful));
+    showToast({ text: t(sync.successful), variant: "success" });
 
 const toastFailure = (err: any) =>
-    toast(Toasts.Type.FAILURE, t(sync.error.failure, { error: String(err) }));
+    showToast({ text: t(sync.error.failure, { error: String(err) }), variant: "critical" });
 
 const logger = new Logger("SettingsSync:Offline", "#39b7e0");
 
@@ -113,13 +106,13 @@ export async function exportSettings({ syncDataStore = true, type = "all", minif
 
     if (syncDataStore) {
         try {
-            dataStore = await DataStore.entries();
+            dataStore = (await Promise.all((await DataStore.keys<IDBValidKey>()).map(async (key): Promise<[IDBValidKey, unknown] | undefined> => { try { return [key, await DataStore.get<unknown>(key)]; } catch (error) { logger.warn(`Skipping unreadable DataStore record ${String(key)}:`, error); return undefined; } }))).filter((entry): entry is [IDBValidKey, unknown] => entry !== undefined);
         } catch (err) {
             logger.error("Failed to read DataStore entries:", err);
 
             if (type === "all") {
                 logger.warn("Skipping DataStore in backup due to size. Export DataStore separately if needed.");
-                toast(Toasts.Type.MESSAGE, t(sync.error.tooLarge));
+                showToast({ text: t(sync.error.tooLarge) });
                 dataStore = undefined;
             } else if (type === "datastore") {
                 throw new Error(t(sync.error.clearSomeDate));
@@ -157,7 +150,7 @@ export async function downloadSettingsBackup(type: BackupType = "all", { minify 
         }
     } catch (err) {
         logger.error("Failed to export settings:", err);
-        toast(Toasts.Type.FAILURE, t(sync.error.failedExport));
+        showToast({ text: t(sync.error.failedExport), variant: "critical" });
         throw err;
     }
 }
@@ -166,7 +159,7 @@ export async function uploadSettingsBackup(type: BackupType = "all", showToast =
     if (IS_DISCORD_DESKTOP) {
         const [file] = await DiscordNative.fileManager.openFiles({
             filters: [
-                { name: "Plexcord Settings Backup", extensions: ["json"] },
+                { name: t(sync.backupFileType), extensions: ["json"] },
                 { name: "all", extensions: ["*"] }
             ]
         });

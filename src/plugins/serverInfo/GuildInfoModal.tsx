@@ -10,28 +10,23 @@ import "./styles.css";
 import { plugin, t } from "@api/i18n";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
-import { Guild, User } from "@plexcord/discord-types";
+import { Guild, RenderModalProps, User } from "@plexcord/discord-types";
 import { classNameFactory } from "@utils/css";
 import { getGuildAcronym, openImageModal, openUserProfile } from "@utils/discord";
 import { classes } from "@utils/misc";
-import { ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { useAwaiter } from "@utils/react";
 import { findComponentByCodeLazy, findCssClassesLazy } from "@webpack";
-import { FluxDispatcher, GuildChannelStore, GuildMemberStore, GuildRoleStore, GuildStore, IconUtils, Parser, PresenceStore, RelationshipStore, ScrollerThin, SnowflakeUtils, TabBar, Timestamp, useEffect, UserStore, UserUtils, useState, useStateFromStores } from "@webpack/common";
+import { FluxDispatcher, GuildChannelStore, GuildMemberStore, GuildRoleStore, GuildStore, IconUtils, Modal, openModal, Parser, PresenceStore, RelationshipStore, ScrollerThin, SnowflakeUtils, TabBar, Timestamp, useEffect, UserStore, UserUtils, useState, useStateFromStores } from "@webpack/common";
 
 import { settings } from ".";
 
 const IconClasses = findCssClassesLazy("icon", "acronym", "childWrapper");
-const FriendRow = findComponentByCodeLazy("discriminatorClass:", ".isMobileOnline", "getAvatarURL");
+const FriendRow = findComponentByCodeLazy("discriminatorClass:", ".isMobileOnline", "avatarSrc:");
 
 const cl = classNameFactory("pc-gp-");
 
 export function openGuildInfoModal(guild: Guild) {
-    openModal(props =>
-        <ModalRoot {...props} size={ModalSize.DYNAMIC}>
-            <GuildInfoModal guild={guild} />
-        </ModalRoot>
-    );
+    openModal(props => <GuildInfoModal guild={guild} modalProps={props} />);
 }
 
 const enum Tabs {
@@ -62,7 +57,7 @@ function renderTimestamp(timestamp: number) {
     );
 }
 
-function GuildInfoModal({ guild }: GuildProps) {
+function GuildInfoModal({ guild, modalProps }: GuildProps & { modalProps: RenderModalProps; }) {
     const [friendCount, setFriendCount] = useState<number>();
     const [blockedCount, setBlockedCount] = useState<number>();
     const [ignoredCount, setIgnoredCount] = useState<number>();
@@ -86,7 +81,32 @@ function GuildInfoModal({ guild }: GuildProps) {
     });
 
     return (
-        <div className={cl("root")}>
+        <Modal
+            {...modalProps}
+            size="lg"
+            title={
+                <div className={cl("header")}>
+                    {iconUrl
+                        ? <img
+                            className={cl("icon")}
+                            src={iconUrl}
+                            alt=""
+                            onClick={() => openImageModal({
+                                url: iconUrl,
+                                height: 512,
+                                width: 512,
+                            })}
+                        />
+                        : <div aria-hidden className={classes(IconClasses.childWrapper, IconClasses.acronym)}>{getGuildAcronym(guild)}</div>
+                    }
+
+                    <div className={cl("name-and-description")}>
+                        <Heading tag="h5" className={cl("name")}>{guild.name}</Heading>
+                        {guild.description && <Paragraph>{guild.description}</Paragraph>}
+                    </div>
+                </div>
+            }
+        >
             {bannerUrl && currentTab === Tabs.ServerInfo && (
                 <img
                     className={cl("banner")}
@@ -98,27 +118,6 @@ function GuildInfoModal({ guild }: GuildProps) {
                     })}
                 />
             )}
-
-            <div className={cl("header")}>
-                {iconUrl
-                    ? <img
-                        className={cl("icon")}
-                        src={iconUrl}
-                        alt=""
-                        onClick={() => openImageModal({
-                            url: iconUrl,
-                            height: 512,
-                            width: 512,
-                        })}
-                    />
-                    : <div aria-hidden className={classes(IconClasses.childWrapper, IconClasses.acronym)}>{getGuildAcronym(guild)}</div>
-                }
-
-                <div className={cl("name-and-description")}>
-                    <Heading className={cl("name")}>{guild.name}</Heading>
-                    {guild.description && <Paragraph>{guild.description}</Paragraph>}
-                </div>
-            </div>
 
             <TabBar
                 type="top"
@@ -190,7 +189,7 @@ function GuildInfoModal({ guild }: GuildProps) {
                 {currentTab === Tabs.BlockedUsers && <BlockedUsersTab guild={guild} setCount={setBlockedCount} />}
                 {currentTab === Tabs.IgnoredUsers && <IgnoredUserTab guild={guild} setCount={setIgnoredCount} />}
             </div>
-        </div>
+        </Modal>
     );
 }
 
@@ -236,7 +235,7 @@ function ServerInfoTab({ guild }: GuildProps) {
         [t(plugin.serverInfo.modal.vanityLink)]: guild.vanityURLCode ? (<a>{`discord.gg/${guild.vanityURLCode}`}</a>) : "-", // Making the anchor href valid would cause Discord to reload
         [t(plugin.serverInfo.modal.preferredLocale)]: guild.preferredLocale || "-",
         [t(plugin.serverInfo.modal.verification.level)]: [t(plugin.serverInfo.modal.verification.none), t(plugin.serverInfo.modal.verification.low), t(plugin.serverInfo.modal.verification.medium), t(plugin.serverInfo.modal.verification.high), t(plugin.serverInfo.modal.verification.highest)][guild.verificationLevel] || "?",
-        [t(plugin.serverInfo.modal.serverBoosts)]: `${guild.premiumSubscriberCount ?? 0} (Level ${guild.premiumTier ?? 0})`,
+        [t(plugin.serverInfo.modal.serverBoosts)]: t(plugin.serverInfo.modal.boostLevel, { count: guild.premiumSubscriberCount ?? 0, level: guild.premiumTier ?? 0 }),
         [t(plugin.serverInfo.modal.channels)]: GuildChannelStore.getChannels(guild.id)?.count - 1 || "?", // - null category
         [t(plugin.serverInfo.modal.roles)]: GuildRoleStore.getSortedRoles(guild.id).length - 1, // - @everyone
     };

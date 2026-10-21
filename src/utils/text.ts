@@ -19,6 +19,8 @@
 
 import { common, t } from "@api/i18n";
 
+import { isTruthy } from "./guards";
+
 // Utils for readable text transformations eg: `toTitle(fromKebab())`
 
 // Case style to words
@@ -65,7 +67,7 @@ function getUnitStr(unit: Units, isOne: boolean, short: boolean) {
  * @param unit The unit the time is on
  * @param short Whether to use short units like "d" instead of "days"
  */
-export function formatDuration(time: number, unit: Units, short: boolean = false) {
+export function formatDurationVerbose(time: number, unit: Units, short: boolean = false) {
     const { moment } = require("@webpack/common") as typeof import("@webpack/common");
     const dur = moment.duration(time, unit);
 
@@ -107,6 +109,45 @@ export function formatDuration(time: number, unit: Units, short: boolean = false
     return res.length ? res : `0 ${getUnitStr(unit, false, short)}`;
 }
 
+export function formatDuration(ms: number, human = false) {
+    const DAY = 86_400_000;
+    const HOUR = 3_600_000;
+    const MINUTE = 60_000;
+
+    const days = Math.floor(ms / DAY);
+    const hours = Math.floor((ms % DAY) / HOUR);
+    const minutes = Math.floor((ms % HOUR) / MINUTE);
+    const seconds = Math.floor((ms % MINUTE) / 1000);
+
+    const pad = (n: number) => human ? n : n.toString().padStart(2, "0");
+    const unit = (s: string) => human ? s : "";
+
+    const showDays = days !== 0;
+    const showHours = showDays || hours !== 0;
+    const showMinutes = showHours || minutes !== 0 || !human;
+
+    const duration = [
+        showHours && `${pad(hours)}${unit("h")}`,
+        showMinutes && `${pad(minutes)}${unit("m")}`,
+        `${pad(seconds)}${unit("s")}`
+    ].filter(isTruthy).join(human ? " " : ":");
+
+    const prefix = showDays ? `${days}d ` : "";
+    return prefix + duration;
+}
+
+/**
+ * The `formatDurationMs` function formats a duration in milliseconds into a human-readable string,
+ * with the option to include units such as days, hours, minutes, and seconds.
+ * @param {number} ms - The `ms` parameter represents the duration in milliseconds that you want to
+ * format.
+ * @param {boolean} [human=false] - The `human` parameter is a boolean flag that determines whether the
+ * duration should be formatted in a human-readable format or not. If `human` is set to `true`, the
+ * duration will be formatted as "Xd Xh Xm Xs". If `human` is set to `false` (the default), the
+ * duration will be formatted as "XX:XX:XX:XX".
+ * @returns The function `formatDurationMs` returns a formatted string representing the duration in
+ * milliseconds.
+ */
 export function formatDurationMs(ms: number, human: boolean = false, seconds: boolean = true) {
     const format = (n: number) => human ? n : n.toString().padStart(2, "0");
     const unit = (s: string) => human ? s : "";

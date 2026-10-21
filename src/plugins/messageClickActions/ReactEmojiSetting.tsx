@@ -7,10 +7,11 @@
 
 import "./styles.css";
 
+import { plugin, t } from "@api/i18n";
 import { Heading } from "@components/Heading";
 import type { Channel } from "@plexcord/discord-types";
 import { classNameFactory } from "@utils/css";
-import type { IPluginOptionComponentProps } from "@utils/types";
+import type { PluginSettingComponentProps } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
 import { ChannelStore, IconUtils, Popout, SelectedChannelStore, TextInput, useRef, useState, useStateFromStores } from "@webpack/common";
 
@@ -52,22 +53,26 @@ function getEmojiValue(emoji: EmojiSelectPayload | null | undefined) {
     return emoji.name?.trim() ?? "";
 }
 
-function toRenderedEmoji(value: string) {
+type RenderedEmoji =
+    | { kind: "custom"; id: string; name: string; animated: boolean; }
+    | { kind: "unicode"; name: string; animated: boolean; };
+
+function toRenderedEmoji(value: string): RenderedEmoji | null {
     const trimmed = value.trim();
     if (!trimmed) return null;
 
     const customEmoji = parseCustomEmoji(trimmed);
     if (customEmoji) {
         return {
-            kind: "custom" as const,
-            id: customEmoji[3],
-            name: customEmoji[2],
+            kind: "custom",
+            id: customEmoji[3]!,
+            name: customEmoji[2]!,
             animated: customEmoji[1] === "a"
         };
     }
 
     return {
-        kind: "unicode" as const,
+        kind: "unicode",
         name: trimmed,
         animated: false
     };
@@ -141,7 +146,7 @@ function EmojiPickerButton({
                     ref={triggerRef}
                     className={cl("emoji-trigger")}
                 >
-                    {children ?? "Pick Emoji"}
+                    {children ?? t(plugin.messageClickActions.text.pickEmoji)}
                 </div>
             )}
         </Popout>
@@ -168,7 +173,7 @@ function addEmojiToList(list: string, emoji: string) {
 
 function EmojiPreview({ value }: { value: string; }) {
     const renderedEmoji = toRenderedEmoji(value);
-    if (!renderedEmoji) return <>Pick Emoji</>;
+    if (!renderedEmoji) return <>{t(plugin.messageClickActions.emojiSetting.pick)}</>;
 
     if (renderedEmoji.kind === "custom") {
         return (
@@ -183,12 +188,12 @@ function EmojiPreview({ value }: { value: string; }) {
     return <span className={cl("unicode-preview")}>{renderedEmoji.name}</span>;
 }
 
-export function ReactEmojiSetting({ setValue }: IPluginOptionComponentProps) {
+export function ReactEmojiSetting({ setValue }: PluginSettingComponentProps) {
     const [emoji, setEmoji] = useState(settings.store.reactEmoji ?? "💀");
 
     return (
         <div>
-            <Heading>Select Emoji For Reactions</Heading>
+            <Heading>{t(plugin.messageClickActions.emojiSetting.selectMain)}</Heading>
             <div className={cl("primary-emoji-picker")}>
                 <EmojiPickerButton
                     onSelect={newValue => {
@@ -203,7 +208,7 @@ export function ReactEmojiSetting({ setValue }: IPluginOptionComponentProps) {
     );
 }
 
-export function AdditionalReactEmojisSetting({ setValue }: IPluginOptionComponentProps) {
+export function AdditionalReactEmojisSetting({ setValue }: PluginSettingComponentProps) {
     const { addAdditionalReacts } = settings.use(["addAdditionalReacts"]);
     const [emojiList, setEmojiList] = useState(settings.store.additionalReactEmojis ?? "");
 
@@ -211,7 +216,7 @@ export function AdditionalReactEmojisSetting({ setValue }: IPluginOptionComponen
 
     return (
         <div>
-            <Heading>Select Additional Emojis</Heading>
+            <Heading>{t(plugin.messageClickActions.emojiSetting.selectAdditional)}</Heading>
             <div
                 style={{
                     marginTop: 8,
@@ -223,7 +228,7 @@ export function AdditionalReactEmojisSetting({ setValue }: IPluginOptionComponen
             >
                 <TextInput
                     value={emojiList}
-                    placeholder={`comma/newline separated, max ${MAX_ADDITIONAL_REACT_EMOJIS}`}
+                    placeholder={t(plugin.messageClickActions.emojiSetting.additionalPlaceholder, { max: MAX_ADDITIONAL_REACT_EMOJIS })}
                     onChange={newValue => {
                         setEmojiList(newValue);
                         setValue(newValue);

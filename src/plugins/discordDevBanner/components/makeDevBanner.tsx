@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { plugin, t } from "@api/i18n";
 import SettingsPlugin from "@plugins/_core/settings";
 import { detectClient } from "@plugins/_core/supportHelper";
 import { gitHashShort } from "@shared/plexcordUserAgent";
@@ -34,8 +35,8 @@ export function makeDevBanner(state?: string): string | JSX.Element {
         .replace(/{chromiumVersion}/g, chromiumVersion)
         .replace(/{clientName}/g, clientInfo.name)
         .replace(/{clientVersion}/g, `v${clientInfo?.version ?? "0.0.0"}`)
-        .replace(/{plextronHashShort}/g, clientInfo.shortHash ?? "Not Supported")
-        .replace(/{plextronPlatformType}/g, `v${clientInfo?.dev ? "Dev Build" : "Standalone"}`)
+        .replace(/{plextronHashShort}/g, clientInfo.shortHash ?? t(plugin.discordDevBanner.text.notSupported))
+        .replace(/{plextronPlatformType}/g, `v${clientInfo?.dev ? t(plugin.discordDevBanner.text.devBuild) : t(plugin.discordDevBanner.text.standalone)}`)
         .replace(/\\n|{newline}/g, "__NEWLINE__");
 
     if (!replaced.includes("__NEWLINE__") && !/{.*Icon}/.test(baseFormat)) {

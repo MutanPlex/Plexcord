@@ -1,0 +1,23 @@
+.pc-plugins-management-cards.pc-plugins-grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.pc-plugins-management-cards .pc-addon-card {
+    width: auto;
+    height: auto;
+}
+
+.pc-plugins-management-cards .pc-addon-title-container {
+    width: max-content;
+}
+
+.pc-plugins-management-cards .pc-addon-title {
+    position: static;
+    overflow: visible;
+}
+
+.pc-plugins-management-cards .pc-addon-note {
+    max-width: 400px;
+}

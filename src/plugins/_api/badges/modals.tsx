@@ -8,22 +8,24 @@
 import { plugins, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
-import { HeadingPrimary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { Heart } from "@components/Heart";
 import { Paragraph } from "@components/Paragraph";
 import { DonateButton } from "@components/settings";
 import { Margins } from "@utils/margins";
-import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalRoot, openModal } from "@utils/modal";
+import { Modal, openModal } from "@webpack/common";
 
 export function openDonorModal() {
-    const modalKey = openModal(props => (
+    openModal(props => (
         <ErrorBoundary noop onError={() => {
-            closeModal(modalKey);
+            props.onClose();
             PlexcordNative.native.openExternal("https://github.com/sponsors/MutanPlex");
         }}>
-            <ModalRoot {...props}>
-                <ModalHeader>
-                    <HeadingPrimary
+            <Modal
+                {...props}
+                title={
+                    <Heading
+                        tag="h2"
                         style={{
                             width: "100%",
                             textAlign: "center",
@@ -34,9 +36,10 @@ export function openDonorModal() {
                             <Heart />
                             {t(plugins.metadata.badges.modal.title)}
                         </Flex>
-                    </HeadingPrimary>
-                </ModalHeader>
-                <ModalContent>
+                    </Heading>
+                }
+            >
+                <div>
                     <Flex>
                         <img
                             role="presentation"
@@ -59,13 +62,13 @@ export function openDonorModal() {
                             {t(plugins.metadata.badges.modal.description)}
                         </Paragraph>
                     </div>
-                </ModalContent>
-                <ModalFooter>
+                </div>
+                <div>
                     <Flex justifyContent="center" style={{ width: "100%" }}>
                         <DonateButton />
                     </Flex>
-                </ModalFooter>
-            </ModalRoot>
+                </div>
+            </Modal>
         </ErrorBoundary>
     ));
 }

@@ -9,8 +9,7 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { findByPropsLazy } from "@webpack";
-import { FluxDispatcher } from "@webpack/common";
+import { FluxDispatcher, MediaEngineStore } from "@webpack/common";
 
 const validKeycodes = [
     "Backspace", "Tab", "Enter", "ShiftLeft", "ShiftRight", "ControlLeft", "ControlRight", "AltLeft", "AltRight", "Pause", "CapsLock",
@@ -50,15 +49,13 @@ const settings = definePluginSettings({
     },
 });
 
-const { isVideoEnabled } = findByPropsLazy("isVideoEnabled");
-
 function handleKeydown({ code, ctrlKey, shiftKey, altKey }: KeyboardEvent) {
     const { keyBind, reqCtrl, reqShift, reqAlt } = settings.store;
     if (keyBind !== code || ctrlKey !== reqCtrl || shiftKey !== reqShift || altKey !== reqAlt) { return; } // please don't think about it
 
     FluxDispatcher.dispatch({
         type: "MEDIA_ENGINE_SET_VIDEO_ENABLED",
-        enabled: !isVideoEnabled(),
+        enabled: !MediaEngineStore.isVideoEnabled(),
     });
 }
 

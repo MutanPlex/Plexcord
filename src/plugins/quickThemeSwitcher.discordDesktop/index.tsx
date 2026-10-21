@@ -12,7 +12,7 @@ import { Paragraph } from "@components/Paragraph";
 import { debounce } from "@shared/debounce";
 import { Devs, IS_MAC } from "@utils/constants";
 import definePlugin, { OptionType, StartAt } from "@utils/types";
-import { showToast, Toasts } from "@webpack/common";
+import { showToast } from "@webpack/common";
 
 const { PlexcordNative } = window;
 
@@ -52,7 +52,7 @@ const refreshThemeList = async (silent = false) => {
     if (!silent && themeList.length !== oldCount) {
         const diff = themeList.length - oldCount;
         const count = Math.abs(diff);
-        showToast(diff > 0 ? t(plugin.quickThemeSwitcher.modal.added, { count, s: count > 1 ? "s" : "" }) : t(plugin.quickThemeSwitcher.modal.removed, { count, s: count > 1 ? "s" : "" }), Toasts.Type.SUCCESS);
+        showToast({ text: diff > 0 ? t(plugin.quickThemeSwitcher.modal.added, { count, s: count > 1 ? "s" : "" }) : t(plugin.quickThemeSwitcher.modal.removed, { count, s: count > 1 ? "s" : "" }), variant: "success" });
     }
 };
 
@@ -192,7 +192,7 @@ function toggleCurrentTheme(enable: boolean) {
 
 async function reloadThemes() {
     await refreshThemeList(true);
-    showToast(t(plugin.quickThemeSwitcher.modal.reloaded, { themeCount: themeList.length }), Toasts.Type.SUCCESS);
+    showToast({ text: t(plugin.quickThemeSwitcher.modal.reloaded, { themeCount: themeList.length }), variant: "success" });
 }
 
 async function watchForLocalThemeChanges() {
@@ -209,7 +209,7 @@ async function watchForLocalThemeChanges() {
 
         if (settings.store.showNotifications) {
             const count = Math.abs(diff);
-            showToast(diff > 0 ? (t(plugin.quickThemeSwitcher.modal.addedLocal, { count })) : (t(plugin.quickThemeSwitcher.modal.removedLocal, { count })), Toasts.Type.SUCCESS);
+            showToast({ text: diff > 0 ? t(plugin.quickThemeSwitcher.modal.addedLocal, { count }) : t(plugin.quickThemeSwitcher.modal.removedLocal, { count }), variant: "success" });
         }
     }
 

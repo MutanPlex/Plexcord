@@ -16,9 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-import { ChannelStore, GuildMemberStore } from "@webpack/common";
 
-import { DevsById, PcDevsById, PLEXCORD_GUILD_ID, SUPPORT_CHANNEL_ID, SUPPORT_ROLE_ID } from "./constants";
+import { loadLazyChunks } from "@debug/loadLazyChunks";
+import { User } from "@plexcord/discord-types";
+import { ChannelStore, GuildMemberStore, IconUtils } from "@webpack/common";
+
+import { DevsById, KNOWN_ISSUES_CHANNEL_ID, KNOWN_ISSUES_CHANNEL_IDS, PcDevsById, PLEXCORD_GUILD_ID, SUPPORT_CHANNEL_ID, SUPPORT_CHANNEL_IDS, SUPPORT_ROLE_ID } from "./constants";
 
 /**
  * Calls .join(" ") on the arguments
@@ -112,9 +115,16 @@ export function isPlexcordGuild(id: string | null | undefined, isGuildId: boolea
     return channel.guild_id === PLEXCORD_GUILD_ID;
 }
 
-export function isSupportChannel(channelId: string | null | undefined): boolean {
+export function isSupportChannel(channelId: string | null | undefined, includePlextron: boolean = false): boolean {
     if (!channelId) return false;
+    if (includePlextron) return SUPPORT_CHANNEL_IDS.includes(channelId);
     return channelId === SUPPORT_CHANNEL_ID;
+}
+
+export function isKnownIssuesCategory(channelId: string | null | undefined, includePlextron: boolean = false): boolean {
+    if (!channelId) return false;
+    if (includePlextron) return KNOWN_ISSUES_CHANNEL_IDS.includes(channelId);
+    return channelId === KNOWN_ISSUES_CHANNEL_ID;
 }
 
 export function isSupport(userId: string | null | undefined): boolean {
@@ -129,3 +139,24 @@ export function removeFromArray<T>(arr: T[], predicate: (e: T) => boolean) {
     const idx = arr.findIndex(predicate);
     if (idx !== -1) arr.splice(idx, 1);
 }
+
+export function getUserAvatarUrl(user: User, guildId?: string, canAnimate?: boolean, size?: number): string {
+    const memberAvatar = guildId ? GuildMemberStore.getMember(guildId, user.id)?.avatar || null : null;
+
+    if (memberAvatar) {
+        return IconUtils.getGuildMemberAvatarURLSimple({
+            guildId: guildId!,
+            userId: user.id,
+            avatar: memberAvatar,
+            canAnimate,
+            size
+        });
+    }
+
+    return IconUtils.getUserAvatarURL(user, canAnimate, size) ?? IconUtils.getDefaultAvatarURL(user.id, user?.discriminator);
+}
+
+// this is all the way down here because i dont feel like dealing with conflicts
+export const pluralize = pluralise;
+
+export { loadLazyChunks };

@@ -115,6 +115,31 @@ function removeCspRule(_: IpcMainInvokeEvent, domain: string) {
     return false;
 }
 
+// Mirrors how the browser matches CSP host sources (https page: scheme-less sources only match https, no port = default port)
+function matchesCspSource(source: string, { protocol, hostname, port }: URL) {
+    const match = /^(?:([a-z][a-z\d+.-]*):\/\/)?([^:/]+)(?::(\d+|\*))?$/i.exec(source);
+    if (!match) return false;
+
+    const [, scheme, host, sourcePort] = match;
+    if ((scheme ? `${scheme}:` : "https:") !== protocol) return false;
+    if (sourcePort ? sourcePort !== "*" && sourcePort !== port : port !== "") return false;
+
+    if (host === "*") return true;
+    if (host.startsWith("*.")) return hostname.endsWith(host.slice(1));
+    return hostname === host;
+}
+
+// Used for theme css the main process fetches on the renderer's behalf, so it obeys the same rules as a plain @import
+export function isStyleUrlAllowed(url: string) {
+    try {
+        const parsed = new URL(url);
+        return Object.entries({ ...CspPolicies, ...NativeSettings.store.customCspRules })
+            .some(([source, directives]) => directives.includes("style-src") && matchesCspSource(source, parsed));
+    } catch {
+        return false;
+    }
+}
+
 function isDomainAllowed(_: IpcMainInvokeEvent, url: string, directives: string[]) {
     try {
         const domain = new URL(url).host;

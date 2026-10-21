@@ -21,18 +21,18 @@ import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
-import { InfoIcon, OwnerCrownIcon } from "@components/Icons";
-import { Guild, Role, RoleOrUserPermission, UnicodeEmoji, User } from "@plexcord/discord-types";
+import { CopyIdIcon, InfoIcon, OwnerCrownIcon } from "@components/Icons";
+import { Guild, RenderModalProps, Role, RoleOrUserPermission, UnicodeEmoji, User } from "@plexcord/discord-types";
 import { PermissionOverwriteType } from "@plexcord/discord-types/enums";
-import { cl, getGuildPermissionSpecMap } from "@plugins/permissionsViewer/utils";
+import { buildExtraRoleContextMenuItems } from "@plugins/betterRoleContext";
+import { cl, getGuildPermissionSpecMap, loadGetGuildPermissionSpecMap } from "@plugins/permissionsViewer/utils";
 import { copyToClipboard } from "@utils/clipboard";
 import { getIntlMessage, getUniqueUsername } from "@utils/discord";
-import { ModalCloseButton, ModalContent, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { findByCodeLazy } from "@webpack";
-import { ContextMenuApi, FluxDispatcher, GuildMemberStore, GuildRoleStore, i18n, Menu, PermissionsBits, ScrollerThin, Tooltip, useEffect, useMemo, UserStore, useState, useStateFromStores } from "@webpack/common";
+import { ContextMenuApi, FluxDispatcher, GuildMemberStore, GuildRoleStore, i18n, Menu, Modal, openModalLazy, PermissionsBits, ScrollerThin, Tooltip, useEffect, useMemo, useRef, UserStore, useState, useStateFromStores } from "@webpack/common";
 
 import { settings } from "..";
-import { PermissionAllowedIcon, PermissionDefaultIcon, PermissionDeniedIcon } from "./icons";
+import { PermissionAllowedIcon, PermissionDeniedIcon } from "./icons";
 
 type GetRoleIconData = (role: Role, size: number) => { customIconSrc?: string; unicodeEmoji?: UnicodeEmoji; };
 const getRoleIconData: GetRoleIconData = findByCodeLazy("convertSurrogateToName", "customIconSrc", "unicodeEmoji");
@@ -45,7 +45,7 @@ function getRoleIconSrc(role: Role) {
     return customIconSrc ?? unicodeEmoji?.url;
 }
 
-function RolesAndUsersPermissionsComponent({ permissions, guild, modalProps, header }: { permissions: Array<RoleOrUserPermission>; guild: Guild; modalProps: ModalProps; header: string; }) {
+function RolesAndUsersPermissionsComponent({ permissions, guild, modalProps, header }: { permissions: Array<RoleOrUserPermission>; guild: Guild; modalProps: RenderModalProps; header: string; }) {
     const guildPermissionSpecMap = useMemo(() => getGuildPermissionSpecMap(guild), [guild.id]);
 
     useStateFromStores(
@@ -77,115 +77,116 @@ function RolesAndUsersPermissionsComponent({ permissions, guild, modalProps, hea
     const roles = GuildRoleStore.getRolesSnapshot(guild.id);
 
     return (
-        <ModalRoot
+        <Modal
             {...modalProps}
-            size={ModalSize.LARGE}
+            size="xl"
+            title={`${header} ${t(plugin.permissionsViewer.modal.title)}`}
         >
-            <ModalHeader>
-                <BaseText size="lg" weight="semibold" className={cl("modal-title")}>{header} {t(plugin.permissionsViewer.modal.title)}</BaseText>
-                <ModalCloseButton onClick={modalProps.onClose} />
-            </ModalHeader>
+            {!selectedItem && (
+                <div className={cl("modal-no-perms")}>
+                    <BaseText size="lg">{t(plugin.permissionsViewer.modal.noPermissions)}</BaseText>
+                </div>
+            )}
 
-            <ModalContent className={cl("modal-content")}>
-                {!selectedItem && (
-                    <div className={cl("modal-no-perms")}>
-                        <BaseText size="lg">{t(plugin.permissionsViewer.modal.noPermissions)}</BaseText>
-                    </div>
-                )}
+            {selectedItem && (
+                <div className={cl("modal-container")}>
+                    <ScrollerThin className={cl("modal-list")} orientation="auto">
+                        {permissions.map((permission, index) => {
+                            const user: User | undefined = UserStore.getUser(permission.id ?? "");
+                            const role: Role | undefined = roles[permission.id ?? ""];
+                            const roleIconSrc = role != null ? getRoleIconSrc(role) : undefined;
 
-                {selectedItem && (
-                    <div className={cl("modal-container")}>
-                        <ScrollerThin className={cl("modal-list")} orientation="auto">
-                            {permissions.map((permission, index) => {
-                                const user: User | undefined = UserStore.getUser(permission.id ?? "");
-                                const role: Role | undefined = roles[permission.id ?? ""];
-                                const roleIconSrc = role != null ? getRoleIconSrc(role) : undefined;
-
-                                return (
+                            return (
+                                <div
+                                    key={index}
+                                    className={cl("modal-list-item-btn")}
+                                    onClick={() => selectItem(index)}
+                                    role="button"
+                                    tabIndex={0}
+                                >
                                     <div
-                                        key={index}
-                                        className={cl("modal-list-item-btn")}
-                                        onClick={() => selectItem(index)}
-                                        role="button"
-                                        tabIndex={0}
+                                        className={cl("modal-list-item", { "modal-list-item-active": selectedItemIndex === index })}
+                                        onContextMenu={e => {
+                                            if (permission.type === PermissionOverwriteType.ROLE)
+                                                ContextMenuApi.openContextMenu(e, () => (
+                                                    <RoleContextMenu
+                                                        guild={guild}
+                                                        roleId={permission.id!}
+                                                        onClose={modalProps.onClose}
+                                                    />
+                                                ));
+                                            else if (permission.type === PermissionOverwriteType.MEMBER) {
+                                                ContextMenuApi.openContextMenu(e, () => (
+                                                    <UserContextMenu
+                                                        userId={permission.id!}
+                                                    />
+                                                ));
+                                            }
+                                        }}
                                     >
-                                        <div
-                                            className={cl("modal-list-item", { "modal-list-item-active": selectedItemIndex === index })}
-                                            onContextMenu={e => {
-                                                if (permission.type === PermissionOverwriteType.ROLE)
-                                                    ContextMenuApi.openContextMenu(e, () => (
-                                                        <RoleContextMenu
-                                                            guild={guild}
-                                                            roleId={permission.id!}
-                                                            onClose={modalProps.onClose}
-                                                        />
-                                                    ));
-                                                else if (permission.type === PermissionOverwriteType.MEMBER) {
-                                                    ContextMenuApi.openContextMenu(e, () => (
-                                                        <UserContextMenu
-                                                            userId={permission.id!}
-                                                        />
-                                                    ));
-                                                }
-                                            }}
-                                        >
-                                            {(permission.type === PermissionOverwriteType.ROLE || permission.type === PermissionOverwriteType.OWNER) && (
-                                                <span
-                                                    className={cl("modal-role-circle")}
-                                                    style={{ backgroundColor: role?.colorString ?? "var(--primary-300)" }}
-                                                />
-                                            )}
-                                            {permission.type === PermissionOverwriteType.ROLE && roleIconSrc != null && (
-                                                <img
-                                                    className={cl("modal-role-image")}
-                                                    src={roleIconSrc}
-                                                />
-                                            )}
-                                            {permission.type === PermissionOverwriteType.MEMBER && user != null && (
-                                                <img
-                                                    className={cl("modal-user-img")}
-                                                    src={user.getAvatarURL(void 0, void 0, false)}
-                                                />
-                                            )}
-                                            <BaseText size="md" className={cl("modal-list-item-text")}>
-                                                {
-                                                    permission.type === PermissionOverwriteType.ROLE
-                                                        ? role?.name ?? "Unknown Role"
-                                                        : permission.type === PermissionOverwriteType.MEMBER
-                                                            ? (user != null && getUniqueUsername(user)) ?? "Unknown User"
-                                                            : (
-                                                                <Flex style={{ gap: "0.2em" }} alignItems="center">
-                                                                    @{t(plugin.permissionsViewer.modal.owner)}
-                                                                    <OwnerCrownIcon height={18} width={18} aria-hidden="true" />
-                                                                </Flex>
-                                                            )
-                                                }
-                                            </BaseText>
-                                        </div>
+                                        {(permission.type === PermissionOverwriteType.ROLE || permission.type === PermissionOverwriteType.OWNER) && (
+                                            <span
+                                                className={cl("modal-role-circle")}
+                                                style={{ backgroundColor: role?.colorString ?? "var(--primary-300)" }}
+                                            />
+                                        )}
+                                        {permission.type === PermissionOverwriteType.ROLE && roleIconSrc != null && (
+                                            <img
+                                                className={cl("modal-role-image")}
+                                                src={roleIconSrc}
+                                            />
+                                        )}
+                                        {permission.type === PermissionOverwriteType.MEMBER && user != null && (
+                                            <img
+                                                className={cl("modal-user-img")}
+                                                src={user.getAvatarURL(void 0, void 0, false)}
+                                            />
+                                        )}
+                                        <BaseText size="md" className={cl("modal-list-item-text")}>
+                                            {
+                                                permission.type === PermissionOverwriteType.ROLE
+                                                    ? role?.name ?? t(plugin.permissionsViewer.text.unknownRole)
+                                                    : permission.type === PermissionOverwriteType.MEMBER
+                                                        ? (user != null && getUniqueUsername(user)) ?? t(plugin.permissionsViewer.text.unknownUser)
+                                                        : (
+                                                            <Flex style={{ gap: "0.2em" }} alignItems="center">
+                                                                @{t(plugin.permissionsViewer.modal.owner)}
+                                                                <OwnerCrownIcon height={18} width={18} aria-hidden="true" />
+                                                            </Flex>
+                                                        )
+                                            }
+                                        </BaseText>
                                     </div>
-                                );
-                            })}
-                        </ScrollerThin>
-                        <div className={cl("modal-divider")} />
-                        <ScrollerThin className={cl("modal-perms")} orientation="auto">
-                            {Object.values(PermissionsBits).map(bit => (
+                                </div>
+                            );
+                        })}
+                    </ScrollerThin>
+                    <div className={cl("modal-divider")} />
+                    <ScrollerThin className={cl("modal-perms")} orientation="auto">
+                        {Object.values(PermissionsBits).map(bit => {
+                            const overrideType = (() => {
+                                const { permissions, overwriteAllow, overwriteDeny } = selectedItem;
+
+                                if (permissions != null)
+                                    return (permissions & bit) === bit
+                                        ? "allowed"
+                                        : "denied";
+
+                                if (overwriteAllow && (overwriteAllow & bit) === bit)
+                                    return "allowed";
+                                if (overwriteDeny && (overwriteDeny & bit) === bit)
+                                    return "denied";
+
+                                return "default";
+                            })();
+
+                            if (overrideType === "default") return null;
+
+                            return (
                                 <div key={bit} className={cl("modal-perms-item")}>
                                     <div className={cl("modal-perms-item-icon")}>
-                                        {(() => {
-                                            const { permissions, overwriteAllow, overwriteDeny } = selectedItem;
-
-                                            if (permissions)
-                                                return (permissions & bit) === bit
-                                                    ? PermissionAllowedIcon()
-                                                    : PermissionDeniedIcon();
-
-                                            if (overwriteAllow && (overwriteAllow & bit) === bit)
-                                                return PermissionAllowedIcon();
-                                            if (overwriteDeny && (overwriteDeny & bit) === bit)
-                                                return PermissionDeniedIcon();
-
-                                            return PermissionDefaultIcon();
-                                        })()}
+                                        {overrideType === "allowed" && <PermissionAllowedIcon />}
+                                        {overrideType === "denied" && <PermissionDeniedIcon />}
                                     </div>
                                     <BaseText size="md">{guildPermissionSpecMap[String(bit)].title}</BaseText>
 
@@ -198,38 +199,52 @@ function RolesAndUsersPermissionsComponent({ permissions, guild, modalProps, hea
                                         {props => <InfoIcon {...props} />}
                                     </Tooltip>
                                 </div>
-                            ))}
-                        </ScrollerThin>
-                    </div>
-                )}
-            </ModalContent>
-        </ModalRoot>
+                            );
+                        })}
+                    </ScrollerThin>
+                </div>
+            )}
+        </Modal>
+    );
+}
+
+function ViewAsRoleIcon() {
+    return (
+        <svg width="18" height="18" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M20.7 12.7a1 1 0 0 0 0-1.4l-5-5a1 1 0 1 0-1.4 1.4l3.29 3.3H4a1 1 0 1 0 0 2h13.59l-3.3 3.3a1 1 0 0 0 1.42 1.4l5-5Z" />
+        </svg>
     );
 }
 
 function RoleContextMenu({ guild, roleId, onClose }: { guild: Guild; roleId: string; onClose: () => void; }) {
+    const popoutRef = useRef(null);
+    const role = GuildRoleStore.getRole(guild.id, roleId);
+    const { before, after } = buildExtraRoleContextMenuItems(role, guild, popoutRef);
+
     return (
         <Menu.Menu
             navId={cl("role-context-menu")}
             onClose={ContextMenuApi.closeContextMenu}
-            aria-label="Role Options"
+            aria-label={t(plugin.permissionsViewer.text.roleOptions)}
         >
+            {before}
             <Menu.MenuItem
                 id={cl("copy-role-id")}
                 label={getIntlMessage("COPY_ID_ROLE")}
-                action={() => {
-                    copyToClipboard(roleId);
-                }}
+                icon={CopyIdIcon}
+                leadingAccessory={{ type: "icon", icon: CopyIdIcon }}
+                action={() => copyToClipboard(roleId)}
             />
+
+            {after}
 
             {(settings.store as any).unsafeViewAsRole && (
                 <Menu.MenuItem
                     id={cl("view-as-role")}
                     label={getIntlMessage("VIEW_AS_ROLE")}
+                    icon={ViewAsRoleIcon}
+                    leadingAccessory={{ type: "icon", icon: ViewAsRoleIcon }}
                     action={() => {
-                        const role = GuildRoleStore.getRole(guild.id, roleId);
-                        if (!role) return;
-
                         onClose();
                         FluxDispatcher.dispatch({
                             type: "IMPERSONATE_UPDATE",
@@ -253,11 +268,12 @@ function UserContextMenu({ userId }: { userId: string; }) {
         <Menu.Menu
             navId={cl("user-context-menu")}
             onClose={ContextMenuApi.closeContextMenu}
-            aria-label="User Options"
+            aria-label={t(plugin.permissionsViewer.text.userOptions)}
         >
             <Menu.MenuItem
                 id={cl("copy-user-id")}
                 label={getIntlMessage("COPY_ID_USER")}
+                leadingAccessory={{ type: "icon", icon: CopyIdIcon }}
                 action={() => {
                     copyToClipboard(userId);
                 }}
@@ -269,12 +285,16 @@ function UserContextMenu({ userId }: { userId: string; }) {
 const RolesAndUsersPermissions = ErrorBoundary.wrap(RolesAndUsersPermissionsComponent);
 
 export default function openRolesAndUsersPermissionsModal(permissions: Array<RoleOrUserPermission>, guild: Guild, header: string) {
-    return openModal(modalProps => (
-        <RolesAndUsersPermissions
-            modalProps={modalProps}
-            permissions={permissions}
-            guild={guild}
-            header={header}
-        />
-    ));
+    return openModalLazy(async () => {
+        await loadGetGuildPermissionSpecMap();
+
+        return modalProps => (
+            <RolesAndUsersPermissions
+                modalProps={modalProps}
+                permissions={permissions}
+                guild={guild}
+                header={header}
+            />
+        );
+    });
 }

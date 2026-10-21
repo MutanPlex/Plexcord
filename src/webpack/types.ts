@@ -7,11 +7,15 @@
 
 import { Module, ModuleExports, WebpackRequire } from "@plexcord/discord-types/webpack";
 
-import { SYM_ORIGINAL_FACTORY, SYM_PATCHED_BY, SYM_PATCHED_SOURCE } from "./patchWebpack";
+import { SYM_ORIGINAL_FACTORY, SYM_ORIGINAL_MODULE_FACTORIES, SYM_PATCHED_BY, SYM_PATCHED_SOURCE } from "./patchWebpack";
 
 export type AnyWebpackRequire = ((moduleId: PropertyKey) => ModuleExports) & Partial<Omit<WebpackRequire, "m">> & {
     /** The module factories, where all modules that have been loaded are stored (pre-loaded or loaded by lazy chunks) */
-    m: Record<PropertyKey, AnyModuleFactory>;
+    m: AnyModuleFactories;
+};
+
+export type AnyModuleFactories = Record<PropertyKey, AnyModuleFactory> & {
+    [SYM_ORIGINAL_MODULE_FACTORIES]?: Record<PropertyKey, AnyModuleFactory>;
 };
 
 /** exports can be anything, however initially it is always an empty object */

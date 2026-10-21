@@ -1,3 +1,8 @@
 [class*="usersList"] [class*="text"] {
     user-select: text !important;
 }
+
+.pc-bbu-search,
+.pc-bbu-search * {
+    border-radius: 0 !important;
+}

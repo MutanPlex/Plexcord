@@ -35,18 +35,48 @@ function UsersCollectionRows({ usersCollection }: { usersCollection: Data["users
     return (
         <>
             {Object.entries(usersCollection)
-                .map(([_key, { users, name }]) => ({ name, users: Object.values(users) }))
+                .map(([key, { users, name, id }]) => ({ key, id: id || key, name, users: Object.values(users) }))
                 .sort((a, b) => b.users.length - a.users.length)
-                .map(({ name, users }) => (
-                    <aside key={name}>
-                        <div className={cl("header-container")}>
-                            <HeadingPrimary className={cl("header-name")}>{name}</HeadingPrimary>
-                            <div className={cl("header-btns")}>
-                                {users.map(u => <UserRow key={u.id} user={u} />)}
+                .map(({ key, id, name, users }) => {
+                    const isGuild = key !== "dm" && id !== "dm";
+                    return (
+                        <aside key={key}>
+                            <div className={cl("header-container")}>
+                                <HeadingPrimary className={cl("header-name")}>
+                                    {name}
+                                    {isGuild && (
+                                        <span
+                                            className={cl("header-id")}
+                                            onContextMenu={e => {
+                                                e.preventDefault();
+                                                ContextMenuApi.openContextMenu(e, () => (
+                                                    <Menu.Menu
+                                                        navId="guild-id-context-menu"
+                                                        onClose={ContextMenuApi.closeContextMenu}
+                                                        aria-label={t(plugin.iRememberYou.text.serverOptions)}
+                                                    >
+                                                        <Menu.MenuItem
+                                                            id="copy-server-id"
+                                                            label={t(plugin.iRememberYou.text.copyServerId)}
+                                                            action={() => copyWithToast(id, t(plugin.iRememberYou.text.serverIdCopied))}
+                                                        />
+                                                    </Menu.Menu>
+                                                ));
+                                            }}
+                                        >
+                                            <Clickable onClick={() => copyWithToast(id, t(plugin.iRememberYou.text.serverIdCopied))}>
+                                                ({id})
+                                            </Clickable>
+                                        </span>
+                                    )}
+                                </HeadingPrimary>
+                                <div className={cl("header-btns")}>
+                                    {users.map(u => <UserRow key={u.id} user={u} />)}
+                                </div>
                             </div>
-                        </div>
-                    </aside>
-                ))}
+                        </aside>
+                    );
+                })}
         </>
     );
 }

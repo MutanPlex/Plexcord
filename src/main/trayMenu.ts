@@ -5,26 +5,13 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { IpcEvents } from "@shared/IpcEvents";
-import { gitHashShort } from "@shared/plexcordUserAgent";
-import { BrowserWindow, ipcMain, Menu, MenuItemConstructorOptions, shell } from "electron";
+import { gitHash } from "@shared/plexcordUserAgent";
+import { app, BaseWindow, BrowserWindow, dialog, Menu, MenuItemConstructorOptions, shell } from "electron";
 import aboutHtml from "file://about.html?minify";
 
+import updater from "./updater";
 import { SETTINGS_DIR, THEMES_DIR } from "./utils/constants";
-
-let cachedUpdateAvailable = false;
-
-ipcMain.on(IpcEvents.SET_TRAY_UPDATE_STATE, (_, available: boolean) => {
-    cachedUpdateAvailable = available;
-});
-
-function getMainWindow(): BrowserWindow | undefined {
-    return BrowserWindow.getFocusedWindow() ?? BrowserWindow.getAllWindows()[0];
-}
-
-function sendToRenderer(event: IpcEvents): void {
-    getMainWindow()?.webContents.send(event);
-}
+import { components, t } from "./utils/i18n";
 
 function findInsertIndex(template: MenuItemConstructorOptions[]): number {
     const openIndex = template.findIndex(item => {
@@ -62,14 +49,11 @@ function openAboutWindow() {
         return;
     }
 
-    const height = 750;
-    const width = height * (4 / 3);
-
     aboutWindow = new BrowserWindow({
         center: true,
         autoHideMenuBar: true,
-        height,
-        width
+        height: 525,
+        width: 900
     });
 
     aboutWindow.webContents.setWindowOpenHandler(({ url }) => {
@@ -84,7 +68,7 @@ function openAboutWindow() {
 
     const aboutParams = aboutHtml
         .replaceAll("{{VERSION}}", VERSION)
-        .replaceAll("{{GIT_HASH}}", gitHashShort);
+        .replaceAll("{{GIT_HASH}}", gitHash); // change to gitHashShort if/when its added
     const base64Html = Buffer.from(aboutParams).toString("base64");
     aboutWindow.loadURL(`data:text/html;base64,${base64Html}`);
     aboutWindow.on("closed", () => {
@@ -92,35 +76,53 @@ function openAboutWindow() {
     });
 }
 
+const notify = (window: BaseWindow | undefined, title: string, message: string) =>
+    window && !window.isDestroyed()
+        ? dialog.showMessageBox(window, { title, message })
+        : dialog.showMessageBox({ title, message });
+
 function createPlexcordMenuItems(): MenuItemConstructorOptions[] {
     return [
         {
             label: "Plexcord",
             submenu: [
                 {
-                    label: "About Plexcord",
+                    label: t(components.tray.aboutPlexcord, "About Plexcord"),
                     click: () => openAboutWindow()
                 },
                 {
-                    label: cachedUpdateAvailable ? "Update Plexcord" : "Check for Updates",
-                    click: () => sendToRenderer(IpcEvents.TRAY_CHECK_UPDATES)
-                },
-                {
-                    label: "Repair Plexcord",
-                    click: () => sendToRenderer(IpcEvents.TRAY_REPAIR)
+                    label: t(components.tray.updatePlexcord, "Update Plexcord"),
+                    async click(_item, window) {
+                        try {
+                            const updateAvailable = await updater.fetchUpdate();
+                            if (!updateAvailable) {
+                                return notify(window, t(components.tray.noUpdateTitle, "No Update Available"), t(components.tray.noUpdateBody, "You are already using the latest version of Plexcord."));
+                            }
+
+                            const result = await updater.applyUpdate();
+                            if (!result) {
+                                return notify(window, t(components.tray.updateFailedTitle, "Update Failed"), t(components.tray.updateFailedBody, "Failed to apply the update for Plexcord."));
+                            }
+
+                            await notify(window, t(components.tray.updateSuccessTitle, "Update Successful"), t(components.tray.updateSuccessBody, "Now relaunching Plexcord to apply the update."));
+                            app.relaunch();
+                            app.exit();
+                        } catch (e) {
+                            notify(window, t(components.tray.updateErrorTitle, "Update Error"), t(components.tray.updateErrorBody, { error: String(e) }, "An error occurred while updating Plexcord.\n\n{{error}}"));
+                        }
+                    }
                 },
                 { type: "separator" },
                 {
-                    label: "Open Settings Folder",
+                    label: t(components.tray.openSettingsFolder, "Open Settings Folder"),
                     click: () => shell.openPath(SETTINGS_DIR)
                 },
                 {
-                    label: "Open Themes Folder",
+                    label: t(components.tray.openThemesFolder, "Open Themes Folder"),
                     click: () => shell.openPath(THEMES_DIR)
                 }
             ]
         },
-        { type: "separator" }
     ];
 }
 

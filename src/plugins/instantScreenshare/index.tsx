@@ -12,8 +12,8 @@ import { Paragraph } from "@components/Paragraph";
 import { VoiceState } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
-import { findByCodeLazy, findStoreLazy } from "@webpack";
-import { ChannelStore, MediaEngineStore, PermissionsBits, PermissionStore, SelectedChannelStore, showToast, Toasts, UserStore, VoiceActions, WindowStore } from "@webpack/common";
+import { findByCodeLazy } from "@webpack";
+import { ApplicationStreamingSettingsStore, ChannelStore, MediaEngineStore, PermissionsBits, PermissionStore, SelectedChannelStore, showToast, UserStore, VoiceActions, WindowStore } from "@webpack/common";
 
 import { getCurrentMedia, settings } from "./utils";
 
@@ -21,7 +21,6 @@ let hasStreamed, isStreaming, streamKey;
 const startStream = findByCodeLazy('type:"STREAM_START"');
 const stopStream = findByCodeLazy('type:"STREAM_STOP"');
 const StreamPreviewSettings = getUserSettingLazy("voiceAndVideo", "disableStreamPreviews")!;
-const ApplicationStreamingSettingsStore = findStoreLazy("ApplicationStreamingSettingsStore");
 
 async function autoStartStream(instant = true) {
     if (!instant && !WindowStore.isFocused() && settings.store.focusDiscord) return;
@@ -63,7 +62,7 @@ async function autoStartStream(instant = true) {
 
 function handleToggle() {
     settings.store.toolboxManagement = !settings.store.toolboxManagement;
-    showToast(`${t(plugin.instantScreenshare.toolbox.toast, { state: settings.store.toolboxManagement ? t(plugin.instantScreenshare.toolbox.enabled) : t(plugin.instantScreenshare.toolbox.disabled) })}`, Toasts.Type.SUCCESS);
+    showToast({ text: `${t(plugin.instantScreenshare.toolbox.toast, { state: settings.store.toolboxManagement ? t(plugin.instantScreenshare.toolbox.enabled) : t(plugin.instantScreenshare.toolbox.disabled) })}`, variant: "success" });
 }
 
 export default definePlugin({
@@ -96,6 +95,8 @@ export default definePlugin({
         </>
     ),
 
+    getToolboxLabel: () => t(plugin.instantScreenshare.toolbox.label),
+
     patches: [
         {
             find: "DISCONNECT_FROM_VOICE_CHANNEL]",
@@ -106,11 +107,11 @@ export default definePlugin({
             },
         },
         {
-            find: "keybindActionTypes()",
+            find: '"push-to-talk-priority"',
             predicate: () => settings.store.keybindScreenshare,
             replacement: {
                 match: /=\[(\{id:.{0,25}value:\i\.\i\.UNASSIGNED)/,
-                replace: '=[{id:"instant-screen-share",value:"INSTANT_SCREEN_SHARE",label:"Instant Screenshare"},$1'
+                replace: '=[{id:"instant-screen-share",value:"INSTANT_SCREEN_SHARE",label:$self.getToolboxLabel()},$1'
             }
         }
     ],
@@ -146,6 +147,9 @@ export default definePlugin({
     },
 
     toolboxActions: () => ({
-        [t(plugin.instantScreenshare.toolbox.label)]: (() => handleToggle())
+        [t(plugin.instantScreenshare.text.instantScreenshare)]() {
+            settings.store.toolboxManagement = !settings.store.toolboxManagement;
+            showToast({ text: t(plugin.instantScreenshare.toast.instantScreenshareDisabled, { disabled: settings.store.toolboxManagement ? t(plugin.instantScreenshare.toolbox.enabled) : t(plugin.instantScreenshare.toolbox.disabled) }), variant: "success" });
+        }
     })
 });

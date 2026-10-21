@@ -53,7 +53,7 @@ export default definePlugin({
 
         if (channel.type !== ChannelTypes.DM) {
             let where = ChannelTypesSets.THREADS.has(channel.type)
-                ? `${channelName(channel)} in ${channelName(parent, true)}`
+                ? t(plugin.notificationTitle.text.threadInParent, { thread: channelName(channel), parent: channelName(parent, true) })
                 : `${channelName(channel, true)}`;
             if (guild != null)
                 where += `, ${guild.name}`;

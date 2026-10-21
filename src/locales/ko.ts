@@ -46,11 +46,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         switches: {
             useQuickCss: {
                 label: "맞춤 CSS 활성화",
-                description: "QuickCSS 편집기에서 사용자 정의 CSS를 로드합니다. 이를 통해 Discord의 모양을 자신만의 스타일로 맞춤 설정할 수 있습니다."
+                description: "설정한 QuickCSS를 적용합니다"
             },
             enableReactDevtools: {
                 label: "React 개발자 도구 활성화",
-                description: "Discord의 React 구성 요소를 디버깅하려면 React 개발자 도구 확장을 활성화하세요. 플러그인 개발에 유용합니다."
+                description: "주로 플러그인 개발자에게 유용합니다. 무엇인지 모른다면 무시하세요"
             },
             mainWindowFrameless: {
                 label: "기본 창 프레임 비활성화",
@@ -60,7 +60,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "창틀 비활성화",
                 description: "깔끔한 외관을 위해 기본 창 프레임을 제거합니다. 제목 표시줄 영역을 끌어서 창을 이동할 수 있습니다."
             },
-            winNativeTitleBar: {
+            nativeTitleBar: {
                 label: "Discord의 사용자 정의 제목 표시줄 대신 Windows의 기본 제목 표시줄을 사용하세요",
                 description: "Discord의 사용자 정의 제목 표시줄을 표준 Windows 제목 표시줄로 교체합니다. 이로 인해 일부 창 관리 도구와의 호환성이 향상될 수 있습니다."
             },
@@ -76,7 +76,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             disableMinSize: {
                 label: "최소 창 크기 비활성화",
-                description: "Discord 창의 크기가 기본 최소 크기보다 작게 조정되도록 허용합니다. 창 관리자나 작은 화면을 타일링하는 데 유용합니다."
+                description: "Discord의 최소 크기보다 작게도 창 크기를 자유롭게 조절할 수 있습니다"
             }
         },
         quickActions: {
@@ -193,6 +193,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignore: "무시 - 알림을 전혀 표시하지 않습니다."
             },
         },
+        windowsMaterial: {
+            title: "Windows 배경 재질 (재시작 필요)",
+            description: "Windows 투명 배경 효과입니다. 투명도를 지원하는 테마가 필요하며, 그렇지 않으면 아무 효과가 없습니다. 이 설정을 변경한 후에는 재시작이 필요합니다.",
+            material: {
+                none: "없음",
+                mica: "Mica (시스템 테마와 바탕화면 배경을 사용해 배경을 칠함)",
+                tabbed: "Tabbed (배경 색조가 더 강한 Mica 변형)",
+                acrylic: "Acrylic (반투명 배경을 위해 Discord 뒤의 창을 흐리게 함)"
+            }
+        },
         macVibrancy: {
             title: "창 진동 스타일(다시 시작해야 함)",
             description: "macOS 창 생동감 효과를 사용자 정의합니다. 이는 Discord 창의 흐림 및 투명도 스타일을 제어합니다. 변경 사항을 적용하려면 다시 시작해야 합니다.",
@@ -212,6 +222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 fullscreenUI: "전체 화면 UI(투명하지만 약간 흐릿함)",
                 hud: "HUD(가장 투명함)"
             }
+        },
+        tabs: {
+            renderFailed: "{{tab}} 탭을 표시하지 못했습니다. 문제가 계속되면 설치 프로그램으로 다시 설치해 보세요!"
         }
     },
 
@@ -270,7 +283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             discordDesktop: "Discord 데스크톱 앱",
             plextron: "플렉트론 앱",
             web: "Plextron 앱 및 Discord 웹 버전",
-            dev: "Plexcord의 개발자 버전"
+            dev: "Plexcord의 개발자 버전",
+            browser: "Plexcord 웹 브라우저 버전"
         },
         search: {
             looking: "당신은 찾고 있습니까?",
@@ -307,7 +321,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userplugins: "사용자 플러그인 표시",
                 api: "API 플러그인 표시",
                 type: "유형별 필터",
-                tags: "태그별 필터"
+                tags: "태그별 필터",
+                favorites: "즐겨찾기 보기"
             }
         },
         pluginModal: {
@@ -320,7 +335,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             enabledUser: "활성화된 사용자 플러그인",
             totalUser: "총 사용자 플러그인",
             info: "더 많은 정보 보기",
-            source: "소스 코드 보기"
+            source: "소스 코드 보기",
+            favorite: "즐겨찾기 - 플러그인 목록 맨 위에 고정합니다",
+            unfavorite: "즐겨찾기 해제"
         },
         metadata: {
             api: {
@@ -342,7 +359,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     userSettings: "Discord의 UserSettings를 패치하여 그룹과 이름을 노출합니다.",
                     audioPlayer: "내부 Discord 오디오 파일 또는 외부 오디오 링크를 재생하는 API입니다.",
                     userArea: "사용자 영역 패널에 버튼을 추가하는 API입니다.",
-                    profileCollections: "Discord의 게임 컬렉션처럼 사용자 프로필 패널에 컬렉션을 추가하기 위한 API."
+                    profileCollections: "Discord의 게임 컬렉션처럼 사용자 프로필 패널에 컬렉션을 추가하기 위한 API.",
+                    profileSections: "사용자 프로필 패널의 '가입일' 영역 근처에 섹션을 추가하는 API입니다.",
+                    headerBar: "헤더 바에 버튼을 추가하는 API입니다.",
+                    surfaceClasses: "안정적인 Discord 레이아웃 영역에 플러그인 소유의 의미적 데이터 속성과 제한된 props를 추가하는 API입니다."
                 },
                 chatButtons: {
                     context: {
@@ -389,7 +409,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             button: "활성화된 플러그인의 버튼이 여기에 표시됩니다."
-        }
+        },
+        invalidInput: "잘못된 입력",
+        loading: "로딩 중...",
+        authorPrefix: "제작자:"
     },
 
     patchHelper: {
@@ -474,7 +497,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             plugins: "플러그인 내보내기",
             css: "QuickCSS 내보내기",
             datastore: "데이터 저장소 내보내기"
-        }
+        },
+        backupFileType: "Plexcord 설정 백업"
     },
 
     cloud: {
@@ -640,7 +664,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         newPlugins: "{{count}} 새 플러그인{{s}}",
         following: "최근 업데이트에 다음 플러그인이 추가되었습니다.",
-        more: "+{{count}} 추가 플러그인"
+        more: "+{{count}} 추가 플러그인",
+        error: {
+            retrieveRepo: "저장소 정보를 가져오지 못했습니다",
+            fetchRepo: "저장소에서 가져오지 못했습니다",
+            connectRepo: "저장소에 연결하지 못했습니다. 인터넷 연결을 확인하세요."
+        }
     },
 
     csp: {
@@ -717,7 +746,8 @@ const translations: MatchStructure<typeof enTranslations> = {
         unknown: {
             title: "알려지지 않은",
             author: "알 수 없는 작성자",
-            theme: "불일치 테마"
+            theme: "불일치 테마",
+            description: "설명이 제공되지 않았습니다."
         },
         required: "다음 플러그인이 필요하지만 활성화되어 있지 않습니다.",
         homepage: "홈페이지",
@@ -778,6 +808,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             failed: {
                 download: "테마를 다운로드하지 못했습니다."
             }
+        },
+        openInFolder: "폴더에서 열기",
+        fallback: {
+            author: "알 수 없는 작성자",
+            description: "Discord 테마입니다."
         }
     },
 
@@ -834,6 +869,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         repo: "레포",
         repoDescription: "이는 Plexcord가 업데이트를 가져오는 GitHub 저장소입니다.",
         loading: "로드 중...",
+        unknownAuthor: "알 수 없는 작성자"
     },
 
     components: {
@@ -849,7 +885,29 @@ const translations: MatchStructure<typeof enTranslations> = {
             message: "QuickCSS 편집기는 여전히 백그라운드에 열려 있습니다.",
             detail: "그래도 Discord를 종료하시겠습니까? 그러면 QuickCSS 편집기도 닫힙니다.",
             cancel: "취소",
-            close: "어쨌든 닫기"
+            close: "어쨌든 닫기",
+            windowTitle: "Plexcord QuickCSS 편집기"
+        },
+        messagePopover: {
+            scrollLeft: "왼쪽으로 스크롤",
+            scrollRight: "오른쪽으로 스크롤"
+        },
+        notices: {
+            error: "알림 표시 중 오류 발생"
+        },
+        tray: {
+            aboutPlexcord: "Plexcord 정보",
+            updatePlexcord: "Plexcord 업데이트",
+            noUpdateTitle: "사용 가능한 업데이트 없음",
+            noUpdateBody: "이미 최신 버전의 Plexcord를 사용 중입니다.",
+            updateFailedTitle: "업데이트 실패",
+            updateFailedBody: "Plexcord 업데이트를 적용하지 못했습니다.",
+            updateSuccessTitle: "업데이트 완료",
+            updateSuccessBody: "업데이트를 적용하기 위해 Plexcord를 다시 시작합니다.",
+            updateErrorTitle: "업데이트 오류",
+            updateErrorBody: "Plexcord를 업데이트하는 중 오류가 발생했습니다.\n\n{{error}}",
+            openSettingsFolder: "설정 폴더 열기",
+            openThemesFolder: "테마 폴더 열기"
         }
     },
 
@@ -918,7 +976,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             seconds: "초",
             ago: "~ 전에",
             s: "에스"
-        }
+        },
+        detectLanguage: "언어 감지"
     },
 
     plugin: {
@@ -945,6 +1004,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             utility: "유틸리티",
             voice: "음성"
         },
+        concatenatedComponentExtractor: {
+            name: "ConcatenatedComponentExtractor",
+            description: "번들러에 의해 연결(concatenate)된 컴포넌트를 추출합니다"
+        },
+        concatenatedModules: {
+            name: "ConcatenatedModules",
+            description: "번들러에 의해 연결(concatenate)된 모듈을 추출합니다"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Discord의 추적(분석/'과학'), 측정항목 및 Sentry 충돌 보고를 비활성화합니다.",
@@ -952,6 +1019,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disableAnalytics: {
                     label: "분석 비활성화",
                     description: "Discord의 추적(분석/'과학'), 측정항목 및 Sentry 충돌 보고를 비활성화합니다."
+                },
+                disableStackDumping: {
+                    description: "Discord가 충돌하면 콘솔에 네이티브 스택 추적을 출력합니다. 완전히 다시 시작해야 합니다."
                 }
             }
         },
@@ -966,6 +1036,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsLocation: {
                     label: "설정 위치",
                     description: "Plexcord 설정 섹션의 위치를 ​​결정합니다."
+                },
+                includePlexcordInfoWhenCopying: {
+                    label: "복사 시 Plexcord 정보 포함",
+                    description: "설정 페이지 좌측 하단의 버전 정보를 클릭할 때 Plexcord 정보(Plexcord, Electron, Chromium)도 함께 복사합니다"
                 }
             }
         },
@@ -983,6 +1057,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "기다리다!",
                     body: "오래된 버전의 Plexcord를 사용하고 있습니다! 문제가 이미 해결되었을 가능성이 있습니다.",
                     footer: "지원을 요청하기 전에 먼저 업데이트하세요!",
+                    dismiss: "무엇을 하는지 알고 있거나 업데이트할 수 없다면 이 안내를 닫아도 됩니다.",
                     button: {
                         cancel: "업데이트 보기",
                         confirm: "지금 업데이트 및 다시 시작",
@@ -1181,7 +1256,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "익명화 방법",
                     random: "무작위 문자",
                     consistent: "일관된",
-                    timestamp: "타임스탬프"
+                    timestamp: "타임스탬프",
+                    date: "날짜"
                 },
                 randomisedLength: {
                     label: "무작위 길이",
@@ -1190,6 +1266,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 consistent: {
                     label: "일관된",
                     description: "일관된 익명화 비밀"
+                },
+                dateFormat: {
+                    description: "날짜 형식 (YYYY, MM, DD, HH, mm, ss, SSS 지원)",
+                    label: "날짜 형식"
                 }
             },
             using: {
@@ -1201,76 +1281,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toggle: "파일에 대한 스포일러를 전환합니다(기본값은 켜져 있음).",
                 enabled: "스포일러가 활성화되었습니다!",
                 disabled: "스포일러가 비활성화되었습니다!"
-            }
-        },
-        appleMusic: {
-            name: "AppleMusicRichPresence",
-            description: "Apple Music을 위한 Discord의 풍부한 존재감!",
-            about: "사용자 정의 가능한 활동 형식 문자열의 경우 여러 특수 문자열을 사용하여 활동에 트랙 데이터를 포함할 수 있습니다! {{name}}은 트랙 이름으로 대체됩니다. {{artist}}은 아티스트의 이름으로 대체됩니다. {{album}}은 앨범 이름으로 대체됩니다.",
-            button: {
-                listen: "Apple Music에서 듣기",
-                songLink: "SongLink에서 보기"
-            },
-            option: {
-                activityType: {
-                    label: "활동 유형",
-                    description: "어떤 활동 유형",
-                    listening: "청취",
-                    playing: "재생"
-                },
-                statusDisplayType: {
-                    label: "상태 표시 유형",
-                    description: "멤버 목록에 트랙/아티스트 이름 표시",
-                    off: "표시 안 함(일반 청취 메시지 표시)",
-                    artist: "아티스트 이름 표시",
-                    track: "트랙 이름 표시"
-                },
-                refreshInterval: {
-                    label: "새로 고침 간격",
-                    description: "활동 새로 고침 간격(초)"
-                },
-                enableTimestamps: {
-                    label: "타임스탬프 활성화",
-                    description: "타임스탬프 활성화 여부"
-                },
-                enableButtons: {
-                    label: "버튼 활성화",
-                    description: "버튼 활성화 여부"
-                },
-                nameString: {
-                    label: "이름 문자열",
-                    description: "활동 이름 형식 문자열"
-                },
-                detailsString: {
-                    label: "세부정보 문자열",
-                    description: "활동 세부정보 형식 문자열"
-                },
-                stateString: {
-                    label: "상태 문자열",
-                    description: "활동 상태 형식 문자열"
-                },
-                largeImageType: {
-                    label: "대형 이미지 유형",
-                    description: "활동 자산 큰 이미지 유형",
-                    album: "앨범 아트워크",
-                    artist: "아티스트 작품",
-                    disabled: "장애가 있는"
-                },
-                largeTextString: {
-                    label: "큰 텍스트 문자열",
-                    description: "활동 자산 큰 텍스트 형식 문자열"
-                },
-                smallImageType: {
-                    label: "작은 이미지 유형",
-                    description: "활동 자산 작은 이미지 유형",
-                    album: "애플 뮤직 로고",
-                    artist: "아티스트 작품",
-                    disabled: "장애가 있는"
-                },
-                smallTextString: {
-                    label: "작은 텍스트 문자열",
-                    description: "활동 자산 작은 텍스트 형식 문자열"
-                }
             }
         },
         arRpc: {
@@ -1373,6 +1383,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     left: "왼쪽",
                     right: "오른쪽"
                 }
+            },
+            text: {
+                smallText: "작은 텍스트",
+                largeText: "큰 텍스트"
             }
         },
         betterAudioPlayer: {
@@ -1405,7 +1419,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             toast: {
-                invalidColorFormat: "{{settingKey}}의 색상 형식이 잘못되었습니다. 'R, G, B' 또는 '#RRGGBB' 형식인지 확인하세요."
+                invalidColorFormat: "{{settingKey}}의 색상 형식이 잘못되었습니다. 'R, G, B' 또는 '#RRGGBB' 형식인지 확인하세요.",
+                invalidColorFormatFor: "{{key}}의 색상 형식이 잘못되었습니다. \"R, G, B\" 또는 \"#RRGGBB\"를 사용하세요"
             }
         },
         betterBanReasons: {
@@ -1423,7 +1438,20 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             title: "이유",
             placeholder: "이유",
-            add: "다른 이유 추가"
+            add: "다른 이유 추가",
+            duration: {
+                discordDefault: "Discord 기본값",
+                none: "삭제하지 않음",
+                hour1: "지난 1시간",
+                hours6: "지난 6시간",
+                hours12: "지난 12시간",
+                hours24: "지난 24시간",
+                days3: "지난 3일",
+                days7: "지난 7일"
+            },
+            text: {
+                autoDeleteDuration: "메시지 자동 삭제 기간"
+            }
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
@@ -1485,6 +1513,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "강제 오픈",
                     description: "해당 폴더의 서버로 전환할 때 해당 폴더를 강제로 엽니다."
                 },
+                enableNestedFolders: {
+                    label: "중첩 폴더 활성화",
+                    description: "드래그하여 다른 폴더 안에 폴더를 중첩할 수 있도록 허용"
+                },
                 keepIcons: {
                     label: "아이콘 유지",
                     description: "BetterFolders 사이드바에 기본 길드 바 폴더가 열리면 길드 아이콘이 계속 표시됩니다."
@@ -1518,6 +1550,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             render: {
                 tip: "이 초대는 {{time}}에 만료됩니다.",
                 header: "{{name}}님이 귀하를 {{server}}에 초대했습니다.",
+                headerSelf: "{{server}}에 참가할 수 있는 초대를 보냈습니다",
                 never: "만료되지 않음"
             }
         },
@@ -1541,7 +1574,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterRoleContext: {
             name: "BetterRoleContext",
-            description: "사용자 프로필에서 역할을 마우스 오른쪽 버튼으로 클릭하면 역할 색상 복사 / 역할 편집 / 역할 아이콘 보기 옵션이 추가되었습니다.",
+            description: "사용자 프로필이나 멤버 목록에서 역할을 우클릭할 때 역할 색상 복사 / 역할 편집 / 역할 아이콘 보기 옵션을 추가합니다",
             option: {
                 roleIconFileFormat: {
                     label: "역할 아이콘 파일 형식",
@@ -1551,7 +1584,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 copyColor: "역할 색상 복사",
                 editRole: "역할 편집",
-                viewIcon: "역할 아이콘 보기"
+                viewIcon: "역할 아이콘 보기",
+                viewMembers: "역할 멤버 보기"
+            },
+            text: {
+                roleActions: "역할 작업"
             }
         },
         betterRoleDot: {
@@ -1627,6 +1664,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         blockKeywords: {
             name: "BlockKeywords",
             description: "특정 사용자 정의 키워드가 포함된 메시지를 보낸 사용자가 차단된 것처럼 차단합니다.",
+            regexHelper: {
+                title: "정규식 도우미",
+                placeholder: "테스트할 입력...",
+                noPatterns: "설정된 패턴이 없습니다"
+            },
             option: {
                 blockedWords: {
                     label: "차단된 단어",
@@ -1635,6 +1677,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 useRegex: {
                     label: "정규식 사용",
                     description: "메시지 내용을 확인할 때 각 값을 정규식으로 사용(고급)"
+                },
+                regexHelper: {
+                    label: "정규식 도우미",
+                    description: "샘플 입력으로 정규식을 테스트합니다"
                 },
                 caseSensitive: {
                     label: "대소문자 구분",
@@ -1778,6 +1824,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 loading: "로드 중...",
                 save: "구하다",
                 edit: "편집하다"
+            },
+            text: {
+                unknownUser: "알 수 없는 사용자"
             }
         },
         callTimer: {
@@ -2067,12 +2116,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 plusPulse: "플러스 버튼 펄스",
                 mentionGlow: "멘션 배지 글로우",
                 compactExpand: "컴팩트 모드 확장",
-                selectedBorder: "선택한 탭 파란색 테두리",
+                selectedBorder: "선택한 탭 강조 테두리",
                 selectedBackground: "선택한 탭 배경색",
                 tabShadows: "탭 그림자 효과",
                 tabRepositioning: "탭 위치 변경(부드러운 위치 변경)",
                 resizeHandle: "크기 조정 핸들 페이드",
-                questActivate: "활성 퀘스트 그라데이션"
+                questActivate: "진행 중인 퀘스트 그라데이션"
             },
             bookmark: {
                 label: "서표",
@@ -2110,7 +2159,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 tab: "ChannelTabs 탭 상황에 맞는 메뉴",
                 compact: "콤팩트",
                 bookmarkBar: "북마크바",
-                openAll: "북마크에서 모두 열기",
+                openAll: "모든 북마크 열기",
                 openNew: "새 탭에서 열기",
                 folderMenu: "북마크 폴더 메뉴",
                 close: {
@@ -2190,6 +2239,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 tabWidthScale: {
                     label: "탭 너비 스케일",
                     description: "탭 너비 배율(백분율) - 탭 가장자리를 드래그하여 조정 가능"
+                },
+                tabHeightScale: {
+                    label: "탭 높이 배율",
+                    description: "탭 높이 배율 (백분율)."
                 },
                 renderAllTabs: {
                     label: "모든 탭 렌더링",
@@ -2398,11 +2451,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     restore: "탭을 복원하지 못했습니다.",
                     saved: "저장된 탭을 로드하지 못했습니다."
                 }
+            },
+            text: {
+                folder: "폴더"
             }
         },
         characterCounter: {
             name: "CharacterCounter",
-            description: "메시지 상자에 문자 카운터를 표시합니다.",
+            description: "채팅 입력란에 글자 수 카운터를 추가합니다",
             option: {
                 colorEffects: {
                     label: "색상 효과",
@@ -2416,7 +2472,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         cleanChannelName: {
             name: "CleanChannelName",
-            description: "채널 이름에서 모든 이모티콘과 장식을 제거하세요."
+            description: "채널 이름에서 이모지와 장식을 제거합니다. 채널을 편집하는 동안에는 원래 이름으로 돌아갑니다.",
+            option: {
+                ignoredChannels: {
+                    description: "변경하지 않을 채널 ID의 쉼표로 구분된 목록입니다.",
+                    label: "무시할 채널"
+                }
+            },
+            text: {
+                keepOriginalName: "원래 이름 유지"
+            }
         },
         clearURLs: {
             name: "ClearURLs",
@@ -2428,7 +2493,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 loading: "회원 로드 중...",
                 noMembers: "회원을 찾을 수 없습니다.",
-                unknown: "알 수 없는 역할"
+                unknown: "알 수 없는 역할",
+                andMore: "외 {{count}}명"
             }
         },
         clientSideBlock: {
@@ -2494,6 +2560,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     disable: "Nitro 테마 비활성화",
                     reset: "테마 색상 재설정"
                 }
+            },
+            text: {
+                dark: "다크",
+                light: "라이트"
             }
         },
         clipsEnhancements: {
@@ -2508,22 +2578,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     only: "활동 시작 또는 종료 이름이 일치하는 경우에만",
                     never: "절대"
                 },
-                enableScreenshotKeybind: {
-                    label: "스크린샷 키 바인딩 활성화",
-                    description: "스크린샷 키 바인딩 기능을 활성화하세요"
-                },
-                enableVoiceOnlyClips: {
-                    label: "음성 전용 클립 활성화",
-                    description: "음성 전용 클립 활성화(비디오 없이 오디오)"
-                },
-                enableAdvancedSignals: {
-                    label: "고급 신호 활성화",
-                    description: "고급 클립 신호 활성화(자동 클립 트리거)"
-                },
-                ignorePlatformRestriction: {
-                    label: "플랫폼 제한 무시",
-                    description: "플랫폼 제한 클리핑 허용(저장 오류가 발생할 수 있음)"
-                },
                 clipsLink: {
                     label: "클립 링크",
                     link: "Clips 설정에서 FPS 및 지속 시간 옵션을 변경하세요!"
@@ -2536,7 +2590,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         commandPalette: {
             name: "CommandPalette",
-            description: "키보드를 사용하여 UI를 탐색할 수 있습니다.",
+            description: "Discord 어디서나 작업을 실행하는 Raycast 스타일 명령 팔레트",
             action: {
                 command: {
                     label: "명령 실행",
@@ -2990,7 +3044,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                             label: "{{pluginName}} 실행 실패: {{actionLabel}}."
                         }
                     }
-                }
+                },
+                commandDeleted: "명령이 삭제되었습니다.",
+                statusSetToLabel: "상태가 {{label}}(으)로 설정되었습니다.",
+                themeSetToLabel: "테마가 {{label}}(으)로 설정되었습니다.",
+                noSettingsPageWas: "설정 페이지가 지정되지 않았습니다.",
+                unableToOpenLabel: "{{label_that_settings_page}}을(를) 열 수 없습니다.",
+                failedToStartDependencies: "종속성을 시작하지 못했습니다: {{join}}",
+                messageSentToUsername: "{{username}}님에게 메시지를 보냈습니다.",
+                enabledRestart: "{{name}}을(를) 활성화했습니다. 적용하려면 다시 시작하세요.",
+                disabledRestart: "{{name}}을(를) 비활성화했습니다. 적용하려면 다시 시작하세요.",
+                enabled: "{{name}}을(를) 활성화했습니다.",
+                disabled: "{{name}}을(를) 비활성화했습니다.",
+                errorStarting: "{{name}}을(를) 시작하는 중 오류가 발생했습니다.",
+                errorStopping: "{{name}}을(를) 중지하는 중 오류가 발생했습니다."
             },
             display: {
                 channel: {
@@ -3026,6 +3093,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 customCommands: {
                     label: "사용자 정의 명령",
                     description: "사용자 정의 명령 팔레트 항목 관리"
+                },
+                closeAfterExecute: {
+                    description: "명령을 실행한 후 팔레트를 닫습니다.",
+                    label: "실행 후 닫기"
                 }
             },
             template: {
@@ -3045,7 +3116,121 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "매크로",
                     description: "일련의 명령 실행"
                 }
-            }
+            },
+            text: {
+                insertTextInChat: "채팅에 텍스트 삽입",
+                name: "Name",
+                commandName: "명령 이름",
+                settingsPage: "설정 페이지",
+                searchSettingsPages: "설정 페이지 검색...",
+                text: "텍스트",
+                textToInsertInto: "채팅 입력창에 삽입할 텍스트",
+                editCommand: "명령 편집",
+                deleteCommand: "명령 삭제",
+                createCustomCommand: "사용자 지정 명령 만들기",
+                light: "라이트",
+                ash: "애쉬",
+                dark: "다크",
+                onyx: "오닉스",
+                toggleMute: "음소거 전환",
+                toggleDeafen: "헤드셋 음소거 전환",
+                setStatus: "상태 설정",
+                searchStatuses: "상태 검색...",
+                setLabel: "{{label}} 설정",
+                toggleTheme: "테마 전환",
+                openServer: "서버 열기",
+                openChannel: "채널 열기",
+                openDm: "DM 열기",
+                goHome: "홈으로 이동",
+                goToServer: "서버로 이동",
+                searchServers: "서버 검색...",
+                goToChannel: "채널로 이동",
+                searchChannels: "채널 검색...",
+                searchFriends: "친구 검색...",
+                myAccount: "내 계정",
+                profiles: "프로필",
+                dataPrivacy: "데이터 및 개인정보",
+                devices: "기기",
+                connections: "연결",
+                appearance: "디스플레이",
+                accessibility: "접근성",
+                voiceVideo: "음성 및 비디오",
+                chat: "채팅",
+                textImages: "텍스트 및 이미지",
+                notifications: "알림",
+                keybinds: "단축키",
+                authorizedApps: "승인된 앱",
+                familyCenter: "가족 센터",
+                advanced: "고급",
+                plexcord: "Plexcord",
+                plexcordPlugins: "Plexcord 플러그인",
+                plexcordThemes: "Plexcord 테마",
+                plexcordUpdater: "Plexcord 업데이터",
+                plexcordChangelog: "Plexcord 변경 로그",
+                openQuickcss: "QuickCSS 열기",
+                openUpdater: "업데이터 열기",
+                openChangelog: "변경 로그 열기",
+                restartDiscord: "Discord 다시 시작",
+                managePlugins: "플러그인 관리",
+                searchPlugins: "플러그인 검색...",
+                sendDm: "DM 보내기",
+                recipient: "받는 사람",
+                message: "메시지",
+                messageContent: "메시지 내용",
+                openPaletteHotkey: "팔레트 열기 단축키",
+                actions: "작업",
+                preview: "미리 보기",
+                openCommand: "명령 열기",
+                copyAnswer: "답 복사",
+                openDetails: "세부 정보 열기",
+                calculator: "계산기",
+                expression: "식",
+                result: "결과",
+                copyExpression: "식 복사",
+                pinned: "고정됨",
+                suggestions: "제안",
+                setAlias: "별칭 설정",
+                aliasForLabel: "{{label}}의 별칭",
+                leaveEmptyToRemove: "비워 두면 제거됩니다",
+                command: "명령",
+                noResults: "결과 없음",
+                addFile: "파일 추가",
+                saveCommand: "명령어 저장",
+                createCommand: "명령어 만들기",
+                nameRequired: "이름은 필수입니다.",
+                enterValidUrl: "올바른 URL을 입력하세요.",
+                pickSettingsPage: "제안 목록에서 설정 페이지를 선택하세요.",
+                textRequired: "텍스트는 필수입니다.",
+                commandSaved: "명령어를 저장했습니다.",
+                commandCreated: "명령어를 만들었습니다.",
+                editCustomCommand: "사용자 지정 명령어 편집",
+                disablePlugin: "플러그인 비활성화",
+                enablePlugin: "플러그인 활성화",
+                pickRecipient: "제안 목록에서 받는 사람을 선택하세요.",
+                addMessageOrFile: "메시지나 파일을 추가하세요.",
+                pressKeys: "키를 누르세요...",
+                answerCopied: "답을 클립보드에 복사했습니다.",
+                calculationCopied: "계산식을 클립보드에 복사했습니다.",
+                unpinCommand: "명령어 고정 해제",
+                pinCommand: "명령어 고정",
+                saveAlias: "별칭 저장",
+                changeHotkey: "단축키 변경",
+                recordHotkey: "단축키 기록",
+                pressKeyCombo: "키 조합을 누르세요. Backspace로 지우기, Esc로 취소",
+                searchIn: "{{title}} 검색...",
+                searchCommands: "명령어 검색...",
+                somethingWentWrong: "문제가 발생했습니다.",
+                remove: "제거",
+                enabled: "활성화됨",
+                disabled: "비활성화됨",
+                sectionNavigation: "탐색",
+                sectionCustom: "사용자 지정",
+                sectionPlugins: "플러그인",
+                sectionMessaging: "메시지",
+                current: "현재",
+                submit: "제출"
+            },
+            description2: "Discord 어디서나 작업을 실행하는 Raycast 스타일 명령 팔레트"
         },
         consoleJanitor: {
             name: "ConsoleJanitor",
@@ -3115,11 +3300,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         copyProfileColors: {
             name: "CopyProfileColors",
             description: "사람들의 프로필 그라데이션 색상을 클립보드에 복사하는 플러그인입니다.",
-            copy: "프로필 색상 복사",
+            copy: "서버 프로필 색상 복사",
             toast: {
                 noColor: "프로필 색상을 찾을 수 없습니다!",
                 copied: "프로필 색상이 클립보드에 복사되었습니다!",
                 error: "프로필 색상을 복사하는 중 오류가 발생했습니다!"
+            },
+            text: {
+                formatted: "기본 색상 #{{primary}}, 보조 색상 #{{secondary}}"
             }
         },
         copyStatusUrls: {
@@ -3134,8 +3322,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "CopyStickerLinks",
             description: "스티커 링크를 복사하고 여는 기능을 추가합니다.",
             context: {
-                copy: "링크 복사",
-                open: "링크 열기"
+                copy: "스티커 링크 복사",
+                open: "스티커 링크 열기"
             },
             toast: {
                 success: "링크가 복사되었습니다!"
@@ -3271,6 +3459,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unset: "설정되지 않음",
                 set: "새 아이콘 설정",
                 hover: "새로 고치려면 설정 후 폴더 위로 마우스를 가져가야 할 수도 있습니다."
+            },
+            context: {
+                changeIcon: "아이콘 변경"
             }
         },
         customIdle: {
@@ -3302,7 +3493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             error: {
                 appIdInvalid: "앱 ID는 유효한 숫자여야 합니다.",
                 notice: "알아채다",
-                sharing: "활동 공유가 활성화되어 있지 않으면 사람들이 귀하의 사용자 정의 리치 프레즌스를 볼 수 없습니다!",
+                sharing: "활동 공유가 꺼져 있어 다른 사람이 사용자 지정 Rich Presence를 볼 수 없습니다!",
                 enable: "할 수 있게 하다",
                 validStream: "스트리밍 링크는 유효한 URL이어야 합니다.",
                 mustBeURL: "유효한 URL이어야 합니다.",
@@ -3418,7 +3609,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 buttonTwoURL: {
                     label: "버튼 2 URL",
                     description: "버튼 2 URL"
+                },
+                enablePresence: {
+                    description: "상태를 표시할지 여부",
+                    label: "상태 활성화"
                 }
+            },
+            toast: {
+                savedPresetName: "프리셋 {{name}}을(를) 저장했습니다.",
+                loadedPresetName: "프리셋 {{name}}을(를) 불러왔습니다.",
+                deletedPresetSelectedpreset: "프리셋 {{selectedPreset}}을(를) 삭제했습니다."
+            },
+            text: {
+                presetName: "프리셋 이름",
+                selectAPreset: "프리셋 선택",
+                streamLinkTwitchOr: "방송 링크 (Twitch 또는 YouTube, 활동 유형이 방송 중일 때만)",
+                presets: "프리셋",
+                save: "저장",
+                load: "불러오기",
+                delete: "삭제",
+                noSavedPresetsYet: "저장된 프리셋이 아직 없습니다.",
+                showCustomRpc: "사용자 지정 RPC 표시",
+                customRpcDisabled: "사용자 지정 RPC 꺼짐",
+                theEnablePresenceSetting: "\"상태 활성화\" 설정이 꺼져 있어 상태가 표시되지 않습니다. 의도한 것이 아니라면 아래에서 켜세요.",
+                activitySharingDisabled: "활동 공유 꺼짐",
+                discordDeveloperPortal: "Discord 개발자 포털",
+                imgur: "Imgur",
+                enableActivitySharing: "활동 공유 켜기"
             }
         },
         customSounds: {
@@ -3460,7 +3677,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 default: "기본",
                 custom: "관습",
-                select: "파일을 선택하세요..."
+                select: "파일을 선택하세요...",
+                overrides: {
+                    label: "재정의"
+                },
+                soundpack: {
+                    label: "사운드팩",
+                    description: "Discord에서 설정한 사운드팩 대신 사용할 사운드팩입니다.",
+                    default: "Discord 기본값"
+                }
             },
             type: {
                 activityEnd: "활동 종료",
@@ -3534,6 +3759,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 calendar: "다음과 같은 동적 날짜 형식을 지원합니다.",
                 today: "오늘",
                 yesterday: "어제",
+                or: "또는",
                 relative: "다음과 같은 시간을 제공합니다",
                 relativeTime: "4시간 전",
                 preview: "시사",
@@ -3627,6 +3853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 dearrowed: "이 삽입은 DeArrowed되었습니다. 복원하려면 클릭하세요.",
                 dearrow: "화살표를 해제하려면 클릭하세요"
+            },
+            text: {
+                toggleDearrow: "Dearrow 전환"
             }
         },
         declutter: {
@@ -3635,6 +3864,12 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 userProfileHeader: {
                     label: "사용자 프로필"
+                },
+                removeAvatarDecoration: {
+                    label: "아바타 장식 제거",
+                    description: "아바타 꾸미기를 제거합니다. Decor가 켜져 있으면 비활성화됩니다.",
+                    alertBody: "Decor 플러그인과의 충돌을 방지하기 위해 아바타 장식 제거 기능이 비활성화되었습니다.",
+                    ok: "확인"
                 },
                 removeNameplate: {
                     label: "명판 제거",
@@ -3657,7 +3892,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Discord에는 이미 접근성 설정에 사용자 이름 스타일 옵션이 내장되어 있습니다."
                 },
                 friendsListHeader: {
-                    label: "Above Friends/DMs List"
+                    label: "친구/DM 목록 위"
                 },
                 removeShopAboveDM: {
                     label: "DM 위의 상점 제거",
@@ -3693,7 +3928,27 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeButtonTooltips: {
                     label: "버튼 툴팁 제거",
                     description: "버튼 툴팁을 제거합니다."
+                },
+                removeProfileFrame: {
+                    description: "프로필 프레임을 제거합니다.",
+                    label: "프로필 프레임 제거"
+                },
+                removeDisplayNameStyles: {
+                    description: "멤버 목록에서 애니메이션/스타일이 적용된 표시 이름을 제거합니다.",
+                    label: "표시 이름 스타일 제거"
+                },
+                removeLibraryAboveDms: {
+                    description: "DM 목록 위의 라이브러리를 제거합니다.",
+                    label: "DM 위 라이브러리 제거"
+                },
+                removeFamilyCenterAboveDms: {
+                    description: "DM 목록 위의 가족 센터를 제거합니다.",
+                    label: "DM 위 가족 센터 제거"
                 }
+            },
+            text: {
+                discordAlreadyHasA: "Discord에는 이미 사용자 이름 스타일 옵션이 기본으로 있습니다:",
+                accessibilitySettings: "접근성 설정."
             }
         },
         decodeBase64: {
@@ -3800,6 +4055,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hold: "기다리다",
                 suspended: "장식을 제출하면 {{guidelines}}에 동의하게 됩니다. 이 지침을 읽지 않으면 계정이 정지되어 향후 더 많은 장식을 만들 수 없게 될 수 있습니다.",
                 guidelines: "지침"
+            },
+            toast: {
+                failedToAuthorizeMessage: "인증에 실패했습니다: {{message}}"
+            },
+            text: {
+                removeDecoration: "Decor 꾸미기 제거",
+                decoration: "Decor 꾸미기",
+                none: "없음",
+                decorationFile: "꾸미기 파일"
             }
         },
         demonstration: {
@@ -3861,6 +4125,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                 starting: "플러그인을 시작하는 중 오류가 발생했습니다 {{plugin}}",
                 noMessage: "오류 메시지 없음",
                 noReason: "이유가 제공되지 않음"
+            },
+            text: {
+                reconnect: "다시 연결",
+                loadingLazyModules: "지연 모듈을 불러오는 중입니다. 재시작하면 오류가 발생할 수 있습니다",
+                loadedLazyModules: "모든 지연 모듈을 불러왔습니다",
+                failedLazyModules: "지연 모듈을 불러오지 못했습니다. 콘솔을 확인하세요",
+                ok: "확인"
             }
         },
         disableCallIdle: {
@@ -3919,6 +4190,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "기타 변수",
                     newline: "개행 문자"
                 }
+            },
+            text: {
+                notSupported: "지원되지 않음",
+                devBuild: "개발 빌드",
+                standalone: "독립 실행형"
             }
         },
         dontFilterMe: {
@@ -3935,6 +4211,23 @@ const translations: MatchStructure<typeof enTranslations> = {
         dontRoundMyTimestamps: {
             name: "DontRoundMyTimestamps",
             description: "항상 상대 타임스탬프를 내림하므로 7.6y는 8y 대신 7y가 됩니다."
+        },
+        downloadAllAttachments: {
+            name: "DownloadAllAttachments",
+            description: "메시지의 모든 첨부 파일을 한 번에 다운로드하는 팝오버 버튼을 추가합니다.",
+            button: "모든 첨부 파일 다운로드",
+            toast: {
+                success: "첨부 파일 {{count}}개를 다운로드했습니다.",
+                partial: "첨부 파일 {{total}}개 중 {{succeeded}}개를 다운로드했습니다. {{failed}}개 실패.",
+                downloadedPluralizeSucceededAttachment: "{{pluralize_succeeded_attachment}}을(를) 다운로드했습니다.",
+                downloadedSucceededOfLength: "첨부 파일 {{length}}개 중 {{succeeded}}개를 다운로드했습니다. {{failed}}개 실패."
+            },
+            option: {
+                downloadAllFileTypes: {
+                    description: "미디어가 아닌 첨부 파일도 다운로드합니다. 받은 파일을 신뢰할 수 있을 때만 켜세요.",
+                    label: "모든 파일 형식 다운로드"
+                }
+            }
         },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
@@ -3999,7 +4292,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     created: "초대장이 생성되었습니다.",
                     unable: "초대장을 만들 수 없습니다.",
                     noChannel: "초대할 수 있는 채널이 없습니다.",
-                }
+                },
+                noReusableInvite: "재사용 가능한 초대가 없습니다.",
+                unableToReuseInvite: "초대를 재사용할 수 없습니다."
             },
             ghost: {
                 user: "사용자",
@@ -4110,6 +4405,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "툴바 개발 메뉴",
                     description: "도움말(?) 툴바 버튼(채팅 오른쪽 상단)을 디스코드 개발자 메뉴로 변경"
                 }
+            },
+            text: {
+                searchExperiments: "실험 검색"
             }
         },
         exportMessages: {
@@ -4193,6 +4491,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportAll: "{{user}}에서 모든 메시지 내보내기",
                 user: "사용자",
                 exportAllChannel: "모든 채널 메시지 내보내기"
+            },
+            text: {
+                unknownError: "알 수 없는 오류"
             }
         },
         expressionCloner: {
@@ -4206,11 +4507,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 success: "{{name}}을(를) {{guild}}에 성공적으로 복제했습니다!",
                 yourServer: "귀하의 서버",
                 failed: "복제 실패:",
-                console: "문제가 발생했습니다(콘솔을 확인하세요!)"
+                console: "문제가 발생했습니다(콘솔을 확인하세요!)",
+                successfullyClonedNameTo: "{{name}}을(를) {{name_your_server}}(으)로 복제했습니다!"
             },
             context: {
                 clone: "{{type}} 복제",
                 cloneName: "{{data}} 복제"
+            },
+            text: {
+                yourServer: "내 서버",
+                cloneTo: "{{name}}(으)로 복제",
+                emoji: "이모지",
+                sticker: "스티커"
             }
         },
         f8break: {
@@ -4413,36 +4721,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removed: "제거된 별칭: {{alias}}",
                 failedRemove: "별칭을 제거하지 못했습니다.",
                 duplicate: "중복된 별칭",
-                failedSave: "별칭을 저장하지 못했습니다."
+                failedSave: "별칭을 저장하지 못했습니다.",
+                removedAliasAlias: "별칭 :{{alias}}:을(를) 제거했습니다",
+                aliasSetForGetemojidisplayname: "{{getEmojiDisplayName_ref}}의 별칭을 설정했습니다."
             },
             button: {
                 edit: "별칭 수정",
                 set: "별칭 설정"
+            },
+            text: {
+                remove: "제거",
+                noAliasesSetYet: "아직 설정된 별칭이 없습니다.",
+                aliasRequired: "별칭은 필수입니다.",
+                aliasInvalid: "별칭은 2~32자이며 소문자, 숫자, 밑줄만 사용할 수 있습니다."
             }
         },
-        favoriteGifSearch: {
-            name: "FavouriteGifSearch",
-            description: "즐겨찾는 GIF에 검색창을 추가합니다.",
-            placeholder: "좋아하는 GIF 검색",
-            option: {
-                searchOption: {
-                    label: "검색 옵션",
-                    description: "검색하려는 URL 부분",
-                    url: "전체 URL",
-                    path: "경로만(/somegif.gif)",
-                    hostandpath: "호스트 및 경로(tenor.com somgif.gif)"
-                }
-            }
-        },
-        favouriteAnything: {
-            name: "FavouriteAnything",
+        favoriteAnything: {
+            name: "FavoriteAnything",
             description: "어떤 이미지든 즐겨찾기에 추가",
             noFiles: "검색과 일치하는 파일이 없습니다.",
             searchPlaceholder: "파일 검색",
             media: "미디어",
             demoText: "별을 클릭하여 파일을 즐겨찾기에 추가하세요.\n즐겨찾기한 파일이 여기에 표시됩니다!",
             fetchError: "{filename}을(를) 가져올 수 없습니다",
-            uploadError: "{filename}을(를) 업로드할 수 없습니다"
+            uploadError: "{filename}을(를) 업로드할 수 없습니다",
+            text: {
+                clickTheStarTo: "별을 클릭하면 파일을 즐겨찾기에 추가합니다.",
+                favoriteFilesWillShow: "즐겨찾기한 파일이 여기에 표시됩니다!"
+            },
+            option: {
+                localThumbnails: {
+                    description: "외부 서비스(placeholder.nin0.dev) 대신 로컬에서 파일 썸네일을 생성합니다. 모바일과 호환되지 않습니다. 이 옵션을 바꿔도 기존 즐겨찾기에는 영향을 주지 않습니다.",
+                    label: "로컬 썸네일"
+                }
+            }
         },
         fileDownloadButton: {
             name: "FileDownloadButton",
@@ -4457,7 +4769,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 navigate: "답글 사이를 이동하려면 하단 패널을 사용하세요.",
                 container: "컨테이너 요소를 찾을 수 없습니다.",
-                couldntFind: "답변 메시지를 찾을 수 없습니다."
+                couldntFind: "답장을 찾을 수 없습니다."
             },
             option: {
                 includePings: {
@@ -4545,6 +4857,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 channelFull: {
                     label: "채널이 가득 참",
                     description: "채널이 더 이상 꽉 차 있지 않으면 채널로 이동을 시도합니다."
+                },
+                onlyWhenInVoice: {
+                    label: "음성 중일 때만",
+                    description: "음성 채널에 있을 때만 사용자를 따라갑니다"
                 }
             },
             toast: {
@@ -4589,25 +4905,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     previewText: "날렵한 갈색여우는 게으른 개를 뛰어넘는다",
                     authors: "작성자: {{authors}}"
                 }
+            },
+            text: {
+                currentFont: "현재 글꼴:",
+                resetFont: "글꼴 재설정"
             }
         },
         forceOwnerCrown: {
             name: "ForceOwnerCrown",
             description: "서버 규모가 큰 경우에도 사용자 이름 옆에 소유자 왕관을 강제 적용합니다."
-        },
-        forwardAnywhere: {
-            name: "ForwardAnywhere",
-            description: "전달이 실패하면 일반 메시지로 보냅니다. NSFW 전달도 허용합니다.",
-            option: {
-                forwardPreface: {
-                    label: "앞으로 서문",
-                    description: "전달된 콘텐츠 앞에 무엇을 붙여야 할까요?"
-                }
-            },
-            context: {
-                attachments: "첨부파일",
-                forwarded: "다음에서 전달됨"
-            }
         },
         freaky: {
             name: "Freaky",
@@ -4707,12 +5013,17 @@ const translations: MatchStructure<typeof enTranslations> = {
                     name: "Besties",
                     description: "이걸 어떻게 관리하나요??? (5년)"
                 }
+            },
+            option: {
+                showFriendsInChat: {
+                    description: "친구가 보낸 메시지에 친구 아이콘을 표시합니다.",
+                    label: "채팅에 친구 표시"
+                }
+            },
+            text: {
+                friend: "친구",
+                rankIcon: "등급 아이콘"
             }
-        },
-        friendsSince: {
-            name: "FriendsSince",
-            description: "사용자 팝아웃에 누군가와 언제 친구가 되었는지 표시됩니다.",
-            section: "이후 친구"
         },
         friendTags: {
             name: "FriendTags",
@@ -4748,7 +5059,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
-            description: "게임 활동을 표시하거나 숨기기 위해 사용자 팝아웃에 토글을 추가합니다.",
+            description: "마이크와 헤드셋 음소거 버튼 옆에 게임 활동 전환 버튼을 추가합니다. 우클릭하면 Spotify 활동을 전환합니다.",
             tooltip: "게임 활동 전환",
             gameActivity: {
                 enabled: "게임 활동 활성화됨",
@@ -4765,6 +5076,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     panel: "음소거/청각 장애 옆",
                     toolbox: "Plexcord 도구 상자"
                 }
+            },
+            text: {
+                disableGameActivity: "게임 활동 비활성화",
+                enableGameActivity: "게임 활동 활성화",
+                shareSpotifyActivity: "Spotify 활동 공유",
+                shareSpotifyActivityAccount: "Spotify 활동 공유 ({{name}})"
             }
         },
         ghosted: {
@@ -4912,7 +5229,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "이미지 링크가 클립보드에 복사되었습니다!",
                 urlCopied: "URL이 클립보드에 복사되었습니다!",
                 already: "해당 컬렉션이 이미 존재합니다.",
-                alreadyCollection: "해당 GIF는 이미 해당 컬렉션에 있습니다."
+                alreadyCollection: "이 GIF는 이미 컬렉션에 있습니다",
+                collectionsImportedSuccessfully: "컬렉션을 가져왔습니다.",
+                failedToImportCollections: "컬렉션을 가져오지 못했습니다: {{String_err}}"
             },
             modal: {
                 create: {
@@ -4948,6 +5267,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     remove: "제거하다",
                     cancel: "괜찮아요"
                 }
+            },
+            text: {
+                gifPickerCategoryOptions: "GIF 선택기 카테고리 옵션",
+                gifCollections: "GIF 컬렉션",
+                unknown: "알 수 없음"
             }
         },
         gifPaste: {
@@ -4959,7 +5283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "서버 소유자에게 10분의 1의 확률로 즐겨찾는 GIF를 무작위로 보내는 명령을 추가합니다.",
             command: {
                 gifRoulette: {
-                    description: "운명을 유혹하고 GIF를 보내보세요"
+                    description: "운명을 유혹하고 GIF를 보내보세요",
+                    restricted: "이 명령은 이 서버에서 제한되어 있습니다."
                 }
             },
             option: {
@@ -4994,7 +5319,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 only: "상위 {{length}}/{{total}}만 표시"
             },
             modal: {
-                title: "{{user}}의 GitHub 저장소",
+                title: "{{username}}의 GitHub 저장소",
                 repository: "저장소",
                 description: "설명",
                 language: "언어",
@@ -5101,9 +5426,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         hideMessages: {
             name: "HideMessages",
-            description: "다시 시작할 때까지 메시지를 일시적으로 숨기는 플러그인입니다.",
+            description: "재시작할 때까지 메시지와 DM을 일시적으로 숨깁니다.",
             button: {
-                hide: "숨다"
+                hide: "숨다",
+                hideDm: "DM 숨기기",
+                unhideDm: "DM 숨기기 해제"
+            },
+            toggle: {
+                none: "숨긴 DM 없음",
+                hide: "숨긴 DM 숨기기",
+                show: "숨긴 DM 보기"
             },
             option: {
                 hidePopoverButton: {
@@ -5111,6 +5443,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "메시지 팝오버에서 숨기기 버튼을 숨깁니다."
                 }
             }
+        },
+        hideMutedVoiceIndicator: {
+            name: "HideMutedVoiceIndicator",
+            description: "활성 음성 채널이 모두 음소거된 경우 서버 목록의 음성 표시기를 숨깁니다"
         },
         hideServers: {
             name: "HideServers",
@@ -5231,10 +5567,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 refreshed: "아바타를 새로 고쳤습니다.",
                 deletedAll: "모든 메모를 삭제했습니다.",
                 imported: "메모를 성공적으로 가져왔습니다.",
-                invalid: "메모를 가져오지 못했습니다."
+                invalid: "메모를 가져오지 못했습니다.",
+                invalidJson: "잘못된 JSON"
             },
             toolbox: {
                 action: "노트 열기"
+            },
+            text: {
+                holyNotes: "Holy Notes",
+                noteTag: "메모"
             }
         },
         homeTyping: {
@@ -5342,7 +5683,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 ignoreListening: {
                     label: "듣기 무시",
-                    description: "모든 청취 활동을 무시합니다(보통 Spotify 활동입니다)."
+                    description: "모든 듣는 중 활동을 무시합니다 (대개 Spotify 활동)"
                 },
                 ignoreWatching: {
                     label: "시청 무시",
@@ -5355,6 +5696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoredActivities: {
                     label: "무시된 활동"
                 }
+            },
+            text: {
+                enableActivity: "활동 활성화",
+                disableActivity: "활동 비활성화"
             }
         },
         ignoreCalls: {
@@ -5440,6 +5785,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 sizeHTML: "크기",
                 dimensions: "치수",
                 filename: "파일 이름"
+            },
+            text: {
+                bytes: "바이트"
             }
         },
         imgToGif: {
@@ -5558,6 +5906,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toast: "즉시 화면 공유 {{state}}",
                 enabled: "활성화됨",
                 disabled: "장애가 있는"
+            },
+            toast: {
+                instantScreenshareDisabled: "즉시 화면 공유 {{disabled}}"
+            },
+            text: {
+                instantScreenshare: "Instant Screenshare"
             }
         },
         invisibleChat: {
@@ -5680,6 +6034,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     resetData: "스토리지 재설정",
                     sure: "확실합니까?"
                 }
+            },
+            text: {
+                serverOptions: "서버 옵션",
+                copyServerId: "서버 ID 복사",
+                serverIdCopied: "서버 ID를 클립보드에 복사했습니다"
             }
         },
         jumpTo: {
@@ -5746,6 +6105,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "키워드",
                     description: "키워드 관리"
                 }
+            },
+            text: {
+                keywordEntryI1: "키워드 항목 {{i_1}}",
+                listPriorityAdvanced: "목록 우선순위 (고급)",
+                whichListToPrioritize: "메시지가 두 목록에 모두 해당할 때 우선할 목록",
+                ifYouAreNot: "잘 모르겠다면 대부분의 일반적인 경우 블랙리스트로 설정합니다"
             }
         },
         lastOnline: {
@@ -5819,10 +6184,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     listenbrainzLogo: "큰 ListenBrainz 로고 사용",
                     generic: "일반 자리 표시자 사용"
                 },
+                showAlbumCover: {
+                    label: "앨범 커버 표시",
+                    description: "앨범 커버를 표시합니다. 이 옵션을 비활성화하면 대체 이미지가 표시됩니다. 음악 커버가 부적절한 경우 유용합니다"
+                },
                 useLogo: {
                     label: "로고 사용",
                     description: "앨범 아트에 ListenBrainz 로고 표시"
                 }
+            },
+            button: {
+                profile: "ListenBrainz 프로필",
+                viewSong: "곡 보기"
             }
         },
         loadingQuotes: {
@@ -5849,6 +6222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "추가 인용 구분 기호",
                     description: "추가 견적을 위한 구분 기호"
                 }
+            },
+            text: {
+                allQuotesDisabled: "정말 로딩 문구를 전부 꺼버린 거야? 이런 바보 같으니…"
             }
         },
         loginWithQR: {
@@ -5867,7 +6243,26 @@ const translations: MatchStructure<typeof enTranslations> = {
             stopScanning: "스캔 중지",
             usingWebcam: "웹캠을 사용하여 스캔",
             dragDrop: "여기에 이미지를 드래그 앤 드롭하거나 클릭하여 이미지를 선택하세요.",
-            orPaste: "아니면 클립보드에서 이미지를 붙여넣으세요!"
+            orPaste: "아니면 클립보드에서 이미지를 붙여넣으세요!",
+            verifyLogin: "로그인 확인",
+            text: {
+                scanQrCode: "QR 코드 스캔"
+            }
+        },
+        markdownTables: {
+            name: "MarkdownTables",
+            description: "Discord 메시지에서 GitHub 스타일 마크다운 표를 렌더링합니다.",
+            toolbar: {
+                label: "마크다운 표 보기",
+                table: "표",
+                raw: "원본"
+            },
+            option: {
+                hideToggle: {
+                    label: "전환 숨기기",
+                    description: "표/원본 전환을 숨기고 항상 렌더링된 표를 표시합니다."
+                }
+            }
         },
         mediaPlaybackSpeed: {
             name: "MediaPlaybackSpeed",
@@ -5893,7 +6288,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         memberCount: {
             name: "MemberCount",
-            description: "온라인 회원 수, 총 회원 수, 서버 음성 채널 사용자 수를 회원 목록 및 도구 설명에 표시합니다.",
+            description: "서버의 온라인 멤버 수, 전체 멤버 수, 음성 채널 사용자 수를 멤버 목록과 툴팁에 표시합니다.",
             option: {
                 toolTip: {
                     label: "툴팁",
@@ -5910,7 +6305,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             onlineThisChannel: "{{formattedOnlineCount}} 이 채널에서 온라인으로",
             totalMembers: "{{formattedTotalCount}} 총 서버 구성원",
-            totalVoice: "{{formattedVoiceCount}} 멤버의 목소리"
+            totalVoice: "{{formattedVoiceCount}} 멤버의 목소리",
+            tooltip: {
+                total: "서버 전체 멤버 {{count}}명"
+            }
         },
         mentionAvatars: {
             name: "MentionAvatars",
@@ -6057,7 +6455,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                 messageContent: "메시지 내용이 복사되었습니다!",
                 userId: "사용자 ID가 복사되었습니다!"
             },
-            linkCopied: "링크가 복사되었습니다!"
+            linkCopied: "링크가 복사되었습니다!",
+            text: {
+                shift: "Shift",
+                ctrl: "Ctrl",
+                alt: "Alt",
+                backspace: "Backspace",
+                pickEmoji: "이모지 선택"
+            },
+            emojiSetting: {
+                pick: "이모지 선택",
+                selectMain: "반응에 사용할 이모지 선택",
+                selectAdditional: "추가 이모지 선택",
+                additionalPlaceholder: "쉼표/줄 바꿈으로 구분, 최대 {{max}}개"
+            },
+            toast: {
+                cannotReact: "반응할 수 없음: 권한 부족",
+                linkCopied: "링크를 복사했습니다!"
+            }
         },
         messageColors: {
             name: "MessageColors",
@@ -6212,7 +6627,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         messageLogger: {
             name: "MessageLogger",
             description: "삭제 및 편집된 메시지를 일시적으로 기록합니다.",
-            removeMessage: "메시지 기록 제거",
+            removeMessage: "메시지 기록 지우기",
             removeMessageTemporary: "메시지 제거(임시)",
             clearMessageLog: "메시지 로그 지우기",
             showDiff: "차이 표시",
@@ -6276,7 +6691,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                 separatedDiffs: {
                     label: "분리된 차이점",
                     description: "더 읽기 쉬운 차등을 위해 diff에서 별도의 추가 및 제거"
+                },
+                logDeletedAttachments: {
+                    description: "삭제된 첨부 파일을 기록할지 여부",
+                    label: "삭제된 첨부 파일 기록"
                 }
+            },
+            text: {
+                clearHistory: "기록 지우기",
+                toggleDeletedHighlight: "삭제됨 강조 전환",
+                enableDiffView: "차이점 보기 활성화",
+                disableDiffView: "차이점 보기 비활성화",
+                noDeletedMessages: "삭제된 메시지 없음",
+                deletedMessageSuffix: " 개의 삭제된 메시지",
+                deletedMessagesSuffix: " 개의 삭제된 메시지"
             }
         },
         messageLoggerEnhanced: {
@@ -6478,11 +6906,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 whitelistedIds: {
                     label: "허용된 ID",
-                    description: "화이트리스트에 있는 서버, 채널 또는 사용자 ID."
+                    description: "메시지 기록에 항상 표시할 서버, 채널 또는 사용자 ID입니다."
                 },
                 blacklistedIds: {
                     label: "블랙리스트에 등록된 ID",
-                    description: "블랙리스트에 있는 서버, 채널 또는 사용자 ID."
+                    description: "메시지 기록에 절대 표시하지 않을 서버, 채널 또는 사용자 ID입니다."
                 },
                 imageCacheDir: {
                     label: "이미지 캐시 디렉토리",
@@ -6520,6 +6948,25 @@ const translations: MatchStructure<typeof enTranslations> = {
                     confirmText: "분명한",
                     cancel: "취소"
                 }
+            },
+            toast: {
+                clearedLogs: "로그를 지웠습니다",
+                failedToClearLogs: "로그를 지우지 못했습니다",
+                failedToRemoveMessage: "메시지를 제거하지 못했습니다. 자세한 내용은 콘솔을 확인하세요.",
+                noMessagesFoundIn: "로그 파일에서 메시지를 찾을 수 없습니다",
+                successfullyImportedCountLogs: "로그 {{count}}개를 가져왔습니다",
+                successfullyExportedLogs: "로그를 내보냈습니다",
+                successfullyExportedCountLogs: "로그 {{count}}개를 내보냈습니다",
+                errorExportingLogsCheck: "로그를 내보내는 중 오류가 발생했습니다. 자세한 내용은 콘솔을 확인하세요"
+            },
+            text: {
+                jsonFile: "JSON 파일",
+                clearLogs: "기록 지우기",
+                clearingLogs: "기록 지우는 중...",
+                messageLogger: "Message Logger",
+                importLogs: "기록 가져오기",
+                logs: "기록",
+                loadingTabLogs: "{{tab}} 로그 불러오는 중..."
             }
         },
         messageNotifier: {
@@ -6877,7 +7324,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Tidal의 가사 표시"
                 },
                 websocketURL: {
-                    label: "Websocket URL",
+                    label: "WebSocket URL",
                     description: "기본값은 ws://localhost:24123입니다"
                 },
                 YtmSectionTitle: {
@@ -6913,13 +7360,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     LRCLIB: "LRCLIB"
                 },
                 spotifyLyricsApiUrl: {
-                    label: "Spotify 가사 API URL",
-                    description: "Spotify 가사 API 기본 URL입니다."
+                    label: "Spotify 가사 API 기본 URL",
+                    description: "사용자 지정 인스턴스 기본 URL (예: http://localhost:8080)."
                 },
                 translateTo: {
                     label: "번역 대상",
                     description: "가사 번역 - 이를 변경하면 기존 번역이 삭제됩니다.",
-                    cleared: "번역이 삭제됨"
+                    cleared: "번역을 지웠습니다"
                 },
                 lyricsConversion: {
                     label: "가사 변환",
@@ -6941,6 +7388,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "캐시된 가사 및 번역 모두 지우기",
                     button: "캐시 제거",
                     cacheLyricsPurged: "가사 캐시가 삭제되었습니다."
+                },
+                lyricDelay: {
+                    label: "가사 지연"
                 }
             },
             context: {
@@ -7025,6 +7475,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 failed: "모달을 렌더링하지 못했습니다 :(",
                 checkConsole: "콘솔에서 오류를 확인하세요.",
                 invalidUrlCustomApi: "사용자 정의 API 서버 URL의 URL 형식이 잘못되었습니다."
+            },
+            text: {
+                unknownArtist: "알 수 없는 아티스트",
+                unknownTitle: "알 수 없는 제목"
             }
         },
         mutualGroupDMs: {
@@ -7045,7 +7499,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "NewGuildSettings",
             description: "가입 시 자동으로 새 서버를 음소거하고 기타 다양한 설정을 변경합니다.",
             context: {
-                apply: "새로운 길드 설정 적용"
+                apply: "폴더에 NewGuildSettings 적용"
             },
             option: {
                 guild: {
@@ -7100,7 +7554,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 dontShowAgain: "다시 표시하지 않음",
                 restartRequired: "변경 사항을 적용하려면 다시 시작해야 함",
                 restart: "다시 시작",
-                continue: "계속하다"
+                continue: "계속하다",
+                supportUs: "Plexcord는 오픈 소스 소프트웨어입니다. 마음에 드신다면 후원을 고려해 주세요:",
+                supportUsLink: "여기"
             }
         },
         noAppsAllowed: {
@@ -7284,7 +7740,10 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         notificationTitle: {
             name: "NotificationTitle",
-            description: "데스크톱 알림을 더욱 유익하게 만듭니다."
+            description: "데스크톱 알림을 더욱 유익하게 만듭니다.",
+            text: {
+                threadInParent: "{{parent}}의 {{thread}}"
+            }
         },
         notificationVolume: {
             name: "NotificationVolume",
@@ -7360,6 +7819,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 vrcx: {
                     label: "VR챗",
                     description: "VRCX 앱에서 VRChat 링크 열기"
+                },
+                telegram: {
+                    label: "Telegram",
+                    description: "Telegram 링크를 Telegram 앱에서 열기"
                 }
             },
             notification: {
@@ -7447,6 +7910,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 highest: "가장 높은 역할",
                 lowest: "가장 낮은 역할",
                 details: "역할 세부정보"
+            },
+            text: {
+                roleOptions: "역할 옵션",
+                userOptions: "사용자 옵션",
+                unknownRole: "알 수 없는 역할",
+                unknownUser: "알 수 없는 사용자"
             }
         },
         petpet: {
@@ -7534,7 +8003,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     color: "색상",
                     save: "구하다",
                     create: "만들다"
-                }
+                },
+                defaultCategoryName: "고정 카테고리 {{number}}"
             }
         },
         pingNotifications: {
@@ -7578,12 +8048,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformIndicators: {
             name: "PlatformIndicators",
             description: "사용자에게 플랫폼 지표(데스크톱, 모바일, 웹...)를 추가합니다.",
-            embeddedTooltip: "콘솔",
+            embeddedTooltip: "내장 (콘솔 또는 게임)",
             vrTooltip: "VR",
             option: {
                 list: {
                     label: "목록",
-                    description: "회원 목록에 표시기 표시"
+                    description: "사용자 프로필에 표시기 표시"
                 },
                 badges: {
                     label: "배지",
@@ -7606,7 +8076,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformSpoofer: {
             name: "PlatformSpoofer",
             description: "현재 사용 중인 플랫폼이나 장치를 스푸핑하세요.",
-            about: "이 플러그인이 경고를 받거나 금지되지 않을 것이라고 보장할 수 없습니다.",
+            about: "이 플러그인으로 인해 경고나 차단을 받지 않는다고 보장할 수 없습니다. Xbox/Playstation/VR을 선택하면 클라이언트가 오래된 버전이 될 수 있습니다.",
             platform: {
                 desktop: "디스코드 클라이언트",
                 web: "디스코드 웹",
@@ -7619,7 +8089,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 platform: {
                     label: "플랫폼",
-                    description: "어떤 플랫폼으로 나타날지",
+                    description: "사용 중인 것처럼 보일 플랫폼입니다.",
                     desktop: "데스크탑",
                     web: "편물",
                     android: "기계적 인조 인간",
@@ -7689,9 +8159,9 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         profileSets: {
             name: "ProfileSets",
-            description: "설정의 프로필 섹션을 통해 다양한 프로필 사전 설정을 저장하고 로드할 수 있습니다.",
+            description: "다양한 프로필 프리셋을 저장하고 불러올 수 있습니다.",
             toast: {
-                importFailed: "프로필 세트를 가져오지 못했습니다. 파일이 유효하지 않을 수 있습니다.",
+                importFailed: "프리셋을 가져오지 못했습니다. 파일이 잘못되었을 수 있습니다.",
             },
             option: {
                 avatarSize: {
@@ -7722,397 +8192,550 @@ const translations: MatchStructure<typeof enTranslations> = {
                 random: "무작위의",
                 import: "수입",
                 exportAll: "모두 내보내기"
+            },
+            text: {
+                selectAServer: "서버 선택",
+                profileSets: "프로필 세트",
+                youAreNotIn: "아직 참가한 서버가 없습니다.",
+                mainProfile: "기본 프로필",
+                serverProfiles: "서버 프로필",
+                openProfileSets: "프로필 세트 열기"
             }
         },
         questify: {
             name: "Questify",
-            description: "일련의 기능으로 Quest 경험을 향상시키거나 해당 기능이 마음에 들지 않으면 완전히 비활성화하십시오.",
-            quests: "퀘스트",
+            description: "특정 Quest 기능을 강화하거나, 성가신 요소를 끄거나, Quest를 완전히 제거합니다.",
+            quests: "Quest",
             context: {
                 quest: {
-                    label: "퀘스트 버튼 메뉴",
-                    ignore: "모두 무시로 표시",
-                    reset: "무시된 목록 재설정",
-                    fetch: "퀘스트 가져오기",
-                    markAsIgnored: "무시로 표시",
-                    unmarkAsIgnored: "무시됨 표시 해제",
-                    stopAuto: "자동 완성 중지",
-                    copyQuestID: "퀘스트 ID 복사",
-                    startAuto: "자동 완성 시작"
-                }
-            },
-            settings: {
-                questButton: {
-                    title: "퀘스트 버튼",
-                    description: "요청하지 않은 퀘스트에 대한 선택적 표시와 함께 서버 목록에 퀘스트 버튼을 표시합니다.",
-                    leftClick: "왼쪽 클릭 동작",
-                    middleClick: "중간 클릭 동작",
-                    rightClick: "마우스 오른쪽 버튼 클릭 동작",
-                    visibility: "버튼 가시성",
-                    unclaimedIndicator: "미청구 지표",
-                    badgeColor: "배지 색상",
-                    rewardDisplay: "보상 표시",
-                    includedRewardTypes: "포함된 보상 유형",
-                    includedRewardTypesDesc: "버튼 가시성, 배지 수를 결정하고 경고음을 재생할 때 이러한 보상 유형이 있는 퀘스트만 청구되지 않은 것으로 계산됩니다.",
-                    selectRewardTypes: "미청구 횟수에 포함할 보상 유형을 선택하세요...",
-                    noRewardType: "해당 이름으로 지원되는 Quest 기능이 없습니다.",
-                    default: "기본",
-                    disable: "장애를 입히다"
-                },
-                questFeatures: {
-                    title: "퀘스트 특징",
-                    description: "특정 Quest 기능을 수정합니다.",
-                    popupWarning: "완료된 퀘스트 및 퀘스트 진행 상황 추적에서는 {{disablePopup}} 옵션이 무시됩니다.",
-                    videoQuestInfo: "{{completeVideo}} 옵션은 비디오 퀘스트 기간 동안 기다렸다가 자동으로 완료된 것으로 표시합니다.",
-                    gameQuestInfo: "마찬가지로 {{completeGame}} 옵션은 게임 퀘스트 기간 동안 기다렸다가 자동으로 완료된 것으로 표시합니다. 이 옵션은 공식 데스크톱 클라이언트에서만 지원됩니다.",
-                    manualStartWarning: "여전히 퀘스트는 수동으로 시작해야 합니다. 첫 번째 클릭은 백그라운드에서 퀘스트를 시작합니다. 비디오 퀘스트의 경우 후속 클릭을 하면 정상적으로 비디오 모달이 열립니다. 퀘스트를 중단하려면 퀘스트 타일에서 상황에 맞는 메뉴를 열고 {{stopAuto}}을 선택하세요.",
-                    tosWarning: "이러한 옵션 중 하나를 사용하는 것은 Discord의 ToS에 위배됩니다. 자신의 책임하에 사용하십시오.",
-                    selectFeatures: "수정할 Quest 기능을 선택합니다.",
-                    disablePopup: "계정 패널 위의 퀘스트 팝업 비활성화",
-                    completeVideo: "백그라운드에서 비디오 퀘스트 완료",
-                    completeGame: "백그라운드에서 플레이 게임 퀘스트 완료하기",
-                    stopAuto: "자동 완성 중지"
-                },
-                restyleQuests: {
-                    title: "퀘스트 리스타일",
-                    description: "가시성을 위해 선택적인 테마 색상으로 퀘스트를 강조 표시합니다.",
-                    precedenceNote: "요청한 퀘스트 스타일과 만료된 퀘스트 스타일은 퀘스트가 무시되더라도 우선적으로 적용됩니다.",
-                    gradientStyle: "그라데이션 스타일",
-                    assetPreload: "자산 사전 로드",
-                    unclaimed: "청구되지 않은",
-                    claimed: "청구됨",
-                    ignored: "무시됨",
-                    expired: "만료됨",
-                    intenseGradient: "강렬한 리스타일 그라데이션",
-                    defaultGradient: "기본 스타일 변경 그라데이션",
-                    blackGradient: "미묘한 블랙 그라데이션",
-                    noGradient: "그라데이션 없음",
-                    loadAllAssets: "페이지 로드 시 모든 퀘스트 자산 로드",
-                    loadDuringScroll: "페이지 스크롤 중 퀘스트 자산 로드"
-                },
-                reorderQuests: {
-                    title: "퀘스트 재정렬",
-                    description: "상태별로 퀘스트를 정렬합니다. 퀘스트 페이지에서 \"Questify\" 정렬 옵션을 선택한 경우 적용됩니다.",
-                    formatNote: "쉼표로 구분된 목록에는 {{items}}이 모두 포함되어야 합니다.",
-                    placeholder: "UNCLAIMED, CLAIMED, IGNORED, EXPIRED를 모두 포함해야 합니다.",
-                    invalidFormat: "형식이 잘못되었습니다.",
-                    unclaimedSubsort: "청구되지 않은 하위 분류",
-                    claimedSubsort: "청구된 하위 분류",
-                    ignoredSubsort: "무시된 하위 정렬",
-                    expiredSubsort: "만료된 하위 분류",
-                    addedNewest: "추가됨(최신)",
-                    addedOldest: "추가됨(가장 오래된 것)",
-                    expiredRecent: "만료됨(가장 최근)",
-                    expiredLeast: "만료됨(가장 최근 항목)",
-                    expiringSoon: "만료(가장 빨리)",
-                    expiringLate: "만료 예정(최신)",
-                    claimedRecent: "청구됨(가장 최근)",
-                    claimedLeast: "청구됨(가장 최근)",
-                    ignoredQuestProfile: "무시된 퀘스트 프로필",
-                    sharedProfile: "공유: 이 클라이언트 공유의 모든 계정은 무시됩니다.",
-                    privateProfile: "비공개: 이 클라이언트의 모든 계정에는 별도의 무시가 있습니다.",
-                    rememberSort: "정렬 선택 기억하기",
-                    rememberFilter: "필터 선택 기억하기",
-                    yes: "예",
-                    no: "아니요",
-                    rememberNote: "이 정렬 및 필터 선택은 퀘스트 페이지에 내장된 정렬 및 필터 옵션을 나타냅니다. 위의 사용자 정의 정렬은 퀘스트 페이지에서 \"Questify\" 정렬 옵션을 선택한 경우에만 적용됩니다. 기억 기능이 비활성화된 경우 퀘스트 페이지를 열 때마다 정렬 또는 필터 옵션이 재설정됩니다."
-                },
-                fetchingQuests: {
-                    title: "퀘스트 가져오는 중",
-                    description: "Discord에서 퀘스트를 가져오는 빈도를 구성하고 새 퀘스트에 대한 알림을 설정하세요.",
-                    defaultBehavior: "기본적으로 Discord는 로드 시와 퀘스트 페이지를 방문할 때만 퀘스트를 가져옵니다. 즉, 아래에 정의된 가져오기 간격이 없으면 이 플러그인은 하루 종일 추가된 새 퀘스트를 인식하지 못하게 됩니다.",
-                    requirement: "이는 활성화된 퀘스트 버튼에 따라 {{unclaimed}}로 설정되거나 청구되지 않은 {{pill}}, {{badge}} 또는 {{both}} 표시기가 활성화된 {{always}}로 설정됩니다. 그렇지 않으면 주기적으로 퀘스트를 가져올 이유가 없습니다.",
-                    blockWarning: "또한 {{questFeatures}} 설정에서 {{fetchingQuests}}이 차단된 경우에는 작동하지 않습니다.",
-                    fetchInterval: "가져오기 간격",
-                    alertSound: "경고음",
-                    intervalPlaceholder: "30분에서 12시간 사이의 간격을 선택하거나 입력합니다.",
-                    intervalFeedback: "간격은 30분에서 12시간 사이여야 합니다.",
-                    soundPlaceholder: "사운드를 선택하거나 사용자 정의 사운드 URL을 제공하세요.",
-                    soundFeedback: "사운드를 찾을 수 없거나 지원되는 도메인의 URL이 아닙니다.",
-                    disabled: "장애가 있는",
-                    minutes: "분",
-                    minute: "분",
-                    hours: "시간",
-                    hour: "시간",
-                    thirtyMinutes: "30분",
-                    oneHour: "1시간",
-                    threeHours: "3시간",
-                    sixHours: "6시간",
-                    twelveHours: "12시간",
-                    customSound: "맞춤형 사운드"
-                },
-                disableOptions: {
-                    everything: "모든 것을 비활성화",
-                    discovery: "검색 탭 비활성화",
-                    dms: "DM에서 퀘스트 탭 비활성화",
-                    fetching: "퀘스트 가져오기 비활성화",
-                    popup: "계정 패널 위 팝업 비활성화",
-                    sponsored: "퀘스트 페이지에서 스폰서 배너 비활성화",
-                    badge: "사용자 프로필에서 배지 비활성화",
-                    inventory: "선물 인벤토리 재배치 알림 비활성화",
-                    friendsList: "친구 목록 활성 상태 프로모션",
-                    membersList: "회원 목록 적극적으로 재생 아이콘",
-                    gameQuests: "백그라운드에서 플레이 게임/활동 퀘스트 완료",
-                    videoQuests: "백그라운드에서 비디오 시청 퀘스트를 완료하세요",
-                    achievementQuests: "백그라운드에서 활동 퀘스트의 작업 완료",
-                    mobileDesktop: "모바일 퀘스트를 데스크탑과 호환되게 만들기",
-                    notifyOnComplete: "퀘스트 완료 알림"
-                },
-                options: {
-                    always: "언제나",
-                    unclaimed: "청구되지 않은",
-                    never: "절대",
-                    pill: "알약",
-                    badge: "배지",
-                    both: "둘 다",
-                    none: "없음",
-                    openQuests: "오픈 퀘스트",
-                    contextMenu: "상황에 맞는 메뉴",
-                    pluginSettings: "플러그인 설정",
-                    nothing: "아무것도 아님",
-                    orbs: "오브",
-                    nitroCodes: "니트로 코드",
-                    rewardCodes: "보상 코드",
-                    inGameItems: "게임 내 아이템",
-                    profileCollectibles: "프로필 수집품"
-                }
-            },
-            option: {
-                disableQuests: {
-                    label: "퀘스트 비활성화",
-                    description: "비활성화할 Quest 기능을 선택합니다."
-                },
-                disableQuestsEverything: {
-                    label: "모든 것을 비활성화",
-                    description: "모든 Quest 기능을 비활성화합니다."
-                },
-                disableQuestsFetchingQuests: {
-                    label: "퀘스트 가져오기 비활성화",
-                    description: "Discord에서 퀘스트 가져오기를 비활성화합니다."
-                },
-                disableQuestsDirectMessagesTab: {
-                    label: "DM에서 퀘스트 탭 비활성화",
-                    description: "직접 메시지 페이지에서 퀘스트 탭을 비활성화합니다."
-                },
-                disableQuestsDiscoveryTab: {
-                    label: "검색 탭 비활성화",
-                    description: "검색 페이지에서 퀘스트 탭을 비활성화합니다."
-                },
-                disableQuestsPageSponsoredBanner: {
-                    label: "퀘스트 페이지에서 스폰서 배너 비활성화",
-                    description: "퀘스트 페이지에서 스폰서 배너를 비활성화합니다."
-                },
-                disableQuestsPopupAboveAccountPanel: {
-                    label: "계정 패널 위 팝업 비활성화",
-                    description: "계정 패널 위의 퀘스트 팝업을 비활성화하세요."
-                },
-                disableQuestsBadgeOnUserProfiles: {
-                    label: "사용자 프로필에서 배지 비활성화",
-                    description: "사용자 프로필에서 Quest 배지를 비활성화합니다."
-                },
-                disableQuestsGiftInventoryRelocationNotice: {
-                    label: "선물 인벤토리 재배치 알림 비활성화",
-                    description: "선물 인벤토리 퀘스트 재배치 알림을 비활성화합니다."
-                },
-                disableFriendsListActiveNowPromotion: {
-                    label: "친구 목록 활성 상태 프로모션 비활성화",
-                    description: "친구가 플레이하는 게임에 대한 퀘스트 홍보를 비활성화합니다."
-                },
-                disableMembersListActivelyPlayingIcons: {
-                    label: "회원 목록의 활성 재생 아이콘 비활성화",
-                    description: "회원 목록에서 활성 재생 아이콘을 비활성화합니다."
-                },
-                makeMobileQuestsDesktopCompatible: {
-                    label: "모바일 퀘스트를 데스크탑과 호환되게 만들기",
-                    description: "모바일 전용 퀘스트를 데스크톱과 호환되도록 만드세요."
-                },
-                completeVideoQuestsInBackground: {
-                    label: "백그라운드에서 비디오 퀘스트를 완료하세요",
-                    description: "비디오 지속 시간이 지난 후 백그라운드에서 비디오 퀘스트를 완료하세요."
-                },
-                completeGameQuestsInBackground: {
-                    label: "백그라운드에서 게임 퀘스트 완료",
-                    description: "게임 시간이 지나면 백그라운드에서 게임 퀘스트를 완료하세요."
-                },
-                completeAchievementQuestsInBackground: {
-                    label: "백그라운드에서 활동 퀘스트의 작업 완료",
-                    description: "백그라운드에서 활동 퀘스트의 성취를 완료하세요."
-                },
-                notifyOnQuestComplete: {
-                    label: "퀘스트 완료 시 알림",
-                    description: "퀘스트가 자동으로 완료되면 알림을 표시합니다."
-                },
-                questButton: {
-                    label: "퀘스트 버튼",
-                    description: "서버 목록에 퀘스트 버튼을 표시합니다."
-                },
-                questButtonDisplay: {
-                    label: "퀘스트 버튼 표시",
-                    description: "서버 목록의 퀘스트 버튼에 사용할 표시 유형입니다."
-                },
-                questRewardIncludeRewardCode: {
-                    label: "보상 코드 포함",
-                    description: "퀘스트 수를 표시할 때 보상 코드와 함께 퀘스트를 포함합니다."
-                },
-                questRewardIncludeNitroCode: {
-                    label: "니트로 코드 포함",
-                    description: "퀘스트 수를 표시할 때 Nitro 코드와 함께 퀘스트를 포함합니다."
-                },
-                questRewardIncludeInGame: {
-                    label: "게임 내 보상 포함",
-                    description: "퀘스트 수를 표시할 때 게임 내 보상이 포함된 퀘스트를 포함합니다."
-                },
-                questRewardIncludeCollectibles: {
-                    label: "수집품 포함",
-                    description: "퀘스트 수를 표시할 때 수집품과 함께 퀘스트를 포함합니다."
-                },
-                questRewardIncludeOrbs: {
-                    label: "오브 포함",
-                    description: "퀘스트 수를 표시할 때 오브와 함께 퀘스트를 포함합니다."
-                },
-                questButtonUnclaimed: {
-                    label: "퀘스트 버튼 미청구 표시기",
-                    description: "서버 목록의 퀘스트 버튼에 있는 미청구 표시에 사용할 표시 유형입니다."
-                },
-                questButtonBadgeColor: {
-                    label: "퀘스트 버튼 배지 색상",
-                    description: "서버 목록의 퀘스트 버튼 배지 색상입니다."
-                },
-                questButtonLeftClickAction: {
-                    label: "왼쪽 클릭 동작",
-                    description: "서버 목록에서 퀘스트 버튼을 마우스 왼쪽 버튼으로 클릭했을 때 수행할 작업입니다."
-                },
-                questButtonMiddleClickAction: {
-                    label: "중간 클릭 동작",
-                    description: "서버 목록에서 퀘스트 버튼을 마우스 가운데 버튼으로 클릭했을 때 수행할 작업입니다."
-                },
-                questButtonRightClickAction: {
-                    label: "마우스 오른쪽 버튼 클릭 동작",
-                    description: "서버 목록에서 퀘스트 버튼을 우클릭했을 때 수행할 동작입니다."
-                },
-                fetchingQuests: {
-                    label: "퀘스트 가져오는 중",
-                    description: "Discord에서 퀘스트를 가져옵니다."
-                },
-                fetchingQuestsInterval: {
-                    label: "퀘스트 가져오기 간격",
-                    description: "Discord에서 퀘스트를 가져오는 간격(초)입니다."
-                },
-                fetchingQuestsAlert: {
-                    label: "퀘스트 알림을 가져오는 중",
-                    description: "새로운 퀘스트가 감지되면 재생할 소리입니다."
-                },
-                fetchingQuestsAlertVolume: {
-                    label: "퀘스트 알림 볼륨을 가져오는 중",
-                    description: "새로운 퀘스트가 감지될 때 경고음의 볼륨입니다."
-                },
-                restyleQuests: {
-                    label: "퀘스트 리스타일",
-                    description: "퀘스트 페이지에서 퀘스트 타일의 모양을 사용자 정의하세요."
-                },
-                restyleQuestsUnclaimed: {
-                    label: "요청되지 않은 퀘스트 리스타일",
-                    description: "퀘스트 페이지에서 청구되지 않은 퀘스트 타일의 색상입니다."
-                },
-                restyleQuestsClaimed: {
-                    label: "리스타일 퀘스트 요청됨",
-                    description: "퀘스트 페이지에서 요청된 퀘스트 타일의 색상입니다."
-                },
-                restyleQuestsIgnored: {
-                    label: "리스타일 퀘스트가 무시됨",
-                    description: "퀘스트 페이지에서 무시된 퀘스트 타일의 색상입니다."
-                },
-                restyleQuestsExpired: {
-                    label: "리스타일 퀘스트 만료됨",
-                    description: "퀘스트 페이지에서 만료된 퀘스트 타일의 색상입니다."
-                },
-                restyleQuestsGradient: {
-                    label: "퀘스트 그라데이션 스타일 변경",
-                    description: "퀘스트 타일에 사용되는 그라데이션 스타일입니다."
-                },
-                restyleQuestsPreload: {
-                    label: "퀘스트 미리 로드 스타일 변경",
-                    description: "퀘스트 타일의 자산을 미리 로드해 보십시오."
-                },
-                reorderQuests: {
-                    label: "퀘스트 재정렬",
-                    description: "상태별로 퀘스트를 정렬합니다. 기본 정렬을 위해 비워두세요. 쉼표로 구분된 목록에는 UNCLAIMED, CLAIMED, IGNORED, EXPIRED가 모두 포함되어야 합니다."
-                },
-                unclaimedSubsort: {
-                    label: "청구되지 않은 하위 분류",
-                    description: "청구되지 않은 퀘스트에 대한 하위 정렬 방법입니다."
-                },
-                claimedSubsort: {
-                    label: "청구된 하위 분류",
-                    description: "청구된 퀘스트에 대한 하위 정렬 방법입니다."
-                },
-                ignoredSubsort: {
-                    label: "무시된 하위 정렬",
-                    description: "무시된 퀘스트에 대한 하위 정렬 방법입니다."
-                },
-                expiredSubsort: {
-                    label: "만료된 하위 분류",
-                    description: "만료된 퀘스트의 하위 정렬 방법입니다."
-                },
-                unclaimedUnignoredQuests: {
-                    label: "청구되지 않은 무시되지 않은 퀘스트",
-                    description: "청구되지 않은 퀘스트와 무시되지 않은 퀘스트 수를 추적합니다."
-                },
-                onQuestsPage: {
-                    label: "퀘스트 페이지에서",
-                    description: "사용자가 현재 퀘스트 페이지에 있는지 여부입니다."
-                },
-                triggerQuestsRerender: {
-                    label: "트리거 퀘스트 재렌더링",
-                    description: "이 설정을 전환하여 퀘스트 페이지의 다시 렌더링을 트리거합니다."
-                },
-                ignoredQuestProfile: {
-                    label: "무시된 퀘스트 프로필",
-                    description: "무시된 퀘스트에 사용되는 프로필입니다."
-                },
-                rememberQuestPageSort: {
-                    label: "퀘스트 페이지 정렬 기억하기",
-                    description: "퀘스트 페이지에서 마지막으로 사용된 정렬을 기억하세요."
-                },
-                rememberQuestPageFilters: {
-                    label: "퀘스트 페이지 필터를 기억하세요",
-                    description: "퀘스트 페이지에서 마지막으로 사용한 필터를 기억하세요."
-                },
-                lastQuestPageSort: {
-                    label: "마지막 퀘스트 페이지 정렬",
-                    description: "퀘스트 페이지에서 마지막으로 사용된 정렬을 기억하세요."
-                },
-                lastQuestPageFilters: {
-                    label: "마지막 퀘스트 페이지 필터",
-                    description: "퀘스트 페이지에서 마지막으로 사용한 필터를 기억하세요."
-                },
-                ignoredQuestIDs: {
-                    label: "무시된 퀘스트 ID",
-                    description: "무시되는 퀘스트 ID의 배열입니다."
-                },
-                resumeQuestIDs: {
-                    label: "퀘스트 ID 재개",
-                    description: "백그라운드에서 자동 완성되는 퀘스트 ID 배열입니다."
+                    label: "Quest 버튼 메뉴",
+                    ignore: "모두 무시됨으로 표시",
+                    reset: "무시 목록 초기화",
+                    fetch: "Quest 가져오기",
+                    markAsIgnored: "무시됨으로 표시",
+                    unmarkAsIgnored: "무시 해제",
+                    stopAuto: "자동 완료 중지",
+                    startAuto: "자동 완료 시작",
+                    copyQuestID: "Quest ID 복사"
                 }
             },
             button: {
-                questInProgressWithTime: "완료 중({{remainTime}})",
-                completing: "완료 중",
-                resume: "이력서(~{{remainTime}})",
-                complete: "{{remainTime}} 완료",
-                completeImmediate: "완료(즉시)",
-                completed: "완전한"
+                completing: "완료 중...",
+                completingWithTime: "완료 중 ({{time}})",
+                completingIn: "{{time}} 후 완료",
+                queued: "대기 중 ({{position}})",
+                resuming: "재개 중...",
+                completeNow: "지금 완료",
+                complete: "완료 ({{time}})",
+                resume: "재개 ({{time}})",
+                completed: "완료됨"
             },
             reward: {
-                orbs: "{{orbQuantity}} 오브에 대한 {{completingText}}.",
-                article: "{{itemName}}에 대한 {{completingText}}.",
-                unrecognized: "인식할 수 없는 보상 유형의 경우 {{completingText}}입니다."
+                orbs: "{{status}}: {{orbQuantity}} Orbs",
+                article: "{{status}}: {{itemName}}",
+                unrecognized: "{{status}}: 알 수 없는 보상"
+            },
+            toast: {
+                autoCompleteBroken: "자동 완료가 작동하지 않습니다. 곧 수정될 예정입니다.",
+                enrollmentFailed: "{{questName}} Quest 등록에 실패했습니다.",
+                enrollmentInNormalizequestnameQuest: "{{normalizeQuestName_quest}} 퀘스트 등록에 실패했습니다{{rateLimitSuffix}}."
             },
             notification: {
                 completed: {
-                    title: "퀘스트 완료",
-                    body: "{{questName}} 퀘스트가 완료되었습니다."
+                    title: "Quest 완료!",
+                    body: "{{questName}} Quest를 완료했습니다."
+                },
+                newQuest: {
+                    title: "새 Quest 감지!",
+                    body: "{{questName}} Quest를 이제 이용할 수 있습니다."
+                },
+                newQuests: {
+                    title: "새 Quest 감지!",
+                    body: "새 Quest {{count}}개를 이제 이용할 수 있습니다."
+                },
+                newExcludedQuest: {
+                    title: "새 제외 Quest 감지!",
+                    body: "제외된 {{questName}} Quest가 감지되었습니다. ID: {{questId}}"
+                },
+                newExcludedQuests: {
+                    title: "새 제외 Quest 감지!",
+                    body: "새 제외 Quest {{count}}개가 감지되었습니다. Quest ID는 콘솔에서 확인하세요."
                 }
+            },
+            alert: {
+                restart: {
+                    title: "재시작 필요",
+                    body: "Questify 설정 변경 사항을 적용하려면 재시작해야 합니다.",
+                    confirm: "재시작",
+                    cancel: "나중에"
+                },
+                dangerous: {
+                    title: "확실한가요?",
+                    confirm: "계속",
+                    cancel: "취소",
+                    disableEverything: "Quest 기능이 완전히 비활성화됩니다.",
+                    allowDangerous: "위험한 설정을 변경할 수 있게 됩니다."
+                }
+            },
+            status: {
+                unclaimed: "미수령",
+                claimed: "수령함",
+                ignored: "무시됨",
+                expired: "만료됨"
+            },
+            questTypes: {
+                watchVideo: "동영상 시청",
+                watchVideoOnMobile: "모바일에서 동영상 시청",
+                achievementInActivity: "활동 내 업적",
+                achievementInGame: "게임 내 업적",
+                playActivity: "활동 플레이",
+                playOnDesktop: "데스크톱에서 플레이",
+                playOnDesktopV2: "데스크톱에서 플레이 V2",
+                streamOnDesktop: "데스크톱에서 방송",
+                playOnPlayStation: "PlayStation에서 플레이",
+                playOnXbox: "Xbox에서 플레이"
+            },
+            settings: {
+                questButton: {
+                    title: "Quest 버튼",
+                    description: "서버 목록에 Quest 버튼을 표시하고, 미수령 및 무시되지 않은 Quest에 대한 표시기를 선택적으로 보여줍니다.",
+                    behavior: "버튼 동작",
+                    leftClick: "왼쪽 클릭 동작:",
+                    middleClick: "가운데 클릭 동작:",
+                    rightClick: "오른쪽 클릭 동작:",
+                    visibility: "버튼 표시:",
+                    visibilityTooltip: "항상: 이 기능이 켜져 있는 동안 Quest 버튼을 표시합니다.\n\n미수령: 관련된 미수령 Quest 보상이 있을 때만 표시합니다.\n\n안 함: Quest 버튼을 숨깁니다.",
+                    unclaimedIndicator: "미수령 표시기:",
+                    unclaimedIndicatorTooltip: "필: Quest 버튼 옆에 Discord의 읽지 않음 표시를 보여줍니다.\n\n배지: 관련된 미수령 Quest 보상 수를 보여줍니다.\n\n둘 다: 필과 배지를 함께 보여줍니다.\n\n없음: 표시기를 숨깁니다.",
+                    badgeColor: "배지 색상:",
+                    relevancy: "Quest 대상",
+                    includedRewardTypes: "포함할 보상 유형:",
+                    includedRewardTypesTooltip: "버튼 표시, 배지 수, 알림 동작을 결정할 때 이 보상 유형의 Quest만 미수령으로 계산합니다.",
+                    includedQuestTypes: "포함할 Quest 유형:",
+                    includedQuestTypesTooltip: "버튼 표시, 배지 수, 알림 동작을 결정할 때 이 작업 유형의 Quest만 미수령으로 계산합니다.",
+                    display: {
+                        always: "항상",
+                        unclaimed: "미수령",
+                        never: "안 함"
+                    },
+                    indicator: {
+                        pill: "필",
+                        badge: "배지",
+                        both: "둘 다",
+                        none: "없음"
+                    },
+                    action: {
+                        openQuests: "Quest 열기",
+                        contextMenu: "컨텍스트 메뉴",
+                        pluginSettings: "플러그인 설정",
+                        nothing: "아무것도 안 함"
+                    },
+                    rewardTypes: {
+                        orbs: "Orbs",
+                        nitroCodes: "Nitro 코드",
+                        rewardCodes: "보상 코드",
+                        inGameItems: "게임 내 아이템",
+                        profileCollectibles: "프로필 수집품"
+                    }
+                },
+                questFeatures: {
+                    title: "Quest 기능",
+                    description: "Quest의 동작을 변경해 기능을 강화하거나 제거합니다.",
+                    disableFeatures: "기능 비활성화",
+                    disableEverything: "Quest 기능 완전히 비활성화:",
+                    disableEverythingTooltip: "모든 플러그인 강화 기능을 끄고, Quest 페이지와 Discord 전역의 Quest 요소를 숨기며, Discord가 Quest 데이터를 가져오지 못하게 합니다. Orbs는 보조 화폐로서 상점과 밀접하게 연결되어 있으므로 상점에는 영향을 주지 않습니다.",
+                    disableSpecific: "특정 기능 비활성화:",
+                    disableSpecificTooltip: "스폰서 배너는 Quest 페이지 상단의 유료 Quest 배너입니다.\n\n이전 안내는 Quest가 DM으로 옮겨졌음을 알리는 탐색 페이지 등의 표시입니다.\n\n친구 목록 프로모는 서버를 함께 쓰는 사용자가 활성 Quest가 있는 게임을 플레이하는 동안 친구 목록의 \"현재 활동 중\" 섹션에 표시되는 카드입니다.\n\n멤버 목록 프로모는 활성 Quest가 있는 게임을 플레이 중인 멤버에게 서버 멤버 목록에서 표시되는 아이콘입니다.\n\n계정 패널 프로모는 사용자 계정 패널 위에 표시되는 유료 Quest 홍보입니다.\n\n계정 패널 진행도는 사용자 계정 패널 위에 표시되는 진행 중이거나 완료된 Quest의 진행도입니다.\n\nQuest 및 Orbs 배지는 Quest를 하나 이상 완료했거나 Orbs 배지를 구매한 사람의 프로필에 표시되는 배지입니다.",
+                    disableOptions: {
+                        sponsoredBanner: "스폰서 배너",
+                        relocationNotices: "이전 안내",
+                        friendsListPromo: "친구 목록 프로모",
+                        membersListPromo: "멤버 목록 프로모",
+                        accountPanelPromo: "계정 패널 프로모",
+                        accountPanelProgress: "계정 패널 진행도",
+                        orbsAndQuestsBadges: "Quest 및 Orbs 배지"
+                    },
+                    modifyFeatures: "기능 수정",
+                    warningTos: "Discord는 Quest 완료 방식을 변경하는 스크립트나 플러그인 사용자에게 경고를 보내기 시작했으며, 이는 {{tos}}에 위배됩니다.",
+                    tos: "서비스 약관",
+                    warningEscalate: "경고는 현재 Quest나 보상에 대한 접근 권한 상실 위협에 그치는 것으로 보이지만, Discord는 언제든지 조치를 강화할 수 있습니다.",
+                    warningDetection: "Discord가 사용자를 추적하는 다양한 방법 때문에 탐지를 현실적으로 피할 방법은 없습니다. 계속 진행한다면 Discord가 언젠가 이를 탐지할 가능성이 높다는 점을 이해하세요.",
+                    warningRisk: "다음 토글을 사용해 잠재적으로 위험한 설정에 본인 책임하에 접근하세요.",
+                    allowDangerous: "위험한 설정 변경 허용...",
+                    disallowDangerous: "초기화하고 위험한 설정 변경 금지...",
+                    completeVideoQuicker: "동영상 Quest 자동 완료 가속:",
+                    completeVideoQuickerTooltip: "Discord는 Quest에 등록한 후 동영상 길이보다 24초 짧은 시간이 지나면 동영상 Quest를 완료할 수 있게 합니다.\n\n즉, 24초 이하의 동영상 Quest나 등록 후 나중에 돌아와 완료하는 Quest는 즉시 완료할 수 있습니다.\n\n이 설정은 동영상 Quest 자동 완료에만 적용되며 아래 자동 완료 설정에 의존합니다. 수동으로 완료할 때는 여전히 전체 시간을 기다려야 하며 등록 시점과 무관합니다.",
+                    mobileDesktop: "일부 모바일 전용 동영상 Quest를 데스크톱에서 완료 가능하게:",
+                    mobileDesktopTooltip: "일부 모바일 전용 동영상 Quest는 데스크톱에서 등록할 수 있지만 완료는 모바일에서 해야 합니다. 이 설정은 데스크톱에서 완료할 수 있게 합니다.\n\n일부 모바일 전용 동영상 Quest는 모바일에서만 등록할 수 있습니다. 이 설정을 적용하려면 모바일 기기에서 등록한 뒤 데스크톱으로 돌아와 Quest를 새로고침해야 합니다.\n\n단독으로 켜면 이 설정은 동영상 Quest의 수동 완료에만 적용됩니다. 데스크톱에서 모바일 동영상 Quest를 자동 완료하는 것은 아래 자동 완료 설정에 의존하며, 이 설정도 암묵적으로 켜집니다.",
+                    simultaneous: "Quest를 순차적이 아니라 동시에 자동 완료:",
+                    simultaneousTooltip: "기본적으로 여러 Quest를 자동 완료하려 하면 대기열에 넣어 순서대로 완료합니다.\n\n이 설정은 대신 모든 자동 완료 Quest를 동시에 실행합니다.\n\n이 설정은 Quest 자동 완료에만 적용되며 아래 자동 완료 설정에 의존합니다.",
+                    resumeInterrupted: "새로고침 또는 재시작 후 중단된 자동 완료 재개:",
+                    resumeInterruptedTooltip: "이 설정은 새로고침이나 재시작으로 중단된 자동 완료를 자동으로 재개하며, 대기열에 있었지만 아직 시작되지 않은 Quest를 다시 대기열에 넣는 것도 포함합니다.",
+                    autoCompleteTypes: "특정 Quest 유형 자동 완료:",
+                    autoCompleteTypesTooltip: "\"모바일에서 동영상 시청\" Quest는 데스크톱에서 등록 가능한 모바일 Quest에서만 작동합니다. 모바일에서만 등록할 수 있는 Quest라면 먼저 모바일 기기에서 등록한 뒤 데스크톱으로 돌아와 Quest를 새로고침해야 합니다.\n\n모든 동영상 관련 Quest는 보통 진행 보고와 함께 스택 트레이스를 보냅니다. 따라서 Discord는 어떤 함수가 호출되었는지 정확히 알 수 있고, 자사 함수가 진행을 시작했는지 검증할 수 있습니다. Questify는 이 스택 트레이스를 지우지만, 없다는 사실 자체가 있는 것만큼이나 눈에 띕니다.\n\n\"데스크톱에서 플레이\", \"PlayStation에서 플레이\", \"Xbox에서 플레이\", \"활동 플레이\" Quest는 Discord의 제한으로 인해 공식 데스크톱 클라이언트에서만 사용할 수 있습니다. 웹 확장 프로그램, Plextron 등 서드파티 클라이언트는 이 유형의 자동 완료를 지원하지 않습니다.\n\n모든 게임 관련 Quest는 보통 하트비트 보고와 함께 게임 지문을 보냅니다. 따라서 Discord는 수만 명의 사용자 데이터를 이용해 다른 사용자가 실제 게임을 사용하는지 실행 파일을 흉내 내는지 판단할 수 있습니다. 이 값을 위조할 합리적인 방법이 없어 Questify는 비워 두지만, 없다는 사실은 엉성한 위조만큼이나 눈에 띕니다.\n\n\"활동 내 업적\" Quest는 즉시 완료하는 방식으로만 자동 완료할 수 있습니다. 이 방법은 언제든 패치될 수 있습니다.\n\nQuest 자동 완료는 Quest 페이지의 각 버튼을 클릭해 진행합니다. 위에서 동시 완료를 켜지 않았다면 Quest는 대기열에 들어간 순서대로 자동 완료됩니다.\n\nQuest 자동 완료는 가장 위험한 설정입니다. 본인 책임하에 켜세요."
+                },
+                questNotifications: {
+                    title: "Quest 알림",
+                    description: "Quest 완료 및 새 Quest 감지에 대한 알림과 경보를 설정합니다.",
+                    questCompleted: "Quest 완료",
+                    notifyOnComplete: "Quest 완료 시 알림 표시:",
+                    soundOnComplete: "Quest 완료 시 소리 재생:",
+                    volume: "음량:",
+                    newQuests: "새 Quest 감지",
+                    notifyOnNew: "새 Quest 감지 시 알림 표시:",
+                    soundOnNew: "새 Quest 감지 시 소리 재생:",
+                    notifyOnNewExcluded: "새 제외 Quest 감지 시 알림 표시:",
+                    notifyOnNewExcludedTooltip: "일부 Quest는 지역 또는 플랫폼 제한으로 인해 이용 가능한 Quest 목록에서 제외됩니다.\n\n켜면 Questify가 해당 Quest 설정을 가져와 포함할 Quest 및 보상 유형 필터를 적용하고, 제외된 Quest 데이터를 콘솔에 출력하며, 일치하는 제외 Quest에 대해 별도 알림을 표시합니다.",
+                    soundOnNewExcluded: "새 제외 Quest 감지 시 소리 재생:",
+                    soundOnNewExcludedTooltip: "일부 Quest는 지역 또는 플랫폼 제한으로 인해 이용 가능한 Quest 목록에서 제외됩니다.\n\n소리를 선택하면 Questify가 해당 Quest 설정을 가져와 포함할 Quest 및 보상 유형 필터를 적용하고, 제외된 Quest 데이터를 콘솔에 출력하며, 일치하는 제외 Quest에 대해 이 소리를 재생합니다.",
+                    fetchInterval: "Quest 가져오기 간격:",
+                    fetchIntervalTooltip: "Discord는 시작할 때와 Quest 페이지를 방문할 때만 Quest를 가져옵니다.\n\n이 간격은 클라이언트가 열려 있는 동안 주기적으로 Quest를 가져와, Quest 버튼 표시기와 새 Quest 경보가 하루 종일 최신 상태로 유지되게 합니다.\n\n켜져 있고 Quest 버튼 또는 Quest 알림 설정이 주기적 가져오기를 의미 있게 하도록 구성된 경우에만 실행됩니다.",
+                    disabled: "꺼짐",
+                    preview: "{{sound}} 미리 듣기",
+                    intervals: {
+                        thirtyMinutes: "30분",
+                        fortyFiveMinutes: "45분",
+                        oneHour: "1시간",
+                        threeHours: "3시간",
+                        sixHours: "6시간",
+                        twelveHours: "12시간"
+                    }
+                },
+                questTiles: {
+                    title: "Quest 타일",
+                    description: "선택적 테마 색상으로 Quest를 강조해 잘 보이게 합니다.",
+                    behavior: "타일 동작",
+                    gradientStyle: "그라데이션 스타일:",
+                    gradientStyleTooltip: "강렬함과 기본은 이미지 그라데이션에 선택한 타일 색상을 사용합니다.\n\n은은한 검정은 대비를 위해 더 어두운 중립 그라데이션을 유지합니다.\n\n그라데이션 없음은 이미지 그라데이션을 제거하므로 일부 Quest 아트워크를 읽기 어려워질 수 있습니다.",
+                    assetPreload: "에셋 미리 로드:",
+                    assetPreloadTooltip: "Quest 페이지를 열 때 모든 에셋을 로드하면 스크롤 시 레이아웃이 밀리는 현상이 줄어듭니다.\n\n스크롤하면서 로드하는 방식은 Discord의 기본 동작에 더 가깝고 처음에 드는 작업이 적을 수 있습니다.",
+                    colors: "타일 색상",
+                    enable: "켜기",
+                    disable: "끄기",
+                    gradient: {
+                        intense: "강렬한 리스타일 그라데이션",
+                        default: "기본 리스타일 그라데이션",
+                        black: "은은한 검정 그라데이션",
+                        hide: "그라데이션 없음"
+                    },
+                    preload: {
+                        onLoad: "페이지 로드 시 모든 Quest 에셋 로드",
+                        onScroll: "페이지 스크롤 중 Quest 에셋 로드"
+                    }
+                },
+                reorderQuests: {
+                    title: "Quest 재정렬",
+                    description: "퀘스트 페이지에서 Questify 정렬을 선택하면 퀘스트를 상태별로 정렬합니다. 숨긴 상태는 어떤 정렬에서도 제외됩니다.",
+                    statusOrder: "상태 순서",
+                    statusOrderTooltip: "각 상태는 한 번만 나타날 수 있습니다. 다른 위치에서 이미 사용 중인 상태를 선택하면 두 위치가 서로 바뀝니다.",
+                    positions: {
+                        first: "첫 번째:",
+                        second: "두 번째:",
+                        third: "세 번째:",
+                        fourth: "네 번째:"
+                    },
+                    subsorts: "하위 정렬",
+                    unclaimedSubsort: "미수령 하위 정렬:",
+                    unclaimedSubsortTooltip: "완료했지만 수령하지 않은 Quest는 미완료 미수령 Quest 아래에 위치하며, 그 후 각 그룹 안에서 이 하위 정렬이 적용됩니다.",
+                    claimedSubsort: "수령함 하위 정렬:",
+                    claimedSubsortTooltip: "수령한 Quest는 수령 시간 또는 Quest 추가 시간으로 정렬할 수 있습니다.",
+                    ignoredSubsort: "무시됨 하위 정렬:",
+                    ignoredSubsortTooltip: "무시된 Quest는 그룹 위치를 유지하며, 이 하위 정렬이 그룹 내 순서를 정합니다.",
+                    expiredSubsort: "만료됨 하위 정렬:",
+                    expiredSubsortTooltip: "만료된 Quest는 만료 시간 또는 Quest 추가 시간으로 정렬할 수 있습니다.",
+                    subsort: {
+                        addedNewest: "추가됨 (최신순)",
+                        addedOldest: "추가됨 (오래된순)",
+                        expiringSoonest: "만료 예정 (빠른순)",
+                        expiringLatest: "만료 예정 (늦은순)",
+                        expiredMostRecent: "만료됨 (최근)",
+                        expiredLeastRecent: "만료됨 (오래전)",
+                        claimedMostRecent: "수령함 (최근)",
+                        claimedLeastRecent: "수령함 (오래전)"
+                    },
+                    memory: "Quest 페이지 기억",
+                    rememberSort: "Quest 페이지에서 선택한 정렬 기억:",
+                    rememberSortTooltip: "끄면 Quest 페이지가 매번 Questify 정렬로 열립니다.",
+                    rememberFilters: "Quest 페이지에서 선택한 필터 기억:",
+                    rememberFiltersTooltip: "끄면 Quest 페이지가 매번 작업 또는 보상 필터 없이 열립니다."
+                }
+            },
+            option: {
+                migrationVersion: {
+                    label: "마이그레이션 버전",
+                    description: "설정의 현재 마이그레이션 버전입니다."
+                },
+                questFeatures: {
+                    label: "Quest 기능",
+                    description: "비활성화할 Quest 기능을 선택합니다."
+                },
+                disableQuestsEverything: {
+                    label: "모두 비활성화",
+                    description: "모든 Quest 기능을 비활성화합니다."
+                },
+                disableRelocationNotices: {
+                    label: "이전 안내 비활성화",
+                    description: "탐색 페이지의 Quest 이전 안내를 비활성화합니다."
+                },
+                disableSponsoredBanner: {
+                    label: "스폰서 배너 비활성화",
+                    description: "Quest 페이지의 스폰서 배너를 비활성화합니다."
+                },
+                disableAccountPanelPromo: {
+                    label: "계정 패널 프로모 비활성화",
+                    description: "계정 패널 위의 홍보 Quest 팝업을 비활성화합니다."
+                },
+                disableAccountPanelQuestProgress: {
+                    label: "계정 패널 진행도 비활성화",
+                    description: "계정 패널 위의 진행 중 및 완료된 Quest 진행도를 비활성화합니다."
+                },
+                disableOrbsAndQuestsBadges: {
+                    label: "Quest 및 Orbs 배지 비활성화",
+                    description: "사용자 프로필의 Quest 배지를 비활성화합니다."
+                },
+                disableFriendsListPromo: {
+                    label: "친구 목록 프로모 비활성화",
+                    description: "친구가 플레이하는 게임의 Quest 홍보를 비활성화합니다."
+                },
+                disableMembersListPromo: {
+                    label: "멤버 목록 프로모 비활성화",
+                    description: "멤버 목록의 플레이 중 아이콘을 비활성화합니다."
+                },
+                allowChangingDangerousSettings: {
+                    label: "위험한 설정 허용",
+                    description: "위험한 설정의 변경을 허용합니다."
+                },
+                resumeInterruptedQuests: {
+                    label: "중단된 Quest 재개",
+                    description: "새로고침 또는 재시작 후 Quest 자동 완료를 재개합니다."
+                },
+                makeMobileVideoQuestsDesktopCompatible: {
+                    label: "모바일 동영상 Quest 데스크톱 호환",
+                    description: "모바일 전용 동영상 Quest를 데스크톱과 호환되게 합니다."
+                },
+                autoCompleteQuestsSimultaneously: {
+                    label: "동시에 자동 완료",
+                    description: "Quest를 순차적이 아니라 동시에 완료합니다."
+                },
+                completeVideoQuestsQuicker: {
+                    label: "동영상 Quest 더 빨리 완료",
+                    description: "동영상 Quest 자동 완료에 Discord의 진행 여유와 등록 후 경과 시간을 사용합니다."
+                },
+                autoCompleteQuestTypes: {
+                    label: "자동 완료할 Quest 유형",
+                    description: "백그라운드에서 자동 완료할 Quest 유형입니다."
+                },
+                questButton: {
+                    label: "Quest 버튼",
+                    description: "서버 목록의 Quest 버튼을 사용자 지정합니다."
+                },
+                questButtonDisplay: {
+                    label: "Quest 버튼 표시",
+                    description: "서버 목록의 Quest 버튼에 사용할 표시 유형입니다."
+                },
+                questButtonIncludedTypes: {
+                    label: "Quest 버튼 포함 유형",
+                    description: "Quest 버튼에 Quest 수를 표시할 때 포함할 보상 유형과 Quest 유형입니다."
+                },
+                questButtonIndicator: {
+                    label: "Quest 버튼 표시기",
+                    description: "Quest 버튼의 미수령 표시기에 사용할 표시 유형입니다."
+                },
+                questButtonBadgeCount: {
+                    label: "배지 수",
+                    description: "관련된 미수령 Quest의 현재 수입니다."
+                },
+                questButtonBadgeColor: {
+                    label: "배지 색상",
+                    description: "서버 목록의 Quest 버튼 배지 색상입니다."
+                },
+                questButtonLeftClickAction: {
+                    label: "왼쪽 클릭 동작",
+                    description: "Quest 버튼을 왼쪽 클릭할 때 수행할 동작입니다."
+                },
+                questButtonMiddleClickAction: {
+                    label: "가운데 클릭 동작",
+                    description: "Quest 버튼을 가운데 클릭할 때 수행할 동작입니다."
+                },
+                questButtonRightClickAction: {
+                    label: "오른쪽 클릭 동작",
+                    description: "Quest 버튼을 오른쪽 클릭할 때 수행할 동작입니다."
+                },
+                questNotifications: {
+                    label: "Quest 알림",
+                    description: "Quest 완료 및 새 Quest 감지 알림을 설정합니다."
+                },
+                notifyOnQuestComplete: {
+                    label: "완료 시 알림",
+                    description: "Quest가 완료되면 알림을 표시합니다."
+                },
+                notifyOnNewQuests: {
+                    label: "새 Quest 알림",
+                    description: "새 Quest가 감지되면 알림을 표시합니다."
+                },
+                notifyOnNewExcludedQuests: {
+                    label: "새 제외 Quest 알림",
+                    description: "새 제외 Quest가 감지되면 알림을 표시합니다."
+                },
+                questCompletedAlertSound: {
+                    label: "Quest 완료 소리",
+                    description: "Quest가 완료되면 재생할 소리입니다."
+                },
+                questCompletedAlertVolume: {
+                    label: "Quest 완료 소리 음량",
+                    description: "Quest 완료 소리의 음량입니다."
+                },
+                questFetchInterval: {
+                    label: "가져오기 간격",
+                    description: "Discord에서 Quest를 가져오는 간격(초)입니다."
+                },
+                newQuestAlertSound: {
+                    label: "새 Quest 소리",
+                    description: "새 Quest가 감지되면 재생할 소리입니다."
+                },
+                newQuestAlertVolume: {
+                    label: "새 Quest 소리 음량",
+                    description: "새 Quest 소리의 음량입니다."
+                },
+                newExcludedQuestAlertSound: {
+                    label: "새 제외 Quest 소리",
+                    description: "새 제외 Quest가 감지되면 재생할 소리입니다."
+                },
+                newExcludedQuestAlertVolume: {
+                    label: "새 제외 Quest 소리 음량",
+                    description: "새 제외 Quest 소리의 음량입니다."
+                },
+                questTiles: {
+                    label: "Quest 타일",
+                    description: "Quest 페이지의 Quest 타일 모양을 사용자 지정합니다."
+                },
+                questTileUnclaimedColor: {
+                    label: "미수령 타일 색상",
+                    description: "미수령 Quest 타일의 색상입니다."
+                },
+                questTileClaimedColor: {
+                    label: "수령함 타일 색상",
+                    description: "수령한 Quest 타일의 색상입니다."
+                },
+                questTileIgnoredColor: {
+                    label: "무시됨 타일 색상",
+                    description: "무시된 Quest 타일의 색상입니다."
+                },
+                questTileExpiredColor: {
+                    label: "만료됨 타일 색상",
+                    description: "만료된 Quest 타일의 색상입니다."
+                },
+                questTileGradient: {
+                    label: "타일 그라데이션",
+                    description: "Quest 타일에 사용하는 그라데이션 스타일입니다."
+                },
+                questTilePreload: {
+                    label: "타일 미리 로드",
+                    description: "Quest 타일의 에셋을 미리 로드하려고 시도합니다."
+                },
+                reorderQuests: {
+                    label: "Quest 재정렬",
+                    description: "상태별로 Quest를 정렬합니다."
+                },
+                questOrder: {
+                    label: "Quest 순서",
+                    description: "Quest 상태 그룹의 정렬 순서입니다."
+                },
+                unclaimedSubsort: {
+                    label: "미수령 하위 정렬",
+                    description: "미수령 Quest의 하위 정렬 방식입니다."
+                },
+                claimedSubsort: {
+                    label: "수령함 하위 정렬",
+                    description: "수령한 Quest의 하위 정렬 방식입니다."
+                },
+                ignoredSubsort: {
+                    label: "무시됨 하위 정렬",
+                    description: "무시된 Quest의 하위 정렬 방식입니다."
+                },
+                expiredSubsort: {
+                    label: "만료됨 하위 정렬",
+                    description: "만료된 Quest의 하위 정렬 방식입니다."
+                },
+                isOnQuestsPage: {
+                    label: "Quest 페이지에 있음",
+                    description: "사용자가 현재 Quest 페이지에 있는지 여부입니다."
+                },
+                rememberQuestPageSort: {
+                    label: "정렬 기억",
+                    description: "Quest 페이지에서 마지막으로 사용한 정렬을 기억합니다."
+                },
+                rememberQuestPageFilters: {
+                    label: "필터 기억",
+                    description: "Quest 페이지에서 마지막으로 사용한 필터를 기억합니다."
+                },
+                lastQuestPageSort: {
+                    label: "마지막 정렬",
+                    description: "Quest 페이지에서 마지막으로 사용한 정렬입니다."
+                },
+                lastQuestPageFilters: {
+                    label: "마지막 필터",
+                    description: "Quest 페이지에서 마지막으로 사용한 필터입니다."
+                },
+                ignoredQuestIDs: {
+                    label: "무시된 Quest ID",
+                    description: "무시된 Quest ID 목록입니다."
+                },
+                resumeQuestIDs: {
+                    label: "재개할 Quest ID",
+                    description: "백그라운드에서 자동 완료 중이거나 대기열에 있는 Quest ID 목록입니다."
+                },
+                acknowledgedNotices: {
+                    description: "사용자가 확인한 일회성 공지입니다.",
+                    label: "확인한 공지"
+                },
+                settingsSearch: {
+                    description: "Questify 설정을 검색합니다.",
+                    label: "설정 검색"
+                },
+                hideNonAutoCompletableQuests: {
+                    description: "지원되고 활성화된 자동 완료 작업이 없는 미완료 퀘스트를 숨깁니다.",
+                    label: "자동 완료 불가 퀘스트 숨기기"
+                },
+                preventVideoQuestsPausing: {
+                    description: "퀘스트 창이 포커스를 잃어도 동영상이 일시 정지되지 않게 합니다.",
+                    label: "동영상 퀘스트 일시 정지 방지"
+                },
+                hiddenQuestStatuses: {
+                    description: "숨길 퀘스트 상태 그룹입니다.",
+                    label: "숨긴 퀘스트 상태"
+                }
+            },
+            text: {
+                clearQuestQueue: "퀘스트 대기열 비우기",
+                hideIncompleteQuestsWith: "이 플랫폼에서 지원되고 퀘스트 유형 드롭다운에서 활성화된 자동 완료 작업이 없을 때, 미수령 또는 무시 상태의 미완료 퀘스트를 숨깁니다. 수령, 만료, 완료된 퀘스트는 제외됩니다. 해당 퀘스트를 숨기려면 상태 순서 숨김 옵션을 사용하세요.",
+                discordForcesYouTo: "Discord는 동영상 퀘스트의 영상을 재생하려면 클라이언트를 활성 상태로 두도록 강제합니다.",
+                hideNonAutoCompletable: "자동 완료할 수 없는 퀘스트 숨기기:",
+                preventVideoQuestsFrom: "포커스를 잃어도 동영상 퀘스트가 일시 정지되지 않게 하기:",
+                thePunishmentAlsoConsists: "처벌에는 위반 1건당 2년간 유지되는 계정 상태 위반도 포함됩니다.",
+                dueToTheVarious: "Discord가 사용자를 추적하는 다양한 방법 때문에 탐지를 현실적으로 피할 방법은 없습니다. 계속하면 언젠가 Discord가 사용을 탐지할 가능성이 높다는 점을 알아 두세요.",
+                enrollInQuest: "퀘스트 등록",
+                hidden: "숨김",
+                selectingAnOccupiedPosition: "이미 사용 중인 위치를 선택하면 두 상태가 서로 바뀝니다. 숨긴 상태는 퀘스트 목록에서 제거됩니다.",
+                searchQuestifySettings: "Questify 설정 검색",
+                searchQuestifySettings2: "Questify 설정 검색...",
+                noMatchingSettings: "일치하는 설정이 없습니다.",
+                questifyNoticeAugust7th: "Questify 공지 - 2026년 8월 7일",
+                keepUsingDangerousQuestify: "위험한 Questify 설정 계속 사용",
+                disableDangerousQuestifySettings: "위험한 Questify 설정 끄기",
+                questifyNoticeAugust26th: "Questify 공지 - 2026년 8월 26일",
+                areYouSure: "확실한가요?",
+                thePunishmentAppearsLimited: "처벌은 퀘스트와 보상에 대한 접근 권한 상실로 제한되는 것으로 보이지만 Discord는 언제든 강화할 수 있습니다.",
+                queueAllQuests: "모든 퀘스트 대기열에 추가",
+                inProgress: "진행 중",
+                rateLimited: "속도 제한됨",
+                preventsVideoPausing: "이 설정은 영상이 일시 정지되지 않게 하여 완료가 정상적으로 진행되도록 합니다.",
+                appliesOnlyToVideoQuests: "이 설정은 비디오 퀘스트를 수동으로 완료할 때만 적용됩니다.",
+                knownToPunish: "Discord는 퀘스트 완료를 조작하는 스크립트나 플러그인 사용자를 처벌하는 것으로 알려져 있습니다. 퀘스트 완료를 조작하는 것은 Discord의 다음 정책에 위배됩니다:",
+                punishmentConsists: "처벌은 퀘스트와 보상에 대한 접근 권한을 일시적 또는 영구적으로 잃는 것입니다.",
+                questBanSystem: "Discord는 비공식적인 방법으로 퀘스트를 완료한 것이 확인되면 퀘스트 완료와 보상 수령을 일시적 또는 영구적으로 제한하는 퀘스트 차단 시스템을 도입했습니다. 퀘스트 완료를 조작하는 것은 다음 정책에 위배됩니다:",
+                begunPunishing: "Discord는 퀘스트 완료를 조작하는 스크립트와 플러그인 사용자를 처벌하기 시작했습니다. 퀘스트 완료를 조작하는 것은 다음 정책에 위배됩니다:",
+                dueToRateLimits: " (속도 제한으로 인해)"
             }
         },
         questionMarkReplacement: {
@@ -8230,6 +8853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "GIF로 저장",
                     description: "기본적으로 GIF로 저장"
                 }
+            },
+            text: {
+                quotePreview: "인용 미리보기"
             }
         },
         randomVoice: {
@@ -8287,7 +8913,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                     server: "잘못된 서버"
                 }
             },
+            keybind: {
+                label: "단축키",
+                recording: "기록 중...",
+                reset: "초기화"
+            },
             option: {
+                keybindEnabled: {
+                    label: "단축키 사용",
+                    description: "랜덤 음성 단축키 설정을 표시합니다"
+                },
                 userAmountOperation: {
                     label: "사용자 금액 운영",
                     description: "사용자 수에 따른 작업 선택"
@@ -8379,6 +9014,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             alert: {
                 failed: "음성 채널을 찾지 못했습니다!"
+            },
+            toast: {
+                failedToFindA: "음성 채널을 찾지 못했습니다.",
+                voiceChannelIsUnavailable: "음성 채널을 사용할 수 없습니다."
+            },
+            text: {
+                userCount: "사용자 {{count}}명",
+                usersCount: "사용자 {{count}}명"
             }
         },
         reactErrorDecoder: {
@@ -8426,7 +9069,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 clearRdms: {
                     label: "RDMS 목록 지우기",
                     description: "테스트 유틸리티: RDM 목록 지우기",
-                    toast: "RMDS 기록 삭제",
+                    toast: "RDMS 기록을 지웠습니다",
                     button: "RDM 기록 지우기"
                 }
             },
@@ -8477,6 +9120,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noLongerFriend: "귀하는 더 이상 {{user}}님과 친구가 아닙니다.",
                 friendRequestRevoked: "{{user}}님의 친구 요청이 취소되었습니다.",
                 ok: "좋아요"
+            },
+            text: {
+                relationshipNotifier: "관계 알림"
             }
         },
         remix: {
@@ -8500,7 +9146,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ellipse: "타원",
                 line: "선",
                 arrow: "화살",
-                fill: "채우다"
+                fill: "채우다",
+                image: "이미지"
             }
         },
         repeatMessages: {
@@ -8534,12 +9181,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "텍스트 검색",
                 searchWith: "{{name}}로 검색"
+            },
+            text: {
+                google: "Google"
             }
         },
         replyPingControl: {
             name: "ReplyPingControl",
-            description: "화이트리스트 기능을 사용하여 메시지 답장에 대해 항상 핑을 받을지 여부를 제어합니다.",
+            description: "메시지 답장 시 항상 알림을 받을지 전혀 받지 않을지 제어하며, 화이트리스트 및 블랙리스트 기능을 제공합니다",
             option: {
+                replyPingBlacklist: {
+                    label: "답장 알림 블랙리스트",
+                    description: "답장 알림을 전혀 받지 않을 사용자 ID의 쉼표로 구분된 목록"
+                },
                 alwaysPingOnReply: {
                     label: "응답 시 항상 핑(Ping)",
                     description: "누군가가 메시지에 답장하면 항상 핑이 울립니다."
@@ -8564,6 +9218,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "이미지 검색",
                 all: "모두 검색"
+            },
+            text: {
+                all: "모두"
             }
         },
         reviewDB: {
@@ -8671,6 +9328,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             profile: {
                 optedOut: "사용자가 거부했습니다",
                 noReviews: "아직 리뷰가 없습니다"
+            },
+            toast: {
+                youCannotVoteOn: "자신의 리뷰에는 투표할 수 없습니다.",
+                networkErrorFailedTo: "네트워크 오류: ReviewDB에 연결하지 못했습니다.",
+                pleaseAuthorizeToVote: "리뷰에 투표하려면 인증하세요.",
+                requestFailed: "ReviewDB: 요청이 상태 {{status}}(으)로 실패했습니다"
+            },
+            text: {
+                ok: "확인",
+                updateReviewFor: "@{{name}} 리뷰 업데이트",
+                reviewUser: "@{{name}} 리뷰하기",
+                system: "시스템",
+                reviewCount: "(리뷰 {{count}}개)"
             }
         },
         richMagnetLinks: {
@@ -8764,46 +9434,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
         },
-        rpcStats: {
-            name: "RPCStats",
-            description: "RPC로서의 활동에 대한 통계를 표시합니다.",
-            option: {
-                assetURL: {
-                    label: "자산 URL",
-                    description: "RPC에 사용할 이미지입니다. 비워두면 프로필 사진이 사용됩니다."
-                },
-                rpcTitle: {
-                    label: "RPC 제목",
-                    description: "RPC 제목"
-                },
-                statDisplay: {
-                    label: "통계 표시",
-                    description: "RPC는 무엇을 표시해야 합니까? (한 줄만 가질 수 있습니다. 확실합니다)",
-                    today: "오늘 보낸 메시지의 양",
-                    alltime: "항상 전송된 메시지의 양",
-                    listened: "이번 주 가장 많이 들은 앨범"
-                },
-                lastFMApiKey: {
-                    label: "Last.fm API 키",
-                    description: "Last.fm API 키"
-                },
-                lastFMUsername: {
-                    label: "Last.fm 사용자 이름",
-                    description: "Last.fm 사용자 이름"
-                },
-                albumCoverImage: {
-                    label: "앨범 표지 이미지",
-                    description: "앨범 표지 이미지를 RPC 이미지로 사용해야 합니까? (Last.fm 디스플레이를 선택한 경우)"
-                },
-                lastFMStatFormat: {
-                    label: "Last.fm 통계 형식",
-                    description: "Last.fm 통계의 형식은 어떻게 지정되어야 합니까? $album은 앨범 이름으로 대체되고, $artist는 아티스트 이름으로 대체됩니다."
-                }
-            },
-            noInfo: "지금은 정보가 없습니다 :(",
-            messagesToday: "오늘 보낸 메시지: {{count}}",
-            messagesAllTime: "항상 보낸 메시지: {{count}}"
-        },
         saveFavoriteGIFs: {
             name: "SaveFavouritedGIFs",
             description: "즐겨찾는 GIF URL 내보내기",
@@ -8868,7 +9498,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 maxMessagesReached: "분당 채널당 최대 {{max}} 메시지에 도달했습니다.",
                 messageScheduled: "메시지 예약됨!",
                 messageRemoved: "예약된 메시지가 삭제되었습니다.",
-                allCleared: "예약된 메시지가 모두 삭제되었습니다."
+                allCleared: "예약된 메시지가 모두 삭제되었습니다.",
+                scheduledMessageSentTo: "{{name}}님에게 예약 메시지를 보냈습니다"
             },
             button: {
                 tooltipOn: "일정 모드 켜짐(비활성화하려면 클릭, 목록을 보려면 마우스 오른쪽 버튼 클릭)",
@@ -8924,20 +9555,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Snow Halation 테마만 재생하세요"
                 }
             }
-        },
-        summaries: {
-            name: "Summaries",
-            description: "모든 서버에서 Discord의 실험적인 요약 기능을 활성화하여 AI가 생성한 대화 요약을 표시합니다.",
-            option: {
-                summaryExpiryThresholdDays: {
-                    label: "요약 만료 임계값(일)",
-                    description: "요약이 제거되기 전까지의 시간(일)입니다. 채널당 최대 50개의 요약만 보관됩니다."
-                }
-            }
-        },
-        selfForward: {
-            name: "SelfForward",
-            description: "현재 채널을 앞으로 목록 팝업에 추가합니다."
         },
         sendTimestamps: {
             name: "SendTimestamps",
@@ -9002,7 +9619,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 serverBoosts: "서버 부스트",
                 channels: "채널",
-                roles: "역할"
+                roles: "역할",
+                boostLevel: "{{count}} (레벨 {{level}})"
             }
         },
         serverListIndicators: {
@@ -9061,6 +9679,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bgOpacity: {
                     label: "배경 불투명도",
                     description: "배경 불투명도"
+                },
+                ignoredLanguages: {
+                    label: "무시할 언어",
+                    description: "Discord 기본 코드 블록에 맡길 언어의 쉼표로 구분된 목록"
                 }
             },
             button: {
@@ -9079,6 +9701,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noShiftPin: {
                     label: "시프트 핀 없음",
                     description: "메시지 고정을 위해 교대 근무를 보류해야 하는 요구 사항을 제거합니다."
+                },
+                noQuickReacts: {
+                    description: "빠른 반응을 숨깁니다. 기본적으로 전체 메뉴를 표시하면 빠른 반응 버튼이 숨겨집니다.",
+                    label: "빠른 반응 없음"
                 }
             }
         },
@@ -9161,6 +9787,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     compact: "콤팩트",
                     cozy: "아늑한",
                     roomy: "넓은"
+                },
+                showGithubOrgs: {
+                    description: "사용자가 속한 GitHub 조직 표시",
+                    label: "GitHub 조직 표시"
+                },
+                showOnModal: {
+                    description: "전체 크기 프로필 창에 연결된 계정 표시",
+                    label: "창에 표시"
                 }
             }
         },
@@ -9295,7 +9929,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 memberList: {
                     label: "회원 목록",
-                    description: "구성원 목록에서 사용자 정의 이름 형식으로 나열된 첫 번째 사용 가능한 이름을 표시합니다."
+                    description: "멤버 목록, DM 목록, 친구 목록, 지금 활동 중에 사용자 지정 이름 형식의 첫 번째 사용 가능한 이름을 표시합니다."
                 },
                 profilePopout: {
                     label: "프로필 팝아웃",
@@ -9349,6 +9983,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "쪽지에만 있는 맞춤 이름",
                     description: "서버가 아닌 DM에만 사용자 정의 이름을 표시합니다."
                 },
+                alwaysShowEffects: {
+                    label: "항상 효과 애니메이션",
+                    description: "마우스를 올린 것처럼 항상 효과를 표시합니다."
+                },
                 includedNames: {
                     label: "포함된 이름",
                     description: "사용자 이름, 표시 이름, 별명, 친구 이름을 표시하는 순서입니다. 다음 자리 표시자를 사용하세요: {user}, {display}, {nick}, {friend}. 이름 옵션을 사용할 수 없는 경우 {friend, nick, display}와 같이 쉼표로 구분하여 대체 이름으로 사용할 수 있는 여러 이름 옵션을 제공할 수 있습니다. 이름당 최대 3개의 접두사와 3개의 접미사를 사용할 수 있습니다."
@@ -9376,6 +10014,42 @@ const translations: MatchStructure<typeof enTranslations> = {
                 triggerNameRerender: {
                     label: "트리거 이름 재렌더링",
                     description: "이 설정을 전환하여 이름 다시 렌더링을 트리거합니다."
+                },
+                searchAutocomplete: {
+                    description: "멘션과 검색 자동 완성에 사용자 지정 이름 형식의 첫 번째 사용 가능한 이름을 표시합니다.",
+                    label: "검색 자동 완성"
+                },
+                styleDirectMessagesList: {
+                    description: "마우스를 올리지 않아도 선택되지 않은 항목에 표시 이름 효과를 표시합니다. 꺼도 선택 및 마우스 오버 항목에는 스타일이 적용됩니다.",
+                    label: "다이렉트 메시지 목록 스타일 적용"
+                },
+                styleDirectMessagesMessages: {
+                    description: "마우스를 올리지 않아도 메시지 작성자에게 표시 이름 효과를 표시합니다. 꺼도 마우스 오버 이름에는 스타일이 적용됩니다.",
+                    label: "DM 메시지 스타일 적용"
+                },
+                styleFriendsList: {
+                    description: "마우스를 올리지 않아도 표시 이름 효과를 표시합니다. 꺼도 마우스 오버 항목에는 스타일이 적용됩니다.",
+                    label: "친구 목록 스타일 적용"
+                },
+                styleActiveNow: {
+                    description: "마우스를 올리지 않아도 표시 이름 효과를 표시합니다. 꺼도 마우스 오버 항목에는 스타일이 적용됩니다.",
+                    label: "지금 활동 중 스타일 적용"
+                },
+                ignoreEffects: {
+                    description: "기본이 아닌 이름에는 기본 역할 색상만 사용하고 표시 이름 효과는 생략합니다.",
+                    label: "효과 무시"
+                },
+                animateEffects: {
+                    description: "기본이 아닌 이름에 역할 그라데이션과 표시 이름 효과를 애니메이션으로 표시합니다. \"효과 무시\"와 동작 줄이기로 비활성화됩니다.",
+                    label: "효과 애니메이션"
+                },
+                alwaysAnimateEffects: {
+                    description: "표시 이름 효과가 이미 보이는 경우 마우스를 올리지 않아도 강제로 애니메이션합니다.",
+                    label: "항상 효과 애니메이션"
+                },
+                gradientGlow: {
+                    description: "서버 역할 그라데이션처럼 애니메이션 사용자 그라데이션에 광채를 추가합니다.",
+                    label: "그라데이션 광채"
                 }
             },
             modal: {
@@ -9389,6 +10063,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nickname: "SMYN 닉네임",
                 reset: "SMYN 닉네임 재설정",
                 cancel: "취소"
+            },
+            text: {
+                save: "저장",
+                unknown: "알 수 없음"
             }
         },
         showTimeoutDuration: {
@@ -9401,6 +10079,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     tooltip: "도구 설명에서",
                     inline: "시간 초과 아이콘 옆"
                 }
+            },
+            text: {
+                timeoutRemaining: "타임아웃 남음"
             }
         },
         showResourceChannels: {
@@ -9559,7 +10240,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 hidden: "숨김({{location}}) 입력 중",
                 visible: "표시({{location}}) 입력 중",
-                global: "표시 유형(전역)"
+                global: "표시 유형(전역)",
+                voiceChannel: "연결된 음성 채널 채팅에서는 입력 중 표시가 항상 보입니다",
+                temporary: "최근 메시지로 인해 이 채널에서 입력 중 표시가 일시적으로 보입니다"
             },
             option: {
                 enabledGlobally: {
@@ -9610,6 +10293,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "기본 숨김",
                     description: "활성화되면 플러그인은 아래 '비활성화 위치'에 나열되지 않은 DM/채널/길드에서 다른 사람이 입력하는 것을 숨깁니다. 비활성화된 경우, 플러그인은 아래 '활성화된 위치'에 나열되지 않은 DM/채널/길드에 대한 귀하의 입력을 다른 사람에게 표시합니다."
                 },
+                alwaysEnableInActiveVoiceChat: {
+                    label: "활성 음성 채팅에서 항상 활성화",
+                    description: "연결된 음성 채널에서 입력할 때 입력 중 표시가 항상 보이도록 허용합니다."
+                },
+                temporaryEnableThresholdServers: {
+                    label: "임시 활성화 시간 (서버)",
+                    description: "서버 채널에서 메시지를 보낸 후 이 시간(초) 동안 입력 중 표시가 일시적으로 보이도록 허용합니다. 이미 채널에서 입력 중 표시가 보이는 경우 이 설정은 효과가 없습니다."
+                },
+                temporaryEnableThresholdDirectMessages: {
+                    label: "임시 활성화 시간 (개인 메시지)",
+                    description: "DM 또는 그룹 DM에서 메시지를 보낸 후 이 시간(초) 동안 입력 중 표시가 일시적으로 보이도록 허용합니다. 이미 채널에서 입력 중 표시가 보이는 경우 이 설정은 효과가 없습니다."
+                },
                 enabledLocations: {
                     label: "활성화된 위치",
                     description: "이 ID에 대한 기능을 활성화하십시오. 쉼표로 구분된 DM ID, 채널 ID 및 길드 ID 목록을 허용합니다. '기본 숨김'이 비활성화된 경우에만 사용됩니다."
@@ -9618,6 +10313,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "장애인 장소",
                     description: "해당 ID에 대한 기능을 비활성화합니다. 쉼표로 구분된 DM ID, 채널 ID 및 길드 ID 목록을 허용합니다. '기본 숨김'이 활성화된 경우에만 사용됩니다."
                 }
+            },
+            text: {
+                silentTyping: "조용히 입력",
+                enabled: "사용",
+                chatBarIndicators: "채팅창 표시기",
+                membersListIndicators: "멤버 목록 표시기",
+                guild: "서버",
+                channel: "채널",
+                global: "전역"
             }
         },
         snowfall: {
@@ -9714,7 +10418,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         splitLargeMessages: {
             name: "SplitLargeMessages",
-            description: "Discord의 메시지 제한에 맞게 대용량 메시지를 여러 개로 분할합니다.",
+            description: "너무 긴 메시지를 보내기 전에 Discord 크기에 맞게 나눕니다.",
             option: {
                 maxLength: {
                     label: "최대 메시지 길이",
@@ -9726,7 +10430,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 sendDelay: {
                     label: "전송 지연",
-                    description: "각 청크 사이의 지연 시간은 초 단위입니다."
+                    description: "각 조각 사이의 최소 지연 (초)."
                 },
                 hardSplit: {
                     label: "하드 분할",
@@ -9734,32 +10438,26 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 splitInSlowmode: {
                     label: "저속 모드에서 분할",
-                    description: "채널에 저속 모드가 활성화된 경우 메시지를 분할해야 합니까?"
+                    description: "슬로우 모드 지연이 설정한 최대값 이내일 때 분할을 허용합니다."
                 },
                 slowmodeMax: {
                     label: "저속 모드 최대",
-                    description: "저속 모드로 분할하는 경우 최대 저속 모드 시간입니다."
-                }
-            }
-        },
-        spotifyActivityToggle: {
-            name: "SpotifyActivityToggle",
-            description: "Spotify 활동 가시성을 위한 토글 버튼을 추가합니다.",
-            tooltip: {
-                enable: "Spotify 활동 켜기",
-                disable: "Spotify 활동 끄기"
-            },
-            option: {
-                location: {
-                    label: "위치",
-                    description: "Spotify 토글 버튼을 표시할 위치",
-                    panel: "음소거/청각 장애 옆",
-                    toolbox: "Plexcord 도구 상자"
+                    description: "메시지를 나눌 때 허용되는 최대 슬로우 모드 시간입니다."
                 },
-                activityStatus: {
-                    label: "활동현황",
-                    description: "Spotify 활동의 현재 상태"
+                splitMode: {
+                    description: "메시지를 나눌 때 이 경계를 우선합니다.",
+                    label: "분할 모드"
                 }
+            },
+            toast: {
+                cannotSplitThisMessage: "채널의 슬로우 모드 때문에 이 메시지를 나눌 수 없습니다.",
+                onlySentLengthMessage: "메시지 {{length}}개 중 {{sent}}개만 전송되었습니다.",
+                unsentCopied: "전송되지 않은 메시지 부분을 클립보드에 복사했습니다."
+            },
+            text: {
+                newlines: "줄 바꿈",
+                spaces: "공백",
+                strictCharacterLimit: "엄격한 글자 수 제한"
             }
         },
         spotifyCrack: {
@@ -9845,7 +10543,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             context: {
                 edit: "사용자 정의 사전 설정 편집",
-                set: "맞춤 상태 설정"
+                set: "맞춤 상태 설정",
+                delete: "프리셋 삭제"
             },
             notification: {
                 successfully: "상태가 성공적으로 저장되었습니다."
@@ -9912,11 +10611,39 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 blockSticker: "블록 스티커",
                 unblockSticker: "스티커 차단 해제"
+            },
+            text: {
+                failedToRender: "표시하지 못했습니다 :("
             }
         },
         stickerPaste: {
             name: "StickerPaste",
             description: "스티커 선택기에서 스티커를 선택하면 즉시 보내는 대신 채팅 상자에 삽입됩니다."
+        },
+        streaks: {
+            name: "Streaks",
+            description: "연속된 날에 DM을 주고받은 사용자 옆에 연속 기록을 표시합니다.",
+            tooltip: "{{count}}일 연속",
+            tooltipExpiring: "{{count}}일 연속 — 오늘도 메시지를 보내 기록을 이어가세요!",
+            option: {
+                account: {
+                    description: "Streaks API에 로그인하거나 로그아웃합니다. 연속 기록은 API에 저장되므로 기록하려면 로그인해야 합니다.",
+                    login: "Streaks API에 로그인",
+                    logout: "Streaks API에서 로그아웃"
+                },
+                eliteColor: "엘리트 연속 기록 색상 (100일 이상)",
+                diamondColor: "다이아몬드 연속 기록 색상 (60일 이상)",
+                platinumColor: "플래티넘 연속 기록 색상 (45일 이상)",
+                goldColor: "골드 연속 기록 색상 (30일 이상)",
+                silverColor: "실버 연속 기록 색상 (14일 이상)",
+                bronzeColor: "브론즈 연속 기록 색상 (7일 이상)",
+                defaultColor: "기본 연속 기록 색상 (1일 이상)"
+            },
+            toast: {
+                authFailed: "인증 실패: {{error}}",
+                failedToAuthorizeMessage: "인증에 실패했습니다: {{message}}",
+                authorizationExpired: "Streaks 인증이 만료되었습니다. Streaks 플러그인 설정에서 다시 인증하세요."
+            }
         },
         streamerModeOnStream: {
             name: "StreamerModeOnStream",
@@ -9924,27 +10651,27 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         streamingCodecDisabler: {
             name: "StreamingCodecDisabler",
-            description: "원하는 스트리밍에 대한 코덱을 비활성화합니다.",
+            description: "방송과 카메라에서 원하는 비디오 코덱을 비활성화합니다.",
             option: {
                 disableAv1Codec: {
                     label: "AV1 코덱 비활성화",
-                    description: "Discord가 스트리밍에 AV1 사용을 고려하지 못하도록 방지하세요."
+                    description: "방송과 카메라에 AV1을 사용하지 않도록 합니다."
                 },
                 disableH265Codec: {
                     label: "H265 코덱 비활성화",
-                    description: "Discord가 스트리밍에 H265 사용을 고려하지 않도록 방지하세요."
+                    description: "방송과 카메라에 H265를 사용하지 않도록 합니다."
                 },
                 disableH264Codec: {
                     label: "H264 코덱 비활성화",
-                    description: "Discord가 스트리밍에 H264 사용을 고려하지 않도록 방지하세요."
+                    description: "방송과 카메라에 H264를 사용하지 않도록 합니다."
                 },
                 disableVP8Codec: {
                     label: "VP8 코덱 비활성화",
-                    description: "Discord가 스트리밍에 VP8 사용을 고려하지 않도록 방지하세요."
+                    description: "방송과 카메라에 VP8을 사용하지 않도록 합니다."
                 },
                 disableVP9Codec: {
                     label: "VP9 코덱 비활성화",
-                    description: "Discord가 스트리밍에 VP9 사용을 고려하지 않도록 방지하세요."
+                    description: "방송과 카메라에 VP9를 사용하지 않도록 합니다."
                 }
             }
         },
@@ -9990,6 +10717,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             modal: {
+                name: "이름",
+                nameDescription: "이 규칙을 식별하는 데 도움이 되는 선택적 이름입니다.",
+                search: "규칙 검색...",
+                noResults: "검색 조건과 일치하는 규칙이 없습니다.",
                 title: "테스트 규칙",
                 find: "찾다",
                 findRegex: "Regex 패턴",
@@ -10004,6 +10735,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 add: "규칙 추가",
                 empty: "빈 규칙",
                 rule: "규칙",
+            },
+            text: {
+                optionallyOnlyApplyThis: "선택적으로 메시지에 이 텍스트가 포함된 경우에만 이 규칙을 적용합니다.",
+                emptyRule: "빈 규칙 {{number}}",
+                ruleWithFind: "규칙 {{number}} - {{find}}"
             }
         },
         themeAttributes: {
@@ -10089,6 +10825,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 askedTimezone: {
                     label: "요청된 시간대",
                     description: "사용자에게 시간대를 설정하라는 요청을 받았는지 여부"
+                },
+                recipientTimezoneInDms: {
+                    label: "DM에서 받는 사람의 시간대",
+                    description: "DM에서 내 메시지에 받는 사람의 시간대를 표시합니다"
+                },
+                showLocalTimezone: {
+                    label: "로컬 시간대 표시",
+                    description: "\"로컬\" 대신 로컬 시간대를 표시"
                 }
             },
             modal: {
@@ -10097,6 +10841,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 selectPlaceholder: "시간대 선택",
                 delete: "시간대 삭제",
                 save: "구하다"
+            },
+            text: {
+                invalidResponseFormat: "잘못된 응답 형식"
             }
         },
         toastNotifications: {
@@ -10157,6 +10904,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 determineServerNotifications: {
                     label: "서버 알림 결정",
                     description: "서버 알림 설정에 따라 알림 표시 여부 결정"
+                },
+                respectDoNotDisturb: {
+                    label: "방해 금지 모드 준수",
+                    description: "상태가 방해 금지일 때 알림을 표시하지 않습니다."
                 },
                 directMessages: {
                     label: "직접 메시지",
@@ -10244,8 +10995,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "DeepL을 사용하려면 DeepL Pro의 유료 API 키가 필요합니다.",
                     descriptionWeb: "번역 서비스 (웹에서는 지원되지 않습니다!)",
                     google: "구글 번역",
-                    deepl: "DeepL 무료",
-                    deeplPro: "딥엘 프로"
+                    deepl: "DeepL 무료 - API 키 필요",
+                    deeplPro: "DeepL Pro - API 키 필요",
+                    kagi: "Kagi 번역 - API 키 필요"
+                },
+                kagiSession: {
+                    label: "Kagi 세션",
+                    description: "https://kagi.com/settings?p=user_details 에서 세션 토큰을 가져오세요"
                 },
                 deeplApiKey: {
                     label: "DeepL API 키",
@@ -10284,6 +11040,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     cancel: "알았어요",
                     secondaryConfirm: "다시 표시하지 않음"
                 }
+            },
+            button: {
+                manageLanguages: "번역 언어 및 자동 번역 설정"
             }
         },
         typingIndicator: {
@@ -10596,6 +11355,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "이미지 크기",
                     description: "사용할 이미지 크기"
                 }
+            },
+            text: {
+                viewAvatarDecoration: "아바타 꾸미기 보기"
             }
         },
         viewRaw: {
@@ -10616,11 +11378,23 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "모든 메시지의 원시 콘텐츠/데이터를 보려면 버튼을 변경하세요.",
                     left: "원시 콘텐츠를 보려면 마우스 왼쪽 버튼을 클릭하세요.",
                     right: "원시 콘텐츠를 보려면 마우스 오른쪽 버튼을 클릭하세요."
+                },
+                messageContextMenu: {
+                    description: "메시지 컨텍스트 메뉴에 표시",
+                    label: "메시지 컨텍스트 메뉴"
+                },
+                sortKeys: {
+                    description: "원시 데이터의 키를 알파벳순으로 정렬합니다.",
+                    label: "키 정렬"
+                },
+                stripSensitiveData: {
+                    description: "이메일, 전화번호 같은 민감한 데이터를 원시 데이터에서 제거합니다.",
+                    label: "민감한 데이터 제거"
                 }
             },
             modal: {
                 title: "원시 보기",
-                content: "콘텐츠",
+                content: "메시지 내용",
                 data: "{{type}} 데이터",
                 copied: "{{type}} 데이터가 클립보드에 복사되었습니다!",
                 copy: "{{type}} JSON 복사",
@@ -10633,6 +11407,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 guild: "동업 조합",
                 role: "역할",
                 user: "사용자"
+            },
+            text: {
+                copyTypeData: "{{type}} 데이터 복사",
+                rawTypeData: "{{type}} 원시 데이터",
+                messageData: "메시지 데이터"
             }
         },
         voiceButtons: {
@@ -10811,6 +11590,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 pause: "녹음 일시 정지",
                 recording: "녹음",
                 send: "보내다",
+            },
+            text: {
+                convertioWebConverter: "convertio 웹 변환기"
             }
         },
         volumeBooster: {
@@ -10820,39 +11602,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 multiplier: {
                     label: "승수",
                     description: "볼륨 승수"
-                }
-            }
-        },
-        wallpaperFree: {
-            name: "WallpaperFree",
-            description: "기존 DM 벽지 실험을 재현합니다. 모든 채널, 사용자 또는 서버에 대한 배경 이미지를 설정하세요.",
-            option: {
-                globalDefault: {
-                    label: "전역 기본값",
-                    description: "모든 채널에 대한 전역 기본 배경화면을 설정합니다."
-                },
-                stylingTips: {
-                    label: "스타일링 팁"
-                }
-            },
-            context: {
-                setWallpaper: "배경화면 설정",
-                removeWallpaper: "배경화면 제거"
-            },
-            modal: {
-                set: "배경화면 설정",
-                image: "이미지 URL",
-                cancel: "취소",
-                apply: "적용하다",
-                global: {
-                    set: "글로벌 배경화면 설정",
-                    remove: "전역 기본 배경화면 제거",
-                    reset: "배경화면 데이터 재설정"
-                },
-                web: {
-                    info: "Plexcord 테마 디렉토리에 로컬 파일을 두고 URL plexcord:///themes/filename.ext를 사용하여 로컬 파일을 사용할 수 있습니다.",
-                    open: "테마 디렉토리 열기",
-                    quickCSS: "QuickCSS 열기"
                 }
             }
         },
@@ -10868,7 +11617,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webKeybinds: {
             name: "WebKeybinds",
-            description: "Discord 웹 버전에서 누락된 키 바인딩을 다시 추가합니다: Ctrl+T, Ctrl+Shift+T, Ctrl+Tab, Ctrl+Shift+Tab, Ctrl+1-9, Ctrl+,. 브라우저 내부가 아닌 Plextron/Legcord에서만 완전히 작동합니다."
+            description: "웹 버전 Discord에 없는 단축키를 다시 추가합니다. 브라우저가 아닌 Plextron/Legcord에서만 완전히 동작합니다",
+            option: {
+                showNavigationButtons: {
+                    description: "제목 표시줄에 뒤로/앞으로 이동 버튼을 표시합니다.",
+                    label: "탐색 버튼 표시"
+                },
+                overrideCommonKeybinds: {
+                    description: "Discord가 가장 일반적인 탭 탐색 단축키(ctrl+t, ctrl+shift+t, ctrl+tab, ctrl+shift+tab, ctrl+n)를 재정의할 수 있게 합니다. 웹사이트 단축키를 우선하는 일부 브라우저에서만 동작합니다.",
+                    label: "일반 단축키 재정의"
+                }
+            }
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
@@ -10887,6 +11646,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 avatarClick: {
                     label: "아바타 클릭",
                     description: "반응에서 아바타 클릭 전환"
+                },
+                clickableAvatars: {
+                    description: "켜면 반응한 사용자의 아바타를 클릭할 때 반응을 추가하지 않고 프로필을 엽니다",
+                    label: "클릭 가능한 아바타"
                 }
             }
         },
@@ -11002,6 +11765,2447 @@ const translations: MatchStructure<typeof enTranslations> = {
         youtubeDescription: {
             name: "YouTubeDescription",
             description: "YouTube 비디오 삽입에 설명을 추가합니다."
+        },
+        addAttachments: {
+            name: "AddAttachments",
+            description: "메시지를 편집하는 동안 새 첨부 파일을 추가할 수 있습니다",
+            toast: {
+                youCannotAddMore: "이 메시지에는 더 이상 첨부 파일을 추가할 수 없습니다.",
+                youCanOnlyAdd: "이 메시지에는 첨부 파일을 {{count}}개만 더 추가할 수 있습니다.",
+                uploadingThisCanTake: "업로드 중입니다. 시간이 걸릴 수 있습니다...",
+                addedOne: "첨부 파일을 추가했습니다!",
+                addedMany: "첨부 파일들을 추가했습니다!"
+            },
+            text: {
+                addAttachments: "첨부 파일 추가"
+            }
+        },
+        advancedPermissions: {
+            option: {
+                simplifiedCard: {
+                    description: "Discord의 간소화된 권한 카드를 어떻게 할지",
+                    label: "간소화된 카드",
+                    hide: "숨기기",
+                    collapse: "접을 수 있게 만들기",
+                    show: "보이게 두기"
+                },
+                collapsedByDefault: {
+                    description: "간소화된 권한을 접힌 상태로 시작합니다.",
+                    label: "기본적으로 접기"
+                }
+            },
+            name: "AdvancedPermissions",
+            description: "기본적으로 고급 권한 카드를 표시합니다.",
+            text: {
+                simplifiedPermissions: "간소화된 권한"
+            }
+        },
+        autoJumpToMessage: {
+            option: {
+                onlyWhenUnfocused: {
+                    description: "Discord 창에 포커스가 없을 때만 자동으로 메시지로 이동합니다.",
+                    label: "포커스가 없을 때만"
+                }
+            },
+            name: "AutoJumpToMessage",
+            description: "새 메시지가 온 채널을 자동으로 엽니다."
+        },
+        betterForwards: {
+            text: {
+                serverIconForName: "{{name}}의 서버 아이콘",
+                messageAttachments: "메시지 첨부 파일",
+                messageTextWillNot: "이 옵션이 꺼져 있으면 메시지 텍스트가 전달되지 않습니다",
+                forwardEverything: "모두 전달",
+                viewServer: "서버 보기",
+                embed: "임베드",
+                embedNumber: "임베드 {{number}}",
+                image: "이미지",
+                video: "동영상",
+                serverIcon: "{{name}} 서버 아이콘",
+                dmIcon: "{{name}} DM 아이콘",
+                groupDmIcon: "{{name}} 그룹 DM 아이콘"
+            },
+            option: {
+                resendOnFail: {
+                    description: "전달이 실패하면 전달된 메시지를 다시 보내려고 시도합니다. 의도치 않은 멘션이나 텍스트 스팸이 발생할 수 있습니다. NSFW 제한을 우회합니다.",
+                    label: "실패 시 다시 보내기"
+                },
+                forwardPreface: {
+                    description: "전달된 메시지 앞에 붙일 내용",
+                    label: "전달 접두사"
+                },
+                dontFollowForwards: {
+                    description: "메시지 하나를 전달한 후 해당 메시지로 이동하지 않습니다. Shift를 누르고 있으면 이 동작을 무시합니다.",
+                    label: "전달 따라가지 않기"
+                },
+                selfForward: {
+                    description: "전달 목록 팝업에 현재 채널을 표시합니다.",
+                    label: "자기 자신에게 전달"
+                }
+            },
+            name: "BetterForwards",
+            description: "NSFW 우회 및 UI 개선을 포함한 메시지 전달 유틸리티입니다."
+        },
+        betterImageEditor: {
+            text: {
+                search: "검색",
+                searchSavedPictures: "저장된 사진 검색",
+                clearTheSearch: "검색 지우기",
+                savedPictures: "저장된 사진",
+                removeName: "{{name}} 제거",
+                removeHoldShiftTo: "제거. Shift를 누르고 있으면 확인을 건너뜁니다",
+                originals: "원본",
+                putBackTheLast: "마지막 항목 되돌리기",
+                forgetEveryRememberedCrop: "기억된 모든 자르기를 잊을까요?",
+                yourPicturesStayEach: "사진은 그대로 남습니다. 앞으로는 다시 자를 때까지 각 사진이 프레이밍 없이 열립니다.",
+                forget: "잊기",
+                cancel: "취소",
+                clearSavedPictures: "저장된 사진을 지울까요?",
+                everyPictureYouHave: "여기에 저장한 모든 사진이 각 사진에 기억된 자르기와 함께 삭제됩니다. Discord 자체 보관함과 현재 아바타 및 배너는 영향을 받지 않습니다.",
+                clear: "지우기",
+                removeThisPicture: "이 사진을 제거할까요?",
+                remove: "제거",
+                keepTheCroppedCopy: "자른 사본을 보관할까요?",
+                itGoesOnThe: "원본 옆의 {{toLowerCase}} 선반에 놓입니다.",
+                keep: "보관",
+                noThanks: "괜찮습니다",
+                exportToAFile: "파일로 내보내기",
+                importFromAFile: "파일에서 가져오기",
+                forgetRememberedFraming: "기억된 프레이밍 잊기",
+                clearSavedPictures2: "저장된 사진 지우기",
+                croppedKind: "자른 {{kind}}",
+                unpinName: "{{name}} 고정 해제",
+                pinName: "{{name}} 고정",
+                pinnedNeverDrops: "고정됨, 선반에서 사라지지 않습니다",
+                pinNeverDrops: "고정하여 선반에서 사라지지 않게 하기",
+                nothingMatches: "일치하는 항목이 없습니다",
+                originalsEmpty: "선택하거나 붙여넣거나 끌어놓은 이미지가 여기에 표시됩니다",
+                croppedEmpty: "자른 이미지가 여기에 표시됩니다",
+                forgotFraming: "이미지 {{count}}개의 프레이밍을 삭제했습니다",
+                nothingFramed: "프레이밍된 이미지가 없었습니다",
+                pictureLibrary: "이미지 라이브러리",
+                addedPictures: "이미지 {{count}}개를 추가했습니다",
+                nothingNew: "해당 파일에 새로운 항목이 없습니다",
+                shownOfTotal: "{{shown}} / {{total}}",
+                keptCount: "{{count}}개 보관됨",
+                youAreWearingThis: "현재 사용 중",
+                removePictureBody: "{{name}}이(가) 기억된 자르기와 함께 저장된 사진에서 삭제됩니다."
+            },
+            option: {
+                librarySize: {
+                    description: "각 선반에 보관할 사진 수입니다.",
+                    label: "라이브러리 크기"
+                },
+                rememberCrop: {
+                    description: "사진에 마지막으로 사용한 확대/축소와 위치를 복원합니다.",
+                    label: "자르기 기억"
+                },
+                forgetFraming: {
+                    description: "기억된 모든 자르기를 버리고 각 사진을 Discord 기본 방식대로 엽니다.",
+                    label: "프레이밍 잊기"
+                },
+                saveCropped: {
+                    description: "사진을 자른 후 각 사진의 사본을 보관합니다.",
+                    label: "자른 사진 저장"
+                },
+                askBeforeSavingCropped: {
+                    description: "자른 사본을 자동으로 보관하지 않고 먼저 묻습니다.",
+                    label: "자른 사진 저장 전에 묻기"
+                },
+                transfer: {
+                    description: "사진과 각 사진의 프레이밍을 다른 기기로 옮깁니다.",
+                    label: "전송"
+                },
+                clearLibrary: {
+                    description: "저장한 모든 사진을 버립니다.",
+                    label: "라이브러리 비우기"
+                }
+            },
+            name: "BetterImageEditor",
+            description: "아바타 및 배너 편집기에 사진 선반을 두고, 각 사진을 어떻게 잘랐는지 기억합니다.",
+            toast: {
+                couldNotExportYour: "사진을 내보낼 수 없습니다",
+                couldNotReadThat: "해당 파일을 읽을 수 없습니다",
+                thatPictureIsMissing: "해당 사진이 없습니다",
+                thatPictureIsToo: "해당 사진은 Discord에 비해 너무 큽니다",
+                couldNotUseThat: "해당 사진을 사용할 수 없습니다",
+                couldNotKeepThe: "자른 사본을 보관할 수 없습니다"
+            },
+            kind: {
+                avatars: "아바타",
+                banners: "배너",
+                serverIcons: "서버 아이콘",
+                serverBanners: "서버 배너",
+                eventCovers: "이벤트 커버",
+                homeHeaders: "홈 헤더",
+                decorations: "꾸미기",
+                widgetCovers: "위젯 커버",
+                widgetImages: "위젯 이미지"
+            }
+        },
+        cancelFriendRequest: {
+            name: "CancelFriendRequest",
+            description: "프로필에서 보낸 친구 요청을 취소하는 방법을 추가합니다.",
+            text: {
+                cancelOutgoingFriendRequest: "보낸 친구 요청 취소"
+            }
+        },
+        clipUpload: {
+            text: {
+                createdAtMustBe: "생성일은 유효한 날짜여야 합니다.",
+                cancel: "취소",
+                uploadClipFile: "클립 파일 업로드",
+                fileName: "파일 이름",
+                title: "제목",
+                epicMoment: "멋진 순간",
+                message: "메시지",
+                checkOutThisClip: "이 클립 좀 봐!",
+                spoiler: "스포일러",
+                remix: "리믹스",
+                thumbnail: "썸네일",
+                file: "파일",
+                selectFile: "파일 선택",
+                parseClipMetadataFrom: "파일에서 클립 메타데이터 읽기",
+                selectFriends: "친구 선택",
+                selectAGame: "게임 선택",
+                customApplicationId: "사용자 지정 애플리케이션 ID",
+                createdAt: "생성일",
+                participants: "참가자",
+                onlyTagPeopleWho: "현장에 있었고 이 클립에 나오는 것에 동의한 사람만 태그하세요.",
+                gameApplication: "게임/애플리케이션",
+                uploadClipFile2: "클립 파일 업로드",
+                uploading: "업로드 중",
+                upload: "업로드",
+                noFileSelected: "선택된 파일 없음",
+                couldNotPrepare: "선택한 파일을 준비하지 못했습니다.",
+                couldNotRead: "선택한 파일을 읽지 못했습니다.",
+                couldNotUpdateMetadata: "클립 메타데이터를 업데이트하지 못했습니다.",
+                notCompatible: "이 파일은 호환되지 않습니다. H.264 영상과 AAC 오디오가 포함된 MP4 클립을 사용하세요.",
+                uploadFailed: "업로드에 실패했습니다.",
+                noUploadSlot: "Discord가 업로드 슬롯을 반환하지 않았습니다.",
+                uploadCanceled: "업로드가 취소되었습니다.",
+                failedToUpload: "클립을 업로드하지 못했습니다.",
+                selectClipFile: "클립 파일 선택",
+                mp4Video: "MP4 동영상"
+            },
+            name: "ClipUpload",
+            description: "로컬 동영상 파일을 Discord 클립으로 업로드하는 버튼을 추가합니다.",
+            toast: {
+                checkingClipFile: "클립 파일을 확인하는 중입니다.",
+                convertingClipFile: "클립 파일을 변환하는 중입니다.",
+                clipUploaded: "클립이 업로드되었습니다."
+            }
+        },
+        collapsibleUI: {
+            name: "CollapsibleUI",
+            description: "채널, 멤버, 채팅 버튼, 사용자 영역을 기본 방식으로 접을 수 있게 합니다.",
+            text: {
+                collapsibleUi: "접을 수 있는 UI",
+                guildBar: "서버 바",
+                channelList: "채널 목록",
+                membersList: "멤버 목록",
+                messageButtons: "메시지 버튼",
+                titleBar: "제목 표시줄",
+                headerBar: "헤더 바",
+                userArea: "사용자 영역"
+            },
+            option: {
+                detachUserArea: {
+                    description: "사용자 영역을 분리하여 접히지 않았을 때 자유롭게 이동할 수 있게 합니다.",
+                    label: "사용자 영역 분리"
+                },
+                detachedUserAreaX: {
+                    description: "분리된 사용자 영역의 x 위치를 저장합니다.",
+                    label: "분리된 사용자 영역 X"
+                },
+                detachedUserAreaY: {
+                    description: "분리된 사용자 영역의 y 위치를 저장합니다.",
+                    label: "분리된 사용자 영역 Y"
+                },
+                guildBarCollapsed: {
+                    description: "서버 바를 접힌 상태로 유지합니다.",
+                    label: "서버 바 접힘"
+                },
+                channelListCollapsed: {
+                    description: "채널 목록을 접힌 상태로 유지합니다.",
+                    label: "채널 목록 접힘"
+                },
+                membersListCollapsed: {
+                    description: "멤버 목록을 접힌 상태로 유지합니다.",
+                    label: "멤버 목록 접힘"
+                },
+                chatButtonsCollapsed: {
+                    description: "메시지 버튼 줄을 접힌 상태로 유지합니다.",
+                    label: "채팅 버튼 접힘"
+                },
+                titleBarCollapsed: {
+                    description: "제목 표시줄을 접힌 상태로 유지합니다.",
+                    label: "제목 표시줄 접힘"
+                },
+                headerBarCollapsed: {
+                    description: "헤더 바를 접힌 상태로 유지합니다.",
+                    label: "헤더 바 접힘"
+                },
+                userAreaCollapsed: {
+                    description: "사용자 영역을 접힌 상태로 유지합니다.",
+                    label: "사용자 영역 접힘"
+                }
+            }
+        },
+        customCommands: {
+            text: {
+                cancel: "취소",
+                name: "Name",
+                response: "응답",
+                detectedArguments: "감지된 인수",
+                exampleCommandResponse: "명령 응답 예시:",
+                exampleUsage: "사용 예시:",
+                exampleOutput: "출력 예시:",
+                viewArgumentsGuide: "인수 가이드 보기",
+                editTag: "태그 편집",
+                deleteTag: "태그 삭제",
+                registeredTags: "등록된 태그",
+                createTag: "태그 만들기",
+                aTagWithThe: "**{{name}}** 이름의 태그가 없습니다!",
+                successfullyDeletedTheTag: "태그 **{{name}}**을(를) 삭제했습니다!",
+                ephemeralReserved: "인수 이름 \"ephemeral\"은 예약되어 있어 사용할 수 없습니다.",
+                createNewTag: "새 태그 만들기",
+                editTagSubtitle: "사용자 지정 명령어를 편집합니다.",
+                createTagSubtitle: "슬래시 명령어로 등록될 새 태그를 만듭니다.",
+                save: "저장",
+                create: "만들기",
+                variablesHelp: "응답에 이중 중괄호로 감싼 변수를 넣을 수 있으며, 이는 명령어 인수가 됩니다. 예:",
+                defaultValuesHelp: "등호를 사용해 기본값이 있는 인수를 지정할 수 있습니다. 예:",
+                noTagsYet: "앗! 아직 태그가 없습니다. `/tags create`로 만들어 보세요!",
+                nameAlreadyExists: "\"{{name}}\" 이름의 태그가 이미 있으며 덮어쓰게 됩니다.",
+                defaultValue: "(기본값: {{value}})"
+            },
+            name: "CustomCommands",
+            description: "사용자 지정 슬래시 명령 / 태그를 만들 수 있습니다",
+            option: {
+                tagsList: {
+                    label: "태그 목록"
+                }
+            },
+            command: {
+                ephemeral: "응답을 나만 볼 수 있게 할지 여부",
+                tags: "모든 사용자 지정 명령 관리",
+                create: "새 태그 만들기",
+                list: "모든 태그 목록 보기",
+                delete: "이름으로 태그 제거",
+                tagName: "태그 이름"
+            }
+        },
+        fileUpload: {
+            name: "FileUpload",
+            description: "Zipline, Nest, S3, WebDAV 같은 호스팅 서비스에 파일을 업로드합니다",
+            toast: {
+                fileTypeNotAllowed: "현재 필터에서 허용되지 않는 파일 형식입니다",
+                pleaseConfigureFileuploadSettings: "먼저 FileUpload 설정을 구성하세요",
+                sharexConfigIsValid: "ShareX 구성이 유효합니다",
+                importedSharexConfig: "ShareX 구성을 가져왔습니다",
+                uploadSuccessfulButNo: "업로드에 성공했지만 복사할 URL이 없습니다",
+                uploadSuccessfulUrlCopied: "업로드에 성공했고 URL을 클립보드에 복사했습니다",
+                uploadSuccessfulButFailed: "업로드에 성공했지만 URL을 복사하지 못했습니다",
+                uploadSuccessful: "업로드 성공",
+                uploadSucceededWithServicelabels: "대체 후 {{serviceLabels_service}}(으)로 업로드에 성공했습니다",
+                apngToGifConversion: "APNG를 GIF로 변환하지 못해 APNG로 업로드합니다",
+                uploadAlreadyInProgress: "이미 업로드 중입니다",
+                uploadCancelled: "업로드 취소됨",
+                uploadFailedMessage: "업로드 실패: {{message}}",
+                invalidSharexConfig: "잘못된 ShareX 설정",
+                failedToImportSharexConfig: "ShareX 설정을 가져오지 못했습니다"
+            },
+            text: {
+                uploadToServicename: "{{serviceName}}에 업로드",
+                uploadToHost: "호스트에 업로드",
+                chooseFile: "파일 선택...",
+                zipline: "Zipline",
+                eZHost: "E-Z Host",
+                nest: "Nest",
+                encryptingHost: "Encrypting.host",
+                s3Compatible: "S3 호환",
+                catboxMoe: "Catbox.moe",
+                litterbox: "Litterbox",
+                sharexCustomUploader: "ShareX 사용자 지정 업로더",
+                webdavNextcloudOwncloud: "WebDAV (Nextcloud/Owncloud)",
+                n1Hour: "1시간",
+                n12Hours: "12시간",
+                n24Hours: "24시간",
+                n72Hours: "72시간",
+                corsProxy: "CORS 프록시",
+                query: "쿼리",
+                param: "매개변수",
+                fakeLink: "가짜 링크",
+                embed: "임베드",
+                n30Seconds: "30초",
+                n1Minute: "1분",
+                n2Minutes: "2분",
+                n5Minutes: "5분",
+                n10Minutes: "10분",
+                dragHostsToReorder: "호스트를 끌어 대체 시도 순서를 바꿉니다. 선택한 호스트를 먼저 시도한 뒤 이 순서를 사용합니다.",
+                chooseWhereFileuploadSends: "FileUpload가 새 파일을 보낼 곳을 선택합니다.",
+                connectionDetailsForYour: "Zipline 인스턴스의 연결 정보입니다.",
+                theUrlOfYour: "Zipline 인스턴스 URL",
+                yourZiplineApiAuthorization: "Zipline API 인증 토큰",
+                yourZiplineApiToken: "Zipline API 토큰",
+                folderIdForUploads: "업로드할 폴더 ID (폴더가 없으면 비워 두기)",
+                leaveEmptyForNo: "폴더가 없으면 비워 두세요",
+                connectionDetailsForE: "E-Z Host 업로드의 연결 정보입니다.",
+                yourEZHost: "E-Z Host API 키",
+                connectionDetailsForNest: "Nest 업로드의 연결 정보입니다.",
+                yourNestApiAuthorization: "Nest API 인증 토큰",
+                yourNestApiToken: "Nest API 토큰",
+                connectionDetailsForEncrypting: "Encrypting.host 업로드의 연결 정보입니다.",
+                yourEncryptingHostApi: "Encrypting.host API 키",
+                howEncryptingHostShould: "Encrypting.host가 반환하는 링크의 형식입니다.",
+                selectUrlStyle: "URL 스타일 선택",
+                optionalTitleForEmbed: "임베드 스타일 응답의 제목 (선택 사항).",
+                optionalTitle: "제목 (선택 사항)",
+                optionalColorForEmbed: "임베드 스타일 응답의 색상 (선택 사항).",
+                optionalColor: "색상 (선택 사항)",
+                optionalFakeLinkValue: "fakelink 스타일 응답의 가짜 링크 값 (선택 사항).",
+                optionalFakeLink: "가짜 링크 (선택 사항)",
+                connectionDetailsAndObject: "버킷의 연결 정보와 객체 이름 지정입니다.",
+                s3CompatibleEndpointE: "S3 호환 엔드포인트 (예: https://<accountid>.r2.cloudflarestorage.com)",
+                bucketToUploadInto: "업로드할 버킷",
+                awsRegionOrAuto: "AWS 리전 또는 Cloudflare R2의 경우 auto",
+                s3CompatibleAccessKey: "S3 호환 액세스 키",
+                yourAccessKeyId: "액세스 키 ID",
+                s3CompatibleSecretKey: "S3 호환 비밀 키",
+                yourSecretAccessKey: "비밀 액세스 키",
+                optionalTemporaryCredentialToken: "임시 자격 증명 토큰 (선택 사항)",
+                optionalSessionToken: "세션 토큰 (선택 사항)",
+                optionalPublicUrlBase: "반환되는 링크에 사용할 공개 기본 URL (선택 사항)",
+                optionalFolderPrefixInside: "버킷 내 폴더/접두사 (선택 사항)",
+                useEndpointBucketKey: "endpoint/bucket/key 형식을 사용합니다 (R2에 권장).",
+                optionalAccountBindingFor: "Catbox 업로드용 계정 연결 (선택 사항).",
+                yourCatboxUserhashFor: "계정 연결용 Catbox userhash입니다. 익명 업로드는 비워 두세요.",
+                yourCatboxUserhash: "Catbox userhash",
+                howLongUploadsAre: "업로드 보관 기간",
+                selectExpiry: "만료 선택",
+                optionalAccountBindingFor2: "GoFile 업로드용 계정 연결 (선택 사항).",
+                optionalGofileTokenTo: "계정에 업로드하기 위한 GoFile 토큰 (선택 사항).",
+                optionalGofileToken: "GoFile 토큰 (선택 사항)",
+                connectionDetailsForPixelvault: "PixelVault 업로드의 연결 정보입니다.",
+                yourPixelvaultAuthorizationKey: "PixelVault 인증 키입니다.",
+                yourPixelvaultUploadKey: "PixelVault 업로드 키",
+                optionalAccountBindingFor3: "PixelDrain 업로드용 계정 연결 (선택 사항).",
+                optionalPixeldrainApiKey: "인증된 업로드용 PixelDrain API 키 (선택 사항). 익명 업로드는 비워 두세요.",
+                yourPixeldrainApiKey: "PixelDrain API 키",
+                pasteImportOrValidate: "ShareX 사용자 지정 업로더 구성을 붙여 넣거나 가져오거나 검증합니다.",
+                pasteYourSharexCustom: "ShareX 사용자 지정 업로더 JSON(.sxcu/.json)을 붙여 넣으세요. DestinationType에 FileUploader 또는 ImageUploader가 포함되어야 합니다.",
+                importFromFileOr: "파일에서 가져오거나 붙여 넣은 구성 검증",
+                connectionDetailsForWebdav: "WebDAV 서버(Nextcloud, Owncloud 등)의 연결 정보입니다.",
+                baseWebdavUrlE: "기본 WebDAV URL (예: https://nextcloud.example.com/remote.php/dav/files/username)",
+                optionalSubdirectoryOnThe: "업로드할 서버의 하위 디렉터리 (선택 사항, 예: uploads)",
+                leaveEmptyForRoot: "루트 디렉터리는 비워 두세요",
+                selectYourWebdavServer: "WebDAV 서버 유형을 선택하세요. Nextcloud와 ownCloud는 공개 공유 링크를 만듭니다. 일반은 원본 파일 URL을 반환합니다.",
+                selectServerType: "서버 유형 선택",
+                howToReturnThe: "공개 공유 링크를 반환하는 방식입니다. 공유 페이지는 웹 페이지로, 직접 다운로드는 파일로 바로 연결하며, Markdown 링크는 공유 페이지를 클릭 가능한 파일 이름으로 감쌉니다.",
+                selectShareLinkFormat: "공유 링크 형식 선택",
+                controlWhatFileuploadDoes: "호스트가 URL을 반환한 후 FileUpload의 동작을 설정합니다.",
+                stripQueryParametersFrom: "업로드된 파일 URL에서 쿼리 매개변수를 제거합니다.",
+                wrapUploadedVideoLinks: "Discord 미리 보기를 개선하기 위해 업로드된 동영상 링크를 임베드 프록시로 감쌉니다.",
+                chooseWhichEmbedProxy: "업로드된 동영상 링크에 사용할 임베드 프록시 서비스를 선택합니다",
+                selectAnEmbedProxy: "임베드 프록시 서비스 선택",
+                convertApngFilesTo: "APNG 파일을 GIF 형식으로 변환합니다.",
+                useTheOriginalFilename: "업로드 이름을 upload.ext로 짓는 대신 원래 파일 이름을 사용합니다.",
+                automaticallyCopyTheUploaded: "업로드된 파일 URL을 클립보드에 자동으로 복사합니다.",
+                onlyUseTheSelected: "대체 호스트를 시도하지 않고 선택한 업로더만 사용합니다.",
+                afterUploadInsertThe: "업로드 후 결과 URL을 현재 채팅 입력란에 삽입합니다.",
+                wrapInsertedUrlsIn: "Discord 미리 보기 임베드를 피하려면 삽입된 URL을 꺾쇠괄호로 감쌉니다.",
+                chooseWhenFileuploadTakes: "FileUpload가 Discord 파일 처리를 대신할 시점을 선택합니다.",
+                useFileuploadWhenUploading: "Discord 파일 선택기로 업로드할 때 FileUpload를 사용합니다.",
+                useFileuploadOnlyFor: "현재 Discord 업로드 제한보다 큰 파일에만 FileUpload를 사용합니다.",
+                manualDiscordFileSize: "자동 감지가 틀릴 때 사용하는 Discord 파일 크기 제한(MB) 수동 설정입니다. 자동으로 하려면 비워 두세요.",
+                auto: "자동",
+                commaSeparatedListOf: "쉼표로 구분된 확장자 목록 (예: png,jpg,gif). 비워 두면 모두 허용합니다.",
+                configureBrowserUploadProxying: "브라우저 업로드 프록시와 시간 제한을 구성합니다.",
+                corsProxyUsedFor: "웹 업로드에 사용하는 CORS 프록시입니다. 기본 프록시를 사용하려면 비워 두세요.",
+                sourceCodeForThe: "기본 CORS 프록시의 소스 코드",
+                maximumTimeToWait: "대체로 전환하기 전 업로드 시도당 최대 대기 시간",
+                selectTimeout: "시간 제한 선택",
+                drag: "끌기",
+                importSxcuJson: ".sxcu/.json 가져오기",
+                validate: "검증",
+                resetToDefault: "기본값으로 재설정",
+                progress: "{{percent}}% - {{transferred}} / {{total}}",
+                cancel: "취소"
+            },
+            option: {
+                serviceType: {
+                    description: "선택한 업로드 서비스",
+                    label: "서비스 유형"
+                },
+                serviceUrl: {
+                    description: "Zipline 서비스 URL",
+                    label: "서비스 URL"
+                },
+                ziplineToken: {
+                    description: "Zipline 인증 토큰",
+                    label: "Zipline 토큰"
+                },
+                folderId: {
+                    description: "Zipline 폴더 ID (선택 사항)",
+                    label: "폴더 ID"
+                },
+                ezHostKey: {
+                    description: "E-Z Host API 키",
+                    label: "E-Z Host 키"
+                },
+                nestToken: {
+                    description: "Nest API 토큰",
+                    label: "Nest 토큰"
+                },
+                encryptingHostKey: {
+                    description: "Encrypting.host API 키",
+                    label: "Encrypting.host 키"
+                },
+                encryptingHostUrlStyle: {
+                    description: "Encrypting.host URL 스타일",
+                    label: "Encrypting.host URL 스타일"
+                },
+                encryptingHostDomains: {
+                    description: "Encrypting.host 도메인 JSON 목록",
+                    label: "Encrypting.host 도메인"
+                },
+                encryptingHostTitle: {
+                    description: "Encrypting.host 임베드 제목 (선택 사항)",
+                    label: "Encrypting.host 제목"
+                },
+                encryptingHostColor: {
+                    description: "Encrypting.host 임베드 색상 (선택 사항)",
+                    label: "Encrypting.host 색상"
+                },
+                encryptingHostFakelink: {
+                    description: "Encrypting.host 가짜 링크 (선택 사항)",
+                    label: "Encrypting.host 가짜 링크"
+                },
+                s3Endpoint: {
+                    description: "S3 호환 엔드포인트 URL",
+                    label: "S3 엔드포인트"
+                },
+                s3Bucket: {
+                    description: "S3 버킷 이름",
+                    label: "S3 버킷"
+                },
+                s3Region: {
+                    description: "S3 리전 (R2는 auto 사용)",
+                    label: "S3 리전"
+                },
+                s3AccessKeyId: {
+                    description: "S3 액세스 키 ID",
+                    label: "S3 액세스 키 ID"
+                },
+                s3SecretAccessKey: {
+                    description: "S3 비밀 액세스 키",
+                    label: "S3 비밀 액세스 키"
+                },
+                s3SessionToken: {
+                    description: "S3 세션 토큰 (선택 사항)",
+                    label: "S3 세션 토큰"
+                },
+                s3PublicUrl: {
+                    description: "공개 기본 URL (선택 사항)",
+                    label: "S3 공개 URL"
+                },
+                s3Prefix: {
+                    description: "S3 객체 키 접두사 (선택 사항)",
+                    label: "S3 접두사"
+                },
+                s3ForcePathStyle: {
+                    description: "경로 스타일 S3 URL 사용",
+                    label: "S3 경로 스타일 강제"
+                },
+                litterboxExpiry: {
+                    description: "Litterbox 보관 기간",
+                    label: "Litterbox 만료"
+                },
+                catboxUserhash: {
+                    description: "계정 연결용 Catbox userhash",
+                    label: "Catbox userhash"
+                },
+                sharexConfig: {
+                    description: "ShareX 사용자 지정 업로더 JSON",
+                    label: "ShareX 구성"
+                },
+                disableFallbacks: {
+                    description: "대체 업로드 서비스 사용 안 함",
+                    label: "대체 사용 안 함"
+                },
+                autoSend: {
+                    description: "업로드된 URL을 채팅 입력란에 삽입",
+                    label: "자동 전송"
+                },
+                autoFormat: {
+                    description: "삽입된 URL을 꺾쇠괄호로 감싸기",
+                    label: "자동 서식"
+                },
+                bypassDiscordUpload: {
+                    description: "Discord 업로드를 우회하고 대신 FileUpload를 사용합니다.",
+                    label: "Discord 업로드 우회"
+                },
+                bypassDiscordUploadOnlyOverLimit: {
+                    description: "파일이 크기 제한을 초과할 때만 FileUpload를 사용합니다.",
+                    label: "제한 초과 시에만 Discord 업로드 우회"
+                },
+                customDiscordFileSizeLimitMB: {
+                    description: "Discord 파일 크기 제한을 MB 단위로 직접 지정합니다. 0은 자동 감지입니다.",
+                    label: "사용자 지정 Discord 파일 크기 제한 (MB)"
+                },
+                gofileToken: {
+                    description: "GoFile API 토큰 (선택 사항)",
+                    label: "GoFile 토큰"
+                },
+                fallbackOrder: {
+                    description: "대체 업로더 순서",
+                    label: "대체 순서"
+                },
+                pixelVaultKey: {
+                    description: "PixelVault 업로드 키",
+                    label: "PixelVault 키"
+                },
+                pixelDrainKey: {
+                    description: "PixelDrain API 키 (선택 사항)",
+                    label: "PixelDrain 키"
+                },
+                uploadTimeoutMs: {
+                    description: "업로드 시간 제한 (밀리초)",
+                    label: "업로드 시간 제한 (ms)"
+                },
+                stripQueryParams: {
+                    description: "업로드된 URL에서 쿼리 매개변수 제거",
+                    label: "쿼리 매개변수 제거"
+                },
+                embedProxyEnabled: {
+                    description: "업로드된 동영상 링크를 임베드 도우미 서비스를 통해 프록시합니다.",
+                    label: "임베드 프록시 사용"
+                },
+                embedProxyService: {
+                    description: "업로드된 동영상 링크를 감싸는 임베드 도우미 서비스입니다.",
+                    label: "임베드 프록시 서비스"
+                },
+                corsProxyUrl: {
+                    description: "브라우저 업로드에 사용하는 CORS 프록시 URL",
+                    label: "CORS 프록시 URL"
+                },
+                apngToGif: {
+                    description: "APNG 업로드를 GIF로 변환",
+                    label: "APNG를 GIF로"
+                },
+                preserveOriginalFilename: {
+                    description: "업로드할 때 원래 파일 이름을 유지합니다.",
+                    label: "원래 파일 이름 유지"
+                },
+                autoCopy: {
+                    description: "업로드 URL 자동 복사",
+                    label: "자동 복사"
+                },
+                autoUploadPastedFiles: {
+                    description: "채팅 입력란에 붙여 넣을 때 클립보드의 파일을 이미지 호스트에 자동 업로드합니다.",
+                    label: "붙여 넣은 파일 자동 업로드"
+                },
+                webdavUrl: {
+                    description: "WebDAV 서버 URL",
+                    label: "WebDAV URL"
+                },
+                webdavUsername: {
+                    description: "WebDAV 사용자 이름",
+                    label: "WebDAV 사용자 이름"
+                },
+                webdavPassword: {
+                    description: "WebDAV 비밀번호 또는 앱 토큰",
+                    label: "WebDAV 비밀번호"
+                },
+                webdavDirectory: {
+                    description: "WebDAV 서버의 하위 디렉터리 (선택 사항)",
+                    label: "WebDAV 디렉터리"
+                },
+                webdavServerType: {
+                    description: "WebDAV 서버 유형",
+                    label: "WebDAV 서버 유형",
+                    nextcloud: "Nextcloud",
+                    owncloud: "ownCloud",
+                    generic: "일반 WebDAV"
+                },
+                webdavShareType: {
+                    description: "WebDAV 공유 링크 형식",
+                    label: "WebDAV 공유 유형",
+                    sharepage: "공유 페이지",
+                    directdownload: "직접 다운로드",
+                    markdown: "Markdown 링크"
+                },
+                uploadAllowedFileTypes: {
+                    description: "허용할 파일 확장자의 쉼표로 구분된 목록 (예: png,jpg,gif,mp4). 비워 두면 모든 파일을 허용합니다.",
+                    label: "업로드 허용 파일 형식"
+                },
+                settingsComponent: {
+                    description: "설정",
+                    label: "설정 구성 요소"
+                }
+            },
+            panel: {
+                fallbackOrder: "대체 순서",
+                uploadService: "업로드 서비스",
+                zipline: "Zipline",
+                serviceUrl: "서비스 URL",
+                ziplineToken: "Zipline 토큰",
+                folderId: "폴더 ID",
+                eZHost: "E-Z Host",
+                eZHostApiKey: "E-Z Host API 키",
+                nest: "Nest",
+                nestToken: "Nest 토큰",
+                encryptingHost: "Encrypting.host",
+                encryptingHostApiKey: "Encrypting.host API 키",
+                urlStyle: "URL 스타일",
+                domainsJson: "도메인 (JSON)",
+                embedTitle: "임베드 제목",
+                embedColor: "임베드 색상",
+                fakeLink: "가짜 링크",
+                s3CompatibleStorage: "S3 호환 스토리지",
+                s3EndpointUrl: "S3 엔드포인트 URL",
+                bucketName: "버킷 이름",
+                region: "리전",
+                accessKeyId: "액세스 키 ID",
+                secretAccessKey: "비밀 액세스 키",
+                sessionToken: "세션 토큰",
+                publicBaseUrl: "공개 기본 URL",
+                objectKeyPrefix: "객체 키 접두사",
+                usePathStyleEndpoint: "경로 스타일 엔드포인트 사용",
+                catbox: "Catbox",
+                catboxUserhash: "Catbox userhash",
+                litterboxExpiry: "Litterbox 만료",
+                gofile: "GoFile",
+                gofileToken: "GoFile 토큰",
+                pixelvault: "PixelVault",
+                pixelvaultUploadKey: "PixelVault 업로드 키",
+                pixeldrain: "PixelDrain",
+                pixeldrainApiKey: "PixelDrain API 키",
+                sharexCustomUploader: "ShareX 사용자 지정 업로더",
+                sharexCustomUploaderConfig: "ShareX 사용자 지정 업로더 구성",
+                sharexConfigActions: "ShareX 구성 작업",
+                webdav: "WebDAV",
+                serverUrl: "서버 URL",
+                username: "사용자 이름",
+                passwordOrAppToken: "비밀번호 또는 앱 토큰",
+                passwordOrAppToken2: "비밀번호 또는 앱 토큰",
+                uploadDirectory: "업로드 디렉터리",
+                serverType: "서버 유형",
+                shareLinkFormat: "공유 링크 형식",
+                uploadBehavior: "업로드 동작",
+                stripQueryParameters: "쿼리 매개변수 제거",
+                useEmbedProxy: "임베드 프록시 사용",
+                embedProxyService: "임베드 프록시 서비스",
+                convertApngToGif: "APNG를 GIF로 변환",
+                preserveOriginalFilename: "원래 파일 이름 유지",
+                autoCopyUrl: "URL 자동 복사",
+                disableFallbackUploaders: "대체 업로더 사용 안 함",
+                insertUrlIntoChatInput: "URL을 채팅 입력란에 삽입",
+                formatInsertedUrl: "삽입된 URL 서식 지정",
+                discordIntegration: "Discord 통합",
+                bypassDiscordUploadButton: "Discord 업로드 버튼 우회",
+                autoUploadPastedFiles: "붙여 넣은 파일 자동 업로드",
+                respectDiscordFileSizeLimit: "Discord 파일 크기 제한 준수",
+                discordLimitOverrideMb: "Discord 제한 재정의 (MB)",
+                allowedFileTypes: "허용 파일 형식",
+                network: "회로망",
+                corsProxyUrl: "CORS 프록시 URL",
+                defaultCorsProxySource: "기본 CORS 프록시 소스",
+                uploadTimeout: "업로드 시간 제한",
+                domainsJsonDescription: "사용할 도메인의 JSON 배열입니다. 예: [\"offensive\"]"
+            },
+            status: {
+                cancelled: "업로드가 취소되었습니다.",
+                uploadingVia: "{{service}}(으)로 업로드 중...",
+                uploading: "업로드 중...",
+                unknownError: "알 수 없는 오류",
+                startingVia: "{{service}}(으)로 업로드 시작 중...",
+                retryingWith: "{{service}}(으)로 재시도 중 ({{attempt}}/{{total}})...",
+                uploadedVia: "{{service}}(으)로 업로드했습니다.",
+                allFailed: "모든 업로드 서비스가 실패했습니다. 마지막 오류: {{error}}",
+                fileReady: "파일 준비 완료, 업로드 시작 중...",
+                preparing: "업로드 준비 중...",
+                failed: "업로드 실패: {{message}}",
+                timedOut: "업로드 시간이 초과되었습니다",
+                serviceFailed: "{{service}} 실패: {{message}}",
+                preparingFile: "{{name}}{{suffix}} 준비 중..."
+            }
+        },
+        gifMaker: {
+            option: {
+                lastWidth: {
+                    label: "마지막 너비"
+                },
+                lastHeight: {
+                    label: "마지막 높이"
+                },
+                lastCaptionMode: {
+                    label: "마지막 캡션 모드"
+                },
+                lastCaptionText: {
+                    label: "마지막 캡션 텍스트"
+                },
+                lastCaptionSize: {
+                    label: "마지막 캡션 크기"
+                },
+                lastFontFamily: {
+                    label: "마지막 글꼴 패밀리"
+                },
+                lastBubbleTipBase: {
+                    label: "마지막 말풍선 꼬리 기준"
+                },
+                maxWidth: {
+                    description: "자동 맞춤 최대 너비입니다.",
+                    label: "최대 너비"
+                },
+                maxHeight: {
+                    description: "자동 맞춤 최대 높이입니다.",
+                    label: "최대 높이"
+                }
+            },
+            name: "GifMaker",
+            description: "채팅이나 GIF 선택기의 모든 미디어로 GIF를 만들고 캡션을 답니다.",
+            text: {
+                send: "보내기",
+                export: "내보내기",
+                makeGif: "GIF 만들기",
+                editGif: "GIF 편집",
+                selectAFont: "글꼴 선택...",
+                enterCaption: "캡션 입력...",
+                width: "너비",
+                height: "높이",
+                loadingFonts: "글꼴 불러오는 중...",
+                captions: "캡션",
+                text: "텍스트",
+                font: "글꼴",
+                fontSize: "글꼴 크기",
+                tipBase: "꼬리 기준",
+                dimensions: "크기",
+                generatingGif: "GIF 생성 중...",
+                clickOnThePreview: "미리 보기를 클릭해 말풍선 꼬리 위치를 정합니다",
+                gifPreview: "GIF 미리보기"
+            },
+            captionMode: {
+                caption: "캡션",
+                none: "없음",
+                speechbubble: "말풍선"
+            }
+        },
+        gifProviderSwitcher: {
+            name: "GifProviderSwitcher",
+            description: "Klipy 대신 Tenor 또는 Giphy GIF 검색을 사용할 수 있습니다",
+            text: {
+                tenor: "Tenor",
+                giphy: "Giphy",
+                klipy: "Klipy",
+                providers: "제공자",
+                providersCount: "제공자 {{count}}개"
+            }
+        },
+        keyboardNavigation: {
+            toast: {
+                invalidUrl: "잘못된 URL",
+                copiedResponseToClipboard: "응답을 클립보드에 복사했습니다!",
+                issueFetchingUrl: "URL을 가져오는 중 문제가 발생했습니다",
+                copiedGitInfoTo: "Git 정보를 클립보드에 복사했습니다!",
+                noUpdatesAvailable: "사용 가능한 업데이트 없음",
+                enabledPlugin: "{{id}}을(를) 활성화했습니다",
+                disabledPlugin: "{{id}}을(를) 비활성화했습니다"
+            },
+            text: {
+                openPlexcordTab: "Plexcord 탭 열기",
+                openPluginTab: "플러그인 탭 열기",
+                openThemesTab: "테마 탭 열기",
+                openUpdaterTab: "업데이터 탭 열기",
+                openCloudTab: "클라우드 탭 열기",
+                openBackupRestoreTab: "백업 및 복원 탭 열기",
+                restartClient: "클라이언트 다시 시작",
+                openQuickCssFile: "QuickCSS 파일 열기",
+                openSettingsFolder: "설정 폴더 열기",
+                openInGithub: "GitHub에서 열기",
+                openInBrowser: "브라우저에서 열기",
+                togglePlugin: "플러그인 전환",
+                enable: "활성화",
+                disable: "비활성화",
+                quickFetch: "빠른 가져오기",
+                copyGitInfo: "Git 정보 복사",
+                checkForUpdates: "업데이트 확인",
+                aPlexcordUpdateIs: "Plexcord 업데이트가 있습니다!",
+                clickHereToView: "여기를 클릭해 업데이트 보기",
+                navigateToServer: "서버로 이동",
+                commandPalette: "명령 팔레트",
+                searchTheCommandPalette: "명령 팔레트 검색",
+                multipleChoice: "객관식",
+                textInput: "텍스트 입력",
+                openDevTab: "개발 탭 열기",
+                enterUrlToFetch: "가져올 URL 입력 (GET만 지원)",
+                typeAndPressEnter: "입력 후 Enter를 누르세요",
+                recording: "기록 중...",
+                recordKeybind: "키 바인드 기록",
+                enterUrl: "URL 입력"
+            },
+            option: {
+                hotkey: {
+                    description: "명령 팔레트를 여는 단축키입니다.",
+                    label: "단축키"
+                },
+                allowMouseControl: {
+                    description: "마우스로 명령 팔레트를 조작할 수 있게 합니다.",
+                    label: "마우스 조작 허용"
+                }
+            },
+            name: "KeyboardNavigation",
+            description: "키보드로 UI를 탐색할 수 있습니다."
+        },
+        lastActive: {
+            name: "LastActive",
+            description: "채널/서버에서 나 또는 다른 사용자의 마지막 메시지로 이동하는 플러그인입니다.",
+            toast: {
+                failedToFindMessages: "메시지를 찾지 못했습니다. 자세한 내용은 콘솔을 확인하세요.",
+                couldnTFindAny: "이 사용자의 최근 메시지를 찾을 수 없습니다.",
+                channelInformationNotAvailable: "채널 정보를 사용할 수 없습니다.",
+                failedToJumpTo: "메시지로 이동하지 못했습니다. 자세한 내용은 콘솔을 확인하세요."
+            },
+            text: {
+                yourLastMessage: "내 마지막 메시지",
+                userSLastMessage: "사용자의 마지막 메시지"
+            }
+        },
+        limitlessScreenshare: {
+            text: {
+                deleteTag: "태그 삭제",
+                mustBeGreaterThan: ">{{value}}이어야 합니다",
+                maxResolutionTooLow: "최대 해상도는 {{value}}보다 낮을 수 없습니다",
+                maxResolutionRound: "해상도 반올림이 켜져 있으면 최대 해상도는 0으로 끝나야 합니다"
+            },
+            name: "LimitlessScreenshare",
+            description: "화면 공유 해상도와 FPS 슬라이더를 추가합니다.",
+            option: {
+                maxFPS: {
+                    description: "슬라이더의 최대 FPS",
+                    label: "최대 FPS"
+                },
+                maxResolution: {
+                    description: "슬라이더의 최대 해상도",
+                    label: "최대 해상도"
+                },
+                roundResolution: {
+                    description: "해상도를 가장 가까운 10p로 반올림합니다",
+                    label: "해상도 반올림"
+                },
+                resolutions: {
+                    label: "해상도"
+                },
+                fpss: {
+                    label: "FPS 값"
+                }
+            }
+        },
+        messagePeek: {
+            option: {
+                hideMuted: {
+                    description: "음소거한 DM과 그룹 채팅의 메시지 미리 보기와 타임스탬프를 숨깁니다.",
+                    label: "음소거 숨기기"
+                }
+            },
+            name: "MessagePeek",
+            description: "다이렉트 메시지 목록에 마지막 메시지 미리 보기와 타임스탬프를 표시합니다.",
+            text: {
+                officialDiscordMessage: "Discord 공식 메시지",
+                sentGif: "GIF를 보냈습니다",
+                voiceMessage: "음성 메시지",
+                membersCount: "멤버 {{count}}명",
+                you: "나"
+            }
+        },
+        messageTranslate: {
+            name: "MessageTranslate",
+            description: "캐싱, 채널별 전환 등 다양한 옵션으로 메시지를 내 언어로 자동 번역합니다.",
+            option: {
+                targetLanguage: {
+                    description: "번역 대상 언어 코드 (예: en, es, fr, de, ja).",
+                    label: "대상 언어"
+                },
+                excludedLanguages: {
+                    description: "번역에서 제외할 언어 코드 (예: en, es, fr, de, ja).",
+                    label: "제외할 언어"
+                },
+                confidenceRequirement: {
+                    description: "번역을 표시하는 데 필요한 최소 신뢰도 (0~1).",
+                    label: "신뢰도 요구 사항"
+                },
+                autoTranslate: {
+                    description: "메시지가 표시되면 자동으로 번역합니다.",
+                    label: "자동 번역"
+                },
+                skipOwnMessages: {
+                    description: "내 메시지는 번역하지 않습니다.",
+                    label: "내 메시지 건너뛰기"
+                },
+                skipBotMessages: {
+                    description: "봇 메시지는 번역하지 않습니다.",
+                    label: "봇 메시지 건너뛰기"
+                },
+                ignoredGuilds: {
+                    description: "번역하지 않을 서버 ID의 쉼표로 구분된 목록.",
+                    label: "무시할 서버"
+                },
+                ignoredChannels: {
+                    description: "번역하지 않을 채널 ID의 쉼표로 구분된 목록.",
+                    label: "무시할 채널"
+                },
+                ignoredUsers: {
+                    description: "번역하지 않을 사용자 ID의 쉼표로 구분된 목록.",
+                    label: "무시할 사용자"
+                },
+                showIndicator: {
+                    description: "번역된 메시지에 작은 (번역됨) 표시를 붙입니다.",
+                    label: "표시 보기"
+                },
+                showOriginal: {
+                    description: "원문과 번역문을 표시합니다.",
+                    noorig: "원문을 표시하지 않습니다."
+                }
+            },
+            text: {
+                showOriginalInSubtext: "원문을 보조 텍스트로 표시",
+                showOriginalMessageTranslation: "원래 메시지를 표시하고 번역은 보조 텍스트로 표시",
+                translatedFrom: "{{lang}}에서 번역됨"
+            }
+        },
+        moreStickers: {
+            toast: {
+                stickerPackDeleted: "스티커 팩을 삭제했습니다",
+                stickerPackAdded: "스티커 팩을 추가했습니다",
+                stickerPacksAdded: "스티커 팩들을 추가했습니다",
+                stickerPacksExported: "스티커 팩을 내보냈습니다",
+                newStickerPacksAlready: "새 스티커 팩이 이미 있어 마이그레이션이 필요하지 않습니다",
+                oldStickerPacksNot: "이전 스티커 팩을 찾을 수 없어 마이그레이션할 항목이 없습니다",
+                migrationFailedTitleId: "마이그레이션 실패: {{title}} ({{id}})",
+                stickerPackMigrationComplete: "스티커 팩 마이그레이션 완료",
+                failedToUploadSticker: "스티커를 업로드하지 못했습니다"
+            },
+            text: {
+                stickerPackUrl: "스티커 팩 URL",
+                pasteHtmlHere: "여기에 HTML 붙여 넣기",
+                delete: "삭제",
+                addStickerPackFrom: "URL에서 스티커 팩 추가",
+                insert: "삽입",
+                addStickerPackFrom2: "HTML에서 스티커 팩 추가",
+                insertFromHtml: "HTML에서 삽입",
+                addStickerPackFrom3: "파일에서 스티커 팩 추가",
+                miscTools: "기타 도구",
+                exportStickerPacks: "스티커 팩 내보내기",
+                migrateFromV1: "v1에서 마이그레이션",
+                stickersManagement: "스티커 관리",
+                theRegionLineRecognized: "사용 중인 CORS 프록시 때문에 LINE이 인식하는 지역이 실제 지역과 다를 수 있습니다.",
+                openStickerPackFile: "스티커 팩 파일 열기",
+                stickers: "스티커+",
+                categoryTitle: "카테고리, {{title}}",
+                searchStickers: "스티커 검색",
+                ffmpegstatecontextIsUndefined: "FFmpegStateContext가 정의되지 않았습니다",
+                recentlyUsed: "최근 사용",
+                addFromUrl: "URL에서 추가",
+                addFromHtml: "HTML에서 추가",
+                addFromFile: "파일에서 추가",
+                misc: "기타",
+                invalidUrl: "잘못된 URL",
+                lineOnly: "현재 LINE 스티커/이모지만 지원됩니다.",
+                getTelegramStickers: "Telegram 스티커는 다음으로 받을 수 있습니다:",
+                htmlFallbackHelp: "스티커 팩을 추가하는 중 오류가 발생하면 스티커 팩 페이지의 HTML 소스 코드로 추가해 볼 수 있습니다.",
+                htmlFallbackApplies: "지역 잠금 / OS 잠금 등이 걸린 스티커에 해당합니다."
+            },
+            option: {
+                promptToUpload: {
+                    description: "스티커를 바로 보내지 않고 채팅창에 삽입합니다",
+                    label: "업로드 전 확인"
+                },
+                packs: {
+                    description: "팩",
+                    label: "팩"
+                }
+            },
+            name: "MoreStickers",
+            description: "다른 소셜 미디어 플랫폼의 스티커 팩을 추가합니다. (예: LINE)"
+        },
+        musicRichPresence: {
+            option: {
+                scrobblerBackend: {
+                    description: "사용할 스크로블러 백엔드입니다.",
+                    label: "스크로블러 백엔드"
+                },
+                instanceBaseURL: {
+                    description: "ListenBrainz 인스턴스의 기본 URL입니다.",
+                    label: "인스턴스 기본 URL"
+                },
+                instanceAPIBaseUrl: {
+                    description: "ListenBrainz API의 기본 URL입니다.",
+                    label: "인스턴스 API 기본 URL"
+                },
+                apiKey: {
+                    description: "Last.fm API 키입니다. 필수는 아니지만 공유 키의 속도 제한을 피하려면 강력히 권장합니다",
+                    label: "API 키"
+                },
+                username: {
+                    description: "사용자 이름",
+                    label: "사용자 이름"
+                },
+                shareUsername: {
+                    description: "스크로블러 프로필 링크 표시",
+                    label: "사용자 이름 공유"
+                },
+                clickableLinks: {
+                    description: "곡, 아티스트, 앨범 이름을 클릭 가능한 링크로 만듭니다",
+                    label: "클릭 가능한 링크"
+                },
+                hideWithSpotify: {
+                    description: "Spotify가 실행 중이면 상태 숨기기",
+                    label: "Spotify와 함께 숨기기"
+                },
+                hideWithActivity: {
+                    description: "다른 상태가 있으면 숨기기",
+                    label: "활동 시 숨기기"
+                },
+                statusName: {
+                    description: "사용자 지정 상태 텍스트입니다. 다음 변수를 사용할 수 있습니다: {artist} | {album} | {title}",
+                    label: "상태 이름"
+                },
+                statusDisplayType: {
+                    description: "멤버 목록에 곡/아티스트 이름 표시",
+                    off: "표시 안 함 (일반 듣는 중 메시지 표시)"
+                },
+                nameFormat: {
+                    description: "상태 이름에 곡과 아티스트 이름 표시",
+                    statusName: "사용자 지정 상태 이름 사용"
+                },
+                missingArt: {
+                    description: "앨범 또는 앨범 아트가 없을 때",
+                    logo: "큰 스크로블러 로고 사용"
+                },
+                showLogo: {
+                    description: "앨범 커버 옆에 스크로블러 서비스 로고 표시",
+                    label: "스크로블러 로고 표시"
+                },
+                showAlbumCover: {
+                    description: "앨범 커버를 표시합니다. 끄면 자리 표시자가 표시됩니다. 음악에 부적절한 이미지가 있을 때 유용합니다",
+                    label: "앨범 커버 표시"
+                },
+                useListeningStatus: {
+                    description: "'플레이 중' 대신 '듣는 중' 상태 표시"
+                }
+            },
+            name: "MusicRichPresence",
+            description: "Last.FM/Listenbrainz용 Rich Presence",
+            text: {
+                showArtistName: "아티스트 이름 표시",
+                showTrackName: "곡 이름 표시",
+                useMusicServiceName: "음악 서비스 이름 사용 (없으면 사용자 지정 상태 텍스트)",
+                useFormatArtistSong: "'아티스트 - 곡' 형식 사용",
+                useFormatSongArtist: "'곡 - 아티스트' 형식 사용",
+                useArtistNameOnly: "아티스트 이름만 사용",
+                useSongNameOnly: "곡 이름만 사용",
+                useAlbumNameFalls: "앨범 이름 사용 (곡에 앨범이 없으면 사용자 지정 상태 텍스트)",
+                useGenericPlaceholder: "일반 자리 표시자 사용",
+                lastFm: "Last.FM",
+                howToCreateAn: "API 키 만드는 방법",
+                set: "설정:",
+                applicationName: "애플리케이션 이름",
+                applicationDescription: "애플리케이션 설명",
+                toAnythingAndLeave: "에 아무 값이나 입력하고 나머지는 비워 두세요.",
+                createApiKey: "API 키 만들기",
+                invalidInstance: "잘못된 ListenBrainz 호환 인스턴스",
+                provideBoth: "다음 두 가지를 모두 입력하세요:",
+                apiBaseUrl: "API 기본 URL",
+                andThe: "및",
+                instanceBaseUrl: "인스턴스 기본 URL",
+                forYourCustomInstance: "(사용자 지정 ListenBrainz 인스턴스용). 또는 ListenBrainz/Last.FM으로 다시 전환하세요",
+                allowConnectTitle: "Plexcord가 ListenBrainz 인스턴스에 연결하도록 허용",
+                allowConnectBody: "사용자 지정 ListenBrainz 인스턴스를 사용하려면 먼저 Plexcord의 연결을 허용해야 합니다.",
+                allowInstance: "인스턴스 허용",
+                listenBrainzCompatible: "ListenBrainz 호환 (자체 호스팅)",
+                and: "및"
+            }
+        },
+        noMiddleClickPaste: {
+            name: "NoMiddleClickPaste",
+            description: "Linux 가운데 클릭 붙여넣기 끄기 - Linux 전용"
+        },
+        orbolayBridge: {
+            option: {
+                port: {
+                    description: "연결할 포트",
+                    label: "포트"
+                }
+            },
+            name: "OrbolayBridge",
+            description: "Orbolay를 Discord에 연결하는 브리지 플러그인",
+            toast: {
+                connectedToOrbolayServer: "Orbolay 서버에 연결됨"
+            }
+        },
+        plexcordHelper: {
+            name: "PlexcordHelper",
+            description: "지원을 제공하고 Discord로 인한 충돌을 수정하는 데 사용됩니다.",
+            text: {
+                restartRequired: "다시 시작 필요",
+                restartNow: "지금 다시 시작",
+                later: "나중에",
+                wouldYouLikeTo: "지금 다시 시작하시겠습니까?",
+                somePluginsRequireA: "일부 플러그인은 완전히 끄려면 다시 시작해야 합니다.",
+                alreadyEnabled: "{{plugin}}이(가) 이미 활성화되어 있습니다",
+                alreadyDisabled: "{{plugin}}이(가) 이미 비활성화되어 있습니다",
+                disablePlugin: "{{plugin}} 비활성화",
+                enablePlugin: "{{plugin}} 활성화",
+                errorStopping: "플러그인 {{plugin}} 중지 중 오류 발생",
+                errorStarting: "플러그인 {{plugin}} 시작 중 오류 발생"
+            },
+            toast: {
+                failedToTolowercase: "{{toLowerCase}} 실패",
+                aRestartIsRequired: "변경 사항을 적용하려면 다시 시작해야 합니다!"
+            },
+            card: {
+                notOnThisVersion: "이 플러그인은 현재 버전의 Plexcord에 없습니다. 업데이트해 보세요!"
+            }
+        },
+        plexcordTweaks: {
+            name: "PlexcordTweaks",
+            option: {
+                removeActivitySection: {
+                    description: "멤버 목록 위의 활동 섹션을 제거합니다",
+                    label: "활동 섹션 제거"
+                },
+                showYourOwnActivityButtons: {
+                    description: "Discord는 어떤 이유로 내 활동 버튼을 숨깁니다",
+                    label: "내 활동 버튼 표시"
+                },
+                refreshSlashCommands: {
+                    description: "클라이언트를 다시 시작하지 않고 새로 추가된 슬래시 명령을 표시하도록 새로 고칩니다.",
+                    label: "슬래시 명령 새로 고침"
+                },
+                forceRoleIcon: {
+                    description: "간략 모드에서 메시지 옆에 역할 아이콘을 강제로 표시합니다",
+                    label: "역할 아이콘 강제"
+                },
+                accountStandingButton: {
+                    description: "헤더 바에 계정 상태 버튼 표시",
+                    label: "계정 상태 버튼"
+                },
+                jsonGateway: {
+                    description: "게이트웨이 재연결 시 JSON을 강제합니다",
+                    label: "JSON 게이트웨이"
+                },
+                enableAutoCorrect: {
+                    description: "채팅 상자 컨텍스트 메뉴에 기본 자동 고침 및 텍스트 대치 전환을 추가합니다",
+                    label: "자동 고침 사용"
+                },
+                autoCorrect: {
+                    description: "메시지 편집기에서 기본 자동 고침과 텍스트 대치를 사용합니다",
+                    label: "자동 고침"
+                },
+                disableHolidayNotifications: {
+                    label: "휴일 알림 비활성화",
+                    description: "항상 Discord 기본 알림음을 사용합니다"
+                },
+                showAllBadges: {
+                    label: "모든 배지 표시",
+                    description: "나머지를 +n으로 접지 않고 모든 프로필 배지를 표시합니다"
+                }
+            },
+            text: {
+                allGood: "모두 정상입니다!",
+                limited: "제한됨",
+                veryLimited: "매우 제한됨",
+                atRisk: "위험",
+                suspended: "정지됨",
+                slashCommandsRefreshedSuccessfully: "슬래시 명령을 새로 고쳤습니다.",
+                failedToRefreshCommands: "명령을 새로 고치지 못했습니다. 자세한 내용은 콘솔을 확인하세요.",
+                enableAutocorrect: "자동 고침 사용"
+            },
+            command: {
+                refreshCommands: "슬래시 명령 새로 고침"
+            },
+            description: "Discord를 위한 작은 조정 및 수정 모음입니다."
+        },
+        plextronStreamFixes: {
+            option: {
+                unlockQualityOptions: {
+                    description: "Nitro 상태와 관계없이 방송 품질 옵션 잠금 해제",
+                    label: "품질 옵션 잠금 해제"
+                },
+                removeResolutionCap: {
+                    description: "60fps에서 720p 이상의 해상도 허용",
+                    label: "해상도 제한 제거"
+                },
+                forceEncoderSettings: {
+                    description: "인코더가 설정한 해상도/FPS를 사용하도록 강제",
+                    label: "인코더 설정 강제"
+                },
+                preventDownscale: {
+                    description: "Discord가 방송 해상도를 낮추지 못하게 함",
+                    label: "다운스케일 방지"
+                },
+                keyframeInterval: {
+                    description: "키프레임 간격 (ms, 0 = 인코더 기본값, 5000 = 5초마다)",
+                    label: "키프레임 간격"
+                },
+                minBitrate: {
+                    description: "인코더 최소 비트레이트 (kbps)",
+                    label: "최소 비트레이트"
+                },
+                raiseBitrateCaps: {
+                    description: "데스크톱 기본 비트레이트 상한 상향 (목표 600kbps → 10Mbps, 최대 3.5Mbps → 40Mbps)",
+                    label: "비트레이트 상한 상향"
+                },
+                preventFramerateReduction: {
+                    description: "말하지 않을 때 Discord가 방송 프레임레이트를 낮추지 못하게 함",
+                    label: "프레임레이트 감소 방지"
+                },
+                bitsPerPixelPct: {
+                    description: "목표 비트레이트의 픽셀당 비트 백분율 (8 = 0.08bpp, 12 = 0.12bpp)",
+                    label: "픽셀당 비트 (%)"
+                }
+            },
+            name: "PlextronStreamFixes",
+            description: "Discord의 인코더와 품질 제한을 패치하여 Plextron의 방송 품질을 개선하려 시도합니다."
+        },
+        rPCEditor: {
+            name: "RPCEditor"
+        },
+        reactionTimestamps: {
+            name: "ReactionTimestamps",
+            description: "반응 팝업에 각 반응의 시간을 표시합니다.",
+            text: {
+                userAtTime: "{{user}} ({{time}})"
+            }
+        },
+        richPresence: {
+            text: {
+                useCustomStatusName: "사용자 지정 상태 이름 사용",
+                useFormatArtistSong: "'아티스트 - 곡' 형식 사용",
+                useFormatSongArtist: "'곡 - 아티스트' 형식 사용",
+                useArtistNameOnly: "아티스트 이름만 사용",
+                useSongNameOnly: "곡 이름만 사용",
+                useAlbumName: "앨범 이름 사용",
+                useLargeStatsFm: "큰 Stats.fm 로고 사용",
+                useGenericPlaceholder: "일반 자리 표시자 사용",
+                seriesMovieName: "시리즈/영화 이름",
+                seriesEpisodeTrackMovie: "시리즈 - 에피소드/트랙/영화 이름",
+                custom: "사용자 지정",
+                seriesCover: "시리즈 커버",
+                episodeCover: "에피소드 커버",
+                season1Episode1: "시즌 1 에피소드 1",
+                off: "끄기",
+                listening: "듣는 중",
+                playing: "플레이 중",
+                streaming: "방송 중",
+                watching: "시청 중",
+                none: "없음",
+                navidromeInstanceExposesServer: "Navidrome 인스턴스 (서버 URL 노출. 일회성 인증 전송.)",
+                lastFmApiSends: "Last.fm API (메타데이터를 last.fm으로 전송)",
+                donTShowShows: "표시 안 함 (일반 듣는 중 메시지 표시)",
+                showStateLineContent: "상태 줄 내용 표시",
+                showDetailsLineContent: "세부 정보 줄 내용 표시",
+                displayYourCurrentlyPlaying: "재생 중인 오디오북을 Discord Rich Presence로 표시합니다. AudioBookShelf 서버 URL, 사용자 이름, 비밀번호가 필요합니다.",
+                audiobookshelfServerUrl: "AudioBookShelf 서버 URL.",
+                audiobookshelfUsername: "AudioBookShelf 사용자 이름.",
+                audiobookshelfPassword: "AudioBookShelf 비밀번호.",
+                connectsToTosuVia: "포트 24050의 WebSocket으로 tosu에 연결합니다. 설정은 필요 없으며 tosu가 osu!와 함께 실행 중인지만 확인하세요.",
+                showWhatYouRe: "stats.fm을 통해 지금 듣고 있는 곡을 표시합니다. 청취 기록이 공개되어 있어야 합니다.",
+                statsFmUsername: "Stats.fm 사용자 이름.",
+                customStatusText: "사용자 지정 상태 텍스트.",
+                statsFm: "Stats.fm",
+                nameFormat: "이름 형식.",
+                fallbackWhenArtIs: "아트가 없을 때의 대체.",
+                showListeningStatus: "듣는 중 상태 표시.",
+                showStatsFmLogo: "앨범 아트 옆에 Stats.fm 로고 표시.",
+                showLinkToStats: "stats.fm 프로필 링크 표시.",
+                showLinkToSong: "stats.fm의 곡 링크 표시.",
+                hideStatsFmPresence: "Spotify가 실행 중이면 stats.fm 상태 숨기기.",
+                hideStatsFmPresence2: "외부 RPC가 실행 중이면 stats.fm 상태 숨기기.",
+                disableDownloadingAlbumArt: "앨범 아트 다운로드 끄기.",
+                showWhatYouRe2: "Jellyfin에서 재생 중인 항목을 표시합니다. API 키 얻는 법: Jellyfin 웹 UI를 열고 F12로 개발자 도구를 연 뒤 네트워크 탭에서 서버로 가는 요청을 찾고, Authorization 헤더(Ctrl+F로 검색)에서 Token='this' 부분이 필요합니다. 사용자 ID는 프로필 페이지 URL에서 찾을 수 있습니다.",
+                jellyfinServerUrl: "Jellyfin 서버 URL.",
+                jellyfinApiKey: "Jellyfin API 키.",
+                authorization: "Authorization",
+                jellyfinUserId: "Jellyfin 사용자 ID.",
+                userIdFromProfile: "프로필 URL의 사용자 ID",
+                nameDisplayFormat: "이름 표시 형식.",
+                customNameTemplate: "사용자 지정 이름 템플릿.",
+                nameOnJellyfin: "Jellyfin의 {name}",
+                coverTypeForTv: "TV 프로그램의 커버 유형.",
+                episodeNumberFormat: "에피소드 번호 형식.",
+                overrideRichPresenceType: "Rich Presence 유형 재정의.",
+                showEpisodeNameAfter: "시즌/에피소드 정보 뒤에 에피소드 이름 표시.",
+                showPresenceWhenMedia: "미디어가 일시 정지되어도 상태 표시.",
+                hideMediaDetails: "미디어 세부 정보 숨기기.",
+                discordRichPresenceFor: "Gensokyo Radio용 Discord Rich Presence. 켜고 들으세요!",
+                refreshIntervalInSeconds: "새로 고침 간격 (초).",
+                showWhatYouRe3: "Navidrome을 통해 지금 듣고 있는 곡을 표시합니다.",
+                navidromeServerUrlMust: "Navidrome 서버 URL (공개 도메인이어야 함, 예: https://navidrome.example.com).",
+                navidromeUsername: "Navidrome 사용자 이름.",
+                navidromePassword: "Navidrome 비밀번호.",
+                optionalDiscordApplicationClient: "Discord 애플리케이션 클라이언트 ID (선택 사항).",
+                howToFetchAlbum: "앨범 아트를 가져오는 방법.",
+                optionalProvideYourOwn: "선택 사항: 자신의 Last.fm API 키 입력 (비워 두면 기본값).",
+                showNavidromeLogoIn: "앨범 아트 오른쪽 아래에 Navidrome 로고 표시.",
+                showAlbumNameIn: "상태에 앨범 이름 표시.",
+                whichTypeOfActivity: "표시할 활동 유형.",
+                showTheStateDetails: "멤버 목록에 상태/세부 정보 줄 내용 표시",
+                hideRichPresenceWhen: "음악이 일시 정지되면 Rich Presence 숨기기 (스톱워치 대신)",
+                theListeningToText: "'듣는 중' 텍스트 (예: {artist})",
+                navidrome: "Navidrome",
+                theMainLineShowing: "재생 중인 곡을 보여 주는 기본 줄 (예: {song})",
+                song: "{song}",
+                theLineBelowThe: "곡 이름 아래 줄 (예: {artist})",
+                artist: "{artist}",
+                theAlbumLineE: "앨범 줄 (예: {album})",
+                album: "{album}",
+                enableTabLabelsCurrenttab: "{{TAB_LABELS_currentTab}} 상태 활성화.",
+                statsFmProfile: "Stats.fm 프로필",
+                viewSong: "곡 보기",
+                showArtistName: "아티스트 이름 표시",
+                showTrackName: "곡 이름 표시",
+                enterValue: "값 입력"
+            },
+            name: "RichPresence",
+            description: "AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome, Gensokyo Radio를 위한 통합 Rich Presence 허브.",
+            toast: {
+                audiobookshelfRpcIsNot: "AudioBookShelf RPC가 구성되지 않았습니다.",
+                jellyfinRpcIsNot: "Jellyfin RPC가 구성되지 않았습니다.",
+                jellyfinReturnedAnInvalid: "Jellyfin이 잘못된 응답을 반환했습니다. API 키가 틀렸을 수 있습니다."
+            },
+            option: {
+                enabled: {
+                    description: "Rich Presence 서비스 활성화.",
+                    label: "사용"
+                },
+                serviceSettings: {
+                    description: "서비스 구성.",
+                    label: "서비스 설정"
+                },
+                abs_enabled: {
+                    description: "AudioBookShelf 상태 활성화.",
+                    label: "AudioBookShelf 사용"
+                },
+                tosu_enabled: {
+                    description: "osu! (tosu) 상태 활성화.",
+                    label: "osu! (tosu) 사용"
+                },
+                sfm_enabled: {
+                    description: "stats.fm 상태 활성화.",
+                    label: "Stats.fm 사용"
+                },
+                jf_enabled: {
+                    description: "Jellyfin 상태 활성화.",
+                    label: "Jellyfin 사용"
+                },
+                gr_enabled: {
+                    description: "Gensokyo Radio 상태 활성화.",
+                    label: "Gensokyo Radio 사용"
+                },
+                nd_enabled: {
+                    description: "Navidrome 상태 활성화.",
+                    label: "Navidrome 사용"
+                },
+                abs_serverUrl: {
+                    description: "AudioBookShelf 서버 URL.",
+                    label: "AudioBookShelf 서버 URL"
+                },
+                abs_username: {
+                    description: "AudioBookShelf 사용자 이름.",
+                    label: "AudioBookShelf 사용자 이름"
+                },
+                abs_password: {
+                    description: "AudioBookShelf 비밀번호.",
+                    label: "AudioBookShelf 비밀번호"
+                },
+                sfm_username: {
+                    description: "Stats.fm 사용자 이름.",
+                    label: "Stats.fm 사용자 이름"
+                },
+                sfm_shareUsername: {
+                    description: "stats.fm 프로필 링크 표시.",
+                    label: "Stats.fm: 사용자 이름 공유"
+                },
+                sfm_shareSong: {
+                    description: "stats.fm의 곡 링크 표시.",
+                    label: "Stats.fm: 곡 공유"
+                },
+                sfm_hideWithSpotify: {
+                    description: "Spotify가 실행 중이면 stats.fm 상태 숨기기.",
+                    label: "Stats.fm: Spotify와 함께 숨기기"
+                },
+                sfm_hideWithExternalRPC: {
+                    description: "외부 RPC가 실행 중이면 stats.fm 상태 숨기기.",
+                    label: "Stats.fm: 외부 RPC와 함께 숨기기"
+                },
+                sfm_statusName: {
+                    description: "사용자 지정 상태 텍스트.",
+                    label: "Stats.fm: 상태 이름"
+                },
+                sfm_nameFormat: {
+                    description: "이름 형식.",
+                    label: "Stats.fm: 이름 형식",
+                    statusName: "사용자 지정 상태 이름 사용",
+                    artistFirst: "'아티스트 - 곡' 형식 사용",
+                    songFirst: "'곡 - 아티스트' 형식 사용",
+                    artistOnly: "아티스트 이름만 사용",
+                    songOnly: "곡 이름만 사용",
+                    albumName: "앨범 이름 사용"
+                },
+                sfm_useListeningStatus: {
+                    description: "듣는 중 상태 표시.",
+                    label: "Stats.fm: 듣는 중 상태 사용"
+                },
+                sfm_missingArt: {
+                    description: "아트가 없을 때의 대체.",
+                    label: "Stats.fm: 아트 없음",
+                    statsFmLogo: "큰 Stats.fm 로고 사용",
+                    placeholder: "일반 자리 표시자 사용"
+                },
+                sfm_showLogo: {
+                    description: "앨범 아트 옆에 Stats.fm 로고 표시.",
+                    label: "Stats.fm: 로고 표시"
+                },
+                sfm_alwaysHideArt: {
+                    description: "앨범 아트 다운로드 끄기.",
+                    label: "Stats.fm: 항상 아트 숨기기"
+                },
+                jf_serverUrl: {
+                    description: "Jellyfin 서버 URL.",
+                    label: "Jellyfin 서버 URL"
+                },
+                jf_apiKey: {
+                    description: "Jellyfin API 키.",
+                    label: "Jellyfin API 키"
+                },
+                jf_userId: {
+                    description: "Jellyfin 사용자 ID.",
+                    label: "Jellyfin 사용자 ID"
+                },
+                jf_nameDisplay: {
+                    description: "이름 표시 형식.",
+                    label: "Jellyfin: 이름 표시",
+                    default: "시리즈/영화 이름",
+                    full: "시리즈 - 에피소드/트랙/영화 이름",
+                    custom: "사용자 지정"
+                },
+                jf_customName: {
+                    description: "사용자 지정 이름 템플릿.",
+                    label: "Jellyfin: 사용자 지정 이름"
+                },
+                jf_coverType: {
+                    description: "TV 프로그램의 커버 유형.",
+                    label: "Jellyfin: 커버 유형",
+                    series: "시리즈 커버",
+                    episode: "에피소드 커버"
+                },
+                jf_episodeFormat: {
+                    description: "에피소드 번호 형식.",
+                    label: "Jellyfin: 에피소드 형식",
+                    long: "S01E01",
+                    fulltext: "시즌 1 에피소드 1"
+                },
+                jf_showEpisodeName: {
+                    description: "시즌/에피소드 정보 뒤에 에피소드 이름 표시.",
+                    label: "Jellyfin: 에피소드 이름 표시"
+                },
+                jf_overrideType: {
+                    description: "Rich Presence 유형 재정의.",
+                    label: "Jellyfin: 유형 재정의",
+                    off: "끄기",
+                    listening: "듣는 중",
+                    playing: "플레이 중",
+                    streaming: "방송 중",
+                    watching: "시청 중"
+                },
+                jf_showPausedState: {
+                    description: "미디어가 일시 정지되어도 상태 표시.",
+                    label: "Jellyfin: 일시 정지 상태 표시"
+                },
+                jf_privacyMode: {
+                    description: "미디어 세부 정보 숨기기.",
+                    label: "Jellyfin: 개인 정보 보호 모드"
+                },
+                gr_refreshInterval: {
+                    description: "새로 고침 간격 (초).",
+                    label: "Gensokyo Radio: 새로 고침 간격"
+                },
+                nd_serverUrl: {
+                    description: "Navidrome 서버 URL (예: https://navidrome.example.com)",
+                    label: "Navidrome 서버 URL"
+                },
+                nd_username: {
+                    description: "Navidrome 사용자 이름",
+                    label: "Navidrome 사용자 이름"
+                },
+                nd_password: {
+                    description: "Navidrome 비밀번호",
+                    label: "Navidrome 비밀번호"
+                },
+                nd_clientId: {
+                    description: "Discord 애플리케이션 클라이언트 ID (선택 사항)",
+                    label: "Navidrome: 클라이언트 ID"
+                },
+                nd_showSmallImage: {
+                    description: "앨범 아트 오른쪽 아래에 Navidrome 로고 표시.",
+                    label: "Navidrome: 작은 이미지 표시"
+                },
+                nd_showAlbum: {
+                    description: "상태에 앨범 이름 표시.",
+                    label: "Navidrome: 앨범 표시"
+                },
+                nd_albumArtMode: {
+                    description: "앨범 아트를 가져오는 방법.",
+                    label: "Navidrome: 앨범 아트 모드",
+                    none: "없음",
+                    instance: "Navidrome 인스턴스 (서버 URL을 Discord에 노출, 인증은 전송 안 함)",
+                    lastfm: "Last.fm API (곡 메타데이터를 Last.fm으로 전송)"
+                },
+                nd_lastfmApiKey: {
+                    description: "Last.fm API 키 (선택 사항)",
+                    label: "Navidrome: Last.fm API 키"
+                },
+                nd_refreshInterval: {
+                    description: "새로 고침 간격 (초).",
+                    label: "Navidrome: 새로 고침 간격"
+                },
+                nd_activityType: {
+                    description: "활동 유형",
+                    label: "Navidrome: 활동 유형",
+                    listening: "듣는 중",
+                    playingFixesHiddenLines: "플레이 중 (숨겨진 줄 수정)",
+                    watching: "시청 중"
+                },
+                nd_nameString: {
+                    description: "활동 이름 서식 문자열",
+                    label: "Navidrome: 이름 문자열"
+                },
+                nd_detailsString: {
+                    description: "활동 세부 정보 서식 문자열",
+                    label: "Navidrome: 세부 정보 문자열"
+                },
+                nd_stateString: {
+                    description: "활동 상태 서식 문자열",
+                    label: "Navidrome: 상태 문자열"
+                },
+                nd_largeTextString: {
+                    description: "활동 큰 텍스트 서식 문자열",
+                    label: "Navidrome: 큰 텍스트 문자열"
+                },
+                nd_statusDisplayType: {
+                    description: "멤버 목록에 곡/아티스트 이름 표시",
+                    off: "표시 안 함 (일반 듣는 중 메시지 표시)"
+                },
+                nd_hideOnPause: {
+                    description: "음악이 일시 정지되면 Rich Presence 숨기기",
+                    label: "Navidrome: 일시 정지 시 숨기기"
+                }
+            },
+            panel: {
+                password: "비밀번호",
+                statsFmUsername: "stats.fm 사용자 이름",
+                customStatusText: "사용자 지정 상태 텍스트",
+                nameFormat: "이름 형식",
+                missingArtFallback: "아트 없음 대체",
+                showListeningStatus: "듣는 중 상태 표시",
+                showStatsFmLogo: "Stats.fm 로고 표시",
+                showProfileLink: "프로필 링크 표시",
+                showSongLink: "곡 링크 표시",
+                hideWithSpotify: "Spotify와 함께 숨기기",
+                hideWithExternalRpc: "외부 RPC와 함께 숨기기",
+                disableAlbumArt: "앨범 아트 끄기",
+                apiKey: "API 키",
+                userId: "사용자 ID",
+                nameDisplay: "이름 표시",
+                customNameTemplate: "사용자 지정 이름 템플릿",
+                coverType: "커버 유형",
+                episodeFormat: "에피소드 형식",
+                overridePresenceType: "상태 유형 재정의",
+                showEpisodeName: "에피소드 이름 표시",
+                showWhenPaused: "일시 정지 시 표시",
+                privacyMode: "개인 정보 보호 모드",
+                refreshInterval: "새로 고침 간격",
+                clientId: "클라이언트 ID",
+                albumArtMode: "앨범 아트 모드",
+                lastFmApiKey: "Last.fm API 키",
+                showSmallImage: "작은 이미지 표시",
+                showAlbum: "앨범 표시",
+                activityType: "활동 유형",
+                statusDisplayType: "상태 표시 유형",
+                hideOnPause: "일시 정지 시 숨기기",
+                activityNameFormat: "활동 이름 형식",
+                detailsFormat: "세부 정보 형식",
+                stateFormat: "상태 형식",
+                largeTextFormat: "큰 텍스트 형식",
+                enabled: "활성화됨"
+            }
+        },
+        sedEnhanced: {
+            option: {
+                regexByDefault: {
+                    description: "`r` 플래그를 반전하여 `r`을 쓰면 비정규식 모드, 생략하면 정규식 모드가 됩니다.",
+                    label: "기본으로 정규식"
+                }
+            },
+            name: "SedEnhanced",
+            description: "Discord의 기초적인 `sed` 지원을 확장합니다."
+        },
+        showRolesInChat: {
+            option: {
+                showBots: {
+                    description: "봇의 최상위 역할을 표시할지 여부.",
+                    label: "봇 표시"
+                },
+                useRoleColor: {
+                    description: "아이콘에 역할 색상을 사용합니다.",
+                    label: "역할 색상 사용"
+                }
+            },
+            name: "ShowRolesInChat",
+            description: "채팅 메시지에서 사용자 이름 옆에 최상위 역할을 표시합니다. 특정 역할은 컨텍스트 메뉴(우클릭)에서 숨기거나 표시할 수 있습니다.",
+            text: {
+                chatRoleActions: "채팅 역할 작업",
+                unhideRolesInChat: "채팅에서 역할 다시 표시",
+                showRoleInChat: "채팅에 역할 표시",
+                hideRoleInChat: "채팅에서 역할 숨기기"
+            }
+        },
+        silenceUsers: {
+            option: {
+                mutedUserIds: {
+                    description: "핑과 서버 배지를 무음 처리할 Discord 사용자 ID (쉼표로 구분).",
+                    label: "무음 처리한 사용자 ID"
+                }
+            },
+            name: "SilenceUsers",
+            description: "특정 사용자의 @멘션 핑과 서버 배지 개수를 무음 처리합니다. 일반 메시지와 DM은 영향받지 않습니다."
+        },
+        songLink: {
+            text: {
+                showIfAvailable: "사용 가능하면 표시",
+                openInDesktopApp: "데스크톱 앱에서 열기",
+                loadingSongLink: "곡 링크 불러오는 중...",
+                pleaseProvideAMusic: "음악 링크를 입력하세요.",
+                thisWillTakeA: "잠시 기다려 주세요...",
+                noAlternativePlatformsFound: "이 링크에 대한 다른 플랫폼을 찾지 못했습니다.",
+                failedToResolveMusic: "음악 링크를 확인하지 못했습니다",
+                logo: "{{name}} 로고"
+            },
+            option: {
+                servicesSettings: {
+                    description: "서비스 설정",
+                    label: "서비스 설정"
+                },
+                userCountry: {
+                    description: "조회에 사용할 국가 (두 글자 국가 코드)",
+                    label: "사용자 국가"
+                },
+                includeMetadata: {
+                    description: "곡 제목과 아티스트 이름을 머리글로 포함합니다.",
+                    label: "메타데이터 포함"
+                }
+            },
+            name: "SongLink",
+            description: "곡 링크 아래에 스트리밍 서비스 버튼을 추가합니다",
+            command: {
+                musiclink: "음악 링크를 다른 스트리밍 플랫폼으로 변환합니다.",
+                url: "음악 링크 (Spotify, Deezer, YouTube, Tidal, Apple Music, SoundCloud)"
+            }
+        },
+        songSpotlight: {
+            name: "SongSpotlight",
+            description: "프로필에서 곡을 자랑하세요",
+            text: {
+                songSpotlight: "Song Spotlight",
+                explicit: "성인",
+                addSong: "곡 추가",
+                addANewSong: "새 곡 추가",
+                copyLink: "링크 복사",
+                removeSong: "곡 제거",
+                failedToLoad: "불러오지 못했습니다!",
+                areYouSure: "확실한가요?",
+                thisWillOverwriteYour: "현재 곡을 덮어씁니다.",
+                continue: "계속",
+                nevermind: "취소",
+                thisWillPermanentlyDelete: "모든 곡이 영구적으로 삭제됩니다.",
+                delete: "삭제",
+                signInToSong: "Song Spotlight에 로그인",
+                songs: "곡",
+                authorization: "Authorization",
+                importFromClipboard: "클립보드에서 가져오기",
+                copyToClipboard: "클립보드에 복사",
+                signOut: "로그아웃",
+                deleteSongs: "곡 삭제",
+                more: "더 보기",
+                editSongs: "곡 편집",
+                copyJson: "JSON 복사",
+                looksLikeThereS: "여기에는 아무것도 없는 것 같아요!",
+                uhOhSongSpotlight: "이런! Song Spotlight를 불러오지 못했습니다. 자세한 내용은 콘솔을 확인하세요.",
+                stealSong: "곡 가져가기",
+                profileSongs: "프로필 곡",
+                notEnoughSpace: "공간이 부족합니다",
+                alreadyAdded: "이미 이 노래를 추가했습니다",
+                invalidLink: "잘못된 링크",
+                failedToParseLink: "링크를 분석하지 못했습니다",
+                invalidUrl: "잘못된 URL",
+                goAddSongs: "자, 뭘 기다리세요? Song Spotlight에 노래를 추가해 보세요!",
+                tellUserToAddSongs: "{{name}}님에게 Song Spotlight에 노래를 추가하라고 알려주세요!",
+                supportedServices: "Song Spotlight는 다음 서비스를 지원합니다:",
+                viewSongsVia: "노래는",
+                viewSongsViaSuffix: "명령어로도 볼 수 있습니다!",
+                coverTooltipOwner: "{{label}}의 {{sublabel}}",
+                coverTooltipBy: "{{sublabel}}의 {{label}}",
+                lastUpdated: "마지막 업데이트",
+                save: "저장",
+                showMore: "{{count}}개 더 보기"
+            },
+            toast: {
+                youHaveBeenSigned: "Song Spotlight에서 로그아웃되었습니다. 다시 로그인하세요.",
+                songSpotlightError: "Song Spotlight: {{error}}",
+                successfullyAuthorized: "인증에 성공했습니다!",
+                failedToPlaySong: "곡 미리 듣기를 재생하지 못했습니다!",
+                addedSong: "곡을 추가했습니다!",
+                removedSong: "곡을 제거했습니다!",
+                noJsonInClipboard: "클립보드에 JSON이 없습니다!",
+                invalidSongSpotlightData: "클립보드의 Song Spotlight 데이터가 잘못되었습니다!",
+                oneOrMoreImported: "가져온 곡 중 하나 이상이 잘못되었습니다.",
+                importedSongsFromClipboard: "클립보드에서 곡을 가져왔습니다!",
+                successfullySavedSongs: "곡을 저장했습니다!",
+                successfullySignedOut: "로그아웃했습니다!",
+                successfullyDeletedSongs: "곡을 삭제했습니다!",
+                youDonTHave: "공간이 부족합니다!",
+                uhOhThisSong: "이런, 이 곡은 존재하지 않습니다!",
+                youAlreadyHaveThis: "이미 추가한 곡입니다!",
+                youDonTHave2: "이 곡을... 추가하지 않으셨나요?",
+                fetchError: "Song Spotlight 요청 오류: {{path}}"
+            },
+            option: {
+                collapseSongList: {
+                    description: "사용자 프로필의 곡 목록을 별도 메뉴를 여는 버튼으로 접습니다",
+                    label: "곡 목록 접기"
+                },
+                profileSongsLimit: {
+                    description: "사용자를 처음 클릭했을 때 표시할 곡 수",
+                    label: "프로필 곡 수 제한"
+                },
+                previewVolume: {
+                    description: "곡 미리 듣기 재생 볼륨",
+                    label: "미리 듣기 볼륨"
+                }
+            }
+        },
+        stopAutoUnread: {
+            name: "StopAutoUnread",
+            description: "Discord가 채널 알림 설정을 자동으로 '모든 메시지'로 바꾸지 못하게 합니다"
+        },
+        themeLibrary: {
+            text: {
+                enablePlugin: "플러그인 활성화",
+                cancel: "취소",
+                holdOn: "잠깐만요!",
+                thisThemeRequiresThe: "이 테마가 제대로 작동하려면",
+                pluginToWorkProperly: "플러그인이 필요합니다!",
+                doYouWantTo: "활성화하시겠습니까?",
+                themeInfo: "테마 정보",
+                viewSource: "소스 보기",
+                close: "닫기",
+                download: "다운로드",
+                overwrite: "덮어쓰기",
+                keepMyFile: "내 파일 유지",
+                copyToClipboard: "클립보드에 복사",
+                conflict: "충돌!",
+                themeSource: "테마 소스",
+                aThemeWithThe: "같은 이름의 테마",
+                alreadyExists: "이(가) 이미 있습니다",
+                inYourThemesDirectory: "테마 폴더에 있습니다! 덮어쓰시겠습니까?",
+                version: "버전",
+                likes: "좋아요",
+                donate: "후원",
+                supportServer: "지원 서버",
+                source: "소스",
+                tags: "태그",
+                youCanSupportThe: "아래에서 후원하여 작성자를 지원할 수 있습니다!",
+                joinDiscordServer: "Discord 서버 참가",
+                viewThemeSource: "테마 소스 보기",
+                showAll: "모두 표시",
+                showThemes: "테마 표시",
+                showSnippets: "스니펫 표시",
+                showMostLiked: "좋아요 많은 순 표시",
+                showDark: "어두운 테마 표시",
+                showLight: "밝은 테마 표시",
+                showEnabled: "사용 중 표시",
+                showDisabled: "사용 안 함 표시",
+                searchForATheme: "테마 검색...",
+                gettingTheLatestThemes: "최신 테마를 가져오는 중...",
+                thisWonTTake: "오래 걸리지 않아요!",
+                failedToFetchThemes: "테마를 가져오지 못했습니다",
+                couldNotFetchThe: "테마 목록을 가져오지 못했습니다. 나중에 다시 시도하세요.",
+                wantYourThemeRemoved: "테마 삭제를 원하시나요?",
+                hide: "숨기기",
+                noThemeFound: "테마를 찾을 수 없습니다.",
+                tryNarrowingYourSearch: "검색 범위를 좁혀 보세요.",
+                themeLibrary: "테마 라이브러리",
+                successfullyAuthorizedWithThemelibrary: "ThemeLibrary 인증에 성공했습니다!",
+                failedToAuthorizeCheck: "인증에 실패했습니다. 콘솔을 확인하세요",
+                successfullyDeauthorizedFromThemelibrary: "ThemeLibrary 인증을 해제했습니다!",
+                failedToDeauthorizeCheck: "인증 해제에 실패했습니다. 콘솔을 확인하세요",
+                themelibraryAuth: "ThemeLibrary 인증",
+                themeRemoval: "테마 삭제",
+                allThemeAuthorsAre: "모든 테마 작성자는 테마 정보에 표기되며 소스는 수정되지 않았습니다. 그래도 테마 삭제를 원하면 아래를 클릭해 이슈를 여세요.",
+                authorizeWithThemelibrary: "ThemeLibrary로 인증",
+                copyThemelibraryToken: "ThemeLibrary 토큰 복사",
+                deauthorizeThemelibrary: "ThemeLibrary 인증 해제",
+                themeDetails: "{{name}} 세부 정보",
+                mostLiked: "좋아요 많은 순",
+                newestAdditions: "최근 추가",
+                removeTheme: "테마 제거",
+                addTheme: "테마 추가",
+                authors: "작성자",
+                author: "작성자",
+                nobodyLikedTheme: "아직 이 테마를 좋아한 사람이 없습니다.",
+                nobodyLikedSnippet: "아직 이 스니펫을 좋아한 사람이 없습니다.",
+                usersLikedTheme: "{{likes}}명의 사용자가 이 테마를 좋아합니다!",
+                usersLikedSnippet: "{{likes}}명의 사용자가 이 스니펫을 좋아합니다!",
+                openThemeLibrary: "테마 라이브러리 열기",
+                lastUpdated: "이 테마의 마지막 업데이트:",
+                removalInfo: "테마를 영구적으로 삭제하려면 다음에서 이슈를 열어주세요:",
+                themes: "테마",
+                requestRemoval: "테마 삭제 요청",
+                pluginSuffix: "플러그인이 필요합니다!"
+            },
+            toast: {
+                downloadedName: "{{name}}을(를) 다운로드했습니다!",
+                failedToDownloadName: "{{name}}을(를) 다운로드하지 못했습니다! (콘솔 확인)",
+                invalidOrExpiredInvite: "초대가 잘못되었거나 만료되었습니다!",
+                copiedToClipboard: "클립보드에 복사됨",
+                noUniquetokenPresentTry: "uniqueToken이 없습니다. 먼저 인증하세요!",
+                noTokenToCopy: "복사할 토큰이 없습니다. 먼저 인증하세요!",
+                copiedToClipboard2: "클립보드에 복사했습니다!"
+            },
+            name: "ThemeLibrary",
+            description: "Plexcord용 테마 라이브러리입니다.",
+            option: {
+                hideWarningCard: {
+                    description: "테마 라이브러리 탭 상단의 경고 카드 숨기기",
+                    label: "경고 카드 숨기기"
+                },
+                buttons: {
+                    description: "ThemeLibrary 버튼",
+                    label: "버튼"
+                }
+            }
+        },
+        translatePlus: {
+            name: "Translate+",
+            description: "인공어를 지원하는 Plexcord 번역 플러그인입니다!",
+            text: {
+                translate: "번역",
+                dismiss: "닫기",
+                translationFailedDueTo: "오류로 인해 번역에 실패했습니다.",
+                translatedFrom: "{{lang}}에서 번역됨"
+            },
+            option: {
+                target: {
+                    description: "대상 언어",
+                    label: "대상"
+                },
+                toki: {
+                    description: "도키 포나 활성화",
+                    label: "도키 포나"
+                },
+                sitelen: {
+                    description: "시텔렌 포나 활성화",
+                    label: "시텔렌 포나"
+                },
+                shavian: {
+                    description: "쇼 알파벳 활성화",
+                    label: "쇼 알파벳"
+                }
+            }
+        },
+        triviaAI: {
+            name: "TriviaAI",
+            description: "AI를 사용해 퀴즈 질문에 답하도록 도와주는 플러그인입니다.",
+            text: {
+                answerWithAi: "AI로 답변",
+                enterApiKeyHere: "AI 엔드포인트의 API 키를 여기에 입력하세요.",
+                enterSystemPrompt: "시스템 프롬프트를 입력하세요.",
+                enterYourOpenaiCompatible: "OpenAI 호환 AI 엔드포인트를 여기에 입력하세요.",
+                status: "상태 {{status}}"
+            },
+            option: {
+                apiKey: {
+                    description: "API 키.",
+                    label: "API 키"
+                },
+                model: {
+                    description: "사용할 AI 모델.",
+                    label: "모델",
+                    placeholder: "예: google/gemini-3-flash-preview, inception/mercury, openai/gpt-5.2-chat 등"
+                },
+                systemPrompt: {
+                    description: "AI의 시스템 프롬프트. 자리 표시자: {current_user}, {current_time}",
+                    label: "시스템 프롬프트"
+                },
+                maxTokens: {
+                    description: "응답의 최대 토큰 수.",
+                    label: "최대 토큰"
+                },
+                endpoint: {
+                    description: "OpenAI 호환 AI 엔드포인트.",
+                    label: "엔드포인트"
+                },
+                context: {
+                    description: "컨텍스트로 포함할 이전 메시지 수.",
+                    label: "컨텍스트"
+                },
+                passMessageAuthorName: {
+                    description: "AI에 전달할 때 메시지 내용 앞에 작성자 이름을 붙입니다. 대화에서 AI가 사용자를 구분하는 데 도움이 됩니다.",
+                    label: "메시지 작성자 이름 전달"
+                },
+                treatSelfAsAssistant: {
+                    description: "켜면 내 메시지가 컨텍스트에서 어시스턴트 메시지로 처리됩니다. 일부 모델은 팬픽을 생성하기 시작합니다.",
+                    label: "나를 어시스턴트로 처리"
+                },
+                mode: {
+                    description: "답변을 어떻게 처리할까요?",
+                    label: "모드",
+                    autoreply: "자동 답장",
+                    chatbar: "채팅창 텍스트 바꾸기",
+                    bot: "Clyde"
+                },
+                supportImages: {
+                    description: "이미지가 있으면 컨텍스트로 AI에 전달합니다. 모든 모델이 지원하지는 않습니다.",
+                    label: "이미지 지원"
+                },
+                sendImagesAsBase64: {
+                    description: "이미지를 base64로 AI에 보냅니다.",
+                    label: "이미지를 base64로 보내기"
+                }
+            },
+            toast: {
+                triviaaiApiSettingsAre: "TriviaAI: API 설정이 완료되지 않았습니다.",
+                errorGettingResponseFrom: "AI 모델의 응답을 가져오는 중 오류가 발생했습니다"
+            }
+        },
+        unreadCountBadge: {
+            option: {
+                showOnMutedChannels: {
+                    description: "음소거한 채널에도 읽지 않음 수 표시",
+                    label: "음소거한 채널에 표시"
+                },
+                notificationCountLimit: {
+                    description: "실제 수 대신 +99 표시",
+                    label: "알림 수 제한"
+                }
+            },
+            name: "UnreadCountBadge",
+            description: "채널 목록의 채널에 읽지 않은 메시지 수 배지를 표시합니다"
+        },
+        userPFP: {
+            toast: {
+                gifsWebpMustBe: "GIF/WebP는 URL로 추가해야 합니다. 이미지 호스팅 서비스에 업로드한 뒤 링크를 붙여 넣으세요."
+            },
+            text: {
+                save: "저장",
+                delete: "삭제",
+                customAvatar: "사용자 지정 아바타",
+                original: "원본",
+                local: "로컬",
+                enterPngGifUrl: "PNG/GIF URL 입력",
+                setAvatar: "아바타 설정",
+                usingTheSetAvatar: "아바타 설정 기능은 로컬 전용이라 변경 사항은 나에게만 보입니다.",
+                joinUserpfpServer: "UserPFP 서버 참가",
+                dropHere: "여기에 놓으세요!",
+                dragOrClick: "⬆ 이미지를 끌어오거나 클릭해서 업로드하세요 (GIF나 WebP는 URL을 사용하세요)",
+                uploadedFile: "(업로드한 파일)",
+                supportHere: "여기서 UserPFP 후원하기"
+            },
+            option: {
+                overrideServerAvatars: {
+                    description: "서버 아바타를 사용자 지정 아바타로, 없으면 기본 사용자 아바타로 대체합니다.",
+                    label: "서버 아바타 재정의"
+                },
+                preferNitro: {
+                    description: "기본 애니메이션 프로필 사진(Nitro)과 UserPFP 아바타가 모두 있을 때 사용할 아바타",
+                    label: "Nitro 우선",
+                    false: "UserPFP",
+                    true: "Nitro"
+                },
+                databaseSource: {
+                    description: "데이터베이스를 불러올 URL",
+                    label: "데이터베이스 소스"
+                }
+            },
+            name: "UserPFP",
+            description: "자신과 다른 사용자에게 로컬 정적 또는 애니메이션 아바타를 설정할 수 있습니다"
+        },
+        userpluginInstaller: {
+            toast: {
+                restartToApplyChanges: "변경 사항을 적용하려면 다시 시작하세요!"
+            },
+            text: {
+                installError: "설치 오류",
+                done: "완료!",
+                later: "나중에",
+                updateError: "업데이트 오류",
+                checkingForUpdates: "업데이트 확인 중...",
+                loadingPlugins: "플러그인 불러오는 중...",
+                pluginUpdatesAvailable: "플러그인 업데이트 있음",
+                theFollowingPluginsAre: "다음 플러그인이 오래되었습니다:",
+                youCanUpdatePlugins: "아래에서 플러그인을 업데이트할 수 있습니다.",
+                installPlugin: "플러그인 설치",
+                userplugininstallerNotFullyLoaded: "UserpluginInstaller가 완전히 로드되지 않았습니다",
+                youNeedToRestart: "네이티브 부분을 불러오려면 다시 시작해야 합니다 :)",
+                restartNow: "지금 다시 시작",
+                someUserpluginsAreOut: "일부 UserPlugins가 오래되었습니다!",
+                clickToOpenThe: "클릭해 UserPlugin 업데이터 열기",
+                plexcordDoesNotModerate: "Plexcord는 유저플러그인을 검토하지 않으며 설치로 인해 발생하는 결과에 대해 책임지지 않습니다.",
+                onlyInstallUserpluginsFrom: "신뢰하는 개발자의 유저플러그인만 설치하세요. 전적으로 본인 책임입니다.",
+                setGitPath: "Git 경로 설정",
+                installHint: "GitHub, GitLab, Codeberg, git.nin0.dev 또는 plugins.nin0.dev의 플러그인은 여기에 클론 URL을 붙여 넣어 설치할 수 있습니다.",
+                enableAndRestart: "활성화 후 다시 시작",
+                enableAndRefresh: "활성화 후 새로 고침",
+                tabCounts: "({{total}}개, {{enabled}}개 활성화)",
+                possiblyMore: "업데이트 확인이 끝나지 않아 더 있을 수 있습니다. ",
+                alreadyInstalled: "플러그인이 이미 설치되어 있습니다. 아래에서 업데이트하세요",
+                invalidUrl: "잘못된 URL입니다. 위의 안내를 읽어주세요",
+                install: "설치",
+                restart: "재시작",
+                refresh: "새로고침",
+                update: "업데이트",
+                source: "소스",
+                support: "지원",
+                managePlugins: "플러그인 관리",
+                uninstalledRestart: "{{name}}을(를) 제거했습니다. 플러그인을 완전히 제거하려면 재시작이 필요합니다.",
+                uninstalledRefresh: "{{name}}을(를) 제거했습니다. 플러그인을 완전히 제거하려면 새로고침이 필요합니다.",
+                updatedRestart: "{{name}}을(를) 업데이트했습니다. 업데이트를 적용하려면 재시작이 필요합니다.",
+                updatedRefresh: "{{name}}을(를) 업데이트했습니다. 업데이트를 적용하려면 새로고침이 필요합니다.",
+                installedBody: "{{name}}을(를) 설치했습니다. 이제 어떻게 할까요?",
+                installedNativeBody: "{{name}}을(를) 설치했습니다. 다만 네이티브 기능을 사용하므로 클라이언트를 재시작해야 합니다. 이제 어떻게 할까요?"
+            },
+            option: {
+                allowlistedChannels: {
+                    description: "플러그인 설치 버튼을 표시할 채널의 쉼표로 구분된 목록입니다. Plexcord 유저플러그인 채널에서는 항상 표시됩니다",
+                    label: "허용된 채널"
+                },
+                notifyIfUpdate: {
+                    description: "UserPlugins 업데이트가 필요하면 Plexcord 알림 표시",
+                    label: "업데이트가 있으면 알림"
+                },
+                neverNotifyForPlugins: {
+                    description: "이 플러그인들은 업데이트 알림을 표시하지 않음 (UserPlugins 탭에서 계속 업데이트 가능)",
+                    label: "알림 안 받을 플러그인"
+                }
+            },
+            name: "UserpluginInstaller",
+            description: "버튼 클릭 한 번으로 유저플러그인을 설치합니다"
+        },
+        vCPanelSettings: {
+            option: {
+                title1: {
+                    label: "제목 1"
+                },
+                uncollapseSettingsByDefault: {
+                    description: "기본적으로 음성 설정을 자동으로 펼치기",
+                    label: "기본적으로 설정 펼치기"
+                },
+                title2: {
+                    label: "제목 2"
+                },
+                outputVolume: {
+                    description: "출력 볼륨 슬라이더 표시",
+                    label: "출력 볼륨"
+                },
+                inputVolume: {
+                    description: "입력 볼륨 슬라이더 표시",
+                    label: "입력 볼륨"
+                },
+                outputDevice: {
+                    description: "출력 장치 선택기 표시",
+                    label: "출력 장치"
+                },
+                inputDevice: {
+                    description: "입력 장치 선택기 표시",
+                    label: "입력 장치"
+                },
+                camera: {
+                    description: "카메라 선택기 표시",
+                    label: "카메라"
+                },
+                title3: {
+                    label: "제목 3"
+                },
+                showOutputVolumeHeader: {
+                    description: "출력 볼륨 슬라이더 위에 머리글 표시",
+                    label: "출력 볼륨 머리글 표시"
+                },
+                showInputVolumeHeader: {
+                    description: "입력 볼륨 슬라이더 위에 머리글 표시",
+                    label: "입력 볼륨 머리글 표시"
+                },
+                showOutputDeviceHeader: {
+                    description: "출력 장치 선택기 위에 머리글 표시",
+                    label: "출력 장치 머리글 표시"
+                },
+                showInputDeviceHeader: {
+                    description: "입력 장치 선택기 위에 머리글 표시",
+                    label: "입력 장치 머리글 표시"
+                },
+                showVideoDeviceHeader: {
+                    description: "카메라 선택기 위에 머리글 표시",
+                    label: "비디오 장치 머리글 표시"
+                }
+            },
+            name: "VCPanelSettings",
+            description: "음성 패널에서 바로 음성 설정을 제어합니다",
+            text: {
+                appearance: "디스플레이",
+                settingsToShow: "표시할 설정",
+                headersToShow: "표시할 머리글",
+                outputVolume: "출력 볼륨",
+                inputVolume: "입력 볼륨",
+                outputDevice: "출력 장치",
+                inputDevice: "입력 장치",
+                settings: "설정",
+                hide: "숨기기"
+            }
+        },
+        voiceMessageTranscriber: {
+            text: {
+                autoDetect: "자동 감지",
+                start: "시작",
+                transcriptionOptions: "전사 옵션",
+                audioLanguage: "오디오 언어",
+                retry: "다시 시도",
+                transcriptionFailed: "전사 실패",
+                transcribeVoiceMessage: "음성 메시지 전사",
+                close: "닫기",
+                baseRecommended: "Base (권장)",
+                small: "Small",
+                largeV3TurboBest: "Large v3 Turbo (최고 정확도, GPU 권장)",
+                transcribe: "받아쓰기",
+                translateToEnglish: "영어로 번역",
+                voiceMessageTranslation: "음성 메시지 번역",
+                voiceMessageTranscription: "음성 메시지 받아쓰기",
+                hideTimestamps: "타임스탬프 숨기기",
+                showTimestamps: "타임스탬프 표시",
+                copied: "복사했습니다!",
+                copyText: "텍스트 복사",
+                downloadingAudio: "오디오 다운로드 중...",
+                processingAudio: "오디오 처리 중...",
+                loadingModel: "모델 불러오는 중...",
+                transcribing: "받아쓰는 중...",
+                transcription: "받아쓰기 결과",
+                transcriptionError: "받아쓰기 오류",
+                transcribingInProgress: "받아쓰기 진행 중...",
+                initializing: "초기화 중...",
+                workerCrashed: "받아쓰기 작업자가 충돌했습니다",
+                workerStopped: "받아쓰기 작업자가 중지되었습니다",
+                deleteCache: "모든 캐시 파일 삭제 ({{size}} MB)",
+                action: "작업"
+            },
+            name: "VoiceMessageTranscriber",
+            description: "Whisper 기반의 기기 내 음성 메시지 전사",
+            option: {
+                embed: {
+                    description: "창 대신 음성 메시지 첨부 파일 안에 전사를 바로 표시합니다.",
+                    label: "임베드"
+                },
+                maintainHorizontal: {
+                    description: "임베드된 전사 상자의 가로 크기를 유지하고 세로로 늘립니다.",
+                    label: "가로 유지"
+                },
+                selectedModel: {
+                    description: "모델 크기.",
+                    onnxcommunitywhispertiny: "Tiny (가장 빠름, 정확도 가장 낮음)"
+                },
+                useGpu: {
+                    description: "지원되면 GPU(WebGPU)에서 모델을 실행합니다. 훨씬 빠르며 큰 모델도 사용할 수 있습니다. 사용할 수 없으면 CPU로 대체됩니다.",
+                    label: "GPU 사용"
+                },
+                quantized: {
+                    description: "CPU에서 실행할 때 양자화 모델을 사용합니다 (크기 작음, 약간의 품질 저하).",
+                    label: "양자화"
+                },
+                deleteModalFiles: {
+                    description: "저장소에서 캐시된 파일을 삭제합니다.",
+                    label: "모델 파일 삭제"
+                }
+            }
+        },
+        voiceMessagesInBackground: {
+            name: "VoiceMessagesInBackground",
+            description: "동기화된 미니 플레이어로 채팅을 이동해도 음성 메시지를 계속 재생합니다.",
+            text: {
+                voiceMessagesInBackground: "백그라운드 음성 메시지 플레이어",
+                returnToChannelname: "{{channelName}}(으)로 돌아가기",
+                voiceMessagePosition: "음성 메시지 위치",
+                changePlaybackSpeed: "재생 속도 변경",
+                playbackSpeedSpeedTimes: "재생 속도 {{speed}}배",
+                closeVoiceMessagePlayer: "음성 메시지 플레이어 닫기",
+                voiceMessage: "음성 메시지",
+                directMessage: "개인 메시지",
+                resume: "음성 메시지 재개",
+                pause: "음성 메시지 일시 정지"
+            }
+        },
+        webPWA: {
+            name: "WebPWA",
+            description: "Discord를 앱(PWA)으로 설치할 수 있게 합니다. 알림 배지, 전역 단축키, Discord 자체 제목 표시줄을 활성화합니다.",
+            text: {
+                activities: "활동",
+                hopIn: "참여하기",
+                status: "상태",
+                emojis: "이모지",
+                rooms: "방",
+                discord: "Discord",
+                platforms: "플랫폼",
+                keybindsInfoBefore: "사용자 지정 전역 '눌러서 X' 단축키를 지원합니다. 변경하려면",
+                keybindsInfoAfter: "(으)로 이동하세요. '길게 눌러 X' 단축키는 지원되지 않습니다."
+            }
+        },
+        "webRichPresence (arRPC)": {
+            name: "WebRichPresence (arRPC)"
+        },
+        webScreenShare: {
+            option: {
+                resolution: {
+                    description: "해상도",
+                    label: "해상도"
+                },
+                frameRate: {
+                    description: "프레임레이트",
+                    label: "프레임레이트"
+                },
+                contentHint: {
+                    description: "콘텐츠 힌트",
+                    label: "콘텐츠 힌트"
+                },
+                systemAudio: {
+                    description: "시스템 오디오 음소거",
+                    label: "시스템 오디오"
+                }
+            },
+            name: "WebScreenShare",
+            description: "화면 공유 옵션 메뉴를 추가합니다. 해상도, 프레임레이트, 인코딩 힌트, 시스템 오디오 설정을 바꿀 수 있습니다.",
+            text: {
+                stream: "방송",
+                streamMuted: "방송 음소거됨",
+                streamMode: "방송 모드",
+                muteStreamAudio: "방송 오디오 음소거",
+                preventsSystemAudioFrom: "시스템 오디오가 방송에 포함되지 않게 합니다.",
+                showStreamPreviews: "방송 미리 보기 표시",
+                allowsOthersToSee: "다른 사람이 참여하기 전에 방송 미리 보기를 볼 수 있게 합니다.",
+                smootherVideo: "더 부드러운 영상",
+                cleanerText: "더 선명한 텍스트",
+                userPreset: "사용자 프리셋",
+                custom: "사용자 지정",
+                gaming: "게임",
+                screenshare: "화면 공유"
+            }
+        },
+        whitelistedEmojis: {
+            option: {
+                defaultEmojis: {
+                    description: "화이트리스트에 없으면 기본 유니코드 이모지를 자동 완성에서 숨깁니다.",
+                    label: "기본 이모지"
+                },
+                serverEmojis: {
+                    description: "화이트리스트에 없으면 서버 사용자 지정 이모지를 자동 완성에서 숨깁니다.",
+                    label: "서버 이모지"
+                },
+                disableToasts: {
+                    description: "이모지를 추가하거나 제거할 때 토스트를 표시하지 않습니다.",
+                    label: "토스트 끄기"
+                },
+                whiteListedEmojis: {
+                    description: "화이트리스트 이모지",
+                    label: "화이트리스트 이모지"
+                },
+                exportEmojis: {
+                    description: "이모지 내보내기",
+                    label: "이모지 내보내기"
+                },
+                importEmojis: {
+                    description: "이모지 가져오기",
+                    label: "이모지 가져오기"
+                },
+                resetEmojis: {
+                    description: "이모지 재설정",
+                    label: "이모지 재설정"
+                }
+            },
+            name: "WhitelistedEmojis",
+            description: "화이트리스트에 있는 이모지를 제외한 모든 메시지 이모지를 끌 수 있습니다.",
+            toast: {
+                addedLengthEmojisTo: "이모지 {{length}}개를 목록에 추가했습니다. {{length}}개는 이미 목록에 있습니다",
+                removedLengthEmojisFrom: "이모지 {{length}}개를 목록에서 제거했습니다",
+                nameIsAlreadyIn: "\"{{name}}\"은(는) 이미 목록에 있습니다",
+                addedNameToThe: "\"{{name}}\"을(를) 목록에 추가했습니다",
+                nameIsNotIn: "\"{{name}}\"은(는) 목록에 없습니다",
+                removedNameFromThe: "\"{{name}}\"을(를) 목록에서 제거했습니다",
+                successfullyExportedEmojis: "이모지를 내보냈습니다",
+                successfullyImportedEmojis: "이모지를 가져왔습니다",
+                invalidJsonData: "잘못된 JSON 데이터",
+                failedToImportEmojis: "이모지를 가져오지 못했습니다: {{err}}",
+                resetEmojis: "이모지를 재설정했습니다"
+            },
+            text: {
+                areYouSure: "확실한가요?",
+                thisWillOverwriteYour: "현재 화이트리스트를 덮어씁니다.",
+                import: "가져오기",
+                cancel: "취소",
+                thisWillRemoveAll: "화이트리스트에서 모든 이모지가 제거됩니다.",
+                reset: "재설정",
+                addAllGuildEmojis: "서버 이모지 모두 추가",
+                removeAllGuildEmojis: "서버 이모지 모두 제거",
+                noEmojisInThe: "화이트리스트에 이모지가 없습니다.",
+                removeAll: "모두 제거",
+                removeFromWhitelist: "화이트리스트에서 제거",
+                addToWhitelist: "화이트리스트에 추가",
+                defaultEmojis: "기본 이모지",
+                guildEmojis: "{{name}} 이모지",
+                guildFallback: "서버 {{id}}",
+                whitelistedEmojis: "화이트리스트 이모지",
+                remove: "제거"
+            }
+        },
+        wigglyText: {
+            option: {
+                intensity: {
+                    description: "애니메이션 강도 (px)",
+                    label: "강도"
+                }
+            },
+            name: "WigglyText",
+            description: "텍스트를 흔들리게 하는 새 마크다운 서식을 추가합니다.",
+            text: {
+                leftAndRight: "좌우로",
+                byTyping: "입력:",
+                upAndDown: "위아래로",
+                inACircle: "원형으로",
+                youCanMakeTextWiggle: "다음과 같이 텍스트를 흔들 수 있습니다:"
+            }
+        },
+        fixDiscordCss: {
+            description: "Discord의 CSS 지연을 수정합니다"
+        },
+        directFileDownload: {
+            name: "DirectFileDownload",
+            description: "파일을 브라우저에서 여는 대신 Discord에서 바로 다운로드합니다"
+        },
+        githubRepos: {
+            text: {
+                failedToFetchRepositories: "저장소를 가져오지 못했습니다",
+                personal: "개인",
+                unknown: "알 수 없음",
+                sortedByCount: "저장소 수 순으로 정렬됨. 클릭하면 가나다순으로 정렬",
+                sortedAlphabetically: "가나다순으로 정렬됨. 클릭하면 저장소 수 순으로 정렬",
+                mostRepos: "저장소 많은 순"
+            }
         }
     }
 } as const;

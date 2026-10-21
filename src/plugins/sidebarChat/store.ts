@@ -4,12 +4,14 @@
  * Copyright (c) 2025 MutanPlex
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
+
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Flux as TFlux } from "@plexcord/discord-types";
 import { proxyLazy } from "@utils/lazy";
 import { OptionType } from "@utils/types";
 import { ChannelActionCreators, Flux as FluxWP, FluxDispatcher, PopoutActions, PopoutWindowStore } from "@webpack/common";
+
 interface IFlux extends TFlux {
     PersistedStore: TFlux["Store"];
 }
@@ -50,13 +52,6 @@ export const settings = definePluginSettings({
             setAlwaysOnTopForOpenPopouts(value);
         }
     },
-    patchCommunity: {
-        label: () => t(plugin.sidebarChat.option.patchCommunity.label),
-        description: () => t(plugin.sidebarChat.option.patchCommunity.description),
-        type: OptionType.BOOLEAN,
-        default: true,
-        restartNeeded: true,
-    }
 });
 
 export const SidebarStore = proxyLazy(() => {

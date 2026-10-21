@@ -6,8 +6,9 @@
  */
 
 import * as DataStore from "@api/DataStore";
+import { plugin, t } from "@api/i18n";
 import { chooseFile, saveFile } from "@utils/web";
-import { Toasts } from "@webpack/common";
+import { showToast } from "@webpack/common";
 
 import { DATA_COLLECTION_NAME, getCollections, refreshCacheCollection } from "./collectionManager";
 import { logger } from "./misc";
@@ -46,7 +47,7 @@ export async function uploadGifCollections(showToast = true): Promise<void> {
         if (IS_DISCORD_DESKTOP) {
                 const [file] = await DiscordNative.fileManager.openFiles({
                         filters: [
-                                { name: "Gif Collections", extensions: ["json"] },
+                                { name: t(plugin.gifCollections.text.gifCollections), extensions: ["json"] },
                                 { name: "all", extensions: ["*"] },
                         ],
                 });
@@ -76,14 +77,6 @@ export async function uploadGifCollections(showToast = true): Promise<void> {
         }
 }
 
-const toastSuccess = () => Toasts.show({
-        type: Toasts.Type.SUCCESS,
-        message: "Collections imported successfully.",
-        id: Toasts.genId(),
-});
+const toastSuccess = () => showToast({ text: t(plugin.gifCollections.toast.collectionsImportedSuccessfully), variant: "success" });
 
-const toastFailure = (err: unknown) => Toasts.show({
-        type: Toasts.Type.FAILURE,
-        message: `Failed to import collections: ${String(err)}`,
-        id: Toasts.genId(),
-});
+const toastFailure = (err: unknown) => showToast({ text: t(plugin.gifCollections.toast.failedToImportCollections, { String_err: String(err) }), variant: "critical" });

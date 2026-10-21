@@ -64,6 +64,7 @@
     line-height: 16px;
     color: var(--white-500);
     text-align: center;
+    white-space: nowrap;
     margin-right: 8px;
 }
 
@@ -170,21 +171,6 @@
 
 .text-normal.margin-bottom {
     margin-bottom: 10px;
-}
-
-.pc-plugins-disable-warning,
-.pc-plugin-modal-disable-warning {
-    background-color: color-mix(in srgb, var(--status-danger) 10%, transparent) !important;
-    border-style: solid !important;
-    border-width: .1rem !important;
-    border-color: color-mix(in srgb, var(--status-danger) 80%, transparent) !important;
-    border-radius: 5px !important;
-    color: color-mix(in srgb, var(--status-danger) 100%, transparent) !important;
-}
-
-.pc-plugins-disable-warning:hover,
-.pc-plugin-modal-disable-warning:hover {
-    background-color: color-mix(in srgb, var(--status-danger) 40%, transparent) !important;
 }
 
 .pc-plugins-confirm-reset,

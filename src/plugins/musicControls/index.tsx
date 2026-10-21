@@ -29,7 +29,9 @@ import { migrateOldLyrics } from "./spotify/lyrics/api";
 import { SpotifyLyrics } from "./spotify/lyrics/components/lyrics";
 import { SpotifyPlayer } from "./spotify/PlayerComponent";
 import { TidalLyrics } from "./tidal/lyrics/components/lyrics";
+import { stopTidalLrcStore } from "./tidal/lyrics/providers/store";
 import { TidalPlayer } from "./tidal/TidalPlayer";
+import { stopTidalStore } from "./tidal/TidalStore";
 
 export default definePlugin({
     name: "MusicControls",
@@ -40,7 +42,7 @@ export default definePlugin({
 
     patches: [
         {
-            find: ".DISPLAY_NAME_STYLES_COACHMARK)",
+            find: "#{intl::USER_PROFILE_ACCOUNT_POPOUT_BUTTON_A11Y_LABEL}",
             replacement: {
                 // react.jsx)(AccountPanel, { ..., showTaglessAccountPanel: blah })
                 match: /(?<=\i\.jsxs?\)\()(\i),{(?=[^}]*?userTag:\i,occluded:)/,
@@ -106,5 +108,10 @@ export default definePlugin({
     async start() {
         await migrateOldLyrics();
         toggleHoverControls(settings.store.hoverControls);
+    },
+
+    stop() {
+        stopTidalLrcStore();
+        stopTidalStore();
     },
 });

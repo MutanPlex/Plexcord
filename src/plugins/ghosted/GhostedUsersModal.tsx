@@ -8,11 +8,10 @@
 import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Paragraph } from "@components/Paragraph";
-import { Channel } from "@plexcord/discord-types";
+import { Channel, RenderModalProps } from "@plexcord/discord-types";
 import { classNameFactory } from "@utils/css";
-import { ModalCloseButton, ModalContent, ModalHeader, ModalRoot, ModalSize } from "@utils/modal";
 import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
-import { Avatar, ChannelStore, MessageStore, React, UserStore } from "@webpack/common";
+import { Avatar, ChannelStore, MessageStore, Modal, React, UserStore } from "@webpack/common";
 
 const cl = classNameFactory("pc-boo-");
 
@@ -41,9 +40,8 @@ function GroupDmsIcon({ channel }: { channel: Channel; }) {
 }
 
 interface GhostedUsersModalProps {
-    modalProps: any;
+    modalProps: RenderModalProps;
     ghostedChannels: string[];
-    onClose: () => void;
     onClearGhost: (channelId: string) => void;
 }
 
@@ -61,14 +59,14 @@ export function getChannelDisplayName(channelId: string): string {
     return user?.username || t(plugin.ghosted.modal.unknownUser);
 }
 
-export function GhostedUsersModal({ modalProps, ghostedChannels: initialChannels, onClose, onClearGhost }: GhostedUsersModalProps) {
+export function GhostedUsersModal({ modalProps, ghostedChannels: initialChannels, onClearGhost }: GhostedUsersModalProps) {
     const [ghostedChannels, setGhostedChannels] = React.useState(initialChannels);
 
     const handleChannelClick = (channelId: string) => {
         const channel = ChannelStore.getChannel(channelId);
         if (channel) {
             SelectedChannelActionCreators.selectPrivateChannel(channelId);
-            onClose();
+            modalProps.onClose();
         }
     };
 
@@ -87,77 +85,67 @@ export function GhostedUsersModal({ modalProps, ghostedChannels: initialChannels
     };
 
     return (
-        <ModalRoot {...modalProps} size={ModalSize.MEDIUM}>
-            <ModalHeader>
-                <Paragraph
-                    size="lg"
-                    className={cl("modal-header")}
-                >
-                    {t(plugin.ghosted.modal.title)} ({ghostedChannels.length})
-                </Paragraph>
-                {ghostedChannels.length > 0 && (
-                    <Button
-                        size="small"
-                        variant="primary"
-                        onClick={handleClearAll}
-                        className={cl("clear")}
-                    >
-                        {t(plugin.ghosted.modal.clearAll)}
-                    </Button>
-                )}
-                <ModalCloseButton onClick={onClose} />
-            </ModalHeader>
-            <ModalContent>
-                <div className={cl("modal-content")}>
-                    {ghostedChannels.length === 0 ? (
-                        <Paragraph size="md">{t(plugin.ghosted.modal.noGhost)}</Paragraph>
-                    ) : (
-                        ghostedChannels.map(channelId => {
-                            const channel = ChannelStore.getChannel(channelId);
-                            if (!channel) return null;
+        <Modal
+            {...modalProps}
+            size="md"
+            title={`${t(plugin.ghosted.modal.title)} (${ghostedChannels.length})`}
+            actions={ghostedChannels.length > 0 ? [
+                {
+                    text: t(plugin.ghosted.modal.clearAll),
+                    variant: "primary",
+                    onClick: handleClearAll
+                }
+            ] : []}
+        >
+            <div className={cl("modal-content")}>
+                {ghostedChannels.length === 0 ? (
+                    <Paragraph size="md">{t(plugin.ghosted.modal.noGhost)}</Paragraph>
+                ) : (
+                    ghostedChannels.map(channelId => {
+                        const channel = ChannelStore.getChannel(channelId);
+                        if (!channel) return null;
 
-                            const lastMessage = MessageStore.getMessages(channelId)?.last();
-                            const lastMessageDate = lastMessage?.timestamp ? formatMessageDate(lastMessage.timestamp) : "";
+                        const lastMessage = MessageStore.getMessages(channelId)?.last();
+                        const lastMessageDate = lastMessage?.timestamp ? formatMessageDate(lastMessage.timestamp) : "";
 
-                            const displayName = getChannelDisplayName(channel.id);
-                            const userId = channel?.recipients?.[0] ?? "";
-                            return (
-                                <div
-                                    key={channelId}
-                                    onClick={() => handleChannelClick(channelId)}
-                                    className={cl("ghosted-entry")}
-                                >
-                                    {channel.isGroupDM() ?
-                                        <GroupDmsIcon
-                                            channel={channel}
-                                        /> : <Avatar
-                                            src={UserStore.getUser(userId)?.getAvatarURL(undefined, 128, true)}
-                                            size="SIZE_40"
-                                            aria-label={displayName}
-                                        />}
-                                    <div className={cl("user-info")}>
-                                        <Paragraph size="md">
-                                            {displayName}
+                        const displayName = getChannelDisplayName(channel.id);
+                        const userId = channel?.recipients?.[0] ?? "";
+                        return (
+                            <div
+                                key={channelId}
+                                onClick={() => handleChannelClick(channelId)}
+                                className={cl("ghosted-entry")}
+                            >
+                                {channel.isGroupDM() ?
+                                    <GroupDmsIcon
+                                        channel={channel}
+                                    /> : <Avatar
+                                        src={UserStore.getUser(userId)?.getAvatarURL(undefined, 128, true)}
+                                        size="SIZE_40"
+                                        aria-label={displayName}
+                                    />}
+                                <div className={cl("user-info")}>
+                                    <Paragraph size="md">
+                                        {displayName}
+                                    </Paragraph>
+                                    {lastMessageDate && (
+                                        <Paragraph size="xs" className={cl("modal-text")}>
+                                            {lastMessageDate}
                                         </Paragraph>
-                                        {lastMessageDate && (
-                                            <Paragraph size="xs" className={cl("modal-text")}>
-                                                {lastMessageDate}
-                                            </Paragraph>
-                                        )}
-                                    </div>
-                                    <Button
-                                        size="small"
-                                        variant="primary"
-                                        onClick={e => handleClearClick(e, channelId)}
-                                    >
-                                        {t(plugin.ghosted.modal.clear)}
-                                    </Button>
+                                    )}
                                 </div>
-                            );
-                        })
-                    )}
-                </div>
-            </ModalContent>
-        </ModalRoot>
+                                <Button
+                                    size="small"
+                                    variant="primary"
+                                    onClick={e => handleClearClick(e, channelId)}
+                                >
+                                    {t(plugin.ghosted.modal.clear)}
+                                </Button>
+                            </div>
+                        );
+                    })
+                )}
+            </div>
+        </Modal>
     );
 }

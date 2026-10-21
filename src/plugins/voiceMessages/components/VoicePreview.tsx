@@ -19,17 +19,10 @@
 
 import { plugin, t } from "@api/i18n";
 import { useTimer } from "@utils/react";
-import { findComponentByCodeLazy } from "@webpack";
-
-import { cl } from "..";
 
 const PREVIEW_IDLE_LABEL = "----";
 
-interface VoiceMessageProps {
-    src: string;
-    waveform: string;
-}
-const VoiceMessage = findComponentByCodeLazy<VoiceMessageProps>("waveform:", "onVolumeChange");
+import { cl, VoiceMessage } from "..";
 
 export type VoicePreviewOptions = {
     src?: string;

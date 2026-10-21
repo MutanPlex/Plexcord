@@ -8,7 +8,6 @@
 import { settings, t } from "@api/i18n";
 import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { useSettings } from "@api/Settings";
-import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
 import { ErrorCard } from "@components/ErrorCard";
@@ -18,8 +17,7 @@ import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { Margins } from "@utils/margins";
 import { identity } from "@utils/misc";
-import { ModalCloseButton, ModalContent, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
-import { Select, Slider } from "@webpack/common";
+import { Modal, openModal, Select, Slider } from "@webpack/common";
 
 export function NotificationSection() {
     return (
@@ -42,16 +40,13 @@ export function NotificationSection() {
 
 export function openNotificationSettingsModal() {
     openModal(props => (
-        <ModalRoot {...props} size={ModalSize.MEDIUM}>
-            <ModalHeader>
-                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t(settings.notifications.settings)}</BaseText>
-                <ModalCloseButton onClick={props.onClose} />
-            </ModalHeader>
-
-            <ModalContent>
-                <NotificationSettings />
-            </ModalContent>
-        </ModalRoot>
+        <Modal
+            {...props}
+            size="lg"
+            title={t(settings.notifications.settings)}
+        >
+            <NotificationSettings />
+        </Modal>
     ));
 }
 
@@ -59,8 +54,8 @@ function NotificationSettings() {
     const settingsState = useSettings(["notifications.*"]).notifications;
 
     return (
-        <div style={{ padding: "1em 0" }}>
-            <Heading>{t(settings.notifications.style.label)}</Heading>
+        <>
+            <Heading tag="h5">{t(settings.notifications.style.label)}</Heading>
             {settingsState.useNative !== "never" && Notification?.permission === "denied" && (
                 <ErrorCard style={{ padding: "1em" }} className={Margins.bottom8}>
                     <Heading>{t(settings.notifications.permissions.denied.title)}</Heading>
@@ -196,6 +191,6 @@ function NotificationSettings() {
                 isSelected={v => v === settingsState.streamingTreatment}
                 serialize={identity}
             />
-        </div>
+        </>
     );
 }

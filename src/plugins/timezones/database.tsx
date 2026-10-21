@@ -7,7 +7,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { openModal } from "@utils/index";
-import { OAuth2AuthorizeModal, showToast, Toasts } from "@webpack/common";
+import { OAuth2AuthorizeModal, showToast } from "@webpack/common";
 
 import { settings } from ".";
 
@@ -25,7 +25,7 @@ function getRedirectUri(): string {
 function handleApiError(error: any, defaultMessage: string): void {
     console.error(defaultMessage, error);
     const message = error?.message || defaultMessage;
-    showToast(message, Toasts.Type.FAILURE);
+    showToast({ text: message, variant: "critical" });
 }
 
 async function safeJsonParse(response: Response): Promise<any> {
@@ -33,7 +33,7 @@ async function safeJsonParse(response: Response): Promise<any> {
         return await response.json();
     } catch (e) {
         console.warn("Failed to parse JSON response:", e);
-        return { message: "Invalid response format" };
+        return { message: t(plugin.timezones.text.invalidResponseFormat) };
     }
 }
 
@@ -114,7 +114,7 @@ async function setTimezoneInternal(timezone: string): Promise<boolean> {
             return false;
         }
 
-        showToast(t(plugin.timezones.toast.update.successfully), Toasts.Type.SUCCESS);
+        showToast({ text: t(plugin.timezones.toast.update.successfully), variant: "success" });
         return true;
     } catch (e) {
         handleApiError(e, t(plugin.timezones.toast.update.failed));
@@ -153,7 +153,7 @@ async function deleteTimezoneInternal(): Promise<boolean> {
             return false;
         }
 
-        showToast(t(plugin.timezones.toast.delete.successfully), Toasts.Type.SUCCESS);
+        showToast({ text: t(plugin.timezones.toast.delete.successfully), variant: "success" });
         return true;
     } catch (e) {
         handleApiError(e, t(plugin.timezones.toast.delete.failed));
@@ -184,7 +184,7 @@ export function authModal(callback?: () => void) {
                         handleApiError(json, t(plugin.timezones.toast.auth.failed));
                         return;
                     }
-                    showToast(t(plugin.timezones.toast.auth.success), Toasts.Type.SUCCESS);
+                    showToast({ text: t(plugin.timezones.toast.auth.success), variant: "success" });
                     callback?.();
                 } catch (e) {
                     handleApiError(e, t(plugin.timezones.toast.auth.failed));

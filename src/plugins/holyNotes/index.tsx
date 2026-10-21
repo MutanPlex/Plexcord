@@ -23,12 +23,13 @@ import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import * as DataStore from "@api/DataStore";
 import { HeaderBarButton } from "@api/HeaderBar";
 import { plugin, t } from "@api/i18n";
+import { BookmarkIcon } from "@components/Icons";
 import { Message } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { openModal } from "@utils/modal";
-import definePlugin, { IconComponent } from "@utils/types";
-import { findByCodeLazy, findComponentByCodeLazy, findCssClassesLazy, findExportedComponentLazy } from "@webpack";
+import definePlugin from "@utils/types";
+import { findByCodeLazy, findComponentByCodeLazy, findCssClassesLazy } from "@webpack";
 import { ChannelStore, Menu } from "@webpack/common";
 
 import { NoteModal } from "./components/modals/Notebook";
@@ -36,14 +37,11 @@ import noteHandler, { noteHandlerCache } from "./NoteHandler";
 import { DataStoreToCache, HolyNoteStore } from "./utils";
 
 export const cl = classNameFactory("pc-notebook-");
-export const CircleQuestionIcon = findExportedComponentLazy("CircleQuestionIcon");
-export const BookmarkIconLazy = findExportedComponentLazy("BookmarkIcon");
-export const BookmarkIcon: IconComponent = props => <BookmarkIconLazy {...props} />;
+export const CircleQuestionIcon = findComponentByCodeLazy("10.58l-3.3-3.3a1");
 export const MessageRecord = findByCodeLazy("isEdited(){");
 export const messageClasses = findCssClassesLazy("message", "groupStart", "cozyMessage");
 export const resultsClasses = findCssClassesLazy("emptyResultsWrap", "emptyResultsContent", "errorImage", "emptyResultsText", "noResultsImage", "alt");
 export const ChannelRecord = findByCodeLazy("computeLurkerPermissionsAllowList(){");
-export const ChannelMessage = findComponentByCodeLazy("Message must not be a thread");
 
 function HolyNotesButton() {
     return (
@@ -70,6 +68,8 @@ const messageContextMenuPatch: NavContextMenuPatchCallback = (children, { messag
     );
 };
 
+export let ChannelMessage;
+
 export default definePlugin({
     name: "HolyNotes",
     description: () => t(plugin.holyNotes.description),
@@ -82,6 +82,23 @@ export default definePlugin({
         render: HolyNotesButton,
         priority: 600
     },
+
+    patches: [
+        {
+            find: "Message must not be a thread starter message",
+            replacement: [
+                {
+                    // Grab the channel message component to render saved notes
+                    match: /(?<=(\i)=\i\.memo\(function\(\i\)\{.{0,400}\.THREAD_STARTER_MESSAGE.*?bg-flash-.{0,10}:\i\}\);)/,
+                    replace: "$self.ChannelMessage=$1;"
+                },
+            ],
+        }
+    ],
+    set ChannelMessage(value: any) {
+        ChannelMessage = value;
+    },
+
     toolboxActions: () => ({
         [t(plugin.holyNotes.toolbox.action)]: async () => {
             openModal(props => <NoteModal {...props} />);

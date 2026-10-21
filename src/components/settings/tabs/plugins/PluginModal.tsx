@@ -21,30 +21,30 @@ import "./PluginModal.css";
 
 import { generateId } from "@api/Commands";
 import { plugin as pluginI18n, plugins, t, useForceUpdateOnLocaleChange } from "@api/i18n";
+import { hasAnyVisibleSettings, isSettingHidden } from "@api/PluginManager";
 import { useSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Paragraph } from "@components/Paragraph";
-import { User } from "@plexcord/discord-types";
+import { RenderModalProps, User } from "@plexcord/discord-types";
 import { debounce } from "@shared/debounce";
 import { gitRemote } from "@shared/plexcordUserAgent";
 import { classNameFactory } from "@utils/css";
 import { proxyLazy } from "@utils/lazy";
 import { Margins } from "@utils/margins";
 import { classes, isObjectEmpty } from "@utils/misc";
-import { CloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { OptionType, Plugin, PluginTag } from "@utils/types";
 import { findComponentByCodeLazy, findCssClassesLazy } from "@webpack";
-import { Clickable, FluxDispatcher, React, Toasts, Tooltip, useEffect, useMemo, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
+import { Clickable, FluxDispatcher, Modal, openModal, React, showToast, Tooltip, useEffect, useMemo, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
 import { Constructor } from "type-fest";
 
 import { PluginMeta } from "~plugins";
 
 import { OptionComponentMap } from "./components";
 import { openContributorModal } from "./ContributorModal";
-import { GithubButton, WebsiteButton } from "./LinkIconButton";
+import { FavoriteButton, GithubButton, WebsiteButton } from "./PluginModalButtons";
 
 const cl = classNameFactory("pc-plugin-modal-");
 
@@ -57,7 +57,7 @@ function getName(name: string | (() => string)): string {
     return typeof name === "function" ? name() : name;
 }
 
-interface PluginModalProps extends ModalProps {
+interface PluginModalProps extends RenderModalProps {
     plugin: Plugin;
     onRestartNeeded(key: string): void;
 }
@@ -101,9 +101,9 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
         ? (typeof rawDisplayDescription === "function" ? rawDisplayDescription() : rawDisplayDescription)
         : (typeof plugin.description === "function" ? plugin.description() : plugin.description);
 
-    const hasSettings = Boolean(pluginSettings && plugin.options && !isObjectEmpty(plugin.options));
+    const hasSettings = hasAnyVisibleSettings(plugin);
     // avoid layout shift by showing dummy users while loading users
-    const fallbackAuthors = useMemo(() => [makeDummyUser({ username: "Loading...", id: "-1465912127305809920" })], []);
+    const fallbackAuthors = useMemo(() => [makeDummyUser({ username: t(plugins.loading), id: "-1465912127305809920" })], []);
     const [authors, setAuthors] = useState<Partial<User>[]>([]);
 
     useEffect(() => {
@@ -128,14 +128,17 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
     }
 
     function renderSettings() {
-        if (!hasSettings || !plugin.options)
+        const { settings } = plugin;
+        if (!hasSettings || !settings)
             return <Paragraph>{t(plugins.pluginModal.noSettings)}</Paragraph>;
 
-        const options = Object.entries(plugin.options).map(([key, setting]) => {
-            if (setting.type === OptionType.CUSTOM || setting.hidden) return null;
+        const options = Object.entries(settings.def).map(([key, setting]) => {
+            if (setting.type === OptionType.CUSTOM) return null;
+
+            if (isSettingHidden(settings, setting)) return null;
 
             function onChange(newValue: any) {
-                const option = plugin.options?.[key];
+                const option = plugin.settings!.def[key];
                 if (!option || option.type === OptionType.CUSTOM) return;
 
                 pluginSettings[key] = newValue;
@@ -148,10 +151,11 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                 <ErrorBoundary noop key={key}>
                     <Component
                         id={key}
-                        option={setting}
+                        setting={setting}
                         onChange={debounce(onChange)}
                         pluginSettings={pluginSettings}
-                        definedSettings={plugin.settings}
+                        definedSettings={settings}
+                        closePluginSettings={onClose}
                     />
                 </ErrorBoundary>
             );
@@ -185,28 +189,52 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
     const pluginMeta = PluginMeta[pluginName];
 
     return (
-        <ModalRoot transitionState={transitionState} size={ModalSize.MEDIUM}>
-            <ModalHeader separator={false} className={cl("header")}>
-                <div className={cl("header-content")}>
-                    <BaseText size="lg" weight="semibold" className={cl("title")}>{displayName}</BaseText>
-                    <BaseText size="sm" className={cl("description")}>{displayDescription}</BaseText>
-                    {!!plugin.tags?.length && <PluginTags tags={plugin.tags} />}
-                    {!!plugin.settingsAboutComponent && (
-                        <div className={Margins.top8}>
-                            <ErrorBoundary message={t(plugins.error.infoRender)}>
-                                <plugin.settingsAboutComponent />
-                            </ErrorBoundary>
+        <Modal
+            transitionState={transitionState}
+            onClose={onClose}
+            size="lg"
+            title={
+                <div className={cl("header")}>
+                    <BaseText tag="h1" size="lg" weight="semibold" className={cl("title")}>{displayName}</BaseText>
+                    {!pluginMeta.userPlugin && (
+                        <div className={cl("links")}>
+                            <FavoriteButton
+                                isFavorite={pluginSettings.isFavorite ?? false}
+                                onClick={() => pluginSettings.isFavorite = !pluginSettings.isFavorite}
+                            />
+                            <WebsiteButton
+                                text={t(plugins.pluginModal.info)}
+                                href={`https://plexcord.club/plugins/${plugin.name}`}
+                            />
+                            <GithubButton
+                                text={t(plugins.pluginModal.source)}
+                                href={`https://github.com/${gitRemote}/tree/main/src/plugins/${pluginMeta.folderName}`}
+                            />
                         </div>
                     )}
                 </div>
-                <div className={cl("header-trailing")}>
-                    <CloseButton onClick={onClose} />
+            }
+            subtitle={
+                <div className={cl("info")}>
+                    <div>
+                        <BaseText size="sm" className={cl("description")}>{displayDescription}</BaseText>
+                        {!!plugin.tags?.length && <PluginTags tags={plugin.tags} />}
+                    </div>
                 </div>
-            </ModalHeader>
-
-            <ModalContent className={"pc-settings-modal-content"}>
+            }
+        >
+            {!!plugin.settingsAboutComponent && (
+                <div className={classes(Margins.top16, cl("about-box"))}>
+                    <section>
+                        <ErrorBoundary message={t(plugins.error.infoRender)}>
+                            <plugin.settingsAboutComponent />
+                        </ErrorBoundary>
+                    </section>
+                </div>
+            )}
+            <div className="pc-settings-modal-content">
                 <section>
-                    <BaseText size="lg" weight="semibold" color="text-strong" className={Margins.bottom8}>{t(plugins.pluginModal.authors)}</BaseText>
+                    <BaseText size="lg" weight="semibold" color="text-strong" className={classes(Margins.top8, Margins.bottom8)}>{t(plugins.pluginModal.authors)}</BaseText>
                     <div style={{ width: "fit-content" }}>
                         <ErrorBoundary noop>
                             <UserSummaryItem
@@ -234,20 +262,14 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                 </section>
 
                 <section>
-                    <BaseText size="lg" weight="semibold" color="text-strong" className={classes(Margins.top16, Margins.bottom8)}>{t(plugins.pluginModal.settings)}</BaseText>
-                    {renderSettings()}
-                </section>
-            </ModalContent>
-            <ModalFooter>
-                <Flex flexDirection="column" style={{ width: "100%" }}>
-                    <Flex style={{ justifyContent: "space-between", alignItems: "center" }}>
-                        {hasSettings ? (
+                    <Flex style={{ justifyContent: "space-between", alignItems: "center" }} className={classes(Margins.top16, Margins.bottom8)}>
+                        <BaseText size="lg" weight="semibold" color="text-strong">{t(plugins.pluginModal.settings)}</BaseText>
+                        {hasSettings && (
                             <Tooltip text={t(plugins.restart.resetDefault)} shouldShow={!isObjectEmpty(pluginSettings)}>
                                 {({ onMouseEnter, onMouseLeave }) => (
                                     <Button
-                                        className={cl("disable-warning")}
+                                        variant="dangerPrimary"
                                         size="small"
-                                        variant="primary"
                                         onClick={handleResetClick}
                                         onMouseEnter={onMouseEnter}
                                         onMouseLeave={onMouseLeave}
@@ -256,23 +278,12 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                                     </Button>
                                 )}
                             </Tooltip>
-                        ) : <div />}
-                        {!pluginMeta.userPlugin && (
-                            <div className={cl("links")}>
-                                <WebsiteButton
-                                    text={t(plugins.pluginModal.info)}
-                                    href={`https://plexcord.club/plugins/${plugin.name}`}
-                                />
-                                <GithubButton
-                                    text={t(plugins.pluginModal.source)}
-                                    href={`https://github.com/${gitRemote}/tree/main/src/plugins/${pluginMeta.folderName}`}
-                                />
-                            </div>
                         )}
                     </Flex>
-                </Flex>
-            </ModalFooter>
-        </ModalRoot >
+                    {renderSettings()}
+                </section>
+            </div>
+        </Modal>
     );
 }
 
@@ -322,13 +333,10 @@ function resetSettings(plugin: Plugin, onRestartNeeded?: (pluginName: string) =>
         onRestartNeeded?.(pluginName);
     }
 
-    Toasts.show({
-        message: t(plugins.pluginModal.successfulReset, { plugin: pluginName }),
-        id: Toasts.genId(),
-        type: Toasts.Type.SUCCESS,
-        options: {
-            position: Toasts.Position.TOP
-        }
+    showToast({
+        text: t(plugins.pluginModal.successfulReset, { plugin: pluginName }),
+        variant: "success",
+        position: "top"
     });
 }
 

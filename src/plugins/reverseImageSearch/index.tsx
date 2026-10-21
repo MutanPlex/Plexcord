@@ -19,8 +19,7 @@
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
-import { Flex } from "@components/Flex";
-import { OpenExternalIcon } from "@components/Icons";
+import { OpenExternalIcon, SearchIcon } from "@components/Icons";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { Menu } from "@webpack/common";
@@ -45,6 +44,7 @@ function makeSearchItem(src: string) {
             label={t(plugin.reverseImageSearch.context.label)}
             key="search-image"
             id="search-image"
+            leadingAccessory={{ type: "icon", icon: SearchIcon }}
         >
             {Object.keys(Engines).map((engine, i) => {
                 const key = "search-image-" + engine;
@@ -52,20 +52,8 @@ function makeSearchItem(src: string) {
                     <Menu.MenuItem
                         key={key}
                         id={key}
-                        label={
-                            <Flex alignItems="center" style={{ gap: "0.5em" }}>
-                                <img
-                                    style={{
-                                        borderRadius: "50%",
-                                    }}
-                                    aria-hidden="true"
-                                    height={16}
-                                    width={16}
-                                    src={`https://icons.duckduckgo.com/ip3/${new URL(Engines[engine]).host}.ico`}
-                                />
-                                {engine}
-                            </Flex>
-                        }
+                        label={engine}
+                        leadingAccessory={{ type: "image", src: `https://icons.duckduckgo.com/ip3/${new URL(Engines[engine]).host}.ico` }}
                         action={() => search(src, Engines[engine])}
                     />
                 );
@@ -73,12 +61,8 @@ function makeSearchItem(src: string) {
             <Menu.MenuItem
                 key="search-image-all"
                 id="search-image-all"
-                label={
-                    <Flex alignItems="center" style={{ gap: "0.5em" }}>
-                        <OpenExternalIcon height={16} width={16} />
-                        {t(plugin.reverseImageSearch.context.all)}
-                    </Flex>
-                }
+                label={t(plugin.reverseImageSearch.text.all)}
+                leadingAccessory={{ type: "icon", icon: OpenExternalIcon }}
                 action={() => Object.values(Engines).forEach(e => search(src, e))}
             />
         </Menu.MenuItem>

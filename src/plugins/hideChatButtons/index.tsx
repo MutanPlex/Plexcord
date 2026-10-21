@@ -61,13 +61,13 @@ function ButtonsInnerComponent({ buttons }: { buttons: ReactNode; }) {
             ? []
             : [buttons];
 
-    if (buttonItems.length === 0 || buttonItems.every(button => (button as any)?.props?.disabled === true)) return null;
-
     const [open, setOpen] = useState(hidechatbuttonsopen);
 
     useEffect(() => {
         hidechatbuttonsopen = open;
     }, [open]);
+
+    if (buttonItems.length === 0 || buttonItems.every(button => (button as any)?.props?.disabled === true)) return null;
 
     return (
         <div key="chat-bar-buttons-menu" id="chat-bar-buttons-menu" style={{
@@ -87,22 +87,18 @@ function ButtonsInnerComponent({ buttons }: { buttons: ReactNode; }) {
 export default definePlugin({
     name: "HideChatButtons",
     description: () => t(plugin.hideChatButtons.description),
-    settings: settings,
     authors: [Devs.iamme, PcDevs.MutanPlex],
+    dependencies: ["ChatInputButtonAPI"],
+    settings: settings,
     tags: ["chat", "appearance", "customisation"],
 
-    patches: [
-        {
-            find: '"sticker")',
-            replacement: {
-                match: /(?<="div",\{.{0,15}children:)(.+?)\}/,
-                replace: "$self.buttonsInner($1)}"
-            }
-        }
-    ],
     startAt: StartAt.Init,
-    buttonsInner(buttons: ReactNode) {
-        return <ButtonsInnerComponent buttons={buttons} />;
+
+    chatBarButtonWrapper: {
+        wrapper: (buttons: ReactNode) => {
+            return <ButtonsInnerComponent buttons={buttons} />;
+        },
+        priority: 0,
     },
     start() {
         hidechatbuttonsopen = settings.store.open;

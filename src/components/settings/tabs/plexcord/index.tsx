@@ -24,16 +24,18 @@ import { openContributorModal } from "@components/settings/tabs/plugins/Contribu
 import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
 import settingsPlugin from "@plugins/_core/settings";
 import { gitRemote } from "@shared/plexcordUserAgent";
-import { DONOR_ROLE_ID, IS_MAC, IS_WINDOWS, PLEXCORD_GUILD_ID } from "@utils/constants";
+import { DONOR_ROLE_ID, IS_WINDOWS, PLEXCORD_GUILD_ID } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { Margins } from "@utils/margins";
 import { classes, isPcPluginDev, isPluginDev } from "@utils/misc";
 import { relaunch } from "@utils/native";
-import { Alerts, GuildMemberStore, React, Select, useMemo, UserStore } from "@webpack/common";
+import { promptToRestart } from "@utils/promptToRestart";
+import { GuildMemberStore, React, Select, useMemo, UserStore } from "@webpack/common";
 
 import { DonateButtonComponent } from "./DonateButton";
-import { VibrancySettings } from "./MacVibrancySettings";
+import { MacOSVibrancySettings } from "./MacVibrancySettings";
 import { NotificationSection } from "./NotificationSettings";
+import { WindowsMaterialSettings } from "./WindowsMaterialSettings";
 
 const DEFAULT_DONATE_IMAGE = "https://cdn.discordapp.com/emojis/1026533090627174460.png";
 const SHIGGY_DONATE_IMAGE = "https://media.discordapp.net/stickers/1039992459209490513.png";
@@ -84,75 +86,64 @@ function LanguageSelector() {
 }
 
 function Switches() {
-    const settingsState = useSettings(["useQuickCss", "enableReactDevtools", "frameless", "winNativeTitleBar", "transparent", "winCtrlQ", "disableMinSize"]);
+    const settingsState = useSettings(["useQuickCss", "enableReactDevtools", "mainWindowFrameless", "frameless", "nativeTitleBar", "transparent", "winCtrlQ", "disableMinSize"]);
 
     const Switches = [
         {
             key: "useQuickCss",
             title: t(settings.switches.useQuickCss.label),
             description: t(settings.switches.useQuickCss.description),
-            restartRequired: true,
-            warning: { enabled: false }
-        },
-        !IS_WEB && {
-            key: "enableReactDevtools",
-            title: t(settings.switches.enableReactDevtools.label),
-            description: t(settings.switches.enableReactDevtools.description),
-            restartRequired: true,
-            warning: { enabled: false }
         },
         (!IS_WEB && !IS_DISCORD_DESKTOP || !IS_WINDOWS) && {
             key: "mainWindowFrameless",
             title: t(settings.switches.mainWindowFrameless.label),
             description: t(settings.switches.mainWindowFrameless.description),
             restartRequired: true,
-            warning: { enabled: false },
         },
         !IS_WEB && (!IS_DISCORD_DESKTOP || !IS_WINDOWS ? {
             key: "frameless",
             title: t(settings.switches.frameless.label),
             description: t(settings.switches.frameless.description),
             restartRequired: true,
-            warning: { enabled: false }
         } : {
-            key: "winNativeTitleBar",
-            title: t(settings.switches.winNativeTitleBar.label),
-            description: t(settings.switches.winNativeTitleBar.description),
+            key: "nativeTitleBar",
+            title: t(settings.switches.nativeTitleBar.label),
+            description: t(settings.switches.nativeTitleBar.description),
             restartRequired: true,
-            warning: { enabled: false }
         }),
         !IS_WEB && {
             key: "transparent",
             title: t(settings.switches.transparent.label),
             description: t(settings.switches.transparent.description),
             restartRequired: true,
-            warning: {
-                enabled: true,
-                message: IS_WINDOWS
-                    ? t(settings.switches.transparent.isWindows)
-                    : t(settings.switches.transparent.notWindows),
-            },
+            warning: IS_WINDOWS
+                ? t(settings.switches.transparent.isWindows)
+                : t(settings.switches.transparent.notWindows),
         },
         !IS_WEB && IS_WINDOWS && {
             key: "winCtrlQ",
             title: t(settings.switches.winCtrlQ.label),
             description: t(settings.switches.winCtrlQ.description),
-            restartRequired: true,
-            warning: { enabled: false }
+            restartRequired: true
         },
         IS_DISCORD_DESKTOP && {
             key: "disableMinSize",
             title: t(settings.switches.disableMinSize.label),
             description: t(settings.switches.disableMinSize.description),
             restartRequired: true,
-            warning: { enabled: false }
+        },
+        !IS_WEB && {
+            key: "enableReactDevtools",
+            title: t(settings.switches.enableReactDevtools.label),
+            description: t(settings.switches.enableReactDevtools.description),
+            restartRequired: true
         },
     ] satisfies Array<false | {
         key: KeysOfType<typeof settingsState, boolean>;
         title: string;
         description?: string;
         restartRequired?: boolean;
-        warning: { enabled: boolean; message?: string; };
+        warning?: string;
     }>;
 
     return Switches.filter((s): s is Exclude<typeof s, false> => !!s).map(
@@ -161,11 +152,11 @@ function Switches() {
                 key={s.key}
                 title={s.title}
                 description={
-                    s.warning.enabled ? (
+                    s.warning ? (
                         <>
                             {s.description}
                             <Notice.Warning className={Margins.top8} style={{ width: "100%" }}>
-                                {s.warning.message}
+                                {s.warning}
                             </Notice.Warning>
                         </>
                     ) : (
@@ -177,16 +168,9 @@ function Switches() {
                     settingsState[s.key] = v;
 
                     if (s.restartRequired) {
-                        Alerts.show({
-                            title: t(plugins.restart.required),
-                            body: t(plugins.restart.apply),
-                            confirmText: t(plugins.restart.button.now),
-                            cancelText: t(plugins.restart.button.later),
-                            onConfirm: relaunch
-                        });
+                        promptToRestart("relaunch");
                     }
                 }}
-                hideBorder
             />
         ),
     );
@@ -199,8 +183,6 @@ function PlexcordSettings() {
         Math.random() > 0.5 ? DEFAULT_DONATE_IMAGE : SHIGGY_DONATE_IMAGE,
         []
     );
-
-    const needsVibrancySettings = IS_DISCORD_DESKTOP && IS_MAC;
 
     const user = UserStore?.getCurrentUser();
 
@@ -311,7 +293,8 @@ function PlexcordSettings() {
 
             <Switches />
 
-            {needsVibrancySettings && <VibrancySettings />}
+            <MacOSVibrancySettings />
+            <WindowsMaterialSettings />
 
             <NotificationSection />
         </SettingsTab>

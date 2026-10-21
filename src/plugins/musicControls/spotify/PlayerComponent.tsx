@@ -20,7 +20,6 @@
 import "./spotifyStyles.css";
 
 import { plugin, t } from "@api/i18n";
-import { Settings } from "@api/Settings";
 import { Flex } from "@components/Flex";
 import { CopyIcon, ImageIcon, LinkIcon, OpenExternalIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
@@ -29,19 +28,14 @@ import { debounce } from "@shared/debounce";
 import { classNameFactory } from "@utils/css";
 import { copyWithToast, openImageModal } from "@utils/discord";
 import { classes } from "@utils/misc";
+import { formatDuration } from "@utils/text";
 import { ContextMenuApi, FluxDispatcher, Menu, React, useEffect, useState, useStateFromStores } from "@webpack/common";
 
+import { settings } from "../settings";
 import { SeekBar } from "./SeekBar";
 import { SpotifyStore, Track } from "./SpotifyStore";
 
 const cl = classNameFactory("pc-spotify-");
-
-function msToHuman(ms: number) {
-    const minutes = ms / 1000 / 60;
-    const m = Math.floor(minutes);
-    const s = Math.floor((minutes - m) * 60);
-    return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
-}
 
 function Svg(path: string, label: string) {
     return () => (
@@ -99,18 +93,21 @@ function CopyContextMenu({ name, type, path }: { type: string; name: string; pat
                 label={t(plugin.musicControls.context.spotify.copy, { type: localizedType })}
                 action={() => copyWithToast(name)}
                 icon={CopyIcon}
+                leadingAccessory={{ type: "icon", icon: CopyIcon }}
             />
             <Menu.MenuItem
                 id="pc-spotify-copy-link"
                 label={t(plugin.musicControls.context.spotify.link, { type: localizedType })}
                 action={() => copyWithToast("https://open.spotify.com" + path)}
                 icon={LinkIcon}
+                leadingAccessory={{ type: "icon", icon: LinkIcon }}
             />
             <Menu.MenuItem
                 id="pc-spotify-open"
                 label={t(plugin.musicControls.context.spotify.open, { type: localizedType })}
                 action={() => SpotifyStore.openExternal(path)}
                 icon={OpenExternalIcon}
+                leadingAccessory={{ type: "icon", icon: OpenExternalIcon }}
             />
         </Menu.Menu>
     );
@@ -141,7 +138,7 @@ function Controls() {
                 <Shuffle />
             </Button>
             <Button onClick={() => {
-                Settings.plugins.MusicControls.previousButtonRestartsTrack && SpotifyStore.position > 3000 ? SpotifyStore.seek(0) : SpotifyStore.prev();
+                settings.store.previousButtonRestartsTrack && SpotifyStore.position > 3000 ? SpotifyStore.seek(0) : SpotifyStore.prev();
             }}>
                 <SkipPrev />
             </Button>
@@ -202,7 +199,7 @@ function SpotifySeekBar() {
                 className={cl("progress-time") + " " + cl("time-left")}
                 aria-label={t(plugin.musicControls.modal.player.progress)}
             >
-                {msToHuman(position)}
+                {formatDuration(position)}
             </Span>
             <SeekBar
                 initialValue={position}
@@ -210,7 +207,7 @@ function SpotifySeekBar() {
                 maxValue={duration}
                 onValueChange={onChange}
                 asValueChanges={onChange}
-                onValueRender={msToHuman}
+                onValueRender={formatDuration}
             />
             <Span
                 size="xs"
@@ -218,7 +215,7 @@ function SpotifySeekBar() {
                 className={cl("progress-time") + " " + cl("time-right")}
                 aria-label={t(plugin.musicControls.modal.player.totalDuration)}
             >
-                {msToHuman(duration)}
+                {formatDuration(duration)}
             </Span>
         </div>
     );
@@ -239,6 +236,7 @@ function AlbumContextMenu({ track }: { track: Track; }) {
                 label={t(plugin.musicControls.modal.album.open)}
                 action={() => SpotifyStore.openExternal(`/album/${track.album.id}`)}
                 icon={OpenExternalIcon}
+                leadingAccessory={{ type: "icon", icon: OpenExternalIcon }}
             />
             <Menu.MenuItem
                 key="view-cover"
@@ -247,6 +245,7 @@ function AlbumContextMenu({ track }: { track: Track; }) {
                 // trolley
                 action={() => openImageModal(track.album.image)}
                 icon={ImageIcon}
+                leadingAccessory={{ type: "icon", icon: ImageIcon }}
             />
             <Menu.MenuControlItem
                 id="spotify-volume"

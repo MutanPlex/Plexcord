@@ -17,16 +17,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { plugin, t } from "@api/i18n";
+import { getLanguageName, plugin, t } from "@api/i18n";
 import { Divider } from "@components/Divider";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
+import { RenderModalProps } from "@plexcord/discord-types";
 import { Margins } from "@utils/margins";
-import { ModalCloseButton, ModalContent, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
-import { SearchableSelect, useMemo } from "@webpack/common";
+import { Modal, openModal, SearchableSelect, useMemo } from "@webpack/common";
 
 import { settings } from "./settings";
-import { cl, getLanguages } from "./utils";
+import { getLanguages } from "./utils";
 
 const LanguageSettingKeys = ["receivedInput", "receivedOutput", "sentInput", "sentOutput"] as const;
 
@@ -35,7 +35,7 @@ function LanguageSelect({ settingsKey, includeAuto }: { settingsKey: typeof Lang
 
     const options = useMemo(
         () => {
-            const options = Object.entries(getLanguages()).map(([value, label]) => ({ value, label }));
+            const options = Object.entries(getLanguages()).map(([value, label]) => ({ value, label: getLanguageName(value, label) }));
             if (!includeAuto)
                 options.shift();
 
@@ -80,29 +80,27 @@ function AutoTranslateToggle() {
     );
 }
 
-export function TranslateModal({ rootProps }: { rootProps: ModalProps; }) {
+function TranslateModal({ rootProps }: { rootProps: RenderModalProps; }) {
     return (
-        <ModalRoot {...rootProps}>
-            <ModalHeader className={cl("modal-header")}>
-                <Heading className={cl("modal-title")}>
-                    {t(plugin.translate.modal.title)}
-                </Heading>
-                <ModalCloseButton onClick={rootProps.onClose} />
-            </ModalHeader>
+        <Modal
+            {...rootProps}
+            title={t(plugin.translate.modal.title)}
+        >
+            {LanguageSettingKeys.map(s => (
+                <LanguageSelect
+                    key={s}
+                    settingsKey={s}
+                    includeAuto={s.endsWith("Input")}
+                />
+            ))}
 
-            <ModalContent className={cl("modal-content")}>
-                {LanguageSettingKeys.map(s => (
-                    <LanguageSelect
-                        key={s}
-                        settingsKey={s}
-                        includeAuto={s.endsWith("Input")}
-                    />
-                ))}
+            <Divider className={Margins.bottom16} />
 
-                <Divider className={Margins.bottom16} />
-
-                <AutoTranslateToggle />
-            </ModalContent>
-        </ModalRoot>
+            <AutoTranslateToggle />
+        </Modal>
     );
+}
+
+export function openTranslateModal() {
+    openModal(props => <TranslateModal rootProps={props} />);
 }

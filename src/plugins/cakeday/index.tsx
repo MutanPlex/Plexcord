@@ -25,7 +25,7 @@ import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { ModalContent, ModalFooter, ModalHeader, ModalRoot, openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
-import { Menu, React, showToast, TextInput, Toasts, Tooltip, useEffect, UserStore } from "@webpack/common";
+import { Menu, React, showToast, TextInput, Tooltip, useEffect, UserStore } from "@webpack/common";
 interface SavedBirthdays {
     [userId: string]: string;
 }
@@ -91,11 +91,11 @@ async function setBirthday(userId: string, username: string, birthday: string) {
         savedBirthdays[userId] = birthday;
         await saveBirthdays();
 
-        showToast(t(plugin.cakeDay.toast.success), Toasts.Type.SUCCESS);
+        showToast({ text: t(plugin.cakeDay.toast.success), variant: "success" });
 
         if (checkBirthday(userId) && !notifiedToday.has(userId)) {
             const user = UserStore.getUser(userId);
-            const displayName = user?.username || username || "Unknown User";
+            const displayName = user?.username || username || t(plugin.cakeDay.text.unknownUser);
             const icon = Settings.notifications.renderImages ? user?.getAvatarURL?.(undefined, 128) : undefined;
 
             showNotification({
@@ -113,7 +113,7 @@ async function setBirthday(userId: string, username: string, birthday: string) {
             logger.info(`Birthday notification sent for ${displayName} (${userId})`);
         }
     } else {
-        showToast(t(plugin.cakeDay.toast.invalid), Toasts.Type.FAILURE);
+        showToast({ text: t(plugin.cakeDay.toast.invalid), variant: "critical" });
     }
 }
 
@@ -122,7 +122,7 @@ async function clearBirthday(userId: string, username: string) {
         delete savedBirthdays[userId];
         await saveBirthdays();
 
-        showToast(t(plugin.cakeDay.toast.cleared), Toasts.Type.SUCCESS);
+        showToast({ text: t(plugin.cakeDay.toast.cleared), variant: "success" });
         logger.info(`Cleared birthday for ${username} (${userId})`);
     }
 }
@@ -143,7 +143,7 @@ function checkAndNotifyBirthdays(forceNotify = false) {
         Object.keys(savedBirthdays).forEach(userId => {
             if (checkBirthday(userId) && !notifiedToday.has(userId)) {
                 const user = UserStore.getUser(userId);
-                const displayName = user?.username || "Unknown User";
+                const displayName = user?.username || t(plugin.cakeDay.text.unknownUser);
                 const icon = Settings.notifications.renderImages ? user?.getAvatarURL?.(undefined, 128) : undefined;
 
                 showNotification({
@@ -310,7 +310,7 @@ function UserListModal() {
         setEditValue("");
         setError("");
         forceUpdate();
-        showToast(t(plugin.cakeDay.toast.success), Toasts.Type.SUCCESS);
+        showToast({ text: t(plugin.cakeDay.toast.success), variant: "success" });
     }
 
     async function handleRemove(userId: string, username: string) {
@@ -324,7 +324,7 @@ function UserListModal() {
             <Flex flexDirection="column" gap={"12px"}>
                 {trackedUserIds.map((userId, index) => {
                     const user = UserStore.getUser(userId);
-                    const displayName = user?.username || "Unknown User";
+                    const displayName = user?.username || t(plugin.cakeDay.text.unknownUser);
                     const isBirthday = checkBirthday(userId);
                     const isEditing = editingUserId === userId;
 

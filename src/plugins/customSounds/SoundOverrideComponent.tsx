@@ -71,19 +71,19 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                 const dataUri = await ensureDataURICached(override.selectedFileId);
 
                 if (!dataUri || !dataUri.startsWith("data:audio/")) {
-                    showToast(t(plugin.customSounds.toast.invalidFile));
+                    showToast({ text: t(plugin.customSounds.toast.invalidFile) });
                     return;
                 }
 
                 sound.current = playAudio(dataUri, {
                     volume: override.volume, onError: e => {
                         console.error("[CustomSounds] Error playing custom audio:", e);
-                        showToast(t(plugin.customSounds.toast.playing));
+                        showToast({ text: t(plugin.customSounds.toast.playing) });
                     }
                 });
             } catch (error) {
                 console.error("[CustomSounds] Error in previewSound:", error);
-                showToast(t(plugin.customSounds.toast.previewSound));
+                showToast({ text: t(plugin.customSounds.toast.previewSound) });
             }
         } else if (selectedSound === "default") {
             sound.current = playAudio(type.id);
@@ -98,13 +98,13 @@ export function SoundOverrideComponent({ type, override, onChange }: {
 
         const fileExtension = file.name.split(".").pop()?.toLowerCase();
         if (!fileExtension || !AUDIO_EXTENSIONS.includes(fileExtension)) {
-            showToast(t(plugin.customSounds.toast.invalidExtension));
+            showToast({ text: t(plugin.customSounds.toast.invalidExtension) });
             event.target.value = "";
             return;
         }
 
         try {
-            showToast(t(plugin.customSounds.toast.uploading));
+            showToast({ text: t(plugin.customSounds.toast.uploading) });
             const id = await saveAudio(file);
 
             const savedFiles = await getAllAudio();
@@ -116,10 +116,10 @@ export function SoundOverrideComponent({ type, override, onChange }: {
             await ensureDataURICached(id);
             await saveAndNotify();
 
-            showToast(t(plugin.customSounds.toast.uploaded, { fileName: file.name }));
+            showToast({ text: t(plugin.customSounds.toast.uploaded, { fileName: file.name }) });
         } catch (error) {
             console.error("[CustomSounds] Error uploading file:", error);
-            showToast(t(plugin.customSounds.toast.uploadedError, { error: error }));
+            showToast({ text: t(plugin.customSounds.toast.uploadedError, { error: error }) });
         }
 
         event.target.value = "";
@@ -138,10 +138,10 @@ export function SoundOverrideComponent({ type, override, onChange }: {
             } else {
                 update();
             }
-            showToast(t(plugin.customSounds.toast.deleted));
+            showToast({ text: t(plugin.customSounds.toast.deleted) });
         } catch (error) {
             console.error("[CustomSounds] Error deleting file:", error);
-            showToast(t(plugin.customSounds.toast.deleteError));
+            showToast({ text: t(plugin.customSounds.toast.deleteError) });
         }
     };
 
@@ -166,7 +166,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                             await ensureDataURICached(override.selectedFileId);
                         } catch (error) {
                             console.error(`[CustomSounds] Failed to cache data URI for ${type.id}:`, error);
-                            showToast(t(plugin.customSounds.toast.loadingError));
+                            showToast({ text: t(plugin.customSounds.toast.loadingError) });
                         }
                     }
 
@@ -180,7 +180,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
 
             {override.enabled && (
                 <>
-                    <div style={{ display: "flex", gap: "8px", marginBottom: "16px" }}>
+                    <div className={cl("override-controls")}>
                         <Button
                             variant="positive"
                             onClick={previewSound}
@@ -195,78 +195,81 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                         </Button>
                     </div>
 
-                    <Heading>{t(plugin.customSounds.button.volume)}</Heading>
-                    <Slider
-                        markers={makeRange(0, 100, 10)}
-                        initialValue={override.volume}
-                        onValueChange={val => {
-                            sound.current && (sound.current.volume = val);
-                            override.volume = val;
-                            saveAndNotify();
-                        }}
-                        className={Margins.bottom16}
-                        disabled={!override.enabled}
-                    />
+                    <div className={Margins.bottom16}>
+                        <Heading>{t(plugin.customSounds.button.volume)}</Heading>
+                        <Slider
+                            markers={makeRange(0, 100, 10)}
+                            initialValue={override.volume}
+                            onValueChange={val => {
+                                sound.current && (sound.current.volume = val);
+                                override.volume = val;
+                                saveAndNotify();
+                            }}
+                            disabled={!override.enabled}
+                        />
+                    </div>
 
-                    <Heading>{t(plugin.customSounds.button.soundSource)}</Heading>
-                    <Select
-                        options={[
-                            { value: "default", label: t(plugin.customSounds.option.default) },
-                            ...(type.seasonal?.map(id => ({ value: id, label: capitalizeWords(id) })) ?? []),
-                            { value: "custom", label: t(plugin.customSounds.option.custom) }
-                        ]}
-                        isSelected={v => v === override.selectedSound}
-                        select={async v => {
-                            override.selectedSound = v;
+                    <div className={Margins.bottom16}>
+                        <Heading>{t(plugin.customSounds.button.soundSource)}</Heading>
+                        <Select
+                            options={[
+                                { value: "default", label: t(plugin.customSounds.option.default) },
+                                ...(type.seasonal?.map(id => ({ value: id, label: capitalizeWords(id) })) ?? []),
+                                { value: "custom", label: t(plugin.customSounds.option.custom) }
+                            ]}
+                            isSelected={v => v === override.selectedSound}
+                            select={async v => {
+                                override.selectedSound = v;
 
-                            if (v === "custom" && override.selectedFileId) {
-                                try {
-                                    await ensureDataURICached(override.selectedFileId);
-                                } catch (error) {
-                                    console.error(`[CustomSounds] Failed to cache data URI for ${type.id}:`, error);
-                                    showToast(t(plugin.customSounds.toast.loadingError));
+                                if (v === "custom" && override.selectedFileId) {
+                                    try {
+                                        await ensureDataURICached(override.selectedFileId);
+                                    } catch (error) {
+                                        console.error(`[CustomSounds] Failed to cache data URI for ${type.id}:`, error);
+                                        showToast({ text: t(plugin.customSounds.toast.error) });
+                                    }
                                 }
-                            }
 
-                            await saveAndNotify();
-                        }}
-                        serialize={opt => opt.value}
-                        className={Margins.bottom16}
-                    />
+                                await saveAndNotify();
+                            }}
+                            serialize={opt => opt.value}
+                        />
+                    </div>
 
                     {override.selectedSound === "custom" && (
                         <>
-                            <Heading>{t(plugin.customSounds.button.customFile)}</Heading>
-                            <Select
-                                options={[
-                                    { value: "", label: t(plugin.customSounds.option.select) },
-                                    ...customFileOptions
-                                ]}
-                                isSelected={v => v === (override.selectedFileId || "")}
-                                select={async id => {
-                                    if (!id) {
-                                        override.selectedFileId = undefined;
-                                    } else {
-                                        override.selectedFileId = id;
-                                        await ensureDataURICached(id);
-                                    }
+                            <div className={Margins.bottom8}>
+                                <Heading>{t(plugin.customSounds.button.customFile)}</Heading>
+                                <Select
+                                    options={[
+                                        { value: "", label: t(plugin.customSounds.option.select) },
+                                        ...customFileOptions
+                                    ]}
+                                    isSelected={v => v === (override.selectedFileId || "")}
+                                    select={async id => {
+                                        if (!id) {
+                                            override.selectedFileId = undefined;
+                                        } else {
+                                            override.selectedFileId = id;
+                                            await ensureDataURICached(id);
+                                        }
 
-                                    await saveAndNotify();
-                                }}
-                                serialize={opt => opt.value}
-                                className={Margins.bottom8}
-                            />
+                                        await saveAndNotify();
+                                    }}
+                                    serialize={opt => opt.value}
+                                />
+                            </div>
                             <input
+                                className={cl("file-input")}
                                 ref={fileInputRef}
                                 type="file"
                                 accept=".mp3,.wav,.ogg,.m4a,.flac,.aac,.webm,.wma,.mp4"
-                                style={{ display: "none" }}
                                 onChange={uploadFile}
                             />
-                            <div style={{ display: "flex", gap: "8px", marginBottom: "16px" }}>
+                            <div className={cl("override-controls")}>
                                 <Button
+                                    variant="primary"
                                     onClick={() => fileInputRef.current?.click()}
-                                    variant="secondary"
                                 >
                                     {t(plugin.customSounds.button.uploadNew)}
                                 </Button>

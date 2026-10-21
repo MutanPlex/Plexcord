@@ -8,6 +8,7 @@
 import * as DataStore from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
 import { Heading } from "@components/Heading";
@@ -146,7 +147,7 @@ function RadioOption({ name, value, checked, onChange, label }: { name: string; 
         <div className={cl("sort-option")}>
             <label className={cl("sort-label")}>
                 <input type="radio" name={name} value={value} checked={checked} onChange={onChange} className={cl("sort-input")} />
-                {label}
+                <BaseText className={cl("sort-text")} tag="div" size="sm">{label}</BaseText>
             </label>
         </div>
     );

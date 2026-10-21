@@ -27,7 +27,6 @@ import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { classes } from "@utils/misc";
 import definePlugin from "@utils/types";
-import { ChannelStore } from "@webpack/common";
 
 const KEY = "HideAttachments_HiddenIds";
 
@@ -76,8 +75,6 @@ export default definePlugin({
             return {
                 label: isHidden ? t(plugin.hideMedia.show) : t(plugin.hideMedia.hide),
                 icon: isHidden ? ImageVisible : ImageInvisible,
-                message: msg,
-                channel: ChannelStore.getChannel(msg.channel_id),
                 onClick: () => toggleHide(msg.channel_id, msg.id)
             };
         },

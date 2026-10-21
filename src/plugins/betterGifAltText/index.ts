@@ -26,7 +26,6 @@ export default definePlugin({
     description: () => t(plugin.betterGifAltText.description),
     authors: [Devs.Ven],
     tags: ["accessibility"],
-
     patches: [
         {
             find: ".modalContext})};",
@@ -48,6 +47,8 @@ export default definePlugin({
     ],
 
     altify(props: any) {
+        if (props.contentType && props.contentType !== "image/gif") return props.alt;
+
         props.alt ??= "GIF";
         if (props.alt !== "GIF") return props.alt;
 

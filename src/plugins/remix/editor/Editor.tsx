@@ -34,7 +34,7 @@ export const Editor = (props: { url?: string; }) => {
                 filename={undefined}
                 placeholder={t(plugin.remix.editor.choose)}
                 buttonText={t(plugin.remix.editor.browse)}
-                filters={[{ name: "Image", extensions: ["png", "jpeg"] }]}
+                filters={[{ name: t(plugin.remix.editor.image), extensions: ["png", "jpeg"] }]}
                 onFileSelect={(file: File) => setFile(file)}
             />}
             {file && (<>

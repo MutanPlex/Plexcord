@@ -22,17 +22,20 @@ export default definePlugin({
             replacement: [
                 {
                     match: /`x-google-max-bitrate=\$\{\i\}`/,
-                    replace: '"x-google-max-bitrate=80_000"'
-                },
-                {
-                    match: ";level-asymmetry-allowed=1",
-                    replace: ";b=AS:800000;level-asymmetry-allowed=1"
+                    replace: '"x-google-max-bitrate=80000"'
                 },
                 {
                     match: /;usedtx=\$\{(\i)\?"0":"1"\}/,
                     replace: '$&${$1?";stereo=1;sprop-stereo=1":""}'
                 },
             ]
+        },
+        {
+            find: "ApplicationStreamPreviewUploadManager",
+            replacement: {
+                match: /removeAttribute\("srcObject"\)(?<=(\i)\..+?)/,
+                replace: "pause(),$1.srcObject=null"
+            }
         }
     ]
 });

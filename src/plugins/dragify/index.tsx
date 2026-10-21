@@ -15,7 +15,7 @@ import { PcDevs } from "@utils/constants";
 import { getGuildAcronym, insertTextIntoChatInputBox } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
-import { ChannelStore, GuildStore, IconUtils, RelationshipStore, SelectedChannelStore, showToast, Toasts, UserStore } from "@webpack/common";
+import { ChannelStore, GuildStore, IconUtils, RelationshipStore, SelectedChannelStore, showToast, UserStore } from "@webpack/common";
 
 import { beginDrag as beginSessionDrag, clearDragState, getLastDropAt, hasActiveDrag, isGuildDragActive, isInputDragSource, isUserDragActive, markDrop, markInputDragSource, scheduleGuildCleanup, shouldIgnoreDrop, startDragWatchdog, stopDragState, touchDrag } from "./dragState";
 import { type GhostState, hideGhost as hideDragGhost, isGhostVisible, mountGhost as mountDragGhost, scheduleGhostPosition as scheduleDragGhostPosition, showGhost as showDragGhost, unmountGhost as unmountDragGhost } from "./ghost";
@@ -180,24 +180,16 @@ export default definePlugin({
                 },
                 // Voice channel rows (guild sidebar fallback - li wrapper)
                 {
-                    match: /(?<=getModeClass\(\),.{0,50})"data-dnd-name":.{0,25},children:\[/,
+                    match: /(?<=this\.getModeClass\(\),.{0,50})"data-dnd-name":.{0,40},children:\[/g,
                     replace: "draggable:!0,onDragStart:e=>$self.onChannelDragStart(e,{id:this?.props?.channel?.id,guild_id:this?.props?.channel?.guild_id}),$&"
                 }
             ]
-        },
-        // Voice channel rows (alternate voice list implementation)
-        {
-            find: "handleClickChat",
-            replacement: {
-                match: /(?<=getModeClass\(\),.{0,50})"data-dnd-name":.{0,25},children:\[/,
-                replace: "draggable:!0,onDragStart:e=>$self.onChannelDragStart(e,{id:this?.props?.channel?.id,guild_id:this?.props?.channel?.guild_id}),$&"
-            }
         },
         // Thread rows in channel list (sidebar thread items)
         {
             find: "__invalid_threadMainContent",
             replacement: {
-                match: /className:\i\.\i,onClick:\i,"aria-label":(?=.{0,100}__invalid_threadMainContent)/,
+                match: /className:\i\.\i,onClick:\i,onAuxClick:(?=.{0,100}__invalid_threadMainContent)/,
                 replace: "draggable:!0,onDragStart:e=>$self.onChannelDragStart(e),$&"
             }
         },
@@ -207,7 +199,7 @@ export default definePlugin({
         {
             find: "shouldShowThreadsPopout",
             replacement: {
-                match: /(?<=getClassName\(\).{0,50})"data-dnd-name":.{0,25},onMouseEnter:/,
+                match: /(?<=getClassName\(\).{0,50})"data-dnd-name":.{0,40},onMouseEnter:/,
                 replace: "draggable:!0,onDragStart:e=>$self.onChannelDragStart(e,{id:this?.props?.channel?.id,guild_id:this?.props?.channel?.guild_id}),$&"
             }
         },
@@ -215,7 +207,7 @@ export default definePlugin({
         {
             find: "POPOUT)},children:",
             replacement: {
-                match: /(?<=getUser\(\i\.ownerId\).{0,100})className:\i\.\i,onClick:\i=>\{\(0,\i\.\i\)\((\i),/,
+                match: /(?<=getUser\(\i\.ownerId\).{0,100})className:\i\.\i,onClick:function\(\i\)\{\(0,\i\.\i\)\(\i,/,
                 replace: "draggable:!0,onDragStart:e=>$self.onChannelDragStart(e,{id:arguments[0]?.thread?.id,guild_id:arguments[0]?.thread?.guild_id}),$&"
             }
         },
@@ -232,7 +224,7 @@ export default definePlugin({
             find: ']="BADGES"',
             replacement: {
                 match: /(?="data-username-has-gradient")/,
-                replace: "draggable:!0,onDragStart:e=>$self.onUserDragStart(e,arguments[0].author),\"data-dragify-user\":!0,\"data-user-id\":arguments[0].author.id,"
+                replace: "draggable:!0,onDragStart:e=>$self.onUserDragStart(e,arguments[0].message?.author),\"data-dragify-user\":!0,\"data-user-id\":arguments[0].message?.author?.id,"
             }
         },
         // Call avatars (DM/group call tiles)
@@ -309,7 +301,7 @@ export default definePlugin({
         } catch (error) {
             clearDragState();
             logger.error("Failed handling drop", error);
-            showToast(t(plugin.dragify.toast.failed.drop), Toasts.Type.FAILURE);
+            showToast({ text: t(plugin.dragify.toast.failed.drop), variant: "critical" });
         }
     },
 
@@ -398,10 +390,10 @@ export default definePlugin({
         if (inspection.hasAttachment) return;
 
         const rawUserId =
-            inspection.authorId
-            ?? user?.id
+            user?.id
             ?? user?.userId
             ?? user?.user?.id
+            ?? inspection.authorId
             ?? inspection.userId
             ?? null;
         const userId = rawUserId?.trim();

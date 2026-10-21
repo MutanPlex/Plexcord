@@ -1,6 +1,14 @@
+.pc-googlefonts-current {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
 .pc-googlefonts-results {
     max-height: 400px;
     overflow-y: auto;
+    scrollbar-width: none;
 }
 
 .pc-googlefonts-card {

@@ -38,9 +38,11 @@ import { isTruthy } from "@utils/guards";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
+import { PluginTarget } from "@utils/pluginTargets";
+import { promptToRestart } from "@utils/promptToRestart";
 import { useAwaiter, useCleanupEffect } from "@utils/react";
 import { PluginTag, PluginTagList } from "@utils/types";
-import { Alerts, lodash, Parser, React, SearchableSelect, Select, TextInput, Toasts, Tooltip, useMemo, useRef, useState } from "@webpack/common";
+import { Alerts, lodash, Parser, React, SearchableSelect, Select, showToast, TextInput, Tooltip, useMemo, useRef, useState } from "@webpack/common";
 import { JSX } from "react";
 
 import Plugins, { ExcludedPlugins, PluginMeta } from "~plugins"; // Avoid circular dependency
@@ -58,13 +60,10 @@ export const cl = classNameFactory("pc-plugins-");
 export const logger = new Logger("PluginSettings", "#a6d189");
 
 export function showErrorToast(message: string) {
-    Toasts.show({
-        message,
-        type: Toasts.Type.FAILURE,
-        id: Toasts.genId(),
-        options: {
-            position: Toasts.Position.BOTTOM
-        }
+    showToast({
+        text: message,
+        variant: "critical",
+        position: "bottom"
     });
 }
 
@@ -128,9 +127,9 @@ function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetC
                     <LanguageSelector />
                     {enabledPlugins.length > 0 && (
                         <Button
-                            variant="secondary"
+                            variant="dangerPrimary"
                             size="small"
-                            className={"pc-plugins-disable-warning pc-modal-align-reset"}
+                            className={"pc-modal-align-reset"}
                             onClick={() => {
                                 return openWarningModal(null, undefined, false, enabledPlugins.length, resetCheckAndDo);
                             }}
@@ -146,6 +145,7 @@ function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetC
 
 const enum SearchStatus {
     ALL,
+    FAVORITES,
     ENABLED,
     DISABLED,
     NEW,
@@ -153,13 +153,14 @@ const enum SearchStatus {
     API_PLUGINS
 }
 
-export function getExcludedReasons(): Record<"web" | "discordDesktop" | "plextron" | "desktop" | "dev", string> {
+export function getExcludedReasons(): Record<PluginTarget, string> {
     return {
         desktop: t(plugins.excluded.desktop),
         discordDesktop: t(plugins.excluded.discordDesktop),
         plextron: t(plugins.excluded.plextron),
         web: t(plugins.excluded.web),
-        dev: t(plugins.excluded.dev)
+        dev: t(plugins.excluded.dev),
+        browser: t(plugins.excluded.browser)
     };
 }
 
@@ -197,22 +198,16 @@ function PluginSettings() {
 
     useCleanupEffect(() => {
         if (changes.hasChanges)
-            Alerts.show({
-                title: t(plugins.restart.required),
-                body: (
-                    <>
-                        <p>{t(plugins.restart.following)}</p>
-                        <div>{changes.map((s, i) => (
-                            <>
-                                {i > 0 && ", "}
-                                {Parser.parse("`" + s.split(".")[0] + "`")}
-                            </>
-                        ))}</div>
-                    </>
-                ),
-                confirmText: t(plugins.restart.button.now),
-                cancelText: t(plugins.restart.button.later),
-                onConfirm: () => location.reload()
+            promptToRestart("reload", {
+                children: <>
+                    <p>{t(plugins.restart.following)}</p>
+                    <div>{[...changes].map((s, i) => (
+                        <React.Fragment key={s}>
+                            {i > 0 && ", "}
+                            {Parser.parse("`" + s.split(".")[0] + "`")}
+                        </React.Fragment>
+                    ))}</div>
+                </>
             });
     }, []);
 
@@ -233,7 +228,8 @@ function PluginSettings() {
     const sortedPlugins = useMemo(() =>
         Object.values(Plugins).sort((a, b) => getName(a.name).localeCompare(getName(b.name))),
         []
-    );
+    )
+        .toSorted((a, b) => Number(settings.plugins[getName(b.name)]?.isFavorite ?? false) - Number(settings.plugins[getName(a.name)]?.isFavorite ?? false));
 
     const hasUserPlugins = useMemo(() => !IS_STANDALONE && Object.values(PluginMeta).some(m => m.userPlugin), []);
 
@@ -248,6 +244,9 @@ function PluginSettings() {
         const enabled = isPluginEnabled(pluginName);
 
         switch (status) {
+            case SearchStatus.FAVORITES:
+                if (!settings.plugins[pluginName]?.isFavorite) return false;
+                break;
             case SearchStatus.DISABLED:
                 if (enabled) return false;
                 break;
@@ -308,7 +307,7 @@ function PluginSettings() {
     const showApi = searchValue.status === SearchStatus.API_PLUGINS;
     for (const p of sortedPlugins) {
         const pluginName = getName(p.name);
-        if (p.hidden || (!p.options && pluginName.endsWith("API") && !showApi))
+        if (p.hidden || (!p.settings && pluginName.endsWith("API") && !showApi))
             continue;
 
         if (!pluginFilter(p)) continue;
@@ -422,6 +421,7 @@ function PluginSettings() {
                     <Select
                         options={[
                             { label: t(plugins.filters.option.all), value: SearchStatus.ALL, default: true },
+                            { label: t(plugins.filters.option.favorites), value: SearchStatus.FAVORITES },
                             { label: t(plugins.filters.option.enabled), value: SearchStatus.ENABLED },
                             { label: t(plugins.filters.option.disabled), value: SearchStatus.DISABLED },
                             { label: t(plugins.filters.option.new), value: SearchStatus.NEW },

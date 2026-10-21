@@ -7,16 +7,22 @@
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
+import { User } from "@plexcord/discord-types";
 import { copyToClipboard } from "@utils/clipboard";
 import { PcDevs } from "@utils/constants";
+import { Logger } from "@utils/Logger";
 import definePlugin from "@utils/types";
-import { Menu, Toasts, UserProfileStore } from "@webpack/common";
+import { Menu, SelectedGuildStore, showToast, UserProfileStore } from "@webpack/common";
 
-function getProfileColors(userId) {
+const logger = new Logger("CopyProfileColors");
+
+function getProfileColors(userId: string, guildId?: string) {
     try {
-        const profile = UserProfileStore.getUserProfile(userId);
+        const profile = guildId
+            ? UserProfileStore.getGuildMemberProfile(userId, guildId)
+            : UserProfileStore.getUserProfile(userId);
 
-        if (!profile || !profile.themeColors || profile.themeColors.length < 2) {
+        if (!profile?.themeColors || profile.themeColors.length < 2) {
             return null;
         }
 
@@ -25,41 +31,29 @@ function getProfileColors(userId) {
 
         return { primaryColor, secondaryColor };
     } catch (e) {
-        console.error("Failed to get profile colors:", e);
+        logger.error("Failed to get profile colors:", e);
         return null;
     }
 }
 
-function copyProfileColors(userId) {
-    const colors = getProfileColors(userId);
+function copyProfileColors(userId: string, guildId?: string) {
+    const colors = getProfileColors(userId, guildId);
 
     if (!colors) {
-        Toasts.show({
-            type: Toasts.Type.FAILURE,
-            message: t(plugin.copyProfileColors.toast.noColor),
-            id: Toasts.genId()
-        });
+        showToast({ text: t(plugin.copyProfileColors.toast.noColor), variant: "critical" });
         return;
     }
 
     const { primaryColor, secondaryColor } = colors;
 
-    const formattedColors = `Primary-color #${primaryColor}, Secondary-Color #${secondaryColor}`;
+    const formattedColors = t(plugin.copyProfileColors.text.formatted, { primary: primaryColor, secondary: secondaryColor });
 
     try {
         copyToClipboard(formattedColors);
-        Toasts.show({
-            type: Toasts.Type.SUCCESS,
-            message: t(plugin.copyProfileColors.toast.copied),
-            id: Toasts.genId()
-        });
+        showToast({ text: t(plugin.copyProfileColors.toast.copied), variant: "success" });
     } catch (e) {
-        console.error("Failed to copy to clipboard:", e);
-        Toasts.show({
-            type: Toasts.Type.FAILURE,
-            message: t(plugin.copyProfileColors.toast.error),
-            id: Toasts.genId()
-        });
+        logger.error("Failed to copy to clipboard:", e);
+        showToast({ text: t(plugin.copyProfileColors.toast.error), variant: "critical" });
     }
 }
 
@@ -76,22 +70,41 @@ export function ColorIcon() {
     );
 }
 
-const userContextMenuPatch: NavContextMenuPatchCallback = (children, { user }) => {
+const userContextMenuPatch: NavContextMenuPatchCallback = (children, { user, guildId }: { user?: User; guildId?: string; }) => {
     if (!user) return;
+
+    const effectiveGuildId = guildId ?? SelectedGuildStore.getGuildId();
+    const guildProfile = effectiveGuildId
+        ? UserProfileStore.getGuildMemberProfile(user.id, effectiveGuildId)
+        : null;
+    const hasGuildColors = guildProfile?.themeColors && guildProfile.themeColors.length >= 2;
+
     children.push(
         <Menu.MenuItem
             id="CopyProfileColors"
             icon={ColorIcon}
+            leadingAccessory={{ type: "icon", icon: ColorIcon }}
             label={t(plugin.copyProfileColors.copy)}
             action={() => copyProfileColors(user.id)}
         />
     );
+    if (hasGuildColors && effectiveGuildId) {
+        children.push(
+            <Menu.MenuItem
+                id="CopyServerProfileColors"
+                icon={ColorIcon}
+                leadingAccessory={{ type: "icon", icon: ColorIcon }}
+                label={t(plugin.copyProfileColors.copy)}
+                action={() => copyProfileColors(user.id, effectiveGuildId)}
+            />
+        );
+    }
 };
 
 export default definePlugin({
     name: "CopyProfileColors",
     description: () => t(plugin.copyProfileColors.description),
-    authors: [PcDevs.Crxa, PcDevs.Cortex],
+    authors: [PcDevs.Crxa, PcDevs.Cortex, PcDevs.MutanPlex, PcDevs.Gir0fa],
     tags: ["appearance", "customisation", "utility"],
     contextMenus: {
         "user-context": userContextMenuPatch,

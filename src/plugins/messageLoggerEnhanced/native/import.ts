@@ -8,14 +8,15 @@
 import { randomUUID } from "node:crypto";
 import { FileHandle, open } from "node:fs/promises";
 
+import { plugin, t } from "@main/utils/i18n";
 import { dialog, IpcMainInvokeEvent } from "electron";
 
 const activeFiles = new Map<string, FileHandle>();
 
 export async function startNativeLogImport(_event: IpcMainInvokeEvent, defaultPath?: string) {
     const res = await dialog.showOpenDialog({
-        title: "Import Logs",
-        filters: [{ name: "Logs", extensions: ["json"] }],
+        title: t(plugin.messageLoggerEnhanced.text.importLogs, "Import Logs"),
+        filters: [{ name: t(plugin.messageLoggerEnhanced.text.logs, "Logs"), extensions: ["json"] }],
         properties: ["openFile"],
         defaultPath
     });

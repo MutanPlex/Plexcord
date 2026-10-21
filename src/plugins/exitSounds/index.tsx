@@ -16,7 +16,7 @@ import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
-import { ChannelActions, Constants, GuildStore, IconUtils, MediaEngineStore, Menu, RestAPI, SearchableSelect, SelectedChannelStore, TextInput, Toasts } from "@webpack/common";
+import { Constants, GuildStore, IconUtils, MediaEngineStore, Menu, RestAPI, SearchableSelect, SelectedChannelStore, showToast, TextInput } from "@webpack/common";
 
 const cl = classNameFactory("pc-exitsounds-");
 
@@ -103,8 +103,6 @@ const SoundButtonContext: NavContextMenuPatchCallback = (children, { sound }: { 
     );
 };
 
-let original: typeof ChannelActions.selectVoiceChannel;
-
 export default definePlugin({
     name: "ExitSounds",
     description: () => t(plugin.exitSounds.description),
@@ -112,58 +110,35 @@ export default definePlugin({
     tags: ["voice", "media"],
     dependencies: ["AudioPlayerAPI"],
     settings,
-
     contextMenus: {
         "sound-button-context": SoundButtonContext
     },
-
-    start() {
-        original = ChannelActions.selectVoiceChannel;
-        ChannelActions.selectVoiceChannel = async (id: string | null, ...args: unknown[]) => {
-            const { soundGuildId, soundId } = settings.store;
-            const voiceId = SelectedChannelStore.getVoiceChannelId();
-
-            if (soundGuildId && soundId && voiceId !== id && !MediaEngineStore.isDeaf()) {
-                try {
-                    await RestAPI.post({
-                        url: Constants.Endpoints.SEND_SOUNDBOARD_SOUND(voiceId),
-                        body: {
-                            sound_id: soundId,
-                            source_guild_id: soundGuildId
-                        }
-                    });
-
-                    let duration = 5000;
-                    try {
-                        const audio = new Audio(`https://${window.GLOBAL_ENV.CDN_HOST}/soundboard-sounds/${soundId}`);
-                        await new Promise<void>(resolve => {
-                            audio.addEventListener("loadedmetadata", () => {
-                                resolve();
-                            });
-                            setTimeout(resolve, 2000);
-                        });
-                        if (audio.duration && !isNaN(audio.duration) && isFinite(audio.duration)) {
-                            duration = Math.ceil(audio.duration * 1000);
-                        }
-                    } catch {
-                        // Ignore errors, just use default duration
-                    }
-
-                    await new Promise(r => setTimeout(r, duration));
-                } catch {
-                    Toasts.show({
-                        message: t(plugin.exitSounds.toast.failedToPlay),
-                        id: Toasts.genId(),
-                        type: Toasts.Type.FAILURE
-                    });
-                }
+    patches: [
+        {
+            find: 'type:"VOICE_CHANNEL_SHOW_FEEDBACK"',
+            replacement: {
+                match: /disconnect\(\)\{/,
+                replace: "async $& await $self.onDisconnect();"
             }
+        }
+    ],
+    async onDisconnect() {
+        const { soundGuildId, soundId } = settings.store;
+        if (!soundGuildId || !soundId || MediaEngineStore.isDeaf()) return;
 
-            return original(id, ...args);
-        };
-    },
+        const voiceId = SelectedChannelStore.getVoiceChannelId();
+        if (!voiceId) return;
 
-    stop() {
-        ChannelActions.selectVoiceChannel = original;
+        try {
+            await RestAPI.post({
+                url: Constants.Endpoints.SEND_SOUNDBOARD_SOUND(voiceId),
+                body: {
+                    sound_id: soundId,
+                    source_guild_id: soundGuildId
+                }
+            });
+        } catch {
+            showToast({ text: t(plugin.exitSounds.toast.failedToPlay), variant: "critical" });
+        }
     }
 });

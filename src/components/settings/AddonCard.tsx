@@ -77,7 +77,7 @@ export function AddonCard({ disabled, isNew, name, infoButton, footer, author, e
 
                     {!!author && (
                         <BaseText size="md" color="text-subtle" className={cl("author")}>
-                            {author}
+                            {t(plugins.authorPrefix)} {author}
                         </BaseText>
                     )}
                 </div>

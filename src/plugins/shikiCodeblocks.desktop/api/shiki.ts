@@ -106,7 +106,7 @@ export const shiki = {
 
         return await client.run("codeToThemedTokens", {
             code,
-            lang: langId,
+            lang: lang.id ?? langId,
             theme: shiki.currentThemeUrl ?? themeUrls[0],
         });
     },

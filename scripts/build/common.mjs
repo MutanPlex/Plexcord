@@ -19,9 +19,6 @@
 
 // @ts-check
 
-import "../suppressExperimentalWarnings.js";
-import "../checkNodeVersion.js";
-
 import { exec, execSync } from "child_process";
 import esbuild, { build, context } from "esbuild";
 import { constants as FsConstants, readFileSync } from "fs";
@@ -31,6 +28,8 @@ import { dirname, join, relative, resolve } from "path";
 import { fileURLToPath } from "url";
 import { promisify } from "util";
 
+import "../suppressExperimentalWarnings.js";
+import "../checkNodeVersion.js";
 import { getPluginTarget } from "../utils.mjs";
 
 const PackageJSON = JSON.parse(readFileSync(join(dirname(fileURLToPath(import.meta.url)), "../../package.json"), "utf-8"));
@@ -172,6 +171,7 @@ export const globPlugins = kind => ({
                         const excluded =
                             (target === "dev" && !IS_DEV) ||
                             (target === "web" && kind === "discordDesktop") ||
+                            (target === "browser" && kind !== "web") ||
                             (target === "desktop" && kind === "web") ||
                             (target === "discordDesktop" && kind !== "discordDesktop") ||
                             (target === "plextron" && kind !== "plextron");

@@ -30,11 +30,11 @@ const cl = classNameFactory("pc-channeltabs-");
 
 export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
     const [userId, setUserId] = useState("");
-    const [tabsOverflow, setTabsOverflow] = useState(false);
     const {
         showBookmarkBar,
         widerTabsAndBookmarks,
         tabWidthScale,
+        tabHeightScale,
         enableNumberKeySwitching,
         numberKeySwitchCount,
         enableCloseTabShortcut,
@@ -67,6 +67,7 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
         "showBookmarkBar",
         "widerTabsAndBookmarks",
         "tabWidthScale",
+        "tabHeightScale",
         "enableNumberKeySwitching",
         "numberKeySwitchCount",
         "enableCloseTabShortcut",
@@ -97,27 +98,32 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
         "newTabButtonBehavior"
     ]);
     const GhostTabs = useGhostTabs();
-    const isFullscreen = useStateFromStores([ChannelRTCStore], () => ChannelRTCStore.isFullscreenInContext() ?? false);
+    const isFullscreen = useStateFromStores([], () => ChannelRTCStore.isFullscreenInContext() ?? false);
 
     const _update = useForceUpdater();
     const update = useCallback((save = true) => {
         _update();
-        if (save) saveTabs(userId);
-    }, [userId]);
+        const currentUserId = UserStore.getCurrentUser()?.id;
+        if (save && currentUserId) void saveTabs(currentUserId);
+    }, []);
 
     const ref = useRef<HTMLDivElement>(null);
-    const scrollerRef = useRef<HTMLDivElement>(null);
+    const currentChannelRef = useRef(props);
+    currentChannelRef.current = props;
 
     useEffect(() => {
-        setUpdaterFunction(update);
-        const onLogin = () => {
-            const { id } = UserStore.getCurrentUser();
-            if (id === userId && openedTabs.length) return;
-            setUserId(id);
+        return setUpdaterFunction(update);
+    }, [update]);
 
-            openStartupTabs({ ...props, userId: id }, setUserId);
+    useEffect(() => {
+        const onLogin = () => {
+            const user = UserStore.getCurrentUser();
+            if (!user) return;
+
+            void openStartupTabs({ ...currentChannelRef.current, userId: user.id }, setUserId);
         };
 
+        onLogin();
         FluxDispatcher.subscribe("CONNECTION_OPEN_SUPPLEMENTAL", onLogin);
         return () => {
             FluxDispatcher.unsubscribe("CONNECTION_OPEN_SUPPLEMENTAL", onLogin);
@@ -135,27 +141,6 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
     useEffect(() => {
         _update();
     }, [widerTabsAndBookmarks]);
-
-    useEffect(() => {
-        const scroller = scrollerRef.current;
-        if (!scroller) return;
-
-        const checkOverflow = () => {
-            if (!newTabButtonBehavior) {
-                setTabsOverflow(true);
-                return;
-            }
-            const overflow = scroller.scrollWidth > scroller.clientWidth;
-            setTabsOverflow(overflow);
-        };
-
-        checkOverflow();
-
-        const observer = new ResizeObserver(checkOverflow);
-        observer.observe(scroller);
-
-        return () => observer.disconnect();
-    }, [openedTabs.length, newTabButtonBehavior]);
 
     useEffect(() => {
         const matchesKeybind = (event: KeyboardEvent, keybindString: string): boolean => {
@@ -291,6 +276,16 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
 
     if (isFullscreen) return null;
 
+    const shouldFollowNewTabButton = newTabButtonBehavior;
+    const newTabButton = (
+        <button
+            onClick={() => createTab(props, true)}
+            className={cl("button", "new-button", "hoverable")}
+        >
+            <PlusSmallIcon />
+        </button>
+    );
+
     return (
         <div
             className={classes(
@@ -315,7 +310,7 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
                 !compactAutoExpandOnHover && cl("no-compact-hover-expand")
             )}
             ref={ref}
-            style={{ "--tab-width-scale": tabWidthScale / 100 } as React.CSSProperties}
+            style={{ "--tab-width-scale": tabWidthScale / 100, "--tab-height-scale": tabHeightScale / 100 } as React.CSSProperties}
             onContextMenu={e => ContextMenuApi.openContextMenu(e, () => <BasicContextMenu />)}
         >
             {showBookmarkBar && <>
@@ -324,21 +319,15 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
             </>}
             <div className={cl("tab-container")}>
                 <HorizontalScroller
-                    customRef={node => { scrollerRef.current = node; }}
-                    className={cl("tab-scroller", newTabButtonBehavior && !tabsOverflow && "tab-scroller-following")}
+                    className={cl("tab-scroller", shouldFollowNewTabButton && "tab-scroller-following")}
                 >
                     {openedTabs.filter(tab => tab != null).map((tab, i) =>
                         <ChannelTab {...tab} index={i} key={tab.id} />
                     )}
-                    {GhostTabs}
+                    {shouldFollowNewTabButton && newTabButton}
                 </HorizontalScroller>
 
-                <button
-                    onClick={() => createTab(props, true)}
-                    className={cl("button", "new-button", "hoverable")}
-                >
-                    <PlusSmallIcon />
-                </button>
+                {!shouldFollowNewTabButton && newTabButton}
             </div >
 
         </div>
@@ -347,13 +336,14 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
 
 export function ChannelTabsPreview(p: { setValue: (v: TabSet) => void; }) {
     const id = UserStore.getCurrentUser()?.id;
-    if (!id) return <Paragraph>{t(plugin.channelTabs.error.noLogin)}</Paragraph>;
 
     const { setValue } = p;
     const { tabSet }: { tabSet: TabSet; } = settings.use(["tabSet"]);
 
     const placeholder = [{ guildId: "@me", channelId: undefined as any }];
-    const [currentTabs, setCurrentTabs] = useState(tabSet?.[id] ?? placeholder);
+    const [currentTabs, setCurrentTabs] = useState(tabSet?.[id ?? ""] ?? placeholder);
+
+    if (!id) return <Paragraph>{t(plugin.channelTabs.error.noLogin)}</Paragraph>;
 
     return (
         <>

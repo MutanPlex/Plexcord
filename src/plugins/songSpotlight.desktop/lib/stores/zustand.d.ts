@@ -1,0 +1,19 @@
+/*
+ * Plexcord, a modification for Discord's desktop app
+ * Copyright (c) 2026 Vendicated and contributors
+ * Copyright (c) 2026 MutanPlex
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+export type ZustandDefinition<T> = (set: (state: Partial<T>) => void, get: () => T) => T;
+
+export interface ZustandStore<T> {
+    (): T;
+    getState(): T;
+}
+
+export interface PersistedZustandStore<T> extends ZustandStore<T> {
+    persist: {
+        rehydrate(): Promise<void>;
+    };
+}

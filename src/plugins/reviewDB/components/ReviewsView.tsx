@@ -64,7 +64,7 @@ export default function ReviewsView({
 }: Props) {
     const [signal, refetch] = useForceUpdater(true);
 
-    const [reviewData] = useAwaiter(() => getReviews(discordId, { offset: (page - 1) * REVIEWS_PER_PAGE }), {
+    const [reviewData] = useAwaiter(() => getReviews(discordId, { offset: (page - 1) * REVIEWS_PER_PAGE, limit: REVIEWS_PER_PAGE, fetchVotes: true }), {
         fallbackValue: null,
         deps: [refetchSignal, signal, page],
         onSuccess: data => {
@@ -72,7 +72,7 @@ export default function ReviewsView({
             const systemReviews = data!.reviews.filter(r => r.type === ReviewType.System);
             const normalReviews = data!.reviews.filter(r => r.type !== ReviewType.System);
 
-            data!.reviews = [...systemReviews, ...normalReviews.reverse()];
+            data!.reviews = [...systemReviews, ...normalReviews];
             scrollToTop?.();
             onFetchReviews(data!);
         }
@@ -127,7 +127,7 @@ function ReviewList({ refetch, reviews, hideOwnReview, profileId, type }: { refe
 }
 
 export function ReviewsInputComponent(
-    { discordId, isAuthor, refetch, name, modalKey, repliesTo }: { discordId: string, name: string; isAuthor: boolean; refetch(): void; modalKey?: string; repliesTo?: number; }
+    { discordId, isAuthor, refetch, name, modalKey }: { discordId: string, name: string; isAuthor: boolean; refetch(): void; modalKey?: string; }
 ) {
     const { token } = Auth;
     const editorRef = useRef<any>(null);
@@ -140,7 +140,7 @@ export function ReviewsInputComponent(
         <>
             <div onClick={() => {
                 if (!token) {
-                    showToast(t(plugin.reviewDB.notification.auth.opening));
+                    showToast({ text: t(plugin.reviewDB.notification.auth.opening) });
                     authorize();
                 }
             }}>
@@ -150,10 +150,9 @@ export function ReviewsInputComponent(
                     placeholder={
                         !token
                             ? t(plugin.reviewDB.notification.auth.need)
-                            : repliesTo ? t(plugin.reviewDB.button.reply, { user: name })
-                                : isAuthor
-                                    ? t(plugin.reviewDB.button.update, { user: name })
-                                    : t(plugin.reviewDB.button.review, { user: name })
+                            : isAuthor
+                                ? t(plugin.reviewDB.text.updateReviewFor, { name })
+                                : t(plugin.reviewDB.text.reviewUser, { name })
                     }
                     type={inputType}
                     disableThemedBackground={true}
@@ -165,7 +164,6 @@ export function ReviewsInputComponent(
                             const response = await addReview({
                                 userid: discordId,
                                 comment: res.value,
-                                repliesto: repliesTo,
                             });
 
                             if (response) {

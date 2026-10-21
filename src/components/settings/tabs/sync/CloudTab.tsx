@@ -20,19 +20,18 @@
 import { cloud, t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import { authorizeCloud, deauthorizeCloud } from "@api/SettingsSync/cloudSetup";
-import { deleteCloudSettings, eraseAllCloudData, getCloudSettings, putCloudSettings } from "@api/SettingsSync/cloudSync";
+import { deleteCloudSettings, eraseAllCloudData, getCloudSettings, getCloudSyncDirection, putCloudSettings, setCloudSyncDirection } from "@api/SettingsSync/cloudSync";
 import { Button } from "@components/Button";
 import { CheckedTextInput } from "@components/CheckedTextInput";
 import { Divider } from "@components/Divider";
 import { Flex } from "@components/Flex";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
-import { CloudDownloadIcon, CloudUploadIcon } from "@components/Icons";
+import { CloudDownloadIcon, CloudUploadIcon, SkullIcon } from "@components/Icons";
 import { Link } from "@components/Link";
 import { Notice } from "@components/Notice";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
-import { localStorage } from "@utils/localStorage";
 import { Margins } from "@utils/margins";
 import { useForceUpdater } from "@utils/react";
 import { findComponentByCodeLazy } from "@webpack";
@@ -46,7 +45,6 @@ function PlexcordIcon() {
 
 const RefreshIcon = findComponentByCodeLazy("M4 12a8 8 0 0 1 14.93-4H15");
 const TrashIcon = findComponentByCodeLazy("2.81h8.36a3");
-const SkullIcon = findComponentByCodeLazy("m13.47 1 .07.04c.45.06");
 
 function validateUrl(url: string) {
     try {
@@ -63,6 +61,7 @@ const cloudBackendOptions = [
 
 function CloudTab() {
     const settings = useSettings(["cloud.authenticated", "cloud.url", "cloud.settingsSync"]);
+    const [syncDirection, setSyncDirection] = useState(getCloudSyncDirection);
     const [inputKey, setInputKey] = useState(0);
     const forceUpdate = useForceUpdater();
 
@@ -176,10 +175,10 @@ function CloudTab() {
                     { label: t(cloud.sync.direction.pull), value: "pull" },
                     { label: t(cloud.sync.direction.manual), value: "manual" }
                 ]}
-                isSelected={v => v === (localStorage.Plexcord_cloudSyncDirection ?? "both")}
+                isSelected={v => v === syncDirection}
                 select={v => {
-                    localStorage.Plexcord_cloudSyncDirection = v;
-                    forceUpdate();
+                    setCloudSyncDirection(v);
+                    setSyncDirection(v);
                 }}
                 serialize={v => v}
                 isDisabled={!syncEnabled}
@@ -245,7 +244,7 @@ function CloudTab() {
                     })}
                 >
                     <Flex gap="8px" alignItems="center">
-                        <SkullIcon color="currentColor" />
+                        <SkullIcon />
                         {t(cloud.danger.delete.account.title)}
                     </Flex>
                 </Button>
@@ -254,4 +253,4 @@ function CloudTab() {
     );
 }
 
-export default wrapTab(CloudTab, "Cloud");
+export default wrapTab(CloudTab, t(cloud.title));

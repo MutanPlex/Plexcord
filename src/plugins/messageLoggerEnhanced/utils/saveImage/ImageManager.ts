@@ -17,13 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import {
-    createStore,
-    del,
-    get,
-    keys,
-    set,
-} from "@api/DataStore";
+import { createStore, del, get, keys, set } from "@api/DataStore";
 import { Flogger, Native } from "@plugins/messageLoggerEnhanced";
 import { LoggedAttachment } from "@plugins/messageLoggerEnhanced/types";
 import { DEFAULT_IMAGE_CACHE_DIR } from "@plugins/messageLoggerEnhanced/utils/constants";
@@ -105,8 +99,6 @@ async function downloadAttachmentWeb(attachment: LoggedAttachment, attempts = 0)
     }
     const ab = await res.arrayBuffer();
     const path = `${DEFAULT_IMAGE_CACHE_DIR}/${attachment.id}${attachment.fileExtension}`;
-
-    // await writeImage(imageCacheDir, `${attachmentId}${fileExtension}`, new Uint8Array(ab));
 
     await set(path, new Uint8Array(ab), ImageStore);
     idbSavedImages.set(attachment.id, { attachmentId: attachment.id, path });

@@ -201,7 +201,10 @@ function loadImage(source: File | string): Promise<HTMLImageElement> {
             if (isFile) URL.revokeObjectURL(url);
             resolve(img);
         };
-        img.onerror = (event, _source, _lineno, _colno, err) => reject(err || event);
+        img.onerror = (event, _source, _lineno, _colno, err) => {
+            if (isFile) URL.revokeObjectURL(url);
+            reject(err || event);
+        };
         img.crossOrigin = "anonymous";
         img.src = url;
     });

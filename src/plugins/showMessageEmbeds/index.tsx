@@ -15,7 +15,7 @@ import { Logger } from "@utils/Logger";
 import { parseUrl } from "@utils/misc";
 import definePlugin from "@utils/types";
 import { findByCodeLazy } from "@webpack";
-import { ChannelStore, Constants, Menu, MessageStore, React, RestAPI, showToast, Toasts } from "@webpack/common";
+import { ChannelStore, Constants, Menu, MessageStore, React, RestAPI, showToast } from "@webpack/common";
 
 const logger = new Logger("ShowMessageEmbeds");
 
@@ -49,6 +49,7 @@ const addButton = (children, message, url) => {
                 label={t(plugin.showMessageEmbeds.context.embed.show)}
                 action={_ => unfurlEmbed(url, message)}
                 icon={ImageVisible}
+                leadingAccessory={{ type: "icon", icon: ImageVisible }}
                 key="pc-sme-show" />);
     } else if (isUrlInMessage(message, url)) { // check the url is actually in the message text so we know it's one people can actually add back
         children.splice(0, 0,
@@ -57,6 +58,7 @@ const addButton = (children, message, url) => {
                 label={t(plugin.showMessageEmbeds.context.embed.hide)}
                 action={_ => removeEmbed(url, message)}
                 icon={ImageInvisible}
+                leadingAccessory={{ type: "icon", icon: ImageInvisible }}
                 key="pc-sme-remove" />);
     }
 };
@@ -189,7 +191,7 @@ function removeEmbed(url: string, message: Message) {
 }
 
 function showFailureToast(message: string) {
-    showToast(message, Toasts.Type.FAILURE, { position: Toasts.Position.BOTTOM });
+    showToast({ text: message, variant: "critical", position: "bottom" });
 }
 
 export default definePlugin({

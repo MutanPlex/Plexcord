@@ -7,39 +7,17 @@
 
 import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
-import { Button } from "@components/Button";
 import { CodeBlock } from "@components/CodeBlock";
 import { Flex } from "@components/Flex";
 import { HeadingSecondary } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { TooltipContainer } from "@components/TooltipContainer";
-import { Icon } from "@plexcord/discord-types";
+import { Icon, RenderModalProps } from "@plexcord/discord-types";
 import { copyWithToast, getIntlMessage } from "@utils/discord";
 import { Logger } from "@utils/Logger";
-import {
-    CloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalProps,
-    ModalRoot,
-    ModalSize,
-    openModal
-} from "@utils/modal";
 import { saveFile } from "@utils/web";
 import { findComponentByCodeLazy } from "@webpack";
-import {
-    Clickable,
-    ContextMenuApi,
-    createRoot,
-    FluxDispatcher,
-    Menu,
-    ReactDOM,
-    useCallback,
-    useEffect,
-    useMemo,
-    useState
-} from "@webpack/common";
+import { Clickable, ContextMenuApi, createRoot, FluxDispatcher, Menu, Modal, openModal, ReactDOM, useCallback, useEffect, useMemo, useState } from "@webpack/common";
 
 import { cssColors, getCssColorKeys, iconSizes, iconSizesInPx } from "../utils";
 
@@ -190,6 +168,7 @@ function OtherContextMenu({ iconName, Icon, color }: { iconName: string; Icon: I
                 id="log-console"
                 label={t(plugin.iconViewer.context.icon.log)}
                 icon={BugIcon}
+                leadingAccessory={{ type: "icon", icon: BugIcon }}
                 action={() => logger.info(Icon)}
             />
             <Menu.MenuItem id="save" label={t(plugin.iconViewer.context.icon.save)}>
@@ -228,7 +207,7 @@ function OtherContextMenu({ iconName, Icon, color }: { iconName: string; Icon: I
     );
 }
 
-function IconModal({ iconName, Icon, onClose, transitionState }: { iconName: string; Icon: Icon; } & ModalProps) {
+function IconModal({ iconName, Icon, onClose, transitionState }: { iconName: string; Icon: Icon; } & RenderModalProps) {
     const [color, setColor] = useColorNavigation(209);
     const colorData = cssColors[color];
     const colorKeys = useMemo(() => getCssColorKeys(), []);
@@ -249,62 +228,59 @@ function IconModal({ iconName, Icon, onClose, transitionState }: { iconName: str
         });
     }, [colorKeys.length, setColor]);
 
-    const openOtherMenu = (e: React.MouseEvent) => {
-        ContextMenuApi.openContextMenu(e, () => (
+    const openOtherMenu = (e?: React.MouseEvent) => {
+        if (e) ContextMenuApi.openContextMenu(e, () => (
             <OtherContextMenu iconName={iconName} Icon={Icon} color={color} />
         ));
     };
 
     return (
-        <ModalRoot transitionState={transitionState} size={ModalSize.MEDIUM}>
-            <ModalHeader separator={false} className="pc-ic-modal-header">
-                <div className="pc-ic-modal-header-content">
-                    <BaseText size="lg" weight="semibold" className="pc-ic-modal-title">{iconName}</BaseText>
+        <Modal
+            transitionState={transitionState}
+            onClose={onClose}
+            size="md"
+            title={iconName}
+            actions={[
+                {
+                    text: t(plugin.iconViewer.context.icon.actions),
+                    variant: "primary",
+                    onClick: openOtherMenu
+                }
+            ]}
+        >
+            <Flex className="pc-ic-modal-main">
+                <div
+                    className="pc-ic-icon-preview"
+                    aria-label={colorData?.name}
+                    onContextMenu={openColorMenu}
+                    onWheel={onWheel}
+                >
+                    <Icon className="pc-ic-icon-large" color={colorData?.css} fill={fill} />
                 </div>
-                <div className="pc-ic-modal-header-trailing">
-                    <CloseButton onClick={onClose} />
-                </div>
-            </ModalHeader>
-            <ModalContent className="pc-ic-modal-content">
-                <Flex className="pc-ic-modal-main">
-                    <div
-                        className="pc-ic-icon-preview"
-                        aria-label={colorData?.name}
-                        onContextMenu={openColorMenu}
-                        onWheel={onWheel}
-                    >
-                        <Icon className="pc-ic-icon-large" color={colorData?.css} fill={fill} />
-                    </div>
-                    <Flex flexDirection="column" className="pc-ic-icon-info">
-                        <Flex className="pc-ic-icon-sizes">
-                            {iconSizes.map(size => (
-                                <TooltipContainer text={size} key={size}>
-                                    <Icon size={size} color={colorData?.css} fill={fill} />
-                                </TooltipContainer>
-                            ))}
-                        </Flex>
-                        <TooltipContainer text={t(plugin.iconViewer.context.icon.rightClick)}>
-                            <BaseText size="sm" color="text-muted" className="pc-ic-color-label">
-                                {colorData?.name}
-                            </BaseText>
-                        </TooltipContainer>
+                <Flex flexDirection="column" className="pc-ic-icon-info">
+                    <Flex className="pc-ic-icon-sizes">
+                        {iconSizes.map(size => (
+                            <TooltipContainer text={size} key={size}>
+                                <Icon size={size} color={colorData?.css} fill={fill} />
+                            </TooltipContainer>
+                        ))}
                     </Flex>
+                    <TooltipContainer text={t(plugin.iconViewer.context.icon.rightClick)}>
+                        <BaseText size="sm" color="text-muted" className="pc-ic-color-label">
+                            {colorData?.name}
+                        </BaseText>
+                    </TooltipContainer>
                 </Flex>
-                <div className="pc-ic-use-as">
-                    <BaseText size="md" weight="semibold">{t(plugin.iconViewer.context.icon.usage)}</BaseText>
-                    <BaseText size="sm" color="text-muted">{t(plugin.iconViewer.context.icon.click)}</BaseText>
-                </div>
-                {/* for some reason i cant make this shit codeblock full width, FF 15 */}
-                <Clickable className="pc-ic-codeblock-wrapper" onClick={() => copyWithToast(findCode, t(plugin.iconViewer.context.icon.copied))}>
-                    <CodeBlock content={findCode} lang="ts" />
-                </Clickable>
-            </ModalContent>
-            <ModalFooter className="pc-ic-modal-footer">
-                <Button variant="primary" onClick={openOtherMenu}>
-                    {t(plugin.iconViewer.context.icon.actions)}
-                </Button>
-            </ModalFooter>
-        </ModalRoot>
+            </Flex>
+            <div className="pc-ic-use-as">
+                <BaseText size="md" weight="semibold">{t(plugin.iconViewer.context.icon.usage)}</BaseText>
+                <BaseText size="sm" color="text-muted">{t(plugin.iconViewer.context.icon.click)}</BaseText>
+            </div>
+            {/* for some reason i cant make this shit codeblock full width, FF 15 */}
+            <Clickable className="pc-ic-codeblock-wrapper" onClick={() => copyWithToast(findCode, t(plugin.iconViewer.context.icon.copied))}>
+                <CodeBlock content={findCode} lang="ts" />
+            </Clickable>
+        </Modal>
     );
 }
 

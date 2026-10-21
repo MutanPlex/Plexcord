@@ -9,21 +9,19 @@ import { readdir, readFile, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import { DATA_DIR } from "@main/utils/constants";
-import { LoggedAttachment } from "@plugins/messageLoggerEnhanced/types";
-import { LOGS_DATA_FILENAME } from "@plugins/messageLoggerEnhanced/utils/constants";
 import { dialog, IpcMainInvokeEvent, shell } from "electron";
 
 import { getSettings, saveSettings } from "./settings";
 export * from "./export";
 export * from "./import";
+import { blockedExts } from "../list";
+import { LoggedAttachment } from "../types";
+import { DEFAULT_ATTACHMENT_FILE_EXTENSIONS, LOGS_DATA_FILENAME } from "../utils/constants";
 import { ensureDirectoryExists, getAttachmentIdFromFilename, sleep } from "./utils";
 
 export { getSettings };
-
-// so we can filter the native helpers by this key
 export function messageLoggerEnhancedUniqueIdThingyIdkMan() { }
 
-// Map<attachmetId, path>()
 const nativeSavedImages = new Map<string, string>();
 export const getNativeSavedImages = () => nativeSavedImages;
 
@@ -68,9 +66,6 @@ export async function getImageNative(_event: IpcMainInvokeEvent, attachmentId: s
 export async function writeImageNative(_event: IpcMainInvokeEvent, filename: string, content: Uint8Array) {
     if (!filename || !content) return;
     const imageDir = await getImageCacheDir();
-
-    // returns the file name
-    // ../../someMalicousPath.png -> someMalicousPath
     const attachmentId = getAttachmentIdFromFilename(filename);
 
     const existingImage = nativeSavedImages.get(attachmentId);
@@ -105,6 +100,10 @@ export async function getDefaultNativeDataDir(): Promise<string> {
     return path.join(DATA_DIR, "MessageLoggerData");
 }
 
+export async function getDefaultAttachmentFileExtensions(): Promise<string> {
+    return DEFAULT_ATTACHMENT_FILE_EXTENSIONS;
+}
+
 export async function chooseDir(event: IpcMainInvokeEvent, logKey: "logsDir" | "imageCacheDir") {
     const settings = await getSettings();
     const defaultPath = settings[logKey] || await getDefaultNativeDataDir();
@@ -129,8 +128,8 @@ export async function chooseDir(event: IpcMainInvokeEvent, logKey: "logsDir" | "
     return dir;
 }
 
-export async function showItemInFolder(_event: IpcMainInvokeEvent, filePath: string) {
-    shell.showItemInFolder(filePath);
+export async function showItemInFolder(_event: IpcMainInvokeEvent) {
+    shell.showItemInFolder(await getImageCacheDir());
 }
 
 export async function chooseFile(_event: IpcMainInvokeEvent, title: string, filters: Electron.FileFilter[], defaultPath?: string) {
@@ -142,8 +141,6 @@ export async function chooseFile(_event: IpcMainInvokeEvent, title: string, filt
     return await readFile(path, "utf-8");
 }
 
-// doing it in native because you can only fetch images from the renderer
-// other types of files will cause cors issues
 export async function downloadAttachment(_event: IpcMainInvokeEvent, attachment: LoggedAttachment, attempts = 0, useOldUrl = false): Promise<{ error: string | null; path: string | null; }> {
     try {
         if (!attachment?.url || !attachment.oldUrl || !attachment?.id)
@@ -151,6 +148,19 @@ export async function downloadAttachment(_event: IpcMainInvokeEvent, attachment:
 
         if (attachment.id.match(/[\\/.]/)) {
             return { error: "Invalid Attachment ID", path: null };
+        }
+
+        const settings = await getSettings();
+        const allowedExtensionsStr = settings.attachmentFileExtensions?.trim() || "";
+        if (allowedExtensionsStr === "" || allowedExtensionsStr.toLowerCase() === "none") {
+            return { error: "All attachment downloads are currently blocked by settings configurations.", path: null };
+        }
+
+        const allowedList = allowedExtensionsStr.split(",").map((ext: string) => ext.trim().toLowerCase());
+        const cleanExt = attachment.fileExtension?.replace(".", "").toLowerCase();
+
+        if (!cleanExt || !allowedList.includes(cleanExt)) {
+            return { error: `File type .${cleanExt} is blocked by settings configurations.`, path: null };
         }
 
         const existingImage = nativeSavedImages.get(attachment.id);
@@ -196,4 +206,28 @@ export async function downloadAttachment(_event: IpcMainInvokeEvent, attachment:
         console.error(error);
         return { error: error.message, path: null };
     }
+}
+
+export async function updateAllowedExtensions(_event: IpcMainInvokeEvent, cleanExtensionsString: string | undefined) {
+    const settings = await getSettings();
+    const incomingRaw = cleanExtensionsString?.trim() || "";
+
+    if (incomingRaw === "") {
+        settings.attachmentFileExtensions = "none";
+        await saveSettings(settings);
+        return;
+    }
+
+    const validatedExtensions = incomingRaw
+        .split(",")
+        .map(ext => ext.trim().toLowerCase())
+        .filter(ext => ext.length > 0 && !blockedExts.includes(ext));
+
+    if (validatedExtensions.length === 0) {
+        settings.attachmentFileExtensions = "none";
+    } else {
+        settings.attachmentFileExtensions = validatedExtensions.join(",");
+    }
+
+    await saveSettings(settings);
 }

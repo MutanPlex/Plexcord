@@ -9,17 +9,14 @@ import "./ContributorModal.css";
 
 import { plugins, t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
-import ErrorBoundary from "@components/ErrorBoundary";
-import { HeadingPrimary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
-import { GithubButton, WebsiteButton } from "@components/settings/tabs/plugins/LinkIconButton";
-import { User } from "@plexcord/discord-types";
+import { RenderModalProps, User } from "@plexcord/discord-types";
 import { DevsById, PcDevsById } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { fetchUserProfile } from "@utils/discord";
-import { ModalContent, ModalFooter, ModalRoot, openModal } from "@utils/modal";
-import { showToast, useEffect, useMemo, UserProfileStore, useStateFromStores } from "@webpack/common";
+import { Modal, openModal, showToast, useEffect, useMemo, UserProfileStore, useStateFromStores } from "@webpack/common";
 
 import Plugins, { PluginMeta } from "~plugins";
 
@@ -28,20 +25,15 @@ function getName(name: string | (() => string)): string {
 }
 
 import { PluginCard } from "./PluginCard";
+import { GithubButton, WebsiteButton } from "./PluginModalButtons";
 
 const cl = classNameFactory("pc-author-modal-");
 
 export function openContributorModal(user: User) {
-    openModal(modalProps =>
-        <ModalRoot {...modalProps}>
-            <ErrorBoundary>
-                <ContributorModal user={user} />
-            </ErrorBoundary>
-        </ModalRoot>
-    );
+    openModal(modalProps => <ContributorModal user={user} modalProps={modalProps} />);
 }
 
-function ContributorModal({ user }: { user: User; }) {
+function ContributorModal({ user, modalProps }: { user: User; modalProps: RenderModalProps; }) {
     useSettings();
 
     const profile = useStateFromStores([UserProfileStore], () => UserProfileStore.getUserProfile(user.id));
@@ -71,52 +63,45 @@ function ContributorModal({ user }: { user: User; }) {
     const hasLinks = website || githubName;
 
     return (
-        <>
-            <ModalContent className={cl("root")}>
+        <Modal
+            {...modalProps}
+            title={
                 <div className={cl("header")}>
                     <img
                         className={cl("avatar")}
                         src={user.getAvatarURL(void 0, 512, true)}
                         alt=""
                     />
-                    <HeadingPrimary className={cl("name")}>{user.username}</HeadingPrimary>
+                    <Heading tag="h2" className={cl("name")}>{user.username}</Heading>
                 </div>
-
-                {pluginList.length ? (
-                    <Paragraph>
-                        {t(plugins.contributor.modal.contributionsInfo, {
-                            userName: user.username,
-                            contributionCount: pluginList.length,
-                            continuedLink: <Link href="https://plexcord.club/source">{t(plugins.contributor.contributed)}</Link>,
-                            s: pluginList.length === 1 ? "" : "s"
-                        })}
-                    </Paragraph>
-                ) : (
-                    <Paragraph>
-                        {t(plugins.contributor.modal.noContributions, {
-                            userName: user.username,
-                            contributedLink: <Link href="https://plexcord.club/source">{t(plugins.contributor.contributed)}</Link>
-                        })}
-                    </Paragraph>
-                )}
-
-                {!!pluginList.length && (
-                    <div className={cl("plugins")}>
-                        {pluginList.map(p =>
-                            <PluginCard
-                                key={getName(p.name)}
-                                plugin={p}
-                                disabled={p.required ?? false}
-                                onRestartNeeded={() => showToast(t(plugins.restart.apply))}
-                            />
-                        )}
-                    </div>
-                )}
-            </ModalContent>
-
-            {hasLinks && (
-                <ModalFooter>
-                    <div className={cl("links")}>
+            }
+            subtitle={
+                pluginList.length
+                    ? (
+                        <Paragraph>
+                            {t(plugins.contributor.modal.contributionsInfo, {
+                                userName: user.username,
+                                contributionCount: pluginList.length,
+                                continuedLink: <Link href="https://plexcord.club/source">{t(plugins.contributor.contributed)}</Link>,
+                                s: pluginList.length === 1 ? "" : "s"
+                            })}
+                        </Paragraph>
+                    )
+                    : (
+                        <Paragraph>
+                            {t(plugins.contributor.modal.noContributions, {
+                                userName: user.username,
+                                contributedLink: <Link href="https://plexcord.club/source">{t(plugins.contributor.contributed)}</Link>
+                            })}
+                        </Paragraph>
+                    )
+            }
+            actionBarInput={
+                hasLinks && (
+                    <div
+                        className={cl("links")}
+                        style={{ width: "100%", justifyContent: "flex-end" }}
+                    >
                         {website && (
                             <WebsiteButton
                                 text={website}
@@ -130,8 +115,23 @@ function ContributorModal({ user }: { user: User; }) {
                             />
                         )}
                     </div>
-                </ModalFooter>
-            )}
-        </>
+                )
+            }
+        >
+            <div className={cl("root")}>
+                {!!pluginList.length && (
+                    <div className={cl("plugins")}>
+                        {pluginList.map(p =>
+                            <PluginCard
+                                key={getName(p.name)}
+                                plugin={p}
+                                disabled={p.required ?? false}
+                                onRestartNeeded={() => showToast({ text: t(plugins.restart.apply) })}
+                            />
+                        )}
+                    </div>
+                )}
+            </div>
+        </Modal>
     );
 }

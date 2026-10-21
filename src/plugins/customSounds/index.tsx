@@ -16,11 +16,18 @@ import { Heading } from "@components/Heading";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType, StartAt } from "@utils/types";
+import { findLazy, findStoreLazy, mapMangledModuleLazy } from "@webpack";
 import { React, showToast, TextInput, useEffect } from "@webpack/common";
 
 import { getAllAudio, getAudioDataURI } from "./audioStore";
 import { SoundOverrideComponent } from "./SoundOverrideComponent";
-import { makeEmptyOverride, seasonalSounds, SoundOverride, soundTypes } from "./types";
+import { makeEmptyOverride, SoundOverride, soundTypes } from "./types";
+
+const Soundpacks: Record<string, string> = findLazy(m => m.WINTER_HOLIDAY === "winter_holiday");
+const SoundpackStore = findStoreLazy("SoundpackStore");
+const { getSoundpackMap } = mapMangledModuleLazy('message1:"bit_message1"', {
+    getSoundpackMap: m => typeof m === "function"
+});
 
 const cl = classNameFactory("pc-custom-sounds-");
 
@@ -48,13 +55,13 @@ function setOverride(id: string, override: SoundOverride) {
 }
 
 export const getCustomSoundURL: AudioProcessor = (data: PreprocessAudioData) => {
-    let audioOverride = data.audio;
-
-    if (data.audio in seasonalSounds) {
-        audioOverride = soundTypes.values.find(sound => sound.seasonal?.includes(data.audio))?.id || data.audio;
+    if (settings.store.soundpack) {
+        const current: Record<string, string> = getSoundpackMap(SoundpackStore.getSoundpack());
+        const name = Object.keys(current).find(key => current[key] === data.audio) ?? data.audio;
+        data.audio = getSoundpackMap(settings.store.soundpack)[name] ?? name;
     }
 
-    const override = getOverride(audioOverride);
+    const override = getOverride(soundTypes.values.find(sound => sound.seasonal?.includes(data.audio))?.id || data.audio);
 
     if (!override?.enabled) {
         return;
@@ -72,25 +79,7 @@ export const getCustomSoundURL: AudioProcessor = (data: PreprocessAudioData) => 
     }
 
     if (override.selectedSound !== "default" && override.selectedSound !== "custom") {
-        if (override.selectedSound in seasonalSounds) {
-            data.audio = seasonalSounds[override.selectedSound];
-            data.volume = override.volume;
-            return;
-        }
-
-        const soundType = allSoundTypes.values.find(t => t.id === data.audio);
-
-        if (soundType?.seasonal) {
-            const seasonalId = soundType.seasonal.find(seasonalId =>
-                seasonalId.startsWith(`${override.selectedSound}_`)
-            );
-
-            if (seasonalId && seasonalId in seasonalSounds) {
-                data.audio = seasonalSounds[seasonalId];
-                data.volume = override.volume;
-                return;
-            }
-        }
+        data.audio = override.selectedSound;
     }
 
     data.volume = override.volume;
@@ -190,7 +179,7 @@ export async function debugCustomSounds() {
     let totalSettingsSize = 0;
 
     for (const [soundId, storedValue] of Object.entries(settings.store)) {
-        if (soundId === "overrides") continue;
+        if (soundId === "overrides" || soundId === "soundpack") continue;
 
         const override = getOverride(soundId);
         const settingsSize = JSON.stringify(override).length;
@@ -226,7 +215,22 @@ const soundSettings = Object.fromEntries(
 
 const settings = definePluginSettings({
     ...soundSettings,
+    soundpack: {
+        label: () => t(plugin.customSounds.option.soundpack.label),
+        description: () => t(plugin.customSounds.option.soundpack.description),
+        type: OptionType.SELECT,
+        get options() {
+            return [
+                { label: () => t(plugin.customSounds.option.soundpack.default), value: "", default: true },
+                ...Object.entries(Soundpacks).map(([key, value]) => ({
+                    label: key.toLowerCase().replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase()),
+                    value
+                }))
+            ];
+        }
+    },
     overrides: {
+        label: () => t(plugin.customSounds.option.overrides.label),
         type: OptionType.COMPONENT,
         description: "",
         component: () => {
@@ -248,7 +252,7 @@ const settings = definePluginSettings({
                 });
                 dataUriCache.clear();
                 setResetTrigger(prev => prev + 1);
-                showToast(t(plugin.customSounds.toast.reset));
+                showToast({ text: t(plugin.customSounds.toast.reset) });
             };
 
             const triggerFileUpload = () => {
@@ -280,10 +284,10 @@ const settings = definePluginSettings({
                             }
 
                             setResetTrigger(prev => prev + 1);
-                            showToast(t(plugin.customSounds.toast.imported));
+                            showToast({ text: t(plugin.customSounds.toast.imported) });
                         } catch (error) {
                             console.error("Error importing settings:", error);
-                            showToast(t(plugin.customSounds.toast.importError));
+                            showToast({ text: t(plugin.customSounds.toast.importError) });
                         }
                     };
 
@@ -317,7 +321,7 @@ const settings = definePluginSettings({
                 a.click();
                 URL.revokeObjectURL(url);
 
-                showToast(t(plugin.customSounds.toast.exported, { count: overrides.length }));
+                showToast({ text: t(plugin.customSounds.toast.exported, { count: overrides.length }) });
             };
 
             const filteredSoundTypes = allSoundTypes.values.filter(type =>
@@ -328,15 +332,15 @@ const settings = definePluginSettings({
             return (
                 <div>
                     <div className="pc-custom-sounds-buttons">
-                        <Button variant="secondary" onClick={triggerFileUpload}>{t(plugin.customSounds.import)}</Button>
-                        <Button variant="primary" onClick={downloadSettings}>{t(plugin.customSounds.export)}</Button>
+                        <Button variant="primary" onClick={triggerFileUpload}>{t(plugin.customSounds.import)}</Button>
+                        <Button variant="secondary" onClick={downloadSettings}>{t(plugin.customSounds.export)}</Button>
                         <Button variant="dangerPrimary" onClick={resetOverrides}>{t(plugin.customSounds.reset)}</Button>
-                        <Button variant="dangerSecondary" onClick={debugCustomSounds}>{t(plugin.customSounds.debug)}</Button>
+                        <Button variant="overlayPrimary" onClick={debugCustomSounds}>{t(plugin.customSounds.debug)}</Button>
                         <input
+                            className={cl("file-input")}
                             ref={fileInputRef}
                             type="file"
                             accept=".json"
-                            style={{ display: "none" }}
                             onChange={handleSettingsUpload}
                         />
                     </div>
@@ -368,7 +372,7 @@ const settings = definePluginSettings({
                                                 await ensureDataURICached(currentOverride.selectedFileId);
                                             } catch (error) {
                                                 console.error(`[CustomSounds] Failed to cache data URI for ${type.id}:`, error);
-                                                showToast(t(plugin.customSounds.toast.error));
+                                                showToast({ text: t(plugin.customSounds.toast.error) });
                                             }
                                         }
 

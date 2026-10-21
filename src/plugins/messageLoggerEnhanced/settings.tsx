@@ -10,9 +10,10 @@ import { definePluginSettings, Settings } from "@api/Settings";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { OptionType } from "@utils/types";
-import { Alerts, useState } from "@webpack/common";
+import { useState } from "@webpack/common";
 
-import { clearLogs, Native } from ".";
+import { Native } from ".";
+import { ClearLogsButton } from "./components/ClearLogsButton";
 import { ImageCacheDir, LogsDir } from "./components/FolderSelectInput";
 import { openLogModal } from "./components/LogsModal";
 import { blockedExts } from "./list";
@@ -214,16 +215,25 @@ export const settings = definePluginSettings({
         default: "png,jpg,jpeg,gif,webp,mp4,webm,mp3,ogg,wav",
         type: OptionType.STRING,
         onChange: (value: string) => {
-            if (!value) return;
-            const exts = value.split(",").map(ext => ext.trim().toLowerCase());
+            let processedValue = "";
 
-            const invalid = exts.filter(ext => blockedExts.includes(ext));
-            if (invalid.length > 0) {
-                console.warn("Rejected invalid file extensions:", invalid);
-                return exts.filter(ext => !blockedExts.includes(ext)).join(",");
+            if (value) {
+                const exts = value.split(",").map(ext => ext.trim().toLowerCase());
+                const invalid = exts.filter(ext => blockedExts.includes(ext));
+
+                if (invalid.length > 0) {
+                    console.warn("Rejected invalid file extensions:", invalid);
+                    processedValue = exts.filter(ext => !blockedExts.includes(ext)).join(",");
+                } else {
+                    processedValue = exts.join(",");
+                }
             }
 
-            return exts.join(",");
+            Native.updateAllowedExtensions(processedValue).catch((err: any) => {
+                console.error("Failed to sync attachment extensions natively:", err);
+            });
+
+            return processedValue;
         }
     },
     cacheLimit: {
@@ -318,7 +328,7 @@ export const settings = definePluginSettings({
                     || settings.store.imageCacheDir == null
                     || settings.store.imageCacheDir === DEFAULT_IMAGE_CACHE_DIR
                 }
-                onClick={() => Native.showItemInFolder(settings.store.imageCacheDir)}
+                onClick={() => Native.showItemInFolder()}
             >
                 {t(plugin.messageLoggerEnhanced.option.openImageCacheFolder.label)}
             </Button>
@@ -328,23 +338,7 @@ export const settings = definePluginSettings({
         label: () => t(plugin.messageLoggerEnhanced.option.clearLogs.label),
         description: () => t(plugin.messageLoggerEnhanced.option.clearLogs.description),
         type: OptionType.COMPONENT,
-        component: () =>
-            <Button
-                variant="dangerPrimary"
-                onClick={() => Alerts.show({
-                    title: t(plugin.messageLoggerEnhanced.option.clearLogs.title),
-                    body: t(plugin.messageLoggerEnhanced.option.clearLogs.body),
-                    // @ts-expect-error not typed
-                    confirmVariant: "critical-primary",
-                    confirmText: t(plugin.messageLoggerEnhanced.option.clearLogs.confirmText),
-                    cancelText: t(plugin.messageLoggerEnhanced.option.clearLogs.cancel),
-                    onConfirm: async () => {
-                        await clearLogs();
-                    },
-                })}
-            >
-                {t(plugin.messageLoggerEnhanced.option.clearLogs.label)}
-            </Button>
+        component: () => <ClearLogsButton />
     },
 
 });

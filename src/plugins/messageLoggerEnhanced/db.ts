@@ -7,7 +7,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { Logger } from "@utils/Logger";
-import { ChannelStore, Toasts } from "@webpack/common";
+import { ChannelStore, showToast } from "@webpack/common";
 import { DBSchema, IDBPDatabase, openDB } from "idb";
 
 import { LoggedMessageJSON } from "./types";
@@ -325,15 +325,45 @@ export async function deleteMessagesBulkIDB(message_ids: string[]) {
     });
 }
 
-export async function clearMessagesIDB(showToast = true) {
+export async function clearMessagesIDB(toast = true) {
     cachedMessages.clear();
-    await withDb(void 0, database => database.clear("messages"));
 
-    if (!showToast) return;
+    const current = await ensureDb();
+    current?.close();
+    database = null;
+    dbPromise = null;
 
-    Toasts.show({
-        type: Toasts.Type.MESSAGE,
-        message: t(plugin.messageLoggerEnhanced.alert.cleared),
-        id: Toasts.genId()
+    const deleted = typeof indexedDB === "undefined" ? false : await new Promise<boolean>(resolve => {
+        const req = indexedDB.deleteDatabase(DB_NAME);
+        req.onsuccess = () => resolve(true);
+        req.onerror = () => resolve(false);
+        req.onblocked = () => resolve(false);
+    });
+
+    if (!deleted) await clearMessagesChunkedIDB();
+
+    cachedMessages.clear();
+
+    if (!toast) return;
+
+    showToast({ text: t(plugin.messageLoggerEnhanced.alert.cleared) });
+}
+
+// faster than db.clear on large dbs
+async function clearMessagesChunkedIDB() {
+    const CLEAR_BATCH_SIZE = 5000;
+    await withDb(void 0, async database => {
+        while (true) {
+            const tx = database.transaction("messages", "readwrite", { durability: "relaxed" });
+            const { store } = tx;
+            const keys = (await store.getAllKeys(undefined, CLEAR_BATCH_SIZE)) as string[];
+            if (keys.length === 0) {
+                await tx.done;
+                break;
+            }
+
+            const range = IDBKeyRange.bound(keys[0], keys[keys.length - 1]);
+            await Promise.all([store.delete(range), tx.done]);
+        }
     });
 }

@@ -8,7 +8,7 @@
 import "./styles.css";
 
 import { plugin, t } from "@api/i18n";
-import { MessageOptions } from "@api/MessageEvents";
+import { MessageObject, SendMessageOptions } from "@api/MessageEvents";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -19,17 +19,7 @@ import { MessageAccessory } from "./components/MessageAccessory";
 import { openScheduleTimeModal } from "./components/ScheduleTimeModal";
 import { openViewScheduledModal } from "./components/ViewScheduledModal";
 import { FluxReactionEvent, ScheduledAttachment } from "./types";
-import {
-    cleanupAllPhantomMessages,
-    handleReactionAdd,
-    handleReactionRemove,
-    isPhantomMessage,
-    loadScheduledMessages,
-    recreatePhantomMessages,
-    resyncPhantomReactions,
-    startScheduler,
-    stopScheduler
-} from "./utils";
+import { cleanupAllPhantomMessages, handleReactionAdd, handleReactionRemove, isPhantomMessage, loadScheduledMessages, recreatePhantomMessages, resyncPhantomReactions, startScheduler, stopScheduler } from "./utils";
 
 export const settings = definePluginSettings({
     maxMessagesPerMinute: {
@@ -125,7 +115,7 @@ export default definePlugin({
         return <MessageAccessory message={props.message} />;
     },
 
-    async onBeforeMessageSend(channelId: string, messageObj: { content: string; }, options: MessageOptions) {
+    async onBeforeMessageSend(channelId: string, messageObj: MessageObject, options: SendMessageOptions) {
         if (!isScheduleModeEnabled) return;
         if (!messageObj.content.trim() && !options.uploads?.length) return;
 

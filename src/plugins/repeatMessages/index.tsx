@@ -116,6 +116,7 @@ const messageCtxPatch: NavContextMenuPatchCallback = (children, { msg }: { msg: 
             id="pc-repeat"
             label={shift ? t(plugin.repeatMessages.context.repeatAndReply) : t(plugin.repeatMessages.context.repeat)}
             icon={RepeatMessageIcon}
+            leadingAccessory={{ type: "icon", icon: RepeatMessageIcon }}
             action={async () => repeatMessage(msg)}
         />
     ));

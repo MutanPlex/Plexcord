@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { Channel, Message } from "@plexcord/discord-types";
+import { Channel } from "@plexcord/discord-types";
 import { findCssClassesLazy } from "@webpack";
 import { MessageStore, useEffect, UserStore, useState, useStateFromStores } from "@webpack/common";
 
@@ -88,9 +88,7 @@ export function Boo({ channel }: { channel: Channel; }) {
     const { id } = channel;
 
     const currentUserId = useStateFromStores([UserStore], () => UserStore.getCurrentUser()?.id);
-    const lastMessage: Message = useStateFromStores([MessageStore], () =>
-        MessageStore.getMessages(id)?.last()
-    );
+    const lastMessage = useStateFromStores([MessageStore], () => MessageStore.getMessages(id)?.last());
 
     const [state, setState] = useState({
         isCurrentUser: null as boolean | null,
@@ -171,7 +169,7 @@ export function Boo({ channel }: { channel: Channel; }) {
         }
 
         // if exempted or bot (if setting enabled), remove from ghost tracking
-        if (isExempted || (settings.store.ignoreBots && lastMessage.author.bot) || isInactive) {
+        if (isExempted || (settings.store.ignoreBots && lastMessage?.author.bot) || isInactive) {
             if (countedChannels.has(id)) {
                 countedChannels.delete(id);
                 setBooCount(getBooCount() - 1);

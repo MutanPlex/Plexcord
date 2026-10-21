@@ -13,11 +13,9 @@ import { ErrorBoundary } from "@components/index";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
-import { findByPropsLazy } from "@webpack";
 import { useEffect, UserStore, useState } from "@webpack/common";
 
 const cl = classNameFactory("pc-charCounter-");
-const SlateUtils = findByPropsLazy("getSelectedText");
 
 const settings = definePluginSettings({
     colorEffects: {
@@ -39,7 +37,7 @@ function getCounterColor(percentage: number) {
 export default definePlugin({
     name: "CharacterCounter",
     description: () => t(plugin.characterCounter.description),
-    authors: [PcDevs.creations, PcDevs.Panniku, Devs.thororen, PcDevs.MutanPlex],
+    authors: [Devs.thororen, PcDevs.creations],
     tags: ["chat", "utility"],
     settings,
     patches: [
@@ -55,8 +53,8 @@ export default definePlugin({
         {
             find: "#{intl::PREMIUM_MESSAGE_LENGTH_UPSELL_TOOLTIP}",
             replacement: {
-                match: /return \i\?\i\(\):\i\(\)(?<=#{intl::PREMIUM_MESSAGE_LENGTH_UPSELL_TOOLTIP_WITHOUT_LINK}.{0,200}?)/,
-                replace: "return null"
+                match: /(?<=\.PREMIUM_UPSELL\);)(?=.{0,50}\.PREMIUM_UPSELL_VIEWED)/,
+                replace: "return null;"
             }
         }
     ],
@@ -67,9 +65,7 @@ export default definePlugin({
 
         useEffect(() => {
             const listener = () => {
-                if (!editorRef?.current) return setSelectedCount(0);
-
-                setTimeout(() => setSelectedCount(SlateUtils.getSelectedText(editorRef.current.getSlateEditor())?.length ?? 0), 50);
+                setSelectedCount(document.getSelection()?.toString()?.length ?? 0);
             };
 
             document.addEventListener("selectionchange", listener);
@@ -77,8 +73,11 @@ export default definePlugin({
         }, []);
 
         if (!text.length) return null;
-        const premiumType = UserStore.getCurrentUser().premiumType ?? 0;
-        const charMax = premiumType === 2 ? 4000 : 2000;
+
+        const charMax = editorRef?.current?.props?.maxCharacterCount ?? (
+            UserStore.getCurrentUser().premiumType === 2 ? 4000 : 2000
+        );
+
         const color = getCounterColor((text.length / charMax) * 100);
         return (
             <div className={cl("counter")} style={{ color }}>

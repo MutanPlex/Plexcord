@@ -6,63 +6,42 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
-import { Button } from "@components/Button";
-import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
+import { RenderModalProps } from "@plexcord/discord-types";
 import { settings } from "@plugins/decor/settings";
-import { cl, DecorationModalClasses, requireAvatarDecorationModal } from "@plugins/decor/ui";
-import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
+import { DecorationModalClasses, requireAvatarDecorationModal } from "@plugins/decor/ui";
+import { ConfirmModal, openModal } from "@webpack/common";
 
 import { openCreateDecorationModal } from "./CreateDecorationModal";
 
-function GuidelinesModal(props: ModalProps) {
-    return <ModalRoot
-        {...props}
-        size={ModalSize.SMALL}
-        className={DecorationModalClasses.modal}
-    >
-        <ModalHeader separator={false} className={cl("modal-header")}>
-            <BaseText size="lg" weight="semibold" color="text-strong" tag="h1" style={{ flexGrow: 1 }}>
-                {t(plugin.decor.guidelines.hold)}
-            </BaseText>
-            <ModalCloseButton onClick={props.onClose} />
-        </ModalHeader>
-        <ModalContent
-            scrollbarType="none"
+function GuidelinesModal(props: RenderModalProps) {
+    return (
+        <ConfirmModal
+            {...props}
+            title={t(plugin.decor.guidelines.hold)}
+            confirmText={t(plugin.decor.button.continue)}
+            cancelText={t(plugin.decor.button.back)}
+            variant="primary"
+            onConfirm={() => {
+                settings.store.agreedToGuidelines = true;
+                props.onClose();
+                openCreateDecorationModal();
+            }}
         >
-            <Paragraph>
-                {t(plugin.decor.guidelines.suspended, {
-                    guidelines: <Link
-                        href="https://github.com/decor-discord/.github/blob/main/GUIDELINES.md"
-                    >
-                        {t(plugin.decor.create.guidelines)}
-                    </Link>
-                })
-                }
-            </Paragraph>
-        </ModalContent>
-        <ModalFooter className={cl("modal-footer")}>
-            <Flex style={{ gap: "4px" }}>
-                <Button
-                    onClick={() => {
-                        settings.store.agreedToGuidelines = true;
-                        props.onClose();
-                        openCreateDecorationModal();
-                    }}
-                >
-                    {t(plugin.decor.button.continue)}
-                </Button>
-                <Button
-                    onClick={props.onClose}
-                    variant="none"
-                >
-                    {t(plugin.decor.button.back)}
-                </Button>
-            </Flex>
-        </ModalFooter>
-    </ModalRoot>;
+            <div className={DecorationModalClasses.modal}>
+                <Paragraph>
+                    {t(plugin.decor.guidelines.suspended, {
+                        guidelines: <Link
+                            href="https://github.com/decor-discord/.github/blob/main/GUIDELINES.md"
+                        >
+                            {t(plugin.decor.create.guidelines)}
+                        </Link>
+                    })}
+                </Paragraph>
+            </div>
+        </ConfirmModal>
+    );
 }
 
 export const openGuidelinesModal = () =>

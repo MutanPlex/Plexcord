@@ -46,11 +46,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         switches: {
             useQuickCss: {
                 label: "Увімкнути власні CSS",
-                description: "Завантажувати власні CSS з редактора QuickCSS. Це дозволяє налаштовувати вигляд Discord за допомогою ваших власних стилів."
+                description: "Застосовує налаштований вами QuickCSS"
             },
             enableReactDevtools: {
                 label: "Увімкнути інструменти розробника React",
-                description: "Увімкнути розширення React Developer Tools для відлагодження компонентів React у Discord. Корисно для розробки плагінів."
+                description: "Переважно корисно розробникам плагінів. Ігноруйте, якщо не знаєте, що це"
             },
             mainWindowFrameless: {
                 label: "Вимкнути рамку головного вікна",
@@ -60,7 +60,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Вимкнути рамку вікна",
                 description: "Прибрати рідну рамку вікна для чистішого вигляду. Ви все одно зможете переміщувати вікно, перетягуючи область рядка заголовка."
             },
-            winNativeTitleBar: {
+            nativeTitleBar: {
                 label: "Використовувати рідний рядок заголовка Windows замість кастомного Discord",
                 description: "Замінити кастомний рядок заголовка Discord на стандартний рядок заголовка Windows. Це може покращити сумісність із деякими інструментами керування вікнами."
             },
@@ -76,7 +76,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             disableMinSize: {
                 label: "Вимкнути мінімальний розмір вікна",
-                description: "Дозволити змінювати розмір вікна Discord до меншого, ніж його стандартний мінімальний розмір. Корисно для тайлових менеджерів вікон або маленьких екранів."
+                description: "Дозволяє змінювати розмір вікна як завгодно, навіть менше за мінімальний розмір Discord"
             }
         },
         quickActions: {
@@ -193,6 +193,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignore: "Ігнорувати - зовсім не показувати сповіщення"
             },
         },
+        windowsMaterial: {
+            title: "Матеріал фону Windows (потрібен перезапуск)",
+            description: "Ефекти прозорого фону Windows. Потрібна тема з підтримкою прозорості, інакше нічого не зміниться. Після зміни цього параметра потрібен перезапуск.",
+            material: {
+                none: "Немає",
+                mica: "Mica (використовує тему системи та шпалери робочого столу для фарбування фону)",
+                tabbed: "Tabbed (варіант Mica з сильнішим відтінком фону)",
+                acrylic: "Acrylic (розмиває вікно позаду Discord для напівпрозорого фону)"
+            }
+        },
         macVibrancy: {
             title: "Стиль вібрації вікна (потрібен перезапуск)",
             description: "Налаштуйте ефект вібрації вікна macOS. Це керує стилем розмиття та прозорості вікна Discord. Зміни наберуть чинності після перезапуску.",
@@ -212,6 +222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 fullscreenUI: "Повноекранний інтерфейс (прозорий, але трохи розмитий)",
                 hud: "HUD (найбільш прозорий)"
             }
+        },
+        tabs: {
+            renderFailed: "Не вдалося відобразити вкладку {{tab}}. Якщо проблема не зникне, спробуйте перевстановити через інсталятор!"
         }
     },
 
@@ -270,7 +283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             discordDesktop: "Додаток Discord Desktop",
             plextron: "Додаток Plextron",
             web: "Додаток Plextron та вебверсія Discord",
-            dev: "Версія для розробників Plexcord"
+            dev: "Версія для розробників Plexcord",
+            browser: "Версія Plexcord для веббраузера"
         },
         search: {
             looking: "Ви шукаєте",
@@ -307,7 +321,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userplugins: "Показати плагіни користувача",
                 api: "Показати API плагіни",
                 type: "Фільтр за типом",
-                tags: "Фільтр за тегами"
+                tags: "Фільтр за тегами",
+                favorites: "Показати обране"
             }
         },
         pluginModal: {
@@ -320,7 +335,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             enabledUser: "Увімкнені плагіни користувача",
             totalUser: "Всього плагінів користувача",
             info: "Переглянути більше інфо",
-            source: "Переглянути вихідний код"
+            source: "Переглянути вихідний код",
+            favorite: "Додати до обраного - закріплює плагін угорі списку",
+            unfavorite: "Прибрати з обраного"
         },
         metadata: {
             api: {
@@ -342,7 +359,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     userSettings: "Виправляє UserSettings Discord, щоб відкрити їхню групу та назву.",
                     audioPlayer: "API для відтворення внутрішніх аудіофайлів Discord або зовнішніх аудіопосилань.",
                     userArea: "API для додавання кнопок на панель області користувача.",
-                    profileCollections: "API для додавання колекцій до панелі профілю користувача, як у колекції ігор Discord."
+                    profileCollections: "API для додавання колекцій до панелі профілю користувача, як у колекції ігор Discord.",
+                    profileSections: "API для додавання розділів поруч із блоком «Учасник з» на панелях профілю користувача.",
+                    headerBar: "API для додавання кнопок у заголовок.",
+                    surfaceClasses: "API для додавання семантичних data-атрибутів плагінів та обмежених props до стабільних областей інтерфейсу Discord."
                 },
                 chatButtons: {
                     context: {
@@ -389,7 +409,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             button: "Тут з'являться кнопки увімкнених плагінів."
-        }
+        },
+        invalidInput: "Неправильне введення",
+        loading: "Завантаження...",
+        authorPrefix: "від"
     },
 
     patchHelper: {
@@ -474,7 +497,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             plugins: "Експортувати плагін",
             css: "Експортувати QuickCSS",
             datastore: "Експортувати DataStores"
-        }
+        },
+        backupFileType: "Резервна копія налаштувань Plexcord"
     },
 
     cloud: {
@@ -640,7 +664,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         newPlugins: "{{count}} нових плагін{{s}}",
         following: "Наступні плагіни були додані в останніх оновленнях:",
-        more: "+ще {{count}} плагінів"
+        more: "+ще {{count}} плагінів",
+        error: {
+            retrieveRepo: "Не вдалося отримати інформацію про репозиторій",
+            fetchRepo: "Не вдалося отримати дані з репозиторію",
+            connectRepo: "Не вдалося підключитися до репозиторію. Перевірте підключення до інтернету."
+        }
     },
 
     csp: {
@@ -717,7 +746,8 @@ const translations: MatchStructure<typeof enTranslations> = {
         unknown: {
             title: "Невідомо",
             author: "Невідомий автор",
-            theme: "Тема Discord"
+            theme: "Тема Discord",
+            description: "Опис відсутній."
         },
         required: "Наступні плагіни потрібні, але не увімкнені: ",
         homepage: "Домашня сторінка",
@@ -778,6 +808,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             failed: {
                 download: "Не вдалося завантажити тему"
             }
+        },
+        openInFolder: "Відкрити в теці",
+        fallback: {
+            author: "Невідомий автор",
+            description: "Тема Discord."
         }
     },
 
@@ -834,6 +869,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         repo: "Репозиторій",
         repoDescription: "Це репозиторій GitHub, звідки Plexcord отримує оновлення.",
         loading: "Завантаження...",
+        unknownAuthor: "Невідомий автор"
     },
 
     components: {
@@ -849,7 +885,29 @@ const translations: MatchStructure<typeof enTranslations> = {
             message: "Редактор QuickCSS все ще відкритий у фоновому режимі.",
             detail: "Ви все одно хочете закрити Discord? Це також закриє редактор QuickCSS.",
             cancel: "Скасувати",
-            close: "Все одно закрити"
+            close: "Все одно закрити",
+            windowTitle: "Редактор QuickCSS Plexcord"
+        },
+        messagePopover: {
+            scrollLeft: "Прокрутити ліворуч",
+            scrollRight: "Прокрутити праворуч"
+        },
+        notices: {
+            error: "Помилка під час показу сповіщення"
+        },
+        tray: {
+            aboutPlexcord: "Про Plexcord",
+            updatePlexcord: "Оновити Plexcord",
+            noUpdateTitle: "Оновлень немає",
+            noUpdateBody: "Ви вже використовуєте останню версію Plexcord.",
+            updateFailedTitle: "Помилка оновлення",
+            updateFailedBody: "Не вдалося застосувати оновлення Plexcord.",
+            updateSuccessTitle: "Оновлення виконано",
+            updateSuccessBody: "Plexcord перезапускається для застосування оновлення.",
+            updateErrorTitle: "Помилка оновлення",
+            updateErrorBody: "Під час оновлення Plexcord сталася помилка.\n\n{{error}}",
+            openSettingsFolder: "Відкрити теку налаштувань",
+            openThemesFolder: "Відкрити теку тем"
         }
     },
 
@@ -918,7 +976,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             seconds: "секунди",
             ago: "тому",
             s: ""
-        }
+        },
+        detectLanguage: "Визначити мову"
     },
 
     plugin: {
@@ -945,6 +1004,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             utility: "Утиліти",
             voice: "Голос"
         },
+        concatenatedComponentExtractor: {
+            name: "ConcatenatedComponentExtractor",
+            description: "Вилучення компонентів, об'єднаних збирачем (bundler)"
+        },
+        concatenatedModules: {
+            name: "ConcatenatedModules",
+            description: "Вилучення модулів, об'єднаних збирачем (bundler)"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Вимкнути відстеження Discord (аналітику/'science'), метрики та звіти про збої Sentry",
@@ -952,6 +1019,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disableAnalytics: {
                     label: "Вимкнути аналітику",
                     description: "Вимкнути відстеження Discord (аналітику/'science'), метрики та звіти про збої Sentry"
+                },
+                disableStackDumping: {
+                    description: "Виводити нативне трасування стека в консоль під час збою Discord. Потрібен повний перезапуск."
                 }
             }
         },
@@ -966,6 +1036,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsLocation: {
                     label: "Розташування налаштувань",
                     description: "Визначає, де буде розташований розділ налаштувань Plexcord."
+                },
+                includePlexcordInfoWhenCopying: {
+                    label: "Включати інформацію про Plexcord під час копіювання",
+                    description: "Також копіювати інформацію про Plexcord (Plexcord, Electron, Chromium) при натисканні на інформацію про версію в лівому нижньому кутку сторінки Налаштувань"
                 }
             }
         },
@@ -983,6 +1057,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Зачекайте!",
                     body: "Ви використовуєте застарілу версію Plexcord! Скоріш за все, вашу проблему вже виправлено.",
                     footer: "Будь ласка, спочатку оновіться, перш ніж звертатися за підтримкою!",
+                    dismiss: "Якщо ви знаєте, що робите, або не можете оновитися, можете закрити це повідомлення.",
                     button: {
                         cancel: "Переглянути оновлення",
                         confirm: "Оновити та перезапустити",
@@ -1181,7 +1256,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Метод анонімізації",
                     random: "Випадкові символи",
                     consistent: "Постійний (Consistent)",
-                    timestamp: "Мітка часу (Timestamp)"
+                    timestamp: "Мітка часу (Timestamp)",
+                    date: "Дата"
                 },
                 randomisedLength: {
                     label: "Довжина випадкової назви",
@@ -1190,6 +1266,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 consistent: {
                     label: "Постійний секрет",
                     description: "Секретний ключ для постійної анонімізації"
+                },
+                dateFormat: {
+                    description: "Формат дати (підтримуються YYYY, MM, DD, HH, mm, ss, SSS)",
+                    label: "Формат дати"
                 }
             },
             using: {
@@ -1201,76 +1281,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toggle: "Перемкнути спойлер для ваших файлів (увімкнено за замовчуванням)",
                 enabled: "Спойлер увімкнено!",
                 disabled: "Спойлер вимкнено!"
-            }
-        },
-        appleMusic: {
-            name: "AppleMusicRichPresence",
-            description: "Discord Rich Presence для вашої Apple Music!",
-            about: "Для рядків форматування активності ви можете використовувати спеціальні теги, щоб включити дані треку! {{name}} замінюється назвою треку; {{artist}} — ім'ям виконавця(ів); а {{album}} — назвою альбому.",
-            button: {
-                listen: "Слухати в Apple Music",
-                songLink: "Переглянути на SongLink"
-            },
-            option: {
-                activityType: {
-                    label: "Тип активності",
-                    description: "Який тип активності відображати",
-                    listening: "Слухає",
-                    playing: "Грає в"
-                },
-                statusDisplayType: {
-                    label: "Тип відображення статусу",
-                    description: "Показувати назву треку / виконавця у списку учасників",
-                    off: "Не показувати (відображати загальне повідомлення)",
-                    artist: "Показувати ім'я виконавця",
-                    track: "Показувати назву треку"
-                },
-                refreshInterval: {
-                    label: "Інтервал оновлення",
-                    description: "Інтервал між оновленнями активності (у секундах)"
-                },
-                enableTimestamps: {
-                    label: "Увімкнути часові мітки",
-                    description: "Чи вмикати відображення часу відтворення"
-                },
-                enableButtons: {
-                    label: "Увімкнути кнопки",
-                    description: "Чи вмикати кнопки в активності"
-                },
-                nameString: {
-                    label: "Рядок назви",
-                    description: "Рядок форматування назви активності"
-                },
-                detailsString: {
-                    label: "Рядок подробиць",
-                    description: "Рядок форматування подробиць активності"
-                },
-                stateString: {
-                    label: "Рядок стану",
-                    description: "Рядок форматування стану активності"
-                },
-                largeImageType: {
-                    label: "Тип великого зображення",
-                    description: "Тип великого зображення в активах активності",
-                    album: "Обкладинка альбому",
-                    artist: "Фото виконавця",
-                    disabled: "Вимкнено"
-                },
-                largeTextString: {
-                    label: "Рядок великого тексту",
-                    description: "Форматування тексту для великого зображення"
-                },
-                smallImageType: {
-                    label: "Тип малого зображення",
-                    description: "Тип малого зображення в активах активності",
-                    album: "Логотип Apple Music",
-                    artist: "Фото виконавця",
-                    disabled: "Вимкнено"
-                },
-                smallTextString: {
-                    label: "Рядок малого тексту",
-                    description: "Форматування тексту для малого зображення"
-                }
             }
         },
         arRpc: {
@@ -1373,6 +1383,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     left: "Зліва",
                     right: "Справа"
                 }
+            },
+            text: {
+                smallText: "Малий текст",
+                largeText: "Великий текст"
             }
         },
         betterAudioPlayer: {
@@ -1405,7 +1419,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             toast: {
-                invalidColorFormat: "Неправильний формат кольору для {{settingKey}}, переконайтеся, що він у форматі 'R, G, B' або '#RRGGBB'"
+                invalidColorFormat: "Неправильний формат кольору для {{settingKey}}, переконайтеся, що він у форматі 'R, G, B' або '#RRGGBB'",
+                invalidColorFormatFor: "Неправильний формат кольору для {{key}}, використовуйте \"R, G, B\" або \"#RRGGBB\""
             }
         },
         betterBanReasons: {
@@ -1423,7 +1438,20 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             title: "Причини",
             placeholder: "Причина",
-            add: "Додати іншу причину"
+            add: "Додати іншу причину",
+            duration: {
+                discordDefault: "Типово для Discord",
+                none: "Нічого не видаляти",
+                hour1: "Остання година",
+                hours6: "Останні 6 годин",
+                hours12: "Останні 12 годин",
+                hours24: "Останні 24 години",
+                days3: "Останні 3 дні",
+                days7: "Останні 7 днів"
+            },
+            text: {
+                autoDeleteDuration: "Період автовидалення повідомлень"
+            }
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
@@ -1485,6 +1513,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Примусове відкриття",
                     description: "Примусово відкривати папку при переході до сервера з цієї папки"
                 },
+                enableNestedFolders: {
+                    label: "Увімкнути вкладені папки",
+                    description: "Дозволити вкладати папки в інші папки шляхом перетягування"
+                },
                 keepIcons: {
                     label: "Зберігати іконки",
                     description: "Продовжувати показувати іконки серверів у головній панелі, коли папку відкрито у BetterFolders"
@@ -1518,6 +1550,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             render: {
                 tip: "Це запрошення закінчиться {{time}}",
                 header: "{{name}} запросив вас до {{server}}",
+                headerSelf: "Ви надіслали запрошення приєднатися до {{server}}",
                 never: "не закінчується"
             }
         },
@@ -1541,7 +1574,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterRoleContext: {
             name: "BetterRoleContext",
-            description: "Додає опції копіювання кольору ролі, редагування ролі або перегляду іконки ролі при натисканні правою кнопкою миші на роль у профілі",
+            description: "Додає опції копіювання кольору ролі / редагування ролі / перегляду значка ролі під час натискання ПКМ на ролі в профілі користувача або в списку учасників",
             option: {
                 roleIconFileFormat: {
                     label: "Формат файлу іконки ролі",
@@ -1551,7 +1584,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 copyColor: "Копіювати колір ролі",
                 editRole: "Редагувати роль",
-                viewIcon: "Переглянути іконку ролі"
+                viewIcon: "Переглянути іконку ролі",
+                viewMembers: "Переглянути учасників ролі"
+            },
+            text: {
+                roleActions: "Дії з роллю"
             }
         },
         betterRoleDot: {
@@ -1627,6 +1664,11 @@ const translations: MatchStructure<typeof enTranslations> = {
         blockKeywords: {
             name: "BlockKeywords",
             description: "Блокує повідомлення, що містять вказані ключові слова, так, ніби відправник був заблокований.",
+            regexHelper: {
+                title: "Помічник Regex",
+                placeholder: "Текст для перевірки...",
+                noPatterns: "Шаблони не налаштовано"
+            },
             option: {
                 blockedWords: {
                     label: "Заблоковані слова",
@@ -1635,6 +1677,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 useRegex: {
                     label: "Використовувати Regex",
                     description: "Використовувати регулярні вирази для перевірки вмісту повідомлень (для досвідчених)"
+                },
+                regexHelper: {
+                    label: "Помічник Regex",
+                    description: "Перевірте свої регулярні вирази на прикладі тексту"
                 },
                 caseSensitive: {
                     label: "Враховувати регістр",
@@ -1778,6 +1824,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 loading: "Завантаження...",
                 save: "Зберегти",
                 edit: "Редагувати"
+            },
+            text: {
+                unknownUser: "Невідомий користувач"
             }
         },
         callTimer: {
@@ -2067,12 +2116,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 plusPulse: "Пульсація кнопки 'Плюс'",
                 mentionGlow: "Сяйво значка згадки",
                 compactExpand: "Розширення в компактному режимі",
-                selectedBorder: "Синя межа вибраної вкладки",
+                selectedBorder: "Акцентна рамка вибраної вкладки",
                 selectedBackground: "Колір фону вибраної вкладки",
                 tabShadows: "Ефекти тіні вкладок",
                 tabRepositioning: "Переміщення вкладок (плавна зміна позиції)",
                 resizeHandle: "Згасання повзунка зміни розміру",
-                questActivate: "Градієнт активного квесту"
+                questActivate: "Градієнт активних завдань"
             },
             bookmark: {
                 label: "Закладка",
@@ -2110,7 +2159,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 tab: "Меню вкладок ChannelTabs",
                 compact: "Компактний",
                 bookmarkBar: "Панель закладок",
-                openAll: "Відкрити всі в закладках",
+                openAll: "Відкрити всі закладки",
                 openNew: "Відкрити в новій вкладці",
                 folderMenu: "Меню папки закладок",
                 close: {
@@ -2190,6 +2239,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 tabWidthScale: {
                     label: "Масштаб ширини вкладок",
                     description: "Масштаб ширини (у відсотках) — можна регулювати перетягуванням країв"
+                },
+                tabHeightScale: {
+                    label: "Масштаб висоти вкладок",
+                    description: "Масштаб висоти вкладок (у відсотках)."
                 },
                 renderAllTabs: {
                     label: "Рендерити всі вкладки",
@@ -2398,11 +2451,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     restore: "Не вдалося відновити вкладки",
                     saved: "Не вдалося завантажити збережені вкладки"
                 }
+            },
+            text: {
+                folder: "Тека"
             }
         },
         characterCounter: {
             name: "CharacterCounter",
-            description: "Відображає лічильник символів у полі введення повідомлення",
+            description: "Додає лічильник символів у поле введення чату",
             option: {
                 colorEffects: {
                     label: "Кольорові ефекти",
@@ -2416,7 +2472,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         cleanChannelName: {
             name: "CleanChannelName",
-            description: "Видаляє емодзі та декоративні символи з назв каналів"
+            description: "Прибирає емодзі й прикраси з назв каналів. Під час редагування каналу повертає початкову назву.",
+            option: {
+                ignoredChannels: {
+                    description: "Список ID каналів через кому, які слід залишити без змін.",
+                    label: "Ігноровані канали"
+                }
+            },
+            text: {
+                keepOriginalName: "Зберегти початкову назву"
+            }
         },
         clearURLs: {
             name: "ClearURLs",
@@ -2428,7 +2493,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 loading: "Завантаження учасників...",
                 noMembers: "Учасників не знайдено.",
-                unknown: "Невідома роль"
+                unknown: "Невідома роль",
+                andMore: "і ще {{count}}"
             }
         },
         clientSideBlock: {
@@ -2494,6 +2560,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     disable: "Вимкнути тему Nitro",
                     reset: "Скинути колір теми"
                 }
+            },
+            text: {
+                dark: "Темна",
+                light: "Світла"
             }
         },
         clipsEnhancements: {
@@ -2508,22 +2578,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     only: "Лише коли назва гри збігається",
                     never: "Ніколи"
                 },
-                enableScreenshotKeybind: {
-                    label: "Гаряча клавіша скріншота",
-                    description: "Увімкнути комбінацію для створення скріншотів"
-                },
-                enableVoiceOnlyClips: {
-                    label: "Кліпи лише з аудіо",
-                    description: "Дозволити запис лише звуку без відео"
-                },
-                enableAdvancedSignals: {
-                    label: "Розширені сигнали",
-                    description: "Увімкнути автоматичні тригери для створення кліпів"
-                },
-                ignorePlatformRestriction: {
-                    label: "Ігнорувати обмеження платформи",
-                    description: "Дозволити запис кліпів там, де це обмежено (може призвести до помилок збереження)"
-                },
                 clipsLink: {
                     label: "Посилання на кліпи",
                     link: "Змінюйте FPS та тривалість у налаштуваннях кліпів!"
@@ -2536,7 +2590,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         commandPalette: {
             name: "CommandPalette",
-            description: "Дозволяє керувати інтерфейсом та виконувати дії за допомогою клавіатури.",
+            description: "Палітра команд у стилі Raycast для виконання дій будь-де в Discord",
             action: {
                 command: {
                     label: "Виконати команду",
@@ -2990,7 +3044,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                             label: "Помилка виконання {{pluginName}}: {{actionLabel}}."
                         }
                     }
-                }
+                },
+                commandDeleted: "Команду видалено.",
+                statusSetToLabel: "Статус встановлено: {{label}}.",
+                themeSetToLabel: "Тему встановлено: {{label}}.",
+                noSettingsPageWas: "Сторінку налаштувань не вказано.",
+                unableToOpenLabel: "Не вдалося відкрити {{label_that_settings_page}}.",
+                failedToStartDependencies: "Не вдалося запустити залежності: {{join}}",
+                messageSentToUsername: "Повідомлення надіслано {{username}}.",
+                enabledRestart: "{{name}} увімкнено. Перезапустіть для застосування.",
+                disabledRestart: "{{name}} вимкнено. Перезапустіть для застосування.",
+                enabled: "{{name}} увімкнено.",
+                disabled: "{{name}} вимкнено.",
+                errorStarting: "Помилка під час запуску {{name}}.",
+                errorStopping: "Помилка під час зупинки {{name}}."
             },
             display: {
                 channel: {
@@ -3026,6 +3093,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 customCommands: {
                     label: "Власні команди",
                     description: "Керування вашими запитами в палітрі"
+                },
+                closeAfterExecute: {
+                    description: "Закривати палітру після виконання команди.",
+                    label: "Закривати після виконання"
                 }
             },
             template: {
@@ -3045,7 +3116,121 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Макрос",
                     description: "Запустити послідовність дій"
                 }
-            }
+            },
+            text: {
+                insertTextInChat: "Вставити текст у чат",
+                name: "Name",
+                commandName: "Назва команди",
+                settingsPage: "Сторінка налаштувань",
+                searchSettingsPages: "Пошук сторінок налаштувань...",
+                text: "Текст",
+                textToInsertInto: "Текст для вставлення в поле чату",
+                editCommand: "Редагувати команду",
+                deleteCommand: "Видалити команду",
+                createCustomCommand: "Створити власну команду",
+                light: "Світла",
+                ash: "Попеляста",
+                dark: "Темна",
+                onyx: "Онікс",
+                toggleMute: "Перемкнути мікрофон",
+                toggleDeafen: "Перемкнути звук",
+                setStatus: "Встановити статус",
+                searchStatuses: "Пошук статусів...",
+                setLabel: "Встановити {{label}}",
+                toggleTheme: "Перемкнути тему",
+                openServer: "Відкрити сервер",
+                openChannel: "Відкрити канал",
+                openDm: "Відкрити ОП",
+                goHome: "На головну",
+                goToServer: "Перейти на сервер",
+                searchServers: "Пошук серверів...",
+                goToChannel: "Перейти до каналу",
+                searchChannels: "Пошук каналів...",
+                searchFriends: "Пошук друзів...",
+                myAccount: "Мій обліковий запис",
+                profiles: "Профілі",
+                dataPrivacy: "Дані та конфіденційність",
+                devices: "Пристрої",
+                connections: "Інтеграції",
+                appearance: "Вигляд",
+                accessibility: "Спеціальні можливості",
+                voiceVideo: "Голос і відео",
+                chat: "Чат",
+                textImages: "Текст і зображення",
+                notifications: "Сповіщення",
+                keybinds: "Гарячі клавіші",
+                authorizedApps: "Авторизовані застосунки",
+                familyCenter: "Сімейний центр",
+                advanced: "Розширені",
+                plexcord: "Plexcord",
+                plexcordPlugins: "Плагіни Plexcord",
+                plexcordThemes: "Теми Plexcord",
+                plexcordUpdater: "Оновлення Plexcord",
+                plexcordChangelog: "Журнал змін Plexcord",
+                openQuickcss: "Відкрити QuickCSS",
+                openUpdater: "Відкрити оновлення",
+                openChangelog: "Відкрити журнал змін",
+                restartDiscord: "Перезапустити Discord",
+                managePlugins: "Керування плагінами",
+                searchPlugins: "Пошук плагінів...",
+                sendDm: "Надіслати ОП",
+                recipient: "Отримувач",
+                message: "Повідомлення",
+                messageContent: "Текст повідомлення",
+                openPaletteHotkey: "Гаряча клавіша відкриття палітри",
+                actions: "Дії",
+                preview: "Попередній перегляд",
+                openCommand: "Відкрити команду",
+                copyAnswer: "Копіювати відповідь",
+                openDetails: "Відкрити подробиці",
+                calculator: "Калькулятор",
+                expression: "Вираз",
+                result: "Результат",
+                copyExpression: "Копіювати вираз",
+                pinned: "Закріплені",
+                suggestions: "Пропозиції",
+                setAlias: "Задати псевдонім",
+                aliasForLabel: "Псевдонім для {{label}}",
+                leaveEmptyToRemove: "Залиште порожнім, щоб видалити",
+                command: "Команда",
+                noResults: "Немає результатів",
+                addFile: "Додати файл",
+                saveCommand: "Зберегти команду",
+                createCommand: "Створити команду",
+                nameRequired: "Ім'я обов'язкове.",
+                enterValidUrl: "Введіть правильний URL.",
+                pickSettingsPage: "Виберіть сторінку налаштувань із підказок.",
+                textRequired: "Текст обов'язковий.",
+                commandSaved: "Команду збережено.",
+                commandCreated: "Команду створено.",
+                editCustomCommand: "Редагувати власну команду",
+                disablePlugin: "Вимкнути плагін",
+                enablePlugin: "Увімкнути плагін",
+                pickRecipient: "Виберіть одержувача з підказок.",
+                addMessageOrFile: "Додайте повідомлення або файл.",
+                pressKeys: "Натисніть клавіші...",
+                answerCopied: "Відповідь скопійовано в буфер обміну.",
+                calculationCopied: "Обчислення скопійовано в буфер обміну.",
+                unpinCommand: "Відкріпити команду",
+                pinCommand: "Закріпити команду",
+                saveAlias: "Зберегти псевдонім",
+                changeHotkey: "Змінити комбінацію клавіш",
+                recordHotkey: "Записати комбінацію клавіш",
+                pressKeyCombo: "Натисніть комбінацію клавіш, Backspace — очистити, Esc — скасувати",
+                searchIn: "Пошук у {{title}}...",
+                searchCommands: "Пошук команд...",
+                somethingWentWrong: "Щось пішло не так.",
+                remove: "Вилучити",
+                enabled: "Увімкнено",
+                disabled: "Вимкнено",
+                sectionNavigation: "Навігація",
+                sectionCustom: "Користувацькі",
+                sectionPlugins: "Плагіни",
+                sectionMessaging: "Повідомлення",
+                current: "Поточний",
+                submit: "Надіслати"
+            },
+            description2: "Палітра команд у стилі Raycast для виконання дій будь-де в Discord"
         },
         consoleJanitor: {
             name: "ConsoleJanitor",
@@ -3115,11 +3300,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         copyProfileColors: {
             name: "CopyProfileColors",
             description: "Плагін для копіювання кольорів градієнта профілю користувачів у буфер обміну.",
-            copy: "Копіювати кольори профілю",
+            copy: "Копіювати кольори профілю сервера",
             toast: {
                 noColor: "Кольорів профілю не знайдено!",
                 copied: "Кольори профілю скопійовано!",
                 error: "Помилка при копіюванні кольорів!"
+            },
+            text: {
+                formatted: "Основний колір #{{primary}}, Додатковий колір #{{secondary}}"
             }
         },
         copyStatusUrls: {
@@ -3134,8 +3322,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "CopyStickerLinks",
             description: "Додає можливість копіювати та відкривати посилання на стікери",
             context: {
-                copy: "Копіювати посилання",
-                open: "Відкрити посилання"
+                copy: "Копіювати посилання на наліпку",
+                open: "Відкрити посилання на наліпку"
             },
             toast: {
                 success: "Посилання скопійовано!"
@@ -3271,6 +3459,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unset: "Скинути",
                 set: "Встановити нову іконку",
                 hover: "Можливо, знадобиться навести курсор на папку після збереження, щоб вона оновилася."
+            },
+            context: {
+                changeIcon: "Змінити значок"
             }
         },
         customIdle: {
@@ -3302,7 +3493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             error: {
                 appIdInvalid: "App ID має бути числом.",
                 notice: "Увага",
-                sharing: "Передача активності вимкнена, інші не побачать ваш статус!",
+                sharing: "Показ активності не ввімкнено, тож інші не бачитимуть ваш власний Rich Presence!",
                 enable: "Увімкнути",
                 validStream: "Посилання на стрім має бути коректним URL.",
                 mustBeURL: "Має бути коректним посиланням.",
@@ -3319,7 +3510,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 appId: {
-                    label: "App ID",
+                    label: "ID застосунку",
                     description: "ID додатка (обов'язково)"
                 },
                 appName: {
@@ -3418,7 +3609,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 buttonTwoURL: {
                     label: "URL кнопки 2",
                     description: "Посилання другої кнопки"
+                },
+                enablePresence: {
+                    description: "Чи показувати статус",
+                    label: "Увімкнути статус"
                 }
+            },
+            toast: {
+                savedPresetName: "Пресет {{name}} збережено.",
+                loadedPresetName: "Пресет {{name}} завантажено.",
+                deletedPresetSelectedpreset: "Пресет {{selectedPreset}} видалено."
+            },
+            text: {
+                presetName: "Назва пресету",
+                selectAPreset: "Виберіть пресет",
+                streamLinkTwitchOr: "Посилання на трансляцію (Twitch або YouTube, лише якщо тип активності — Трансляція)",
+                presets: "Пресети",
+                save: "Зберегти",
+                load: "Завантажити",
+                delete: "Видалити",
+                noSavedPresetsYet: "Збережених пресетів поки немає.",
+                showCustomRpc: "Показати власний RPC",
+                customRpcDisabled: "Власний RPC вимкнено",
+                theEnablePresenceSetting: "Параметр «Увімкнути статус» вимкнено, тож ваш статус не показуватиметься. Якщо це ненавмисно, увімкніть його нижче.",
+                activitySharingDisabled: "Показ активності вимкнено",
+                discordDeveloperPortal: "Портал розробників Discord",
+                imgur: "Imgur",
+                enableActivitySharing: "Увімкнути показ активності"
             }
         },
         customSounds: {
@@ -3460,7 +3677,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 default: "Стандартно",
                 custom: "Власний",
-                select: "Виберіть файл..."
+                select: "Виберіть файл...",
+                overrides: {
+                    label: "Перевизначення"
+                },
+                soundpack: {
+                    label: "Набір звуків",
+                    description: "Набір звуків, який використовуватиметься замість вибраного в Discord.",
+                    default: "Типовий Discord"
+                }
             },
             type: {
                 activityEnd: "Кінець активності",
@@ -3485,7 +3710,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hangStatusSelect: "Вибір статусу",
                 highfiveClap: "Дати п'ять (плескіт)",
                 highfiveWhistle: "Дати п'ять (свист)",
-                humanMan: "Human Man",
+                humanMan: "Людина",
                 lofiMessage: "LoFi повідомлення",
                 mention1: "Згадка 1 (@role)",
                 mention2: "Згадка 2 (@everyone)",
@@ -3502,7 +3727,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 pttStart: "PTT: Початок",
                 pttStop: "PTT: Кінець",
                 reconnect: "Перепідключення",
-                robotMan: "Robot Man",
+                robotMan: "Робот",
                 stageWaiting: "Трибуна: Очікування",
                 streamEnded: "Стрім закінчено",
                 streamStarted: "Стрім розпочато",
@@ -3534,6 +3759,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 calendar: "вмикає динамічні дати, такі як",
                 today: "Сьогодні",
                 yesterday: "Вчора",
+                or: "або",
                 relative: "дає відносний час, наприклад",
                 relativeTime: "4 години тому",
                 preview: "Попередній перегляд",
@@ -3558,7 +3784,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Формат часу при наведенні курсору"
                 },
                 ariaLabelFormat: {
-                    label: "Aria label",
+                    label: "Мітка ARIA",
                     description: "Формат часу для систем доступності (screen readers)"
                 },
                 sameDayFormat: {
@@ -3627,6 +3853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 dearrowed: "Це відео оброблено DeArrow; натисніть, щоб відновити оригінал",
                 dearrow: "Натисніть для DeArrow"
+            },
+            text: {
+                toggleDearrow: "Перемкнути Dearrow"
             }
         },
         declutter: {
@@ -3635,6 +3864,12 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 userProfileHeader: {
                     label: "Профіль користувача"
+                },
+                removeAvatarDecoration: {
+                    label: "Видалити прикрасу аватара",
+                    description: "Прибрати прикраси аватарів. Вимикається, якщо ввімкнено Decor.",
+                    alertBody: "Видалення прикрас аватара вимкнено для запобігання конфліктам із плагіном Decor.",
+                    ok: "ОК"
                 },
                 removeNameplate: {
                     label: "Видалити табличку (Nameplate)",
@@ -3693,7 +3928,27 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeButtonTooltips: {
                     label: "Видалити підказки кнопок",
                     description: "Прибрати спливаючі текстові підказки над кнопками."
+                },
+                removeProfileFrame: {
+                    description: "Прибирає рамки профілю.",
+                    label: "Прибрати рамку профілю"
+                },
+                removeDisplayNameStyles: {
+                    description: "Прибирає анімовані/стилізовані імена у списку учасників.",
+                    label: "Прибрати стилі імен"
+                },
+                removeLibraryAboveDms: {
+                    description: "Прибирає бібліотеку над списком ОП.",
+                    label: "Прибрати бібліотеку над ОП"
+                },
+                removeFamilyCenterAboveDms: {
+                    description: "Прибирає сімейний центр над списком ОП.",
+                    label: "Прибрати сімейний центр над ОП"
                 }
+            },
+            text: {
+                discordAlreadyHasA: "У Discord уже є вбудований параметр стилю імені користувача в",
+                accessibilitySettings: "налаштуваннях спеціальних можливостей."
             }
         },
         decodeBase64: {
@@ -3800,6 +4055,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hold: "Зачекайте",
                 suspended: "Надсилаючи роботу, ви погоджуєтесь із {{guidelines}}. Ігнорування правил може призвести до блокування можливості створювати декорації.",
                 guidelines: "правилами"
+            },
+            toast: {
+                failedToAuthorizeMessage: "Не вдалося авторизуватися: {{message}}"
+            },
+            text: {
+                removeDecoration: "Вилучити прикрасу Decor",
+                decoration: "Прикраса Decor",
+                none: "Немає",
+                decorationFile: "Файл прикраси"
             }
         },
         demonstration: {
@@ -3861,6 +4125,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                 starting: "Помилка при запуску плагіна {{plugin}}",
                 noMessage: "Повідомлення про помилку відсутнє",
                 noReason: "Причина не вказана"
+            },
+            text: {
+                reconnect: "Перепідключитися",
+                loadingLazyModules: "Завантаження лінивих модулів, перезапуск може призвести до помилок",
+                loadedLazyModules: "Усі ліниві модулі завантажено",
+                failedLazyModules: "Не вдалося завантажити ліниві модулі, перевірте консоль",
+                ok: "ОК"
             }
         },
         disableCallIdle: {
@@ -3919,6 +4190,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Різне",
                     newline: "Символ нового рядка"
                 }
+            },
+            text: {
+                notSupported: "Не підтримується",
+                devBuild: "Dev-збірка",
+                standalone: "Автономна"
             }
         },
         dontFilterMe: {
@@ -3935,6 +4211,23 @@ const translations: MatchStructure<typeof enTranslations> = {
         dontRoundMyTimestamps: {
             name: "DontRoundMyTimestamps",
             description: "Завжди округлює відносний час до меншого (напр. 7.6р стане 7р замість 8р)"
+        },
+        downloadAllAttachments: {
+            name: "DownloadAllAttachments",
+            description: "Додає кнопку в меню повідомлення для завантаження всіх вкладень одразу.",
+            button: "Завантажити всі вкладення",
+            toast: {
+                success: "Завантажено вкладень: {{count}}.",
+                partial: "Завантажено {{succeeded}} з {{total}} вкладень. Помилок: {{failed}}.",
+                downloadedPluralizeSucceededAttachment: "Завантажено: {{pluralize_succeeded_attachment}}.",
+                downloadedSucceededOfLength: "Завантажено {{succeeded}} з {{length}} вкладень. Не вдалося: {{failed}}."
+            },
+            option: {
+                downloadAllFileTypes: {
+                    description: "Також завантажувати вкладення, що не є медіа. Вмикайте, лише якщо довіряєте тому, що вам надсилають.",
+                    label: "Завантажувати всі типи файлів"
+                }
+            }
         },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
@@ -3999,7 +4292,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     created: "Запрошення створено.",
                     unable: "Не вдалося створити запрошення.",
                     noChannel: "Немає доступного каналу для запрошень.",
-                }
+                },
+                noReusableInvite: "Немає доступного багаторазового запрошення.",
+                unableToReuseInvite: "Не вдалося повторно використати запрошення."
             },
             ghost: {
                 user: "Користувач",
@@ -4110,6 +4405,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Меню розробника на панелі",
                     description: "Змінює кнопку допомоги (?) на панелі інструментів на меню розробника Discord"
                 }
+            },
+            text: {
+                searchExperiments: "Пошук експериментів"
             }
         },
         exportMessages: {
@@ -4193,6 +4491,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportAll: "Експортувати всі повідомлення від {{user}}",
                 user: "Користувач",
                 exportAllChannel: "Експортувати всі повідомлення каналу"
+            },
+            text: {
+                unknownError: "Невідома помилка"
             }
         },
         expressionCloner: {
@@ -4206,11 +4507,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 success: "Успішно клоновано {{name}} на {{guild}}!",
                 yourServer: "ваш сервер",
                 failed: "Помилка клонування: ",
-                console: "Щось пішло не так (перевірте консоль!)"
+                console: "Щось пішло не так (перевірте консоль!)",
+                successfullyClonedNameTo: "{{name}} успішно клоновано до {{name_your_server}}!"
             },
             context: {
                 clone: "Клонувати {{type}}",
                 cloneName: "Клонувати {{data}}"
+            },
+            text: {
+                yourServer: "ваш сервер",
+                cloneTo: "Клонувати до {{name}}",
+                emoji: "Емодзі",
+                sticker: "Стікер"
             }
         },
         f8break: {
@@ -4413,36 +4721,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removed: "Аліас видалено: {{alias}}",
                 failedRemove: "Помилка при видаленні",
                 duplicate: "Дублікат аліаса",
-                failedSave: "Не вдалося зберегти аліас."
+                failedSave: "Не вдалося зберегти аліас.",
+                removedAliasAlias: "Псевдонім :{{alias}}: видалено",
+                aliasSetForGetemojidisplayname: "Псевдонім задано для {{getEmojiDisplayName_ref}}."
             },
             button: {
                 edit: "Редагувати аліас",
                 set: "Встановити аліас"
+            },
+            text: {
+                remove: "Вилучити",
+                noAliasesSetYet: "Псевдоніми ще не задано.",
+                aliasRequired: "Псевдонім обов'язковий.",
+                aliasInvalid: "Псевдонім має містити 2-32 символи й складатися лише з малих літер, цифр або підкреслень."
             }
         },
-        favoriteGifSearch: {
-            name: "FavouriteGifSearch",
-            description: "Додає рядок пошуку до ваших улюблених GIF-файлів.",
-            placeholder: "Пошук в улюблених GIF",
-            option: {
-                searchOption: {
-                    label: "Параметри пошуку",
-                    description: "Яку частину URL шукати",
-                    url: "Весь URL",
-                    path: "Лише шлях (/somegif.gif)",
-                    hostandpath: "Хост і шлях (tenor.com somgif.gif)"
-                }
-            }
-        },
-        favouriteAnything: {
-            name: "FavouriteAnything",
+        favoriteAnything: {
+            name: "FavoriteAnything",
             description: "Дозволяє додавати будь-яке зображення в улюблене",
             noFiles: "Немає файлів, що відповідають вашому запиту.",
             searchPlaceholder: "Пошук файлів",
             media: "Медіа",
             demoText: "Натисніть на зірку, щоб додати файл в улюблене.\nУлюблені файли відображатимуться тут!",
             fetchError: "Не вдалося отримати {filename}",
-            uploadError: "Не вдалося завантажити {filename}"
+            uploadError: "Не вдалося завантажити {filename}",
+            text: {
+                clickTheStarTo: "Натисніть зірку, щоб додати файл до обраного.",
+                favoriteFilesWillShow: "Обрані файли з'являться тут!"
+            },
+            option: {
+                localThumbnails: {
+                    description: "Створювати мініатюри файлів локально замість зовнішнього сервісу (placeholder.nin0.dev). Несумісно з мобільними пристроями. Перемикання не впливає на наявне обране.",
+                    label: "Локальні мініатюри"
+                }
+            }
         },
         fileDownloadButton: {
             name: "FileDownloadButton",
@@ -4457,7 +4769,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 navigate: "Використовуйте нижню панель для навігації між відповідями.",
                 container: "Не вдалося знайти елемент контейнера.",
-                couldntFind: "Відповідь не знайдена."
+                couldntFind: "Відповідь не знайдено."
             },
             option: {
                 includePings: {
@@ -4545,6 +4857,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 channelFull: {
                     label: "Канал заповнений",
                     description: "Спробувати зайти в канал, як тільки там з'явиться вільне місце"
+                },
+                onlyWhenInVoice: {
+                    label: "Лише в голосовому",
+                    description: "Слідувати за користувачем, лише коли ви в голосовому каналі"
                 }
             },
             toast: {
@@ -4589,25 +4905,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     previewText: "Ой, при бігу та скаку та заєць ліс перестрибує.",
                     authors: "Від {{authors}}"
                 }
+            },
+            text: {
+                currentFont: "Поточний шрифт:",
+                resetFont: "Скинути шрифт"
             }
         },
         forceOwnerCrown: {
             name: "ForceOwnerCrown",
             description: "Примусово показує корону власника біля імен, навіть на великих серверах."
-        },
-        forwardAnywhere: {
-            name: "ForwardAnywhere",
-            description: "Якщо пересилання повідомлення не вдається, надсилає його як звичайне; дозволяє пересилати NSFW-контент",
-            option: {
-                forwardPreface: {
-                    label: "Текст перед пересиланням",
-                    description: "Що додати перед пересланим контентом"
-                }
-            },
-            context: {
-                attachments: "Вкладення",
-                forwarded: "Переслано від"
-            }
         },
         freaky: {
             name: "Freaky",
@@ -4707,12 +5013,17 @@ const translations: MatchStructure<typeof enTranslations> = {
                     name: "Найкращі друзі",
                     description: "Як вам це вдалося??? (5 років)"
                 }
+            },
+            option: {
+                showFriendsInChat: {
+                    description: "Показувати значок друга біля повідомлень від друзів.",
+                    label: "Показувати друзів у чаті"
+                }
+            },
+            text: {
+                friend: "Друг",
+                rankIcon: "Значок рангу"
             }
-        },
-        friendsSince: {
-            name: "FriendsSince",
-            description: "Показує дату початку дружби у вікні профілю",
-            section: "Друзі з"
         },
         friendTags: {
             name: "FriendTags",
@@ -4748,7 +5059,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
-            description: "Додає перемикач ігрової активності у профілі",
+            description: "Додає кнопку поруч із мікрофоном і вимкненням звуку для перемикання ігрової активності. ПКМ — перемикання активності Spotify.",
             tooltip: "Перемкнути ігрову активність",
             gameActivity: {
                 enabled: "Ігрова активність увімкнена",
@@ -4765,6 +5076,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     panel: "Поруч із мікрофоном/звуком",
                     toolbox: "Plexcord Toolbox"
                 }
+            },
+            text: {
+                disableGameActivity: "Вимкнути ігрову активність",
+                enableGameActivity: "Увімкнути ігрову активність",
+                shareSpotifyActivity: "Ділитися активністю Spotify",
+                shareSpotifyActivityAccount: "Ділитися активністю Spotify ({{name}})"
             }
         },
         ghosted: {
@@ -4912,7 +5229,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "Посилання скопійовано!",
                 urlCopied: "URL скопійовано!",
                 already: "Така колекція вже існує",
-                alreadyCollection: "Ця GIF вже є в цій колекції"
+                alreadyCollection: "Цей GIF уже є в колекції",
+                collectionsImportedSuccessfully: "Колекції успішно імпортовано.",
+                failedToImportCollections: "Не вдалося імпортувати колекції: {{String_err}}"
             },
             modal: {
                 create: {
@@ -4948,6 +5267,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     remove: "Прибрати",
                     cancel: "Скасувати"
                 }
+            },
+            text: {
+                gifPickerCategoryOptions: "Параметри категорій вибору GIF",
+                gifCollections: "Колекції GIF",
+                unknown: "Невідомо"
             }
         },
         gifPaste: {
@@ -4959,7 +5283,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Додає команду для надсилання випадкової GIF з улюблених, з шансом 1 до 10 тегнути власника сервера",
             command: {
                 gifRoulette: {
-                    description: "Випробувати долю та надіслати GIF"
+                    description: "Випробувати долю та надіслати GIF",
+                    restricted: "Ця команда обмежена на цьому сервері."
                 }
             },
             option: {
@@ -4994,7 +5319,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 only: "Показано лише топ {{length}}/{{total}}"
             },
             modal: {
-                title: "Репозиторії GitHub користувача {{user}}",
+                title: "Репозиторії GitHub користувача {{username}}",
                 repository: "Репозиторій",
                 description: "Опис",
                 language: "Мова",
@@ -5050,7 +5375,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Вибір стікера привітання",
                 mode: "Режим",
                 stickers: "Стікери привітання",
-                multi: "Unholy Multi-Greet",
+                multi: "Нечестиве багатопривітання",
                 send: "Надіслати привітання"
             }
         },
@@ -5101,9 +5426,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         hideMessages: {
             name: "HideMessages",
-            description: "Тимчасово приховує повідомлення до перезапуску клієнта.",
+            description: "Тимчасово приховує повідомлення та ОП до перезапуску.",
             button: {
-                hide: "Приховати"
+                hide: "Приховати",
+                hideDm: "Приховати ОП",
+                unhideDm: "Показати ОП"
+            },
+            toggle: {
+                none: "Немає прихованих ОП",
+                hide: "Приховати приховані ОП",
+                show: "Показати приховані ОП"
             },
             option: {
                 hidePopoverButton: {
@@ -5111,6 +5443,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Не показувати кнопку приховування у спливаючому меню повідомлення."
                 }
             }
+        },
+        hideMutedVoiceIndicator: {
+            name: "HideMutedVoiceIndicator",
+            description: "Приховує індикатор голосового каналу в списку серверів, якщо всі активні голосові канали заглушені"
         },
         hideServers: {
             name: "HideServers",
@@ -5231,10 +5567,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 refreshed: "Аватари оновлено.",
                 deletedAll: "Усі нотатки видалено.",
                 imported: "Нотатки імпортовано.",
-                invalid: "Помилка імпорту."
+                invalid: "Помилка імпорту.",
+                invalidJson: "Недійсний JSON"
             },
             toolbox: {
                 action: "Відкрити нотатки"
+            },
+            text: {
+                holyNotes: "Holy Notes",
+                noteTag: "НОТАТКА"
             }
         },
         homeTyping: {
@@ -5342,7 +5683,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 ignoreListening: {
                     label: "Ігнорувати музику",
-                    description: "Приховати статус 'Слухає...' (напр. Spotify)"
+                    description: "Ігнорувати всі активності прослуховування (зазвичай це Spotify)"
                 },
                 ignoreWatching: {
                     label: "Ігнорувати перегляд",
@@ -5355,6 +5696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoredActivities: {
                     label: "Ігноровані активності"
                 }
+            },
+            text: {
+                enableActivity: "Увімкнути активність",
+                disableActivity: "Вимкнути активність"
             }
         },
         ignoreCalls: {
@@ -5440,6 +5785,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 sizeHTML: "Розмір файлу",
                 dimensions: "Розміри",
                 filename: "Назва файлу"
+            },
+            text: {
+                bytes: "Байт"
             }
         },
         imgToGif: {
@@ -5558,6 +5906,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toast: "Instant Screenshare {{state}}",
                 enabled: "Увімкнено",
                 disabled: "Вимкнено"
+            },
+            toast: {
+                instantScreenshareDisabled: "Миттєва демонстрація екрана {{disabled}}"
+            },
+            text: {
+                instantScreenshare: "Instant Screenshare"
             }
         },
         invisibleChat: {
@@ -5680,6 +6034,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     resetData: "Очистити базу",
                     sure: "Ви впевнені?"
                 }
+            },
+            text: {
+                serverOptions: "Параметри сервера",
+                copyServerId: "Копіювати ID сервера",
+                serverIdCopied: "ID сервера скопійовано в буфер обміну"
             }
         },
         jumpTo: {
@@ -5746,6 +6105,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Ключові слова",
                     description: "Керування ключовими словами"
                 }
+            },
+            text: {
+                keywordEntryI1: "Ключове слово {{i_1}}",
+                listPriorityAdvanced: "Пріоритет списків (розширений)",
+                whichListToPrioritize: "Який список пріоритетніший, якщо повідомлення підпадає під обидва",
+                ifYouAreNot: "Якщо не впевнені, здебільшого обирають «Чорний список»"
             }
         },
         lastOnline: {
@@ -5819,10 +6184,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     listenbrainzLogo: "Логотип ListenBrainz",
                     generic: "Загальний заповнювач"
                 },
+                showAlbumCover: {
+                    label: "Показувати обкладинку альбому",
+                    description: "Показувати обкладинку альбому. Вимкнення цієї функції відображатиме заповнювач. Корисно, якщо у вашій музиці є неналежні обкладинки"
+                },
                 useLogo: {
                     label: "Логотип",
                     description: "Показувати логотип ListenBrainz на обкладинці альбому"
                 }
+            },
+            button: {
+                profile: "Профіль ListenBrainz",
+                viewSong: "Переглянути пісню"
             }
         },
         loadingQuotes: {
@@ -5849,6 +6222,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Роздільник цитат",
                     description: "Символ-роздільник для власних цитат"
                 }
+            },
+            text: {
+                allQuotesDisabled: "Ти справді вимкнув усі цитати завантаження? Ну і блазень же ти..."
             }
         },
         loginWithQR: {
@@ -5867,7 +6243,26 @@ const translations: MatchStructure<typeof enTranslations> = {
             stopScanning: "Зупинити сканування",
             usingWebcam: "Сканувати через веб-камеру",
             dragDrop: "Перетягніть зображення сюди або натисніть, щоб вибрати",
-            orPaste: "Або вставте зображення з буфера обміну!"
+            orPaste: "Або вставте зображення з буфера обміну!",
+            verifyLogin: "Підтвердити вхід",
+            text: {
+                scanQrCode: "Сканувати QR-код"
+            }
+        },
+        markdownTables: {
+            name: "MarkdownTables",
+            description: "Відображає таблиці markdown у стилі GitHub у повідомленнях Discord.",
+            toolbar: {
+                label: "Вигляд таблиці markdown",
+                table: "Таблиця",
+                raw: "Сирий"
+            },
+            option: {
+                hideToggle: {
+                    label: "Приховати перемикач",
+                    description: "Приховує перемикач Таблиця/Сирий і завжди показує відображені таблиці."
+                }
+            }
         },
         mediaPlaybackSpeed: {
             name: "Швидкість медіа",
@@ -5893,7 +6288,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         memberCount: {
             name: "Кількість учасників",
-            description: "Показує кількість учасників у мережі, загальну кількість та кількість людей у голосових каналах.",
+            description: "Показує кількість учасників онлайн, усіх учасників і користувачів у голосових каналах сервера - у списку учасників і підказці.",
             option: {
                 toolTip: {
                     label: "Підказка",
@@ -5910,7 +6305,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             onlineThisChannel: "{{formattedOnlineCount}} у мережі в цьому каналі",
             totalMembers: "{{formattedTotalCount}} всього учасників",
-            totalVoice: "{{formattedVoiceCount}} учасників у голосі"
+            totalVoice: "{{formattedVoiceCount}} учасників у голосі",
+            tooltip: {
+                total: "Усього учасників сервера: {{count}}"
+            }
         },
         mentionAvatars: {
             name: "Аватари у згадках",
@@ -6057,7 +6455,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                 messageContent: "Текст повідомлення скопійовано!",
                 userId: "ID користувача скопійовано!"
             },
-            linkCopied: "Посилання скопійовано!"
+            linkCopied: "Посилання скопійовано!",
+            text: {
+                shift: "Shift",
+                ctrl: "Ctrl",
+                alt: "Alt",
+                backspace: "Backspace",
+                pickEmoji: "Вибрати емодзі"
+            },
+            emojiSetting: {
+                pick: "Вибрати емодзі",
+                selectMain: "Виберіть емодзі для реакцій",
+                selectAdditional: "Виберіть додаткові емодзі",
+                additionalPlaceholder: "через кому/з нового рядка, макс. {{max}}"
+            },
+            toast: {
+                cannotReact: "Неможливо поставити реакцію: бракує дозволів",
+                linkCopied: "Посилання скопійовано!"
+            }
         },
         messageColors: {
             name: "Кольори повідомлень",
@@ -6153,7 +6568,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Колір фону для повідомлень у прев'ю"
                 },
                 automodEmbeds: {
-                    label: "Automod Embeds",
+                    label: "Вбудовування AutoMod",
                     description: "Використовувати компактні вкладення (менше інфо)",
                     always: "Завжди",
                     prefer: "Переважно компактні, але розширені за потреби",
@@ -6212,7 +6627,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         messageLogger: {
             name: "Логер повідомлень",
             description: "Тимчасово зберігає видалені та відредаговані повідомлення.",
-            removeMessage: "Видалити історію повідомлення",
+            removeMessage: "Очистити історію повідомлення",
             removeMessageTemporary: "Видалити повідомлення (Тимчасово)",
             clearMessageLog: "Очистити лог",
             showDiff: "Показати різницю",
@@ -6276,7 +6691,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                 separatedDiffs: {
                     label: "Розділена різниця",
                     description: "Розділяти додане та видалене для кращої читабельності"
+                },
+                logDeletedAttachments: {
+                    description: "Чи записувати видалені вкладення",
+                    label: "Записувати видалені вкладення"
                 }
+            },
+            text: {
+                clearHistory: "Очистити історію",
+                toggleDeletedHighlight: "Перемкнути підсвічування видалених",
+                enableDiffView: "Увімкнути перегляд змін",
+                disableDiffView: "Вимкнути перегляд змін",
+                noDeletedMessages: "Немає видалених повідомлень",
+                deletedMessageSuffix: " видалене повідомлення",
+                deletedMessagesSuffix: " видалених повідомлень"
             }
         },
         messageLoggerEnhanced: {
@@ -6478,11 +6906,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 whitelistedIds: {
                     label: "Білий список ID",
-                    description: "ID серверів, каналів або користувачів для обов'язкового логування."
+                    description: "ID серверів, каналів або користувачів, які завжди відображаються в журналі повідомлень."
                 },
                 blacklistedIds: {
                     label: "Чорний список ID",
-                    description: "ID серверів, каналів або користувачів, які будуть ігноруватися."
+                    description: "ID серверів, каналів або користувачів, які ніколи не відображаються в журналі повідомлень."
                 },
                 imageCacheDir: {
                     label: "Директорія кешу зображень",
@@ -6520,6 +6948,25 @@ const translations: MatchStructure<typeof enTranslations> = {
                     confirmText: "Очистити",
                     cancel: "Скасувати"
                 }
+            },
+            toast: {
+                clearedLogs: "Журнали очищено",
+                failedToClearLogs: "Не вдалося очистити журнали",
+                failedToRemoveMessage: "Не вдалося видалити повідомлення. Подробиці в консолі.",
+                noMessagesFoundIn: "У файлі журналу немає повідомлень",
+                successfullyImportedCountLogs: "Імпортовано журналів: {{count}}",
+                successfullyExportedLogs: "Журнали успішно експортовано",
+                successfullyExportedCountLogs: "Експортовано журналів: {{count}}",
+                errorExportingLogsCheck: "Помилка експорту журналів. Докладніше в консолі"
+            },
+            text: {
+                jsonFile: "Файл JSON",
+                clearLogs: "Очистити журнали",
+                clearingLogs: "Очищення журналів...",
+                messageLogger: "Message Logger",
+                importLogs: "Імпортувати журнали",
+                logs: "Журнали",
+                loadingTabLogs: "Завантаження журналів: {{tab}}..."
             }
         },
         messageNotifier: {
@@ -6913,13 +7360,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     LRCLIB: "LRCLIB"
                 },
                 spotifyLyricsApiUrl: {
-                    label: "URL-адреса API текстів пісень Spotify",
-                    description: "Базова URL-адреса API текстів пісень Spotify."
+                    label: "Базовий URL API текстів Spotify",
+                    description: "Базовий URL власного екземпляра (наприклад: http://localhost:8080)."
                 },
                 translateTo: {
                     label: "Перекласти на",
                     description: "Мова для перекладу тексту — зміна очистить існуючі переклади",
-                    cleared: "Переклад очищено"
+                    cleared: "Переклади очищено"
                 },
                 lyricsConversion: {
                     label: "Конвертація тексту",
@@ -6941,6 +7388,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Видалити всі збережені тексти та переклади",
                     button: "Очистити кеш",
                     cacheLyricsPurged: "Кеш текстів очищено"
+                },
+                lyricDelay: {
+                    label: "Затримка тексту пісні"
                 }
             },
             context: {
@@ -7025,6 +7475,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 failed: "Не вдалося відобразити модальне вікно :(",
                 checkConsole: "Перевірте консоль на наявність помилок",
                 invalidUrlCustomApi: "Невірний формат URL для Custom API Server URL"
+            },
+            text: {
+                unknownArtist: "Невідомий виконавець",
+                unknownTitle: "Невідома назва"
             }
         },
         mutualGroupDMs: {
@@ -7045,7 +7499,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "NewGuildSettings",
             description: "Автоматично вимикає звук та змінює інші налаштування при вході на нові сервери",
             context: {
-                apply: "Застосувати NewGuildSettings"
+                apply: "Застосувати NewGuildSettings до теки"
             },
             option: {
                 guild: {
@@ -7100,7 +7554,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 dontShowAgain: "Більше не показувати",
                 restartRequired: "Для застосування змін потрібен перезапуск",
                 restart: "Перезапуск",
-                continue: "Продовжити"
+                continue: "Продовжити",
+                supportUs: "Plexcord — програмне забезпечення з відкритим кодом. Якщо вам подобається ним користуватися, підтримайте нас",
+                supportUsLink: "тут"
             }
         },
         noAppsAllowed: {
@@ -7284,7 +7740,10 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         notificationTitle: {
             name: "NotificationTitle",
-            description: "Робить заголовки сповіщень на робочому столі інформативнішими"
+            description: "Робить заголовки сповіщень на робочому столі інформативнішими",
+            text: {
+                threadInParent: "{{thread}} у {{parent}}"
+            }
         },
         notificationVolume: {
             name: "NotificationVolume",
@@ -7360,6 +7819,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 vrcx: {
                     label: "VRChat",
                     description: "Відкривати посилання VRChat у додатку VRCX"
+                },
+                telegram: {
+                    label: "Telegram",
+                    description: "Відкривати посилання Telegram у застосунку Telegram"
                 }
             },
             notification: {
@@ -7447,6 +7910,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 highest: "Найвища роль",
                 lowest: "Найнижча роль",
                 details: "Деталі ролі"
+            },
+            text: {
+                roleOptions: "Параметри ролі",
+                userOptions: "Параметри користувача",
+                unknownRole: "Невідома роль",
+                unknownUser: "Невідомий користувач"
             }
         },
         petpet: {
@@ -7497,7 +7966,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unnamed: "ой-ой"
                 },
                 pin: {
-                    label: "Закріпити чат",
+                    label: "Закріпити ОП",
                     addCategory: "Додати категорію"
                 },
                 unPin: {
@@ -7534,7 +8003,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     color: "Колір",
                     save: "Зберегти",
                     create: "Створити"
-                }
+                },
+                defaultCategoryName: "Закріплена категорія {{number}}"
             }
         },
         pingNotifications: {
@@ -7578,12 +8048,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformIndicators: {
             name: "PlatformIndicators",
             description: "Додає індикатори платформи (ПК, мобільний, веб...) користувачам",
-            embeddedTooltip: "Консоль",
+            embeddedTooltip: "Вбудований (консоль або гра)",
             vrTooltip: "VR",
             option: {
                 list: {
                     label: "Список учасників",
-                    description: "Показувати індикатори в списку учасників"
+                    description: "Показувати індикатори в профілях користувачів"
                 },
                 badges: {
                     label: "Значки",
@@ -7606,7 +8076,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         platformSpoofer: {
             name: "PlatformSpoofer",
             description: "Підміна інформації про вашу платформу або пристрій",
-            about: "Ми не гарантуємо, що цей плагін не призведе до попереджень або бану.",
+            about: "Ми не можемо гарантувати, що через цей плагін ви не отримаєте попередження або бан. Вибір Xbox/Playstation/VR може зробити ваш клієнт застарілою версією.",
             platform: {
                 desktop: "Клієнт Discord",
                 web: "Discord Веб",
@@ -7619,7 +8089,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 platform: {
                     label: "Платформа",
-                    description: "Якою платформою ви хочете виглядати",
+                    description: "Яку платформу вдавати.",
                     desktop: "Комп'ютер",
                     web: "Браузер",
                     android: "Android",
@@ -7689,9 +8159,9 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         profileSets: {
             name: "ProfileSets",
-            description: "Дозволяє зберігати та завантажувати різні пресети профілю через розділ 'Профіль' у налаштуваннях.",
+            description: "Дозволяє зберігати та завантажувати різні пресети профілю.",
             toast: {
-                importFailed: "Не вдалося імпортувати профілі. Файл може бути пошкодженим.",
+                importFailed: "Не вдалося імпортувати пресети. Можливо, файл недійсний.",
             },
             option: {
                 avatarSize: {
@@ -7722,397 +8192,550 @@ const translations: MatchStructure<typeof enTranslations> = {
                 random: "Випадково",
                 import: "Імпорт",
                 exportAll: "Експортувати все"
+            },
+            text: {
+                selectAServer: "Виберіть сервер",
+                profileSets: "Набори профілів",
+                youAreNotIn: "Ви ще не перебуваєте на жодному сервері.",
+                mainProfile: "Основний профіль",
+                serverProfiles: "Профілі серверів",
+                openProfileSets: "Відкрити набори профілів"
             }
         },
         questify: {
             name: "Questify",
-            description: "Покращуйте свій досвід роботи з Квестами за допомогою набору функцій або вимкніть їх повністю, якщо вони вам не до вподоби.",
+            description: "Покращує окремі функції Квестів, вимикає дратівливі елементи або повністю прибирає Квести.",
             quests: "Квести",
             context: {
                 quest: {
                     label: "Меню кнопки Квестів",
                     ignore: "Позначити всі як ігноровані",
                     reset: "Скинути список ігнорованих",
-                    fetch: "Отримати Квести",
+                    fetch: "Завантажити Квести",
                     markAsIgnored: "Позначити як ігнорований",
-                    unmarkAsIgnored: "Прибрати з ігнорованих",
-                    stopAuto: "Зупинити автозавершення",
-                    copyQuestID: "Копіювати ID Квесту",
-                    startAuto: "Запустити автозавершення"
+                    unmarkAsIgnored: "Перестати ігнорувати",
+                    stopAuto: "Зупинити автовиконання",
+                    startAuto: "Запустити автовиконання",
+                    copyQuestID: "Копіювати ID Квесту"
                 }
+            },
+            button: {
+                completing: "Виконання...",
+                completingWithTime: "Виконання ({{time}})",
+                completingIn: "Виконання через {{time}}",
+                queued: "У черзі ({{position}})",
+                resuming: "Відновлення...",
+                completeNow: "Виконати зараз",
+                complete: "Виконати ({{time}})",
+                resume: "Продовжити ({{time}})",
+                completed: "Виконано"
+            },
+            reward: {
+                orbs: "{{status}}: {{orbQuantity}} Orbs.",
+                article: "{{status}}: {{itemName}}.",
+                unrecognized: "{{status}}: невідома нагорода."
+            },
+            toast: {
+                autoCompleteBroken: "Автовиконання зламане. Виправлення невдовзі з'явиться.",
+                enrollmentFailed: "Не вдалося записатися на Квест {{questName}}.",
+                enrollmentInNormalizequestnameQuest: "Не вдалося записатися на завдання {{normalizeQuestName_quest}}{{rateLimitSuffix}}."
+            },
+            notification: {
+                completed: {
+                    title: "Квест виконано!",
+                    body: "Квест {{questName}} виконано."
+                },
+                newQuest: {
+                    title: "Виявлено новий Квест!",
+                    body: "Квест {{questName}} тепер доступний."
+                },
+                newQuests: {
+                    title: "Виявлено нові Квести!",
+                    body: "Доступно нових Квестів: {{count}}."
+                },
+                newExcludedQuest: {
+                    title: "Виявлено новий виключений Квест!",
+                    body: "Виявлено виключений Квест {{questName}}. ID: {{questId}}"
+                },
+                newExcludedQuests: {
+                    title: "Виявлено нові виключені Квести!",
+                    body: "Виявлено нових виключених Квестів: {{count}}. Їхні ID дивіться в консолі."
+                }
+            },
+            alert: {
+                restart: {
+                    title: "Потрібен перезапуск",
+                    body: "Зміна в налаштуваннях Questify потребує перезапуску.",
+                    confirm: "Перезапустити",
+                    cancel: "Пізніше"
+                },
+                dangerous: {
+                    title: "Ви впевнені?",
+                    confirm: "Продовжити",
+                    cancel: "Скасувати",
+                    disableEverything: "Це повністю вимкне функціональність Квестів.",
+                    allowDangerous: "Це дозволить змінювати небезпечні налаштування."
+                }
+            },
+            status: {
+                unclaimed: "НЕ ОТРИМАНО",
+                claimed: "Отримано",
+                ignored: "Ігнорується",
+                expired: "Завершився"
+            },
+            questTypes: {
+                watchVideo: "Переглянути відео",
+                watchVideoOnMobile: "Переглянути відео на телефоні",
+                achievementInActivity: "Досягнення в активності",
+                achievementInGame: "Досягнення в грі",
+                playActivity: "Зіграти в активність",
+                playOnDesktop: "Грати на ПК",
+                playOnDesktopV2: "Грати на ПК V2",
+                streamOnDesktop: "Стрімити на ПК",
+                playOnPlayStation: "Грати на PlayStation",
+                playOnXbox: "Грати на Xbox"
             },
             settings: {
                 questButton: {
                     title: "Кнопка Квестів",
-                    description: "Показувати кнопку Квестів у списку серверів з опціональним індикатором для незабраних нагород.",
-                    leftClick: "Дія лівою кнопкою миші",
-                    middleClick: "Дія середньою кнопкою миші",
-                    rightClick: "Дія правою кнопкою миші",
-                    visibility: "Видимість кнопки",
-                    unclaimedIndicator: "Індикатор незабраних нагород",
-                    badgeColor: "Колір значка",
-                    rewardDisplay: "Відображення нагород",
-                    includedRewardTypes: "Включені типи нагород",
-                    includedRewardTypesDesc: "Враховувати лише Квести з цими типами нагород як незабрані при визначенні видимості кнопки, кількості на значку та відтворенні звуку сповіщення.",
-                    selectRewardTypes: "Виберіть типи нагород для підрахунку незабраних...",
-                    noRewardType: "Підтримуваної функції Квестів з такою назвою не існує.",
-                    default: "За замовчуванням",
-                    disable: "Вимкнути"
+                    description: "Показує кнопку Квестів у списку серверів з необов'язковим індикатором неотриманих і неігнорованих Квестів.",
+                    behavior: "Поведінка кнопки",
+                    leftClick: "Дія лівого кліку:",
+                    middleClick: "Дія середнього кліку:",
+                    rightClick: "Дія правого кліку:",
+                    visibility: "Видимість кнопки:",
+                    visibilityTooltip: "Завжди — кнопка Квестів показується, поки цю функцію ввімкнено.\n\nНе отримано — кнопка показується лише за наявності відповідних неотриманих нагород.\n\nНіколи — кнопку Квестів приховано.",
+                    unclaimedIndicator: "Індикатор неотриманих:",
+                    unclaimedIndicatorTooltip: "Мітка показує позначку непрочитаного Discord поруч із кнопкою Квестів.\n\nЗначок показує кількість відповідних неотриманих нагород.\n\nОбидва показує мітку і значок разом.\n\nНемає приховує індикатори.",
+                    badgeColor: "Колір значка:",
+                    relevancy: "Релевантність Квестів",
+                    includedRewardTypes: "Враховані типи нагород:",
+                    includedRewardTypesTooltip: "Вважати неотриманими лише Квести з цими типами нагород під час визначення видимості кнопки, числа на значку та сповіщень.",
+                    includedQuestTypes: "Враховані типи Квестів:",
+                    includedQuestTypesTooltip: "Вважати неотриманими лише Квести з цими типами завдань під час визначення видимості кнопки, числа на значку та сповіщень.",
+                    display: {
+                        always: "Завжди",
+                        unclaimed: "Не отримано",
+                        never: "Ніколи"
+                    },
+                    indicator: {
+                        pill: "Мітка",
+                        badge: "Значок",
+                        both: "Обидва",
+                        none: "Немає"
+                    },
+                    action: {
+                        openQuests: "Відкрити Квести",
+                        contextMenu: "Контекстне меню",
+                        pluginSettings: "Налаштування плагіна",
+                        nothing: "Нічого"
+                    },
+                    rewardTypes: {
+                        orbs: "Orbs",
+                        nitroCodes: "Коди Nitro",
+                        rewardCodes: "Коди нагород",
+                        inGameItems: "Ігрові предмети",
+                        profileCollectibles: "Колекційні предмети профілю"
+                    }
                 },
                 questFeatures: {
                     title: "Функції Квестів",
-                    description: "Змінюйте конкретні функції Квестів.",
-                    popupWarning: "Опція {{disablePopup}} буде ігноруватися для завершених Квестів та відстеження прогресу Квестів.",
-                    videoQuestInfo: "Опція {{completeVideo}} зачекає час тривалості відео-квесту та автоматично позначить його як завершений.",
-                    gameQuestInfo: "Аналогічно, опція {{completeGame}} зачекає час тривалості ігрового квесту та автоматично позначить його як завершений. Ця опція підтримується лише в офіційному десктопному клієнті.",
-                    manualStartWarning: "Ви все одно повинні запускати Квести вручну. Перший клік запустить Квест у фоновому режимі. Для відео-квестів наступні кліки відкриватимуть вікно відео як зазвичай. Щоб перервати Квест, ви можете відкрити контекстне меню на плитці Квесту та обрати {{stopAuto}}.",
-                    tosWarning: "Використання будь-якої з цих опцій порушує Умови використання Discord. Використовуйте на свій страх і ризик.",
-                    selectFeatures: "Виберіть, які функції Квестів змінити.",
-                    disablePopup: "Вимкнути спливаюче вікно Квестів над панеллю акаунта",
-                    completeVideo: "Завершувати відео-квести у фоновому режимі",
-                    completeGame: "Завершувати ігрові квести у фоновому режимі",
-                    stopAuto: "Зупинити автозавершення"
+                    description: "Змініть поведінку Квестів, щоб розширити або прибрати функціональність.",
+                    disableFeatures: "Вимкнення функцій",
+                    disableEverything: "Повністю вимкнути функціональність Квестів:",
+                    disableEverythingTooltip: "Це вимкне всі покращення плагіна, приховає сторінку Квестів та елементи Квестів у всьому Discord і не дозволить Discord завантажувати дані Квестів. Магазин це не зачепить, оскільки Orbs надто тісно пов'язані з ним як друга валюта.",
+                    disableSpecific: "Вимкнути окремі функції:",
+                    disableSpecificTooltip: "Спонсорський банер — платний банер Квесту вгорі сторінки Квестів.\n\nСповіщення про перенесення — підказки, наприклад на сторінці «Огляд», що Квести перенесено в особисті повідомлення.\n\nПромо у списку друзів — картка в розділі «Зараз активні» списку друзів, поки користувач зі спільним сервером грає в гру з активним Квестом.\n\nПромо у списку учасників — значок біля учасників у списку сервера, поки вони грають у гру з активним Квестом.\n\nПромо на панелі акаунта — платне просування Квесту над панеллю акаунта.\n\nПрогрес на панелі акаунта — прогрес активного або виконаного Квесту над панеллю акаунта.\n\nЗначки Квестів і Orbs — значки в профілях тих, хто виконав хоча б один Квест або купив значок Orbs відповідно.",
+                    disableOptions: {
+                        sponsoredBanner: "Спонсорський банер",
+                        relocationNotices: "Сповіщення про перенесення",
+                        friendsListPromo: "Промо у списку друзів",
+                        membersListPromo: "Промо у списку учасників",
+                        accountPanelPromo: "Промо на панелі акаунта",
+                        accountPanelProgress: "Прогрес на панелі акаунта",
+                        orbsAndQuestsBadges: "Значки Квестів і Orbs"
+                    },
+                    modifyFeatures: "Зміна функцій",
+                    warningTos: "Discord почав виносити попередження користувачам скриптів і плагінів, що змінюють виконання Квестів, що порушує його {{tos}}.",
+                    tos: "Умови використання",
+                    warningEscalate: "Наразі попередження обмежуються загрозою втрати доступу до Квестів або їхніх нагород, але Discord може посилити заходи будь-коли.",
+                    warningDetection: "Через численні способи, якими Discord відстежує користувачів, реально уникнути виявлення неможливо. Продовжуючи, врахуйте, що Discord, найімовірніше, рано чи пізно це виявить.",
+                    warningRisk: "Скористайтеся перемикачем нижче, щоб на власний ризик отримати доступ до потенційно небезпечних налаштувань.",
+                    allowDangerous: "Дозволити зміну небезпечних налаштувань...",
+                    disallowDangerous: "Скинути та заборонити зміну небезпечних налаштувань...",
+                    completeVideoQuicker: "Прискорити автовиконання відео-Квестів:",
+                    completeVideoQuickerTooltip: "Discord дозволяє виконати відео-Квест, коли з моменту запису минув час, що дорівнює тривалості відео мінус 24 секунди.\n\nЦе означає, що відео-Квест тривалістю 24 секунди або менше, чи Квест, на який ви записалися й повернулися пізніше, можна виконати одразу.\n\nЦе налаштування діє лише для автовиконання відео-Квестів і залежить від налаштування автовиконання нижче. Ручне виконання, як і раніше, вимагає очікування повної тривалості та не залежить від часу запису.",
+                    mobileDesktop: "Дозволити виконувати на ПК деякі мобільні відео-Квести:",
+                    mobileDesktopTooltip: "На деякі мобільні відео-Квести можна записатися на ПК, але виконувати їх усе одно треба на телефоні. Це налаштування дозволяє виконувати їх на ПК.\n\nНа деякі мобільні відео-Квести можна записатися лише з телефона. Щоб налаштування на них діяло, запишіться на них із телефона, потім поверніться на ПК і оновіть Квести.\n\nСаме по собі це налаштування діє лише під час ручного виконання відео-Квестів. Автовиконання мобільних відео-Квестів на ПК залежить від налаштування автовиконання нижче й неявно вмикає і це налаштування.",
+                    simultaneous: "Автовиконувати Квести одночасно, а не по черзі:",
+                    simultaneousTooltip: "За замовчуванням під час автовиконання кількох Квестів вони стають у чергу й виконуються по порядку.\n\nЦе налаштування натомість дозволяє виконувати всі Квести одночасно.\n\nЦе налаштування діє лише для автовиконання й залежить від налаштування автовиконання нижче.",
+                    resumeInterrupted: "Відновлювати перерване автовиконання після перезавантаження чи перезапуску:",
+                    resumeInterruptedTooltip: "Це налаштування автоматично відновлює автовиконання, перерване перезавантаженням чи перезапуском, включно з повторним додаванням у чергу Квестів, які стояли в черзі, але ще не почалися.",
+                    autoCompleteTypes: "Автовиконувати вибрані типи Квестів:",
+                    autoCompleteTypesTooltip: "Квести «Переглянути відео на телефоні» працюють лише з мобільними Квестами, на які можна записатися на ПК. Якщо запис доступний лише з телефона, спершу запишіться на телефоні, потім поверніться на ПК і оновіть Квести.\n\nУсі відео-Квести зазвичай надсилають стек викликів разом зі звітами про прогрес. Тож Discord точно знає, які функції викликалися, і може перевірити, що прогрес запустили його власні функції. Questify стирає стек викликів, але його відсутність видає не менше, ніж наявність.\n\nКвести «Грати на ПК», «Грати на PlayStation», «Грати на Xbox» і «Зіграти в активність» доступні лише в офіційних десктоп-клієнтах через обмеження Discord. Сторонні клієнти, як-от веб-розширення, Plextron та інші, не підтримують їхнє автовиконання.\n\nУсі ігрові Квести зазвичай надсилають відбиток гри разом зі звітами heartbeat. Тож Discord може за даними десятків тисяч користувачів визначити, чи використовують інші справжню гру, чи емулюють виконуваний файл. Розумного способу підробити це значення немає, тому Questify залишає його порожнім, але його відсутність видає не менше, ніж погана підробка.\n\nКвести «Досягнення в активності» можна автовиконати лише миттєво. Цей спосіб можуть виправити будь-коли.\n\nАвтовиконання запускається натисканням відповідних кнопок на сторінці Квестів. Квести виконуються в порядку додавання до черги, якщо вище не ввімкнено одночасне виконання.\n\nАвтовиконання Квестів — найризикованіше з небезпечних налаштувань. Вмикайте його на власний ризик."
                 },
-                restyleQuests: {
-                    title: "Стилізація Квестів",
-                    description: "Виділяйте Квести за допомогою додаткових кольорів теми для кращої видимості.",
-                    precedenceNote: "Стилі для отриманих та прострочених Квестів мають пріоритет, навіть якщо Квест ігнорується.",
-                    gradientStyle: "Стиль градієнта",
-                    assetPreload: "Попереднє завантаження ресурсів",
-                    unclaimed: "Незабрані",
-                    claimed: "Отримані",
-                    ignored: "Ігноровані",
-                    expired: "Прострочені",
-                    intenseGradient: "Інтенсивний градієнт",
-                    defaultGradient: "Стандартний градієнт",
-                    blackGradient: "Легкий чорний градієнт",
-                    noGradient: "Без градієнта",
-                    loadAllAssets: "Завантажувати всі ресурси Квестів при завантаженні сторінки",
-                    loadDuringScroll: "Завантажувати ресурси Квестів під час прокрутки сторінки"
+                questNotifications: {
+                    title: "Сповіщення про Квести",
+                    description: "Налаштуйте сповіщення та оповіщення про виконані й нові виявлені Квести.",
+                    questCompleted: "Квест виконано",
+                    notifyOnComplete: "Показувати сповіщення після виконання Квесту:",
+                    soundOnComplete: "Відтворювати звук після виконання Квесту:",
+                    volume: "Гучність:",
+                    newQuests: "Виявлено нові Квести",
+                    notifyOnNew: "Показувати сповіщення при виявленні нових Квестів:",
+                    soundOnNew: "Відтворювати звук при виявленні нових Квестів:",
+                    notifyOnNewExcluded: "Показувати сповіщення при виявленні нових виключених Квестів:",
+                    notifyOnNewExcludedTooltip: "Деякі Квести виключено зі списку доступних через регіональні або платформні обмеження.\n\nЯкщо ввімкнено, Questify завантажить їхні конфігурації, застосує ваші фільтри за типами Квестів і нагород, виведе дані виключених Квестів у консоль і покаже окреме сповіщення для відповідних виключених Квестів.",
+                    soundOnNewExcluded: "Відтворювати звук при виявленні нових виключених Квестів:",
+                    soundOnNewExcludedTooltip: "Деякі Квести виключено зі списку доступних через регіональні або платформні обмеження.\n\nЯкщо вибрано звук, Questify завантажить їхні конфігурації, застосує ваші фільтри за типами Квестів і нагород, виведе дані виключених Квестів у консоль і відтворить цей звук для відповідних виключених Квестів.",
+                    fetchInterval: "Інтервал завантаження Квестів:",
+                    fetchIntervalTooltip: "Discord завантажує Квести лише під час запуску та під час відвідування сторінки Квестів.\n\nЦей інтервал періодично завантажує Квести, поки клієнт відкритий, щоб індикатори кнопки Квестів і оповіщення про нові Квести залишалися актуальними протягом дня.\n\nПрацює, лише якщо ввімкнено й налаштування кнопки чи сповіщень Квестів роблять періодичне завантаження доцільним.",
+                    disabled: "ВИМКНЕНО",
+                    preview: "Прослухати {{sound}}",
+                    intervals: {
+                        thirtyMinutes: "30 хвилин",
+                        fortyFiveMinutes: "45 хвилин",
+                        oneHour: "1 година",
+                        threeHours: "3 години",
+                        sixHours: "6 годин",
+                        twelveHours: "12 годин"
+                    }
+                },
+                questTiles: {
+                    title: "Плитки Квестів",
+                    description: "Виділяйте Квести додатковими кольорами теми для кращої помітності.",
+                    behavior: "Поведінка плиток",
+                    gradientStyle: "Стиль градієнта:",
+                    gradientStyleTooltip: "Інтенсивний і Стандартний використовують вибраний колір плитки в градієнті зображення.\n\nМ'який чорний зберігає темніший нейтральний градієнт для контрасту.\n\nБез градієнта прибирає градієнт зображення, через що деякі ілюстрації Квестів може бути важче читати.",
+                    assetPreload: "Попереднє завантаження ресурсів:",
+                    assetPreloadTooltip: "Завантаження всіх ресурсів під час відкриття сторінки Квестів зменшує зсуви макета під час прокручування.\n\nЗавантаження під час прокручування ближче до стандартної поведінки Discord і потребує менше роботи на початку.",
+                    colors: "Кольори плиток",
+                    enable: "Увімкнути",
+                    disable: "Вимкнути",
+                    gradient: {
+                        intense: "Інтенсивний градієнт оформлення",
+                        default: "Стандартний градієнт оформлення",
+                        black: "М'який чорний градієнт",
+                        hide: "Без градієнта"
+                    },
+                    preload: {
+                        onLoad: "Завантажувати всі ресурси під час відкриття сторінки",
+                        onScroll: "Завантажувати ресурси під час прокручування"
+                    }
                 },
                 reorderQuests: {
-                    title: "Сортування Квестів",
-                    description: "Сортуйте Квести за їхнім статусом. Застосовується, коли на сторінці Квестів обрано варіант сортування \"Questify\".",
-                    formatNote: "Список через кому має містити всі елементи: {{items}}.",
-                    placeholder: "Ви повинні включити всі: UNCLAIMED, CLAIMED, IGNORED, EXPIRED",
-                    invalidFormat: "Невірний формат.",
-                    unclaimedSubsort: "Підсортування незабраних",
-                    claimedSubsort: "Підсортування отриманих",
-                    ignoredSubsort: "Підсортування ігнорованих",
-                    expiredSubsort: "Підсортування прострочених",
-                    addedNewest: "Додані (новіші)",
-                    addedOldest: "Додані (старіші)",
-                    expiredRecent: "Прострочені (нещодавно)",
-                    expiredLeast: "Прострочені (давно)",
-                    expiringSoon: "Закінчуються (незабаром)",
-                    expiringLate: "Закінчуються (пізніше)",
-                    claimedRecent: "Отримані (нещодавно)",
-                    claimedLeast: "Отримані (давно)",
-                    ignoredQuestProfile: "Профіль ігнорованих Квестів",
-                    sharedProfile: "Спільний: всі акаунти в цьому клієнті мають спільний список ігнорування.",
-                    privateProfile: "Приватний: всі акаунти в цьому клієнті мають окремі списки ігнорування.",
-                    rememberSort: "Запам'ятовувати вибір сортування",
-                    rememberFilter: "Запам'ятовувати вибір фільтра",
-                    yes: "Так",
-                    no: "Ні",
-                    rememberNote: "Цей вибір стосується вбудованих опцій Discord на сторінці Квестів. Користувацьке сортування вище працює лише при виборі сортування \"Questify\". Якщо функцію вимкнено, сортування та фільтри скидатимуться щоразу при відкритті сторінки."
-                },
-                fetchingQuests: {
-                    title: "Отримання Квестів",
-                    description: "Налаштуйте частоту отримання Квестів від Discord та встановіть сповіщення про нові Квести.",
-                    defaultBehavior: "За замовчуванням Discord отримує Квести лише при завантаженні або відвідуванні сторінки Квестів. Це означає, що без інтервалу перевірки плагін не знатиме про нові Квести, додані протягом дня.",
-                    requirement: "Це працює, якщо Кнопка Квестів увімкнена та налаштована на {{unclaimed}}, або на {{always}} з увімкненими індикаторами.",
-                    blockWarning: "Також, якщо {{fetchingQuests}} заблоковано в налаштуваннях {{questFeatures}}, це не працюватиме.",
-                    fetchInterval: "Інтервал перевірки",
-                    alertSound: "Звук сповіщення",
-                    intervalPlaceholder: "Оберіть або введіть інтервал від 30 хвилин до 12 годин.",
-                    intervalFeedback: "Інтервал має бути від 30 хвилин до 12 годин.",
-                    soundPlaceholder: "Оберіть звук або вкажіть URL на власний звук.",
-                    soundFeedback: "Звук не знайдено або URL веде на непідтримуваний домен.",
-                    disabled: "Вимкнено",
-                    minutes: "Хвилини",
-                    minute: "Хвилина",
-                    hours: "Години",
-                    hour: "Година",
-                    thirtyMinutes: "30 хвилин",
-                    oneHour: "1 година",
-                    threeHours: "3 години",
-                    sixHours: "6 годин",
-                    twelveHours: "12 годин",
-                    customSound: "ВЛАСНИЙ ЗВУК"
-                },
-                disableOptions: {
-                    everything: "Вимкнути все",
-                    discovery: "Вимкнути вкладку 'Discovery'",
-                    dms: "Вимкнути вкладку Квестів у ПП",
-                    fetching: "Вимкнути отримання Квестів",
-                    popup: "Вимкнути спливаюче вікно над панеллю акаунта",
-                    sponsored: "Вимкнути спонсорський банер на сторінці Квестів",
-                    badge: "Вимкнути значок у профілях користувачів",
-                    inventory: "Вимкнути повідомлення про перенесення інвентарю подарунків",
-                    friendsList: "Реклама Квестів у списку друзів 'Активні зараз'",
-                    membersList: "Іконки активної гри в списку учасників",
-                    gameQuests: "Завершувати ігрові квести у фоновому режимі",
-                    videoQuests: "Завершувати відео-квести у фоновому режимі",
-                    achievementQuests: "Завершувати квести на досягнення у фоновому режимі",
-                    mobileDesktop: "Зробити мобільні квести сумісними з ПК",
-                    notifyOnComplete: "Сповіщати про завершення Квесту"
-                },
-                options: {
-                    always: "Завжди",
-                    unclaimed: "Незабрані",
-                    never: "Ніколи",
-                    pill: "Еліпс (Pill)",
-                    badge: "Значок (Badge)",
-                    both: "Обидва",
-                    none: "Нічого",
-                    openQuests: "Відкрити Квести",
-                    contextMenu: "Контекстне меню",
-                    pluginSettings: "Налаштування плагіна",
-                    nothing: "Нічого",
-                    orbs: "Сфери (Orbs)",
-                    nitroCodes: "Коди Nitro",
-                    rewardCodes: "Коди нагород",
-                    inGameItems: "Внутрішньоігрові предмети",
-                    profileCollectibles: "Колекційні предмети профілю"
+                    title: "Порядок Квестів",
+                    description: "Сортувати завдання за статусом, коли на сторінці завдань вибрано сортування Questify. Приховані статуси відфільтровуються за будь-якого сортування.",
+                    statusOrder: "Порядок статусів",
+                    statusOrderTooltip: "Кожен статус може трапитися лише один раз. Вибір статусу, вже зайнятого на іншій позиції, міняє позиції місцями.",
+                    positions: {
+                        first: "Перший:",
+                        second: "Другий:",
+                        third: "Третій:",
+                        fourth: "Четвертий:"
+                    },
+                    subsorts: "Підсортування",
+                    unclaimedSubsort: "Підсортування неотриманих:",
+                    unclaimedSubsortTooltip: "Виконані, але неотримані Квести залишаються нижче невиконаних неотриманих, потім усередині цих груп застосовується це підсортування.",
+                    claimedSubsort: "Підсортування отриманих:",
+                    claimedSubsortTooltip: "Отримані Квести можна сортувати за часом отримання або за часом додавання Квесту.",
+                    ignoredSubsort: "Підсортування ігнорованих:",
+                    ignoredSubsortTooltip: "Ігноровані Квести зберігають позицію своєї групи, а це підсортування визначає їхній порядок усередині неї.",
+                    expiredSubsort: "Підсортування завершених:",
+                    expiredSubsortTooltip: "Завершені Квести можна сортувати за часом завершення або за часом додавання Квесту.",
+                    subsort: {
+                        addedNewest: "Додані (нові)",
+                        addedOldest: "Додані (старі)",
+                        expiringSoonest: "Завершуються (скоро)",
+                        expiringLatest: "Завершуються (нескоро)",
+                        expiredMostRecent: "Завершилися (нещодавно)",
+                        expiredLeastRecent: "Завершилися (давно)",
+                        claimedMostRecent: "Отримані (нещодавно)",
+                        claimedLeastRecent: "Отримані (давно)"
+                    },
+                    memory: "Пам'ять сторінки Квестів",
+                    rememberSort: "Запам'ятовувати вибране сортування сторінки Квестів:",
+                    rememberSortTooltip: "Якщо вимкнено, сторінка Квестів щоразу відкривається із сортуванням Questify.",
+                    rememberFilters: "Запам'ятовувати вибрані фільтри сторінки Квестів:",
+                    rememberFiltersTooltip: "Якщо вимкнено, сторінка Квестів щоразу відкривається без фільтрів завдань і нагород."
                 }
             },
             option: {
-                disableQuests: {
-                    label: "Вимкнути Квести",
+                migrationVersion: {
+                    label: "Версія міграції",
+                    description: "Поточна версія міграції налаштувань."
+                },
+                questFeatures: {
+                    label: "Функції Квестів",
                     description: "Виберіть, які функції Квестів вимкнути."
                 },
                 disableQuestsEverything: {
                     label: "Вимкнути все",
-                    description: "Вимкнути всі функції Квестів."
+                    description: "Вимикає всі функції Квестів."
                 },
-                disableQuestsFetchingQuests: {
-                    label: "Вимкнути отримання Квестів",
-                    description: "Вимкнути отримання Квестів від Discord."
+                disableRelocationNotices: {
+                    label: "Вимкнути сповіщення про перенесення",
+                    description: "Вимикає сповіщення про перенесення Квестів на сторінці «Огляд»."
                 },
-                disableQuestsDirectMessagesTab: {
-                    label: "Вимкнути вкладку Квестів у ПП",
-                    description: "Вимкнути вкладку Квестів на сторінці приватних повідомлень."
+                disableSponsoredBanner: {
+                    label: "Вимкнути спонсорський банер",
+                    description: "Вимикає спонсорський банер на сторінці Квестів."
                 },
-                disableQuestsDiscoveryTab: {
-                    label: "Вимкнути вкладку Discovery",
-                    description: "Вимкнути вкладку Квестів на сторінці Discovery."
+                disableAccountPanelPromo: {
+                    label: "Вимкнути промо на панелі акаунта",
+                    description: "Вимикає спливне просування Квесту над панеллю акаунта."
                 },
-                disableQuestsPageSponsoredBanner: {
-                    label: "Вимкнути спонсорський банер на сторінці Квестів",
-                    description: "Вимкнути спонсорський банер на сторінці Квестів."
+                disableAccountPanelQuestProgress: {
+                    label: "Вимкнути прогрес на панелі акаунта",
+                    description: "Вимикає прогрес активних і виконаних Квестів над панеллю акаунта."
                 },
-                disableQuestsPopupAboveAccountPanel: {
-                    label: "Вимкнути спливаюче вікно над панеллю акаунта",
-                    description: "Вимкнути спливаюче вікно Квестів над панеллю вашого акаунта."
+                disableOrbsAndQuestsBadges: {
+                    label: "Вимкнути значки Квестів і Orbs",
+                    description: "Вимикає значок Квестів у профілях."
                 },
-                disableQuestsBadgeOnUserProfiles: {
-                    label: "Вимкнути значок у профілях користувачів",
-                    description: "Вимкнути значок Квестів у профілях користувачів."
+                disableFriendsListPromo: {
+                    label: "Вимкнути промо у списку друзів",
+                    description: "Вимикає просування Квестів для ігор, у які грають друзі."
                 },
-                disableQuestsGiftInventoryRelocationNotice: {
-                    label: "Вимкнути повідомлення про перенесення інвентарю",
-                    description: "Вимкнути повідомлення про перенесення інвентарю подарунків для Квестів."
+                disableMembersListPromo: {
+                    label: "Вимкнути промо у списку учасників",
+                    description: "Вимикає значок активної гри у списку учасників."
                 },
-                disableFriendsListActiveNowPromotion: {
-                    label: "Вимкнути рекламу Квестів у списку друзів",
-                    description: "Вимкнути просування Квестів для ігор, у які грають друзі."
+                allowChangingDangerousSettings: {
+                    label: "Дозволити небезпечні налаштування",
+                    description: "Дозволяє змінювати небезпечні налаштування."
                 },
-                disableMembersListActivelyPlayingIcons: {
-                    label: "Вимкнути іконки активної гри в списку учасників",
-                    description: "Вимкнути іконки активної гри в списку учасників сервера."
+                resumeInterruptedQuests: {
+                    label: "Відновлювати перервані Квести",
+                    description: "Відновлює автовиконання Квестів після перезавантаження чи перезапуску."
                 },
-                makeMobileQuestsDesktopCompatible: {
-                    label: "Зробити мобільні квести сумісними з ПК",
-                    description: "Зробити квести, що призначені лише для мобільних пристроїв, доступними на ПК."
+                makeMobileVideoQuestsDesktopCompatible: {
+                    label: "Мобільні відео-Квести на ПК",
+                    description: "Робить мобільні відео-Квести сумісними з ПК."
                 },
-                completeVideoQuestsInBackground: {
-                    label: "Завершувати відео-квести у фоновому режимі",
-                    description: "Завершувати відео-квести у фоновому режимі після закінчення тривалості відео."
+                autoCompleteQuestsSimultaneously: {
+                    label: "Автовиконання одночасно",
+                    description: "Виконує Квести одночасно, а не по черзі."
                 },
-                completeGameQuestsInBackground: {
-                    label: "Завершувати ігрові квести у фоновому режимі",
-                    description: "Завершувати ігрові квести у фоновому режимі після закінчення необхідного часу гри."
+                completeVideoQuestsQuicker: {
+                    label: "Швидше виконувати відео-Квести",
+                    description: "Використовує допуск прогресу Discord і час від запису під час автовиконання відео-Квестів."
                 },
-                completeAchievementQuestsInBackground: {
-                    label: "Завершувати квести на досягнення у фоновому режимі",
-                    description: "Завершувати квести на виконання завдань в активностях у фоновому режимі."
-                },
-                notifyOnQuestComplete: {
-                    label: "Сповіщати про завершення Квесту",
-                    description: "Показувати сповіщення, коли Квест завершується автоматично."
+                autoCompleteQuestTypes: {
+                    label: "Типи Квестів для автовиконання",
+                    description: "Які типи Квестів автовиконувати у фоні."
                 },
                 questButton: {
                     label: "Кнопка Квестів",
-                    description: "Показувати кнопку Квестів у списку серверів."
+                    description: "Налаштуйте кнопку Квестів у списку серверів."
                 },
                 questButtonDisplay: {
                     label: "Відображення кнопки Квестів",
-                    description: "Тип відображення кнопки Квестів у списку серверів."
+                    description: "Який тип відображення використовувати для кнопки Квестів у списку серверів."
                 },
-                questRewardIncludeRewardCode: {
-                    label: "Включати коди нагород",
-                    description: "Враховувати Квести з кодами нагород при підрахунку кількості Квестів."
+                questButtonIncludedTypes: {
+                    label: "Враховані типи кнопки Квестів",
+                    description: "Які типи нагород і Квестів враховувати в лічильнику на кнопці Квестів."
                 },
-                questRewardIncludeNitroCode: {
-                    label: "Включати коди Nitro",
-                    description: "Враховувати Квести з кодами Nitro при підрахунку кількості Квестів."
+                questButtonIndicator: {
+                    label: "Індикатор кнопки Квестів",
+                    description: "Який тип відображення використовувати для індикатора неотриманих на кнопці Квестів."
                 },
-                questRewardIncludeInGame: {
-                    label: "Включати внутрішньоігрові нагороди",
-                    description: "Враховувати Квести з ігровими предметами при підрахунку кількості Квестів."
-                },
-                questRewardIncludeCollectibles: {
-                    label: "Включати колекційні предмети",
-                    description: "Враховувати Квести з колекційними предметами профілю при підрахунку кількості Квестів."
-                },
-                questRewardIncludeOrbs: {
-                    label: "Включати сфери (Orbs)",
-                    description: "Враховувати Квести зі сферами при підрахунку кількості Квестів."
-                },
-                questButtonUnclaimed: {
-                    label: "Індикатор незабраних нагород",
-                    description: "Який тип відображення використовувати для індикатора незабраних нагород на кнопці Квестів."
+                questButtonBadgeCount: {
+                    label: "Число на значку",
+                    description: "Поточна кількість відповідних неотриманих Квестів."
                 },
                 questButtonBadgeColor: {
-                    label: "Колір значка кнопки Квестів",
-                    description: "Колір фону значка кнопки Квестів у списку серверів."
+                    label: "Колір значка",
+                    description: "Колір значка кнопки Квестів у списку серверів."
                 },
                 questButtonLeftClickAction: {
-                    label: "Дія лівою кнопкою миші",
-                    description: "Дія при натисканні лівою кнопкою миші на кнопку Квестів."
+                    label: "Дія лівого кліку",
+                    description: "Дія під час лівого кліку по кнопці Квестів."
                 },
                 questButtonMiddleClickAction: {
-                    label: "Дія середньою кнопкою миші",
-                    description: "Дія при натисканні середньою кнопкою миші на кнопку Квестів."
+                    label: "Дія середнього кліку",
+                    description: "Дія під час середнього кліку по кнопці Квестів."
                 },
                 questButtonRightClickAction: {
-                    label: "Дія правою кнопкою миші",
-                    description: "Дія при натисканні правою кнопкою миші на кнопку Квестів."
+                    label: "Дія правого кліку",
+                    description: "Дія під час правого кліку по кнопці Квестів."
                 },
-                fetchingQuests: {
-                    label: "Отримання Квестів",
-                    description: "Отримувати Квести від Discord."
+                questNotifications: {
+                    label: "Сповіщення про Квести",
+                    description: "Налаштуйте сповіщення про виконані й нові виявлені Квести."
                 },
-                fetchingQuestsInterval: {
-                    label: "Інтервал отримання Квестів",
-                    description: "Інтервал у секундах для перевірки наявності нових Квестів."
+                notifyOnQuestComplete: {
+                    label: "Сповіщати про виконання",
+                    description: "Показує сповіщення після виконання Квесту."
                 },
-                fetchingQuestsAlert: {
-                    label: "Звук сповіщення",
-                    description: "Звук, який відтворюється при виявленні нових Квестів."
+                notifyOnNewQuests: {
+                    label: "Сповіщати про нові Квести",
+                    description: "Показує сповіщення при виявленні нових Квестів."
                 },
-                fetchingQuestsAlertVolume: {
-                    label: "Гучність сповіщення",
-                    description: "Рівень гучності звуку сповіщення про нові Квести."
+                notifyOnNewExcludedQuests: {
+                    label: "Сповіщати про нові виключені Квести",
+                    description: "Показує сповіщення при виявленні нових виключених Квестів."
                 },
-                restyleQuests: {
-                    label: "Стилізація Квестів",
+                questCompletedAlertSound: {
+                    label: "Звук виконання Квесту",
+                    description: "Звук, що відтворюється після виконання Квесту."
+                },
+                questCompletedAlertVolume: {
+                    label: "Гучність виконання Квесту",
+                    description: "Гучність звуку виконання Квесту."
+                },
+                questFetchInterval: {
+                    label: "Інтервал завантаження",
+                    description: "Інтервал у секундах для завантаження Квестів із Discord."
+                },
+                newQuestAlertSound: {
+                    label: "Звук нового Квесту",
+                    description: "Звук, що відтворюється при виявленні нових Квестів."
+                },
+                newQuestAlertVolume: {
+                    label: "Гучність нового Квесту",
+                    description: "Гучність звуку нового Квесту."
+                },
+                newExcludedQuestAlertSound: {
+                    label: "Звук нового виключеного Квесту",
+                    description: "Звук, що відтворюється при виявленні нових виключених Квестів."
+                },
+                newExcludedQuestAlertVolume: {
+                    label: "Гучність нового виключеного Квесту",
+                    description: "Гучність звуку нового виключеного Квесту."
+                },
+                questTiles: {
+                    label: "Плитки Квестів",
                     description: "Налаштуйте вигляд плиток Квестів на сторінці Квестів."
                 },
-                restyleQuestsUnclaimed: {
-                    label: "Колір незабраних Квестів",
-                    description: "Колір для плиток Квестів, нагороди за які ще не забрані."
+                questTileUnclaimedColor: {
+                    label: "Колір неотриманих плиток",
+                    description: "Колір плиток неотриманих Квестів."
                 },
-                restyleQuestsClaimed: {
-                    label: "Колір отриманих Квестів",
-                    description: "Колір для плиток вже завершених та отриманих Квестів."
+                questTileClaimedColor: {
+                    label: "Колір отриманих плиток",
+                    description: "Колір плиток отриманих Квестів."
                 },
-                restyleQuestsIgnored: {
-                    label: "Колір ігнорованих Квестів",
-                    description: "Колір для плиток Квестів, які ви вирішили ігнорувати."
+                questTileIgnoredColor: {
+                    label: "Колір ігнорованих плиток",
+                    description: "Колір плиток ігнорованих Квестів."
                 },
-                restyleQuestsExpired: {
-                    label: "Колір прострочених Квестів",
-                    description: "Колір для плиток Квестів, термін дії яких закінчився."
+                questTileExpiredColor: {
+                    label: "Колір завершених плиток",
+                    description: "Колір плиток завершених Квестів."
                 },
-                restyleQuestsGradient: {
-                    label: "Градієнт плиток Квестів",
-                    description: "Стиль градієнта, що використовується на плитках Квестів."
+                questTileGradient: {
+                    label: "Градієнт плиток",
+                    description: "Стиль градієнта в плитках Квестів."
                 },
-                restyleQuestsPreload: {
-                    label: "Попереднє завантаження ресурсів",
-                    description: "Намагатися заздалегідь завантажити зображення для плиток Квестів."
+                questTilePreload: {
+                    label: "Попереднє завантаження плиток",
+                    description: "Намагається заздалегідь завантажити ресурси плиток Квестів."
                 },
                 reorderQuests: {
-                    label: "Сортування Квестів",
-                    description: "Сортуйте Квести за статусом. Має містити: UNCLAIMED, CLAIMED, IGNORED, EXPIRED."
+                    label: "Порядок Квестів",
+                    description: "Сортує Квести за статусом."
+                },
+                questOrder: {
+                    label: "Порядок Квестів",
+                    description: "Порядок сортування груп статусів Квестів."
                 },
                 unclaimedSubsort: {
-                    label: "Підсортування незабраних",
-                    description: "Метод додаткового сортування для незабраних Квестів."
+                    label: "Підсортування неотриманих",
+                    description: "Метод підсортування неотриманих Квестів."
                 },
                 claimedSubsort: {
                     label: "Підсортування отриманих",
-                    description: "Метод додаткового сортування для отриманих Квестів."
+                    description: "Метод підсортування отриманих Квестів."
                 },
                 ignoredSubsort: {
                     label: "Підсортування ігнорованих",
-                    description: "Метод додаткового сортування для ігнорованих Квестів."
+                    description: "Метод підсортування ігнорованих Квестів."
                 },
                 expiredSubsort: {
-                    label: "Підсортування прострочених",
-                    description: "Метод додаткового сортування для прострочених Квестів."
+                    label: "Підсортування завершених",
+                    description: "Метод підсортування завершених Квестів."
                 },
-                unclaimedUnignoredQuests: {
-                    label: "Незабрані неігноровані Квести",
-                    description: "Відстежує кількість Квестів, які не є забраними і не є ігнорованими."
-                },
-                onQuestsPage: {
+                isOnQuestsPage: {
                     label: "На сторінці Квестів",
-                    description: "Чи знаходиться користувач на сторінці Квестів у даний момент."
-                },
-                triggerQuestsRerender: {
-                    label: "Оновити відображення Квестів",
-                    description: "Примусово перемалювати сторінку Квестів."
-                },
-                ignoredQuestProfile: {
-                    label: "Профіль ігнорування",
-                    description: "Який профіль використовувати для збереження ігнорованих Квестів."
+                    description: "Чи перебуває користувач зараз на сторінці Квестів."
                 },
                 rememberQuestPageSort: {
                     label: "Запам'ятовувати сортування",
-                    description: "Запам'ятовувати останній використаний метод сортування."
+                    description: "Запам'ятовує останнє використане сортування на сторінці Квестів."
                 },
                 rememberQuestPageFilters: {
                     label: "Запам'ятовувати фільтри",
-                    description: "Запам'ятовувати останній використані фільтри на сторінці Квестів."
+                    description: "Запам'ятовує останні використані фільтри на сторінці Квестів."
                 },
                 lastQuestPageSort: {
                     label: "Останнє сортування",
-                    description: "Зберігає останній вибраний метод сортування."
+                    description: "Останнє використане сортування на сторінці Квестів."
                 },
                 lastQuestPageFilters: {
                     label: "Останні фільтри",
-                    description: "Зберігає останні вибрані фільтри."
+                    description: "Останні використані фільтри на сторінці Квестів."
                 },
                 ignoredQuestIDs: {
                     label: "ID ігнорованих Квестів",
-                    description: "Масив ідентифікаторів Квестів, які позначені як ігноровані."
+                    description: "Список ID ігнорованих Квестів."
                 },
                 resumeQuestIDs: {
-                    label: "ID Квестів для автозавершення",
-                    description: "Масив ID Квестів, що зараз автоматично завершуються у фоні."
+                    label: "ID Квестів для відновлення",
+                    description: "Список ID Квестів, які автовиконуються або стоять у черзі у фоні."
+                },
+                acknowledgedNotices: {
+                    description: "Одноразові повідомлення, які користувач підтвердив.",
+                    label: "Підтверджені повідомлення"
+                },
+                settingsSearch: {
+                    description: "Пошук у налаштуваннях Questify.",
+                    label: "Пошук налаштувань"
+                },
+                hideNonAutoCompletableQuests: {
+                    description: "Приховувати незавершені завдання без підтримуваного й увімкненого автозавершення.",
+                    label: "Приховувати завдання без автозавершення"
+                },
+                preventVideoQuestsPausing: {
+                    description: "Не ставити відео на паузу, коли вікно завдання втрачає фокус.",
+                    label: "Заборона паузи відеозавдань"
+                },
+                hiddenQuestStatuses: {
+                    description: "Групи статусів завдань для приховування.",
+                    label: "Приховані статуси завдань"
                 }
             },
-            button: {
-                questInProgressWithTime: "Завершується ({{remainTime}})",
-                completing: "Завершення",
-                resume: "Продовжити (~{{remainTime}})",
-                complete: "Завершити {{remainTime}}",
-                completeImmediate: "Завершити (миттєво)",
-                completed: "Завершено"
-            },
-            reward: {
-                orbs: "{{completingText}} за {{orbQuantity}} сфер.",
-                article: "{{completingText}} за {{itemName}}.",
-                unrecognized: "{{completingText}} за невідомий тип нагороди."
-            },
-            notification: {
-                completed: {
-                    title: "Квест завершено",
-                    body: "Квест {{questName}} успішно завершено."
-                }
+            text: {
+                clearQuestQueue: "Очистити чергу завдань",
+                hideIncompleteQuestsWith: "Приховувати незавершені завдання зі статусом «не отримано» чи «ігнорується», якщо на цій платформі немає підтримуваного й увімкненого в списку типів завдання автозавершення. Отримані, прострочені й завершені завдання не зачіпаються. Щоб приховати їх, використовуйте параметри прихованих статусів.",
+                discordForcesYouTo: "Discord вимагає, щоб клієнт був активним, інакше відеозавдання не відтворюють відео.",
+                hideNonAutoCompletable: "Приховувати завдання без автозавершення:",
+                preventVideoQuestsFrom: "Не ставити відеозавдання на паузу при втраті фокуса:",
+                thePunishmentAlsoConsists: "Покарання також включає порушення стану облікового запису строком 2 роки за кожне порушення.",
+                dueToTheVarious: "Через різноманітні способи відстеження користувачів Discord реально уникнути виявлення неможливо. Якщо продовжите, зважайте, що Discord, найімовірніше, колись це виявить.",
+                enrollInQuest: "Записатися на завдання",
+                hidden: "Приховано",
+                selectingAnOccupiedPosition: "Вибір зайнятої позиції міняє статуси місцями. Приховані статуси прибираються зі списків завдань.",
+                searchQuestifySettings: "Пошук налаштувань Questify",
+                searchQuestifySettings2: "Пошук налаштувань Questify...",
+                noMatchingSettings: "Відповідних налаштувань немає.",
+                questifyNoticeAugust7th: "Повідомлення Questify — 7 серпня 2026",
+                keepUsingDangerousQuestify: "Продовжити використовувати небезпечні налаштування Questify",
+                disableDangerousQuestifySettings: "Вимкнути небезпечні налаштування Questify",
+                questifyNoticeAugust26th: "Повідомлення Questify — 26 серпня 2026",
+                areYouSure: "Ви впевнені?",
+                thePunishmentAppearsLimited: "Покарання, схоже, обмежується втратою доступу до завдань і нагород, але Discord може посилити його будь-коли.",
+                queueAllQuests: "Поставити всі завдання в чергу",
+                inProgress: "Виконується",
+                rateLimited: "Обмежено",
+                preventsVideoPausing: "Цей параметр не дає відео ставати на паузу, щоб прогрес ішов як зазвичай.",
+                appliesOnlyToVideoQuests: "Цей параметр застосовується лише під час ручного виконання відеозавдань.",
+                knownToPunish: "Відомо, що Discord карає користувачів скриптів і плагінів, які змінюють виконання завдань. Зміна виконання завдань порушує",
+                punishmentConsists: "Покарання полягає в тимчасовій або постійній втраті доступу до завдань і нагород за них.",
+                questBanSystem: "Discord запровадив систему блокування завдань, яка тимчасово або назавжди обмежить ваш доступ до виконання завдань і отримання нагород, якщо виявиться, що ви виконуєте їх неофіційними способами. Зміна виконання завдань порушує їхні",
+                begunPunishing: "Discord почав карати користувачів скриптів і плагінів, які змінюють виконання завдань. Зміна виконання завдань порушує їхні",
+                dueToRateLimits: " через обмеження частоти запитів"
             }
         },
         questionMarkReplacement: {
@@ -8230,6 +8853,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Зберігати як GIF",
                     description: "Зберігати як GIF за замовчуванням"
                 }
+            },
+            text: {
+                quotePreview: "Попередній перегляд цитати"
             }
         },
         randomVoice: {
@@ -8287,7 +8913,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                     server: "Недійсний сервер"
                 }
             },
+            keybind: {
+                label: "Гаряча клавіша",
+                recording: "Запис...",
+                reset: "Скинути"
+            },
             option: {
+                keybindEnabled: {
+                    label: "Гарячу клавішу ввімкнено",
+                    description: "Показати налаштування гарячої клавіші випадкового голосового каналу"
+                },
                 userAmountOperation: {
                     label: "Операція над кількістю користувачів",
                     description: "Виберіть логіку для кількості людей"
@@ -8379,6 +9014,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             alert: {
                 failed: "Не вдалося знайти відповідний голосовий канал!"
+            },
+            toast: {
+                failedToFindA: "Не вдалося знайти голосовий канал.",
+                voiceChannelIsUnavailable: "Голосовий канал недоступний."
+            },
+            text: {
+                userCount: "{{count}} користувач",
+                usersCount: "Користувачів: {{count}}"
             }
         },
         reactErrorDecoder: {
@@ -8477,6 +9120,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noLongerFriend: "Ви більше не друзі з {{user}}.",
                 friendRequestRevoked: "Запит у друзі від {{user}} було відкликано.",
                 ok: "ОК"
+            },
+            text: {
+                relationshipNotifier: "Сповіщення про стосунки"
             }
         },
         remix: {
@@ -8500,7 +9146,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ellipse: "Еліпс",
                 line: "Лінія",
                 arrow: "Стрілка",
-                fill: "Заливка"
+                fill: "Заливка",
+                image: "Зображення"
             }
         },
         repeatMessages: {
@@ -8534,12 +9181,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Шукати текст",
                 searchWith: "Шукати через {{name}}"
+            },
+            text: {
+                google: "Google"
             }
         },
         replyPingControl: {
             name: "ReplyPingControl",
-            description: "Контролюйте, чи отримувати пінг при відповіді на ваші повідомлення, з можливістю білого списку",
+            description: "Керуйте тим, чи отримувати завжди або ніколи згадки під час відповідей на повідомлення, з функціями білого та чорного списків",
             option: {
+                replyPingBlacklist: {
+                    label: "Чорний список згадок у відповідях",
+                    description: "Розділений комами список ID користувачів, від яких ви ніколи не хочете отримувати згадки у відповідях"
+                },
                 alwaysPingOnReply: {
                     label: "Завжди пінгувати при відповіді",
                     description: "Завжди отримувати сповіщення, коли хтось відповідає на ваше повідомлення"
@@ -8564,6 +9218,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Шукати зображення",
                 all: "Шукати всюди"
+            },
+            text: {
+                all: "Усі"
             }
         },
         reviewDB: {
@@ -8671,6 +9328,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             profile: {
                 optedOut: "Користувач відмовився",
                 noReviews: "Немає відгуків"
+            },
+            toast: {
+                youCannotVoteOn: "Не можна голосувати за власний відгук.",
+                networkErrorFailedTo: "Помилка мережі: не вдалося підключитися до ReviewDB.",
+                pleaseAuthorizeToVote: "Авторизуйтеся, щоб голосувати за відгуки.",
+                requestFailed: "ReviewDB: запит завершився зі статусом {{status}}"
+            },
+            text: {
+                ok: "Гаразд",
+                updateReviewFor: "Оновити відгук про @{{name}}",
+                reviewUser: "Залишити відгук про @{{name}}",
+                system: "Система",
+                reviewCount: "(відгуків: {{count}})"
             }
         },
         richMagnetLinks: {
@@ -8764,46 +9434,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
         },
-        rpcStats: {
-            name: "RPCStats",
-            description: "Відображає вашу статистику як ігрову активність (RPC)",
-            option: {
-                assetURL: {
-                    label: "URL зображення",
-                    description: "Зображення для RPC. Якщо порожньо — буде використано ваш аватар"
-                },
-                rpcTitle: {
-                    label: "Заголовок RPC",
-                    description: "Назва вашої активності"
-                },
-                statDisplay: {
-                    label: "Що відображати",
-                    description: "Яку статистику показувати?",
-                    today: "Кількість повідомлень за сьогодні",
-                    alltime: "Загальна кількість повідомлень",
-                    listened: "Альбом тижня, що слухали найбільше"
-                },
-                lastFMApiKey: {
-                    label: "Last.fm API Key",
-                    description: "Ваш API ключ Last.fm"
-                },
-                lastFMUsername: {
-                    label: "Користувач Last.fm",
-                    description: "Ваш нікнейм на Last.fm"
-                },
-                albumCoverImage: {
-                    label: "Обкладинка альбому",
-                    description: "Використовувати обкладинку альбому як іконку RPC? (Для статистики Last.fm)"
-                },
-                lastFMStatFormat: {
-                    label: "Формат статистики Last.fm",
-                    description: "Як форматувати текст? $album заміниться на альбом, $artist — на виконавця"
-                }
-            },
-            noInfo: "Зараз немає інформації :(",
-            messagesToday: "Повідомлень за сьогодні: {{count}}",
-            messagesAllTime: "Всього повідомлень: {{count}}"
-        },
         saveFavoriteGIFs: {
             name: "SaveFavouritedGIFs",
             description: "Експорт посилань на ваші улюблені GIF",
@@ -8868,7 +9498,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 maxMessagesReached: "Досягнуто ліміт {{max}} повідомлень на хвилину для каналу",
                 messageScheduled: "Повідомлення заплановано!",
                 messageRemoved: "Заплановане повідомлення видалено",
-                allCleared: "Всі заплановані повідомлення очищено"
+                allCleared: "Всі заплановані повідомлення очищено",
+                scheduledMessageSentTo: "Заплановане повідомлення надіслано {{name}}"
             },
             button: {
                 tooltipOn: "Режим планування УВІМК (клік — вимкнути, ПКМ — список)",
@@ -8924,20 +9555,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Відтворювати тільки Snow Halation Theme"
                 }
             }
-        },
-        summaries: {
-            name: "Summaries",
-            description: "Вмикає експериментальну функцію 'Підсумки' на кожному сервері, відображаючи створені ШІ резюме розмов",
-            option: {
-                summaryExpiryThresholdDays: {
-                    label: "Термін зберігання підсумків (днів)",
-                    description: "Час у днях, після якого підсумок видаляється. Зберігається до 50 підсумків на канал."
-                }
-            }
-        },
-        selfForward: {
-            name: "SelfForward",
-            description: "Додає поточний канал у список для швидкої пересилки повідомлень"
         },
         sendTimestamps: {
             name: "SendTimestamps",
@@ -9002,7 +9619,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 serverBoosts: "Бусти сервера",
                 channels: "Канали",
-                roles: "Ролі"
+                roles: "Ролі",
+                boostLevel: "{{count}} (Рівень {{level}})"
             }
         },
         serverListIndicators: {
@@ -9061,6 +9679,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bgOpacity: {
                     label: "Прозорість фону",
                     description: "Прозорість фону блоку коду"
+                },
+                ignoredLanguages: {
+                    label: "Ігноровані мови",
+                    description: "Список мов через кому, які залишаються стандартним блокам коду Discord"
                 }
             },
             button: {
@@ -9079,6 +9701,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noShiftPin: {
                     label: "Закріплення без Shift",
                     description: "Видалити вимогу тримати Shift для закріплення повідомлення."
+                },
+                noQuickReacts: {
+                    description: "Приховувати швидкі реакції. За замовчуванням повне меню приховує кнопки швидких реакцій.",
+                    label: "Без швидких реакцій"
                 }
             }
         },
@@ -9161,6 +9787,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     compact: "Компактний",
                     cozy: "Затишний",
                     roomy: "Просторий"
+                },
+                showGithubOrgs: {
+                    description: "Показувати організації GitHub, до яких належить користувач",
+                    label: "Показувати організації GitHub"
+                },
+                showOnModal: {
+                    description: "Показувати підключені облікові записи в повному вікні профілю",
+                    label: "Показувати у вікні"
                 }
             }
         },
@@ -9295,7 +9929,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 memberList: {
                     label: "Список учасників",
-                    description: "Використовувати формат імен у списку учасників."
+                    description: "Показувати перше доступне ім'я з вашого формату в списку учасників, ОП, друзів і «Зараз активні»."
                 },
                 profilePopout: {
                     label: "Спливаюче вікно профілю",
@@ -9349,6 +9983,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Власні імена тільки в ПП",
                     description: "Показувати власні SMYN-нікнейми лише в приватних повідомленнях."
                 },
+                alwaysShowEffects: {
+                    label: "Завжди анімувати ефекти",
+                    description: "Завжди показувати ефекти так, ніби ви навели курсор."
+                },
                 includedNames: {
                     label: "Включені імена",
                     description: "Порядок відображення імен. Доступні: {user}, {display}, {nick}, {friend}. Можна вказати через кому для резервних варіантів."
@@ -9376,6 +10014,42 @@ const translations: MatchStructure<typeof enTranslations> = {
                 triggerNameRerender: {
                     label: "Оновити відображення імен",
                     description: "Перемкніть, щоб примусово оновити імена в інтерфейсі."
+                },
+                searchAutocomplete: {
+                    description: "Показувати перше доступне ім'я з вашого формату в автодоповненні згадок і пошуку.",
+                    label: "Автодоповнення пошуку"
+                },
+                styleDirectMessagesList: {
+                    description: "Показувати ефекти імені в невибраних записах без наведення. Якщо вимкнено, вибрані й наведені записи все одно стилізуються.",
+                    label: "Стилізувати список ОП"
+                },
+                styleDirectMessagesMessages: {
+                    description: "Показувати ефекти імені в авторів повідомлень без наведення. Якщо вимкнено, наведені імена все одно стилізуються.",
+                    label: "Стилізувати повідомлення в ОП"
+                },
+                styleFriendsList: {
+                    description: "Показувати ефекти імені без наведення. Якщо вимкнено, наведені записи все одно стилізуються.",
+                    label: "Стилізувати список друзів"
+                },
+                styleActiveNow: {
+                    description: "Показувати ефекти імені без наведення. Якщо вимкнено, наведені записи все одно стилізуються.",
+                    label: "Стилізувати «Зараз активні»"
+                },
+                ignoreEffects: {
+                    description: "Для неосновних імен використовувати лише колір основної ролі й без ефектів імені.",
+                    label: "Ігнорувати ефекти"
+                },
+                animateEffects: {
+                    description: "Анімувати градієнти ролей та ефекти імені в неосновних іменах. Вимикається параметром «Ігнорувати ефекти» та зменшенням руху.",
+                    label: "Анімувати ефекти"
+                },
+                alwaysAnimateEffects: {
+                    description: "Примусово анімувати ефекти імені, коли вони вже видимі, навіть без наведення.",
+                    label: "Завжди анімувати ефекти"
+                },
+                gradientGlow: {
+                    description: "Додавати світіння анімованим градієнтам користувачів, як у градієнтів ролей сервера.",
+                    label: "Світіння градієнта"
                 }
             },
             modal: {
@@ -9389,6 +10063,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nickname: "SMYN-нікнейм",
                 reset: "Скинути SMYN-нікнейм",
                 cancel: "Скасувати"
+            },
+            text: {
+                save: "Зберегти",
+                unknown: "Невідомо"
             }
         },
         showTimeoutDuration: {
@@ -9401,6 +10079,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     tooltip: "У підказці",
                     inline: "Поруч із іконкою"
                 }
+            },
+            text: {
+                timeoutRemaining: "до кінця тайм-ауту"
             }
         },
         showResourceChannels: {
@@ -9559,7 +10240,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 hidden: "Набір тексту приховано ({{location}})",
                 visible: "Набір тексту видно ({{location}})",
-                global: "Набір тексту видно (Глобально)"
+                global: "Набір тексту видно (Глобально)",
+                voiceChannel: "Набір тексту завжди видно в чаті підключеного голосового каналу",
+                temporary: "Набір тексту тимчасово видно в цьому каналі через нещодавнє повідомлення"
             },
             option: {
                 enabledGlobally: {
@@ -9610,6 +10293,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Приховано за замовчуванням",
                     description: "Якщо увімкнено, набір тексту буде приховано всюди, крім місць зі списку виключень."
                 },
+                alwaysEnableInActiveVoiceChat: {
+                    label: "Завжди вмикати в активному голосовому чаті",
+                    description: "Завжди показувати ваш індикатор набору тексту під час набору в голосовому каналі, до якого ви підключені."
+                },
+                temporaryEnableThresholdServers: {
+                    label: "Поріг тимчасового ввімкнення (сервери)",
+                    description: "Тимчасово показувати ваш індикатор набору тексту протягом указаної кількості секунд після надсилання повідомлення в каналі сервера. Якщо індикатор уже видно в каналі, це налаштування не діє."
+                },
+                temporaryEnableThresholdDirectMessages: {
+                    label: "Поріг тимчасового ввімкнення (особисті повідомлення)",
+                    description: "Тимчасово показувати ваш індикатор набору тексту протягом указаної кількості секунд після надсилання повідомлення в ОП або груповому ОП. Якщо індикатор уже видно в каналі, це налаштування не діє."
+                },
                 enabledLocations: {
                     label: "Список увімкнення",
                     description: "Увімкнути функцію для цих ID (ПП, канали, сервери)."
@@ -9618,6 +10313,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Список вимкнення",
                     description: "Вимкнути функцію для цих ID."
                 }
+            },
+            text: {
+                silentTyping: "Тихий набір",
+                enabled: "Увімкнено",
+                chatBarIndicators: "Індикатори в полі чату",
+                membersListIndicators: "Індикатори в списку учасників",
+                guild: "Сервер",
+                channel: "Канал",
+                global: "Глобально"
             }
         },
         snowfall: {
@@ -9714,7 +10418,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         splitLargeMessages: {
             name: "SplitLargeMessages",
-            description: "Розбиває великі повідомлення на кілька частин, щоб вони відповідали ліміту Discord.",
+            description: "Розбиває надто великі повідомлення на частини за розміром Discord перед надсиланням.",
             option: {
                 maxLength: {
                     label: "Максимальна довжина",
@@ -9726,7 +10430,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 sendDelay: {
                     label: "Затримка надсилання",
-                    description: "Пауза між кожною частиною (в секундах)."
+                    description: "Мінімальна затримка між частинами в секундах."
                 },
                 hardSplit: {
                     label: "Жорстке розбиття",
@@ -9734,32 +10438,26 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 splitInSlowmode: {
                     label: "Розбивати в повільному режимі",
-                    description: "Чи розбивати повідомлення, якщо в каналі діє повільний режим?"
+                    description: "Дозволяти розбиття в повільному режимі, якщо його затримка не перевищує заданий максимум."
                 },
                 slowmodeMax: {
                     label: "Макс. повільний режим",
-                    description: "Максимально допустимий час повільного режиму для розбиття."
-                }
-            }
-        },
-        spotifyActivityToggle: {
-            name: "SpotifyActivityToggle",
-            description: "Додає кнопку для перемикання видимості активності Spotify.",
-            tooltip: {
-                enable: "Увімкнути активність Spotify",
-                disable: "Вимкнути активність Spotify"
-            },
-            option: {
-                location: {
-                    label: "Розташування",
-                    description: "Де показувати кнопку перемикання Spotify",
-                    panel: "Поруч із кнопками звуку",
-                    toolbox: "Plexcord Toolbox"
+                    description: "Максимальна тривалість повільного режиму, допустима під час розбиття повідомлень."
                 },
-                activityStatus: {
-                    label: "Статус активності",
-                    description: "Поточний статус вашої активності Spotify"
+                splitMode: {
+                    description: "Надавати перевагу цій межі під час розбиття повідомлення.",
+                    label: "Режим розбиття"
                 }
+            },
+            toast: {
+                cannotSplitThisMessage: "Неможливо розбити це повідомлення через повільний режим каналу.",
+                onlySentLengthMessage: "Надіслано лише {{sent}}/{{length}} частин повідомлення.",
+                unsentCopied: "Невідправлені частини повідомлення скопійовано в буфер обміну."
+            },
+            text: {
+                newlines: "Перенесення рядків",
+                spaces: "Пробіли",
+                strictCharacterLimit: "Суворий ліміт символів"
             }
         },
         spotifyCrack: {
@@ -9845,7 +10543,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             context: {
                 edit: "Редагувати пресети",
-                set: "Встановити кастомний статус"
+                set: "Встановити кастомний статус",
+                delete: "Видалити пресет"
             },
             notification: {
                 successfully: "Статус успішно збережено"
@@ -9912,11 +10611,39 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 blockSticker: "Заблокувати стікер",
                 unblockSticker: "Розблокувати стікер"
+            },
+            text: {
+                failedToRender: "Не вдалося відобразити :("
             }
         },
         stickerPaste: {
             name: "StickerPaste",
             description: "При виборі стікера він вставляється в поле введення тексту, а не надсилається миттєво"
+        },
+        streaks: {
+            name: "Streaks",
+            description: "Показує серію поруч із користувачем, якщо ви обмінюєтеся ПП кілька днів поспіль.",
+            tooltip: "Серія: {{count}} дн.",
+            tooltipExpiring: "Серія: {{count}} дн. — напишіть сьогодні, щоб її зберегти!",
+            option: {
+                account: {
+                    description: "Увійти в API Streaks або вийти з нього. Серії зберігаються в API, тому для їх обліку потрібно увійти.",
+                    login: "Увійти в API Streaks",
+                    logout: "Вийти з API Streaks"
+                },
+                eliteColor: "Колір елітної серії (100+ дн.)",
+                diamondColor: "Колір діамантової серії (60+ дн.)",
+                platinumColor: "Колір платинової серії (45+ дн.)",
+                goldColor: "Колір золотої серії (30+ дн.)",
+                silverColor: "Колір срібної серії (14+ дн.)",
+                bronzeColor: "Колір бронзової серії (7+ дн.)",
+                defaultColor: "Колір серії за замовчуванням (1+ дн.)"
+            },
+            toast: {
+                authFailed: "Не вдалося авторизуватися: {{error}}",
+                failedToAuthorizeMessage: "Не вдалося авторизуватися: {{message}}",
+                authorizationExpired: "Термін авторизації Streaks минув. Авторизуйтеся знову в налаштуваннях плагіна Streaks."
+            }
         },
         streamerModeOnStream: {
             name: "StreamerModeOnStream",
@@ -9924,27 +10651,27 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         streamingCodecDisabler: {
             name: "StreamingCodecDisabler",
-            description: "Вимкніть кодеки для трансляцій на свій вибір",
+            description: "Вимкніть вибрані відеокодеки для трансляцій і камер.",
             option: {
                 disableAv1Codec: {
                     label: "Вимкнути AV1",
-                    description: "Заборонити Discord використовувати кодек AV1 для стрімів."
+                    description: "Заборонити Discord використовувати AV1 для трансляцій і камер."
                 },
                 disableH265Codec: {
                     label: "Вимкнути H265",
-                    description: "Заборонити Discord використовувати кодек H265 для стрімів."
+                    description: "Заборонити Discord використовувати H265 для трансляцій і камер."
                 },
                 disableH264Codec: {
                     label: "Вимкнути H264",
-                    description: "Заборонити Discord використовувати кодек H264 для стрімів."
+                    description: "Заборонити Discord використовувати H264 для трансляцій і камер."
                 },
                 disableVP8Codec: {
                     label: "Вимкнути VP8",
-                    description: "Заборонити Discord використовувати кодек VP8 для стрімів."
+                    description: "Заборонити Discord використовувати VP8 для трансляцій і камер."
                 },
                 disableVP9Codec: {
                     label: "Вимкнути VP9",
-                    description: "Заборонити Discord використовувати кодек VP9 для стрімів."
+                    description: "Заборонити Discord використовувати VP9 для трансляцій і камер."
                 }
             }
         },
@@ -9990,6 +10717,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             modal: {
+                name: "Назва",
+                nameDescription: "Необов'язкова назва, щоб легше впізнати це правило.",
+                search: "Пошук правила...",
+                noResults: "Немає правил, що відповідають пошуку.",
                 title: "Тестування правил",
                 find: "Знайти",
                 findRegex: "Шаблон regex",
@@ -10004,6 +10735,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 add: "Додати правило",
                 empty: "Порожнє правило",
                 rule: "Правило",
+            },
+            text: {
+                optionallyOnlyApplyThis: "За потреби застосовувати це правило, лише якщо повідомлення містить цей текст.",
+                emptyRule: "Порожнє правило {{number}}",
+                ruleWithFind: "Правило {{number}} - {{find}}"
             }
         },
         themeAttributes: {
@@ -10089,6 +10825,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 askedTimezone: {
                     label: "Запитували про пояс",
                     description: "Чи було вже запропоновано користувачу встановити його пояс"
+                },
+                recipientTimezoneInDms: {
+                    label: "Часовий пояс співрозмовника в ОП",
+                    description: "В ОП показувати часовий пояс співрозмовника біля ваших повідомлень"
+                },
+                showLocalTimezone: {
+                    label: "Показувати місцевий часовий пояс",
+                    description: "Показувати місцевий часовий пояс замість слова «місцевий»"
                 }
             },
             modal: {
@@ -10097,6 +10841,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 selectPlaceholder: "Оберіть пояс із списку",
                 delete: "Видалити часовий пояс",
                 save: "Зберегти"
+            },
+            text: {
+                invalidResponseFormat: "Недійсний формат відповіді"
             }
         },
         toastNotifications: {
@@ -10157,6 +10904,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 determineServerNotifications: {
                     label: "Враховувати налаштування сервера",
                     description: "Показувати сповіщення лише якщо вони дозволені в налаштуваннях сервера Discord"
+                },
+                respectDoNotDisturb: {
+                    label: "Враховувати «Не турбувати»",
+                    description: "Не показувати сповіщення, коли ваш статус «Не турбувати»."
                 },
                 directMessages: {
                     label: "Приватні повідомлення",
@@ -10244,11 +10995,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "DeepL вимагає платний API ключ (Pro)",
                     descriptionWeb: "Сервіс перекладу (не підтримується у веб-версії!)",
                     google: "Google Translate",
-                    deepl: "DeepL Free",
-                    deeplPro: "DeepL Pro"
+                    deepl: "DeepL Безкоштовний - Потрібен ключ API",
+                    deeplPro: "DeepL Pro - Потрібен ключ API",
+                    kagi: "Kagi Перекладач - Потрібен ключ API"
+                },
+                kagiSession: {
+                    label: "Сесія Kagi",
+                    description: "Отримайте токен сесії за адресою https://kagi.com/settings?p=user_details"
                 },
                 deeplApiKey: {
-                    label: "DeepL API Key",
+                    label: "API-ключ DeepL",
                     description: "Ваш API ключ DeepL",
                     placeholder: "Отримайте ключ на deepl.com/your-account"
                 },
@@ -10284,6 +11040,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     cancel: "Зрозуміло",
                     secondaryConfirm: "Більше не показувати"
                 }
+            },
+            button: {
+                manageLanguages: "Налаштувати мови перекладу й автопереклад"
             }
         },
         typingIndicator: {
@@ -10596,6 +11355,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Розмір зображення",
                     description: "Яку роздільну здатність використовувати"
                 }
+            },
+            text: {
+                viewAvatarDecoration: "Переглянути прикрасу аватара"
             }
         },
         viewRaw: {
@@ -10616,11 +11378,23 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Змінити дію кнопки для перегляду сирих даних.",
                     left: "Лівий клік — перегляд.",
                     right: "Правий клік — перегляд."
+                },
+                messageContextMenu: {
+                    description: "Показувати в контекстному меню повідомлення",
+                    label: "Контекстне меню повідомлення"
+                },
+                sortKeys: {
+                    description: "Сортувати ключі необроблених даних за абеткою.",
+                    label: "Сортувати ключі"
+                },
+                stripSensitiveData: {
+                    description: "Видаляти з необроблених даних конфіденційні відомості, як-от e-mail і номер телефону.",
+                    label: "Видаляти конфіденційні дані"
                 }
             },
             modal: {
                 title: "Перегляд сирих даних",
-                content: "Текст (Content)",
+                content: "Вміст повідомлення",
                 data: "Дані {{type}}",
                 copied: "Дані {{type}} скопійовано!",
                 copy: "Копіювати {{type}} JSON",
@@ -10633,6 +11407,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 guild: "Сервер",
                 role: "Роль",
                 user: "Користувач"
+            },
+            text: {
+                copyTypeData: "Копіювати дані {{type}}",
+                rawTypeData: "Необроблені дані {{type}}",
+                messageData: "Дані повідомлення"
             }
         },
         voiceButtons: {
@@ -10779,11 +11558,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 noiseSuppression: {
                     label: "Приглушення шуму",
-                    description: "Noise Suppression"
+                    description: "Шумоподавлення"
                 },
                 echoCancellation: {
                     label: "Ехопоглинання",
-                    description: "Echo Cancellation"
+                    description: "Ехоподавлення"
                 }
             },
             notification: {
@@ -10811,6 +11590,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 pause: "Пауза",
                 recording: "ЗАПИС",
                 send: "Надіслати",
+            },
+            text: {
+                convertioWebConverter: "веб-конвертер convertio"
             }
         },
         volumeBooster: {
@@ -10820,39 +11602,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 multiplier: {
                     label: "Множник",
                     description: "Наскільки сильно підсилювати звук"
-                }
-            }
-        },
-        wallpaperFree: {
-            name: "WallpaperFree",
-            description: "Відтворення старого експерименту Discord; встановлюйте фонові шпалери для будь-якого каналу, користувача чи сервера.",
-            option: {
-                globalDefault: {
-                    label: "Глобальний фон",
-                    description: "Фон за замовчуванням для всіх каналів."
-                },
-                stylingTips: {
-                    label: "Поради зі стилізації"
-                }
-            },
-            context: {
-                setWallpaper: "Встановити шпалери",
-                removeWallpaper: "Видалити шпалери"
-            },
-            modal: {
-                set: "Встановлення шпалер",
-                image: "URL зображення",
-                cancel: "Скасувати",
-                apply: "Застосувати",
-                global: {
-                    set: "Встановити глобальний фон",
-                    remove: "Видалити глобальний фон",
-                    reset: "Скинути всі дані шпалер"
-                },
-                web: {
-                    info: "Ви можете використовувати локальні файли, розмістивши їх у директорії тем Plexcord за посиланням plexcord:///themes/filename.ext",
-                    open: "Відкрити папку тем",
-                    quickCSS: "Відкрити QuickCSS"
                 }
             }
         },
@@ -10868,7 +11617,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webKeybinds: {
             name: "WebKeybinds",
-            description: "Додає гарячі клавіші, яких бракує у браузері: Ctrl+T, Ctrl+Tab, перехід по цифрах тощо. Повноцінно працює лише в Plextron/Legcord."
+            description: "Повертає сполучення клавіш, яких немає у вебверсії Discord. Повністю працює лише в Plextron/Legcord, а не в браузері",
+            option: {
+                showNavigationButtons: {
+                    description: "Показувати кнопки навігації назад/вперед у заголовку вікна.",
+                    label: "Показувати кнопки навігації"
+                },
+                overrideCommonKeybinds: {
+                    description: "Дозволяє Discord перевизначати найпоширеніші сполучення для вкладок (ctrl+t, ctrl+shift+t, ctrl+tab, ctrl+shift+tab, ctrl+n). Працює лише в деяких браузерах, де сполучення сайтів мають пріоритет.",
+                    label: "Перевизначати поширені сполучення"
+                }
+            }
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
@@ -10887,6 +11646,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 avatarClick: {
                     label: "Клік по аватару",
                     description: "Дозволити відкривати профілі через клік по аватару в реакціях"
+                },
+                clickableAvatars: {
+                    description: "Якщо ввімкнено, натискання на аватар користувача, що відреагував, відкриє його профіль замість додавання реакції",
+                    label: "Клікабельні аватари"
                 }
             }
         },
@@ -11003,6 +11766,2447 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "YouTubeDescription",
             description: "Додає опис відео безпосередньо у вбудовані плеєри YouTube у чаті"
         },
+        addAttachments: {
+            name: "AddAttachments",
+            description: "Дозволяє додавати нові вкладення під час редагування повідомлень",
+            toast: {
+                youCannotAddMore: "Ви не можете додати більше вкладень до цього повідомлення.",
+                youCanOnlyAdd: "До цього повідомлення можна додати ще вкладень: {{count}}.",
+                uploadingThisCanTake: "Завантаження, це може зайняти деякий час...",
+                addedOne: "Вкладення успішно додано!",
+                addedMany: "Вкладення успішно додано!"
+            },
+            text: {
+                addAttachments: "Додати вкладення"
+            }
+        },
+        advancedPermissions: {
+            option: {
+                simplifiedCard: {
+                    description: "Що робити зі спрощеною карткою дозволів Discord",
+                    label: "Спрощена картка",
+                    hide: "Приховати",
+                    collapse: "Зробити згортальною",
+                    show: "Залишити видимою"
+                },
+                collapsedByDefault: {
+                    description: "Починати зі згорнутими спрощеними дозволами.",
+                    label: "Згорнуто за замовчуванням"
+                }
+            },
+            name: "AdvancedPermissions",
+            description: "Показує розширену картку дозволів за замовчуванням.",
+            text: {
+                simplifiedPermissions: "Спрощені дозволи"
+            }
+        },
+        autoJumpToMessage: {
+            option: {
+                onlyWhenUnfocused: {
+                    description: "Автоматично переходити до повідомлень лише коли вікно Discord не у фокусі.",
+                    label: "Лише без фокуса"
+                }
+            },
+            name: "AutoJumpToMessage",
+            description: "Автоматично відкриває канал із новими повідомленнями."
+        },
+        betterForwards: {
+            text: {
+                serverIconForName: "Значок сервера {{name}}",
+                messageAttachments: "Вкладення повідомлення",
+                messageTextWillNot: "Текст повідомлення не пересилатиметься, якщо цей параметр вимкнено",
+                forwardEverything: "Переслати все",
+                viewServer: "Переглянути сервер",
+                embed: "Вбудовування",
+                embedNumber: "Вбудовування {{number}}",
+                image: "Зображення",
+                video: "Відео",
+                serverIcon: "Значок сервера {{name}}",
+                dmIcon: "Значок ОП {{name}}",
+                groupDmIcon: "Значок групового ОП {{name}}"
+            },
+            option: {
+                resendOnFail: {
+                    description: "Спробує повторно надіслати переслане повідомлення, якщо пересилання не вдалося. Може спричинити небажані згадки або спам. Обходить обмеження NSFW.",
+                    label: "Повторити в разі помилки"
+                },
+                forwardPreface: {
+                    description: "Чим має починатися переслане повідомлення",
+                    label: "Префікс пересилання"
+                },
+                dontFollowForwards: {
+                    description: "Після пересилання одного повідомлення не переходити до нього. Утримуйте Shift, щоб ігнорувати цю поведінку.",
+                    label: "Не переходити до пересланих"
+                },
+                selfForward: {
+                    description: "Показувати поточний канал у спливному списку пересилання.",
+                    label: "Пересилання собі"
+                }
+            },
+            name: "BetterForwards",
+            description: "Інструменти пересилання повідомлень, зокрема обхід NSFW і покращення інтерфейсу."
+        },
+        betterImageEditor: {
+            text: {
+                search: "Пошук",
+                searchSavedPictures: "Пошук серед збережених зображень",
+                clearTheSearch: "Очистити пошук",
+                savedPictures: "Збережені зображення",
+                removeName: "Вилучити {{name}}",
+                removeHoldShiftTo: "Вилучити. Утримуйте Shift, щоб пропустити підтвердження",
+                originals: "Оригінали",
+                putBackTheLast: "Повернути останнє",
+                forgetEveryRememberedCrop: "Забути всі запам'ятовані обрізання?",
+                yourPicturesStayEach: "Ваші зображення залишаться. Відтепер кожне відкриватиметься без кадрування, доки ви знову його не обріжете.",
+                forget: "Забути",
+                cancel: "Скасувати",
+                clearSavedPictures: "Очистити збережені зображення?",
+                everyPictureYouHave: "Усі збережені тут зображення буде видалено разом із запам'ятованим обрізанням кожного. Власний архів Discord та ваші поточні аватар і банер не зачіпаються.",
+                clear: "Очистити",
+                removeThisPicture: "Вилучити це зображення?",
+                remove: "Вилучити",
+                keepTheCroppedCopy: "Зберегти обрізану копію?",
+                itGoesOnThe: "Вона потрапить на полицю {{toLowerCase}} поруч з оригіналами.",
+                keep: "Зберегти",
+                noThanks: "Ні, дякую",
+                exportToAFile: "Експортувати у файл",
+                importFromAFile: "Імпортувати з файлу",
+                forgetRememberedFraming: "Забути запам'ятоване кадрування",
+                clearSavedPictures2: "Очистити збережені зображення",
+                croppedKind: "Обрізані: {{kind}}",
+                unpinName: "Відкріпити {{name}}",
+                pinName: "Закріпити {{name}}",
+                pinnedNeverDrops: "Закріплено, ніколи не зникне з полиці",
+                pinNeverDrops: "Закріпити, щоб ніколи не зникало з полиці",
+                nothingMatches: "Тут нічого не відповідає",
+                originalsEmpty: "Зображення, які ви вибираєте, вставляєте чи перетягуєте, з'являться тут",
+                croppedEmpty: "Зображення, які ви обрізаєте, з'являться тут",
+                forgotFraming: "Забуто кадрування {{count}} зображень",
+                nothingFramed: "Нічого не було кадровано",
+                pictureLibrary: "Бібліотека зображень",
+                addedPictures: "Додано зображень: {{count}}",
+                nothingNew: "У цьому файлі немає нічого нового",
+                shownOfTotal: "{{shown}} з {{total}}",
+                keptCount: "Збережено: {{count}}",
+                youAreWearingThis: "Зараз використовується",
+                removePictureBody: "{{name}} буде видалено зі збережених зображень разом із запам'ятованим обрізанням."
+            },
+            option: {
+                librarySize: {
+                    description: "Скільки зображень зберігати на кожній полиці.",
+                    label: "Розмір бібліотеки"
+                },
+                rememberCrop: {
+                    description: "Відновлює масштаб і положення, які ви востаннє використовували для зображення.",
+                    label: "Запам'ятовувати обрізання"
+                },
+                forgetFraming: {
+                    description: "Скинути всі запам'ятовані обрізання й відкривати кожне зображення так, як це робить Discord.",
+                    label: "Забути кадрування"
+                },
+                saveCropped: {
+                    description: "Зберігати копію кожного зображення після обрізання.",
+                    label: "Зберігати обрізані"
+                },
+                askBeforeSavingCropped: {
+                    description: "Спочатку запитувати замість автоматичного збереження обрізаної копії.",
+                    label: "Запитувати перед збереженням обрізаних"
+                },
+                transfer: {
+                    description: "Перенести зображення та кадрування кожного на інший пристрій.",
+                    label: "Перенесення"
+                },
+                clearLibrary: {
+                    description: "Видалити всі збережені зображення.",
+                    label: "Очистити бібліотеку"
+                }
+            },
+            name: "BetterImageEditor",
+            description: "Зберігає полицю з вашими зображеннями в редакторі аватара й банера та запам'ятовує, як ви обрізали кожне.",
+            toast: {
+                couldNotExportYour: "Не вдалося експортувати зображення",
+                couldNotReadThat: "Не вдалося прочитати цей файл",
+                thatPictureIsMissing: "Це зображення відсутнє",
+                thatPictureIsToo: "Це зображення завелике для Discord",
+                couldNotUseThat: "Не вдалося використати це зображення",
+                couldNotKeepThe: "Не вдалося зберегти обрізану копію"
+            },
+            kind: {
+                avatars: "аватари",
+                banners: "банери",
+                serverIcons: "значки серверів",
+                serverBanners: "банери серверів",
+                eventCovers: "обкладинки подій",
+                homeHeaders: "заголовки головної",
+                decorations: "прикраси",
+                widgetCovers: "обкладинки віджетів",
+                widgetImages: "зображення віджетів"
+            }
+        },
+        cancelFriendRequest: {
+            name: "CancelFriendRequest",
+            description: "Додає можливість скасовувати вихідні запити в друзі з профілів.",
+            text: {
+                cancelOutgoingFriendRequest: "Скасувати вихідний запит у друзі"
+            }
+        },
+        clipUpload: {
+            text: {
+                createdAtMustBe: "Дата створення має бути коректною.",
+                cancel: "Скасувати",
+                uploadClipFile: "Завантажити файл кліпу",
+                fileName: "Назва файлу",
+                title: "Назва",
+                epicMoment: "Епічний момент",
+                message: "Повідомлення",
+                checkOutThisClip: "Подивись цей кліп!",
+                spoiler: "Спойлер",
+                remix: "Ремікс",
+                thumbnail: "Мініатюра",
+                file: "Файл",
+                selectFile: "Вибрати файл",
+                parseClipMetadataFrom: "Отримати метадані кліпу з файлу",
+                selectFriends: "Вибрати друзів",
+                selectAGame: "Вибрати гру",
+                customApplicationId: "Користувацький ID застосунку",
+                createdAt: "Створено",
+                participants: "Учасники",
+                onlyTagPeopleWho: "Позначайте лише тих, хто був присутній і погодився бути в цьому кліпі.",
+                gameApplication: "Гра/застосунок",
+                uploadClipFile2: "Завантажити файл кліпу",
+                uploading: "Завантаження",
+                upload: "Завантажити",
+                noFileSelected: "Файл не вибрано",
+                couldNotPrepare: "Не вдалося підготувати вибраний файл.",
+                couldNotRead: "Не вдалося прочитати вибраний файл.",
+                couldNotUpdateMetadata: "Не вдалося оновити метадані кліпу.",
+                notCompatible: "Цей файл несумісний. Використовуйте MP4-кліп із відео H.264 і звуком AAC.",
+                uploadFailed: "Помилка завантаження.",
+                noUploadSlot: "Discord не надав слот для завантаження.",
+                uploadCanceled: "Завантаження скасовано.",
+                failedToUpload: "Не вдалося завантажити кліп.",
+                selectClipFile: "Вибрати файл кліпу",
+                mp4Video: "Відео MP4"
+            },
+            name: "ClipUpload",
+            description: "Додає кнопку для завантаження локального відео як кліпу Discord.",
+            toast: {
+                checkingClipFile: "Перевірка файлу кліпу.",
+                convertingClipFile: "Конвертація файлу кліпу.",
+                clipUploaded: "Кліп завантажено."
+            }
+        },
+        collapsibleUI: {
+            name: "CollapsibleUI",
+            description: "Вбудовані згортальні області для каналів, учасників, кнопок чату й області користувача.",
+            text: {
+                collapsibleUi: "Згортальний інтерфейс",
+                guildBar: "Панель серверів",
+                channelList: "Список каналів",
+                membersList: "Список учасників",
+                messageButtons: "Кнопки повідомлення",
+                titleBar: "Рядок заголовка",
+                headerBar: "Панель заголовка",
+                userArea: "Область користувача"
+            },
+            option: {
+                detachUserArea: {
+                    description: "Відкріплює область користувача, щоб її можна було вільно переміщувати, коли вона не згорнута.",
+                    label: "Відкріпити область користувача"
+                },
+                detachedUserAreaX: {
+                    description: "Зберігає положення x відкріпленої області користувача.",
+                    label: "Відкріплена область користувача X"
+                },
+                detachedUserAreaY: {
+                    description: "Зберігає положення y відкріпленої області користувача.",
+                    label: "Відкріплена область користувача Y"
+                },
+                guildBarCollapsed: {
+                    description: "Запам'ятовує панель серверів згорнутою.",
+                    label: "Панель серверів згорнута"
+                },
+                channelListCollapsed: {
+                    description: "Запам'ятовує список каналів згорнутим.",
+                    label: "Список каналів згорнуто"
+                },
+                membersListCollapsed: {
+                    description: "Запам'ятовує список учасників згорнутим.",
+                    label: "Список учасників згорнуто"
+                },
+                chatButtonsCollapsed: {
+                    description: "Запам'ятовує ряд кнопок повідомлення згорнутим.",
+                    label: "Кнопки чату згорнуто"
+                },
+                titleBarCollapsed: {
+                    description: "Запам'ятовує рядок заголовка згорнутим.",
+                    label: "Рядок заголовка згорнуто"
+                },
+                headerBarCollapsed: {
+                    description: "Запам'ятовує панель заголовка згорнутою.",
+                    label: "Панель заголовка згорнуто"
+                },
+                userAreaCollapsed: {
+                    description: "Запам'ятовує область користувача згорнутою.",
+                    label: "Область користувача згорнуто"
+                }
+            }
+        },
+        customCommands: {
+            text: {
+                cancel: "Скасувати",
+                name: "Name",
+                response: "Відповідь",
+                detectedArguments: "Виявлені аргументи",
+                exampleCommandResponse: "Приклад відповіді команди:",
+                exampleUsage: "Приклад використання:",
+                exampleOutput: "Приклад виводу:",
+                viewArgumentsGuide: "Переглянути посібник з аргументів",
+                editTag: "Редагувати тег",
+                deleteTag: "Видалити тег",
+                registeredTags: "Зареєстровані теги",
+                createTag: "Створити тег",
+                aTagWithThe: "Тегу з назвою **{{name}}** не існує!",
+                successfullyDeletedTheTag: "Тег **{{name}}** успішно видалено!",
+                ephemeralReserved: "Ім'я аргументу \"ephemeral\" зарезервоване й не може бути використане.",
+                createNewTag: "Створити новий тег",
+                editTagSubtitle: "Відредагуйте свою власну команду.",
+                createTagSubtitle: "Створіть новий тег, який буде зареєстровано як слеш-команду.",
+                save: "Зберегти",
+                create: "Створити",
+                variablesHelp: "Ваша відповідь може містити змінні в подвійних фігурних дужках, які стануть аргументами команди, наприклад",
+                defaultValuesHelp: "Ви можете задати аргументи зі значеннями за замовчуванням за допомогою знака рівності, наприклад",
+                noTagsYet: "Йой! Тегів ще немає, використайте `/tags create`, щоб створити тег!",
+                nameAlreadyExists: "Тег з назвою \"{{name}}\" вже існує і буде перезаписаний.",
+                defaultValue: "(за замовчуванням: {{value}})"
+            },
+            name: "CustomCommands",
+            description: "Дозволяє створювати власні слеш-команди / теги",
+            option: {
+                tagsList: {
+                    label: "Список тегів"
+                }
+            },
+            command: {
+                ephemeral: "Чи має відповідь бачити лише ви",
+                tags: "Керування всіма власними командами",
+                create: "Створити новий тег",
+                list: "Список усіх ваших тегів",
+                delete: "Видалити тег за назвою",
+                tagName: "Назва тегу"
+            }
+        },
+        fileUpload: {
+            name: "FileUpload",
+            description: "Завантажує файли на хостинги, як-от Zipline, Nest, S3 і WebDAV",
+            toast: {
+                fileTypeNotAllowed: "Тип файлу не дозволено поточним фільтром",
+                pleaseConfigureFileuploadSettings: "Спочатку налаштуйте FileUpload",
+                sharexConfigIsValid: "Конфігурація ShareX коректна",
+                importedSharexConfig: "Конфігурацію ShareX імпортовано",
+                uploadSuccessfulButNo: "Завантаження виконано, але URL для копіювання недоступний",
+                uploadSuccessfulUrlCopied: "Завантаження виконано, URL скопійовано в буфер обміну",
+                uploadSuccessfulButFailed: "Завантаження виконано, але не вдалося скопіювати URL",
+                uploadSuccessful: "Завантаження виконано",
+                uploadSucceededWithServicelabels: "Завантаження виконано через {{serviceLabels_service}} після переходу до резервного",
+                apngToGifConversion: "Не вдалося перетворити APNG на GIF, завантаження як APNG",
+                uploadAlreadyInProgress: "Завантаження вже триває",
+                uploadCancelled: "Завантаження скасовано",
+                uploadFailedMessage: "Помилка завантаження: {{message}}",
+                invalidSharexConfig: "Неправильна конфігурація ShareX",
+                failedToImportSharexConfig: "Не вдалося імпортувати конфігурацію ShareX"
+            },
+            text: {
+                uploadToServicename: "Завантажити в {{serviceName}}",
+                uploadToHost: "Завантажити на хостинг",
+                chooseFile: "Вибрати файл...",
+                zipline: "Zipline",
+                eZHost: "E-Z Host",
+                nest: "Nest",
+                encryptingHost: "Encrypting.host",
+                s3Compatible: "S3-сумісний",
+                catboxMoe: "Catbox.moe",
+                litterbox: "Litterbox",
+                sharexCustomUploader: "Власний завантажувач ShareX",
+                webdavNextcloudOwncloud: "WebDAV (Nextcloud/Owncloud)",
+                n1Hour: "1 година",
+                n12Hours: "12 годин",
+                n24Hours: "24 години",
+                n72Hours: "72 години",
+                corsProxy: "CORS-проксі",
+                query: "Запит",
+                param: "Параметр",
+                fakeLink: "Фальшиве посилання",
+                embed: "Вбудовування",
+                n30Seconds: "30 секунд",
+                n1Minute: "1 хвилина",
+                n2Minutes: "2 хвилини",
+                n5Minutes: "5 хвилин",
+                n10Minutes: "10 хвилин",
+                dragHostsToReorder: "Перетягуйте хостинги, щоб змінити порядок резервних спроб. Спочатку пробується вибраний хостинг, потім цей порядок.",
+                chooseWhereFileuploadSends: "Виберіть, куди FileUpload надсилає нові файли.",
+                connectionDetailsForYour: "Дані підключення до вашого екземпляра Zipline.",
+                theUrlOfYour: "URL вашого екземпляра Zipline",
+                yourZiplineApiAuthorization: "Ваш токен авторизації API Zipline",
+                yourZiplineApiToken: "Ваш API-токен Zipline",
+                folderIdForUploads: "ID теки для завантажень (залиште порожнім, якщо тека не потрібна)",
+                leaveEmptyForNo: "Залиште порожнім, якщо тека не потрібна",
+                connectionDetailsForE: "Дані підключення для завантажень на E-Z Host.",
+                yourEZHost: "Ваш API-ключ E-Z Host",
+                connectionDetailsForNest: "Дані підключення для завантажень на Nest.",
+                yourNestApiAuthorization: "Ваш токен авторизації API Nest",
+                yourNestApiToken: "Ваш API-токен Nest",
+                connectionDetailsForEncrypting: "Дані підключення для завантажень на Encrypting.host.",
+                yourEncryptingHostApi: "Ваш API-ключ Encrypting.host",
+                howEncryptingHostShould: "Як Encrypting.host має форматувати повернені посилання.",
+                selectUrlStyle: "Виберіть стиль URL",
+                optionalTitleForEmbed: "Необов'язковий заголовок для відповідей у стилі вбудовування.",
+                optionalTitle: "Необов'язковий заголовок",
+                optionalColorForEmbed: "Необов'язковий колір для відповідей у стилі вбудовування.",
+                optionalColor: "Необов'язковий колір",
+                optionalFakeLinkValue: "Необов'язкове значення фальшивого посилання для відповідей у стилі fakelink.",
+                optionalFakeLink: "Необов'язкове фальшиве посилання",
+                connectionDetailsAndObject: "Дані підключення й іменування об'єктів для вашого бакета.",
+                s3CompatibleEndpointE: "S3-сумісна кінцева точка (наприклад, https://<accountid>.r2.cloudflarestorage.com)",
+                bucketToUploadInto: "Бакет для завантаження",
+                awsRegionOrAuto: "Регіон AWS або auto для Cloudflare R2",
+                s3CompatibleAccessKey: "S3-сумісний ключ доступу",
+                yourAccessKeyId: "Ваш ID ключа доступу",
+                s3CompatibleSecretKey: "S3-сумісний секретний ключ",
+                yourSecretAccessKey: "Ваш секретний ключ доступу",
+                optionalTemporaryCredentialToken: "Необов'язковий тимчасовий токен облікових даних",
+                optionalSessionToken: "Необов'язковий токен сеансу",
+                optionalPublicUrlBase: "Необов'язковий публічний базовий URL для повернених посилань",
+                optionalFolderPrefixInside: "Необов'язкова тека/префікс у бакеті",
+                useEndpointBucketKey: "Використовувати формат endpoint/bucket/key, рекомендовано для R2.",
+                optionalAccountBindingFor: "Необов'язкова прив'язка облікового запису для завантажень на Catbox.",
+                yourCatboxUserhashFor: "Ваш userhash Catbox для прив'язки облікового запису; залиште порожнім для анонімних завантажень.",
+                yourCatboxUserhash: "Ваш userhash Catbox",
+                howLongUploadsAre: "Як довго зберігаються завантаження",
+                selectExpiry: "Виберіть термін дії",
+                optionalAccountBindingFor2: "Необов'язкова прив'язка облікового запису для завантажень на GoFile.",
+                optionalGofileTokenTo: "Необов'язковий токен GoFile для завантаження у ваш обліковий запис.",
+                optionalGofileToken: "Необов'язковий токен GoFile",
+                connectionDetailsForPixelvault: "Дані підключення для завантажень на PixelVault.",
+                yourPixelvaultAuthorizationKey: "Ваш ключ авторизації PixelVault.",
+                yourPixelvaultUploadKey: "Ваш ключ завантаження PixelVault",
+                optionalAccountBindingFor3: "Необов'язкова прив'язка облікового запису для завантажень на PixelDrain.",
+                optionalPixeldrainApiKey: "Необов'язковий API-ключ PixelDrain для автентифікованих завантажень. Залиште порожнім для анонімних завантажень.",
+                yourPixeldrainApiKey: "Ваш API-ключ PixelDrain",
+                pasteImportOrValidate: "Вставте, імпортуйте або перевірте конфігурацію власного завантажувача ShareX.",
+                pasteYourSharexCustom: "Вставте JSON власного завантажувача ShareX (.sxcu/.json). DestinationType має містити FileUploader або ImageUploader.",
+                importFromFileOr: "Імпортувати з файлу або перевірити вставлену конфігурацію",
+                connectionDetailsForWebdav: "Дані підключення до серверів WebDAV (Nextcloud, Owncloud тощо).",
+                baseWebdavUrlE: "Базовий URL WebDAV (наприклад, https://nextcloud.example.com/remote.php/dav/files/username)",
+                optionalSubdirectoryOnThe: "Необов'язковий підкаталог на сервері для завантаження (наприклад, uploads)",
+                leaveEmptyForRoot: "Залиште порожнім для кореневого каталогу",
+                selectYourWebdavServer: "Виберіть тип сервера WebDAV. Nextcloud і ownCloud створять публічне посилання. Звичайний поверне прямий URL файлу.",
+                selectServerType: "Виберіть тип сервера",
+                howToReturnThe: "Як повертати публічне посилання. «Сторінка доступу» веде на вебсторінку; «Пряме завантаження» — одразу на файл; «Посилання Markdown» обгортає сторінку в клікабельну назву файлу.",
+                selectShareLinkFormat: "Виберіть формат посилання",
+                controlWhatFileuploadDoes: "Визначає дії FileUpload після того, як хостинг поверне URL.",
+                stripQueryParametersFrom: "Видаляти параметри запиту з URL завантаженого файлу.",
+                wrapUploadedVideoLinks: "Обгортати посилання на завантажені відео проксі вбудовування для кращого попереднього перегляду в Discord.",
+                chooseWhichEmbedProxy: "Виберіть сервіс проксі вбудовування для посилань на завантажені відео",
+                selectAnEmbedProxy: "Виберіть сервіс проксі вбудовування",
+                convertApngFilesTo: "Перетворювати файли APNG на формат GIF.",
+                useTheOriginalFilename: "Використовувати початкову назву файлу замість upload.ext.",
+                automaticallyCopyTheUploaded: "Автоматично копіювати URL завантаженого файлу в буфер обміну.",
+                onlyUseTheSelected: "Використовувати лише вибраний завантажувач без резервних хостингів.",
+                afterUploadInsertThe: "Після завантаження вставляти отриманий URL у поточне поле чату.",
+                wrapInsertedUrlsIn: "Обрамляти вставлені URL кутовими дужками, щоб Discord не створював попередній перегляд.",
+                chooseWhenFileuploadTakes: "Виберіть, коли FileUpload перебирає обробку файлів Discord.",
+                useFileuploadWhenUploading: "Використовувати FileUpload під час завантаження через вибір файлів Discord.",
+                useFileuploadOnlyFor: "Використовувати FileUpload лише для файлів, більших за поточний ліміт завантаження Discord.",
+                manualDiscordFileSize: "Ручний ліміт розміру файлів Discord у МБ, використовується, якщо автовизначення помиляється. Залиште порожнім для автоматичного режиму.",
+                auto: "Авто",
+                commaSeparatedListOf: "Список розширень через кому (наприклад, png,jpg,gif). Залиште порожнім, щоб дозволити всі.",
+                configureBrowserUploadProxying: "Налаштування проксі й тайм-аутів завантажень із браузера.",
+                corsProxyUsedFor: "CORS-проксі для веб-завантажень. Залиште порожнім, щоб використовувати проксі за замовчуванням.",
+                sourceCodeForThe: "Вихідний код CORS-проксі за замовчуванням",
+                maximumTimeToWait: "Максимальний час очікування на спробу завантаження перед переходом до резервного",
+                selectTimeout: "Виберіть тайм-аут",
+                drag: "Перетягнути",
+                importSxcuJson: "Імпорт .sxcu/.json",
+                validate: "Перевірити",
+                resetToDefault: "Скинути до типових",
+                progress: "{{percent}}% - {{transferred}} з {{total}}",
+                cancel: "Скасувати"
+            },
+            option: {
+                serviceType: {
+                    description: "Вибраний сервіс завантаження",
+                    label: "Тип сервісу"
+                },
+                serviceUrl: {
+                    description: "URL сервісу Zipline",
+                    label: "URL сервісу"
+                },
+                ziplineToken: {
+                    description: "Токен авторизації Zipline",
+                    label: "Токен Zipline"
+                },
+                folderId: {
+                    description: "Необов'язковий ID теки Zipline",
+                    label: "ID теки"
+                },
+                ezHostKey: {
+                    description: "API-ключ E-Z Host",
+                    label: "Ключ E-Z Host"
+                },
+                nestToken: {
+                    description: "API-токен Nest",
+                    label: "Токен Nest"
+                },
+                encryptingHostKey: {
+                    description: "API-ключ Encrypting.host",
+                    label: "Ключ Encrypting.host"
+                },
+                encryptingHostUrlStyle: {
+                    description: "Стиль URL Encrypting.host",
+                    label: "Стиль URL Encrypting.host"
+                },
+                encryptingHostDomains: {
+                    description: "Список доменів Encrypting.host у JSON",
+                    label: "Домени Encrypting.host"
+                },
+                encryptingHostTitle: {
+                    description: "Необов'язковий заголовок вбудовування Encrypting.host",
+                    label: "Заголовок Encrypting.host"
+                },
+                encryptingHostColor: {
+                    description: "Необов'язковий колір вбудовування Encrypting.host",
+                    label: "Колір Encrypting.host"
+                },
+                encryptingHostFakelink: {
+                    description: "Необов'язкове фальшиве посилання Encrypting.host",
+                    label: "Фальшиве посилання Encrypting.host"
+                },
+                s3Endpoint: {
+                    description: "URL S3-сумісної кінцевої точки",
+                    label: "Кінцева точка S3"
+                },
+                s3Bucket: {
+                    description: "Назва бакета S3",
+                    label: "Бакет S3"
+                },
+                s3Region: {
+                    description: "Регіон S3 (для R2 використовуйте auto)",
+                    label: "Регіон S3"
+                },
+                s3AccessKeyId: {
+                    description: "ID ключа доступу S3",
+                    label: "ID ключа доступу S3"
+                },
+                s3SecretAccessKey: {
+                    description: "Секретний ключ доступу S3",
+                    label: "Секретний ключ доступу S3"
+                },
+                s3SessionToken: {
+                    description: "Необов'язковий токен сеансу S3",
+                    label: "Токен сеансу S3"
+                },
+                s3PublicUrl: {
+                    description: "Необов'язковий публічний базовий URL",
+                    label: "Публічний URL S3"
+                },
+                s3Prefix: {
+                    description: "Необов'язковий префікс ключів об'єктів S3",
+                    label: "Префікс S3"
+                },
+                s3ForcePathStyle: {
+                    description: "Використовувати URL S3 у стилі шляху",
+                    label: "Примусовий стиль шляху S3"
+                },
+                litterboxExpiry: {
+                    description: "Термін зберігання Litterbox",
+                    label: "Термін дії Litterbox"
+                },
+                catboxUserhash: {
+                    description: "Userhash Catbox для прив'язки облікового запису",
+                    label: "Userhash Catbox"
+                },
+                sharexConfig: {
+                    description: "JSON власного завантажувача ShareX",
+                    label: "Конфігурація ShareX"
+                },
+                disableFallbacks: {
+                    description: "Вимкнути резервні сервіси завантаження",
+                    label: "Вимкнути резервні"
+                },
+                autoSend: {
+                    description: "Вставляти завантажений URL у поле чату",
+                    label: "Автонадсилання"
+                },
+                autoFormat: {
+                    description: "Обрамляти вставлений URL кутовими дужками",
+                    label: "Автоформат"
+                },
+                bypassDiscordUpload: {
+                    description: "Обходити завантаження Discord і використовувати FileUpload натомість.",
+                    label: "Обходити завантаження Discord"
+                },
+                bypassDiscordUploadOnlyOverLimit: {
+                    description: "Використовувати FileUpload, лише якщо файли перевищують ліміт розміру.",
+                    label: "Обходити завантаження Discord лише понад ліміт"
+                },
+                customDiscordFileSizeLimitMB: {
+                    description: "Ручний ліміт розміру файлів Discord у МБ. 0 — автоматичне визначення.",
+                    label: "Власний ліміт розміру Discord (МБ)"
+                },
+                gofileToken: {
+                    description: "Необов'язковий API-токен GoFile",
+                    label: "Токен GoFile"
+                },
+                fallbackOrder: {
+                    description: "Порядок резервних завантажувачів",
+                    label: "Порядок резервних"
+                },
+                pixelVaultKey: {
+                    description: "Ключ завантаження PixelVault",
+                    label: "Ключ PixelVault"
+                },
+                pixelDrainKey: {
+                    description: "Необов'язковий API-ключ PixelDrain",
+                    label: "Ключ PixelDrain"
+                },
+                uploadTimeoutMs: {
+                    description: "Тайм-аут завантаження в мілісекундах",
+                    label: "Тайм-аут завантаження (мс)"
+                },
+                stripQueryParams: {
+                    description: "Видаляти параметри запиту із завантажених URL",
+                    label: "Видаляти параметри запиту"
+                },
+                embedProxyEnabled: {
+                    description: "Пропускати посилання на завантажені відео через сервіс-помічник вбудовування.",
+                    label: "Проксі вбудовування ввімкнено"
+                },
+                embedProxyService: {
+                    description: "Сервіс-помічник вбудовування, що обгортає посилання на завантажені відео.",
+                    label: "Сервіс проксі вбудовування"
+                },
+                corsProxyUrl: {
+                    description: "URL CORS-проксі для завантажень із браузера",
+                    label: "URL CORS-проксі"
+                },
+                apngToGif: {
+                    description: "Перетворювати завантажувані APNG на GIF",
+                    label: "APNG у GIF"
+                },
+                preserveOriginalFilename: {
+                    description: "Зберігати початкову назву файлу під час завантаження.",
+                    label: "Зберігати початкову назву"
+                },
+                autoCopy: {
+                    description: "Автоматично копіювати URL завантаження",
+                    label: "Автокопіювання"
+                },
+                autoUploadPastedFiles: {
+                    description: "Автоматично завантажувати файли з буфера обміну на хостинг зображень під час вставлення в чат.",
+                    label: "Автозавантаження вставлених файлів"
+                },
+                webdavUrl: {
+                    description: "URL сервера WebDAV",
+                    label: "URL WebDAV"
+                },
+                webdavUsername: {
+                    description: "Ім'я користувача WebDAV",
+                    label: "Користувач WebDAV"
+                },
+                webdavPassword: {
+                    description: "Пароль WebDAV або токен застосунку",
+                    label: "Пароль WebDAV"
+                },
+                webdavDirectory: {
+                    description: "Необов'язковий підкаталог на сервері WebDAV",
+                    label: "Каталог WebDAV"
+                },
+                webdavServerType: {
+                    description: "Тип сервера WebDAV",
+                    label: "Тип сервера WebDAV",
+                    nextcloud: "Nextcloud",
+                    owncloud: "ownCloud",
+                    generic: "Звичайний WebDAV"
+                },
+                webdavShareType: {
+                    description: "Формат посилання спільного доступу WebDAV",
+                    label: "Тип спільного доступу WebDAV",
+                    sharepage: "Сторінка доступу",
+                    directdownload: "Пряме завантаження",
+                    markdown: "Посилання Markdown"
+                },
+                uploadAllowedFileTypes: {
+                    description: "Список дозволених розширень через кому (наприклад, png,jpg,gif,mp4). Залиште порожнім, щоб дозволити всі файли.",
+                    label: "Дозволені типи файлів для завантаження"
+                },
+                settingsComponent: {
+                    description: "Налаштування",
+                    label: "Компонент налаштувань"
+                }
+            },
+            panel: {
+                fallbackOrder: "Порядок резервних",
+                uploadService: "Сервіс завантаження",
+                zipline: "Zipline",
+                serviceUrl: "URL сервісу",
+                ziplineToken: "Токен Zipline",
+                folderId: "ID теки",
+                eZHost: "E-Z Host",
+                eZHostApiKey: "API-ключ E-Z Host",
+                nest: "Nest",
+                nestToken: "Токен Nest",
+                encryptingHost: "Encrypting.host",
+                encryptingHostApiKey: "API-ключ Encrypting.host",
+                urlStyle: "Стиль URL",
+                domainsJson: "Домени (JSON)",
+                embedTitle: "Заголовок вбудовування",
+                embedColor: "Колір вбудовування",
+                fakeLink: "Фальшиве посилання",
+                s3CompatibleStorage: "S3-сумісне сховище",
+                s3EndpointUrl: "URL кінцевої точки S3",
+                bucketName: "Назва бакета",
+                region: "Регіон",
+                accessKeyId: "ID ключа доступу",
+                secretAccessKey: "Секретний ключ доступу",
+                sessionToken: "Токен сеансу",
+                publicBaseUrl: "Публічний базовий URL",
+                objectKeyPrefix: "Префікс ключів об'єктів",
+                usePathStyleEndpoint: "Використовувати ендпоінт у стилі шляху",
+                catbox: "Catbox",
+                catboxUserhash: "Userhash Catbox",
+                litterboxExpiry: "Термін дії Litterbox",
+                gofile: "GoFile",
+                gofileToken: "Токен GoFile",
+                pixelvault: "PixelVault",
+                pixelvaultUploadKey: "Ключ завантаження PixelVault",
+                pixeldrain: "PixelDrain",
+                pixeldrainApiKey: "API-ключ PixelDrain",
+                sharexCustomUploader: "Власний завантажувач ShareX",
+                sharexCustomUploaderConfig: "Конфігурація власного завантажувача ShareX",
+                sharexConfigActions: "Дії з конфігурацією ShareX",
+                webdav: "WebDAV",
+                serverUrl: "URL сервера",
+                username: "Ім'я користувача",
+                passwordOrAppToken: "Пароль або токен застосунку",
+                passwordOrAppToken2: "пароль або токен застосунку",
+                uploadDirectory: "Каталог завантаження",
+                serverType: "Тип сервера",
+                shareLinkFormat: "Формат посилання",
+                uploadBehavior: "Поведінка завантаження",
+                stripQueryParameters: "Видаляти параметри запиту",
+                useEmbedProxy: "Використовувати проксі вбудовування",
+                embedProxyService: "Сервіс проксі вбудовування",
+                convertApngToGif: "Перетворювати APNG на GIF",
+                preserveOriginalFilename: "Зберігати початкову назву",
+                autoCopyUrl: "Автокопіювання URL",
+                disableFallbackUploaders: "Вимкнути резервні завантажувачі",
+                insertUrlIntoChatInput: "Вставляти URL у поле чату",
+                formatInsertedUrl: "Форматувати вставлений URL",
+                discordIntegration: "Інтеграція з Discord",
+                bypassDiscordUploadButton: "Обходити кнопку завантаження Discord",
+                autoUploadPastedFiles: "Автозавантаження вставлених файлів",
+                respectDiscordFileSizeLimit: "Враховувати ліміт розміру Discord",
+                discordLimitOverrideMb: "Перевизначити ліміт Discord (МБ)",
+                allowedFileTypes: "Дозволені типи файлів",
+                network: "Мережа",
+                corsProxyUrl: "URL CORS-проксі",
+                defaultCorsProxySource: "Джерело CORS-проксі за замовчуванням",
+                uploadTimeout: "Тайм-аут завантаження",
+                domainsJsonDescription: "JSON-масив доменів для використання, наприклад [\"offensive\"]."
+            },
+            status: {
+                cancelled: "Завантаження скасовано.",
+                uploadingVia: "Завантаження через {{service}}...",
+                uploading: "Завантаження...",
+                unknownError: "Невідома помилка",
+                startingVia: "Початок завантаження через {{service}}...",
+                retryingWith: "Повторна спроба через {{service}} ({{attempt}}/{{total}})...",
+                uploadedVia: "Успішно завантажено через {{service}}.",
+                allFailed: "Усі сервіси завантаження завершилися помилкою. Остання помилка: {{error}}",
+                fileReady: "Файл готовий, починаємо завантаження...",
+                preparing: "Підготовка завантаження...",
+                failed: "Помилка завантаження: {{message}}",
+                timedOut: "Час завантаження вичерпано",
+                serviceFailed: "{{service}}: помилка: {{message}}",
+                preparingFile: "Підготовка {{name}}{{suffix}}..."
+            }
+        },
+        gifMaker: {
+            option: {
+                lastWidth: {
+                    label: "Остання ширина"
+                },
+                lastHeight: {
+                    label: "Остання висота"
+                },
+                lastCaptionMode: {
+                    label: "Останній режим підпису"
+                },
+                lastCaptionText: {
+                    label: "Останній текст підпису"
+                },
+                lastCaptionSize: {
+                    label: "Останній розмір підпису"
+                },
+                lastFontFamily: {
+                    label: "Остання родина шрифтів"
+                },
+                lastBubbleTipBase: {
+                    label: "Остання основа хвоста виноски"
+                },
+                maxWidth: {
+                    description: "Максимальна ширина під час автопідгонки.",
+                    label: "Макс. ширина"
+                },
+                maxHeight: {
+                    description: "Максимальна висота під час автопідгонки.",
+                    label: "Макс. висота"
+                }
+            },
+            name: "GifMaker",
+            description: "Створюйте GIF із підписами з будь-яких медіа в чаті чи у виборі GIF.",
+            text: {
+                send: "Надіслати",
+                export: "Експорт",
+                makeGif: "Створити GIF",
+                editGif: "Редагувати GIF",
+                selectAFont: "Виберіть шрифт...",
+                enterCaption: "Введіть підпис...",
+                width: "Ширина",
+                height: "Висота",
+                loadingFonts: "Завантаження шрифтів...",
+                captions: "Підписи",
+                text: "Текст",
+                font: "Шрифт",
+                fontSize: "Розмір шрифту",
+                tipBase: "Основа хвоста",
+                dimensions: "Розміри",
+                generatingGif: "Створення GIF...",
+                clickOnThePreview: "Натисніть на попередній перегляд, щоб розташувати хвіст виноски",
+                gifPreview: "Попередній перегляд GIF"
+            },
+            captionMode: {
+                caption: "Підпис",
+                none: "Немає",
+                speechbubble: "Бульбашка"
+            }
+        },
+        gifProviderSwitcher: {
+            name: "GifProviderSwitcher",
+            description: "Дозволяє використовувати пошук GIF від Tenor або Giphy замість Klipy",
+            text: {
+                tenor: "Tenor",
+                giphy: "Giphy",
+                klipy: "Klipy",
+                providers: "Провайдери",
+                providersCount: "Провайдерів: {{count}}"
+            }
+        },
+        keyboardNavigation: {
+            toast: {
+                invalidUrl: "Недійсний URL",
+                copiedResponseToClipboard: "Відповідь скопійовано в буфер обміну!",
+                issueFetchingUrl: "Помилка під час отримання URL",
+                copiedGitInfoTo: "Інформацію Git скопійовано в буфер обміну!",
+                noUpdatesAvailable: "Немає доступних оновлень",
+                enabledPlugin: "{{id}} успішно увімкнено",
+                disabledPlugin: "{{id}} успішно вимкнено"
+            },
+            text: {
+                openPlexcordTab: "Відкрити вкладку Plexcord",
+                openPluginTab: "Відкрити вкладку плагінів",
+                openThemesTab: "Відкрити вкладку тем",
+                openUpdaterTab: "Відкрити вкладку оновлень",
+                openCloudTab: "Відкрити вкладку хмари",
+                openBackupRestoreTab: "Відкрити вкладку резервного копіювання",
+                restartClient: "Перезапустити клієнт",
+                openQuickCssFile: "Відкрити файл QuickCSS",
+                openSettingsFolder: "Відкрити теку налаштувань",
+                openInGithub: "Відкрити на GitHub",
+                openInBrowser: "Відкрити в браузері",
+                togglePlugin: "Перемкнути плагін",
+                enable: "Увімкнути",
+                disable: "Вимкнути",
+                quickFetch: "Швидкий запит",
+                copyGitInfo: "Копіювати інформацію Git",
+                checkForUpdates: "Перевірити оновлення",
+                aPlexcordUpdateIs: "Доступне оновлення Plexcord!",
+                clickHereToView: "Натисніть тут, щоб переглянути оновлення",
+                navigateToServer: "Перейти на сервер",
+                commandPalette: "Палітра команд",
+                searchTheCommandPalette: "Пошук у палітрі команд",
+                multipleChoice: "Вибір із варіантів",
+                textInput: "Введення тексту",
+                openDevTab: "Відкрити вкладку розробника",
+                enterUrlToFetch: "Введіть URL для запиту (лише GET)",
+                typeAndPressEnter: "Введіть текст і натисніть Enter",
+                recording: "Запис...",
+                recordKeybind: "Записати комбінацію клавіш",
+                enterUrl: "Введіть URL"
+            },
+            option: {
+                hotkey: {
+                    description: "Гаряча клавіша для відкриття палітри команд.",
+                    label: "Гаряча клавіша"
+                },
+                allowMouseControl: {
+                    description: "Дозволити керування палітрою команд мишею.",
+                    label: "Дозволити керування мишею"
+                }
+            },
+            name: "KeyboardNavigation",
+            description: "Дозволяє керувати інтерфейсом із клавіатури."
+        },
+        lastActive: {
+            name: "LastActive",
+            description: "Плагін для переходу до останнього повідомлення вашого чи іншого користувача в каналі/на сервері.",
+            toast: {
+                failedToFindMessages: "Не вдалося знайти повідомлення. Подробиці в консолі.",
+                couldnTFindAny: "Не знайдено нещодавніх повідомлень цього користувача.",
+                channelInformationNotAvailable: "Інформація про канал недоступна.",
+                failedToJumpTo: "Не вдалося перейти до повідомлення. Подробиці в консолі."
+            },
+            text: {
+                yourLastMessage: "Ваше останнє повідомлення",
+                userSLastMessage: "Останнє повідомлення користувача"
+            }
+        },
+        limitlessScreenshare: {
+            text: {
+                deleteTag: "Видалити тег",
+                mustBeGreaterThan: "Має бути >{{value}}",
+                maxResolutionTooLow: "Максимальна роздільна здатність не може бути нижчою за {{value}}",
+                maxResolutionRound: "Максимальна роздільна здатність має закінчуватися на 0, якщо ввімкнено округлення"
+            },
+            name: "LimitlessScreenshare",
+            description: "Додає повзунок роздільності й FPS демонстрації екрана.",
+            option: {
+                maxFPS: {
+                    description: "Макс. FPS для повзунка",
+                    label: "Макс. FPS"
+                },
+                maxResolution: {
+                    description: "Макс. роздільність для повзунка",
+                    label: "Макс. роздільність"
+                },
+                roundResolution: {
+                    description: "Округлювати роздільність до найближчих 10p",
+                    label: "Округлювати роздільність"
+                },
+                resolutions: {
+                    label: "Роздільності"
+                },
+                fpss: {
+                    label: "Значення FPS"
+                }
+            }
+        },
+        messagePeek: {
+            option: {
+                hideMuted: {
+                    description: "Приховувати попередній перегляд і час повідомлень для вимкнених ОП і груп.",
+                    label: "Приховувати вимкнені"
+                }
+            },
+            name: "MessagePeek",
+            description: "Показує попередній перегляд і час останнього повідомлення у списку особистих повідомлень.",
+            text: {
+                officialDiscordMessage: "Офіційне повідомлення Discord",
+                sentGif: "надіслав(-ла) GIF",
+                voiceMessage: "голосове повідомлення",
+                membersCount: "Учасників: {{count}}",
+                you: "Ви"
+            }
+        },
+        messageTranslate: {
+            name: "MessageTranslate",
+            description: "Автоматичний переклад повідомлень вашою мовою з кешуванням, перемикачами для каналів та іншими параметрами.",
+            option: {
+                targetLanguage: {
+                    description: "Код цільової мови перекладу (наприклад, en, es, fr, de, ja).",
+                    label: "Цільова мова"
+                },
+                excludedLanguages: {
+                    description: "Коди мов, що виключаються з перекладу (наприклад, en, es, fr, de, ja).",
+                    label: "Виключені мови"
+                },
+                confidenceRequirement: {
+                    description: "Мінімальна впевненість (від 0 до 1) для показу перекладу.",
+                    label: "Потрібна впевненість"
+                },
+                autoTranslate: {
+                    description: "Автоматично перекладати повідомлення під час появи.",
+                    label: "Автопереклад"
+                },
+                skipOwnMessages: {
+                    description: "Не перекладати власні повідомлення.",
+                    label: "Пропускати свої повідомлення"
+                },
+                skipBotMessages: {
+                    description: "Не перекладати повідомлення ботів.",
+                    label: "Пропускати повідомлення ботів"
+                },
+                ignoredGuilds: {
+                    description: "Список ID серверів через кому, де не перекладати.",
+                    label: "Ігноровані сервери"
+                },
+                ignoredChannels: {
+                    description: "Список ID каналів через кому, де не перекладати.",
+                    label: "Ігноровані канали"
+                },
+                ignoredUsers: {
+                    description: "Список ID користувачів через кому, яких не перекладати.",
+                    label: "Ігноровані користувачі"
+                },
+                showIndicator: {
+                    description: "Додавати невелику позначку (перекладено) до перекладених повідомлень.",
+                    label: "Показувати позначку"
+                },
+                showOriginal: {
+                    description: "Показувати оригінал і переклад.",
+                    noorig: "Не показувати оригінал."
+                }
+            },
+            text: {
+                showOriginalInSubtext: "Показувати оригінал у підписі",
+                showOriginalMessageTranslation: "Показувати оригінал, переклад — у підписі",
+                translatedFrom: "перекладено з мови: {{lang}}"
+            }
+        },
+        moreStickers: {
+            toast: {
+                stickerPackDeleted: "Набір наліпок видалено",
+                stickerPackAdded: "Набір наліпок додано",
+                stickerPacksAdded: "Набори наліпок додано",
+                stickerPacksExported: "Набори наліпок експортовано",
+                newStickerPacksAlready: "Нові набори наліпок уже є, перенесення не потрібне",
+                oldStickerPacksNot: "Старі набори наліпок не знайдено, переносити нічого",
+                migrationFailedTitleId: "Помилка перенесення: {{title}} ({{id}})",
+                stickerPackMigrationComplete: "Перенесення наборів наліпок завершено",
+                failedToUploadSticker: "Не вдалося завантажити наліпку"
+            },
+            text: {
+                stickerPackUrl: "URL набору наліпок",
+                pasteHtmlHere: "Вставте HTML сюди",
+                delete: "Видалити",
+                addStickerPackFrom: "Додати набір наліпок за URL",
+                insert: "Вставити",
+                addStickerPackFrom2: "Додати набір наліпок з HTML",
+                insertFromHtml: "Вставити з HTML",
+                addStickerPackFrom3: "Додати набір наліпок з файлу",
+                miscTools: "Інші інструменти",
+                exportStickerPacks: "Експорт наборів наліпок",
+                migrateFromV1: "Перенести з v1",
+                stickersManagement: "Керування наліпками",
+                theRegionLineRecognized: "Регіон, який визначає LINE, може відрізнятися від вашого через використовуваний CORS-проксі.",
+                openStickerPackFile: "Відкрити файл набору наліпок",
+                stickers: "Наліпки+",
+                categoryTitle: "Категорія, {{title}}",
+                searchStickers: "Пошук наліпок",
+                ffmpegstatecontextIsUndefined: "FFmpegStateContext не визначено",
+                recentlyUsed: "Нещодавні",
+                addFromUrl: "Додати за URL",
+                addFromHtml: "Додати з HTML",
+                addFromFile: "Додати з файлу",
+                misc: "Інше",
+                invalidUrl: "Неправильний URL",
+                lineOnly: "Наразі підтримуються лише стікери/емодзі LINE.",
+                getTelegramStickers: "Отримати стікери Telegram можна за допомогою",
+                htmlFallbackHelp: "Якщо під час додавання набору стікерів виникають помилки, спробуйте додати його через HTML-код сторінки набору.",
+                htmlFallbackApplies: "Це стосується стікерів із регіональними / системними обмеженнями тощо."
+            },
+            option: {
+                promptToUpload: {
+                    description: "Вставляє наліпку в поле чату замість негайного надсилання",
+                    label: "Питати перед завантаженням"
+                },
+                packs: {
+                    description: "Набори",
+                    label: "Набори"
+                }
+            },
+            name: "MoreStickers",
+            description: "Додає набори наліпок з інших соцмереж. (наприклад, LINE)"
+        },
+        musicRichPresence: {
+            option: {
+                scrobblerBackend: {
+                    description: "Бекенд скроблера, що використовується.",
+                    label: "Бекенд скроблера"
+                },
+                instanceBaseURL: {
+                    description: "Базовий URL вашого екземпляра ListenBrainz.",
+                    label: "Базовий URL екземпляра"
+                },
+                instanceAPIBaseUrl: {
+                    description: "Базовий URL вашого API ListenBrainz.",
+                    label: "Базовий URL API екземпляра"
+                },
+                apiKey: {
+                    description: "API-ключ Last.fm. Не обов'язковий, але дуже рекомендований, щоб уникнути обмежень спільного ключа",
+                    label: "API-ключ"
+                },
+                username: {
+                    description: "Ім'я користувача",
+                    label: "Ім'я користувача"
+                },
+                shareUsername: {
+                    description: "Показувати посилання на профіль скроблера",
+                    label: "Показувати ім'я користувача"
+                },
+                clickableLinks: {
+                    description: "Зробити назви треку, виконавця й альбому клікабельними посиланнями",
+                    label: "Клікабельні посилання"
+                },
+                hideWithSpotify: {
+                    description: "Приховувати статус, якщо запущено Spotify",
+                    label: "Приховувати при Spotify"
+                },
+                hideWithActivity: {
+                    description: "Приховувати статус, якщо є інший статус",
+                    label: "Приховувати при активності"
+                },
+                statusName: {
+                    description: "Власний текст статусу. Доступні змінні: {artist} | {album} | {title}",
+                    label: "Назва статусу"
+                },
+                statusDisplayType: {
+                    description: "Показувати трек / виконавця у списку учасників",
+                    off: "Не показувати (загальне повідомлення про прослуховування)"
+                },
+                nameFormat: {
+                    description: "Показувати пісню й виконавця в назві статусу",
+                    statusName: "Використовувати власну назву статусу"
+                },
+                missingArt: {
+                    description: "Якщо немає альбому чи обкладинки",
+                    logo: "Використовувати великий логотип скроблера"
+                },
+                showLogo: {
+                    description: "Показувати логотип сервісу скроблера біля обкладинки",
+                    label: "Показувати логотип скроблера"
+                },
+                showAlbumCover: {
+                    description: "Показувати обкладинку альбому. Якщо вимкнути, буде заглушка. Корисно, якщо в музики недоречні обкладинки",
+                    label: "Показувати обкладинку"
+                },
+                useListeningStatus: {
+                    description: "Показувати статус «Слухає» замість «Грає»"
+                }
+            },
+            name: "MusicRichPresence",
+            description: "Rich Presence для Last.FM/Listenbrainz",
+            text: {
+                showArtistName: "Показувати виконавця",
+                showTrackName: "Показувати назву треку",
+                useMusicServiceName: "Використовувати назву музичного сервісу (інакше власний текст статусу)",
+                useFormatArtistSong: "Формат «виконавець - пісня»",
+                useFormatSongArtist: "Формат «пісня - виконавець»",
+                useArtistNameOnly: "Лише ім'я виконавця",
+                useSongNameOnly: "Лише назва пісні",
+                useAlbumNameFalls: "Використовувати назву альбому (якщо її немає — власний текст статусу)",
+                useGenericPlaceholder: "Використовувати загальну заглушку",
+                lastFm: "Last.FM",
+                howToCreateAn: "Як створити API-ключ",
+                set: "Задайте",
+                applicationName: "Назва застосунку",
+                applicationDescription: "Опис застосунку",
+                toAnythingAndLeave: "будь-якими значеннями, а решту залиште порожнім.",
+                createApiKey: "Створити API-ключ",
+                invalidInstance: "Недійсний екземпляр, сумісний з ListenBrainz",
+                provideBoth: "Вкажіть",
+                apiBaseUrl: "Базова URL-адреса API",
+                andThe: "і",
+                instanceBaseUrl: "базова URL-адреса екземпляра",
+                forYourCustomInstance: "вашого власного екземпляра ListenBrainz або поверніться до ListenBrainz/Last.FM",
+                allowConnectTitle: "Дозволити Plexcord підключатися до екземпляра ListenBrainz",
+                allowConnectBody: "Щоб використовувати власний екземпляр ListenBrainz, спочатку дозвольте Plexcord підключатися до нього.",
+                allowInstance: "Дозволити екземпляр",
+                listenBrainzCompatible: "Сумісний з ListenBrainz (власний сервер)",
+                and: "і"
+            }
+        },
+        noMiddleClickPaste: {
+            name: "NoMiddleClickPaste",
+            description: "Вимкнути вставлення середньою кнопкою миші в Linux - лише Linux"
+        },
+        orbolayBridge: {
+            option: {
+                port: {
+                    description: "Порт для підключення",
+                    label: "Порт"
+                }
+            },
+            name: "OrbolayBridge",
+            description: "Плагін-міст для підключення Orbolay до Discord",
+            toast: {
+                connectedToOrbolayServer: "Підключено до сервера Orbolay"
+            }
+        },
+        plexcordHelper: {
+            name: "PlexcordHelper",
+            description: "Використовується для надання підтримки та виправлення збоїв, спричинених Discord.",
+            text: {
+                restartRequired: "Потрібен перезапуск",
+                restartNow: "Перезапустити зараз",
+                later: "Пізніше",
+                wouldYouLikeTo: "Перезапустити зараз?",
+                somePluginsRequireA: "Деяким плагінам потрібен перезапуск для повного вимкнення.",
+                alreadyEnabled: "{{plugin}} уже ввімкнено",
+                alreadyDisabled: "{{plugin}} уже вимкнено",
+                disablePlugin: "Вимкнути {{plugin}}",
+                enablePlugin: "Увімкнути {{plugin}}",
+                errorStopping: "Помилка під час зупинки плагіна {{plugin}}",
+                errorStarting: "Помилка під час запуску плагіна {{plugin}}"
+            },
+            toast: {
+                failedToTolowercase: "Не вдалося: {{toLowerCase}}",
+                aRestartIsRequired: "Для застосування зміни потрібен перезапуск!"
+            },
+            card: {
+                notOnThisVersion: "Цього плагіна немає в цій версії Plexcord. Спробуйте оновитися!"
+            }
+        },
+        plexcordTweaks: {
+            name: "PlexcordTweaks",
+            option: {
+                removeActivitySection: {
+                    description: "Прибирає розділ активності над списком учасників",
+                    label: "Прибрати розділ активності"
+                },
+                showYourOwnActivityButtons: {
+                    description: "Discord чомусь приховує ваші власні кнопки активності",
+                    label: "Показувати свої кнопки активності"
+                },
+                refreshSlashCommands: {
+                    description: "Оновлює слеш-команди, щоб нові з'явилися без перезапуску клієнта.",
+                    label: "Оновити слеш-команди"
+                },
+                forceRoleIcon: {
+                    description: "Примусово показує значки ролей біля повідомлень у компактному режимі",
+                    label: "Примусовий значок ролі"
+                },
+                accountStandingButton: {
+                    description: "Показувати кнопку стану облікового запису в заголовку",
+                    label: "Кнопка стану облікового запису"
+                },
+                jsonGateway: {
+                    description: "Примусово використовує JSON під час повторного підключення до шлюзу",
+                    label: "JSON-шлюз"
+                },
+                enableAutoCorrect: {
+                    description: "Додає до контекстного меню поля чату перемикач вбудованої автозаміни та замін тексту",
+                    label: "Увімкнути автозаміну"
+                },
+                autoCorrect: {
+                    description: "Використовувати вбудовану автозаміну й заміни тексту в редакторах повідомлень",
+                    label: "Автозаміна"
+                },
+                disableHolidayNotifications: {
+                    label: "Вимкнути святкові сповіщення",
+                    description: "Завжди використовувати стандартні звуки сповіщень Discord"
+                },
+                showAllBadges: {
+                    label: "Показувати всі значки",
+                    description: "Показує всі значки профілю замість згортання решти в +n"
+                }
+            },
+            text: {
+                allGood: "Усе гаразд!",
+                limited: "Обмежено",
+                veryLimited: "Сильно обмежено",
+                atRisk: "Під загрозою",
+                suspended: "Заблоковано",
+                slashCommandsRefreshedSuccessfully: "Слеш-команди успішно оновлено.",
+                failedToRefreshCommands: "Не вдалося оновити команди. Подробиці в консолі.",
+                enableAutocorrect: "Увімкнути автозаміну"
+            },
+            command: {
+                refreshCommands: "Оновити слеш-команди"
+            },
+            description: "Набір дрібних налаштувань і виправлень для Discord."
+        },
+        plextronStreamFixes: {
+            option: {
+                unlockQualityOptions: {
+                    description: "Розблокувати налаштування якості трансляції незалежно від Nitro",
+                    label: "Розблокувати якість"
+                },
+                removeResolutionCap: {
+                    description: "Дозволити роздільність понад 720p при 60 fps",
+                    label: "Зняти обмеження роздільності"
+                },
+                forceEncoderSettings: {
+                    description: "Змусити кодувальник використовувати задану роздільність/FPS",
+                    label: "Примусові налаштування кодувальника"
+                },
+                preventDownscale: {
+                    description: "Не давати Discord знижувати роздільність трансляції",
+                    label: "Заборона зниження"
+                },
+                keyframeInterval: {
+                    description: "Інтервал ключових кадрів у мс (0 = типово для кодувальника, 5000 = кожні 5 с)",
+                    label: "Інтервал ключових кадрів"
+                },
+                minBitrate: {
+                    description: "Мінімальний бітрейт кодувальника в кбіт/с",
+                    label: "Мін. бітрейт"
+                },
+                raiseBitrateCaps: {
+                    description: "Підняти стандартні ліміти бітрейту на ПК (ціль 600 кбіт/с → 10 Мбіт/с, макс. 3,5 Мбіт/с → 40 Мбіт/с)",
+                    label: "Підняти ліміти бітрейту"
+                },
+                preventFramerateReduction: {
+                    description: "Не давати Discord знижувати частоту кадрів трансляції, коли ви мовчите",
+                    label: "Заборона зниження частоти кадрів"
+                },
+                bitsPerPixelPct: {
+                    description: "Відсоток біт на піксель для цільового бітрейту (8 = 0,08 bpp, 12 = 0,12 bpp)",
+                    label: "Біт на піксель (%)"
+                }
+            },
+            name: "PlextronStreamFixes",
+            description: "Намагається покращити якість трансляції в Plextron, змінюючи кодувальник і обмеження якості Discord."
+        },
+        rPCEditor: {
+            name: "RPCEditor"
+        },
+        reactionTimestamps: {
+            name: "ReactionTimestamps",
+            description: "Показує час кожної реакції у спливному вікні реакцій.",
+            text: {
+                userAtTime: "{{user}} о {{time}}"
+            }
+        },
+        richPresence: {
+            text: {
+                useCustomStatusName: "Використовувати власну назву статусу",
+                useFormatArtistSong: "Формат «виконавець - пісня»",
+                useFormatSongArtist: "Формат «пісня - виконавець»",
+                useArtistNameOnly: "Лише ім'я виконавця",
+                useSongNameOnly: "Лише назва пісні",
+                useAlbumName: "Використовувати назву альбому",
+                useLargeStatsFm: "Використовувати великий логотип Stats.fm",
+                useGenericPlaceholder: "Використовувати загальну заглушку",
+                seriesMovieName: "Назва серіалу/фільму",
+                seriesEpisodeTrackMovie: "Серіал - назва епізоду/треку/фільму",
+                custom: "Власний",
+                seriesCover: "Обкладинка серіалу",
+                episodeCover: "Обкладинка епізоду",
+                season1Episode1: "Сезон 1 епізод 1",
+                off: "Вимк.",
+                listening: "Слухає",
+                playing: "Грає",
+                streaming: "Стримить",
+                watching: "Дивиться",
+                none: "Немає",
+                navidromeInstanceExposesServer: "Екземпляр Navidrome (розкриває URL сервера. Одноразову автентифікацію надіслано.)",
+                lastFmApiSends: "API Last.fm (надсилає метадані на last.fm)",
+                donTShowShows: "Не показувати (загальне повідомлення про прослуховування)",
+                showStateLineContent: "Показувати вміст рядка стану",
+                showDetailsLineContent: "Показувати вміст рядка деталей",
+                displayYourCurrentlyPlaying: "Показувати аудіокниги, які ви слухаєте, як Rich Presence у Discord. Потрібні URL, ім'я користувача й пароль вашого сервера AudioBookShelf.",
+                audiobookshelfServerUrl: "URL сервера AudioBookShelf.",
+                audiobookshelfUsername: "Ім'я користувача AudioBookShelf.",
+                audiobookshelfPassword: "Пароль AudioBookShelf.",
+                connectsToTosuVia: "Підключається до tosu через WebSocket на порту 24050. Налаштування не потрібне, лише переконайтеся, що tosu запущено разом з osu!.",
+                showWhatYouRe: "Показувати, що ви слухаєте, через stats.fm. Історія прослуховувань має бути публічною.",
+                statsFmUsername: "Ім'я користувача Stats.fm.",
+                customStatusText: "Власний текст статусу.",
+                statsFm: "Stats.fm",
+                nameFormat: "Формат назви.",
+                fallbackWhenArtIs: "Заміна, якщо немає обкладинки.",
+                showListeningStatus: "Показувати статус прослуховування.",
+                showStatsFmLogo: "Показувати логотип Stats.fm поруч з обкладинкою.",
+                showLinkToStats: "Показувати посилання на профіль stats.fm.",
+                showLinkToSong: "Показувати посилання на пісню в stats.fm.",
+                hideStatsFmPresence: "Приховувати статус stats.fm, якщо запущено Spotify.",
+                hideStatsFmPresence2: "Приховувати статус stats.fm, якщо запущено зовнішній RPC.",
+                disableDownloadingAlbumArt: "Вимкнути завантаження обкладинок альбомів.",
+                showWhatYouRe2: "Показувати, що ви відтворюєте в Jellyfin. Як отримати API-ключ: відкрийте вебінтерфейс Jellyfin, натисніть F12 для інструментів розробника, перейдіть на вкладку «Мережа», знайдіть запити до сервера, знайдіть заголовок Authorization (Ctrl+F для пошуку) — потрібна частина з Token='this'. ID користувача є в URL сторінки профілю.",
+                jellyfinServerUrl: "URL сервера Jellyfin.",
+                jellyfinApiKey: "API-ключ Jellyfin.",
+                authorization: "Authorization",
+                jellyfinUserId: "ID користувача Jellyfin.",
+                userIdFromProfile: "ID користувача з URL профілю",
+                nameDisplayFormat: "Формат відображення назви.",
+                customNameTemplate: "Власний шаблон назви.",
+                nameOnJellyfin: "{name} у Jellyfin",
+                coverTypeForTv: "Тип обкладинки для серіалів.",
+                episodeNumberFormat: "Формат номера епізоду.",
+                overrideRichPresenceType: "Перевизначити тип Rich Presence.",
+                showEpisodeNameAfter: "Показувати назву епізоду після сезону/епізоду.",
+                showPresenceWhenMedia: "Показувати статус, коли медіа на паузі.",
+                hideMediaDetails: "Приховувати відомості про медіа.",
+                discordRichPresenceFor: "Rich Presence Discord для Gensokyo Radio. Просто увімкніть і слухайте!",
+                refreshIntervalInSeconds: "Інтервал оновлення в секундах.",
+                showWhatYouRe3: "Показувати, що ви слухаєте, через Navidrome.",
+                navidromeServerUrlMust: "URL сервера Navidrome (має бути публічним доменом, наприклад, https://navidrome.example.com).",
+                navidromeUsername: "Ім'я користувача Navidrome.",
+                navidromePassword: "Пароль Navidrome.",
+                optionalDiscordApplicationClient: "Необов'язковий ID клієнта застосунку Discord.",
+                howToFetchAlbum: "Спосіб отримання обкладинок альбомів.",
+                optionalProvideYourOwn: "Необов'язково: вкажіть свій API-ключ Last.fm (якщо порожньо — типовий).",
+                showNavidromeLogoIn: "Показувати логотип Navidrome у правому нижньому куті обкладинки.",
+                showAlbumNameIn: "Показувати назву альбому в статусі.",
+                whichTypeOfActivity: "Який тип активності показувати.",
+                showTheStateDetails: "Показувати рядок стану / деталей у списку учасників",
+                hideRichPresenceWhen: "Приховувати Rich Presence, коли музика на паузі (замість секундоміра)",
+                theListeningToText: "Текст «Слухає» (наприклад, {artist})",
+                navidrome: "Navidrome",
+                theMainLineShowing: "Основний рядок із поточною піснею (наприклад, {song})",
+                song: "{song}",
+                theLineBelowThe: "Рядок під назвою пісні (наприклад, {artist})",
+                artist: "{artist}",
+                theAlbumLineE: "Рядок альбому (наприклад, {album})",
+                album: "{album}",
+                enableTabLabelsCurrenttab: "Увімкнути статус {{TAB_LABELS_currentTab}}.",
+                statsFmProfile: "Профіль Stats.fm",
+                viewSong: "Переглянути пісню",
+                showArtistName: "Показувати виконавця",
+                showTrackName: "Показувати назву треку",
+                enterValue: "Введіть значення"
+            },
+            name: "RichPresence",
+            description: "Єдиний центр Rich Presence для AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome і Gensokyo Radio.",
+            toast: {
+                audiobookshelfRpcIsNot: "RPC AudioBookShelf не налаштовано.",
+                jellyfinRpcIsNot: "RPC Jellyfin не налаштовано.",
+                jellyfinReturnedAnInvalid: "Jellyfin повернув недійсну відповідь. Можливо, API-ключ неправильний."
+            },
+            option: {
+                enabled: {
+                    description: "Увімкнути сервіси Rich Presence.",
+                    label: "Увімкнено"
+                },
+                serviceSettings: {
+                    description: "Налаштування сервісу.",
+                    label: "Налаштування сервісу"
+                },
+                abs_enabled: {
+                    description: "Увімкнути статус AudioBookShelf.",
+                    label: "AudioBookShelf увімкнено"
+                },
+                tosu_enabled: {
+                    description: "Увімкнути статус osu! (tosu).",
+                    label: "osu! (tosu) увімкнено"
+                },
+                sfm_enabled: {
+                    description: "Увімкнути статус stats.fm.",
+                    label: "Stats.fm увімкнено"
+                },
+                jf_enabled: {
+                    description: "Увімкнути статус Jellyfin.",
+                    label: "Jellyfin увімкнено"
+                },
+                gr_enabled: {
+                    description: "Увімкнути статус Gensokyo Radio.",
+                    label: "Gensokyo Radio увімкнено"
+                },
+                nd_enabled: {
+                    description: "Увімкнути статус Navidrome.",
+                    label: "Navidrome увімкнено"
+                },
+                abs_serverUrl: {
+                    description: "URL сервера AudioBookShelf.",
+                    label: "URL сервера AudioBookShelf"
+                },
+                abs_username: {
+                    description: "Ім'я користувача AudioBookShelf.",
+                    label: "Користувач AudioBookShelf"
+                },
+                abs_password: {
+                    description: "Пароль AudioBookShelf.",
+                    label: "Пароль AudioBookShelf"
+                },
+                sfm_username: {
+                    description: "Ім'я користувача Stats.fm.",
+                    label: "Користувач Stats.fm"
+                },
+                sfm_shareUsername: {
+                    description: "Показувати посилання на профіль stats.fm.",
+                    label: "Stats.fm: показувати ім'я"
+                },
+                sfm_shareSong: {
+                    description: "Показувати посилання на пісню в stats.fm.",
+                    label: "Stats.fm: ділитися піснею"
+                },
+                sfm_hideWithSpotify: {
+                    description: "Приховувати статус stats.fm, якщо запущено Spotify.",
+                    label: "Stats.fm: приховувати при Spotify"
+                },
+                sfm_hideWithExternalRPC: {
+                    description: "Приховувати статус stats.fm, якщо запущено зовнішній RPC.",
+                    label: "Stats.fm: приховувати при зовнішньому RPC"
+                },
+                sfm_statusName: {
+                    description: "Власний текст статусу.",
+                    label: "Stats.fm: назва статусу"
+                },
+                sfm_nameFormat: {
+                    description: "Формат назви.",
+                    label: "Stats.fm: формат назви",
+                    statusName: "Використовувати власну назву статусу",
+                    artistFirst: "Формат «виконавець - пісня»",
+                    songFirst: "Формат «пісня - виконавець»",
+                    artistOnly: "Лише ім'я виконавця",
+                    songOnly: "Лише назва пісні",
+                    albumName: "Використовувати назву альбому"
+                },
+                sfm_useListeningStatus: {
+                    description: "Показувати статус прослуховування.",
+                    label: "Stats.fm: статус прослуховування"
+                },
+                sfm_missingArt: {
+                    description: "Заміна, якщо немає обкладинки.",
+                    label: "Stats.fm: немає обкладинки",
+                    statsFmLogo: "Використовувати великий логотип Stats.fm",
+                    placeholder: "Використовувати загальну заглушку"
+                },
+                sfm_showLogo: {
+                    description: "Показувати логотип Stats.fm поруч з обкладинкою.",
+                    label: "Stats.fm: показувати логотип"
+                },
+                sfm_alwaysHideArt: {
+                    description: "Вимкнути завантаження обкладинок альбомів.",
+                    label: "Stats.fm: завжди приховувати обкладинку"
+                },
+                jf_serverUrl: {
+                    description: "URL сервера Jellyfin.",
+                    label: "URL сервера Jellyfin"
+                },
+                jf_apiKey: {
+                    description: "API-ключ Jellyfin.",
+                    label: "API-ключ Jellyfin"
+                },
+                jf_userId: {
+                    description: "ID користувача Jellyfin.",
+                    label: "ID користувача Jellyfin"
+                },
+                jf_nameDisplay: {
+                    description: "Формат відображення назви.",
+                    label: "Jellyfin: відображення назви",
+                    default: "Назва серіалу/фільму",
+                    full: "Серіал - назва епізоду/треку/фільму",
+                    custom: "Власний"
+                },
+                jf_customName: {
+                    description: "Власний шаблон назви.",
+                    label: "Jellyfin: власна назва"
+                },
+                jf_coverType: {
+                    description: "Тип обкладинки для серіалів.",
+                    label: "Jellyfin: тип обкладинки",
+                    series: "Обкладинка серіалу",
+                    episode: "Обкладинка епізоду"
+                },
+                jf_episodeFormat: {
+                    description: "Формат номера епізоду.",
+                    label: "Jellyfin: формат епізоду",
+                    long: "S01E01",
+                    fulltext: "Сезон 1 епізод 1"
+                },
+                jf_showEpisodeName: {
+                    description: "Показувати назву епізоду після сезону/епізоду.",
+                    label: "Jellyfin: назва епізоду"
+                },
+                jf_overrideType: {
+                    description: "Перевизначити тип Rich Presence.",
+                    label: "Jellyfin: перевизначити тип",
+                    off: "Вимк.",
+                    listening: "Слухає",
+                    playing: "Грає",
+                    streaming: "Стримить",
+                    watching: "Дивиться"
+                },
+                jf_showPausedState: {
+                    description: "Показувати статус, коли медіа на паузі.",
+                    label: "Jellyfin: показувати паузу"
+                },
+                jf_privacyMode: {
+                    description: "Приховувати відомості про медіа.",
+                    label: "Jellyfin: режим приватності"
+                },
+                gr_refreshInterval: {
+                    description: "Інтервал оновлення в секундах.",
+                    label: "Gensokyo Radio: інтервал оновлення"
+                },
+                nd_serverUrl: {
+                    description: "URL сервера Navidrome (наприклад, https://navidrome.example.com)",
+                    label: "URL сервера Navidrome"
+                },
+                nd_username: {
+                    description: "Ім'я користувача Navidrome",
+                    label: "Користувач Navidrome"
+                },
+                nd_password: {
+                    description: "Пароль Navidrome",
+                    label: "Пароль Navidrome"
+                },
+                nd_clientId: {
+                    description: "Необов'язковий ID клієнта застосунку Discord",
+                    label: "Navidrome: ID клієнта"
+                },
+                nd_showSmallImage: {
+                    description: "Показувати логотип Navidrome у правому нижньому куті обкладинки.",
+                    label: "Navidrome: маленьке зображення"
+                },
+                nd_showAlbum: {
+                    description: "Показувати назву альбому в статусі.",
+                    label: "Navidrome: показувати альбом"
+                },
+                nd_albumArtMode: {
+                    description: "Спосіб отримання обкладинок альбомів.",
+                    label: "Navidrome: режим обкладинки",
+                    none: "Немає",
+                    instance: "Екземпляр Navidrome (розкриває URL сервера Discord, автентифікація не надсилається)",
+                    lastfm: "API Last.fm (надсилає метадані треку на Last.fm)"
+                },
+                nd_lastfmApiKey: {
+                    description: "Необов'язковий API-ключ Last.fm",
+                    label: "Navidrome: API-ключ Last.fm"
+                },
+                nd_refreshInterval: {
+                    description: "Інтервал оновлення в секундах.",
+                    label: "Navidrome: інтервал оновлення"
+                },
+                nd_activityType: {
+                    description: "Тип активності",
+                    label: "Navidrome: тип активності",
+                    listening: "Слухає",
+                    playingFixesHiddenLines: "Грає (виправляє приховані рядки)",
+                    watching: "Дивиться"
+                },
+                nd_nameString: {
+                    description: "Рядок формату назви активності",
+                    label: "Navidrome: рядок назви"
+                },
+                nd_detailsString: {
+                    description: "Рядок формату деталей активності",
+                    label: "Navidrome: рядок деталей"
+                },
+                nd_stateString: {
+                    description: "Рядок формату стану активності",
+                    label: "Navidrome: рядок стану"
+                },
+                nd_largeTextString: {
+                    description: "Рядок формату великого тексту активності",
+                    label: "Navidrome: рядок великого тексту"
+                },
+                nd_statusDisplayType: {
+                    description: "Показувати трек / виконавця у списку учасників",
+                    off: "Не показувати (загальне повідомлення про прослуховування)"
+                },
+                nd_hideOnPause: {
+                    description: "Приховувати Rich Presence, коли музика на паузі",
+                    label: "Navidrome: приховувати на паузі"
+                }
+            },
+            panel: {
+                password: "Пароль",
+                statsFmUsername: "ім'я користувача stats.fm",
+                customStatusText: "Власний текст статусу",
+                nameFormat: "Формат імені",
+                missingArtFallback: "Заміна за відсутності обкладинки",
+                showListeningStatus: "Показувати статус прослуховування",
+                showStatsFmLogo: "Показувати логотип Stats.fm",
+                showProfileLink: "Показувати посилання на профіль",
+                showSongLink: "Показувати посилання на пісню",
+                hideWithSpotify: "Приховувати при Spotify",
+                hideWithExternalRpc: "Приховувати при зовнішньому RPC",
+                disableAlbumArt: "Вимкнути обкладинки альбомів",
+                apiKey: "API-ключ",
+                userId: "ID користувача",
+                nameDisplay: "Відображення назви",
+                customNameTemplate: "Власний шаблон назви",
+                coverType: "Тип обкладинки",
+                episodeFormat: "Формат епізоду",
+                overridePresenceType: "Перевизначити тип статусу",
+                showEpisodeName: "Показувати назву епізоду",
+                showWhenPaused: "Показувати на паузі",
+                privacyMode: "Режим приватності",
+                refreshInterval: "Інтервал оновлення",
+                clientId: "ID клієнта",
+                albumArtMode: "Режим обкладинки",
+                lastFmApiKey: "API-ключ Last.fm",
+                showSmallImage: "Показувати маленьке зображення",
+                showAlbum: "Показувати альбом",
+                activityType: "Тип активності",
+                statusDisplayType: "Тип відображення статусу",
+                hideOnPause: "Приховувати на паузі",
+                activityNameFormat: "Формат назви активності",
+                detailsFormat: "Формат деталей",
+                stateFormat: "Формат стану",
+                largeTextFormat: "Формат великого тексту",
+                enabled: "Увімкнено"
+            }
+        },
+        sedEnhanced: {
+            option: {
+                regexByDefault: {
+                    description: "Інвертує прапорець `r`: із ним вмикається режим без регулярних виразів, без нього — режим регулярних виразів.",
+                    label: "Regex за замовчуванням"
+                }
+            },
+            name: "SedEnhanced",
+            description: "Розширює примітивну підтримку `sed` у Discord."
+        },
+        showRolesInChat: {
+            option: {
+                showBots: {
+                    description: "Чи показувати найвищу роль у ботів.",
+                    label: "Показувати ботів"
+                },
+                useRoleColor: {
+                    description: "Використовувати колір ролі для значка.",
+                    label: "Колір ролі"
+                }
+            },
+            name: "ShowRolesInChat",
+            description: "Показує найвищу роль користувача поруч з іменем у повідомленнях. Приховуйте/показуйте окремі ролі через їхнє контекстне меню (ПКМ).",
+            text: {
+                chatRoleActions: "Дії з роллю в чаті",
+                unhideRolesInChat: "Знову показувати ролі в чаті",
+                showRoleInChat: "Показувати роль у чаті",
+                hideRoleInChat: "Сховати роль у чаті"
+            }
+        },
+        silenceUsers: {
+            option: {
+                mutedUserIds: {
+                    description: "ID користувачів Discord через кому, чиї пінги й значки сервера вимикаються.",
+                    label: "ID вимкнених користувачів"
+                }
+            },
+            name: "SilenceUsers",
+            description: "Вимикає пінги @згадок і лічильники значків сервера від певних користувачів. Звичайні повідомлення та ОП не зачіпаються."
+        },
+        songLink: {
+            text: {
+                showIfAvailable: "Показувати, якщо доступно",
+                openInDesktopApp: "Відкрити в застосунку для ПК",
+                loadingSongLink: "Завантаження посилання на пісню...",
+                pleaseProvideAMusic: "Вкажіть посилання на музику.",
+                thisWillTakeA: "Це займе трохи часу...",
+                noAlternativePlatformsFound: "Для цього посилання не знайдено альтернативних платформ.",
+                failedToResolveMusic: "Не вдалося розпізнати посилання на музику",
+                logo: "Логотип {{name}}"
+            },
+            option: {
+                servicesSettings: {
+                    description: "налаштування сервісів",
+                    label: "Налаштування сервісів"
+                },
+                userCountry: {
+                    description: "Країна для пошуку (двобуквений код країни)",
+                    label: "Країна користувача"
+                },
+                includeMetadata: {
+                    description: "Додавати назву треку й виконавця як заголовок.",
+                    label: "Додавати метадані"
+                }
+            },
+            name: "SongLink",
+            description: "Додає кнопки стрімінгових сервісів під посиланнями на пісні",
+            command: {
+                musiclink: "Перетворити посилання на музику для інших стрімінгових платформ.",
+                url: "Посилання на музику (Spotify, Deezer, YouTube, Tidal, Apple Music, SoundCloud)"
+            }
+        },
+        songSpotlight: {
+            name: "SongSpotlight",
+            description: "Показуйте пісні у своєму профілі",
+            text: {
+                songSpotlight: "Song Spotlight",
+                explicit: "Ненормативно",
+                addSong: "Додати пісню",
+                addANewSong: "Додати нову пісню",
+                copyLink: "Копіювати посилання",
+                removeSong: "Видалити пісню",
+                failedToLoad: "Не вдалося завантажити!",
+                areYouSure: "Ви впевнені?",
+                thisWillOverwriteYour: "Це перезапише ваші поточні пісні.",
+                continue: "Продовжити",
+                nevermind: "Не треба",
+                thisWillPermanentlyDelete: "Це назавжди видалить усі ваші пісні.",
+                delete: "Видалити",
+                signInToSong: "Увійти в Song Spotlight",
+                songs: "Пісні",
+                authorization: "Authorization",
+                importFromClipboard: "Імпорт із буфера обміну",
+                copyToClipboard: "Копіювати в буфер обміну",
+                signOut: "Вийти",
+                deleteSongs: "Видалити пісні",
+                more: "Ще",
+                editSongs: "Редагувати пісні",
+                copyJson: "Копіювати JSON",
+                looksLikeThereS: "Схоже, тут нічого немає!",
+                uhOhSongSpotlight: "Ой! Не вдалося завантажити Song Spotlight. Подробиці в консолі.",
+                stealSong: "Поцупити пісню",
+                profileSongs: "Пісні профілю",
+                notEnoughSpace: "Недостатньо місця",
+                alreadyAdded: "Ви вже додали цю пісню",
+                invalidLink: "Неправильне посилання",
+                failedToParseLink: "Не вдалося розібрати посилання",
+                invalidUrl: "Неправильний URL",
+                goAddSongs: "Ну? Чого ви чекаєте? Додайте кілька пісень до свого Song Spotlight!",
+                tellUserToAddSongs: "Попросіть {{name}} додати кілька пісень до свого Song Spotlight!",
+                supportedServices: "Song Spotlight підтримує ці сервіси:",
+                viewSongsVia: "Свої пісні також можна переглянути командою",
+                viewSongsViaSuffix: "!",
+                coverTooltipOwner: "{{label}}: {{sublabel}}",
+                coverTooltipBy: "{{label}} — {{sublabel}}",
+                lastUpdated: "Останнє оновлення",
+                save: "Зберегти",
+                showMore: "Показати ще {{count}}"
+            },
+            toast: {
+                youHaveBeenSigned: "Ви вийшли з Song Spotlight. Увійдіть знову.",
+                songSpotlightError: "Song Spotlight: {{error}}",
+                successfullyAuthorized: "Авторизацію виконано!",
+                failedToPlaySong: "Не вдалося відтворити прев'ю пісні!",
+                addedSong: "Пісню додано!",
+                removedSong: "Пісню видалено!",
+                noJsonInClipboard: "У буфері обміну немає JSON!",
+                invalidSongSpotlightData: "Недійсні дані Song Spotlight у буфері обміну!",
+                oneOrMoreImported: "Одна чи кілька імпортованих пісень недійсні.",
+                importedSongsFromClipboard: "Пісні імпортовано з буфера обміну!",
+                successfullySavedSongs: "Пісні успішно збережено!",
+                successfullySignedOut: "Вихід виконано!",
+                successfullyDeletedSongs: "Пісні успішно видалено!",
+                youDonTHave: "Недостатньо місця!",
+                uhOhThisSong: "Ой, такої пісні не існує!",
+                youAlreadyHaveThis: "Цю пісню вже додано!",
+                youDonTHave2: "У вас... немає цієї пісні?",
+                fetchError: "Помилка запиту Song Spotlight: {{path}}"
+            },
+            option: {
+                collapseSongList: {
+                    description: "Згортає список пісень у профілі в кнопку, що відкриває окреме меню",
+                    label: "Згорнути список пісень"
+                },
+                profileSongsLimit: {
+                    description: "Скільки пісень показувати при першому натисканні на користувача",
+                    label: "Ліміт пісень у профілі"
+                },
+                previewVolume: {
+                    description: "Гучність прев'ю пісень",
+                    label: "Гучність прев'ю"
+                }
+            }
+        },
+        stopAutoUnread: {
+            name: "StopAutoUnread",
+            description: "Не дає Discord автоматично змінювати сповіщення каналу на «Усі повідомлення»"
+        },
+        themeLibrary: {
+            text: {
+                enablePlugin: "Увімкнути плагін",
+                cancel: "Скасувати",
+                holdOn: "Хвилинку!",
+                thisThemeRequiresThe: "Для цієї теми потрібен",
+                pluginToWorkProperly: "плагін для коректної роботи!",
+                doYouWantTo: "Увімкнути його?",
+                themeInfo: "Відомості про тему",
+                viewSource: "Переглянути джерело",
+                close: "Закрити",
+                download: "Завантажити",
+                overwrite: "Перезаписати",
+                keepMyFile: "Залишити мій файл",
+                copyToClipboard: "Копіювати в буфер обміну",
+                conflict: "Конфлікт!",
+                themeSource: "Джерело теми",
+                aThemeWithThe: "Тема з такою самою назвою",
+                alreadyExists: "уже існує",
+                inYourThemesDirectory: "у теці тем! Перезаписати її?",
+                version: "Версія",
+                likes: "Вподобання",
+                donate: "Підтримати",
+                supportServer: "Сервер підтримки",
+                source: "Джерело",
+                tags: "Теги",
+                youCanSupportThe: "Ви можете підтримати автора пожертвою нижче!",
+                joinDiscordServer: "Приєднатися до сервера Discord",
+                viewThemeSource: "Переглянути джерело теми",
+                showAll: "Показати всі",
+                showThemes: "Показати теми",
+                showSnippets: "Показати сніпети",
+                showMostLiked: "Показати найпопулярніші",
+                showDark: "Показати темні",
+                showLight: "Показати світлі",
+                showEnabled: "Показати увімкнені",
+                showDisabled: "Показати вимкнені",
+                searchForATheme: "Пошук теми...",
+                gettingTheLatestThemes: "Отримання найновіших тем...",
+                thisWonTTake: "Це недовго!",
+                failedToFetchThemes: "Не вдалося отримати теми",
+                couldNotFetchThe: "Не вдалося отримати список тем. Спробуйте пізніше.",
+                wantYourThemeRemoved: "Хочете видалити свою тему?",
+                hide: "Приховати",
+                noThemeFound: "Тему не знайдено.",
+                tryNarrowingYourSearch: "Спробуйте уточнити пошук.",
+                themeLibrary: "Бібліотека тем",
+                successfullyAuthorizedWithThemelibrary: "Авторизацію в ThemeLibrary виконано!",
+                failedToAuthorizeCheck: "Не вдалося авторизуватися, перевірте консоль",
+                successfullyDeauthorizedFromThemelibrary: "Авторизацію ThemeLibrary відкликано!",
+                failedToDeauthorizeCheck: "Не вдалося відкликати авторизацію, перевірте консоль",
+                themelibraryAuth: "Авторизація ThemeLibrary",
+                themeRemoval: "Видалення теми",
+                allThemeAuthorsAre: "Усі автори тем зазначені у відомостях про тему, вихідний код не змінено. Якщо все ж хочете видалити свою тему, створіть issue, натиснувши нижче.",
+                authorizeWithThemelibrary: "Авторизуватися в ThemeLibrary",
+                copyThemelibraryToken: "Копіювати токен ThemeLibrary",
+                deauthorizeThemelibrary: "Відкликати авторизацію ThemeLibrary",
+                themeDetails: "Відомості про {{name}}",
+                mostLiked: "Найпопулярніші",
+                newestAdditions: "Нові додавання",
+                removeTheme: "Вилучити тему",
+                addTheme: "Додати тему",
+                authors: "Автори",
+                author: "Автор",
+                nobodyLikedTheme: "Ця тема ще нікому не сподобалася.",
+                nobodyLikedSnippet: "Цей сніпет ще нікому не сподобався.",
+                usersLikedTheme: "Ця тема сподобалася користувачам: {{likes}}!",
+                usersLikedSnippet: "Цей сніпет сподобався користувачам: {{likes}}!",
+                openThemeLibrary: "Відкрити бібліотеку тем",
+                lastUpdated: "Цю тему востаннє оновлено",
+                removalInfo: "Якщо ви хочете назавжди видалити свої теми, створіть issue на",
+                themes: "Теми",
+                requestRemoval: "Запросити видалення теми",
+                pluginSuffix: "плагін!"
+            },
+            toast: {
+                downloadedName: "{{name}} завантажено!",
+                failedToDownloadName: "Не вдалося завантажити {{name}}! (перевірте консоль)",
+                invalidOrExpiredInvite: "Недійсне або прострочене запрошення!",
+                copiedToClipboard: "Скопійовано в буфер обміну",
+                noUniquetokenPresentTry: "Немає uniqueToken, спочатку авторизуйтеся!",
+                noTokenToCopy: "Немає токена для копіювання, спочатку авторизуйтеся!",
+                copiedToClipboard2: "Скопійовано в буфер обміну!"
+            },
+            name: "ThemeLibrary",
+            description: "Бібліотека тем для Plexcord.",
+            option: {
+                hideWarningCard: {
+                    description: "Приховувати картку попередження вгорі вкладки бібліотеки тем",
+                    label: "Приховати попередження"
+                },
+                buttons: {
+                    description: "Кнопки ThemeLibrary",
+                    label: "Кнопки"
+                }
+            }
+        },
+        translatePlus: {
+            name: "Translate+",
+            description: "Плагін перекладу Plexcord, але з підтримкою штучних мов!",
+            text: {
+                translate: "Перекласти",
+                dismiss: "Приховати",
+                translationFailedDueTo: "Переклад не вдався через помилку.",
+                translatedFrom: "перекладено з мови: {{lang}}"
+            },
+            option: {
+                target: {
+                    description: "Цільова мова",
+                    label: "Ціль"
+                },
+                toki: {
+                    description: "Увімкнути токі пона",
+                    label: "Токі пона"
+                },
+                sitelen: {
+                    description: "Увімкнути сітелен пона",
+                    label: "Сітелен пона"
+                },
+                shavian: {
+                    description: "Увімкнути алфавіт Шоу",
+                    label: "Алфавіт Шоу"
+                }
+            }
+        },
+        triviaAI: {
+            name: "TriviaAI",
+            description: "Плагін, що допомагає відповідати на запитання вікторин за допомогою ШІ.",
+            text: {
+                answerWithAi: "Відповісти з ШІ",
+                enterApiKeyHere: "Введіть тут API-ключ вашого ШІ-ендпоінта.",
+                enterSystemPrompt: "Введіть системний промпт.",
+                enterYourOpenaiCompatible: "Введіть тут ваш ШІ-ендпоінт, сумісний з OpenAI.",
+                status: "Статус {{status}}"
+            },
+            option: {
+                apiKey: {
+                    description: "API-ключ.",
+                    label: "API-ключ"
+                },
+                model: {
+                    description: "Модель ШІ для використання.",
+                    label: "Модель",
+                    placeholder: "наприклад, google/gemini-3-flash-preview, inception/mercury, openai/gpt-5.2-chat тощо"
+                },
+                systemPrompt: {
+                    description: "Системний промпт для ШІ. Заповнювачі: {current_user}, {current_time}",
+                    label: "Системний промпт"
+                },
+                maxTokens: {
+                    description: "Максимальна кількість токенів у відповіді.",
+                    label: "Макс. токенів"
+                },
+                endpoint: {
+                    description: "ШІ-ендпоінт, сумісний з OpenAI.",
+                    label: "Ендпоінт"
+                },
+                context: {
+                    description: "Скільки попередніх повідомлень включати в контекст.",
+                    label: "Контекст"
+                },
+                passMessageAuthorName: {
+                    description: "Додавати ім'я автора перед текстом повідомлення під час передавання ШІ. Це допомагає ШІ розрізняти користувачів у розмові.",
+                    label: "Передавати ім'я автора"
+                },
+                treatSelfAsAssistant: {
+                    description: "Якщо ввімкнено, ваші повідомлення вважатимуться повідомленнями асистента в контексті. Деякі моделі через це починають писати фанфіки.",
+                    label: "Вважати себе асистентом"
+                },
+                mode: {
+                    description: "Як обробляти відповіді?",
+                    label: "Режим",
+                    autoreply: "Автовідповідь",
+                    chatbar: "Замінити текст у полі чату",
+                    bot: "Clyde"
+                },
+                supportImages: {
+                    description: "Передавати зображення ШІ як контекст (якщо є). Підтримується не всіма моделями.",
+                    label: "Підтримка зображень"
+                },
+                sendImagesAsBase64: {
+                    description: "Надсилати зображення ШІ в base64.",
+                    label: "Надсилати зображення в base64"
+                }
+            },
+            toast: {
+                triviaaiApiSettingsAre: "TriviaAI: налаштування API не заповнено.",
+                errorGettingResponseFrom: "Помилка отримання відповіді від моделі ШІ"
+            }
+        },
+        unreadCountBadge: {
+            option: {
+                showOnMutedChannels: {
+                    description: "Показувати кількість непрочитаних у вимкнених каналах",
+                    label: "Показувати у вимкнених каналах"
+                },
+                notificationCountLimit: {
+                    description: "Показувати +99 замість справжньої кількості",
+                    label: "Ліміт лічильника сповіщень"
+                }
+            },
+            name: "UnreadCountBadge",
+            description: "Показує значки з кількістю непрочитаних повідомлень біля каналів у списку"
+        },
+        userPFP: {
+            toast: {
+                gifsWebpMustBe: "GIF/WebP треба додавати за URL. Завантажте GIF/WebP на хостинг зображень і вставте посилання."
+            },
+            text: {
+                save: "Зберегти",
+                delete: "Видалити",
+                customAvatar: "Власний аватар",
+                original: "Оригінал",
+                local: "Локальний",
+                enterPngGifUrl: "Введіть URL PNG/GIF",
+                setAvatar: "Задати аватар",
+                usingTheSetAvatar: "Функція встановлення аватара працює лише локально — зміни бачите тільки ви.",
+                joinUserpfpServer: "Приєднатися до сервера UserPFP",
+                dropHere: "Відпустіть тут!",
+                dragOrClick: "⬆ Перетягніть зображення або натисніть для завантаження (для GIF або WebP використовуйте URL)",
+                uploadedFile: "(завантажений файл)",
+                supportHere: "Підтримати UserPFP"
+            },
+            option: {
+                overrideServerAvatars: {
+                    description: "Замінювати аватари сервера власними або стандартним, якщо власний не задано.",
+                    label: "Замінювати аватари сервера"
+                },
+                preferNitro: {
+                    description: "Який аватар використовувати, якщо є і стандартний анімований (Nitro), і аватар UserPFP",
+                    label: "Надавати перевагу Nitro",
+                    false: "UserPFP",
+                    true: "Nitro"
+                },
+                databaseSource: {
+                    description: "URL для завантаження бази даних",
+                    label: "Джерело бази даних"
+                }
+            },
+            name: "UserPFP",
+            description: "Дозволяє встановлювати локальні статичні або анімовані аватари для себе та інших користувачів"
+        },
+        userpluginInstaller: {
+            toast: {
+                restartToApplyChanges: "Перезапустіть, щоб застосувати зміни!"
+            },
+            text: {
+                installError: "Помилка встановлення",
+                done: "Готово!",
+                later: "Пізніше",
+                updateError: "Помилка оновлення",
+                checkingForUpdates: "Перевірка оновлень...",
+                loadingPlugins: "Завантаження плагінів...",
+                pluginUpdatesAvailable: "Доступні оновлення плагінів",
+                theFollowingPluginsAre: "Наступні плагіни застаріли:",
+                youCanUpdatePlugins: "Оновити плагіни можна нижче.",
+                installPlugin: "Встановити плагін",
+                userplugininstallerNotFullyLoaded: "UserpluginInstaller завантажено не повністю",
+                youNeedToRestart: "Потрібен перезапуск, щоб завантажилася нативна частина :)",
+                restartNow: "Перезапустити зараз",
+                someUserpluginsAreOut: "Деякі UserPlugins застаріли!",
+                clickToOpenThe: "Натисніть, щоб відкрити оновлення UserPlugins",
+                plexcordDoesNotModerate: "Plexcord не модерує користувацькі плагіни й не несе відповідальності за наслідки їх встановлення.",
+                onlyInstallUserpluginsFrom: "Встановлюйте користувацькі плагіни лише від довірених розробників. Ви робите це на власний ризик.",
+                setGitPath: "Вказати шлях до Git",
+                installHint: "Ви можете встановити плагін з GitHub, GitLab, Codeberg, git.nin0.dev або plugins.nin0.dev, вставивши сюди його URL для клонування.",
+                enableAndRestart: "Увімкнути й перезапустити",
+                enableAndRefresh: "Увімкнути й оновити",
+                tabCounts: "({{total}}, увімкнено: {{enabled}})",
+                possiblyMore: "і, можливо, інші, оскільки перевірку оновлень не завершено. ",
+                alreadyInstalled: "Плагін уже встановлено, оновіть його нижче",
+                invalidUrl: "Недійсний URL, прочитайте примітку вище",
+                install: "Встановити",
+                restart: "Перезапустити",
+                refresh: "Оновити",
+                update: "Оновити",
+                source: "Вихідний код",
+                support: "Підтримка",
+                managePlugins: "Керування плагінами",
+                uninstalledRestart: "{{name}} видалено. Для повного видалення плагіна потрібен перезапуск.",
+                uninstalledRefresh: "{{name}} видалено. Для повного видалення плагіна потрібно оновити сторінку.",
+                updatedRestart: "{{name}} оновлено. Для застосування оновлення потрібен перезапуск.",
+                updatedRefresh: "{{name}} оновлено. Для застосування оновлення потрібно оновити сторінку.",
+                installedBody: "{{name}} успішно встановлено. Що далі?",
+                installedNativeBody: "{{name}} успішно встановлено. Однак він використовує нативні функції, тому потрібен перезапуск клієнта. Що далі?"
+            },
+            option: {
+                allowlistedChannels: {
+                    description: "Список каналів через кому, де показувати кнопку «Встановити плагін». У каналах користувацьких плагінів Plexcord вона показується завжди",
+                    label: "Дозволені канали"
+                },
+                notifyIfUpdate: {
+                    description: "Показувати сповіщення Plexcord, якщо UserPlugins потрібно оновити",
+                    label: "Сповіщати про оновлення"
+                },
+                neverNotifyForPlugins: {
+                    description: "Ніколи не показувати сповіщення про оновлення цих плагінів (їх можна оновити на вкладці UserPlugins)",
+                    label: "Не сповіщати для плагінів"
+                }
+            },
+            name: "UserpluginInstaller",
+            description: "Встановлюйте користувацькі плагіни в один клік"
+        },
+        vCPanelSettings: {
+            option: {
+                title1: {
+                    label: "Заголовок 1"
+                },
+                uncollapseSettingsByDefault: {
+                    description: "Автоматично розгортати налаштування голосу за замовчуванням",
+                    label: "Розгортати налаштування за замовчуванням"
+                },
+                title2: {
+                    label: "Заголовок 2"
+                },
+                outputVolume: {
+                    description: "Показувати повзунок гучності виводу",
+                    label: "Гучність виводу"
+                },
+                inputVolume: {
+                    description: "Показувати повзунок гучності вводу",
+                    label: "Гучність вводу"
+                },
+                outputDevice: {
+                    description: "Показувати вибір пристрою виводу",
+                    label: "Пристрій виводу"
+                },
+                inputDevice: {
+                    description: "Показувати вибір пристрою вводу",
+                    label: "Пристрій вводу"
+                },
+                camera: {
+                    description: "Показувати вибір камери",
+                    label: "Камера"
+                },
+                title3: {
+                    label: "Заголовок 3"
+                },
+                showOutputVolumeHeader: {
+                    description: "Показувати заголовок над повзунком гучності виводу",
+                    label: "Заголовок гучності виводу"
+                },
+                showInputVolumeHeader: {
+                    description: "Показувати заголовок над повзунком гучності вводу",
+                    label: "Заголовок гучності вводу"
+                },
+                showOutputDeviceHeader: {
+                    description: "Показувати заголовок над вибором пристрою виводу",
+                    label: "Заголовок пристрою виводу"
+                },
+                showInputDeviceHeader: {
+                    description: "Показувати заголовок над вибором пристрою вводу",
+                    label: "Заголовок пристрою вводу"
+                },
+                showVideoDeviceHeader: {
+                    description: "Показувати заголовок над вибором камери",
+                    label: "Заголовок відеопристрою"
+                }
+            },
+            name: "VCPanelSettings",
+            description: "Керуйте налаштуваннями голосу просто з голосової панелі",
+            text: {
+                appearance: "Вигляд",
+                settingsToShow: "Налаштування для показу",
+                headersToShow: "Заголовки для показу",
+                outputVolume: "Гучність виводу",
+                inputVolume: "Гучність вводу",
+                outputDevice: "Пристрій виводу",
+                inputDevice: "Пристрій вводу",
+                settings: "Налаштування",
+                hide: "Сховати"
+            }
+        },
+        voiceMessageTranscriber: {
+            text: {
+                autoDetect: "Автовизначення",
+                start: "Почати",
+                transcriptionOptions: "Параметри розшифрування",
+                audioLanguage: "Мова аудіо",
+                retry: "Повторити",
+                transcriptionFailed: "Помилка розшифрування",
+                transcribeVoiceMessage: "Розшифрувати голосове повідомлення",
+                close: "Закрити",
+                baseRecommended: "Base (рекомендовано)",
+                small: "Small",
+                largeV3TurboBest: "Large v3 Turbo (найкраща точність, рекомендовано GPU)",
+                transcribe: "Розшифрувати",
+                translateToEnglish: "Перекласти англійською",
+                voiceMessageTranslation: "Переклад голосового повідомлення",
+                voiceMessageTranscription: "Розшифровка голосового повідомлення",
+                hideTimestamps: "Сховати часові мітки",
+                showTimestamps: "Показати часові мітки",
+                copied: "Скопійовано!",
+                copyText: "Копіювати текст",
+                downloadingAudio: "Завантаження аудіо...",
+                processingAudio: "Обробка аудіо...",
+                loadingModel: "Завантаження моделі...",
+                transcribing: "Розшифровка...",
+                transcription: "Розшифровка",
+                transcriptionError: "Помилка розшифровки",
+                transcribingInProgress: "Триває розшифровка...",
+                initializing: "Ініціалізація...",
+                workerCrashed: "Процес розшифровки аварійно завершився",
+                workerStopped: "Процес розшифровки зупинено",
+                deleteCache: "Видалити всі кешовані файли ({{size}} МБ)",
+                action: "Дія"
+            },
+            name: "VoiceMessageTranscriber",
+            description: "Розшифрування голосових повідомлень на пристрої за допомогою Whisper",
+            option: {
+                embed: {
+                    description: "Показувати розшифрування просто у вкладенні голосового повідомлення, а не у вікні.",
+                    label: "Вбудовування"
+                },
+                maintainHorizontal: {
+                    description: "Зберігати ширину вбудованого блоку розшифрування й розширювати його вертикально.",
+                    label: "Зберігати ширину"
+                },
+                selectedModel: {
+                    description: "Розмір моделі.",
+                    onnxcommunitywhispertiny: "Tiny (найшвидша, найнижча точність)"
+                },
+                useGpu: {
+                    description: "Запускати модель на GPU (WebGPU), якщо підтримується. Набагато швидше й дозволяє використовувати великі моделі. Якщо недоступно — CPU.",
+                    label: "Використовувати GPU"
+                },
+                quantized: {
+                    description: "Використовувати квантовані моделі на CPU (менший розмір, невелика втрата якості).",
+                    label: "Квантований"
+                },
+                deleteModalFiles: {
+                    description: "Видалити кешовані файли зі сховища.",
+                    label: "Видалити файли моделі"
+                }
+            }
+        },
+        voiceMessagesInBackground: {
+            name: "VoiceMessagesInBackground",
+            description: "Продовжує відтворення голосових повідомлень між чатами із синхронізованим мініплеєром.",
+            text: {
+                voiceMessagesInBackground: "Фоновий плеєр голосових повідомлень",
+                returnToChannelname: "Повернутися до {{channelName}}",
+                voiceMessagePosition: "Позиція голосового повідомлення",
+                changePlaybackSpeed: "Змінити швидкість відтворення",
+                playbackSpeedSpeedTimes: "Швидкість відтворення ×{{speed}}",
+                closeVoiceMessagePlayer: "Закрити плеєр голосових повідомлень",
+                voiceMessage: "Голосове повідомлення",
+                directMessage: "Особисте повідомлення",
+                resume: "Продовжити голосове повідомлення",
+                pause: "Призупинити голосове повідомлення"
+            }
+        },
+        webPWA: {
+            name: "WebPWA",
+            description: "Дозволяє встановити Discord як застосунок (PWA). Вмикає значки сповіщень, глобальні сполучення клавіш і власний заголовок Discord.",
+            text: {
+                activities: "Активності",
+                hopIn: "Приєднатися",
+                status: "Статус",
+                emojis: "Емодзі",
+                rooms: "Кімнати",
+                discord: "Discord",
+                platforms: "Платформи",
+                keybindsInfoBefore: "Підтримуються користувацькі глобальні сполучення «Натисни для X». Перейдіть на",
+                keybindsInfoAfter: "і змініть їх там. Сполучення «Утримуй для X» не підтримуються."
+            }
+        },
+        "webRichPresence (arRPC)": {
+            name: "WebRichPresence (arRPC)"
+        },
+        webScreenShare: {
+            option: {
+                resolution: {
+                    description: "Роздільність",
+                    label: "Роздільність"
+                },
+                frameRate: {
+                    description: "Частота кадрів",
+                    label: "Частота кадрів"
+                },
+                contentHint: {
+                    description: "Підказка про вміст",
+                    label: "Підказка про вміст"
+                },
+                systemAudio: {
+                    description: "Вимкнути системний звук",
+                    label: "Системний звук"
+                }
+            },
+            name: "WebScreenShare",
+            description: "Додає меню параметрів демонстрації екрана. Дозволяє змінювати роздільність, частоту кадрів, підказки кодування та системний звук.",
+            text: {
+                stream: "Трансляція",
+                streamMuted: "Трансляцію вимкнено",
+                streamMode: "Режим трансляції",
+                muteStreamAudio: "Вимкнути звук трансляції",
+                preventsSystemAudioFrom: "Не допускає системний звук у трансляцію.",
+                showStreamPreviews: "Показувати прев'ю трансляції",
+                allowsOthersToSee: "Дозволяє іншим бачити прев'ю трансляції до приєднання.",
+                smootherVideo: "Плавніше відео",
+                cleanerText: "Чіткіший текст",
+                userPreset: "Користувацький пресет",
+                custom: "Власний",
+                gaming: "Ігри",
+                screenshare: "Демонстрація екрана"
+            }
+        },
+        whitelistedEmojis: {
+            option: {
+                defaultEmojis: {
+                    description: "Приховувати стандартні емодзі Unicode з автодоповнення, якщо їх немає в білому списку.",
+                    label: "Стандартні емодзі"
+                },
+                serverEmojis: {
+                    description: "Приховувати власні емодзі серверів з автодоповнення, якщо їх немає в білому списку.",
+                    label: "Емодзі сервера"
+                },
+                disableToasts: {
+                    description: "Не показувати сповіщення під час додавання чи видалення емодзі.",
+                    label: "Вимкнути сповіщення"
+                },
+                whiteListedEmojis: {
+                    description: "Емодзі в білому списку",
+                    label: "Емодзі в білому списку"
+                },
+                exportEmojis: {
+                    description: "Експорт емодзі",
+                    label: "Експорт емодзі"
+                },
+                importEmojis: {
+                    description: "Імпорт емодзі",
+                    label: "Імпорт емодзі"
+                },
+                resetEmojis: {
+                    description: "Скинути емодзі",
+                    label: "Скинути емодзі"
+                }
+            },
+            name: "WhitelistedEmojis",
+            description: "Дозволяє вимкнути всі емодзі в повідомленнях, окрім набору з білого списку.",
+            toast: {
+                addedLengthEmojisTo: "Додано емодзі до списку: {{length}}, уже були в списку: {{length}}",
+                removedLengthEmojisFrom: "Видалено емодзі зі списку: {{length}}",
+                nameIsAlreadyIn: "«{{name}}» уже в списку",
+                addedNameToThe: "«{{name}}» додано до списку",
+                nameIsNotIn: "«{{name}}» немає в списку",
+                removedNameFromThe: "«{{name}}» видалено зі списку",
+                successfullyExportedEmojis: "Емодзі успішно експортовано",
+                successfullyImportedEmojis: "Емодзі успішно імпортовано",
+                invalidJsonData: "Недійсні дані JSON",
+                failedToImportEmojis: "Не вдалося імпортувати емодзі: {{err}}",
+                resetEmojis: "Емодзі скинуто"
+            },
+            text: {
+                areYouSure: "Ви впевнені?",
+                thisWillOverwriteYour: "Це перезапише ваш поточний білий список.",
+                import: "Імпорт",
+                cancel: "Скасувати",
+                thisWillRemoveAll: "Це видалить усі емодзі з вашого білого списку.",
+                reset: "Скинути",
+                addAllGuildEmojis: "Додати всі емодзі сервера",
+                removeAllGuildEmojis: "Видалити всі емодзі сервера",
+                noEmojisInThe: "У білому списку немає емодзі.",
+                removeAll: "Видалити всі",
+                removeFromWhitelist: "Вилучити з білого списку",
+                addToWhitelist: "Додати до білого списку",
+                defaultEmojis: "Стандартні емодзі",
+                guildEmojis: "Емодзі {{name}}",
+                guildFallback: "Сервер {{id}}",
+                whitelistedEmojis: "Емодзі з білого списку",
+                remove: "Видалити"
+            }
+        },
+        wigglyText: {
+            option: {
+                intensity: {
+                    description: "Інтенсивність анімації в px",
+                    label: "Інтенсивність"
+                }
+            },
+            name: "WigglyText",
+            description: "Додає нове форматування Markdown, яке змушує текст погойдуватися.",
+            text: {
+                leftAndRight: "ліворуч і праворуч",
+                byTyping: "якщо набрати",
+                upAndDown: "вгору і вниз",
+                inACircle: "по колу",
+                youCanMakeTextWiggle: "Ось як можна змусити текст хитатися:"
+            }
+        },
+        fixDiscordCss: {
+            description: "Виправляє затримки CSS у Discord"
+        },
+        directFileDownload: {
+            name: "DirectFileDownload",
+            description: "Завантажує файли безпосередньо з Discord, а не відкриває їх у браузері"
+        },
+        githubRepos: {
+            text: {
+                failedToFetchRepositories: "Не вдалося отримати репозиторії",
+                personal: "Особисте",
+                unknown: "Невідомо",
+                sortedByCount: "Відсортовано за кількістю репозиторіїв. Натисніть, щоб сортувати А-Я",
+                sortedAlphabetically: "Відсортовано А-Я. Натисніть, щоб сортувати за кількістю репозиторіїв",
+                mostRepos: "Найбільше репозиторіїв"
+            }
+        }
     }
 } as const;
 

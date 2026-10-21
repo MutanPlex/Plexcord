@@ -7,17 +7,13 @@
 
 import { plugin, t } from "@api/i18n";
 import { Channel, Message } from "@plexcord/discord-types";
-import { ChannelStore, Toasts, UserStore } from "@webpack/common";
+import { ChannelStore, showToast, UserStore } from "@webpack/common";
 import { proxyLazyWebpack } from "webpack";
 
 import { AllNotebooks, Note, Notebook } from "./types";
 import { deleteCacheFromDataStore, DeleteEntireStore, saveCacheToDataStore } from "./utils";
 
 export const noteHandlerCache = new Map<string, Notebook>();
-
-function showToast(message: string, type: typeof Toasts.Type[keyof typeof Toasts.Type] = Toasts.Type.SUCCESS) {
-    Toasts.show({ id: Toasts.genId(), message, type });
-}
 
 function formatNote(channel: Channel, message: Message): Note {
     return {
@@ -56,7 +52,7 @@ export const noteHandler = proxyLazyWebpack(() => ({
 
         noteHandlerCache.set(notebook, newNotes);
         saveCacheToDataStore(notebook, newNotes);
-        showToast(t(plugin.holyNotes.toast.saved, { notebook }));
+        showToast({ text: t(plugin.holyNotes.toast.saved, { notebook }), variant: "success" });
     },
 
     deleteNote(noteId: string, notebook: string) {
@@ -66,7 +62,7 @@ export const noteHandler = proxyLazyWebpack(() => ({
         const { [noteId]: _, ...rest } = notes;
         noteHandlerCache.set(notebook, rest);
         saveCacheToDataStore(notebook, rest);
-        showToast(t(plugin.holyNotes.toast.deleted, { notebook }));
+        showToast({ text: t(plugin.holyNotes.toast.deleted, { notebook }), variant: "success" });
     },
 
     moveNote(note: Note, from: string, to: string) {
@@ -81,23 +77,23 @@ export const noteHandler = proxyLazyWebpack(() => ({
         noteHandlerCache.set(to, newTo);
         saveCacheToDataStore(from, restFrom);
         saveCacheToDataStore(to, newTo);
-        showToast(t(plugin.holyNotes.toast.moved, { from, to }));
+        showToast({ text: t(plugin.holyNotes.toast.moved, { from, to }), variant: "success" });
     },
 
     newNoteBook(name: string, silent?: boolean) {
         if (noteHandlerCache.has(name)) {
-            showToast(t(plugin.holyNotes.toast.exists, { notebookName: name }), Toasts.Type.FAILURE);
+            showToast({ text: t(plugin.holyNotes.toast.exists, { notebookName: name }), variant: "critical" });
             return;
         }
         noteHandlerCache.set(name, {});
         saveCacheToDataStore(name, {});
-        if (!silent) showToast(t(plugin.holyNotes.toast.created, { notebookName: name }));
+        if (!silent) showToast({ text: t(plugin.holyNotes.toast.created, { notebookName: name }), variant: "success" });
     },
 
     deleteNotebook(name: string) {
         noteHandlerCache.delete(name);
         deleteCacheFromDataStore(name);
-        showToast(t(plugin.holyNotes.toast.deleted, { notebook: name }));
+        showToast({ text: t(plugin.holyNotes.toast.deleted, { notebook: name }), variant: "success" });
     },
 
     refreshAvatars() {
@@ -117,13 +113,13 @@ export const noteHandler = proxyLazyWebpack(() => ({
             noteHandlerCache.set(notebookName, notebook);
             saveCacheToDataStore(notebookName, notebook);
         }
-        showToast(t(plugin.holyNotes.toast.refreshed));
+        showToast({ text: t(plugin.holyNotes.toast.refreshed), variant: "success" });
     },
 
     async deleteEverything() {
         noteHandlerCache.clear();
         await DeleteEntireStore();
-        showToast(t(plugin.holyNotes.toast.deletedAll));
+        showToast({ text: t(plugin.holyNotes.toast.deletedAll), variant: "success" });
     },
 
     exportNotes(): AllNotebooks {
@@ -135,7 +131,7 @@ export const noteHandler = proxyLazyWebpack(() => ({
         try {
             parsed = JSON.parse(jsonString);
         } catch {
-            showToast("Invalid JSON", Toasts.Type.FAILURE);
+            showToast({ text: t(plugin.holyNotes.toast.invalidJson), variant: "critical" });
             return;
         }
 
@@ -144,7 +140,7 @@ export const noteHandler = proxyLazyWebpack(() => ({
             saveCacheToDataStore(notebook, parsed[notebook]);
         }
 
-        showToast(t(plugin.holyNotes.toast.imported));
+        showToast({ text: t(plugin.holyNotes.toast.imported), variant: "success" });
     },
 }));
 
