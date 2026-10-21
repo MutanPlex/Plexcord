@@ -18,7 +18,6 @@
 
 // Shared with the renderer, so nothing electron/node specific may be imported here
 
-// Themes are written for Vencord/Equicord, whose classes use vc-/vc_ (and eq-) instead of pc-/pc_
 const legacyPrefixRe = /(\.|#|--|class[*^$|~]?=\s*["']?)(?:vc|eq)([-_])/g;
 export const rewriteLegacyClasses = (css: string) => css.replace(legacyPrefixRe, "$1pc$2");
 

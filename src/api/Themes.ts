@@ -80,7 +80,6 @@ async function initThemes() {
         const mode = getThemeActivationMode(rawLink);
 
         if (shouldApplyTheme(mode, activeTheme)) {
-            // on desktop the main process fetches it and rewrites vc-/vc_ classes, see rewriteThemeCss
             links.add(IS_WEB ? link : `plexcord:///online-themes/${encodeURIComponent(link)}`);
         }
     }

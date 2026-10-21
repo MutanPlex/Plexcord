@@ -4,7 +4,7 @@
     mask: var(--si-widget) center/contain no-repeat !important;
 }
 
-.vce-theme-info {
+.pce-theme-info {
     padding: 0.5rem;
     margin-bottom: 10px;
     display: flex;
@@ -15,31 +15,31 @@
     transition: all 0.3s ease;
 }
 
-.vce-theme-info-preview {
+.pce-theme-info-preview {
     max-width: 100%;
     max-height: 100%;
     border-radius: 5px;
     margin: 0.5rem;
 }
 
-.vce-theme-info-preview img {
+.pce-theme-info-preview img {
     width: 1080px !important;
     height: 1920px !important;
     object-fit: cover;
 }
 
-.vce-theme-text-title {
+.pce-theme-text-title {
     padding: 0.5rem;
     padding-bottom: 0;
 }
 
-.vce-theme-text-description {
+.pce-theme-text-description {
     padding: 0.5rem;
     padding-top: 0;
     padding-bottom: 0.25rem;
 }
 
-.vce-theme-info-tag {
+.pce-theme-info-tag {
     background: var(--background-secondary-alt);
     color: var(--text-strong);
     border: 2px solid var(--background-base-low);
@@ -50,7 +50,7 @@
     margin-bottom: 0.5rem;
 }
 
-.vce-text-input {
+.pce-text-input {
     display: inline-block !important;
     color: var(--text-default) !important;
     font-size: 16px !important;
@@ -60,44 +60,44 @@
     max-height: unset;
 }
 
-.vce-likes-icon {
+.pce-likes-icon {
     overflow: visible;
     margin-right: 0.5rem;
     transition: fill 0.3s ease;
 }
 
-.vce-button-grid {
+.pce-button-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
 }
 
-.vce-warning-button {
+.pce-warning-button {
     display: flex;
     width: 100%;
 }
 
-.vce-search-grid {
+.pce-search-grid {
     display: grid;
     height: 40px;
     gap: 10px;
     grid-template-columns: 1fr 200px;
 }
 
-.vce-button {
+.pce-button {
     white-space: normal;
     display: inline-flex;
     align-items: center;
     justify-content: center;
 }
 
-.vce-overwrite-modal {
+.pce-overwrite-modal {
     border: 1px solid var(--input-border-default, var(--input-border));
     border-radius: 8px;
     padding: 0.5em;
 }
 
-.vce-image-paste {
+.pce-image-paste {
     border-radius: 8px;
     border: 3px dashed var(--input-border-default, var(--input-border));
     background-color: var(--background-secondary-alt);
@@ -109,27 +109,27 @@
     transition: border 0.3s ease;
 }
 
-.vce-image-paste:hover {
+.pce-image-paste:hover {
     border: 3px dashed var(--brand-500);
     transition: border 0.3s ease;
 }
 
-.vce-styled-list {
+.pce-styled-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-.vce-styled-list li {
+.pce-styled-list li {
     padding: 10px 0;
     border-bottom: thin solid var(--input-border-default, var(--input-border));
 }
 
-.vce-styled-list li:last-child {
+.pce-styled-list li:last-child {
     border-bottom: none;
 }
 
-.vce-divider-border {
+.pce-divider-border {
     border-bottom: thin solid var(--input-border-default, var(--input-border));
     padding: 10px 0;
     width: 100%;

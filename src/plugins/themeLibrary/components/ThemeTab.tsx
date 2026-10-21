@@ -186,7 +186,7 @@ function ThemeTab() {
                                     size={Button.Sizes.SMALL}
                                     color={Button.Colors.RED}
                                     look={Button.Looks.FILLED}
-                                    className={classes(Margins.top16, "vce-warning-button")}
+                                    className={classes(Margins.top16, "pce-warning-button")}
                                 >{t(plugin.themeLibrary.text.hide)}</Button>
                             </ErrorCard>
                         )}
@@ -216,7 +216,7 @@ function ThemeTab() {
                         }}>
                             {t(plugin.themeLibrary.text.themes)}
                         </HeadingPrimary>
-                        <div className={classes(Margins.bottom20, "vce-search-grid")}>
+                        <div className={classes(Margins.bottom20, "pce-search-grid")}>
                             <TextInput value={searchValue.value} placeholder={t(plugin.themeLibrary.text.searchForATheme)} onChange={onSearch} />
                             <div className={InputStyles.inputWrapper}>
                                 <SearchableSelect

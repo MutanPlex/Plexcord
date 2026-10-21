@@ -112,21 +112,21 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({ theme, themeLinks, likedTh
 
     return (
         <Card style={{ padding: ".5rem", marginBottom: ".5em", marginTop: ".5em", display: "flex", flexDirection: "column", backgroundColor: "var(--background-base-lower-alt)" }} key={theme.id}>
-            <HeadingPrimary style={{ overflowWrap: "break-word", marginTop: "8px" }} className="vce-theme-text-title">
+            <HeadingPrimary style={{ overflowWrap: "break-word", marginTop: "8px" }} className="pce-theme-text-title">
                 {theme.name}
             </HeadingPrimary>
-            <Paragraph className="vce-theme-text-description">
+            <Paragraph className="pce-theme-text-description">
                 {Parser.parse(theme.description)}
             </Paragraph>
             {!removePreview && (
-                <img role="presentation" src={theme.thumbnail_url} loading="lazy" alt={theme.name} className="vce-theme-info-preview" />
+                <img role="presentation" src={theme.thumbnail_url} loading="lazy" alt={theme.name} className="pce-theme-info-preview" />
             )}
-            <div className="vce-theme-info">
+            <div className="pce-theme-info">
                 <div style={{ justifyContent: "flex-start", flexDirection: "column" }}>
                     {theme.tags && (
                         <Paragraph>
                             {theme.tags.map(tag => (
-                                <span className="vce-theme-info-tag" key={tag}>
+                                <span className="pce-theme-info-tag" key={tag}>
                                     {tag}
                                 </span>
                             ))}
