@@ -57,7 +57,7 @@ function checkIfMuted(channel) {
     if (!settings.store.ignoreMuted) return false;
     if (!channel) return false;
 
-    if (channel.isMuted()) return true;
+    if (UserGuildSettingsStore.isChannelMuted(channel.guild_id ?? null, channel.id)) return true;
 
     const isDM = [1, 3].includes(channel.type);
     if (isDM) {
@@ -69,9 +69,6 @@ function checkIfMuted(channel) {
 
     if (channel.guild_id) {
         if (UserGuildSettingsStore.isMuted(channel.guild_id)) return true;
-
-        if (UserGuildSettingsStore.isMuted(channel.guild_id)) return true;
-        if (UserGuildSettingsStore.isChannelMuted(channel.guild_id, channel.id)) return true;
         if (UserGuildSettingsStore.isCategoryMuted(channel.guild_id, channel.id)) return true;
     }
 
