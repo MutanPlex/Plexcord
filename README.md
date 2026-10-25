@@ -61,20 +61,47 @@ A powerful, lightweight Discord client modification that enhances your Discord e
 
 ## 📥 Installation
 
-### Desktop
+### Desktop (recommended)
 
-1. Download the latest installer from [Releases](https://github.com/MutanPlex/Plexcord/releases)
-2. Run the installer
-3. Click the install button
-4. Restart Discord
+Download the installer for your system. These links always point to the latest version.
+
+| Platform | Download |
+| --- | --- |
+| **Windows** | [PlexcordInstaller.exe](https://github.com/Plexcord/Installer/releases/latest/download/PlexcordInstaller.exe) |
+| **macOS** | [PlexcordInstaller.MacOS.zip](https://github.com/Plexcord/Installer/releases/latest/download/PlexcordInstaller.MacOS.zip) |
+| **Linux** | [PlexcordInstallerCli-linux](https://github.com/Plexcord/Installer/releases/latest/download/PlexcordInstallerCli-linux) |
+| Windows (command line) | [PlexcordInstallerCli.exe](https://github.com/Plexcord/Installer/releases/latest/download/PlexcordInstallerCli.exe) |
+
+1. Close Discord completely (also from the system tray).
+2. Run the installer. On Linux, make it executable first: `chmod +x PlexcordInstallerCli-linux && ./PlexcordInstallerCli-linux`
+3. Pick your Discord install (Stable, PTB or Canary) and click **Install**.
+4. Start Discord. Plexcord appears under **User Settings → Plexcord**.
+
+To update, use the built-in updater in Plexcord settings. To remove Plexcord, run the installer again and click **Uninstall**.
 
 ### Browser
 
-Install via extension or UserScript - see our [browser installation guide](https://plexcord.club/download)
+| Option | Download | How to install |
+| --- | --- | --- |
+| **Chrome / Edge / Chromium** | [extension-chrome.zip](https://github.com/MutanPlex/Plexcord/releases/download/devbuild/extension-chrome.zip) | Unzip, open `chrome://extensions`, enable **Developer mode**, click **Load unpacked** and select the folder |
+| **Firefox** | [extension-firefox.zip](https://github.com/MutanPlex/Plexcord/releases/download/devbuild/extension-firefox.zip) | Open `about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on** and select the zip |
+| **UserScript** | [Plexcord.user.js](https://github.com/MutanPlex/Plexcord/releases/download/devbuild/Plexcord.user.js) | Install [Violentmonkey](https://violentmonkey.github.io) or Tampermonkey, then open the link |
 
-### Manual Installation
+Then open [discord.com/app](https://discord.com/app). More details on the [download page](https://plexcord.club/download).
 
-For advanced users, see the [development setup guide](https://docs.plexcord.club/docs/installing/plexcord)
+### Build from source
+
+For developers and advanced users. Requires [Node.js](https://nodejs.org) 22+, [pnpm](https://pnpm.io) and [Git](https://git-scm.com).
+
+```sh
+git clone https://github.com/MutanPlex/Plexcord
+cd Plexcord
+pnpm install --frozen-lockfile
+pnpm build        # desktop build (pnpm buildWeb for the browser build)
+pnpm inject       # patches your Discord install with your build
+```
+
+Use `pnpm watch` while developing. Plugin development guide: [docs.plexcord.club](https://docs.plexcord.club/docs/getting-started)
 
 ## Support the Project
 
