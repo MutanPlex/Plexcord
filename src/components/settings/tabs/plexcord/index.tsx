@@ -7,7 +7,7 @@
 
 import "./PlexcordTab.css";
 
-import i18n, { settings, SUPPORTED_LANGUAGES, t, useForceUpdateOnLocaleChange, useTranslation } from "@api/i18n";
+import i18n, { plugin, settings, SUPPORTED_LANGUAGES, t, useForceUpdateOnLocaleChange, useTranslation } from "@api/i18n";
 import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { Settings, useSettings } from "@api/Settings";
 import { Button } from "@components/Button";
@@ -22,6 +22,7 @@ import { SpecialCard } from "@components/settings/SpecialCard";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { openContributorModal } from "@components/settings/tabs/plugins/ContributorModal";
 import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
+import NoTrack from "@plugins/_core/noTrack";
 import settingsPlugin from "@plugins/_core/settings";
 import { gitRemote } from "@shared/plexcordUserAgent";
 import { DONOR_ROLE_ID, IS_WINDOWS, PLEXCORD_GUILD_ID } from "@utils/constants";
@@ -87,12 +88,24 @@ function LanguageSelector() {
 
 function Switches() {
     const settingsState = useSettings(["useQuickCss", "enableReactDevtools", "mainWindowFrameless", "frameless", "nativeTitleBar", "transparent", "winCtrlQ", "disableMinSize"]);
+    const { disableAnalytics } = NoTrack.settings.use(["disableAnalytics"]);
 
     const Switches = [
         {
             key: "useQuickCss",
             title: t(settings.switches.useQuickCss.label),
             description: t(settings.switches.useQuickCss.description),
+        },
+        {
+            value: disableAnalytics,
+            updateSetting(newValue) {
+                NoTrack.settings.store.disableAnalytics = newValue;
+            },
+            reactKey: "NoTrack::disableAnalytics",
+            key: null!,
+            title: t(plugin.noTrack.option.disableAnalytics.label),
+            description: t(plugin.noTrack.option.disableAnalytics.description),
+            restartRequired: NoTrack.settings.def.disableAnalytics.restartNeeded,
         },
         (!IS_WEB && !IS_DISCORD_DESKTOP || !IS_WINDOWS) && {
             key: "mainWindowFrameless",
@@ -140,16 +153,19 @@ function Switches() {
         },
     ] satisfies Array<false | {
         key: KeysOfType<typeof settingsState, boolean>;
+        reactKey?: string;
         title: string;
         description?: string;
         restartRequired?: boolean;
         warning?: string;
+        updateSetting?(newValue: boolean): void;
+        value?: boolean;
     }>;
 
     return Switches.filter((s): s is Exclude<typeof s, false> => !!s).map(
         s => (
             <FormSwitch
-                key={s.key}
+                key={s.reactKey ?? s.key}
                 title={s.title}
                 description={
                     s.warning ? (
@@ -163,9 +179,10 @@ function Switches() {
                         s.description
                     )
                 }
-                value={settingsState[s.key]}
+                value={s.value ?? settingsState[s.key]}
                 onChange={v => {
-                    settingsState[s.key] = v;
+                    if (s.updateSetting) s.updateSetting(v);
+                    else settingsState[s.key] = v;
 
                     if (s.restartRequired) {
                         promptToRestart("relaunch");

@@ -1018,7 +1018,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 disableAnalytics: {
                     label: "Analizi Kapat",
-                    description: "Discord'un takip sistemini (analitik/'science') metriklerini ve Sentry çökme raporlamasını devre dışı bırak"
+                    description: "Discord'un izleme analizlerini engeller. Rozetlerin ilerlemeni takip etmesini istiyorsan (örn: yayın saatleri) bunu kapat."
                 },
                 disableStackDumping: {
                     description: "Discord çöktüğünde konsola yerel yığın izi yazdır. Tam yeniden başlatma gerektirir."
@@ -1421,6 +1421,36 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 invalidColorFormat: "{{settingKey}} için geçersiz renk formatı, 'R, G, B' veya '#RRGGBB' formatında olduğundan emin olun",
                 invalidColorFormatFor: "{{key}} için geçersiz renk biçimi, \"R, G, B\" veya \"#RRGGBB\" kullan"
+            }
+        },
+        betterBackreading: {
+            name: "BetterBackreading",
+            description: "Mesajları daha erken yükleyerek ve daha az geri sıçramayla geçmiş mesajları okumayı iyileştirir.",
+            wholeNumber: "{{min}} ile {{max}} arasında bir tam sayı gir.",
+            option: {
+                imageScrollMargin: {
+                    label: "Görsel Ön Yükleme Mesafesi",
+                    description: "Görsellerin piksel cinsinden ne kadar önceden yükleneceği (300-3000)."
+                },
+                messageLoadBuffer: {
+                    label: "Mesaj Yükleme Tamponu",
+                    description: "Daha fazla mesajın piksel cinsinden ne kadar önceden getirileceği (500-3000)."
+                },
+                useDiscordMessageCount: {
+                    label: "Discord'un Dinamik Mesaj Sayısını Kullan",
+                    description: "Pencere ve sohbet ayarlarına göre kaç mesaj getirileceğini Discord seçsin."
+                },
+                messageCount: {
+                    label: "Özel Mesaj Sayısı",
+                    description: "Dinamik sayı kapalıyken her geçmiş isteğinde kaç mesaj getirileceği (30-100)."
+                },
+                channelOpenScrollMode: {
+                    label: "Kanal Açılış Konumu",
+                    description: "Okunmamış kanalları kayıtlı konumda (veya en altta) aç, her zaman en altta aç ya da varsayılan okunmamış davranışına bırak.",
+                    default: "Discord Varsayılanı",
+                    bottom: "Her Zaman En Alt",
+                    saved: "Kayıtlı Konum"
+                }
             }
         },
         betterBanReasons: {
@@ -4519,6 +4549,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "{{name}} sunucusuna kopyala",
                 emoji: "Emoji",
                 sticker: "Çıkartma"
+            }
+        },
+        externalPlayer: {
+            name: "ExternalPlayer",
+            description: "Videoları ve sesleri mpv gibi harici bir medya oynatıcıda açar.",
+            option: {
+                player: {
+                    label: "Oynatıcı",
+                    description: "Medyanın hangi oynatıcıda açılacağı."
+                },
+                openOnClick: {
+                    label: "Tıklayınca Aç",
+                    description: "Oynat'a bastığında videoları ve sesleri Discord'da oynatmak yerine oynatıcıda aç."
+                },
+                path: {
+                    label: "Oynatıcı Yolu",
+                    description: "Oynatıcı yürütülebilir dosyasının mutlak yolu. PATH'teki oynatıcıyı kullanmak için boş bırak."
+                },
+                args: {
+                    label: "Oynatıcı Argümanları",
+                    description: "Oynatıcıya iletilen ek argümanlar. Boşluk içeren değerleri tırnak içine al."
+                }
+            },
+            context: {
+                openIn: "{{player}} ile aç"
+            },
+            toast: {
+                alreadyOpen: "Zaten {{player}} ile açık.",
+                restartRequired: "ExternalPlayer'ı yüklemek için Discord'u tamamen yeniden başlat.",
+                openFailed: "Oynatıcı açılamadı."
+            },
+            status: {
+                paused: "{{player}} içinde duraklatıldı",
+                playing: "{{player}} içinde oynatılıyor"
             }
         },
         f8break: {
@@ -8216,7 +8280,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unmarkAsIgnored: "Yok Sayılan İşaretini Kaldır",
                     stopAuto: "Otomatik Tamamlamayı Durdur",
                     startAuto: "Otomatik Tamamlamayı Başlat",
-                    copyQuestID: "Görev ID'sini Kopyala"
+                    copyQuestID: "Görev ID'sini Kopyala",
+                    pauseAutoEnrollment: "Otomatik Kaydı Duraklat",
+                    unpauseAutoEnrollment: "Otomatik Kaydı Sürdür",
+                    pauseAutoProcessing: "Otomatik İşlemeyi Duraklat",
+                    unpauseAutoProcessing: "Otomatik İşlemeyi Sürdür"
                 }
             },
             button: {
@@ -8238,7 +8306,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 autoCompleteBroken: "Otomatik Tamamlama bozuk. Kısa süre içinde bir düzeltme yayınlanacak.",
                 enrollmentFailed: "{{questName}} Görevine kayıt başarısız oldu.",
-                enrollmentInNormalizequestnameQuest: "{{normalizeQuestName_quest}} görevine kayıt başarısız oldu{{rateLimitSuffix}}."
+                enrollmentInNormalizequestnameQuest: "{{normalizeQuestName_quest}} görevine kayıt başarısız oldu{{rateLimitSuffix}}.",
+                automationUnlocked: "Görev Otomasyonunun Kilidi Açıldı.",
+                automationLocked: "Görev Otomasyonu Kilitlendi."
             },
             notification: {
                 completed: {
@@ -8371,8 +8441,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     simultaneousTooltip: "Varsayılan olarak, birden fazla Görevi otomatik tamamlamaya çalışmak onları sırayla tamamlanmak üzere kuyruğa alır.\n\nBu ayar bunun yerine tüm otomatik tamamlanan Görevlerin aynı anda çalışmasına izin verir.\n\nBu ayar yalnızca Görevlerin otomatik tamamlanmasına uygulanır ve aşağıdaki otomatik tamamlama ayarına bağlıdır.",
                     resumeInterrupted: "Yeniden yükleme veya yeniden başlatmadan sonra kesintiye uğrayan otomatik tamamlamaları sürdür:",
                     resumeInterruptedTooltip: "Bu ayar, yeniden yüklemeler veya yeniden başlatmalar nedeniyle kesintiye uğrayan otomatik tamamlamaları, henüz başlamamış ancak kuyruğa alınmış Görevleri yeniden kuyruğa almak dahil, otomatik olarak sürdürür.",
+                    autoProcess: "Uyumlu Görevleri otomatik tamamlama için otomatik işle:",
+                    autoProcessTooltip: "Discord çalışırken tespit edilen, ödül ve Görev türü filtrelerine dahil olan uygun, alınmamış, yok sayılmamış ve süresi dolmamış Görevleri tamamlar. Yalnızca aşağıda etkinleştirilen desteklenen görev türleri dahil edilir.\n\nUyumlu Görevleri otomatik tamamlama kuyruğuna almadan önce bunlara otomatik olarak kaydolur. Bilinen hız sınırı bekleme sürelerini bekler. Bilinmeyen hatalarda, yeniden deneme süresi olmayan hız sınırlarında veya tekrarlanan kayıt hatalarında durur.",
+                    autoEnroll: "Uyumlu Görevlere otomatik olarak kaydol.",
+                    autoEnrollTooltip: "Discord çalışırken tespit edilen, ödül ve Görev türü filtrelerine dahil olan uygun, alınmamış, yok sayılmamış ve süresi dolmamış Görevlere kaydolur.\n\nGörevleri otomatik tamamlama kuyruğuna almadan kaydolur. Bilinen hız sınırı bekleme sürelerini bekler. Bilinmeyen hatalarda, yeniden deneme süresi olmayan hız sınırlarında veya tekrarlanan kayıt hatalarında durur.",
                     autoCompleteTypes: "Belirli Görev türlerini otomatik tamamla:",
-                    autoCompleteTypesTooltip: "Mobilde Video İzle Görevleri yalnızca masaüstünden kaydolunabilen mobil Görevlerde çalışır. Bir Göreve kayıt mobille sınırlıysa, masaüstüne dönüp Görevlerinizi yenilemeden önce mobil cihazınızdan ona kaydolmalısınız.\n\nVideoyla ilgili tüm Görevler genellikle ilerleme raporlarıyla birlikte bir yığın izi (stack trace) gönderir. Bu, Discord'un tam olarak hangi fonksiyonların çağrıldığını bileceği ve dolayısıyla ilerlemeyi kendi fonksiyonlarının başlattığını doğrulayabileceği anlamına gelir. Questify bu yığın izini siler, ancak yokluğu da varlığı kadar ele verici olacaktır.\n\nMasaüstünde Oyna, PlayStation'da Oyna, Xbox'ta Oyna ve Etkinlik Oyna Görevleri, Discord'un getirdiği bir kısıtlama nedeniyle yalnızca resmi masaüstü istemcilerinde kullanılabilir. Web eklentileri, Plextron ve diğerleri gibi 3. taraf istemciler bu Görev türlerinin otomatik tamamlanmasını desteklemez.\n\nOyunla ilgili tüm Görevler genellikle heartbeat raporlarıyla birlikte bir oyun parmak izi gönderir. Bu, Discord'un on binlerce kullanıcının verilerini kullanarak diğer kullanıcıların gerçek bir oyun mu kullandığını yoksa çalıştırılabilir dosyayı mı taklit ettiğini belirleyebileceği anlamına gelir. Bu değeri taklit etmenin makul bir yolu yoktur, bu yüzden Questify onu boş bırakır, ancak yokluğu da değeri kötü taklit etmek kadar ele verici olacaktır.\n\nEtkinlikte Başarım Görevleri yalnızca anında tamamlanarak otomatik tamamlanabilir. Bu yöntem her an yamalanabilir.\n\nGörevlerin otomatik tamamlanması, Görevler sayfasındaki ilgili butonlarına tıklanarak yapılır. Yukarıdaki eşzamanlı tamamlama ayarı etkin değilse, Görevler kuyruğa alındıkları sırayla otomatik tamamlanır.\n\nGörevleri otomatik tamamlamak, mevcut en riskli tehlikeli ayardır. Riski size ait olmak üzere etkinleştirin."
+                    autoCompleteTypesTooltip: "Mobilde Video İzle Görevleri yalnızca masaüstünden kaydolunabilen mobil Görevlerde çalışır. Bir Göreve kayıt mobille sınırlıysa, masaüstüne dönüp Görevlerinizi yenilemeden önce mobil cihazınızdan ona kaydolmalısınız.\n\nVideoyla ilgili tüm Görevler genellikle ilerleme raporlarıyla birlikte bir yığın izi (stack trace) gönderir. Bu, Discord'un tam olarak hangi fonksiyonların çağrıldığını bileceği ve dolayısıyla ilerlemeyi kendi fonksiyonlarının başlattığını doğrulayabileceği anlamına gelir. Questify bu yığın izini siler, ancak yokluğu da varlığı kadar ele verici olacaktır.\n\nMasaüstünde Oyna, PlayStation'da Oyna, Xbox'ta Oyna, Etkinlik Oyna ve Etkinlikte Başarım Görevleri, Discord'un getirdiği bir kısıtlama nedeniyle yalnızca resmi masaüstü istemcilerinde kullanılabilir. Web eklentileri, Plextron ve diğerleri gibi 3. taraf istemciler bu Görev türlerinin otomatik tamamlanmasını desteklemez.\n\nOyunla ilgili tüm Görevler genellikle heartbeat raporlarıyla birlikte bir oyun parmak izi gönderir. Bu, Discord'un on binlerce kullanıcının verilerini kullanarak diğer kullanıcıların gerçek bir oyun mu kullandığını yoksa çalıştırılabilir dosyayı mı taklit ettiğini belirleyebileceği anlamına gelir. Bu değeri taklit etmenin makul bir yolu yoktur, bu yüzden Questify onu boş bırakır, ancak yokluğu da değeri kötü taklit etmek kadar ele verici olacaktır.\n\nOtomatik tamamlama, Görevler sayfasındaki Görev butonlarından veya otomatik işlemeden başlar. Yukarıdaki eşzamanlı tamamlama etkin değilse, Görevler kuyruğa alındıkları sırayla tamamlanır.\n\nGörevleri otomatik tamamlamak, mevcut en riskli tehlikeli ayardır. Riski size ait olmak üzere etkinleştirin."
                 },
                 questNotifications: {
                     title: "Görev Bildirimleri",
@@ -8704,6 +8778,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hiddenQuestStatuses: {
                     description: "Gizlenecek görev durumu grupları.",
                     label: "Gizli Görev Durumları"
+                },
+                autoEnrollQuests: {
+                    label: "Görevlere Otomatik Kaydol",
+                    description: "Discord çalışırken başarılı getirmelerde uygun mevcut Görevlere otomatik olarak kaydol."
+                },
+                autoCompleteQuests: {
+                    label: "Görevleri Otomatik Tamamla",
+                    description: "Discord çalışırken başarılı getirmelerde, desteklenen ve etkin görev türlerine sahip uygun mevcut Görevlere otomatik olarak kaydol ve onları tamamla."
                 }
             },
             text: {
@@ -9661,12 +9743,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     mustURL: "Geçerli bir URL olmalıdır",
                     mustJSON: "Bir JSON dosyası olmalıdır"
                 },
-                tryHljs: {
-                    label: "Hljs'e Yedeklenme",
+                tryDiscordHighlighter: {
+                    label: "Discord'un Renklendiricisini Dene",
                     description: "Daha hafif olan varsayılan Discord renklendiricisini ve temasını kullan.",
                     never: "Asla",
-                    secondary: "Highlight.js yerine Shiki'yi tercih et",
-                    primary: "Shiki yerine Highlight.js'i tercih et",
+                    secondary: "Discord'un renklendiricisi yerine Shiki'yi tercih et",
+                    primary: "Shiki yerine Discord'un renklendiricisini tercih et",
                     always: "Her zaman"
                 },
                 useDevIcon: {

@@ -1018,7 +1018,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 disableAnalytics: {
                     label: "禁用分析",
-                    description: "停用 Discord 的追蹤（分析/「科學」）、指標和 Sentry 崩潰報告"
+                    description: "封鎖 Discord 的追蹤分析。如果你希望徽章記錄你的進度（例如：直播時數），請關閉此項。"
                 },
                 disableStackDumping: {
                     description: "Discord 當機時在主控台輸出原生堆疊追蹤。需要完全重新啟動。"
@@ -1421,6 +1421,36 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 invalidColorFormat: "{{settingKey}} 的顏色格式無效，請確保其格式為“R、G、B”或“#RRGGBB”",
                 invalidColorFormatFor: "{{key}} 的顏色格式無效，請使用 \"R, G, B\" 或 \"#RRGGBB\""
+            }
+        },
+        betterBackreading: {
+            name: "BetterBackreading",
+            description: "透過更早載入訊息並減少回彈，改善回顧歷史訊息的體驗。",
+            wholeNumber: "請輸入 {{min}} 到 {{max}} 之間的整數。",
+            option: {
+                imageScrollMargin: {
+                    label: "圖片預先載入距離",
+                    description: "提前多遠載入圖片，單位為像素（300-3000）。"
+                },
+                messageLoadBuffer: {
+                    label: "訊息載入緩衝",
+                    description: "提前多遠取得更多訊息，單位為像素（500-3000）。"
+                },
+                useDiscordMessageCount: {
+                    label: "使用 Discord 的動態訊息數量",
+                    description: "讓 Discord 依你的視窗與聊天設定決定要取得多少則訊息。"
+                },
+                messageCount: {
+                    label: "自訂訊息數量",
+                    description: "關閉動態數量時，每次歷史請求取得的訊息數量（30-100）。"
+                },
+                channelOpenScrollMode: {
+                    label: "頻道開啟位置",
+                    description: "在儲存的位置（或底部）開啟未讀頻道、一律在底部開啟，或使用預設的未讀行為。",
+                    default: "Discord 預設",
+                    bottom: "一律在底部",
+                    saved: "儲存的位置"
+                }
             }
         },
         betterBanReasons: {
@@ -4519,6 +4549,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "複製到 {{name}}",
                 emoji: "表情符號",
                 sticker: "貼圖"
+            }
+        },
+        externalPlayer: {
+            name: "ExternalPlayer",
+            description: "在 mpv 等外部媒體播放器中開啟影片與音訊。",
+            option: {
+                player: {
+                    label: "播放器",
+                    description: "用於開啟媒體的播放器。"
+                },
+                openOnClick: {
+                    label: "點擊時開啟",
+                    description: "按下播放時在播放器中開啟影片與音訊，而非在 Discord 中播放。"
+                },
+                path: {
+                    label: "播放器路徑",
+                    description: "播放器執行檔的絕對路徑。留空則使用 PATH 中的播放器。"
+                },
+                args: {
+                    label: "播放器參數",
+                    description: "傳遞給播放器的額外參數。包含空格的值請以引號括住。"
+                }
+            },
+            context: {
+                openIn: "在 {{player}} 中開啟"
+            },
+            toast: {
+                alreadyOpen: "已在 {{player}} 中開啟。",
+                restartRequired: "請完全重新啟動 Discord 以載入 ExternalPlayer。",
+                openFailed: "無法開啟播放器。"
+            },
+            status: {
+                paused: "已在 {{player}} 中暫停",
+                playing: "正在 {{player}} 中播放"
             }
         },
         f8break: {
@@ -8216,7 +8280,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unmarkAsIgnored: "取消忽略",
                     stopAuto: "停止自動完成",
                     startAuto: "開始自動完成",
-                    copyQuestID: "複製 Quest ID"
+                    copyQuestID: "複製 Quest ID",
+                    pauseAutoEnrollment: "暫停自動報名",
+                    unpauseAutoEnrollment: "繼續自動報名",
+                    pauseAutoProcessing: "暫停自動處理",
+                    unpauseAutoProcessing: "繼續自動處理"
                 }
             },
             button: {
@@ -8238,7 +8306,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 autoCompleteBroken: "自動完成已失效，修正即將推出。",
                 enrollmentFailed: "加入 {{questName}} Quest 失敗。",
-                enrollmentInNormalizequestnameQuest: "報名任務 {{normalizeQuestName_quest}} 失敗{{rateLimitSuffix}}。"
+                enrollmentInNormalizequestnameQuest: "報名任務 {{normalizeQuestName_quest}} 失敗{{rateLimitSuffix}}。",
+                automationUnlocked: "Quest 自動化已解鎖。",
+                automationLocked: "Quest 自動化已鎖定。"
             },
             notification: {
                 completed: {
@@ -8371,8 +8441,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     simultaneousTooltip: "預設情況下，嘗試自動完成多個 Quest 時會將它們排隊並依序完成。\n\n此設定可讓所有自動完成的 Quest 同時執行。\n\n此設定僅適用於 Quest 的自動完成，並取決於下方的自動完成設定。",
                     resumeInterrupted: "在重新載入或重新啟動後恢復被中斷的自動完成：",
                     resumeInterruptedTooltip: "此設定會自動恢復因重新載入或重新啟動而中斷的自動完成，包括重新排入那些已排隊但尚未開始的 Quest。",
+                    autoProcess: "自動處理相容的 Quest 以自動完成：",
+                    autoProcessTooltip: "完成 Discord 執行期間偵測到、符合你的獎勵與 Quest 類型篩選條件、具資格且未領取、未忽略、未過期的 Quest。僅包含下方已啟用的支援任務類型。\n\n在將相容的 Quest 加入自動完成佇列前自動報名。會等待已知的速率限制冷卻時間。遇到未知錯誤、沒有重試延遲的速率限制或多次報名失敗時停止。",
+                    autoEnroll: "自動報名相容的 Quest。",
+                    autoEnrollTooltip: "報名 Discord 執行期間偵測到、符合你的獎勵與 Quest 類型篩選條件、具資格且未領取、未忽略、未過期的 Quest。\n\n報名 Quest 但不加入自動完成佇列。會等待已知的速率限制冷卻時間。遇到未知錯誤、沒有重試延遲的速率限制或多次報名失敗時停止。",
                     autoCompleteTypes: "自動完成特定 Quest 類型：",
-                    autoCompleteTypesTooltip: "「在手機上觀看影片」Quest 僅適用於可在桌面版加入的手機 Quest。如果某個 Quest 只能在手機上加入，你必須先在手機上加入，再回到桌面版重新整理 Quest。\n\n所有影片相關 Quest 通常會隨進度回報傳送呼叫堆疊。這表示 Discord 能確切知道呼叫了哪些函式，進而驗證進度是否由其自身函式發起。Questify 會清除此呼叫堆疊，但其缺少與存在一樣容易露出破綻。\n\n由於 Discord 的限制，「在桌面版遊玩」、「在 PlayStation 上遊玩」、「在 Xbox 上遊玩」與「玩活動」Quest 僅在官方桌面用戶端中可用。瀏覽器擴充功能、Plextron 等第三方用戶端不支援自動完成這些類型。\n\n所有遊戲相關 Quest 通常會隨心跳回報傳送遊戲指紋。這表示 Discord 能利用數萬名使用者的資料判斷其他使用者是在執行真實遊戲還是在模擬執行檔。沒有合理的方法偽造此值，因此 Questify 將其留空，但其缺少與拙劣的偽造一樣容易露出破綻。\n\n「活動內成就」Quest 只能透過立即完成來自動完成。此方法隨時可能被修補。\n\n自動完成 Quest 需點擊 Quest 頁面上相應的按鈕。除非上方啟用了同時完成，Quest 將依排隊順序自動完成。\n\n自動完成 Quest 是風險最高的危險設定。啟用風險自負。"
+                    autoCompleteTypesTooltip: "「在手機上觀看影片」Quest 僅適用於可在桌面版加入的手機 Quest。如果某個 Quest 只能在手機上加入，你必須先在手機上加入，再回到桌面版重新整理 Quest。\n\n所有影片相關 Quest 通常會隨進度回報傳送呼叫堆疊。這表示 Discord 能確切知道呼叫了哪些函式，進而驗證進度是否由其自身函式發起。Questify 會清除此呼叫堆疊，但其缺少與存在一樣容易露出破綻。\n\n由於 Discord 的限制，「在桌面版遊玩」、「在 PlayStation 上遊玩」、「在 Xbox 上遊玩」、「玩活動」與「活動內成就」Quest 僅在官方桌面用戶端中可用。瀏覽器擴充功能、Plextron 等第三方用戶端不支援自動完成這些類型。\n\n所有遊戲相關 Quest 通常會隨心跳回報傳送遊戲指紋。這表示 Discord 能利用數萬名使用者的資料判斷其他使用者是在執行真實遊戲還是在模擬執行檔。沒有合理的方法偽造此值，因此 Questify 將其留空，但其缺少與拙劣的偽造一樣容易露出破綻。\n\n自動完成從 Quest 頁面上的 Quest 按鈕或自動處理開始。除非上方啟用了同時完成，Quest 將依排隊順序完成。\n\n自動完成 Quest 是風險最高的危險設定。啟用風險自負。"
                 },
                 questNotifications: {
                     title: "Quest 通知",
@@ -8704,6 +8778,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hiddenQuestStatuses: {
                     description: "要隱藏的任務狀態群組。",
                     label: "隱藏的任務狀態"
+                },
+                autoEnrollQuests: {
+                    label: "自動報名 Quest",
+                    description: "在 Discord 執行期間成功取得時，自動報名具資格的可用 Quest。"
+                },
+                autoCompleteQuests: {
+                    label: "自動完成 Quest",
+                    description: "在 Discord 執行期間成功取得時，自動報名並完成具有支援且已啟用任務類型的具資格可用 Quest。"
                 }
             },
             text: {
@@ -9661,12 +9743,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     mustURL: "必須是有效的 URL",
                     mustJSON: "必須是 JSON 文件"
                 },
-                tryHljs: {
-                    label: "回退到 Hljs",
+                tryDiscordHighlighter: {
+                    label: "嘗試 Discord 的語法標示器",
                     description: "使用更輕量級的預設 Discord 螢光筆和主題。",
                     never: "絕不",
-                    secondary: "喜歡 Shiki 而不是 Highlight.js",
-                    primary: "喜歡Highlight.js而不是Shiki",
+                    secondary: "優先使用 Shiki 而非 Discord 的語法標示器",
+                    primary: "優先使用 Discord 的語法標示器而非 Shiki",
                     always: "總是"
                 },
                 useDevIcon: {

@@ -1018,7 +1018,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 disableAnalytics: {
                     label: "분석 비활성화",
-                    description: "Discord의 추적(분석/'과학'), 측정항목 및 Sentry 충돌 보고를 비활성화합니다."
+                    description: "Discord의 추적 분석을 차단합니다. 배지로 진행 상황(예: 방송한 시간)을 추적하려면 이 옵션을 끄세요."
                 },
                 disableStackDumping: {
                     description: "Discord가 충돌하면 콘솔에 네이티브 스택 추적을 출력합니다. 완전히 다시 시작해야 합니다."
@@ -1421,6 +1421,36 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 invalidColorFormat: "{{settingKey}}의 색상 형식이 잘못되었습니다. 'R, G, B' 또는 '#RRGGBB' 형식인지 확인하세요.",
                 invalidColorFormatFor: "{{key}}의 색상 형식이 잘못되었습니다. \"R, G, B\" 또는 \"#RRGGBB\"를 사용하세요"
+            }
+        },
+        betterBackreading: {
+            name: "BetterBackreading",
+            description: "메시지를 더 일찍 불러오고 튕김을 줄여 이전 메시지 읽기를 개선합니다.",
+            wholeNumber: "{{min}}에서 {{max}} 사이의 정수를 입력하세요.",
+            option: {
+                imageScrollMargin: {
+                    label: "이미지 미리 불러오기 거리",
+                    description: "이미지를 얼마나 미리 불러올지(픽셀, 300-3000)."
+                },
+                messageLoadBuffer: {
+                    label: "메시지 불러오기 버퍼",
+                    description: "추가 메시지를 얼마나 미리 가져올지(픽셀, 500-3000)."
+                },
+                useDiscordMessageCount: {
+                    label: "Discord의 동적 메시지 수 사용",
+                    description: "창과 채팅 설정에 따라 가져올 메시지 수를 Discord가 정하도록 합니다."
+                },
+                messageCount: {
+                    label: "사용자 지정 메시지 수",
+                    description: "동적 수가 꺼져 있을 때 기록 요청마다 가져올 메시지 수(30-100)."
+                },
+                channelOpenScrollMode: {
+                    label: "채널 열기 위치",
+                    description: "읽지 않은 채널을 저장된 위치(또는 맨 아래)에서 열거나, 항상 맨 아래에서 열거나, 기본 읽지 않음 동작을 따릅니다.",
+                    default: "Discord 기본값",
+                    bottom: "항상 맨 아래",
+                    saved: "저장된 위치"
+                }
             }
         },
         betterBanReasons: {
@@ -4519,6 +4549,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "{{name}}(으)로 복제",
                 emoji: "이모지",
                 sticker: "스티커"
+            }
+        },
+        externalPlayer: {
+            name: "ExternalPlayer",
+            description: "동영상과 오디오를 mpv 같은 외부 미디어 플레이어로 엽니다.",
+            option: {
+                player: {
+                    label: "플레이어",
+                    description: "미디어를 열 플레이어입니다."
+                },
+                openOnClick: {
+                    label: "클릭 시 열기",
+                    description: "재생을 누르면 Discord에서 재생하는 대신 동영상과 오디오를 플레이어로 엽니다."
+                },
+                path: {
+                    label: "플레이어 경로",
+                    description: "플레이어 실행 파일의 절대 경로입니다. 비워 두면 PATH에 있는 것을 사용합니다."
+                },
+                args: {
+                    label: "플레이어 인수",
+                    description: "플레이어에 전달할 추가 인수입니다. 공백이 있는 값은 따옴표로 감싸세요."
+                }
+            },
+            context: {
+                openIn: "{{player}}에서 열기"
+            },
+            toast: {
+                alreadyOpen: "이미 {{player}}에서 열려 있습니다.",
+                restartRequired: "ExternalPlayer를 불러오려면 Discord를 완전히 다시 시작하세요.",
+                openFailed: "플레이어를 열지 못했습니다."
+            },
+            status: {
+                paused: "{{player}}에서 일시 정지됨",
+                playing: "{{player}}에서 재생 중"
             }
         },
         f8break: {
@@ -8216,7 +8280,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unmarkAsIgnored: "무시 해제",
                     stopAuto: "자동 완료 중지",
                     startAuto: "자동 완료 시작",
-                    copyQuestID: "Quest ID 복사"
+                    copyQuestID: "Quest ID 복사",
+                    pauseAutoEnrollment: "자동 등록 일시 중지",
+                    unpauseAutoEnrollment: "자동 등록 재개",
+                    pauseAutoProcessing: "자동 처리 일시 중지",
+                    unpauseAutoProcessing: "자동 처리 재개"
                 }
             },
             button: {
@@ -8238,7 +8306,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 autoCompleteBroken: "자동 완료가 작동하지 않습니다. 곧 수정될 예정입니다.",
                 enrollmentFailed: "{{questName}} Quest 등록에 실패했습니다.",
-                enrollmentInNormalizequestnameQuest: "{{normalizeQuestName_quest}} 퀘스트 등록에 실패했습니다{{rateLimitSuffix}}."
+                enrollmentInNormalizequestnameQuest: "{{normalizeQuestName_quest}} 퀘스트 등록에 실패했습니다{{rateLimitSuffix}}.",
+                automationUnlocked: "Quest 자동화가 잠금 해제되었습니다.",
+                automationLocked: "Quest 자동화가 잠겼습니다."
             },
             notification: {
                 completed: {
@@ -8371,8 +8441,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     simultaneousTooltip: "기본적으로 여러 Quest를 자동 완료하려 하면 대기열에 넣어 순서대로 완료합니다.\n\n이 설정은 대신 모든 자동 완료 Quest를 동시에 실행합니다.\n\n이 설정은 Quest 자동 완료에만 적용되며 아래 자동 완료 설정에 의존합니다.",
                     resumeInterrupted: "새로고침 또는 재시작 후 중단된 자동 완료 재개:",
                     resumeInterruptedTooltip: "이 설정은 새로고침이나 재시작으로 중단된 자동 완료를 자동으로 재개하며, 대기열에 있었지만 아직 시작되지 않은 Quest를 다시 대기열에 넣는 것도 포함합니다.",
+                    autoProcess: "호환되는 Quest를 자동 완료용으로 자동 처리:",
+                    autoProcessTooltip: "Discord 실행 중 감지된, 보상 및 Quest 유형 필터에 포함된 자격이 있고 미수령이며 무시되지 않고 만료되지 않은 Quest를 완료합니다. 아래에서 활성화한 지원되는 작업 유형만 포함됩니다.\n\n호환되는 Quest를 자동 완료 대기열에 넣기 전에 자동으로 등록합니다. 알려진 속도 제한 대기 시간을 기다립니다. 알 수 없는 오류, 재시도 지연이 없는 속도 제한 또는 반복된 등록 실패 시 중지됩니다.",
+                    autoEnroll: "호환되는 Quest에 자동으로 등록합니다.",
+                    autoEnrollTooltip: "Discord 실행 중 감지된, 보상 및 Quest 유형 필터에 포함된 자격이 있고 미수령이며 무시되지 않고 만료되지 않은 Quest에 등록합니다.\n\nQuest를 자동 완료 대기열에 넣지 않고 등록합니다. 알려진 속도 제한 대기 시간을 기다립니다. 알 수 없는 오류, 재시도 지연이 없는 속도 제한 또는 반복된 등록 실패 시 중지됩니다.",
                     autoCompleteTypes: "특정 Quest 유형 자동 완료:",
-                    autoCompleteTypesTooltip: "\"모바일에서 동영상 시청\" Quest는 데스크톱에서 등록 가능한 모바일 Quest에서만 작동합니다. 모바일에서만 등록할 수 있는 Quest라면 먼저 모바일 기기에서 등록한 뒤 데스크톱으로 돌아와 Quest를 새로고침해야 합니다.\n\n모든 동영상 관련 Quest는 보통 진행 보고와 함께 스택 트레이스를 보냅니다. 따라서 Discord는 어떤 함수가 호출되었는지 정확히 알 수 있고, 자사 함수가 진행을 시작했는지 검증할 수 있습니다. Questify는 이 스택 트레이스를 지우지만, 없다는 사실 자체가 있는 것만큼이나 눈에 띕니다.\n\n\"데스크톱에서 플레이\", \"PlayStation에서 플레이\", \"Xbox에서 플레이\", \"활동 플레이\" Quest는 Discord의 제한으로 인해 공식 데스크톱 클라이언트에서만 사용할 수 있습니다. 웹 확장 프로그램, Plextron 등 서드파티 클라이언트는 이 유형의 자동 완료를 지원하지 않습니다.\n\n모든 게임 관련 Quest는 보통 하트비트 보고와 함께 게임 지문을 보냅니다. 따라서 Discord는 수만 명의 사용자 데이터를 이용해 다른 사용자가 실제 게임을 사용하는지 실행 파일을 흉내 내는지 판단할 수 있습니다. 이 값을 위조할 합리적인 방법이 없어 Questify는 비워 두지만, 없다는 사실은 엉성한 위조만큼이나 눈에 띕니다.\n\n\"활동 내 업적\" Quest는 즉시 완료하는 방식으로만 자동 완료할 수 있습니다. 이 방법은 언제든 패치될 수 있습니다.\n\nQuest 자동 완료는 Quest 페이지의 각 버튼을 클릭해 진행합니다. 위에서 동시 완료를 켜지 않았다면 Quest는 대기열에 들어간 순서대로 자동 완료됩니다.\n\nQuest 자동 완료는 가장 위험한 설정입니다. 본인 책임하에 켜세요."
+                    autoCompleteTypesTooltip: "\"모바일에서 동영상 시청\" Quest는 데스크톱에서 등록 가능한 모바일 Quest에서만 작동합니다. 모바일에서만 등록할 수 있는 Quest라면 먼저 모바일 기기에서 등록한 뒤 데스크톱으로 돌아와 Quest를 새로고침해야 합니다.\n\n모든 동영상 관련 Quest는 보통 진행 보고와 함께 스택 트레이스를 보냅니다. 따라서 Discord는 어떤 함수가 호출되었는지 정확히 알 수 있고, 자사 함수가 진행을 시작했는지 검증할 수 있습니다. Questify는 이 스택 트레이스를 지우지만, 없다는 사실 자체가 있는 것만큼이나 눈에 띕니다.\n\n\"데스크톱에서 플레이\", \"PlayStation에서 플레이\", \"Xbox에서 플레이\", \"활동 플레이\", \"활동 내 업적\" Quest는 Discord의 제한으로 인해 공식 데스크톱 클라이언트에서만 사용할 수 있습니다. 웹 확장 프로그램, Plextron 등 서드파티 클라이언트는 이 유형의 자동 완료를 지원하지 않습니다.\n\n모든 게임 관련 Quest는 보통 하트비트 보고와 함께 게임 지문을 보냅니다. 따라서 Discord는 수만 명의 사용자 데이터를 이용해 다른 사용자가 실제 게임을 사용하는지 실행 파일을 흉내 내는지 판단할 수 있습니다. 이 값을 위조할 합리적인 방법이 없어 Questify는 비워 두지만, 없다는 사실은 엉성한 위조만큼이나 눈에 띕니다.\n\n자동 완료는 Quest 페이지의 Quest 버튼이나 자동 처리에서 시작됩니다. 위에서 동시 완료를 켜지 않았다면 Quest는 대기열에 들어간 순서대로 완료됩니다.\n\nQuest 자동 완료는 가장 위험한 설정입니다. 본인 책임하에 켜세요."
                 },
                 questNotifications: {
                     title: "Quest 알림",
@@ -8704,6 +8778,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hiddenQuestStatuses: {
                     description: "숨길 퀘스트 상태 그룹입니다.",
                     label: "숨긴 퀘스트 상태"
+                },
+                autoEnrollQuests: {
+                    label: "Quest 자동 등록",
+                    description: "Discord 실행 중 가져오기에 성공하면 자격이 있는 사용 가능한 Quest에 자동으로 등록합니다."
+                },
+                autoCompleteQuests: {
+                    label: "Quest 자동 완료",
+                    description: "Discord 실행 중 가져오기에 성공하면 지원되고 활성화된 작업 유형을 가진 자격이 있는 사용 가능한 Quest에 자동으로 등록하고 완료합니다."
                 }
             },
             text: {
@@ -9661,12 +9743,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     mustURL: "유효한 URL이어야 합니다.",
                     mustJSON: "JSON 파일이어야 합니다."
                 },
-                tryHljs: {
-                    label: "Hljs로 대체",
+                tryDiscordHighlighter: {
+                    label: "Discord 하이라이터 사용해 보기",
                     description: "더 가벼운 기본 Discord 하이라이터와 테마를 사용하세요.",
                     never: "절대",
-                    secondary: "하이라이트.js 대신 Shiki를 선호하세요",
-                    primary: "Shiki 대신 하이라이트.js를 선호하세요",
+                    secondary: "Discord 하이라이터보다 Shiki 우선",
+                    primary: "Shiki보다 Discord 하이라이터 우선",
                     always: "언제나"
                 },
                 useDevIcon: {

@@ -47,7 +47,7 @@ const format = (date: Date, formatTemplate: string): string => {
     const sameElseFormat = settings.store?.formats?.sameElseFormat || (typeof timeFormats.sameElseFormat.default === "function" ? timeFormats.sameElseFormat.default() : timeFormats.sameElseFormat.default);
 
     return mmt.format(formatTemplate)
-        .replace("calendar", () => mmt.calendar(null, {
+        .replace("calendar", () => mmt.calendar(undefined, {
             sameDay: sameDayFormat,
             lastDay: lastDayFormat,
             lastWeek: lastWeekFormat,

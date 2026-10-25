@@ -20,6 +20,7 @@
 import "./shiki.css";
 
 import { plugin, t } from "@api/i18n";
+import { migratePluginSetting } from "@api/Settings";
 import { enableStyle } from "@api/Styles";
 import { Devs } from "@utils/constants";
 import definePlugin, { ReporterTestable } from "@utils/types";
@@ -32,6 +33,8 @@ import { settings } from "./settings";
 import { DeviconSetting } from "./types";
 import { clearStyles } from "./utils/createStyle";
 
+migratePluginSetting("ShikiCodeblocks", "tryDiscordHighlighter", "tryHljs");
+
 export default definePlugin({
     name: "ShikiCodeblocks",
     description: () => t(plugin.shikiCodeblocks.description),
@@ -42,10 +45,10 @@ export default definePlugin({
 
     patches: [
         {
-            find: "codeBlock:{react(",
+            find: "codeBlock:{react:(",
             replacement: {
-                match: /codeBlock:\{react\((\i),(\i),(\i)\)\{/,
-                replace: "$&if(!$self.isIgnored($1.lang))return $self.renderHighlighter($1,$2,$3);"
+                match: /codeBlock:\{react:\((\i),(\i),(\i)\)=>/,
+                replace: "$&!$self.isIgnored($1.lang)?$self.renderHighlighter($1,$2,$3):"
             }
         },
         {

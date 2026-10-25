@@ -1018,7 +1018,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 disableAnalytics: {
                     label: "Deaktiver analyse",
-                    description: "Deaktiver Discords sporing (analytics/'science'), metrikker og Sentry-fejlrapportering"
+                    description: "Bloker Discords sporingsanalyser. Slå dette fra, hvis du vil have, at badges sporer dine fremskridt (f.eks. timer streamet)."
                 },
                 disableStackDumping: {
                     description: "Udskriv en indbygget stakspore i konsollen, når Discord går ned. Kræver fuld genstart."
@@ -1421,6 +1421,36 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 invalidColorFormat: "Ugyldigt farveformat for {{settingKey}}, sørg for at det er i formatet 'R, G, B' eller '#RRGGBB'",
                 invalidColorFormatFor: "Ugyldigt farveformat for {{key}}, brug \"R, G, B\" eller \"#RRGGBB\""
+            }
+        },
+        betterBackreading: {
+            name: "BetterBackreading",
+            description: "Forbedrer læsning bagud med tidligere indlæsning af beskeder og mindre hoppen.",
+            wholeNumber: "Indtast et helt tal fra {{min}} til {{max}}.",
+            option: {
+                imageScrollMargin: {
+                    label: "Forudindlæsningsafstand for billeder",
+                    description: "Hvor langt frem billeder indlæses, i pixels (300-3000)."
+                },
+                messageLoadBuffer: {
+                    label: "Indlæsningsbuffer for beskeder",
+                    description: "Hvor langt frem flere beskeder hentes, i pixels (500-3000)."
+                },
+                useDiscordMessageCount: {
+                    label: "Brug Discords dynamiske beskedantal",
+                    description: "Lad Discord vælge, hvor mange beskeder der hentes, ud fra dit vindue og dine chatindstillinger."
+                },
+                messageCount: {
+                    label: "Brugerdefineret beskedantal",
+                    description: "Hvor mange beskeder der hentes pr. historikanmodning, når det dynamiske antal er slået fra (30-100)."
+                },
+                channelOpenScrollMode: {
+                    label: "Position ved åbning af kanal",
+                    description: "Åbn ulæste kanaler på den gemte position (eller nederst), altid nederst, eller brug standardadfærden for ulæste.",
+                    default: "Discord-standard",
+                    bottom: "Altid nederst",
+                    saved: "Gemt position"
+                }
             }
         },
         betterBanReasons: {
@@ -4519,6 +4549,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "Klon til {{name}}",
                 emoji: "Emoji",
                 sticker: "Klistermærke"
+            }
+        },
+        externalPlayer: {
+            name: "ExternalPlayer",
+            description: "Åbn videoer og lyd i en ekstern medieafspiller som mpv.",
+            option: {
+                player: {
+                    label: "Afspiller",
+                    description: "Hvilken afspiller medier skal åbnes i."
+                },
+                openOnClick: {
+                    label: "Åbn ved klik",
+                    description: "Åbn videoer og lyd i afspilleren, når du trykker på afspil, i stedet for at afspille dem i Discord."
+                },
+                path: {
+                    label: "Afspillersti",
+                    description: "Absolut sti til afspillerens programfil. Lad den være tom for at bruge den fra din PATH."
+                },
+                args: {
+                    label: "Afspillerargumenter",
+                    description: "Ekstra argumenter, der sendes til afspilleren. Sæt værdier med mellemrum i anførselstegn."
+                }
+            },
+            context: {
+                openIn: "Åbn i {{player}}"
+            },
+            toast: {
+                alreadyOpen: "Allerede åben i {{player}}.",
+                restartRequired: "Genstart Discord helt for at indlæse ExternalPlayer.",
+                openFailed: "Kunne ikke åbne afspilleren."
+            },
+            status: {
+                paused: "Sat på pause i {{player}}",
+                playing: "Afspiller i {{player}}"
             }
         },
         f8break: {
@@ -8216,7 +8280,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unmarkAsIgnored: "Fjern ignorering",
                     stopAuto: "Stop automatisk fuldførelse",
                     startAuto: "Start automatisk fuldførelse",
-                    copyQuestID: "Kopiér Quest-ID"
+                    copyQuestID: "Kopiér Quest-ID",
+                    pauseAutoEnrollment: "Sæt automatisk tilmelding på pause",
+                    unpauseAutoEnrollment: "Genoptag automatisk tilmelding",
+                    pauseAutoProcessing: "Sæt automatisk behandling på pause",
+                    unpauseAutoProcessing: "Genoptag automatisk behandling"
                 }
             },
             button: {
@@ -8238,7 +8306,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 autoCompleteBroken: "Automatisk fuldførelse virker ikke. En rettelse kommer snart.",
                 enrollmentFailed: "Tilmelding til Questen {{questName}} mislykkedes.",
-                enrollmentInNormalizequestnameQuest: "Tilmelding til questen {{normalizeQuestName_quest}} mislykkedes{{rateLimitSuffix}}."
+                enrollmentInNormalizequestnameQuest: "Tilmelding til questen {{normalizeQuestName_quest}} mislykkedes{{rateLimitSuffix}}.",
+                automationUnlocked: "Quest-automatisering låst op.",
+                automationLocked: "Quest-automatisering låst."
             },
             notification: {
                 completed: {
@@ -8371,8 +8441,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     simultaneousTooltip: "Som standard sættes flere Quests til automatisk fuldførelse i kø og fuldføres i rækkefølge.\n\nDenne indstilling lader i stedet alle automatisk fuldførte Quests køre på samme tid.\n\nDenne indstilling gælder kun automatisk fuldførelse og afhænger af indstillingen for automatisk fuldførelse nedenfor.",
                     resumeInterrupted: "Genoptag afbrudte automatiske fuldførelser efter genindlæsning eller genstart:",
                     resumeInterruptedTooltip: "Denne indstilling genoptager automatisk fuldførelser, der er afbrudt af genindlæsninger eller genstarter, inklusive at sætte Quests i kø igen, som stod i kø men endnu ikke var startet.",
+                    autoProcess: "Behandl automatisk kompatible Quests til automatisk fuldførelse:",
+                    autoProcessTooltip: "Fuldfør kvalificerede, uindløste, ikke-ignorerede og ikke-udløbne Quests, der er omfattet af dine belønnings- og Quest-typefiltre, og som registreres, mens Discord kører. Kun understøttede opgavetyper, der er slået til nedenfor, medtages.\n\nTilmelder sig automatisk kompatible Quests, før de sættes i kø til automatisk fuldførelse. Venter på kendte rate-limit-pauser. Stopper ved ukendte fejl, rate limits uden ventetid eller gentagne tilmeldingsfejl.",
+                    autoEnroll: "Tilmeld automatisk kompatible Quests.",
+                    autoEnrollTooltip: "Tilmeld kvalificerede, uindløste, ikke-ignorerede og ikke-udløbne Quests, der er omfattet af dine belønnings- og Quest-typefiltre, og som registreres, mens Discord kører.\n\nTilmelder Quests uden at sætte dem i kø til automatisk fuldførelse. Venter på kendte rate-limit-pauser. Stopper ved ukendte fejl, rate limits uden ventetid eller gentagne tilmeldingsfejl.",
                     autoCompleteTypes: "Fuldfør bestemte Quest-typer automatisk:",
-                    autoCompleteTypesTooltip: "\"Se video på mobil\"-Quests virker kun for mobile Quests, man kan tilmelde sig på computer. Er tilmelding begrænset til mobil, skal du først tilmelde dig på din mobil, før du vender tilbage til computeren og opdaterer dine Quests.\n\nAlle videorelaterede Quests sender normalt et stack trace med fremskridtsrapporterne. Discord ved altså præcis, hvilke funktioner der blev kaldt, og kan kontrollere, at deres egne funktioner startede fremskridtet. Questify sletter dette stack trace, men fraværet afslører lige så meget som tilstedeværelsen.\n\n\"Spil på computer\", \"Spil på PlayStation\", \"Spil på Xbox\" og \"Spil aktivitet\"-Quests er kun tilgængelige i officielle computerklienter på grund af en begrænsning fra Discord. Tredjepartsklienter som webudvidelser, Plextron og andre understøtter ikke automatisk fuldførelse af disse typer.\n\nAlle spilrelaterede Quests sender normalt et spilfingeraftryk med heartbeat-rapporterne. Discord kan derfor bruge data fra titusindvis af brugere til at afgøre, om andre sandsynligvis bruger et rigtigt spil eller emulerer den eksekverbare fil. Der er ingen fornuftig måde at forfalske værdien på, så Questify lader den stå tom, men fraværet afslører lige så meget som en dårlig forfalskning.\n\n\"Præstation i aktivitet\"-Quests kan kun fuldføres automatisk ved at fuldføre dem med det samme. Denne metode kan blive lukket når som helst.\n\nAutomatisk fuldførelse sker ved at klikke på de respektive knapper på Quest-siden. Quests fuldføres i den rækkefølge, de blev sat i kø, medmindre samtidig fuldførelse er slået til ovenfor.\n\nAutomatisk fuldførelse af Quests er den mest risikable af de farlige indstillinger. Slå den til på egen risiko."
+                    autoCompleteTypesTooltip: "\"Se video på mobil\"-Quests virker kun for mobile Quests, man kan tilmelde sig på computer. Er tilmelding begrænset til mobil, skal du først tilmelde dig på din mobil, før du vender tilbage til computeren og opdaterer dine Quests.\n\nAlle videorelaterede Quests sender normalt et stack trace med fremskridtsrapporterne. Discord ved altså præcis, hvilke funktioner der blev kaldt, og kan kontrollere, at deres egne funktioner startede fremskridtet. Questify sletter dette stack trace, men fraværet afslører lige så meget som tilstedeværelsen.\n\n\"Spil på computer\", \"Spil på PlayStation\", \"Spil på Xbox\", \"Spil aktivitet\" og \"Præstation i aktivitet\"-Quests er kun tilgængelige i officielle computerklienter på grund af en begrænsning fra Discord. Tredjepartsklienter som webudvidelser, Plextron og andre understøtter ikke automatisk fuldførelse af disse typer.\n\nAlle spilrelaterede Quests sender normalt et spilfingeraftryk med heartbeat-rapporterne. Discord kan derfor bruge data fra titusindvis af brugere til at afgøre, om andre sandsynligvis bruger et rigtigt spil eller emulerer den eksekverbare fil. Der er ingen fornuftig måde at forfalske værdien på, så Questify lader den stå tom, men fraværet afslører lige så meget som en dårlig forfalskning.\n\nAutomatisk fuldførelse starter fra Quest-knapperne på Quest-siden eller fra automatisk behandling. Quests fuldføres i den rækkefølge, de blev sat i kø, medmindre samtidig fuldførelse er slået til ovenfor.\n\nAutomatisk fuldførelse af Quests er den mest risikable af de farlige indstillinger. Slå den til på egen risiko."
                 },
                 questNotifications: {
                     title: "Quest-notifikationer",
@@ -8704,6 +8778,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hiddenQuestStatuses: {
                     description: "Quest-statusgrupper, der skal skjules.",
                     label: "Skjulte quest-statusser"
+                },
+                autoEnrollQuests: {
+                    label: "Tilmeld Quests automatisk",
+                    description: "Tilmeld automatisk kvalificerede tilgængelige Quests ved vellykkede hentninger, mens Discord kører."
+                },
+                autoCompleteQuests: {
+                    label: "Fuldfør Quests automatisk",
+                    description: "Tilmeld og fuldfør automatisk kvalificerede tilgængelige Quests med understøttede og aktiverede opgavetyper ved vellykkede hentninger, mens Discord kører."
                 }
             },
             text: {
@@ -9661,12 +9743,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     mustURL: "Skal være en gyldig URL",
                     mustJSON: "Skal være en JSON-fil"
                 },
-                tryHljs: {
-                    label: "Fallback til Hljs",
+                tryDiscordHighlighter: {
+                    label: "Prøv Discords highlighter",
                     description: "Brug Discords standard highlighter hvis nødvendigt.",
                     never: "Aldrig",
-                    secondary: "Foretræk Shiki over Highlight.js",
-                    primary: "Foretræk Highlight.js over Shiki",
+                    secondary: "Foretræk Shiki frem for Discords highlighter",
+                    primary: "Foretræk Discords highlighter frem for Shiki",
                     always: "Altid"
                 },
                 useDevIcon: {

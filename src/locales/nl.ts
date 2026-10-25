@@ -1018,7 +1018,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 disableAnalytics: {
                     label: "Schakel Analytics uit",
-                    description: "Schakel het volgen van Discord (analyse/'wetenschap'), statistieken en Sentry-crashrapportage uit"
+                    description: "Blokkeert de tracking-analyses van Discord. Schakel dit uit als je wilt dat badges je voortgang bijhouden (bijv. gestreamde uren)."
                 },
                 disableStackDumping: {
                     description: "Een native stacktrace in de console tonen als Discord crasht. Vereist een volledige herstart."
@@ -1421,6 +1421,36 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 invalidColorFormat: "Ongeldig kleurformaat voor {{settingKey}}, zorg ervoor dat het formaat 'R, G, B' of '#RRGGBB' is",
                 invalidColorFormatFor: "Ongeldige kleurnotatie voor {{key}}, gebruik \"R, G, B\" of \"#RRGGBB\""
+            }
+        },
+        betterBackreading: {
+            name: "BetterBackreading",
+            description: "Verbetert het teruglezen door berichten eerder te laden en minder terug te springen.",
+            wholeNumber: "Voer een geheel getal in van {{min}} tot {{max}}.",
+            option: {
+                imageScrollMargin: {
+                    label: "Voorlaadafstand voor afbeeldingen",
+                    description: "Hoe ver vooruit afbeeldingen worden geladen, in pixels (300-3000)."
+                },
+                messageLoadBuffer: {
+                    label: "Laadbuffer voor berichten",
+                    description: "Hoe ver vooruit meer berichten worden opgehaald, in pixels (500-3000)."
+                },
+                useDiscordMessageCount: {
+                    label: "Discords dynamische berichtaantal gebruiken",
+                    description: "Laat Discord kiezen hoeveel berichten worden opgehaald op basis van je venster en chatinstellingen."
+                },
+                messageCount: {
+                    label: "Aangepast berichtaantal",
+                    description: "Hoeveel berichten per geschiedenisverzoek worden opgehaald als het dynamische aantal is uitgeschakeld (30-100)."
+                },
+                channelOpenScrollMode: {
+                    label: "Positie bij openen van kanaal",
+                    description: "Open ongelezen kanalen op de opgeslagen positie (of onderaan), altijd onderaan, of gebruik het standaardgedrag voor ongelezen.",
+                    default: "Discord-standaard",
+                    bottom: "Altijd onderaan",
+                    saved: "Opgeslagen positie"
+                }
             }
         },
         betterBanReasons: {
@@ -4519,6 +4549,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "Klonen naar {{name}}",
                 emoji: "Emoji",
                 sticker: "Sticker"
+            }
+        },
+        externalPlayer: {
+            name: "ExternalPlayer",
+            description: "Open video's en audio in een externe mediaspeler zoals mpv.",
+            option: {
+                player: {
+                    label: "Speler",
+                    description: "In welke speler media worden geopend."
+                },
+                openOnClick: {
+                    label: "Openen bij klikken",
+                    description: "Open video's en audio in de speler wanneer je op afspelen drukt, in plaats van ze in Discord af te spelen."
+                },
+                path: {
+                    label: "Spelerpad",
+                    description: "Absoluut pad naar het uitvoerbare bestand van de speler. Laat leeg om die uit je PATH te gebruiken."
+                },
+                args: {
+                    label: "Spelerargumenten",
+                    description: "Extra argumenten die aan de speler worden doorgegeven. Zet waarden met spaties tussen aanhalingstekens."
+                }
+            },
+            context: {
+                openIn: "Openen in {{player}}"
+            },
+            toast: {
+                alreadyOpen: "Al geopend in {{player}}.",
+                restartRequired: "Start Discord volledig opnieuw om ExternalPlayer te laden.",
+                openFailed: "Kan de speler niet openen."
+            },
+            status: {
+                paused: "Gepauzeerd in {{player}}",
+                playing: "Speelt af in {{player}}"
             }
         },
         f8break: {
@@ -8216,7 +8280,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unmarkAsIgnored: "Niet meer negeren",
                     stopAuto: "Automatisch voltooien stoppen",
                     startAuto: "Automatisch voltooien starten",
-                    copyQuestID: "Quest-ID kopiëren"
+                    copyQuestID: "Quest-ID kopiëren",
+                    pauseAutoEnrollment: "Automatisch inschrijven pauzeren",
+                    unpauseAutoEnrollment: "Automatisch inschrijven hervatten",
+                    pauseAutoProcessing: "Automatisch verwerken pauzeren",
+                    unpauseAutoProcessing: "Automatisch verwerken hervatten"
                 }
             },
             button: {
@@ -8238,7 +8306,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 autoCompleteBroken: "Automatisch voltooien werkt niet. Er komt binnenkort een oplossing.",
                 enrollmentFailed: "Inschrijven voor de Quest {{questName}} is mislukt.",
-                enrollmentInNormalizequestnameQuest: "Inschrijving voor quest {{normalizeQuestName_quest}} mislukt{{rateLimitSuffix}}."
+                enrollmentInNormalizequestnameQuest: "Inschrijving voor quest {{normalizeQuestName_quest}} mislukt{{rateLimitSuffix}}.",
+                automationUnlocked: "Quest-automatisering ontgrendeld.",
+                automationLocked: "Quest-automatisering vergrendeld."
             },
             notification: {
                 completed: {
@@ -8371,8 +8441,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     simultaneousTooltip: "Standaard worden meerdere automatisch te voltooien Quests in een wachtrij gezet en op volgorde voltooid.\n\nMet deze instelling lopen alle automatisch te voltooien Quests in plaats daarvan tegelijk.\n\nDeze instelling geldt alleen voor automatisch voltooien en is afhankelijk van de instelling voor automatisch voltooien hieronder.",
                     resumeInterrupted: "Onderbroken automatische voltooiingen hervatten na herladen of herstarten:",
                     resumeInterruptedTooltip: "Deze instelling hervat automatisch voltooiingen die door herladen of herstarten zijn onderbroken, inclusief het opnieuw in de wachtrij zetten van Quests die al in de wachtrij stonden maar nog niet waren begonnen.",
+                    autoProcess: "Compatibele Quests automatisch verwerken voor automatisch voltooien:",
+                    autoProcessTooltip: "Voltooit in aanmerking komende, niet-geclaimde, niet-genegeerde en niet-verlopen Quests die binnen je beloning- en Quest-typefilters vallen en worden gedetecteerd terwijl Discord draait. Alleen ondersteunde taaktypen die hieronder zijn ingeschakeld, worden meegenomen.\n\nSchrijft zich automatisch in voor compatibele Quests voordat ze in de wachtrij worden gezet voor automatisch voltooien. Wacht bekende rate-limit-wachttijden af. Stopt bij onbekende fouten, rate limits zonder wachttijd of herhaalde inschrijvingsfouten.",
+                    autoEnroll: "Automatisch inschrijven voor compatibele Quests.",
+                    autoEnrollTooltip: "Schrijft zich in voor in aanmerking komende, niet-geclaimde, niet-genegeerde en niet-verlopen Quests die binnen je beloning- en Quest-typefilters vallen en worden gedetecteerd terwijl Discord draait.\n\nSchrijft zich in voor Quests zonder ze in de wachtrij te zetten voor automatisch voltooien. Wacht bekende rate-limit-wachttijden af. Stopt bij onbekende fouten, rate limits zonder wachttijd of herhaalde inschrijvingsfouten.",
                     autoCompleteTypes: "Specifieke Quest-typen automatisch voltooien:",
-                    autoCompleteTypesTooltip: "\"Video bekijken op mobiel\"-Quests werken alleen voor mobiele Quests waarvoor je je op desktop kunt inschrijven. Is inschrijving beperkt tot mobiel, dan moet je je eerst op je mobiele apparaat inschrijven voordat je terugkeert naar desktop en je Quests vernieuwt.\n\nAlle videogerelateerde Quests sturen meestal een stacktrace mee met de voortgangsrapporten. Discord weet dus precies welke functies zijn aangeroepen en kan controleren of de eigen functies de voortgang hebben gestart. Questify wist deze stacktrace, maar de afwezigheid ervan verraadt evenveel als de aanwezigheid.\n\n\"Spelen op desktop\", \"Spelen op PlayStation\", \"Spelen op Xbox\" en \"Activiteit spelen\"-Quests zijn door een beperking van Discord alleen beschikbaar in officiële desktopclients. Clients van derden zoals webextensies, Plextron en andere ondersteunen het automatisch voltooien van deze typen niet.\n\nAlle gamegerelateerde Quests sturen meestal een game-fingerprint mee met de heartbeat-rapporten. Discord kan zo met gegevens van tienduizenden gebruikers bepalen of anderen waarschijnlijk een echte game gebruiken of het uitvoerbare bestand emuleren. Er is geen redelijke manier om deze waarde te vervalsen, dus Questify laat hem leeg, maar de afwezigheid ervan verraadt evenveel als een slechte vervalsing.\n\n\"Prestatie in activiteit\"-Quests kunnen alleen automatisch worden voltooid door ze direct te voltooien. Deze methode kan op elk moment worden gepatcht.\n\nAutomatisch voltooien gebeurt door op de bijbehorende knoppen op de Quest-pagina te klikken. Quests worden voltooid in de volgorde waarin ze in de wachtrij zijn gezet, tenzij hierboven gelijktijdig voltooien is ingeschakeld.\n\nHet automatisch voltooien van Quests is de meest riskante gevaarlijke instelling. Schakel het in op eigen risico."
+                    autoCompleteTypesTooltip: "\"Video bekijken op mobiel\"-Quests werken alleen voor mobiele Quests waarvoor je je op desktop kunt inschrijven. Is inschrijving beperkt tot mobiel, dan moet je je eerst op je mobiele apparaat inschrijven voordat je terugkeert naar desktop en je Quests vernieuwt.\n\nAlle videogerelateerde Quests sturen meestal een stacktrace mee met de voortgangsrapporten. Discord weet dus precies welke functies zijn aangeroepen en kan controleren of de eigen functies de voortgang hebben gestart. Questify wist deze stacktrace, maar de afwezigheid ervan verraadt evenveel als de aanwezigheid.\n\n\"Spelen op desktop\", \"Spelen op PlayStation\", \"Spelen op Xbox\", \"Activiteit spelen\" en \"Prestatie in activiteit\"-Quests zijn door een beperking van Discord alleen beschikbaar in officiële desktopclients. Clients van derden zoals webextensies, Plextron en andere ondersteunen het automatisch voltooien van deze typen niet.\n\nAlle gamegerelateerde Quests sturen meestal een game-fingerprint mee met de heartbeat-rapporten. Discord kan zo met gegevens van tienduizenden gebruikers bepalen of anderen waarschijnlijk een echte game gebruiken of het uitvoerbare bestand emuleren. Er is geen redelijke manier om deze waarde te vervalsen, dus Questify laat hem leeg, maar de afwezigheid ervan verraadt evenveel als een slechte vervalsing.\n\nAutomatisch voltooien start via de Quest-knoppen op de Quest-pagina of via automatische verwerking. Quests worden voltooid in de volgorde waarin ze in de wachtrij zijn gezet, tenzij hierboven gelijktijdig voltooien is ingeschakeld.\n\nHet automatisch voltooien van Quests is de meest riskante gevaarlijke instelling. Schakel het in op eigen risico."
                 },
                 questNotifications: {
                     title: "Quest-meldingen",
@@ -8704,6 +8778,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hiddenQuestStatuses: {
                     description: "Te verbergen queststatusgroepen.",
                     label: "Verborgen queststatussen"
+                },
+                autoEnrollQuests: {
+                    label: "Automatisch inschrijven voor Quests",
+                    description: "Schrijf je automatisch in voor beschikbare Quests die in aanmerking komen bij succesvolle ophaalacties terwijl Discord draait."
+                },
+                autoCompleteQuests: {
+                    label: "Quests automatisch voltooien",
+                    description: "Schrijf je automatisch in voor en voltooi beschikbare Quests die in aanmerking komen met ondersteunde en ingeschakelde taaktypen bij succesvolle ophaalacties terwijl Discord draait."
                 }
             },
             text: {
@@ -9661,12 +9743,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     mustURL: "Moet een geldige URL zijn",
                     mustJSON: "Moet een JSON-bestand zijn"
                 },
-                tryHljs: {
-                    label: "Terugval op Hljs",
+                tryDiscordHighlighter: {
+                    label: "Discords highlighter proberen",
                     description: "Gebruik de lichtere standaard Discord-markeerstift en -thema.",
                     never: "Nooit",
-                    secondary: "Geef de voorkeur aan Shiki in plaats van Highlight.js",
-                    primary: "Geef de voorkeur aan Highlight.js in plaats van Shiki",
+                    secondary: "Shiki verkiezen boven Discords highlighter",
+                    primary: "Discords highlighter verkiezen boven Shiki",
                     always: "Altijd"
                 },
                 useDevIcon: {

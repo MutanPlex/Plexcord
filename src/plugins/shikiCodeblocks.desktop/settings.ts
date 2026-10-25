@@ -27,7 +27,7 @@ import { OptionType } from "@utils/types";
 import { shiki } from "./api/shiki";
 import { themes } from "./api/themes";
 import deviconStyle from "./devicon.css?managed";
-import { DeviconSetting, HljsSetting } from "./types";
+import { DeviconSetting, HighlighterSetting } from "./types";
 
 const themeNames = Object.keys(themes) as (keyof typeof themes)[];
 
@@ -53,27 +53,27 @@ export const settings = definePluginSettings({
             shiki.setTheme(value || settings.store.theme);
         },
     },
-    tryHljs: {
-        label: () => t(plugin.shikiCodeblocks.option.tryHljs.label),
-        description: () => t(plugin.shikiCodeblocks.option.tryHljs.description),
+    tryDiscordHighlighter: {
+        label: () => t(plugin.shikiCodeblocks.option.tryDiscordHighlighter.label),
+        description: () => t(plugin.shikiCodeblocks.option.tryDiscordHighlighter.description),
         type: OptionType.SELECT,
         options: [
             {
-                label: () => t(plugin.shikiCodeblocks.option.tryHljs.never),
-                value: HljsSetting.Never,
+                label: () => t(plugin.shikiCodeblocks.option.tryDiscordHighlighter.never),
+                value: HighlighterSetting.Never,
             },
             {
-                label: () => t(plugin.shikiCodeblocks.option.tryHljs.secondary),
-                value: HljsSetting.Secondary,
+                label: () => t(plugin.shikiCodeblocks.option.tryDiscordHighlighter.secondary),
+                value: HighlighterSetting.Secondary,
                 default: true,
             },
             {
-                label: () => t(plugin.shikiCodeblocks.option.tryHljs.primary),
-                value: HljsSetting.Primary,
+                label: () => t(plugin.shikiCodeblocks.option.tryDiscordHighlighter.primary),
+                value: HighlighterSetting.Primary,
             },
             {
-                label: () => t(plugin.shikiCodeblocks.option.tryHljs.always),
-                value: HljsSetting.Always,
+                label: () => t(plugin.shikiCodeblocks.option.tryDiscordHighlighter.always),
+                value: HighlighterSetting.Always,
             },
         ]
     },

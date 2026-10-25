@@ -1018,7 +1018,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 disableAnalytics: {
                     label: "禁用分析",
-                    description: "禁用 Discord 的跟踪（分析/“科学”）、指标和 Sentry 崩溃报告"
+                    description: "阻止 Discord 的跟踪分析。如果你希望徽章记录你的进度（例如：直播时长），请关闭此项。"
                 },
                 disableStackDumping: {
                     description: "Discord 崩溃时在控制台输出原生堆栈跟踪。需要完全重启。"
@@ -1421,6 +1421,36 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 invalidColorFormat: "{{settingKey}} 的颜色格式无效，请确保其格式为“R、G、B”或“#RRGGBB”",
                 invalidColorFormatFor: "{{key}} 的颜色格式无效，请使用 \"R, G, B\" 或 \"#RRGGBB\""
+            }
+        },
+        betterBackreading: {
+            name: "BetterBackreading",
+            description: "通过更早加载消息并减少回弹来改善回看历史消息的体验。",
+            wholeNumber: "请输入 {{min}} 到 {{max}} 之间的整数。",
+            option: {
+                imageScrollMargin: {
+                    label: "图片预加载距离",
+                    description: "提前多远加载图片，单位为像素（300-3000）。"
+                },
+                messageLoadBuffer: {
+                    label: "消息加载缓冲",
+                    description: "提前多远获取更多消息，单位为像素（500-3000）。"
+                },
+                useDiscordMessageCount: {
+                    label: "使用 Discord 的动态消息数量",
+                    description: "让 Discord 根据你的窗口和聊天设置决定获取多少条消息。"
+                },
+                messageCount: {
+                    label: "自定义消息数量",
+                    description: "关闭动态数量时，每次历史请求获取的消息数量（30-100）。"
+                },
+                channelOpenScrollMode: {
+                    label: "频道打开位置",
+                    description: "在保存的位置（或底部）打开未读频道、始终在底部打开，或使用默认的未读行为。",
+                    default: "Discord 默认",
+                    bottom: "始终在底部",
+                    saved: "保存的位置"
+                }
             }
         },
         betterBanReasons: {
@@ -4519,6 +4549,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "克隆到 {{name}}",
                 emoji: "表情符号",
                 sticker: "贴纸"
+            }
+        },
+        externalPlayer: {
+            name: "ExternalPlayer",
+            description: "在 mpv 等外部媒体播放器中打开视频和音频。",
+            option: {
+                player: {
+                    label: "播放器",
+                    description: "用于打开媒体的播放器。"
+                },
+                openOnClick: {
+                    label: "点击时打开",
+                    description: "按下播放时在播放器中打开视频和音频，而不是在 Discord 中播放。"
+                },
+                path: {
+                    label: "播放器路径",
+                    description: "播放器可执行文件的绝对路径。留空则使用 PATH 中的播放器。"
+                },
+                args: {
+                    label: "播放器参数",
+                    description: "传递给播放器的额外参数。包含空格的值请用引号括起来。"
+                }
+            },
+            context: {
+                openIn: "在 {{player}} 中打开"
+            },
+            toast: {
+                alreadyOpen: "已在 {{player}} 中打开。",
+                restartRequired: "请完全重启 Discord 以加载 ExternalPlayer。",
+                openFailed: "无法打开播放器。"
+            },
+            status: {
+                paused: "已在 {{player}} 中暂停",
+                playing: "正在 {{player}} 中播放"
             }
         },
         f8break: {
@@ -8216,7 +8280,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unmarkAsIgnored: "取消忽略",
                     stopAuto: "停止自动完成",
                     startAuto: "开始自动完成",
-                    copyQuestID: "复制 Quest ID"
+                    copyQuestID: "复制 Quest ID",
+                    pauseAutoEnrollment: "暂停自动报名",
+                    unpauseAutoEnrollment: "继续自动报名",
+                    pauseAutoProcessing: "暂停自动处理",
+                    unpauseAutoProcessing: "继续自动处理"
                 }
             },
             button: {
@@ -8238,7 +8306,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 autoCompleteBroken: "自动完成已失效，修复即将推出。",
                 enrollmentFailed: "加入 {{questName}} Quest 失败。",
-                enrollmentInNormalizequestnameQuest: "报名任务 {{normalizeQuestName_quest}} 失败{{rateLimitSuffix}}。"
+                enrollmentInNormalizequestnameQuest: "报名任务 {{normalizeQuestName_quest}} 失败{{rateLimitSuffix}}。",
+                automationUnlocked: "Quest 自动化已解锁。",
+                automationLocked: "Quest 自动化已锁定。"
             },
             notification: {
                 completed: {
@@ -8371,8 +8441,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     simultaneousTooltip: "默认情况下，尝试自动完成多个 Quest 时会将它们排队并按顺序完成。\n\n此设置允许所有自动完成的 Quest 同时运行。\n\n此设置仅适用于 Quest 的自动完成，并依赖下方的自动完成设置。",
                     resumeInterrupted: "在重新加载或重启后恢复被中断的自动完成：",
                     resumeInterruptedTooltip: "此设置会自动恢复因重新加载或重启而中断的自动完成，包括重新排队那些已排队但尚未开始的 Quest。",
+                    autoProcess: "自动处理兼容的 Quest 以自动完成：",
+                    autoProcessTooltip: "完成 Discord 运行期间检测到的、符合你的奖励和 Quest 类型筛选条件的、有资格且未领取、未忽略、未过期的 Quest。仅包含下方已启用的受支持任务类型。\n\n在将兼容的 Quest 加入自动完成队列前自动报名。会等待已知的速率限制冷却时间。遇到未知错误、没有重试延迟的速率限制或多次报名失败时停止。",
+                    autoEnroll: "自动报名兼容的 Quest。",
+                    autoEnrollTooltip: "报名 Discord 运行期间检测到的、符合你的奖励和 Quest 类型筛选条件的、有资格且未领取、未忽略、未过期的 Quest。\n\n报名 Quest 但不加入自动完成队列。会等待已知的速率限制冷却时间。遇到未知错误、没有重试延迟的速率限制或多次报名失败时停止。",
                     autoCompleteTypes: "自动完成特定 Quest 类型：",
-                    autoCompleteTypesTooltip: "\"在手机上观看视频\" Quest 仅适用于可在桌面端加入的手机 Quest。如果某个 Quest 只能在手机上加入，你必须先在手机上加入，然后回到桌面端刷新 Quest。\n\n所有视频相关 Quest 通常会随进度报告发送调用栈。这意味着 Discord 能确切知道调用了哪些函数，从而验证进度是否由其自身函数发起。Questify 会清除此调用栈，但其缺失与存在一样容易暴露。\n\n由于 Discord 的限制，\"在桌面端游玩\"、\"在 PlayStation 上游玩\"、\"在 Xbox 上游玩\"和\"玩活动\" Quest 仅在官方桌面客户端中可用。浏览器扩展、Plextron 等第三方客户端不支持自动完成这些类型。\n\n所有游戏相关 Quest 通常会随心跳报告发送游戏指纹。这意味着 Discord 可以利用数万用户的数据判断其他用户是在运行真实游戏还是在模拟可执行文件。没有合理的方法伪造此值，因此 Questify 将其留空，但其缺失与拙劣的伪造一样容易暴露。\n\n\"活动内成就\" Quest 只能通过立即完成来自动完成。此方法随时可能被修补。\n\n自动完成 Quest 需点击 Quest 页面上相应的按钮。除非上方启用了同时完成，Quest 将按排队顺序自动完成。\n\n自动完成 Quest 是风险最高的危险设置。启用风险自负。"
+                    autoCompleteTypesTooltip: "\"在手机上观看视频\" Quest 仅适用于可在桌面端加入的手机 Quest。如果某个 Quest 只能在手机上加入，你必须先在手机上加入，然后回到桌面端刷新 Quest。\n\n所有视频相关 Quest 通常会随进度报告发送调用栈。这意味着 Discord 能确切知道调用了哪些函数，从而验证进度是否由其自身函数发起。Questify 会清除此调用栈，但其缺失与存在一样容易暴露。\n\n由于 Discord 的限制，\"在桌面端游玩\"、\"在 PlayStation 上游玩\"、\"在 Xbox 上游玩\"、\"玩活动\"和\"活动内成就\" Quest 仅在官方桌面客户端中可用。浏览器扩展、Plextron 等第三方客户端不支持自动完成这些类型。\n\n所有游戏相关 Quest 通常会随心跳报告发送游戏指纹。这意味着 Discord 可以利用数万用户的数据判断其他用户是在运行真实游戏还是在模拟可执行文件。没有合理的方法伪造此值，因此 Questify 将其留空，但其缺失与拙劣的伪造一样容易暴露。\n\n自动完成从 Quest 页面上的 Quest 按钮或自动处理开始。除非上方启用了同时完成，Quest 将按排队顺序完成。\n\n自动完成 Quest 是风险最高的危险设置。启用风险自负。"
                 },
                 questNotifications: {
                     title: "Quest 通知",
@@ -8704,6 +8778,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hiddenQuestStatuses: {
                     description: "要隐藏的任务状态分组。",
                     label: "隐藏的任务状态"
+                },
+                autoEnrollQuests: {
+                    label: "自动报名 Quest",
+                    description: "在 Discord 运行期间成功获取时，自动报名有资格的可用 Quest。"
+                },
+                autoCompleteQuests: {
+                    label: "自动完成 Quest",
+                    description: "在 Discord 运行期间成功获取时，自动报名并完成具有受支持且已启用任务类型的有资格的可用 Quest。"
                 }
             },
             text: {
@@ -9661,12 +9743,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     mustURL: "必须是有效的 URL",
                     mustJSON: "必须是 JSON 文件"
                 },
-                tryHljs: {
-                    label: "回退到 Hljs",
+                tryDiscordHighlighter: {
+                    label: "尝试 Discord 的高亮器",
                     description: "使用更轻量级的默认 Discord 荧光笔和主题。",
                     never: "绝不",
-                    secondary: "更喜欢 Shiki 而不是 Highlight.js",
-                    primary: "更喜欢Highlight.js而不是Shiki",
+                    secondary: "优先使用 Shiki 而不是 Discord 的高亮器",
+                    primary: "优先使用 Discord 的高亮器而不是 Shiki",
                     always: "总是"
                 },
                 useDevIcon: {

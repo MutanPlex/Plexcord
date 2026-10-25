@@ -16,6 +16,8 @@ import { makeRange, OptionType } from "@utils/types";
 import { SearchableSelect, useState } from "@webpack/common";
 import { JSX } from "react";
 
+import { Bookmarks } from "./types";
+
 interface DynamicDropdownSettingOption {
     label: string;
     value: string;
@@ -148,7 +150,12 @@ export const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         default: {}
     },
-
+    bookmarks: {
+        type: OptionType.CUSTOM,
+        description: "",
+        default: {} as Record<string, Bookmarks>,
+        hidden: true
+    },
     showStatusIndicators: {
         label: () => t(plugin.channelTabs.option.showStatusIndicators.label),
         description: () => t(plugin.channelTabs.option.showStatusIndicators.description),

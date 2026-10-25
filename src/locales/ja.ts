@@ -1018,7 +1018,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 disableAnalytics: {
                     label: "分析を無効にする",
-                    description: "Discord のトラッキング (分析/「科学」)、メトリクス、Sentry クラッシュ レポートを無効にする"
+                    description: "Discord のトラッキング分析をブロックします。バッジで進捗（例: 配信時間）を記録したい場合はオフにしてください。"
                 },
                 disableStackDumping: {
                     description: "Discord がクラッシュしたときにネイティブのスタックトレースをコンソールに出力します。完全な再起動が必要です。"
@@ -1421,6 +1421,36 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 invalidColorFormat: "{{settingKey}} のカラー形式が無効です。'R、G、B' または '#RRGGBB' の形式であることを確認してください。",
                 invalidColorFormatFor: "{{key}} の色形式が無効です。\"R, G, B\" または \"#RRGGBB\" を使用してください"
+            }
+        },
+        betterBackreading: {
+            name: "BetterBackreading",
+            description: "メッセージを早めに読み込み、スクロールの揺り戻しを減らして過去ログの閲覧を改善します。",
+            wholeNumber: "{{min}} から {{max}} までの整数を入力してください。",
+            option: {
+                imageScrollMargin: {
+                    label: "画像の先読み距離",
+                    description: "画像をどれだけ先まで読み込むか（ピクセル、300-3000）。"
+                },
+                messageLoadBuffer: {
+                    label: "メッセージ読み込みバッファ",
+                    description: "追加のメッセージをどれだけ先まで取得するか（ピクセル、500-3000）。"
+                },
+                useDiscordMessageCount: {
+                    label: "Discord の動的なメッセージ数を使用",
+                    description: "ウィンドウとチャット設定に基づいて、取得するメッセージ数を Discord に決めさせます。"
+                },
+                messageCount: {
+                    label: "カスタムメッセージ数",
+                    description: "動的な数が無効のときに、履歴リクエストごとに取得するメッセージ数（30-100）。"
+                },
+                channelOpenScrollMode: {
+                    label: "チャンネルを開く位置",
+                    description: "未読チャンネルを保存した位置（または最下部）で開くか、常に最下部で開くか、デフォルトの未読動作に従います。",
+                    default: "Discord のデフォルト",
+                    bottom: "常に最下部",
+                    saved: "保存した位置"
+                }
             }
         },
         betterBanReasons: {
@@ -4519,6 +4549,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "{{name}}に複製",
                 emoji: "絵文字",
                 sticker: "スタンプ"
+            }
+        },
+        externalPlayer: {
+            name: "ExternalPlayer",
+            description: "動画や音声を mpv などの外部メディアプレーヤーで開きます。",
+            option: {
+                player: {
+                    label: "プレーヤー",
+                    description: "メディアを開くプレーヤー。"
+                },
+                openOnClick: {
+                    label: "クリックで開く",
+                    description: "再生を押したときに、Discord で再生する代わりに動画や音声をプレーヤーで開きます。"
+                },
+                path: {
+                    label: "プレーヤーのパス",
+                    description: "プレーヤーの実行ファイルへの絶対パス。空欄にすると PATH 上のものを使用します。"
+                },
+                args: {
+                    label: "プレーヤーの引数",
+                    description: "プレーヤーに渡す追加の引数。スペースを含む値は引用符で囲んでください。"
+                }
+            },
+            context: {
+                openIn: "{{player}} で開く"
+            },
+            toast: {
+                alreadyOpen: "すでに {{player}} で開いています。",
+                restartRequired: "ExternalPlayer を読み込むには Discord を完全に再起動してください。",
+                openFailed: "プレーヤーを開けませんでした。"
+            },
+            status: {
+                paused: "{{player}} で一時停止中",
+                playing: "{{player}} で再生中"
             }
         },
         f8break: {
@@ -8216,7 +8280,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unmarkAsIgnored: "無視を解除",
                     stopAuto: "自動完了を停止",
                     startAuto: "自動完了を開始",
-                    copyQuestID: "Quest ID をコピー"
+                    copyQuestID: "Quest ID をコピー",
+                    pauseAutoEnrollment: "自動登録を一時停止",
+                    unpauseAutoEnrollment: "自動登録を再開",
+                    pauseAutoProcessing: "自動処理を一時停止",
+                    unpauseAutoProcessing: "自動処理を再開"
                 }
             },
             button: {
@@ -8238,7 +8306,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 autoCompleteBroken: "自動完了が壊れています。まもなく修正されます。",
                 enrollmentFailed: "{{questName}} Quest への登録に失敗しました。",
-                enrollmentInNormalizequestnameQuest: "クエスト {{normalizeQuestName_quest}} への参加に失敗しました{{rateLimitSuffix}}。"
+                enrollmentInNormalizequestnameQuest: "クエスト {{normalizeQuestName_quest}} への参加に失敗しました{{rateLimitSuffix}}。",
+                automationUnlocked: "Quest 自動化のロックが解除されました。",
+                automationLocked: "Quest 自動化がロックされました。"
             },
             notification: {
                 completed: {
@@ -8371,8 +8441,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     simultaneousTooltip: "デフォルトでは、複数の Quest を自動完了しようとするとキューに入れられ、順番に完了されます。\n\nこの設定では、代わりにすべての自動完了 Quest を同時に実行できます。\n\nこの設定は Quest の自動完了にのみ適用され、下の自動完了設定に依存します。",
                     resumeInterrupted: "再読み込みや再起動後に中断された自動完了を再開:",
                     resumeInterruptedTooltip: "この設定は、再読み込みや再起動で中断された自動完了を自動的に再開します。キューに入っていたがまだ開始していなかった Quest の再キュー登録も含みます。",
+                    autoProcess: "互換性のある Quest を自動完了のために自動処理:",
+                    autoProcessTooltip: "Discord の実行中に検出された、報酬と Quest タイプのフィルターに含まれる、対象で未受け取り・未無視・期限内の Quest を完了します。下で有効にしたサポート対象のタスクタイプのみが含まれます。\n\n互換性のある Quest を自動完了のキューに入れる前に自動で登録します。既知のレート制限の待機時間は待ちます。不明なエラー、再試行待機時間のないレート制限、登録の連続失敗で停止します。",
+                    autoEnroll: "互換性のある Quest に自動で登録します。",
+                    autoEnrollTooltip: "Discord の実行中に検出された、報酬と Quest タイプのフィルターに含まれる、対象で未受け取り・未無視・期限内の Quest に登録します。\n\nQuest を自動完了のキューに入れずに登録します。既知のレート制限の待機時間は待ちます。不明なエラー、再試行待機時間のないレート制限、登録の連続失敗で停止します。",
                     autoCompleteTypes: "特定の Quest タイプを自動完了:",
-                    autoCompleteTypesTooltip: "「モバイルで動画を視聴」Quest は、デスクトップで登録できるモバイル Quest でのみ動作します。モバイルでのみ登録できる Quest の場合は、先にモバイル端末で登録してからデスクトップに戻り、Quest を更新してください。\n\n動画関連の Quest は通常、進捗報告とともにスタックトレースを送信します。そのため Discord はどの関数が呼ばれたかを正確に把握し、自社の関数が進捗を開始したことを検証できます。Questify はこのスタックトレースを消去しますが、存在しないこと自体が存在するのと同じくらい目立ちます。\n\n「デスクトップでプレイ」「PlayStation でプレイ」「Xbox でプレイ」「アクティビティをプレイ」Quest は、Discord による制限のため公式デスクトップクライアントでのみ利用できます。Web 拡張機能、Plextron などのサードパーティクライアントは、これらのタイプの自動完了に対応していません。\n\nゲーム関連の Quest は通常、ハートビート報告とともにゲームのフィンガープリントを送信します。そのため Discord は数万人のユーザーのデータを使って、他のユーザーが実際のゲームを使っているか実行ファイルを偽装しているかを判断できます。この値を偽装する合理的な方法はないため Questify は空のままにしますが、存在しないことは下手な偽装と同じくらい目立ちます。\n\n「アクティビティで実績」Quest は即座に完了することでのみ自動完了できます。この方法はいつでも修正される可能性があります。\n\nQuest の自動完了は、Quest ページの各ボタンをクリックして行います。上で同時完了が有効でない限り、Quest はキューに入った順に自動完了されます。\n\nQuest の自動完了は最もリスクの高い危険な設定です。自己責任で有効にしてください。"
+                    autoCompleteTypesTooltip: "「モバイルで動画を視聴」Quest は、デスクトップで登録できるモバイル Quest でのみ動作します。モバイルでのみ登録できる Quest の場合は、先にモバイル端末で登録してからデスクトップに戻り、Quest を更新してください。\n\n動画関連の Quest は通常、進捗報告とともにスタックトレースを送信します。そのため Discord はどの関数が呼ばれたかを正確に把握し、自社の関数が進捗を開始したことを検証できます。Questify はこのスタックトレースを消去しますが、存在しないこと自体が存在するのと同じくらい目立ちます。\n\n「デスクトップでプレイ」「PlayStation でプレイ」「Xbox でプレイ」「アクティビティをプレイ」「アクティビティで実績」Quest は、Discord による制限のため公式デスクトップクライアントでのみ利用できます。Web 拡張機能、Plextron などのサードパーティクライアントは、これらのタイプの自動完了に対応していません。\n\nゲーム関連の Quest は通常、ハートビート報告とともにゲームのフィンガープリントを送信します。そのため Discord は数万人のユーザーのデータを使って、他のユーザーが実際のゲームを使っているか実行ファイルを偽装しているかを判断できます。この値を偽装する合理的な方法はないため Questify は空のままにしますが、存在しないことは下手な偽装と同じくらい目立ちます。\n\n自動完了は、Quest ページの Quest ボタンまたは自動処理から開始されます。上で同時完了が有効でない限り、Quest はキューに入った順に完了されます。\n\nQuest の自動完了は最もリスクの高い危険な設定です。自己責任で有効にしてください。"
                 },
                 questNotifications: {
                     title: "Quest 通知",
@@ -8704,6 +8778,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hiddenQuestStatuses: {
                     description: "非表示にするクエストのステータスグループです。",
                     label: "非表示のクエストステータス"
+                },
+                autoEnrollQuests: {
+                    label: "Quest に自動登録",
+                    description: "Discord の実行中、取得に成功したときに対象の利用可能な Quest に自動で登録します。"
+                },
+                autoCompleteQuests: {
+                    label: "Quest を自動完了",
+                    description: "Discord の実行中、取得に成功したときに、サポートされ有効化されたタスクタイプを持つ対象の利用可能な Quest に自動で登録して完了します。"
                 }
             },
             text: {
@@ -9661,12 +9743,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     mustURL: "有効な URL である必要があります",
                     mustJSON: "JSON ファイルである必要があります"
                 },
-                tryHljs: {
-                    label: "Hljs へのフォールバック",
+                tryDiscordHighlighter: {
+                    label: "Discord のハイライターを試す",
                     description: "より軽量なデフォルトの Discord ハイライターとテーマを使用します。",
                     never: "一度もない",
-                    secondary: "Highlight.js ではなく Shiki を好む",
-                    primary: "Shiki ではなく Highlight.js を好む",
+                    secondary: "Discord のハイライターより Shiki を優先",
+                    primary: "Shiki より Discord のハイライターを優先",
                     always: "いつも"
                 },
                 useDevIcon: {

@@ -1018,7 +1018,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 disableAnalytics: {
                     label: "Désactiver les analyses",
-                    description: "Désactive le suivi de Discord (analytics/'science'), les métriques et les rapports de plantage Sentry"
+                    description: "Bloque les analyses de suivi de Discord. Désactivez ceci si vous voulez que les badges suivent votre progression (ex. : heures de stream)."
                 },
                 disableStackDumping: {
                     description: "Afficher une trace de pile native dans la console quand Discord plante. Nécessite un redémarrage complet."
@@ -1421,6 +1421,36 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 invalidColorFormat: "Format de couleur invalide pour {{settingKey}}, assurez-vous qu'il soit au format 'R, G, B' ou '#RRGGBB'",
                 invalidColorFormatFor: "Format de couleur invalide pour {{key}}, utilise \"R, G, B\" ou \"#RRGGBB\""
+            }
+        },
+        betterBackreading: {
+            name: "BetterBackreading",
+            description: "Améliore la lecture de l'historique avec un chargement plus précoce des messages et moins de sauts.",
+            wholeNumber: "Entrez un nombre entier entre {{min}} et {{max}}.",
+            option: {
+                imageScrollMargin: {
+                    label: "Distance de préchargement des images",
+                    description: "À quelle distance à l'avance charger les images, en pixels (300-3000)."
+                },
+                messageLoadBuffer: {
+                    label: "Tampon de chargement des messages",
+                    description: "À quelle distance à l'avance récupérer plus de messages, en pixels (500-3000)."
+                },
+                useDiscordMessageCount: {
+                    label: "Utiliser le nombre dynamique de messages de Discord",
+                    description: "Laisse Discord choisir combien de messages récupérer selon votre fenêtre et vos paramètres de discussion."
+                },
+                messageCount: {
+                    label: "Nombre de messages personnalisé",
+                    description: "Combien de messages récupérer par requête d'historique lorsque le nombre dynamique est désactivé (30-100)."
+                },
+                channelOpenScrollMode: {
+                    label: "Position à l'ouverture d'un salon",
+                    description: "Ouvre les salons non lus à la position enregistrée (ou en bas), toujours en bas, ou laisse le comportement par défaut des non-lus.",
+                    default: "Par défaut de Discord",
+                    bottom: "Toujours en bas",
+                    saved: "Position enregistrée"
+                }
             }
         },
         betterBanReasons: {
@@ -4519,6 +4549,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "Cloner vers {{name}}",
                 emoji: "Emoji",
                 sticker: "Autocollant"
+            }
+        },
+        externalPlayer: {
+            name: "ExternalPlayer",
+            description: "Ouvre les vidéos et l'audio dans un lecteur multimédia externe comme mpv.",
+            option: {
+                player: {
+                    label: "Lecteur",
+                    description: "Dans quel lecteur ouvrir les médias."
+                },
+                openOnClick: {
+                    label: "Ouvrir au clic",
+                    description: "Ouvre les vidéos et l'audio dans le lecteur quand vous appuyez sur lecture, au lieu de les lire dans Discord."
+                },
+                path: {
+                    label: "Chemin du lecteur",
+                    description: "Chemin absolu vers l'exécutable du lecteur. Laissez vide pour utiliser celui de votre PATH."
+                },
+                args: {
+                    label: "Arguments du lecteur",
+                    description: "Arguments supplémentaires passés au lecteur. Mettez entre guillemets les valeurs contenant des espaces."
+                }
+            },
+            context: {
+                openIn: "Ouvrir dans {{player}}"
+            },
+            toast: {
+                alreadyOpen: "Déjà ouvert dans {{player}}.",
+                restartRequired: "Redémarrez complètement Discord pour charger ExternalPlayer.",
+                openFailed: "Impossible d'ouvrir le lecteur."
+            },
+            status: {
+                paused: "En pause dans {{player}}",
+                playing: "Lecture dans {{player}}"
             }
         },
         f8break: {
@@ -8216,7 +8280,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unmarkAsIgnored: "Ne plus ignorer",
                     stopAuto: "Arrêter l'auto-complétion",
                     startAuto: "Lancer l'auto-complétion",
-                    copyQuestID: "Copier l'ID de la quête"
+                    copyQuestID: "Copier l'ID de la quête",
+                    pauseAutoEnrollment: "Suspendre l'inscription automatique",
+                    unpauseAutoEnrollment: "Reprendre l'inscription automatique",
+                    pauseAutoProcessing: "Suspendre le traitement automatique",
+                    unpauseAutoProcessing: "Reprendre le traitement automatique"
                 }
             },
             button: {
@@ -8238,7 +8306,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 autoCompleteBroken: "L'auto-complétion est cassée. Un correctif arrivera bientôt.",
                 enrollmentFailed: "L'inscription à la quête {{questName}} a échoué.",
-                enrollmentInNormalizequestnameQuest: "Échec de l'inscription à la quête {{normalizeQuestName_quest}}{{rateLimitSuffix}}."
+                enrollmentInNormalizequestnameQuest: "Échec de l'inscription à la quête {{normalizeQuestName_quest}}{{rateLimitSuffix}}.",
+                automationUnlocked: "Automatisation des quêtes déverrouillée.",
+                automationLocked: "Automatisation des quêtes verrouillée."
             },
             notification: {
                 completed: {
@@ -8371,8 +8441,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     simultaneousTooltip: "Par défaut, l'auto-complétion de plusieurs quêtes les place dans une file pour être complétées dans l'ordre.\n\nCe paramètre permet à la place d'exécuter toutes les quêtes en auto-complétion en même temps.\n\nCe paramètre ne s'applique qu'à l'auto-complétion et dépend du paramètre d'auto-complétion ci-dessous.",
                     resumeInterrupted: "Reprendre les auto-complétions interrompues après un rechargement ou un redémarrage :",
                     resumeInterruptedTooltip: "Ce paramètre reprend automatiquement les auto-complétions interrompues par des rechargements ou des redémarrages, y compris la remise en file des quêtes qui étaient en attente mais n'avaient pas encore commencé.",
+                    autoProcess: "Traiter automatiquement les quêtes compatibles pour l'auto-complétion :",
+                    autoProcessTooltip: "Complète les quêtes éligibles, non réclamées, non ignorées et non expirées incluses par vos filtres de récompense et de type de quête, détectées pendant que Discord est ouvert. Seuls les types de tâches pris en charge activés ci-dessous sont inclus.\n\nS'inscrit automatiquement aux quêtes compatibles avant de les mettre en file pour l'auto-complétion. Attend les délais de limitation connus. S'arrête en cas d'erreur inconnue, de limitation sans délai de nouvelle tentative ou d'échecs d'inscription répétés.",
+                    autoEnroll: "S'inscrire automatiquement aux quêtes compatibles.",
+                    autoEnrollTooltip: "S'inscrit aux quêtes éligibles, non réclamées, non ignorées et non expirées incluses par vos filtres de récompense et de type de quête, détectées pendant que Discord est ouvert.\n\nS'inscrit aux quêtes sans les mettre en file pour l'auto-complétion. Attend les délais de limitation connus. S'arrête en cas d'erreur inconnue, de limitation sans délai de nouvelle tentative ou d'échecs d'inscription répétés.",
                     autoCompleteTypes: "Auto-compléter certains types de quêtes :",
-                    autoCompleteTypesTooltip: "Les quêtes \"Regarder une vidéo sur mobile\" ne fonctionnent qu'avec les quêtes mobiles permettant l'inscription sur ordinateur. Si l'inscription est limitée au mobile, vous devez d'abord vous inscrire sur votre appareil mobile avant de revenir sur ordinateur et d'actualiser vos quêtes.\n\nToutes les quêtes liées aux vidéos envoient habituellement une trace de pile avec les rapports de progression. Discord sait donc exactement quelles fonctions ont été appelées et peut vérifier que ses propres fonctions ont initié la progression. Questify efface cette trace, mais son absence est tout aussi révélatrice que sa présence.\n\nLes quêtes \"Jouer sur ordinateur\", \"Jouer sur PlayStation\", \"Jouer sur Xbox\" et \"Jouer à une activité\" ne sont disponibles que sur les clients de bureau officiels en raison d'une limitation imposée par Discord. Les clients tiers comme les extensions web, Plextron et d'autres ne prennent pas en charge leur auto-complétion.\n\nToutes les quêtes liées aux jeux envoient habituellement une empreinte du jeu avec les rapports de heartbeat. Discord peut ainsi utiliser les données de dizaines de milliers d'utilisateurs pour déterminer si d'autres utilisent probablement un vrai jeu ou émulent l'exécutable. Il n'existe aucune méthode raisonnable pour falsifier cette valeur ; Questify la laisse donc vide, mais son absence est tout aussi révélatrice qu'une mauvaise falsification.\n\nLes quêtes \"Succès dans une activité\" ne peuvent être auto-complétées qu'en les complétant immédiatement. Cette méthode peut être corrigée à tout moment.\n\nL'auto-complétion se fait en cliquant sur les boutons respectifs de la page des quêtes. Les quêtes sont auto-complétées dans l'ordre de mise en file, sauf si la complétion simultanée est activée ci-dessus.\n\nL'auto-complétion des quêtes est le paramètre dangereux le plus risqué. Activez-le à vos propres risques."
+                    autoCompleteTypesTooltip: "Les quêtes \"Regarder une vidéo sur mobile\" ne fonctionnent qu'avec les quêtes mobiles permettant l'inscription sur ordinateur. Si l'inscription est limitée au mobile, vous devez d'abord vous inscrire sur votre appareil mobile avant de revenir sur ordinateur et d'actualiser vos quêtes.\n\nToutes les quêtes liées aux vidéos envoient habituellement une trace de pile avec les rapports de progression. Discord sait donc exactement quelles fonctions ont été appelées et peut vérifier que ses propres fonctions ont initié la progression. Questify efface cette trace, mais son absence est tout aussi révélatrice que sa présence.\n\nLes quêtes \"Jouer sur ordinateur\", \"Jouer sur PlayStation\", \"Jouer sur Xbox\", \"Jouer à une activité\" et \"Succès dans une activité\" ne sont disponibles que sur les clients de bureau officiels en raison d'une limitation imposée par Discord. Les clients tiers comme les extensions web, Plextron et d'autres ne prennent pas en charge leur auto-complétion.\n\nToutes les quêtes liées aux jeux envoient habituellement une empreinte du jeu avec les rapports de heartbeat. Discord peut ainsi utiliser les données de dizaines de milliers d'utilisateurs pour déterminer si d'autres utilisent probablement un vrai jeu ou émulent l'exécutable. Il n'existe aucune méthode raisonnable pour falsifier cette valeur ; Questify la laisse donc vide, mais son absence est tout aussi révélatrice qu'une mauvaise falsification.\n\nL'auto-complétion démarre depuis les boutons de quête de la page des quêtes ou via le traitement automatique. Les quêtes sont complétées dans l'ordre de mise en file, sauf si la complétion simultanée est activée ci-dessus.\n\nL'auto-complétion des quêtes est le paramètre dangereux le plus risqué. Activez-le à vos propres risques."
                 },
                 questNotifications: {
                     title: "Notifications des quêtes",
@@ -8704,6 +8778,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hiddenQuestStatuses: {
                     description: "Groupes de statuts de quête à masquer.",
                     label: "Statuts de quête masqués"
+                },
+                autoEnrollQuests: {
+                    label: "Inscription automatique aux quêtes",
+                    description: "S'inscrire automatiquement aux quêtes disponibles éligibles lors des récupérations réussies pendant que Discord est ouvert."
+                },
+                autoCompleteQuests: {
+                    label: "Complétion automatique des quêtes",
+                    description: "S'inscrire automatiquement aux quêtes disponibles éligibles avec des types de tâches pris en charge et activés, puis les compléter, lors des récupérations réussies pendant que Discord est ouvert."
                 }
             },
             text: {
@@ -9661,12 +9743,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     mustURL: "Doit être une URL valide",
                     mustJSON: "Doit être un fichier JSON"
                 },
-                tryHljs: {
-                    label: "Solution de repli (Hljs)",
+                tryDiscordHighlighter: {
+                    label: "Essayer le surligneur de Discord",
                     description: "Utiliser le moteur de coloration et le thème par défaut de Discord (plus léger).",
                     never: "Jamais",
-                    secondary: "Préférer Shiki plutôt que Highlight.js",
-                    primary: "Préférer Highlight.js plutôt que Shiki",
+                    secondary: "Préférer Shiki au surligneur de Discord",
+                    primary: "Préférer le surligneur de Discord à Shiki",
                     always: "Toujours"
                 },
                 useDevIcon: {

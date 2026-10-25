@@ -1018,7 +1018,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 disableAnalytics: {
                     label: "Disable Analytics",
-                    description: "Disable Discord's tracking (analytics/'science'), metrics and Sentry crash reporting"
+                    description: "Block Discord's tracking analytics. Disable this if you want badges to track your progress (eg: hours streamed)."
                 },
                 disableStackDumping: {
                     description: "Print a native stack trace to the console when Discord crashes. Requires full restart."
@@ -1421,6 +1421,36 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 invalidColorFormat: "Invalid colour format for {{settingKey}}, make sure it's in the format 'R, G, B' or '#RRGGBB'",
                 invalidColorFormatFor: "Invalid colour format for {{key}}, use \"R, G, B\" or \"#RRGGBB\""
+            }
+        },
+        betterBackreading: {
+            name: "BetterBackreading",
+            description: "Improve backreading with earlier message loading and less rubberbanding.",
+            wholeNumber: "Enter a whole number from {{min}} to {{max}}.",
+            option: {
+                imageScrollMargin: {
+                    label: "Image Preload Distance",
+                    description: "How far ahead to load images, in pixels (300-3000)."
+                },
+                messageLoadBuffer: {
+                    label: "Message Load Buffer",
+                    description: "How far ahead to fetch more messages, in pixels (500-3000)."
+                },
+                useDiscordMessageCount: {
+                    label: "Use Discord's Dynamic Message Count",
+                    description: "Let Discord choose how many messages to fetch based on your window and chat settings."
+                },
+                messageCount: {
+                    label: "Custom Message Count",
+                    description: "How many messages to fetch per history request when the dynamic count is disabled (30-100)."
+                },
+                channelOpenScrollMode: {
+                    label: "Channel Opening Position",
+                    description: "Open unread channels at the saved position (or bottom), always the bottom, or defer to default unread behaviour.",
+                    default: "Discord Default",
+                    bottom: "Always Bottom",
+                    saved: "Saved Position"
+                }
             }
         },
         betterBanReasons: {
@@ -4519,6 +4549,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "Clone to {{name}}",
                 emoji: "Emoji",
                 sticker: "Sticker"
+            }
+        },
+        externalPlayer: {
+            name: "ExternalPlayer",
+            description: "Open videos and audio in an external media player like mpv.",
+            option: {
+                player: {
+                    label: "Player",
+                    description: "Which player to open media in."
+                },
+                openOnClick: {
+                    label: "Open On Click",
+                    description: "Open videos and audio in the player when you press play, instead of playing them in Discord."
+                },
+                path: {
+                    label: "Player Path",
+                    description: "Absolute path to the player executable. Leave empty to use the one on your PATH."
+                },
+                args: {
+                    label: "Player Arguments",
+                    description: "Extra arguments passed to the player. Wrap values with spaces in quotes."
+                }
+            },
+            context: {
+                openIn: "Open in {{player}}"
+            },
+            toast: {
+                alreadyOpen: "Already open in {{player}}.",
+                restartRequired: "Fully restart Discord to load ExternalPlayer.",
+                openFailed: "Failed to open the player."
+            },
+            status: {
+                paused: "Paused in {{player}}",
+                playing: "Playing in {{player}}"
             }
         },
         f8break: {
@@ -8216,7 +8280,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unmarkAsIgnored: "Unmark as Ignored",
                     stopAuto: "Stop Auto-Complete",
                     startAuto: "Start Auto-Complete",
-                    copyQuestID: "Copy Quest ID"
+                    copyQuestID: "Copy Quest ID",
+                    pauseAutoEnrollment: "Pause Auto-Enrollment",
+                    unpauseAutoEnrollment: "Unpause Auto-Enrollment",
+                    pauseAutoProcessing: "Pause Auto-Processing",
+                    unpauseAutoProcessing: "Unpause Auto-Processing"
                 }
             },
             button: {
@@ -8238,7 +8306,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 autoCompleteBroken: "Auto-Complete is broken. A fix will be implemented shortly.",
                 enrollmentFailed: "Enrollment in the {{questName}} Quest failed.",
-                enrollmentInNormalizequestnameQuest: "Enrollment in {{normalizeQuestName_quest}} Quest failed{{rateLimitSuffix}}."
+                enrollmentInNormalizequestnameQuest: "Enrollment in {{normalizeQuestName_quest}} Quest failed{{rateLimitSuffix}}.",
+                automationUnlocked: "Quest Automation Unlocked.",
+                automationLocked: "Quest Automation Locked."
             },
             notification: {
                 completed: {
@@ -8371,8 +8441,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     simultaneousTooltip: "By default, attempting to auto-complete multiple Quests will queue them to be completed in order.\n\nThis setting will alternatively allow all auto-complete Quests to run at the same time.\n\nThis setting will only apply to auto-completing Quests and relies on the auto-complete setting below.",
                     resumeInterrupted: "Resume interrupted auto-completions after a reload or restart:",
                     resumeInterruptedTooltip: "This setting will automatically resume any interrupted auto-completions caused by reloads or restarts, including requeuing Quests which had yet to start auto-completing but had been queued.",
+                    autoProcess: "Automatically process compatible Quests for auto-completion:",
+                    autoProcessTooltip: "Complete eligible, unclaimed, unignored, and unexpired Quests included by your reward and Quest type filters that are detected while Discord is running. Only supported task types enabled below are included.\n\nAutomatically enrolls in compatible Quests before queuing them for auto-completion. Waits for known rate-limit cooldowns. Stops on unknown errors, rate limits without a retry delay, or repeated enrollment failures.",
+                    autoEnroll: "Automatically enroll in compatible Quests.",
+                    autoEnrollTooltip: "Enroll in eligible, unclaimed, unignored, and unexpired Quests included by your reward and Quest type filters that are detected while Discord is running.\n\nEnrolls in Quests without queuing them for auto-completion. Waits for known rate-limit cooldowns. Stops on unknown errors, rate limits without a retry delay, or repeated enrollment failures.",
                     autoCompleteTypes: "Auto-complete specific Quest types:",
-                    autoCompleteTypesTooltip: "Watch Video on Mobile Quests will only work on mobile Quests which are enrollable on desktop. If a Quest is locked to enrollment on mobile, you must first enroll in it on your mobile device before returning to desktop and refreshing your Quests.\n\nAll video related Quests usually send a stack trace with the progress reports. This means Discord would know exactly which functions were called, and can therefore verify that their own functions initiated the progress. Questify erases this stack trace, but the absence of it will be just as telling as its presence.\n\nPlay on Desktop, Play on PlayStation, Play on Xbox, and Play Activity Quests are only available on official desktop clients due to a limitation imposed by Discord. 3rd party clients such as web extensions, Plextron, and others, do not support auto-completing these Quest types.\n\nAll game related Quests usually send a game fingerprint with the heartbeat reports. This means Discord can use data from tens of thousands of users to determine whether other users are likely using a real game or are emulating the executable. There is no reasonable method to spoof this value, so Questify leaves it blank, but the absence of it will be just as telling as poorly spoofing the value.\n\nAchievement in Activity Quests can only be auto-completed by completing them immediately. This method may be patched at any time.\n\nAuto-completing Quests is done by clicking their respective buttons on the Quests page. Quests will be auto-completed in the order they were queued, unless the simultaneous completion setting is enabled above.\n\nAuto-completing Quests is the riskiest dangerous setting available. Enable it at your own risk."
+                    autoCompleteTypesTooltip: "Watch Video on Mobile Quests will only work on mobile Quests which are enrollable on desktop. If a Quest is locked to enrollment on mobile, you must first enroll in it on your mobile device before returning to desktop and refreshing your Quests.\n\nAll video related Quests usually send a stack trace with the progress reports. This means Discord would know exactly which functions were called, and can therefore verify that their own functions initiated the progress. Questify erases this stack trace, but the absence of it will be just as telling as its presence.\n\nPlay on Desktop, Play on PlayStation, Play on Xbox, Play Activity, and Achievement in Activity Quests are only available on official desktop clients due to a limitation imposed by Discord. 3rd party clients such as web extensions, Plextron, and others, do not support auto-completing these Quest types.\n\nAll game related Quests usually send a game fingerprint with the heartbeat reports. This means Discord can use data from tens of thousands of users to determine whether other users are likely using a real game or are emulating the executable. There is no reasonable method to spoof this value, so Questify leaves it blank, but the absence of it will be just as telling as poorly spoofing the value.\n\nAuto-completion starts from Quest buttons on the Quests page or automatic processing. Quests are completed in the order they were queued, unless simultaneous completion is enabled above.\n\nAuto-completing Quests is the riskiest dangerous setting available. Enable it at your own risk."
                 },
                 questNotifications: {
                     title: "Quest Notifications",
@@ -8704,6 +8778,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hiddenQuestStatuses: {
                     description: "Quest status groups to hide.",
                     label: "Hidden Quest Statuses"
+                },
+                autoEnrollQuests: {
+                    label: "Auto Enroll Quests",
+                    description: "Automatically enroll in eligible available Quests on successful fetches while Discord is running."
+                },
+                autoCompleteQuests: {
+                    label: "Auto Complete Quests",
+                    description: "Automatically enroll in and complete eligible available Quests with supported and enabled task types on successful fetches while Discord is running."
                 }
             },
             text: {
@@ -9661,12 +9743,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     mustURL: "Must be a valid URL",
                     mustJSON: "Must be a JSON file"
                 },
-                tryHljs: {
-                    label: "Fallback to Hljs",
+                tryDiscordHighlighter: {
+                    label: "Try Discord's Highlighter",
                     description: "Use the more lightweight default Discord highlighter and theme.",
                     never: "Never",
-                    secondary: "Prefer Shiki instead of Highlight.js",
-                    primary: "Prefer Highlight.js instead of Shiki",
+                    secondary: "Prefer Shiki instead of Discord's highlighter",
+                    primary: "Prefer Discord's highlighter instead of Shiki",
                     always: "Always"
                 },
                 useDevIcon: {

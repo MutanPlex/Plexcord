@@ -1018,7 +1018,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 disableAnalytics: {
                     label: "Vô hiệu hóa phân tích",
-                    description: "Tắt tính năng theo dõi của Discord (phân tích/'khoa học'), số liệu và báo cáo sự cố Sentry"
+                    description: "Chặn phân tích theo dõi của Discord. Tắt tùy chọn này nếu bạn muốn huy hiệu theo dõi tiến độ của bạn (vd: số giờ phát trực tiếp)."
                 },
                 disableStackDumping: {
                     description: "In dấu vết ngăn xếp gốc ra bảng điều khiển khi Discord bị sập. Cần khởi động lại hoàn toàn."
@@ -1421,6 +1421,36 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 invalidColorFormat: "Định dạng màu không hợp lệ cho {{settingKey}}, hãy đảm bảo nó ở định dạng 'R, G, B' hoặc '#RRGGBB'",
                 invalidColorFormatFor: "Định dạng màu không hợp lệ cho {{key}}, hãy dùng \"R, G, B\" hoặc \"#RRGGBB\""
+            }
+        },
+        betterBackreading: {
+            name: "BetterBackreading",
+            description: "Cải thiện việc đọc lại tin nhắn cũ bằng cách tải sớm hơn và ít bị giật cuộn hơn.",
+            wholeNumber: "Nhập một số nguyên từ {{min}} đến {{max}}.",
+            option: {
+                imageScrollMargin: {
+                    label: "Khoảng cách tải trước hình ảnh",
+                    description: "Tải hình ảnh trước bao xa, tính bằng pixel (300-3000)."
+                },
+                messageLoadBuffer: {
+                    label: "Bộ đệm tải tin nhắn",
+                    description: "Tải thêm tin nhắn trước bao xa, tính bằng pixel (500-3000)."
+                },
+                useDiscordMessageCount: {
+                    label: "Dùng số lượng tin nhắn động của Discord",
+                    description: "Để Discord chọn số tin nhắn cần tải dựa trên cửa sổ và cài đặt trò chuyện của bạn."
+                },
+                messageCount: {
+                    label: "Số lượng tin nhắn tùy chỉnh",
+                    description: "Số tin nhắn cần tải cho mỗi yêu cầu lịch sử khi tắt số lượng động (30-100)."
+                },
+                channelOpenScrollMode: {
+                    label: "Vị trí khi mở kênh",
+                    description: "Mở kênh chưa đọc ở vị trí đã lưu (hoặc cuối cùng), luôn ở cuối, hoặc theo hành vi chưa đọc mặc định.",
+                    default: "Mặc định của Discord",
+                    bottom: "Luôn ở cuối",
+                    saved: "Vị trí đã lưu"
+                }
             }
         },
         betterBanReasons: {
@@ -4519,6 +4549,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "Sao chép sang {{name}}",
                 emoji: "Emoji",
                 sticker: "Nhãn dán"
+            }
+        },
+        externalPlayer: {
+            name: "ExternalPlayer",
+            description: "Mở video và âm thanh trong trình phát đa phương tiện bên ngoài như mpv.",
+            option: {
+                player: {
+                    label: "Trình phát",
+                    description: "Trình phát dùng để mở nội dung đa phương tiện."
+                },
+                openOnClick: {
+                    label: "Mở khi nhấp",
+                    description: "Mở video và âm thanh trong trình phát khi bạn nhấn phát, thay vì phát chúng trong Discord."
+                },
+                path: {
+                    label: "Đường dẫn trình phát",
+                    description: "Đường dẫn tuyệt đối đến tệp thực thi của trình phát. Để trống để dùng trình phát trong PATH."
+                },
+                args: {
+                    label: "Tham số trình phát",
+                    description: "Tham số bổ sung truyền cho trình phát. Đặt giá trị có dấu cách trong dấu ngoặc kép."
+                }
+            },
+            context: {
+                openIn: "Mở trong {{player}}"
+            },
+            toast: {
+                alreadyOpen: "Đã mở trong {{player}}.",
+                restartRequired: "Khởi động lại hoàn toàn Discord để tải ExternalPlayer.",
+                openFailed: "Không thể mở trình phát."
+            },
+            status: {
+                paused: "Đã tạm dừng trong {{player}}",
+                playing: "Đang phát trong {{player}}"
             }
         },
         f8break: {
@@ -8216,7 +8280,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unmarkAsIgnored: "Bỏ đánh dấu bỏ qua",
                     stopAuto: "Dừng tự động hoàn thành",
                     startAuto: "Bắt đầu tự động hoàn thành",
-                    copyQuestID: "Sao chép ID Quest"
+                    copyQuestID: "Sao chép ID Quest",
+                    pauseAutoEnrollment: "Tạm dừng tự động đăng ký",
+                    unpauseAutoEnrollment: "Tiếp tục tự động đăng ký",
+                    pauseAutoProcessing: "Tạm dừng tự động xử lý",
+                    unpauseAutoProcessing: "Tiếp tục tự động xử lý"
                 }
             },
             button: {
@@ -8238,7 +8306,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 autoCompleteBroken: "Tự động hoàn thành đang bị lỗi. Bản sửa sẽ sớm được phát hành.",
                 enrollmentFailed: "Đăng ký Quest {{questName}} thất bại.",
-                enrollmentInNormalizequestnameQuest: "Đăng ký nhiệm vụ {{normalizeQuestName_quest}} thất bại{{rateLimitSuffix}}."
+                enrollmentInNormalizequestnameQuest: "Đăng ký nhiệm vụ {{normalizeQuestName_quest}} thất bại{{rateLimitSuffix}}.",
+                automationUnlocked: "Đã mở khóa tự động hóa Quest.",
+                automationLocked: "Đã khóa tự động hóa Quest."
             },
             notification: {
                 completed: {
@@ -8371,8 +8441,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     simultaneousTooltip: "Theo mặc định, khi tự động hoàn thành nhiều Quest, chúng sẽ được xếp hàng để hoàn thành theo thứ tự.\n\nCài đặt này cho phép tất cả Quest tự động hoàn thành chạy cùng lúc.\n\nCài đặt này chỉ áp dụng cho tự động hoàn thành và phụ thuộc vào cài đặt tự động hoàn thành bên dưới.",
                     resumeInterrupted: "Tiếp tục các lần tự động hoàn thành bị gián đoạn sau khi tải lại hoặc khởi động lại:",
                     resumeInterruptedTooltip: "Cài đặt này sẽ tự động tiếp tục các lần tự động hoàn thành bị gián đoạn do tải lại hoặc khởi động lại, kể cả xếp hàng lại các Quest đang chờ nhưng chưa bắt đầu.",
+                    autoProcess: "Tự động xử lý các Quest tương thích để tự động hoàn thành:",
+                    autoProcessTooltip: "Hoàn thành các Quest đủ điều kiện, chưa nhận, không bị bỏ qua và chưa hết hạn nằm trong bộ lọc phần thưởng và loại Quest của bạn, được phát hiện khi Discord đang chạy. Chỉ bao gồm các loại nhiệm vụ được hỗ trợ đã bật bên dưới.\n\nTự động đăng ký các Quest tương thích trước khi đưa chúng vào hàng đợi tự động hoàn thành. Chờ hết thời gian giới hạn tốc độ đã biết. Dừng khi gặp lỗi không xác định, giới hạn tốc độ không có thời gian thử lại hoặc đăng ký thất bại nhiều lần.",
+                    autoEnroll: "Tự động đăng ký các Quest tương thích.",
+                    autoEnrollTooltip: "Đăng ký các Quest đủ điều kiện, chưa nhận, không bị bỏ qua và chưa hết hạn nằm trong bộ lọc phần thưởng và loại Quest của bạn, được phát hiện khi Discord đang chạy.\n\nĐăng ký Quest mà không đưa vào hàng đợi tự động hoàn thành. Chờ hết thời gian giới hạn tốc độ đã biết. Dừng khi gặp lỗi không xác định, giới hạn tốc độ không có thời gian thử lại hoặc đăng ký thất bại nhiều lần.",
                     autoCompleteTypes: "Tự động hoàn thành các loại Quest cụ thể:",
-                    autoCompleteTypesTooltip: "Quest \"Xem video trên điện thoại\" chỉ hoạt động với Quest điện thoại có thể đăng ký trên máy tính. Nếu Quest chỉ cho đăng ký trên điện thoại, bạn phải đăng ký trên điện thoại trước rồi quay lại máy tính và làm mới Quest.\n\nTất cả Quest liên quan đến video thường gửi stack trace kèm báo cáo tiến độ. Như vậy Discord biết chính xác hàm nào đã được gọi và có thể xác minh tiến độ do hàm của họ khởi tạo. Questify xóa stack trace này, nhưng việc thiếu nó cũng dễ lộ như khi có nó.\n\nCác Quest \"Chơi trên máy tính\", \"Chơi trên PlayStation\", \"Chơi trên Xbox\" và \"Chơi hoạt động\" chỉ khả dụng trên ứng dụng máy tính chính thức do giới hạn của Discord. Ứng dụng bên thứ ba như tiện ích trình duyệt, Plextron và các ứng dụng khác không hỗ trợ tự động hoàn thành các loại này.\n\nTất cả Quest liên quan đến trò chơi thường gửi dấu vân tay trò chơi kèm báo cáo heartbeat. Như vậy Discord có thể dùng dữ liệu từ hàng chục nghìn người dùng để xác định người khác có thật sự chạy trò chơi hay đang giả lập tệp thực thi. Không có cách hợp lý để giả mạo giá trị này nên Questify để trống, nhưng việc thiếu nó cũng dễ lộ như giả mạo kém.\n\nQuest \"Thành tựu trong hoạt động\" chỉ có thể tự động hoàn thành bằng cách hoàn thành ngay lập tức. Phương pháp này có thể bị vá bất cứ lúc nào.\n\nTự động hoàn thành được thực hiện bằng cách nhấp vào nút tương ứng trên trang Quest. Quest sẽ được hoàn thành theo thứ tự xếp hàng, trừ khi bật hoàn thành đồng thời ở trên.\n\nTự động hoàn thành Quest là cài đặt nguy hiểm rủi ro nhất. Hãy bật nó với rủi ro của riêng bạn."
+                    autoCompleteTypesTooltip: "Quest \"Xem video trên điện thoại\" chỉ hoạt động với Quest điện thoại có thể đăng ký trên máy tính. Nếu Quest chỉ cho đăng ký trên điện thoại, bạn phải đăng ký trên điện thoại trước rồi quay lại máy tính và làm mới Quest.\n\nTất cả Quest liên quan đến video thường gửi stack trace kèm báo cáo tiến độ. Như vậy Discord biết chính xác hàm nào đã được gọi và có thể xác minh tiến độ do hàm của họ khởi tạo. Questify xóa stack trace này, nhưng việc thiếu nó cũng dễ lộ như khi có nó.\n\nCác Quest \"Chơi trên máy tính\", \"Chơi trên PlayStation\", \"Chơi trên Xbox\", \"Chơi hoạt động\" và \"Thành tựu trong hoạt động\" chỉ khả dụng trên ứng dụng máy tính chính thức do giới hạn của Discord. Ứng dụng bên thứ ba như tiện ích trình duyệt, Plextron và các ứng dụng khác không hỗ trợ tự động hoàn thành các loại này.\n\nTất cả Quest liên quan đến trò chơi thường gửi dấu vân tay trò chơi kèm báo cáo heartbeat. Như vậy Discord có thể dùng dữ liệu từ hàng chục nghìn người dùng để xác định người khác có thật sự chạy trò chơi hay đang giả lập tệp thực thi. Không có cách hợp lý để giả mạo giá trị này nên Questify để trống, nhưng việc thiếu nó cũng dễ lộ như giả mạo kém.\n\nTự động hoàn thành bắt đầu từ các nút Quest trên trang Quest hoặc từ xử lý tự động. Quest được hoàn thành theo thứ tự xếp hàng, trừ khi bật hoàn thành đồng thời ở trên.\n\nTự động hoàn thành Quest là cài đặt nguy hiểm rủi ro nhất. Hãy bật nó với rủi ro của riêng bạn."
                 },
                 questNotifications: {
                     title: "Thông báo Quest",
@@ -8704,6 +8778,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hiddenQuestStatuses: {
                     description: "Các nhóm trạng thái nhiệm vụ sẽ ẩn.",
                     label: "Trạng thái nhiệm vụ đã ẩn"
+                },
+                autoEnrollQuests: {
+                    label: "Tự động đăng ký Quest",
+                    description: "Tự động đăng ký các Quest khả dụng đủ điều kiện khi tải thành công trong lúc Discord đang chạy."
+                },
+                autoCompleteQuests: {
+                    label: "Tự động hoàn thành Quest",
+                    description: "Tự động đăng ký và hoàn thành các Quest khả dụng đủ điều kiện có loại nhiệm vụ được hỗ trợ và đã bật khi tải thành công trong lúc Discord đang chạy."
                 }
             },
             text: {
@@ -9661,12 +9743,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     mustURL: "Phải là một URL hợp lệ",
                     mustJSON: "Phải là tệp JSON"
                 },
-                tryHljs: {
-                    label: "Dự phòng cho Hljs",
+                tryDiscordHighlighter: {
+                    label: "Thử trình tô sáng của Discord",
                     description: "Sử dụng chủ đề và công cụ đánh dấu Discord mặc định nhẹ hơn.",
                     never: "Không bao giờ",
-                    secondary: "Thích Shiki thay vì Highlight.js",
-                    primary: "Thích Highlight.js thay vì Shiki",
+                    secondary: "Ưu tiên Shiki thay vì trình tô sáng của Discord",
+                    primary: "Ưu tiên trình tô sáng của Discord thay vì Shiki",
                     always: "Luôn luôn"
                 },
                 useDevIcon: {

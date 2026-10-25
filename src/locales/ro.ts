@@ -1018,7 +1018,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 disableAnalytics: {
                     label: "Dezactivează Analiticele",
-                    description: "Dezactivează urmărirea Discord (analytics/'science'), metricile și raportarea erorilor Sentry"
+                    description: "Blochează analizele de urmărire ale Discord. Dezactivează asta dacă vrei ca insignele să îți urmărească progresul (ex.: ore de streaming)."
                 },
                 disableStackDumping: {
                     description: "Afișează o urmă de stivă nativă în consolă când Discord se blochează. Necesită repornire completă."
@@ -1421,6 +1421,36 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 invalidColorFormat: "Format de culoare invalid pentru {{settingKey}}, asigură-te că este 'R, G, B' sau '#RRGGBB'",
                 invalidColorFormatFor: "Format de culoare invalid pentru {{key}}, folosește \"R, G, B\" sau \"#RRGGBB\""
+            }
+        },
+        betterBackreading: {
+            name: "BetterBackreading",
+            description: "Îmbunătățește citirea mesajelor vechi prin încărcare mai timpurie și mai puține salturi.",
+            wholeNumber: "Introdu un număr întreg între {{min}} și {{max}}.",
+            option: {
+                imageScrollMargin: {
+                    label: "Distanța de preîncărcare a imaginilor",
+                    description: "Cât de departe în avans se încarcă imaginile, în pixeli (300-3000)."
+                },
+                messageLoadBuffer: {
+                    label: "Buffer de încărcare a mesajelor",
+                    description: "Cât de departe în avans se preiau mai multe mesaje, în pixeli (500-3000)."
+                },
+                useDiscordMessageCount: {
+                    label: "Folosește numărul dinamic de mesaje al Discord",
+                    description: "Lasă Discord să aleagă câte mesaje să preia în funcție de fereastră și setările de chat."
+                },
+                messageCount: {
+                    label: "Număr personalizat de mesaje",
+                    description: "Câte mesaje să se preia per cerere de istoric când numărul dinamic este dezactivat (30-100)."
+                },
+                channelOpenScrollMode: {
+                    label: "Poziția la deschiderea canalului",
+                    description: "Deschide canalele necitite la poziția salvată (sau jos), mereu jos, sau folosește comportamentul implicit pentru necitite.",
+                    default: "Implicit Discord",
+                    bottom: "Mereu jos",
+                    saved: "Poziție salvată"
+                }
             }
         },
         betterBanReasons: {
@@ -4519,6 +4549,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "Clonează în {{name}}",
                 emoji: "Emoji",
                 sticker: "Autocolant"
+            }
+        },
+        externalPlayer: {
+            name: "ExternalPlayer",
+            description: "Deschide videoclipurile și audio într-un player media extern, precum mpv.",
+            option: {
+                player: {
+                    label: "Player",
+                    description: "În ce player să se deschidă fișierele media."
+                },
+                openOnClick: {
+                    label: "Deschide la clic",
+                    description: "Deschide videoclipurile și audio în player când apeși redare, în loc să le redai în Discord."
+                },
+                path: {
+                    label: "Calea playerului",
+                    description: "Calea absolută către executabilul playerului. Lasă gol pentru a-l folosi pe cel din PATH."
+                },
+                args: {
+                    label: "Argumentele playerului",
+                    description: "Argumente suplimentare transmise playerului. Pune între ghilimele valorile cu spații."
+                }
+            },
+            context: {
+                openIn: "Deschide în {{player}}"
+            },
+            toast: {
+                alreadyOpen: "Deja deschis în {{player}}.",
+                restartRequired: "Repornește complet Discord pentru a încărca ExternalPlayer.",
+                openFailed: "Nu s-a putut deschide playerul."
+            },
+            status: {
+                paused: "Pus pe pauză în {{player}}",
+                playing: "Se redă în {{player}}"
             }
         },
         f8break: {
@@ -8216,7 +8280,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unmarkAsIgnored: "Nu mai ignora",
                     stopAuto: "Oprește finalizarea automată",
                     startAuto: "Pornește finalizarea automată",
-                    copyQuestID: "Copiază ID-ul Quest-ului"
+                    copyQuestID: "Copiază ID-ul Quest-ului",
+                    pauseAutoEnrollment: "Întrerupe înscrierea automată",
+                    unpauseAutoEnrollment: "Reia înscrierea automată",
+                    pauseAutoProcessing: "Întrerupe procesarea automată",
+                    unpauseAutoProcessing: "Reia procesarea automată"
                 }
             },
             button: {
@@ -8238,7 +8306,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 autoCompleteBroken: "Finalizarea automată nu funcționează. O remediere va apărea în curând.",
                 enrollmentFailed: "Înscrierea în Quest-ul {{questName}} a eșuat.",
-                enrollmentInNormalizequestnameQuest: "Înscrierea în misiunea {{normalizeQuestName_quest}} a eșuat{{rateLimitSuffix}}."
+                enrollmentInNormalizequestnameQuest: "Înscrierea în misiunea {{normalizeQuestName_quest}} a eșuat{{rateLimitSuffix}}.",
+                automationUnlocked: "Automatizarea Quest-urilor a fost deblocată.",
+                automationLocked: "Automatizarea Quest-urilor a fost blocată."
             },
             notification: {
                 completed: {
@@ -8371,8 +8441,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     simultaneousTooltip: "Implicit, finalizarea automată a mai multor Quest-uri le pune într-o coadă pentru a fi finalizate în ordine.\n\nAceastă setare permite în schimb ca toate Quest-urile cu finalizare automată să ruleze în același timp.\n\nAceastă setare se aplică doar finalizării automate și depinde de setarea de finalizare automată de mai jos.",
                     resumeInterrupted: "Reia finalizările automate întrerupte după reîncărcare sau repornire:",
                     resumeInterruptedTooltip: "Această setare reia automat finalizările automate întrerupte de reîncărcări sau reporniri, inclusiv repunerea în coadă a Quest-urilor care erau în coadă dar nu începuseră încă.",
+                    autoProcess: "Procesează automat Quest-urile compatibile pentru finalizare automată:",
+                    autoProcessTooltip: "Finalizează Quest-urile eligibile, nerevendicate, neignorate și neexpirate incluse de filtrele tale de recompensă și tip de Quest, detectate cât timp Discord rulează. Sunt incluse doar tipurile de sarcini acceptate activate mai jos.\n\nSe înscrie automat în Quest-urile compatibile înainte de a le pune în coadă pentru finalizare automată. Așteaptă perioadele cunoscute de limitare a ratei. Se oprește la erori necunoscute, limitări fără timp de reîncercare sau eșecuri repetate de înscriere.",
+                    autoEnroll: "Înscrie-te automat în Quest-urile compatibile.",
+                    autoEnrollTooltip: "Se înscrie în Quest-urile eligibile, nerevendicate, neignorate și neexpirate incluse de filtrele tale de recompensă și tip de Quest, detectate cât timp Discord rulează.\n\nSe înscrie în Quest-uri fără a le pune în coadă pentru finalizare automată. Așteaptă perioadele cunoscute de limitare a ratei. Se oprește la erori necunoscute, limitări fără timp de reîncercare sau eșecuri repetate de înscriere.",
                     autoCompleteTypes: "Finalizează automat anumite tipuri de Quest:",
-                    autoCompleteTypesTooltip: "Quest-urile \"Urmărește video pe mobil\" funcționează doar cu Quest-uri mobile la care te poți înscrie de pe desktop. Dacă înscrierea e limitată la mobil, înscrie-te mai întâi de pe dispozitivul mobil, apoi revino pe desktop și reîmprospătează Quest-urile.\n\nToate Quest-urile video trimit de obicei un stack trace împreună cu rapoartele de progres. Astfel Discord știe exact ce funcții au fost apelate și poate verifica dacă progresul a fost inițiat de propriile funcții. Questify șterge acest stack trace, dar absența lui este la fel de grăitoare ca prezența.\n\nQuest-urile \"Joacă pe desktop\", \"Joacă pe PlayStation\", \"Joacă pe Xbox\" și \"Joacă activitate\" sunt disponibile doar în clienții desktop oficiali, din cauza unei limitări impuse de Discord. Clienții terți precum extensiile web, Plextron și alții nu acceptă finalizarea automată a acestor tipuri.\n\nToate Quest-urile de jocuri trimit de obicei o amprentă a jocului împreună cu rapoartele heartbeat. Astfel Discord poate folosi datele a zeci de mii de utilizatori pentru a stabili dacă alții folosesc probabil un joc real sau emulează executabilul. Nu există o metodă rezonabilă de a falsifica această valoare, așa că Questify o lasă goală, dar absența ei este la fel de grăitoare ca o falsificare proastă.\n\nQuest-urile \"Realizare în activitate\" pot fi finalizate automat doar finalizându-le imediat. Această metodă poate fi corectată oricând.\n\nFinalizarea automată se face apăsând butoanele respective de pe pagina Quest-urilor. Quest-urile vor fi finalizate în ordinea în care au fost puse în coadă, cu excepția cazului în care finalizarea simultană este activată mai sus.\n\nFinalizarea automată a Quest-urilor este cea mai riscantă setare periculoasă. Activeaz-o pe propriul risc."
+                    autoCompleteTypesTooltip: "Quest-urile \"Urmărește video pe mobil\" funcționează doar cu Quest-uri mobile la care te poți înscrie de pe desktop. Dacă înscrierea e limitată la mobil, înscrie-te mai întâi de pe dispozitivul mobil, apoi revino pe desktop și reîmprospătează Quest-urile.\n\nToate Quest-urile video trimit de obicei un stack trace împreună cu rapoartele de progres. Astfel Discord știe exact ce funcții au fost apelate și poate verifica dacă progresul a fost inițiat de propriile funcții. Questify șterge acest stack trace, dar absența lui este la fel de grăitoare ca prezența.\n\nQuest-urile \"Joacă pe desktop\", \"Joacă pe PlayStation\", \"Joacă pe Xbox\", \"Joacă activitate\" și \"Realizare în activitate\" sunt disponibile doar în clienții desktop oficiali, din cauza unei limitări impuse de Discord. Clienții terți precum extensiile web, Plextron și alții nu acceptă finalizarea automată a acestor tipuri.\n\nToate Quest-urile de jocuri trimit de obicei o amprentă a jocului împreună cu rapoartele heartbeat. Astfel Discord poate folosi datele a zeci de mii de utilizatori pentru a stabili dacă alții folosesc probabil un joc real sau emulează executabilul. Nu există o metodă rezonabilă de a falsifica această valoare, așa că Questify o lasă goală, dar absența ei este la fel de grăitoare ca o falsificare proastă.\n\nFinalizarea automată pornește de la butoanele Quest de pe pagina Quest-urilor sau de la procesarea automată. Quest-urile sunt finalizate în ordinea în care au fost puse în coadă, cu excepția cazului în care finalizarea simultană este activată mai sus.\n\nFinalizarea automată a Quest-urilor este cea mai riscantă setare periculoasă. Activeaz-o pe propriul risc."
                 },
                 questNotifications: {
                     title: "Notificări Quest",
@@ -8704,6 +8778,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hiddenQuestStatuses: {
                     description: "Grupuri de stări ale misiunilor de ascuns.",
                     label: "Stări de misiune ascunse"
+                },
+                autoEnrollQuests: {
+                    label: "Înscriere automată în Quest-uri",
+                    description: "Înscrie-te automat în Quest-urile disponibile eligibile la preluările reușite, cât timp Discord rulează."
+                },
+                autoCompleteQuests: {
+                    label: "Finalizare automată a Quest-urilor",
+                    description: "Înscrie-te automat și finalizează Quest-urile disponibile eligibile cu tipuri de sarcini acceptate și activate la preluările reușite, cât timp Discord rulează."
                 }
             },
             text: {
@@ -9661,12 +9743,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     mustURL: "Trebuie să fie un URL valid",
                     mustJSON: "Trebuie să fie un fișier JSON"
                 },
-                tryHljs: {
-                    label: "Rezervă la Hljs",
+                tryDiscordHighlighter: {
+                    label: "Încearcă evidențiatorul Discord",
                     description: "Folosește stilul implicit Discord dacă Shiki nu e necesar.",
                     never: "Niciodată",
-                    secondary: "Preferă Shiki în loc de Highlight.js",
-                    primary: "Preferă Highlight.js în loc de Shiki",
+                    secondary: "Preferă Shiki în locul evidențiatorului Discord",
+                    primary: "Preferă evidențiatorul Discord în locul Shiki",
                     always: "Întotdeauna"
                 },
                 useDevIcon: {

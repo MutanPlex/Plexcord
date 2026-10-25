@@ -6,6 +6,7 @@
  */
 
 import { plugin, t } from "@api/i18n";
+
 import { cacheFile, getCachedFile } from "./cache";
 
 const workerCode = `

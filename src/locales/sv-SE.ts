@@ -1018,7 +1018,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 disableAnalytics: {
                     label: "Inaktivera Analytics",
-                    description: "Inaktivera Discords spårning (analytics/'vetenskap'), mätvärden och Sentry-kraschrapportering"
+                    description: "Blockerar Discords spårningsanalyser. Stäng av detta om du vill att märken ska spåra dina framsteg (t.ex. streamade timmar)."
                 },
                 disableStackDumping: {
                     description: "Skriv ut en inbyggd stackspårning i konsolen när Discord kraschar. Kräver fullständig omstart."
@@ -1421,6 +1421,36 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 invalidColorFormat: "Ogiltigt färgformat för {{settingKey}}, se till att det är i formatet \"R, G, B\" eller \"#RRGGBB\"",
                 invalidColorFormatFor: "Ogiltigt färgformat för {{key}}, använd \"R, G, B\" eller \"#RRGGBB\""
+            }
+        },
+        betterBackreading: {
+            name: "BetterBackreading",
+            description: "Förbättrar läsning bakåt med tidigare inläsning av meddelanden och mindre hopp.",
+            wholeNumber: "Ange ett heltal från {{min}} till {{max}}.",
+            option: {
+                imageScrollMargin: {
+                    label: "Förinläsningsavstånd för bilder",
+                    description: "Hur långt i förväg bilder läses in, i pixlar (300-3000)."
+                },
+                messageLoadBuffer: {
+                    label: "Inläsningsbuffert för meddelanden",
+                    description: "Hur långt i förväg fler meddelanden hämtas, i pixlar (500-3000)."
+                },
+                useDiscordMessageCount: {
+                    label: "Använd Discords dynamiska meddelandeantal",
+                    description: "Låt Discord välja hur många meddelanden som hämtas utifrån ditt fönster och dina chattinställningar."
+                },
+                messageCount: {
+                    label: "Anpassat meddelandeantal",
+                    description: "Hur många meddelanden som hämtas per historikbegäran när det dynamiska antalet är avstängt (30-100)."
+                },
+                channelOpenScrollMode: {
+                    label: "Position vid öppning av kanal",
+                    description: "Öppna olästa kanaler på den sparade positionen (eller längst ned), alltid längst ned, eller använd standardbeteendet för olästa.",
+                    default: "Discord-standard",
+                    bottom: "Alltid längst ned",
+                    saved: "Sparad position"
+                }
             }
         },
         betterBanReasons: {
@@ -4519,6 +4549,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "Klona till {{name}}",
                 emoji: "Emoji",
                 sticker: "Klistermärke"
+            }
+        },
+        externalPlayer: {
+            name: "ExternalPlayer",
+            description: "Öppna videor och ljud i en extern mediaspelare som mpv.",
+            option: {
+                player: {
+                    label: "Spelare",
+                    description: "Vilken spelare media ska öppnas i."
+                },
+                openOnClick: {
+                    label: "Öppna vid klick",
+                    description: "Öppna videor och ljud i spelaren när du trycker på spela upp, i stället för att spela dem i Discord."
+                },
+                path: {
+                    label: "Sökväg till spelare",
+                    description: "Absolut sökväg till spelarens körbara fil. Lämna tomt för att använda den i din PATH."
+                },
+                args: {
+                    label: "Spelarargument",
+                    description: "Extra argument som skickas till spelaren. Omge värden med mellanslag med citattecken."
+                }
+            },
+            context: {
+                openIn: "Öppna i {{player}}"
+            },
+            toast: {
+                alreadyOpen: "Redan öppen i {{player}}.",
+                restartRequired: "Starta om Discord helt för att läsa in ExternalPlayer.",
+                openFailed: "Det gick inte att öppna spelaren."
+            },
+            status: {
+                paused: "Pausad i {{player}}",
+                playing: "Spelas i {{player}}"
             }
         },
         f8break: {
@@ -8216,7 +8280,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unmarkAsIgnored: "Sluta ignorera",
                     stopAuto: "Stoppa automatisk slutförning",
                     startAuto: "Starta automatisk slutförning",
-                    copyQuestID: "Kopiera Quest-ID"
+                    copyQuestID: "Kopiera Quest-ID",
+                    pauseAutoEnrollment: "Pausa automatisk anmälan",
+                    unpauseAutoEnrollment: "Återuppta automatisk anmälan",
+                    pauseAutoProcessing: "Pausa automatisk bearbetning",
+                    unpauseAutoProcessing: "Återuppta automatisk bearbetning"
                 }
             },
             button: {
@@ -8238,7 +8306,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 autoCompleteBroken: "Automatisk slutförning fungerar inte. En åtgärd kommer snart.",
                 enrollmentFailed: "Anmälan till Questen {{questName}} misslyckades.",
-                enrollmentInNormalizequestnameQuest: "Anmälan till uppdraget {{normalizeQuestName_quest}} misslyckades{{rateLimitSuffix}}."
+                enrollmentInNormalizequestnameQuest: "Anmälan till uppdraget {{normalizeQuestName_quest}} misslyckades{{rateLimitSuffix}}.",
+                automationUnlocked: "Quest-automatisering upplåst.",
+                automationLocked: "Quest-automatisering låst."
             },
             notification: {
                 completed: {
@@ -8371,8 +8441,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     simultaneousTooltip: "Som standard köas flera Quests för automatisk slutförning och slutförs i ordning.\n\nDenna inställning låter i stället alla automatiskt slutförda Quests köras samtidigt.\n\nDenna inställning gäller bara automatisk slutförning och beror på inställningen för automatisk slutförning nedan.",
                     resumeInterrupted: "Återuppta avbrutna automatiska slutförningar efter omladdning eller omstart:",
                     resumeInterruptedTooltip: "Denna inställning återupptar automatiskt slutförningar som avbrutits av omladdningar eller omstarter, inklusive att köa om Quests som stod i kö men ännu inte hade startat.",
+                    autoProcess: "Bearbeta kompatibla Quests automatiskt för automatisk slutförning:",
+                    autoProcessTooltip: "Slutför berättigade, ej inlösta, ej ignorerade och ej utgångna Quests som omfattas av dina belönings- och Quest-typfilter och som upptäcks medan Discord körs. Endast stödda uppgiftstyper som är påslagna nedan tas med.\n\nAnmäler sig automatiskt till kompatibla Quests innan de köas för automatisk slutförning. Väntar ut kända rate limit-pauser. Stoppar vid okända fel, rate limits utan väntetid eller upprepade anmälningsfel.",
+                    autoEnroll: "Anmäl automatiskt till kompatibla Quests.",
+                    autoEnrollTooltip: "Anmäler sig till berättigade, ej inlösta, ej ignorerade och ej utgångna Quests som omfattas av dina belönings- och Quest-typfilter och som upptäcks medan Discord körs.\n\nAnmäler sig till Quests utan att köa dem för automatisk slutförning. Väntar ut kända rate limit-pauser. Stoppar vid okända fel, rate limits utan väntetid eller upprepade anmälningsfel.",
                     autoCompleteTypes: "Slutför vissa Quest-typer automatiskt:",
-                    autoCompleteTypesTooltip: "\"Titta på video i mobilen\"-Quests fungerar bara för mobila Quests som man kan anmäla sig till på dator. Om anmälan är begränsad till mobil måste du först anmäla dig i mobilen innan du återvänder till datorn och uppdaterar dina Quests.\n\nAlla videorelaterade Quests skickar normalt en stack trace med framstegsrapporterna. Discord vet alltså exakt vilka funktioner som anropades och kan kontrollera att deras egna funktioner startade framstegen. Questify raderar denna stack trace, men frånvaron avslöjar lika mycket som närvaron.\n\n\"Spela på dator\", \"Spela på PlayStation\", \"Spela på Xbox\" och \"Spela aktivitet\"-Quests är bara tillgängliga i officiella datorklienter på grund av en begränsning från Discord. Tredjepartsklienter som webbtillägg, Plextron och andra stöder inte automatisk slutförning av dessa typer.\n\nAlla spelrelaterade Quests skickar normalt ett spelfingeravtryck med heartbeat-rapporterna. Discord kan alltså använda data från tiotusentals användare för att avgöra om andra troligen använder ett riktigt spel eller emulerar den körbara filen. Det finns inget rimligt sätt att förfalska värdet, så Questify lämnar det tomt, men frånvaron avslöjar lika mycket som en dålig förfalskning.\n\n\"Prestation i aktivitet\"-Quests kan bara slutföras automatiskt genom att slutföras omedelbart. Metoden kan täppas till när som helst.\n\nAutomatisk slutförning sker genom att klicka på respektive knappar på Quest-sidan. Quests slutförs i den ordning de köades, om inte samtidig slutförning är påslagen ovan.\n\nAutomatisk slutförning av Quests är den mest riskabla farliga inställningen. Slå på den på egen risk."
+                    autoCompleteTypesTooltip: "\"Titta på video i mobilen\"-Quests fungerar bara för mobila Quests som man kan anmäla sig till på dator. Om anmälan är begränsad till mobil måste du först anmäla dig i mobilen innan du återvänder till datorn och uppdaterar dina Quests.\n\nAlla videorelaterade Quests skickar normalt en stack trace med framstegsrapporterna. Discord vet alltså exakt vilka funktioner som anropades och kan kontrollera att deras egna funktioner startade framstegen. Questify raderar denna stack trace, men frånvaron avslöjar lika mycket som närvaron.\n\n\"Spela på dator\", \"Spela på PlayStation\", \"Spela på Xbox\", \"Spela aktivitet\" och \"Prestation i aktivitet\"-Quests är bara tillgängliga i officiella datorklienter på grund av en begränsning från Discord. Tredjepartsklienter som webbtillägg, Plextron och andra stöder inte automatisk slutförning av dessa typer.\n\nAlla spelrelaterade Quests skickar normalt ett spelfingeravtryck med heartbeat-rapporterna. Discord kan alltså använda data från tiotusentals användare för att avgöra om andra troligen använder ett riktigt spel eller emulerar den körbara filen. Det finns inget rimligt sätt att förfalska värdet, så Questify lämnar det tomt, men frånvaron avslöjar lika mycket som en dålig förfalskning.\n\nAutomatisk slutförning startar från Quest-knapparna på Quest-sidan eller från automatisk bearbetning. Quests slutförs i den ordning de köades, om inte samtidig slutförning är påslagen ovan.\n\nAutomatisk slutförning av Quests är den mest riskabla farliga inställningen. Slå på den på egen risk."
                 },
                 questNotifications: {
                     title: "Quest-aviseringar",
@@ -8704,6 +8778,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hiddenQuestStatuses: {
                     description: "Uppdragsstatusgrupper som ska döljas.",
                     label: "Dolda uppdragsstatusar"
+                },
+                autoEnrollQuests: {
+                    label: "Anmäl till Quests automatiskt",
+                    description: "Anmäl automatiskt till berättigade tillgängliga Quests vid lyckade hämtningar medan Discord körs."
+                },
+                autoCompleteQuests: {
+                    label: "Slutför Quests automatiskt",
+                    description: "Anmäl automatiskt till och slutför berättigade tillgängliga Quests med stödda och påslagna uppgiftstyper vid lyckade hämtningar medan Discord körs."
                 }
             },
             text: {
@@ -9661,12 +9743,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     mustURL: "Måste vara en giltig webbadress",
                     mustJSON: "Måste vara en JSON-fil"
                 },
-                tryHljs: {
-                    label: "Fallback till Hljs",
+                tryDiscordHighlighter: {
+                    label: "Prova Discords highlighter",
                     description: "Använd den mer lätta standardmarkeringen och temat Discord.",
                     never: "Aldrig",
-                    secondary: "Föredrar Shiki istället för Highlight.js",
-                    primary: "Föredrar Highlight.js istället för Shiki",
+                    secondary: "Föredra Shiki framför Discords highlighter",
+                    primary: "Föredra Discords highlighter framför Shiki",
                     always: "Alltid"
                 },
                 useDevIcon: {

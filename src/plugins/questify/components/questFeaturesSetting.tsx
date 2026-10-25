@@ -11,7 +11,7 @@ import type { JSX } from "react";
 
 import { getQuestifySettings, useQuestifySettings } from "../settings/access";
 import { resetDangerousSettings } from "../settings/dangerous";
-import { autoCompleteQuestTaskTypes, defaultAutoCompleteQuestTypes, isDesktopCompatible } from "../settings/def";
+import { autoCompleteQuestTaskTypes, defaultAutoCompleteQuestTypes, isAutoCompleteCompatible } from "../settings/def";
 import { validateIgnoredQuests } from "../settings/ignoredQuests";
 import { Alerts, q } from "../utils/ui";
 import { ManaButton, type ManaSelectOption, SettingsCard, SettingsDescription, SettingsHeader, SettingsNotice, SettingsParagraph, SettingsSelect, SettingsSubheader, SettingsSubtleSwitch } from "./shared";
@@ -26,6 +26,8 @@ type QuestDisableSettingKey =
     | "disableSponsoredBanner";
 
 type QuestModifySettingKey =
+    | "autoEnrollQuests"
+    | "autoCompleteQuests"
     | "autoCompleteQuestsSimultaneously"
     | "resumeInterruptedQuests"
     | "completeVideoQuestsQuicker"
@@ -69,7 +71,7 @@ function getAutoCompleteQuestTypeManaOptions(): ManaSelectOption[] {
         id: String(questType),
         label: labels[questType],
         value: String(questType),
-        disabled: !isDesktopCompatible(questType),
+        disabled: !isAutoCompleteCompatible(questType),
     }));
 }
 
@@ -86,6 +88,9 @@ export function QuestFeaturesSetting(): JSX.Element {
         "resumeInterruptedQuests",
         "allowChangingDangerousSettings",
         "makeMobileVideoQuestsDesktopCompatible",
+        "usedKonamiCode",
+        "autoEnrollQuests",
+        "autoCompleteQuests",
         "autoCompleteQuestsSimultaneously",
         "autoCompleteQuestTypes",
         "completeVideoQuestsQuicker",
@@ -106,7 +111,7 @@ export function QuestFeaturesSetting(): JSX.Element {
         .map(({ key }) => key);
 
     const selectedAutoCompleteQuestTypeValues = autoCompleteQuestTaskTypes
-        .filter(questType => isDesktopCompatible(questType) && questFeatures.autoCompleteQuestTypes[questType] === true)
+        .filter(questType => isAutoCompleteCompatible(questType) && questFeatures.autoCompleteQuestTypes[questType] === true)
         .map(questType => String(questType));
 
     function updateDisableValue(value: string | string[] | null) {
@@ -134,7 +139,7 @@ export function QuestFeaturesSetting(): JSX.Element {
 
         for (const questType of autoCompleteQuestTaskTypes) {
             const nextValue = selectedValues.has(String(questType))
-                && isDesktopCompatible(questType);
+                && isAutoCompleteCompatible(questType);
 
             nextAutoCompleteQuestTypes[questType] = nextValue;
         }
@@ -314,9 +319,34 @@ export function QuestFeaturesSetting(): JSX.Element {
                             text: t(plugin.questify.settings.questFeatures.resumeInterruptedTooltip)
                         }}
                     />
+                    {questFeatures.usedKonamiCode === true && (
+                        <>
+                            <SettingsSubtleSwitch
+                                disabled={questFeatures.disableQuestsEverything || !questFeatures.allowChangingDangerousSettings}
+                                checked={questFeatures.autoCompleteQuests}
+                                label={t(plugin.questify.settings.questFeatures.autoProcess)}
+                                onChange={checked => updateModifyValue("autoCompleteQuests", checked)}
+                                bottomSpacing="5"
+                                tooltip={{
+                                    position: "top",
+                                    text: t(plugin.questify.settings.questFeatures.autoProcessTooltip)
+                                }}
+                            />
+                            <SettingsSubtleSwitch
+                                disabled={questFeatures.disableQuestsEverything || !questFeatures.allowChangingDangerousSettings}
+                                checked={questFeatures.autoEnrollQuests}
+                                label={t(plugin.questify.settings.questFeatures.autoEnroll)}
+                                onChange={checked => updateModifyValue("autoEnrollQuests", checked)}
+                                bottomSpacing="5"
+                                tooltip={{
+                                    position: "top",
+                                    text: t(plugin.questify.settings.questFeatures.autoEnrollTooltip)
+                                }}
+                            />
+                        </>
+                    )}
                     <SettingsSelect
                         label={t(plugin.questify.settings.questFeatures.autoCompleteTypes)}
-                        labelClassName="margin-top-9"
                         wrapTags={true}
                         options={autoCompleteQuestTypeManaOptions}
                         value={selectedAutoCompleteQuestTypeValues}

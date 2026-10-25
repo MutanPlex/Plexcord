@@ -1018,7 +1018,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 disableAnalytics: {
                     label: "Desactivar analíticas",
-                    description: "Desactiva el rastreo de Discord (analytics/'science'), las métricas y el envío de informes de errores a Sentry"
+                    description: "Bloquea las analíticas de rastreo de Discord. Desactívalo si quieres que las insignias registren tu progreso (p. ej.: horas transmitidas)."
                 },
                 disableStackDumping: {
                     description: "Imprimir un seguimiento de pila nativo en la consola cuando Discord se bloquee. Requiere un reinicio completo."
@@ -1421,6 +1421,36 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 invalidColorFormat: "Formato de color no válido para {{settingKey}}, asegúrate de usar 'R, G, B' o '#RRGGBB'",
                 invalidColorFormatFor: "Formato de color no válido para {{key}}, usa \"R, G, B\" o \"#RRGGBB\""
+            }
+        },
+        betterBackreading: {
+            name: "BetterBackreading",
+            description: "Mejora la lectura de mensajes antiguos con una carga más temprana y menos saltos.",
+            wholeNumber: "Introduce un número entero entre {{min}} y {{max}}.",
+            option: {
+                imageScrollMargin: {
+                    label: "Distancia de precarga de imágenes",
+                    description: "Con cuánta antelación se cargan las imágenes, en píxeles (300-3000)."
+                },
+                messageLoadBuffer: {
+                    label: "Búfer de carga de mensajes",
+                    description: "Con cuánta antelación se obtienen más mensajes, en píxeles (500-3000)."
+                },
+                useDiscordMessageCount: {
+                    label: "Usar el número dinámico de mensajes de Discord",
+                    description: "Deja que Discord elija cuántos mensajes obtener según tu ventana y tus ajustes de chat."
+                },
+                messageCount: {
+                    label: "Número de mensajes personalizado",
+                    description: "Cuántos mensajes obtener por solicitud de historial cuando el número dinámico está desactivado (30-100)."
+                },
+                channelOpenScrollMode: {
+                    label: "Posición al abrir un canal",
+                    description: "Abre los canales no leídos en la posición guardada (o al final), siempre al final, o usa el comportamiento predeterminado de no leídos.",
+                    default: "Predeterminado de Discord",
+                    bottom: "Siempre al final",
+                    saved: "Posición guardada"
+                }
             }
         },
         betterBanReasons: {
@@ -4519,6 +4549,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "Clonar en {{name}}",
                 emoji: "Emoji",
                 sticker: "Sticker"
+            }
+        },
+        externalPlayer: {
+            name: "ExternalPlayer",
+            description: "Abre vídeos y audio en un reproductor multimedia externo como mpv.",
+            option: {
+                player: {
+                    label: "Reproductor",
+                    description: "En qué reproductor abrir los archivos multimedia."
+                },
+                openOnClick: {
+                    label: "Abrir al hacer clic",
+                    description: "Abre vídeos y audio en el reproductor al pulsar reproducir, en lugar de reproducirlos en Discord."
+                },
+                path: {
+                    label: "Ruta del reproductor",
+                    description: "Ruta absoluta al ejecutable del reproductor. Déjala vacía para usar el de tu PATH."
+                },
+                args: {
+                    label: "Argumentos del reproductor",
+                    description: "Argumentos adicionales que se pasan al reproductor. Pon entre comillas los valores con espacios."
+                }
+            },
+            context: {
+                openIn: "Abrir en {{player}}"
+            },
+            toast: {
+                alreadyOpen: "Ya está abierto en {{player}}.",
+                restartRequired: "Reinicia Discord por completo para cargar ExternalPlayer.",
+                openFailed: "No se pudo abrir el reproductor."
+            },
+            status: {
+                paused: "En pausa en {{player}}",
+                playing: "Reproduciendo en {{player}}"
             }
         },
         f8break: {
@@ -8216,7 +8280,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     unmarkAsIgnored: "Dejar de ignorar",
                     stopAuto: "Detener autocompletado",
                     startAuto: "Iniciar autocompletado",
-                    copyQuestID: "Copiar ID de la Quest"
+                    copyQuestID: "Copiar ID de la Quest",
+                    pauseAutoEnrollment: "Pausar inscripción automática",
+                    unpauseAutoEnrollment: "Reanudar inscripción automática",
+                    pauseAutoProcessing: "Pausar procesamiento automático",
+                    unpauseAutoProcessing: "Reanudar procesamiento automático"
                 }
             },
             button: {
@@ -8238,7 +8306,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 autoCompleteBroken: "El autocompletado no funciona. Pronto se publicará una solución.",
                 enrollmentFailed: "Error al inscribirse en la Quest {{questName}}.",
-                enrollmentInNormalizequestnameQuest: "Falló la inscripción en la misión {{normalizeQuestName_quest}}{{rateLimitSuffix}}."
+                enrollmentInNormalizequestnameQuest: "Falló la inscripción en la misión {{normalizeQuestName_quest}}{{rateLimitSuffix}}.",
+                automationUnlocked: "Automatización de Quests desbloqueada.",
+                automationLocked: "Automatización de Quests bloqueada."
             },
             notification: {
                 completed: {
@@ -8371,8 +8441,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     simultaneousTooltip: "Por defecto, al intentar autocompletar varias Quests se ponen en cola para completarse en orden.\n\nEste ajuste permite, en cambio, que todas las Quests de autocompletado se ejecuten al mismo tiempo.\n\nEste ajuste solo se aplica al autocompletado de Quests y depende del ajuste de autocompletado de abajo.",
                     resumeInterrupted: "Reanudar autocompletados interrumpidos tras recargar o reiniciar:",
                     resumeInterruptedTooltip: "Este ajuste reanudará automáticamente cualquier autocompletado interrumpido por recargas o reinicios, incluido volver a poner en cola las Quests que estaban en cola pero aún no habían empezado.",
+                    autoProcess: "Procesar automáticamente las Quests compatibles para autocompletarlas:",
+                    autoProcessTooltip: "Completa las Quests elegibles, sin reclamar, no ignoradas y no caducadas incluidas en tus filtros de recompensa y tipo de Quest que se detecten mientras Discord está en ejecución. Solo se incluyen los tipos de tarea compatibles activados abajo.\n\nSe inscribe automáticamente en las Quests compatibles antes de ponerlas en cola para autocompletarlas. Espera los tiempos de espera conocidos por límite de frecuencia. Se detiene ante errores desconocidos, límites de frecuencia sin tiempo de reintento o fallos de inscripción repetidos.",
+                    autoEnroll: "Inscribirse automáticamente en las Quests compatibles.",
+                    autoEnrollTooltip: "Se inscribe en las Quests elegibles, sin reclamar, no ignoradas y no caducadas incluidas en tus filtros de recompensa y tipo de Quest que se detecten mientras Discord está en ejecución.\n\nSe inscribe en las Quests sin ponerlas en cola para autocompletarlas. Espera los tiempos de espera conocidos por límite de frecuencia. Se detiene ante errores desconocidos, límites de frecuencia sin tiempo de reintento o fallos de inscripción repetidos.",
                     autoCompleteTypes: "Autocompletar tipos de Quest específicos:",
-                    autoCompleteTypesTooltip: "Las Quests de \"Ver vídeo en el móvil\" solo funcionan con Quests móviles en las que se puede inscribir desde escritorio. Si la inscripción está limitada al móvil, primero debes inscribirte desde tu móvil antes de volver al escritorio y actualizar tus Quests.\n\nTodas las Quests de vídeo suelen enviar un stack trace con los informes de progreso. Así Discord sabe exactamente qué funciones se llamaron y puede verificar que sus propias funciones iniciaron el progreso. Questify borra este stack trace, pero su ausencia será tan reveladora como su presencia.\n\nLas Quests de \"Jugar en escritorio\", \"Jugar en PlayStation\", \"Jugar en Xbox\" y \"Jugar actividad\" solo están disponibles en clientes de escritorio oficiales debido a una limitación impuesta por Discord. Los clientes de terceros como extensiones web, Plextron y otros no admiten su autocompletado.\n\nTodas las Quests de juegos suelen enviar una huella del juego con los informes de heartbeat. Así Discord puede usar datos de decenas de miles de usuarios para determinar si otros usuarios probablemente usan un juego real o emulan el ejecutable. No hay un método razonable para falsificar este valor, por lo que Questify lo deja en blanco, pero su ausencia será tan reveladora como una mala falsificación.\n\nLas Quests de \"Logro en actividad\" solo pueden autocompletarse completándolas de inmediato. Este método puede corregirse en cualquier momento.\n\nEl autocompletado se realiza haciendo clic en los botones correspondientes de la página de Quests. Las Quests se autocompletarán en el orden en que se pusieron en cola, salvo que esté activado arriba el completado simultáneo.\n\nAutocompletar Quests es el ajuste peligroso más arriesgado. Actívalo bajo tu propia responsabilidad."
+                    autoCompleteTypesTooltip: "Las Quests de \"Ver vídeo en el móvil\" solo funcionan con Quests móviles en las que se puede inscribir desde escritorio. Si la inscripción está limitada al móvil, primero debes inscribirte desde tu móvil antes de volver al escritorio y actualizar tus Quests.\n\nTodas las Quests de vídeo suelen enviar un stack trace con los informes de progreso. Así Discord sabe exactamente qué funciones se llamaron y puede verificar que sus propias funciones iniciaron el progreso. Questify borra este stack trace, pero su ausencia será tan reveladora como su presencia.\n\nLas Quests de \"Jugar en escritorio\", \"Jugar en PlayStation\", \"Jugar en Xbox\", \"Jugar actividad\" y \"Logro en actividad\" solo están disponibles en clientes de escritorio oficiales debido a una limitación impuesta por Discord. Los clientes de terceros como extensiones web, Plextron y otros no admiten su autocompletado.\n\nTodas las Quests de juegos suelen enviar una huella del juego con los informes de heartbeat. Así Discord puede usar datos de decenas de miles de usuarios para determinar si otros usuarios probablemente usan un juego real o emulan el ejecutable. No hay un método razonable para falsificar este valor, por lo que Questify lo deja en blanco, pero su ausencia será tan reveladora como una mala falsificación.\n\nEl autocompletado empieza desde los botones de Quest en la página de Quests o mediante el procesamiento automático. Las Quests se completan en el orden en que se pusieron en cola, salvo que esté activado arriba el completado simultáneo.\n\nAutocompletar Quests es el ajuste peligroso más arriesgado. Actívalo bajo tu propia responsabilidad."
                 },
                 questNotifications: {
                     title: "Notificaciones de Quests",
@@ -8704,6 +8778,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hiddenQuestStatuses: {
                     description: "Grupos de estado de misiones que se ocultarán.",
                     label: "Estados de misión ocultos"
+                },
+                autoEnrollQuests: {
+                    label: "Inscribirse en Quests automáticamente",
+                    description: "Inscríbete automáticamente en las Quests disponibles elegibles al obtenerlas correctamente mientras Discord está en ejecución."
+                },
+                autoCompleteQuests: {
+                    label: "Completar Quests automáticamente",
+                    description: "Inscríbete y completa automáticamente las Quests disponibles elegibles con tipos de tarea compatibles y activados al obtenerlas correctamente mientras Discord está en ejecución."
                 }
             },
             text: {
@@ -9661,12 +9743,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     mustURL: "Debe ser una URL válida",
                     mustJSON: "Debe ser un archivo JSON"
                 },
-                tryHljs: {
-                    label: "Usar Hljs como reserva",
+                tryDiscordHighlighter: {
+                    label: "Probar el resaltador de Discord",
                     description: "Usa el resaltador por defecto de Discord si Shiki falla.",
                     never: "Nunca",
-                    secondary: "Preferir Shiki sobre Highlight.js",
-                    primary: "Preferir Highlight.js sobre Shiki",
+                    secondary: "Preferir Shiki en lugar del resaltador de Discord",
+                    primary: "Preferir el resaltador de Discord en lugar de Shiki",
                     always: "Siempre"
                 },
                 useDevIcon: {
