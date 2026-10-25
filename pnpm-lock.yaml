@@ -244,7 +244,7 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0
       '@plexcord/discord-types':
-        specifier: link:packages\discord-types
+        specifier: link:packages/discord-types
         version: link:packages/discord-types
       '@stylistic/eslint-plugin':
         specifier: ^5.10.0

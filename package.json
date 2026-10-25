@@ -61,7 +61,7 @@
     },
     "devDependencies": {
         "@electron/asar": "^4.2.0",
-        "@plexcord/discord-types": "link:packages\\discord-types",
+        "@plexcord/discord-types": "link:packages/discord-types",
         "@stylistic/eslint-plugin": "^5.10.0",
         "@types/chrome": "^0.2.0",
         "@types/lodash": "^4.17.24",
