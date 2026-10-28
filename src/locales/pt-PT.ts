@@ -680,14 +680,22 @@ const translations: MatchStructure<typeof enTranslations> = {
             recommended: "É altamente recomendado movê-los para o GitHub ou Imgur. Mas também pode permitir domínios se confiar neles totalmente.",
             afterAllow: "Depois de permitir um domínio, tem de fechar totalmente (pela bandeja do sistema / gestor de tarefas) e reiniciar o {{platform}} para aplicar a alteração.",
             allow: "Permitir",
+            allowAll: "Permitir todos ({{count}} domínios)",
             url: "URLs Bloqueados"
         },
         imgur: {
             direct: "Os links do Imgur devem ser links diretos no formato {{etc}}",
             copy: "To obter um link direto, clique com o botão direito na imagem e selecione 'Copiar endereço da imagem'."
         },
+        notice: {
+            allowHost: "Permitir anfitrião",
+            blocked: "As ligações a {{host}} estão bloqueadas. Permita este anfitrião se confiar nele e reinicie o Discord.",
+            imagesBlocked: "As imagens de {{host}} estão bloqueadas. Permita este anfitrião se confiar nele e reinicie o Discord.",
+            failed: "Não foi possível permitir este domínio."
+        },
         wants: {
             caller: "{{callerName}} deseja permitir ligações a {{domain}}",
+            unknown: "Uma fonte desconhecida quer permitir ligações a {{domain}}",
             detail: "A menos que reconheça e confie totalmente em {{domain}}, deve cancelar este pedido!",
             restart: "Terá de fechar totalmente e reiniciar o {{appName}} para que as alterações surtam efeito.",
             type: {
@@ -1485,7 +1493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
-            description: "Permite pesquisar na lista de utilizadores bloqueados e torna os nomes selecionáveis nas definições.",
+            description: "Permite pesquisar na lista de utilizadores bloqueados, torna os nomes selecionáveis nas definições, ignora o aviso de perfil bloqueado e agrupa mensagens bloqueadas / ignoradas.",
             placeholder: "Pesquisar utilizadores..."
         },
         betterCommands: {
@@ -4259,6 +4267,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        draftNavigator: {
+            name: "DraftNavigator",
+            description: "Pesquise rascunhos não enviados, pré-visualize o texto e vá para o canal.",
+            text: {
+                title: "Navegador de rascunhos",
+                open: "Abrir navegador de rascunhos",
+                unknownChannel: "Canal desconhecido ({{id}})",
+                channelUnavailable: "Canal indisponível",
+                directMessage: "Mensagem direta",
+                groupMessage: "Mensagem de grupo",
+                server: "Servidor",
+                jump: "Ir",
+                jumpTo: "Ir para {{name}}",
+                count: "{{count}} rascunhos",
+                countOne: "{{count}} rascunho",
+                countFiltered: "{{shown}} de {{total}} rascunhos",
+                noMatches: "Nenhum rascunho correspondente.",
+                noDrafts: "Nenhum rascunho por enviar.",
+                close: "Fechar",
+                searchLabel: "Pesquisar rascunhos",
+                searchPlaceholder: "Pesquisar canais, servidores ou texto do rascunho",
+                listLabel: "Rascunhos por enviar"
+            }
+        },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
             description: "Adiciona funcionalidade de arrastar e largar aos emojis favoritos"
@@ -4549,40 +4581,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "Clonar para {{name}}",
                 emoji: "Emoji",
                 sticker: "Autocolante"
-            }
-        },
-        externalPlayer: {
-            name: "ExternalPlayer",
-            description: "Abre vídeos e áudio num leitor multimédia externo como o mpv.",
-            option: {
-                player: {
-                    label: "Leitor",
-                    description: "Em que leitor abrir os conteúdos multimédia."
-                },
-                openOnClick: {
-                    label: "Abrir ao clicar",
-                    description: "Abre vídeos e áudio no leitor ao premir reproduzir, em vez de os reproduzir no Discord."
-                },
-                path: {
-                    label: "Caminho do leitor",
-                    description: "Caminho absoluto para o executável do leitor. Deixe vazio para usar o do seu PATH."
-                },
-                args: {
-                    label: "Argumentos do leitor",
-                    description: "Argumentos extra passados ao leitor. Coloque entre aspas os valores com espaços."
-                }
-            },
-            context: {
-                openIn: "Abrir no {{player}}"
-            },
-            toast: {
-                alreadyOpen: "Já aberto no {{player}}.",
-                restartRequired: "Reinicie o Discord completamente para carregar o ExternalPlayer.",
-                openFailed: "Não foi possível abrir o leitor."
-            },
-            status: {
-                paused: "Pausado no {{player}}",
-                playing: "A reproduzir no {{player}}"
             }
         },
         f8break: {
@@ -8053,6 +8051,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Secção de DMs Colapsada",
                     description: "Colapsar secção de DMs"
                 },
+                friendsSidebarGroupDms: {
+                    label: "MDs de grupo na barra lateral de amigos",
+                    description: "Mostra as MDs de grupo afixadas na barra lateral de amigos."
+                },
                 userBasedCategoryList: {
                     label: "Lista de Categorias Baseada no Utilizador",
                     description: ""
@@ -10778,6 +10780,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         textReplace: {
             name: "TextReplace",
             description: "Substitui texto nas tuas mensagens. Podes encontrar regras pré-feitas no canal #textreplace-rules no servidor da Plexcord",
+            importExport: {
+                title: "Importar e exportar",
+                description: "Exporte as suas regras como um ficheiro JSON ou importe regras para as adicionar às existentes.",
+                export: "Exportar JSON",
+                import: "Importar JSON",
+                success: "Regras importadas com sucesso.",
+                failed: "Não foi possível importar as regras. Escolha um ficheiro JSON do TextReplace válido."
+            },
             option: {
                 replace: {
                     label: "Substituir",
@@ -12181,7 +12191,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         fileUpload: {
             name: "FileUpload",
             description: "Carrega ficheiros para serviços de alojamento como Zipline, Nest, S3 e WebDAV",
+            dialog: {
+                message: "O FileUpload quer carregar ficheiros para {{origin}}",
+                detail: "A menos que reconheça e confie totalmente em {{origin}}, deve cancelar este pedido!\n\nConfiar memoriza este servidor, Permitir autoriza apenas este pedido.",
+                trust: "Confiar",
+                allow: "Permitir",
+                cancel: "Cancelar"
+            },
             toast: {
+                approvedServersReset: "Servidores aprovados repostos",
                 fileTypeNotAllowed: "Tipo de ficheiro não permitido pelo filtro atual",
                 pleaseConfigureFileuploadSettings: "Configura primeiro as definições do FileUpload",
                 sharexConfigIsValid: "A configuração do ShareX é válida",
@@ -12304,8 +12322,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 auto: "Automático",
                 commaSeparatedListOf: "Lista de extensões separadas por vírgulas (ex.: png,jpg,gif). Deixa vazio para permitir todas.",
                 configureBrowserUploadProxying: "Configura o proxy e os tempos limite dos carregamentos pelo navegador.",
-                corsProxyUsedFor: "Proxy CORS usado para carregamentos web. Deixa vazio para usar o proxy predefinido.",
-                sourceCodeForThe: "Código-fonte do proxy CORS predefinido",
+                corsProxyUsedFor: "Proxy CORS opcional para carregamentos que não podem passar pela aplicação de ambiente de trabalho. O proxy vê todos os ficheiros e tokens enviados através dele, por isso utilize apenas um em que confie. Deixe vazio para carregar diretamente.",
                 maximumTimeToWait: "Tempo máximo de espera por tentativa de carregamento antes de mudar para o alternativo",
                 selectTimeout: "Seleciona o tempo limite",
                 drag: "Arrastar",
@@ -12469,7 +12486,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Serviço de proxy de incorporação"
                 },
                 corsProxyUrl: {
-                    description: "URL do proxy CORS usado para carregamentos pelo navegador",
+                    description: "URL de proxy CORS opcional para carregamentos no navegador",
                     label: "URL do proxy CORS"
                 },
                 apngToGif: {
@@ -12528,6 +12545,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             panel: {
+                approvedServers: "Servidores aprovados",
+                approvedServersDescription: "Servidores S3 e WebDAV para os quais permitiu que o FileUpload carregasse ficheiros. Ao repor, será perguntado novamente no próximo carregamento.",
+                resetApprovedServers: "Repor servidores aprovados",
                 fallbackOrder: "Ordem alternativa",
                 uploadService: "Serviço de carregamento",
                 zipline: "Zipline",
@@ -12593,7 +12613,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedFileTypes: "Tipos de ficheiro permitidos",
                 network: "Rede",
                 corsProxyUrl: "URL do proxy CORS",
-                defaultCorsProxySource: "Fonte do proxy CORS predefinido",
                 uploadTimeout: "Tempo limite de carregamento",
                 domainsJsonDescription: "Array JSON de domínios a usar, por exemplo [\"offensive\"]."
             },
@@ -13888,7 +13907,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         userPFP: {
             toast: {
-                gifsWebpMustBe: "GIFs/WebP têm de ser adicionados por URL. Carrega o teu GIF/WebP para um serviço de alojamento de imagens e cola a ligação."
+                gifsWebpMustBe: "GIFs/WebP têm de ser adicionados por URL. Ligações do Imgur, GitHub, Tenor, Giphy e Discord funcionam sem configuração adicional."
             },
             text: {
                 save: "Guardar",

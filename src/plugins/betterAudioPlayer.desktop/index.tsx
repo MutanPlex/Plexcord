@@ -11,11 +11,12 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
-import definePlugin, { OptionType } from "@utils/types";
+import definePlugin, { OptionType, PluginNative } from "@utils/types";
 import { ColorUtils, React, showToast } from "@webpack/common";
 
+const Native = PlexcordNative.pluginHelpers.BetterAudioPlayer as PluginNative<typeof import("./native")>;
+
 const cl = classNameFactory("pc-better-audio-player-");
-const CORS_PROXY = "https://cors.keiran0.workers.dev?url=";
 const MAX_FILE_SIZE = 12e6;
 
 interface PlayerInstance {
@@ -112,15 +113,8 @@ function drawSpectrograph(ctx: CanvasRenderingContext2D, w: number, h: number, f
 }
 
 async function fetchAudioBlob(src: string): Promise<string | null> {
-    const url = new URL(src);
-    url.searchParams.set("t", Date.now().toString());
-
-    const response = await fetch(CORS_PROXY + encodeURIComponent(url.href));
-    const contentLength = response.headers.get("content-length");
-    if (contentLength && Number(contentLength) > MAX_FILE_SIZE) return null;
-
-    const blob = await response.blob();
-    return URL.createObjectURL(blob);
+    const data = await Native.fetchAudio(src);
+    return data.byteLength > MAX_FILE_SIZE ? null : URL.createObjectURL(new Blob([data]));
 }
 
 async function createAudioGraph(audio: HTMLAudioElement): Promise<AudioGraph | null> {

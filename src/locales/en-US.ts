@@ -677,14 +677,22 @@ const translations = {
             recommended: "It is highly recommended to move them to GitHub or Imgur. But you may also allow domains if you fully trust them.",
             afterAllow: "After allowing a domain, you have to fully close (from tray / task manager) and restart {{platform}} to apply the change.",
             allow: "Allow",
+            allowAll: "Allow All ({{count}} domains)",
             url: "Blocked URLs"
         },
         imgur: {
             direct: "Imgur links should be direct links in the form of {{etc}}",
             copy: "To obtain a direct link, right-click the image and select 'Copy image address'."
         },
+        notice: {
+            allowHost: "Allow Host",
+            blocked: "Connections to {{host}} are blocked. Allow this host if you trust it, then restart Discord.",
+            imagesBlocked: "Images from {{host}} are blocked. Allow this host if you trust it, then restart Discord.",
+            failed: "Could not allow this domain."
+        },
         wants: {
             caller: "{{callerName}} wants to allow connections to {{domain}}",
+            unknown: "An unknown source wants to allow connections to {{domain}}",
             detail: "Unless you recognise and fully trust {{domain}}, you should cancel this request!",
             restart: "You will have to fully close and restart {{appName}} for the changes to take effect.",
             type: {
@@ -1482,7 +1490,7 @@ const translations = {
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
-            description: "Allows you to search in blocked users list and makes names selectable in settings.",
+            description: "Lets you search the blocked users list, makes names selectable in settings, skips the blocked profile prompt, and groups blocked / ignored messages.",
             placeholder: "Search users..."
         },
         betterCommands: {
@@ -4257,6 +4265,30 @@ const translations = {
                 }
             }
         },
+        draftNavigator: {
+            name: "DraftNavigator",
+            description: "Search unsent drafts, preview their text, and jump to the channel.",
+            text: {
+                title: "Draft Navigator",
+                open: "Open Draft Navigator",
+                unknownChannel: "Unknown channel ({{id}})",
+                channelUnavailable: "Channel unavailable",
+                directMessage: "Direct message",
+                groupMessage: "Group message",
+                server: "Server",
+                jump: "Jump",
+                jumpTo: "Jump to {{name}}",
+                count: "{{count}} drafts",
+                countOne: "{{count}} draft",
+                countFiltered: "{{shown}} of {{total}} drafts",
+                noMatches: "No matching drafts.",
+                noDrafts: "No unsent drafts.",
+                close: "Close",
+                searchLabel: "Search drafts",
+                searchPlaceholder: "Search channels, servers, or draft text",
+                listLabel: "Unsent drafts"
+            }
+        },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
             description: "Adds drag and drop functionality to favorite emotes"
@@ -4547,40 +4579,6 @@ const translations = {
                 cloneTo: "Clone to {{name}}",
                 emoji: "Emoji",
                 sticker: "Sticker"
-            }
-        },
-        externalPlayer: {
-            name: "ExternalPlayer",
-            description: "Open videos and audio in an external media player like mpv.",
-            option: {
-                player: {
-                    label: "Player",
-                    description: "Which player to open media in."
-                },
-                openOnClick: {
-                    label: "Open On Click",
-                    description: "Open videos and audio in the player when you press play, instead of playing them in Discord."
-                },
-                path: {
-                    label: "Player Path",
-                    description: "Absolute path to the player executable. Leave empty to use the one on your PATH."
-                },
-                args: {
-                    label: "Player Arguments",
-                    description: "Extra arguments passed to the player. Wrap values with spaces in quotes."
-                }
-            },
-            context: {
-                openIn: "Open in {{player}}"
-            },
-            toast: {
-                alreadyOpen: "Already open in {{player}}.",
-                restartRequired: "Fully restart Discord to load ExternalPlayer.",
-                openFailed: "Failed to open the player."
-            },
-            status: {
-                paused: "Paused in {{player}}",
-                playing: "Playing in {{player}}"
             }
         },
         f8break: {
@@ -8051,6 +8049,10 @@ const translations = {
                     label: "DM Section Collapsed",
                     description: "Collapse DM section"
                 },
+                friendsSidebarGroupDms: {
+                    label: "Friends Sidebar Group DMs",
+                    description: "Show pinned group DMs in the friends sidebar."
+                },
                 userBasedCategoryList: {
                     label: "User Based Category List",
                     description: ""
@@ -10777,6 +10779,14 @@ const translations = {
         textReplace: {
             name: "TextReplace",
             description: "Replace text in your messages. You can find pre-made rules in the #textreplace-rules channel in Plexcord's Server",
+            importExport: {
+                title: "Import and Export",
+                description: "Export your rules as a JSON file or import rules to add them to your existing rules.",
+                export: "Export JSON",
+                import: "Import JSON",
+                success: "Rules imported successfully.",
+                failed: "Could not import rules. Choose a valid TextReplace JSON file."
+            },
             option: {
                 replace: {
                     label: "Replace",
@@ -12181,7 +12191,15 @@ const translations = {
         fileUpload: {
             name: "FileUpload",
             description: "Upload files to hosting services like Zipline, Nest, S3, and WebDAV",
+            dialog: {
+                message: "FileUpload wants to upload files to {{origin}}",
+                detail: "Unless you recognize and fully trust {{origin}}, you should cancel this request!\n\nTrust remembers this server, Allow only permits this request.",
+                trust: "Trust",
+                allow: "Allow",
+                cancel: "Cancel"
+            },
             toast: {
+                approvedServersReset: "Approved servers reset",
                 fileTypeNotAllowed: "File type not allowed by current filter",
                 pleaseConfigureFileuploadSettings: "Please configure FileUpload settings first",
                 sharexConfigIsValid: "ShareX config is valid",
@@ -12304,8 +12322,7 @@ const translations = {
                 auto: "Auto",
                 commaSeparatedListOf: "Comma-separated list of extensions (e.g. png,jpg,gif). Leave empty to allow all.",
                 configureBrowserUploadProxying: "Configure browser upload proxying and timeouts.",
-                corsProxyUsedFor: "CORS proxy used for web uploads. Leave empty to use the default proxy.",
-                sourceCodeForThe: "Source code for the default CORS proxy",
+                corsProxyUsedFor: "Optional CORS proxy for uploads that can't go through the desktop app. The proxy sees every file and token sent through it, so only use one you trust. Leave empty to upload directly.",
                 maximumTimeToWait: "Maximum time to wait per upload attempt before switching to fallback",
                 selectTimeout: "Select timeout",
                 drag: "Drag",
@@ -12469,7 +12486,7 @@ const translations = {
                     label: "Embed Proxy Service"
                 },
                 corsProxyUrl: {
-                    description: "CORS proxy URL used for browser uploads",
+                    description: "Optional CORS proxy URL used for browser uploads",
                     label: "Cors Proxy Url"
                 },
                 apngToGif: {
@@ -12528,6 +12545,9 @@ const translations = {
                 }
             },
             panel: {
+                approvedServers: "Approved Servers",
+                approvedServersDescription: "S3 and WebDAV servers you allowed FileUpload to upload to. Resetting will ask again on the next upload.",
+                resetApprovedServers: "Reset Approved Servers",
                 fallbackOrder: "Fallback Order",
                 uploadService: "Upload Service",
                 zipline: "Zipline",
@@ -12593,7 +12613,6 @@ const translations = {
                 allowedFileTypes: "Allowed File Types",
                 network: "Network",
                 corsProxyUrl: "CORS Proxy URL",
-                defaultCorsProxySource: "Default CORS Proxy Source",
                 uploadTimeout: "Upload Timeout",
                 domainsJsonDescription: "JSON array of domains to use, for example [\"offensive\"]."
             },
@@ -13888,7 +13907,7 @@ const translations = {
         },
         userPFP: {
             toast: {
-                gifsWebpMustBe: "GIFs/WebP must be added via URL. Upload your GIF/WebP to a image hosting service and paste the link."
+                gifsWebpMustBe: "GIFs/WebP must be added via URL. Imgur, GitHub, Tenor, Giphy and Discord links work without extra setup."
             },
             text: {
                 save: "Save",

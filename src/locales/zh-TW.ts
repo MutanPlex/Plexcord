@@ -680,14 +680,22 @@ const translations: MatchStructure<typeof enTranslations> = {
             recommended: "強烈建議將它們移至 GitHub 或 Imgur。但如果您完全信任網域，您也可以允許它們。",
             afterAllow: "允許網域後，您必須完全關閉（從托盤/工作管理員）並重新啟動 {{platform}} 才能套用變更。",
             allow: "允許",
+            allowAll: "全部允許（{{count}} 個網域）",
             url: "被封鎖的網址"
         },
         imgur: {
             direct: "Imgur 連結應該是 {{etc}} 形式的直接鏈接",
             copy: "要獲取直接鏈接，請右鍵單擊圖像並選擇“複製圖像地址”。"
         },
+        notice: {
+            allowHost: "允許主機",
+            blocked: "連線至 {{host}} 已被封鎖。如果你信任此主機，請允許它，然後重新啟動 Discord。",
+            imagesBlocked: "來自 {{host}} 的圖片已被封鎖。如果你信任此主機，請允許它，然後重新啟動 Discord。",
+            failed: "無法允許此網域。"
+        },
         wants: {
             caller: "{{callerName}} 希望允許連接到 {{domain}}",
+            unknown: "未知來源想要允許連線至 {{domain}}",
             detail: "除非您認可並完全信任 {{domain}}，否則您應該取消此請求！",
             restart: "您必須完全關閉並重新啟動 {{appName}} 才能使變更生效。",
             type: {
@@ -1485,7 +1493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
-            description: "允許您在封鎖的使用者清單中搜尋並在設定中選擇名稱。",
+            description: "允許在封鎖使用者清單中搜尋，讓設定中的名稱可選取，略過已封鎖個人資料的提示，並合併已封鎖 / 已忽略的訊息。",
             placeholder: "搜尋用戶..."
         },
         betterCommands: {
@@ -4259,6 +4267,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        draftNavigator: {
+            name: "DraftNavigator",
+            description: "搜尋未傳送的草稿，預覽其內容並跳至該頻道。",
+            text: {
+                title: "草稿導覽",
+                open: "開啟草稿導覽",
+                unknownChannel: "未知頻道 ({{id}})",
+                channelUnavailable: "頻道無法使用",
+                directMessage: "私人訊息",
+                groupMessage: "群組訊息",
+                server: "伺服器",
+                jump: "跳至",
+                jumpTo: "跳至 {{name}}",
+                count: "{{count}} 則草稿",
+                countOne: "{{count}} 則草稿",
+                countFiltered: "{{total}} 則草稿中的 {{shown}} 則",
+                noMatches: "沒有符合的草稿。",
+                noDrafts: "沒有未傳送的草稿。",
+                close: "關閉",
+                searchLabel: "搜尋草稿",
+                searchPlaceholder: "搜尋頻道、伺服器或草稿內容",
+                listLabel: "未傳送的草稿"
+            }
+        },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
             description: "為最愛的表情添加拖放功能"
@@ -4549,40 +4581,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "複製到 {{name}}",
                 emoji: "表情符號",
                 sticker: "貼圖"
-            }
-        },
-        externalPlayer: {
-            name: "ExternalPlayer",
-            description: "在 mpv 等外部媒體播放器中開啟影片與音訊。",
-            option: {
-                player: {
-                    label: "播放器",
-                    description: "用於開啟媒體的播放器。"
-                },
-                openOnClick: {
-                    label: "點擊時開啟",
-                    description: "按下播放時在播放器中開啟影片與音訊，而非在 Discord 中播放。"
-                },
-                path: {
-                    label: "播放器路徑",
-                    description: "播放器執行檔的絕對路徑。留空則使用 PATH 中的播放器。"
-                },
-                args: {
-                    label: "播放器參數",
-                    description: "傳遞給播放器的額外參數。包含空格的值請以引號括住。"
-                }
-            },
-            context: {
-                openIn: "在 {{player}} 中開啟"
-            },
-            toast: {
-                alreadyOpen: "已在 {{player}} 中開啟。",
-                restartRequired: "請完全重新啟動 Discord 以載入 ExternalPlayer。",
-                openFailed: "無法開啟播放器。"
-            },
-            status: {
-                paused: "已在 {{player}} 中暫停",
-                playing: "正在 {{player}} 中播放"
             }
         },
         f8break: {
@@ -8053,6 +8051,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "DM 部分摺疊",
                     description: "折疊 DM 部分"
                 },
+                friendsSidebarGroupDms: {
+                    label: "好友側邊欄中的群組私訊",
+                    description: "在好友側邊欄中顯示已釘選的群組私訊。"
+                },
                 userBasedCategoryList: {
                     label: "基於使用者的類別列表",
                     description: ""
@@ -10778,6 +10780,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         textReplace: {
             name: "TextReplace",
             description: "替換訊息中的文字。您可以在 Plexcord 伺服器的 #textreplace-rules 頻道中找到預先制定的規則",
+            importExport: {
+                title: "匯入與匯出",
+                description: "將規則匯出為 JSON 檔案，或匯入規則以新增至現有規則。",
+                export: "匯出 JSON",
+                import: "匯入 JSON",
+                success: "規則匯入成功。",
+                failed: "無法匯入規則。請選擇有效的 TextReplace JSON 檔案。"
+            },
             option: {
                 replace: {
                     label: "代替",
@@ -12181,7 +12191,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         fileUpload: {
             name: "FileUpload",
             description: "將檔案上傳到 Zipline、Nest、S3 與 WebDAV 等託管服務",
+            dialog: {
+                message: "FileUpload 想要將檔案上傳到 {{origin}}",
+                detail: "除非你認識並完全信任 {{origin}}，否則應取消此請求！\n\n「信任」會記住此伺服器，「允許」僅允許本次請求。",
+                trust: "信任",
+                allow: "允許",
+                cancel: "取消"
+            },
             toast: {
+                approvedServersReset: "已核准的伺服器已重設",
                 fileTypeNotAllowed: "目前篩選器不允許此檔案類型",
                 pleaseConfigureFileuploadSettings: "請先設定 FileUpload",
                 sharexConfigIsValid: "ShareX 設定有效",
@@ -12304,8 +12322,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 auto: "自動",
                 commaSeparatedListOf: "以逗號分隔的副檔名清單（例如 png,jpg,gif）。留空則全部允許。",
                 configureBrowserUploadProxying: "設定瀏覽器上傳代理與逾時。",
-                corsProxyUsedFor: "用於網頁上傳的 CORS 代理。留空則使用預設代理。",
-                sourceCodeForThe: "預設 CORS 代理的原始碼",
+                corsProxyUsedFor: "用於無法透過桌面應用程式進行之上傳的選用 CORS 代理。代理可以看到經由它傳送的每個檔案與權杖，因此請只使用你信任的代理。留空則直接上傳。",
                 maximumTimeToWait: "每次上傳嘗試在切換到備用前的最長等待時間",
                 selectTimeout: "選擇逾時",
                 drag: "拖曳",
@@ -12469,7 +12486,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "嵌入代理服務"
                 },
                 corsProxyUrl: {
-                    description: "用於瀏覽器上傳的 CORS 代理 URL",
+                    description: "用於瀏覽器上傳的選用 CORS 代理 URL",
                     label: "CORS 代理 URL"
                 },
                 apngToGif: {
@@ -12528,6 +12545,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             panel: {
+                approvedServers: "已核准的伺服器",
+                approvedServersDescription: "你已允許 FileUpload 上傳的 S3 與 WebDAV 伺服器。重設後，下次上傳時會再次詢問。",
+                resetApprovedServers: "重設已核准的伺服器",
                 fallbackOrder: "備用順序",
                 uploadService: "上傳服務",
                 zipline: "Zipline",
@@ -12593,7 +12613,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedFileTypes: "允許的檔案類型",
                 network: "網路",
                 corsProxyUrl: "CORS 代理 URL",
-                defaultCorsProxySource: "預設 CORS 代理原始碼",
                 uploadTimeout: "上傳逾時",
                 domainsJsonDescription: "要使用的網域 JSON 陣列，例如 [\"offensive\"]。"
             },
@@ -13888,7 +13907,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         userPFP: {
             toast: {
-                gifsWebpMustBe: "GIF/WebP 必須透過 URL 新增。請將 GIF/WebP 上傳到圖床並貼上連結。"
+                gifsWebpMustBe: "GIF/WebP 必須透過 URL 新增。Imgur、GitHub、Tenor、Giphy 與 Discord 的連結無需額外設定即可使用。"
             },
             text: {
                 save: "儲存",

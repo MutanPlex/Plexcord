@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { NativeSettings } from "@main/settings";
+import { NativeSettings, RendererSettings } from "@main/settings";
 import { session } from "electron";
 
 type PolicyMap = Record<string, string[]>;
@@ -17,6 +17,7 @@ export const ConnectAndCssSrc = [...ConnectSrc, ...CssSrc];
 export const ImageAndMediaSrc = [...ImageSrc, "media-src"];
 export const ImageAndCssSrc = [...ImageSrc, ...CssSrc];
 export const ImageScriptsAndCssSrc = [...ImageAndCssSrc, "script-src", "worker-src"];
+export const ImageMediaAndCssSrc = [...ImageAndMediaSrc, ...CssSrc];
 
 // Plugins can whitelist their own domains by importing this object in their native.ts
 // script and just adding to it. But generally, you should just edit this file instead
@@ -27,12 +28,14 @@ export const CspPolicies: PolicyMap = {
     "localhost:*": ImageAndCssSrc,
     "127.0.0.1:*": ImageAndCssSrc,
     "localhost:24123": ImageAndCssSrc,
+    "ws://localhost:*": ConnectSrc,
+    "ws://127.0.0.1:*": ConnectSrc,
 
     "lrclib.net": ConnectSrc, // Lyrics library used by some lyrics plugins
     "translate.googleapis.com": ConnectSrc, // Google Translate API
     "*.github.io": ImageAndCssSrc, // GitHub pages, used by most themes
-    "github.com": ImageAndCssSrc, // GitHub content (stuff uploaded to markdown forms), used by most themes
-    "raw.githubusercontent.com": ImageAndCssSrc, // GitHub raw, used by some themes
+    "github.com": ImageMediaAndCssSrc, // GitHub content (stuff uploaded to markdown forms), used by most themes
+    "raw.githubusercontent.com": ImageMediaAndCssSrc, // GitHub raw, used by some themes
     "*.gitlab.io": ImageAndCssSrc, // GitLab pages, used by some themes
     "gitlab.com": ImageAndCssSrc, // GitLab raw, used by some themes
     "*.codeberg.page": ImageAndCssSrc, // Codeberg pages, used by some themes
@@ -49,7 +52,7 @@ export const CspPolicies: PolicyMap = {
     "i.pinimg.com": ImageSrc, // Pinterest, used by some themes
     "files.catbox.moe": ImageAndCssSrc, // Catbox, used by some themes
 
-    "cdn.discordapp.com": ImageAndCssSrc, // Discord CDN, used by Plexcord and some themes to load media
+    "cdn.discordapp.com": ImageMediaAndCssSrc, // Discord CDN, used by Plexcord and some themes to load media
     "media.discordapp.net": ImageSrc, // Discord media CDN, possible alternative to Discord CDN
 
     // CDNs used for some things by Plexcord.
@@ -85,6 +88,34 @@ export const CspPolicies: PolicyMap = {
     "*.tenor.com": ImageAndMediaSrc,
     "*.tenor.co": ImageAndMediaSrc,
     "*.giphy.com": ImageAndMediaSrc,
+
+    "images-ext-1.discordapp.net": ImageSrc,
+    "images-ext-2.discordapp.net": ImageSrc,
+    "static.klipy.com": ImageAndMediaSrc,
+    "avatars.githubusercontent.com": ImageSrc,
+    "api.spotify.com": ConnectSrc,
+    "*.scdn.co": ImageAndMediaSrc,
+    "*.sndcdn.com": ImageAndMediaSrc,
+    "*.mzstatic.com": ImageSrc,
+    "audio-ssl.itunes.apple.com": ImageAndMediaSrc,
+    "*.tidal.com": ImageAndMediaSrc,
+    "embed.tidal.com": ["frame-src"],
+    "spotify-lyrics-api-pi.vercel.app": ConnectSrc,
+    "dc.songspotlight.nexpid.xyz": ConnectSrc,
+    "api.stats.fm": ConnectSrc,
+    "openrouter.ai": ConnectSrc,
+    "aiapi.serversmp.xyz": ConnectSrc,
+    "embed.sammcheese.net": ConnectSrc,
+    "encrypting.host": ConnectSrc,
+    "api.thecatapi.com": ConnectSrc,
+    "api.thedogapi.com": ConnectSrc,
+    "www.reddit.com": ConnectSrc,
+    "huggingface.co": ConnectSrc,
+    "*.huggingface.co": ConnectSrc,
+    "*.hf.co": ConnectSrc,
+    "placeholder.nin0.dev": ImageSrc,
+    "twemoji.maxcdn.com": ImageSrc,
+    "shiggy.thororen.com": ImageSrc,
 };
 
 const findHeader = (headers: PolicyMap, headerName: Lowercase<string>) => {
@@ -150,7 +181,30 @@ const patchCsp = (headers: PolicyMap) => {
     }
 };
 
+export function isHostAllowed(host: string, directives: string[]) {
+    return [...Object.entries(CspPolicies), ...Object.entries(NativeSettings.store.customCspRules)].some(([source, allowed]) =>
+        (source === host || source.startsWith("*.") && host.endsWith(source.slice(1)) || source.endsWith(":*") && host.startsWith(source.slice(0, -1)))
+        && directives.every(d => allowed.includes(d))
+    );
+}
+
+function migrateThemeLinks() {
+    if (NativeSettings.store.migratedThemeLinkCsp) return;
+
+    const { themeLinks = [], enabledThemeLinks = [] } = RendererSettings.store;
+    for (const link of new Set([...themeLinks, ...enabledThemeLinks])) {
+        const url = URL.parse(link.replace(/^@(light|dark) /, ""));
+        if (url?.protocol !== "https:") continue;
+
+        if (!isHostAllowed(url.host, ["style-src"])) NativeSettings.store.customCspRules[url.host] = ["style-src", "img-src", "font-src"];
+    }
+
+    NativeSettings.store.migratedThemeLinkCsp = true;
+}
+
 export function initCsp() {
+    migrateThemeLinks();
+
     session.defaultSession.webRequest.onHeadersReceived(({ responseHeaders, resourceType }, cb) => {
         if (responseHeaders) {
             if (resourceType === "mainFrame")

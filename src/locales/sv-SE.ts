@@ -680,14 +680,22 @@ const translations: MatchStructure<typeof enTranslations> = {
             recommended: "Det rekommenderas starkt att flytta dem till GitHub eller Imgur. Men du kan också tillåta domäner om du litar på dem fullt ut.",
             afterAllow: "När du har tillåtit en domän måste du stänga helt (från fack/uppgiftshanteraren) och starta om {{platform}} för att tillämpa ändringen.",
             allow: "Tillåta",
+            allowAll: "Tillåt alla ({{count}} domäner)",
             url: "Blockerade webbadresser"
         },
         imgur: {
             direct: "Imgur-länkar bör vara direktlänkar i form av {{etc}}",
             copy: "För att få en direktlänk, högerklicka på bilden och välj \"Kopiera bildadress\"."
         },
+        notice: {
+            allowHost: "Tillåt värd",
+            blocked: "Anslutningar till {{host}} är blockerade. Tillåt den här värden om du litar på den och starta sedan om Discord.",
+            imagesBlocked: "Bilder från {{host}} är blockerade. Tillåt den här värden om du litar på den och starta sedan om Discord.",
+            failed: "Det gick inte att tillåta den här domänen."
+        },
         wants: {
             caller: "{{callerName}} vill tillåta anslutningar till {{domain}}",
+            unknown: "En okänd källa vill tillåta anslutningar till {{domain}}",
             detail: "Om du inte känner igen och helt litar på {{domain}}, bör du avbryta denna begäran!",
             restart: "Du måste stänga och starta om {{appName}} helt för att ändringarna ska träda i kraft.",
             type: {
@@ -1485,7 +1493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
-            description: "Låter dig söka i listan med blockerade användare och gör namn valbara i inställningarna.",
+            description: "Låter dig söka i listan över blockerade användare, gör namn markerbara i inställningarna, hoppar över frågan för blockerade profiler och grupperar blockerade / ignorerade meddelanden.",
             placeholder: "Sök användare..."
         },
         betterCommands: {
@@ -4259,6 +4267,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        draftNavigator: {
+            name: "DraftNavigator",
+            description: "Sök bland osända utkast, förhandsgranska deras text och hoppa till kanalen.",
+            text: {
+                title: "Utkastnavigator",
+                open: "Öppna utkastnavigatorn",
+                unknownChannel: "Okänd kanal ({{id}})",
+                channelUnavailable: "Kanalen är inte tillgänglig",
+                directMessage: "Direktmeddelande",
+                groupMessage: "Gruppmeddelande",
+                server: "Server",
+                jump: "Hoppa",
+                jumpTo: "Hoppa till {{name}}",
+                count: "{{count}} utkast",
+                countOne: "{{count}} utkast",
+                countFiltered: "{{shown}} av {{total}} utkast",
+                noMatches: "Inga matchande utkast.",
+                noDrafts: "Inga osända utkast.",
+                close: "Stäng",
+                searchLabel: "Sök utkast",
+                searchPlaceholder: "Sök kanaler, servrar eller utkasttext",
+                listLabel: "Osända utkast"
+            }
+        },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
             description: "Lägger till dra-och-släpp-funktioner till favoritkänslor"
@@ -4549,40 +4581,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "Klona till {{name}}",
                 emoji: "Emoji",
                 sticker: "Klistermärke"
-            }
-        },
-        externalPlayer: {
-            name: "ExternalPlayer",
-            description: "Öppna videor och ljud i en extern mediaspelare som mpv.",
-            option: {
-                player: {
-                    label: "Spelare",
-                    description: "Vilken spelare media ska öppnas i."
-                },
-                openOnClick: {
-                    label: "Öppna vid klick",
-                    description: "Öppna videor och ljud i spelaren när du trycker på spela upp, i stället för att spela dem i Discord."
-                },
-                path: {
-                    label: "Sökväg till spelare",
-                    description: "Absolut sökväg till spelarens körbara fil. Lämna tomt för att använda den i din PATH."
-                },
-                args: {
-                    label: "Spelarargument",
-                    description: "Extra argument som skickas till spelaren. Omge värden med mellanslag med citattecken."
-                }
-            },
-            context: {
-                openIn: "Öppna i {{player}}"
-            },
-            toast: {
-                alreadyOpen: "Redan öppen i {{player}}.",
-                restartRequired: "Starta om Discord helt för att läsa in ExternalPlayer.",
-                openFailed: "Det gick inte att öppna spelaren."
-            },
-            status: {
-                paused: "Pausad i {{player}}",
-                playing: "Spelas i {{player}}"
             }
         },
         f8break: {
@@ -8053,6 +8051,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "DM-sektionen har kollapsat",
                     description: "Komprimera DM-avsnittet"
                 },
+                friendsSidebarGroupDms: {
+                    label: "Grupp-DM i vänsidofältet",
+                    description: "Visa fästa grupp-DM i vänsidofältet."
+                },
                 userBasedCategoryList: {
                     label: "Användarbaserad kategorilista",
                     description: ""
@@ -10778,6 +10780,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         textReplace: {
             name: "TextReplace",
             description: "Byt ut text i dina meddelanden. Du kan hitta färdiga regler i #textreplace-rules-kanalen i Plexcords server",
+            importExport: {
+                title: "Import och export",
+                description: "Exportera dina regler som en JSON-fil eller importera regler för att lägga till dem i dina befintliga regler.",
+                export: "Exportera JSON",
+                import: "Importera JSON",
+                success: "Reglerna har importerats.",
+                failed: "Kunde inte importera regler. Välj en giltig TextReplace JSON-fil."
+            },
             option: {
                 replace: {
                     label: "Ersätta",
@@ -12181,7 +12191,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         fileUpload: {
             name: "FileUpload",
             description: "Ladda upp filer till värdtjänster som Zipline, Nest, S3 och WebDAV",
+            dialog: {
+                message: "FileUpload vill ladda upp filer till {{origin}}",
+                detail: "Om du inte känner igen och litar helt på {{origin}} bör du avbryta denna begäran!\n\nLita på kommer ihåg den här servern, Tillåt tillåter bara denna begäran.",
+                trust: "Lita på",
+                allow: "Tillåt",
+                cancel: "Avbryt"
+            },
             toast: {
+                approvedServersReset: "Godkända servrar återställda",
                 fileTypeNotAllowed: "Filtypen tillåts inte av det aktuella filtret",
                 pleaseConfigureFileuploadSettings: "Konfigurera FileUpload-inställningarna först",
                 sharexConfigIsValid: "ShareX-konfigurationen är giltig",
@@ -12304,8 +12322,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 auto: "Automatiskt",
                 commaSeparatedListOf: "Kommaseparerad lista med filändelser (t.ex. png,jpg,gif). Lämna tomt för att tillåta alla.",
                 configureBrowserUploadProxying: "Konfigurera proxy och tidsgränser för webbläsaruppladdningar.",
-                corsProxyUsedFor: "CORS-proxy som används för webbuppladdningar. Lämna tomt för att använda standardproxyn.",
-                sourceCodeForThe: "Källkod för standard-CORS-proxyn",
+                corsProxyUsedFor: "Valfri CORS-proxy för uppladdningar som inte kan gå via skrivbordsappen. Proxyn ser varje fil och token som skickas genom den, så använd bara en du litar på. Lämna tomt för att ladda upp direkt.",
                 maximumTimeToWait: "Maximal väntetid per uppladdningsförsök innan byte till reserv",
                 selectTimeout: "Välj tidsgräns",
                 drag: "Dra",
@@ -12469,7 +12486,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Inbäddningsproxytjänst"
                 },
                 corsProxyUrl: {
-                    description: "CORS-proxy-URL som används för webbläsaruppladdningar",
+                    description: "Valfri CORS-proxy-URL för uppladdningar i webbläsaren",
                     label: "CORS-proxy-URL"
                 },
                 apngToGif: {
@@ -12528,6 +12545,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             panel: {
+                approvedServers: "Godkända servrar",
+                approvedServersDescription: "S3- och WebDAV-servrar som du har tillåtit FileUpload att ladda upp till. Vid återställning frågas du igen vid nästa uppladdning.",
+                resetApprovedServers: "Återställ godkända servrar",
                 fallbackOrder: "Reservordning",
                 uploadService: "Uppladdningstjänst",
                 zipline: "Zipline",
@@ -12593,7 +12613,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedFileTypes: "Tillåtna filtyper",
                 network: "Nätverk",
                 corsProxyUrl: "CORS-proxy-URL",
-                defaultCorsProxySource: "Källa för standard-CORS-proxy",
                 uploadTimeout: "Tidsgräns för uppladdning",
                 domainsJsonDescription: "JSON-array med domäner att använda, till exempel [\"offensive\"]."
             },
@@ -13888,7 +13907,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         userPFP: {
             toast: {
-                gifsWebpMustBe: "GIF/WebP måste läggas till via URL. Ladda upp din GIF/WebP till en bildvärdtjänst och klistra in länken."
+                gifsWebpMustBe: "GIF/WebP måste läggas till via URL. Länkar från Imgur, GitHub, Tenor, Giphy och Discord fungerar utan extra inställningar."
             },
             text: {
                 save: "Spara",

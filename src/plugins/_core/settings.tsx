@@ -196,7 +196,7 @@ export default definePlugin({
             buildEntry({
                 key: "plexcord_main",
                 title: "Plexcord",
-                panelTitle: "Plexcord" + t(settingsI18n.title),
+                panelTitle: "Plexcord " + t(settingsI18n.title),
                 Component: PlexcordTab,
                 Icon: MainSettingsIcon
             }),

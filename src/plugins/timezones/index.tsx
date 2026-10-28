@@ -20,7 +20,7 @@ import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy, findCssClassesLazy } from "@webpack";
 import { ChannelStore, Menu, openModal, showToast, Tooltip, useEffect, UserStore, useState } from "@webpack/common";
 
-import { deleteTimezone, getTimezone, loadDatabaseTimezones, setUserDatabaseTimezone } from "./database";
+import { DatabaseUrlNotice, deleteTimezone, getTimezone, loadDatabaseTimezones, setUserDatabaseTimezone } from "./database";
 import { SetTimezoneModal } from "./TimezoneModal";
 
 export let timezones: Record<string, string | null> = {};
@@ -116,6 +116,11 @@ export const settings = definePluginSettings({
         description: () => t(plugin.timezones.option.databaseUrl.description),
         type: OptionType.STRING,
         default: "https://timezone.creations.works"
+    },
+
+    databaseUrlPermission: {
+        type: OptionType.COMPONENT,
+        component: () => <DatabaseUrlNotice />
     },
 
     setDatabaseTimezone: {

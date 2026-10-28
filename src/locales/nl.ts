@@ -680,14 +680,22 @@ const translations: MatchStructure<typeof enTranslations> = {
             recommended: "Het wordt sterk aanbevolen om ze naar GitHub of Imgur te verplaatsen. Maar u kunt ook domeinen toestaan ​​als u ze volledig vertrouwt.",
             afterAllow: "Nadat u een domein heeft toegestaan, moet u {{platform}} volledig afsluiten (via lade/taakbeheer) en opnieuw opstarten om de wijziging toe te passen.",
             allow: "Toestaan",
+            allowAll: "Alles toestaan ({{count}} domeinen)",
             url: "Geblokkeerde URL's"
         },
         imgur: {
             direct: "Imgur-links moeten directe links zijn in de vorm van {{etc}}",
             copy: "Om een ​​directe link te verkrijgen, klikt u met de rechtermuisknop op de afbeelding en selecteert u 'Afbeeldingsadres kopiëren'."
         },
+        notice: {
+            allowHost: "Host toestaan",
+            blocked: "Verbindingen met {{host}} zijn geblokkeerd. Sta deze host toe als je hem vertrouwt en herstart daarna Discord.",
+            imagesBlocked: "Afbeeldingen van {{host}} zijn geblokkeerd. Sta deze host toe als je hem vertrouwt en herstart daarna Discord.",
+            failed: "Kon dit domein niet toestaan."
+        },
         wants: {
             caller: "{{callerName}} wil verbindingen met {{domain}} toestaan",
+            unknown: "Een onbekende bron wil verbindingen met {{domain}} toestaan",
             detail: "Tenzij u {{domain}} herkent en volledig vertrouwt, moet u dit verzoek annuleren!",
             restart: "U moet {{appName}} volledig afsluiten en opnieuw opstarten om de wijzigingen door te voeren.",
             type: {
@@ -1485,7 +1493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
-            description: "Hiermee kunt u zoeken in de lijst met geblokkeerde gebruikers en kunt u namen selecteren in de instellingen.",
+            description: "Laat je zoeken in de lijst met geblokkeerde gebruikers, maakt namen selecteerbaar in instellingen, slaat de melding voor geblokkeerde profielen over en groepeert geblokkeerde / genegeerde berichten.",
             placeholder: "Gebruikers zoeken..."
         },
         betterCommands: {
@@ -4259,6 +4267,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        draftNavigator: {
+            name: "DraftNavigator",
+            description: "Doorzoek niet-verzonden concepten, bekijk hun tekst en spring naar het kanaal.",
+            text: {
+                title: "Conceptnavigator",
+                open: "Conceptnavigator openen",
+                unknownChannel: "Onbekend kanaal ({{id}})",
+                channelUnavailable: "Kanaal niet beschikbaar",
+                directMessage: "Privébericht",
+                groupMessage: "Groepsbericht",
+                server: "Server",
+                jump: "Ga naar",
+                jumpTo: "Ga naar {{name}}",
+                count: "{{count}} concepten",
+                countOne: "{{count}} concept",
+                countFiltered: "{{shown}} van {{total}} concepten",
+                noMatches: "Geen overeenkomende concepten.",
+                noDrafts: "Geen niet-verzonden concepten.",
+                close: "Sluiten",
+                searchLabel: "Concepten zoeken",
+                searchPlaceholder: "Zoek kanalen, servers of concepttekst",
+                listLabel: "Niet-verzonden concepten"
+            }
+        },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
             description: "Voegt functionaliteit voor slepen en neerzetten toe aan favoriete emotes"
@@ -4549,40 +4581,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "Klonen naar {{name}}",
                 emoji: "Emoji",
                 sticker: "Sticker"
-            }
-        },
-        externalPlayer: {
-            name: "ExternalPlayer",
-            description: "Open video's en audio in een externe mediaspeler zoals mpv.",
-            option: {
-                player: {
-                    label: "Speler",
-                    description: "In welke speler media worden geopend."
-                },
-                openOnClick: {
-                    label: "Openen bij klikken",
-                    description: "Open video's en audio in de speler wanneer je op afspelen drukt, in plaats van ze in Discord af te spelen."
-                },
-                path: {
-                    label: "Spelerpad",
-                    description: "Absoluut pad naar het uitvoerbare bestand van de speler. Laat leeg om die uit je PATH te gebruiken."
-                },
-                args: {
-                    label: "Spelerargumenten",
-                    description: "Extra argumenten die aan de speler worden doorgegeven. Zet waarden met spaties tussen aanhalingstekens."
-                }
-            },
-            context: {
-                openIn: "Openen in {{player}}"
-            },
-            toast: {
-                alreadyOpen: "Al geopend in {{player}}.",
-                restartRequired: "Start Discord volledig opnieuw om ExternalPlayer te laden.",
-                openFailed: "Kan de speler niet openen."
-            },
-            status: {
-                paused: "Gepauzeerd in {{player}}",
-                playing: "Speelt af in {{player}}"
             }
         },
         f8break: {
@@ -8053,6 +8051,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "DM-sectie samengevouwen",
                     description: "DM-sectie samenvouwen"
                 },
+                friendsSidebarGroupDms: {
+                    label: "Groeps-DM's in de vriendenzijbalk",
+                    description: "Toon vastgezette groeps-DM's in de vriendenzijbalk."
+                },
                 userBasedCategoryList: {
                     label: "Op gebruiker gebaseerde categorielijst",
                     description: ""
@@ -10778,6 +10780,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         textReplace: {
             name: "TextReplace",
             description: "Vervang tekst in uw berichten. U kunt vooraf gemaakte regels vinden in het kanaal #textreplace-rules in de server van Plexcord",
+            importExport: {
+                title: "Importeren en exporteren",
+                description: "Exporteer je regels als JSON-bestand of importeer regels om ze aan je bestaande regels toe te voegen.",
+                export: "JSON exporteren",
+                import: "JSON importeren",
+                success: "Regels succesvol geïmporteerd.",
+                failed: "Kon regels niet importeren. Kies een geldig TextReplace JSON-bestand."
+            },
             option: {
                 replace: {
                     label: "Vervangen",
@@ -12181,7 +12191,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         fileUpload: {
             name: "FileUpload",
             description: "Upload bestanden naar hostingdiensten zoals Zipline, Nest, S3 en WebDAV",
+            dialog: {
+                message: "FileUpload wil bestanden uploaden naar {{origin}}",
+                detail: "Tenzij je {{origin}} herkent en volledig vertrouwt, moet je dit verzoek annuleren!\n\nVertrouwen onthoudt deze server, Toestaan staat alleen dit verzoek toe.",
+                trust: "Vertrouwen",
+                allow: "Toestaan",
+                cancel: "Annuleren"
+            },
             toast: {
+                approvedServersReset: "Goedgekeurde servers gereset",
                 fileTypeNotAllowed: "Bestandstype niet toegestaan door het huidige filter",
                 pleaseConfigureFileuploadSettings: "Configureer eerst de FileUpload-instellingen",
                 sharexConfigIsValid: "ShareX-configuratie is geldig",
@@ -12304,8 +12322,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 auto: "Automatisch",
                 commaSeparatedListOf: "Kommagescheiden lijst met extensies (bijv. png,jpg,gif). Laat leeg om alles toe te staan.",
                 configureBrowserUploadProxying: "Proxy en time-outs voor browseruploads configureren.",
-                corsProxyUsedFor: "CORS-proxy voor webuploads. Laat leeg om de standaardproxy te gebruiken.",
-                sourceCodeForThe: "Broncode van de standaard-CORS-proxy",
+                corsProxyUsedFor: "Optionele CORS-proxy voor uploads die niet via de desktop-app kunnen. De proxy ziet elk bestand en elke token die erdoorheen gaat, dus gebruik alleen een proxy die je vertrouwt. Laat leeg om direct te uploaden.",
                 maximumTimeToWait: "Maximale wachttijd per uploadpoging voordat naar reserve wordt overgeschakeld",
                 selectTimeout: "Time-out kiezen",
                 drag: "Slepen",
@@ -12469,7 +12486,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Embedproxydienst"
                 },
                 corsProxyUrl: {
-                    description: "CORS-proxy-URL voor browseruploads",
+                    description: "Optionele CORS-proxy-URL voor uploads in de browser",
                     label: "CORS-proxy-URL"
                 },
                 apngToGif: {
@@ -12528,6 +12545,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             panel: {
+                approvedServers: "Goedgekeurde servers",
+                approvedServersDescription: "S3- en WebDAV-servers waarnaar je FileUpload hebt toegestaan te uploaden. Na het resetten wordt het bij de volgende upload opnieuw gevraagd.",
+                resetApprovedServers: "Goedgekeurde servers resetten",
                 fallbackOrder: "Reservevolgorde",
                 uploadService: "Uploaddienst",
                 zipline: "Zipline",
@@ -12593,7 +12613,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedFileTypes: "Toegestane bestandstypen",
                 network: "Netwerk",
                 corsProxyUrl: "CORS-proxy-URL",
-                defaultCorsProxySource: "Bron van standaard-CORS-proxy",
                 uploadTimeout: "Uploadtime-out",
                 domainsJsonDescription: "JSON-array van te gebruiken domeinen, bijvoorbeeld [\"offensive\"]."
             },
@@ -13888,7 +13907,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         userPFP: {
             toast: {
-                gifsWebpMustBe: "GIF's/WebP moeten via een URL worden toegevoegd. Upload je GIF/WebP naar een afbeeldingshost en plak de link."
+                gifsWebpMustBe: "GIF's/WebP moeten via een URL worden toegevoegd. Links van Imgur, GitHub, Tenor, Giphy en Discord werken zonder extra instellingen."
             },
             text: {
                 save: "Opslaan",

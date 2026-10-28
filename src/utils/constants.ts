@@ -1195,6 +1195,10 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "ItzMeShadow999",
         id: 1065604516399026176n
     },
+    rot: {
+        name: "rot",
+        id: 1021210809164111932n
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>

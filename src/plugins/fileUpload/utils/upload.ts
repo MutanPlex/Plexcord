@@ -21,16 +21,16 @@ import { getExtensionFromBytes, getExtensionFromMime, getMimeFromExtension, getU
 import { isS3Configured, uploadToS3 } from "./s3";
 import { parseShareXConfig, resolveShareXTemplate } from "./sharex";
 
-const Native = IS_DISCORD_DESKTOP
-    ? PlexcordNative.pluginHelpers.FileUpload as PluginNative<typeof import("../native")>
-    : null;
+const Native = IS_WEB
+    ? null
+    : PlexcordNative.pluginHelpers.FileUpload as PluginNative<typeof import("../native")>;
 
 export const logger = new Logger("FileUpload", "#7cb7ff");
 
 function toProxyUrl(url: string): string {
     const corsProxyUrl = normalizeCorsProxyUrl((settings.store as { corsProxyUrl?: string; }).corsProxyUrl);
 
-    if (url.startsWith(`${corsProxyUrl}?url=`)) {
+    if (!corsProxyUrl || url.startsWith(`${corsProxyUrl}?url=`)) {
         return url;
     }
 
@@ -1180,7 +1180,6 @@ const EXE_BLOCKED_SERVICES = new Set<ServiceType>([
 function getEmbedProxyService(): EmbedProxyService {
     const service = settings.store.embedProxyService;
     return service === "nfp" ? service : "cors";
-
 }
 
 function shouldProxyEmbedUrl(url: string): boolean {

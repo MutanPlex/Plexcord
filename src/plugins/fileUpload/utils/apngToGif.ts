@@ -7,7 +7,7 @@
 
 /*
  * FFmpeg loading and worker code adapted from the MoreStickers plugin
- * by Leko and Arjix (src/plexcordplugins/moreStickers/utils.tsx)
+ * by Leko and Arjix (src/plugins/moreStickers.desktop/utils.tsx)
  */
 
 import { FFmpeg } from "@ffmpeg/ffmpeg";

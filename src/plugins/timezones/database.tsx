@@ -5,7 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { plugin, t } from "@api/i18n";
+import { csp, plugin, t } from "@api/i18n";
+import { Button } from "@components/Button";
+import { Notice } from "@components/Notice";
+import { useCspPermission } from "@utils/csp";
 import { openModal } from "@utils/index";
 import { OAuth2AuthorizeModal, showToast } from "@webpack/common";
 
@@ -13,6 +16,18 @@ import { settings } from ".";
 
 const databaseTimezones: Record<string, { value: string | null; }> = {};
 const CLIENT_ID = "1377021506810417173";
+
+export function DatabaseUrlNotice() {
+    const { databaseUrl } = settings.use(["databaseUrl"]);
+    const [isAllowed, allow] = useCspPermission(databaseUrl, ["connect-src"], "Timezones");
+    if (isAllowed) return null;
+
+    return (
+        <Notice variant="warning" action={<Button size="small" variant="secondary" onClick={allow}>{t(csp.notice.allowHost)}</Button>}>
+            {t(csp.notice.blocked, { host: URL.parse(databaseUrl)?.host })}
+        </Notice>
+    );
+}
 
 function getDomain(): string {
     return settings.store.databaseUrl || "https://timezone.creations.works";

@@ -36,3 +36,32 @@
 .pc-pindms-collapsed .pc-pindms-collapse-icon {
     transform: rotate(0deg);
 }
+
+.pc-pindms-sidebar-channel {
+    padding-block: 1px;
+    container-type: inline-size;
+}
+
+.pc-pindms-sidebar-channel [class*="layout__"] {
+    height: var(--custom-friend-row-height);
+}
+
+.pc-pindms-sidebar-channel [class*="channel__"] {
+    margin-inline-start: 0;
+    max-width: 100%;
+}
+
+.pc-pindms-sidebar-channel [class*="link__"] {
+    padding-block: calc(var(--space-xs) - 1px);
+    padding-inline: var(--space-xs);
+}
+
+.pc-pindms-sidebar-channel [class*="closeButton_"] {
+    display: none !important;
+}
+
+@container (width < 100px) {
+    .pc-pindms-sidebar-channel [class*="link__"] {
+        padding-inline: calc((100cqw - 32px) / 2) 0;
+    }
+}

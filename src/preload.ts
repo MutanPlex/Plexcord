@@ -23,10 +23,9 @@ import { contextBridge, webFrame } from "electron/renderer";
 
 import PlexcordNative, { invoke, sendSync } from "./PlexcordNative";
 
-contextBridge.exposeInMainWorld("PlexcordNative", PlexcordNative);
-
 // Discord
 if (location.protocol !== "data:") {
+    contextBridge.exposeInMainWorld("PlexcordNative", PlexcordNative);
     invoke(IpcEvents.INIT_FILE_WATCHERS);
     if (IS_DISCORD_DESKTOP) {
         webFrame.executeJavaScript(sendSync<string>(IpcEvents.PRELOAD_GET_RENDERER_JS));

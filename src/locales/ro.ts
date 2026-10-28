@@ -680,14 +680,22 @@ const translations: MatchStructure<typeof enTranslations> = {
             recommended: "Se recomandă insistent mutarea lor pe GitHub sau Imgur. Totuși, poți permite domeniile dacă ai încredere deplină în ele.",
             afterAllow: "După ce permiți un domeniu, trebuie să închizi complet aplicația (din tray / task manager) și să repornești {{platform}}.",
             allow: "Permite",
+            allowAll: "Permite toate ({{count}} domenii)",
             url: "URL-uri Blocate"
         },
         imgur: {
             direct: "Link-urile Imgur ar trebui să fie link-uri directe de forma {{etc}}",
             copy: "Pentru a obține un link direct, fă click dreapta pe imagine și selectează 'Copy image address'."
         },
+        notice: {
+            allowHost: "Permite gazda",
+            blocked: "Conexiunile către {{host}} sunt blocate. Permite această gazdă dacă ai încredere în ea, apoi repornește Discord.",
+            imagesBlocked: "Imaginile de la {{host}} sunt blocate. Permite această gazdă dacă ai încredere în ea, apoi repornește Discord.",
+            failed: "Nu s-a putut permite acest domeniu."
+        },
         wants: {
             caller: "{{callerName}} dorește să permită conexiuni către {{domain}}",
+            unknown: "O sursă necunoscută vrea să permită conexiuni către {{domain}}",
             detail: "Dacă nu recunoști și nu ai încredere deplină în {{domain}}, ar trebui să anulezi această cerere!",
             restart: "Va trebui să închizi complet și să repornești {{appName}} pentru ca modificările să aibă efect.",
             type: {
@@ -1485,7 +1493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
-            description: "Permite căutarea în lista de utilizatori blocați și face numele selectabile în setări.",
+            description: "Îți permite să cauți în lista utilizatorilor blocați, face numele selectabile în setări, sare peste confirmarea profilurilor blocate și grupează mesajele blocate / ignorate.",
             placeholder: "Caută utilizatori..."
         },
         betterCommands: {
@@ -4259,6 +4267,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        draftNavigator: {
+            name: "DraftNavigator",
+            description: "Caută ciorne netrimise, previzualizează textul lor și sari la canal.",
+            text: {
+                title: "Navigator de ciorne",
+                open: "Deschide navigatorul de ciorne",
+                unknownChannel: "Canal necunoscut ({{id}})",
+                channelUnavailable: "Canal indisponibil",
+                directMessage: "Mesaj direct",
+                groupMessage: "Mesaj de grup",
+                server: "Server",
+                jump: "Sari",
+                jumpTo: "Sari la {{name}}",
+                count: "{{count}} ciorne",
+                countOne: "{{count}} ciornă",
+                countFiltered: "{{shown}} din {{total}} ciorne",
+                noMatches: "Nicio ciornă potrivită.",
+                noDrafts: "Nicio ciornă netrimisă.",
+                close: "Închide",
+                searchLabel: "Caută ciorne",
+                searchPlaceholder: "Caută canale, servere sau textul ciornei",
+                listLabel: "Ciorne netrimise"
+            }
+        },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
             description: "Adaugă funcționalitatea drag-and-drop pentru emoji-urile preferate"
@@ -4549,40 +4581,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "Clonează în {{name}}",
                 emoji: "Emoji",
                 sticker: "Autocolant"
-            }
-        },
-        externalPlayer: {
-            name: "ExternalPlayer",
-            description: "Deschide videoclipurile și audio într-un player media extern, precum mpv.",
-            option: {
-                player: {
-                    label: "Player",
-                    description: "În ce player să se deschidă fișierele media."
-                },
-                openOnClick: {
-                    label: "Deschide la clic",
-                    description: "Deschide videoclipurile și audio în player când apeși redare, în loc să le redai în Discord."
-                },
-                path: {
-                    label: "Calea playerului",
-                    description: "Calea absolută către executabilul playerului. Lasă gol pentru a-l folosi pe cel din PATH."
-                },
-                args: {
-                    label: "Argumentele playerului",
-                    description: "Argumente suplimentare transmise playerului. Pune între ghilimele valorile cu spații."
-                }
-            },
-            context: {
-                openIn: "Deschide în {{player}}"
-            },
-            toast: {
-                alreadyOpen: "Deja deschis în {{player}}.",
-                restartRequired: "Repornește complet Discord pentru a încărca ExternalPlayer.",
-                openFailed: "Nu s-a putut deschide playerul."
-            },
-            status: {
-                paused: "Pus pe pauză în {{player}}",
-                playing: "Se redă în {{player}}"
             }
         },
         f8break: {
@@ -8053,6 +8051,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Secțiune DM restrânsă",
                     description: "Restrânge secțiunea DM"
                 },
+                friendsSidebarGroupDms: {
+                    label: "DM-uri de grup în bara laterală de prieteni",
+                    description: "Afișează DM-urile de grup fixate în bara laterală de prieteni."
+                },
                 userBasedCategoryList: {
                     label: "Listă categorii bazată pe utilizator",
                     description: ""
@@ -10778,6 +10780,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         textReplace: {
             name: "TextReplace",
             description: "Înlocuiește textul în mesajele tale. Poți găsi reguli gata făcute pe serverul Plexcord.",
+            importExport: {
+                title: "Import și export",
+                description: "Exportă regulile ca fișier JSON sau importă reguli pentru a le adăuga la cele existente.",
+                export: "Exportă JSON",
+                import: "Importă JSON",
+                success: "Regulile au fost importate cu succes.",
+                failed: "Regulile nu au putut fi importate. Alege un fișier JSON TextReplace valid."
+            },
             option: {
                 replace: {
                     label: "Înlocuire",
@@ -12181,7 +12191,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         fileUpload: {
             name: "FileUpload",
             description: "Încarcă fișiere pe servicii de găzduire precum Zipline, Nest, S3 și WebDAV",
+            dialog: {
+                message: "FileUpload vrea să încarce fișiere pe {{origin}}",
+                detail: "Dacă nu recunoști {{origin}} și nu ai încredere deplină în el, ar trebui să anulezi această cerere!\n\nAi încredere reține acest server, Permite aprobă doar această cerere.",
+                trust: "Ai încredere",
+                allow: "Permite",
+                cancel: "Anulează"
+            },
             toast: {
+                approvedServersReset: "Serverele aprobate au fost resetate",
                 fileTypeNotAllowed: "Tipul de fișier nu este permis de filtrul curent",
                 pleaseConfigureFileuploadSettings: "Configurează mai întâi setările FileUpload",
                 sharexConfigIsValid: "Configurația ShareX este validă",
@@ -12304,8 +12322,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 auto: "Automat",
                 commaSeparatedListOf: "Listă de extensii separate prin virgule (ex. png,jpg,gif). Lasă gol pentru a le permite pe toate.",
                 configureBrowserUploadProxying: "Configurează proxy-ul și timpii limită pentru încărcările din browser.",
-                corsProxyUsedFor: "Proxy CORS folosit pentru încărcările web. Lasă gol pentru proxy-ul implicit.",
-                sourceCodeForThe: "Codul sursă al proxy-ului CORS implicit",
+                corsProxyUsedFor: "Proxy CORS opțional pentru încărcările care nu pot trece prin aplicația desktop. Proxy-ul vede fiecare fișier și token trimis prin el, așa că folosește doar unul de încredere. Lasă gol pentru a încărca direct.",
                 maximumTimeToWait: "Timpul maxim de așteptare per încercare de încărcare înainte de a trece la rezervă",
                 selectTimeout: "Selectează timpul limită",
                 drag: "Trage",
@@ -12469,7 +12486,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Serviciu proxy de înglobare"
                 },
                 corsProxyUrl: {
-                    description: "URL proxy CORS folosit pentru încărcările din browser",
+                    description: "URL opțional pentru proxy CORS folosit la încărcările din browser",
                     label: "URL proxy CORS"
                 },
                 apngToGif: {
@@ -12528,6 +12545,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             panel: {
+                approvedServers: "Servere aprobate",
+                approvedServersDescription: "Servere S3 și WebDAV pe care ai permis FileUpload să încarce fișiere. După resetare, se va cere din nou la următoarea încărcare.",
+                resetApprovedServers: "Resetează serverele aprobate",
                 fallbackOrder: "Ordine de rezervă",
                 uploadService: "Serviciu de încărcare",
                 zipline: "Zipline",
@@ -12593,7 +12613,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedFileTypes: "Tipuri de fișiere permise",
                 network: "Rețea",
                 corsProxyUrl: "URL proxy CORS",
-                defaultCorsProxySource: "Sursa proxy-ului CORS implicit",
                 uploadTimeout: "Timp limită de încărcare",
                 domainsJsonDescription: "Array JSON de domenii de folosit, de exemplu [\"offensive\"]."
             },
@@ -13888,7 +13907,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         userPFP: {
             toast: {
-                gifsWebpMustBe: "GIF-urile/WebP trebuie adăugate prin URL. Încarcă GIF-ul/WebP-ul pe un serviciu de găzduire a imaginilor și lipește linkul."
+                gifsWebpMustBe: "GIF-urile/WebP trebuie adăugate prin URL. Linkurile Imgur, GitHub, Tenor, Giphy și Discord funcționează fără configurare suplimentară."
             },
             text: {
                 save: "Salvează",

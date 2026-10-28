@@ -5,12 +5,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { NativeSettings } from "@main/settings";
+import { NativeSettings, RendererSettings } from "@main/settings";
 import { csp, t } from "@main/utils/i18n";
 import { IpcEvents } from "@shared/IpcEvents";
 import { app, dialog, ipcMain, IpcMainInvokeEvent } from "electron";
 
-import { CspPolicies, ImageAndCssSrc } from ".";
+import { CspPolicies, ImageAndCssSrc, isHostAllowed } from ".";
 
 export type CspRequestResult = "invalid" | "cancelled" | "unchecked" | "ok" | "conflict";
 
@@ -24,7 +24,7 @@ function validate(url: string, directives: string[]) {
     try {
         const { host } = new URL(url);
 
-        if (/[;'"\\]/.test(host)) return false;
+        if (!/^(\*\.)?[\w-]+(\.[\w-]+)*(:\d+)?$/.test(host)) return false;
     } catch {
         return false;
     }
@@ -35,10 +35,10 @@ function validate(url: string, directives: string[]) {
     return true;
 }
 
-function getMessage(url: string, directives: string[], callerName: string) {
-    const domain = new URL(url).host;
-
-    const message = t(csp.wants.caller, { callerName, domain });
+function getMessage(domain: string, directives: string[], isPlugin: boolean, callerName: string) {
+    const message = isPlugin
+        ? t(csp.wants.caller, { callerName, domain })
+        : t(csp.wants.unknown, { domain });
 
     const appName = app.getName().toLowerCase().includes("discord") ? "Discord" : "Plextron";
 
@@ -72,20 +72,23 @@ function getMessage(url: string, directives: string[], callerName: string) {
     return { message, detail };
 }
 
-async function addCspRule(_: IpcMainInvokeEvent, url: string, directives: string[], callerName: string): Promise<CspRequestResult> {
-    if (!validate(url, directives)) {
+async function addCspRule(_: IpcMainInvokeEvent, url: string | string[], directives: string[], callerName: string): Promise<CspRequestResult> {
+    const urls = [url].flat();
+    if (!urls.length || urls.some(u => !validate(u, directives))) {
         return "invalid";
     }
 
-    const domain = new URL(url).host;
-
-    if (domain in NativeSettings.store.customCspRules) {
+    const domains = [...new Set(urls.map(u => new URL(u).host))].filter(d => !(d in NativeSettings.store.customCspRules));
+    if (!domains.length) {
         return "conflict";
     }
 
+    const domain = domains.join(", ");
+
+    const isPlugin = !!RendererSettings.store.plugins?.[callerName]?.enabled;
     const { checkboxChecked, response } = await dialog.showMessageBox({
-        ...getMessage(url, directives, callerName),
-        type: callerName ? "info" : "warning",
+        ...getMessage(domain, directives, isPlugin, callerName),
+        type: isPlugin ? "info" : "warning",
         title: "Plexcord " + t(csp.wants.title),
         buttons: [t(csp.wants.button.cancel), t(csp.wants.button.allow)],
         defaultId: 0,
@@ -102,7 +105,7 @@ async function addCspRule(_: IpcMainInvokeEvent, url: string, directives: string
         return "unchecked";
     }
 
-    NativeSettings.store.customCspRules[domain] = directives;
+    for (const d of domains) NativeSettings.store.customCspRules[d] = directives;
     return "ok";
 }
 
@@ -141,14 +144,6 @@ export function isStyleUrlAllowed(url: string) {
 }
 
 function isDomainAllowed(_: IpcMainInvokeEvent, url: string, directives: string[]) {
-    try {
-        const domain = new URL(url).host;
-
-        const ruleForDomain = CspPolicies[domain] ?? NativeSettings.store.customCspRules[domain];
-        if (!ruleForDomain) return false;
-
-        return directives.every(d => ruleForDomain.includes(d));
-    } catch (e) {
-        return false;
-    }
+    const domain = URL.parse(url)?.host;
+    return !!domain && isHostAllowed(domain, directives);
 }

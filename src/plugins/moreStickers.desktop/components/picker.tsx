@@ -6,9 +6,9 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { PickerContent, PickerContentHeader, PickerContentRow, PickerContentRowGrid, PickerHeaderProps, SidebarProps, Sticker, StickerCategoryType, StickerPack } from "@plugins/moreStickers/types";
-import { sendSticker } from "@plugins/moreStickers/upload";
-import { clPicker, FFmpegStateContext } from "@plugins/moreStickers/utils";
+import { PickerContent, PickerContentHeader, PickerContentRow, PickerContentRowGrid, PickerHeaderProps, SidebarProps, Sticker, StickerCategoryType, StickerPack } from "@plugins/moreStickers.desktop/types";
+import { sendSticker } from "@plugins/moreStickers.desktop/upload";
+import { clPicker, FFmpegStateContext } from "@plugins/moreStickers.desktop/utils";
 import { debounce } from "@shared/debounce";
 import { Modal,openModal, React, TextInput } from "@webpack/common";
 import { JSX } from "react";

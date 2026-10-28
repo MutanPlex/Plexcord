@@ -680,14 +680,22 @@ const translations: MatchStructure<typeof enTranslations> = {
             recommended: "Наполегливо рекомендується перенести їх на GitHub або Imgur. Але ви також можете дозволити домени, якщо повністю їм довіряєте.",
             afterAllow: "Після надання дозволу домену потрібно повністю закрити (з трею / диспетчера завдань) та перезапустити {{platform}}, щоб зміни набрали чинності.",
             allow: "Дозволити",
+            allowAll: "Дозволити всі (доменів: {{count}})",
             url: "Заблоковані URL-адреси"
         },
         imgur: {
             direct: "Посилання на Imgur мають бути прямими посиланнями у форматі {{etc}}",
             copy: "Щоб отримати пряме посилання, натисніть праву кнопку миші на зображенні та виберіть 'Копіювати адресу зображення'."
         },
+        notice: {
+            allowHost: "Дозволити хост",
+            blocked: "З'єднання з {{host}} заблоковано. Дозвольте цей хост, якщо довіряєте йому, а потім перезапустіть Discord.",
+            imagesBlocked: "Зображення з {{host}} заблоковано. Дозвольте цей хост, якщо довіряєте йому, а потім перезапустіть Discord.",
+            failed: "Не вдалося дозволити цей домен."
+        },
         wants: {
             caller: "{{callerName}} хоче дозволити з'єднання з {{domain}}",
+            unknown: "Невідоме джерело хоче дозволити з'єднання з {{domain}}",
             detail: "Якщо ви не впізнаєте або не довіряєте {{domain}} повністю, ви повинні скасувати цей запит!",
             restart: "Вам потрібно буде повністю закрити та перезапустити {{appName}}, щоб зміни набули чинності.",
             type: {
@@ -1485,7 +1493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
-            description: "Дозволяє шукати у списку заблокованих користувачів та робить імена доступними для виділення в налаштуваннях.",
+            description: "Дозволяє шукати у списку заблокованих користувачів, робить імена виділюваними в налаштуваннях, пропускає попередження про заблокований профіль і групує заблоковані / ігноровані повідомлення.",
             placeholder: "Пошук користувачів..."
         },
         betterCommands: {
@@ -4259,6 +4267,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        draftNavigator: {
+            name: "DraftNavigator",
+            description: "Шукайте невідправлені чернетки, переглядайте їхній текст і переходьте до каналу.",
+            text: {
+                title: "Навігатор чернеток",
+                open: "Відкрити навігатор чернеток",
+                unknownChannel: "Невідомий канал ({{id}})",
+                channelUnavailable: "Канал недоступний",
+                directMessage: "Особисте повідомлення",
+                groupMessage: "Групове повідомлення",
+                server: "Сервер",
+                jump: "Перейти",
+                jumpTo: "Перейти до {{name}}",
+                count: "Чернеток: {{count}}",
+                countOne: "Чернеток: {{count}}",
+                countFiltered: "Чернеток: {{shown}} з {{total}}",
+                noMatches: "Немає відповідних чернеток.",
+                noDrafts: "Немає невідправлених чернеток.",
+                close: "Закрити",
+                searchLabel: "Пошук чернеток",
+                searchPlaceholder: "Пошук каналів, серверів або тексту чернетки",
+                listLabel: "Невідправлені чернетки"
+            }
+        },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
             description: "Додає можливість перетягування (drag-and-drop) для улюблених емодзі"
@@ -4549,40 +4581,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "Клонувати до {{name}}",
                 emoji: "Емодзі",
                 sticker: "Стікер"
-            }
-        },
-        externalPlayer: {
-            name: "ExternalPlayer",
-            description: "Відкриває відео та аудіо в зовнішньому медіаплеєрі, наприклад mpv.",
-            option: {
-                player: {
-                    label: "Плеєр",
-                    description: "У якому плеєрі відкривати медіа."
-                },
-                openOnClick: {
-                    label: "Відкривати за натисканням",
-                    description: "Відкривати відео та аудіо в плеєрі під час натискання відтворення замість програвання в Discord."
-                },
-                path: {
-                    label: "Шлях до плеєра",
-                    description: "Абсолютний шлях до виконуваного файлу плеєра. Залиште порожнім, щоб використовувати плеєр із PATH."
-                },
-                args: {
-                    label: "Аргументи плеєра",
-                    description: "Додаткові аргументи для плеєра. Значення з пробілами беріть у лапки."
-                }
-            },
-            context: {
-                openIn: "Відкрити в {{player}}"
-            },
-            toast: {
-                alreadyOpen: "Уже відкрито в {{player}}.",
-                restartRequired: "Повністю перезапустіть Discord, щоб завантажити ExternalPlayer.",
-                openFailed: "Не вдалося відкрити плеєр."
-            },
-            status: {
-                paused: "На паузі в {{player}}",
-                playing: "Відтворюється в {{player}}"
             }
         },
         f8break: {
@@ -8053,6 +8051,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Розділ згорнуто",
                     description: "Згорнути розділ приватних повідомлень"
                 },
+                friendsSidebarGroupDms: {
+                    label: "Групові ОП на бічній панелі друзів",
+                    description: "Показувати закріплені групові ОП на бічній панелі друзів."
+                },
                 userBasedCategoryList: {
                     label: "Список категорій за користувачем",
                     description: ""
@@ -10778,6 +10780,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         textReplace: {
             name: "TextReplace",
             description: "Замінюйте текст у ваших повідомленнях. Готові правила можна знайти в каналі #textreplace-rules на сервері Plexcord",
+            importExport: {
+                title: "Імпорт і експорт",
+                description: "Експортуйте правила у JSON-файл або імпортуйте правила, щоб додати їх до наявних.",
+                export: "Експорт JSON",
+                import: "Імпорт JSON",
+                success: "Правила успішно імпортовано.",
+                failed: "Не вдалося імпортувати правила. Виберіть коректний JSON-файл TextReplace."
+            },
             option: {
                 replace: {
                     label: "Заміна",
@@ -12181,7 +12191,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         fileUpload: {
             name: "FileUpload",
             description: "Завантажує файли на хостинги, як-от Zipline, Nest, S3 і WebDAV",
+            dialog: {
+                message: "FileUpload хоче завантажити файли на {{origin}}",
+                detail: "Якщо ви не знаєте {{origin}} і не довіряєте йому повністю, скасуйте цей запит!\n\n«Довіряти» запам'ятовує цей сервер, «Дозволити» дозволяє лише цей запит.",
+                trust: "Довіряти",
+                allow: "Дозволити",
+                cancel: "Скасувати"
+            },
             toast: {
+                approvedServersReset: "Схвалені сервери скинуто",
                 fileTypeNotAllowed: "Тип файлу не дозволено поточним фільтром",
                 pleaseConfigureFileuploadSettings: "Спочатку налаштуйте FileUpload",
                 sharexConfigIsValid: "Конфігурація ShareX коректна",
@@ -12304,8 +12322,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 auto: "Авто",
                 commaSeparatedListOf: "Список розширень через кому (наприклад, png,jpg,gif). Залиште порожнім, щоб дозволити всі.",
                 configureBrowserUploadProxying: "Налаштування проксі й тайм-аутів завантажень із браузера.",
-                corsProxyUsedFor: "CORS-проксі для веб-завантажень. Залиште порожнім, щоб використовувати проксі за замовчуванням.",
-                sourceCodeForThe: "Вихідний код CORS-проксі за замовчуванням",
+                corsProxyUsedFor: "Необов'язковий CORS-проксі для завантажень, які не можуть пройти через застосунок для ПК. Проксі бачить кожен файл і токен, що проходять через нього, тож використовуйте лише той, якому довіряєте. Залиште порожнім для прямого завантаження.",
                 maximumTimeToWait: "Максимальний час очікування на спробу завантаження перед переходом до резервного",
                 selectTimeout: "Виберіть тайм-аут",
                 drag: "Перетягнути",
@@ -12469,7 +12486,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Сервіс проксі вбудовування"
                 },
                 corsProxyUrl: {
-                    description: "URL CORS-проксі для завантажень із браузера",
+                    description: "Необов'язкова URL-адреса CORS-проксі для завантажень із браузера",
                     label: "URL CORS-проксі"
                 },
                 apngToGif: {
@@ -12528,6 +12545,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             panel: {
+                approvedServers: "Схвалені сервери",
+                approvedServersDescription: "Сервери S3 і WebDAV, на які ви дозволили FileUpload завантажувати файли. Після скидання дозвіл буде запитано знову під час наступного завантаження.",
+                resetApprovedServers: "Скинути схвалені сервери",
                 fallbackOrder: "Порядок резервних",
                 uploadService: "Сервіс завантаження",
                 zipline: "Zipline",
@@ -12593,7 +12613,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedFileTypes: "Дозволені типи файлів",
                 network: "Мережа",
                 corsProxyUrl: "URL CORS-проксі",
-                defaultCorsProxySource: "Джерело CORS-проксі за замовчуванням",
                 uploadTimeout: "Тайм-аут завантаження",
                 domainsJsonDescription: "JSON-масив доменів для використання, наприклад [\"offensive\"]."
             },
@@ -13888,7 +13907,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         userPFP: {
             toast: {
-                gifsWebpMustBe: "GIF/WebP треба додавати за URL. Завантажте GIF/WebP на хостинг зображень і вставте посилання."
+                gifsWebpMustBe: "GIF/WebP потрібно додавати за URL. Посилання Imgur, GitHub, Tenor, Giphy і Discord працюють без додаткового налаштування."
             },
             text: {
                 save: "Зберегти",

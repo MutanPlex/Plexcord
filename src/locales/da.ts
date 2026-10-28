@@ -680,14 +680,22 @@ const translations: MatchStructure<typeof enTranslations> = {
             recommended: "Det anbefales kraftigt at flytte dem til GitHub eller Imgur. Du kan også tillade domæner, hvis du stoler fuldt ud på dem.",
             afterAllow: "Når du har tilladt et domæne, skal du lukke {{platform}} helt (fra bakken / Jobliste) og starte det igen, for at ændringen træder i kraft.",
             allow: "Tillad",
+            allowAll: "Tillad alle ({{count}} domæner)",
             url: "Blokerede URL'er"
         },
         imgur: {
             direct: "Imgur-links skal være direkte links i formen {{etc}}",
             copy: "For at få et direkte link skal du højreklikke på billedet og vælge 'Kopiér billedadresse'."
         },
+        notice: {
+            allowHost: "Tillad vært",
+            blocked: "Forbindelser til {{host}} er blokeret. Tillad denne vært, hvis du stoler på den, og genstart derefter Discord.",
+            imagesBlocked: "Billeder fra {{host}} er blokeret. Tillad denne vært, hvis du stoler på den, og genstart derefter Discord.",
+            failed: "Kunne ikke tillade dette domæne."
+        },
         wants: {
             caller: "{{callerName}} vil tillade forbindelser til {{domain}}",
+            unknown: "En ukendt kilde vil tillade forbindelser til {{domain}}",
             detail: "Medmindre du genkender og stoler fuldt ud på {{domain}}, bør du annullere denne anmodning!",
             restart: "Du skal lukke {{appName}} helt og starte den igen, for at ændringerne træder i kraft.",
             type: {
@@ -1485,7 +1493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
-            description: "Giver dig mulighed for at søge i listen over blokerede brugere og gør navne valgbare i indstillinger.",
+            description: "Lader dig søge i listen over blokerede brugere, gør navne markerbare i indstillinger, springer prompten for blokerede profiler over og grupperer blokerede / ignorerede beskeder.",
             placeholder: "Søg efter brugere..."
         },
         betterCommands: {
@@ -4259,6 +4267,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        draftNavigator: {
+            name: "DraftNavigator",
+            description: "Søg i usendte kladder, se deres tekst og hop til kanalen.",
+            text: {
+                title: "Kladdenavigator",
+                open: "Åbn kladdenavigator",
+                unknownChannel: "Ukendt kanal ({{id}})",
+                channelUnavailable: "Kanal utilgængelig",
+                directMessage: "Direkte besked",
+                groupMessage: "Gruppebesked",
+                server: "Server",
+                jump: "Hop",
+                jumpTo: "Hop til {{name}}",
+                count: "{{count}} kladder",
+                countOne: "{{count}} kladde",
+                countFiltered: "{{shown}} af {{total}} kladder",
+                noMatches: "Ingen matchende kladder.",
+                noDrafts: "Ingen usendte kladder.",
+                close: "Luk",
+                searchLabel: "Søg i kladder",
+                searchPlaceholder: "Søg i kanaler, servere eller kladdetekst",
+                listLabel: "Usendte kladder"
+            }
+        },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
             description: "Tilføjer træk-og-slip funktionalitet til favorit-emotes"
@@ -4549,40 +4581,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "Klon til {{name}}",
                 emoji: "Emoji",
                 sticker: "Klistermærke"
-            }
-        },
-        externalPlayer: {
-            name: "ExternalPlayer",
-            description: "Åbn videoer og lyd i en ekstern medieafspiller som mpv.",
-            option: {
-                player: {
-                    label: "Afspiller",
-                    description: "Hvilken afspiller medier skal åbnes i."
-                },
-                openOnClick: {
-                    label: "Åbn ved klik",
-                    description: "Åbn videoer og lyd i afspilleren, når du trykker på afspil, i stedet for at afspille dem i Discord."
-                },
-                path: {
-                    label: "Afspillersti",
-                    description: "Absolut sti til afspillerens programfil. Lad den være tom for at bruge den fra din PATH."
-                },
-                args: {
-                    label: "Afspillerargumenter",
-                    description: "Ekstra argumenter, der sendes til afspilleren. Sæt værdier med mellemrum i anførselstegn."
-                }
-            },
-            context: {
-                openIn: "Åbn i {{player}}"
-            },
-            toast: {
-                alreadyOpen: "Allerede åben i {{player}}.",
-                restartRequired: "Genstart Discord helt for at indlæse ExternalPlayer.",
-                openFailed: "Kunne ikke åbne afspilleren."
-            },
-            status: {
-                paused: "Sat på pause i {{player}}",
-                playing: "Afspiller i {{player}}"
             }
         },
         f8break: {
@@ -8053,6 +8051,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "DM-sektion foldet sammen",
                     description: "Fold DM-sektionen sammen"
                 },
+                friendsSidebarGroupDms: {
+                    label: "Gruppe-DM'er i vennesidebjælken",
+                    description: "Vis fastgjorte gruppe-DM'er i vennesidebjælken."
+                },
                 userBasedCategoryList: {
                     label: "Brugerbaseret kategoriliste",
                     description: ""
@@ -10778,6 +10780,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         textReplace: {
             name: "TextReplace",
             description: "Erstat tekst i dine beskeder automatisk. Du kan finde færdige regler i Plexcord-serveren.",
+            importExport: {
+                title: "Import og eksport",
+                description: "Eksportér dine regler som en JSON-fil, eller importér regler for at tilføje dem til dine eksisterende regler.",
+                export: "Eksportér JSON",
+                import: "Importér JSON",
+                success: "Reglerne blev importeret.",
+                failed: "Kunne ikke importere regler. Vælg en gyldig TextReplace JSON-fil."
+            },
             option: {
                 replace: {
                     label: "Erstat",
@@ -12181,7 +12191,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         fileUpload: {
             name: "FileUpload",
             description: "Upload filer til hostingtjenester som Zipline, Nest, S3 og WebDAV",
+            dialog: {
+                message: "FileUpload vil uploade filer til {{origin}}",
+                detail: "Medmindre du genkender og fuldt ud stoler på {{origin}}, bør du annullere denne anmodning!\n\nStol på husker denne server, Tillad tillader kun denne anmodning.",
+                trust: "Stol på",
+                allow: "Tillad",
+                cancel: "Annuller"
+            },
             toast: {
+                approvedServersReset: "Godkendte servere nulstillet",
                 fileTypeNotAllowed: "Filtypen er ikke tilladt af det aktuelle filter",
                 pleaseConfigureFileuploadSettings: "Konfigurer først FileUpload-indstillingerne",
                 sharexConfigIsValid: "ShareX-konfigurationen er gyldig",
@@ -12304,8 +12322,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 auto: "Automatisk",
                 commaSeparatedListOf: "Kommasepareret liste over filendelser (f.eks. png,jpg,gif). Lad stå tomt for at tillade alle.",
                 configureBrowserUploadProxying: "Konfigurer proxy og tidsgrænser for browseruploads.",
-                corsProxyUsedFor: "CORS-proxy brugt til webuploads. Lad stå tomt for at bruge standardproxyen.",
-                sourceCodeForThe: "Kildekode til standard-CORS-proxyen",
+                corsProxyUsedFor: "Valgfri CORS-proxy til uploads, der ikke kan gå gennem desktop-appen. Proxyen ser alle filer og tokens, der sendes gennem den, så brug kun en, du stoler på. Lad feltet være tomt for at uploade direkte.",
                 maximumTimeToWait: "Maksimal ventetid pr. uploadforsøg, før der skiftes til reserve",
                 selectTimeout: "Vælg tidsgrænse",
                 drag: "Træk",
@@ -12469,7 +12486,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Indlejringsproxytjeneste"
                 },
                 corsProxyUrl: {
-                    description: "CORS-proxy-URL, der bruges til browseruploads",
+                    description: "Valgfri CORS-proxy-URL til uploads i browseren",
                     label: "CORS-proxy-URL"
                 },
                 apngToGif: {
@@ -12528,6 +12545,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             panel: {
+                approvedServers: "Godkendte servere",
+                approvedServersDescription: "S3- og WebDAV-servere, som du har tilladt FileUpload at uploade til. Nulstilling vil spørge igen ved næste upload.",
+                resetApprovedServers: "Nulstil godkendte servere",
                 fallbackOrder: "Reserverækkefølge",
                 uploadService: "Uploadtjeneste",
                 zipline: "Zipline",
@@ -12593,7 +12613,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedFileTypes: "Tilladte filtyper",
                 network: "Netværk",
                 corsProxyUrl: "CORS-proxy-URL",
-                defaultCorsProxySource: "Kilde til standard-CORS-proxy",
                 uploadTimeout: "Tidsgrænse for upload",
                 domainsJsonDescription: "JSON-array med domæner, der skal bruges, f.eks. [\"offensive\"]."
             },
@@ -13888,7 +13907,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         userPFP: {
             toast: {
-                gifsWebpMustBe: "GIF'er/WebP skal tilføjes via URL. Upload din GIF/WebP til en billedhostingtjeneste, og indsæt linket."
+                gifsWebpMustBe: "GIF/WebP skal tilføjes via URL. Links fra Imgur, GitHub, Tenor, Giphy og Discord virker uden ekstra opsætning."
             },
             text: {
                 save: "Gem",

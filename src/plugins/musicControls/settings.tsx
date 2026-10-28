@@ -5,13 +5,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { getLanguageName, plugin, t } from "@api/i18n";
+import { csp, getLanguageName, plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
+import { Notice } from "@components/Notice";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsSection } from "@components/settings/tabs/plugins/components/Common";
+import { useCspPermission } from "@utils/csp";
 import { makeRange, OptionType } from "@utils/types";
 import { MaskedLink, Select, showToast, TextInput } from "@webpack/common";
 
@@ -43,6 +45,9 @@ function InstallInstructions() {
 }
 
 function LyricsProviderSettings() {
+    const { spotifyLyricsApiUrl } = settings.use(["spotifyLyricsApiUrl"]);
+    const [isLyricsServerAllowed, allowLyricsServer] = useCspPermission(spotifyLyricsApiUrl.trim(), ["connect-src"], "MusicControls");
+
     return (
         <>
             <SettingsSection name="lyricsProvider" label={t(plugin.musicControls.option.lyricsProvider.label)} description={t(plugin.musicControls.option.lyricsProvider.description)}>
@@ -76,6 +81,12 @@ function LyricsProviderSettings() {
                         maxLength={null}
                     />
                 </SettingsSection>
+            )}
+
+            {!isLyricsServerAllowed && settings.store.lyricsProvider === Provider.Spotify && (
+                <Notice variant="warning" action={<Button size="small" variant="secondary" onClick={allowLyricsServer}>{t(csp.notice.allowHost)}</Button>}>
+                    {t(csp.notice.blocked, { host: URL.parse(spotifyLyricsApiUrl.trim())?.host })}
+                </Notice>
             )}
         </>
     );

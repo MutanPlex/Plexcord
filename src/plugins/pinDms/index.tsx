@@ -10,17 +10,18 @@ import "./styles.css";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { PinIcon } from "@components/Icons";
 import { Channel } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType, StartAt } from "@utils/types";
-import { findCssClassesLazy } from "@webpack";
-import { Clickable, ContextMenuApi, FluxDispatcher, Menu, React } from "@webpack/common";
+import { findComponentByCodeLazy, findCssClassesLazy, findStoreLazy } from "@webpack";
+import { ChannelStore, Clickable, ContextMenuApi, FluxDispatcher, Menu, PrivateChannelSortStore, React, RelationshipStore, SelectedChannelStore, useStateFromStores } from "@webpack/common";
 
 import { contextMenus } from "./components/contextMenu";
 import { openCategoryModal, requireSettingsModal } from "./components/CreateCategoryModal";
 import { DEFAULT_CHUNK_SIZE } from "./constants";
-import { canMoveCategory, canMoveCategoryInDirection, Category, categoryLen, collapseCategory, getAllUncollapsedChannels, getCategoryByIndex, getCategoryChannels, getSections, init, isPinned, moveCategory, removeCategory, usePinnedDms } from "./data";
+import { canMoveCategory, canMoveCategoryInDirection, Category, categoryLen, collapseCategory, currentUserCategories, getAllUncollapsedChannels, getCategoryByIndex, getCategoryChannels, getSections, init, isPinned, moveCategory, removeCategory, usePinnedDms } from "./data";
 
 interface ChannelComponentProps {
     children: React.ReactNode,
@@ -28,7 +29,73 @@ interface ChannelComponentProps {
     selected: boolean;
 }
 
+interface FriendSection {
+    key: string;
+    pinDms?: boolean;
+    collapsed?: boolean;
+    rows: { userId?: string; pinDmsChannelId?: string; }[];
+}
+
 const headerClasses = findCssClassesLazy("privateChannelsHeaderContainer", "headerText");
+const PrivateChannelRow = findComponentByCodeLazy<{ channel: Channel; selected: boolean; }>(".getAnyStreamForUser(", "recipients.some(");
+const FriendRowStore: { getRow(userId: string): FriendSection["rows"][number] | undefined; } = findStoreLazy("FriendRowStore");
+
+let lastFriendSections: { sections: FriendSection[]; order: string[] | false; result: FriendSection[]; } | null = null;
+
+const FriendSidebarChannel = ErrorBoundary.wrap(({ channelId }: { channelId: string; }) => {
+    const channel = useStateFromStores([ChannelStore], () => ChannelStore.getChannel(channelId));
+    const selected = useStateFromStores([SelectedChannelStore], () => SelectedChannelStore.getChannelId() === channelId);
+
+    return channel ? <div className="pc-pindms-sidebar-channel"><PrivateChannelRow channel={channel} selected={selected} /></div> : null;
+}, { noop: true });
+
+function openCategoryMenu(e: React.MouseEvent, category: Category) {
+    ContextMenuApi.openContextMenu(e, () => (
+        <Menu.Menu
+            navId="pc-pindms-header-menu"
+            onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
+            color="danger"
+            aria-label={t(plugin.pinDMs.context.category.label)}
+        >
+            <Menu.MenuItem
+                id="pc-pindms-edit-category"
+                label={t(plugin.pinDMs.context.category.edit)}
+                action={() => openCategoryModal(category.id, null)}
+            />
+
+            {
+                canMoveCategory(category.id) && (
+                    <>
+                        {
+                            canMoveCategoryInDirection(category.id, -1) && <Menu.MenuItem
+                                id="pc-pindms-move-category-up"
+                                label={t(plugin.pinDMs.context.category.up)}
+                                action={() => moveCategory(category.id, -1)}
+                            />
+                        }
+                        {
+                            canMoveCategoryInDirection(category.id, 1) && <Menu.MenuItem
+                                id="pc-pindms-move-category-down"
+                                label={t(plugin.pinDMs.context.category.down)}
+                                action={() => moveCategory(category.id, 1)}
+                            />
+                        }
+                    </>
+
+                )
+            }
+
+            <Menu.MenuSeparator />
+            <Menu.MenuItem
+                id="pc-pindms-delete-category"
+                color="danger"
+                label={t(plugin.pinDMs.context.category.delete)}
+                action={() => removeCategory(category.id)}
+            />
+
+        </Menu.Menu>
+    ));
+}
 
 export let instance: any;
 
@@ -46,6 +113,7 @@ export const settings = definePluginSettings({
             { label: () => t(plugin.pinDMs.option.pinOrder.lastMessage), value: PinOrder.LastMessage, default: true },
             { label: () => t(plugin.pinDMs.option.pinOrder.custom), value: PinOrder.Custom }
         ],
+        onChange: () => FluxDispatcher.dispatch({ type: "FRIENDS_LIST_TEAR_DOWN" })
     },
     canCollapseDmSection: {
         label: () => t(plugin.pinDMs.option.canCollapseDmSection.label),
@@ -60,11 +128,19 @@ export const settings = definePluginSettings({
         default: false,
         hidden: true
     },
+    friendsSidebarGroupDms: {
+        label: () => t(plugin.pinDMs.option.friendsSidebarGroupDms.label),
+        description: () => t(plugin.pinDMs.option.friendsSidebarGroupDms.description),
+        type: OptionType.BOOLEAN,
+        default: true,
+        onChange: () => FluxDispatcher.dispatch({ type: "FRIENDS_LIST_TEAR_DOWN" })
+    },
     userBasedCategoryList: {
         label: () => t(plugin.pinDMs.option.userBasedCategoryList.label),
         description: () => t(plugin.pinDMs.option.userBasedCategoryList.description),
         type: OptionType.CUSTOM,
-        default: {} as Record<string, Category[]>
+        default: {} as Record<string, Category[]>,
+        onChange: () => FluxDispatcher.dispatch({ type: "FRIENDS_LIST_TEAR_DOWN" })
     },
 });
 
@@ -157,6 +233,59 @@ export default definePlugin({
                 match: /(?<=\i===\i\.ME\?)\i\.\i\.getPrivateChannelIds\(\)/,
                 replace: "$self.getAllUncollapsedChannels().concat($&.filter(c=>!$self.isPinned(c)))"
             }
+        },
+
+        // Friends sidebar
+        {
+            find: 'displayName="FriendRowStore"',
+            replacement: [
+                {
+                    match: /(?<=getSections\(\)\{.{0,80}?,)\i(?=\})/,
+                    replace: "$self.getFriendSections($&)"
+                },
+                {
+                    // Track pinned DM recipients even if they aren't friends
+                    match: /\i\.\i\.isFriend(?=\()/g,
+                    replace: "$self.isFriendRow"
+                },
+                {
+                    match: /\i\.\i\.getFriendIDs\(\)/g,
+                    replace: "$self.getFriendRowIds($&)"
+                }
+            ]
+        },
+        {
+            find: 'location:"FriendsSidebar"',
+            replacement: [
+                {
+                    match: /(?<=\[)\i\.\i(?=\],\(\)=>\i\.\i\.getSections\(\))/g,
+                    replace: "$&,$self.PrivateChannelSortStore"
+                },
+                {
+                    match: /let (\i)=(\i\[\i\])\?\.key;return null!=\1&&(\i)\.has\(\1\)/,
+                    replace: "return $self.isFriendSectionCollapsed($2,$3)"
+                },
+                {
+                    match: /(?<=useCallback\((\i)=>\{)(?=\i\(\i=>\{let \i=new Set\(\i\);return \i\.delete\(\1\))/,
+                    replace: "if($self.toggleFriendSection($1))return;"
+                },
+                {
+                    match: /(?<=null==(\i)\|\|null==\i\?null:)(?=\i\.type===\i\.\i\.VOICE_GROUP\?)/,
+                    replace: "null!=$1.pinDmsChannelId?$self.renderFriendSidebarChannel($1):"
+                },
+                {
+                    match: /(?<=\i=(\i)\.key,\i=\i\.useCallback\(\(\)=>\i\(\i\).{0,800}?"aria-label":\i,onClick:\i,)/,
+                    replace: "onContextMenu:e=>$self.openFriendSectionMenu(e,$1),"
+                },
+                {
+                    match: /(?<=\{let\{section:(\i)\}=\i;)(?=switch\(\i\.type\))/,
+                    replace: "if($1.pinDms)return $self.renderFriendSectionIcon($1);"
+                },
+                {
+                    match: /(?<=\{let\{section:(\i)\}=\i;)(?=return \i\.type===\i\.\i\.GAME\?)/,
+                    replace: "if($1.pinDms)return $self.renderFriendSectionLabel($1);"
+                }
+            ]
         },
     ],
 
@@ -261,6 +390,84 @@ export default definePlugin({
         return rowHeight * (channels.indexOf(channelId) + preRenderedChildren) + padding;
     },
 
+    get PrivateChannelSortStore() {
+        return PrivateChannelSortStore;
+    },
+
+    isFriendRow(userId: string) {
+        const channelId = ChannelStore.getDMFromUserId(userId);
+        return RelationshipStore.isFriend(userId) || channelId != null && isPinned(channelId);
+    },
+
+    getFriendRowIds(friendIds: string[]) {
+        return [...friendIds, ...currentUserCategories.flatMap(c => c.channels).flatMap(id => {
+            const channel = ChannelStore.getChannel(id);
+            return channel?.isDM() ? channel.getRecipientId() ?? [] : [];
+        })];
+    },
+
+    getFriendSections(sections: FriendSection[]) {
+        const order = settings.store.pinOrder === PinOrder.LastMessage && PrivateChannelSortStore.getPrivateChannelIds();
+        if (lastFriendSections?.sections === sections && lastFriendSections.order === order) return lastFriendSections.result;
+
+        const pinned = currentUserCategories.map(category => ({
+            key: `pc-pindms-${category.id}`,
+            label: category.name,
+            color: category.color,
+            collapsed: category.collapsed,
+            pinDms: true,
+            rows: getCategoryChannels(category).flatMap(id => {
+                const channel = ChannelStore.getChannel(id);
+                if (channel?.isGroupDM()) return settings.store.friendsSidebarGroupDms ? [{ pinDmsChannelId: id }] : [];
+
+                const recipientId = channel?.isDM() && channel.getRecipientId();
+                const row = recipientId && FriendRowStore.getRow(recipientId);
+                return row ? [row] : [];
+            })
+        })).filter(s => s.rows.length);
+
+        const pinnedIds = new Set(pinned.flatMap(s => s.rows.map(r => r.userId)));
+        const result = [
+            ...pinned,
+            ...sections
+                .map(s => ({ ...s, rows: s.rows.filter(r => !pinnedIds.has(r.userId)) }))
+                .filter(s => s.rows.length)
+        ];
+
+        lastFriendSections = { sections, order, result };
+        return result;
+    },
+
+    isFriendSectionCollapsed(section: FriendSection | undefined, collapsed: Set<string>) {
+        if (section?.pinDms) return !!section.collapsed;
+        return section != null && collapsed.has(section.key);
+    },
+
+    toggleFriendSection(key: string) {
+        const category = currentUserCategories.find(c => `pc-pindms-${c.id}` === key);
+        if (!category) return false;
+
+        collapseCategory(category.id, !category.collapsed);
+        return true;
+    },
+
+    openFriendSectionMenu(e: React.MouseEvent, section: FriendSection) {
+        const category = currentUserCategories.find(c => `pc-pindms-${c.id}` === section.key);
+        if (category) openCategoryMenu(e, category);
+    },
+
+    renderFriendSidebarChannel({ pinDmsChannelId }: { pinDmsChannelId: string; }) {
+        return <FriendSidebarChannel key={pinDmsChannelId} channelId={pinDmsChannelId} />;
+    },
+
+    renderFriendSectionIcon({ color }: { color: number; }) {
+        return <PinIcon width={16} height={16} fill={`#${color.toString(16).padStart(6, "0")}`} />;
+    },
+
+    renderFriendSectionLabel({ label, color }: { label: string; color: number; }) {
+        return <span style={{ color: `#${color.toString(16).padStart(6, "0")}` }}>{label}</span>;
+    },
+
     renderCategory: ErrorBoundary.wrap(({ section }: { section: number; }) => {
         const category = getCategoryByIndex(section - 1);
         if (!category) return null;
@@ -268,53 +475,7 @@ export default definePlugin({
         return (
             <Clickable
                 onClick={() => collapseCategory(category.id, !category.collapsed)}
-                onContextMenu={e => {
-                    ContextMenuApi.openContextMenu(e, () => (
-                        <Menu.Menu
-                            navId="pc-pindms-header-menu"
-                            onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-                            color="danger"
-                            aria-label={t(plugin.pinDMs.context.category.label)}
-                        >
-                            <Menu.MenuItem
-                                id="pc-pindms-edit-category"
-                                label={t(plugin.pinDMs.context.category.edit)}
-                                action={() => openCategoryModal(category.id, null)}
-                            />
-
-                            {
-                                canMoveCategory(category.id) && (
-                                    <>
-                                        {
-                                            canMoveCategoryInDirection(category.id, -1) && <Menu.MenuItem
-                                                id="pc-pindms-move-category-up"
-                                                label={t(plugin.pinDMs.context.category.up)}
-                                                action={() => moveCategory(category.id, -1)}
-                                            />
-                                        }
-                                        {
-                                            canMoveCategoryInDirection(category.id, 1) && <Menu.MenuItem
-                                                id="pc-pindms-move-category-down"
-                                                label={t(plugin.pinDMs.context.category.down)}
-                                                action={() => moveCategory(category.id, 1)}
-                                            />
-                                        }
-                                    </>
-
-                                )
-                            }
-
-                            <Menu.MenuSeparator />
-                            <Menu.MenuItem
-                                id="pc-pindms-delete-category"
-                                color="danger"
-                                label={t(plugin.pinDMs.context.category.delete)}
-                                action={() => removeCategory(category.id)}
-                            />
-
-                        </Menu.Menu>
-                    ));
-                }}
+                onContextMenu={e => openCategoryMenu(e, category)}
             >
                 <h2
                     className={classes(headerClasses.privateChannelsHeaderContainer, "pc-pindms-section-container", category.collapsed ? "pc-pindms-collapsed" : "")}

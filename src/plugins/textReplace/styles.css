@@ -24,3 +24,11 @@
 .pc-textReplace-search-input {
     margin-top: 8px;
 }
+
+.pc-textReplace-import-export-buttons {
+    margin-top: 8px;
+}
+
+.pc-textReplace-import-export-buttons > button {
+    flex: 1;
+}

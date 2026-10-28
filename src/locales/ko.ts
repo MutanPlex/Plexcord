@@ -680,14 +680,22 @@ const translations: MatchStructure<typeof enTranslations> = {
             recommended: "GitHub 또는 Imgur로 옮기는 것이 좋습니다. 그러나 도메인을 완전히 신뢰하는 경우 도메인을 허용할 수도 있습니다.",
             afterAllow: "도메인을 허용한 후 변경 사항을 적용하려면 (트레이/작업 관리자에서) 완전히 닫고 {{platform}}을(를) 다시 시작해야 합니다.",
             allow: "허용하다",
+            allowAll: "모두 허용 (도메인 {{count}}개)",
             url: "차단된 URL"
         },
         imgur: {
             direct: "Imgur 링크는 {{etc}} 형식의 직접 링크여야 합니다.",
             copy: "직접 링크를 얻으려면 이미지를 마우스 오른쪽 버튼으로 클릭하고 '이미지 주소 복사'를 선택하세요."
         },
+        notice: {
+            allowHost: "호스트 허용",
+            blocked: "{{host}}에 대한 연결이 차단되었습니다. 신뢰한다면 이 호스트를 허용한 뒤 Discord를 다시 시작하세요.",
+            imagesBlocked: "{{host}}의 이미지가 차단되었습니다. 신뢰한다면 이 호스트를 허용한 뒤 Discord를 다시 시작하세요.",
+            failed: "이 도메인을 허용하지 못했습니다."
+        },
         wants: {
             caller: "{{callerName}}이(가) {{domain}}에 대한 연결을 허용하려고 합니다.",
+            unknown: "알 수 없는 출처가 {{domain}}에 대한 연결을 허용하려고 합니다",
             detail: "{{domain}}을(를) 인식하고 완전히 신뢰하지 않는 한 이 요청을 취소해야 합니다!",
             restart: "변경 사항을 적용하려면 {{appName}}을(를) 완전히 닫고 다시 시작해야 합니다.",
             type: {
@@ -1485,7 +1493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
-            description: "차단된 사용자 목록에서 검색할 수 있으며 설정에서 이름을 선택할 수 있습니다.",
+            description: "차단한 사용자 목록에서 검색할 수 있게 하고, 설정에서 이름을 선택할 수 있게 하며, 차단된 프로필 확인 창을 건너뛰고, 차단 / 무시된 메시지를 묶어 줍니다.",
             placeholder: "사용자 검색..."
         },
         betterCommands: {
@@ -4259,6 +4267,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        draftNavigator: {
+            name: "DraftNavigator",
+            description: "보내지 않은 초안을 검색하고 내용을 미리 본 뒤 채널로 이동합니다.",
+            text: {
+                title: "초안 탐색기",
+                open: "초안 탐색기 열기",
+                unknownChannel: "알 수 없는 채널 ({{id}})",
+                channelUnavailable: "채널을 사용할 수 없음",
+                directMessage: "개인 메시지",
+                groupMessage: "그룹 메시지",
+                server: "서버",
+                jump: "이동",
+                jumpTo: "{{name}}(으)로 이동",
+                count: "초안 {{count}}개",
+                countOne: "초안 {{count}}개",
+                countFiltered: "초안 {{total}}개 중 {{shown}}개",
+                noMatches: "일치하는 초안이 없습니다.",
+                noDrafts: "보내지 않은 초안이 없습니다.",
+                close: "닫기",
+                searchLabel: "초안 검색",
+                searchPlaceholder: "채널, 서버 또는 초안 내용 검색",
+                listLabel: "보내지 않은 초안"
+            }
+        },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
             description: "즐겨찾는 감정 표현에 드래그 앤 드롭 기능을 추가합니다."
@@ -4549,40 +4581,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "{{name}}(으)로 복제",
                 emoji: "이모지",
                 sticker: "스티커"
-            }
-        },
-        externalPlayer: {
-            name: "ExternalPlayer",
-            description: "동영상과 오디오를 mpv 같은 외부 미디어 플레이어로 엽니다.",
-            option: {
-                player: {
-                    label: "플레이어",
-                    description: "미디어를 열 플레이어입니다."
-                },
-                openOnClick: {
-                    label: "클릭 시 열기",
-                    description: "재생을 누르면 Discord에서 재생하는 대신 동영상과 오디오를 플레이어로 엽니다."
-                },
-                path: {
-                    label: "플레이어 경로",
-                    description: "플레이어 실행 파일의 절대 경로입니다. 비워 두면 PATH에 있는 것을 사용합니다."
-                },
-                args: {
-                    label: "플레이어 인수",
-                    description: "플레이어에 전달할 추가 인수입니다. 공백이 있는 값은 따옴표로 감싸세요."
-                }
-            },
-            context: {
-                openIn: "{{player}}에서 열기"
-            },
-            toast: {
-                alreadyOpen: "이미 {{player}}에서 열려 있습니다.",
-                restartRequired: "ExternalPlayer를 불러오려면 Discord를 완전히 다시 시작하세요.",
-                openFailed: "플레이어를 열지 못했습니다."
-            },
-            status: {
-                paused: "{{player}}에서 일시 정지됨",
-                playing: "{{player}}에서 재생 중"
             }
         },
         f8break: {
@@ -8053,6 +8051,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "DM 섹션이 접혔습니다.",
                     description: "DM 섹션 접기"
                 },
+                friendsSidebarGroupDms: {
+                    label: "친구 사이드바 그룹 DM",
+                    description: "고정된 그룹 DM을 친구 사이드바에 표시합니다."
+                },
                 userBasedCategoryList: {
                     label: "사용자 기반 카테고리 목록",
                     description: ""
@@ -10778,6 +10780,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         textReplace: {
             name: "TextReplace",
             description: "메시지의 텍스트를 바꾸세요. Plexcord 서버의 #textreplace-rules 채널에서 미리 만들어진 규칙을 찾을 수 있습니다.",
+            importExport: {
+                title: "가져오기 및 내보내기",
+                description: "규칙을 JSON 파일로 내보내거나 규칙을 가져와 기존 규칙에 추가합니다.",
+                export: "JSON 내보내기",
+                import: "JSON 가져오기",
+                success: "규칙을 가져왔습니다.",
+                failed: "규칙을 가져오지 못했습니다. 올바른 TextReplace JSON 파일을 선택하세요."
+            },
             option: {
                 replace: {
                     label: "바꾸다",
@@ -12181,7 +12191,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         fileUpload: {
             name: "FileUpload",
             description: "Zipline, Nest, S3, WebDAV 같은 호스팅 서비스에 파일을 업로드합니다",
+            dialog: {
+                message: "FileUpload가 {{origin}}에 파일을 업로드하려고 합니다",
+                detail: "{{origin}}을(를) 알고 완전히 신뢰하지 않는다면 이 요청을 취소하세요!\n\n신뢰는 이 서버를 기억하고, 허용은 이번 요청만 허용합니다.",
+                trust: "신뢰",
+                allow: "허용",
+                cancel: "취소"
+            },
             toast: {
+                approvedServersReset: "승인된 서버를 초기화했습니다",
                 fileTypeNotAllowed: "현재 필터에서 허용되지 않는 파일 형식입니다",
                 pleaseConfigureFileuploadSettings: "먼저 FileUpload 설정을 구성하세요",
                 sharexConfigIsValid: "ShareX 구성이 유효합니다",
@@ -12304,8 +12322,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 auto: "자동",
                 commaSeparatedListOf: "쉼표로 구분된 확장자 목록 (예: png,jpg,gif). 비워 두면 모두 허용합니다.",
                 configureBrowserUploadProxying: "브라우저 업로드 프록시와 시간 제한을 구성합니다.",
-                corsProxyUsedFor: "웹 업로드에 사용하는 CORS 프록시입니다. 기본 프록시를 사용하려면 비워 두세요.",
-                sourceCodeForThe: "기본 CORS 프록시의 소스 코드",
+                corsProxyUsedFor: "데스크톱 앱을 거칠 수 없는 업로드에 사용할 선택적 CORS 프록시입니다. 프록시는 이를 통해 전송되는 모든 파일과 토큰을 볼 수 있으므로 신뢰하는 것만 사용하세요. 비워 두면 직접 업로드합니다.",
                 maximumTimeToWait: "대체로 전환하기 전 업로드 시도당 최대 대기 시간",
                 selectTimeout: "시간 제한 선택",
                 drag: "끌기",
@@ -12469,7 +12486,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "임베드 프록시 서비스"
                 },
                 corsProxyUrl: {
-                    description: "브라우저 업로드에 사용하는 CORS 프록시 URL",
+                    description: "브라우저 업로드에 사용할 선택적 CORS 프록시 URL",
                     label: "CORS 프록시 URL"
                 },
                 apngToGif: {
@@ -12528,6 +12545,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             panel: {
+                approvedServers: "승인된 서버",
+                approvedServersDescription: "FileUpload가 업로드하도록 허용한 S3 및 WebDAV 서버입니다. 초기화하면 다음 업로드 때 다시 묻습니다.",
+                resetApprovedServers: "승인된 서버 초기화",
                 fallbackOrder: "대체 순서",
                 uploadService: "업로드 서비스",
                 zipline: "Zipline",
@@ -12593,7 +12613,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedFileTypes: "허용 파일 형식",
                 network: "회로망",
                 corsProxyUrl: "CORS 프록시 URL",
-                defaultCorsProxySource: "기본 CORS 프록시 소스",
                 uploadTimeout: "업로드 시간 제한",
                 domainsJsonDescription: "사용할 도메인의 JSON 배열입니다. 예: [\"offensive\"]"
             },
@@ -13888,7 +13907,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         userPFP: {
             toast: {
-                gifsWebpMustBe: "GIF/WebP는 URL로 추가해야 합니다. 이미지 호스팅 서비스에 업로드한 뒤 링크를 붙여 넣으세요."
+                gifsWebpMustBe: "GIF/WebP는 URL로 추가해야 합니다. Imgur, GitHub, Tenor, Giphy, Discord 링크는 추가 설정 없이 작동합니다."
             },
             text: {
                 save: "저장",

@@ -33,7 +33,8 @@ import { Devs, PcDevs, SUPPORT_CHANNEL_IDS } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
-import { React, Select, TextInput, UserStore, useState } from "@webpack/common";
+import { chooseFile, saveFile } from "@utils/web";
+import { React, Select, showToast, TextInput, UserStore, useState } from "@webpack/common";
 
 interface Rule {
     name?: string;
@@ -67,6 +68,7 @@ const makeEmptyRule: () => Rule = () => ({
     id: crypto.randomUUID()
 });
 const makeEmptyRuleArray = () => [makeEmptyRule()];
+const RULE_SETTINGS: ("stringRules" | "regexRules")[] = ["stringRules", "regexRules"];
 
 const settings = definePluginSettings({
     replace: {
@@ -89,6 +91,7 @@ const settings = definePluginSettings({
                         rulesArray={regexRules}
                         isRegex
                     />
+                    <TextReplaceImportExport />
                 </>
             );
         }
@@ -106,6 +109,49 @@ const settings = definePluginSettings({
         default: makeEmptyRuleArray(),
     }
 });
+
+function TextReplaceImportExport() {
+    return (
+        <div>
+            <HeadingSecondary>{t(plugin.textReplace.importExport.title)}</HeadingSecondary>
+            <Paragraph>{t(plugin.textReplace.importExport.description)}</Paragraph>
+            <Flex className={cl("import-export-buttons")}>
+                <Button onClick={exportRules}>{t(plugin.textReplace.importExport.export)}</Button>
+                <Button onClick={importRules}>{t(plugin.textReplace.importExport.import)}</Button>
+            </Flex>
+        </div>
+    );
+}
+
+function exportRules() {
+    const { stringRules, regexRules } = settings.plain;
+    const json = JSON.stringify({ stringRules, regexRules }, (key, value) => key === "id" ? undefined : value, 4);
+
+    if (IS_DISCORD_DESKTOP) DiscordNative.fileManager.saveWithDialog(new TextEncoder().encode(json), "textreplace-rules.json");
+    else saveFile(new File([json], "textreplace-rules.json", { type: "application/json" }));
+}
+
+async function importRules() {
+    const file = await chooseFile("application/json");
+    if (!file) return;
+
+    try {
+        const data = JSON.parse(await file.text());
+
+        for (const key of RULE_SETTINGS) {
+            const imported = (data[key] ?? [])
+                .filter((rule: Rule) => typeof rule?.find === "string" && rule.find)
+                .map((rule: Rule) => ({ ...makeEmptyRule(), ...rule, id: crypto.randomUUID() }));
+
+            settings.store[key] = [...settings.plain[key].filter(rule => !isEmptyRule(rule)), ...imported, makeEmptyRule()];
+        }
+
+        showToast({ text: t(plugin.textReplace.importExport.success), variant: "success" });
+    } catch (err) {
+        new Logger("TextReplace").error("Failed to import rules:", err);
+        showToast({ text: t(plugin.textReplace.importExport.failed), variant: "critical" });
+    }
+}
 
 function stringToRegex(str: string) {
     const match = str.match(/^(\/)?(.+?)(?:\/([gimsuyv]*))?$/); // Regex to match regex
@@ -425,7 +471,7 @@ const TEXT_REPLACE_RULES_EXEMPT_CHANNEL_IDS = [
 export default definePlugin({
     name: "TextReplace",
     description: () => t(plugin.textReplace.description),
-    authors: [Devs.AutumnVN, Devs.TheKodeToad, PcDevs.Etorix, PcDevs.Ape],
+    authors: [Devs.AutumnVN, Devs.TheKodeToad, PcDevs.Etorix, PcDevs.Ape, PcDevs.rot],
     tags: ["chat", "customisation", "utility"],
 
     settings,

@@ -680,14 +680,22 @@ const translations: MatchStructure<typeof enTranslations> = {
             recommended: "Bunları GitHub veya Imgur'a taşımanız şiddetle önerilir. Ancak, onlara tamamen güvendiğiniz takdirde alanları da izin verebilirsiniz.",
             afterAllow: "Bir alanı izin verdikten sonra, değişikliği uygulamak için {{platform}}'ı tamamen kapatıp (sistem tepsisinden / görev yöneticisinden) yeniden başlatmalısınız.",
             allow: "İzin Ver",
+            allowAll: "Tümüne İzin Ver ({{count}} alan adı)",
             url: "Engellenen URL'ler"
         },
         imgur: {
             direct: "Imgur bağlantıları {{etc}} biçiminde doğrudan bağlantılar olmalıdır.",
             copy: "Doğrudan bir bağlantı elde etmek için, resme sağ tıklayın ve 'Resim adresini kopyala' seçeneğini belirleyin."
         },
+        notice: {
+            allowHost: "Sunucuya İzin Ver",
+            blocked: "{{host}} adresine bağlantılar engellendi. Güveniyorsanız bu sunucuya izin verin, ardından Discord'u yeniden başlatın.",
+            imagesBlocked: "{{host}} adresinden gelen görseller engellendi. Güveniyorsanız bu sunucuya izin verin, ardından Discord'u yeniden başlatın.",
+            failed: "Bu alan adına izin verilemedi."
+        },
         wants: {
             caller: "{{callerName}} {{domain}} alanına bağlantılara izin vermek istiyor",
+            unknown: "Bilinmeyen bir kaynak {{domain}} adresine bağlantılara izin vermek istiyor",
             detail: "{{domain}} alanını tanımıyor ve tamamen güvenmiyorsanız, bu isteği iptal etmelisiniz!",
             restart: "Değişikliklerin etkili olması için {{appName}}'ı tamamen kapatıp yeniden başlatmanız gerekir.",
             type: {
@@ -1485,7 +1493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
-            description: "Engellenen kullanıcılar listesini aramanıza ve ayarlarda isimleri seçilebilir hale getirmenize olanak tanır.",
+            description: "Engellenen kullanıcılar listesinde arama yapmanızı sağlar, ayarlarda isimleri seçilebilir yapar, engellenen profil uyarısını atlar ve engellenen / yok sayılan mesajları gruplar.",
             placeholder: "Kullanıcı ara..."
         },
         betterCommands: {
@@ -4259,6 +4267,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        draftNavigator: {
+            name: "DraftNavigator",
+            description: "Gönderilmemiş taslakları arayın, metinlerini önizleyin ve kanala atlayın.",
+            text: {
+                title: "Taslak Gezgini",
+                open: "Taslak Gezginini Aç",
+                unknownChannel: "Bilinmeyen kanal ({{id}})",
+                channelUnavailable: "Kanal kullanılamıyor",
+                directMessage: "Direkt mesaj",
+                groupMessage: "Grup mesajı",
+                server: "Sunucu",
+                jump: "Git",
+                jumpTo: "{{name}} kanalına git",
+                count: "{{count}} taslak",
+                countOne: "{{count}} taslak",
+                countFiltered: "{{total}} taslaktan {{shown}} tanesi",
+                noMatches: "Eşleşen taslak yok.",
+                noDrafts: "Gönderilmemiş taslak yok.",
+                close: "Kapat",
+                searchLabel: "Taslaklarda ara",
+                searchPlaceholder: "Kanal, sunucu veya taslak metninde ara",
+                listLabel: "Gönderilmemiş taslaklar"
+            }
+        },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
             description: "Favori emojilerin sırasını değiştirmek için sürükle-bırak özelliğini ekler"
@@ -4549,40 +4581,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "{{name}} sunucusuna kopyala",
                 emoji: "Emoji",
                 sticker: "Çıkartma"
-            }
-        },
-        externalPlayer: {
-            name: "ExternalPlayer",
-            description: "Videoları ve sesleri mpv gibi harici bir medya oynatıcıda açar.",
-            option: {
-                player: {
-                    label: "Oynatıcı",
-                    description: "Medyanın hangi oynatıcıda açılacağı."
-                },
-                openOnClick: {
-                    label: "Tıklayınca Aç",
-                    description: "Oynat'a bastığında videoları ve sesleri Discord'da oynatmak yerine oynatıcıda aç."
-                },
-                path: {
-                    label: "Oynatıcı Yolu",
-                    description: "Oynatıcı yürütülebilir dosyasının mutlak yolu. PATH'teki oynatıcıyı kullanmak için boş bırak."
-                },
-                args: {
-                    label: "Oynatıcı Argümanları",
-                    description: "Oynatıcıya iletilen ek argümanlar. Boşluk içeren değerleri tırnak içine al."
-                }
-            },
-            context: {
-                openIn: "{{player}} ile aç"
-            },
-            toast: {
-                alreadyOpen: "Zaten {{player}} ile açık.",
-                restartRequired: "ExternalPlayer'ı yüklemek için Discord'u tamamen yeniden başlat.",
-                openFailed: "Oynatıcı açılamadı."
-            },
-            status: {
-                paused: "{{player}} içinde duraklatıldı",
-                playing: "{{player}} içinde oynatılıyor"
             }
         },
         f8break: {
@@ -8053,6 +8051,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "DM Bölümü Daraltıldı",
                     description: "DM bölümünü daralt"
                 },
+                friendsSidebarGroupDms: {
+                    label: "Arkadaşlar Kenar Çubuğunda Grup DM'leri",
+                    description: "Sabitlenmiş grup DM'lerini arkadaşlar kenar çubuğunda göster."
+                },
                 userBasedCategoryList: {
                     label: "Kullanıcı Bazlı Kategori Listesi",
                     description: ""
@@ -10778,6 +10780,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         textReplace: {
             name: "TextReplace",
             description: "Mesajlarınızdaki metni değiştirin. Plexcord sunucusundaki #textreplace-rules kanalında hazır kurallar bulabilirsiniz",
+            importExport: {
+                title: "İçe ve Dışa Aktar",
+                description: "Kurallarınızı JSON dosyası olarak dışa aktarın veya mevcut kurallarınıza eklemek için kuralları içe aktarın.",
+                export: "JSON Dışa Aktar",
+                import: "JSON İçe Aktar",
+                success: "Kurallar başarıyla içe aktarıldı.",
+                failed: "Kurallar içe aktarılamadı. Geçerli bir TextReplace JSON dosyası seçin."
+            },
             option: {
                 replace: {
                     label: "Değiştir",
@@ -12181,7 +12191,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         fileUpload: {
             name: "FileUpload",
             description: "Dosyaları Zipline, Nest, S3 ve WebDAV gibi barındırma hizmetlerine yükle",
+            dialog: {
+                message: "FileUpload, dosyaları {{origin}} adresine yüklemek istiyor",
+                detail: "{{origin}} adresini tanımıyor ve ona tamamen güvenmiyorsan bu isteği iptal etmelisin!\n\nGüven bu sunucuyu hatırlar, İzin Ver yalnızca bu isteğe izin verir.",
+                trust: "Güven",
+                allow: "İzin Ver",
+                cancel: "İptal"
+            },
             toast: {
+                approvedServersReset: "Onaylı sunucular sıfırlandı",
                 fileTypeNotAllowed: "Dosya türüne mevcut filtre tarafından izin verilmiyor",
                 pleaseConfigureFileuploadSettings: "Önce FileUpload ayarlarını yapılandır",
                 sharexConfigIsValid: "ShareX yapılandırması geçerli",
@@ -12304,8 +12322,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 auto: "Otomatik",
                 commaSeparatedListOf: "Virgülle ayrılmış uzantı listesi (ör. png,jpg,gif). Tümüne izin vermek için boş bırak.",
                 configureBrowserUploadProxying: "Tarayıcı yükleme proxy'sini ve zaman aşımlarını yapılandır.",
-                corsProxyUsedFor: "Web yüklemeleri için kullanılan CORS proxy'si. Varsayılan proxy için boş bırak.",
-                sourceCodeForThe: "Varsayılan CORS proxy'sinin kaynak kodu",
+                corsProxyUsedFor: "Masaüstü uygulaması üzerinden yapılamayan yüklemeler için isteğe bağlı CORS proxy'si. Proxy, üzerinden gönderilen her dosyayı ve token'ı görür; bu yüzden yalnızca güvendiğiniz birini kullanın. Doğrudan yüklemek için boş bırakın.",
                 maximumTimeToWait: "Yedeğe geçmeden önce yükleme denemesi başına en uzun bekleme süresi",
                 selectTimeout: "Zaman aşımı seç",
                 drag: "Sürükle",
@@ -12469,7 +12486,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Gömme Proxy Hizmeti"
                 },
                 corsProxyUrl: {
-                    description: "Tarayıcı yüklemeleri için kullanılan CORS proxy URL'si",
+                    description: "Tarayıcı yüklemeleri için isteğe bağlı CORS proxy URL'si",
                     label: "CORS Proxy URL'si"
                 },
                 apngToGif: {
@@ -12528,6 +12545,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             panel: {
+                approvedServers: "Onaylı Sunucular",
+                approvedServersDescription: "FileUpload'ın yükleme yapmasına izin verdiğiniz S3 ve WebDAV sunucuları. Sıfırlarsanız bir sonraki yüklemede tekrar sorulur.",
+                resetApprovedServers: "Onaylı Sunucuları Sıfırla",
                 fallbackOrder: "Yedek Sırası",
                 uploadService: "Yükleme Hizmeti",
                 zipline: "Zipline",
@@ -12593,7 +12613,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedFileTypes: "İzin Verilen Dosya Türleri",
                 network: "Ağ",
                 corsProxyUrl: "CORS Proxy URL'si",
-                defaultCorsProxySource: "Varsayılan CORS Proxy Kaynağı",
                 uploadTimeout: "Yükleme Zaman Aşımı",
                 domainsJsonDescription: "Kullanılacak alan adlarının JSON dizisi, örneğin [\"offensive\"]."
             },
@@ -13888,7 +13907,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         userPFP: {
             toast: {
-                gifsWebpMustBe: "GIF/WebP dosyaları URL ile eklenmelidir. GIF/WebP dosyanı bir görsel barındırma hizmetine yükle ve bağlantıyı yapıştır."
+                gifsWebpMustBe: "GIF/WebP dosyaları URL ile eklenmelidir. Imgur, GitHub, Tenor, Giphy ve Discord bağlantıları ek ayar gerektirmeden çalışır."
             },
             text: {
                 save: "Kaydet",

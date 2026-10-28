@@ -6,10 +6,13 @@
  */
 
 import { set } from "@api/DataStore";
-import { plugin, t } from "@api/i18n";
+import { csp, plugin, t } from "@api/i18n";
+import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { Margins } from "@components/margins";
+import { Notice } from "@components/Notice";
 import { RenderModalProps } from "@plexcord/discord-types";
+import { useCspPermission } from "@utils/csp";
 import { classNameFactory } from "@utils/css";
 import { IconUtils, Modal, React, showToast,TextInput, UserStore, useState } from "@webpack/common";
 
@@ -35,6 +38,8 @@ export function SetAvatarModal({ userId, modalProps }: { userId: string; modalPr
     const [preview, setPreview] = useState<string>(avatars[userId] || "");
     const [isDragging, setIsDragging] = useState(false);
     const fileInputRef = React.useRef<HTMLInputElement>(null);
+    const previewUrl = URL.parse(preview);
+    const [isAllowed, allowHost] = useCspPermission(previewUrl?.protocol === "https:" ? preview : undefined, ["img-src"], "UserPFP");
 
     function handleKey(e: React.KeyboardEvent) {
         if (e.key === "Enter") saveUserAvatar();
@@ -124,6 +129,15 @@ export function SetAvatarModal({ userId, modalProps }: { userId: string; modalPr
                         onChange={handleUrlChange}
                         autoFocus
                     />
+                    {!isAllowed && (
+                        <Notice
+                            variant="warning"
+                            className={Margins.top8}
+                            action={<Button size="small" variant="secondary" onClick={allowHost}>{t(csp.notice.allowHost)}</Button>}
+                        >
+                            {t(csp.notice.imagesBlocked, { host: previewUrl?.host })}
+                        </Notice>
+                    )}
                 </section>
 
                 {/* Drag & drop */}

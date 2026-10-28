@@ -5,19 +5,24 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { plugin, t } from "@api/i18n";
+import { csp, plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
+import { Notice } from "@components/Notice";
 import { SettingsSection } from "@components/settings/tabs/plugins/components/Common";
 import { Switch } from "@components/Switch";
+import { useCspPermission } from "@utils/csp";
 import { classNameFactory } from "@utils/css";
 import { useForceUpdater } from "@utils/react";
-import { OptionType } from "@utils/types";
+import { OptionType, PluginNative } from "@utils/types";
 import { React, Select, showToast, TextArea, TextInput } from "@webpack/common";
 
-import { CORS_PROXY } from "./constants";
 import { fallbackServiceOrder, serviceLabels, ServiceType } from "./types";
 import { parseShareXConfig } from "./utils/sharex";
+
+const Native = IS_WEB
+    ? null
+    : PlexcordNative.pluginHelpers.FileUpload as PluginNative<typeof import("./native")>;
 
 const defaultFallbackOrder = fallbackServiceOrder.join(",");
 const cl = classNameFactory("pc-file-upload-settings-");
@@ -30,7 +35,7 @@ const getServiceOptions = () => [
     { label: t(plugin.fileUpload.text.encryptingHost), value: ServiceType.ENCRYPTINGHOST },
     { label: t(plugin.fileUpload.text.s3Compatible), value: ServiceType.S3 },
     { label: t(plugin.fileUpload.text.catboxMoe), value: ServiceType.CATBOX },
-    ...(IS_DISCORD_DESKTOP ? [{ label: "0x0.st", value: ServiceType.ZEROX0 }] : []),
+    ...(IS_WEB ? [] : [{ label: "0x0.st", value: ServiceType.ZEROX0 }]),
     { label: t(plugin.fileUpload.text.litterbox), value: ServiceType.LITTERBOX },
     { label: "GoFile", value: ServiceType.GOFILE },
     { label: "tmpfiles.org", value: ServiceType.TMPFILES },
@@ -53,8 +58,8 @@ const getLitterboxOptions = () => [
 
 // Built on demand so labels follow the current language instead of the one active when the module loaded
 const getEmbedProxyOptions = () => [
-    { label: t(plugin.fileUpload.text.corsProxy), value: "cors", default: true },
-    { label: "discord.nfp.is", value: "nfp" }
+    { label: t(plugin.fileUpload.text.corsProxy), value: "cors" },
+    { label: "discord.nfp.is", value: "nfp", default: true }
 ];
 
 // Built on demand so labels follow the current language instead of the one active when the module loaded
@@ -340,14 +345,14 @@ export const settings = definePluginSettings({
         get options() {
             return getEmbedProxyOptions();
         },
-        default: "cors",
+        default: "nfp",
         hidden: true
     },
     corsProxyUrl: {
         label: () => t(plugin.fileUpload.option.corsProxyUrl.label),
         type: OptionType.STRING,
         description: () => t(plugin.fileUpload.option.corsProxyUrl.description),
-        default: CORS_PROXY,
+        default: "",
         hidden: true
     },
     apngToGif: {
@@ -583,10 +588,30 @@ function FallbackOrderSettings() {
     );
 }
 
+function getShareXRequestUrl(config: string) {
+    try {
+        return parseShareXConfig(config).RequestURL;
+    } catch {
+        return undefined;
+    }
+}
+
+function AllowHostNotice({ url }: { url?: string; }) {
+    const [isAllowed, allow] = useCspPermission(url, ["connect-src"], "FileUpload");
+    if (isAllowed || !url) return null;
+
+    return (
+        <Notice variant="warning" action={<Button size="small" variant="secondary" onClick={allow}>{t(csp.notice.allowHost)}</Button>}>
+            {t(csp.notice.blocked, { host: URL.parse(url)?.host })}
+        </Notice>
+    );
+}
+
 export function SettingsComponent() {
     const update = useForceUpdater();
     const sharexFileInputRef = React.useRef<HTMLInputElement>(null);
     const { serviceType } = settings.store;
+    const { serviceUrl, sharexConfig, corsProxyUrl } = settings.use(["serviceUrl", "sharexConfig", "corsProxyUrl"]);
 
     const validateShareXConfig = () => {
         try {
@@ -644,6 +669,7 @@ export function SettingsComponent() {
                         onChange={v => settings.store.serviceUrl = v}
                         placeholder="https://your-zipline-instance.com"
                     />
+                    <AllowHostNotice url={serviceUrl} />
                     <SettingTextInput
                         name={t(plugin.fileUpload.panel.ziplineToken)}
                         description={t(plugin.fileUpload.text.yourZiplineApiAuthorization)}
@@ -895,6 +921,7 @@ export function SettingsComponent() {
                             onChange={handleShareXFileUpload}
                         />
                     </SettingsSection>
+                    <AllowHostNotice url={getShareXRequestUrl(sharexConfig || "")} />
                 </SettingGroup>
             )}
 
@@ -1088,10 +1115,7 @@ export function SettingsComponent() {
                     onChange={v => settings.store.corsProxyUrl = v}
                     placeholder="https://your-cors-proxy.example.com"
                 />
-
-                <SettingsSection id="default-cors-proxy-source" name={t(plugin.fileUpload.panel.defaultCorsProxySource)} description={t(plugin.fileUpload.text.sourceCodeForThe)}>
-                    <a href="https://codeberg.org/key/corsproxy" target="_blank" rel="noreferrer">codeberg.org/key/corsproxy</a>
-                </SettingsSection>
+                <AllowHostNotice url={corsProxyUrl} />
 
                 <SettingsSection id="upload-timeout" name={t(plugin.fileUpload.panel.uploadTimeout)} description={t(plugin.fileUpload.text.maximumTimeToWait)}>
                     <Select
@@ -1111,6 +1135,20 @@ export function SettingsComponent() {
                         placeholder={t(plugin.fileUpload.text.selectTimeout)}
                     />
                 </SettingsSection>
+
+                {Native && (
+                    <SettingsSection id="approved-servers" name={t(plugin.fileUpload.panel.approvedServers)} description={t(plugin.fileUpload.panel.approvedServersDescription)}>
+                        <Button
+                            size="small"
+                            onClick={async () => {
+                                await Native.clearApprovedOrigins();
+                                showToast({ text: t(plugin.fileUpload.toast.approvedServersReset), variant: "success" });
+                            }}
+                        >
+                            {t(plugin.fileUpload.panel.resetApprovedServers)}
+                        </Button>
+                    </SettingsSection>
+                )}
             </SettingGroup>
 
             <FallbackOrderSettings />

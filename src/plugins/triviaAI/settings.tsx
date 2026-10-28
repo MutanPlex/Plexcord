@@ -5,9 +5,24 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { plugin, t } from "@api/i18n";
+import { csp, plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { Button } from "@components/Button";
+import { Notice } from "@components/Notice";
+import { useCspPermission } from "@utils/csp";
 import { OptionType } from "@utils/types";
+
+function EndpointNotice() {
+    const { endpoint } = settings.use(["endpoint"]);
+    const [isAllowed, allow] = useCspPermission(endpoint, ["connect-src"], "TriviaAI");
+    if (isAllowed) return null;
+
+    return (
+        <Notice variant="warning" action={<Button size="small" variant="secondary" onClick={allow}>{t(csp.notice.allowHost)}</Button>}>
+            {t(csp.notice.blocked, { host: URL.parse(endpoint)?.host })}
+        </Notice>
+    );
+}
 
 export const settings = definePluginSettings({
     apiKey: {
@@ -47,6 +62,10 @@ export const settings = definePluginSettings({
         description: () => t(plugin.triviaAI.option.endpoint.description),
         default: "https://openrouter.ai/api/v1/chat/completions",
         placeholder: t(plugin.triviaAI.text.enterYourOpenaiCompatible)
+    },
+    endpointPermission: {
+        type: OptionType.COMPONENT,
+        component: () => <EndpointNotice />
     },
     context: {
         label: () => t(plugin.triviaAI.option.context.label),

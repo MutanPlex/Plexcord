@@ -7,18 +7,23 @@
 
 import "./styles.css";
 
-import { t, themes } from "@api/i18n";
+import { csp, t, themes } from "@api/i18n";
 import { Settings, type ThemeActivationMode, useSettings } from "@api/Settings";
+import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
+import { ErrorCard } from "@components/ErrorCard";
 import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { getThemeInfo, UserThemeHeader } from "@main/themes";
+import { CspBlockedUrls, useCspErrors } from "@utils/cspViolations";
 import { classNameFactory } from "@utils/css";
 import { copyWithToast } from "@utils/discord";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
+import { promptToRestart } from "@utils/promptToRestart";
+import { useForceUpdater } from "@utils/react";
 import { getStylusWebStoreUrl } from "@utils/web";
 import { React, Select, showToast, TextInput, useEffect, useMemo, useRef, useState } from "@webpack/common";
 import { SyntheticEvent } from "react";
@@ -78,6 +83,61 @@ interface UnifiedTheme {
     header: UserThemeHeader;
     link?: string;
     activationMode: ThemeActivationMode;
+}
+
+function CspErrorCard() {
+    const errors = useCspErrors();
+    const forceUpdate = useForceUpdater();
+
+    if (IS_WEB || !errors.length) return null;
+
+    const isImgurHtmlDomain = (url: string) => url.startsWith("https://imgur.com/");
+
+    const allowableUrls = errors.filter(url => URL.canParse(url) && !isImgurHtmlDomain(url));
+    const allowableHosts = new Set(allowableUrls.map(url => new URL(url).host));
+
+    const allowUrls = async (urls: string[]) => {
+        const result = await PlexcordNative.csp.requestAddOverride(urls.map(url => new URL(url).origin), ["connect-src", "img-src", "style-src", "font-src"], "Plexcord Themes");
+        if (result !== "ok") return;
+
+        const hosts = new Set(urls.map(url => new URL(url).host));
+        CspBlockedUrls.forEach(url => {
+            if (URL.canParse(url) && hosts.has(new URL(url).host)) CspBlockedUrls.delete(url);
+        });
+
+        forceUpdate();
+        promptToRestart("relaunch");
+    };
+
+    return (
+        <ErrorCard className={classes(cl("error-card"), Margins.top16)}>
+            <Heading className={Margins.bottom8}>{t(csp.blocked.resources)}</Heading>
+            <Paragraph className={Margins.bottom8}>
+                {t(csp.blocked.disallowed)} {t(csp.blocked.recommended)}
+            </Paragraph>
+
+            {allowableHosts.size > 1 && (
+                <Button size="small" className={Margins.bottom8} onClick={() => allowUrls(allowableUrls)}>
+                    {t(csp.blocked.allowAll, { count: allowableHosts.size })}
+                </Button>
+            )}
+
+            {errors.map(url => (
+                <div key={url} className="pc-settings-csp-row">
+                    <Link href={url}>{url}</Link>
+                    <Button size="small" variant="secondary" onClick={() => allowUrls([url])} disabled={!allowableUrls.includes(url)}>
+                        {t(csp.blocked.allow)}
+                    </Button>
+                </div>
+            ))}
+
+            {errors.some(isImgurHtmlDomain) && (
+                <Paragraph color="text-subtle" className={Margins.top8}>
+                    {t(csp.imgur.direct, { etc: "https://i.imgur.com/..." })}
+                </Paragraph>
+            )}
+        </ErrorCard>
+    );
 }
 
 function ThemesTab() {
@@ -371,6 +431,8 @@ function ThemesTab() {
 
     return (
         <SettingsTab>
+            <CspErrorCard />
+
             <Heading className={Margins.top16}>{t(themes.management)}</Heading>
             <Paragraph className={Margins.bottom16}>
                 {t(themes.description)}

@@ -680,14 +680,22 @@ const translations: MatchStructure<typeof enTranslations> = {
             recommended: "Chúng tôi khuyên bạn nên chuyển chúng sang GitHub hoặc Imgur. Nhưng bạn cũng có thể cho phép các miền nếu bạn hoàn toàn tin tưởng chúng.",
             afterAllow: "Sau khi cho phép miền, bạn phải đóng hoàn toàn (từ khay / trình quản lý tác vụ) và khởi động lại {{platform}} để áp dụng thay đổi.",
             allow: "Cho phép",
+            allowAll: "Cho phép tất cả ({{count}} tên miền)",
             url: "URL bị chặn"
         },
         imgur: {
             direct: "Liên kết Imgur phải là liên kết trực tiếp ở dạng {{etc}}",
             copy: "Để lấy liên kết trực tiếp, nhấp chuột phải vào hình ảnh và chọn 'Sao chép địa chỉ hình ảnh'."
         },
+        notice: {
+            allowHost: "Cho phép máy chủ",
+            blocked: "Các kết nối đến {{host}} đang bị chặn. Hãy cho phép máy chủ này nếu bạn tin tưởng, sau đó khởi động lại Discord.",
+            imagesBlocked: "Hình ảnh từ {{host}} đang bị chặn. Hãy cho phép máy chủ này nếu bạn tin tưởng, sau đó khởi động lại Discord.",
+            failed: "Không thể cho phép tên miền này."
+        },
         wants: {
             caller: "{{callerName}} muốn cho phép kết nối với {{domain}}",
+            unknown: "Một nguồn không xác định muốn cho phép kết nối đến {{domain}}",
             detail: "Trừ khi bạn nhận ra và hoàn toàn tin tưởng {{domain}}, bạn nên hủy yêu cầu này!",
             restart: "Bạn sẽ phải đóng hoàn toàn và khởi động lại {{appName}} để các thay đổi có hiệu lực.",
             type: {
@@ -1485,7 +1493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
-            description: "Cho phép bạn tìm kiếm trong danh sách người dùng bị chặn và có thể chọn tên trong cài đặt.",
+            description: "Cho phép tìm kiếm trong danh sách người dùng bị chặn, cho phép chọn tên trong cài đặt, bỏ qua lời nhắc hồ sơ bị chặn và gộp các tin nhắn bị chặn / bị bỏ qua.",
             placeholder: "Tìm kiếm người dùng..."
         },
         betterCommands: {
@@ -4259,6 +4267,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        draftNavigator: {
+            name: "DraftNavigator",
+            description: "Tìm kiếm các bản nháp chưa gửi, xem trước nội dung và chuyển đến kênh.",
+            text: {
+                title: "Trình duyệt bản nháp",
+                open: "Mở trình duyệt bản nháp",
+                unknownChannel: "Kênh không xác định ({{id}})",
+                channelUnavailable: "Kênh không khả dụng",
+                directMessage: "Tin nhắn trực tiếp",
+                groupMessage: "Tin nhắn nhóm",
+                server: "Máy chủ",
+                jump: "Chuyển",
+                jumpTo: "Chuyển đến {{name}}",
+                count: "{{count}} bản nháp",
+                countOne: "{{count}} bản nháp",
+                countFiltered: "{{shown}} trên {{total}} bản nháp",
+                noMatches: "Không có bản nháp phù hợp.",
+                noDrafts: "Không có bản nháp chưa gửi.",
+                close: "Đóng",
+                searchLabel: "Tìm bản nháp",
+                searchPlaceholder: "Tìm kênh, máy chủ hoặc nội dung bản nháp",
+                listLabel: "Bản nháp chưa gửi"
+            }
+        },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
             description: "Thêm chức năng kéo và thả vào các biểu tượng cảm xúc yêu thích"
@@ -4549,40 +4581,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "Sao chép sang {{name}}",
                 emoji: "Emoji",
                 sticker: "Nhãn dán"
-            }
-        },
-        externalPlayer: {
-            name: "ExternalPlayer",
-            description: "Mở video và âm thanh trong trình phát đa phương tiện bên ngoài như mpv.",
-            option: {
-                player: {
-                    label: "Trình phát",
-                    description: "Trình phát dùng để mở nội dung đa phương tiện."
-                },
-                openOnClick: {
-                    label: "Mở khi nhấp",
-                    description: "Mở video và âm thanh trong trình phát khi bạn nhấn phát, thay vì phát chúng trong Discord."
-                },
-                path: {
-                    label: "Đường dẫn trình phát",
-                    description: "Đường dẫn tuyệt đối đến tệp thực thi của trình phát. Để trống để dùng trình phát trong PATH."
-                },
-                args: {
-                    label: "Tham số trình phát",
-                    description: "Tham số bổ sung truyền cho trình phát. Đặt giá trị có dấu cách trong dấu ngoặc kép."
-                }
-            },
-            context: {
-                openIn: "Mở trong {{player}}"
-            },
-            toast: {
-                alreadyOpen: "Đã mở trong {{player}}.",
-                restartRequired: "Khởi động lại hoàn toàn Discord để tải ExternalPlayer.",
-                openFailed: "Không thể mở trình phát."
-            },
-            status: {
-                paused: "Đã tạm dừng trong {{player}}",
-                playing: "Đang phát trong {{player}}"
             }
         },
         f8break: {
@@ -8053,6 +8051,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Phần DM đã được thu gọn",
                     description: "Thu gọn phần DM"
                 },
+                friendsSidebarGroupDms: {
+                    label: "Nhóm tin nhắn trực tiếp ở thanh bên bạn bè",
+                    description: "Hiển thị các nhóm tin nhắn trực tiếp đã ghim ở thanh bên bạn bè."
+                },
                 userBasedCategoryList: {
                     label: "Danh sách danh mục dựa trên người dùng",
                     description: ""
@@ -10778,6 +10780,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         textReplace: {
             name: "TextReplace",
             description: "Thay thế văn bản trong tin nhắn của bạn. Bạn có thể tìm thấy các quy tắc được tạo sẵn trong kênh #textreplace-rules trong Máy chủ của Plexcord",
+            importExport: {
+                title: "Nhập và xuất",
+                description: "Xuất các quy tắc của bạn thành tệp JSON hoặc nhập quy tắc để thêm vào các quy tắc hiện có.",
+                export: "Xuất JSON",
+                import: "Nhập JSON",
+                success: "Đã nhập quy tắc thành công.",
+                failed: "Không thể nhập quy tắc. Hãy chọn một tệp JSON TextReplace hợp lệ."
+            },
             option: {
                 replace: {
                     label: "Thay thế",
@@ -12181,7 +12191,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         fileUpload: {
             name: "FileUpload",
             description: "Tải tệp lên các dịch vụ lưu trữ như Zipline, Nest, S3 và WebDAV",
+            dialog: {
+                message: "FileUpload muốn tải tệp lên {{origin}}",
+                detail: "Trừ khi bạn nhận ra và hoàn toàn tin tưởng {{origin}}, bạn nên hủy yêu cầu này!\n\nTin cậy sẽ ghi nhớ máy chủ này, Cho phép chỉ cho phép yêu cầu này.",
+                trust: "Tin cậy",
+                allow: "Cho phép",
+                cancel: "Hủy"
+            },
             toast: {
+                approvedServersReset: "Đã đặt lại máy chủ đã phê duyệt",
                 fileTypeNotAllowed: "Loại tệp không được bộ lọc hiện tại cho phép",
                 pleaseConfigureFileuploadSettings: "Hãy cấu hình cài đặt FileUpload trước",
                 sharexConfigIsValid: "Cấu hình ShareX hợp lệ",
@@ -12304,8 +12322,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 auto: "Tự động",
                 commaSeparatedListOf: "Danh sách phần mở rộng phân tách bằng dấu phẩy (vd: png,jpg,gif). Để trống để cho phép tất cả.",
                 configureBrowserUploadProxying: "Cấu hình proxy và thời gian chờ cho tải lên từ trình duyệt.",
-                corsProxyUsedFor: "Proxy CORS dùng cho tải lên web. Để trống để dùng proxy mặc định.",
-                sourceCodeForThe: "Mã nguồn của proxy CORS mặc định",
+                corsProxyUsedFor: "Proxy CORS tùy chọn cho các lần tải lên không thể đi qua ứng dụng máy tính. Proxy thấy mọi tệp và token được gửi qua nó, vì vậy chỉ dùng proxy bạn tin tưởng. Để trống để tải lên trực tiếp.",
                 maximumTimeToWait: "Thời gian chờ tối đa cho mỗi lần tải lên trước khi chuyển sang dự phòng",
                 selectTimeout: "Chọn thời gian chờ",
                 drag: "Kéo",
@@ -12469,7 +12486,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Dịch vụ proxy nhúng"
                 },
                 corsProxyUrl: {
-                    description: "URL proxy CORS dùng cho tải lên từ trình duyệt",
+                    description: "URL proxy CORS tùy chọn dùng cho tải lên từ trình duyệt",
                     label: "URL proxy CORS"
                 },
                 apngToGif: {
@@ -12528,6 +12545,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             panel: {
+                approvedServers: "Máy chủ đã phê duyệt",
+                approvedServersDescription: "Các máy chủ S3 và WebDAV mà bạn đã cho phép FileUpload tải lên. Sau khi đặt lại, lần tải lên tiếp theo sẽ hỏi lại.",
+                resetApprovedServers: "Đặt lại máy chủ đã phê duyệt",
                 fallbackOrder: "Thứ tự dự phòng",
                 uploadService: "Dịch vụ tải lên",
                 zipline: "Zipline",
@@ -12593,7 +12613,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedFileTypes: "Loại tệp được phép",
                 network: "Mạng",
                 corsProxyUrl: "URL proxy CORS",
-                defaultCorsProxySource: "Nguồn proxy CORS mặc định",
                 uploadTimeout: "Thời gian chờ tải lên",
                 domainsJsonDescription: "Mảng JSON các tên miền sẽ dùng, ví dụ [\"offensive\"]."
             },
@@ -13888,7 +13907,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         userPFP: {
             toast: {
-                gifsWebpMustBe: "GIF/WebP phải được thêm qua URL. Tải GIF/WebP của bạn lên dịch vụ lưu trữ ảnh và dán liên kết."
+                gifsWebpMustBe: "GIF/WebP phải được thêm bằng URL. Liên kết từ Imgur, GitHub, Tenor, Giphy và Discord hoạt động mà không cần thiết lập thêm."
             },
             text: {
                 save: "Lưu",

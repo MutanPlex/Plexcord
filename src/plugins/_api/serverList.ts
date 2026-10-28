@@ -18,16 +18,24 @@
 */
 
 import { plugins, t } from "@api/i18n";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "ServerListAPI",
     description: () => t(plugins.metadata.api.description.serverList),
-    authors: [Devs.kemo],
+    authors: [Devs.kemo, PcDevs.Etorix],
     tags: ["servers", "utility"],
 
     patches: [
+        {
+            // Exports Discord's guildless item for the shared server-list component.
+            find: '="DOWNLOAD_APPS";function',
+            replacement: {
+                match: /(?<=\i\.\i\(\i,\{)(?=\i:\(\)=>\i.{0,30000}?let (\i)=function\(\i\)\{let\{ref:)/,
+                replace: "GuildlessServerListItemComponent:()=>$1,"
+            }
+        },
         {
             find: "#{intl::DISCODO_DISABLED}",
             replacement: {

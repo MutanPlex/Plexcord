@@ -5,9 +5,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { plugin, t } from "@api/i18n";
+import { csp, plugin, t } from "@api/i18n";
+import { Button } from "@components/Button";
+import { Notice } from "@components/Notice";
 import { SettingsSection } from "@components/settings/tabs/plugins/components/Common";
 import { Switch } from "@components/Switch";
+import { useCspPermission } from "@utils/csp";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { Select, Slider, TabBar, TextInput, useState } from "@webpack/common";
@@ -43,6 +46,20 @@ function TextSetting({ name, description, settingsKey, placeholder }: { name: st
     );
 }
 
+function AllowServerSetting({ settingsKey }: { settingsKey: SettingsKey; }) {
+    const url = String(settings.use([settingsKey])[settingsKey] ?? "").trim();
+    const fullUrl = url && (/^https?:\/\//.test(url) ? url : `https://${url}`);
+    const [isAllowed, allow] = useCspPermission(fullUrl, ["connect-src"], "RichPresence");
+
+    if (isAllowed) return null;
+
+    return (
+        <Notice variant="warning" action={<Button size="small" variant="secondary" onClick={allow}>{t(csp.notice.allowHost)}</Button>}>
+            {t(csp.notice.blocked, { host: URL.parse(fullUrl)?.host })}
+        </Notice>
+    );
+}
+
 function SelectSetting({ name, description, settingsKey, options }: { name: string; description: string; settingsKey: SettingsKey; options: { label: string; value: string | number; }[]; }) {
     const [value, setValue] = useState(settings.store[settingsKey] ?? options[0]?.value);
     return (
@@ -64,6 +81,7 @@ function AudioBookShelfSettings() {
         <>
             <SettingsSection id="audiobookshelf-settings" name="" description={t(plugin.richPresence.text.displayYourCurrentlyPlaying)} />
             <TextSetting name={t(plugin.fileUpload.panel.serverUrl)} description={t(plugin.richPresence.text.audiobookshelfServerUrl)} settingsKey="abs_serverUrl" placeholder="https://abs.example.com" />
+            <AllowServerSetting settingsKey="abs_serverUrl" />
             <TextSetting name={t(plugin.fileUpload.panel.username)} description={t(plugin.richPresence.text.audiobookshelfUsername)} settingsKey="abs_username" />
             <TextSetting name={t(plugin.richPresence.panel.password)} description={t(plugin.richPresence.text.audiobookshelfPassword)} settingsKey="abs_password" />
         </>
@@ -112,6 +130,7 @@ function JellyfinSettings() {
         <>
             <SettingsSection id="jellyfin-settings" name="" description={t(plugin.richPresence.text.showWhatYouRe2)} />
             <TextSetting name={t(plugin.fileUpload.panel.serverUrl)} description={t(plugin.richPresence.text.jellyfinServerUrl)} settingsKey="jf_serverUrl" placeholder="https://jellyfin.example.com" />
+            <AllowServerSetting settingsKey="jf_serverUrl" />
             <TextSetting name={t(plugin.richPresence.panel.apiKey)} description={t(plugin.richPresence.text.jellyfinApiKey)} settingsKey="jf_apiKey" placeholder={t(plugin.richPresence.text.authorization)} />
             <TextSetting name={t(plugin.richPresence.panel.userId)} description={t(plugin.richPresence.text.jellyfinUserId)} settingsKey="jf_userId" placeholder={t(plugin.richPresence.text.userIdFromProfile)} />
             <SelectSetting name={t(plugin.richPresence.panel.nameDisplay)} description={t(plugin.richPresence.text.nameDisplayFormat)} settingsKey="jf_nameDisplay" options={[
@@ -170,6 +189,7 @@ function NavidromeSettings() {
         <>
             <SettingsSection id="navidrome-settings" name="" description={t(plugin.richPresence.text.showWhatYouRe3)} />
             <TextSetting name={t(plugin.fileUpload.panel.serverUrl)} description={t(plugin.richPresence.text.navidromeServerUrlMust)} settingsKey="nd_serverUrl" placeholder="https://navidrome.example.com" />
+            <AllowServerSetting settingsKey="nd_serverUrl" />
             <TextSetting name={t(plugin.fileUpload.panel.username)} description={t(plugin.richPresence.text.navidromeUsername)} settingsKey="nd_username" />
             <TextSetting name={t(plugin.richPresence.panel.password)} description={t(plugin.richPresence.text.navidromePassword)} settingsKey="nd_password" />
             <TextSetting name={t(plugin.richPresence.panel.clientId)} description={t(plugin.richPresence.text.optionalDiscordApplicationClient)} settingsKey="nd_clientId" placeholder="1470554657506984069" />

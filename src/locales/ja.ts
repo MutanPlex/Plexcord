@@ -680,14 +680,22 @@ const translations: MatchStructure<typeof enTranslations> = {
             recommended: "GitHub または Imgur に移動することを強くお勧めします。ただし、ドメインを完全に信頼している場合は、ドメインを許可することもできます。",
             afterAllow: "ドメインを許可した後、(トレイ/タスク マネージャーから) 完全に閉じ、{{platform}} を再起動して変更を適用する必要があります。",
             allow: "許可する",
+            allowAll: "すべて許可 ({{count}} 個のドメイン)",
             url: "ブロックされた URL"
         },
         imgur: {
             direct: "Imgur リンクは、{{etc}} 形式の直接リンクである必要があります。",
             copy: "直接リンクを取得するには、画像を右クリックして「画像アドレスをコピー」を選択します。"
         },
+        notice: {
+            allowHost: "ホストを許可",
+            blocked: "{{host}} への接続はブロックされています。信頼できる場合はこのホストを許可し、Discordを再起動してください。",
+            imagesBlocked: "{{host}} の画像はブロックされています。信頼できる場合はこのホストを許可し、Discordを再起動してください。",
+            failed: "このドメインを許可できませんでした。"
+        },
         wants: {
             caller: "{{callerName}} は {{domain}} への接続を許可したいと考えています",
+            unknown: "不明なソースが {{domain}} への接続を許可しようとしています",
             detail: "{{domain}} を認識し、完全に信頼していない場合は、このリクエストをキャンセルする必要があります。",
             restart: "変更を有効にするには、{{appName}} を完全に閉じて再起動する必要があります。",
             type: {
@@ -1485,7 +1493,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
-            description: "ブロックされたユーザーのリストを検索でき、設定で名前を選択できるようになります。",
+            description: "ブロックしたユーザーのリストを検索でき、設定で名前を選択可能にし、ブロックしたプロフィールの確認をスキップし、ブロック / 無視したメッセージをまとめます。",
             placeholder: "ユーザーを検索..."
         },
         betterCommands: {
@@ -4259,6 +4267,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        draftNavigator: {
+            name: "DraftNavigator",
+            description: "未送信の下書きを検索し、テキストをプレビューして、そのチャンネルへ移動します。",
+            text: {
+                title: "下書きナビゲーター",
+                open: "下書きナビゲーターを開く",
+                unknownChannel: "不明なチャンネル ({{id}})",
+                channelUnavailable: "チャンネルを利用できません",
+                directMessage: "ダイレクトメッセージ",
+                groupMessage: "グループメッセージ",
+                server: "サーバー",
+                jump: "移動",
+                jumpTo: "{{name}} へ移動",
+                count: "{{count}} 件の下書き",
+                countOne: "{{count}} 件の下書き",
+                countFiltered: "{{total}} 件中 {{shown}} 件の下書き",
+                noMatches: "一致する下書きはありません。",
+                noDrafts: "未送信の下書きはありません。",
+                close: "閉じる",
+                searchLabel: "下書きを検索",
+                searchPlaceholder: "チャンネル、サーバー、下書きのテキストを検索",
+                listLabel: "未送信の下書き"
+            }
+        },
         dragFavoriteEmotes: {
             name: "DragFavoriteEmotes",
             description: "お気に入りのエモートにドラッグ アンド ドロップ機能を追加します"
@@ -4549,40 +4581,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cloneTo: "{{name}}に複製",
                 emoji: "絵文字",
                 sticker: "スタンプ"
-            }
-        },
-        externalPlayer: {
-            name: "ExternalPlayer",
-            description: "動画や音声を mpv などの外部メディアプレーヤーで開きます。",
-            option: {
-                player: {
-                    label: "プレーヤー",
-                    description: "メディアを開くプレーヤー。"
-                },
-                openOnClick: {
-                    label: "クリックで開く",
-                    description: "再生を押したときに、Discord で再生する代わりに動画や音声をプレーヤーで開きます。"
-                },
-                path: {
-                    label: "プレーヤーのパス",
-                    description: "プレーヤーの実行ファイルへの絶対パス。空欄にすると PATH 上のものを使用します。"
-                },
-                args: {
-                    label: "プレーヤーの引数",
-                    description: "プレーヤーに渡す追加の引数。スペースを含む値は引用符で囲んでください。"
-                }
-            },
-            context: {
-                openIn: "{{player}} で開く"
-            },
-            toast: {
-                alreadyOpen: "すでに {{player}} で開いています。",
-                restartRequired: "ExternalPlayer を読み込むには Discord を完全に再起動してください。",
-                openFailed: "プレーヤーを開けませんでした。"
-            },
-            status: {
-                paused: "{{player}} で一時停止中",
-                playing: "{{player}} で再生中"
             }
         },
         f8break: {
@@ -8053,6 +8051,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "DM セクションの崩壊",
                     description: "DMセクションを折りたたむ"
                 },
+                friendsSidebarGroupDms: {
+                    label: "フレンドサイドバーのグループDM",
+                    description: "ピン留めしたグループDMをフレンドサイドバーに表示します。"
+                },
                 userBasedCategoryList: {
                     label: "ユーザーベースのカテゴリリスト",
                     description: ""
@@ -10778,6 +10780,14 @@ const translations: MatchStructure<typeof enTranslations> = {
         textReplace: {
             name: "TextReplace",
             description: "メッセージ内のテキストを置き換えます。事前に作成されたルールは、Plexcord サーバーの #textreplace-rules チャネルで見つけることができます。",
+            importExport: {
+                title: "インポートとエクスポート",
+                description: "ルールをJSONファイルとしてエクスポートするか、ルールをインポートして既存のルールに追加します。",
+                export: "JSONをエクスポート",
+                import: "JSONをインポート",
+                success: "ルールをインポートしました。",
+                failed: "ルールをインポートできませんでした。有効なTextReplaceのJSONファイルを選択してください。"
+            },
             option: {
                 replace: {
                     label: "交換する",
@@ -12181,7 +12191,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         fileUpload: {
             name: "FileUpload",
             description: "Zipline、Nest、S3、WebDAV などのホスティングサービスにファイルをアップロードします",
+            dialog: {
+                message: "FileUpload が {{origin}} にファイルをアップロードしようとしています",
+                detail: "{{origin}} を知っていて完全に信頼できる場合を除き、このリクエストはキャンセルしてください！\n\n「信頼」はこのサーバーを記憶し、「許可」は今回のリクエストのみ許可します。",
+                trust: "信頼",
+                allow: "許可",
+                cancel: "キャンセル"
+            },
             toast: {
+                approvedServersReset: "承認済みサーバーをリセットしました",
                 fileTypeNotAllowed: "現在のフィルターではこのファイル形式は許可されていません",
                 pleaseConfigureFileuploadSettings: "先に FileUpload の設定を行ってください",
                 sharexConfigIsValid: "ShareX の設定は有効です",
@@ -12304,8 +12322,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 auto: "自動",
                 commaSeparatedListOf: "カンマ区切りの拡張子リスト（例: png,jpg,gif）。空欄ですべて許可します。",
                 configureBrowserUploadProxying: "ブラウザーからのアップロードのプロキシとタイムアウトを設定します。",
-                corsProxyUsedFor: "Web アップロードに使う CORS プロキシです。既定のプロキシを使う場合は空欄にします。",
-                sourceCodeForThe: "既定の CORS プロキシのソースコード",
+                corsProxyUsedFor: "デスクトップアプリを経由できないアップロード用の任意のCORSプロキシです。プロキシは経由するすべてのファイルとトークンを見ることができるため、信頼できるものだけを使用してください。空欄にすると直接アップロードします。",
                 maximumTimeToWait: "代替に切り替えるまでのアップロード 1 回あたりの最大待機時間",
                 selectTimeout: "タイムアウトを選択",
                 drag: "ドラッグ",
@@ -12469,7 +12486,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "埋め込みプロキシサービス"
                 },
                 corsProxyUrl: {
-                    description: "ブラウザーからのアップロードに使う CORS プロキシの URL",
+                    description: "ブラウザでのアップロードに使用する任意のCORSプロキシURL",
                     label: "CORS プロキシ URL"
                 },
                 apngToGif: {
@@ -12528,6 +12545,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             panel: {
+                approvedServers: "承認済みサーバー",
+                approvedServersDescription: "FileUploadにアップロードを許可したS3およびWebDAVサーバーです。リセットすると、次回のアップロード時に再度確認されます。",
+                resetApprovedServers: "承認済みサーバーをリセット",
                 fallbackOrder: "代替の順序",
                 uploadService: "アップロードサービス",
                 zipline: "Zipline",
@@ -12593,7 +12613,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedFileTypes: "許可するファイル形式",
                 network: "ネットワーク",
                 corsProxyUrl: "CORS プロキシ URL",
-                defaultCorsProxySource: "既定の CORS プロキシのソース",
                 uploadTimeout: "アップロードのタイムアウト",
                 domainsJsonDescription: "使用するドメインの JSON 配列。例: [\"offensive\"]"
             },
@@ -13888,7 +13907,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         userPFP: {
             toast: {
-                gifsWebpMustBe: "GIF/WebP は URL で追加する必要があります。画像ホスティングサービスにアップロードしてリンクを貼り付けてください。"
+                gifsWebpMustBe: "GIF/WebPはURLで追加する必要があります。Imgur、GitHub、Tenor、Giphy、Discordのリンクは追加設定なしで使えます。"
             },
             text: {
                 save: "保存",
