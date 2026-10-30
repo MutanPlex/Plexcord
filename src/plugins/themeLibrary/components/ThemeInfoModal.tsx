@@ -6,6 +6,7 @@
  */
 
 import { plugin, t } from "@api/i18n";
+import { Button } from "@components/Button";
 import { CodeBlock } from "@components/CodeBlock";
 import { Heading } from "@components/Heading";
 import { Heart } from "@components/Heart";
@@ -17,7 +18,7 @@ import { openInviteModal } from "@utils/discord";
 import { Margins } from "@utils/margins";
 import type { PluginNative } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
-import { Button, Modal, openModal, Parser, React, showToast } from "@webpack/common";
+import { Modal, openModal, Parser, React, showToast } from "@webpack/common";
 
 import { logger } from "./ThemeTab";
 
@@ -164,8 +165,7 @@ export const ThemeInfoModal: React.FC<ThemeInfoModalProps> = ({ author, theme, .
                             )}
                             <Paragraph>
                                 <Button
-                                    color={Button.Colors.BRAND}
-                                    look={Button.Looks.FILLED}
+                                    variant="primary"
                                     className={Margins.top8}
                                     onClick={async e => {
                                         e.preventDefault();

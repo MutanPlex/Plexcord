@@ -26,7 +26,7 @@ import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { EyeIcon } from "@components/Icons";
+import { EyeIcon, HistoryIcon } from "@components/Icons";
 import { Message, MessageAttachment } from "@plexcord/discord-types";
 import { Devs, PcDevs, PLEXBOT_USER_ID, SUPPORT_CATEGORY_ID } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
@@ -58,44 +58,6 @@ interface MLAttachment extends MessageAttachment {
 }
 
 const MessageClasses = findCssClassesLazy("edited", "communicationDisabled", "isSystemMessage");
-
-function ClearHistoryIcon({ height = 24, width = 24, className }: { height?: number | string; width?: number | string; className?: string; }) {
-    return (
-        <svg
-            className={className}
-            width={width}
-            height={height}
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <path
-                d="M5.63606 18.3639C9.15077 21.8786 14.8493 21.8786 18.364 18.3639C21.8787 14.8492 21.8787 9.1507 18.364 5.63598C14.8493 2.12126 9.15077 2.12126 5.63606 5.63598C3.87757 7.39447 2.99889 9.6996 3.00002 12.0044L3 13.9999"
-                stroke="currentColor"
-                strokeWidth={2.5}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                style={{ fill: "none" }}
-            />
-            <path
-                d="M1 11.9999L3 13.9999L5 11.9999"
-                stroke="currentColor"
-                strokeWidth={2.5}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                style={{ fill: "none" }}
-            />
-            <path
-                d="M11 7.99994L11 12.9999L16 12.9999"
-                stroke="currentColor"
-                strokeWidth={2.5}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                style={{ fill: "none" }}
-            />
-        </svg>
-    );
-}
 
 // track messages where the user disabled diffs for this session
 const disabledDiffMessages = new Set<string>();
@@ -212,7 +174,7 @@ const patchMessageContextMenu: NavContextMenuPatchCallback = (
             id={REMOVE_HISTORY_ID}
             key={REMOVE_HISTORY_ID}
             label={label}
-            leadingAccessory={{ type: "icon", icon: ClearHistoryIcon }}
+            leadingAccessory={{ type: "icon", icon: HistoryIcon }}
             color="danger"
             action={() => {
                 clearMessageHistory(message);
@@ -527,7 +489,7 @@ export default definePlugin({
     },
 
     messagePopoverButton: {
-        icon: ClearHistoryIcon,
+        icon: HistoryIcon,
         render(message) {
             const current = MessageStore.getMessage(message.channel_id, message.id) as MLMessage | undefined;
 
@@ -536,7 +498,7 @@ export default definePlugin({
 
             return {
                 label: t(plugin.messageLogger.text.clearHistory),
-                icon: ClearHistoryIcon,
+                icon: HistoryIcon,
                 onClick: () => {
                     const latest = MessageStore.getMessage(message.channel_id, message.id) as MLMessage | undefined;
                     if (!latest) return;

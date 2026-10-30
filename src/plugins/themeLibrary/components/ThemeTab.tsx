@@ -10,6 +10,7 @@ import "./styles.css";
 import * as DataStore from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
 import { Settings } from "@api/Settings";
+import { Button } from "@components/Button";
 import { ErrorCard } from "@components/ErrorCard";
 import { HeadingPrimary, HeadingTertiary } from "@components/Heading";
 import { OpenExternalIcon } from "@components/Icons";
@@ -20,7 +21,7 @@ import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { findCssClassesLazy } from "@webpack";
-import { Button, React, SearchableSelect, TextInput, useEffect, useState } from "@webpack/common";
+import { React, SearchableSelect, TextInput, useEffect, useState } from "@webpack/common";
 
 import { ThemeCard } from "./ThemeCard";
 
@@ -183,9 +184,8 @@ function ThemeTab() {
                                         Settings.plugins.ThemeLibrary.hideWarningCard = true;
                                         setHideWarningCard(true);
                                     }}
-                                    size={Button.Sizes.SMALL}
-                                    color={Button.Colors.RED}
-                                    look={Button.Looks.FILLED}
+                                    size="small"
+                                    variant="dangerPrimary"
                                     className={classes(Margins.top16, "pce-warning-button")}
                                 >{t(plugin.themeLibrary.text.hide)}</Button>
                             </ErrorCard>

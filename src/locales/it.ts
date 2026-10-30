@@ -64,6 +64,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Usa la barra del titolo nativa di Windows invece di quella di Discord",
                 description: "Sostituisce la barra del titolo personalizzata di Discord con quella standard di Windows. Migliora la compatibilità con alcuni strumenti di gestione delle finestre."
             },
+            noRoundCorners: {
+                label: "Disattiva gli angoli arrotondati della finestra",
+                description: "Rende squadrati gli angoli della finestra di Discord invece che arrotondati."
+            },
             transparent: {
                 label: "Abilita trasparenza finestra",
                 description: "Rende la finestra di Discord trasparente. È richiesto un tema che supporti la trasparenza, altrimenti non avrà effetto.",
@@ -3356,17 +3360,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 error: "Errore durante la copia dell'URL, controlla la console"
             }
         },
-        copyStickerLinks: {
-            name: "CopyStickerLinks",
-            description: "Aggiunge la possibilità di copiare e aprire i link degli Sticker",
-            context: {
-                copy: "Copia link dell'adesivo",
-                open: "Apri link dell'adesivo"
-            },
-            toast: {
-                success: "Link copiato!"
-            }
-        },
         copyUserMention: {
             name: "CopyUserMention",
             description: "Aggiunge un pulsante per copiare la menzione dell'utente nel menu contestuale.",
@@ -4558,29 +4551,58 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownError: "Errore sconosciuto"
             }
         },
-        expressionCloner: {
-            name: "ExpressionCloner",
-            description: "Ti permette di clonare emoji e sticker nel tuo server (clicca col tasto destro su di essi)",
-            modal: {
-                title: "Nome Personalizzato",
-                invalidName: "Il nome deve avere tra 2 e 32 caratteri e contenere solo caratteri alfanumerici"
-            },
-            toast: {
-                success: "Clonato con successo {{name}} in {{guild}}!",
-                yourServer: "il tuo server",
-                failed: "Clonazione fallita: ",
-                console: "Qualcosa è andato storto (controlla la console!)",
-                successfullyClonedNameTo: "{{name}} clonato correttamente in {{name_your_server}}!"
+        expressionManager: {
+            name: "ExpressionManager",
+            description: "Clona emoji e adesivi. Aggiunge opzioni al menu contestuale per clonarli, modificarli o eliminarli rapidamente. Aggiunge anche opzioni per copiare e salvare gli adesivi",
+            option: {
+                editAndDelete: {
+                    label: "Modifica ed elimina",
+                    description: "Aggiunge le opzioni \"Modifica\" ed \"Elimina\" al menu contestuale del selettore di espressioni"
+                },
+                stickerCopyAndOpen: {
+                    label: "Link degli adesivi",
+                    description: "Aggiunge le opzioni \"Copia link dell'adesivo\" e \"Apri link dell'adesivo\" al menu contestuale degli adesivi"
+                },
+                recents: {
+                    label: "Rimuovi dai recenti",
+                    description: "Aggiunge l'opzione \"Rimuovi dai recenti\" al menu contestuale delle espressioni usate di frequente"
+                }
             },
             context: {
-                clone: "Clona {{type}}",
-                cloneName: "Clona {{data}}"
+                cloneEmoji: "Clona Emoji",
+                cloneSticker: "Clona Adesivo",
+                editEmoji: "Modifica emoji",
+                editSticker: "Modifica adesivo",
+                deleteEmoji: "Elimina emoji",
+                deleteSticker: "Elimina adesivo",
+                removeFromRecents: "Rimuovi dai recenti",
+                uploadAsEmoji: "Carica come emoji",
+                copyStickerLink: "Copia link dell'adesivo",
+                openStickerLink: "Apri link dell'adesivo"
             },
-            text: {
+            modal: {
+                customName: "Nome Personalizzato",
+                invalidName: "Il nome deve avere tra 2 e 30 caratteri e contenere solo caratteri alfanumerici",
+                cloneTitle: "Clona {{name}}",
+                deleteTitle: "Elimina {{name}}",
+                deleteEmoji: "Vuoi davvero eliminare questa emoji?",
+                deleteSticker: "Vuoi davvero eliminare questo adesivo?",
+                deleteConfirm: "Elimina",
+                recentsEmoji: "Questo azzererà tutta la cronologia d'uso di questa emoji e non può essere annullato. Sei sicuro?",
+                recentsSticker: "Questo azzererà tutta la cronologia d'uso di questo adesivo e non può essere annullato. Sei sicuro?",
+                recentsConfirm: "Fallo"
+            },
+            toast: {
+                emojiDeleted: "Emoji eliminata con successo.",
+                stickerDeleted: "Adesivo eliminato con successo.",
+                emojiDeleteFailed: "Impossibile eliminare l'emoji",
+                stickerDeleteFailed: "Impossibile eliminare l'adesivo",
+                cloned: "Clonato con successo {{name}} in {{guild}}!",
                 yourServer: "il tuo server",
-                cloneTo: "Clona in {{name}}",
-                emoji: "Emoji",
-                sticker: "Adesivo"
+                cloneFailed: "Clonazione fallita: {{message}}",
+                console: "Qualcosa è andato storto (controlla la console!)",
+                linkCopied: "Link copiato!",
+                emojiModalFailed: "Impossibile aprire la finestra delle emoji: {{error}}"
             }
         },
         f8break: {
@@ -9859,7 +9881,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "Mostra gli account collegati nei popout degli utenti",
+            description: "Mostra gli account collegati nei popout degli utenti e nella barra laterale dei messaggi diretti",
             option: {
                 iconSize: {
                     label: "Dimensione Icone",

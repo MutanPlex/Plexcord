@@ -64,6 +64,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Gebruik de eigen titelbalk van Windows in plaats van de aangepaste titelbalk van Discord",
                 description: "Vervang de aangepaste titelbalk van Discord door de standaard Windows-titelbalk. Dit kan de compatibiliteit met sommige vensterbeheertools verbeteren."
             },
+            noRoundCorners: {
+                label: "Afgeronde vensterhoeken uitschakelen",
+                description: "Maakt de hoeken van het Discord-venster vierkant in plaats van afgerond."
+            },
             transparent: {
                 label: "Schakel venstertransparantie in",
                 description: "Maak het Discord-venster transparant. Er is een thema nodig dat transparantie ondersteunt, anders levert dit niets op.",
@@ -3356,17 +3360,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 error: "Fout bij kopiëren van URL. Controleer de console voor meer informatie"
             }
         },
-        copyStickerLinks: {
-            name: "CopyStickerLinks",
-            description: "Voegt de mogelijkheid toe om stickerlinks te kopiëren en te openen",
-            context: {
-                copy: "Stickerlink kopiëren",
-                open: "Stickerlink openen"
-            },
-            toast: {
-                success: "Link gekopieerd!"
-            }
-        },
         copyUserMention: {
             name: "CopyUserMention",
             description: "Voegt een knop toe om de vermelding van de gebruiker te kopiëren in het gebruikerscontextmenu, werkt het beste met ValidUser.",
@@ -4558,29 +4551,58 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownError: "Onbekende fout"
             }
         },
-        expressionCloner: {
-            name: "ExpressionCloner",
-            description: "Hiermee kunt u emotes en stickers naar uw eigen server klonen (klik er met de rechtermuisknop op)",
-            modal: {
-                title: "Aangepaste naam",
-                invalidName: "De naam moet tussen 2 en 32 tekens lang zijn en mag alleen alfanumerieke tekens bevatten"
-            },
-            toast: {
-                success: "Met succes {{name}} naar {{guild}} gekloond!",
-                yourServer: "jouw server",
-                failed: "Kan niet klonen:",
-                console: "Er is iets misgegaan (controleer de console!)",
-                successfullyClonedNameTo: "{{name}} is gekloond naar {{name_your_server}}!"
+        expressionManager: {
+            name: "ExpressionManager",
+            description: "Kloon emoji's en stickers. Voegt contextmenu-opties toe om ze snel te klonen, bewerken of verwijderen. Voegt ook kopieer- en opslaan-opties voor stickers toe",
+            option: {
+                editAndDelete: {
+                    label: "Bewerken en verwijderen",
+                    description: "Voegt de opties \"Bewerken\" en \"Verwijderen\" toe aan het contextmenu van de expressiekiezer"
+                },
+                stickerCopyAndOpen: {
+                    label: "Stickerlinks",
+                    description: "Voegt de opties \"Stickerlink kopiëren\" en \"Stickerlink openen\" toe aan het contextmenu van stickers"
+                },
+                recents: {
+                    label: "Verwijderen uit recent",
+                    description: "Voegt de optie \"Verwijderen uit recent\" toe aan het contextmenu van veelgebruikte expressies"
+                }
             },
             context: {
-                clone: "Kloon {{type}}",
-                cloneName: "Kloon {{data}}"
+                cloneEmoji: "Kloon Emoji",
+                cloneSticker: "Kloon Sticker",
+                editEmoji: "Emoji bewerken",
+                editSticker: "Sticker bewerken",
+                deleteEmoji: "Emoji verwijderen",
+                deleteSticker: "Sticker verwijderen",
+                removeFromRecents: "Verwijderen uit recent",
+                uploadAsEmoji: "Uploaden als emoji",
+                copyStickerLink: "Stickerlink kopiëren",
+                openStickerLink: "Stickerlink openen"
             },
-            text: {
-                yourServer: "je server",
-                cloneTo: "Klonen naar {{name}}",
-                emoji: "Emoji",
-                sticker: "Sticker"
+            modal: {
+                customName: "Aangepaste naam",
+                invalidName: "De naam moet tussen 2 en 30 tekens lang zijn en mag alleen alfanumerieke tekens bevatten",
+                cloneTitle: "Kloon {{name}}",
+                deleteTitle: "{{name}} verwijderen",
+                deleteEmoji: "Weet je zeker dat je deze emoji wilt verwijderen?",
+                deleteSticker: "Weet je zeker dat je deze sticker wilt verwijderen?",
+                deleteConfirm: "Verwijderen",
+                recentsEmoji: "Hiermee wordt alle gebruiksgeschiedenis van deze emoji gewist en dit kan niet ongedaan worden gemaakt. Weet je het zeker?",
+                recentsSticker: "Hiermee wordt alle gebruiksgeschiedenis van deze sticker gewist en dit kan niet ongedaan worden gemaakt. Weet je het zeker?",
+                recentsConfirm: "Doe het"
+            },
+            toast: {
+                emojiDeleted: "Emoji verwijderd.",
+                stickerDeleted: "Sticker verwijderd.",
+                emojiDeleteFailed: "Emoji verwijderen mislukt",
+                stickerDeleteFailed: "Sticker verwijderen mislukt",
+                cloned: "Met succes {{name}} naar {{guild}} gekloond!",
+                yourServer: "jouw server",
+                cloneFailed: "Kan niet klonen: {{message}}",
+                console: "Er is iets misgegaan (controleer de console!)",
+                linkCopied: "Link gekopieerd!",
+                emojiModalFailed: "Emojivenster openen mislukt: {{error}}"
             }
         },
         f8break: {
@@ -9859,7 +9881,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "Toon verbonden accounts in gebruikerspop-outs",
+            description: "Toon verbonden accounts in gebruikerspop-outs en de DM-zijbalk",
             option: {
                 iconSize: {
                     label: "Pictogramgrootte",

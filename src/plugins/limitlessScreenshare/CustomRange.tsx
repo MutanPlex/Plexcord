@@ -17,6 +17,7 @@ export type CustomRangeProps = {
     group: string,
     id: string,
     suffix: string;
+    step?: 1 | 10;
 };
 
 type RangeSliderProps = Omit<CustomRangeProps, "group" | "id"> & {
@@ -24,34 +25,38 @@ type RangeSliderProps = Omit<CustomRangeProps, "group" | "id"> & {
     sliderRef: any;
 };
 
-const RangeSlider = ({ onChange, initialValue, minMax, suffix, controlProps, sliderRef }: RangeSliderProps) => {
+const RangeSlider = ({ onChange, initialValue, minMax, suffix, controlProps, sliderRef, step = 1 }: RangeSliderProps) => {
     const [value, setValue] = useState(initialValue);
     const [minValue, maxValue] = minMax;
+    const min = minValue / step, max = maxValue / step;
 
-    const changeStreamSettings = useMemo(() => lodash.throttle((value: number) => onChange(value), COOLDOWN_MS), []);
+    const changeStreamSettings = useMemo(() => lodash.throttle((value: number) => onChange(value * step!), COOLDOWN_MS), []);
     useEffect(() => () => changeStreamSettings.cancel(), [changeStreamSettings]);
 
     const onChangeHandler = (newValue: number) => {
-        const roundedValue = Math.round(denormalize(newValue, minValue, maxValue));
-        setValue(roundedValue);
-        changeStreamSettings(roundedValue);
+        const clampedValue = lodash.clamp(Math.round(denormalize(newValue, min, max)), min, max);
+        setValue(clampedValue);
+        changeStreamSettings(clampedValue);
     };
     return (
         <Menu.MenuSliderControl
             {...controlProps}
             ref={sliderRef}
             onChange={onChangeHandler}
-            renderValue={() => value + suffix}
-            value={normalize(value, minValue, maxValue) || 0}
+            renderValue={() => value * step! + suffix}
+            value={normalize(value, min, max) || 0}
             minValue={0}
             maxValue={100}>
         </Menu.MenuSliderControl>
     );
 };
 
-export const CustomRange = ({ group, id, ...props }: CustomRangeProps) => (
-    <Menu.MenuControlItem group={`${group}`} id={`${id}-custom`} label={props.initialValue + props.suffix} control={(controlProps, ref) => <RangeSlider
+export const CustomRange = ({ group, id, initialValue, minMax, step = 1, ...props }: CustomRangeProps) => (
+    <Menu.MenuControlItem group={`${group}`} id={`${id}-custom`} label={initialValue * step + props.suffix} control={(controlProps, ref) => <RangeSlider
         {...props}
+        initialValue={initialValue}
+        minMax={minMax}
+        step={step}
         controlProps={controlProps}
         sliderRef={ref}
     />} />

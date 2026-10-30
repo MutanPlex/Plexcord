@@ -9,13 +9,14 @@ import "./style.css";
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
 import { chooseFile, saveFile } from "@utils/web";
-import { Alerts, Button, React, showToast, useCallback, useEffect, useRef, useState } from "@webpack/common";
+import { Alerts, React, showToast, useCallback, useEffect, useRef, useState } from "@webpack/common";
 
 import { cl, croppedLabel, Shelf } from "./components/Shelf";
 import { add, clear, CropState, currentApplied, Entry, exportAll, forget, forgetCrops, getFile, getThumbs, Group, importAll, Kind, previousApplied, readIndex, recordApplied, saveCrop, toDataUrl, togglePin, touch } from "./library";
@@ -81,11 +82,11 @@ const settings = definePluginSettings({
         description: () => t(plugin.betterImageEditor.option.forgetFraming.description),
         component: () => (
             <Button
-                color={Button.Colors.PRIMARY}
+                variant="secondary"
                 onClick={() => Alerts.show({
                     title: t(plugin.betterImageEditor.text.forgetEveryRememberedCrop),
                     body: t(plugin.betterImageEditor.text.yourPicturesStayEach),
-                    confirmColor: Button.Colors.RED,
+                    confirmColor: "danger",
                     confirmText: t(plugin.betterImageEditor.text.forget),
                     cancelText: t(plugin.betterImageEditor.text.cancel),
                     onConfirm: () => forgetCrops()
@@ -118,8 +119,8 @@ const settings = definePluginSettings({
         description: () => t(plugin.betterImageEditor.option.transfer.description),
         component: () => (
             <div className={cl("buttons")}>
-                <Button color={Button.Colors.PRIMARY} onClick={exportLibrary}>{t(plugin.betterImageEditor.text.exportToAFile)}</Button>
-                <Button color={Button.Colors.PRIMARY} onClick={importLibrary}>{t(plugin.betterImageEditor.text.importFromAFile)}</Button>
+                <Button variant="secondary" onClick={exportLibrary}>{t(plugin.betterImageEditor.text.exportToAFile)}</Button>
+                <Button variant="secondary" onClick={importLibrary}>{t(plugin.betterImageEditor.text.importFromAFile)}</Button>
             </div>
         )
     },
@@ -129,11 +130,11 @@ const settings = definePluginSettings({
         description: () => t(plugin.betterImageEditor.option.clearLibrary.description),
         component: () => (
             <Button
-                color={Button.Colors.PRIMARY}
+                variant="secondary"
                 onClick={() => Alerts.show({
                     title: t(plugin.betterImageEditor.text.clearSavedPictures),
                     body: t(plugin.betterImageEditor.text.everyPictureYouHave),
-                    confirmColor: Button.Colors.RED,
+                    confirmColor: "danger",
                     confirmText: t(plugin.betterImageEditor.text.clear),
                     cancelText: t(plugin.betterImageEditor.text.cancel),
                     onConfirm: () => clear().catch(err => logger.error("could not clear the library", err))
@@ -257,7 +258,7 @@ function useForget(bump: () => void) {
         Alerts.show({
             title: t(plugin.betterImageEditor.text.removeThisPicture),
             body: t(plugin.betterImageEditor.text.removePictureBody, { name: entry.name }),
-            confirmColor: Button.Colors.RED,
+            confirmColor: "danger",
             confirmText: t(plugin.betterImageEditor.text.remove),
             cancelText: t(plugin.betterImageEditor.text.cancel),
             onConfirm: run

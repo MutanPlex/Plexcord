@@ -10,7 +10,7 @@ import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { Alerts, Button, GuildStore } from "@webpack/common";
+import { Alerts, GuildStore } from "@webpack/common";
 const DeleteGuild = findByPropsLazy("deleteGuild", "sendTransferOwnershipPincode").deleteGuild;
 
 function GetPropsAndDeleteGuild(id) {
@@ -42,7 +42,7 @@ export default definePlugin({
             return Alerts.show({
                 title: t(plugin.noDeleteSafety.modal.title),
                 body: <p>{t(plugin.noDeleteSafety.modal.body)}</p>,
-                confirmColor: Button.Colors.RED,
+                confirmColor: "danger",
                 confirmText: t(plugin.noDeleteSafety.modal.confirm),
                 onConfirm: () => GetPropsAndDeleteGuild(server.id),
                 cancelText: t(plugin.noDeleteSafety.modal.cancel)

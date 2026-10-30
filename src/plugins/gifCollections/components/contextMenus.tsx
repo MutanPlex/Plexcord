@@ -181,7 +181,7 @@ export function RemoveItemContextMenuItems({ type, nameOrId }: { type: "collecti
                         confirmText: type === "collection"
                             ? t(plugin.gifCollections.alert.delete.confirm)
                             : t(plugin.gifCollections.alert.delete.remove),
-                        confirmColor: "dangerPrimary",
+                        confirmColor: "danger",
                         cancelText: t(plugin.gifCollections.alert.delete.cancel),
                         onConfirm: doDelete,
                     });

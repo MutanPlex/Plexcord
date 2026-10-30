@@ -64,6 +64,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Usar la barra de título nativa de Windows en lugar de la personalizada de Discord",
                 description: "Sustituye la barra de título personalizada de Discord por la barra de título estándar de Windows. Esto puede mejorar la compatibilidad con algunas herramientas de gestión de ventanas."
             },
+            noRoundCorners: {
+                label: "Desactivar esquinas redondeadas de la ventana",
+                description: "Hace que las esquinas de la ventana de Discord sean cuadradas en lugar de redondeadas."
+            },
             transparent: {
                 label: "Habilitar transparencia de ventana",
                 description: "Hace que la ventana de Discord sea transparente. Se requiere un tema que soporte transparencia o esto no hará nada.",
@@ -3356,17 +3360,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 error: "Error al copiar la URL, consulta la consola"
             }
         },
-        copyStickerLinks: {
-            name: "CopyStickerLinks",
-            description: "Añade la posibilidad de copiar y abrir enlaces de pegatinas (stickers)",
-            context: {
-                copy: "Copiar enlace del sticker",
-                open: "Abrir enlace del sticker"
-            },
-            toast: {
-                success: "¡Enlace copiado!"
-            }
-        },
         copyUserMention: {
             name: "CopyUserMention",
             description: "Añade un botón para copiar la mención de un usuario en el menú contextual.",
@@ -4558,29 +4551,58 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownError: "Error desconocido"
             }
         },
-        expressionCloner: {
-            name: "ExpressionCloner",
-            description: "Te permite clonar emojis y pegatinas a tu propio servidor (haz clic derecho sobre ellos)",
-            modal: {
-                title: "Nombre personalizado",
-                invalidName: "El nombre debe tener entre 2 y 32 caracteres y solo contener caracteres alfanuméricos"
-            },
-            toast: {
-                success: "¡{{name}} clonado con éxito en {{guild}}!",
-                yourServer: "tu servidor",
-                failed: "Error al clonar: ",
-                console: "Algo salió mal (¡revisa la consola!)",
-                successfullyClonedNameTo: "¡{{name}} se clonó correctamente en {{name_your_server}}!"
+        expressionManager: {
+            name: "ExpressionManager",
+            description: "Clona emojis y stickers. Añade opciones al menú contextual para clonarlos, editarlos o eliminarlos rápidamente. También añade opciones para copiar y guardar stickers",
+            option: {
+                editAndDelete: {
+                    label: "Editar y eliminar",
+                    description: "Añade las opciones \"Editar\" y \"Eliminar\" al menú contextual del selector de expresiones"
+                },
+                stickerCopyAndOpen: {
+                    label: "Enlaces de stickers",
+                    description: "Añade las opciones \"Copiar enlace del sticker\" y \"Abrir enlace del sticker\" al menú contextual de stickers"
+                },
+                recents: {
+                    label: "Quitar de recientes",
+                    description: "Añade la opción \"Quitar de recientes\" al menú contextual de las expresiones usadas con frecuencia"
+                }
             },
             context: {
-                clone: "Clonar {{type}}",
-                cloneName: "Clonar {{data}}"
+                cloneEmoji: "Clonar Emoji",
+                cloneSticker: "Clonar Sticker",
+                editEmoji: "Editar emoji",
+                editSticker: "Editar sticker",
+                deleteEmoji: "Eliminar emoji",
+                deleteSticker: "Eliminar sticker",
+                removeFromRecents: "Quitar de recientes",
+                uploadAsEmoji: "Subir como emoji",
+                copyStickerLink: "Copiar enlace del sticker",
+                openStickerLink: "Abrir enlace del sticker"
             },
-            text: {
+            modal: {
+                customName: "Nombre personalizado",
+                invalidName: "El nombre debe tener entre 2 y 30 caracteres y solo contener caracteres alfanuméricos",
+                cloneTitle: "Clonar {{name}}",
+                deleteTitle: "Eliminar {{name}}",
+                deleteEmoji: "¿Seguro que quieres eliminar este emoji?",
+                deleteSticker: "¿Seguro que quieres eliminar este sticker?",
+                deleteConfirm: "Eliminar",
+                recentsEmoji: "Esto restablecerá todo el historial de uso de este emoji y no se puede deshacer. ¿Estás seguro?",
+                recentsSticker: "Esto restablecerá todo el historial de uso de este sticker y no se puede deshacer. ¿Estás seguro?",
+                recentsConfirm: "Hazlo"
+            },
+            toast: {
+                emojiDeleted: "Emoji eliminado correctamente.",
+                stickerDeleted: "Sticker eliminado correctamente.",
+                emojiDeleteFailed: "No se ha podido eliminar el emoji",
+                stickerDeleteFailed: "No se ha podido eliminar el sticker",
+                cloned: "¡{{name}} clonado con éxito en {{guild}}!",
                 yourServer: "tu servidor",
-                cloneTo: "Clonar en {{name}}",
-                emoji: "Emoji",
-                sticker: "Sticker"
+                cloneFailed: "Error al clonar: {{message}}",
+                console: "Algo salió mal (¡revisa la consola!)",
+                linkCopied: "¡Enlace copiado!",
+                emojiModalFailed: "No se ha podido abrir la ventana de emojis: {{error}}"
             }
         },
         f8break: {
@@ -9859,7 +9881,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "Muestra las cuentas conectadas en las tarjetas de perfil.",
+            description: "Muestra las cuentas conectadas en las tarjetas de perfil y en la barra lateral de MD.",
             option: {
                 iconSize: {
                     label: "Tamaño de icono",

@@ -64,6 +64,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Использовать нативную строку заголовка Windows вместо кастомной",
                 description: "Заменить кастомную строку заголовка Discord на стандартную строку заголовка Windows. Это может улучшить совместимость с некоторыми инструментами управления окнами."
             },
+            noRoundCorners: {
+                label: "Отключить скруглённые углы окна",
+                description: "Делает углы окна Discord прямыми вместо скруглённых."
+            },
             transparent: {
                 label: "Включить прозрачность окна",
                 description: "Сделать окно Discord прозрачным. Требуется тема с поддержкой прозрачности, иначе настройка ничего не изменит.",
@@ -3356,17 +3360,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 error: "Ошибка копирования, проверьте консоль"
             }
         },
-        copyStickerLinks: {
-            name: "CopyStickerLinks",
-            description: "Добавляет возможность копировать и открывать ссылки на стикеры",
-            context: {
-                copy: "Копировать ссылку на стикер",
-                open: "Открыть ссылку на стикер"
-            },
-            toast: {
-                success: "Ссылка скопирована!"
-            }
-        },
         copyUserMention: {
             name: "CopyUserMention",
             description: "Добавляет кнопку копирования упоминания пользователя в контекстное меню.",
@@ -4558,29 +4551,58 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownError: "Неизвестная ошибка"
             }
         },
-        expressionCloner: {
-            name: "ExpressionCloner",
-            description: "Позволяет клонировать эмодзи и стикеры на свой сервер (через правый клик)",
-            modal: {
-                title: "Свое название",
-                invalidName: "Имя должно быть от 2 до 32 символов и содержать только буквы и цифры"
-            },
-            toast: {
-                success: "Успешно скопировано {{name}} на {{guild}}!",
-                yourServer: "ваш сервер",
-                failed: "Не удалось клонировать: ",
-                console: "Что-то пошло не так (проверьте консоль!)",
-                successfullyClonedNameTo: "{{name}} успешно клонирован в {{name_your_server}}!"
+        expressionManager: {
+            name: "ExpressionManager",
+            description: "Клонирование эмодзи и стикеров. Добавляет пункты контекстного меню для быстрого клонирования, редактирования или удаления. Также добавляет пункты копирования и сохранения стикеров",
+            option: {
+                editAndDelete: {
+                    label: "Редактирование и удаление",
+                    description: "Добавляет пункты «Редактировать» и «Удалить» в контекстное меню выбора выражений"
+                },
+                stickerCopyAndOpen: {
+                    label: "Ссылки на стикеры",
+                    description: "Добавляет пункты «Копировать ссылку на стикер» и «Открыть ссылку на стикер» в контекстное меню стикеров"
+                },
+                recents: {
+                    label: "Удалить из недавних",
+                    description: "Добавляет пункт «Удалить из недавних» в контекстное меню часто используемых выражений"
+                }
             },
             context: {
-                clone: "Клонировать {{type}}",
-                cloneName: "Клонировать {{data}}"
+                cloneEmoji: "Клонировать Эмодзи",
+                cloneSticker: "Клонировать Стикер",
+                editEmoji: "Редактировать эмодзи",
+                editSticker: "Редактировать стикер",
+                deleteEmoji: "Удалить эмодзи",
+                deleteSticker: "Удалить стикер",
+                removeFromRecents: "Удалить из недавних",
+                uploadAsEmoji: "Загрузить как эмодзи",
+                copyStickerLink: "Копировать ссылку на стикер",
+                openStickerLink: "Открыть ссылку на стикер"
             },
-            text: {
+            modal: {
+                customName: "Свое название",
+                invalidName: "Имя должно быть от 2 до 30 символов и содержать только буквы и цифры",
+                cloneTitle: "Клонировать {{name}}",
+                deleteTitle: "Удалить {{name}}",
+                deleteEmoji: "Вы уверены, что хотите удалить этот эмодзи?",
+                deleteSticker: "Вы уверены, что хотите удалить этот стикер?",
+                deleteConfirm: "Удалить",
+                recentsEmoji: "Это сбросит всю историю использования этого эмодзи, и это действие нельзя отменить. Вы уверены?",
+                recentsSticker: "Это сбросит всю историю использования этого стикера, и это действие нельзя отменить. Вы уверены?",
+                recentsConfirm: "Сделать"
+            },
+            toast: {
+                emojiDeleted: "Эмодзи успешно удалён.",
+                stickerDeleted: "Стикер успешно удалён.",
+                emojiDeleteFailed: "Не удалось удалить эмодзи",
+                stickerDeleteFailed: "Не удалось удалить стикер",
+                cloned: "Успешно скопировано {{name}} на {{guild}}!",
                 yourServer: "ваш сервер",
-                cloneTo: "Клонировать в {{name}}",
-                emoji: "Эмодзи",
-                sticker: "Стикер"
+                cloneFailed: "Не удалось клонировать: {{message}}",
+                console: "Что-то пошло не так (проверьте консоль!)",
+                linkCopied: "Ссылка скопирована!",
+                emojiModalFailed: "Не удалось открыть окно эмодзи: {{error}}"
             }
         },
         f8break: {
@@ -9859,7 +9881,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "Отображает подключенные аккаунты в кратком профиле пользователя",
+            description: "Отображает подключенные аккаунты в кратком профиле пользователя и на боковой панели ЛС",
             option: {
                 iconSize: {
                     label: "Размер иконок",

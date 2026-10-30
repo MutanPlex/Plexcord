@@ -61,7 +61,7 @@ export const cl = classNameFactory("pc-vmsg-");
 
 export type VoiceRecorder = React.ComponentType<{
     setAudioBlob(blob: Blob): void;
-    onRecordingChange?(recording: boolean): void;
+    onRecordingChange(recording: boolean): void;
 }>;
 
 type AudioMetadata = {
@@ -160,7 +160,11 @@ const ctxMenuPatch: NavContextMenuPatchCallback = (children, props) => {
                 icon: Microphone
             }}
             label={t(plugin.voiceMessages.context.sendVoiceMessage)}
-            action={() => openModal(modalProps => <VoiceMessageModal modalProps={modalProps} />)}
+            action={() =>
+                openModal(modalProps => <VoiceMessageModal modalProps={modalProps} />, {
+                    onCloseCallback: () => FluxDispatcher.dispatch({ type: "PLEXCORD_STOP_RECORDING" })
+                })
+            }
         />
     );
 };

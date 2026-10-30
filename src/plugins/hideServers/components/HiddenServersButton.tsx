@@ -26,7 +26,6 @@ function HiddenServersButton() {
             {actuallyHidden > 0 ? (
                 <Button
                     className={cl("button")}
-                    variant="secondary"
                     size="min"
                     onClick={() => openHiddenServersModal()}
                 >

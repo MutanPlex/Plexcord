@@ -15,6 +15,7 @@ import definePlugin, { OptionType } from "@utils/types";
 import { PresenceStore, SettingsRouter, UserStore } from "@webpack/common";
 
 const extraTimeslots = [3, 4, 5, 6, 7, 10, 15, 20, 25, 30];
+const extraResolutions = [240, 360, 2160, 4320];
 const extraFramerates = [45, 90, 120, 144, 165, 240];
 
 const settings = definePluginSettings({
@@ -72,7 +73,11 @@ export default definePlugin({
                     replace: " $self.patchTimeslots($&)"
                 },
                 {
-                    match: /\[\{.{0,25}\i.\i.FPS_15.{0,500}\}\]/,
+                    match: /\[\{.{0,25}\i.\i.RESOLUTION_480.{0,600}\}\]/,
+                    replace: " $self.patchResolutions($&)"
+                },
+                {
+                    match: /\[\{.{0,25}\i.\i.FPS_30.{0,500}\}\]/,
                     replace: " $self.patchFramerates($&)"
                 }
             ]
@@ -91,6 +96,20 @@ export default definePlugin({
         }));
 
         return newTimeslots.sort((a, b) => a.value - b.value);
+    },
+
+    patchResolutions(resolutions: { id: string; value: number; label: string; }[]) {
+        const newResolutions = [...resolutions];
+
+        extraResolutions.forEach(resolution => newResolutions.push({
+            id: `${resolution}p`,
+            value: resolution,
+            label: getIntlMessage("SCREENSHARE_RESOLUTION_ABBREVIATED", {
+                resolution
+            })
+        }));
+
+        return newResolutions.sort((a, b) => (a.value || Infinity) - (b.value || Infinity));
     },
 
     patchFramerates(framerates: { id: string; value: number; label: string; }[]) {

@@ -64,6 +64,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "使用 Windows 的原生标题栏而不是 Discord 的自定义标题栏",
                 description: "将 Discord 的自定义标题栏替换为标准 Windows 标题栏。这可能会提高与某些窗口管理工具的兼容性。"
             },
+            noRoundCorners: {
+                label: "禁用窗口圆角",
+                description: "使 Discord 窗口的四角变为直角而不是圆角。"
+            },
             transparent: {
                 label: "启用窗口透明度",
                 description: "使 Discord 窗口透明。需要一个支持透明度的主题，否则将不起作用。",
@@ -3356,17 +3360,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 error: "复制 URL 时出错，请检查控制台以获取更多信息"
             }
         },
-        copyStickerLinks: {
-            name: "CopyStickerLinks",
-            description: "添加复制和打开贴纸链接的功能",
-            context: {
-                copy: "复制贴纸链接",
-                open: "打开贴纸链接"
-            },
-            toast: {
-                success: "链接已复制！"
-            }
-        },
         copyUserMention: {
             name: "CopyUserMention",
             description: "添加一个按钮以在用户上下文菜单上复制用户的提及，最适合与 ValidUser 配合使用。",
@@ -4558,29 +4551,58 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownError: "未知错误"
             }
         },
-        expressionCloner: {
-            name: "ExpressionCloner",
-            description: "允许您将表情和贴纸克隆到您自己的服务器（右键单击它们）",
-            modal: {
-                title: "自定义名称",
-                invalidName: "名称必须介于 2 到 32 个字符之间，并且仅包含字母数字字符"
-            },
-            toast: {
-                success: "成功将 {{name}} 克隆到 {{guild}}！",
-                yourServer: "你的服务器",
-                failed: "克隆失败：",
-                console: "出了点问题（检查控制台！）",
-                successfullyClonedNameTo: "已成功将 {{name}} 克隆到 {{name_your_server}}！"
+        expressionManager: {
+            name: "ExpressionManager",
+            description: "克隆表情符号和贴纸。添加右键菜单选项，可快速克隆、编辑或删除它们。还为贴纸添加复制和保存选项",
+            option: {
+                editAndDelete: {
+                    label: "编辑和删除",
+                    description: "在表情选择器的右键菜单中添加“编辑”和“删除”选项"
+                },
+                stickerCopyAndOpen: {
+                    label: "贴纸链接",
+                    description: "在贴纸的右键菜单中添加“复制贴纸链接”和“打开贴纸链接”选项"
+                },
+                recents: {
+                    label: "从最近使用中移除",
+                    description: "在常用表情的右键菜单中添加“从最近使用中移除”选项"
+                }
             },
             context: {
-                clone: "克隆 {{type}}",
-                cloneName: "克隆 {{data}}"
+                cloneEmoji: "克隆 表情符号",
+                cloneSticker: "克隆 贴纸",
+                editEmoji: "编辑表情符号",
+                editSticker: "编辑贴纸",
+                deleteEmoji: "删除表情符号",
+                deleteSticker: "删除贴纸",
+                removeFromRecents: "从最近使用中移除",
+                uploadAsEmoji: "作为表情符号上传",
+                copyStickerLink: "复制贴纸链接",
+                openStickerLink: "打开贴纸链接"
             },
-            text: {
+            modal: {
+                customName: "自定义名称",
+                invalidName: "名称必须介于 2 到 30 个字符之间，并且仅包含字母数字字符",
+                cloneTitle: "克隆 {{name}}",
+                deleteTitle: "删除 {{name}}",
+                deleteEmoji: "确定要删除此表情符号吗？",
+                deleteSticker: "确定要删除此贴纸吗？",
+                deleteConfirm: "删除",
+                recentsEmoji: "这将重置此表情符号的全部使用记录，且无法撤销。确定吗？",
+                recentsSticker: "这将重置此贴纸的全部使用记录，且无法撤销。确定吗？",
+                recentsConfirm: "确定"
+            },
+            toast: {
+                emojiDeleted: "表情符号已删除。",
+                stickerDeleted: "贴纸已删除。",
+                emojiDeleteFailed: "删除表情符号失败",
+                stickerDeleteFailed: "删除贴纸失败",
+                cloned: "成功将 {{name}} 克隆到 {{guild}}！",
                 yourServer: "你的服务器",
-                cloneTo: "克隆到 {{name}}",
-                emoji: "表情符号",
-                sticker: "贴纸"
+                cloneFailed: "克隆失败：{{message}}",
+                console: "出了点问题（检查控制台！）",
+                linkCopied: "链接已复制！",
+                emojiModalFailed: "无法打开表情符号窗口：{{error}}"
             }
         },
         f8break: {
@@ -9859,7 +9881,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "在用户弹出窗口中显示连接的帐户",
+            description: "在用户弹出窗口和私信侧边栏中显示连接的帐户",
             option: {
                 iconSize: {
                     label: "图标大小",

@@ -64,6 +64,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Folosește bara de titlu nativă Windows în locul celei personalizate Discord",
                 description: "Înlocuiește bara de titlu personalizată a Discord cu bara de titlu standard Windows. Acest lucru poate îmbunătăți compatibilitatea cu unele instrumente de gestionare a ferestrelor."
             },
+            noRoundCorners: {
+                label: "Dezactivează colțurile rotunjite ale ferestrei",
+                description: "Face colțurile ferestrei Discord pătrate în loc de rotunjite."
+            },
             transparent: {
                 label: "Activează transparența ferestrei",
                 description: "Face fereastra Discord transparentă. Este necesară o temă care suportă transparența, altfel această setare nu va avea niciun efect.",
@@ -3356,17 +3360,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 error: "Eroare la copierea URL-ului, verifică consola pentru detalii"
             }
         },
-        copyStickerLinks: {
-            name: "CopyStickerLinks",
-            description: "Adaugă posibilitatea de a copia și deschide linkurile abțibildurilor",
-            context: {
-                copy: "Copiază linkul stickerului",
-                open: "Deschide linkul stickerului"
-            },
-            toast: {
-                success: "Link copiat!"
-            }
-        },
         copyUserMention: {
             name: "CopyUserMention",
             description: "Adaugă un buton pentru a copia mențiunea utilizatorului în meniul contextual, funcționează cel mai bine cu ValidUser.",
@@ -4558,29 +4551,58 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownError: "Eroare necunoscută"
             }
         },
-        expressionCloner: {
-            name: "ExpressionCloner",
-            description: "Vă permite să clonați emoji-uri și abțibilduri pe propriul server (click dreapta pe ele)",
-            modal: {
-                title: "Nume personalizat",
-                invalidName: "Numele trebuie să aibă între 2 și 32 de caractere și să conțină doar caractere alfanumerice"
-            },
-            toast: {
-                success: "S-a clonat cu succes {{name}} pe {{guild}}!",
-                yourServer: "serverul tău",
-                failed: "Clonarea a eșuat: ",
-                console: "Ceva n-a mers bine (verifică consola!)",
-                successfullyClonedNameTo: "{{name}} a fost clonat în {{name_your_server}}!"
+        expressionManager: {
+            name: "ExpressionManager",
+            description: "Clonează emoji-uri și autocolante. Adaugă opțiuni în meniul contextual pentru a le clona, edita sau șterge rapid. Adaugă și opțiuni de copiere și salvare pentru autocolante",
+            option: {
+                editAndDelete: {
+                    label: "Editare și ștergere",
+                    description: "Adaugă opțiunile „Editează” și „Șterge” în meniul contextual al selectorului de expresii"
+                },
+                stickerCopyAndOpen: {
+                    label: "Linkuri de autocolante",
+                    description: "Adaugă opțiunile „Copiază linkul stickerului” și „Deschide linkul stickerului” în meniul contextual al autocolantelor"
+                },
+                recents: {
+                    label: "Elimină din recente",
+                    description: "Adaugă opțiunea „Elimină din recente” în meniul contextual al expresiilor folosite frecvent"
+                }
             },
             context: {
-                clone: "Clonează {{type}}",
-                cloneName: "Clonează {{data}}"
+                cloneEmoji: "Clonează Emoji",
+                cloneSticker: "Clonează Autocolant",
+                editEmoji: "Editează emoji-ul",
+                editSticker: "Editează autocolantul",
+                deleteEmoji: "Șterge emoji-ul",
+                deleteSticker: "Șterge autocolantul",
+                removeFromRecents: "Elimină din recente",
+                uploadAsEmoji: "Încarcă ca emoji",
+                copyStickerLink: "Copiază linkul stickerului",
+                openStickerLink: "Deschide linkul stickerului"
             },
-            text: {
+            modal: {
+                customName: "Nume personalizat",
+                invalidName: "Numele trebuie să aibă între 2 și 30 de caractere și să conțină doar caractere alfanumerice",
+                cloneTitle: "Clonează {{name}}",
+                deleteTitle: "Șterge {{name}}",
+                deleteEmoji: "Sigur vrei să ștergi acest emoji?",
+                deleteSticker: "Sigur vrei să ștergi acest autocolant?",
+                deleteConfirm: "Șterge",
+                recentsEmoji: "Aceasta va reseta tot istoricul de utilizare pentru acest emoji și nu poate fi anulată. Ești sigur?",
+                recentsSticker: "Aceasta va reseta tot istoricul de utilizare pentru acest autocolant și nu poate fi anulată. Ești sigur?",
+                recentsConfirm: "Fă-o"
+            },
+            toast: {
+                emojiDeleted: "Emoji șters cu succes.",
+                stickerDeleted: "Autocolant șters cu succes.",
+                emojiDeleteFailed: "Ștergerea emoji-ului a eșuat",
+                stickerDeleteFailed: "Ștergerea autocolantului a eșuat",
+                cloned: "S-a clonat cu succes {{name}} pe {{guild}}!",
                 yourServer: "serverul tău",
-                cloneTo: "Clonează în {{name}}",
-                emoji: "Emoji",
-                sticker: "Autocolant"
+                cloneFailed: "Clonarea a eșuat: {{message}}",
+                console: "Ceva n-a mers bine (verifică consola!)",
+                linkCopied: "Link copiat!",
+                emojiModalFailed: "Deschiderea ferestrei de emoji a eșuat: {{error}}"
             }
         },
         f8break: {
@@ -9859,7 +9881,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "Afișează conturile conectate în ferestrele de profil (popouts)",
+            description: "Afișează conturile conectate în ferestrele de profil (popouts) și în bara laterală a mesajelor directe",
             option: {
                 iconSize: {
                     label: "Dimensiune pictogramă",

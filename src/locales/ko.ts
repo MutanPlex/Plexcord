@@ -64,6 +64,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Discord의 사용자 정의 제목 표시줄 대신 Windows의 기본 제목 표시줄을 사용하세요",
                 description: "Discord의 사용자 정의 제목 표시줄을 표준 Windows 제목 표시줄로 교체합니다. 이로 인해 일부 창 관리 도구와의 호환성이 향상될 수 있습니다."
             },
+            noRoundCorners: {
+                label: "둥근 창 모서리 비활성화",
+                description: "Discord 창의 모서리를 둥글지 않고 각지게 만듭니다."
+            },
             transparent: {
                 label: "창 투명도 활성화",
                 description: "디스코드 창을 투명하게 만들어보세요. 투명성을 지원하는 테마가 필요합니다. 그렇지 않으면 아무 작업도 수행되지 않습니다.",
@@ -3356,17 +3360,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 error: "URL을 복사하는 중에 오류가 발생했습니다. 자세한 내용은 콘솔을 확인하세요."
             }
         },
-        copyStickerLinks: {
-            name: "CopyStickerLinks",
-            description: "스티커 링크를 복사하고 여는 기능을 추가합니다.",
-            context: {
-                copy: "스티커 링크 복사",
-                open: "스티커 링크 열기"
-            },
-            toast: {
-                success: "링크가 복사되었습니다!"
-            }
-        },
         copyUserMention: {
             name: "CopyUserMention",
             description: "사용자 상황에 맞는 메뉴에 사용자 멘션을 복사하는 버튼을 추가하며 ValidUser와 가장 잘 작동합니다.",
@@ -4558,29 +4551,58 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownError: "알 수 없는 오류"
             }
         },
-        expressionCloner: {
-            name: "ExpressionCloner",
-            description: "감정 표현과 스티커를 자신의 서버에 복제할 수 있습니다(마우스 오른쪽 버튼으로 클릭).",
-            modal: {
-                title: "맞춤 이름",
-                invalidName: "이름은 2~32자여야 하며 영숫자만 포함할 수 있습니다."
-            },
-            toast: {
-                success: "{{name}}을(를) {{guild}}에 성공적으로 복제했습니다!",
-                yourServer: "귀하의 서버",
-                failed: "복제 실패:",
-                console: "문제가 발생했습니다(콘솔을 확인하세요!)",
-                successfullyClonedNameTo: "{{name}}을(를) {{name_your_server}}(으)로 복제했습니다!"
+        expressionManager: {
+            name: "ExpressionManager",
+            description: "이모지와 스티커를 복제합니다. 빠르게 복제, 편집 또는 삭제할 수 있는 컨텍스트 메뉴 옵션을 추가합니다. 스티커 복사 및 저장 옵션도 추가합니다",
+            option: {
+                editAndDelete: {
+                    label: "편집 및 삭제",
+                    description: "표현 선택기 컨텍스트 메뉴에 \"편집\" 및 \"삭제\" 옵션을 추가합니다"
+                },
+                stickerCopyAndOpen: {
+                    label: "스티커 링크",
+                    description: "스티커 컨텍스트 메뉴에 \"스티커 링크 복사\" 및 \"스티커 링크 열기\" 옵션을 추가합니다"
+                },
+                recents: {
+                    label: "최근 항목에서 제거",
+                    description: "자주 사용하는 표현의 컨텍스트 메뉴에 \"최근 항목에서 제거\" 옵션을 추가합니다"
+                }
             },
             context: {
-                clone: "{{type}} 복제",
-                cloneName: "{{data}} 복제"
+                cloneEmoji: "이모지 복제",
+                cloneSticker: "스티커 복제",
+                editEmoji: "이모지 편집",
+                editSticker: "스티커 편집",
+                deleteEmoji: "이모지 삭제",
+                deleteSticker: "스티커 삭제",
+                removeFromRecents: "최근 항목에서 제거",
+                uploadAsEmoji: "이모지로 업로드",
+                copyStickerLink: "스티커 링크 복사",
+                openStickerLink: "스티커 링크 열기"
             },
-            text: {
-                yourServer: "내 서버",
-                cloneTo: "{{name}}(으)로 복제",
-                emoji: "이모지",
-                sticker: "스티커"
+            modal: {
+                customName: "맞춤 이름",
+                invalidName: "이름은 2~30자여야 하며 영숫자만 포함할 수 있습니다.",
+                cloneTitle: "{{name}} 복제",
+                deleteTitle: "{{name}} 삭제",
+                deleteEmoji: "이 이모지를 삭제하시겠습니까?",
+                deleteSticker: "이 스티커를 삭제하시겠습니까?",
+                deleteConfirm: "삭제",
+                recentsEmoji: "이 이모지의 모든 사용 기록이 초기화되며 되돌릴 수 없습니다. 계속하시겠습니까?",
+                recentsSticker: "이 스티커의 모든 사용 기록이 초기화되며 되돌릴 수 없습니다. 계속하시겠습니까?",
+                recentsConfirm: "실행"
+            },
+            toast: {
+                emojiDeleted: "이모지를 삭제했습니다.",
+                stickerDeleted: "스티커를 삭제했습니다.",
+                emojiDeleteFailed: "이모지를 삭제하지 못했습니다",
+                stickerDeleteFailed: "스티커를 삭제하지 못했습니다",
+                cloned: "{{name}}을(를) {{guild}}에 성공적으로 복제했습니다!",
+                yourServer: "귀하의 서버",
+                cloneFailed: "복제 실패: {{message}}",
+                console: "문제가 발생했습니다(콘솔을 확인하세요!)",
+                linkCopied: "링크가 복사되었습니다!",
+                emojiModalFailed: "이모지 창을 열지 못했습니다: {{error}}"
             }
         },
         f8break: {
@@ -9859,7 +9881,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "사용자 팝아웃에 연결된 계정 표시",
+            description: "사용자 팝아웃과 DM 사이드바에 연결된 계정 표시",
             option: {
                 iconSize: {
                     label: "아이콘 크기",

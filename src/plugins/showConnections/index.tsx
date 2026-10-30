@@ -265,6 +265,14 @@ export default definePlugin({
                 match: /!\i&&\(\i\|\|\i\).{0,250}profileAppConnections\}\)\}\)/,
                 replace: "$self.profilePopoutComponent(arguments[0]),",
             }
+        },
+        {
+            // Same as FakeNitro
+            find: '.getByName("fork_and_knife")',
+            replacement: {
+                match: /targetUserId:\i\.id.{0,60}?]}\)(?=])/,
+                replace: "$&,$self.profilePopoutComponent(arguments[0])"
+            }
         }
     ],
 

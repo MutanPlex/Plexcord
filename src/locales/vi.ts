@@ -64,6 +64,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Sử dụng thanh tiêu đề gốc của Windows thay vì thanh tiêu đề tùy chỉnh của Discord",
                 description: "Thay thế thanh tiêu đề tùy chỉnh của Discord bằng thanh tiêu đề tiêu chuẩn của Windows. Điều này có thể cải thiện khả năng tương thích với một số công cụ quản lý cửa sổ."
             },
+            noRoundCorners: {
+                label: "Tắt bo góc cửa sổ",
+                description: "Làm cho các góc của cửa sổ Discord vuông thay vì bo tròn."
+            },
             transparent: {
                 label: "Kích hoạt độ trong suốt của cửa sổ",
                 description: "Làm cho cửa sổ Discord trong suốt. Cần phải có một chủ đề hỗ trợ tính minh bạch, nếu không điều này sẽ không có tác dụng gì.",
@@ -3356,17 +3360,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 error: "Lỗi sao chép URL, hãy kiểm tra bảng điều khiển để biết thêm thông tin"
             }
         },
-        copyStickerLinks: {
-            name: "CopyStickerLinks",
-            description: "Thêm khả năng sao chép và mở liên kết Nhãn dán",
-            context: {
-                copy: "Sao chép liên kết nhãn dán",
-                open: "Mở liên kết nhãn dán"
-            },
-            toast: {
-                success: "Đã sao chép liên kết!"
-            }
-        },
         copyUserMention: {
             name: "CopyUserMention",
             description: "Thêm nút để sao chép đề cập của người dùng trên menu ngữ cảnh của người dùng, hoạt động tốt nhất với ValidUser.",
@@ -4558,29 +4551,58 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownError: "Lỗi không xác định"
             }
         },
-        expressionCloner: {
-            name: "ExpressionCloner",
-            description: "Cho phép bạn sao chép biểu tượng cảm xúc và nhãn dán vào máy chủ của riêng bạn (nhấp chuột phải vào chúng)",
-            modal: {
-                title: "Tên tùy chỉnh",
-                invalidName: "Tên phải dài từ 2 đến 32 ký tự và chỉ chứa các ký tự chữ và số"
-            },
-            toast: {
-                success: "Đã sao chép thành công {{name}} thành {{guild}}!",
-                yourServer: "máy chủ của bạn",
-                failed: "Không sao chép được:",
-                console: "Đã xảy ra lỗi (kiểm tra bảng điều khiển!)",
-                successfullyClonedNameTo: "Đã sao chép {{name}} sang {{name_your_server}}!"
+        expressionManager: {
+            name: "ExpressionManager",
+            description: "Nhân bản emoji và nhãn dán. Thêm tùy chọn vào menu ngữ cảnh để nhanh chóng nhân bản, chỉnh sửa hoặc xóa chúng. Đồng thời thêm tùy chọn sao chép và lưu cho nhãn dán",
+            option: {
+                editAndDelete: {
+                    label: "Chỉnh sửa và xóa",
+                    description: "Thêm tùy chọn \"Chỉnh sửa\" và \"Xóa\" vào menu ngữ cảnh của bộ chọn biểu cảm"
+                },
+                stickerCopyAndOpen: {
+                    label: "Liên kết nhãn dán",
+                    description: "Thêm tùy chọn \"Sao chép liên kết nhãn dán\" và \"Mở liên kết nhãn dán\" vào menu ngữ cảnh của nhãn dán"
+                },
+                recents: {
+                    label: "Xóa khỏi gần đây",
+                    description: "Thêm tùy chọn \"Xóa khỏi gần đây\" vào menu ngữ cảnh của các biểu cảm thường dùng"
+                }
             },
             context: {
-                clone: "Nhân bản {{type}}",
-                cloneName: "Nhân bản {{data}}"
+                cloneEmoji: "Nhân bản Emoji",
+                cloneSticker: "Nhân bản Nhãn dán",
+                editEmoji: "Chỉnh sửa emoji",
+                editSticker: "Chỉnh sửa nhãn dán",
+                deleteEmoji: "Xóa emoji",
+                deleteSticker: "Xóa nhãn dán",
+                removeFromRecents: "Xóa khỏi gần đây",
+                uploadAsEmoji: "Tải lên dưới dạng emoji",
+                copyStickerLink: "Sao chép liên kết nhãn dán",
+                openStickerLink: "Mở liên kết nhãn dán"
             },
-            text: {
+            modal: {
+                customName: "Tên tùy chỉnh",
+                invalidName: "Tên phải dài từ 2 đến 30 ký tự và chỉ chứa các ký tự chữ và số",
+                cloneTitle: "Nhân bản {{name}}",
+                deleteTitle: "Xóa {{name}}",
+                deleteEmoji: "Bạn có chắc muốn xóa emoji này không?",
+                deleteSticker: "Bạn có chắc muốn xóa nhãn dán này không?",
+                deleteConfirm: "Xóa",
+                recentsEmoji: "Thao tác này sẽ đặt lại toàn bộ lịch sử sử dụng của emoji này và không thể hoàn tác. Bạn có chắc không?",
+                recentsSticker: "Thao tác này sẽ đặt lại toàn bộ lịch sử sử dụng của nhãn dán này và không thể hoàn tác. Bạn có chắc không?",
+                recentsConfirm: "Thực hiện"
+            },
+            toast: {
+                emojiDeleted: "Đã xóa emoji thành công.",
+                stickerDeleted: "Đã xóa nhãn dán thành công.",
+                emojiDeleteFailed: "Không thể xóa emoji",
+                stickerDeleteFailed: "Không thể xóa nhãn dán",
+                cloned: "Đã sao chép thành công {{name}} thành {{guild}}!",
                 yourServer: "máy chủ của bạn",
-                cloneTo: "Sao chép sang {{name}}",
-                emoji: "Emoji",
-                sticker: "Nhãn dán"
+                cloneFailed: "Không sao chép được: {{message}}",
+                console: "Đã xảy ra lỗi (kiểm tra bảng điều khiển!)",
+                linkCopied: "Đã sao chép liên kết!",
+                emojiModalFailed: "Không thể mở cửa sổ emoji: {{error}}"
             }
         },
         f8break: {
@@ -9859,7 +9881,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "Hiển thị các tài khoản được kết nối trong cửa sổ bật lên của người dùng",
+            description: "Hiển thị các tài khoản được kết nối trong cửa sổ bật lên của người dùng và thanh bên tin nhắn trực tiếp",
             option: {
                 iconSize: {
                     label: "Kích thước biểu tượng",

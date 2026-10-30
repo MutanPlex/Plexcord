@@ -64,6 +64,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Use Windows' native title bar instead of Discord's custom one",
                 description: "Replace Discord's custom title bar with the standard Windows title bar. This may improve compatibility with some window management tools."
             },
+            noRoundCorners: {
+                label: "Disable Rounded Window Corners",
+                description: "Makes the corners of the Discord window squared instead of rounded."
+            },
             transparent: {
                 label: "Enable window transparency",
                 description: "Make the Discord window transparent. A theme that supports transparency is required or this will do nothing.",
@@ -3356,17 +3360,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 error: "Error copying URL, check console for more info"
             }
         },
-        copyStickerLinks: {
-            name: "CopyStickerLinks",
-            description: "Adds the ability to copy & open Sticker links",
-            context: {
-                copy: "Copy Sticker Link",
-                open: "Open Sticker Link"
-            },
-            toast: {
-                success: "Link copied!"
-            }
-        },
         copyUserMention: {
             name: "CopyUserMention",
             description: "Adds a button to copy user's mention on the user context menu, works best with ValidUser.",
@@ -4558,29 +4551,58 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownError: "Unknown error"
             }
         },
-        expressionCloner: {
-            name: "ExpressionCloner",
-            description: "Allows you to clone emotes & stickers to your own server (right-click them)",
-            modal: {
-                title: "Custom Name",
-                invalidName: "Name must be between 2 and 32 characters and only contain alphanumeric characters"
-            },
-            toast: {
-                success: "Successfully cloned {{name}} to {{guild}}!",
-                yourServer: "your server",
-                failed: "Failed to clone: ",
-                console: "Something went wrong (check console!)",
-                successfullyClonedNameTo: "Successfully cloned {{name}} to {{name_your_server}}!"
+        expressionManager: {
+            name: "ExpressionManager",
+            description: "Clone Emotes & Stickers. Adds context menu options to quickly clone, edit, or delete them. Also adds Copy & Save options for stickers",
+            option: {
+                editAndDelete: {
+                    label: "Edit and Delete",
+                    description: "Add \"Edit\" and \"Delete\" options to the expression picker context menu"
+                },
+                stickerCopyAndOpen: {
+                    label: "Sticker Links",
+                    description: "Add \"Copy Sticker Link\" and \"Open Sticker Link\" options to the sticker context menu"
+                },
+                recents: {
+                    label: "Remove from Recents",
+                    description: "Add \"Remove from Recents\" option to the context menu of frequently used expressions"
+                }
             },
             context: {
-                clone: "Clone {{type}}",
-                cloneName: "Clone {{data}}"
+                cloneEmoji: "Clone Emoji",
+                cloneSticker: "Clone Sticker",
+                editEmoji: "Edit Emoji",
+                editSticker: "Edit Sticker",
+                deleteEmoji: "Delete Emoji",
+                deleteSticker: "Delete Sticker",
+                removeFromRecents: "Remove From Recents",
+                uploadAsEmoji: "Upload as Emoji",
+                copyStickerLink: "Copy Sticker Link",
+                openStickerLink: "Open Sticker Link"
             },
-            text: {
+            modal: {
+                customName: "Custom Name",
+                invalidName: "Name must be between 2 and 30 characters and only contain alphanumeric characters",
+                cloneTitle: "Clone {{name}}",
+                deleteTitle: "Delete {{name}}",
+                deleteEmoji: "Are you sure you want to delete this emoji?",
+                deleteSticker: "Are you sure you want to delete this sticker?",
+                deleteConfirm: "Delete",
+                recentsEmoji: "This will reset all usage history for this emoji and cannot be undone. Are you sure?",
+                recentsSticker: "This will reset all usage history for this sticker and cannot be undone. Are you sure?",
+                recentsConfirm: "Do it"
+            },
+            toast: {
+                emojiDeleted: "Emoji deleted successfully.",
+                stickerDeleted: "Sticker deleted successfully.",
+                emojiDeleteFailed: "Failed to delete Emoji",
+                stickerDeleteFailed: "Failed to delete Sticker",
+                cloned: "Successfully cloned {{name}} to {{guild}}!",
                 yourServer: "your server",
-                cloneTo: "Clone to {{name}}",
-                emoji: "Emoji",
-                sticker: "Sticker"
+                cloneFailed: "Failed to clone: {{message}}",
+                console: "Something went wrong (check console!)",
+                linkCopied: "Link copied!",
+                emojiModalFailed: "Failed to open Emoji Modal: {{error}}"
             }
         },
         f8break: {
@@ -9859,7 +9881,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "Show connected accounts in user popouts",
+            description: "Show connected accounts in user popouts and the DM sidebar",
             option: {
                 iconSize: {
                     label: "Icon Size",

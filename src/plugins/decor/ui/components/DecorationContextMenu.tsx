@@ -11,7 +11,8 @@ import { Decoration } from "@plugins/decor/lib/api";
 import { useCurrentUserDecorationsStore } from "@plugins/decor/lib/stores/CurrentUserDecorationsStore";
 import { cl } from "@plugins/decor/ui";
 import { copyToClipboard } from "@utils/clipboard";
-import { ConfirmModal, ContextMenuApi, Menu, openModal, UserStore } from "@webpack/common";
+import { confirmAction } from "@utils/discord";
+import { ContextMenuApi, Menu, UserStore } from "@webpack/common";
 
 export default function DecorationContextMenu({ decoration }: { decoration: Decoration; }) {
     const { delete: deleteDecoration } = useCurrentUserDecorationsStore();
@@ -35,18 +36,15 @@ export default function DecorationContextMenu({ decoration }: { decoration: Deco
                 color="danger"
                 icon={DeleteIcon}
                 leadingAccessory={{ type: "icon", icon: DeleteIcon }}
-                action={() => openModal(props => (
-                    <ConfirmModal
-                        {...props}
-                        title={t(plugin.decor.alert.delete.title)}
-                        subtitle={t(plugin.decor.alert.delete.body, { decoration })}
-                        confirmText={t(plugin.decor.alert.delete.confirm)}
-                        cancelText={t(plugin.decor.alert.delete.cancel)}
-                        onConfirm={() => {
-                            deleteDecoration(decoration);
-                        }}
-                    />
-                ))}
+                action={() => {
+                    confirmAction({
+                        title: t(plugin.decor.alert.delete.title),
+                        subtitle: t(plugin.decor.alert.delete.body, { decoration: decoration.alt }),
+                        confirmText: t(plugin.decor.alert.delete.confirm),
+                        cancelText: t(plugin.decor.alert.delete.cancel),
+                        onConfirm: () => deleteDecoration(decoration)
+                    });
+                }}
             />
         }
     </Menu.Menu>;

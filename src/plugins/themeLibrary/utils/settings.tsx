@@ -8,13 +8,14 @@
 import * as DataStore from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { Button } from "@components/Button";
 import { HeadingSecondary } from "@components/Heading";
 import { OpenExternalIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
 import { copyToClipboard } from "@utils/clipboard";
 import { classNameFactory } from "@utils/css";
 import { OptionType } from "@utils/types";
-import { Button, showToast } from "@webpack/common";
+import { showToast } from "@webpack/common";
 
 import { authorizeUser, deauthorizeUser } from "./auth";
 
@@ -63,7 +64,7 @@ export const settings = definePluginSettings({
                         <Button onClick={handleClick}>
                             {t(plugin.themeLibrary.text.copyThemelibraryToken)}
                         </Button>
-                        <Button color={Button.Colors.RED} onClick={() => deauthorizeUser()}>
+                        <Button variant="dangerPrimary" onClick={() => deauthorizeUser()}>
                             {t(plugin.themeLibrary.text.deauthorizeThemelibrary)}
                         </Button>
                     </div>

@@ -23,7 +23,7 @@ import { get, set } from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
 import { updateMessage } from "@api/MessageUpdater";
 import { ImageInvisible, ImageVisible } from "@components/Icons";
-import { Message } from "@plexcord/discord-types";
+import { BasicMessage } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { classes } from "@utils/misc";
 import definePlugin from "@utils/types";
@@ -39,7 +39,7 @@ async function getHiddenMessages() {
 
 const saveHiddenMessages = (ids: Set<string>) => set(KEY, ids);
 
-const hasMedia = (msg: Message) => msg.attachments.length > 0 || msg.embeds.length > 0 || msg.stickerItems.length > 0 || msg.components.length > 0;
+const hasMedia = (msg: BasicMessage) => msg.attachments.length > 0 || msg.embeds.length > 0 || msg.stickerItems.length > 0 || msg.components.length > 0;
 
 async function toggleHide(channelId: string, messageId: string) {
     const ids = await getHiddenMessages();

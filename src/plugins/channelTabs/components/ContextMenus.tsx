@@ -258,8 +258,7 @@ function FolderAppearanceFields({
         >{t(plugin.channelTabs.modal.folderIcon.chooseIcon)}</Button>
         {iconName && <Button
             className={Margins.top8}
-            color="transparent"
-            variant="none"
+            variant="secondary"
             onClick={() => setIconName(undefined)}
         >{t(plugin.channelTabs.modal.folderIcon.useDefaultIcon)}</Button>}
     </>;

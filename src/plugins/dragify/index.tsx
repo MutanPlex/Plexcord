@@ -21,7 +21,7 @@ import { beginDrag as beginSessionDrag, clearDragState, getLastDropAt, hasActive
 import { type GhostState, hideGhost as hideDragGhost, isGhostVisible, mountGhost as mountDragGhost, scheduleGhostPosition as scheduleDragGhostPosition, showGhost as showDragGhost, unmountGhost as unmountDragGhost } from "./ghost";
 import { clearInviteCache, createInvite, isGroupMessageChannel } from "./invite";
 import { type ChannelTarget, inspectDragEvent, type ResolvedDragTarget } from "./targets";
-import { collectPayloadStrings, type DropEntity, extractStrings, parseDragifyPayload, parseFromStrings, serializeDragEntity } from "./utils";
+import { collectPayloadStrings, type DropEntity,extractStrings, parseDragifyPayload, parseFromStrings, serializeDragEntity } from "./utils";
 
 const logger = new Logger("Dragify");
 type DragifyRuntime = {
@@ -239,7 +239,7 @@ export default definePlugin({
         {
             find: "PrivateChannel.renderAvatar: Invalid prop configuration - no user or channel",
             replacement: {
-                match: /\.CHANNEL\(\i\.\i,\i\.\i\),(?=.{0,150}\.isMultiUserDM\(\))/,
+                match: /\.CHANNEL\(\i\.\i,\i\.\i\),(?=.{0,200}\.isMultiUserDM\(\))/,
                 replace: "$&draggable:!0,onDragStart:e=>$self.onDmDragStart(e,arguments[0].channel),"
             }
         },

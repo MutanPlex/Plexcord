@@ -79,7 +79,7 @@ function GuildRow({ guild }) {
             </Heading>
             <Button
                 className="row-button"
-                variant="primary"
+                variant="secondary"
                 onClick={() => restoreGuild(guild, SortedGuildStore)}
             >
                 {t(plugin.hideServers.button.remove)}
@@ -112,7 +112,7 @@ export function HiddenServersMenu({ guilds }: { guilds: Guild[]; }) {
                     <div className={cl("folder-header")}>
                         <BaseText size="sm" weight="medium">{folder.folderName || t(plugin.hideServers.button.folder)}</BaseText>
                         <Button
-                            variant="primary"
+                            variant="secondary"
                             onClick={() => {
                                 folderGuilds.forEach(g => restoreGuild(g, SortedGuildStore));
                             }}

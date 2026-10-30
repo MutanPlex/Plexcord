@@ -21,8 +21,8 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { Alerts, Button, GuildStore } from "@webpack/common";
-import { findByPropsLazy } from "webpack";
+import { findByPropsLazy } from "@webpack";
+import { Alerts, GuildStore } from "@webpack/common";
 
 const DeleteGuild = findByPropsLazy("deleteGuild", "sendTransferOwnershipPincode").deleteGuild;
 
@@ -101,7 +101,7 @@ export default definePlugin({
             return Alerts.show({
                 title: t(plugin.alwaysTrust.alert.title),
                 body: t(plugin.alwaysTrust.alert.body),
-                confirmColor: Button.Colors.RED,
+                confirmColor: "danger",
                 confirmText: t(plugin.alwaysTrust.alert.confirm),
                 onConfirm: () => GetPropsAndDeleteGuild(server.id),
                 cancelText: t(plugin.alwaysTrust.alert.cancel)

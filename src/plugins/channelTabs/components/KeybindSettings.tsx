@@ -144,7 +144,7 @@ function KeybindInput({ label, description, settingKey, enabledKey }: KeybindInp
                 </button>
                 <Button
                     size="small"
-                    variant="primary"
+                    variant="secondary"
                     onClick={handleReset}
                     disabled={!isEnabled}
                 >

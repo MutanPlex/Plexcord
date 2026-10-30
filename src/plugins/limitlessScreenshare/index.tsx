@@ -85,16 +85,17 @@ export default definePlugin({
     ],
     OptionsRange(changeStream: (value: number) => void, initialValue: number, isResolution: boolean) {
         const { maxFPS, maxResolution, roundResolution, resolutions, fpss } = settings.store;
-        const rounder = roundResolution ? 10 : 1;
+        const step = roundResolution ? 10 : 1;
 
         return [
             CustomRange(isResolution ? {
-                onChange: (value: number) => changeStream(value * rounder),
-                initialValue: initialValue / rounder,
-                minMax: [MIN_RESOLUTION / rounder, maxResolution / rounder],
+                onChange: (value: number) => changeStream(value),
+                initialValue: initialValue / step,
+                minMax: [MIN_RESOLUTION, maxResolution],
+                step,
                 group: "resolution",
                 id: "stream-option-resolution",
-                suffix: roundResolution ? "0p" : "p"
+                suffix: "p"
             } : {
                 onChange: (value: number) => changeStream(value),
                 initialValue,
@@ -114,19 +115,20 @@ export default definePlugin({
     },
     SettingsRange(changeStream: (boolean: boolean, resolution: number, fps: number, analyticsType: string) => void, params: [boolean, string], isResolution: boolean) {
         const { maxFPS, maxResolution, roundResolution, resolutions, fpss } = settings.store;
-        const rounder = roundResolution ? 10 : 1;
+        const step = roundResolution ? 10 : 1;
         const [p1, p2] = params;
         const getResolution = () => MediaEngineStore.getState().goLiveSource?.quality.resolution || 720;
         const getFPS = () => MediaEngineStore.getState().goLiveSource?.quality.frameRate || 30;
 
         return [
             CustomRange(isResolution ? {
-                onChange: (value: number) => changeStream(p1, value * rounder, getFPS(), p2),
-                initialValue: getResolution() / rounder,
-                minMax: [MIN_RESOLUTION / rounder, maxResolution / rounder],
+                onChange: (value: number) => changeStream(p1, value * step, getFPS(), p2),
+                initialValue: getResolution() / step,
+                minMax: [MIN_RESOLUTION, maxResolution],
+                step,
                 group: "stream-settings-resolution",
                 id: "stream-settings-resolution",
-                suffix: roundResolution ? "0p" : "p"
+                suffix: "p"
             } : {
                 onChange: (value: number) => changeStream(p1, getResolution(), value, p2),
                 initialValue: getFPS(),
@@ -149,5 +151,5 @@ export default definePlugin({
                 list: fpss
             })
         ];
-    },
+    }
 });

@@ -8,6 +8,7 @@
 import * as DataStore from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import { CheckedTextInput } from "@components/CheckedTextInput";
 import { Divider } from "@components/Divider";
 import { Flex } from "@components/Flex";
@@ -19,7 +20,7 @@ import { isV1, migrate } from "@plugins/moreStickers.desktop/migrate-v1";
 import { deleteStickerPack, getStickerPack, getStickerPackMetas, saveStickerPack } from "@plugins/moreStickers.desktop/stickers";
 import { SettingsTabsKey, Sticker, StickerPack, StickerPackMeta } from "@plugins/moreStickers.desktop/types";
 import { cl, clPicker, Mutex } from "@plugins/moreStickers.desktop/utils";
-import { Button, React, showToast,TabBar, TextArea } from "@webpack/common";
+import { React, showToast, TabBar, TextArea } from "@webpack/common";
 import { JSX } from "react";
 
 const mutex = new Mutex();
@@ -115,7 +116,6 @@ export const Packs = () => {
         <div className={cl("settings")}>
             <TabBar
                 type="top"
-                look="brand"
                 selectedItem={tab}
                 onItemSelect={setTab}
                 className="tab-bar"
@@ -165,7 +165,7 @@ export const Packs = () => {
                             />
                         </span>
                         <Button
-                            size={Button.Sizes.SMALL}
+                            size="small"
                             onClick={async e => {
                                 e.preventDefault();
 
@@ -256,7 +256,7 @@ export const Packs = () => {
                             />
                         </span>
                         <Button
-                            size={Button.Sizes.SMALL}
+                            size="small"
                             onClick={async e => {
                                 e.preventDefault();
 
@@ -308,7 +308,7 @@ export const Packs = () => {
                     <Heading>{t(plugin.moreStickers.text.addStickerPackFrom3)}</Heading>
 
                     <Button
-                        size={Button.Sizes.SMALL}
+                        size="small"
                         onClick={async e => {
                             const input = document.createElement("input");
                             input.type = "file";
@@ -362,7 +362,7 @@ export const Packs = () => {
                         justifyContent: "start"
                     }} >
                         <Button
-                            size={Button.Sizes.SMALL}
+                            size="small"
                             onClick={async e => {
                                 const result: StickerPack[] = [];
                                 const stickerPacks = await getStickerPackMetas();
@@ -388,7 +388,7 @@ export const Packs = () => {
                             }}
                         >{t(plugin.moreStickers.text.exportStickerPacks)}</Button>
                         <Button
-                            size={Button.Sizes.SMALL}
+                            size="small"
                             onClick={async e => {
                                 await migrate();
                             }}

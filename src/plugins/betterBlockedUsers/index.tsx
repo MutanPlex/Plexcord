@@ -121,7 +121,7 @@ export default definePlugin({
     renderUser(userId: string, rest: any) {
         return (
             <div style={{ display: "flex", gap: "8px" }}>
-                <Button variant="primary" onClick={() => openUserProfile(userId)}>
+                <Button variant="secondary" onClick={() => openUserProfile(userId)}>
                     {getIntlMessage("SHOW_USER_PROFILE")}
                 </Button>
                 {rest}

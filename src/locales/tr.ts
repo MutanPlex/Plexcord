@@ -64,6 +64,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Discord'un özel başlık çubuğu yerine Windows'un yerel başlık çubuğunu kullan",
                 description: "Discord'un özel başlık çubuğunu standart Windows başlık çubuğuyla değiştirin. Bu, bazı pencere yönetimi araçlarıyla uyumluluğu geliştirebilir."
             },
+            noRoundCorners: {
+                label: "Yuvarlak Pencere Köşelerini Devre Dışı Bırak",
+                description: "Discord penceresinin köşelerini yuvarlak yerine köşeli yapar."
+            },
             transparent: {
                 label: "Pencere şeffaflığını etkinleştir",
                 description: "Discord penceresini şeffaf yapın. Şeffaflığı destekleyen bir tema gereklidir, aksi takdirde hiçbir şey yapmaz.",
@@ -3356,17 +3360,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 error: "URL kopyalanırken hata oluştu, daha fazla bilgi için konsolu kontrol edin"
             }
         },
-        copyStickerLinks: {
-            name: "CopyStickerLinks",
-            description: "Sticker bağlantılarını kopyalama ve açma özelliği ekler",
-            context: {
-                copy: "Çıkartma Bağlantısını Kopyala",
-                open: "Çıkartma Bağlantısını Aç"
-            },
-            toast: {
-                success: "Bağlantı kopyalandı!"
-            }
-        },
         copyUserMention: {
             name: "CopyUserMention",
             description: "Kullanıcı bağlam menüsüne, kullanıcının mention’unu kopyalamak için bir buton ekler. ValidUser ile en iyi şekilde çalışır.",
@@ -4558,29 +4551,58 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownError: "Bilinmeyen hata"
             }
         },
-        expressionCloner: {
-            name: "ExpressionCloner",
-            description: "Emojileri ve Stickerları kendi sunucunuza klonlamanıza izin verir (sağ tıklayın)",
-            modal: {
-                title: "Özel İsim",
-                invalidName: "İsim 2 ile 32 karakter arasında olmalı ve yalnızca alfanümerik karakterler içermelidir"
-            },
-            toast: {
-                success: "{{name}}, {{guild}} sunucusuna başarıyla klonlandı!",
-                yourServer: "senin sunucun",
-                failed: "Klonlama başarısız: ",
-                console: "Bir şeyler yanlış gitti (konsolu kontrol et!)",
-                successfullyClonedNameTo: "{{name}}, {{name_your_server}} sunucusuna başarıyla kopyalandı!"
+        expressionManager: {
+            name: "ExpressionManager",
+            description: "Emojileri ve çıkartmaları klonla. Hızlıca klonlamak, düzenlemek veya silmek için bağlam menüsü seçenekleri ekler. Çıkartmalar için kopyalama ve kaydetme seçenekleri de ekler",
+            option: {
+                editAndDelete: {
+                    label: "Düzenle ve Sil",
+                    description: "İfade seçicinin bağlam menüsüne \"Düzenle\" ve \"Sil\" seçeneklerini ekler"
+                },
+                stickerCopyAndOpen: {
+                    label: "Çıkartma Bağlantıları",
+                    description: "Çıkartma bağlam menüsüne \"Çıkartma Bağlantısını Kopyala\" ve \"Çıkartma Bağlantısını Aç\" seçeneklerini ekler"
+                },
+                recents: {
+                    label: "Son Kullanılanlardan Kaldır",
+                    description: "Sık kullanılan ifadelerin bağlam menüsüne \"Son Kullanılanlardan Kaldır\" seçeneğini ekler"
+                }
             },
             context: {
-                clone: "{{type}} Klonla",
-                cloneName: "{{data}} Klonla"
+                cloneEmoji: "Emoji Klonla",
+                cloneSticker: "Çıkartma Klonla",
+                editEmoji: "Emojiyi Düzenle",
+                editSticker: "Çıkartmayı Düzenle",
+                deleteEmoji: "Emojiyi Sil",
+                deleteSticker: "Çıkartmayı Sil",
+                removeFromRecents: "Son Kullanılanlardan Kaldır",
+                uploadAsEmoji: "Emoji Olarak Yükle",
+                copyStickerLink: "Çıkartma Bağlantısını Kopyala",
+                openStickerLink: "Çıkartma Bağlantısını Aç"
             },
-            text: {
-                yourServer: "sunucun",
-                cloneTo: "{{name}} sunucusuna kopyala",
-                emoji: "Emoji",
-                sticker: "Çıkartma"
+            modal: {
+                customName: "Özel İsim",
+                invalidName: "İsim 2 ile 30 karakter arasında olmalı ve yalnızca alfanümerik karakterler içermelidir",
+                cloneTitle: "{{name}} Klonla",
+                deleteTitle: "{{name}} Sil",
+                deleteEmoji: "Bu emojiyi silmek istediğinden emin misin?",
+                deleteSticker: "Bu çıkartmayı silmek istediğinden emin misin?",
+                deleteConfirm: "Sil",
+                recentsEmoji: "Bu, bu emojinin tüm kullanım geçmişini sıfırlar ve geri alınamaz. Emin misin?",
+                recentsSticker: "Bu, bu çıkartmanın tüm kullanım geçmişini sıfırlar ve geri alınamaz. Emin misin?",
+                recentsConfirm: "Yap"
+            },
+            toast: {
+                emojiDeleted: "Emoji başarıyla silindi.",
+                stickerDeleted: "Çıkartma başarıyla silindi.",
+                emojiDeleteFailed: "Emoji silinemedi",
+                stickerDeleteFailed: "Çıkartma silinemedi",
+                cloned: "{{name}}, {{guild}} sunucusuna başarıyla klonlandı!",
+                yourServer: "senin sunucun",
+                cloneFailed: "Klonlama başarısız: {{message}}",
+                console: "Bir şeyler yanlış gitti (konsolu kontrol et!)",
+                linkCopied: "Bağlantı kopyalandı!",
+                emojiModalFailed: "Emoji penceresi açılamadı: {{error}}"
             }
         },
         f8break: {
@@ -9859,7 +9881,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "Kullanıcı açılır kartlarında bağlı hesapları gösterir",
+            description: "Kullanıcı açılır kartlarında ve DM kenar çubuğunda bağlı hesapları gösterir",
             option: {
                 iconSize: {
                     label: "İkon Boyutu",

@@ -64,6 +64,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Brug Windows' indfødte titellinje i stedet for Discords brugerdefinerede",
                 description: "Erstat Discords brugerdefinerede titellinje med standard Windows-titellinjen. Dette kan forbedre kompatibiliteten med visse vindueshåndteringsværktøjer."
             },
+            noRoundCorners: {
+                label: "Deaktiver afrundede vindueshjørner",
+                description: "Gør hjørnerne på Discord-vinduet firkantede i stedet for afrundede."
+            },
             transparent: {
                 label: "Aktiver vinduesgennemsigtighed",
                 description: "Gør Discord-vinduet gennemsigtigt. Et tema, der understøtter gennemsigtighed, er påkrævet, ellers har dette ingen effekt.",
@@ -3356,17 +3360,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 error: "Fejl ved kopiering af URL, tjek konsollen for mere info"
             }
         },
-        copyStickerLinks: {
-            name: "CopyStickerLinks",
-            description: "Tilføjer muligheden for at kopiere og åbne Sticker-links",
-            context: {
-                copy: "Kopiér klistermærkelink",
-                open: "Åbn klistermærkelink"
-            },
-            toast: {
-                success: "Link kopieret!"
-            }
-        },
         copyUserMention: {
             name: "CopyUserMention",
             description: "Tilføjer en knap til at kopiere brugerens mention i bruger-kontekstmenuen.",
@@ -4558,29 +4551,58 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownError: "Ukendt fejl"
             }
         },
-        expressionCloner: {
-            name: "ExpressionCloner",
-            description: "Gør det muligt at klone emotes og stickers til din egen server (højreklik på dem)",
-            modal: {
-                title: "Brugerdefineret navn",
-                invalidName: "Navnet skal være mellem 2 og 32 tegn og må kun indeholde alfanumeriske tegn"
-            },
-            toast: {
-                success: "Klonede {{name}} til {{guild}}!",
-                yourServer: "din server",
-                failed: "Kunne ikke klone: ",
-                console: "Noget gik galt (tjek konsollen!)",
-                successfullyClonedNameTo: "{{name}} blev klonet til {{name_your_server}}!"
+        expressionManager: {
+            name: "ExpressionManager",
+            description: "Klon emotes og klistermærker. Tilføjer kontekstmenuvalg til hurtigt at klone, redigere eller slette dem. Tilføjer også kopiér- og gem-valg til klistermærker",
+            option: {
+                editAndDelete: {
+                    label: "Rediger og slet",
+                    description: "Tilføj \"Rediger\" og \"Slet\" til udtryksvælgerens kontekstmenu"
+                },
+                stickerCopyAndOpen: {
+                    label: "Klistermærkelinks",
+                    description: "Tilføj \"Kopiér klistermærkelink\" og \"Åbn klistermærkelink\" til klistermærkets kontekstmenu"
+                },
+                recents: {
+                    label: "Fjern fra seneste",
+                    description: "Tilføj \"Fjern fra seneste\" til kontekstmenuen for ofte brugte udtryk"
+                }
             },
             context: {
-                clone: "Klon {{type}}",
-                cloneName: "Klon {{data}}"
+                cloneEmoji: "Klon Emoji",
+                cloneSticker: "Klon Klistermærke",
+                editEmoji: "Rediger emoji",
+                editSticker: "Rediger klistermærke",
+                deleteEmoji: "Slet emoji",
+                deleteSticker: "Slet klistermærke",
+                removeFromRecents: "Fjern fra seneste",
+                uploadAsEmoji: "Upload som emoji",
+                copyStickerLink: "Kopiér klistermærkelink",
+                openStickerLink: "Åbn klistermærkelink"
             },
-            text: {
+            modal: {
+                customName: "Brugerdefineret navn",
+                invalidName: "Navnet skal være mellem 2 og 30 tegn og må kun indeholde alfanumeriske tegn",
+                cloneTitle: "Klon {{name}}",
+                deleteTitle: "Slet {{name}}",
+                deleteEmoji: "Er du sikker på, at du vil slette denne emoji?",
+                deleteSticker: "Er du sikker på, at du vil slette dette klistermærke?",
+                deleteConfirm: "Slet",
+                recentsEmoji: "Dette nulstiller al brugshistorik for denne emoji og kan ikke fortrydes. Er du sikker?",
+                recentsSticker: "Dette nulstiller al brugshistorik for dette klistermærke og kan ikke fortrydes. Er du sikker?",
+                recentsConfirm: "Gør det"
+            },
+            toast: {
+                emojiDeleted: "Emoji slettet.",
+                stickerDeleted: "Klistermærke slettet.",
+                emojiDeleteFailed: "Kunne ikke slette emoji",
+                stickerDeleteFailed: "Kunne ikke slette klistermærke",
+                cloned: "Klonede {{name}} til {{guild}}!",
                 yourServer: "din server",
-                cloneTo: "Klon til {{name}}",
-                emoji: "Emoji",
-                sticker: "Klistermærke"
+                cloneFailed: "Kunne ikke klone: {{message}}",
+                console: "Noget gik galt (tjek konsollen!)",
+                linkCopied: "Link kopieret!",
+                emojiModalFailed: "Kunne ikke åbne emoji-vinduet: {{error}}"
             }
         },
         f8break: {
@@ -9859,7 +9881,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "Vis tilknyttede konti i bruger-popouts",
+            description: "Vis tilknyttede konti i bruger-popouts og DM-sidepanelet",
             option: {
                 iconSize: {
                     label: "Ikonstørrelse",

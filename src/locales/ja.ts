@@ -64,6 +64,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Discordのカスタムタイトルバーの代わりにWindowsのネイティブタイトルバーを使用する",
                 description: "Discord のカスタム タイトル バーを標準の Windows タイトル バーに置き換えます。これにより、一部のウィンドウ管理ツールとの互換性が向上する可能性があります。"
             },
+            noRoundCorners: {
+                label: "ウィンドウの角丸を無効化",
+                description: "Discordウィンドウの角を丸ではなく四角にします。"
+            },
             transparent: {
                 label: "ウィンドウの透明性を有効にする",
                 description: "Discordのウィンドウを透明にします。透明性をサポートするテーマが必要です。そうでない場合は何も行われません。",
@@ -3356,17 +3360,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 error: "URL のコピー中にエラーが発生しました。詳細についてはコンソールを確認してください"
             }
         },
-        copyStickerLinks: {
-            name: "CopyStickerLinks",
-            description: "ステッカーのリンクをコピーして開く機能を追加します",
-            context: {
-                copy: "ステッカーのリンクをコピー",
-                open: "ステッカーのリンクを開く"
-            },
-            toast: {
-                success: "リンクがコピーされました!"
-            }
-        },
         copyUserMention: {
             name: "CopyUserMention",
             description: "ユーザーのコンテキスト メニューにユーザーのメンションをコピーするボタンを追加します。ValidUser で最適に機能します。",
@@ -4558,29 +4551,58 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownError: "不明なエラー"
             }
         },
-        expressionCloner: {
-            name: "ExpressionCloner",
-            description: "エモートとステッカーを自分のサーバーに複製できます (右クリック)",
-            modal: {
-                title: "カスタム名",
-                invalidName: "名前は 2 ～ 32 文字で、英数字のみを含む必要があります。"
-            },
-            toast: {
-                success: "{{name}} から {{guild}} へのクローンが正常に作成されました。",
-                yourServer: "あなたのサーバー",
-                failed: "クローン作成に失敗しました:",
-                console: "何か問題が発生しました (コンソールを確認してください!)",
-                successfullyClonedNameTo: "{{name}} を {{name_your_server}} に複製しました！"
+        expressionManager: {
+            name: "ExpressionManager",
+            description: "絵文字とスタンプをクローンします。素早くクローン・編集・削除できるコンテキストメニュー項目を追加します。スタンプのコピーと保存の項目も追加します",
+            option: {
+                editAndDelete: {
+                    label: "編集と削除",
+                    description: "表現ピッカーのコンテキストメニューに「編集」と「削除」を追加します"
+                },
+                stickerCopyAndOpen: {
+                    label: "スタンプのリンク",
+                    description: "スタンプのコンテキストメニューに「ステッカーのリンクをコピー」と「ステッカーのリンクを開く」を追加します"
+                },
+                recents: {
+                    label: "最近使ったものから削除",
+                    description: "よく使う表現のコンテキストメニューに「最近使ったものから削除」を追加します"
+                }
             },
             context: {
-                clone: "クローン{{type}}",
-                cloneName: "クローン{{data}}"
+                cloneEmoji: "クローン絵文字",
+                cloneSticker: "クローンスタンプ",
+                editEmoji: "絵文字を編集",
+                editSticker: "スタンプを編集",
+                deleteEmoji: "絵文字を削除",
+                deleteSticker: "スタンプを削除",
+                removeFromRecents: "最近使ったものから削除",
+                uploadAsEmoji: "絵文字としてアップロード",
+                copyStickerLink: "ステッカーのリンクをコピー",
+                openStickerLink: "ステッカーのリンクを開く"
             },
-            text: {
+            modal: {
+                customName: "カスタム名",
+                invalidName: "名前は 2 ～ 30 文字で、英数字のみを含む必要があります。",
+                cloneTitle: "クローン{{name}}",
+                deleteTitle: "{{name}}を削除",
+                deleteEmoji: "この絵文字を削除してもよろしいですか？",
+                deleteSticker: "このスタンプを削除してもよろしいですか？",
+                deleteConfirm: "削除",
+                recentsEmoji: "この絵文字の使用履歴がすべてリセットされ、元に戻せません。よろしいですか？",
+                recentsSticker: "このスタンプの使用履歴がすべてリセットされ、元に戻せません。よろしいですか？",
+                recentsConfirm: "実行"
+            },
+            toast: {
+                emojiDeleted: "絵文字を削除しました。",
+                stickerDeleted: "スタンプを削除しました。",
+                emojiDeleteFailed: "絵文字を削除できませんでした",
+                stickerDeleteFailed: "スタンプを削除できませんでした",
+                cloned: "{{name}} から {{guild}} へのクローンが正常に作成されました。",
                 yourServer: "あなたのサーバー",
-                cloneTo: "{{name}}に複製",
-                emoji: "絵文字",
-                sticker: "スタンプ"
+                cloneFailed: "クローン作成に失敗しました: {{message}}",
+                console: "何か問題が発生しました (コンソールを確認してください!)",
+                linkCopied: "リンクがコピーされました!",
+                emojiModalFailed: "絵文字ウィンドウを開けませんでした: {{error}}"
             }
         },
         f8break: {
@@ -9859,7 +9881,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "接続されているアカウントをユーザーのポップアウトに表示する",
+            description: "接続されているアカウントをユーザーのポップアウトとDMサイドバーに表示する",
             option: {
                 iconSize: {
                     label: "アイコンのサイズ",

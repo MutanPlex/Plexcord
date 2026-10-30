@@ -64,6 +64,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "使用 Windows 的原生標題列而不是 Discord 的自訂標題列",
                 description: "將 Discord 的自訂標題列替換為標準 Windows 標題列。這可能會提高與某些視窗管理工具的相容性。"
             },
+            noRoundCorners: {
+                label: "停用視窗圓角",
+                description: "讓 Discord 視窗的四角變為直角而非圓角。"
+            },
             transparent: {
                 label: "啟用視窗透明度",
                 description: "讓 Discord 視窗透明。需要一個支持透明度的主題，否則將不起作用。",
@@ -3356,17 +3360,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 error: "複製 URL 時出錯，請檢查控制台以獲取更多信息"
             }
         },
-        copyStickerLinks: {
-            name: "CopyStickerLinks",
-            description: "新增複製和開啟貼紙連結的功能",
-            context: {
-                copy: "複製貼圖連結",
-                open: "開啟貼圖連結"
-            },
-            toast: {
-                success: "連結已複製！"
-            }
-        },
         copyUserMention: {
             name: "CopyUserMention",
             description: "新增一個按鈕以在使用者上下文功能表上複製使用者的提及，最適合與 ValidUser 配合使用。",
@@ -4558,29 +4551,58 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownError: "未知錯誤"
             }
         },
-        expressionCloner: {
-            name: "ExpressionCloner",
-            description: "允許您將表情和貼紙克隆到您自己的伺服器（右鍵單擊它們）",
-            modal: {
-                title: "自訂名稱",
-                invalidName: "名稱必須介於 2 到 32 個字元之間，並且僅包含字母數字字符"
-            },
-            toast: {
-                success: "成功將 {{name}} 複製到 {{guild}}！",
-                yourServer: "你的伺服器",
-                failed: "克隆失敗：",
-                console: "出了點問題（檢查控制台！）",
-                successfullyClonedNameTo: "已成功將 {{name}} 複製到 {{name_your_server}}！"
+        expressionManager: {
+            name: "ExpressionManager",
+            description: "複製表情符號與貼圖。新增右鍵選單選項，可快速複製、編輯或刪除它們。也為貼圖新增複製與儲存選項",
+            option: {
+                editAndDelete: {
+                    label: "編輯與刪除",
+                    description: "在表情選擇器的右鍵選單中新增「編輯」與「刪除」選項"
+                },
+                stickerCopyAndOpen: {
+                    label: "貼圖連結",
+                    description: "在貼圖的右鍵選單中新增「複製貼圖連結」與「開啟貼圖連結」選項"
+                },
+                recents: {
+                    label: "從最近使用中移除",
+                    description: "在常用表情的右鍵選單中新增「從最近使用中移除」選項"
+                }
             },
             context: {
-                clone: "克隆 {{type}}",
-                cloneName: "克隆 {{data}}"
+                cloneEmoji: "克隆 表情符號",
+                cloneSticker: "克隆 貼圖",
+                editEmoji: "編輯表情符號",
+                editSticker: "編輯貼圖",
+                deleteEmoji: "刪除表情符號",
+                deleteSticker: "刪除貼圖",
+                removeFromRecents: "從最近使用中移除",
+                uploadAsEmoji: "作為表情符號上傳",
+                copyStickerLink: "複製貼圖連結",
+                openStickerLink: "開啟貼圖連結"
             },
-            text: {
+            modal: {
+                customName: "自訂名稱",
+                invalidName: "名稱必須介於 2 到 30 個字元之間，並且僅包含字母數字字符",
+                cloneTitle: "克隆 {{name}}",
+                deleteTitle: "刪除 {{name}}",
+                deleteEmoji: "確定要刪除此表情符號嗎？",
+                deleteSticker: "確定要刪除此貼圖嗎？",
+                deleteConfirm: "刪除",
+                recentsEmoji: "這將重設此表情符號的所有使用紀錄，且無法復原。確定嗎？",
+                recentsSticker: "這將重設此貼圖的所有使用紀錄，且無法復原。確定嗎？",
+                recentsConfirm: "確定"
+            },
+            toast: {
+                emojiDeleted: "已成功刪除表情符號。",
+                stickerDeleted: "已成功刪除貼圖。",
+                emojiDeleteFailed: "無法刪除表情符號",
+                stickerDeleteFailed: "無法刪除貼圖",
+                cloned: "成功將 {{name}} 複製到 {{guild}}！",
                 yourServer: "你的伺服器",
-                cloneTo: "複製到 {{name}}",
-                emoji: "表情符號",
-                sticker: "貼圖"
+                cloneFailed: "克隆失敗：{{message}}",
+                console: "出了點問題（檢查控制台！）",
+                linkCopied: "連結已複製！",
+                emojiModalFailed: "無法開啟表情符號視窗：{{error}}"
             }
         },
         f8break: {
@@ -9859,7 +9881,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "在使用者彈出視窗中顯示連線的帳戶",
+            description: "在使用者彈出視窗與私訊側邊欄中顯示連線的帳戶",
             option: {
                 iconSize: {
                     label: "圖示大小",

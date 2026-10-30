@@ -104,7 +104,7 @@ export const settings = definePluginSettings({
                     title: t(plugin.gifCollections.alert.import.title),
                     body: t(plugin.gifCollections.alert.import.body),
                     confirmText: t(plugin.gifCollections.alert.import.confirm),
-                    confirmColor: "dangerPrimary",
+                    confirmColor: "danger",
                     cancelText: t(plugin.gifCollections.alert.import.cancel),
                     onConfirm: () => uploadGifCollections(),
                 }) : uploadGifCollections()}>
@@ -130,7 +130,7 @@ export const settings = definePluginSettings({
                     title: t(plugin.gifCollections.alert.reset.title),
                     body: t(plugin.gifCollections.alert.reset.body),
                     confirmText: t(plugin.gifCollections.alert.reset.confirm),
-                    confirmColor: "dangerPrimary",
+                    confirmColor: "danger",
                     cancelText: t(plugin.gifCollections.alert.reset.cancel),
                     onConfirm: async () => {
                         await DataStore.set(DATA_COLLECTION_NAME, []);

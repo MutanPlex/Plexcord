@@ -10,13 +10,15 @@ import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import {
     Divider,
+    Heading,
+    Paragraph,
     Span,
 } from "@components/index";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
-import { Checkbox, closeModal, Modal, openModal, Text, } from "@webpack/common";
+import { Checkbox, closeModal, Modal, openModal } from "@webpack/common";
 
 import managedStyle from "./styles.css?managed";
 
@@ -146,8 +148,8 @@ function ModalComponent({ modalProps, submit, close, options }: {
                 size="lg"
                 actionBarInput={
                     <div className={cl("summary")}>
-                        <Text variant="text-md/semibold" color="text-strong" className={cl("source-or-preset-name")}>{liveSettings.contentHint === "motion" ? t(plugin.webScreenShare.text.gaming) : liveSettings.contentHint === "detail" ? t(plugin.webScreenShare.text.screenshare) : t(plugin.webScreenShare.text.custom)}</Text>
-                        <Text variant="text-xs/medium" color="text-muted" className={cl("summary-detail")}>
+                        <Paragraph size="md" weight="semibold" style={{ color: "var(--text-strong, var(--text-default))" }} className={cl("source-or-preset-name")}>{liveSettings.contentHint === "motion" ? t(plugin.webScreenShare.text.gaming) : liveSettings.contentHint === "detail" ? t(plugin.webScreenShare.text.screenshare) : t(plugin.webScreenShare.text.custom)}</Paragraph>
+                        <Paragraph size="xs" weight="medium" style={{ color: "var(--text-muted, var(--text-default))" }} className={cl("summary-detail")}>
                             <span>{liveSettings.contentHint === "motion" ? t(plugin.webScreenShare.text.smootherVideo) : liveSettings.contentHint === "detail" ? t(plugin.webScreenShare.text.cleanerText) : t(plugin.webScreenShare.text.userPreset)}</span>
                             <span className={cl("ellipsis")}>•</span>
                             <span>{liveSettings.resolution}p</span>
@@ -155,7 +157,7 @@ function ModalComponent({ modalProps, submit, close, options }: {
                             <span>{liveSettings.frameRate}fps</span>
                             {liveSettings.systemAudio ? <span className={cl("ellipsis")}>•</span> : ""}
                             {liveSettings.systemAudio ? <span>{t(plugin.webScreenShare.text.streamMuted)}</span> : ""}
-                        </Text>
+                        </Paragraph>
                     </div>
                 }
                 actions={[
@@ -170,7 +172,7 @@ function ModalComponent({ modalProps, submit, close, options }: {
                 <div>
                     <div className={cl("flex", "padding")}>
                         <section className={cl("quality-section")}>
-                            <Text tag="h2" variant="heading-md/semibold" color="text-strong">{t(plugin.webScreenShare.option.resolution.description)}</Text>
+                            <Heading tag="h2">{t(plugin.webScreenShare.option.resolution.description)}</Heading>
                             <OptionRadio
                                 options={StreamResolution}
                                 settings={liveSettings}
@@ -180,7 +182,7 @@ function ModalComponent({ modalProps, submit, close, options }: {
                         </section>
 
                         <section className={cl("quality-section")}>
-                            <Text tag="h2" variant="heading-md/semibold" color="text-strong">{t(plugin.webScreenShare.option.frameRate.description)}</Text>
+                            <Heading tag="h2">{t(plugin.webScreenShare.option.frameRate.description)}</Heading>
                             <OptionRadio
                                 options={StreamFps}
                                 settings={liveSettings}
@@ -190,7 +192,7 @@ function ModalComponent({ modalProps, submit, close, options }: {
                         </section>
                     </div>
                     <div>
-                        <Text tag="h2" variant="heading-md/semibold" color="text-strong">{t(plugin.webScreenShare.text.streamMode)}</Text>
+                        <Heading tag="h2">{t(plugin.webScreenShare.text.streamMode)}</Heading>
                         <div>
                             <OptionRadio
                                 options={StreamContentHint}
@@ -209,8 +211,8 @@ function ModalComponent({ modalProps, submit, close, options }: {
                             shape="box"
                             reverse={true}>
                             <div className={cl("control-content")}>
-                                <Text tag="h2" variant="heading-md/semibold" color="text-strong">{t(plugin.webScreenShare.text.muteStreamAudio)}</Text>
-                                <Text variant="text-sm/normal" color="text-subtle">{t(plugin.webScreenShare.text.preventsSystemAudioFrom)}</Text>
+                                <Heading tag="h2">{t(plugin.webScreenShare.text.muteStreamAudio)}</Heading>
+                                <Paragraph style={{ color: "var(--text-subtle, var(--text-default))" }}>{t(plugin.webScreenShare.text.preventsSystemAudioFrom)}</Paragraph>
                             </div>
                         </Checkbox>
                     </div>
@@ -221,8 +223,8 @@ function ModalComponent({ modalProps, submit, close, options }: {
                             shape="box"
                             reverse={true}>
                             <div className={cl("control-content")}>
-                                <Text tag="h2" variant="heading-md/semibold" color="text-strong">{t(plugin.webScreenShare.text.showStreamPreviews)}</Text>
-                                <Text variant="text-sm/normal" color="text-subtle">{t(plugin.webScreenShare.text.allowsOthersToSee)}</Text>
+                                <Heading tag="h2">{t(plugin.webScreenShare.text.showStreamPreviews)}</Heading>
+                                <Paragraph style={{ color: "var(--text-subtle, var(--text-default))" }}>{t(plugin.webScreenShare.text.allowsOthersToSee)}</Paragraph>
                             </div>
                         </Checkbox>
                     </div>

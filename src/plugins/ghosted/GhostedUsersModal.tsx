@@ -136,7 +136,7 @@ export function GhostedUsersModal({ modalProps, ghostedChannels: initialChannels
                                 </div>
                                 <Button
                                     size="small"
-                                    variant="primary"
+                                    variant="secondary"
                                     onClick={e => handleClearClick(e, channelId)}
                                 >
                                     {t(plugin.ghosted.modal.clear)}

@@ -19,6 +19,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
+import { useFluxSubscription } from "@utils/react";
 import { PluginNative } from "@utils/types";
 import { MediaEngineStore, showToast, useState } from "@webpack/common";
 
@@ -29,10 +30,29 @@ const Native = PlexcordNative.pluginHelpers.VoiceMessages as PluginNative<typeof
 export const VoiceRecorderDesktop: VoiceRecorder = ({ setAudioBlob, onRecordingChange }) => {
     const [recording, setRecording] = useState(false);
 
-    const changeRecording = (recording: boolean) => {
+    useFluxSubscription("PLEXCORD_STOP_RECORDING", stopRecording);
+
+    function changeRecording(recording: boolean) {
         setRecording(recording);
-        onRecordingChange?.(recording);
-    };
+        onRecordingChange(recording);
+    }
+
+    function stopRecording() {
+        if (!recording) return;
+
+        const discordVoice = DiscordNative.nativeModules.requireModule("discord_voice");
+
+        discordVoice.stopLocalAudioRecording(async (filePath: string) => {
+            if (filePath) {
+                const buf = await Native.readRecording(filePath);
+                if (buf)
+                    setAudioBlob(new Blob([new Uint8Array(buf)], { type: "audio/ogg; codecs=opus" }));
+                else
+                    showToast({ text: t(plugin.voiceMessages.notification.failed.finish), variant: "critical" });
+            }
+            changeRecording(false);
+        });
+    }
 
     function toggleRecording() {
         const discordVoice = DiscordNative.nativeModules.requireModule("discord_voice");
@@ -53,16 +73,7 @@ export const VoiceRecorderDesktop: VoiceRecorder = ({ setAudioBlob, onRecordingC
                 }
             );
         } else {
-            discordVoice.stopLocalAudioRecording(async (filePath: string) => {
-                if (filePath) {
-                    const buf = await Native.readRecording(filePath);
-                    if (buf)
-                        setAudioBlob(new Blob([new Uint8Array(buf)], { type: "audio/ogg; codecs=opus" }));
-                    else
-                        showToast({ text: t(plugin.voiceMessages.notification.failed.finish), variant: "critical" });
-                }
-                changeRecording(false);
-            });
+            stopRecording();
         }
     }
 

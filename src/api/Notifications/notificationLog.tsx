@@ -24,9 +24,9 @@ import { Paragraph } from "@components/Paragraph";
 import { openNotificationSettingsModal } from "@components/settings/tabs/plexcord/NotificationSettings";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { classNameFactory } from "@utils/css";
+import { confirmAction } from "@utils/discord";
 import { useAwaiter } from "@utils/react";
-import { ConfirmModal, ListScrollerThin, Modal, openModal, React, Timestamp, useEffect, useReducer, useState } from "@webpack/common";
-import { nanoid } from "nanoid";
+import { ListScrollerThin, Modal, openModal, React, Timestamp, useEffect, useReducer, useState } from "@webpack/common";
 import type { DispatchWithoutAction } from "react";
 
 import NotificationComponent from "./NotificationComponent";
@@ -66,7 +66,7 @@ export async function persistNotification(notification: NotificationData) {
         log.unshift({
             ...pureNotification,
             timestamp: Date.now(),
-            id: nanoid()
+            id: crypto.randomUUID()
         });
 
         if (log.length > limit && limit !== 200)
@@ -179,22 +179,19 @@ function LogModal(props: RenderModalProps) {
                     variant: "critical-primary",
                     disabled: !log.length,
                     onClick() {
-                        openModal(props =>
-                            <ConfirmModal
-                                {...props}
-                                title={t(notifications.log.sure)}
-                                subtitle={t(notifications.log.permamently, {
-                                    count: log.length,
-                                    s: log.length !== 1 ? "s" : ""
-                                })}
-                                confirmText={t(notifications.log.button.confirm)}
-                                cancelText={t(notifications.log.button.cancel)}
-                                onConfirm={async () => {
-                                    await DataStore.set(KEY, []);
-                                    signals.forEach(x => x());
-                                }}
-                            />
-                        );
+                        confirmAction({
+                            title: t(notifications.log.sure),
+                            subtitle: t(notifications.log.permamently, {
+                                count: log.length,
+                                s: log.length !== 1 ? "s" : ""
+                            }),
+                            confirmText: t(notifications.log.button.confirm),
+                            cancelText: t(notifications.log.button.cancel),
+                            async onConfirm() {
+                                await DataStore.set(KEY, []);
+                                signals.forEach(x => x());
+                            },
+                        });
                     }
                 }
             ]}

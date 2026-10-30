@@ -23,10 +23,10 @@ import { Review, ReviewType } from "@plugins/reviewDB/entities";
 import { blockUser, deleteReview, deleteReviewVote, reportReview, unblockUser, voteReview } from "@plugins/reviewDB/reviewDbApi";
 import { settings } from "@plugins/reviewDB/settings";
 import { canBlockReviewAuthor, canDeleteReview, canReportReview, cl, showToast } from "@plugins/reviewDB/utils";
-import { openUserProfile } from "@utils/discord";
+import { confirmAction, openUserProfile } from "@utils/discord";
 import { classes } from "@utils/misc";
-import { ConfirmModal, IconUtils, openModal as openPlexcordModal, Parser, Timestamp, useEffect, useState } from "@webpack/common";
-import { findCssClassesLazy } from "webpack";
+import { findCssClassesLazy } from "@webpack";
+import { IconUtils, Parser, Timestamp, useEffect, useState } from "@webpack/common";
 
 import { openBlockModal } from "./BlockedUserModal";
 import { BlockButton, DeleteButton, ReportButton } from "./MessageButton";
@@ -39,6 +39,8 @@ const ButtonClasses = findCssClassesLazy("button", "wrapper", "selected");
 const BotTagClasses = findCssClassesLazy("botTagVerified", "botTagRegular", "botText", "px", "rem");
 
 const dateFormat = new Intl.DateTimeFormat();
+
+const ensureToken = async (error: string) => await getToken() || showToast({ text: error, variant: "critical" });
 
 export default function ReviewComponent({ review, refetch, profileId }: { review: Review; refetch(): void; profileId: string; }) {
     const [showAll, setShowAll] = useState(false);
@@ -55,64 +57,52 @@ export default function ReviewComponent({ review, refetch, profileId }: { review
         openUserProfile(review.sender.discordID);
     }
 
-    function delReview() {
-        openPlexcordModal(props => (
-            <ConfirmModal
-                {...props}
-                title={t(plugin.reviewDB.modal.delete.title)}
-                subtitle={t(plugin.reviewDB.modal.delete.description)}
-                confirmText={t(plugin.reviewDB.modal.delete.confirm)}
-                cancelText={t(plugin.reviewDB.modal.delete.cancel)}
-                onConfirm={async () => {
-                    if (!(await getToken())) {
-                        return showToast({ text: t(plugin.reviewDB.modal.delete.error), variant: "critical" });
-                    }
-                    const res = await deleteReview(review.id);
-                    if (res) refetch();
-                }}
-            />
-        ));
+    async function delReview() {
+        if (!await ensureToken(t(plugin.reviewDB.modal.delete.error))) return;
+
+        await confirmAction({
+            title: t(plugin.reviewDB.modal.delete.title),
+            subtitle: t(plugin.reviewDB.modal.delete.description),
+            confirmText: t(plugin.reviewDB.modal.delete.confirm),
+            cancelText: t(plugin.reviewDB.modal.delete.cancel),
+            async onConfirm() {
+                const res = await deleteReview(review.id);
+                if (res) refetch();
+            },
+        });
     }
 
-    function reportRev() {
-        openPlexcordModal(props => (
-            <ConfirmModal
-                {...props}
-                title={t(plugin.reviewDB.modal.report.title)}
-                subtitle={t(plugin.reviewDB.modal.report.description)}
-                confirmText={t(plugin.reviewDB.modal.report.confirm)}
-                cancelText={t(plugin.reviewDB.modal.report.cancel)}
-                onConfirm={async () => {
-                    if (!(await getToken())) {
-                        return showToast({ text: t(plugin.reviewDB.modal.report.error), variant: "critical" });
-                    }
-                    await reportReview(review.id);
-                }}
-            />
-        ));
+    async function reportRev() {
+        if (!await ensureToken(t(plugin.reviewDB.modal.report.error))) return;
+
+        await confirmAction({
+            title: t(plugin.reviewDB.modal.report.title),
+            subtitle: t(plugin.reviewDB.modal.report.description),
+            confirmText: t(plugin.reviewDB.modal.report.confirm),
+            cancelText: t(plugin.reviewDB.modal.report.cancel),
+            async onConfirm() {
+                await reportReview(review.id);
+            },
+        });
     }
 
     const isAuthorBlocked = Auth?.user?.blockedUsers?.includes(review.sender.discordID) ?? false;
 
-    function blockReviewSender() {
+    async function blockReviewSender() {
+        if (!await ensureToken(t(plugin.reviewDB.modal.block.error))) return;
+
         if (isAuthorBlocked)
             return unblockUser(review.sender.discordID);
 
-        openPlexcordModal(props => (
-            <ConfirmModal
-                {...props}
-                title={t(plugin.reviewDB.modal.block.title)}
-                subtitle={t(plugin.reviewDB.modal.block.description)}
-                confirmText={t(plugin.reviewDB.modal.block.confirm)}
-                cancelText={t(plugin.reviewDB.modal.block.cancel)}
-                onConfirm={async () => {
-                    if (!(await getToken())) {
-                        return showToast({ text: t(plugin.reviewDB.modal.block.error), variant: "critical" });
-                    }
-                    await blockUser(review.sender.discordID);
-                }}
-            />
-        ));
+        await confirmAction({
+            title: t(plugin.reviewDB.modal.block.title),
+            subtitle: t(plugin.reviewDB.modal.block.description),
+            confirmText: t(plugin.reviewDB.modal.block.confirm),
+            cancelText: t(plugin.reviewDB.modal.block.cancel),
+            async onConfirm() {
+                await blockUser(review.sender.discordID);
+            },
+        });
     }
 
     async function submitVote(isUpvote: boolean) {

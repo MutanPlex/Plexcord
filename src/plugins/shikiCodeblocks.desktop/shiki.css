@@ -1,9 +1,12 @@
 .pc-shiki-container {
+    display: flex;
+    min-height: 100%;
     border: 4px;
     background-color: var(--background-base-lower);
 }
 
 .pc-shiki-root {
+    flex: 1;
     border-radius: 4px;
 }
 

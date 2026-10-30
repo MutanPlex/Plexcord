@@ -10,14 +10,16 @@ import "./settings.css";
 import { plugin, t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { isPluginEnabled } from "@api/PluginManager";
+import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
 import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { resolveError } from "@components/settings/tabs/plugins/components/Common";
 import { ActivityType } from "@plexcord/discord-types/enums";
 import { debounce } from "@shared/debounce";
 import { classNameFactory } from "@utils/css";
 import { useAwaiter } from "@utils/react";
-import { Button, Select, showToast, Text, TextInput, useState } from "@webpack/common";
+import { Select, showToast, TextInput, useState } from "@webpack/common";
 
 import CustomRPCPlugin, { RpcConfig, setRpc, settings, TimestampMode } from ".";
 
@@ -127,7 +129,7 @@ function SingleSetting<T>({ settingsKey, label, disabled, isValid, transform }: 
 
     return (
         <div className={cl("single", { disabled })}>
-            <Heading tag="h5">{label}</Heading>
+            <Heading>{label}</Heading>
             <TextInput
                 type="text"
                 placeholder={t(plugin.customRPC.placeholder)}
@@ -135,7 +137,7 @@ function SingleSetting<T>({ settingsKey, label, disabled, isValid, transform }: 
                 onChange={handleChange}
                 disabled={disabled}
             />
-            {error && <Text className={cl("error")} variant="text-sm/normal">{error}</Text>}
+            {error && <Paragraph className={cl("error")}>{error}</Paragraph>}
         </div>
     );
 }
@@ -143,7 +145,7 @@ function SingleSetting<T>({ settingsKey, label, disabled, isValid, transform }: 
 function SelectSetting<T>({ settingsKey, label, options, disabled }: SelectOption<T>) {
     return (
         <div className={cl("single", { disabled })}>
-            <Heading tag="h5">{label}</Heading>
+            <Heading>{label}</Heading>
             <Select
                 placeholder={t(plugin.customRPC.select)}
                 options={options}
@@ -231,10 +233,10 @@ function PresetSettings({ onLoad }: { onLoad(): void; }) {
                         serialize={String}
                     />
                     <Button disabled={!selectedPreset} onClick={loadPreset}>{t(plugin.customRPC.text.load)}</Button>
-                    <Button color={Button.Colors.RED} disabled={!selectedPreset} onClick={deletePreset}>{t(plugin.customRPC.text.delete)}</Button>
+                    <Button variant="dangerPrimary" disabled={!selectedPreset} onClick={deletePreset}>{t(plugin.customRPC.text.delete)}</Button>
                 </div>
             ) : (
-                <Text variant="text-sm/normal">{t(plugin.customRPC.text.noSavedPresetsYet)}</Text>
+                <Paragraph>{t(plugin.customRPC.text.noSavedPresetsYet)}</Paragraph>
             )}
         </div>
     );

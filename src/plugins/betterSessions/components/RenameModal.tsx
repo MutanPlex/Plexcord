@@ -23,12 +23,12 @@ import { Heading } from "@components/Heading";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { SessionInfo } from "@plugins/betterSessions/types";
 import { getDefaultName, savedSessionsCache, saveSessionsToDataStore } from "@plugins/betterSessions/utils";
-import { Modal, React, TextInput } from "@webpack/common";
+import { Modal, React, TextInput, useState } from "@webpack/common";
 import { KeyboardEvent } from "react";
 
 export function RenameModal({ props, session, state }: { props: RenderModalProps, session: SessionInfo["session"], state: [string, React.Dispatch<React.SetStateAction<string>>]; }) {
     const [title, setTitle] = state;
-    const [value, setValue] = React.useState(savedSessionsCache.get(session.id_hash)?.name ?? "");
+    const [value, setValue] = useState(savedSessionsCache.get(session.id_hash)?.name ?? "");
 
     function onSaveClick() {
         savedSessionsCache.set(session.id_hash, { name: value, isNew: false });

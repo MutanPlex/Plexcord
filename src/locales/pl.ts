@@ -64,6 +64,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Używaj natywnego paska tytułu Windows zamiast niestandardowego Discorda",
                 description: "Zastąp niestandardowy pasek tytułu Discorda standardowym paskiem tytułu Windows. Może to poprawić kompatybilność z niektórymi narzędziami do zarządzania oknami."
             },
+            noRoundCorners: {
+                label: "Wyłącz zaokrąglone rogi okna",
+                description: "Sprawia, że rogi okna Discorda są kwadratowe zamiast zaokrąglonych."
+            },
             transparent: {
                 label: "Włącz przezroczystość okna",
                 description: "Spraw, aby okno Discorda było przezroczyste. Wymagany jest motyw obsługujący przezroczystość, w przeciwnym razie funkcja ta nie zadziała.",
@@ -3356,17 +3360,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 error: "Błąd podczas kopiowania adresu URL, sprawdź konsolę"
             }
         },
-        copyStickerLinks: {
-            name: "CopyStickerLinks",
-            description: "Dodaje możliwość kopiowania i otwierania linków do naklejek",
-            context: {
-                copy: "Kopiuj link do naklejki",
-                open: "Otwórz link do naklejki"
-            },
-            toast: {
-                success: "Link skopiowany!"
-            }
-        },
         copyUserMention: {
             name: "CopyUserMention",
             description: "Dodaje przycisk do kopiowania wzmianki użytkownika w menu kontekstowym.",
@@ -4558,29 +4551,58 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownError: "Nieznany błąd"
             }
         },
-        expressionCloner: {
-            name: "ExpressionCloner",
-            description: "Pozwala klonować emotki i naklejki do własnego serwera (kliknij na nie prawym przyciskiem)",
-            modal: {
-                title: "Własna nazwa",
-                invalidName: "Nazwa musi mieć od 2 do 32 znaków i zawierać tylko znaki alfanumeryczne"
-            },
-            toast: {
-                success: "Pomyślnie sklonowano {{name}} do {{guild}}!",
-                yourServer: "Twojego serwera",
-                failed: "Klonowanie nie powiodło się: ",
-                console: "Coś poszło nie tak (sprawdź konsolę!)",
-                successfullyClonedNameTo: "Pomyślnie sklonowano {{name}} do {{name_your_server}}!"
+        expressionManager: {
+            name: "ExpressionManager",
+            description: "Klonuj emoji i naklejki. Dodaje opcje menu kontekstowego do szybkiego klonowania, edytowania lub usuwania. Dodaje też opcje kopiowania i zapisywania naklejek",
+            option: {
+                editAndDelete: {
+                    label: "Edytuj i usuń",
+                    description: "Dodaje opcje „Edytuj” i „Usuń” do menu kontekstowego wyboru ekspresji"
+                },
+                stickerCopyAndOpen: {
+                    label: "Linki naklejek",
+                    description: "Dodaje opcje „Kopiuj link do naklejki” i „Otwórz link do naklejki” do menu kontekstowego naklejki"
+                },
+                recents: {
+                    label: "Usuń z ostatnich",
+                    description: "Dodaje opcję „Usuń z ostatnich” do menu kontekstowego często używanych ekspresji"
+                }
             },
             context: {
-                clone: "Klonuj {{type}}",
-                cloneName: "Klonuj {{data}}"
+                cloneEmoji: "Klonuj Emoji",
+                cloneSticker: "Klonuj Naklejka",
+                editEmoji: "Edytuj emoji",
+                editSticker: "Edytuj naklejkę",
+                deleteEmoji: "Usuń emoji",
+                deleteSticker: "Usuń naklejkę",
+                removeFromRecents: "Usuń z ostatnich",
+                uploadAsEmoji: "Prześlij jako emoji",
+                copyStickerLink: "Kopiuj link do naklejki",
+                openStickerLink: "Otwórz link do naklejki"
             },
-            text: {
-                yourServer: "twój serwer",
-                cloneTo: "Sklonuj do {{name}}",
-                emoji: "Emoji",
-                sticker: "Naklejka"
+            modal: {
+                customName: "Własna nazwa",
+                invalidName: "Nazwa musi mieć od 2 do 30 znaków i zawierać tylko znaki alfanumeryczne",
+                cloneTitle: "Klonuj {{name}}",
+                deleteTitle: "Usuń {{name}}",
+                deleteEmoji: "Czy na pewno chcesz usunąć to emoji?",
+                deleteSticker: "Czy na pewno chcesz usunąć tę naklejkę?",
+                deleteConfirm: "Usuń",
+                recentsEmoji: "To zresetuje całą historię użycia tego emoji i nie można tego cofnąć. Czy na pewno?",
+                recentsSticker: "To zresetuje całą historię użycia tej naklejki i nie można tego cofnąć. Czy na pewno?",
+                recentsConfirm: "Zrób to"
+            },
+            toast: {
+                emojiDeleted: "Emoji zostało usunięte.",
+                stickerDeleted: "Naklejka została usunięta.",
+                emojiDeleteFailed: "Nie udało się usunąć emoji",
+                stickerDeleteFailed: "Nie udało się usunąć naklejki",
+                cloned: "Pomyślnie sklonowano {{name}} do {{guild}}!",
+                yourServer: "Twojego serwera",
+                cloneFailed: "Klonowanie nie powiodło się: {{message}}",
+                console: "Coś poszło nie tak (sprawdź konsolę!)",
+                linkCopied: "Link skopiowany!",
+                emojiModalFailed: "Nie udało się otworzyć okna emoji: {{error}}"
             }
         },
         f8break: {
@@ -9859,7 +9881,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "Pokazuje połączone konta (integracje) w małych oknach profili",
+            description: "Pokazuje połączone konta (integracje) w małych oknach profili i na pasku bocznym wiadomości prywatnych",
             option: {
                 iconSize: {
                     label: "Rozmiar ikon",

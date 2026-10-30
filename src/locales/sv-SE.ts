@@ -64,6 +64,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Använd Windows inbyggda namnlist istället för Discords anpassade",
                 description: "Ersätt Discords anpassade namnlist med standardnamnlisten i Windows. Detta kan förbättra kompatibiliteten med vissa fönsterhanteringsverktyg."
             },
+            noRoundCorners: {
+                label: "Inaktivera rundade fönsterhörn",
+                description: "Gör hörnen på Discord-fönstret fyrkantiga istället för rundade."
+            },
             transparent: {
                 label: "Aktivera fönstertransparens",
                 description: "Gör Discord-fönstret genomskinligt. Ett tema som stöder transparens krävs annars gör det ingenting.",
@@ -3356,17 +3360,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 error: "Det gick inte att kopiera URL, kolla konsolen för mer information"
             }
         },
-        copyStickerLinks: {
-            name: "CopyStickerLinks",
-            description: "Lägger till möjligheten att kopiera och öppna Sticker-länkar",
-            context: {
-                copy: "Kopiera klistermärkeslänk",
-                open: "Öppna klistermärkeslänk"
-            },
-            toast: {
-                success: "Länken kopierad!"
-            }
-        },
         copyUserMention: {
             name: "CopyUserMention",
             description: "Lägger till en knapp för att kopiera användarens omnämnande på användarens snabbmeny, fungerar bäst med ValidUser.",
@@ -4558,29 +4551,58 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownError: "Okänt fel"
             }
         },
-        expressionCloner: {
-            name: "ExpressionCloner",
-            description: "Låter dig klona emotes och klistermärken till din egen server (högerklicka på dem)",
-            modal: {
-                title: "Anpassat namn",
-                invalidName: "Namnet måste vara mellan 2 och 32 tecken och endast innehålla alfanumeriska tecken"
-            },
-            toast: {
-                success: "Klonad {{name}} till {{guild}} framgångsrikt!",
-                yourServer: "din server",
-                failed: "Det gick inte att klona:",
-                console: "Något gick fel (kolla konsolen!)",
-                successfullyClonedNameTo: "{{name}} har klonats till {{name_your_server}}!"
+        expressionManager: {
+            name: "ExpressionManager",
+            description: "Klona emojis och klistermärken. Lägger till snabbmenyval för att snabbt klona, redigera eller ta bort dem. Lägger även till kopiera- och spara-val för klistermärken",
+            option: {
+                editAndDelete: {
+                    label: "Redigera och ta bort",
+                    description: "Lägger till \"Redigera\" och \"Ta bort\" i uttrycksväljarens snabbmeny"
+                },
+                stickerCopyAndOpen: {
+                    label: "Klistermärkeslänkar",
+                    description: "Lägger till \"Kopiera klistermärkeslänk\" och \"Öppna klistermärkeslänk\" i klistermärkets snabbmeny"
+                },
+                recents: {
+                    label: "Ta bort från senaste",
+                    description: "Lägger till \"Ta bort från senaste\" i snabbmenyn för ofta använda uttryck"
+                }
             },
             context: {
-                clone: "Klona {{type}}",
-                cloneName: "Klona {{data}}"
+                cloneEmoji: "Klona Emoji",
+                cloneSticker: "Klona Klistermärke",
+                editEmoji: "Redigera emoji",
+                editSticker: "Redigera klistermärke",
+                deleteEmoji: "Ta bort emoji",
+                deleteSticker: "Ta bort klistermärke",
+                removeFromRecents: "Ta bort från senaste",
+                uploadAsEmoji: "Ladda upp som emoji",
+                copyStickerLink: "Kopiera klistermärkeslänk",
+                openStickerLink: "Öppna klistermärkeslänk"
             },
-            text: {
+            modal: {
+                customName: "Anpassat namn",
+                invalidName: "Namnet måste vara mellan 2 och 30 tecken och endast innehålla alfanumeriska tecken",
+                cloneTitle: "Klona {{name}}",
+                deleteTitle: "Ta bort {{name}}",
+                deleteEmoji: "Är du säker på att du vill ta bort denna emoji?",
+                deleteSticker: "Är du säker på att du vill ta bort detta klistermärke?",
+                deleteConfirm: "Ta bort",
+                recentsEmoji: "Detta återställer all användningshistorik för denna emoji och kan inte ångras. Är du säker?",
+                recentsSticker: "Detta återställer all användningshistorik för detta klistermärke och kan inte ångras. Är du säker?",
+                recentsConfirm: "Gör det"
+            },
+            toast: {
+                emojiDeleted: "Emoji borttagen.",
+                stickerDeleted: "Klistermärke borttaget.",
+                emojiDeleteFailed: "Kunde inte ta bort emoji",
+                stickerDeleteFailed: "Kunde inte ta bort klistermärke",
+                cloned: "Klonad {{name}} till {{guild}} framgångsrikt!",
                 yourServer: "din server",
-                cloneTo: "Klona till {{name}}",
-                emoji: "Emoji",
-                sticker: "Klistermärke"
+                cloneFailed: "Det gick inte att klona: {{message}}",
+                console: "Något gick fel (kolla konsolen!)",
+                linkCopied: "Länken kopierad!",
+                emojiModalFailed: "Kunde inte öppna emojifönstret: {{error}}"
             }
         },
         f8break: {
@@ -9859,7 +9881,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "Visa anslutna konton i användarens popout-fönster",
+            description: "Visa anslutna konton i användarens popout-fönster och DM-sidofältet",
             option: {
                 iconSize: {
                     label: "Ikonstorlek",

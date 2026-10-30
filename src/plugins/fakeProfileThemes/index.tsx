@@ -25,11 +25,10 @@ import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
-import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
-import { User, UserProfile } from "@plexcord/discord-types";
+import { User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { copyWithToast, fetchUserProfile } from "@utils/discord";
 import { Margins } from "@utils/margins";
@@ -38,12 +37,13 @@ import { useAwaiter } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
 import { ColorPicker, React, UserProfileStore, UserStore, useState } from "@webpack/common";
-import virtualMerge from "virtual-merge";
 
-interface Colors {
-    primary: number;
-    accent: number;
+interface CachedDecodedThemeColors {
+    decodedBio: string;
+    themeColors: number[] | null;
 }
+
+const decodedThemeColorsCache = new Map<string, CachedDecodedThemeColors>();
 
 function encode(primary: number, accent: number): string {
     const message = `[#${primary.toString(16).padStart(6, "0")},#${accent.toString(16).padStart(6, "0")}]`;
@@ -161,8 +161,8 @@ function SettingsAboutComponent() {
                             const colorString = encode(color1, color2);
                             copyWithToast(colorString);
                         }}
-                        variant="primary"
-                        size="medium"
+                        variant="secondary"
+                        style={{ marginBottom: "auto" }}
                     >
                         {t(plugin.fakeProfileThemes.button.copy)}
                     </Button>
@@ -192,61 +192,44 @@ export default definePlugin({
     description: () => t(plugin.fakeProfileThemes.description),
     authors: [Devs.Alyxia, Devs.Remty],
     tags: ["appearance", "customisation"],
+    settings,
+    settingsAboutComponent: SettingsAboutComponentWrapper,
 
     patches: [
         {
-            find: "UserProfileStore",
-            replacement: {
-                match: /(?<=getUserProfile\(\i\){return )(.+?)(?=})/,
-                replace: "$self.colorDecodeHook($1)"
-            },
-        },
-        {
-            find: "#{intl::USER_SETTINGS_RESET_PROFILE_THEME}),onClick:",
-            replacement: {
-                match: /#{intl::USER_SETTINGS_RESET_PROFILE_THEME}\).+?}\)(?=\])(?<=color:(\i),.{0,500}?color:(\i),.{0,500}?)/,
-                replace: "$&,$self.addCopy3y3Button({primary:$1,accent:$2})"
-            }
-        },
-        // 2026-03-wysiwyg-user-profile-editing
-        {
-            find: '("UserProfileModalV2EditingPanel")',
+            find: "}getPreviewThemeColors(",
             replacement: [
                 {
-                    match: /disabled:\i\|\|\i\}\)/,
-                    replace: "$&,$self.addCopy3y3Button()"
+                    match: /(}getPreviewThemeColors\(.+?)this\.themeColors/,
+                    replace: "$1$self.colorDecodeHook(this)"
+                },
+                {
+                    match: /canEditThemes\(\){/,
+                    replace: "$&return true;"
                 }
-            ]
+            ],
         }
     ],
 
-    settingsAboutComponent: SettingsAboutComponentWrapper,
+    colorDecodeHook(profile: any) {
+        if (settings.store.nitroFirst && profile?.themeColors != null) {
+            return profile?.themeColors;
+        }
 
-    settings,
-    colorDecodeHook(user: UserProfile) {
-        if (user?.bio) {
-            // don't replace colors if already set with nitro
-            if (settings.store.nitroFirst && user.themeColors) return user;
-            const colors = decode(user.bio);
-            if (colors) {
-                return virtualMerge(user, {
-                    premiumType: 2,
-                    themeColors: colors
-                });
+        if (profile?.bio != null) {
+            const cached = decodedThemeColorsCache.get(profile.userId);
+            if (cached != null && cached.decodedBio === profile.bio) {
+                return cached.themeColors ?? profile?.themeColors;
+            }
+
+            const decodedThemeColors = decode(profile.bio);
+            decodedThemeColorsCache.set(profile.userId, { decodedBio: profile.bio, themeColors: decodedThemeColors });
+
+            if (decodedThemeColors != null) {
+                return decodedThemeColors;
             }
         }
-        return user;
-    },
-    addCopy3y3Button: ErrorBoundary.wrap(function ({ primary, accent }: Colors) {
-        return <Button
-            onClick={() => {
-                const colorString = encode(primary, accent);
-                copyWithToast(colorString);
-            }}
-            variant="primary"
-            size="medium"
-        >
-            {t(plugin.fakeProfileThemes.button.copy)}
-        </Button>;
-    }, { noop: true }),
+
+        return profile?.themeColors;
+    }
 });

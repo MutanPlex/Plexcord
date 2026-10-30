@@ -87,7 +87,7 @@ function LanguageSelector() {
 }
 
 function Switches() {
-    const settingsState = useSettings(["useQuickCss", "enableReactDevtools", "mainWindowFrameless", "frameless", "nativeTitleBar", "transparent", "winCtrlQ", "disableMinSize"]);
+    const settingsState = useSettings(["useQuickCss", "enableReactDevtools", "mainWindowFrameless", "frameless", "nativeTitleBar", "noRoundCorners", "transparent", "winCtrlQ", "disableMinSize"]);
     const { disableAnalytics } = NoTrack.settings.use(["disableAnalytics"]);
 
     const Switches = [
@@ -124,6 +124,12 @@ function Switches() {
             description: t(settings.switches.nativeTitleBar.description),
             restartRequired: true,
         }),
+        IS_DISCORD_DESKTOP && {
+            key: "noRoundCorners",
+            title: t(settings.switches.noRoundCorners.label),
+            description: t(settings.switches.noRoundCorners.description),
+            restartRequired: true
+        },
         !IS_WEB && {
             key: "transparent",
             title: t(settings.switches.transparent.label),

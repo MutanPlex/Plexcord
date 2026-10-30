@@ -7,7 +7,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
-import { Button as NewButton } from "@components/Button";
+import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
@@ -24,11 +24,11 @@ import DecorationGridCreate from "@plugins/decor/ui/components/DecorationGridCre
 import DecorationGridNone from "@plugins/decor/ui/components/DecorationGridNone";
 import DecorDecorationGridDecoration from "@plugins/decor/ui/components/DecorDecorationGridDecoration";
 import SectionedGridList from "@plugins/decor/ui/components/SectionedGridList";
-import { copyWithToast, openInviteModal } from "@utils/discord";
+import { confirmAction, copyWithToast, openInviteModal } from "@utils/discord";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { Queue } from "@utils/Queue";
-import { closeAllModals, ConfirmModal, FluxDispatcher, GuildStore, Modal, NavigationRouter, openModal, Parser, Tooltip, useEffect, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
+import { closeAllModals, FluxDispatcher, GuildStore, Modal, NavigationRouter, openModal, Parser, Tooltip, useEffect, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
 
 import { openCreateDecorationModal } from "./CreateDecorationModal";
 import { openGuidelinesModal } from "./GuidelinesModal";
@@ -162,7 +162,7 @@ function ChangeDecorationModal(props: RenderModalProps) {
         preview={
             <div className={classes(cl("modal-footer-btn-container"), Margins.top8)}>
                 <Tooltip text={t(plugin.decor.join.tooltip)}>
-                    {tooltipProps => <NewButton
+                    {tooltipProps => <Button
                         {...tooltipProps}
                         onClick={async () => {
                             if (!GuildStore.getGuild(GUILD_ID)) {
@@ -180,26 +180,25 @@ function ChangeDecorationModal(props: RenderModalProps) {
                         variant="link"
                     >
                         {t(plugin.decor.join.button)}
-                    </NewButton>}
+                    </Button>}
                 </Tooltip>
-                <NewButton
-                    onClick={() => openModal(modalProps => (
-                        <ConfirmModal
-                            {...modalProps}
-                            title={t(plugin.decor.alert.logout.title)}
-                            subtitle={t(plugin.decor.alert.logout.body)}
-                            confirmText={t(plugin.decor.alert.logout.confirm)}
-                            cancelText={t(plugin.decor.alert.logout.cancel)}
-                            onConfirm={() => {
+                <Button
+                    onClick={() => {
+                        confirmAction({
+                            title: t(plugin.decor.alert.logout.title),
+                            subtitle: t(plugin.decor.alert.logout.body),
+                            confirmText: t(plugin.decor.alert.logout.confirm),
+                            cancelText: t(plugin.decor.alert.logout.cancel),
+                            onConfirm() {
                                 useAuthorizationStore.getState().remove(UserStore.getCurrentUser().id);
                                 props.onClose();
-                            }}
-                        />
-                    ))}
+                            },
+                        });
+                    }}
                     variant="dangerSecondary"
                 >
                     {t(plugin.decor.alert.logout.title)}
-                </NewButton>
+                </Button>
             </div>
         }
     >
@@ -249,13 +248,12 @@ function ChangeDecorationModal(props: RenderModalProps) {
                 />
                 {isActiveDecorationPreset && <Heading tag="h5">{t(plugin.decor.presetPart, { name: activeDecorationPreset.name })}</Heading>}
                 {typeof activeSelectedDecoration === "object" &&
-                    <BaseText
-                        size="sm"
+                    <Paragraph
                         weight="semibold"
                         color="text-strong"
                     >
                         {activeSelectedDecoration?.alt}
-                    </BaseText>
+                    </Paragraph>
                 }
                 {activeDecorationHasAuthor && (
                     <BaseText key={`createdBy-${activeSelectedDecoration.authorId}`}>
@@ -263,9 +261,9 @@ function ChangeDecorationModal(props: RenderModalProps) {
                     </BaseText>
                 )}
                 {isActiveDecorationPreset && (
-                    <NewButton onClick={() => copyWithToast(activeDecorationPreset.id)}>
+                    <Button onClick={() => copyWithToast(activeDecorationPreset.id)}>
                         {t(plugin.decor.copy)}
-                    </NewButton>
+                    </Button>
                 )}
             </div>
         </div>

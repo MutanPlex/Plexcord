@@ -64,6 +64,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Використовувати рідний рядок заголовка Windows замість кастомного Discord",
                 description: "Замінити кастомний рядок заголовка Discord на стандартний рядок заголовка Windows. Це може покращити сумісність із деякими інструментами керування вікнами."
             },
+            noRoundCorners: {
+                label: "Вимкнути заокруглені кути вікна",
+                description: "Робить кути вікна Discord прямими замість заокруглених."
+            },
             transparent: {
                 label: "Увімкнути прозорість вікна",
                 description: "Зробити вікно Discord прозорим. Потрібна тема, яка підтримує прозорість, інакше це нічого не змінить.",
@@ -3356,17 +3360,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 error: "Помилка копіювання URL, подробиці в консолі"
             }
         },
-        copyStickerLinks: {
-            name: "CopyStickerLinks",
-            description: "Додає можливість копіювати та відкривати посилання на стікери",
-            context: {
-                copy: "Копіювати посилання на наліпку",
-                open: "Відкрити посилання на наліпку"
-            },
-            toast: {
-                success: "Посилання скопійовано!"
-            }
-        },
         copyUserMention: {
             name: "CopyUserMention",
             description: "Додає кнопку для копіювання згадки користувача в контекстне меню.",
@@ -4558,29 +4551,58 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownError: "Невідома помилка"
             }
         },
-        expressionCloner: {
-            name: "ExpressionCloner",
-            description: "Дозволяє клонувати емодзі та стікери на ваш власний сервер (через ПКМ)",
-            modal: {
-                title: "Власна назва",
-                invalidName: "Назва має бути від 2 до 32 символів і містити лише цифри та літери"
-            },
-            toast: {
-                success: "Успішно клоновано {{name}} на {{guild}}!",
-                yourServer: "ваш сервер",
-                failed: "Помилка клонування: ",
-                console: "Щось пішло не так (перевірте консоль!)",
-                successfullyClonedNameTo: "{{name}} успішно клоновано до {{name_your_server}}!"
+        expressionManager: {
+            name: "ExpressionManager",
+            description: "Клонування емодзі та наліпок. Додає пункти контекстного меню для швидкого клонування, редагування або видалення. Також додає пункти копіювання та збереження наліпок",
+            option: {
+                editAndDelete: {
+                    label: "Редагування та видалення",
+                    description: "Додає пункти «Редагувати» та «Видалити» до контекстного меню вибору виразів"
+                },
+                stickerCopyAndOpen: {
+                    label: "Посилання на наліпки",
+                    description: "Додає пункти «Копіювати посилання на наліпку» та «Відкрити посилання на наліпку» до контекстного меню наліпок"
+                },
+                recents: {
+                    label: "Видалити з нещодавніх",
+                    description: "Додає пункт «Видалити з нещодавніх» до контекстного меню часто використовуваних виразів"
+                }
             },
             context: {
-                clone: "Клонувати {{type}}",
-                cloneName: "Клонувати {{data}}"
+                cloneEmoji: "Клонувати Емодзі",
+                cloneSticker: "Клонувати Стікер",
+                editEmoji: "Редагувати емодзі",
+                editSticker: "Редагувати наліпку",
+                deleteEmoji: "Видалити емодзі",
+                deleteSticker: "Видалити наліпку",
+                removeFromRecents: "Видалити з нещодавніх",
+                uploadAsEmoji: "Завантажити як емодзі",
+                copyStickerLink: "Копіювати посилання на наліпку",
+                openStickerLink: "Відкрити посилання на наліпку"
             },
-            text: {
+            modal: {
+                customName: "Власна назва",
+                invalidName: "Назва має бути від 2 до 30 символів і містити лише цифри та літери",
+                cloneTitle: "Клонувати {{name}}",
+                deleteTitle: "Видалити {{name}}",
+                deleteEmoji: "Ви впевнені, що хочете видалити цей емодзі?",
+                deleteSticker: "Ви впевнені, що хочете видалити цю наліпку?",
+                deleteConfirm: "Видалити",
+                recentsEmoji: "Це скине всю історію використання цього емодзі, і цю дію не можна скасувати. Ви впевнені?",
+                recentsSticker: "Це скине всю історію використання цієї наліпки, і цю дію не можна скасувати. Ви впевнені?",
+                recentsConfirm: "Зробити"
+            },
+            toast: {
+                emojiDeleted: "Емодзі успішно видалено.",
+                stickerDeleted: "Наліпку успішно видалено.",
+                emojiDeleteFailed: "Не вдалося видалити емодзі",
+                stickerDeleteFailed: "Не вдалося видалити наліпку",
+                cloned: "Успішно клоновано {{name}} на {{guild}}!",
                 yourServer: "ваш сервер",
-                cloneTo: "Клонувати до {{name}}",
-                emoji: "Емодзі",
-                sticker: "Стікер"
+                cloneFailed: "Помилка клонування: {{message}}",
+                console: "Щось пішло не так (перевірте консоль!)",
+                linkCopied: "Посилання скопійовано!",
+                emojiModalFailed: "Не вдалося відкрити вікно емодзі: {{error}}"
             }
         },
         f8break: {
@@ -9859,7 +9881,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "Показує підключені акаунти у спливаючих вікнах профілів",
+            description: "Показує підключені акаунти у спливаючих вікнах профілів та на бічній панелі особистих повідомлень",
             option: {
                 iconSize: {
                     label: "Розмір іконок",

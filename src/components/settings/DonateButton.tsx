@@ -18,10 +18,9 @@
 */
 
 import { settings, t } from "@api/i18n";
-import { Button } from "@components/Button";
+import { Button, ButtonProps } from "@components/Button";
 import { Heart } from "@components/Heart";
 import { OpenExternalIcon } from "@components/Icons";
-import { ButtonProps } from "@plexcord/discord-types";
 import { openInviteModal } from "@utils/discord";
 import { showToast } from "@webpack/common";
 
