@@ -33,10 +33,17 @@ export default definePlugin({
         },
         {
             find: 'type:"GUILD_ONBOARDING_PROMPTS_FETCH_START"',
-            replacement: {
-                match: /(?<="GUILD_ONBOARDING_PROMPTS_FETCH_SUCCESS",guildId:\i,\.\.\.\i)(?=\})/,
-                replace: ",enabled:!1"
-            }
+            replacement: [
+                {
+                    match: /(?<="GUILD_ONBOARDING_PROMPTS_FETCH_SUCCESS",guildId:\i,\.\.\.\i)(?=\})/,
+                    replace: ",enabled:!1"
+                },
+                {
+                    // with enabled:!1 the onboarding page renders empty, so never navigate to it
+                    match: /(?<=function \i\(\i\)\{)(?=\i\.\i\.dispatch\(\{type:"GUILD_ONBOARDING_START")/,
+                    replace: "return;"
+                }
+            ]
         }
     ],
     bypassOnboard(guild_id: string) {

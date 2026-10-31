@@ -50,14 +50,14 @@ export const settings = definePluginSettings({
         description: () => t(plugin.callTimer.option.allCallTimers.description),
         type: OptionType.BOOLEAN,
         restartNeeded: true,
-        default: false
+        default: true
     },
     showWithoutHover: {
         label: () => t(plugin.callTimer.option.showWithoutHover.label),
         description: () => t(plugin.callTimer.option.showWithoutHover.description),
         type: OptionType.BOOLEAN,
         restartNeeded: true,
-        default: false
+        default: true
     },
     showRoleColor: {
         label: () => t(plugin.callTimer.option.showRoleColor.label),
@@ -71,21 +71,21 @@ export const settings = definePluginSettings({
         description: () => t(plugin.callTimer.option.trackSelf.description),
         type: OptionType.BOOLEAN,
         restartNeeded: false,
-        default: false
+        default: true
     },
     showSeconds: {
         label: () => t(plugin.callTimer.option.showSeconds.label),
         description: () => t(plugin.callTimer.option.showSeconds.description),
         type: OptionType.BOOLEAN,
         restartNeeded: false,
-        default: false
+        default: true
     },
     watchLargeGuilds: {
         label: () => t(plugin.callTimer.option.watchLargeGuilds.label),
         description: () => t(plugin.callTimer.option.watchLargeGuilds.description),
         type: OptionType.BOOLEAN,
         restartNeeded: true,
-        default: false
+        default: true
     },
     fixUI: {
         label: () => t(plugin.callTimer.option.fixUI.label),
