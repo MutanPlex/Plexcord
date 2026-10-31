@@ -91,7 +91,8 @@ export default definePlugin({
                     replace: "$&$self.onPopoutClose();"
                 },
                 {
-                    match: /ref:(\i),style:\i(?=.{0,250}#{intl::USER_PROFILE_ACCOUNT_POPOUT_BUTTON_A11Y_LABEL})/,
+                    // style may already be rewritten by the UserArea API patch
+                    match: /ref:(\i),style:(?:\i|\{[^}]*\})(?=.{0,250}#{intl::USER_PROFILE_ACCOUNT_POPOUT_BUTTON_A11Y_LABEL})/,
                     replace: "$&,onContextMenu:($self.grabRef($1),$self.openAccountPanelContextMenu)"
                 }
             ],
