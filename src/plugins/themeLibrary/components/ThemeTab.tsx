@@ -12,7 +12,7 @@ import { plugin, t } from "@api/i18n";
 import { Settings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { ErrorCard } from "@components/ErrorCard";
-import { HeadingPrimary, HeadingTertiary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { OpenExternalIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings";
@@ -168,14 +168,14 @@ function ThemeTab() {
                     </div>
                 ) : error ? (
                     <ErrorCard>
-                        <HeadingTertiary>{t(plugin.themeLibrary.text.failedToFetchThemes)}</HeadingTertiary>
+                        <Heading tag="h4">{t(plugin.themeLibrary.text.failedToFetchThemes)}</Heading>
                         <Paragraph className={Margins.top8}>{t(plugin.themeLibrary.text.couldNotFetchThe)}</Paragraph>
                     </ErrorCard>
                 ) : (
                     <>
                         {hideWarningCard ? null : (
                             <ErrorCard>
-                                <HeadingTertiary>{t(plugin.themeLibrary.text.wantYourThemeRemoved)}</HeadingTertiary>
+                                <Heading tag="h4">{t(plugin.themeLibrary.text.wantYourThemeRemoved)}</Heading>
                                 <Paragraph className={Margins.top8}>
                                     {t(plugin.themeLibrary.text.removalInfo)} <a href="https://github.com/Plexcord/themes.plexcord.club/issues/new?labels=removal&projects=&template=request_removal.yml&title=Theme+Removal">GitHub <OpenExternalIcon height={16} width={16} /></a>
                                 </Paragraph>
@@ -191,13 +191,15 @@ function ThemeTab() {
                             </ErrorCard>
                         )}
                         <div className={classes(Margins.bottom8, Margins.top16)}>
-                            <HeadingPrimary
+                            <Heading
+                                tag="h2"
+                                className={Margins.bottom20}
                                 style={{
                                     overflowWrap: "break-word",
                                     marginTop: 8,
                                 }}>
                                 {searchValue.status === SearchStatus.LIKED ? t(plugin.themeLibrary.text.mostLiked) : t(plugin.themeLibrary.text.newestAdditions)}
-                            </HeadingPrimary>
+                            </Heading>
 
                             {themes.slice(0, 2).map((theme: Theme) => (
                                 <ThemeCard
@@ -210,12 +212,12 @@ function ThemeTab() {
                                 />
                             ))}
                         </div>
-                        <HeadingPrimary style={{
+                        <Heading tag="h2" className={Margins.bottom20} style={{
                             overflowWrap: "break-word",
                             marginTop: 20,
                         }}>
                             {t(plugin.themeLibrary.text.themes)}
-                        </HeadingPrimary>
+                        </Heading>
                         <div className={classes(Margins.bottom20, "pce-search-grid")}>
                             <TextInput value={searchValue.value} placeholder={t(plugin.themeLibrary.text.searchForATheme)} onChange={onSearch} />
                             <div className={InputStyles.inputWrapper}>

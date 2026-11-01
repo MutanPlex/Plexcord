@@ -7565,6 +7565,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownTitle: "Bilinmeyen Başlık"
             }
         },
+        mutedServersActivityBadge: {
+            name: "MutedServersActivityBadge",
+            description: "Sunucu sessize alınmış olsa bile sunucu etkinlik rozetini görünür tutar."
+        },
         mutualGroupDMs: {
             name: "MutualGroupDMs",
             description: "Profillerde ortak grup DM'lerini gösterir",
@@ -9137,7 +9141,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         readAllNotificationsButton: {
             name: "ReadAllNotificationsButton",
             description: "Tüm bildirimleri tek bir tıklamayla okunmuş olarak işaretlemek için bildirim paneline bir düğme ekler.",
-            button: "Hepsini Oku"
+            button: "Hepsini Oku",
+            option: {
+                compact: {
+                    label: "Kompakt",
+                    description: "Sunucu listesinde simge yerine küçük bir metin düğmesi gösterir"
+                }
+            }
         },
         recentDMSwitcher: {
             name: "RecentDMSwitcher",
@@ -9741,10 +9751,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     friend: "Yalnızca çevrimiçi arkadaş sayısı",
                     server: "Yalnızca sunucu sayısı",
                     both: "Hem sunucu hem çevrimiçi arkadaş sayısı"
-                },
-                useCompact: {
-                    label: "Kompakt Modu Kullan",
-                    description: "Göstergenin yalnızca metinle görünmesini sağlar"
                 }
             }
         },
@@ -13059,12 +13065,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 port: {
                     description: "Bağlanılacak bağlantı noktası",
                     label: "Bağlantı Noktası"
+                },
+                openConfig: {
+                    button: "Orbolay ayarlarını aç"
                 }
             },
             name: "OrbolayBridge",
             description: "Orbolay'i Discord'a bağlayan köprü eklentisi",
             toast: {
-                connectedToOrbolayServer: "Orbolay sunucusuna bağlanıldı"
+                connectedToOrbolayServer: "Orbolay sunucusuna bağlanıldı",
+                notConnected: "Orbolay'e bağlı değil"
             }
         },
         plexcordHelper: {
@@ -13133,6 +13143,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showAllBadges: {
                     label: "Tüm Rozetleri Göster",
                     description: "Kalanları +n arkasına gizlemek yerine tüm profil rozetlerini gösterir"
+                },
+                gifPickerTyping: {
+                    label: "GIF Seçicide Yazıyor",
+                    description: "GIF seçici açıkken seni yazıyor olarak gösterir"
                 }
             },
             text: {

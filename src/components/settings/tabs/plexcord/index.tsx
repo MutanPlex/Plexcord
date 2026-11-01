@@ -67,7 +67,7 @@ function LanguageSelector() {
     return (
         <div style={{ display: "flex" }}>
             <div>
-                <Heading tag="h5">{t(settings.language.selector.label)}</Heading>
+                <Heading tag="h5" className={Margins.bottom8}>{t(settings.language.selector.label)}</Heading>
                 <Paragraph className="description" style={{ marginBottom: "8px" }}>
                     {t(settings.language.selector.description)}
                 </Paragraph>
@@ -259,7 +259,7 @@ function PlexcordSettings() {
                 </SpecialCard>
             )}
 
-            <Heading tag="h5">{t(settings.quickActions.title)}</Heading>
+            <Heading tag="h5" className={Margins.bottom8}>{t(settings.quickActions.title)}</Heading>
             <Paragraph className={Margins.bottom16}>
                 {t(settings.quickActions.description)}
             </Paragraph>

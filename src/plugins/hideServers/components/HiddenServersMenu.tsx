@@ -8,7 +8,9 @@
 import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
+import { Card } from "@components/Card";
 import { Heading } from "@components/Heading";
+import { XSmallIcon } from "@components/Icons";
 import { Guild, RenderModalProps } from "@plexcord/discord-types";
 import { HiddenServersStore } from "@plugins/hideServers/HiddenServersStore";
 import { classNameFactory } from "@utils/css";
@@ -56,8 +58,6 @@ function GuildRow({ guild }) {
                 {guild.icon ? (
                     <img
                         alt=""
-                        height="48"
-                        width="48"
                         src={IconUtils.getGuildIconURL({
                             id: guild.id,
                             icon: guild.icon,
@@ -74,17 +74,45 @@ function GuildRow({ guild }) {
                     </div>
                 )}
             </div>
-            <Heading className={cl("name")}>
+            <BaseText size="md" weight="medium" className={cl("name")}>
                 {guild.name}
-            </Heading>
+            </BaseText>
             <Button
-                className="row-button"
-                variant="secondary"
+                variant="dangerSecondary"
+                size="iconOnly"
                 onClick={() => restoreGuild(guild, SortedGuildStore)}
             >
-                {t(plugin.hideServers.button.remove)}
+                <XSmallIcon/>
             </Button>
         </div>
+    );
+}
+
+function Group({ folderName, guilds }) {
+    return (
+        <Card variant="primary" className={cl("folder-group")}>
+            <div className={cl("folder-header")}>
+                <Heading tag="h4">{folderName}</Heading>
+                <Button
+                    variant="dangerSecondary"
+                    onClick={() => {
+                        guilds.forEach(g => restoreGuild(g, SortedGuildStore));
+                    }}
+                    size="small"
+                    className={cl("restore-all")}
+                >
+                    {t(plugin.hideServers.button.removeAll)}
+                </Button>
+            </div>
+            <div className={cl("rows")}>
+                {guilds.map(guild => (
+                    <GuildRow
+                        key={guild.id}
+                        guild={guild}
+                    />
+                ))}
+            </div>
+        </Card>
     );
 }
 
@@ -108,39 +136,22 @@ export function HiddenServersMenu({ guilds }: { guilds: Guild[]; }) {
             if (!folder) return null;
 
             return (
-                <div key={folderId} className={cl("folder")}>
-                    <div className={cl("folder-header")}>
-                        <BaseText size="sm" weight="medium">{folder.folderName || t(plugin.hideServers.button.folder)}</BaseText>
-                        <Button
-                            variant="secondary"
-                            onClick={() => {
-                                folderGuilds.forEach(g => restoreGuild(g, SortedGuildStore));
-                            }}
-                            size="small"
-                            className={cl("restore-all")}
-                        >
-                            {t(plugin.hideServers.button.removeAll)}
-                        </Button>
-                    </div>
-                    {folderGuilds.map(guild => (
-                        <GuildRow
-                            key={guild.id}
-                            guild={guild}
-                        />
-                    ))}
-                </div>
+                <Group
+                    key={folderId}
+                    folderName={folder.folderName || t(plugin.hideServers.button.folder)}
+                    guilds={folderGuilds}
+                />
             );
         })}
 
-        <BaseText size="sm" weight="medium">{t(plugin.hideServers.button.guilds)}</BaseText>
-        {guildsWithoutFolder.map(guild => (
-            <GuildRow
-                key={guild.id}
-                guild={guild}
+        {guildsWithoutFolder.length > 0 ? (
+            <Group
+                folderName={t(plugin.hideServers.button.guilds)}
+                guilds={guildsWithoutFolder}
             />
-        ))}
+        ) : null}
 
-        {hiddenGuilds.length === 0 && <BaseText size="sm" weight="medium">{t(plugin.hideServers.button.noHiddenServers)}</BaseText>}
+        {hiddenGuilds.length === 0 && <BaseText size="md" weight="medium">{t(plugin.hideServers.button.noHiddenServers)}</BaseText>}
     </div>;
 }
 

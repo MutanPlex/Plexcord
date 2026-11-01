@@ -7565,6 +7565,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownTitle: "不明なタイトル"
             }
         },
+        mutedServersActivityBadge: {
+            name: "MutedServersActivityBadge",
+            description: "サーバーをミュートしていても、サーバーのアクティビティバッジを表示したままにします。"
+        },
         mutualGroupDMs: {
             name: "MutualGroupDMs",
             description: "プロフィールに相互グループDMを表示します",
@@ -9137,7 +9141,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         readAllNotificationsButton: {
             name: "ReadAllNotificationsButton",
             description: "ボタンを 1 回クリックするだけで、すべてのサーバー通知を読むことができます。",
-            button: "すべて読む"
+            button: "すべて読む",
+            option: {
+                compact: {
+                    label: "コンパクト",
+                    description: "サーバーリストのアイコンの代わりに小さなテキストボタンを表示します"
+                }
+            }
         },
         recentDMSwitcher: {
             name: "RecentDMSwitcher",
@@ -9741,10 +9751,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     friend: "オンラインの友達のみカウント",
                     server: "サーバー数のみ",
                     both: "サーバーとオンラインの友達の両方の数"
-                },
-                useCompact: {
-                    label: "コンパクトモードを使用する",
-                    description: "インジケーターをテキストのみで表示します"
                 }
             }
         },
@@ -13059,12 +13065,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 port: {
                     description: "接続先のポート",
                     label: "ポート"
+                },
+                openConfig: {
+                    button: "Orbolayの設定を開く"
                 }
             },
             name: "OrbolayBridge",
             description: "Orbolay を Discord に接続するブリッジプラグイン",
             toast: {
-                connectedToOrbolayServer: "Orbolay サーバーに接続しました"
+                connectedToOrbolayServer: "Orbolay サーバーに接続しました",
+                notConnected: "Orbolayに接続されていません"
             }
         },
         plexcordHelper: {
@@ -13133,6 +13143,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showAllBadges: {
                     label: "すべてのバッジを表示",
                     description: "残りを +n にまとめず、プロフィールのバッジをすべて表示します"
+                },
+                gifPickerTyping: {
+                    label: "GIFピッカー入力中",
+                    description: "GIFピッカーを開いている間、入力中として表示します"
                 }
             },
             text: {

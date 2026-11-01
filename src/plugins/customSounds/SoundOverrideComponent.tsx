@@ -196,7 +196,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                     </div>
 
                     <div className={Margins.bottom16}>
-                        <Heading>{t(plugin.customSounds.button.volume)}</Heading>
+                        <Heading className={Margins.bottom8}>{t(plugin.customSounds.button.volume)}</Heading>
                         <Slider
                             markers={makeRange(0, 100, 10)}
                             initialValue={override.volume}
@@ -210,7 +210,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                     </div>
 
                     <div className={Margins.bottom16}>
-                        <Heading>{t(plugin.customSounds.button.soundSource)}</Heading>
+                        <Heading className={Margins.bottom8}>{t(plugin.customSounds.button.soundSource)}</Heading>
                         <Select
                             options={[
                                 { value: "default", label: t(plugin.customSounds.option.default) },
@@ -239,7 +239,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                     {override.selectedSound === "custom" && (
                         <>
                             <div className={Margins.bottom8}>
-                                <Heading>{t(plugin.customSounds.button.customFile)}</Heading>
+                                <Heading className={Margins.bottom8}>{t(plugin.customSounds.button.customFile)}</Heading>
                                 <Select
                                     options={[
                                         { value: "", label: t(plugin.customSounds.option.select) },

@@ -93,7 +93,13 @@ const UserPluginContributorBadge: ProfileBadge = {
     },
 };
 
-let DonorBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
+interface DonorBadge {
+    tooltip?: string;
+    badge: string;
+    "2"?: 1;
+}
+
+let DonorBadges = {} as Record<string, Array<DonorBadge>>;
 const MutanBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
 let DirectoryBadges = {} as Record<string, DirectoryBadge>;
 
@@ -301,27 +307,37 @@ export default definePlugin({
     },
 
     getDonorBadges(userId: string) {
-        return DonorBadges[userId]?.map((badge, idx) => ({
-            id: `plexcord_donor_badge_${idx}`,
-            iconSrc: badge.badge,
-            description: badge.tooltip,
-            name: badge.tooltip,
-            infoLabel: "Plexcord Donor",
-            rarity: BadgeRarity.MYTHIC,
-            position: BadgePosition.START,
-            props: {
-                style: {
-                    borderRadius: "50%",
-                    transform: "scale(0.9)" // The image is a bit too big compared to default badges
-                }
-            },
-            onContextMenu(event, badgeProps) {
-                ContextMenuApi.openContextMenu(event, () => <BadgeContextMenu badge={badgeProps} />);
-            },
-            onClick() {
-                return openDonorModal();
-            },
-        } satisfies ProfileBadge));
+        return DonorBadges[userId]?.map((badge, idx) => {
+            let largeIconSrc: string | undefined = undefined;
+            if (badge["2"]) {
+                const url = new URL(badge.badge);
+                url.pathname = url.pathname.replace(/(\.[^/.]+)$/, "@2x$1");
+                largeIconSrc = url.toString();
+            }
+
+            return {
+                id: `plexcord_donor_badge_${idx}`,
+                iconSrc: badge.badge,
+                largeIconSrc,
+                description: badge.tooltip,
+                name: badge.tooltip,
+                infoLabel: "Plexcord Donor",
+                rarity: BadgeRarity.MYTHIC,
+                position: BadgePosition.START,
+                props: {
+                    style: {
+                        borderRadius: "50%",
+                        transform: "scale(0.9)" // The image is a bit too big compared to default badges
+                    }
+                },
+                onContextMenu(event, badgeProps) {
+                    ContextMenuApi.openContextMenu(event, () => <BadgeContextMenu badge={badgeProps} />);
+                },
+                onClick() {
+                    return openDonorModal();
+                },
+            } satisfies ProfileBadge;
+        });
     }
 });
 

@@ -47,7 +47,7 @@ interface ApplicationFieldProps {
 export function TextField({ title, value, onChange, placeholder, disabled, multiline }: TextFieldProps) {
     return (
         <section>
-            <Heading tag="h5">{title}</Heading>
+            <Heading tag="h5" className={Margins.bottom8}>{title}</Heading>
             {multiline
                 ? <TextArea value={value} onChange={onChange} placeholder={placeholder} disabled={disabled} autosize />
                 : <TextInput value={value} onChange={onChange} placeholder={placeholder} disabled={disabled} />}
@@ -58,7 +58,7 @@ export function TextField({ title, value, onChange, placeholder, disabled, multi
 export function DateTimeField({ value, onChange, disabled }: { value: string; onChange(value: string): void; disabled?: boolean; }) {
     return (
         <section>
-            <Heading tag="h5">{t(plugin.clipUpload.text.createdAt)}</Heading>
+            <Heading tag="h5" className={Margins.bottom8}>{t(plugin.clipUpload.text.createdAt)}</Heading>
             <TextInput
                 type="datetime-local"
                 value={value}
@@ -128,7 +128,7 @@ export function ParticipantField({ value, onChange, disabled }: ParticipantField
 
     return (
         <section>
-            <Heading tag="h5">{t(plugin.clipUpload.text.participants)}</Heading>
+            <Heading tag="h5" className={Margins.bottom8}>{t(plugin.clipUpload.text.participants)}</Heading>
             <Flex flexDirection="column" gap={8}>
                 <Paragraph className={Margins.bottom8}>{t(plugin.clipUpload.text.onlyTagPeopleWho)}</Paragraph>
                 <SearchableSelect
@@ -190,7 +190,7 @@ export function ApplicationField({ value, onChange, disabled }: ApplicationField
 
     return (
         <section>
-            <Heading tag="h5">{t(plugin.clipUpload.text.gameApplication)}</Heading>
+            <Heading tag="h5" className={Margins.bottom8}>{t(plugin.clipUpload.text.gameApplication)}</Heading>
             <Flex flexDirection="column" gap={8}>
                 <SearchableSelect
                     options={options}

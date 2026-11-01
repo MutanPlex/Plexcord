@@ -261,7 +261,7 @@ function CustomInstanceAboutComponent() {
     if (!instanceAPIBaseUrl || !instanceBaseURL)
         return (
             <Card variant="danger">
-                <Heading tag="h5">{t(plugin.musicRichPresence.text.invalidInstance)}</Heading>
+                <Heading tag="h5" className={Margins.bottom8}>{t(plugin.musicRichPresence.text.invalidInstance)}</Heading>
                 <Paragraph>{t(plugin.musicRichPresence.text.provideBoth)} <b>{t(plugin.musicRichPresence.text.apiBaseUrl)}</b> {t(plugin.musicRichPresence.text.andThe)} <b>{t(plugin.musicRichPresence.text.instanceBaseUrl)}</b> {t(plugin.musicRichPresence.text.forYourCustomInstance)}</Paragraph>
             </Card>
         );
@@ -269,7 +269,7 @@ function CustomInstanceAboutComponent() {
     if (!cspAllowed)
         return (
             <Card variant="warning">
-                <Heading tag="h5">{t(plugin.musicRichPresence.text.allowConnectTitle)}</Heading>
+                <Heading tag="h5" className={Margins.bottom8}>{t(plugin.musicRichPresence.text.allowConnectTitle)}</Heading>
                 <Paragraph>{t(plugin.musicRichPresence.text.allowConnectBody)}</Paragraph>
                 <Button
                     size="small"
@@ -307,8 +307,8 @@ export default definePlugin({
         if (settings.store.scrobblerBackend === "lastfm")
             return (
                 <Card>
-                    <Heading tag="h2">{t(plugin.musicRichPresence.text.lastFm)}</Heading>
-                    <Heading tag="h5">{t(plugin.musicRichPresence.text.howToCreateAn)}</Heading>
+                    <Heading tag="h2" className={Margins.bottom20}>{t(plugin.musicRichPresence.text.lastFm)}</Heading>
+                    <Heading tag="h5" className={Margins.bottom8}>{t(plugin.musicRichPresence.text.howToCreateAn)}</Heading>
                     <Paragraph>{t(plugin.musicRichPresence.text.set)} <strong>{t(plugin.musicRichPresence.text.applicationName)}</strong> {t(plugin.musicRichPresence.text.and)} <strong>{t(plugin.musicRichPresence.text.applicationDescription)}</strong> {t(plugin.musicRichPresence.text.toAnythingAndLeave)}</Paragraph>
                     <LinkButton size="small" href="https://www.last.fm/api/account/create" className={Margins.top8}>{t(plugin.musicRichPresence.text.createApiKey)}</LinkButton>
                 </Card>

@@ -28,6 +28,7 @@ import { Divider } from "@components/Divider";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
+import { Text } from "@components/Text";
 import { User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { copyWithToast, fetchUserProfile } from "@utils/discord";
@@ -119,20 +120,21 @@ function SettingsAboutComponent() {
 
     return (
         <section>
-            <Heading>{t(plugin.fakeProfileThemes.modal.usage)}</Heading>
+            <Heading className={Margins.bottom8}>{t(plugin.fakeProfileThemes.modal.usage)}</Heading>
             <Paragraph>
                 {t(plugin.fakeProfileThemes.modal.intro)}
-                <br />
-                {t(plugin.fakeProfileThemes.modal.setColor)}
-                <ul className={Margins.top8}>
-                    <li>• {t(plugin.fakeProfileThemes.modal.step1)}</li>
-                    <li>• {t(plugin.fakeProfileThemes.modal.step2, { copy: t(plugin.fakeProfileThemes.button.copy) })}</li>
-                    <li>• {t(plugin.fakeProfileThemes.modal.step3)}</li>
-                </ul><br />
+            </Paragraph>
+            <Text size="sm" className={Margins.top8}>
+                <strong>{t(plugin.fakeProfileThemes.modal.setColor)}</strong>
+                <ul>
+                    <li>&mdash; {t(plugin.fakeProfileThemes.modal.step1)}</li>
+                    <li>&mdash; {t(plugin.fakeProfileThemes.modal.step2, { copy: t(plugin.fakeProfileThemes.button.copy) })}</li>
+                    <li>&mdash; {t(plugin.fakeProfileThemes.modal.step3)}</li>
+                </ul>
                 <Divider
                     className={classes(Margins.top8, Margins.bottom8)}
                 />
-                <Heading>{t(plugin.fakeProfileThemes.modal.pickers)}</Heading>
+                <Heading className={Margins.bottom8}>{t(plugin.fakeProfileThemes.modal.pickers)}</Heading>
                 <Flex gap="1em">
                     <ColorPicker
                         color={color1}
@@ -170,7 +172,7 @@ function SettingsAboutComponent() {
                 <Divider
                     className={classes(Margins.top8, Margins.bottom8)}
                 />
-                <Heading>{t(plugin.fakeProfileThemes.modal.preview)}</Heading>
+                <Heading className={Margins.bottom8}>{t(plugin.fakeProfileThemes.modal.preview)}</Heading>
                 <div className="pc-fpt-preview">
                     <ProfileModal
                         user={UserStore.getCurrentUser()}
@@ -183,7 +185,7 @@ function SettingsAboutComponent() {
                         isTryItOut={true}
                     />
                 </div>
-            </Paragraph>
+            </Text>
         </section>);
 }
 

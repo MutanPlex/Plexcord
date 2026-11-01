@@ -9,6 +9,7 @@ import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import channelTabs from "@plugins/channelTabs";
 import { BasicChannelTabsProps, ChannelTabsProps, clearStaleNavigationContext, closeTab, createTab, handleChannelSwitch, isNavigationFromSource, isTabSelected, moveToTab, openedTabs, openStartupTabs, saveTabs, settings, setUpdaterFunction, useGhostTabs } from "@plugins/channelTabs/util";
@@ -347,7 +348,7 @@ export function ChannelTabsPreview(p: { setValue: (v: TabSet) => void; }) {
 
     return (
         <>
-            <Heading>{t(plugin.channelTabs.tabs.startup)}</Heading>
+            <Heading className={Margins.bottom8}>{t(plugin.channelTabs.tabs.startup)}</Heading>
             <Flex flexDirection="row" style={{ gap: "2px" }}>
                 {currentTabs.map(t => <>
                     <PreviewTab {...t} />

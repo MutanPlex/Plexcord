@@ -7,6 +7,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { DEFAULT_COLOR, SWATCHES } from "@plugins/pinDms/constants";
 import { categoryLen, createCategory, getCategory } from "@plugins/pinDms/data";
@@ -94,14 +95,14 @@ export function NewCategoryModal({ categoryId, modalProps, initialChannelId }: P
                 }}
             >
                 <section>
-                    <Heading tag="h5">{t(plugin.pinDMs.modal.category.name)}</Heading>
+                    <Heading tag="h5" className={Margins.bottom8}>{t(plugin.pinDMs.modal.category.name)}</Heading>
                     <TextInput
                         value={name}
                         onChange={e => setName(e)}
                     />
                 </section>
                 <section>
-                    <Heading tag="h5">{t(plugin.pinDMs.modal.category.color)}</Heading>
+                    <Heading tag="h5" className={Margins.bottom8}>{t(plugin.pinDMs.modal.category.color)}</Heading>
                     <ColorPickerWithSwatches
                         className={cl("color-picker")}
                         key={category.id}

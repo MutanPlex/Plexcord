@@ -12,6 +12,7 @@ import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
+import { Margins } from "@components/margins";
 import { VideoDevice } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { identity } from "@utils/misc";
@@ -116,7 +117,7 @@ function OutputVolumeComponent() {
 
     return (
         <>
-            {settings.store.showOutputVolumeHeader && <Heading>{t(plugin.vCPanelSettings.text.outputVolume)}</Heading>}
+            {settings.store.showOutputVolumeHeader && <Heading className={Margins.bottom8}>{t(plugin.vCPanelSettings.text.outputVolume)}</Heading>}
             <Slider maxValue={200} minValue={0} onValueRender={v => `${v.toFixed(0)}%`} initialValue={outputVolume} asValueChanges={volume => {
                 FluxDispatcher.dispatch({
                     type: "AUDIO_SET_OUTPUT_VOLUME",
@@ -138,7 +139,7 @@ function InputVolumeComponent() {
 
     return (
         <>
-            {settings.store.showInputVolumeHeader && <Heading>{t(plugin.vCPanelSettings.text.inputVolume)}</Heading>}
+            {settings.store.showInputVolumeHeader && <Heading className={Margins.bottom8}>{t(plugin.vCPanelSettings.text.inputVolume)}</Heading>}
             <Slider maxValue={100} minValue={0} initialValue={inputVolume} asValueChanges={volume => {
                 FluxDispatcher.dispatch({
                     type: "AUDIO_SET_INPUT_VOLUME",
@@ -160,7 +161,7 @@ function OutputDeviceComponent() {
 
     return (
         <>
-            {settings.store.showOutputDeviceHeader && <Heading>{t(plugin.vCPanelSettings.text.outputDevice)}</Heading>}
+            {settings.store.showOutputDeviceHeader && <Heading className={Margins.bottom8}>{t(plugin.vCPanelSettings.text.outputDevice)}</Heading>}
             <Select options={Object.values(MediaEngineStore.getOutputDevices()).map((device: any /* i am NOT typing this*/) => {
                 return { value: device.id, label: settings.store.showOutputDeviceHeader ? device.name : `🔊 ${device.name}` };
             })}
@@ -189,7 +190,7 @@ function InputDeviceComponent() {
 
     return (
         <div style={{ marginTop: "10px" }}>
-            {settings.store.showInputDeviceHeader && <Heading>{t(plugin.vCPanelSettings.text.inputDevice)}</Heading>}
+            {settings.store.showInputDeviceHeader && <Heading className={Margins.bottom8}>{t(plugin.vCPanelSettings.text.inputDevice)}</Heading>}
             <Select options={Object.values(MediaEngineStore.getInputDevices()).map((device: any /* i am NOT typing this*/) => {
                 return { value: device.id, label: settings.store.showInputDeviceHeader ? device.name : `🎤 ${device.name}` };
             })}
@@ -218,7 +219,7 @@ function VideoDeviceComponent() {
 
     return (
         <div style={{ marginTop: "10px" }}>
-            {settings.store.showVideoDeviceHeader && <Heading>{t(plugin.vCPanelSettings.option.camera.label)}</Heading>}
+            {settings.store.showVideoDeviceHeader && <Heading className={Margins.bottom8}>{t(plugin.vCPanelSettings.option.camera.label)}</Heading>}
             <Select options={Object.values(MediaEngineStore.getVideoDevices()).map((device: VideoDevice) => {
                 return { value: device.id, label: settings.store.showVideoDeviceHeader ? device.name : `📷 ${device.name}` };
             })}

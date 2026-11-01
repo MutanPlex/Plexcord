@@ -32,7 +32,7 @@ export default definePlugin({
         {
             find: '"text":"locked"',
             replacement: {
-                match: /(hidePersonalInformation\).+?)(if\(null!=\i\){.+?return \i)(?=})/,
+                match: /(hidePersonalInformation\).+?)(if\(null!=\i\){.{0,600}?)(?=}function \i\(\i\){let{id:)/,
                 replace: "$1return $self.UserMentionComponent({...arguments[0],originalComponent:()=>{$2}});"
             }
         }

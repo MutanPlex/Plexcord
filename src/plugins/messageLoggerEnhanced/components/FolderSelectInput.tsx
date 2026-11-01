@@ -20,6 +20,7 @@
 import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { cl, Native, settings } from "@plugins/messageLoggerEnhanced/index";
 import { DEFAULT_IMAGE_CACHE_DIR } from "@plugins/messageLoggerEnhanced/utils/constants";
 import { copyWithToast } from "@utils/discord";
@@ -34,7 +35,7 @@ function createDirSelector(settingKey: "logsDir" | "imageCacheDir", successMessa
 
         return (
             <section>
-                <Heading tag="h5">{option.description}</Heading>
+                <Heading tag="h5" className={Margins.bottom8}>{option.description}</Heading>
                 <SelectFolderInput
                     settingsKey={settingKey}
                     successMessage={successMessage}

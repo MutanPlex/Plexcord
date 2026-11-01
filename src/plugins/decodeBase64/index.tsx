@@ -21,6 +21,7 @@ import { definePluginSettings } from "@api/Settings";
 import { CodeBlock } from "@components/CodeBlock";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { PcDevs } from "@utils/constants";
 import { copyWithToast } from "@utils/discord";
 import definePlugin, { IconComponent, OptionType } from "@utils/types";
@@ -75,7 +76,7 @@ function openDecodedBase64Modal(decodedContent) {
                 }))}
             >
                 <div style={{ padding: "16px 0" }}>
-                    <Heading>{t(plugin.decodeBase64.modal.content)}</Heading>
+                    <Heading className={Margins.bottom8}>{t(plugin.decodeBase64.modal.content)}</Heading>
                     {decodedContent.map((content, index) => (
                         <CodeBlock key={index} content={content} lang="" />
                     ))}

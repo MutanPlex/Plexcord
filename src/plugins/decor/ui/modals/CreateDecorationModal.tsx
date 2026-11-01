@@ -92,7 +92,7 @@ function CreateDecorationModal(props: RenderModalProps) {
                     <div className={cl("create-decoration-modal-form")}>
                         {error !== null && <BaseText size="xs" color="text-subtle">{error.message}</BaseText>}
                         <section>
-                            <Heading>{t(plugin.decor.file)}</Heading>
+                            <Heading className={Margins.bottom8}>{t(plugin.decor.file)}</Heading>
                             <FileUpload
                                 filename={file?.name}
                                 placeholder={t(plugin.decor.create.fileHolder)}

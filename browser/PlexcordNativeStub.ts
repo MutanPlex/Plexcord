@@ -40,6 +40,8 @@ const setCssDebounced = debounce((css: string) => PlexcordNative.quickCss.set(cs
 
 const themeStore = DataStore.createStore("PlexcordThemes", "PlexcordThemeData");
 
+let win: Window;
+
 // probably should make this less cursed at some point
 window.PlexcordNative = {
     themes: {
@@ -103,7 +105,10 @@ window.PlexcordNative = {
             }
 
             const features = `popup,width=${Math.min(window.innerWidth, 1000)},height=${Math.min(window.innerHeight, 1000)}`;
-            const win = open("about:blank", "PlexcordQuickCss", features);
+
+            win?.close();
+
+            win = open("about:blank", "PlexcordQuickCss", features)!;
             if (!win) {
                 alert("Failed to open QuickCSS popup. Make sure to allow popups!");
                 return;

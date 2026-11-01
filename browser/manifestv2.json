@@ -37,9 +37,11 @@
     "background": {
         "scripts": ["background.js"]
     },
-
-    "web_accessible_resources": ["dist/Plexcord.js", "dist/Plexcord.css"],
-
+    "web_accessible_resources": [
+        "dist/Plexcord.js",
+        "dist/Plexcord.css",
+        "vendor/*"
+    ],
     "browser_specific_settings": {
         "gecko": {
             "id": "contact@plexcord.club",

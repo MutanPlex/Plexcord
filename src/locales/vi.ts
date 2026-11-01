@@ -7565,6 +7565,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownTitle: "Tiêu đề không rõ"
             }
         },
+        mutedServersActivityBadge: {
+            name: "MutedServersActivityBadge",
+            description: "Giữ huy hiệu hoạt động của máy chủ hiển thị ngay cả khi máy chủ bị tắt tiếng."
+        },
         mutualGroupDMs: {
             name: "MutualGroupDMs",
             description: "Hiển thị DM nhóm chung trong hồ sơ",
@@ -9137,7 +9141,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         readAllNotificationsButton: {
             name: "ReadAllNotificationsButton",
             description: "Đọc tất cả các thông báo máy chủ chỉ bằng một nút bấm!",
-            button: "Đọc tất cả"
+            button: "Đọc tất cả",
+            option: {
+                compact: {
+                    label: "Thu gọn",
+                    description: "Hiển thị nút văn bản nhỏ thay vì biểu tượng trong danh sách máy chủ"
+                }
+            }
         },
         recentDMSwitcher: {
             name: "RecentDMSwitcher",
@@ -9741,10 +9751,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     friend: "Chỉ tính bạn bè trực tuyến",
                     server: "Chỉ tính máy chủ",
                     both: "Cả máy chủ và số bạn bè trực tuyến đều được tính"
-                },
-                useCompact: {
-                    label: "Sử dụng Chế độ thu gọn",
-                    description: "Làm cho chỉ báo chỉ xuất hiện với văn bản"
                 }
             }
         },
@@ -13059,12 +13065,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 port: {
                     description: "Cổng để kết nối",
                     label: "Cổng"
+                },
+                openConfig: {
+                    button: "Mở cài đặt Orbolay"
                 }
             },
             name: "OrbolayBridge",
             description: "Plugin cầu nối để kết nối Orbolay với Discord",
             toast: {
-                connectedToOrbolayServer: "Đã kết nối tới máy chủ Orbolay"
+                connectedToOrbolayServer: "Đã kết nối tới máy chủ Orbolay",
+                notConnected: "Chưa kết nối với Orbolay"
             }
         },
         plexcordHelper: {
@@ -13133,6 +13143,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showAllBadges: {
                     label: "Hiện tất cả huy hiệu",
                     description: "Hiện mọi huy hiệu hồ sơ thay vì gộp phần còn lại vào +n"
+                },
+                gifPickerTyping: {
+                    label: "Đang nhập khi chọn GIF",
+                    description: "Hiển thị bạn đang nhập khi trình chọn GIF đang mở"
                 }
             },
             text: {

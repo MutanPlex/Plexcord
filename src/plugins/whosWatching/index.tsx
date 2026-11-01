@@ -11,7 +11,7 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
-import { Heading, HeadingSecondary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { User } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
@@ -45,7 +45,7 @@ function Watching({ userIds, guildId }: WatchingProps): JSX.Element {
             {userIds.length ?
                 (
                     <div className={cl("spectating")}>
-                        <Heading>{getIntlMessage("SPECTATORS", { numViewers: userIds.length })}</Heading>
+                        <Heading className={Margins.bottom8}>{getIntlMessage("SPECTATORS", { numViewers: userIds.length })}</Heading>
                         <Flex flexDirection="column" style={{ gap: 6 }} >
                             {users.map(user => (
                                 <Flex key={user.id} flexDirection="row" gap="6" alignContent="center">
@@ -134,9 +134,9 @@ export default definePlugin({
             <div className={cl("screenshare-panel")}>
                 <div {...props}>{props.children}</div>
                 <div className={classes(cl("spectating-panel"), Margins.top8)}>
-                    <HeadingSecondary className={cl("spectating-header")}>
+                    <Heading tag="h3" className={cl("spectating-header")}>
                         {getIntlMessage("SPECTATORS", { numViewers: userIds.length })}
-                    </HeadingSecondary>
+                    </Heading>
                     {users.length ?
                         <div className={cl("spectating-users")}>
                             <UserSummaryItem

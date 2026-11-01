@@ -9,6 +9,7 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { OptionType } from "@utils/types";
 import { TextInput, useState } from "@webpack/common";
@@ -51,7 +52,7 @@ const settings = definePluginSettings({
 
             return (
                 <section>
-                    <Heading>{t(plugin.soundBoardLogger.option.savedIds.heading)}</Heading>
+                    <Heading className={Margins.bottom8}>{t(plugin.soundBoardLogger.option.savedIds.heading)}</Heading>
                     <TextInput
                         type="number"
                         pattern="-?[0-9]+"

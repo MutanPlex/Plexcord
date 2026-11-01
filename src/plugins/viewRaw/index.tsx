@@ -24,12 +24,13 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings, migratePluginSettings } from "@api/Settings";
 import { CodeBlock } from "@components/CodeBlock";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { HeadingSecondary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { Margins } from "@components/margins";
 import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { copyWithToast, getCurrentGuild, getIntlMessage } from "@utils/discord";
 import { isTruthy } from "@utils/guards";
+import { classes } from "@utils/misc";
 import definePlugin, { IconComponent, OptionType } from "@utils/types";
 import { GuildRoleStore, Menu, Modal, openModal, UserProfileStore } from "@webpack/common";
 import { MouseEventHandler } from "react";
@@ -129,9 +130,9 @@ function openViewRawModal(data: object, rawType: string, msgContent?: string) {
             >
                 {!!msgContent && (
                     <>
-                        <HeadingSecondary>{t(plugin.viewRaw.modal.content)}</HeadingSecondary>
+                        <Heading tag="h3" className={Margins.bottom8}>{t(plugin.viewRaw.modal.content)}</Heading>
                         <CodeBlock className="pc-viewRaw-codeBlock" content={msgContent} lang="" />
-                        <HeadingSecondary className={Margins.top16}>{t(plugin.viewRaw.text.messageData)}</HeadingSecondary>
+                        <Heading tag="h3" className={classes(Margins.top16, Margins.bottom8)}>{t(plugin.viewRaw.text.messageData)}</Heading>
                     </>
                 )}
                 <CodeBlock className="pc-viewRaw-codeBlock" content={json} lang="json" />

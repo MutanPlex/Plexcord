@@ -522,7 +522,7 @@ function ChangelogContent() {
 
             <Divider className={Margins.top20} />
 
-            <Heading>{t(changelog.modal.repository)}</Heading>
+            <Heading className={Margins.bottom8}>{t(changelog.modal.repository)}</Heading>
 
             <Paragraph className={Margins.bottom16}>
                 {t(changelog.modal.description)}

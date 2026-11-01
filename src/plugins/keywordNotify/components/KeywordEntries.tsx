@@ -100,7 +100,7 @@ export function KeywordEntries() {
                         className={cl("ignoreCaseSwitch")} />
                     <Flex flexDirection="row">
                         <div style={{ flexGrow: 1 }}>
-                            <Heading tag="h5">{t(plugin.keywordNotify.listTypeSelector.whitelist)}</Heading>
+                            <Heading tag="h5" className={Margins.bottom8}>{t(plugin.keywordNotify.listTypeSelector.whitelist)}</Heading>
                         </div>
                         <Button onClick={() => {
                             values[i].whitelist.push("");
@@ -118,7 +118,7 @@ export function KeywordEntries() {
                     <div className={classes(Margins.top8, Margins.bottom8)} />
                     <Flex flexDirection="row">
                         <div style={{ flexGrow: 1 }}>
-                            <Heading tag="h5">{t(plugin.keywordNotify.listTypeSelector.blacklist)}</Heading>
+                            <Heading tag="h5" className={Margins.bottom8}>{t(plugin.keywordNotify.listTypeSelector.blacklist)}</Heading>
                         </div>
                         <Button onClick={() => {
                             values[i].blacklist.push("");

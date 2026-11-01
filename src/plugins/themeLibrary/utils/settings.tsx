@@ -9,7 +9,7 @@ import * as DataStore from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
-import { HeadingSecondary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { OpenExternalIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
 import { copyToClipboard } from "@utils/clipboard";
@@ -56,7 +56,7 @@ export const settings = definePluginSettings({
 
             return (
                 <section>
-                    <HeadingSecondary style={{ marginTop: 0, marginBottom: 8 }}>{t(plugin.themeLibrary.text.themelibraryAuth)}</HeadingSecondary>
+                    <Heading tag="h3" style={{ marginTop: 0, marginBottom: 8 }}>{t(plugin.themeLibrary.text.themelibraryAuth)}</Heading>
                     <div className={cl("button-grid")}>
                         <Button onClick={() => authorizeUser()}>
                             {t(plugin.themeLibrary.text.authorizeWithThemelibrary)}
@@ -68,7 +68,7 @@ export const settings = definePluginSettings({
                             {t(plugin.themeLibrary.text.deauthorizeThemelibrary)}
                         </Button>
                     </div>
-                    <HeadingSecondary style={{ marginTop: 8, marginBottom: 8 }}>{t(plugin.themeLibrary.text.themeRemoval)}</HeadingSecondary>
+                    <Heading tag="h3" style={{ marginTop: 8, marginBottom: 8 }}>{t(plugin.themeLibrary.text.themeRemoval)}</Heading>
                     <Paragraph style={{ marginTop: 0, marginBottom: 8 }}> {t(plugin.themeLibrary.text.allThemeAuthorsAre)}</Paragraph>
                     <div className={cl("button-grid")}>
                         <Button onClick={() => PlexcordNative.native.openExternal("https://github.com/Plexcord/themes.plexcord.club/issues/new?labels=removal&projects=&template=request_removal.yml&title=Theme+Removal")}>

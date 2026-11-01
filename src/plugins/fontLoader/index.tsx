@@ -13,7 +13,7 @@ import { definePluginSettings } from "@api/Settings";
 import { managedStyleRootNode } from "@api/Styles";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
-import { HeadingSecondary, HeadingTertiary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { debounce } from "@shared/debounce";
 import { PcDevs } from "@utils/constants";
@@ -123,7 +123,7 @@ function GoogleFontSearch({ onSelect }: { onSelect: (font: GoogleFontMetadata) =
 
     return (
         <section>
-            <HeadingSecondary>{t(plugin.fontLoader.modal.settings.title)}</HeadingSecondary>
+            <Heading tag="h3" className={Margins.bottom8}>{t(plugin.fontLoader.modal.settings.title)}</Heading>
             <Paragraph className={Margins.bottom8}>{t(plugin.fontLoader.modal.settings.description)}</Paragraph>
 
             {selectedFont && (
@@ -158,7 +158,7 @@ function GoogleFontSearch({ onSelect }: { onSelect: (font: GoogleFontMetadata) =
                             onClick={() => onSelect(font)}
                         >
                             <div className="pc-googlefonts-preview" style={{ fontFamily: font.family }}>
-                                <HeadingTertiary>{font.displayName}</HeadingTertiary>
+                                <Heading tag="h4">{font.displayName}</Heading>
                                 <Paragraph>{t(plugin.fontLoader.modal.settings.previewText)}</Paragraph>
                             </div>
                             {font.authors?.length && (

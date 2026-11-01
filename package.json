@@ -46,12 +46,12 @@
         "@streamparser/json": "catalog:",
         "@vap/core": "catalog:",
         "@vap/shiki": "catalog:",
+        "@plexcord/monaco-editor": "catalog:",
         "fflate": "catalog:",
         "gifenc": "catalog:",
         "gifuct-js": "catalog:",
         "idb": "catalog:",
         "jsqr": "catalog:",
-        "monaco-editor": "catalog:",
         "nanoid": "catalog:",
         "native-file-system-adapter": "catalog:",
         "yaml-js": "catalog:"

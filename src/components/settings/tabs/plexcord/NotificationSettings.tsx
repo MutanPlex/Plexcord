@@ -24,7 +24,7 @@ export function NotificationSection() {
         <>
             <Divider className={Margins.top20} />
 
-            <Heading>{t(settings.notifications.title)}</Heading>
+            <Heading className={Margins.bottom8}>{t(settings.notifications.title)}</Heading>
             <Paragraph className={Margins.bottom8}>{t(settings.notifications.description)}</Paragraph>
             <Flex gap="16px" className={Margins.top8}>
                 <Button onClick={openNotificationSettingsModal}>
@@ -55,10 +55,10 @@ function NotificationSettings() {
 
     return (
         <>
-            <Heading tag="h5">{t(settings.notifications.style.label)}</Heading>
+            <Heading tag="h5" className={Margins.bottom8}>{t(settings.notifications.style.label)}</Heading>
             {settingsState.useNative !== "never" && Notification?.permission === "denied" && (
                 <ErrorCard style={{ padding: "1em" }} className={Margins.bottom8}>
-                    <Heading>{t(settings.notifications.permissions.denied.title)}</Heading>
+                    <Heading className={Margins.bottom8}>{t(settings.notifications.permissions.denied.title)}</Heading>
                     <Paragraph>{t(settings.notifications.permissions.denied.label)}</Paragraph>
                 </ErrorCard>
             )}

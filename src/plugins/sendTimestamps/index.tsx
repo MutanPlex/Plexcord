@@ -93,7 +93,7 @@ function PickerModal(props: RenderModalProps) {
                 }}
             />
 
-            <Heading tag="h5">{t(plugin.sendTimestamps.modal.format)}</Heading>
+            <Heading tag="h5" className={Margins.bottom8}>{t(plugin.sendTimestamps.modal.format)}</Heading>
             <div className={cl("format-select")}>
                 <Select
                     options={

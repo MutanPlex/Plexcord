@@ -9,8 +9,9 @@ import { plugin, t } from "@api/i18n";
 import { InlineCode } from "@components/CodeBlock";
 import { ExpandableSection } from "@components/ExpandableCard";
 import { Flex } from "@components/Flex";
-import { HeadingSecondary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { InfoIcon } from "@components/Icons";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { Modal, openModal, TextArea, TextInput, useState } from "@webpack/common";
@@ -72,18 +73,18 @@ function CreateTagDialog({ initialValue, modalProps }: { initialValue: Tag; moda
         >
             <Flex flexDirection="column" gap={12}>
                 <section>
-                    <HeadingSecondary>{t(plugin.customCommands.text.name)}</HeadingSecondary>
+                    <Heading tag="h3" className={Margins.bottom8}>{t(plugin.customCommands.text.name)}</Heading>
                     <TextInput value={name} onChange={setName} placeholder="greet" />
                 </section>
 
                 <section>
-                    <HeadingSecondary>{t(plugin.customCommands.text.response)}</HeadingSecondary>
+                    <Heading tag="h3" className={Margins.bottom8}>{t(plugin.customCommands.text.response)}</Heading>
                     <TextArea value={message} onChange={setMessage} placeholder={EXAMPLE_RESPONSE} autosize />
                 </section>
 
                 {detectedArguments.length > 0 && (
                     <section>
-                        <HeadingSecondary>{t(plugin.customCommands.text.detectedArguments)}</HeadingSecondary>
+                        <Heading tag="h3" className={Margins.bottom8}>{t(plugin.customCommands.text.detectedArguments)}</Heading>
                         <Paragraph>
                             <ul>
                                 {detectedArguments.map(arg => (

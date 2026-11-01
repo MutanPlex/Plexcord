@@ -20,6 +20,7 @@
 import { plugin, t } from "@api/i18n";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { encrypt } from "@plugins/invisibleChat.desktop/index";
 import { insertTextIntoChatInputBox } from "@utils/discord";
@@ -63,20 +64,20 @@ function EncModal(props: RenderModalProps) {
                 }
             ]}
         >
-            <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.encrypt.secret)}</Heading>
+            <Heading className={Margins.bottom8} style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.encrypt.secret)}</Heading>
             <TextInput
                 onChange={(e: string) => {
                     setSecret(e);
                 }}
             />
-            <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.encrypt.cover)}</Heading>
+            <Heading className={Margins.bottom8} style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.encrypt.cover)}</Heading>
             <TextInput
                 disabled={noCover}
                 onChange={(e: string) => {
                     setCover(e);
                 }}
             />
-            <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.encrypt.password)}</Heading>
+            <Heading className={Margins.bottom8} style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.encrypt.password)}</Heading>
             <TextInput
                 style={{ marginBottom: "20px" }}
                 defaultValue={"password"}

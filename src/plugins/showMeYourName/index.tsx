@@ -14,7 +14,7 @@ import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings, migratePluginSetting } from "@api/Settings";
 import { TextButton } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Heading } from "@components/index";
+import { Heading } from "@components/Heading";
 import { GuildMember, Message, RenderModalProps, User } from "@plexcord/discord-types";
 import ircColors from "@plugins/ircColors";
 import mentionAvatars from "@plugins/mentionAvatars";

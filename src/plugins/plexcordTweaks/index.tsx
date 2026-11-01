@@ -17,7 +17,7 @@ import customRPC from "@plugins/customRPC";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy } from "@webpack";
-import { ApplicationCommandIndexStore, Menu, React, SafetyHubStore, SettingsRouter, useStateFromStores } from "@webpack/common";
+import { ApplicationCommandIndexStore, Constants, ExpressionPickerStore, Menu, React, RestAPI, SafetyHubStore, SettingsRouter, useStateFromStores } from "@webpack/common";
 import { ComponentType } from "react";
 
 const fetchSafetyHub: () => Promise<void> = findByCodeLazy("SAFETY_HUB_FETCH_START");
@@ -127,6 +127,13 @@ const settings = definePluginSettings({
         restartNeeded: true,
         default: false,
     },
+    gifPickerTyping: {
+        type: OptionType.BOOLEAN,
+        label: () => t(plugin.plexcordTweaks.option.gifPickerTyping.label),
+        description: () => t(plugin.plexcordTweaks.option.gifPickerTyping.description),
+        restartNeeded: true,
+        default: false,
+    },
     enableAutoCorrect: {
         label: () => t(plugin.plexcordTweaks.option.enableAutoCorrect.label),
         type: OptionType.BOOLEAN,
@@ -162,6 +169,7 @@ export default definePlugin({
         PcDevs.secp192k1,
         PcDevs.tie,
         PcDevs.itzmeshadow999,
+        PcDevs.luqenov,
         PcDevs.MutanPlex
     ],
     settings,
@@ -249,6 +257,14 @@ export default definePlugin({
                 replace: 'autoCorrect:this.props.autoCorrect??"off"'
             },
             predicate: () => settings.store.enableAutoCorrect
+        },
+        {
+            find: "renderHeaderContent()",
+            replacement: {
+                match: /(?<=function \i\(\i\)\{let\{ref:\i,\.\.\.\i\}=\i;)(?=\i\.useEffect\(\(\)=>\(\i\.persistSearch)/,
+                replace: "$self.useGifPickerTyping();"
+            },
+            predicate: () => settings.store.gifPickerTyping
         }
     ],
     commands: [
@@ -272,6 +288,19 @@ export default definePlugin({
     useAutoCorrect() {
         const { autoCorrect } = settings.use(["autoCorrect"]);
         return autoCorrect ? "on" : "off";
+    },
+    useGifPickerTyping() {
+        const channelId = ExpressionPickerStore.useExpressionPickerStore(state => state.activeChannelId);
+
+        React.useEffect(() => {
+            if (!channelId) return;
+
+            const type = () => RestAPI.post({ url: Constants.Endpoints.TYPING(channelId) });
+            type();
+
+            const interval = setInterval(type, 8000);
+            return () => clearInterval(interval);
+        }, [channelId]);
     },
     getPlatformUrl(platform, args) {
         switch (platform) {

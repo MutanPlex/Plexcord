@@ -9,6 +9,7 @@ import "./styles.css";
 
 import { plugin, t } from "@api/i18n";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import type { Channel } from "@plexcord/discord-types";
 import { classNameFactory } from "@utils/css";
 import type { PluginSettingComponentProps } from "@utils/types";
@@ -193,7 +194,7 @@ export function ReactEmojiSetting({ setValue }: PluginSettingComponentProps) {
 
     return (
         <div>
-            <Heading>{t(plugin.messageClickActions.emojiSetting.selectMain)}</Heading>
+            <Heading className={Margins.bottom8}>{t(plugin.messageClickActions.emojiSetting.selectMain)}</Heading>
             <div className={cl("primary-emoji-picker")}>
                 <EmojiPickerButton
                     onSelect={newValue => {
@@ -216,7 +217,7 @@ export function AdditionalReactEmojisSetting({ setValue }: PluginSettingComponen
 
     return (
         <div>
-            <Heading>{t(plugin.messageClickActions.emojiSetting.selectAdditional)}</Heading>
+            <Heading className={Margins.bottom8}>{t(plugin.messageClickActions.emojiSetting.selectAdditional)}</Heading>
             <div
                 style={{
                     marginTop: 8,

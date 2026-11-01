@@ -11,7 +11,7 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Card } from "@components/Card";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { HeadingTertiary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { Message } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
@@ -53,7 +53,7 @@ function RegexHelper() {
 
     return (
         <Card className={cl("regex")}>
-            <HeadingTertiary className={Margins.bottom8}>{t(plugin.blockKeywords.regexHelper.title)}</HeadingTertiary>
+            <Heading tag="h4" className={Margins.bottom8}>{t(plugin.blockKeywords.regexHelper.title)}</Heading>
             <TextInput
                 type="text"
                 placeholder={t(plugin.blockKeywords.regexHelper.placeholder)}

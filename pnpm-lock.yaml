@@ -176,6 +176,9 @@ catalogs:
     '@intrnl/xxhash64':
       specifier: ^0.1.2
       version: 0.1.2
+    '@plexcord/monaco-editor':
+      specifier: 0.57.0-beta.6
+      version: 0.57.0-beta.6
     '@song-spotlight/api':
       specifier: ^2.2.0
       version: 2.2.0
@@ -263,9 +266,6 @@ catalogs:
     moment:
       specifier: 2.30.1
       version: 2.30.1
-    monaco-editor:
-      specifier: ^0.57.0
-      version: 0.57.0
     nanoid:
       specifier: ^5.1.16
       version: 5.1.16
@@ -342,6 +342,9 @@ importers:
       '@intrnl/xxhash64':
         specifier: 'catalog:'
         version: 0.1.2
+      '@plexcord/monaco-editor':
+        specifier: 'catalog:'
+        version: 0.57.0-beta.6
       '@song-spotlight/api':
         specifier: 'catalog:'
         version: 2.2.0(typescript@6.0.3)
@@ -369,9 +372,6 @@ importers:
       jsqr:
         specifier: 'catalog:'
         version: 1.4.0
-      monaco-editor:
-        specifier: 'catalog:'
-        version: 0.57.0
       nanoid:
         specifier: 'catalog:'
         version: 5.1.16
@@ -856,6 +856,9 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
+  '@plexcord/monaco-editor@0.57.0-beta.6':
+    resolution: {integrity: sha512-CFd0tV2IbjTlzFot08DJFtZcVNY2unOGNvIdrz0Ywc4b1KY3Y5xnlbLWKcede6aLRczEASJDrWze8Cmln4w+Tg==}
+
   '@puppeteer/browsers@3.2.6':
     resolution: {integrity: sha512-MJP29gVoHznmqmwhH1tlZqzfeQ3aylTpSSa6WKZXtkwYUH02i9imBmWGTyZrbnAou5paX78SE4jMAUqnEPf8ug==}
     engines: {node: '>=22.12.0'}
@@ -927,9 +930,6 @@ packages:
 
   '@types/react@19.2.3':
     resolution: {integrity: sha512-k5dJVszUiNr1DSe8Cs+knKR6IrqhqdhpUwzqhkS8ecQTSf3THNtbfIp/umqHMpX2bv+9dkx3fwDv/86LcSfvSg==}
-
-  '@types/trusted-types@2.0.7':
-    resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
 
   '@types/yazl@3.3.1':
     resolution: {integrity: sha512-DIWfCKpsTp6hE5BDBHV3+fIL/bLUF9Bv13iDrWnMlmhQpH67buNvI291ZauQ1xcccxK3FqQ9honnXpq4R8NMuQ==}
@@ -1288,9 +1288,6 @@ packages:
   domhandler@5.0.3:
     resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==}
     engines: {node: '>= 4'}
-
-  dompurify@3.4.1:
-    resolution: {integrity: sha512-JahakDAIg1gyOm7dlgWSDjV4n7Ip2PKR55NIT6jrMfIgLFgWo81vdr1/QGqWtFNRqXP9UV71oVePtjqS2ebnPw==}
 
   domutils@3.2.2:
     resolution: {integrity: sha512-6kZKyUajlDuqlHKVX1w7gyslj9MPIXzIFiz/rGu35uC1wMi+kMhQwGhl4lt9unC9Vb9INnY9Z3/ZA3+FhASLaw==}
@@ -1941,11 +1938,6 @@ packages:
     resolution: {integrity: sha512-JvNw9Y81y33E+BEYPr0U7omo+U9AySnsMsEiXgwT6yqd31VQWTLNQqmT4ou5eqPFUrTfIDFta2wKhB1hyohtAQ==}
     engines: {node: 20 || >=22}
 
-  marked@14.0.0:
-    resolution: {integrity: sha512-uIj4+faQ+MgHgwUW1l2PsPglZLOLOT1uErt06dAPtx2kjteLAkbsd/0FiYg/MGS+i7ZKLb7w2WClxHkzOOuryQ==}
-    engines: {node: '>= 18'}
-    hasBin: true
-
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
     engines: {node: '>= 0.4'}
@@ -1998,9 +1990,6 @@ packages:
 
   moment@2.30.1:
     resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
-
-  monaco-editor@0.57.0:
-    resolution: {integrity: sha512-5BkI9KGoqrNvBGUe15/QlZq3OooZ8WLg1AxTpaqHRCP3HNpzPPZKE2EDz8M7c+VRmCeUw1Brp4cx/PWm3kI/5A==}
 
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
@@ -2870,6 +2859,8 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.1
 
+  '@plexcord/monaco-editor@0.57.0-beta.6': {}
+
   '@puppeteer/browsers@3.2.6(yauzl@2.10.0)':
     dependencies:
       modern-tar: 0.8.6
@@ -2937,9 +2928,6 @@ snapshots:
   '@types/react@19.2.3':
     dependencies:
       csstype: 3.2.3
-
-  '@types/trusted-types@2.0.7':
-    optional: true
 
   '@types/yazl@3.3.1':
     dependencies:
@@ -3364,10 +3352,6 @@ snapshots:
   domhandler@5.0.3:
     dependencies:
       domelementtype: 2.3.0
-
-  dompurify@3.4.1:
-    optionalDependencies:
-      '@types/trusted-types': 2.0.7
 
   domutils@3.2.2:
     dependencies:
@@ -4208,8 +4192,6 @@ snapshots:
 
   lru-cache@11.3.3: {}
 
-  marked@14.0.0: {}
-
   math-intrinsics@1.1.0: {}
 
   mathml-tag-names@4.0.0: {}
@@ -4250,11 +4232,6 @@ snapshots:
   modern-tar@0.8.6: {}
 
   moment@2.30.1: {}
-
-  monaco-editor@0.57.0:
-    dependencies:
-      dompurify: 3.4.1
-      marked: 14.0.0
 
   ms@2.1.3: {}
 

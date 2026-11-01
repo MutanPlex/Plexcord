@@ -12,7 +12,7 @@ import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { CheckedTextInput } from "@components/CheckedTextInput";
-import { HeadingTertiary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { DeleteIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
 import { AddonCard } from "@components/settings";
@@ -92,9 +92,9 @@ function UserPluginsTab() {
                     <Card
                         className={classes(cl("info-card"), "pc-warning-card")}
                     >
-                        <HeadingTertiary className={cl("install-title")}>
+                        <Heading tag="h4" className={cl("install-title")}>
                             {t(pluginI18n.userpluginInstaller.text.pluginUpdatesAvailable)}
-                        </HeadingTertiary>
+                        </Heading>
                         <Paragraph className={cl("install-desc")}>
                             {t(pluginI18n.userpluginInstaller.text.theFollowingPluginsAre)}
                             <ul className={cl("outdated-list")}>
@@ -112,9 +112,9 @@ function UserPluginsTab() {
                 )}
             </div>
             <Card className={cl("info-card")}>
-                <HeadingTertiary className={cl("install-title")}>
+                <Heading tag="h4" className={cl("install-title")}>
                     {t(pluginI18n.userpluginInstaller.text.installPlugin)}
-                </HeadingTertiary>
+                </Heading>
                 <Paragraph className={cl("install-desc")}>
                     {t(pluginI18n.userpluginInstaller.text.installHint)}
                 </Paragraph>

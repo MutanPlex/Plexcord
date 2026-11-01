@@ -7565,6 +7565,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownTitle: "알 수 없는 제목"
             }
         },
+        mutedServersActivityBadge: {
+            name: "MutedServersActivityBadge",
+            description: "서버가 음소거되어 있어도 서버 활동 배지를 계속 표시합니다."
+        },
         mutualGroupDMs: {
             name: "MutualGroupDMs",
             description: "프로필에 상호 그룹 DM을 표시합니다.",
@@ -9137,7 +9141,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         readAllNotificationsButton: {
             name: "ReadAllNotificationsButton",
             description: "버튼 클릭 한 번으로 모든 서버 알림을 읽어보세요!",
-            button: "모두 읽기"
+            button: "모두 읽기",
+            option: {
+                compact: {
+                    label: "컴팩트",
+                    description: "서버 목록 아이콘 대신 작은 텍스트 버튼을 표시합니다"
+                }
+            }
         },
         recentDMSwitcher: {
             name: "RecentDMSwitcher",
@@ -9741,10 +9751,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     friend: "온라인 친구 수만 가능",
                     server: "서버 수만",
                     both: "서버 및 온라인 친구 수 모두"
-                },
-                useCompact: {
-                    label: "컴팩트 모드 사용",
-                    description: "표시기가 텍스트로만 나타나도록 합니다."
                 }
             }
         },
@@ -13059,12 +13065,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 port: {
                     description: "연결할 포트",
                     label: "포트"
+                },
+                openConfig: {
+                    button: "Orbolay 설정 열기"
                 }
             },
             name: "OrbolayBridge",
             description: "Orbolay를 Discord에 연결하는 브리지 플러그인",
             toast: {
-                connectedToOrbolayServer: "Orbolay 서버에 연결됨"
+                connectedToOrbolayServer: "Orbolay 서버에 연결됨",
+                notConnected: "Orbolay에 연결되지 않음"
             }
         },
         plexcordHelper: {
@@ -13133,6 +13143,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showAllBadges: {
                     label: "모든 배지 표시",
                     description: "나머지를 +n으로 접지 않고 모든 프로필 배지를 표시합니다"
+                },
+                gifPickerTyping: {
+                    label: "GIF 선택기 입력 중",
+                    description: "GIF 선택기가 열려 있는 동안 입력 중으로 표시합니다"
                 }
             },
             text: {

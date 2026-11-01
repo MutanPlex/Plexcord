@@ -9,6 +9,7 @@ import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { copyToClipboard } from "@utils/clipboard";
 import { Modal, useEffect, useRef, useState } from "@webpack/common";
@@ -124,7 +125,7 @@ export function TranscriptionModal(props: { modalProps: RenderModalProps, src: s
             <div className={cl("content")}>
                 {error ? (
                     <Flex flexDirection="column" alignItems="center" gap={12} style={{ padding: "32px 16px" }}>
-                        <Heading tag="h3" style={{ color: "var(--red-360)" }}>{t(plugin.voiceMessageTranscriber.text.transcriptionFailed)}</Heading>
+                        <Heading tag="h3" className={Margins.bottom8} style={{ color: "var(--red-360)" }}>{t(plugin.voiceMessageTranscriber.text.transcriptionFailed)}</Heading>
                         <BaseText size="sm" color="text-muted" style={{ textAlign: "center" }}>
                             {error}
                         </BaseText>
@@ -135,7 +136,7 @@ export function TranscriptionModal(props: { modalProps: RenderModalProps, src: s
                     </div>
                 ) : (
                     <Flex flexDirection="column" alignItems="center" justifyContent="center" gap={16} style={{ height: "200px" }}>
-                        <Heading tag="h3">
+                        <Heading tag="h3" className={Margins.bottom8}>
                             {status === "downloading_audio" && t(plugin.voiceMessageTranscriber.text.downloadingAudio)}
                             {status === "processing_audio" && t(plugin.voiceMessageTranscriber.text.processingAudio)}
                             {status === "loading" && t(plugin.voiceMessageTranscriber.text.loadingModel)}

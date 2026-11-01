@@ -7,7 +7,8 @@
 
 import { plugin, t } from "@api/i18n";
 import { getUserSettingLazy } from "@api/UserSettings";
-import { HeadingSecondary } from "@components/Heading";
+import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { VoiceState } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
@@ -76,19 +77,19 @@ export default definePlugin({
 
     settingsAboutComponent: () => (
         <>
-            <HeadingSecondary>{t(plugin.instantScreenshare.modal.linux.title)}</HeadingSecondary>
+            <Heading tag="h3" className={Margins.bottom8}>{t(plugin.instantScreenshare.modal.linux.title)}</Heading>
             <Paragraph>
                 {t(plugin.instantScreenshare.modal.linux.body)}
                 <br />
                 {t(plugin.instantScreenshare.modal.linux.bodyTwo)}
             </Paragraph>
             <br />
-            <HeadingSecondary>{t(plugin.instantScreenshare.modal.videoDevices.title)}</HeadingSecondary>
+            <Heading tag="h3" className={Margins.bottom8}>{t(plugin.instantScreenshare.modal.videoDevices.title)}</Heading>
             <Paragraph>
                 {t(plugin.instantScreenshare.modal.videoDevices.body)}
             </Paragraph>
             <br />
-            <HeadingSecondary>{t(plugin.instantScreenshare.modal.regardingSound.title)}</HeadingSecondary>
+            <Heading tag="h3" className={Margins.bottom8}>{t(plugin.instantScreenshare.modal.regardingSound.title)}</Heading>
             <Paragraph>
                 {t(plugin.instantScreenshare.modal.regardingSound.body)}
             </Paragraph>

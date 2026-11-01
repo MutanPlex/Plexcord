@@ -137,7 +137,7 @@ function IdsListComponent(props: { setValue: (value: string) => void; }) {
 
     return (
         <section>
-            <Heading tag="h3">{t(plugin.ignoreActivities.modal.filter.title)}</Heading>
+            <Heading tag="h3" className={Margins.bottom8}>{t(plugin.ignoreActivities.modal.filter.title)}</Heading>
             <Paragraph className={Margins.bottom8}>{t(plugin.ignoreActivities.modal.filter.description)}</Paragraph>
             <TextArea
                 type="text"

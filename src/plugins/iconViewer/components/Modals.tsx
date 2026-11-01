@@ -9,7 +9,8 @@ import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { CodeBlock } from "@components/CodeBlock";
 import { Flex } from "@components/Flex";
-import { HeadingSecondary } from "@components/Heading";
+import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { TooltipContainer } from "@components/TooltipContainer";
 import { Icon, RenderModalProps } from "@plexcord/discord-types";
@@ -278,7 +279,7 @@ export function openIconModal(iconName: string, Icon: Icon) {
 export function SettingsAbout() {
     return (
         <>
-            <HeadingSecondary>{t(plugin.iconViewer.about.title)}</HeadingSecondary>
+            <Heading tag="h3" className={Margins.bottom8}>{t(plugin.iconViewer.about.title)}</Heading>
             <Paragraph>
                 <ul className="pc-ic-unordered-list">
                     <li>{t(plugin.iconViewer.about.preview)}</li>
@@ -289,7 +290,7 @@ export function SettingsAbout() {
                     <li>{t(plugin.iconViewer.about.list.search)}</li>
                 </ul>
             </Paragraph>
-            <HeadingSecondary>{t(plugin.iconViewer.about.list.special)}</HeadingSecondary>
+            <Heading tag="h3" className={Margins.bottom8}>{t(plugin.iconViewer.about.list.special)}</Heading>
             <Paragraph>
                 <ul className="pc-ic-unordered-list">
                     <li>krystalskullofficial._.</li>

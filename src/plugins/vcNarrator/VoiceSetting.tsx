@@ -7,6 +7,7 @@
 
 import { getLanguageName, plugin, t } from "@api/i18n";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { SearchableSelect, useMemo, useState } from "@webpack/common";
 
@@ -85,7 +86,7 @@ function ComplexPicker({ voice, voices }: PickerProps) {
 
     return (
         <>
-            <Heading>{t(plugin.vcNarrator.modal.languageTitle)}</Heading>
+            <Heading className={Margins.bottom8}>{t(plugin.vcNarrator.modal.languageTitle)}</Heading>
             <SearchableSelect
                 placeholder={t(plugin.vcNarrator.modal.language)}
                 options={languageOptions}
@@ -94,7 +95,7 @@ function ComplexPicker({ voice, voices }: PickerProps) {
                 maxVisibleItems={5}
                 closeOnSelect
             />
-            <Heading>{t(plugin.vcNarrator.modal.voiceTitle)}</Heading>
+            <Heading className={Margins.bottom8}>{t(plugin.vcNarrator.modal.voiceTitle)}</Heading>
             <SimplePicker
                 voice={voice}
                 voices={voicesForLanguage}
@@ -120,7 +121,7 @@ function VoiceSetting() {
 export function VoiceSettingSection() {
     return (
         <section>
-            <Heading>{t(plugin.vcNarrator.modal.voiceTitle)}</Heading>
+            <Heading className={Margins.bottom8}>{t(plugin.vcNarrator.modal.voiceTitle)}</Heading>
             <VoiceSetting />
         </section>
     );

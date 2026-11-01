@@ -46,6 +46,7 @@ declare global {
     export var IS_PLEXTRON: boolean;
     export var VERSION: string;
     export var BUILD_TIMESTAMP: number;
+    export var DESKTOP_MONACO_EDITOR_URL: string;
 
     export var PlexcordNative: typeof import("./PlexcordNative").default;
     export var Plexcord: typeof import("./Plexcord");

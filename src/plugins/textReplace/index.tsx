@@ -24,7 +24,8 @@ import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { ExpandableSection } from "@components/ExpandableCard";
 import { Flex } from "@components/Flex";
-import { HeadingSecondary } from "@components/Heading";
+import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { Span } from "@components/Span";
 import { TooltipContainer } from "@components/TooltipContainer";
@@ -113,7 +114,7 @@ const settings = definePluginSettings({
 function TextReplaceImportExport() {
     return (
         <div>
-            <HeadingSecondary>{t(plugin.textReplace.importExport.title)}</HeadingSecondary>
+            <Heading tag="h3" className={Margins.bottom8}>{t(plugin.textReplace.importExport.title)}</Heading>
             <Paragraph>{t(plugin.textReplace.importExport.description)}</Paragraph>
             <Flex className={cl("import-export-buttons")}>
                 <Button onClick={exportRules}>{t(plugin.textReplace.importExport.export)}</Button>
@@ -296,7 +297,7 @@ function TextReplace({ title, description, rulesArray, isRegex = false }: TextRe
     return (
         <>
             <div>
-                <HeadingSecondary>{title}</HeadingSecondary>
+                <Heading className={Margins.bottom8}>{title}</Heading>
                 <Paragraph>{description}</Paragraph>
                 <div className={cl("search-input")}>
                     <TextInput
@@ -413,7 +414,7 @@ function TextReplaceTesting() {
     const [value, setValue] = useState("");
     return (
         <div>
-            <HeadingSecondary>{t(plugin.textReplace.modal.title)}</HeadingSecondary>
+            <Heading tag="h3" className={Margins.bottom8}>{t(plugin.textReplace.modal.title)}</Heading>
             <Flex flexDirection="column" gap={6}>
                 <TextInput placeholder={t(plugin.textReplace.modal.type)} onChange={setValue} />
                 <TextInput placeholder={t(plugin.textReplace.modal.applied)} editable={false} value={applyRules(value, "allMessages")} />

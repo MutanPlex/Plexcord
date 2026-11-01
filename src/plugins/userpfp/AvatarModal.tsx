@@ -122,7 +122,7 @@ export function SetAvatarModal({ userId, modalProps }: { userId: string; modalPr
 
                 {/* URL input */}
                 <section className={Margins.bottom8}>
-                    <Heading tag="h3">{t(plugin.userPFP.text.enterPngGifUrl)}</Heading>
+                    <Heading tag="h3" className={Margins.bottom8}>{t(plugin.userPFP.text.enterPngGifUrl)}</Heading>
                     <TextInput
                         placeholder="https://example.com/image.png"
                         value={url.startsWith("data:") ? t(plugin.userPFP.text.uploadedFile) : url}

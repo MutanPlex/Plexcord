@@ -9,6 +9,7 @@ import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import type { RenderModalProps } from "@plexcord/discord-types";
 import { Checkbox, FluxDispatcher, MessageActions, Modal, openModal, PendingReplyStore, showToast, useEffect, useState } from "@webpack/common";
@@ -127,7 +128,7 @@ function UploadClipFileModal({ modalProps, channelId, clip }: { modalProps: Rend
         >
             <Flex flexDirection="column" gap={12}>
                 <section>
-                    <Heading tag="h5">{t(plugin.clipUpload.text.file)}</Heading>
+                    <Heading tag="h5" className={Margins.bottom8}>{t(plugin.clipUpload.text.file)}</Heading>
                     <Flex alignItems="center" gap={8}>
                         <Button onClick={() => void chooseClipFile()} disabled={uploading}>
                             {t(plugin.clipUpload.text.selectFile)}

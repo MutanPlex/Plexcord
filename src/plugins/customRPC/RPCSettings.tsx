@@ -13,6 +13,7 @@ import { isPluginEnabled } from "@api/PluginManager";
 import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { resolveError } from "@components/settings/tabs/plugins/components/Common";
 import { ActivityType } from "@plexcord/discord-types/enums";
@@ -129,7 +130,7 @@ function SingleSetting<T>({ settingsKey, label, disabled, isValid, transform }: 
 
     return (
         <div className={cl("single", { disabled })}>
-            <Heading>{label}</Heading>
+            <Heading className={Margins.bottom8}>{label}</Heading>
             <TextInput
                 type="text"
                 placeholder={t(plugin.customRPC.placeholder)}
@@ -145,7 +146,7 @@ function SingleSetting<T>({ settingsKey, label, disabled, isValid, transform }: 
 function SelectSetting<T>({ settingsKey, label, options, disabled }: SelectOption<T>) {
     return (
         <div className={cl("single", { disabled })}>
-            <Heading>{label}</Heading>
+            <Heading className={Margins.bottom8}>{label}</Heading>
             <Select
                 placeholder={t(plugin.customRPC.select)}
                 options={options}
@@ -212,7 +213,7 @@ function PresetSettings({ onLoad }: { onLoad(): void; }) {
 
     return (
         <div className={cl("presets")}>
-            <Heading tag="h5">{t(plugin.customRPC.text.presets)}</Heading>
+            <Heading tag="h5" className={Margins.bottom8}>{t(plugin.customRPC.text.presets)}</Heading>
             <div className={cl("preset-create")}>
                 <TextInput
                     type="text"

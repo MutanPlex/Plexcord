@@ -10,6 +10,7 @@ import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Notice } from "@components/Notice";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsSection } from "@components/settings/tabs/plugins/components/Common";
@@ -34,7 +35,7 @@ export function toggleHoverControls(value: boolean) {
 function InstallInstructions() {
     return (
         <section>
-            <Heading>{t(plugin.musicControls.modal.install.title)}</Heading>
+            <Heading className={Margins.bottom8}>{t(plugin.musicControls.modal.install.title)}</Heading>
             <Paragraph>
                 {t(plugin.musicControls.modal.install.install, {
                     link: <MaskedLink href="https://github.com/Inrixia/TidaLuna#installation">{t(plugin.musicControls.modal.install.tidaluna)}</MaskedLink>
@@ -97,7 +98,7 @@ export const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         component: () => (
             <section>
-                <Heading>{t(plugin.musicControls.option.spotifySectionTitle.label)}</Heading>
+                <Heading className={Margins.bottom8}>{t(plugin.musicControls.option.spotifySectionTitle.label)}</Heading>
             </section>
         )
     },
@@ -130,7 +131,7 @@ export const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         component: () => (
             <section>
-                <Heading>{t(plugin.musicControls.option.tidalSectionTitle.label)}</Heading>
+                <Heading className={Margins.bottom8}>{t(plugin.musicControls.option.tidalSectionTitle.label)}</Heading>
             </section>
         )
     },

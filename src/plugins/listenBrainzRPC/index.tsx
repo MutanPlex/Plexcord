@@ -9,6 +9,7 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { Activity, ActivityAssets, ActivityButton } from "@plexcord/discord-types";
 import { ActivityFlags, ActivityType } from "@plexcord/discord-types/enums";
@@ -183,7 +184,7 @@ export default definePlugin({
 
     settingsAboutComponent: () => (
         <>
-            <Heading>{t(plugin.listenBrainzRPC.about.title)}</Heading>
+            <Heading className={Margins.bottom8}>{t(plugin.listenBrainzRPC.about.title)}</Heading>
             <Paragraph>
                 {t(plugin.listenBrainzRPC.about.description, {
                     link: <Link href="https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting#Provide_meaningful_User-Agent_strings">

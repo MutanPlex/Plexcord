@@ -8,6 +8,7 @@
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { ChannelTabsPreview } from "@plugins/channelTabs/components/ChannelTabsContainer";
 import { KeybindSettings } from "@plugins/channelTabs/components/KeybindSettings";
@@ -90,7 +91,7 @@ function AnimationSettings(): JSX.Element {
 
     return (
         <section>
-            <Heading>{t(plugin.channelTabs.animation.title)}</Heading>
+            <Heading className={Margins.bottom8}>{t(plugin.channelTabs.animation.title)}</Heading>
             <Paragraph>
                 {t(plugin.channelTabs.animation.description)}
             </Paragraph>

@@ -25,7 +25,7 @@ export function openDonorModal() {
                 {...props}
                 title={
                     <Heading
-                        tag="h2"
+                        tag="h2" className={Margins.bottom20}
                         style={{
                             width: "100%",
                             textAlign: "center",

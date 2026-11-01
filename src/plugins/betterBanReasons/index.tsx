@@ -12,6 +12,7 @@ import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { DeleteIcon, PlusIcon } from "@components/Icons";
+import { Margins } from "@components/margins";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
@@ -53,7 +54,7 @@ function ReasonsComponent() {
 
     return (
         <section>
-            <Heading>{t(plugin.betterBanReasons.title)}</Heading>
+            <Heading className={Margins.bottom8}>{t(plugin.betterBanReasons.title)}</Heading>
             {reasons.map((r, i) => (
                 <div key={i} className={cl("reason-wrapper")}>
                     <TextInput

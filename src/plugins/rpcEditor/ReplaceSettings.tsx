@@ -9,7 +9,7 @@ import { plugin, t } from "@api/i18n";
 import { Card } from "@components/Card";
 import { CheckedTextInput } from "@components/CheckedTextInput";
 import { FormSwitch } from "@components/FormSwitch";
-import { Heading, HeadingSecondary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { Activity } from "@plexcord/discord-types";
 import { ActivityFlags, ActivityType } from "@plexcord/discord-types/enums";
@@ -34,7 +34,7 @@ export function ReplaceTutorial() {
     const activities: Activity[] = PresenceStore.getActivities(UserStore.getCurrentUser().id);
     return (
         <>
-            <HeadingSecondary>{t(plugin.rpcEditor.modal.tutorial.title)}</HeadingSecondary>
+            <Heading tag="h3" className={Margins.bottom8}>{t(plugin.rpcEditor.modal.tutorial.title)}</Heading>
             {
                 activities.length === 0
                     ? <Paragraph>{t(plugin.rpcEditor.modal.tutorial.noRunning)}</Paragraph>
@@ -45,7 +45,7 @@ export function ReplaceTutorial() {
                             : null;
                     })
             }
-            <HeadingSecondary className={Margins.top8}>{t(plugin.rpcEditor.modal.tutorial.available)}</HeadingSecondary>
+            <Heading tag="h3" className={Margins.top8}>{t(plugin.rpcEditor.modal.tutorial.available)}</Heading>
             <Paragraph>
                 {t(plugin.rpcEditor.modal.tutorial.variableText)}
                 <pre style={{ fontFamily: "monospace" }}>
@@ -54,7 +54,7 @@ export function ReplaceTutorial() {
                     :large_image:, :large_text:, :small_image:, :small_text:
                 </pre>
             </Paragraph>
-            <HeadingSecondary className={Margins.top8}>{t(plugin.rpcEditor.modal.tutorial.more)}</HeadingSecondary>
+            <Heading tag="h3" className={Margins.top8}>{t(plugin.rpcEditor.modal.tutorial.more)}</Heading>
             <Paragraph>
                 {t(plugin.rpcEditor.modal.tutorial.details.leave)}
                 <br />
@@ -92,7 +92,7 @@ export function ReplaceSettings({ appIds, update, save }: SettingsProps) {
                                     }}
                                     className={Margins.bottom8}
                                     hideBorder={true}
-                                /> : <HeadingSecondary>{t(plugin.rpcEditor.modal.settings.addNewApp)}</HeadingSecondary>
+                                /> : <Heading tag="h3" className={Margins.bottom8}>{t(plugin.rpcEditor.modal.settings.addNewApp)}</Heading>
                         }
                         <Heading className={`${Margins.top8} ${Margins.bottom8}`}>{t(plugin.rpcEditor.modal.settings.appId)}</Heading>
                         <CheckedTextInput

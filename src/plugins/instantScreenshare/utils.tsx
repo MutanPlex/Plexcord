@@ -163,7 +163,7 @@ function ScreenSetting() {
 function SettingSection() {
     return (
         <section>
-            <Heading>{t(plugin.instantScreenshare.option.streamMedia.label)}</Heading>
+            <Heading className={Margins.bottom8}>{t(plugin.instantScreenshare.option.streamMedia.label)}</Heading>
             <Paragraph className={Margins.bottom20}>{t(plugin.instantScreenshare.option.streamMedia.description)}</Paragraph>
             <ScreenSetting />
         </section>

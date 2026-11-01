@@ -113,7 +113,7 @@ function PatchHelper() {
             <Heading className={Margins.bottom8}>{t(patchHelper.title)}</Heading>
             <Paragraph className={Margins.bottom16}>{t(patchHelper.description)}</Paragraph>
 
-            <Heading>{t(patchHelper.fullPatch.label)}</Heading>
+            <Heading className={Margins.bottom8}>{t(patchHelper.fullPatch.label)}</Heading>
             <Paragraph className={Margins.bottom8}>
                 {t(patchHelper.fullPatch.description)}
             </Paragraph>
@@ -125,7 +125,7 @@ function PatchHelper() {
             />
 
             <div className={Margins.top20}>
-                <Heading>{t(patchHelper.find)}</Heading>
+                <Heading className={Margins.bottom8}>{t(patchHelper.find)}</Heading>
                 <TextInput
                     type="text"
                     value={find}
@@ -135,7 +135,7 @@ function PatchHelper() {
             </div>
 
             <div className={Margins.top20}>
-                <Heading>{t(patchHelper.match)}</Heading>
+                <Heading className={Margins.bottom8}>{t(patchHelper.match)}</Heading>
                 <TextInput
                     type="text"
                     value={match}

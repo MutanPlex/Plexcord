@@ -310,7 +310,7 @@ function HistoryHotkeyRecorder() {
             className={cl("key-recorder-container")}
         >
             <div>
-                <Heading>{t(plugin.uselessInfo.option.historyHotkey.label)}</Heading>
+                <Heading className={Margins.bottom8}>{t(plugin.uselessInfo.option.historyHotkey.label)}</Heading>
             </div>
             <div
                 onClick={() => recordKeybind(setIsRecording)}
@@ -380,7 +380,7 @@ function RandomFactHotkeyRecorder() {
             className={cl("key-recorder-container")}
         >
             <div>
-                <Heading>{t(plugin.uselessInfo.option.randomFactHotkey.label)}</Heading>
+                <Heading className={Margins.bottom8}>{t(plugin.uselessInfo.option.randomFactHotkey.label)}</Heading>
             </div>
             <div
                 onClick={() => recordKeybind(setIsRecording)}
@@ -469,7 +469,7 @@ export function UselessModal({ modalProps }) {
                     )}
                 </section>
                 <div ref={settingsRef} className={cl("settings")}>
-                    <Heading>{t(plugin.uselessInfo.option.delay.label)}</Heading>
+                    <Heading className={Margins.bottom8}>{t(plugin.uselessInfo.option.delay.label)}</Heading>
                     <Slider
                         markers={makeRange(0, 90, 5)}
                         initialValue={settings.store.delay}
@@ -497,7 +497,7 @@ export function UselessModal({ modalProps }) {
                     </div>
                     {!sameFact && (
                         <>
-                            <Heading>{t(plugin.uselessInfo.option.lastNFacts.label)}</Heading>
+                            <Heading className={Margins.bottom8}>{t(plugin.uselessInfo.option.lastNFacts.label)}</Heading>
                             <Slider
                                 className={Margins.bottom16}
                                 markers={makeRange(0, 50, 5)}

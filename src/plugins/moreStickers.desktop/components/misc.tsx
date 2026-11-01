@@ -13,6 +13,7 @@ import { CheckedTextInput } from "@components/CheckedTextInput";
 import { Divider } from "@components/Divider";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { convert as convertLineEP, getIdFromUrl as getLineEmojiPackIdFromUrl, getStickerPackById as getLineEmojiPackById, isLineEmojiPackHtml, parseHtml as getLineEPFromHtml } from "@plugins/moreStickers.desktop/lineEmojis";
 import { convert as convertLineSP, getIdFromUrl as getLineStickerPackIdFromUrl, getStickerPackById as getLineStickerPackById, isLineStickerPackHtml, parseHtml as getLineSPFromHtml } from "@plugins/moreStickers.desktop/lineStickers";
@@ -131,7 +132,7 @@ export const Packs = () => {
 
             {tab === SettingsTabsKey.ADD_STICKER_PACK_URL &&
                 <div className="section">
-                    <Heading>{t(plugin.moreStickers.text.addStickerPackFrom)}</Heading>
+                    <Heading className={Margins.bottom8}>{t(plugin.moreStickers.text.addStickerPackFrom)}</Heading>
                     <Paragraph>
                         <p>
                             {t(plugin.moreStickers.text.lineOnly)} <br />
@@ -233,7 +234,7 @@ export const Packs = () => {
             }
             {tab === SettingsTabsKey.ADD_STICKER_PACK_HTML &&
                 <div className="section">
-                    <Heading>{t(plugin.moreStickers.text.addStickerPackFrom2)}</Heading>
+                    <Heading className={Margins.bottom8}>{t(plugin.moreStickers.text.addStickerPackFrom2)}</Heading>
                     <Paragraph>
                         <p>
                             {t(plugin.moreStickers.text.htmlFallbackHelp)}<br />
@@ -305,7 +306,7 @@ export const Packs = () => {
             {
                 tab === SettingsTabsKey.ADD_STICKER_PACK_FILE &&
                 <div className="section">
-                    <Heading>{t(plugin.moreStickers.text.addStickerPackFrom3)}</Heading>
+                    <Heading className={Margins.bottom8}>{t(plugin.moreStickers.text.addStickerPackFrom3)}</Heading>
 
                     <Button
                         size="small"
@@ -355,7 +356,7 @@ export const Packs = () => {
             {
                 tab === SettingsTabsKey.MISC &&
                 <div className="section">
-                    <Heading>{t(plugin.moreStickers.text.miscTools)}</Heading>
+                    <Heading className={Margins.bottom8}>{t(plugin.moreStickers.text.miscTools)}</Heading>
 
                     <Flex flexDirection="row" style={{
                         alignItems: "center",
@@ -403,7 +404,7 @@ export const Packs = () => {
                 marginTop: "8px",
                 marginBottom: "8px"
             }} />
-            <Heading>{t(plugin.moreStickers.text.stickersManagement)}</Heading>
+            <Heading className={Margins.bottom8}>{t(plugin.moreStickers.text.stickersManagement)}</Heading>
 
             <div className="section">
                 <div style={{

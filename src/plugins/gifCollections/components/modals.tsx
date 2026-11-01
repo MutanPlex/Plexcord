@@ -9,6 +9,7 @@ import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { classes } from "@utils/misc";
@@ -92,7 +93,7 @@ function MoveToCollectionModal({ props, gifId }: { props: RenderModalProps; gifI
                 { text: t(plugin.gifCollections.context.collection.close), variant: "secondary", onClick: props.onClose }
             ]}
         >
-            <Heading style={{ marginBottom: "10px" }}>{t(plugin.gifCollections.context.collection.select)}</Heading>
+            <Heading className={Margins.bottom8} style={{ marginBottom: "10px" }}>{t(plugin.gifCollections.context.collection.select)}</Heading>
             <div className={cl("buttons")}>
                 {cache_collections
                     .filter(col => col.name !== getItemCollectionNameFromId(gifId))

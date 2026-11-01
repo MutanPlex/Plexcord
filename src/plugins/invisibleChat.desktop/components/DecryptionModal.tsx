@@ -19,6 +19,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { RenderModalProps } from "@plexcord/discord-types";
 import invisibleChatDesktop, { decrypt } from "@plugins/invisibleChat.desktop/index";
 import { Modal, openModal, React, TextInput } from "@webpack/common";
@@ -52,9 +53,9 @@ export function DecModal(props: RenderModalProps & { message: any; }) {
                 }
             ]}
         >
-            <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.decrypt.with)}</Heading>
+            <Heading className={Margins.bottom8} style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.decrypt.with)}</Heading>
             <TextInput defaultValue={encryptedMessage} disabled={true}></TextInput>
-            <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.decrypt.password)}</Heading>
+            <Heading className={Margins.bottom8} style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.decrypt.password)}</Heading>
             <TextInput
                 style={{ marginBottom: "20px" }}
                 onChange={setPassword}

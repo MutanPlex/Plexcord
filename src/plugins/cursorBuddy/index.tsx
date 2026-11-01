@@ -12,6 +12,7 @@ import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings, migratePluginSettings } from "@api/Settings";
 import { Divider } from "@components/Divider";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
@@ -120,7 +121,7 @@ const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         component: () => (
             <div>
-                <Heading style={{ fontSize: "1.6em", marginTop: "10px" }}>{t(plugin.cursorBuddy.option.onekoSection.label)}</Heading>
+                <Heading className={Margins.bottom8} style={{ fontSize: "1.6em", marginTop: "10px" }}>{t(plugin.cursorBuddy.option.onekoSection.label)}</Heading>
                 <Divider style={{ marginBottom: "-10px" }}></Divider>
             </div>
         ),
@@ -150,7 +151,7 @@ const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         component: () => (
             <div>
-                <Heading style={{ fontSize: "1.6em", marginTop: "10px" }}>{t(plugin.cursorBuddy.option.fathorseSection.label)}</Heading>
+                <Heading className={Margins.bottom8} style={{ fontSize: "1.6em", marginTop: "10px" }}>{t(plugin.cursorBuddy.option.fathorseSection.label)}</Heading>
                 <Divider style={{ marginBottom: "-10px" }}></Divider>
             </div>
         ),

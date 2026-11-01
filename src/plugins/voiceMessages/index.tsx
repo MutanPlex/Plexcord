@@ -249,7 +249,7 @@ function VoiceMessageModal({ modalProps }: { modalProps: RenderModalProps; }) {
                 </Button>
             </div>
 
-            <Heading tag="h5">{t(plugin.voiceMessages.modal.preview)}</Heading>
+            <Heading tag="h5" className={Margins.bottom8}>{t(plugin.voiceMessages.modal.preview)}</Heading>
             {metaError
                 ? <Paragraph className={cl("error")}>{t(plugin.voiceMessages.modal.failed)} {metaError.message}</Paragraph>
                 : (

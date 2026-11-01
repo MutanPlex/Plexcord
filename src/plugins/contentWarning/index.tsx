@@ -12,7 +12,7 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
-import { HeadingTertiary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { DeleteIcon } from "@components/Icons";
 import { PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
@@ -131,7 +131,7 @@ function FlaggedWords() {
     });
     return (
         <>
-            <HeadingTertiary>{t(plugin.contentWarning.option.flagged.flagged)}</HeadingTertiary>
+            <Heading tag="h4">{t(plugin.contentWarning.option.flagged.flagged)}</Heading>
             {inputs}
         </>
     );

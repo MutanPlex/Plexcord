@@ -7,7 +7,7 @@
 
 import { set } from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
-import { HeadingSecondary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { classNameFactory } from "@utils/css";
 import { Margins } from "@utils/margins";
@@ -65,9 +65,9 @@ export function SetColorModal({ id, modalProps }: { id: string, modalProps: Rend
         >
             <div onKeyDown={handleKey} className={cl("modal-content")}>
                 <section className={Margins.bottom16}>
-                    <HeadingSecondary>
+                    <Heading tag="h3" className={Margins.bottom8}>
                         {t(plugin.customUserColors.modal.pick)}
-                    </HeadingSecondary>
+                    </Heading>
                     <ColorPicker
                         color={colorPickerColor}
                         onChange={setUserColor}

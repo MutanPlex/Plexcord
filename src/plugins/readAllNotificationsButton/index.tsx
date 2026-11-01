@@ -20,12 +20,23 @@
 import "./style.css";
 
 import { plugin, t } from "@api/i18n";
-import { addServerListElement, removeServerListElement, ServerListRenderPosition } from "@api/ServerList";
+import { addServerListElement, removeServerListElement, ServerListItem, ServerListRenderPosition } from "@api/ServerList";
+import { definePluginSettings } from "@api/Settings";
 import { TextButton } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { DoubleCheckmarkIcon } from "@components/Icons";
 import { Devs } from "@utils/constants";
-import definePlugin from "@utils/types";
+import definePlugin, { OptionType } from "@utils/types";
 import { ActiveJoinedThreadsStore, FluxDispatcher, GuildChannelStore, GuildStore, React, ReadStateStore } from "@webpack/common";
+
+const settings = definePluginSettings({
+    compact: {
+        type: OptionType.BOOLEAN,
+        default: false,
+        label: () => t(plugin.readAllNotificationsButton.option.compact.label),
+        description: () => t(plugin.readAllNotificationsButton.option.compact.description)
+    }
+});
 
 function onClick() {
     const channels: Array<any> = [];
@@ -55,15 +66,26 @@ function onClick() {
     });
 }
 
-const ReadAllButton = () => (
-    <TextButton
-        variant="secondary"
-        onClick={onClick}
-        className="pc-ranb-button"
-    >
-        {t(plugin.readAllNotificationsButton.button)}
-    </TextButton>
-);
+function ReadAllButton() {
+    const { compact } = settings.use(["compact"]);
+
+    return compact ? (
+        <TextButton
+            variant="secondary"
+            onClick={onClick}
+            className="pc-ranb-button"
+        >
+            {t(plugin.readAllNotificationsButton.button)}
+        </TextButton>
+    ) : (
+        <ServerListItem
+            id="pc-ranb-button-container"
+            icon={DoubleCheckmarkIcon}
+            tooltip={t(plugin.readAllNotificationsButton.button)}
+            onClick={onClick}
+        />
+    );
+}
 
 export default definePlugin({
     name: "ReadAllNotificationsButton",
@@ -71,6 +93,7 @@ export default definePlugin({
     authors: [Devs.kemo],
     tags: ["notifications", "servers", "utility"],
     dependencies: ["ServerListAPI"],
+    settings,
 
     renderReadAllButton: ErrorBoundary.wrap(ReadAllButton, { noop: true }),
 

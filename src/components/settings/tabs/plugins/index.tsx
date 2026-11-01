@@ -29,7 +29,7 @@ import { Card } from "@components/Card";
 import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
-import { HeadingTertiary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings";
 import { ChangeList } from "@utils/ChangeList";
@@ -97,7 +97,7 @@ function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetC
         <>
             {required && (
                 <Card className={classes(cl("info-card"), "pc-warning-card", Margins.bottom16)}>
-                    <HeadingTertiary>{t(plugins.restart.required)}</HeadingTertiary>
+                    <Heading tag="h4">{t(plugins.restart.required)}</Heading>
                     <Paragraph className={cl("dep-text")}>
                         {t(plugins.restart.description)}
                     </Paragraph>
@@ -402,9 +402,9 @@ function PluginSettings() {
 
             <ReloadRequiredCard required={changes.hasChanges} enabledPlugins={enabledPlugins} openWarningModal={openWarningModal} resetCheckAndDo={resetCheckAndDo} enabledStockPlugins={enabledStockPlugins} totalStockPlugins={totalStockPlugins} enabledUserPlugins={enabledUserPlugins} totalUserPlugins={totalUserPlugins} />
 
-            <HeadingTertiary className={classes(Margins.top20, Margins.bottom8)}>
+            <Heading tag="h4" className={classes(Margins.top20, Margins.bottom8)}>
                 {t(plugins.filters.label)}
-            </HeadingTertiary>
+            </Heading>
 
             <ErrorBoundary noop>
                 <TextInput
@@ -445,7 +445,7 @@ function PluginSettings() {
                 </div>
             </ErrorBoundary>
 
-            <HeadingTertiary className={Margins.top20}>{t(plugins.title)}</HeadingTertiary>
+            <Heading tag="h4" className={Margins.top20}>{t(plugins.title)}</Heading>
 
             {pluginList.length || requiredPlugins.length
                 ? (

@@ -11,6 +11,7 @@ import { Card } from "@components/Card";
 import { Flex } from "@components/Flex";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import MoreUserTagsPlugin from "@plugins/moreUserTags";
 import { OptionType } from "@utils/types";
@@ -46,7 +47,7 @@ function SettingsComponent() {
                             boxSizing: "border-box",
                         }}
                     >
-                        <Heading style={{ width: "fit-content" }}>
+                        <Heading className={Margins.bottom8} style={{ width: "fit-content" }}>
                             <Tooltip text={tag.description}>
                                 {({ onMouseEnter, onMouseLeave }) => (
                                     <div

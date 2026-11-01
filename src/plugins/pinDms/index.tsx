@@ -15,8 +15,8 @@ import { Channel } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType, StartAt } from "@utils/types";
-import { findComponentByCodeLazy, findCssClassesLazy, findStoreLazy } from "@webpack";
-import { ChannelStore, Clickable, ContextMenuApi, FluxDispatcher, Menu, PrivateChannelSortStore, React, RelationshipStore, SelectedChannelStore, useStateFromStores } from "@webpack/common";
+import { findComponentByCodeLazy, findCssClassesLazy } from "@webpack";
+import { ChannelStore, Clickable, ContextMenuApi, FluxDispatcher, FriendRowStore, Menu, PrivateChannelSortStore, React, RelationshipStore, SelectedChannelStore, useStateFromStores } from "@webpack/common";
 
 import { contextMenus } from "./components/contextMenu";
 import { openCategoryModal, requireSettingsModal } from "./components/CreateCategoryModal";
@@ -38,7 +38,6 @@ interface FriendSection {
 
 const headerClasses = findCssClassesLazy("privateChannelsHeaderContainer", "headerText");
 const PrivateChannelRow = findComponentByCodeLazy<{ channel: Channel; selected: boolean; }>(".getAnyStreamForUser(", "recipients.some(");
-const FriendRowStore: { getRow(userId: string): FriendSection["rows"][number] | undefined; } = findStoreLazy("FriendRowStore");
 
 let lastFriendSections: { sections: FriendSection[]; order: string[] | false; result: FriendSection[]; } | null = null;
 
@@ -416,7 +415,7 @@ export default definePlugin({
             color: category.color,
             collapsed: category.collapsed,
             pinDms: true,
-            rows: getCategoryChannels(category).flatMap(id => {
+            rows: getCategoryChannels(category).flatMap<FriendSection["rows"][number]>(id => {
                 const channel = ChannelStore.getChannel(id);
                 if (channel?.isGroupDM()) return settings.store.friendsSidebarGroupDms ? [{ pinDmsChannelId: id }] : [];
 

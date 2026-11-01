@@ -7565,6 +7565,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownTitle: "Titre inconnu"
             }
         },
+        mutedServersActivityBadge: {
+            name: "MutedServersActivityBadge",
+            description: "Garde le badge d'activité des serveurs visible même lorsque le serveur est en sourdine."
+        },
         mutualGroupDMs: {
             name: "MutualGroupDMs",
             description: "Affiche les groupes MP communs dans les profils",
@@ -9137,7 +9141,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         readAllNotificationsButton: {
             name: "ReadAllNotificationsButton",
             description: "Marque toutes les notifications comme lues en un seul clic !",
-            button: "Tout lire"
+            button: "Tout lire",
+            option: {
+                compact: {
+                    label: "Compact",
+                    description: "Affiche un petit bouton texte au lieu d'une icône dans la liste des serveurs"
+                }
+            }
         },
         recentDMSwitcher: {
             name: "RecentDMSwitcher",
@@ -9741,10 +9751,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     friend: "Amis en ligne seulement",
                     server: "Nombre de serveurs seulement",
                     both: "Les deux"
-                },
-                useCompact: {
-                    label: "Mode compact",
-                    description: "Affiche uniquement le texte sans icône."
                 }
             }
         },
@@ -13059,12 +13065,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 port: {
                     description: "Port de connexion",
                     label: "Port"
+                },
+                openConfig: {
+                    button: "Ouvrir les paramètres d'Orbolay"
                 }
             },
             name: "OrbolayBridge",
             description: "Plugin passerelle pour connecter Orbolay à Discord",
             toast: {
-                connectedToOrbolayServer: "Connecté au serveur Orbolay"
+                connectedToOrbolayServer: "Connecté au serveur Orbolay",
+                notConnected: "Non connecté à Orbolay"
             }
         },
         plexcordHelper: {
@@ -13133,6 +13143,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showAllBadges: {
                     label: "Afficher tous les badges",
                     description: "Affiche tous les badges du profil au lieu de regrouper le reste derrière +n"
+                },
+                gifPickerTyping: {
+                    label: "Saisie dans le sélecteur de GIF",
+                    description: "Vous affiche en train d'écrire pendant que le sélecteur de GIF est ouvert"
                 }
             },
             text: {

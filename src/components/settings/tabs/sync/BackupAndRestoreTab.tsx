@@ -40,7 +40,7 @@ function BackupAndRestoreTab() {
                 <Paragraph>{t(sync.warningText)}</Paragraph>
             </Notice.Warning>
 
-            <Heading>{t(sync.settings.text)}</Heading>
+            <Heading className={Margins.bottom8}>{t(sync.settings.text)}</Heading>
             <Paragraph className={Margins.bottom20}>
                 <ul>
                     <li>• {t(sync.settings.quickcss)}</li>
@@ -52,7 +52,7 @@ function BackupAndRestoreTab() {
 
             <Divider className={Margins.bottom20} />
 
-            <Heading>{t(sync.import.title)}</Heading>
+            <Heading className={Margins.bottom8}>{t(sync.import.title)}</Heading>
             <Paragraph className={Margins.bottom16}>
                 {t(sync.import.description)}
             </Paragraph>
@@ -87,7 +87,7 @@ function BackupAndRestoreTab() {
 
             <Divider className={Margins.bottom20} />
 
-            <Heading>{t(sync.export.title)}</Heading>
+            <Heading className={Margins.bottom8}>{t(sync.export.title)}</Heading>
             <Paragraph className={Margins.bottom16}>
                 {t(sync.export.description)}
             </Paragraph>

@@ -167,7 +167,7 @@ export default definePlugin({
     settingsAboutComponent: () => {
         return (
             <React.Fragment>
-                <Heading>{t(plugin.experiments.modal.about.title)}</Heading>
+                <Heading className={Margins.bottom8}>{t(plugin.experiments.modal.about.title)}</Heading>
                 <Paragraph size="md">
                     {t(plugin.experiments.modal.about.body, {
                         key: <div className={KbdStyles.combo} style={{ display: "inline-flex" }}>
@@ -183,7 +183,7 @@ export default definePlugin({
 
     WarningCard: ErrorBoundary.wrap(() => (
         <ErrorCard id="pc-experiments-warning-card" className={Margins.bottom16}>
-            <Heading>{t(plugin.experiments.modal.warning.title)}</Heading>
+            <Heading className={Margins.bottom8}>{t(plugin.experiments.modal.warning.title)}</Heading>
 
             <Paragraph>
                 {t(plugin.experiments.modal.warning.body)}

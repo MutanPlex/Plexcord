@@ -19,8 +19,9 @@
 
 import { plugin, t } from "@api/i18n";
 import { popNotice, showNotice } from "@api/Notices";
-import { HeadingSecondary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { Devs } from "@utils/constants";
 import definePlugin, { ReporterTestable } from "@utils/types";
@@ -48,7 +49,7 @@ export default definePlugin({
 
     settingsAboutComponent: () => (
         <>
-            <HeadingSecondary>{t(plugin.arRpc.use.title)}</HeadingSecondary>
+            <Heading tag="h3" className={Margins.bottom8}>{t(plugin.arRpc.use.title)}</Heading>
             <Paragraph>
                 {t(plugin.arRpc.use.enable, {
                     link: <Link href="https://github.com/OpenAsar/arrpc/tree/main#server">{t(plugin.arRpc.use.link)}</Link>

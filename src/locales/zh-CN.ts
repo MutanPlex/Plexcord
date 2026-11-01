@@ -7565,6 +7565,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownTitle: "未知标题"
             }
         },
+        mutedServersActivityBadge: {
+            name: "MutedServersActivityBadge",
+            description: "即使服务器已静音，也保持服务器活动徽章可见。"
+        },
         mutualGroupDMs: {
             name: "MutualGroupDMs",
             description: "在个人资料中显示相互的群组 DM",
@@ -9137,7 +9141,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         readAllNotificationsButton: {
             name: "ReadAllNotificationsButton",
             description: "单击按钮即可阅读所有服务器通知！",
-            button: "阅读全部"
+            button: "阅读全部",
+            option: {
+                compact: {
+                    label: "紧凑",
+                    description: "在服务器列表中显示小型文字按钮而不是图标"
+                }
+            }
         },
         recentDMSwitcher: {
             name: "RecentDMSwitcher",
@@ -9741,10 +9751,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     friend: "仅在线好友计数",
                     server: "仅服务器计数",
                     both: "服务器和在线好友都算数"
-                },
-                useCompact: {
-                    label: "使用紧凑模式",
-                    description: "使指示器仅显示文本"
                 }
             }
         },
@@ -13059,12 +13065,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 port: {
                     description: "要连接的端口",
                     label: "端口"
+                },
+                openConfig: {
+                    button: "打开 Orbolay 设置"
                 }
             },
             name: "OrbolayBridge",
             description: "将 Orbolay 连接到 Discord 的桥接插件",
             toast: {
-                connectedToOrbolayServer: "已连接到 Orbolay 服务器"
+                connectedToOrbolayServer: "已连接到 Orbolay 服务器",
+                notConnected: "未连接到 Orbolay"
             }
         },
         plexcordHelper: {
@@ -13133,6 +13143,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showAllBadges: {
                     label: "显示所有徽章",
                     description: "显示所有个人资料徽章，而不是将其余徽章折叠为 +n"
+                },
+                gifPickerTyping: {
+                    label: "GIF 选择器输入中",
+                    description: "打开 GIF 选择器时显示你正在输入"
                 }
             },
             text: {

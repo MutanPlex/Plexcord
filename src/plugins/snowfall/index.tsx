@@ -8,6 +8,7 @@
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -462,7 +463,7 @@ export default definePlugin({
 
     settingsAboutComponent: () => (
         <>
-            <Heading>{t(plugin.snowfall.about.title)}</Heading>
+            <Heading className={Margins.bottom8}>{t(plugin.snowfall.about.title)}</Heading>
             <Paragraph>
                 {t(plugin.snowfall.about.paragraph)}
                 <br /><br />

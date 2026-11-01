@@ -11,7 +11,7 @@ import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
-import { HeadingTertiary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { copyToClipboard } from "@utils/clipboard";
 import { findByPropsLazy, findCssClassesLazy } from "@webpack";
 import { Parser, useEffect, useState } from "@webpack/common";
@@ -46,9 +46,9 @@ function FriendInviteCard({ invite }: { invite: FriendInvite; }) {
         <div className="pc-friend-codes-card">
             <Flex justifyContent="start">
                 <div className="pc-friend-codes-card-title">
-                    <HeadingTertiary style={{ textTransform: "none" }}>
+                    <Heading tag="h4" style={{ textTransform: "none" }}>
                         {invite.code}
-                    </HeadingTertiary>
+                    </Heading>
                     <span>
                         {Parser.parse(t(plugin.friendCodes.card.expires, {
                             expiration: Math.floor(new Date(invite.expires_at).getTime() / 1000),
@@ -83,11 +83,11 @@ export default function FriendCodesPanel() {
     return (
         <>
             <header className={FormStyles.header}>
-                <HeadingTertiary
+                <Heading tag="h4"
                     className={FormStyles.title}
                 >
                     {t(plugin.friendCodes.card.codes)}
-                </HeadingTertiary>
+                </Heading>
 
                 <Flex
                     style={{ marginBottom: "16px" }}

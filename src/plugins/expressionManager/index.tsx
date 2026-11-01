@@ -23,20 +23,17 @@ import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/Co
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { CopyIcon, DeleteIcon, HistoryIcon, PencilIcon, PlusIcon } from "@components/Icons";
-import { CustomEmoji, FluxStore, Guild, GuildSticker, Message, Sticker, StickerItem } from "@plexcord/discord-types";
+import { CustomEmoji, Guild, GuildSticker, Message, StickerItem } from "@plexcord/discord-types";
 import { EmojiIntention, StickerFormatType, StickerType } from "@plexcord/discord-types/enums";
 import { Devs } from "@utils/constants";
 import { confirmAction } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import { removeFromArray } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
-import { findStoreLazy } from "@webpack";
-import { Constants, EmojiStore, GuildStore, Menu, PermissionsBits, PermissionStore, React, RestAPI, SelectedGuildStore, showToast, StickersStore, UserSettingsActionCreators } from "@webpack/common";
+import { Constants, EmojiStore, GuildStore, Menu, PermissionsBits, PermissionStore, React, RestAPI, SelectedGuildStore, showToast, StickersPersistedStore, StickersStore, UserSettingsActionCreators } from "@webpack/common";
 
 import { buildCloneEmojiItem, editEmoji, EmojiURLRegex, openEmojiUploadModal, resolveEmojiName } from "./emojis";
 import { buildCloneStickerItem, buildStickerLinkItems, editSticker } from "./stickers";
-
-const StickersPersistedStore = findStoreLazy("StickersPersistedStore") as FluxStore & { stickerFrecencyWithoutFetchingLatest: { frequently: Sticker[]; }; };
 
 let emojiIntention: EmojiIntention;
 

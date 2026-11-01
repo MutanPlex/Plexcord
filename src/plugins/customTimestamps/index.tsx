@@ -10,7 +10,7 @@ import "./style.css";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings, useSettings } from "@api/Settings";
 import { Divider } from "@components/Divider";
-import { Heading, HeadingPrimary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
 import { Devs, PcDevs } from "@utils/constants";
@@ -66,7 +66,7 @@ const TimeRow = (props: TimeRowProps) => {
 
     return (
         <>
-            <Heading>{props.format.name()}</Heading>
+            <Heading className={Margins.bottom8}>{props.format.name()}</Heading>
             <Paragraph>{props.format.description()}</Paragraph>
             <TextInput value={state} onChange={handleChange} />
         </>
@@ -95,7 +95,7 @@ const settings = definePluginSettings({
                             {key === "sameDayFormat" && (
                                 <div className={Margins.bottom20}>
                                     <Divider style={{ marginBottom: "10px" }} />
-                                    <Heading tag="h1">{t(plugin.customTimestamps.modal.format)}</Heading>
+                                    <Heading tag="h1" className={Margins.bottom20}>{t(plugin.customTimestamps.modal.format)}</Heading>
                                     <Paragraph>
                                         {t(plugin.customTimestamps.modal.howTo)}
                                     </Paragraph>
@@ -134,7 +134,7 @@ export default definePlugin({
 
     settingsAboutComponent: () => (
         <div className={"pc-cmt-info-card"}>
-            <HeadingPrimary>{t(plugin.customTimestamps.modal.title)}</HeadingPrimary>
+            <Heading tag="h2" className={Margins.bottom20}>{t(plugin.customTimestamps.modal.title)}</Heading>
             <Paragraph>
                 <Link href="https://momentjs.com/docs/#/displaying/format/">{t(plugin.customTimestamps.modal.moment)}</Link>
                 <div className={Margins.top8}>

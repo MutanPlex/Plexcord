@@ -7565,6 +7565,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownTitle: "Ukendt titel"
             }
         },
+        mutedServersActivityBadge: {
+            name: "MutedServersActivityBadge",
+            description: "Holder serverens aktivitetsmærke synligt, selv når serveren er slået fra."
+        },
         mutualGroupDMs: {
             name: "MutualGroupDMs",
             description: "Viser fælles gruppechats i profiler",
@@ -9137,7 +9141,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         readAllNotificationsButton: {
             name: "ReadAllNotificationsButton",
             description: "Marker alle servernotifikationer som læst med ét klik!",
-            button: "Læs alle"
+            button: "Læs alle",
+            option: {
+                compact: {
+                    label: "Kompakt",
+                    description: "Vis en lille tekstknap i stedet for et ikon i serverlisten"
+                }
+            }
         },
         recentDMSwitcher: {
             name: "RecentDMSwitcher",
@@ -9741,10 +9751,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     friend: "Kun antal online venner",
                     server: "Kun antal servere",
                     both: "Begge dele"
-                },
-                useCompact: {
-                    label: "Brug kompakt tilstand",
-                    description: "Viser kun indikatoren som tekst"
                 }
             }
         },
@@ -13059,12 +13065,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 port: {
                     description: "Port, der skal forbindes til",
                     label: "Port"
+                },
+                openConfig: {
+                    button: "Åbn Orbolay-indstillinger"
                 }
             },
             name: "OrbolayBridge",
             description: "Bro-plugin, der forbinder Orbolay med Discord",
             toast: {
-                connectedToOrbolayServer: "Forbundet til Orbolay-serveren"
+                connectedToOrbolayServer: "Forbundet til Orbolay-serveren",
+                notConnected: "Ikke forbundet til Orbolay"
             }
         },
         plexcordHelper: {
@@ -13133,6 +13143,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showAllBadges: {
                     label: "Vis alle badges",
                     description: "Viser alle profilbadges i stedet for at skjule resten bag +n"
+                },
+                gifPickerTyping: {
+                    label: "GIF-vælger skriver",
+                    description: "Viser dig som skrivende, mens GIF-vælgeren er åben"
                 }
             },
             text: {

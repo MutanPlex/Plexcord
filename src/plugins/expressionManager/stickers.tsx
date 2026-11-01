@@ -8,7 +8,7 @@
 import { plugin, t } from "@api/i18n";
 import { CheckedTextInput } from "@components/CheckedTextInput";
 import { Flex } from "@components/Flex";
-import { HeadingTertiary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { LinkIcon, TopRightArrow } from "@components/Icons";
 import { Margins } from "@components/margins";
 import { Span } from "@components/Span";
@@ -160,7 +160,7 @@ export function CloneModal({ sticker }: { sticker: PartialSticker; }) {
 
     return (
         <>
-            <HeadingTertiary>{t(plugin.expressionManager.modal.customName)}</HeadingTertiary>
+            <Heading tag="h4">{t(plugin.expressionManager.modal.customName)}</Heading>
             <CheckedTextInput
                 initialValue={name}
                 onChange={v => {

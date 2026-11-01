@@ -78,7 +78,7 @@ export function SetTimezoneModal({ userId, modalProps, database }: { userId: str
             actions={actions}
         >
             <section className={Margins.bottom16}>
-                <Heading>
+                <Heading className={Margins.bottom8}>
                     {t(plugin.timezones.modal.select)}
                 </Heading>
 

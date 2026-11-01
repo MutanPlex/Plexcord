@@ -23,8 +23,14 @@ import { contextBridge, webFrame } from "electron/renderer";
 
 import PlexcordNative, { invoke, sendSync } from "./PlexcordNative";
 
+// Monaco popout
+if (location.href === DESKTOP_MONACO_EDITOR_URL) {
+    contextBridge.exposeInMainWorld("setCss", debounce(PlexcordNative.quickCss.set));
+    contextBridge.exposeInMainWorld("getCurrentCss", PlexcordNative.quickCss.get);
+    contextBridge.exposeInMainWorld("getTheme", PlexcordNative.quickCss.getEditorTheme);
+}
 // Discord
-if (location.protocol !== "data:") {
+else {
     contextBridge.exposeInMainWorld("PlexcordNative", PlexcordNative);
     invoke(IpcEvents.INIT_FILE_WATCHERS);
     if (IS_DISCORD_DESKTOP) {
@@ -32,9 +38,4 @@ if (location.protocol !== "data:") {
         // Not supported in sandboxed preload scripts but Discord doesn't support it either so who cares
         require(process.env.DISCORD_PRELOAD!);
     }
-} // Monaco popout
-else {
-    contextBridge.exposeInMainWorld("setCss", debounce(PlexcordNative.quickCss.set));
-    contextBridge.exposeInMainWorld("getCurrentCss", PlexcordNative.quickCss.get);
-    contextBridge.exposeInMainWorld("getTheme", PlexcordNative.quickCss.getEditorTheme);
 }

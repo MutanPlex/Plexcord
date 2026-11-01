@@ -20,6 +20,7 @@
 import { plugin, t } from "@api/i18n";
 import { TextButton } from "@components/Button";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { SessionInfo } from "@plugins/betterSessions/types";
 import { getDefaultName, savedSessionsCache, saveSessionsToDataStore } from "@plugins/betterSessions/utils";
@@ -60,7 +61,7 @@ export function RenameModal({ props, session, state }: { props: RenderModalProps
             ]}
         >
             <div>
-                <Heading tag="h5">{t(plugin.betterSessions.newDevice)}</Heading>
+                <Heading tag="h5" className={Margins.bottom8}>{t(plugin.betterSessions.newDevice)}</Heading>
                 <TextInput
                     style={{ marginBottom: "10px" }}
                     placeholder={getDefaultName(session.client_info)}

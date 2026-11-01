@@ -7565,6 +7565,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknownTitle: "Titlu necunoscut"
             }
         },
+        mutedServersActivityBadge: {
+            name: "MutedServersActivityBadge",
+            description: "Păstrează insigna de activitate a serverului vizibilă chiar și când serverul este pe mut."
+        },
         mutualGroupDMs: {
             name: "MutualGroupDMs",
             description: "Afișează grupurile DM comune în profiluri",
@@ -9137,7 +9141,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         readAllNotificationsButton: {
             name: "ReadAllNotificationsButton",
             description: "Citește toate notificările de pe servere cu un singur click!",
-            button: "Citește tot"
+            button: "Citește tot",
+            option: {
+                compact: {
+                    label: "Compact",
+                    description: "Afișează un mic buton text în locul unei pictograme în lista de servere"
+                }
+            }
         },
         recentDMSwitcher: {
             name: "RecentDMSwitcher",
@@ -9741,10 +9751,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     friend: "Doar prieteni online",
                     server: "Doar număr servere",
                     both: "Ambele"
-                },
-                useCompact: {
-                    label: "Mod compact",
-                    description: "Afișează indicatorul doar ca text"
                 }
             }
         },
@@ -13059,12 +13065,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 port: {
                     description: "Portul la care să se conecteze",
                     label: "Port"
+                },
+                openConfig: {
+                    button: "Deschide setările Orbolay"
                 }
             },
             name: "OrbolayBridge",
             description: "Plugin punte pentru conectarea Orbolay la Discord",
             toast: {
-                connectedToOrbolayServer: "Conectat la serverul Orbolay"
+                connectedToOrbolayServer: "Conectat la serverul Orbolay",
+                notConnected: "Nu ești conectat la Orbolay"
             }
         },
         plexcordHelper: {
@@ -13133,6 +13143,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showAllBadges: {
                     label: "Afișează toate insignele",
                     description: "Afișează toate insignele profilului în loc să le restrângă pe celelalte în +n"
+                },
+                gifPickerTyping: {
+                    label: "Tastare în selectorul GIF",
+                    description: "Te afișează ca scriind cât timp selectorul GIF este deschis"
                 }
             },
             text: {

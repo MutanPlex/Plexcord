@@ -20,7 +20,7 @@
 import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { HeadingTertiary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import type { Guild, GuildMember, RoleOrUserPermission } from "@plexcord/discord-types";
 import { PermissionOverwriteType } from "@plexcord/discord-types/enums";
 import { cl, getGuildPermissionSpecMap, getSortedRolesForMember, sortUserRoles } from "@plugins/permissionsViewer/utils";
@@ -135,7 +135,7 @@ function UserPermissionsComponent({ guild, guildMember, closePopout }: { guild: 
 
     return <div>
         <div className={cl("user-header-container")}>
-            <HeadingTertiary>{t(plugin.permissionsViewer.modal.title)}</HeadingTertiary>
+            <Heading tag="h4">{t(plugin.permissionsViewer.modal.title)}</Heading>
             <div className={cl("user-header-btns")}>
                 <Tooltip text={t(plugin.permissionsViewer.modal.sortingBy, { method: permissionsSortOrder === PermissionsSortOrder.HighestRole ? t(plugin.permissionsViewer.modal.highest) : t(plugin.permissionsViewer.modal.lowest) })}>
                     {tooltipProps => (

@@ -1,54 +1,47 @@
-.pc-hideservers-button-wrapper {
-    display: flex;
-    justify-content: center;
-    margin: 0 0 8px;
+.pc-hideservers-folder-group {
+    overflow: hidden;
+    margin-bottom: 1em;
 }
 
-.pc-hideservers-button {
-    max-width: 48px;
-    font-size: 60%;
-    background-color: var(--background-primary);
-    color: var(--text-default);
-}
-
-.pc-hideservers-list {
-    flex: 1 1 auto;
-}
-
-/* copied from blocked row */
-.pc-hideservers-row {
-    height: 62px;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    margin-left: 20px;
-    margin-right: 20px;
-    border-top: 1px solid var(--input-border-default, var(--input-border));
-    border-bottom: 1px solid transparent;
-    justify-content: space-between;
-}
-
-.pc-hideservers-guildicon {
-    display: flex;
-    align-items: center;
-    margin-right: 1em;
-}
-
-.pc-hideservers-guildicon img {
-    border-radius: 50%;
-}
-
-.pc-hideservers-name {
-    flex-grow: 1;
-}
-
-.pc-hideservers-row-button {
-    margin-left: auto;
+.pc-hideservers-folder-group:last-of-type {
+    margin-bottom: 0;
 }
 
 .pc-hideservers-folder-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-right: 20px;
+    padding: 1em;
+    background-color: var(--border-subtle);
+}
+
+.pc-hideservers-rows {
+    padding: 0.5em 1em;
+}
+
+/* copied from blocked row */
+.pc-hideservers-row {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.25em 0;
+}
+
+.pc-hideservers-guildicon {
+    display: flex;
+    align-items: center;
+    margin-right: 1em;
+    background-color: var(--background-mod-subtle);
+    border-radius: 20%;
+    overflow: hidden;
+}
+
+.pc-hideservers-guildicon img {
+    width: var(--guildbar-avatar-size);
+    height: var(--guildbar-avatar-size);
+}
+
+.pc-hideservers-name {
+    flex-grow: 1;
 }

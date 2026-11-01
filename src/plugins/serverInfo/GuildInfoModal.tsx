@@ -9,6 +9,7 @@ import "./styles.css";
 
 import { plugin, t } from "@api/i18n";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { Guild, RenderModalProps, User } from "@plexcord/discord-types";
 import { classNameFactory } from "@utils/css";
@@ -244,7 +245,7 @@ function ServerInfoTab({ guild }: GuildProps) {
         <div className={cl("info")}>
             {Object.entries(Fields).map(([name, node]) =>
                 <div className={cl("server-info-pair")} key={name}>
-                    <Heading>{name}</Heading>
+                    <Heading className={Margins.bottom8}>{name}</Heading>
                     {typeof node === "string" ? <span>{node}</span> : node}
                 </div>
             )}

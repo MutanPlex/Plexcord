@@ -108,7 +108,7 @@ export const ThemeInfoModal: React.FC<ThemeInfoModalProps> = ({ author, theme, .
                 }
             ]}
         >
-            <Heading style={{ marginTop: "10px" }}>{authors.length > 1 ? t(plugin.themeLibrary.text.authors) : t(plugin.themeLibrary.text.author)}</Heading>
+            <Heading className={Margins.bottom8} style={{ marginTop: "10px" }}>{authors.length > 1 ? t(plugin.themeLibrary.text.authors) : t(plugin.themeLibrary.text.author)}</Heading>
             <div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
                 <div>
                     <div style={{ display: "flex", alignItems: "center" }}>
@@ -129,13 +129,13 @@ export const ThemeInfoModal: React.FC<ThemeInfoModalProps> = ({ author, theme, .
                     </div>
                     {version && (
                         <>
-                            <Heading style={{ marginTop: "10px" }}>{t(plugin.themeLibrary.text.version)}</Heading>
+                            <Heading className={Margins.bottom8} style={{ marginTop: "10px" }}>{t(plugin.themeLibrary.text.version)}</Heading>
                             <Paragraph>
                                 {version}
                             </Paragraph>
                         </>
                     )}
-                    <Heading style={{ marginTop: "10px" }}>{t(plugin.themeLibrary.text.likes)}</Heading>
+                    <Heading className={Margins.bottom8} style={{ marginTop: "10px" }}>{t(plugin.themeLibrary.text.likes)}</Heading>
                     <Paragraph>
                         {likes === 0
                             ? (type.toLowerCase() === "snippet" ? t(plugin.themeLibrary.text.nobodyLikedSnippet) : t(plugin.themeLibrary.text.nobodyLikedTheme))
@@ -143,7 +143,7 @@ export const ThemeInfoModal: React.FC<ThemeInfoModalProps> = ({ author, theme, .
                     </Paragraph>
                     {donate && (
                         <>
-                            <Heading style={{ marginTop: "10px" }}>{t(plugin.themeLibrary.text.donate)}</Heading>
+                            <Heading className={Margins.bottom8} style={{ marginTop: "10px" }}>{t(plugin.themeLibrary.text.donate)}</Heading>
                             <Paragraph>
                                 {t(plugin.themeLibrary.text.youCanSupportThe)}
                             </Paragraph>
@@ -157,7 +157,7 @@ export const ThemeInfoModal: React.FC<ThemeInfoModalProps> = ({ author, theme, .
                     )}
                     {(guild || invite) && (
                         <>
-                            <Heading style={{ marginTop: "10px" }}>{t(plugin.themeLibrary.text.supportServer)}</Heading>
+                            <Heading className={Margins.bottom8} style={{ marginTop: "10px" }}>{t(plugin.themeLibrary.text.supportServer)}</Heading>
                             {guild && (
                                 <Paragraph>
                                     {guild.name}
@@ -178,7 +178,7 @@ export const ThemeInfoModal: React.FC<ThemeInfoModalProps> = ({ author, theme, .
                             </Paragraph>
                         </>
                     )}
-                    <Heading style={{ marginTop: "10px" }}>{t(plugin.themeLibrary.text.source)}</Heading>
+                    <Heading className={Margins.bottom8} style={{ marginTop: "10px" }}>{t(plugin.themeLibrary.text.source)}</Heading>
                     <Paragraph>
                         <Button
                             disabled={!theme.content || theme.id === "preview"}
@@ -214,7 +214,7 @@ export const ThemeInfoModal: React.FC<ThemeInfoModalProps> = ({ author, theme, .
                     </Paragraph>
                     {tags && (
                         <>
-                            <Heading style={{ marginTop: "10px" }}>{t(plugin.themeLibrary.text.tags)}</Heading>
+                            <Heading className={Margins.bottom8} style={{ marginTop: "10px" }}>{t(plugin.themeLibrary.text.tags)}</Heading>
                             <Paragraph>
                                 {tags.map(tag => (
                                     <span className="pce-theme-info-tag" key={"pce-theme-info-tag"}>

@@ -8,7 +8,7 @@
 import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { ErrorCard } from "@components/ErrorCard";
-import { HeadingPrimary, HeadingSecondary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { relativeLuminance } from "@plugins/clientTheme/utils/colorUtils";
 import { createOrUpdateThemeColorVars } from "@plugins/clientTheme/utils/styleUtils";
@@ -70,7 +70,7 @@ export function ThemeSettingsComponent() {
         <div className={cl("settings")}>
             <div className={cl("container")}>
                 <div className={cl("settings-labels")}>
-                    <HeadingSecondary>{t(plugin.clientTheme.title)}</HeadingSecondary>
+                    <Heading tag="h3" className={Margins.bottom8}>{t(plugin.clientTheme.title)}</Heading>
                     <Paragraph>{t(plugin.clientTheme.add)}</Paragraph>
                 </div>
                 <ColorPicker
@@ -82,7 +82,7 @@ export function ThemeSettingsComponent() {
             </div>
             {(contrastWarning || nitroThemeEnabled) && (<>
                 <ErrorCard className={Margins.top8}>
-                    <HeadingPrimary>{t(plugin.clientTheme.error.modal.title)}</HeadingPrimary>
+                    <Heading tag="h2" className={Margins.bottom20}>{t(plugin.clientTheme.error.modal.title)}</Heading>
 
                     {contrastWarning && <Paragraph>{">"} {t(plugin.clientTheme.error.modal.contrast)}</Paragraph>}
                     {nitroThemeEnabled && <Paragraph>{">"} {t(plugin.clientTheme.error.modal.nitro)}</Paragraph>}

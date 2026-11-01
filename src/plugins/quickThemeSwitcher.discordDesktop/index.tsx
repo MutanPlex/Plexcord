@@ -7,7 +7,8 @@
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings, Settings, SettingsStore } from "@api/Settings";
-import { HeadingSecondary } from "@components/Heading";
+import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { debounce } from "@shared/debounce";
 import { Devs, IS_MAC } from "@utils/constants";
@@ -255,7 +256,7 @@ export default definePlugin({
     startAt: StartAt.DOMContentLoaded,
     settingsAboutComponent: () => (
         <>
-            <HeadingSecondary>{t(plugin.quickThemeSwitcher.about.title)}</HeadingSecondary>
+            <Heading tag="h3" className={Margins.bottom8}>{t(plugin.quickThemeSwitcher.about.title)}</Heading>
             <Paragraph>
                 {t(plugin.quickThemeSwitcher.about.description)}
                 <br />

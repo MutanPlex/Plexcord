@@ -10,7 +10,7 @@
     --pc-cui-user-area-collapsed-width: 52px;
     --pc-cui-header-bar-height: 32px;
     --pc-cui-collapsed-block-size: 8px;
-    --pc-cui-guild-bar-expanded-width: 64px;
+    --pc-cui-guild-bar-expanded-width: var(--custom-guild-list-width);
     --pc-cui-channel-list-min-width: 264px;
     --pc-cui-channel-list-max-width: 432px;
     --pc-cui-members-list-expanded-width: 240px;

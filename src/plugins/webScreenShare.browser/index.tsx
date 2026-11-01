@@ -8,12 +8,9 @@
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
-import {
-    Divider,
-    Heading,
-    Paragraph,
-    Span,
-} from "@components/index";
+import { Heading } from "@components/Heading";
+import { Divider, Paragraph, Span } from "@components/index";
+import { Margins } from "@components/margins";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { Logger } from "@utils/Logger";
@@ -172,7 +169,7 @@ function ModalComponent({ modalProps, submit, close, options }: {
                 <div>
                     <div className={cl("flex", "padding")}>
                         <section className={cl("quality-section")}>
-                            <Heading tag="h2">{t(plugin.webScreenShare.option.resolution.description)}</Heading>
+                            <Heading tag="h2" className={Margins.bottom20}>{t(plugin.webScreenShare.option.resolution.description)}</Heading>
                             <OptionRadio
                                 options={StreamResolution}
                                 settings={liveSettings}
@@ -182,7 +179,7 @@ function ModalComponent({ modalProps, submit, close, options }: {
                         </section>
 
                         <section className={cl("quality-section")}>
-                            <Heading tag="h2">{t(plugin.webScreenShare.option.frameRate.description)}</Heading>
+                            <Heading tag="h2" className={Margins.bottom20}>{t(plugin.webScreenShare.option.frameRate.description)}</Heading>
                             <OptionRadio
                                 options={StreamFps}
                                 settings={liveSettings}
@@ -192,7 +189,7 @@ function ModalComponent({ modalProps, submit, close, options }: {
                         </section>
                     </div>
                     <div>
-                        <Heading tag="h2">{t(plugin.webScreenShare.text.streamMode)}</Heading>
+                        <Heading tag="h2" className={Margins.bottom20}>{t(plugin.webScreenShare.text.streamMode)}</Heading>
                         <div>
                             <OptionRadio
                                 options={StreamContentHint}
@@ -211,7 +208,7 @@ function ModalComponent({ modalProps, submit, close, options }: {
                             shape="box"
                             reverse={true}>
                             <div className={cl("control-content")}>
-                                <Heading tag="h2">{t(plugin.webScreenShare.text.muteStreamAudio)}</Heading>
+                                <Heading tag="h2" className={Margins.bottom20}>{t(plugin.webScreenShare.text.muteStreamAudio)}</Heading>
                                 <Paragraph style={{ color: "var(--text-subtle, var(--text-default))" }}>{t(plugin.webScreenShare.text.preventsSystemAudioFrom)}</Paragraph>
                             </div>
                         </Checkbox>
@@ -223,7 +220,7 @@ function ModalComponent({ modalProps, submit, close, options }: {
                             shape="box"
                             reverse={true}>
                             <div className={cl("control-content")}>
-                                <Heading tag="h2">{t(plugin.webScreenShare.text.showStreamPreviews)}</Heading>
+                                <Heading tag="h2" className={Margins.bottom20}>{t(plugin.webScreenShare.text.showStreamPreviews)}</Heading>
                                 <Paragraph style={{ color: "var(--text-subtle, var(--text-default))" }}>{t(plugin.webScreenShare.text.allowsOthersToSee)}</Paragraph>
                             </div>
                         </Checkbox>

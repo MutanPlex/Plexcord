@@ -10,6 +10,7 @@ import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { settings } from "@plugins/channelTabs/util";
 import { IS_MAC } from "@utils/constants";
@@ -184,7 +185,7 @@ export function KeybindSettings(): JSX.Element {
         <ErrorBoundary>
             <Divider />
             <div className="channelTabs-keybind-settings">
-                <Heading>{t(plugin.channelTabs.option.keybindsSection.title)}</Heading>
+                <Heading className={Margins.bottom8}>{t(plugin.channelTabs.option.keybindsSection.title)}</Heading>
                 <Paragraph>
                     {t(plugin.channelTabs.option.keybindsSection.description)}
                 </Paragraph>

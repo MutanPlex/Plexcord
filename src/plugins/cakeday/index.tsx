@@ -185,7 +185,7 @@ function BirthdayModal({ userId, username, modalProps }: { userId: string, usern
     return (
         <ModalRoot {...modalProps} className="pc-cakeday-modal">
             <ModalHeader>
-                <Heading>{t(plugin.cakeDay.modal.title, { username })}</Heading>
+                <Heading className={Margins.bottom8}>{t(plugin.cakeDay.modal.title, { username })}</Heading>
             </ModalHeader>
             <ModalContent>
                 <section>
@@ -290,7 +290,7 @@ function UserListModal() {
     if (trackedUserIds.length === 0) {
         return (
             <section>
-                <Heading>{t(plugin.cakeDay.modal.saved)}</Heading>
+                <Heading className={Margins.bottom8}>{t(plugin.cakeDay.modal.saved)}</Heading>
                 <Paragraph style={{ color: "var(--text-muted)", fontStyle: "italic" }}>
                     {t(plugin.cakeDay.modal.savedDesc)}
                 </Paragraph>
@@ -320,7 +320,7 @@ function UserListModal() {
 
     return (
         <section>
-            <Heading>{t(plugin.cakeDay.modal.saved)}</Heading>
+            <Heading className={Margins.bottom8}>{t(plugin.cakeDay.modal.saved)}</Heading>
             <Flex flexDirection="column" gap={"12px"}>
                 {trackedUserIds.map((userId, index) => {
                     const user = UserStore.getUser(userId);

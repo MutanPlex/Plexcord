@@ -7,21 +7,11 @@
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { SoundboardSound } from "@plexcord/discord-types";
+import { Button } from "@components/Button";
+import { SoundboardSound, VoiceState } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { ChannelStore, FluxDispatcher, GuildMemberStore, showToast, SoundboardStore, StreamerModeStore, UserStore, VoiceStateStore } from "@webpack/common";
-
-interface ChannelState {
-    userId: string;
-    channelId: string;
-    deaf: boolean;
-    mute: boolean;
-    stream: boolean;
-    selfDeaf: boolean;
-    selfMute: boolean;
-    selfStream: boolean;
-}
 
 interface SoundboardSoundPayload {
     sound_id: string;
@@ -33,6 +23,15 @@ interface SoundboardSoundPayload {
     available: boolean;
 }
 
+const openConfig = () => {
+    if (ws?.readyState !== WebSocket.OPEN) {
+        showToast({ text: t(plugin.orbolayBridge.toast.notConnected), variant: "critical" });
+        return;
+    }
+
+    ws.send(JSON.stringify({ cmd: "OPEN_CONFIG" }));
+};
+
 const settings = definePluginSettings({
     port: {
         label: () => t(plugin.orbolayBridge.option.port.label),
@@ -40,6 +39,10 @@ const settings = definePluginSettings({
         description: () => t(plugin.orbolayBridge.option.port.description),
         default: 6888,
         restartNeeded: true
+    },
+    openConfig: {
+        type: OptionType.COMPONENT,
+        component: () => <Button onClick={openConfig}>{t(plugin.orbolayBridge.option.openConfig.button)}</Button>
     },
 });
 
@@ -65,27 +68,26 @@ const waitForPopulate = async fn => {
     }
 };
 
-const waitForUserData = async (guildId: string, userId: string) => {
-    const isKnown = () =>
-        !!GuildMemberStore.getNick(guildId, userId) ||
-        !!UserStore?.getUser(userId)?.globalName;
+const usernameFor = (guildId: string, userId: string) =>
+    GuildMemberStore.getNick(guildId, userId) ||
+    UserStore?.getUser(userId)?.globalName ||
+    UserStore?.getUser(userId)?.username;
 
+const waitForUserData = async (guildId: string, userId: string) => {
     const deadline = Date.now() + 3000;
-    while (!isKnown() && Date.now() < deadline) {
+    while (!usernameFor(guildId, userId) && Date.now() < deadline) {
         await new Promise(r => setTimeout(r, 100));
     }
 };
 
-const stateToPayload = async (guildId: string, state: ChannelState) => {
+const stateToPayload = async (guildId: string, state: VoiceState) => {
     await waitForUserData(guildId, state.userId);
 
     return {
         userId: state.userId,
-        username:
-            GuildMemberStore.getNick(guildId, state.userId) ||
-            UserStore?.getUser(state.userId)?.globalName,
+        username: usernameFor(guildId, state.userId),
         avatarUrl: UserStore?.getUser(state.userId)?.avatar,
-        channelId: state.channelId,
+        channelId: state.channelId ?? null,
         deaf: state.deaf || state.selfDeaf,
         mute: state.mute || state.selfMute,
         streaming: state.selfStream,
@@ -216,10 +218,10 @@ const handleMessageNotification = dispatch => {
 };
 
 const handleVoiceStateUpdates = async dispatch => {
-    const { id } = UserStore.getCurrentUser();
+    const userId = UserStore.getCurrentUser()?.id;
 
     for (const state of dispatch.voiceStates) {
-        const ourState = state.userId === id;
+        const ourState = state.userId === userId;
         const { guildId } = state;
 
         if (ourState) {
@@ -233,7 +235,7 @@ const handleVoiceStateUpdates = async dispatch => {
                         cmd: "CHANNEL_JOINED",
                         states:
                             await Promise.all(
-                                Object.values(voiceStates).map(s => stateToPayload(guildId, s as ChannelState))
+                                Object.values(voiceStates).map(s => stateToPayload(guildId, s as VoiceState))
                             ),
                     })
                 );
@@ -264,7 +266,7 @@ const handleVoiceStateUpdates = async dispatch => {
             ws?.send(
                 JSON.stringify({
                     cmd: "VOICE_STATE_UPDATE",
-                    state: await stateToPayload(guildId, state as ChannelState),
+                    state: await stateToPayload(guildId, state as VoiceState),
                 })
             );
         }
@@ -299,6 +301,11 @@ const createWebsocket = () => {
     };
     ws.onclose = () => {
         ws = null;
+
+        if (!stopped) {
+            if (retryTimer) clearTimeout(retryTimer);
+            retryTimer = setTimeout(createWebsocket, 5000);
+        }
     };
     ws.onopen = async () => {
         showToast({ text: t(plugin.orbolayBridge.toast.connectedToOrbolayServer), variant: "success" });
@@ -331,7 +338,7 @@ const createWebsocket = () => {
                 cmd: "CHANNEL_JOINED",
                 states:
                     await Promise.all(
-                        Object.values(channelState).map(s => stateToPayload(guildId, s as ChannelState))
+                        Object.values(channelState).map(s => stateToPayload(guildId, s as VoiceState))
                     ),
             })
         );

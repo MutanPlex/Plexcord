@@ -438,7 +438,7 @@ function ThemesTab() {
                 {t(themes.description)}
             </Paragraph>
 
-            <Heading>{t(themes.quickActions.title)}</Heading>
+            <Heading className={Margins.bottom8}>{t(themes.quickActions.title)}</Heading>
             <Paragraph className={Margins.bottom16}>
                 {t(themes.quickActions.description)}
             </Paragraph>
