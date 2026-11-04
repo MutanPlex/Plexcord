@@ -1593,6 +1593,11 @@ const translations = {
                 never: "not expire"
             }
         },
+        betterMutualServers: {
+            name: "BetterMutualServers",
+            description: "Shows roles and join dates in the Mutual Servers list.",
+            joined: "Joined {{date}}"
+        },
         betterNotesBox: {
             name: "BetterNotesBox",
             description: "Hide notes or disable spellcheck (Configure in settings!!)",
@@ -1746,6 +1751,10 @@ const translations = {
                 blurAllChannels: {
                     label: "Blur All Channels",
                     description: "Blur attachments in all channels (not just NSFW)"
+                },
+                ignoredChannels: {
+                    label: "Ignored Channels",
+                    description: "List of channel IDs to not blur attachments in, separated by a space or comma"
                 }
             }
         },
@@ -6076,6 +6085,14 @@ const translations = {
                     label: "Lightness",
                     description: "Lightness, in %. Change if the colors are too light or too dark"
                 },
+                saturation: {
+                    label: "Saturation",
+                    description: "Saturation, in %. Change if the colors are too vibrant or dull"
+                },
+                seed: {
+                    label: "Seed",
+                    description: "Changing this will shuffle everyone's username color to a new color"
+                },
                 memberListColors: {
                     label: "Member List Colors",
                     description: "Replace role colors in the member list"
@@ -8163,33 +8180,6 @@ const translations = {
                 }
             }
         },
-        platformSpoofer: {
-            name: "PlatformSpoofer",
-            description: "Spoof what platform or device you're on",
-            about: "We can't guarantee this plugin won't get you warned or banned. Choosing Xbox/Playstation/VR may make your client an outdated version.",
-            platform: {
-                desktop: "Discord Client",
-                web: "Discord Web",
-                ios: "Discord iOS",
-                android: "Discord Android",
-                xbox: "Discord Embedded",
-                playstation: "Discord Embedded",
-                vr: "VR"
-            },
-            option: {
-                platform: {
-                    label: "Platform",
-                    description: "What platform to pretend you're on.",
-                    desktop: "Desktop",
-                    web: "Web",
-                    android: "Android",
-                    ios: "iOS",
-                    xbox: "Xbox",
-                    playstation: "PlayStation",
-                    vr: "VR"
-                }
-            }
-        },
         plexcordToolbox: {
             name: "PlexcordToolbox",
             description: "Adds a button to the AppBar that houses Plexcord quick actions",
@@ -8304,6 +8294,7 @@ const translations = {
                     fetch: "Fetch Quests",
                     markAsIgnored: "Mark as Ignored",
                     unmarkAsIgnored: "Unmark as Ignored",
+                    launchActivity: "Launch Activity",
                     stopAuto: "Stop Auto-Complete",
                     startAuto: "Start Auto-Complete",
                     copyQuestID: "Copy Quest ID",
@@ -8333,6 +8324,7 @@ const translations = {
                 autoCompleteBroken: "Auto-Complete is broken. A fix will be implemented shortly.",
                 enrollmentFailed: "Enrollment in the {{questName}} Quest failed.",
                 enrollmentInNormalizequestnameQuest: "Enrollment in {{normalizeQuestName_quest}} Quest failed{{rateLimitSuffix}}.",
+                activityLaunchFailed: "Could not launch the activity for {{questName}}.",
                 automationUnlocked: "Quest Automation Unlocked.",
                 automationLocked: "Quest Automation Locked."
             },
@@ -11693,6 +11685,7 @@ const translations = {
                 }
             },
             context: {
+                sendAudioFile: "Send Audio File as Voice Message",
                 sendVoiceMessage: "Send Voice Message",
                 missingPermissions: "(Missing Permissions)"
             },

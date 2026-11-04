@@ -20,6 +20,7 @@
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { managedStyleRootNode } from "@api/Styles";
+import { Channel } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { createAndAppendStyle } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
@@ -39,6 +40,13 @@ const settings = definePluginSettings({
         description: () => t(plugin.blurNSFW.option.blurAllChannels.description),
         type: OptionType.BOOLEAN,
         default: false
+    },
+    ignoredChannels: {
+        label: () => t(plugin.blurNSFW.option.ignoredChannels.label),
+        description: () => t(plugin.blurNSFW.option.ignoredChannels.description),
+        type: OptionType.STRING,
+        default: "",
+        multiline: true,
     }
 });
 
@@ -68,13 +76,19 @@ export default definePlugin({
     tags: ["privacy", "media"],
     settings,
 
+    shouldBlur(channel?: Channel) {
+        const { ignoredChannels, blurAllChannels } = settings.store;
+        if (!channel || !channel.nsfw && !blurAllChannels) return false;
+        return !ignoredChannels.includes(channel.id) && !ignoredChannels.includes(channel.parent_id);
+    },
+
     patches: [
         {
             find: "}renderStickersAccessories(",
             replacement: [
                 {
                     match: /(\.renderReactions\(\i\).+?className:)/,
-                    replace: '$&(this?.props?.channel?.nsfw||$self.settings.store.blurAllChannels?"pc-nsfw-img ":"")+'
+                    replace: '$&($self.shouldBlur(this?.props?.channel)?"pc-nsfw-img ":"")+'
                 }
             ]
         }

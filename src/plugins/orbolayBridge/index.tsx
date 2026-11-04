@@ -6,12 +6,15 @@
  */
 
 import { plugin, t } from "@api/i18n";
+import { DataStore } from "@api/index";
+import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { SoundboardSound, VoiceState } from "@plexcord/discord-types";
+import showMeYourName from "@plugins/showMeYourName";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { ChannelStore, FluxDispatcher, GuildMemberStore, showToast, SoundboardStore, StreamerModeStore, UserStore, VoiceStateStore } from "@webpack/common";
+import { ChannelStore, FluxDispatcher, GuildMemberStore, RelationshipStore, showToast, SoundboardStore, StreamerModeStore, UserStore, VoiceStateStore } from "@webpack/common";
 
 interface SoundboardSoundPayload {
     sound_id: string;
@@ -68,10 +71,23 @@ const waitForPopulate = async fn => {
     }
 };
 
-const usernameFor = (guildId: string, userId: string) =>
-    GuildMemberStore.getNick(guildId, userId) ||
-    UserStore?.getUser(userId)?.globalName ||
-    UserStore?.getUser(userId)?.username;
+const smynInVoice = () => isPluginEnabled(showMeYourName.name) && showMeYourName.settings.store.voiceChannels;
+
+const usernameFor = (guildId: string, userId: string) => {
+    const showFriendName = !guildId
+        || smynInVoice() && !showMeYourName.settings.store.friendNameOnlyInDirectMessages;
+
+    return (showFriendName && RelationshipStore.getNickname(userId)) ||
+        GuildMemberStore.getNick(guildId, userId) ||
+        UserStore?.getUser(userId)?.globalName ||
+        UserStore?.getUser(userId)?.username;
+};
+
+const customNameFor = async (guildId: string, userId: string) => {
+    if (!guildId || !smynInVoice() || showMeYourName.settings.store.customNameOnlyInDirectMessages) return;
+
+    return (await DataStore.get<Record<string, string>>("SMYNCustomNicknames"))?.[userId];
+};
 
 const waitForUserData = async (guildId: string, userId: string) => {
     const deadline = Date.now() + 3000;
@@ -85,7 +101,7 @@ const stateToPayload = async (guildId: string, state: VoiceState) => {
 
     return {
         userId: state.userId,
-        username: usernameFor(guildId, state.userId),
+        username: await customNameFor(guildId, state.userId) || usernameFor(guildId, state.userId),
         avatarUrl: UserStore?.getUser(state.userId)?.avatar,
         channelId: state.channelId ?? null,
         deaf: state.deaf || state.selfDeaf,

@@ -1596,6 +1596,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 never: "nigdy nie wygaśnie"
             }
         },
+        betterMutualServers: {
+            name: "BetterMutualServers",
+            description: "Pokazuje role i daty dołączenia na liście wspólnych serwerów.",
+            joined: "Dołączono {{date}}"
+        },
         betterNotesBox: {
             name: "BetterNotesBox",
             description: "Ukryj notatki lub wyłącz sprawdzanie pisowni (Skonfiguruj w ustawieniach!!)",
@@ -1749,6 +1754,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 blurAllChannels: {
                     label: "Rozmywaj wszystkie kanały",
                     description: "Rozmywaj załączniki na wszystkich kanałach (nie tylko NSFW)"
+                },
+                ignoredChannels: {
+                    label: "Ignorowane kanały",
+                    description: "Lista identyfikatorów kanałów, w których załączniki nie będą rozmywane, oddzielonych spacją lub przecinkiem"
                 }
             }
         },
@@ -6078,6 +6087,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Jasność",
                     description: "Jasność w %. Zmień, jeśli kolory są zbyt jasne lub zbyt ciemne"
                 },
+                saturation: {
+                    label: "Nasycenie",
+                    description: "Nasycenie w %. Zmień, jeśli kolory są zbyt jaskrawe lub zbyt matowe"
+                },
+                seed: {
+                    label: "Ziarno",
+                    description: "Zmiana tej wartości przydzieli nazwom użytkowników nowe kolory"
+                },
                 memberListColors: {
                     label: "Kolory listy członków",
                     description: "Zastąp kolory ról na liście członków"
@@ -8165,33 +8182,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        platformSpoofer: {
-            name: "PlatformSpoofer",
-            description: "Zmienia wyświetlaną platformę lub urządzenie, na którym jesteś",
-            about: "Nie możemy zagwarantować, że ta wtyczka nie spowoduje ostrzeżenia lub bana. Wybranie Xbox/Playstation/VR może sprawić, że Twój klient będzie nieaktualną wersją.",
-            platform: {
-                desktop: "Klient Discord",
-                web: "Discord Web",
-                ios: "Discord iOS",
-                android: "Discord Android",
-                xbox: "Discord Embedded",
-                playstation: "Discord Embedded",
-                vr: "VR"
-            },
-            option: {
-                platform: {
-                    label: "Platforma",
-                    description: "Na jakiej platformie udawać, że jesteś.",
-                    desktop: "Komputer",
-                    web: "Przeglądarka",
-                    android: "Android",
-                    ios: "iOS",
-                    xbox: "Xbox",
-                    playstation: "PlayStation",
-                    vr: "VR"
-                }
-            }
-        },
         plexcordToolbox: {
             name: "PlexcordToolbox",
             description: "Dodaje przycisk do paska aplikacji (AppBar) z szybkimi akcjami Plexcord",
@@ -8306,6 +8296,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     fetch: "Pobierz Questy",
                     markAsIgnored: "Oznacz jako ignorowany",
                     unmarkAsIgnored: "Przestań ignorować",
+                    launchActivity: "Uruchom aktywność",
                     stopAuto: "Zatrzymaj automatyczne ukończenie",
                     startAuto: "Rozpocznij automatyczne ukończenie",
                     copyQuestID: "Kopiuj ID Questa",
@@ -8335,6 +8326,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 autoCompleteBroken: "Automatyczne ukończenie nie działa. Poprawka pojawi się wkrótce.",
                 enrollmentFailed: "Nie udało się zapisać do Questa {{questName}}.",
                 enrollmentInNormalizequestnameQuest: "Nie udało się zapisać do misji {{normalizeQuestName_quest}}{{rateLimitSuffix}}.",
+                activityLaunchFailed: "Nie udało się uruchomić aktywności dla {{questName}}.",
                 automationUnlocked: "Automatyzacja Questów odblokowana.",
                 automationLocked: "Automatyzacja Questów zablokowana."
             },
@@ -11693,6 +11685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             context: {
+                sendAudioFile: "Wyślij plik audio jako wiadomość głosową",
                 sendVoiceMessage: "Wyślij wiadomość głosową",
                 missingPermissions: "(Brak uprawnień)"
             },

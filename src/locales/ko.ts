@@ -1596,6 +1596,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 never: "만료되지 않음"
             }
         },
+        betterMutualServers: {
+            name: "BetterMutualServers",
+            description: "공통 서버 목록에 역할과 가입 날짜를 표시합니다.",
+            joined: "{{date}} 가입"
+        },
         betterNotesBox: {
             name: "BetterNotesBox",
             description: "메모 숨기기 또는 맞춤법 검사 비활성화(설정에서 구성!!)",
@@ -1749,6 +1754,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 blurAllChannels: {
                     label: "모든 채널을 흐리게 합니다.",
                     description: "NSFW뿐만 아니라 모든 채널의 첨부 파일을 흐리게 처리합니다."
+                },
+                ignoredChannels: {
+                    label: "무시할 채널",
+                    description: "첨부 파일을 흐리게 처리하지 않을 채널 ID 목록(공백 또는 쉼표로 구분)"
                 }
             }
         },
@@ -6078,6 +6087,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "가벼움",
                     description: "밝기(%) 색상이 너무 밝거나 어두우면 변경하세요."
                 },
+                saturation: {
+                    label: "채도",
+                    description: "채도(%). 색이 너무 강하거나 흐릿하면 변경하세요"
+                },
+                seed: {
+                    label: "시드",
+                    description: "이 값을 변경하면 모든 사용자 이름의 색이 새로운 색으로 바뀝니다"
+                },
                 memberListColors: {
                     label: "회원 목록 색상",
                     description: "구성원 목록의 역할 색상 바꾸기"
@@ -8165,33 +8182,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        platformSpoofer: {
-            name: "PlatformSpoofer",
-            description: "현재 사용 중인 플랫폼이나 장치를 스푸핑하세요.",
-            about: "이 플러그인으로 인해 경고나 차단을 받지 않는다고 보장할 수 없습니다. Xbox/Playstation/VR을 선택하면 클라이언트가 오래된 버전이 될 수 있습니다.",
-            platform: {
-                desktop: "디스코드 클라이언트",
-                web: "디스코드 웹",
-                ios: "iOS 디스코드",
-                android: "디스코드 안드로이드",
-                xbox: "디스코드 내장",
-                playstation: "디스코드 내장",
-                vr: "VR"
-            },
-            option: {
-                platform: {
-                    label: "플랫폼",
-                    description: "사용 중인 것처럼 보일 플랫폼입니다.",
-                    desktop: "데스크탑",
-                    web: "편물",
-                    android: "기계적 인조 인간",
-                    ios: "iOS",
-                    xbox: "엑스박스",
-                    playstation: "플레이스테이션",
-                    vr: "VR"
-                }
-            }
-        },
         plexcordToolbox: {
             name: "PlexcordToolbox",
             description: "Plexcord 빠른 작업이 포함된 AppBar에 버튼을 추가합니다.",
@@ -8306,6 +8296,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     fetch: "Quest 가져오기",
                     markAsIgnored: "무시됨으로 표시",
                     unmarkAsIgnored: "무시 해제",
+                    launchActivity: "활동 시작",
                     stopAuto: "자동 완료 중지",
                     startAuto: "자동 완료 시작",
                     copyQuestID: "Quest ID 복사",
@@ -8335,6 +8326,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 autoCompleteBroken: "자동 완료가 작동하지 않습니다. 곧 수정될 예정입니다.",
                 enrollmentFailed: "{{questName}} Quest 등록에 실패했습니다.",
                 enrollmentInNormalizequestnameQuest: "{{normalizeQuestName_quest}} 퀘스트 등록에 실패했습니다{{rateLimitSuffix}}.",
+                activityLaunchFailed: "{{questName}}의 활동을 시작할 수 없습니다.",
                 automationUnlocked: "Quest 자동화가 잠금 해제되었습니다.",
                 automationLocked: "Quest 자동화가 잠겼습니다."
             },
@@ -11693,6 +11685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             context: {
+                sendAudioFile: "오디오 파일을 음성 메시지로 보내기",
                 sendVoiceMessage: "음성 메시지 보내기",
                 missingPermissions: "(권한 누락)"
             },

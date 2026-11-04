@@ -27,10 +27,10 @@ import { useMemo, UserStore } from "@webpack/common";
 
 // Calculate a CSS color string based on the user ID
 function calculateNameColorForUser(id?: string) {
-    const { lightness } = settings.use(["lightness"]);
-    const idHash = useMemo(() => id ? h64(id) : null, [id]);
+    const { lightness, saturation, seed } = settings.use(["lightness", "saturation", "seed"]);
+    const idHash = useMemo(() => id ? h64(id + seed) : null, [id, seed]);
 
-    return idHash && `hsl(${idHash % 360n}, 100%, ${lightness}%)`;
+    return idHash && `hsl(${idHash % 360n}, ${saturation}%, ${lightness}%)`;
 }
 
 const settings = definePluginSettings({
@@ -39,6 +39,18 @@ const settings = definePluginSettings({
         description: () => t(plugin.ircColors.option.lightness.description),
         type: OptionType.NUMBER,
         default: 70,
+    },
+    saturation: {
+        label: () => t(plugin.ircColors.option.saturation.label),
+        description: () => t(plugin.ircColors.option.saturation.description),
+        type: OptionType.NUMBER,
+        default: 100
+    },
+    seed: {
+        label: () => t(plugin.ircColors.option.seed.label),
+        description: () => t(plugin.ircColors.option.seed.description),
+        type: OptionType.STRING,
+        default: "",
     },
     memberListColors: {
         label: () => t(plugin.ircColors.option.memberListColors.label),

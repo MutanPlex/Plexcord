@@ -1596,6 +1596,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 never: "не закінчується"
             }
         },
+        betterMutualServers: {
+            name: "BetterMutualServers",
+            description: "Показує ролі та дати приєднання у списку спільних серверів.",
+            joined: "Приєднався {{date}}"
+        },
         betterNotesBox: {
             name: "BetterNotesBox",
             description: "Приховує нотатки або вимикає перевірку орфографії (налаштовується в параметрах!)",
@@ -1749,6 +1754,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 blurAllChannels: {
                     label: "Розмивати в усіх каналах",
                     description: "Розмивати вкладення в усіх каналах (не лише в NSFW)"
+                },
+                ignoredChannels: {
+                    label: "Ігноровані канали",
+                    description: "Список ID каналів, у яких вкладення не розмиваються, через пробіл або кому"
                 }
             }
         },
@@ -6078,6 +6087,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Яскравість",
                     description: "Яскравість у %. Змініть, якщо кольори занадто світлі чи темні"
                 },
+                saturation: {
+                    label: "Насиченість",
+                    description: "Насиченість у %. Змініть, якщо кольори надто яскраві або тьмяні"
+                },
+                seed: {
+                    label: "Зерно",
+                    description: "У разі зміни імена всіх користувачів отримають новий колір"
+                },
                 memberListColors: {
                     label: "Кольори в списку учасників",
                     description: "Замінити кольори ролей у списку праворуч"
@@ -8165,33 +8182,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        platformSpoofer: {
-            name: "PlatformSpoofer",
-            description: "Підміна інформації про вашу платформу або пристрій",
-            about: "Ми не можемо гарантувати, що через цей плагін ви не отримаєте попередження або бан. Вибір Xbox/Playstation/VR може зробити ваш клієнт застарілою версією.",
-            platform: {
-                desktop: "Клієнт Discord",
-                web: "Discord Веб",
-                ios: "Discord iOS",
-                android: "Discord Android",
-                xbox: "Discord Embedded",
-                playstation: "Discord Embedded",
-                vr: "VR"
-            },
-            option: {
-                platform: {
-                    label: "Платформа",
-                    description: "Яку платформу вдавати.",
-                    desktop: "Комп'ютер",
-                    web: "Браузер",
-                    android: "Android",
-                    ios: "iOS",
-                    xbox: "Xbox",
-                    playstation: "PlayStation",
-                    vr: "VR"
-                }
-            }
-        },
         plexcordToolbox: {
             name: "PlexcordToolbox",
             description: "Додає кнопку на панель додатків з швидкими діями Plexcord",
@@ -8306,6 +8296,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     fetch: "Завантажити Квести",
                     markAsIgnored: "Позначити як ігнорований",
                     unmarkAsIgnored: "Перестати ігнорувати",
+                    launchActivity: "Запустити активність",
                     stopAuto: "Зупинити автовиконання",
                     startAuto: "Запустити автовиконання",
                     copyQuestID: "Копіювати ID Квесту",
@@ -8335,6 +8326,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 autoCompleteBroken: "Автовиконання зламане. Виправлення невдовзі з'явиться.",
                 enrollmentFailed: "Не вдалося записатися на Квест {{questName}}.",
                 enrollmentInNormalizequestnameQuest: "Не вдалося записатися на завдання {{normalizeQuestName_quest}}{{rateLimitSuffix}}.",
+                activityLaunchFailed: "Не вдалося запустити активність для {{questName}}.",
                 automationUnlocked: "Автоматизацію Квестів розблоковано.",
                 automationLocked: "Автоматизацію Квестів заблоковано."
             },
@@ -11693,6 +11685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             context: {
+                sendAudioFile: "Надіслати аудіофайл як голосове повідомлення",
                 sendVoiceMessage: "Надіслати голосове повідомлення",
                 missingPermissions: "(Бракує дозволів)"
             },

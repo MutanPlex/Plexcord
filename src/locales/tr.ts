@@ -1596,6 +1596,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 never: "hiçbir zaman"
             }
         },
+        betterMutualServers: {
+            name: "BetterMutualServers",
+            description: "Ortak Sunucular listesinde rolleri ve katılım tarihlerini gösterir.",
+            joined: "Katılma: {{date}}"
+        },
         betterNotesBox: {
             name: "BetterNotesBox",
             description: "Notları gizle veya yazım denetimini devre dışı bırak (Ayarlar kısmından yapılandır!!) ",
@@ -1749,6 +1754,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 blurAllChannels: {
                     label: "Tüm Kanalları Bulanıklaştır",
                     description: "Tüm kanallardaki ekleri bulanıklaştır (sadece NSFW değil)"
+                },
+                ignoredChannels: {
+                    label: "Yok Sayılan Kanallar",
+                    description: "Eklerin bulanıklaştırılmayacağı kanal kimliklerinin boşluk veya virgülle ayrılmış listesi"
                 }
             }
         },
@@ -6078,6 +6087,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Aydınlık",
                     description: "Aydınlık oranı (% cinsinden). Renkler çok açık veya koyu görünüyorsa değiştirin."
                 },
+                saturation: {
+                    label: "Doygunluk",
+                    description: "Yüzde cinsinden doygunluk. Renkler çok canlı veya çok soluksa değiştirin"
+                },
+                seed: {
+                    label: "Tohum",
+                    description: "Bunu değiştirmek herkesin kullanıcı adı rengini yeni bir renkle değiştirir"
+                },
                 memberListColors: {
                     label: "Üye Listesi Renkleri",
                     description: "Üye listesindeki rol renklerini değiştir."
@@ -8165,33 +8182,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        platformSpoofer: {
-            name: "PlatformSpoofer",
-            description: "Hangi platformda veya cihazda olduğunuzu taklit eder",
-            about: "Bu eklentinin uyarı veya yasaklama almana neden olmayacağını garanti edemeyiz. Xbox/Playstation/VR seçmek istemcini eski bir sürüme çevirebilir.",
-            platform: {
-                desktop: "Discord İstemcisi",
-                web: "Discord Web",
-                ios: "Discord iOS",
-                android: "Discord Android",
-                xbox: "Gömülü Discord",
-                playstation: "Gömülü Discord",
-                vr: "VR"
-            },
-            option: {
-                platform: {
-                    label: "Platform",
-                    description: "Hangi platformdaymış gibi görüneceğin.",
-                    desktop: "Masaüstü",
-                    web: "Web",
-                    android: "Android",
-                    ios: "iOS",
-                    xbox: "Xbox",
-                    playstation: "PlayStation",
-                    vr: "VR"
-                }
-            }
-        },
         plexcordToolbox: {
             name: "PlexcordToolbox",
             description: "Uygulama çubuğuna Plexcord hızlı işlemlerini barındıran bir düğme ekler.",
@@ -8306,6 +8296,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     fetch: "Görevleri Getir",
                     markAsIgnored: "Yok Sayılan Olarak İşaretle",
                     unmarkAsIgnored: "Yok Sayılan İşaretini Kaldır",
+                    launchActivity: "Etkinliği Başlat",
                     stopAuto: "Otomatik Tamamlamayı Durdur",
                     startAuto: "Otomatik Tamamlamayı Başlat",
                     copyQuestID: "Görev ID'sini Kopyala",
@@ -8335,6 +8326,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 autoCompleteBroken: "Otomatik Tamamlama bozuk. Kısa süre içinde bir düzeltme yayınlanacak.",
                 enrollmentFailed: "{{questName}} Görevine kayıt başarısız oldu.",
                 enrollmentInNormalizequestnameQuest: "{{normalizeQuestName_quest}} görevine kayıt başarısız oldu{{rateLimitSuffix}}.",
+                activityLaunchFailed: "{{questName}} için etkinlik başlatılamadı.",
                 automationUnlocked: "Görev Otomasyonunun Kilidi Açıldı.",
                 automationLocked: "Görev Otomasyonu Kilitlendi."
             },
@@ -11693,6 +11685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             context: {
+                sendAudioFile: "Ses Dosyasını Sesli Mesaj Olarak Gönder",
                 sendVoiceMessage: "Sesli Mesaj Gönder",
                 missingPermissions: "(İzin Eksik)"
             },

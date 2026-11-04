@@ -1596,6 +1596,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 never: "沒有過期"
             }
         },
+        betterMutualServers: {
+            name: "BetterMutualServers",
+            description: "在共同伺服器清單中顯示身分組和加入日期。",
+            joined: "加入於 {{date}}"
+        },
         betterNotesBox: {
             name: "BetterNotesBox",
             description: "隱藏註釋或停用拼字檢查（在設定中配置！！）",
@@ -1749,6 +1754,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 blurAllChannels: {
                     label: "模糊所有頻道",
                     description: "模糊所有頻道中的配件（不僅僅是 NSFW）"
+                },
+                ignoredChannels: {
+                    label: "忽略的頻道",
+                    description: "不模糊附件的頻道 ID 清單,以空格或逗號分隔"
                 }
             }
         },
@@ -6078,6 +6087,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "亮度",
                     description: "亮度，以 % 為單位。如果顏色太淺或太深，請進行更改"
                 },
+                saturation: {
+                    label: "飽和度",
+                    description: "飽和度(%)。顏色過於鮮豔或暗淡時可調整"
+                },
+                seed: {
+                    label: "種子",
+                    description: "變更此項會將所有人的使用者名稱顏色更換為新顏色"
+                },
                 memberListColors: {
                     label: "會員列表顏色",
                     description: "替換成員清單中的角色顏色"
@@ -8165,33 +8182,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        platformSpoofer: {
-            name: "PlatformSpoofer",
-            description: "欺騙您所在的平台或設備",
-            about: "我們無法保證此外掛不會讓你被警告或封鎖。選擇 Xbox/Playstation/VR 可能會使你的用戶端變成過時版本。",
-            platform: {
-                desktop: "不和諧客戶端",
-                web: "不和諧網",
-                ios: "不和諧 iOS",
-                android: "不和諧安卓",
-                xbox: "不和諧嵌入",
-                playstation: "不和諧嵌入",
-                vr: "虛擬實境"
-            },
-            option: {
-                platform: {
-                    label: "平台",
-                    description: "要偽裝成正在使用的平台。",
-                    desktop: "桌面",
-                    web: "網路",
-                    android: "安卓",
-                    ios: "iOS系統",
-                    xbox: "Xbox",
-                    playstation: "遊戲機",
-                    vr: "虛擬實境"
-                }
-            }
-        },
         plexcordToolbox: {
             name: "PlexcordToolbox",
             description: "在 AppBar 新增一個按鈕，用於容納 Plexcord 快速操作",
@@ -8306,6 +8296,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     fetch: "取得 Quest",
                     markAsIgnored: "標記為已忽略",
                     unmarkAsIgnored: "取消忽略",
+                    launchActivity: "啟動活動",
                     stopAuto: "停止自動完成",
                     startAuto: "開始自動完成",
                     copyQuestID: "複製 Quest ID",
@@ -8335,6 +8326,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 autoCompleteBroken: "自動完成已失效，修正即將推出。",
                 enrollmentFailed: "加入 {{questName}} Quest 失敗。",
                 enrollmentInNormalizequestnameQuest: "報名任務 {{normalizeQuestName_quest}} 失敗{{rateLimitSuffix}}。",
+                activityLaunchFailed: "無法啟動 {{questName}} 的活動。",
                 automationUnlocked: "Quest 自動化已解鎖。",
                 automationLocked: "Quest 自動化已鎖定。"
             },
@@ -11693,6 +11685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             context: {
+                sendAudioFile: "將音訊檔案作為語音訊息傳送",
                 sendVoiceMessage: "傳送語音留言",
                 missingPermissions: "（缺少權限）"
             },

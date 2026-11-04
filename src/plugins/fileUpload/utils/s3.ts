@@ -5,9 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { toProxiedUrl } from "@plugins/fileUpload/constants";
 import { settings } from "@plugins/fileUpload/settings";
-import { PluginNative } from "@utils/types";
 
 type S3Store = {
     s3Endpoint?: string;
@@ -19,7 +17,6 @@ type S3Store = {
     s3PublicUrl?: string;
     s3Prefix?: string;
     s3ForcePathStyle?: boolean;
-    corsProxyUrl?: string;
 };
 
 type UploadRequestResponse = {
@@ -99,7 +96,6 @@ export function isS3Configured(): boolean {
 export async function uploadToS3(
     fileBlob: Blob,
     filename: string,
-    native: PluginNative<typeof import("../native")> | null,
     uploadRequest: UploadRequest
 ): Promise<string> {
     const {
@@ -192,23 +188,15 @@ export async function uploadToS3(
         requestHeaders["x-amz-security-token"] = s3SessionToken;
     }
 
-    if (native) {
-        const arrayBuffer = await fileBlob.arrayBuffer();
-        const result = await native.uploadToS3(arrayBuffer, uploadUrl.toString(), requestHeaders);
-        if (!result.success) {
-            throw new Error(result.error || "Upload failed");
-        }
-    } else {
-        const response = await uploadRequest(toProxiedUrl(uploadUrl.toString(), settings.store.corsProxyUrl), {
-            method: "PUT",
-            headers: requestHeaders,
-            body: fileBlob
-        });
+    const response = await uploadRequest(uploadUrl.toString(), {
+        method: "PUT",
+        headers: requestHeaders,
+        body: fileBlob
+    });
 
-        if (!response.ok) {
-            const text = await response.text();
-            throw new Error(`Upload failed: ${response.status} ${text}`);
-        }
+    if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`Upload failed: ${response.status} ${text}`);
     }
 
     if (s3PublicUrl) {

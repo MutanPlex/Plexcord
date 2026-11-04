@@ -20,14 +20,14 @@
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
 import { plugin, t } from "@api/i18n";
 import { addMessagePreSendListener, MessageSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
-import { definePluginSettings } from "@api/Settings";
-import { Devs } from "@utils/constants";
+import { isPluginEnabled } from "@api/PluginManager";
+import { definePluginSettings, Settings } from "@api/Settings";
+import { MessageFlags } from "@plexcord/discord-types/enums";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { IconComponent, OptionType } from "@utils/types";
-import { React, useEffect, useState } from "@webpack/common";
+import { React, useEffect } from "@webpack/common";
 
-let lastState = false;
-
-export { lastState };
+const SETTINGS_KEYS: "silent"[] = ["silent"];
 
 const settings = definePluginSettings({
     persistState: {
@@ -40,7 +40,7 @@ const settings = definePluginSettings({
             { label: () => t(plugin.silentMessageToggle.option.persistState.restarts), value: "restarts" }
         ],
         onChange(newValue: string) {
-            lastState = newValue !== "none" && lastState;
+            if (newValue === "none") settings.store.silent = false;
         }
     },
     autoDisable: {
@@ -49,7 +49,18 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: true
     }
-});
+}).withPrivateSettings<{ silent?: boolean; }>();
+
+export function takeSilentFlag() {
+    if (
+        !isPluginEnabled("SilentMessageToggle")
+        || Settings.uiElements.chatBarButtons.SilentMessageToggle?.enabled === false
+        || !settings.store.silent
+    ) return 0;
+
+    if (settings.store.autoDisable) settings.store.silent = false;
+    return MessageFlags.SUPPRESS_NOTIFICATIONS;
+}
 
 function SilentMessageDisabledIcon() {
     return (
@@ -78,34 +89,32 @@ const SilentMessageIcon: IconComponent = ({ height = 20, width = 20, className, 
     );
 };
 
-const SilentMessageToggle: ChatBarButtonFactory = ({ isMainChat }) => {
-    const [enabled, setEnabled] = useState(settings.store.persistState === "restarts" || lastState);
-
-    function setEnabledValue(value: boolean) {
-        if (settings.store.persistState !== "none") lastState = value;
-        setEnabled(value);
-    }
+const SilentMessageToggle: ChatBarButtonFactory = ({ channel, isMainChat }) => {
+    const { silent } = settings.use(SETTINGS_KEYS);
 
     useEffect(() => {
+        if (isMainChat && settings.store.persistState === "none") settings.store.silent = false;
+    }, [channel.id, isMainChat]);
+
+    useEffect(() => {
+        if (!isMainChat || !silent) return;
+
         const listener: MessageSendListener = (_, message) => {
-            if (enabled) {
-                if (settings.store.autoDisable) setEnabledValue(false);
-                if (!message.content.startsWith("@silent ")) message.content = "@silent " + message.content;
-            }
+            if (takeSilentFlag() && !/^@silent(\s|$)/.test(message.content)) message.content = "@silent " + message.content;
         };
 
         addMessagePreSendListener(listener);
         return () => void removeMessagePreSendListener(listener);
-    }, [enabled]);
+    }, [isMainChat, silent]);
 
     if (!isMainChat) return null;
 
     return (
         <ChatBarButton
-            tooltip={enabled ? t(plugin.silentMessageToggle.tooltip.disable) : t(plugin.silentMessageToggle.tooltip.enable)}
-            onClick={() => setEnabledValue(!enabled)}
+            tooltip={silent ? t(plugin.silentMessageToggle.tooltip.disable) : t(plugin.silentMessageToggle.tooltip.enable)}
+            onClick={() => settings.store.silent = !silent}
         >
-            {enabled ? <SilentMessageIcon /> : <SilentMessageDisabledIcon />}
+            {silent ? <SilentMessageIcon /> : <SilentMessageDisabledIcon />}
         </ChatBarButton>
     );
 };
@@ -113,12 +122,29 @@ const SilentMessageToggle: ChatBarButtonFactory = ({ isMainChat }) => {
 export default definePlugin({
     name: "SilentMessageToggle",
     description: () => t(plugin.silentMessageToggle.description),
-    authors: [Devs.Nuckyz, Devs.CatNoir],
+    authors: [Devs.Nuckyz, Devs.CatNoir, PcDevs.Z1xus],
     tags: ["chat", "utility"],
+    dependencies: ["ChatInputButtonAPI", "MessageEventsAPI"],
     settings,
+
+    patches: [
+        {
+            find: "Voice message recording is not supported on this client",
+            replacement: {
+                match: /(?<=flags:\i\.\i\.IS_VOICE_MESSAGE)/,
+                replace: "|$self.takeSilentFlag()"
+            }
+        }
+    ],
+
+    takeSilentFlag,
 
     chatBarButton: {
         icon: SilentMessageIcon,
         render: SilentMessageToggle
+    },
+
+    start() {
+        if (settings.store.persistState !== "restarts") settings.store.silent = false;
     }
 });

@@ -9,7 +9,7 @@ import { plugin, t } from "@api/i18n";
 import type { Quest, User } from "@plexcord/discord-types";
 import { QuestTargetedContent, QuestTaskJoinOperator, QuestTaskType } from "@plexcord/discord-types/enums";
 import type { PluginNative } from "@utils/types";
-import { findByCodeLazy, findLazy } from "@webpack";
+import { findByCodeLazy, findByPropsLazy, findLazy } from "@webpack";
 import { FluxDispatcher, QuestStore, RestAPI, showToast, SnowflakeUtils, UserStore } from "@webpack/common";
 
 import { createQuestEnrollmentGuard } from "../index";
@@ -106,6 +106,9 @@ const getQuestOrbQuantity = findByCodeLazy("premiumOrbQuantity??", "orbQuantity"
 ) => number | null;
 
 const QuestCTA = findLazy(m => !!m?.START_QUEST && !!m?.ACCEPT_QUEST) as QuestCTAConstants;
+const ActivityLauncher = findByPropsLazy("launch", "getDetectableGames") as {
+    launch(options: { applicationId: string; }): Promise<boolean>;
+};
 
 async function getActivityProxyTicket(appId: string): Promise<string | undefined> {
     try {
@@ -804,6 +807,53 @@ export async function ensureQuestEnrolled(quest: Quest, analytics: QuestButtonAn
     return failure;
 }
 
+export function getQuestActivityApplicationId(quest: Quest): string | null {
+    const task = Object.values(quest.config.taskConfigV2?.tasks ?? {}).find(task => task.type === QuestTaskType.ACHIEVEMENT_IN_ACTIVITY || task.type === QuestTaskType.PLAY_ACTIVITY);
+
+    return task?.applications?.[0]?.id ?? null;
+}
+
+export async function enrollAndLaunchQuestActivity(quest: Quest): Promise<boolean> {
+    quest = refreshQuest(quest);
+    const isCurrentSession = createQuestEnrollmentGuard();
+
+    if (!isCurrentSession() || !getQuestActivityApplicationId(quest)) {
+        return false;
+    }
+
+    if (!quest.userStatus?.enrolledAt && (quest.userStatus?.completedAt || getQuestStatus(quest, []) !== QuestStatus.Unclaimed)) {
+        return false;
+    }
+
+    const enrollment = await ensureQuestEnrolled(quest);
+
+    if (enrollment.type !== "success" || !isCurrentSession()) {
+        return false;
+    }
+
+    quest = refreshQuest(quest);
+    const appId = getQuestActivityApplicationId(quest);
+
+    if (!appId || !quest.userStatus?.enrolledAt) {
+        return false;
+    }
+
+    try {
+        const launched = await ActivityLauncher.launch({ applicationId: appId });
+
+        QL.info("QUEST_ACTIVITY_LAUNCH_RESULT", { questId: quest.id, appId, launched });
+        return launched;
+    } catch (error) {
+        QL.error("QUEST_ACTIVITY_LAUNCH_FAILED", { questId: quest.id, appId, error });
+
+        if (isCurrentSession()) {
+            showToast({ text: t(plugin.questify.toast.activityLaunchFailed, { questName: normalizeQuestName(quest) }), variant: "critical" });
+        }
+
+        return false;
+    }
+}
+
 export async function enrollAndStartQuestAutoComplete(quest: Quest, analytics: QuestButtonAnalyticsArgs = {}): Promise<boolean> {
     quest = refreshQuest(quest);
 
@@ -1247,7 +1297,7 @@ async function runAchievementQuest(quest: Quest, entry: AutoCompleteEntry, targe
         setQuestAutoCompleteProgress(quest, success ? target.adjusted : 0);
 
         if (!success) {
-            QL.error("AUTO_COMPLETE_ACHIEVEMENT_FAILED", { questId: quest.id, questName: entry.questName, error: result.error });
+            QL.error("AUTO_COMPLETE_ACHIEVEMENT_FAILED", { questId: quest.id, questName: entry.questName, appId, submittedProgress: target.adjusted, error: result.error });
         }
 
         return success;

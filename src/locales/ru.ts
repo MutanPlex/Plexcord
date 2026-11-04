@@ -1596,6 +1596,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 never: "никогда"
             }
         },
+        betterMutualServers: {
+            name: "BetterMutualServers",
+            description: "Показывает роли и даты вступления в списке общих серверов.",
+            joined: "Присоединился {{date}}"
+        },
         betterNotesBox: {
             name: "BetterNotesBox",
             description: "Скрывает заметки или отключает проверку орфографии (настройте в параметрах!)",
@@ -1749,6 +1754,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 blurAllChannels: {
                     label: "Размывать все каналы",
                     description: "Размывать вложения во всех каналах (не только в NSFW)"
+                },
+                ignoredChannels: {
+                    label: "Игнорируемые каналы",
+                    description: "Список ID каналов, в которых вложения не размываются, через пробел или запятую"
                 }
             }
         },
@@ -6078,6 +6087,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Яркость",
                     description: "Яркость в %. Измените, если цвета кажутся слишком светлыми или темными."
                 },
+                saturation: {
+                    label: "Насыщенность",
+                    description: "Насыщенность в %. Измените, если цвета слишком яркие или тусклые"
+                },
+                seed: {
+                    label: "Зерно",
+                    description: "При изменении имена всех пользователей получат новый цвет"
+                },
                 memberListColors: {
                     label: "Цвета в списке участников",
                     description: "Заменять цвета ролей цветами плагина в списке справа."
@@ -8165,33 +8182,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        platformSpoofer: {
-            name: "PlatformSpoofer",
-            description: "Подмена информации о том, с какой платформы или устройства вы зашли.",
-            about: "Мы не можем гарантировать, что из-за этого плагина вы не получите предупреждение или бан. При выборе Xbox/Playstation/VR ваш клиент может стать устаревшей версией.",
-            platform: {
-                desktop: "Клиент Discord",
-                web: "Discord Web",
-                ios: "Discord iOS",
-                android: "Discord Android",
-                xbox: "Discord Embedded",
-                playstation: "Discord Embedded",
-                vr: "VR"
-            },
-            option: {
-                platform: {
-                    label: "Платформа",
-                    description: "Какую платформу изображать.",
-                    desktop: "ПК",
-                    web: "Веб-версия",
-                    android: "Android",
-                    ios: "iOS",
-                    xbox: "Xbox",
-                    playstation: "PlayStation",
-                    vr: "VR"
-                }
-            }
-        },
         plexcordToolbox: {
             name: "PlexcordToolbox",
             description: "Добавляет кнопку в AppBar, содержащую быстрые действия Plexcord.",
@@ -8306,6 +8296,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     fetch: "Загрузить квесты",
                     markAsIgnored: "Отметить как игнорируемый",
                     unmarkAsIgnored: "Перестать игнорировать",
+                    launchActivity: "Запустить активность",
                     stopAuto: "Остановить автовыполнение",
                     startAuto: "Запустить автовыполнение",
                     copyQuestID: "Скопировать ID квеста",
@@ -8335,6 +8326,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 autoCompleteBroken: "Автовыполнение сломано. Исправление скоро появится.",
                 enrollmentFailed: "Не удалось записаться на квест {{questName}}.",
                 enrollmentInNormalizequestnameQuest: "Не удалось записаться на задание {{normalizeQuestName_quest}}{{rateLimitSuffix}}.",
+                activityLaunchFailed: "Не удалось запустить активность для {{questName}}.",
                 automationUnlocked: "Автоматизация квестов разблокирована.",
                 automationLocked: "Автоматизация квестов заблокирована."
             },
@@ -11693,6 +11685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             context: {
+                sendAudioFile: "Отправить аудиофайл как голосовое сообщение",
                 sendVoiceMessage: "Отправить голосовое сообщение",
                 missingPermissions: "(Нет прав)"
             },

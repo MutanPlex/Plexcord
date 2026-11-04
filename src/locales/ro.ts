@@ -1596,6 +1596,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 never: "nu expiră niciodată"
             }
         },
+        betterMutualServers: {
+            name: "BetterMutualServers",
+            description: "Afișează rolurile și datele de aderare în lista de servere comune.",
+            joined: "S-a alăturat pe {{date}}"
+        },
         betterNotesBox: {
             name: "BetterNotesBox",
             description: "Ascunde notițele sau dezactivează corecția ortografică (Configurează în setări!!)",
@@ -1749,6 +1754,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 blurAllChannels: {
                     label: "Blur în Toate Canalele",
                     description: "Cenzurează fișierele în toate canalele (nu doar NSFW)"
+                },
+                ignoredChannels: {
+                    label: "Canale ignorate",
+                    description: "Lista ID-urilor canalelor în care atașamentele nu sunt estompate, separate prin spațiu sau virgulă"
                 }
             }
         },
@@ -6078,6 +6087,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Luminozitate",
                     description: "Luminozitate în %. Modifică dacă culorile sunt prea deschise sau prea închise"
                 },
+                saturation: {
+                    label: "Saturație",
+                    description: "Saturație, în %. Modifică dacă culorile sunt prea vii sau prea șterse"
+                },
+                seed: {
+                    label: "Seed",
+                    description: "Modificarea acestei valori schimbă culoarea numelui de utilizator pentru toată lumea"
+                },
                 memberListColors: {
                     label: "Culori în lista de membri",
                     description: "Înlocuiește culorile rolurilor în lista de membri"
@@ -8165,33 +8182,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        platformSpoofer: {
-            name: "PlatformSpoofer",
-            description: "Falsifică platforma sau dispozitivul pe care te afli",
-            about: "Nu putem garanta că acest plugin nu îți va aduce un avertisment sau o interdicție. Alegerea Xbox/Playstation/VR poate face clientul tău o versiune învechită.",
-            platform: {
-                desktop: "Client Discord",
-                web: "Discord Web",
-                ios: "Discord iOS",
-                android: "Discord Android",
-                xbox: "Discord Embedded",
-                playstation: "Discord Embedded",
-                vr: "VR"
-            },
-            option: {
-                platform: {
-                    label: "Platformă",
-                    description: "Pe ce platformă să pretinzi că ești.",
-                    desktop: "Desktop",
-                    web: "Web",
-                    android: "Android",
-                    ios: "iOS",
-                    xbox: "Xbox",
-                    playstation: "PlayStation",
-                    vr: "VR"
-                }
-            }
-        },
         plexcordToolbox: {
             name: "PlexcordToolbox",
             description: "Adaugă un buton în AppBar care găzduiește acțiunile rapide Plexcord",
@@ -8306,6 +8296,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     fetch: "Preia Quest-urile",
                     markAsIgnored: "Marchează ca ignorat",
                     unmarkAsIgnored: "Nu mai ignora",
+                    launchActivity: "Pornește activitatea",
                     stopAuto: "Oprește finalizarea automată",
                     startAuto: "Pornește finalizarea automată",
                     copyQuestID: "Copiază ID-ul Quest-ului",
@@ -8335,6 +8326,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 autoCompleteBroken: "Finalizarea automată nu funcționează. O remediere va apărea în curând.",
                 enrollmentFailed: "Înscrierea în Quest-ul {{questName}} a eșuat.",
                 enrollmentInNormalizequestnameQuest: "Înscrierea în misiunea {{normalizeQuestName_quest}} a eșuat{{rateLimitSuffix}}.",
+                activityLaunchFailed: "Activitatea pentru {{questName}} nu a putut fi pornită.",
                 automationUnlocked: "Automatizarea Quest-urilor a fost deblocată.",
                 automationLocked: "Automatizarea Quest-urilor a fost blocată."
             },
@@ -11693,6 +11685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             context: {
+                sendAudioFile: "Trimite fișierul audio ca mesaj vocal",
                 sendVoiceMessage: "Trimite mesaj vocal",
                 missingPermissions: "(Permisiuni lipsă)"
             },

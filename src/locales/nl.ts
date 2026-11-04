@@ -1596,6 +1596,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 never: "niet verlopen"
             }
         },
+        betterMutualServers: {
+            name: "BetterMutualServers",
+            description: "Toont rollen en toetredingsdatums in de lijst met gemeenschappelijke servers.",
+            joined: "Lid sinds {{date}}"
+        },
         betterNotesBox: {
             name: "BetterNotesBox",
             description: "Verberg notities of schakel de spellingcontrole uit (Configureer in instellingen!!)",
@@ -1749,6 +1754,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 blurAllChannels: {
                     label: "Vervaag alle kanalen",
                     description: "Bijlagen vervagen in alle kanalen (niet alleen NSFW)"
+                },
+                ignoredChannels: {
+                    label: "Genegeerde kanalen",
+                    description: "Lijst met kanaal-ID's waarin bijlagen niet worden vervaagd, gescheiden door een spatie of komma"
                 }
             }
         },
@@ -6078,6 +6087,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Lichtheid",
                     description: "Lichtheid, in%. Verander als de kleuren te licht of te donker zijn"
                 },
+                saturation: {
+                    label: "Verzadiging",
+                    description: "Verzadiging, in %. Wijzig dit als de kleuren te fel of te dof zijn"
+                },
+                seed: {
+                    label: "Seed",
+                    description: "Als je dit wijzigt, krijgt iedereens gebruikersnaam een nieuwe kleur"
+                },
                 memberListColors: {
                     label: "Kleuren van de ledenlijst",
                     description: "Vervang de rolkleuren in de ledenlijst"
@@ -8165,33 +8182,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        platformSpoofer: {
-            name: "PlatformSpoofer",
-            description: "Spoof op welk platform of apparaat u zich bevindt",
-            about: "We kunnen niet garanderen dat je door deze plugin geen waarschuwing of ban krijgt. Als je Xbox/Playstation/VR kiest, kan je client een verouderde versie worden.",
-            platform: {
-                desktop: "Discord-klant",
-                web: "Onenigheidsweb",
-                ios: "Discord iOS",
-                android: "Onenigheid Android",
-                xbox: "Onenigheid ingebed",
-                playstation: "Onenigheid ingebed",
-                vr: "VR"
-            },
-            option: {
-                platform: {
-                    label: "Platform",
-                    description: "Op welk platform je wilt doen alsof je zit.",
-                    desktop: "Bureaublad",
-                    web: "Web",
-                    android: "Android",
-                    ios: "iOS",
-                    xbox: "Xbox",
-                    playstation: "PlayStation",
-                    vr: "VR"
-                }
-            }
-        },
         plexcordToolbox: {
             name: "PlexcordToolbox",
             description: "Voegt een knop toe aan de AppBar met snelle acties van Plexcord",
@@ -8306,6 +8296,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     fetch: "Quests ophalen",
                     markAsIgnored: "Als genegeerd markeren",
                     unmarkAsIgnored: "Niet meer negeren",
+                    launchActivity: "Activiteit starten",
                     stopAuto: "Automatisch voltooien stoppen",
                     startAuto: "Automatisch voltooien starten",
                     copyQuestID: "Quest-ID kopiëren",
@@ -8335,6 +8326,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 autoCompleteBroken: "Automatisch voltooien werkt niet. Er komt binnenkort een oplossing.",
                 enrollmentFailed: "Inschrijven voor de Quest {{questName}} is mislukt.",
                 enrollmentInNormalizequestnameQuest: "Inschrijving voor quest {{normalizeQuestName_quest}} mislukt{{rateLimitSuffix}}.",
+                activityLaunchFailed: "Kan de activiteit voor {{questName}} niet starten.",
                 automationUnlocked: "Quest-automatisering ontgrendeld.",
                 automationLocked: "Quest-automatisering vergrendeld."
             },
@@ -11693,6 +11685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             context: {
+                sendAudioFile: "Audiobestand verzenden als spraakbericht",
                 sendVoiceMessage: "Spraakbericht verzenden",
                 missingPermissions: "(Ontbrekende rechten)"
             },

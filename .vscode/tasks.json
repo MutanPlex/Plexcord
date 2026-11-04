@@ -5,6 +5,7 @@
     "tasks": [
         {
             "label": "Build",
+            "detail": "Build plexcord",
             "type": "shell",
             "command": "pnpm build",
             "group": {
@@ -13,7 +14,40 @@
             }
         },
         {
+            "label": "Build Dev",
+            "detail": "Build plexcord in development mode",
+            "type": "shell",
+            "command": "pnpm build --dev",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            // for use with the plexcord companion extension
+            "label": "Build Companion Reporter",
+            "type": "shell",
+            "command": "pnpm build --dev --reporter --companion-test",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            }
+        },
+        {
+            "label": "Reporter",
+            "detail": "Build with the reporter that will test all patches and finds, then report errors to console",
+            "type": "shell",
+            "command": "pnpm build --dev --reporter",
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
             "label": "Watch",
+            "detail": "Build and watch for changes",
             "type": "shell",
             "command": "pnpm watch",
             "problemMatcher": [],

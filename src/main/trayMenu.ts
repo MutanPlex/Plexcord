@@ -13,33 +13,8 @@ import updater from "./updater";
 import { SETTINGS_DIR, THEMES_DIR } from "./utils/constants";
 import { components, t } from "./utils/i18n";
 
-function findInsertIndex(template: MenuItemConstructorOptions[]): number {
-    const openIndex = template.findIndex(item => {
-        const label = item.label?.toLowerCase() ?? "";
-        return label.includes("open") || label.includes("show");
-    });
-    return openIndex !== -1 ? openIndex + 1 : 0;
-}
-
-function isTrayMenu(template: MenuItemConstructorOptions[]): boolean {
-    if (!template.length) return false;
-
-    const hasOpenOrShow = template.some(item => {
-        const label = item.label?.toLowerCase() ?? "";
-        return label.includes("open") || label.includes("show");
-    });
-
-    const hasQuit = template.some(item =>
-        item.label?.toLowerCase().includes("quit") || item.role === "quit"
-    );
-
-    const isNotAppMenu = !template.some(item =>
-        item.label === "&File" || item.label === "File" ||
-        item.label === "&Edit" || item.label === "Edit"
-    );
-
-    return hasOpenOrShow && hasQuit && isNotAppMenu;
-}
+const isTrayMenu = (template: MenuItemConstructorOptions[]) =>
+    template.at(-1)?.role === "quit";
 
 let aboutWindow: BrowserWindow | null = null;
 
@@ -81,9 +56,13 @@ const notify = (window: BaseWindow | undefined, title: string, message: string) 
         ? dialog.showMessageBox(window, { title, message })
         : dialog.showMessageBox({ title, message });
 
+let isUpdating = false;
+
 function createPlexcordMenuItems(): MenuItemConstructorOptions[] {
     return [
+        { type: "separator" },
         {
+            id: "plexcord",
             label: "Plexcord",
             submenu: [
                 {
@@ -92,7 +71,11 @@ function createPlexcordMenuItems(): MenuItemConstructorOptions[] {
                 },
                 {
                     label: t(components.tray.updatePlexcord, "Update Plexcord"),
+                    visible: !IS_UPDATER_DISABLED,
                     async click(_item, window) {
+                        if (isUpdating) return;
+                        isUpdating = true;
+
                         try {
                             const updateAvailable = await updater.fetchUpdate();
                             if (!updateAvailable) {
@@ -122,7 +105,7 @@ function createPlexcordMenuItems(): MenuItemConstructorOptions[] {
                     click: () => shell.openPath(THEMES_DIR)
                 }
             ]
-        },
+        }
     ];
 }
 
@@ -130,11 +113,10 @@ export function patchTrayMenu(): void {
     const originalBuildFromTemplate = Menu.buildFromTemplate;
 
     Menu.buildFromTemplate = function (template: MenuItemConstructorOptions[]) {
-        const alreadyPatched = template.some(item => item.label === "Plexcord");
-        if (isTrayMenu(template) && !alreadyPatched) {
-            const insertIndex = findInsertIndex(template);
-            const plexcordItems = createPlexcordMenuItems();
-            template.splice(insertIndex, 0, ...plexcordItems);
+        if (isTrayMenu(template) && !template.some(item => item.id === "plexcord")) {
+            const separatorIndex = template.findIndex(item => item.type === "separator");
+            const insertIndex = separatorIndex !== -1 ? separatorIndex : template.length - 1;
+            template.splice(insertIndex, 0, ...createPlexcordMenuItems());
         }
 
         return originalBuildFromTemplate.call(this, template);

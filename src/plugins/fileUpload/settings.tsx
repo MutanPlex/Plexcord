@@ -5,13 +5,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { csp, plugin, t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
-import { Notice } from "@components/Notice";
 import { SettingsSection } from "@components/settings/tabs/plugins/components/Common";
 import { Switch } from "@components/Switch";
-import { useCspPermission } from "@utils/csp";
 import { classNameFactory } from "@utils/css";
 import { useForceUpdater } from "@utils/react";
 import { OptionType, PluginNative } from "@utils/types";
@@ -588,30 +586,10 @@ function FallbackOrderSettings() {
     );
 }
 
-function getShareXRequestUrl(config: string) {
-    try {
-        return parseShareXConfig(config).RequestURL;
-    } catch {
-        return undefined;
-    }
-}
-
-function AllowHostNotice({ url }: { url?: string; }) {
-    const [isAllowed, allow] = useCspPermission(url, ["connect-src"], "FileUpload");
-    if (isAllowed || !url) return null;
-
-    return (
-        <Notice variant="warning" action={<Button size="small" variant="secondary" onClick={allow}>{t(csp.notice.allowHost)}</Button>}>
-            {t(csp.notice.blocked, { host: URL.parse(url)?.host })}
-        </Notice>
-    );
-}
-
 export function SettingsComponent() {
     const update = useForceUpdater();
     const sharexFileInputRef = React.useRef<HTMLInputElement>(null);
     const { serviceType } = settings.store;
-    const { serviceUrl, sharexConfig, corsProxyUrl } = settings.use(["serviceUrl", "sharexConfig", "corsProxyUrl"]);
 
     const validateShareXConfig = () => {
         try {
@@ -669,7 +647,6 @@ export function SettingsComponent() {
                         onChange={v => settings.store.serviceUrl = v}
                         placeholder="https://your-zipline-instance.com"
                     />
-                    <AllowHostNotice url={serviceUrl} />
                     <SettingTextInput
                         name={t(plugin.fileUpload.panel.ziplineToken)}
                         description={t(plugin.fileUpload.text.yourZiplineApiAuthorization)}
@@ -921,7 +898,6 @@ export function SettingsComponent() {
                             onChange={handleShareXFileUpload}
                         />
                     </SettingsSection>
-                    <AllowHostNotice url={getShareXRequestUrl(sharexConfig || "")} />
                 </SettingGroup>
             )}
 
@@ -1115,7 +1091,6 @@ export function SettingsComponent() {
                     onChange={v => settings.store.corsProxyUrl = v}
                     placeholder="https://your-cors-proxy.example.com"
                 />
-                <AllowHostNotice url={corsProxyUrl} />
 
                 <SettingsSection id="upload-timeout" name={t(plugin.fileUpload.panel.uploadTimeout)} description={t(plugin.fileUpload.text.maximumTimeToWait)}>
                     <Select

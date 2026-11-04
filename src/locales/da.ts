@@ -1596,6 +1596,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 never: "udløber aldrig"
             }
         },
+        betterMutualServers: {
+            name: "BetterMutualServers",
+            description: "Viser roller og tilmeldingsdatoer på listen over fælles servere.",
+            joined: "Tilmeldt {{date}}"
+        },
         betterNotesBox: {
             name: "BetterNotesBox",
             description: "Skjul noter eller deaktiver stavekontrol (Konfigurer i indstillinger!!)",
@@ -1749,6 +1754,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 blurAllChannels: {
                     label: "Slør alle kanaler",
                     description: "Slør vedhæftede filer i alle kanaler (ikke kun NSFW)"
+                },
+                ignoredChannels: {
+                    label: "Ignorerede kanaler",
+                    description: "Liste over kanal-id'er, hvor vedhæftede filer ikke skal sløres, adskilt af mellemrum eller komma"
                 }
             }
         },
@@ -6078,6 +6087,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Lysstyrke",
                     description: "Lysstyrke i %. Skift hvis farverne er for lyse eller for mørke"
                 },
+                saturation: {
+                    label: "Mætning",
+                    description: "Mætning i %. Skift, hvis farverne er for kraftige eller matte"
+                },
+                seed: {
+                    label: "Seed",
+                    description: "Hvis du ændrer dette, får alles brugernavne en ny tilfældig farve"
+                },
                 memberListColors: {
                     label: "Farver i medlemslisten",
                     description: "Erstat rollefarver i medlemslisten"
@@ -8165,33 +8182,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        platformSpoofer: {
-            name: "PlatformSpoofer",
-            description: "Snyd med hvilken platform eller enhed du er på",
-            about: "Vi kan ikke garantere, at dette plugin ikke giver dig en advarsel eller udelukkelse. Hvis du vælger Xbox/Playstation/VR, kan din klient blive en forældet version.",
-            platform: {
-                desktop: "Discord Klient",
-                web: "Discord Web",
-                ios: "Discord iOS",
-                android: "Discord Android",
-                xbox: "Discord Embedded",
-                playstation: "Discord Embedded",
-                vr: "VR"
-            },
-            option: {
-                platform: {
-                    label: "Platform",
-                    description: "Hvilken platform du vil lade som om, du bruger.",
-                    desktop: "Computer",
-                    web: "Web",
-                    android: "Android",
-                    ios: "iOS",
-                    xbox: "Xbox",
-                    playstation: "PlayStation",
-                    vr: "VR"
-                }
-            }
-        },
         plexcordToolbox: {
             name: "PlexcordToolbox",
             description: "Tilføjer en knap til AppBar, som indeholder hurtige Plexcord-handlinger",
@@ -8306,6 +8296,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     fetch: "Hent Quests",
                     markAsIgnored: "Markér som ignoreret",
                     unmarkAsIgnored: "Fjern ignorering",
+                    launchActivity: "Start aktivitet",
                     stopAuto: "Stop automatisk fuldførelse",
                     startAuto: "Start automatisk fuldførelse",
                     copyQuestID: "Kopiér Quest-ID",
@@ -8335,6 +8326,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 autoCompleteBroken: "Automatisk fuldførelse virker ikke. En rettelse kommer snart.",
                 enrollmentFailed: "Tilmelding til Questen {{questName}} mislykkedes.",
                 enrollmentInNormalizequestnameQuest: "Tilmelding til questen {{normalizeQuestName_quest}} mislykkedes{{rateLimitSuffix}}.",
+                activityLaunchFailed: "Kunne ikke starte aktiviteten for {{questName}}.",
                 automationUnlocked: "Quest-automatisering låst op.",
                 automationLocked: "Quest-automatisering låst."
             },
@@ -11693,6 +11685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             context: {
+                sendAudioFile: "Send lydfil som talebesked",
                 sendVoiceMessage: "Send stemmebesked",
                 missingPermissions: "(Mangler tilladelser)"
             },

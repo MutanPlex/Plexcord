@@ -1596,6 +1596,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 never: "inte löpa ut"
             }
         },
+        betterMutualServers: {
+            name: "BetterMutualServers",
+            description: "Visar roller och anslutningsdatum i listan över gemensamma servrar.",
+            joined: "Gick med {{date}}"
+        },
         betterNotesBox: {
             name: "BetterNotesBox",
             description: "Dölj anteckningar eller inaktivera stavningskontroll (Konfigurera i inställningarna!!)",
@@ -1749,6 +1754,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 blurAllChannels: {
                     label: "Oskärpa alla kanaler",
                     description: "Oskärpa bilagor i alla kanaler (inte bara NSFW)"
+                },
+                ignoredChannels: {
+                    label: "Ignorerade kanaler",
+                    description: "Lista över kanal-ID:n där bilagor inte ska suddas ut, åtskilda med mellanslag eller kommatecken"
                 }
             }
         },
@@ -6078,6 +6087,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Lätthet",
                     description: "Lätthet, i %. Ändra om färgerna är för ljusa eller för mörka"
                 },
+                saturation: {
+                    label: "Mättnad",
+                    description: "Mättnad i %. Ändra om färgerna är för starka eller för matta"
+                },
+                seed: {
+                    label: "Seed",
+                    description: "Om du ändrar detta får allas användarnamn en ny färg"
+                },
                 memberListColors: {
                     label: "Färger på medlemslistan",
                     description: "Ersätt rollfärger i medlemslistan"
@@ -8165,33 +8182,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        platformSpoofer: {
-            name: "PlatformSpoofer",
-            description: "Förfalska vilken plattform eller enhet du är på",
-            about: "Vi kan inte garantera att detta plugin inte ger dig en varning eller avstängning. Att välja Xbox/Playstation/VR kan göra din klient till en föråldrad version.",
-            platform: {
-                desktop: "Discord-klient",
-                web: "Discord webben",
-                ios: "Discord iOS",
-                android: "Discord Android",
-                xbox: "Discord inbäddad",
-                playstation: "Discord inbäddad",
-                vr: "VR"
-            },
-            option: {
-                platform: {
-                    label: "Plattform",
-                    description: "Vilken plattform du ska låtsas använda.",
-                    desktop: "Skrivbord",
-                    web: "Web",
-                    android: "Android",
-                    ios: "iOS",
-                    xbox: "Xbox",
-                    playstation: "PlayStation",
-                    vr: "VR"
-                }
-            }
-        },
         plexcordToolbox: {
             name: "PlexcordToolbox",
             description: "Lägger till en knapp i AppBar som innehåller Plexcord snabba åtgärder",
@@ -8306,6 +8296,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     fetch: "Hämta Quests",
                     markAsIgnored: "Markera som ignorerad",
                     unmarkAsIgnored: "Sluta ignorera",
+                    launchActivity: "Starta aktivitet",
                     stopAuto: "Stoppa automatisk slutförning",
                     startAuto: "Starta automatisk slutförning",
                     copyQuestID: "Kopiera Quest-ID",
@@ -8335,6 +8326,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 autoCompleteBroken: "Automatisk slutförning fungerar inte. En åtgärd kommer snart.",
                 enrollmentFailed: "Anmälan till Questen {{questName}} misslyckades.",
                 enrollmentInNormalizequestnameQuest: "Anmälan till uppdraget {{normalizeQuestName_quest}} misslyckades{{rateLimitSuffix}}.",
+                activityLaunchFailed: "Det gick inte att starta aktiviteten för {{questName}}.",
                 automationUnlocked: "Quest-automatisering upplåst.",
                 automationLocked: "Quest-automatisering låst."
             },
@@ -11693,6 +11685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             context: {
+                sendAudioFile: "Skicka ljudfil som röstmeddelande",
                 sendVoiceMessage: "Skicka röstmeddelande",
                 missingPermissions: "(Behörigheter saknas)"
             },

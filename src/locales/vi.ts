@@ -1596,6 +1596,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 never: "không hết hạn"
             }
         },
+        betterMutualServers: {
+            name: "BetterMutualServers",
+            description: "Hiển thị vai trò và ngày tham gia trong danh sách máy chủ chung.",
+            joined: "Đã tham gia {{date}}"
+        },
         betterNotesBox: {
             name: "BetterNotesBox",
             description: "Ẩn ghi chú hoặc tắt tính năng kiểm tra chính tả (Định cấu hình trong cài đặt!!)",
@@ -1749,6 +1754,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 blurAllChannels: {
                     label: "Làm mờ tất cả các kênh",
                     description: "Làm mờ tệp đính kèm ở tất cả các kênh (không chỉ NSFW)"
+                },
+                ignoredChannels: {
+                    label: "Kênh bỏ qua",
+                    description: "Danh sách ID kênh không làm mờ tệp đính kèm, phân tách bằng dấu cách hoặc dấu phẩy"
                 }
             }
         },
@@ -6078,6 +6087,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Độ nhẹ",
                     description: "Độ sáng, tính bằng %. Thay đổi nếu màu quá nhạt hoặc quá tối"
                 },
+                saturation: {
+                    label: "Độ bão hòa",
+                    description: "Độ bão hòa, tính bằng %. Thay đổi nếu màu quá rực hoặc quá nhạt"
+                },
+                seed: {
+                    label: "Hạt giống",
+                    description: "Thay đổi mục này sẽ đổi màu tên người dùng của mọi người sang màu mới"
+                },
                 memberListColors: {
                     label: "Màu danh sách thành viên",
                     description: "Thay thế màu vai trò trong danh sách thành viên"
@@ -8165,33 +8182,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        platformSpoofer: {
-            name: "PlatformSpoofer",
-            description: "Giả mạo nền tảng hoặc thiết bị bạn đang sử dụng",
-            about: "Chúng tôi không thể đảm bảo plugin này sẽ không khiến bạn bị cảnh cáo hoặc cấm. Chọn Xbox/Playstation/VR có thể khiến ứng dụng của bạn thành phiên bản lỗi thời.",
-            platform: {
-                desktop: "Ứng dụng khách bất hòa",
-                web: "Web bất hòa",
-                ios: "Bất hòa iOS",
-                android: "Bất hòa Android",
-                xbox: "Bất hòa nhúng",
-                playstation: "Bất hòa nhúng",
-                vr: "thực tế ảo"
-            },
-            option: {
-                platform: {
-                    label: "Nền tảng",
-                    description: "Nền tảng mà bạn muốn giả vờ đang dùng.",
-                    desktop: "Máy tính để bàn",
-                    web: "Web",
-                    android: "Android",
-                    ios: "iOS",
-                    xbox: "Xbox",
-                    playstation: "PlayStation",
-                    vr: "thực tế ảo"
-                }
-            }
-        },
         plexcordToolbox: {
             name: "PlexcordToolbox",
             description: "Thêm một nút vào AppBar chứa các hành động nhanh của Plexcord",
@@ -8306,6 +8296,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     fetch: "Tải Quest",
                     markAsIgnored: "Đánh dấu là bỏ qua",
                     unmarkAsIgnored: "Bỏ đánh dấu bỏ qua",
+                    launchActivity: "Khởi chạy hoạt động",
                     stopAuto: "Dừng tự động hoàn thành",
                     startAuto: "Bắt đầu tự động hoàn thành",
                     copyQuestID: "Sao chép ID Quest",
@@ -8335,6 +8326,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 autoCompleteBroken: "Tự động hoàn thành đang bị lỗi. Bản sửa sẽ sớm được phát hành.",
                 enrollmentFailed: "Đăng ký Quest {{questName}} thất bại.",
                 enrollmentInNormalizequestnameQuest: "Đăng ký nhiệm vụ {{normalizeQuestName_quest}} thất bại{{rateLimitSuffix}}.",
+                activityLaunchFailed: "Không thể khởi chạy hoạt động cho {{questName}}.",
                 automationUnlocked: "Đã mở khóa tự động hóa Quest.",
                 automationLocked: "Đã khóa tự động hóa Quest."
             },
@@ -11693,6 +11685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             context: {
+                sendAudioFile: "Gửi tệp âm thanh dưới dạng tin nhắn thoại",
                 sendVoiceMessage: "Gửi tin nhắn thoại",
                 missingPermissions: "(Thiếu quyền)"
             },

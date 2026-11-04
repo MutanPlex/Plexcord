@@ -304,7 +304,7 @@ export default definePlugin({
         }
 
         // role color everywhere plugin get user gradient color
-        const colorStyle = settings.store.showRoleColor ? roleColorEverywhere.getColorStyle(userId, joinTime.guildId) : {};
+        const colorStyle = settings.store.showRoleColor && joinTime.guildId ? roleColorEverywhere.getColorStyle(userId, joinTime.guildId) ?? {} : {};
         const colorClass = settings.store.showRoleColor ? roleColorEverywhere.getColorClass(userId, joinTime.guildId) : "";
 
         return (

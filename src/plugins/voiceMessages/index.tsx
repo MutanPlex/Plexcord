@@ -30,21 +30,20 @@ import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { CloudUploadPlatform } from "@plexcord/discord-types/enums";
-import { lastState as silentMessageEnabled } from "@plugins/silentMessageToggle";
+import { takeSilentFlag } from "@plugins/silentMessageToggle";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { Margins } from "@utils/margins";
 import { useAwaiter } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { chooseFile } from "@utils/web";
-import { CloudUploader, Constants, FluxDispatcher, lodash, Menu, MessageActions, Modal, openModal, PendingReplyStore, PermissionsBits, PermissionStore, RestAPI, SelectedChannelStore, showToast, SnowflakeUtils, useEffect, useState } from "@webpack/common";
+import { CloudUploader, Constants, FluxDispatcher, lodash, Menu, MessageActions, Modal, openModal, PendingReplyStore, PermissionsBits, PermissionStore, RestAPI, showToast, SnowflakeUtils, useEffect, useState } from "@webpack/common";
 
 import { VoiceRecorderDesktop } from "./components/DesktopRecorder";
 import { VoicePreview } from "./components/VoicePreview";
 import { VoiceRecorderWeb } from "./components/WebRecorder";
 
 const VOICE_MESSAGE_FLAG = 1 << 13;
-const SILENT_MESSAGE_FLAG = 4096;
 const DEFAULT_WAVEFORM = "AAAAAAAAAAAA";
 const DEFAULT_DURATION = 1;
 const WAVEFORM_MIN_BINS = 32;
@@ -101,9 +100,9 @@ function generateWaveform(audioBuffer: AudioBuffer): string {
     return window.btoa(String.fromCharCode(...bins));
 }
 
-function sendAudio(blob: Blob, meta: AudioMetadata) {
-    const channelId = SelectedChannelStore.getChannelId();
+function sendAudio(blob: Blob, meta: AudioMetadata, channelId: string) {
     const reply = PendingReplyStore.getPendingReply(channelId);
+    const silentFlag = takeSilentFlag();
     if (reply) FluxDispatcher.dispatch({ type: "DELETE_PENDING_REPLY", channelId });
 
     const upload = new CloudUploader({
@@ -116,7 +115,7 @@ function sendAudio(blob: Blob, meta: AudioMetadata) {
         RestAPI.post({
             url: Constants.Endpoints.MESSAGES(channelId),
             body: {
-                flags: VOICE_MESSAGE_FLAG | (silentMessageEnabled ? SILENT_MESSAGE_FLAG : 0),
+                flags: VOICE_MESSAGE_FLAG | silentFlag,
                 channel_id: channelId,
                 content: "",
                 nonce: SnowflakeUtils.fromTimestamp(Date.now()),
@@ -151,6 +150,8 @@ function useObjectUrl() {
 const ctxMenuPatch: NavContextMenuPatchCallback = (children, props) => {
     if (props.channel.guild_id && !(PermissionStore.can(PermissionsBits.SEND_VOICE_MESSAGES, props.channel) && PermissionStore.can(PermissionsBits.SEND_MESSAGES, props.channel))) return;
 
+    const hasNativeRecorder = children.some(c => c?.props?.id === "record_voice_message");
+
     children.push(
         <Menu.MenuItem
             id="pc-send-vmsg"
@@ -159,9 +160,9 @@ const ctxMenuPatch: NavContextMenuPatchCallback = (children, props) => {
                 type: "icon",
                 icon: Microphone
             }}
-            label={t(plugin.voiceMessages.context.sendVoiceMessage)}
+            label={hasNativeRecorder ? t(plugin.voiceMessages.context.sendAudioFile) : t(plugin.voiceMessages.context.sendVoiceMessage)}
             action={() =>
-                openModal(modalProps => <VoiceMessageModal modalProps={modalProps} />, {
+                openModal(modalProps => <VoiceMessageModal modalProps={modalProps} channelId={props.channel.id} />, {
                     onCloseCallback: () => FluxDispatcher.dispatch({ type: "PLEXCORD_STOP_RECORDING" })
                 })
             }
@@ -174,7 +175,12 @@ export interface VoiceMessageProps {
 }
 export let VoiceMessage: React.ComponentType<VoiceMessageProps> = () => null;
 
-function VoiceMessageModal({ modalProps }: { modalProps: RenderModalProps; }) {
+interface VoiceMessageModalProps {
+    modalProps: RenderModalProps;
+    channelId: string;
+}
+
+function VoiceMessageModal({ modalProps, channelId }: VoiceMessageModalProps) {
     const [isRecording, setRecording] = useState(false);
     const [blob, setBlob] = useState<Blob>();
     const [blobUrl, setBlobUrl] = useObjectUrl();
@@ -222,7 +228,7 @@ function VoiceMessageModal({ modalProps }: { modalProps: RenderModalProps; }) {
                 text: t(plugin.voiceMessages.modal.send),
                 variant: "primary",
                 onClick: () => {
-                    sendAudio(blob!, meta ?? EMPTY_META);
+                    sendAudio(blob!, meta ?? EMPTY_META, channelId);
                     modalProps.onClose();
                     showToast({ text: t(plugin.voiceMessages.modal.sending), icon: ClockIcon, iconColor: "var(--text-default)" });
                 },

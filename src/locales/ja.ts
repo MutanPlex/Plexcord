@@ -1596,6 +1596,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 never: "期限切れではない"
             }
         },
+        betterMutualServers: {
+            name: "BetterMutualServers",
+            description: "共通のサーバー一覧にロールと参加日を表示します。",
+            joined: "{{date}} に参加"
+        },
         betterNotesBox: {
             name: "BetterNotesBox",
             description: "メモを非表示にするかスペルチェックを無効にする (設定で構成します!!)",
@@ -1749,6 +1754,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 blurAllChannels: {
                     label: "すべてのチャンネルをぼかす",
                     description: "すべてのチャンネル (NSFW だけでなく) で添付ファイルをぼかします"
+                },
+                ignoredChannels: {
+                    label: "無視するチャンネル",
+                    description: "添付ファイルをぼかさないチャンネルIDのリスト(スペースまたはカンマ区切り)"
                 }
             }
         },
@@ -6078,6 +6087,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "軽さ",
                     description: "明度 (%)。色が明るすぎたり暗すぎたりする場合は変更してください"
                 },
+                saturation: {
+                    label: "彩度",
+                    description: "彩度(%)。色が鮮やかすぎる、またはくすんでいる場合に変更します"
+                },
+                seed: {
+                    label: "シード",
+                    description: "変更すると全員のユーザー名の色が新しい色に入れ替わります"
+                },
                 memberListColors: {
                     label: "メンバーリストの色",
                     description: "メンバーリストの役割の色を置き換える"
@@ -8165,33 +8182,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        platformSpoofer: {
-            name: "PlatformSpoofer",
-            description: "使用しているプラ​​ットフォームまたはデバイスを偽装する",
-            about: "このプラグインによって警告やBANを受けないことは保証できません。Xbox/Playstation/VRを選ぶと、クライアントが古いバージョンになる場合があります。",
-            platform: {
-                desktop: "Discordクライアント",
-                web: "ディスコードウェブ",
-                ios: "ディスコード iOS",
-                android: "ディスコードアンドロイド",
-                xbox: "Discord 埋め込み",
-                playstation: "Discord 埋め込み",
-                vr: "VR"
-            },
-            option: {
-                platform: {
-                    label: "プラットフォーム",
-                    description: "使用しているふりをするプラットフォーム。",
-                    desktop: "デスクトップ",
-                    web: "ウェブ",
-                    android: "アンドロイド",
-                    ios: "iOS",
-                    xbox: "Xbox",
-                    playstation: "プレイステーション",
-                    vr: "VR"
-                }
-            }
-        },
         plexcordToolbox: {
             name: "PlexcordToolbox",
             description: "Plexcord のクイック アクションを収容するボタンを AppBar に追加します",
@@ -8306,6 +8296,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     fetch: "Quest を取得",
                     markAsIgnored: "無視としてマーク",
                     unmarkAsIgnored: "無視を解除",
+                    launchActivity: "アクティビティを起動",
                     stopAuto: "自動完了を停止",
                     startAuto: "自動完了を開始",
                     copyQuestID: "Quest ID をコピー",
@@ -8335,6 +8326,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 autoCompleteBroken: "自動完了が壊れています。まもなく修正されます。",
                 enrollmentFailed: "{{questName}} Quest への登録に失敗しました。",
                 enrollmentInNormalizequestnameQuest: "クエスト {{normalizeQuestName_quest}} への参加に失敗しました{{rateLimitSuffix}}。",
+                activityLaunchFailed: "{{questName}} のアクティビティを起動できませんでした。",
                 automationUnlocked: "Quest 自動化のロックが解除されました。",
                 automationLocked: "Quest 自動化がロックされました。"
             },
@@ -11693,6 +11685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             context: {
+                sendAudioFile: "音声ファイルをボイスメッセージとして送信",
                 sendVoiceMessage: "音声メッセージを送信する",
                 missingPermissions: "(権限がありません)"
             },

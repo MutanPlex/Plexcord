@@ -21,7 +21,7 @@ import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { useFluxSubscription } from "@utils/react";
 import { PluginNative } from "@utils/types";
-import { MediaEngineStore, showToast, useState } from "@webpack/common";
+import { MediaEngineStore, showToast, useRef, useState } from "@webpack/common";
 
 import { settings, type VoiceRecorder } from "..";
 
@@ -29,8 +29,12 @@ const Native = PlexcordNative.pluginHelpers.VoiceMessages as PluginNative<typeof
 
 export const VoiceRecorderDesktop: VoiceRecorder = ({ setAudioBlob, onRecordingChange }) => {
     const [recording, setRecording] = useState(false);
+    const closed = useRef(false);
 
-    useFluxSubscription("PLEXCORD_STOP_RECORDING", stopRecording);
+    useFluxSubscription("PLEXCORD_STOP_RECORDING", () => {
+        closed.current = true;
+        stopRecording();
+    });
 
     function changeRecording(recording: boolean) {
         setRecording(recording);
@@ -66,6 +70,12 @@ export const VoiceRecorderDesktop: VoiceRecorder = ({ setAudioBlob, onRecordingC
                     deviceId: MediaEngineStore.getInputDeviceId(),
                 },
                 (success: boolean) => {
+                    // native recording can finish starting after the modal has closed
+                    if (closed.current) {
+                        if (success) discordVoice.stopLocalAudioRecording(filePath => filePath && Native.readRecording(filePath));
+                        return;
+                    }
+
                     if (success)
                         changeRecording(true);
                     else

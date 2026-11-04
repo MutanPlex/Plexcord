@@ -42,11 +42,11 @@
         "@ffmpeg/ffmpeg": "catalog:",
         "@ffmpeg/util": "catalog:",
         "@intrnl/xxhash64": "catalog:",
+        "@plexcord/monaco-editor": "catalog:",
         "@song-spotlight/api": "catalog:",
         "@streamparser/json": "catalog:",
         "@vap/core": "catalog:",
         "@vap/shiki": "catalog:",
-        "@plexcord/monaco-editor": "catalog:",
         "fflate": "catalog:",
         "gifenc": "catalog:",
         "gifuct-js": "catalog:",
@@ -93,7 +93,7 @@
         "typescript-transform-paths": "catalog:",
         "zip-local": "catalog:"
     },
-    "packageManager": "pnpm@12.15.0",
+    "packageManager": "pnpm@12.16.1",
     "engines": {
         "node": ">=22"
     }
