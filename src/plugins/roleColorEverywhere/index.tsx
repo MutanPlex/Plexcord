@@ -27,11 +27,11 @@ import { hasGuildFeature } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 import { findByCodeLazy, findCssClassesLazy } from "@webpack";
-import { ChannelStore, GuildMemberStore, GuildRoleStore, GuildStore, UserStore } from "@webpack/common";
+import { AccessibilityStore, ChannelStore, GuildMemberStore, GuildRoleStore, GuildStore, UserStore } from "@webpack/common";
 
 const useMessageAuthor = findByCodeLazy('"Result cannot be null because the message is not null"');
 const usernameFont = findCssClassesLazy("usernameFont", "username");
-const fonts = findCssClassesLazy("dnsFont", "zillaSlab", "cherryBomb", "chicle", "museoModerno", "neoCastel", "pixelify", "sinistre", "safari");
+const fonts = findCssClassesLazy("dnsFont", "zillaSlab", "cherryBomb", "chicle", "museoModerno", "neoCastel", "pixelify", "sinistre", "safari", "playpenSans", "orbitron", "newRocker", "kalam", "pricedown");
 
 function getGradientColors(guildId: string, colorStrings: GuildMember["colorStrings"]) {
     const guild = GuildStore.getGuild(guildId);
@@ -205,22 +205,29 @@ export default definePlugin({
 
     getDisplayNameFont(userId: string) {
         try {
-            const user = UserStore.getUser(userId);
-            const fontId = user?.displayNameStyles?.font_id;
+            if (!AccessibilityStore.displayNameStylesEnabled) return "";
 
-            if (!fontId || Number(fontId) === 1) return fonts.dnsFont; // Default font
+            // User records store fontId, font_id in discord-types is the raw API shape
+            const fontId = (UserStore.getUser(userId)?.displayNameStyles as { fontId?: number; } | null | undefined)?.fontId;
 
+            // Ids from Discord's font enum, the default font (11) and fonts without a class get none
             const fontClasses: Record<number, string> = {
-                2: fonts.zillaSlab,
                 3: fonts.cherryBomb,
                 4: fonts.chicle,
-                5: fonts.museoModerno,
-                6: fonts.neoCastel,
-                7: fonts.pixelify,
-                8: fonts.sinistre
+                6: fonts.museoModerno,
+                7: fonts.neoCastel,
+                8: fonts.pixelify,
+                10: fonts.sinistre,
+                12: fonts.zillaSlab,
+                13: fonts.playpenSans,
+                14: fonts.orbitron,
+                15: fonts.newRocker,
+                16: fonts.kalam,
+                17: fonts.pricedown
             };
 
-            return fontClasses[Number(fontId)] || "";
+            const fontClass = fontId != null && fontClasses[fontId];
+            return fontClass ? `${fonts.dnsFont} ${fontClass}` : "";
         } catch (e) {
             logger.error("Failed to get display name font", e);
         }

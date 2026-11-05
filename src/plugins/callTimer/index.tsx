@@ -327,7 +327,7 @@ export default definePlugin({
         if (joinTime == null) return null;
 
         return (
-            <p style={{ margin: 0, fontFamily: "var(--font-code)" }}>
+            <p style={{ margin: 0, fontFamily: "var(--font-primary)" }}>
                 {formatDurationMs(time, settings.store.format === "human")}
             </p>
         );
