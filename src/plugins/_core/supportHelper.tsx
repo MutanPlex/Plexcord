@@ -325,22 +325,6 @@ export default definePlugin({
                 match: /#{intl::BEGINNING_DM},{.+?}\),(?=.{0,300}(\i)\.isMultiUserDM)/,
                 replace: "$& $self.renderContributorDmWarningCard({ channel: $1 }),"
             },
-        },
-        // Fix a race condition?
-        {
-            find: ".completeOperation(",
-            replacement: {
-                match: /(?<=this\.nextId\(\);)(\i\(\i\)),(.{0,200}reject:\i\}\))/,
-                replace: "$2,$1"
-            }
-        },
-        // catch if it cant open
-        {
-            find: "discarding speculative database",
-            replacement: {
-                match: /await \i\(\i\)(?=;.{0,15}this\.databases)/,
-                replace: "$&.catch(()=>null)"
-            }
         }
     ],
 

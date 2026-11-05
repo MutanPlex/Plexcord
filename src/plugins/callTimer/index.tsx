@@ -166,7 +166,7 @@ export default definePlugin({
             find: "VOICE_PANEL}}",
             replacement: [
                 {
-                    match: /user:(\i).*?\.isEmbedded.{0,200};(?=return\(\i&&null!=\i&&(\i)\.push\(\i\))/,
+                    match: /user:(\i).*?\.isEmbedded;(?=return 0!==(\i)\.length)/,
                     replace: "$&$2.push($self.renderTimer($1.id));",
                     predicate: () => !settings.store.showWithoutHover,
                 },

@@ -36,7 +36,7 @@ export function StockPluginsCard({ totalStockPlugins, enabledStockPlugins, total
                         <Tooltip
                             text={
                                 <img
-                                    src="https://discord.com/assets/059679850d492e83.svg"
+                                    src="/assets/059679850d492e83.svg"
                                     style={{ width: "40px", height: "40px" }}
                                 />
                             }
