@@ -49,7 +49,8 @@ function makeColorStyle(guildId: string, { colorString, colorStrings }: Pick<Gui
 
     return {
         color: primaryColor,
-        background: `linear-gradient(to right,${colors})`,
+        // Not the background shorthand: React rewrites only changed keys, which would reset clip and size on rerender
+        backgroundImage: `linear-gradient(to right,${colors})`,
         backgroundClip: "text",
         backgroundSize: "100px auto",
         WebkitTextFillColor: "transparent"
