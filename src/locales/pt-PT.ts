@@ -282,6 +282,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             select: "Selecione uma opção",
             text: "Introduza um valor"
         },
+        range: {
+            between: "O valor deve estar entre {{min}} e {{max}}",
+            atLeast: "O valor deve ser pelo menos {{min}}",
+            atMost: "O valor deve ser no máximo {{max}}"
+        },
         excluded: {
             desktop: "App Discord Desktop ou Plextron",
             discordDesktop: "App Discord Desktop",
@@ -1651,6 +1656,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Permitir clique no ponto de cargo na janela de perfil para copiar a cor do cargo"
                 }
             }
+        },
+        betterSearch: {
+            name: "BetterSearch",
+            description: "Permite utilizar opções de pesquisa de mensagens do canal que normalmente não estão disponíveis"
         },
         betterSessions: {
             name: "BetterSessions",
@@ -9677,7 +9686,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 light: "Claro",
                 dark: "Escuro",
                 format: "Formato do Carimbo",
-                preview: "Pré-visualização",
+                rawMarkdown: "Markdown em bruto:",
+                copy: "Copiar",
                 insert: "Inserir",
                 insertTimestamp: "Inserir Data/Hora"
             },
@@ -11511,6 +11521,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "Dados de {{type}} copiados!",
                 copy: "Copiar JSON de {{type}}",
                 copiedContent: "Conteúdo copiado!",
+                emptyMessage: "Não é possível copiar uma mensagem vazia.",
                 copyContent: "Copiar Conteúdo Bruto"
             },
             types: {

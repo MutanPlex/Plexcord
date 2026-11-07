@@ -61,7 +61,7 @@
     user-select: none;
 }
 
-.pc-shiki-btn~.pc-shiki-btn {
+.pc-shiki-btn ~ .pc-shiki-btn {
     margin-left: 4px;
 }
 

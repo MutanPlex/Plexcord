@@ -445,7 +445,7 @@
 }
 
 /* Responsive design */
-@media (width <=768px) {
+@media (width <= 768px) {
     .pc-changelog-new-plugins-grid {
         grid-template-columns: 1fr;
     }

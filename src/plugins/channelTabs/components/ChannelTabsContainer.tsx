@@ -325,6 +325,7 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
                     {openedTabs.filter(tab => tab != null).map((tab, i) =>
                         <ChannelTab {...tab} index={i} key={tab.id} />
                     )}
+                    {GhostTabs}
                     {shouldFollowNewTabButton && newTabButton}
                 </HorizontalScroller>
 

@@ -61,11 +61,6 @@ async function autoStartStream(instant = true) {
     }
 }
 
-function handleToggle() {
-    settings.store.toolboxManagement = !settings.store.toolboxManagement;
-    showToast({ text: `${t(plugin.instantScreenshare.toolbox.toast, { state: settings.store.toolboxManagement ? t(plugin.instantScreenshare.toolbox.enabled) : t(plugin.instantScreenshare.toolbox.disabled) })}`, variant: "success" });
-}
-
 export default definePlugin({
     name: "InstantScreenshare",
     description: () => t(plugin.instantScreenshare.description),

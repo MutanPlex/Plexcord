@@ -30,8 +30,6 @@ const GITHUB_RAW_URL =
     "https://raw.githubusercontent.com/tab2can/uselessInfo/main/data.json";
 const CDN_FALLBACK_URL =
     "https://cdn.jsdelivr.net/gh/tab2can/uselessInfo@main/data.json";
-const GITHUB_API_CONTENT_URL =
-    "https://api.github.com/repos/tab2can/uselessInfo/contents/data.json?ref=main";
 
 interface FactData {
     id: number;

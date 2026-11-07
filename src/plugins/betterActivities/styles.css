@@ -82,11 +82,15 @@
     opacity: 0.6;
 }
 
-.pc-bactivities-controls .pc-bactivities-controls-carousel .pc-bactivities-controls-dot:hover:not(.pc-bactivities-controls-selected) {
+.pc-bactivities-controls
+    .pc-bactivities-controls-carousel
+    .pc-bactivities-controls-dot:hover:not(.pc-bactivities-controls-selected) {
     opacity: 1;
 }
 
-.pc-bactivities-controls .pc-bactivities-controls-carousel .pc-bactivities-controls-dot.pc-bactivities-controls-selected {
+.pc-bactivities-controls
+    .pc-bactivities-controls-carousel
+    .pc-bactivities-controls-dot.pc-bactivities-controls-selected {
     opacity: 1;
     background: var(--dot-color, var(--brand-500));
 }

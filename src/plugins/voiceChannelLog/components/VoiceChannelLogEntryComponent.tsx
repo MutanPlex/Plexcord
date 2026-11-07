@@ -9,9 +9,9 @@ import "./VoiceChannelLogEntryComponent.css";
 
 import { Channel } from "@plexcord/discord-types";
 import { VoiceChannelLogEntry } from "@plugins/voiceChannelLog/logs";
+import { openUserProfile } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { React, Timestamp, Tooltip, UserStore } from "@webpack/common";
-import { Util } from "Plexcord";
 
 import { cl } from "..";
 import Icon from "./VoiceChannelLogEntryIcons";
@@ -26,7 +26,7 @@ export function VoiceChannelLogEntryComponent({ logEntry, channel }: { logEntry:
                 <img
                     {...tooltipProps}
                     className={classes(cl("avatar"))}
-                    onClick={() => Util.openUserProfile(logEntry.userId)}
+                    onClick={() => openUserProfile(logEntry.userId)}
                     src={user.getAvatarURL(channel.getGuildId())}
                 />
             )}

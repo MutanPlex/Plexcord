@@ -68,7 +68,8 @@ const settings = definePluginSettings({
         label: () => t(plugin.anonymiseFileNames.option.randomisedLength.label),
         description: () => t(plugin.anonymiseFileNames.option.randomisedLength.description),
         type: OptionType.NUMBER,
-        default: 7
+        default: 7,
+        min: 1
     },
     consistent: {
         label: () => t(plugin.anonymiseFileNames.option.consistent.label),

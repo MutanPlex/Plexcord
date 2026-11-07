@@ -17,7 +17,9 @@ export const settings = definePluginSettings({
         label: () => t(plugin.moreQuickReactions.option.reactionCount.label),
         description: () => t(plugin.moreQuickReactions.option.reactionCount.description),
         type: OptionType.NUMBER,
-        default: 5
+        default: 5,
+        min: 0,
+        max: 42
     },
     frequentEmojis: {
         label: () => t(plugin.moreQuickReactions.option.frequentEmojis.label),
@@ -90,8 +92,8 @@ export default definePlugin({
                 },
                 // Override limit of emojis to display with offset hook.
                 {
-                    match: /"MessageContextMenu"\},\{autoTrackExposure.{0,5}\}\),/,
-                    replace: "$&[moreQuickReactionsScrollValue,setMoreQuickReactionsScrollValue]=Plexcord.Webpack.Common.React.useState(0),"
+                    match: /\i=\(\(\i=\(0,\i\.\i\)\(\i\.guild_id\)\.filter\(/,
+                    replace: "[moreQuickReactionsScrollValue,setMoreQuickReactionsScrollValue]=Plexcord.Webpack.Common.React.useState(0),$&"
                 },
                 {
                     match: /\.length>4&&\(\i\.length=4\)/,

@@ -12,7 +12,7 @@ a.pc-magnet-link {
     width: max-content;
 
     &:hover {
-        text-decoration: none
+        text-decoration: none;
     }
 }
 

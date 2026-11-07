@@ -282,6 +282,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             select: "옵션을 선택하세요",
             text: "값을 입력하세요"
         },
+        range: {
+            between: "값은 {{min}}에서 {{max}} 사이여야 합니다",
+            atLeast: "값은 {{min}} 이상이어야 합니다",
+            atMost: "값은 {{max}} 이하여야 합니다"
+        },
         excluded: {
             desktop: "Discord 데스크톱 앱 또는 Plextron",
             discordDesktop: "Discord 데스크톱 앱",
@@ -1651,6 +1656,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "프로필 팝아웃에서 역할 점을 클릭하여 역할 색상을 복사할 수 있도록 허용"
                 }
             }
+        },
+        betterSearch: {
+            name: "BetterSearch",
+            description: "일반적으로 사용할 수 없는 채널 메시지 검색 옵션을 사용할 수 있게 합니다"
         },
         betterSessions: {
             name: "BetterSessions",
@@ -9677,7 +9686,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 light: "빛",
                 dark: "어두운",
                 format: "타임스탬프 형식",
-                preview: "시사",
+                rawMarkdown: "원본 Markdown:",
+                copy: "복사",
                 insert: "끼워 넣다",
                 insertTimestamp: "타임스탬프 삽입"
             },
@@ -11511,6 +11521,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "{{type}} 데이터가 클립보드에 복사되었습니다!",
                 copy: "{{type}} JSON 복사",
                 copiedContent: "콘텐츠가 클립보드에 복사되었습니다!",
+                emptyMessage: "빈 메시지는 복사할 수 없습니다.",
                 copyContent: "원시 콘텐츠 복사"
             },
             types: {

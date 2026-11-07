@@ -23,8 +23,7 @@ import { ModuleExports, ModuleFactory, WebpackRequire } from "@plexcord/discord-
 import { makeLazy, proxyLazy } from "@utils/lazy";
 import { LazyComponent } from "@utils/lazyReact";
 import { Logger } from "@utils/Logger";
-import { canonicalizeMatch } from "@utils/patches";
-import { escapeRegExp } from "@utils/text";
+import { canonicalizeMatch, escapeRegExp } from "@utils/patches";
 
 import type { AnyModuleFactory, AnyWebpackRequire } from "./types";
 

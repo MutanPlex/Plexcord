@@ -151,6 +151,8 @@ export default definePlugin({
     authors: [PcDevs.Reycko, PcDevs.justjxke],
     settings,
 
+    onBeforeMessageSend: listener,
+
     patches: [
         {
             find: 'type:"MESSAGE_LENGTH_UPSELL"', // bypass message length check

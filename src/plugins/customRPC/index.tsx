@@ -321,6 +321,12 @@ export default definePlugin({
                         <Flex flexDirection="column" gap=".5em" alignItems="flex-start">
                             <BaseText size="md" weight="bold">{t(plugin.customRPC.text.customRpcDisabled)}</BaseText>
                             <Paragraph>{t(plugin.customRPC.text.theEnablePresenceSetting)}</Paragraph>
+                            <Button
+                                variant="overlayPrimary"
+                                onClick={() => settings.store.enablePresence = true}
+                            >
+                                {t(plugin.customRPC.option.enablePresence.label)}
+                            </Button>
                         </Flex>
                     </Card>
                 )}

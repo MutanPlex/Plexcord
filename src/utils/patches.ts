@@ -20,6 +20,11 @@
 import { runtimeHashMessageKey } from "./intlHash";
 import { Patch, PatchReplacement, ReplaceFn } from "./types";
 
+// Lives here, not in text.ts: text.ts imports i18n, which pulls @webpack/common into webpack.ts before filters exists
+export const escapeRegExp: (s: string) => string = RegExp.escape ?? function (s: string) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+};
+
 export function canonicalizeMatch<T extends RegExp | string>(match: T): T {
     let partialCanon = typeof match === "string" ? match : match.source;
     partialCanon = partialCanon.replaceAll(/#{intl::([\w$+/]*)(?:::(\w+))?}/g, (_, key, modifier) => {

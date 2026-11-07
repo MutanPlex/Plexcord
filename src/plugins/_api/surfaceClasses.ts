@@ -16,7 +16,7 @@ export default definePlugin({
 
     patches: [
         {
-            find: "AnnouncementsSpoilerIcon:",
+            find: ".CHANNEL_SIDEBAR_RESIZED,{",
             replacement: [
                 {
                     match: /"data-fullscreen":\i.{0,150},\{isSidebarOpen:/,

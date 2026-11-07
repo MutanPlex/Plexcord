@@ -1,15 +1,15 @@
 .pc-gif-collections-sort-container {
-        padding: 12px;
-        background-color: var(--background-secondary-alt);
-        border-radius: 8px;
-        margin-bottom: 16px;
+    padding: 12px;
+    background-color: var(--background-secondary-alt);
+    border-radius: 8px;
+    margin-bottom: 16px;
 }
 
 .pc-gif-collections-sort-title {
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--text-strong);
-        margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-strong);
+    margin-bottom: 8px;
 }
 
 .pc-gif-collections-sort-divider {
@@ -19,14 +19,14 @@
 
 .pc-gif-collections-sort-description,
 .pc-gif-collections-sort-section-title {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--text-default);
-        margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-default);
+    margin-bottom: 8px;
 }
 
 .pc-gif-collections-sort-section {
-        margin-top: 12px;
+    margin-top: 12px;
 }
 
 .pc-gif-collections-sort-option {
@@ -53,85 +53,87 @@
 }
 
 .pc-gif-collections-modal {
-        background-color: var(--modal-background) !important;
-        border-radius: 8px;
-        box-shadow: 0 8px 16px rgb(0 0 0 / 24%), 0 16px 32px rgb(0 0 0 / 24%);
+    background-color: var(--modal-background) !important;
+    border-radius: 8px;
+    box-shadow:
+        0 8px 16px rgb(0 0 0 / 24%),
+        0 16px 32px rgb(0 0 0 / 24%);
 }
 
 .pc-gif-collections-modal-header {
-        padding: 16px;
-        background-color: var(--background-secondary-alt);
-        border-bottom: 1px solid var(--border-subtle);
+    padding: 16px;
+    background-color: var(--background-secondary-alt);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .pc-gif-collections-modal-title {
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--text-strong);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-strong);
 }
 
 .pc-gif-collections-modal-content {
-        padding: 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .pc-gif-collections-info-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 16px;
-        padding: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 8px 0;
 }
 
 .pc-gif-collections-info-row:last-child {
-        border-bottom: none;
+    border-bottom: none;
 }
 
 .pc-gif-collections-info-title {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--text-default);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-default);
 }
 
 .pc-gif-collections-info-text {
-        font-size: 14px;
-        color: var(--text-muted);
-        max-width: 70%;
-        white-space: normal;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 70%;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .pc-gif-collections-modal-footer {
-        padding: 16px;
-        background-color: var(--background-secondary-alt);
-        display: flex;
-        justify-content: flex-end;
+    padding: 16px;
+    background-color: var(--background-secondary-alt);
+    display: flex;
+    justify-content: flex-end;
 }
 
 .pc-gif-collections-rename-text {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--text-default);
-        margin: 16px 0 2px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-default);
+    margin: 16px 0 2px;
 }
 
 .pc-gif-collections-rename-input {
-        outline: 0 solid transparent;
-        transition: outline 0.2s;
-        border-radius: 4px;
+    outline: 0 solid transparent;
+    transition: outline 0.2s;
+    border-radius: 4px;
 }
 
 .pc-gif-collections-input-warning {
-        outline: 1px solid var(--text-feedback-critical);
+    outline: 1px solid var(--text-feedback-critical);
 }
 
 .pc-gif-collections-warning-text {
-        margin-top: 16px;
-        font-size: 14px;
-        color: var(--text-feedback-critical);
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--text-feedback-critical);
 }
 
 .pc-gif-collections-buttons {
@@ -158,5 +160,5 @@
 }
 
 .pc-gif-collections-button:hover {
-        background-color: var(--background-modifier-hover);
+    background-color: var(--background-modifier-hover);
 }

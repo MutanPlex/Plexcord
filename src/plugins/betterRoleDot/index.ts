@@ -78,7 +78,7 @@ export default definePlugin({
             }
         },
         {
-            find: ".roleVerifiedIcon",
+            find: ".PRIMARY_630.css",
             all: true,
             predicate: () => settings.store.copyRoleColorInProfilePopout && !settings.store.bothStyles,
             noWarn: true,

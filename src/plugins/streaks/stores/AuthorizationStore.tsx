@@ -14,8 +14,6 @@ import { OAuth2AuthorizeModal, openModal, showToast, UserStore, zustandCreate, z
 import { AUTHORIZE_URL, CLIENT_ID } from "../constants";
 import { useStreaksStore } from "./StreaksStore";
 
-const logger = new Logger("Streaks");
-
 interface AuthorizationState {
     token: string | null;
     tokens: Record<string, string>;

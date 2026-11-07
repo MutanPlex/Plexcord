@@ -33,7 +33,6 @@ import { Notice } from "@components/Notice";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { Margins } from "@utils/margins";
-import { useForceUpdater } from "@utils/react";
 import { findComponentByCodeLazy } from "@webpack";
 import { Alerts, SearchableSelect, Select, useState } from "@webpack/common";
 
@@ -63,7 +62,6 @@ function CloudTab() {
     const settings = useSettings(["cloud.authenticated", "cloud.url", "cloud.settingsSync"]);
     const [syncDirection, setSyncDirection] = useState(getCloudSyncDirection);
     const [inputKey, setInputKey] = useState(0);
-    const forceUpdate = useForceUpdater();
 
     const { cloud: cloudSettings } = settings;
     const isAuthenticated = cloudSettings.authenticated;

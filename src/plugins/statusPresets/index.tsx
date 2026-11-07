@@ -19,7 +19,6 @@
 
 import "./style.css";
 
-import * as DataStore from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
@@ -27,7 +26,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
 import { proxyLazy } from "@utils/lazy";
 import { useForceUpdater } from "@utils/react";
-import definePlugin, { OptionType, StartAt } from "@utils/types";
+import definePlugin, { OptionType } from "@utils/types";
 import { extractAndLoadChunksLazy, findComponentByCodeLazy, findModuleId, wreq } from "@webpack";
 import { Menu, openModalLazy, OverridePremiumTypeStore, showToast } from "@webpack/common";
 
@@ -43,20 +42,6 @@ interface DiscordStatus {
     expiresAtMs?: string;
     emojiId?: string;
     emojiName?: string;
-}
-
-interface SavedStatusPresets {
-    [statusText: string]: DiscordStatus;
-}
-
-let savedStatusPresets: SavedStatusPresets = {};
-
-async function loadStatusPresets() {
-    savedStatusPresets = await DataStore.get("StatusPresets_statuses") ?? {};
-}
-
-async function saveStatusPresets() {
-    await DataStore.set("StatusPresets_statuses", savedStatusPresets);
 }
 
 interface DiscordStatus {
@@ -209,9 +194,5 @@ export default definePlugin({
                 showToast({ text: t(plugin.statusPresets.notification.successfully), variant: "success" });
             }
         };
-    },
-    async start() {
-        await loadStatusPresets();
-    },
-    startAt: StartAt.WebpackReady
+    }
 });

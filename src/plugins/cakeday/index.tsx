@@ -87,7 +87,6 @@ function isValidBirthday(birthday: string): boolean {
 
 async function setBirthday(userId: string, username: string, birthday: string) {
     if (isValidBirthday(birthday)) {
-        const oldBirthday = savedBirthdays[userId];
         savedBirthdays[userId] = birthday;
         await saveBirthdays();
 

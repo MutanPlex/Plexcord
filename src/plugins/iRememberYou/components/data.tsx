@@ -80,7 +80,6 @@ export class Data {
         array: { user: User; source?: Guild; extra?: IUserExtra; }[]
     ) {
         const target = this.usersCollection;
-        const processedGuilds = new Set<string>();
 
         for (const { user, source, extra } of array) {
             if (user.bot) {

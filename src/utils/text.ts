@@ -241,7 +241,3 @@ export const ZWSP = "\u200b";
 export function toInlineCode(s: string) {
     return "``" + ZWSP + s.replaceAll("`", ZWSP + "`" + ZWSP) + ZWSP + "``";
 }
-
-export const escapeRegExp: (s: string) => string = RegExp.escape ?? function (s: string) {
-    return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-};

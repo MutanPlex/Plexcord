@@ -282,6 +282,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             select: "Selectează o opțiune",
             text: "Introdu o valoare"
         },
+        range: {
+            between: "Valoarea trebuie să fie între {{min}} și {{max}}",
+            atLeast: "Valoarea trebuie să fie cel puțin {{min}}",
+            atMost: "Valoarea trebuie să fie cel mult {{max}}"
+        },
         excluded: {
             desktop: "Aplicația Discord Desktop sau Plextron",
             discordDesktop: "Aplicația Discord Desktop",
@@ -1651,6 +1656,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Permite click pe punctul de rol din profil pentru a copia culoarea"
                 }
             }
+        },
+        betterSearch: {
+            name: "BetterSearch",
+            description: "Îți permite să folosești opțiuni de căutare a mesajelor din canal care nu sunt disponibile în mod normal"
         },
         betterSessions: {
             name: "BetterSessions",
@@ -9677,7 +9686,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 light: "Luminos",
                 dark: "Întunecat",
                 format: "Format Timestamp",
-                preview: "Previzualizare",
+                rawMarkdown: "Markdown brut:",
+                copy: "Copiază",
                 insert: "Inserează",
                 insertTimestamp: "Inserează Timestamp"
             },
@@ -11511,6 +11521,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "Datele {{type}} au fost copiate!",
                 copy: "Copiază JSON {{type}}",
                 copiedContent: "Conținutul a fost copiat!",
+                emptyMessage: "Nu se poate copia un mesaj gol.",
                 copyContent: "Copiază conținutul brut"
             },
             types: {

@@ -65,7 +65,11 @@
     color: var(--interactive-icon-default);
 }
 
-:is(.pc-msg-logger-enhanced-toolbox-btn:hover, .pc-msg-logger-enhanced-toolbox-btn[class*="selected"]) svg {
+:is(
+        .pc-msg-logger-enhanced-toolbox-btn:hover,
+        .pc-msg-logger-enhanced-toolbox-btn[class*="selected"]
+    )
+    svg {
     color: var(--interactive-icon-active);
 }
 

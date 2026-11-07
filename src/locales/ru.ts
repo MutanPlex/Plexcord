@@ -282,6 +282,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             select: "Выберите вариант",
             text: "Введите значение"
         },
+        range: {
+            between: "Значение должно быть от {{min}} до {{max}}",
+            atLeast: "Значение должно быть не меньше {{min}}",
+            atMost: "Значение должно быть не больше {{max}}"
+        },
         excluded: {
             desktop: "Приложение Discord или Plextron",
             discordDesktop: "Приложение Discord для ПК",
@@ -1651,6 +1656,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Разрешить нажатие на точку роли в профиле для копирования цвета"
                 }
             }
+        },
+        betterSearch: {
+            name: "BetterSearch",
+            description: "Позволяет использовать параметры поиска сообщений в канале, которые обычно недоступны"
         },
         betterSessions: {
             name: "BetterSessions",
@@ -9677,7 +9686,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 light: "Светлая",
                 dark: "Темная",
                 format: "Формат метки времени",
-                preview: "Предпросмотр",
+                rawMarkdown: "Исходный Markdown:",
+                copy: "Копировать",
                 insert: "Вставить",
                 insertTimestamp: "Вставить метку времени"
             },
@@ -11511,6 +11521,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "Данные {{type}} скопированы в буфер обмена!",
                 copy: "Копировать {{type}} JSON",
                 copiedContent: "Текст сообщения скопирован!",
+                emptyMessage: "Невозможно скопировать пустое сообщение.",
                 copyContent: "Копировать чистый текст"
             },
             types: {

@@ -42,7 +42,7 @@ interface StyledCardProps {
 
 export function SpecialCard({ title, subtitle, description, cardImage, backgroundImage, backgroundColor, buttonTitle, buttonOnClick: onClick, children }: PropsWithChildren<StyledCardProps>) {
     const cardStyle: React.CSSProperties = {
-        backgroundColor: backgroundColor || "#9c85ef",
+        backgroundColor: backgroundColor || "#6e1beb",
         backgroundImage: `url(${backgroundImage || ""})`,
     };
 

@@ -1,17 +1,17 @@
 {
     "name": "@plexcord/discord-types",
-    "author": "Plexcord Contributors",
+    "version": "1.0.1",
     "private": false,
     "description": "Typescript definitions for the webpack modules of the Discord Web app",
-    "version": "1.0.1",
     "license": "LGPL-3.0-or-later",
-    "types": "src/index.d.ts",
-    "type": "module",
+    "author": "Plexcord & Plexcord Contributors",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/MutanPlex/Plexcord.git",
         "directory": "packages/discord-types"
     },
+    "type": "module",
+    "types": "src/index.d.ts",
     "dependencies": {
         "moment": "catalog:",
         "type-fest": "catalog:"

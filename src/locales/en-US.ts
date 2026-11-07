@@ -279,6 +279,11 @@ const translations = {
             select: "Select an option",
             text: "Enter a value"
         },
+        range: {
+            between: "Value must be between {{min}} and {{max}}",
+            atLeast: "Value must be at least {{min}}",
+            atMost: "Value must be at most {{max}}"
+        },
         excluded: {
             desktop: "Discord Desktop app or Plextron",
             discordDesktop: "Discord Desktop app",
@@ -1648,6 +1653,10 @@ const translations = {
                     description: "Allow click on role dot in profile popout to copy role color"
                 }
             }
+        },
+        betterSearch: {
+            name: "BetterSearch",
+            description: "Allows you to use channel message search options that aren't normally available"
         },
         betterSessions: {
             name: "BetterSessions",
@@ -9676,7 +9685,8 @@ const translations = {
                 light: "Light",
                 dark: "Dark",
                 format: "Timestamp Format",
-                preview: "Preview",
+                rawMarkdown: "Raw Markdown:",
+                copy: "Copy",
                 insert: "Insert",
                 insertTimestamp: "Insert Timestamp"
             },
@@ -11511,6 +11521,7 @@ const translations = {
                 copied: "{{type}} data copied to clipboard!",
                 copy: "Copy {{type}} JSON",
                 copiedContent: "Content copied to clipboard!",
+                emptyMessage: "Can't copy empty message.",
                 copyContent: "Copy Raw Content"
             },
             types: {

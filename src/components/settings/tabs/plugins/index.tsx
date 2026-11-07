@@ -68,7 +68,7 @@ export function showErrorToast(message: string) {
 }
 
 function LanguageSelector() {
-    const { t, locale, isAutoDetect } = useTranslation();
+    const { t, locale } = useTranslation();
     const languageOptions = Object.entries(SUPPORTED_LANGUAGES).map(([code, info]) => ({
         label: `${info.nativeName} (${info.name})`,
         value: code

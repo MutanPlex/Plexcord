@@ -39,7 +39,8 @@ export default definePlugin({
             label: () => t(plugin.messageLatency.option.latency.label),
             description: () => t(plugin.messageLatency.option.latency.description),
             type: OptionType.NUMBER,
-            default: 2
+            default: 2,
+            min: 0
         },
         detectDiscordKotlin: {
             label: () => t(plugin.messageLatency.option.detectDiscordKotlin.label),

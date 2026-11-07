@@ -7,8 +7,8 @@
 
 import { plugin, t } from "@api/i18n";
 import { Channel, Message } from "@plexcord/discord-types";
+import { proxyLazyWebpack } from "@webpack";
 import { ChannelStore, showToast, UserStore } from "@webpack/common";
-import { proxyLazyWebpack } from "webpack";
 
 import { AllNotebooks, Note, Notebook } from "./types";
 import { deleteCacheFromDataStore, DeleteEntireStore, saveCacheToDataStore } from "./utils";

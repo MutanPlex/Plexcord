@@ -171,7 +171,7 @@ function ChannelTabContent(props: ChannelTabsProps & {
     guild?: Guild,
     channel?: Channel;
 }) {
-    const { guild, guildId, channel, channelId, compact } = props;
+    const { guild, guildId, channel, channelId } = props;
     const userId = UserStore.getCurrentUser()?.id;
     const recipients = channel?.recipients;
     const {

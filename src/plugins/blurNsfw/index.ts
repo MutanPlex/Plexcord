@@ -33,6 +33,7 @@ const settings = definePluginSettings({
         description: () => t(plugin.blurNSFW.option.blurAmount.description),
         type: OptionType.NUMBER,
         default: 10,
+        min: 0,
         onChange: setCss
     },
     blurAllChannels: {

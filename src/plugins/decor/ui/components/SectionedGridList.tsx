@@ -7,9 +7,9 @@
 
 import { cl } from "@plugins/decor/ui";
 import { classes } from "@utils/misc";
+import { findCssClassesLazy } from "@webpack";
 import { React } from "@webpack/common";
 import { JSX } from "react";
-import { findCssClassesLazy } from "webpack";
 
 import Grid, { GridProps } from "./Grid";
 

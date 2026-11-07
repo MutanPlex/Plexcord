@@ -101,9 +101,9 @@ export default definePlugin({
 
 function QuoteModal({ message, ...props }: RenderModalProps & { message: Message; }) {
     const [gray, setGray] = useState(settings.store.grayscale);
-    const [showWatermark, setShowWatermark] = useState(settings.store.showWatermark);
+    const [showWatermark] = useState(settings.store.showWatermark);
     const [saveAsGif, setSaveAsGif] = useState(settings.store.saveAsGif);
-    const [watermarkText, setWatermarkText] = useState(settings.store.watermark);
+    const [watermarkText] = useState(settings.store.watermark);
     const [quoteImage, setQuoteImage] = useState<Blob | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const { quoteFont } = settings.store;

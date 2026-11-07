@@ -282,6 +282,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             select: "オプションを選択してください",
             text: "値を入力してください"
         },
+        range: {
+            between: "値は {{min}} から {{max}} の間で指定してください",
+            atLeast: "値は {{min}} 以上で指定してください",
+            atMost: "値は {{max}} 以下で指定してください"
+        },
         excluded: {
             desktop: "Discord デスクトップ アプリまたは Plextron",
             discordDesktop: "Discord デスクトップアプリ",
@@ -1651,6 +1656,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "プロファイルのポップアウトで役割のドットをクリックして役割の色をコピーできるようにします"
                 }
             }
+        },
+        betterSearch: {
+            name: "BetterSearch",
+            description: "通常は利用できないチャンネルメッセージの検索オプションを使用できるようにします"
         },
         betterSessions: {
             name: "BetterSessions",
@@ -9677,7 +9686,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 light: "ライト",
                 dark: "暗い",
                 format: "タイムスタンプの形式",
-                preview: "プレビュー",
+                rawMarkdown: "生の Markdown:",
+                copy: "コピー",
                 insert: "入れる",
                 insertTimestamp: "タイムスタンプの挿入"
             },
@@ -11511,6 +11521,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "{{type}} データがクリップボードにコピーされました!",
                 copy: "{{type}} JSON をコピー",
                 copiedContent: "コンテンツがクリップボードにコピーされました!",
+                emptyMessage: "空のメッセージはコピーできません。",
                 copyContent: "未加工のコンテンツをコピーする"
             },
             types: {

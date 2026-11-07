@@ -1,13 +1,11 @@
 .pc-rpceditor-horizontal {
     display: flex;
     justify-content: space-evenly;
-
 }
 
 .pc-rpceditor-horizontal div {
     flex: 1;
 }
-
 
 .pc-rpceditor-horizontal div:first-child {
     padding-right: 5px;

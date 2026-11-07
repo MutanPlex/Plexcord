@@ -1,28 +1,28 @@
 {
     "name": "@plexcord/types",
-    "private": false,
     "version": "1.22.5",
+    "private": false,
     "description": "",
+    "keywords": [],
+    "license": "GPL-3.0-or-later",
+    "author": "MutanPlex",
     "types": "index.d.ts",
     "scripts": {
         "prepublishOnly": "tsx ./prepare.ts",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "keywords": [],
-    "author": "MutanPlex",
-    "license": "GPL-3.0-or-later",
+    "dependencies": {
+        "@plexcord/discord-types": "workspace:^",
+        "@types/node": "catalog:",
+        "lodash": "catalog:",
+        "moment": "catalog:",
+        "ts-pattern": "catalog:",
+        "type-fest": "catalog:"
+    },
     "devDependencies": {
         "@types/fs-extra": "catalog:",
         "fs-extra": "catalog:",
         "tsx": "catalog:"
-    },
-    "dependencies": {
-        "lodash": "catalog:",
-        "@types/node": "catalog:",
-        "@plexcord/discord-types": "workspace:^",
-        "moment": "catalog:",
-        "ts-pattern": "catalog:",
-        "type-fest": "catalog:"
     },
     "peerDependencies": {
         "@types/react": "catalog:",

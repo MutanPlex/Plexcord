@@ -94,8 +94,8 @@ function PlexcordPopoverButtons(props: { Component: React.ComponentType<MessageP
                 if (!item) return null;
 
                 return (
-                    <ErrorBoundary noop>
-                        <Component key={key} {...item} />
+                    <ErrorBoundary noop key={key}>
+                        <Component {...item} />
                     </ErrorBoundary>
                 );
             } catch (err) {

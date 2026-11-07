@@ -22,8 +22,8 @@
 
 import { readFileSync } from "fs";
 import { appendFile, mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
-import { join, relative } from "path";
 import JSZip from "jszip";
+import { join, relative } from "path";
 
 import { BUILD_TIMESTAMP, buildOrWatchAll, commonOpts, commonRendererPlugins, globPlugins, IS_ANTI_CRASH_TEST, IS_COMPANION_TEST, IS_DEV, IS_REPORTER, IS_STANDALONE, stringifyValues, VERSION } from "./common.mjs";
 

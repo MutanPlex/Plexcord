@@ -1,4 +1,3 @@
-/* stylelint-disable property-no-vendor-prefix */
 .pc-banners-everywhere-memberlist {
     position: absolute;
     left: 0;
@@ -12,6 +11,6 @@
     cursor: pointer;
 }
 
-.pc-banners-everywhere-memberlist~div {
+.pc-banners-everywhere-memberlist ~ div {
     z-index: 1;
 }

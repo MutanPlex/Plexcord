@@ -282,6 +282,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             select: "Vælg en mulighed",
             text: "Indtast en værdi"
         },
+        range: {
+            between: "Værdien skal være mellem {{min}} og {{max}}",
+            atLeast: "Værdien skal være mindst {{min}}",
+            atMost: "Værdien må højst være {{max}}"
+        },
         excluded: {
             desktop: "Discord Desktop-app eller Plextron",
             discordDesktop: "Discord Desktop-app",
@@ -1651,6 +1656,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Tillad klik på rolle-prik i profil-pop-up for at kopiere rollefarve"
                 }
             }
+        },
+        betterSearch: {
+            name: "BetterSearch",
+            description: "Giver dig mulighed for at bruge søgeindstillinger for kanalbeskeder, som normalt ikke er tilgængelige"
         },
         betterSessions: {
             name: "BetterSessions",
@@ -9677,7 +9686,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 light: "Lys",
                 dark: "Mørk",
                 format: "Format for tidsstempel",
-                preview: "Forhåndsvisning",
+                rawMarkdown: "Rå Markdown:",
+                copy: "Kopiér",
                 insert: "Indsæt",
                 insertTimestamp: "Indsæt tidsstempel"
             },
@@ -11511,6 +11521,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "{{type}} data kopieret til udklipsholder!",
                 copy: "Kopier {{type}} JSON",
                 copiedContent: "Indhold kopieret til udklipsholder!",
+                emptyMessage: "Kan ikke kopiere en tom besked.",
                 copyContent: "Kopier råt indhold"
             },
             types: {

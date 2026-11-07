@@ -10,6 +10,7 @@ import { Button } from "@components/Button";
 import { ErrorCard } from "@components/ErrorCard";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
+import { settings } from "@plugins/clientTheme";
 import { relativeLuminance } from "@plugins/clientTheme/utils/colorUtils";
 import { createOrUpdateThemeColorVars } from "@plugins/clientTheme/utils/styleUtils";
 import { classNameFactory } from "@utils/css";
@@ -17,7 +18,6 @@ import { Margins } from "@utils/margins";
 import { findByCodeLazy } from "@webpack";
 import { ClientThemesBackgroundStore, ColorPicker, ThemeStore, useStateFromStores } from "@webpack/common";
 
-import { settings } from "..";
 const saveClientTheme = findByCodeLazy('type:"UNSYNCED_USER_SETTINGS_UPDATE', '"system"===');
 
 const cl = classNameFactory("pc-clientTheme-");

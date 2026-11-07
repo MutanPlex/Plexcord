@@ -67,7 +67,9 @@
     color: var(--status-danger) !important;
     background-color: hsl(var(--red-400-hsl) / 10%) !important;
     opacity: 1;
-    transition: opacity.2s ease-in-out, transform.2s ease-in-out;
+    transition:
+        opacity.2s ease-in-out,
+        transform.2s ease-in-out;
 }
 
 .pc-useless-info-key-recorder-button {
@@ -159,7 +161,9 @@
     z-index: 10000;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
 }
 
 .pc-useless-info-panel-show {
@@ -212,7 +216,9 @@
     align-items: center;
     justify-content: center;
     border-radius: 4px;
-    transition: background-color 0.15s ease, color 0.15s ease;
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
 }
 
 .pc-useless-info-panel-close:hover {

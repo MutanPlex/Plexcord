@@ -35,7 +35,6 @@ function renderListOption(listType: ListType, IdType: idKeys, props: any) {
     const isBlocked = ids.every(id => settings.store[listType].includes(id));
     const oppositeListType = listType === "blacklistedIds" ? "whitelistedIds" : "blacklistedIds";
     const isOppositeBlocked = ids.some(id => settings.store[oppositeListType].includes(id));
-    const translatedType = t(`plugin.messageLoggerEnhanced.type.${IdType.toLowerCase()}`);
     const listAction = listType === "blacklistedIds" ? "blacklist" : "whitelist";
 
     const addToList = () => ids.forEach(id => addToXAndRemoveFromOpposite(listType, id));

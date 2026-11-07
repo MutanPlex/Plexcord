@@ -1,29 +1,19 @@
 .pc-invite-button,
-.pc-donate-button {
-    overflow: visible !important;
-    color: black;
-    background-color: color-mix(in srgb, #ED87A9 25%, pink);
-}
-
-.pc-invite-button:hover,
-.pc-donate-button:hover {
-    overflow: visible !important;
-    color: black;
-    background-color: color-mix(in srgb, #ED87A9 50%, pink);
-}
-
+.pc-donate-button,
 .pc-invite-support-button,
 .pc-donate-support-button {
     overflow: visible !important;
-    color: black;
-    background-color: color-mix(in srgb, #c3a3ce 25%, rgb(240 178 240));
+    color: white;
+    background-color: color-mix(in srgb, #6e1beb 80%, white);
 }
 
+.pc-invite-button:hover,
+.pc-donate-button:hover,
 .pc-invite-support-button:hover,
 .pc-donate-support-button:hover {
     overflow: visible !important;
-    color: black;
-    background-color: color-mix(in srgb, #c3a3ce 50%, rgb(240 178 240));
+    color: white;
+    background-color: color-mix(in srgb, #6e1beb 72%, white);
 }
 
 .pc-invite-link {
@@ -36,13 +26,13 @@
 .pc-contrib-button {
     overflow: visible !important;
     margin-top: 1em;
-    color: black;
-    background-color: color-mix(in srgb, #EDCC87 60%, lightyellow);
+    color: white;
+    background-color: color-mix(in srgb, #1e40af 75%, white);
 }
 
 .pc-contrib-button:hover {
-    color: black;
-    background-color: color-mix(in srgb, #EDCC87 75%, lightyellow);
+    color: white;
+    background-color: color-mix(in srgb, #1e40af 68%, white);
 }
 
 .pc-contrib-github {
@@ -88,25 +78,25 @@
 }
 
 .pc-special-title {
-    color: black;
+    color: white;
 }
 
 .pc-special-subtitle {
-    color: black;
+    color: white;
     font-size: 1.2em;
     font-weight: bold;
     margin-top: 0.5em;
 }
 
 .pc-special-text {
-    color: black;
+    color: white;
     font-size: 1em;
-    margin-top: .75em;
+    margin-top: 0.75em;
     white-space: pre-line;
 }
 
 .pc-special-seperator {
-    margin-top: .75em;
+    margin-top: 0.75em;
     border-top: 1px solid white;
     opacity: 0.4;
 }
@@ -117,7 +107,7 @@
 }
 
 .pc-special-hyperlink-text {
-    color: black;
+    color: white;
     font-size: 1em;
     font-weight: bold;
     text-align: center;

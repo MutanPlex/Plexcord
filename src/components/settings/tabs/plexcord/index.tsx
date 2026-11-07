@@ -26,7 +26,6 @@ import NoTrack from "@plugins/_core/noTrack";
 import settingsPlugin from "@plugins/_core/settings";
 import { gitRemote } from "@shared/plexcordUserAgent";
 import { DONOR_ROLE_ID, IS_WINDOWS, PLEXCORD_GUILD_ID } from "@utils/constants";
-import { classNameFactory } from "@utils/css";
 import { Margins } from "@utils/margins";
 import { classes, isPcPluginDev, isPluginDev } from "@utils/misc";
 import { relaunch } from "@utils/native";
@@ -40,21 +39,19 @@ import { WindowsMaterialSettings } from "./WindowsMaterialSettings";
 
 const DEFAULT_DONATE_IMAGE = "https://cdn.discordapp.com/emojis/1026533090627174460.png";
 const SHIGGY_DONATE_IMAGE = "https://media.discordapp.net/stickers/1039992459209490513.png";
-const VENNIE_DONATOR_IMAGE = "https://cdn.discordapp.com/emojis/1238120638020063377.png";
-const COZY_CONTRIB_IMAGE = "https://cdn.discordapp.com/emojis/1026533070955872337.png";
+const PLEXIE_DONATOR_IMAGE = "https://cdn.discordapp.com/emojis/1567997890897514667.png";
+const COZY_CONTRIB_IMAGE = "https://cdn.discordapp.com/emojis/1568007535817007175.png";
 const DONOR_BACKGROUND_IMAGE = "https://media.discordapp.net/stickers/1311070116305436712.png?size=2048";
 const CONTRIB_BACKGROUND_IMAGE = "https://media.discordapp.net/stickers/1311070166481895484.png?size=2048";
 
 import BadgeAPI from "@plugins/_api/badges";
-
-const cl = classNameFactory("pc-plexcord-tab-");
 
 type KeysOfType<Object, Type> = {
     [K in keyof Object]: Object[K] extends Type ? K : never;
 }[keyof Object];
 
 function LanguageSelector() {
-    const { t, locale, isAutoDetect } = useTranslation();
+    const { t, locale } = useTranslation();
     const languageOptions = Object.entries(SUPPORTED_LANGUAGES).map(([code, info]) => ({
         label: `${info.nativeName} (${info.name})`,
         value: code
@@ -217,9 +214,8 @@ function PlexcordSettings() {
                         title={t(settings.specialCards.donations.title)}
                         subtitle={t(settings.specialCards.donations.subtitle)}
                         description={t(settings.specialCards.donations.description)}
-                        cardImage={VENNIE_DONATOR_IMAGE}
+                        cardImage={PLEXIE_DONATOR_IMAGE}
                         backgroundImage={DONOR_BACKGROUND_IMAGE}
-                        backgroundColor="#ED87A9"
                     >
                         <DonateButtonComponent donated={true} />
                     </SpecialCard>
@@ -230,21 +226,20 @@ function PlexcordSettings() {
                         description={t(settings.specialCards.supportProject.description)}
                         cardImage={donateImage}
                         backgroundImage={DONOR_BACKGROUND_IMAGE}
-                        backgroundColor="#c3a3ce"
                     >
                         <DonateButtonComponent />
                     </SpecialCard>
                 )
             }
 
-            {isPluginDev(user?.id) || isPcPluginDev(user?.id) && (
+            {(isPluginDev(user?.id) || isPcPluginDev(user?.id)) && (
                 <SpecialCard
                     title={t(settings.specialCards.contributions.title)}
                     subtitle={t(settings.specialCards.contributions.subtitle)}
                     description={t(settings.specialCards.contributions.description)}
                     cardImage={COZY_CONTRIB_IMAGE}
                     backgroundImage={CONTRIB_BACKGROUND_IMAGE}
-                    backgroundColor="#EDCC87"
+                    backgroundColor="#1e40af"
                 >
                     <Button
                         variant="none"
@@ -253,7 +248,7 @@ function PlexcordSettings() {
                         onClick={() => openContributorModal(user)}
                         className="pc-contrib-button"
                     >
-                        <GithubIcon aria-hidden fill={"#000000"} className={"pc-contrib-github"} />
+                        <GithubIcon aria-hidden fill="currentColor" className={"pc-contrib-github"} />
                         {t(settings.specialCards.contributions.buttonTitle)}
                     </Button>
                 </SpecialCard>

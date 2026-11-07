@@ -282,6 +282,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             select: "选择一个选项",
             text: "输入一个值"
         },
+        range: {
+            between: "值必须介于 {{min}} 和 {{max}} 之间",
+            atLeast: "值不能小于 {{min}}",
+            atMost: "值不能大于 {{max}}"
+        },
         excluded: {
             desktop: "Discord 桌面应用程序或 Plextron",
             discordDesktop: "Discord 桌面应用程序",
@@ -1651,6 +1656,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "允许单击配置文件弹出窗口中的角色点来复制角色颜色"
                 }
             }
+        },
+        betterSearch: {
+            name: "BetterSearch",
+            description: "允许你使用通常不可用的频道消息搜索选项"
         },
         betterSessions: {
             name: "BetterSessions",
@@ -9677,7 +9686,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 light: "光",
                 dark: "黑暗的",
                 format: "时间戳格式",
-                preview: "预览",
+                rawMarkdown: "原始 Markdown：",
+                copy: "复制",
                 insert: "插入",
                 insertTimestamp: "插入时间戳"
             },
@@ -11511,6 +11521,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "{{type}} 数据已复制到剪贴板！",
                 copy: "复制 {{type}} JSON",
                 copiedContent: "内容已复制到剪贴板！",
+                emptyMessage: "无法复制空消息。",
                 copyContent: "复制原始内容"
             },
             types: {

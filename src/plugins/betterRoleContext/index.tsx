@@ -245,8 +245,6 @@ export default definePlugin({
 
     contextMenus: {
         "dev-context"(children, { id }: { id: string; }) {
-            const popoutRef = useRef(null);
-
             const guild = getCurrentGuild();
             if (!guild) return;
 

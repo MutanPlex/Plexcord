@@ -100,7 +100,6 @@ interface DonorBadge {
 }
 
 let DonorBadges = {} as Record<string, Array<DonorBadge>>;
-const MutanBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
 let DirectoryBadges = {} as Record<string, DirectoryBadge>;
 
 async function loadBadges(url: string, noCache = false) {

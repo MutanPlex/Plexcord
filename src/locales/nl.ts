@@ -282,6 +282,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             select: "Selecteer een optie",
             text: "Voer een waarde in"
         },
+        range: {
+            between: "De waarde moet tussen {{min}} en {{max}} liggen",
+            atLeast: "De waarde moet minimaal {{min}} zijn",
+            atMost: "De waarde mag maximaal {{max}} zijn"
+        },
         excluded: {
             desktop: "Discord Desktop-app of Plextron",
             discordDesktop: "Discord Desktop-app",
@@ -1651,6 +1656,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Sta toe dat u op de rolpunt in de profielpop-out klikt om de rolkleur te kopiëren"
                 }
             }
+        },
+        betterSearch: {
+            name: "BetterSearch",
+            description: "Hiermee kun je zoekopties voor kanaalberichten gebruiken die normaal niet beschikbaar zijn"
         },
         betterSessions: {
             name: "BetterSessions",
@@ -9677,7 +9686,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 light: "Licht",
                 dark: "Donker",
                 format: "Tijdstempelformaat",
-                preview: "Voorbeeld",
+                rawMarkdown: "Ruwe Markdown:",
+                copy: "Kopiëren",
                 insert: "Invoegen",
                 insertTimestamp: "Tijdstempel invoegen"
             },
@@ -11511,6 +11521,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "{{type}} gegevens gekopieerd naar klembord!",
                 copy: "Kopieer {{type}} JSON",
                 copiedContent: "Inhoud gekopieerd naar klembord!",
+                emptyMessage: "Een leeg bericht kan niet worden gekopieerd.",
                 copyContent: "Kopieer onbewerkte inhoud"
             },
             types: {

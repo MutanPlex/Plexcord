@@ -44,7 +44,7 @@ export const parseQuery = memoize((query: string = ""): QueryResult | string => 
         trimmedQuery = trimmedQuery.substring(trimmedQuery.length, 1);
     }
 
-    const [filter, rest] = trimmedQuery.split(" ", 2);
+    const [filter] = trimmedQuery.split(" ", 2);
     if (!filter) {
         return query;
     }

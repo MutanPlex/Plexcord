@@ -99,6 +99,8 @@ const settings = definePluginSettings({
         description: () => t(plugin.xSOverlay.option.webSocketPort.description),
         type: OptionType.NUMBER,
         default: 42070,
+        min: 1,
+        max: 65535,
         async onChange() {
             await start();
         }
@@ -163,6 +165,7 @@ const settings = definePluginSettings({
         description: () => t(plugin.xSOverlay.option.timeout.description),
         type: OptionType.NUMBER,
         default: 3,
+        min: 0
     },
     lengthBasedTimeout: {
         label: () => t(plugin.xSOverlay.option.lengthBasedTimeout.label),

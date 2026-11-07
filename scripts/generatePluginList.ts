@@ -21,7 +21,7 @@ import { Dirent, readdirSync, readFileSync, writeFileSync } from "fs";
 import { access, readFile } from "fs/promises";
 import { join, sep } from "path";
 import { normalize as posixNormalize, sep as posixSep } from "path/posix";
-import { ArrowFunction, AsExpression, BigIntLiteral, createSourceFile, FunctionExpression, Identifier, isArrayLiteralExpression, isArrowFunction, isAsExpression, isCallExpression, isExportAssignment, isFunctionExpression, isIdentifier, isObjectLiteralExpression, isPropertyAccessExpression, isPropertyAssignment, isSatisfiesExpression, isStringLiteral, isVariableStatement, NamedDeclaration, NodeArray, ObjectLiteralExpression, ScriptTarget, StringLiteral, SyntaxKind } from "typescript";
+import { ArrowFunction, BigIntLiteral, createSourceFile, FunctionExpression, Identifier, isArrayLiteralExpression, isArrowFunction, isAsExpression, isCallExpression, isExportAssignment, isFunctionExpression, isIdentifier, isObjectLiteralExpression, isPropertyAccessExpression, isPropertyAssignment, isSatisfiesExpression, isStringLiteral, isVariableStatement, NamedDeclaration, NodeArray, ObjectLiteralExpression, ScriptTarget, StringLiteral, SyntaxKind } from "typescript";
 
 import { PluginTarget, PluginTargets } from "../src/utils/pluginTargets";
 import { getPluginTarget } from "./utils.mjs";
@@ -69,7 +69,7 @@ function getObjectProp(node: ObjectLiteralExpression, name: string) {
 }
 
 function extractTranslationFromFunction(fnNode: ArrowFunction | FunctionExpression): string | null {
-    const body = fnNode.body;
+    const { body } = fnNode;
 
     if (isCallExpression(body)) {
         const arg = body.arguments[0];
@@ -89,14 +89,14 @@ function extractTranslationFromFunction(fnNode: ArrowFunction | FunctionExpressi
             // Navigate through translations object
             let value = translations;
             for (const part of parts) {
-                if (value && typeof value === 'object' && part in value) {
+                if (value && typeof value === "object" && part in value) {
                     value = value[part];
                 } else {
                     return null;
                 }
             }
 
-            return typeof value === 'string' ? value : null;
+            return typeof value === "string" ? value : null;
         }
     }
 
@@ -197,7 +197,6 @@ function parseDevs() {
     if (Object.keys(devs).length === 0) throw new Error("Failed to parse devs: no devs found");
     if (Object.keys(pcDevs).length === 0) throw new Error("Failed to parse Plexcord devs: no devs found");
 }
-
 
 async function parseFile(fileName: string) {
     const file = createSourceFile(fileName, await readFile(fileName, "utf8"), ScriptTarget.Latest);

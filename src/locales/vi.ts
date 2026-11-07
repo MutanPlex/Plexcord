@@ -282,6 +282,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             select: "Chọn một tùy chọn",
             text: "Nhập một giá trị"
         },
+        range: {
+            between: "Giá trị phải nằm trong khoảng từ {{min}} đến {{max}}",
+            atLeast: "Giá trị phải ít nhất là {{min}}",
+            atMost: "Giá trị chỉ được tối đa là {{max}}"
+        },
         excluded: {
             desktop: "Ứng dụng Discord Desktop hoặc Plextron",
             discordDesktop: "Ứng dụng Discord dành cho máy tính để bàn",
@@ -1651,6 +1656,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Cho phép nhấp vào dấu chấm vai trò trong cửa sổ bật lên của hồ sơ để sao chép màu vai trò"
                 }
             }
+        },
+        betterSearch: {
+            name: "BetterSearch",
+            description: "Cho phép bạn sử dụng các tùy chọn tìm kiếm tin nhắn kênh thường không có sẵn"
         },
         betterSessions: {
             name: "BetterSessions",
@@ -9677,7 +9686,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 light: "Ánh sáng",
                 dark: "Tối tăm",
                 format: "Định dạng dấu thời gian",
-                preview: "Xem trước",
+                rawMarkdown: "Markdown thô:",
+                copy: "Sao chép",
                 insert: "Chèn",
                 insertTimestamp: "Chèn dấu thời gian"
             },
@@ -11511,6 +11521,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "{{type}} dữ liệu đã được sao chép vào bảng nhớ tạm!",
                 copy: "Sao chép {{type}} JSON",
                 copiedContent: "Nội dung được sao chép vào clipboard!",
+                emptyMessage: "Không thể sao chép tin nhắn trống.",
                 copyContent: "Sao chép nội dung thô"
             },
             types: {

@@ -282,6 +282,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             select: "Bir seçenek seçin",
             text: "Bir değer girin"
         },
+        range: {
+            between: "Değer {{min}} ile {{max}} arasında olmalıdır",
+            atLeast: "Değer en az {{min}} olmalıdır",
+            atMost: "Değer en fazla {{max}} olmalıdır"
+        },
         excluded: {
             desktop: "Discord Masaüstü uygulaması veya Plextron",
             discordDesktop: "Discord Masaüstü uygulaması",
@@ -1651,6 +1656,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Profil açılır penceresindeki rol noktasına tıklayarak rol rengini kopyalamaya izin ver"
                 }
             }
+        },
+        betterSearch: {
+            name: "BetterSearch",
+            description: "Normalde kullanılamayan kanal mesajı arama seçeneklerini kullanmanı sağlar"
         },
         betterSessions: {
             name: "BetterSessions",
@@ -9677,7 +9686,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 light: "Açık",
                 dark: "Koyu",
                 format: "Zaman Damgası Formatı",
-                preview: "Önizleme",
+                rawMarkdown: "Ham Markdown:",
+                copy: "Kopyala",
                 insert: "Ekle",
                 insertTimestamp: "Zaman Damgası Ekle"
             },
@@ -11511,6 +11521,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "{{type}} verisi panoya kopyalandı!",
                 copy: "{{type}} JSON'unu Kopyala",
                 copiedContent: "İçerik panoya kopyalandı!",
+                emptyMessage: "Boş mesaj kopyalanamaz.",
                 copyContent: "Ham İçeriği Kopyala"
             },
             types: {

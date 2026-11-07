@@ -8,4 +8,3 @@ export * from "./modules";
 export * from "./stores";
 export * from "./toasts";
 export * from "./utils";
-export * as Webpack from "../webpack";

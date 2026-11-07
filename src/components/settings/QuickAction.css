@@ -6,7 +6,7 @@
     margin-bottom: 1em;
 }
 
-@media (width <=1040px) {
+@media (width <= 1040px) {
     .pc-settings-quickActions-card {
         grid-template-columns: repeat(2, 1fr);
     }

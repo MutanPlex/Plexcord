@@ -282,6 +282,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             select: "Виберіть варіант",
             text: "Введіть значення"
         },
+        range: {
+            between: "Значення має бути від {{min}} до {{max}}",
+            atLeast: "Значення має бути не менше {{min}}",
+            atMost: "Значення має бути не більше {{max}}"
+        },
         excluded: {
             desktop: "Додаток Discord Desktop або Plextron",
             discordDesktop: "Додаток Discord Desktop",
@@ -1651,6 +1656,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Дозволити копіювання кольору ролі натисканням на крапку у спливаючому вікні профілю"
                 }
             }
+        },
+        betterSearch: {
+            name: "BetterSearch",
+            description: "Дозволяє використовувати параметри пошуку повідомлень у каналі, які зазвичай недоступні"
         },
         betterSessions: {
             name: "BetterSessions",
@@ -9677,7 +9686,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 light: "Світла",
                 dark: "Темна",
                 format: "Формат мітки часу",
-                preview: "Попередній перегляд",
+                rawMarkdown: "Вихідний Markdown:",
+                copy: "Копіювати",
                 insert: "Вставити",
                 insertTimestamp: "Вставити мітку часу"
             },
@@ -11511,6 +11521,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copied: "Дані {{type}} скопійовано!",
                 copy: "Копіювати {{type}} JSON",
                 copiedContent: "Текст повідомлення скопійовано!",
+                emptyMessage: "Неможливо скопіювати порожнє повідомлення.",
                 copyContent: "Копіювати сирий текст"
             },
             types: {

@@ -145,7 +145,9 @@
     cursor: pointer;
     color: var(--interactive-icon-default);
     opacity: 0.5;
-    transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition:
+        opacity 0.2s ease-in-out,
+        color 0.2s ease-in-out;
     position: absolute;
     top: 0.4rem;
     right: 0.4rem;
@@ -209,7 +211,6 @@
     transition: 200ms ease;
     transition-property: height, opacity;
 
-    /* stylelint-disable-next-line no-descending-specificity */
     .pc-notification-root {
         height: 104px;
     }

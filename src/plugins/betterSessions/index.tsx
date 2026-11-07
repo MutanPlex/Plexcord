@@ -49,6 +49,7 @@ const settings = definePluginSettings({
         description: () => t(plugin.betterSessions.option.checkInterval.description),
         type: OptionType.NUMBER,
         default: 20,
+        min: 1,
         restartNeeded: true
     }
 });

@@ -39,7 +39,7 @@
 
 .pc-h1-defaultMargin,
 .pc-h2-defaultMargin {
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
 /* This is copied from Discord, don't ask me why 0 margin */
@@ -50,5 +50,5 @@
 
 .pc-h3-defaultMargin,
 .pc-h5-defaultMargin {
-    margin-bottom: 8px
+    margin-bottom: 8px;
 }

@@ -63,8 +63,16 @@
 .pc-markdownTables-scrollFrame {
     --pc-markdown-tables-mask-size: 30px;
     --pc-markdown-tables-fade-color: var(--background-primary);
-    --pc-markdown-tables-fade-mid: color-mix(in srgb, var(--pc-markdown-tables-fade-color) 58%, transparent);
-    --pc-markdown-tables-fade-soft: color-mix(in srgb, var(--pc-markdown-tables-fade-color) 24%, transparent);
+    --pc-markdown-tables-fade-mid: color-mix(
+        in srgb,
+        var(--pc-markdown-tables-fade-color) 58%,
+        transparent
+    );
+    --pc-markdown-tables-fade-soft: color-mix(
+        in srgb,
+        var(--pc-markdown-tables-fade-color) 24%,
+        transparent
+    );
 
     position: relative;
     max-width: 100%;

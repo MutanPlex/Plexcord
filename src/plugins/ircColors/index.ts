@@ -39,12 +39,16 @@ const settings = definePluginSettings({
         description: () => t(plugin.ircColors.option.lightness.description),
         type: OptionType.NUMBER,
         default: 70,
+        min: 0,
+        max: 100
     },
     saturation: {
         label: () => t(plugin.ircColors.option.saturation.label),
         description: () => t(plugin.ircColors.option.saturation.description),
         type: OptionType.NUMBER,
-        default: 100
+        default: 100,
+        min: 0,
+        max: 100
     },
     seed: {
         label: () => t(plugin.ircColors.option.seed.label),

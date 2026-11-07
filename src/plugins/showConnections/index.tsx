@@ -60,7 +60,8 @@ const settings = definePluginSettings({
         label: () => t(plugin.showConnections.option.iconSize.label),
         description: () => t(plugin.showConnections.option.iconSize.description),
         type: OptionType.NUMBER,
-        default: 32
+        default: 32,
+        min: 1
     },
     iconSpacing: {
         label: () => t(plugin.showConnections.option.iconSpacing.label),

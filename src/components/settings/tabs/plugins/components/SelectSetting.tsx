@@ -22,12 +22,12 @@ import { isSettingDisabled } from "@api/PluginManager";
 import { PluginSettingSelectDef } from "@utils/types";
 import { React, Select, useState } from "@webpack/common";
 
-import { resolveError, SettingProps, SettingsSection } from "./Common";
+import { resolveError, SettingProps, SettingsSection, useSettingState } from "./Common";
 
 export function SelectSetting({ setting, pluginSettings, definedSettings, onChange, id }: SettingProps<PluginSettingSelectDef>) {
     const def = pluginSettings[id] ?? setting.options?.find(o => o.default)?.value;
 
-    const [state, setState] = useState<any>(def ?? null);
+    const [state, setState] = useSettingState<any>(def ?? null);
     const [error, setError] = useState<string | null>(null);
 
     // Resolve function labels to strings

@@ -41,12 +41,6 @@ const enum LayoutType {
 
 const LayoutTypes: typeof LayoutType = findByPropsLazy("SECTION", "SIDEBAR_ITEM", "PANEL", "CUSTOM");
 
-const enum SectionType {
-    HEADER = "HEADER",
-    DIVIDER = "DIVIDER",
-    CUSTOM = "CUSTOM"
-}
-
 type SettingsLocation =
     | "top"
     | "aboveNitro"
