@@ -7,11 +7,11 @@
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings, migratePluginSettings } from "@api/Settings";
-import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { InfoIcon } from "@components/Icons";
 import { Margins } from "@components/margins";
+import { Text } from "@components/Text";
 import { Message } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
@@ -268,7 +268,7 @@ export default definePlugin({
                     {message && message.embeds.length + message.attachments.length > 0 && (
                         <Flex className={Margins.top16}>
                             <Checkbox value={!hasOpts} onChange={() => setOpts(!hasOpts ? defaultOpts : {})} size={20}>
-                                <BaseText size="sm">{t(plugin.betterForwards.text.forwardEverything)}</BaseText>
+                                <Text size="sm">{t(plugin.betterForwards.text.forwardEverything)}</Text>
                             </Checkbox>
                             <Tooltip text={t(plugin.betterForwards.text.messageTextWillNot)}>
                                 {props => <InfoIcon {...props} color="var(--text-muted)" width={20} height={20} />}

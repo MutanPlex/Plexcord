@@ -6,7 +6,7 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
+import { Text } from "@components/Text";
 import { fetchOrgRepos, fetchReposByUserId, fetchReposByUsername, fetchUserInfo, fetchUserOrgs } from "@plugins/githubRepos/githubApi";
 import { GitHubRepo, RepoGroup, RepoSortMode } from "@plugins/githubRepos/types";
 import { buildRepoGroups, PERSONAL_GROUP_KEY, sortGroups } from "@plugins/githubRepos/utils";
@@ -74,14 +74,14 @@ export function ProfileTabComponent({ id }: { id: string, theme: string; }) {
     }, [id]);
 
     if (loading) return;
-    <BaseText size="xs" weight="semibold" className={cl("loading")} >
+    <Text size="xs" weight="semibold" className={cl("loading")} >
         {t(plugin.gitHubRepos.loading)}
-    </BaseText>;
+    </Text>;
 
     if (error) return;
-    <BaseText size="xs" weight="semibold" className={cl("error")}>
+    <Text size="xs" weight="semibold" className={cl("error")}>
         Error: {error}
-    </BaseText>;
+    </Text>;
 
     if (!groups.length) return null;
 

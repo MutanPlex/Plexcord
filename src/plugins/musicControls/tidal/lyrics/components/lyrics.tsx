@@ -6,7 +6,7 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
+import { Text } from "@components/Text";
 import { TooltipContainer } from "@components/TooltipContainer";
 import { settings } from "@plugins/musicControls/settings";
 import { TidalLrcStore } from "@plugins/musicControls/tidal/lyrics/providers/store";
@@ -57,7 +57,7 @@ function LyricsDisplay({ scroll = true }: { scroll?: boolean; }) {
         >
             {currentLyrics.map((line, i) => (
                 <div ref={lyricRefs[i]} key={i}>
-                    <BaseText size={currLrcIndex === i ? "sm" : "xs"} className={makeClassName(i)}>{line.text || NoteElement}</BaseText>
+                    <Text size={currLrcIndex === i ? "sm" : "xs"} className={makeClassName(i)}>{line.text || NoteElement}</Text>
                 </div>
             ))}
         </div>

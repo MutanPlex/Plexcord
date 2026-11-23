@@ -13,7 +13,7 @@ import { DataStore } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { CustomEmoji, ToastVariant, UnicodeEmoji } from "@plexcord/discord-types";
-import { PcDevs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { chooseFile, saveFile } from "@utils/web";
 import { Alerts, EmojiStore, GuildStore, IconUtils, Menu, showToast as originalShowToast, useEffect, useState } from "@webpack/common";
@@ -406,7 +406,7 @@ export default definePlugin({
     name: "WhitelistedEmojis",
     description: () => t(plugin.whitelistedEmojis.description),
     tags: ["chat", "emotes"],
-    authors: [PcDevs.creations, PcDevs.MutanPlex],
+    authors: [Devs.creations, PcDevs.MutanPlex],
     patches: [
         {
             find: "queryEmojiResults({query:",

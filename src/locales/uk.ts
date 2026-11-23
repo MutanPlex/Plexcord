@@ -81,6 +81,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             disableMinSize: {
                 label: "Вимкнути мінімальний розмір вікна",
                 description: "Дозволяє змінювати розмір вікна як завгодно, навіть менше за мінімальний розмір Discord"
+            },
+            enableBackgroundRendering: {
+                label: "Увімкнути фоновий рендеринг",
+                description: "Вікно застосунку продовжує оновлюватися, навіть коли воно не повністю у фокусі"
             }
         },
         quickActions: {
@@ -90,7 +94,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             editQuickCSS: "Редагувати QuickCSS",
             relaunchDiscord: "Перезапустити Discord",
             openSettingsFolder: "Відкрити папку налаштувань",
-            viewSourceCode: "Переглянути вихідний код"
+            viewSourceCode: "Переглянути вихідний код",
+            openPlayground: "Відкрити пісочницю компонентів"
         },
         specialCards: {
             donations: {
@@ -229,6 +234,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         tabs: {
             renderFailed: "Не вдалося відобразити вкладку {{tab}}. Якщо проблема не зникне, спробуйте перевстановити через інсталятор!"
+        },
+        playground: {
+            title: "Пісочниця компонентів",
+            buttons: "Кнопки",
+            buttonSize: "Розмір кнопки",
+            cards: "Картки"
         }
     },
 
@@ -401,6 +412,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Донор Plexcord",
                     special: "Цей значок — особливий бонус для донорів Plexcord",
                     description: "Будь ласка, розгляньте можливість підтримки розробки Plexcord, ставши донором. Це дуже важливо для нас!"
+                },
+                directory: {
+                    contributed: "зробили внесок",
+                    plugin: "плагін",
+                    plugins: "плагінів",
+                    selfContributed: "Ви {{link}} у {{count}}!",
+                    otherContributed: "Ця людина {{link}} у {{count}}!",
+                    selfNoPlugins: "Ви ще не створили жодного плагіна. Імовірно, ви {{link}} іншими способами!",
+                    otherNoPlugins: "Ця людина не створила жодного плагіна. Імовірно, вона {{link}} іншими способами!",
+                    restart: "Перезапустіть, щоб застосувати зміни!",
+                    selfDonor: "Дякуємо за пожертву!",
+                    otherDonor: "Цей користувач — донатор Plexcord!",
+                    selfDonorDescription: "Ви можете будь-коли керувати своїми перевагами, написавши @mutanplex.",
+                    otherDonorDescription: "Підтримайте Plexcord, щоб отримати власний значок і переваги!"
                 }
             },
         },
@@ -910,7 +935,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             scrollRight: "Прокрутити праворуч"
         },
         notices: {
-            error: "Помилка під час показу сповіщення"
+            error: "Помилка під час показу сповіщення",
+            dismiss: "Закрити"
         },
         tray: {
             aboutPlexcord: "Про Plexcord",
@@ -1029,16 +1055,40 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "ConcatenatedModules",
             description: "Вилучення модулів, об'єднаних збирачем (bundler)"
         },
+        duplicateCategory: {
+            name: "DuplicateCategory",
+            description: "Додає можливість дублювати категорію з тими самими дозволами.",
+            menu: "Дублювати категорію",
+            toast: {
+                created: "Категорію створено."
+            },
+            error: {
+                missing: "Вихідна категорія більше не існує.",
+                failed: "Не вдалося створити категорію. Перевірте свої дозволи та спробуйте ще раз."
+            },
+            modal: {
+                title: "Створити категорію",
+                cancel: "Скасувати",
+                create: "Створити категорію",
+                name: "Назва категорії",
+                placeholder: "Нова категорія",
+                copyPermissions: "Копіювати дозволи",
+                copyPermissionsDescription: "Скопіювати дозволи вихідної категорії до нової категорії. Вимкніть, щоб використовувати стандартні дозволи сервера."
+            }
+        },
         noTrack: {
             name: "NoTrack",
             description: "Вимкнути відстеження Discord (аналітику/'science'), метрики та звіти про збої Sentry",
             option: {
                 disableAnalytics: {
                     label: "Вимкнути аналітику",
-                    description: "Блокує аналітику відстеження Discord. Вимкніть, якщо хочете, щоб значки відстежували ваш прогрес (наприклад, години трансляцій)."
+                    description: "Блокувати аналітику відстеження Discord"
                 },
                 disableStackDumping: {
                     description: "Виводити нативне трасування стека в консоль під час збою Discord. Потрібен повний перезапуск."
+                },
+                allowBadgeTracking: {
+                    description: "Усе одно надсилати події, потрібні значкам для відстеження прогресу (наприклад, години гри, години трансляцій)"
                 }
             }
         },
@@ -1463,11 +1513,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 channelOpenScrollMode: {
                     label: "Позиція під час відкриття каналу",
-                    description: "Відкривати непрочитані канали на збереженій позиції (або внизу), завжди внизу або за стандартною поведінкою для непрочитаного.",
+                    description: "Де в історії чату відкривати канали. Якщо ви вийшли в межах 5 повідомлень від останнього, «Збережена позиція» вважається не заданою і використовується наступний варіант. Якщо останнє прочитане повідомлення старше за вказаний нижче максимальний вік, канал вважається покинутим, а «Найстаріше непрочитане» вважається не заданим.",
                     default: "Типово в Discord",
-                    bottom: "Завжди внизу",
-                    saved: "Збережена позиція"
+                    bottom: "Останнє повідомлення",
+                    saved: "Збережена позиція > Найстаріше непрочитане > Останнє повідомлення",
+                    savedLatest: "Збережена позиція > Останнє повідомлення",
+                    unread: "Найстаріше непрочитане > Останнє повідомлення"
+                },
+                maximumLastReadAge: {
+                    label: "Максимальний вік останнього прочитання",
+                    description: "Максимальний вік останнього прочитаного повідомлення у хвилинах для використання варіанта «Найстаріше непрочитане». 0 — без обмежень."
+                },
+                showJumpToPresentSooner: {
+                    label: "Показувати кнопку «Перейти до теперішнього» раніше",
+                    description: "Показує кнопку «Перейти до теперішнього» під час прокручування на 5 і більше повідомлень вище останнього."
+                },
+                addChatbarButton: {
+                    label: "Додати кнопку на панель чату",
+                    description: "Додає кнопку на панель чату для швидкого перемикання позиції відкриття каналів."
                 }
+            },
+            history: {
+                unavailable: "Збережена історія поки недоступна.",
+                clearTitle: "Очистити збережену історію",
+                clearDescription: "Очищає локальний прогрес читання, який зберігається для відновлення позиції прокручування після перезавантаження.",
+                clear: "Очистити",
+                success: "Успішно",
+                failure: "Помилка"
             }
         },
         betterBanReasons: {
@@ -1624,6 +1696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "BetterPlusReacts",
             description: "Кількість знаків 'плюс' перед :emoji: визначає номер повідомлення, до якого його буде додано як реакцію"
         },
+        betterPollDetails: {
+            name: "BetterPollDetails",
+            description: "Показує відсотки й кількість голосів в опитуваннях до голосування або завершення, не вимикаючи можливість голосувати"
+        },
         betterRoleContext: {
             name: "BetterRoleContext",
             description: "Додає опції копіювання кольору ролі / редагування ролі / перегляду значка ролі під час натискання ПКМ на ролі в профілі користувача або в списку учасників",
@@ -1709,6 +1785,20 @@ const translations: MatchStructure<typeof enTranslations> = {
         betterUploadButton: {
             name: "BetterUploadButton",
             description: "Завантаження одним кліком, відкриття меню — правим кліком"
+        },
+        betterYoutubeEmbeds: {
+            name: "BetterYouTubeEmbeds",
+            description: "Блокує рекламу та обходить блокування UMG",
+            option: {
+                fixBlockedEmbeds: {
+                    label: "Виправляти заблоковані вбудовування",
+                    description: "Відновлювати відео, показ яких у Discord заблоковано, наприклад UMG"
+                },
+                blockAds: {
+                    label: "Блокувати рекламу",
+                    description: "Блокує рекламу у вбудовуваннях YouTube і WatchTogether. Відео може завантажуватися кілька секунд через антирекламні заходи YouTube"
+                }
+            }
         },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
@@ -3993,6 +4083,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeFamilyCenterAboveDms: {
                     description: "Прибирає сімейний центр над списком ОП.",
                     label: "Прибрати сімейний центр над ОП"
+                },
+                removeAccountPopoutBadges: {
+                    label: "Прибрати значки зі спливного вікна облікового запису",
+                    description: "Прибрати значки зі спливного вікна облікового запису."
+                },
+                removeAccountPopoutOrbs: {
+                    label: "Прибрати сфери зі спливного вікна облікового запису",
+                    description: "Прибрати сфери зі спливного вікна облікового запису."
+                },
+                removeInvisibleWarning: {
+                    label: "Прибрати попередження про невидимість",
+                    description: "Прибрати попередження про статус «Невидимий» зі спливного вікна облікового запису."
                 }
             },
             text: {
@@ -4268,8 +4370,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 success: "Завантажено вкладень: {{count}}.",
                 partial: "Завантажено {{succeeded}} з {{total}} вкладень. Помилок: {{failed}}.",
-                downloadedPluralizeSucceededAttachment: "Завантажено: {{pluralize_succeeded_attachment}}.",
-                downloadedSucceededOfLength: "Завантажено {{succeeded}} з {{length}} вкладень. Не вдалося: {{failed}}."
+                downloadedPluralizeSucceededAttachment: "Збережено: {{pluralize_succeeded_attachment}}.",
+                downloadedSucceededOfLength: "Збережено {{succeeded}} з {{length}} вкладень. Помилок: {{failed}}.",
+                tooLarge: "Ці вкладення завеликі для архівування. Збережіть їх по одному.",
+                noneDownloaded: "Не вдалося завантажити жодного вкладення."
             },
             option: {
                 downloadAllFileTypes: {
@@ -4926,10 +5030,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        fixYoutubeEmbeds: {
-            name: "FixYoutubeEmbeds",
-            description: "Обходить блокування відтворення відео YouTube у Discord (наприклад, від UMG)"
-        },
         followUser: {
             name: "FollowUser",
             description: "Додає опцію 'Слідувати' в меню користувача, щоб завжди бути в одному голосовому каналі з ним",
@@ -5150,10 +5250,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         fullSearchContext: {
             name: "FullSearchContext",
             description: "Робить контекстне меню повідомлень у результатах пошуку повноцінним"
-        },
-        fullUserInChatbox: {
-            name: "FullUserInChatbox",
-            description: "Додає більше функцій для згадок користувачів у полі вводу тексту"
         },
         fullVCPFP: {
             name: "FullVCPFP",
@@ -9914,7 +10010,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showHiddenChannels: {
             name: "ShowHiddenChannels",
-            description: "Показує канали, до яких у вас немає доступу для перегляду.",
+            description: "Показує приховані канали. Discord суттєво обмежив цю функціональність. Більше інформації в налаштуваннях плагіна.",
             tooltip: "Прихований канал",
             option: {
                 channelStyle: {
@@ -9968,7 +10064,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknown: "невідомо",
                 permissionDetails: "Деталі дозволів",
                 thisIsA: "Це {{status}} {{channelType}} канал",
-                canNotSee: "Ви не можете бачити {{type}} цього каналу.",
+                canNotSee: "Ви не можете бачити назву чи {{type}} цього каналу.",
                 guidelines: "Проте ви можете бачити правила каналу:",
                 lastCreated: "Останній створений {{type}}:",
                 lastPin: "Останнє закріплене повідомлення:",
@@ -9987,6 +10083,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedUsersAndRoles: "Дозволені користувачі та ролі:",
                 hideAllowedUsersAndRoles: "Приховати список доступу",
                 viewAllowedUsersAndRoles: "Переглянути список доступу"
+            },
+            about: {
+                title: "Обмежена функціональність",
+                patched: "Discord виправив більшу частину функціональності цього плагіна ({{link}}). Приховані канали тепер відображаються як «Немає доступу», і побачити назву, тему чи людей з доступом більше неможливо.",
+                announcement: "прочитайте їхнє оголошення",
+                nothingToDo: "Ми нічого не можемо зробити, щоб це виправити. Однак ви все ще можете знати, що канали існують, і бачити, хто підключений до приватних голосових каналів."
             }
         },
         showHiddenThings: {
@@ -10344,6 +10446,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     defaultHidden: {
                         name: "defaultHidden",
                         description: "Чи приховувати набір тексту за замовчуванням."
+                    },
+                    dmListIndicator: {
+                        description: "Приховувати індикатори набору тексту в розмовах у списку особистих повідомлень."
                     }
                 }
             },
@@ -10426,6 +10531,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabledLocations: {
                     label: "Список вимкнення",
                     description: "Вимкнути функцію для цих ID."
+                },
+                hideDmListTypingIndicators: {
+                    label: "Приховувати індикатори набору в списку ОП",
+                    description: "Приховувати індикатори набору тексту в розмовах у списку особистих повідомлень."
                 }
             },
             text: {
@@ -10435,7 +10544,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 membersListIndicators: "Індикатори в списку учасників",
                 guild: "Сервер",
                 channel: "Канал",
-                global: "Глобально"
+                global: "Глобально",
+                dmListIndicators: "Індикатори списку ОП"
             }
         },
         snowfall: {
@@ -10751,7 +10861,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 goldColor: "Колір золотої серії (30+ дн.)",
                 silverColor: "Колір срібної серії (14+ дн.)",
                 bronzeColor: "Колір бронзової серії (7+ дн.)",
-                defaultColor: "Колір серії за замовчуванням (1+ дн.)"
+                defaultColor: "Колір серії за замовчуванням (1+ дн.)",
+                showOnSelf: {
+                    label: "Показувати в себе",
+                    description: "Показувати серію на ваших власних повідомленнях в ОП"
+                },
+                showOutsideDMs: {
+                    label: "Показувати поза ОП",
+                    description: "Показувати серії на повідомленнях поза ОП"
+                }
             },
             toast: {
                 authFailed: "Не вдалося авторизуватися: {{error}}",
@@ -11755,11 +11873,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
-            description: "Знімає обмеження бітрейту у 2500 кбіт/с для клієнтів на базі Chromium та Plextron.",
+            description: "Знімає обмеження бітрейту 2500 кбіт/с у клієнтах Chromium і Vesktop, вмикає стереозвук трансляцій з вищим бітрейтом, підвищує початковий бітрейт трансляцій, використовує апаратне кодування H264 і виправляє безкінечне зростання навантаження на ЦП під час демонстрації екрана.",
             option: {
                 experimentalAV1Support: {
                     label: "Експериментальна підтримка AV1",
                     description: "Увімкнути кодек AV1. Може спричинити вічне завантаження стрімів"
+                },
+                betterCodecs: {
+                    label: "Кращі кодеки",
+                    description: "МОЖЕ СПРИЧИНИТИ ПРОБЛЕМИ! Надавати перевагу кращим кодекам, як-от AV1 і VP9, під час трансляції. Має покращити якість, але може призвести до проблем, наприклад трансляцій, що завантажуються безкінечно."
                 }
             }
         },
@@ -11881,10 +12003,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Гучність"
                 }
             }
-        },
-        youtubeAdblock: {
-            name: "YouTubeAdblock",
-            description: "Блокує рекламу у вбудованих відео YouTube та в активності 'Watch Together' через AdGuard"
         },
         youtubeDescription: {
             name: "YouTubeDescription",
@@ -12362,7 +12480,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 validate: "Перевірити",
                 resetToDefault: "Скинути до типових",
                 progress: "{{percent}}% - {{transferred}} з {{total}}",
-                cancel: "Скасувати"
+                cancel: "Скасувати",
+                stripFileExtension: "Прибирати розширення файлу зі згенерованого URL",
+                saveOriginalFileName: "Чи буде назву файлу збережено на Zipline і відновлено під час завантаження, незалежно від вибраного формату URL"
             },
             option: {
                 serviceType: {
@@ -12574,6 +12694,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsComponent: {
                     description: "Налаштування",
                     label: "Компонент налаштувань"
+                },
+                ziplineStripExtension: {
+                    label: "Zipline: Прибирати розширення",
+                    description: "Прибирати розширення файлу"
+                },
+                ziplineOriginalName: {
+                    label: "Zipline: Оригінальна назва",
+                    description: "Зберігати оригінальну назву файлу"
                 }
             },
             panel: {
@@ -12646,7 +12774,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 network: "Мережа",
                 corsProxyUrl: "URL CORS-проксі",
                 uploadTimeout: "Тайм-аут завантаження",
-                domainsJsonDescription: "JSON-масив доменів для використання, наприклад [\"offensive\"]."
+                domainsJsonDescription: "JSON-масив доменів для використання, наприклад [\"offensive\"].",
+                stripFileExtension: "Прибирати розширення файлу",
+                saveOriginalFileName: "Зберігати оригінальну назву файлу"
             },
             status: {
                 cancelled: "Завантаження скасовано.",
@@ -13151,6 +13281,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 gifPickerTyping: {
                     label: "Друк у виборі GIF",
                     description: "Показує, що ви друкуєте, поки відкрито вибір GIF"
+                },
+                removeChannelSuggestions: {
+                    label: "Прибрати пропозиції каналів",
+                    description: "Прибирає категорію «Запропоновані канали» з бічної панелі сервера"
                 }
             },
             text: {
@@ -13251,7 +13385,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 audiobookshelfServerUrl: "URL сервера AudioBookShelf.",
                 audiobookshelfUsername: "Ім'я користувача AudioBookShelf.",
                 audiobookshelfPassword: "Пароль AudioBookShelf.",
-                connectsToTosuVia: "Підключається до tosu через WebSocket на порту 24050. Налаштування не потрібне, лише переконайтеся, що tosu запущено разом з osu!.",
+                connectsToTosuVia: "Підключається до tosu через WebSocket. Просто переконайтеся, що tosu запущено разом з osu!.",
                 showWhatYouRe: "Показувати, що ви слухаєте, через stats.fm. Історія прослуховувань має бути публічною.",
                 statsFmUsername: "Ім'я користувача Stats.fm.",
                 customStatusText: "Власний текст статусу.",
@@ -13307,10 +13441,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 viewSong: "Переглянути пісню",
                 showArtistName: "Показувати виконавця",
                 showTrackName: "Показувати назву треку",
-                enterValue: "Введіть значення"
+                enterValue: "Введіть значення",
+                tosuServerUrl: "URL домену tosu.",
+                tosuPrivacyMode: "Приховує ваше ім'я користувача в статусі.",
+                plexDescription: "Показуйте, що ви відтворюєте на своєму сервері Plex. Щоб бачити сеанси, потрібно бути власником сервера. Щоб отримати токен, відкрийте будь-який елемент у Plex Web, виберіть «Отримати інформацію», потім «Переглянути XML» і скопіюйте значення X-Plex-Token з URL.",
+                plexServerUrl: "URL сервера Plex.",
+                plexToken: "Токен Plex.",
+                plexUsername: "Ім'я користувача Plex, для якого показувати сеанси.",
+                plexUsernamePlaceholder: "Ім'я користувача Plex",
+                plexShowCover: "Показувати обкладинку. Ваш токен Plex надсилається до Discord в URL зображення."
             },
             name: "RichPresence",
-            description: "Єдиний центр Rich Presence для AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome і Gensokyo Radio.",
+            description: "Єдиний центр rich presence для AudioBookShelf, osu!, stats.fm, Jellyfin, Plex, Navidrome і Gensokyo Radio.",
             toast: {
                 audiobookshelfRpcIsNot: "RPC AudioBookShelf не налаштовано.",
                 jellyfinRpcIsNot: "RPC Jellyfin не налаштовано.",
@@ -13542,6 +13684,46 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nd_hideOnPause: {
                     description: "Приховувати Rich Presence, коли музика на паузі",
                     label: "Navidrome: приховувати на паузі"
+                },
+                px_enabled: {
+                    label: "Plex: Увімкнено",
+                    description: "Увімкнути статус Plex."
+                },
+                tosu_serverUrl: {
+                    label: "tosu: URL сервера",
+                    description: "URL домену tosu."
+                },
+                tosu_privacyMode: {
+                    label: "tosu: Режим конфіденційності",
+                    description: "Режим конфіденційності"
+                },
+                px_serverUrl: {
+                    label: "Plex: URL сервера",
+                    description: "URL сервера Plex."
+                },
+                px_token: {
+                    label: "Plex: Токен",
+                    description: "Токен Plex."
+                },
+                px_username: {
+                    label: "Plex: Ім'я користувача",
+                    description: "Ім'я користувача Plex, для якого показувати сеанси."
+                },
+                px_showEpisodeName: {
+                    label: "Plex: Показувати назву епізоду",
+                    description: "Показувати назву епізоду після інформації про сезон/епізод."
+                },
+                px_showCover: {
+                    label: "Plex: Показувати обкладинку",
+                    description: "Показувати обкладинку. Ваш токен Plex надсилається до Discord в URL зображення."
+                },
+                px_showPausedState: {
+                    label: "Plex: Показувати стан паузи",
+                    description: "Показувати статус, коли відтворення на паузі."
+                },
+                px_privacyMode: {
+                    label: "Plex: Режим конфіденційності",
+                    description: "Приховувати відомості про медіа."
                 }
             },
             panel: {
@@ -13580,7 +13762,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 detailsFormat: "Формат деталей",
                 stateFormat: "Формат стану",
                 largeTextFormat: "Формат великого тексту",
-                enabled: "Увімкнено"
+                enabled: "Увімкнено",
+                token: "Токен",
+                showCoverArt: "Показувати обкладинку"
             }
         },
         sedEnhanced: {
@@ -14245,7 +14429,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userPreset: "Користувацький пресет",
                 custom: "Власний",
                 gaming: "Ігри",
-                screenshare: "Демонстрація екрана"
+                screenshare: "Демонстрація екрана",
+                source: "Вихідне"
             }
         },
         whitelistedEmojis: {

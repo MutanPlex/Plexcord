@@ -6,11 +6,11 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { Card } from "@components/Card";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings";
+import { Text } from "@components/Text";
 import { classNameFactory } from "@utils/css";
 import { copyWithToast, openUserProfile } from "@utils/discord";
 import { Avatar, Clickable, ContextMenuApi, Menu, React, TextInput, Tooltip, UserStore } from "@webpack/common";
@@ -27,9 +27,9 @@ function tooltipText(user: IStorageUser) {
 
 function UsersCollectionRows({ usersCollection }: { usersCollection: Data["usersCollection"]; }) {
     if (Object.keys(usersCollection).length === 0) return (
-        <BaseText>
+        <Text>
             {t(plugin.iRememberYou.section.empty)}
-        </BaseText>
+        </Text>
     );
 
     return (

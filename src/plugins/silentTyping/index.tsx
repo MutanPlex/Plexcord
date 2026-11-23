@@ -57,6 +57,12 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: false,
     },
+    hideDmListTypingIndicators: {
+        type: OptionType.BOOLEAN,
+        label: () => t(plugin.silentTyping.option.hideDmListTypingIndicators.label),
+        description: () => t(plugin.silentTyping.option.hideDmListTypingIndicators.description),
+        default: false,
+    },
     chatIcon: {
         label: () => t(plugin.silentTyping.option.chatIcon.label),
         description: () => t(plugin.silentTyping.option.chatIcon.description),
@@ -344,7 +350,10 @@ const ChatBarContextCheckbox: NavContextMenuPatchCallback = children => {
         "chatIcon",
         "chatContextMenu",
         "enabledGlobally",
-        "defaultHidden"
+        "defaultHidden",
+        "hideChatBoxTypingIndicators",
+        "hideMembersListTypingIndicators",
+        "hideDmListTypingIndicators"
     ]);
 
     if (!chatContextMenu) return;
@@ -363,6 +372,8 @@ const ChatBarContextCheckbox: NavContextMenuPatchCallback = children => {
                 action={() => settings.store.hideChatBoxTypingIndicators = !settings.store.hideChatBoxTypingIndicators} />
             <Menu.MenuCheckboxItem id="pc-silent-typing-members-list-indicators" label={t(plugin.silentTyping.text.membersListIndicators)} checked={settings.store.hideMembersListTypingIndicators}
                 action={() => settings.store.hideMembersListTypingIndicators = !settings.store.hideMembersListTypingIndicators} />
+            <Menu.MenuCheckboxItem id="pc-silent-typing-dm-list-indicators" label={t(plugin.silentTyping.text.dmListIndicators)} checked={settings.store.hideDmListTypingIndicators}
+                action={() => settings.store.hideDmListTypingIndicators = !settings.store.hideDmListTypingIndicators} />
             <Menu.MenuCheckboxItem id="pc-silent-typing-chat-icon" label={t(plugin.silentTyping.option.chatIcon.label)} checked={chatIcon}
                 action={() => settings.store.chatIcon = !settings.store.chatIcon} />
             <Menu.MenuCheckboxItem id="pc-silent-typing-default" label={t(plugin.silentTyping.option.defaultHidden.label)} checked={defaultHidden}
@@ -372,13 +383,15 @@ const ChatBarContextCheckbox: NavContextMenuPatchCallback = children => {
 };
 
 function shouldHideChatBarTypingIndicators(): boolean {
-    const { hideChatBoxTypingIndicators } = settings.use(["hideChatBoxTypingIndicators"]);
-    return hideChatBoxTypingIndicators;
+    return settings.use(["hideChatBoxTypingIndicators"]).hideChatBoxTypingIndicators;
 }
 
 function shouldHideMembersListTypingIndicators(): boolean {
-    const { hideMembersListTypingIndicators } = settings.use(["hideMembersListTypingIndicators"]);
-    return hideMembersListTypingIndicators;
+    return settings.use(["hideMembersListTypingIndicators"]).hideMembersListTypingIndicators;
+}
+
+function shouldHideDmListTypingIndicators(): boolean {
+    return settings.use(["hideDmListTypingIndicators"]).hideDmListTypingIndicators;
 }
 
 export default definePlugin({
@@ -391,6 +404,7 @@ export default definePlugin({
 
     shouldHideChatBarTypingIndicators,
     shouldHideMembersListTypingIndicators,
+    shouldHideDmListTypingIndicators,
 
     contextMenus: {
         "textarea-context": ChatBarContextCheckbox
@@ -462,10 +476,17 @@ export default definePlugin({
             ]
         },
         {
-            find: ",{avatarCutoutX",
+            find: "handleSetTypingRef:",
             replacement: {
-                match: /isTyping:(\i)=!1(,typingIndicatorRef:\i,avatarContentRef:)/,
-                replace: "silentTypingIsTyping:$1=$self.shouldHideMembersListTypingIndicators()?false:(arguments[0].isTyping??false)$2"
+                match: /isTyping:(\i)(,avatarDecorationSrc:[^}]{1,60}}=\i)/,
+                replace: "isTyping:vcIsTyping$2,$1=!$self.shouldHideMembersListTypingIndicators()&&vcIsTyping"
+            }
+        },
+        {
+            find: "PrivateChannel.renderAvatar",
+            replacement: {
+                match: /return \i\.isMultiUserDM\(\)\?(?=.{0,60}?isTyping:(\i),)/,
+                replace: "if($self.shouldHideDmListTypingIndicators())$1=false;$&"
             }
         },
     ],
@@ -496,6 +517,12 @@ export default definePlugin({
             {
                 name: "members-list-indicators",
                 description: () => t(plugin.silentTyping.command.silentTyping.membersListIndicator.description),
+                required: false,
+                type: ApplicationCommandOptionType.BOOLEAN,
+            },
+            {
+                name: "dm-list-indicators",
+                description: () => t(plugin.silentTyping.command.silentTyping.dmListIndicator.description),
                 required: false,
                 type: ApplicationCommandOptionType.BOOLEAN,
             },
@@ -532,6 +559,20 @@ export default definePlugin({
                     const locationId = location === "guild" ? channel.guild_id : channel.id;
                     toggleLocation(locationId, getEffectiveList(), settings.store.defaultHidden);
                 }
+            }
+
+            const hideMembersListTypingIndicators = findOption(args, "members-list-indicators");
+
+            if (typeof hideMembersListTypingIndicators === "boolean") {
+                updated = true;
+                settings.store.hideMembersListTypingIndicators = hideMembersListTypingIndicators;
+            }
+
+            const hideDmListTypingIndicators = findOption(args, "dm-list-indicators");
+
+            if (typeof hideDmListTypingIndicators === "boolean") {
+                updated = true;
+                settings.store.hideDmListTypingIndicators = hideDmListTypingIndicators;
             }
 
             const updateChatIcon = findOption(args, "chat-icon");

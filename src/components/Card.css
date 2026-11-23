@@ -12,19 +12,19 @@
 }
 
 .pc-card-danger {
-    background-color: var(--background-feedback-critical);
+    background-color: var(--background-feedback-mod-critical);
     border-color: var(--background-feedback-critical);
     color: var(--text-feedback-critical);
 }
 
 .pc-card-warning {
-    background-color: var(--background-feedback-warning);
+    background-color: var(--background-feedback-mod-warning);
     border-color: var(--background-feedback-warning);
     color: var(--text-feedback-warning);
 }
 
 .pc-card-success {
-    background-color: var(--background-feedback-positive);
+    background-color: var(--background-feedback-mod-positive);
     border-color: var(--background-feedback-positive);
     color: var(--text-feedback-positive);
 }

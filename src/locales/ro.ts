@@ -81,6 +81,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             disableMinSize: {
                 label: "Dezactivează dimensiunea minimă a ferestrei",
                 description: "Îți permite să redimensionezi fereastra la orice mărime, chiar mai mică decât minimul Discord"
+            },
+            enableBackgroundRendering: {
+                label: "Activează randarea în fundal",
+                description: "Menține fereastra aplicației actualizată chiar și atunci când nu este complet în focus"
             }
         },
         quickActions: {
@@ -90,7 +94,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             editQuickCSS: "Editează QuickCSS",
             relaunchDiscord: "Repornește Discord",
             openSettingsFolder: "Deschide Dosarul de Setări",
-            viewSourceCode: "Vezi Codul Sursă"
+            viewSourceCode: "Vezi Codul Sursă",
+            openPlayground: "Deschide zona de test a componentelor"
         },
         specialCards: {
             donations: {
@@ -229,6 +234,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         tabs: {
             renderFailed: "Nu s-a putut afișa fila {{tab}}. Dacă problema persistă, încearcă reinstalarea cu programul de instalare!"
+        },
+        playground: {
+            title: "Zona de test a componentelor",
+            buttons: "Butoane",
+            buttonSize: "Dimensiunea butonului",
+            cards: "Carduri"
         }
     },
 
@@ -401,6 +412,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Donator Plexcord",
                     special: "Această insignă este un beneficiu special pentru donatorii Plexcord",
                     description: "Te rugăm să iei în considerare susținerea dezvoltării Plexcord devenind donator. Ar însemna mult pentru noi!"
+                },
+                directory: {
+                    contributed: "contribuit",
+                    plugin: "plugin",
+                    plugins: "pluginuri",
+                    selfContributed: "Ai {{link}} la {{count}}!",
+                    otherContributed: "Această persoană a {{link}} la {{count}}!",
+                    selfNoPlugins: "Nu ai creat încă niciun plugin. Probabil ai {{link}} în alte moduri!",
+                    otherNoPlugins: "Această persoană nu a creat niciun plugin. Probabil a {{link}} în alte moduri!",
+                    restart: "Repornește pentru a aplica modificările!",
+                    selfDonor: "Mulțumim pentru donație!",
+                    otherDonor: "Acest utilizator este un donator Plexcord!",
+                    selfDonorDescription: "Îți poți gestiona beneficiile oricând trimițând un mesaj către @mutanplex.",
+                    otherDonorDescription: "Susține Plexcord pentru a obține propria insignă și beneficii!"
                 }
             },
         },
@@ -910,7 +935,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             scrollRight: "Derulează la dreapta"
         },
         notices: {
-            error: "Eroare la afișarea notificării"
+            error: "Eroare la afișarea notificării",
+            dismiss: "Închide"
         },
         tray: {
             aboutPlexcord: "Despre Plexcord",
@@ -1029,16 +1055,40 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "ConcatenatedModules",
             description: "Extrage modulele care au fost concatenate de bundler"
         },
+        duplicateCategory: {
+            name: "DuplicateCategory",
+            description: "Adaugă o opțiune pentru a duplica o categorie cu aceleași permisiuni.",
+            menu: "Duplică categoria",
+            toast: {
+                created: "Categorie creată."
+            },
+            error: {
+                missing: "Categoria originală nu mai există.",
+                failed: "Categoria nu a putut fi creată. Verifică-ți permisiunile și încearcă din nou."
+            },
+            modal: {
+                title: "Creează categorie",
+                cancel: "Anulează",
+                create: "Creează categoria",
+                name: "Numele categoriei",
+                placeholder: "Categorie nouă",
+                copyPermissions: "Copiază permisiunile",
+                copyPermissionsDescription: "Copiază permisiunile categoriei originale în noua categorie. Dezactivează pentru a folosi permisiunile implicite ale serverului."
+            }
+        },
         noTrack: {
             name: "NoTrack",
             description: "Dezactivează urmărirea Discord (analytics/'science'), metricile și raportarea erorilor Sentry",
             option: {
                 disableAnalytics: {
                     label: "Dezactivează Analiticele",
-                    description: "Blochează analizele de urmărire ale Discord. Dezactivează asta dacă vrei ca insignele să îți urmărească progresul (ex.: ore de streaming)."
+                    description: "Blochează analizele de urmărire ale Discord"
                 },
                 disableStackDumping: {
                     description: "Afișează o urmă de stivă nativă în consolă când Discord se blochează. Necesită repornire completă."
+                },
+                allowBadgeTracking: {
+                    description: "Trimite totuși evenimentele necesare insignelor pentru a-ți urmări progresul (ex.: ore jucate, ore de streaming)"
                 }
             }
         },
@@ -1463,11 +1513,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 channelOpenScrollMode: {
                     label: "Poziția la deschiderea canalului",
-                    description: "Deschide canalele necitite la poziția salvată (sau jos), mereu jos, sau folosește comportamentul implicit pentru necitite.",
+                    description: "Unde să se deschidă canalele în istoricul chatului. Dacă pleci la mai puțin de 5 mesaje de cel mai recent, \"Poziție salvată\" este considerată nesetată și se folosește următoarea alternativă. Dacă ultimul tău mesaj citit este mai vechi decât vârsta maximă de mai jos, canalul este considerat abandonat și \"Cel mai vechi necitit\" este considerat nesetat.",
                     default: "Implicit Discord",
-                    bottom: "Mereu jos",
-                    saved: "Poziție salvată"
+                    bottom: "Cel mai recent mesaj",
+                    saved: "Poziție salvată > Cel mai vechi necitit > Cel mai recent mesaj",
+                    savedLatest: "Poziție salvată > Cel mai recent mesaj",
+                    unread: "Cel mai vechi necitit > Cel mai recent mesaj"
+                },
+                maximumLastReadAge: {
+                    label: "Vârsta maximă a ultimei citiri",
+                    description: "Vârsta maximă a ultimului mesaj citit, în minute, pentru a folosi alternativa \"Cel mai vechi necitit\". Setează 0 pentru nelimitat."
+                },
+                showJumpToPresentSooner: {
+                    label: "Arată mai devreme butonul Salt la prezent",
+                    description: "Afișează butonul Salt la prezent când ai derulat 5 sau mai multe mesaje deasupra celui mai recent."
+                },
+                addChatbarButton: {
+                    label: "Adaugă buton în bara de chat",
+                    description: "Adaugă un buton în bara de chat pentru a schimba rapid poziția de deschidere a canalelor."
                 }
+            },
+            history: {
+                unavailable: "Istoricul salvat nu este încă disponibil.",
+                clearTitle: "Șterge istoricul salvat",
+                clearDescription: "Șterge progresul local de citire, urmărit pentru a restaura poziția de derulare după reîncărcare.",
+                clear: "Șterge",
+                success: "Reușit",
+                failure: "Eșuat"
             }
         },
         betterBanReasons: {
@@ -1624,6 +1696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "BetterPlusReacts",
             description: "Numărul de semne plus dinaintea unui :emoji: determină mesajul la care se adaugă reacția"
         },
+        betterPollDetails: {
+            name: "BetterPollDetails",
+            description: "Afișează procentele și numărul de voturi ale sondajelor înainte de a vota sau de expirare, fără a dezactiva posibilitatea de a vota"
+        },
         betterRoleContext: {
             name: "BetterRoleContext",
             description: "Adaugă opțiuni pentru copierea culorii rolului / editarea rolului / vizualizarea pictogramei rolului la clic dreapta pe roluri în profilul utilizatorului sau în lista de membri",
@@ -1709,6 +1785,20 @@ const translations: MatchStructure<typeof enTranslations> = {
         betterUploadButton: {
             name: "BetterUploadButton",
             description: "Încarcă cu un singur click, deschide meniul cu click dreapta"
+        },
+        betterYoutubeEmbeds: {
+            name: "BetterYouTubeEmbeds",
+            description: "Blochează reclamele și ocolește blocările UMG",
+            option: {
+                fixBlockedEmbeds: {
+                    label: "Repară încorporările blocate",
+                    description: "Restaurează videoclipurile blocate de la afișare în Discord, de exemplu de UMG"
+                },
+                blockAds: {
+                    label: "Blochează reclamele",
+                    description: "Blochează reclamele în încorporările YouTube și în WatchTogether. Videoclipul poate dura câteva secunde să se încarce din cauza măsurilor anti-reclamă ale YouTube"
+                }
+            }
         },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
@@ -3993,6 +4083,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeFamilyCenterAboveDms: {
                     description: "Elimină centrul familiei de deasupra listei de mesaje private.",
                     label: "Elimină centrul familiei de deasupra mesajelor private"
+                },
+                removeAccountPopoutBadges: {
+                    label: "Elimină insignele din fereastra contului",
+                    description: "Elimină insignele din fereastra pop-up a contului."
+                },
+                removeAccountPopoutOrbs: {
+                    label: "Elimină orb-urile din fereastra contului",
+                    description: "Elimină orb-urile din fereastra pop-up a contului."
+                },
+                removeInvisibleWarning: {
+                    label: "Elimină avertizarea de invizibil",
+                    description: "Elimină avertizarea statusului invizibil din fereastra pop-up a contului."
                 }
             },
             text: {
@@ -4268,8 +4370,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 success: "Au fost descărcate {{count}} atașament(e).",
                 partial: "Au fost descărcate {{succeeded}} din {{total}} atașamente. {{failed}} au eșuat.",
-                downloadedPluralizeSucceededAttachment: "Au fost descărcate {{pluralize_succeeded_attachment}}.",
-                downloadedSucceededOfLength: "Descărcate {{succeeded}} din {{length}} atașamente. {{failed}} au eșuat."
+                downloadedPluralizeSucceededAttachment: "S-au salvat {{pluralize_succeeded_attachment}}.",
+                downloadedSucceededOfLength: "S-au salvat {{succeeded}} din {{length}} atașamente. {{failed}} au eșuat.",
+                tooLarge: "Aceste atașamente sunt prea mari pentru a fi arhivate. Salvează-le pe rând.",
+                noneDownloaded: "Nu s-a putut descărca niciun atașament."
             },
             option: {
                 downloadAllFileTypes: {
@@ -4926,10 +5030,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        fixYoutubeEmbeds: {
-            name: "FixYoutubeEmbeds",
-            description: "Ocolește blocarea afișării videoclipurilor YouTube pe Discord (de exemplu, cele blocate de UMG)"
-        },
         followUser: {
             name: "FollowUser",
             description: "Adaugă o opțiune de 'Urmărire' în meniul contextual al utilizatorului pentru a fi mereu în același canal vocal cu acesta",
@@ -5150,10 +5250,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         fullSearchContext: {
             name: "FullSearchContext",
             description: "Face ca meniul contextual al mesajelor din rezultatele căutării să aibă toate opțiunile la care te-ai aștepta"
-        },
-        fullUserInChatbox: {
-            name: "FullUserInChatbox",
-            description: "Oferă mențiunilor de utilizatori din caseta de chat mai multe funcționalități, cum ar fi click stânga/dreapta"
         },
         fullVCPFP: {
             name: "FullVCPFP",
@@ -9914,7 +10010,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showHiddenChannels: {
             name: "ShowHiddenChannels",
-            description: "Afișează canalele pe care nu ai permisiunea de a le vedea.",
+            description: "Afișează canalele ascunse. Discord a limitat puternic această funcționalitate. Mai multe informații în setările pluginului.",
             tooltip: "Canal ascuns",
             option: {
                 channelStyle: {
@@ -9968,7 +10064,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknown: "necunoscut",
                 permissionDetails: "Detalii permisiuni",
                 thisIsA: "Acesta este un canal de {{channelType}} {{status}}",
-                canNotSee: "Nu poți vedea {{type}} acestui canal.",
+                canNotSee: "Nu poți vedea numele sau {{type}} acestui canal.",
                 guidelines: "Cu toate acestea, îi poți vedea regulamentul:",
                 lastCreated: "Ultima {{type}} creată:",
                 lastPin: "Ultimul mesaj fixat:",
@@ -9987,6 +10083,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedUsersAndRoles: "Utilizatori și roluri permise:",
                 hideAllowedUsersAndRoles: "Ascunde utilizatorii și rolurile permise",
                 viewAllowedUsersAndRoles: "Vezi utilizatorii și rolurile permise"
+            },
+            about: {
+                title: "Funcționalitate limitată",
+                patched: "Discord a corectat majoritatea funcționalității acestui plugin ({{link}}). Canalele ascunse apar acum ca \"Fără acces\", iar vizualizarea unor lucruri precum numele, subiectul sau persoanele cu acces nu mai este posibilă.",
+                announcement: "citește anunțul lor",
+                nothingToDo: "Nu putem face nimic pentru a repara asta. Totuși, poți afla în continuare că există canale și vedea cine este conectat la canalele vocale private."
             }
         },
         showHiddenThings: {
@@ -10344,6 +10446,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     defaultHidden: {
                         name: "defaultHidden",
                         description: "Dacă scrierea să fie ascunsă implicit în DM/canale/servere."
+                    },
+                    dmListIndicator: {
+                        description: "Ascunde indicatorii de tastare din conversațiile din lista de mesaje directe."
                     }
                 }
             },
@@ -10426,6 +10531,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabledLocations: {
                     label: "Locații dezactivate",
                     description: "Dezactivează funcționalitatea pentru aceste ID-uri."
+                },
+                hideDmListTypingIndicators: {
+                    label: "Ascunde indicatorii de tastare din lista DM",
+                    description: "Ascunde indicatorii de tastare din conversațiile din lista de mesaje directe."
                 }
             },
             text: {
@@ -10435,7 +10544,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 membersListIndicators: "Indicatori în lista de membri",
                 guild: "Server",
                 channel: "Canal",
-                global: "Global"
+                global: "Global",
+                dmListIndicators: "Indicatori listă DM"
             }
         },
         snowfall: {
@@ -10751,7 +10861,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 goldColor: "Culoare serie aur (30+ zile)",
                 silverColor: "Culoare serie argint (14+ zile)",
                 bronzeColor: "Culoare serie bronz (7+ zile)",
-                defaultColor: "Culoare implicită serie (1+ zile)"
+                defaultColor: "Culoare implicită serie (1+ zile)",
+                showOnSelf: {
+                    label: "Arată la mine",
+                    description: "Arată seria pe propriile mesaje din DM"
+                },
+                showOutsideDMs: {
+                    label: "Arată în afara DM",
+                    description: "Arată seriile pe mesajele din afara DM"
+                }
             },
             toast: {
                 authFailed: "Autorizarea a eșuat: {{error}}",
@@ -11755,11 +11873,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
-            description: "Elimină limita de 2500kbps pentru bitrate pe Chromium și Plextron.",
+            description: "Elimină limita de bitrate de 2500kbps pe clienții Chromium și Vesktop, activează audio stereo în stream cu un bitrate mai mare, crește bitrate-ul de pornire al streamurilor, folosește codare H264 hardware și repară utilizarea CPU care crește la nesfârșit în timpul partajării ecranului.",
             option: {
                 experimentalAV1Support: {
                     label: "Suport experimental AV1",
                     description: "Activează codecul AV1. Poate cauza probleme de încărcare a stream-ului."
+                },
+                betterCodecs: {
+                    label: "Codecuri mai bune",
+                    description: "POATE CAUZA PROBLEME! Preferă codecuri mai bune precum AV1 și VP9 la streaming. Ar trebui să îmbunătățească calitatea, dar poate duce la probleme precum streamuri care se încarcă la nesfârșit."
                 }
             }
         },
@@ -11881,10 +12003,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Volum"
                 }
             }
-        },
-        youtubeAdblock: {
-            name: "YouTubeAdblock",
-            description: "Blochează reclamele în embed-urile YouTube și în activitatea 'Watch Together' via AdGuard"
         },
         youtubeDescription: {
             name: "YouTubeDescription",
@@ -12362,7 +12480,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 validate: "Validează",
                 resetToDefault: "Resetează la implicit",
                 progress: "{{percent}}% - {{transferred}} din {{total}}",
-                cancel: "Anulează"
+                cancel: "Anulează",
+                stripFileExtension: "Elimină extensia fișierului din URL-ul generat",
+                saveOriginalFileName: "Dacă numele fișierului va fi salvat pe Zipline și restaurat la descărcare, indiferent de formatul URL ales"
             },
             option: {
                 serviceType: {
@@ -12574,6 +12694,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsComponent: {
                     description: "Setări",
                     label: "Componentă setări"
+                },
+                ziplineStripExtension: {
+                    label: "Zipline: Elimină extensia",
+                    description: "Elimină extensia fișierului"
+                },
+                ziplineOriginalName: {
+                    label: "Zipline: Nume original",
+                    description: "Păstrează numele original al fișierului"
                 }
             },
             panel: {
@@ -12646,7 +12774,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 network: "Rețea",
                 corsProxyUrl: "URL proxy CORS",
                 uploadTimeout: "Timp limită de încărcare",
-                domainsJsonDescription: "Array JSON de domenii de folosit, de exemplu [\"offensive\"]."
+                domainsJsonDescription: "Array JSON de domenii de folosit, de exemplu [\"offensive\"].",
+                stripFileExtension: "Elimină extensia fișierului",
+                saveOriginalFileName: "Salvează numele original al fișierului"
             },
             status: {
                 cancelled: "Încărcare anulată.",
@@ -13151,6 +13281,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 gifPickerTyping: {
                     label: "Tastare în selectorul GIF",
                     description: "Te afișează ca scriind cât timp selectorul GIF este deschis"
+                },
+                removeChannelSuggestions: {
+                    label: "Elimină sugestiile de canale",
+                    description: "Elimină categoria Canale sugerate din bara laterală a serverului"
                 }
             },
             text: {
@@ -13251,7 +13385,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 audiobookshelfServerUrl: "URL-ul serverului AudioBookShelf.",
                 audiobookshelfUsername: "Numele de utilizator AudioBookShelf.",
                 audiobookshelfPassword: "Parola AudioBookShelf.",
-                connectsToTosuVia: "Se conectează la tosu prin WebSocket pe portul 24050. Nu necesită configurare, asigură-te doar că tosu rulează alături de osu!.",
+                connectsToTosuVia: "Se conectează la tosu prin WebSocket. Asigură-te doar că tosu rulează împreună cu osu!.",
                 showWhatYouRe: "Arată ce asculți prin stats.fm. Istoricul de ascultare trebuie să fie public.",
                 statsFmUsername: "Numele de utilizator Stats.fm.",
                 customStatusText: "Text de stare personalizat.",
@@ -13307,10 +13441,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 viewSong: "Vezi piesa",
                 showArtistName: "Afișează numele artistului",
                 showTrackName: "Afișează numele piesei",
-                enterValue: "Introdu o valoare"
+                enterValue: "Introdu o valoare",
+                tosuServerUrl: "URL-ul domeniului tosu.",
+                tosuPrivacyMode: "Ascunde numele tău de utilizator în prezență.",
+                plexDescription: "Arată ce redai pe serverul tău Plex. Trebuie să fii proprietarul serverului pentru a vedea sesiunile. Pentru a obține tokenul, deschide orice element în Plex Web, alege Obține informații, apoi Vezi XML și copiază valoarea X-Plex-Token din URL.",
+                plexServerUrl: "URL-ul serverului Plex.",
+                plexToken: "Token Plex.",
+                plexUsername: "Numele de utilizator Plex pentru care se afișează sesiunile.",
+                plexUsernamePlaceholder: "Nume de utilizator Plex",
+                plexShowCover: "Arată coperta. Tokenul tău Plex este trimis către Discord în URL-ul imaginii."
             },
             name: "RichPresence",
-            description: "Hub unificat de Rich Presence pentru AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome și Gensokyo Radio.",
+            description: "Hub unificat de rich presence pentru AudioBookShelf, osu!, stats.fm, Jellyfin, Plex, Navidrome și Gensokyo Radio.",
             toast: {
                 audiobookshelfRpcIsNot: "RPC AudioBookShelf nu este configurat.",
                 jellyfinRpcIsNot: "RPC Jellyfin nu este configurat.",
@@ -13542,6 +13684,46 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nd_hideOnPause: {
                     description: "Ascunde Rich Presence când muzica e pe pauză",
                     label: "Navidrome: ascunde la pauză"
+                },
+                px_enabled: {
+                    label: "Plex: Activat",
+                    description: "Activează prezența Plex."
+                },
+                tosu_serverUrl: {
+                    label: "tosu: URL server",
+                    description: "URL-ul domeniului tosu."
+                },
+                tosu_privacyMode: {
+                    label: "tosu: Mod confidențialitate",
+                    description: "Mod confidențialitate"
+                },
+                px_serverUrl: {
+                    label: "Plex: URL server",
+                    description: "URL-ul serverului Plex."
+                },
+                px_token: {
+                    label: "Plex: Token",
+                    description: "Token Plex."
+                },
+                px_username: {
+                    label: "Plex: Nume de utilizator",
+                    description: "Numele de utilizator Plex pentru care se afișează sesiunile."
+                },
+                px_showEpisodeName: {
+                    label: "Plex: Arată numele episodului",
+                    description: "Arată numele episodului după informațiile despre sezon/episod."
+                },
+                px_showCover: {
+                    label: "Plex: Arată coperta",
+                    description: "Arată coperta. Tokenul tău Plex este trimis către Discord în URL-ul imaginii."
+                },
+                px_showPausedState: {
+                    label: "Plex: Arată starea pauzată",
+                    description: "Arată prezența când media este pe pauză."
+                },
+                px_privacyMode: {
+                    label: "Plex: Mod confidențialitate",
+                    description: "Ascunde detaliile media."
                 }
             },
             panel: {
@@ -13580,7 +13762,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 detailsFormat: "Formatul detaliilor",
                 stateFormat: "Formatul stării",
                 largeTextFormat: "Formatul textului mare",
-                enabled: "Activat"
+                enabled: "Activat",
+                token: "Token",
+                showCoverArt: "Arată coperta"
             }
         },
         sedEnhanced: {
@@ -14245,7 +14429,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userPreset: "Presetare utilizator",
                 custom: "Personalizat",
                 gaming: "Gaming",
-                screenshare: "Partajare ecran"
+                screenshare: "Partajare ecran",
+                source: "Sursă"
             }
         },
         whitelistedEmojis: {

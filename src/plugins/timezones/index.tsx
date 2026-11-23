@@ -15,7 +15,7 @@ import { definePluginSettings, migratePluginSetting } from "@api/Settings";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Message, User } from "@plexcord/discord-types";
-import { Devs, PcDevs } from "@utils/constants";
+import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy, findCssClassesLazy } from "@webpack";
 import { ChannelStore, Menu, openModal, showToast, Tooltip, useEffect, UserStore, useState } from "@webpack/common";
@@ -291,7 +291,7 @@ const userContextMenuPatch: NavContextMenuPatchCallback = (children, { user }: {
 
 export default definePlugin({
     name: "Timezones",
-    authors: [Devs.Aria, PcDevs.creations],
+    authors: [Devs.Aria, Devs.creations],
     tags: ["friends", "chat", "utility"],
     description: () => t(plugin.timezones.description),
     contextMenus: {

@@ -35,6 +35,7 @@ import { GuildMemberStore, React, Select, useMemo, UserStore } from "@webpack/co
 import { DonateButtonComponent } from "./DonateButton";
 import { MacOSVibrancySettings } from "./MacVibrancySettings";
 import { NotificationSection } from "./NotificationSettings";
+import { openPlayground } from "./playground";
 import { WindowsMaterialSettings } from "./WindowsMaterialSettings";
 
 const DEFAULT_DONATE_IMAGE = "https://cdn.discordapp.com/emojis/1026533090627174460.png";
@@ -103,6 +104,12 @@ function Switches() {
             title: t(plugin.noTrack.option.disableAnalytics.label),
             description: t(plugin.noTrack.option.disableAnalytics.description),
             restartRequired: NoTrack.settings.def.disableAnalytics.restartNeeded,
+        },
+        !IS_WEB && {
+            key: "enableBackgroundRendering",
+            title: t(settings.switches.enableBackgroundRendering.label),
+            description: t(settings.switches.enableBackgroundRendering.description),
+            restartRequired: true
         },
         (!IS_WEB && !IS_DISCORD_DESKTOP || !IS_WINDOWS) && {
             key: "mainWindowFrameless",
@@ -289,6 +296,11 @@ function PlexcordSettings() {
                     text={t(settings.quickActions.viewSourceCode)}
                     action={() => PlexcordNative.native.openExternal("https://github.com/" + gitRemote)}
                 />
+                {IS_DEV && <QuickAction
+                    Icon={PaintbrushIcon}
+                    text={t(settings.quickActions.openPlayground)}
+                    action={() => openPlayground()}
+                />}
             </QuickActionCard>
 
             <Divider className={Margins.top20} />

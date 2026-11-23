@@ -81,6 +81,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             disableMinSize: {
                 label: "Schakel de minimale venstergrootte uit",
                 description: "Hiermee kun je het venster naar elk formaat schalen, zelfs kleiner dan het minimum van Discord"
+            },
+            enableBackgroundRendering: {
+                label: "Achtergrondrendering inschakelen",
+                description: "Houdt het app-venster bijgewerkt, zelfs als het niet volledig in focus is"
             }
         },
         quickActions: {
@@ -90,7 +94,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             editQuickCSS: "Bewerk QuickCSS",
             relaunchDiscord: "Start Discord opnieuw",
             openSettingsFolder: "Open de map Instellingen",
-            viewSourceCode: "Broncode bekijken"
+            viewSourceCode: "Broncode bekijken",
+            openPlayground: "Componenten-speeltuin openen"
         },
         specialCards: {
             donations: {
@@ -229,6 +234,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         tabs: {
             renderFailed: "Kan het tabblad {{tab}} niet weergeven. Blijft het probleem bestaan, probeer dan opnieuw te installeren met het installatieprogramma!"
+        },
+        playground: {
+            title: "Componenten-speeltuin",
+            buttons: "Knoppen",
+            buttonSize: "Knopgrootte",
+            cards: "Kaarten"
         }
     },
 
@@ -401,6 +412,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Plexcord-donor",
                     special: "Deze badge is een speciaal voordeel voor Plexcord-donoren",
                     description: "Overweeg alstublieft om de ontwikkeling van Plexcord te steunen door donateur te worden. Het zou veel betekenen!"
+                },
+                directory: {
+                    contributed: "bijgedragen",
+                    plugin: "plugin",
+                    plugins: "plugins",
+                    selfContributed: "Je hebt {{link}} aan {{count}}!",
+                    otherContributed: "Deze persoon heeft {{link}} aan {{count}}!",
+                    selfNoPlugins: "Je hebt nog geen plugins gemaakt. Waarschijnlijk heb je op andere manieren {{link}}!",
+                    otherNoPlugins: "Deze persoon heeft geen plugins gemaakt. Waarschijnlijk heeft die op andere manieren {{link}}!",
+                    restart: "Herstart om de wijzigingen toe te passen!",
+                    selfDonor: "Bedankt voor je donatie!",
+                    otherDonor: "Deze gebruiker is een Plexcord-donateur!",
+                    selfDonorDescription: "Je kunt je voordelen op elk moment beheren door @mutanplex een bericht te sturen.",
+                    otherDonorDescription: "Steun Plexcord om je eigen badge en voordelen te krijgen!"
                 }
             },
         },
@@ -910,7 +935,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             scrollRight: "Naar rechts scrollen"
         },
         notices: {
-            error: "Fout bij het tonen van de melding"
+            error: "Fout bij het tonen van de melding",
+            dismiss: "Sluiten"
         },
         tray: {
             aboutPlexcord: "Over Plexcord",
@@ -1029,16 +1055,40 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "ConcatenatedModules",
             description: "Extraheer modules die zijn samengevoegd door de bundler"
         },
+        duplicateCategory: {
+            name: "DuplicateCategory",
+            description: "Voegt een optie toe om een categorie met dezelfde rechten te dupliceren.",
+            menu: "Categorie dupliceren",
+            toast: {
+                created: "Categorie aangemaakt."
+            },
+            error: {
+                missing: "De originele categorie bestaat niet meer.",
+                failed: "Kon de categorie niet aanmaken. Controleer je rechten en probeer het opnieuw."
+            },
+            modal: {
+                title: "Categorie aanmaken",
+                cancel: "Annuleren",
+                create: "Categorie aanmaken",
+                name: "Categorienaam",
+                placeholder: "Nieuwe categorie",
+                copyPermissions: "Rechten kopiëren",
+                copyPermissionsDescription: "De rechten van de originele categorie naar de nieuwe categorie kopiëren. Schakel dit uit om de standaardrechten van de server te gebruiken."
+            }
+        },
         noTrack: {
             name: "NoTrack",
             description: "Schakel het volgen van Discord (analyse/'wetenschap'), statistieken en Sentry-crashrapportage uit",
             option: {
                 disableAnalytics: {
                     label: "Schakel Analytics uit",
-                    description: "Blokkeert de tracking-analyses van Discord. Schakel dit uit als je wilt dat badges je voortgang bijhouden (bijv. gestreamde uren)."
+                    description: "Discords tracking-analyses blokkeren"
                 },
                 disableStackDumping: {
                     description: "Een native stacktrace in de console tonen als Discord crasht. Vereist een volledige herstart."
+                },
+                allowBadgeTracking: {
+                    description: "Toch de gebeurtenissen versturen die badges nodig hebben om je voortgang bij te houden (bijv. gespeelde uren, gestreamde uren)"
                 }
             }
         },
@@ -1463,11 +1513,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 channelOpenScrollMode: {
                     label: "Positie bij openen van kanaal",
-                    description: "Open ongelezen kanalen op de opgeslagen positie (of onderaan), altijd onderaan, of gebruik het standaardgedrag voor ongelezen.",
+                    description: "Waar in de chatgeschiedenis kanalen geopend worden. Als je vertrekt binnen 5 berichten van het nieuwste, wordt \"Opgeslagen positie\" als niet ingesteld beschouwd en wordt de volgende terugval gebruikt. Als je laatst gelezen bericht ouder is dan de maximale leeftijd hieronder, wordt het kanaal als verlaten beschouwd en wordt \"Oudste ongelezen\" als niet ingesteld beschouwd.",
                     default: "Discord-standaard",
-                    bottom: "Altijd onderaan",
-                    saved: "Opgeslagen positie"
+                    bottom: "Nieuwste bericht",
+                    saved: "Opgeslagen positie > Oudste ongelezen > Nieuwste bericht",
+                    savedLatest: "Opgeslagen positie > Nieuwste bericht",
+                    unread: "Oudste ongelezen > Nieuwste bericht"
+                },
+                maximumLastReadAge: {
+                    label: "Maximale leeftijd laatst gelezen",
+                    description: "Maximale leeftijd van je laatst gelezen bericht, in minuten, om de terugval \"Oudste ongelezen\" te gebruiken. Zet op 0 voor onbeperkt."
+                },
+                showJumpToPresentSooner: {
+                    label: "Knop Naar heden springen eerder tonen",
+                    description: "Toont de knop Naar heden springen wanneer je 5 of meer berichten boven het nieuwste bent gescrold."
+                },
+                addChatbarButton: {
+                    label: "Chatbalkknop toevoegen",
+                    description: "Voegt een chatbalkknop toe om snel de openingspositie van kanalen te wisselen."
                 }
+            },
+            history: {
+                unavailable: "De opgeslagen geschiedenis is nog niet beschikbaar.",
+                clearTitle: "Opgeslagen geschiedenis wissen",
+                clearDescription: "Wist de lokale leesvoortgang die wordt bijgehouden om de scrollpositie na herladen te herstellen.",
+                clear: "Wissen",
+                success: "Gelukt",
+                failure: "Mislukt"
             }
         },
         betterBanReasons: {
@@ -1624,6 +1696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "BetterPlusReacts",
             description: "Het aantal plus vóór :emoji: is het bericht waar je het aan moet toevoegen"
         },
+        betterPollDetails: {
+            name: "BetterPollDetails",
+            description: "Toont peilingpercentages en stemaantallen vóór het stemmen of verlopen zonder de mogelijkheid tot stemmen uit te schakelen"
+        },
         betterRoleContext: {
             name: "BetterRoleContext",
             description: "Voegt opties toe om rolkleur te kopiëren / rol te bewerken / rolpictogram te bekijken bij rechtsklikken op rollen in het gebruikersprofiel of de ledenlijst",
@@ -1709,6 +1785,20 @@ const translations: MatchStructure<typeof enTranslations> = {
         betterUploadButton: {
             name: "BetterUploadButton",
             description: "Uploaden met een enkele klik, open het menu met een rechterklik"
+        },
+        betterYoutubeEmbeds: {
+            name: "BetterYouTubeEmbeds",
+            description: "Blokkeer advertenties en omzeil UMG-blokkades",
+            option: {
+                fixBlockedEmbeds: {
+                    label: "Geblokkeerde embeds repareren",
+                    description: "Video's herstellen die niet in Discord getoond mogen worden, bijvoorbeeld door UMG"
+                },
+                blockAds: {
+                    label: "Advertenties blokkeren",
+                    description: "Blokkeert advertenties in YouTube-embeds en WatchTogether. Het laden van de video kan enkele seconden duren door de anti-advertentiemaatregelen van YouTube"
+                }
+            }
         },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
@@ -3993,6 +4083,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeFamilyCenterAboveDms: {
                     description: "Gezinscentrum boven de DM-lijst verwijderen.",
                     label: "Gezinscentrum boven DM's verwijderen"
+                },
+                removeAccountPopoutBadges: {
+                    label: "Badges in account-pop-out verwijderen",
+                    description: "Badges uit de account-pop-out verwijderen."
+                },
+                removeAccountPopoutOrbs: {
+                    label: "Orbs in account-pop-out verwijderen",
+                    description: "Orbs uit de account-pop-out verwijderen."
+                },
+                removeInvisibleWarning: {
+                    label: "Onzichtbaar-waarschuwing verwijderen",
+                    description: "De waarschuwing voor de onzichtbare status uit de account-pop-out verwijderen."
                 }
             },
             text: {
@@ -4268,8 +4370,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 success: "{{count}} bijlage(n) gedownload.",
                 partial: "{{succeeded}} van {{total}} bijlagen gedownload. {{failed}} mislukt.",
-                downloadedPluralizeSucceededAttachment: "{{pluralize_succeeded_attachment}} gedownload.",
-                downloadedSucceededOfLength: "{{succeeded}} van {{length}} bijlagen gedownload. {{failed}} mislukt."
+                downloadedPluralizeSucceededAttachment: "{{pluralize_succeeded_attachment}} opgeslagen.",
+                downloadedSucceededOfLength: "{{succeeded}} van {{length}} bijlagen opgeslagen. {{failed}} mislukt.",
+                tooLarge: "Deze bijlagen zijn te groot om te zippen. Sla ze in plaats daarvan één voor één op.",
+                noneDownloaded: "Kon geen bijlagen downloaden."
             },
             option: {
                 downloadAllFileTypes: {
@@ -4926,10 +5030,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        fixYoutubeEmbeds: {
-            name: "FixYoutubeEmbeds",
-            description: "Omzeilt dat YouTube-video's worden geblokkeerd voor weergave op Discord (bijvoorbeeld door UMG)"
-        },
         followUser: {
             name: "FollowUser",
             description: "Voegt een volgoptie toe in het gebruikerscontextmenu om altijd in dezelfde VC te zijn als zij",
@@ -5150,10 +5250,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         fullSearchContext: {
             name: "FullSearchContext",
             description: "Zorgt ervoor dat het berichtcontextmenu in de berichtzoekresultaten alle opties bevat die u zou verwachten"
-        },
-        fullUserInChatbox: {
-            name: "FullUserInChatbox",
-            description: "Zorgt ervoor dat gebruikersvermeldingen in de chatbox meer functionaliteiten hebben, zoals links/rechts klikken"
         },
         fullVCPFP: {
             name: "FullVCPFP",
@@ -9914,7 +10010,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showHiddenChannels: {
             name: "ShowHiddenChannels",
-            description: "Geef kanalen weer waartoe u geen toegang heeft.",
+            description: "Toont verborgen kanalen. Discord heeft deze functionaliteit sterk beperkt. Meer info in de plugininstellingen.",
             tooltip: "Verborgen kanaal",
             option: {
                 channelStyle: {
@@ -9968,7 +10064,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknown: "onbekend",
                 permissionDetails: "Toestemmingsdetails",
                 thisIsA: "Dit is een {{status}} {{channelType}} kanaal",
-                canNotSee: "Je kunt de {{type}} van dit kanaal niet zien.",
+                canNotSee: "Je kunt de naam of de {{type}} van dit kanaal niet zien.",
                 guidelines: "Mogelijk ziet u echter de richtlijnen:",
                 lastCreated: "Laatst {{type}} gemaakt:",
                 lastPin: "Pincode laatste bericht:",
@@ -9987,6 +10083,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedUsersAndRoles: "Toegestane gebruikers en rollen:",
                 hideAllowedUsersAndRoles: "Toegestane gebruikers en rollen verbergen",
                 viewAllowedUsersAndRoles: "Bekijk toegestane gebruikers en rollen"
+            },
+            about: {
+                title: "Beperkte functionaliteit",
+                patched: "Discord heeft de meeste functionaliteit van deze plugin gepatcht ({{link}}). Verborgen kanalen verschijnen nu als \"Geen toegang\" en dingen zoals de naam, het onderwerp of mensen met toegang zijn niet meer te zien.",
+                announcement: "lees hun aankondiging",
+                nothingToDo: "We kunnen niets doen om dit op te lossen. Je kunt echter nog steeds weten dat kanalen bestaan en zien wie er verbonden is met privé-spraakkanalen."
             }
         },
         showHiddenThings: {
@@ -10344,6 +10446,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     defaultHidden: {
                         name: "defaultHidden",
                         description: "Of het typen in DM's/kanalen/gilden standaard moet worden verborgen of niet."
+                    },
+                    dmListIndicator: {
+                        description: "Typindicatoren verbergen bij gesprekken in de lijst met privéberichten."
                     }
                 }
             },
@@ -10426,6 +10531,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabledLocations: {
                     label: "Gehandicapte locaties",
                     description: "Schakel de functionaliteit voor deze ID's uit. Accepteert een door komma's gescheiden lijst met DM-ID's, kanaal-ID's en gilde-ID's. Wordt alleen gebruikt als 'Standaard verborgen' is ingeschakeld."
+                },
+                hideDmListTypingIndicators: {
+                    label: "Typindicatoren in DM-lijst verbergen",
+                    description: "Typindicatoren verbergen bij gesprekken in de lijst met privéberichten."
                 }
             },
             text: {
@@ -10435,7 +10544,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 membersListIndicators: "Indicatoren in ledenlijst",
                 guild: "Server",
                 channel: "Kanaal",
-                global: "Globaal"
+                global: "Globaal",
+                dmListIndicators: "DM-lijstindicatoren"
             }
         },
         snowfall: {
@@ -10751,7 +10861,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 goldColor: "Goud-reekskleur (30+ dagen)",
                 silverColor: "Zilver-reekskleur (14+ dagen)",
                 bronzeColor: "Brons-reekskleur (7+ dagen)",
-                defaultColor: "Standaard reekskleur (1+ dagen)"
+                defaultColor: "Standaard reekskleur (1+ dagen)",
+                showOnSelf: {
+                    label: "Bij mezelf tonen",
+                    description: "De streak tonen bij je eigen berichten in DM's"
+                },
+                showOutsideDMs: {
+                    label: "Buiten DM's tonen",
+                    description: "Streaks tonen bij berichten buiten DM's"
+                }
             },
             toast: {
                 authFailed: "Autorisatie mislukt: {{error}}",
@@ -11755,11 +11873,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
-            description: "Verwijdert de bitratelimiet van 2500 kbps op Chromium- en Plextron-clients.",
+            description: "Verwijdert de bitratelimiet van 2500kbps op Chromium- en Vesktop-clients, schakelt stereo-streamaudio met een hogere bitrate in, verhoogt de startbitrate van streams, gebruikt hardwarematige H264-codering en lost eindeloos stijgend CPU-gebruik tijdens schermdelen op.",
             option: {
                 experimentalAV1Support: {
                     label: "Experimentele AV1-ondersteuning",
                     description: "Schakel AV1-codec-ondersteuning in. Kan problemen veroorzaken zoals het oneindig laden van streams"
+                },
+                betterCodecs: {
+                    label: "Betere codecs",
+                    description: "KAN PROBLEMEN VEROORZAKEN! Geef de voorkeur aan betere codecs zoals AV1 en VP9 tijdens het streamen. Zou de kwaliteit moeten verbeteren, maar kan leiden tot problemen zoals eindeloos ladende streams."
                 }
             }
         },
@@ -11881,10 +12003,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Volume"
                 }
             }
-        },
-        youtubeAdblock: {
-            name: "YouTubeAdblock",
-            description: "Blokkeer advertenties in YouTube-insluitingen en de Watch Together-activiteit via AdGuard"
         },
         youtubeDescription: {
             name: "YouTubeDescription",
@@ -12362,7 +12480,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 validate: "Valideren",
                 resetToDefault: "Standaard herstellen",
                 progress: "{{percent}}% - {{transferred}} van {{total}}",
-                cancel: "Annuleren"
+                cancel: "Annuleren",
+                stripFileExtension: "De bestandsextensie uit de gegenereerde URL verwijderen",
+                saveOriginalFileName: "Of de bestandsnaam op Zipline wordt opgeslagen en bij het downloaden wordt hersteld, ongeacht het gekozen URL-formaat"
             },
             option: {
                 serviceType: {
@@ -12574,6 +12694,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsComponent: {
                     description: "Instellingen",
                     label: "Instellingencomponent"
+                },
+                ziplineStripExtension: {
+                    label: "Zipline: Extensie verwijderen",
+                    description: "Bestandsextensie verwijderen"
+                },
+                ziplineOriginalName: {
+                    label: "Zipline: Originele naam",
+                    description: "Originele bestandsnaam behouden"
                 }
             },
             panel: {
@@ -12646,7 +12774,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 network: "Netwerk",
                 corsProxyUrl: "CORS-proxy-URL",
                 uploadTimeout: "Uploadtime-out",
-                domainsJsonDescription: "JSON-array van te gebruiken domeinen, bijvoorbeeld [\"offensive\"]."
+                domainsJsonDescription: "JSON-array van te gebruiken domeinen, bijvoorbeeld [\"offensive\"].",
+                stripFileExtension: "Bestandsextensie verwijderen",
+                saveOriginalFileName: "Originele bestandsnaam opslaan"
             },
             status: {
                 cancelled: "Upload geannuleerd.",
@@ -13151,6 +13281,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 gifPickerTyping: {
                     label: "GIF-kiezer typen",
                     description: "Toont je als typend terwijl de GIF-kiezer open is"
+                },
+                removeChannelSuggestions: {
+                    label: "Kanaalsuggesties verwijderen",
+                    description: "Verwijdert de categorie Voorgestelde kanalen uit de serverzijbalk"
                 }
             },
             text: {
@@ -13251,7 +13385,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 audiobookshelfServerUrl: "URL van AudioBookShelf-server.",
                 audiobookshelfUsername: "AudioBookShelf-gebruikersnaam.",
                 audiobookshelfPassword: "AudioBookShelf-wachtwoord.",
-                connectsToTosuVia: "Maakt via WebSocket op poort 24050 verbinding met tosu. Geen configuratie nodig, zorg alleen dat tosu naast osu! draait.",
+                connectsToTosuVia: "Maakt verbinding met tosu via WebSocket. Zorg er gewoon voor dat tosu naast osu! draait.",
                 showWhatYouRe: "Toon via stats.fm waar je naar luistert. Je luistergeschiedenis moet openbaar zijn.",
                 statsFmUsername: "Stats.fm-gebruikersnaam.",
                 customStatusText: "Aangepaste statustekst.",
@@ -13307,10 +13441,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 viewSong: "Nummer bekijken",
                 showArtistName: "Artiestnaam tonen",
                 showTrackName: "Nummernaam tonen",
-                enterValue: "Voer een waarde in"
+                enterValue: "Voer een waarde in",
+                tosuServerUrl: "tosu-domein-URL.",
+                tosuPrivacyMode: "Verbergt je gebruikersnaam in de presence.",
+                plexDescription: "Laat zien wat je afspeelt op je Plex-server. Je moet de servereigenaar zijn om sessies te zien. Om je token te krijgen, open je een willekeurig item in Plex Web, kies je Info ophalen, dan XML bekijken, en kopieer je de X-Plex-Token-waarde uit de URL.",
+                plexServerUrl: "Plex-server-URL.",
+                plexToken: "Plex-token.",
+                plexUsername: "Plex-gebruikersnaam waarvan sessies getoond worden.",
+                plexUsernamePlaceholder: "Plex-gebruikersnaam",
+                plexShowCover: "Albumhoes tonen. Je Plex-token wordt in de afbeeldings-URL naar Discord gestuurd."
             },
             name: "RichPresence",
-            description: "Centrale Rich Presence-hub voor AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome en Gensokyo Radio.",
+            description: "Uniforme rich presence-hub voor AudioBookShelf, osu!, stats.fm, Jellyfin, Plex, Navidrome en Gensokyo Radio.",
             toast: {
                 audiobookshelfRpcIsNot: "AudioBookShelf-RPC is niet geconfigureerd.",
                 jellyfinRpcIsNot: "Jellyfin-RPC is niet geconfigureerd.",
@@ -13542,6 +13684,46 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nd_hideOnPause: {
                     description: "Rich Presence verbergen als muziek gepauzeerd is",
                     label: "Navidrome: verbergen bij pauze"
+                },
+                px_enabled: {
+                    label: "Plex: Ingeschakeld",
+                    description: "Plex-presence inschakelen."
+                },
+                tosu_serverUrl: {
+                    label: "tosu: Server-URL",
+                    description: "tosu-domein-URL."
+                },
+                tosu_privacyMode: {
+                    label: "tosu: Privacymodus",
+                    description: "Privacymodus"
+                },
+                px_serverUrl: {
+                    label: "Plex: Server-URL",
+                    description: "Plex-server-URL."
+                },
+                px_token: {
+                    label: "Plex: Token",
+                    description: "Plex-token."
+                },
+                px_username: {
+                    label: "Plex: Gebruikersnaam",
+                    description: "Plex-gebruikersnaam waarvan sessies getoond worden."
+                },
+                px_showEpisodeName: {
+                    label: "Plex: Afleveringsnaam tonen",
+                    description: "Afleveringsnaam tonen na seizoen-/afleveringsinfo."
+                },
+                px_showCover: {
+                    label: "Plex: Hoes tonen",
+                    description: "Albumhoes tonen. Je Plex-token wordt in de afbeeldings-URL naar Discord gestuurd."
+                },
+                px_showPausedState: {
+                    label: "Plex: Gepauzeerde status tonen",
+                    description: "Presence tonen wanneer media gepauzeerd is."
+                },
+                px_privacyMode: {
+                    label: "Plex: Privacymodus",
+                    description: "Mediadetails verbergen."
                 }
             },
             panel: {
@@ -13580,7 +13762,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 detailsFormat: "Indeling van details",
                 stateFormat: "Indeling van status",
                 largeTextFormat: "Indeling van grote tekst",
-                enabled: "Ingeschakeld"
+                enabled: "Ingeschakeld",
+                token: "Token",
+                showCoverArt: "Albumhoes tonen"
             }
         },
         sedEnhanced: {
@@ -14245,7 +14429,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userPreset: "Gebruikersvoorinstelling",
                 custom: "Aangepast",
                 gaming: "Gaming",
-                screenshare: "Scherm delen"
+                screenshare: "Scherm delen",
+                source: "Bron"
             }
         },
         whitelistedEmojis: {

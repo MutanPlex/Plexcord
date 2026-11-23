@@ -9,12 +9,12 @@ import "./styles.css";
 
 import { plugin, plugins, t } from "@api/i18n";
 import { Settings, useSettings } from "@api/Settings";
-import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Link } from "@components/Link";
 import { Notice } from "@components/Notice";
 import { PluginDependencyList } from "@components/settings/tabs/plugins";
 import { PluginCard } from "@components/settings/tabs/plugins/PluginCard";
+import { Text } from "@components/Text";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { ChangeList } from "@utils/ChangeList";
 import { classNameFactory } from "@utils/css";
@@ -129,16 +129,16 @@ function NewPluginsModal({ modalProps, newPlugins, newSettings }: ModalComponent
             size="md"
             title={
                 <div className={cl("header-content")}>
-                    <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>
+                    <Text size="lg" weight="semibold" style={{ flexGrow: 1 }}>
                         {t(plugin.newPluginsManager.modal.title)} ({totalCount})
-                    </BaseText>
+                    </Text>
                 </div>
             }
             subtitle={
                 <>
-                    <BaseText size="sm" className={cl("description")}>
+                    <Text size="sm" className={cl("description")}>
                         {t(plugin.newPluginsManager.modal.description)}
-                    </BaseText>
+                    </Text>
                     <br />
                     <Notice.Info className={cl("notice")}>
                         {t(plugin.newPluginsManager.modal.supportUs)} <Link href="https://github.com/sponsors/MutanPlex" target="_blank" rel="noopener noreferrer">{t(plugin.newPluginsManager.modal.supportUsLink)}</Link>.

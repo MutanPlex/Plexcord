@@ -6,10 +6,10 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { PlusIcon } from "@components/Icons";
+import { Text } from "@components/Text";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { cl, logger } from "@plugins/songSpotlight.desktop/lib/utils";
 import { Native } from "@plugins/songSpotlight.desktop/service";
@@ -66,9 +66,9 @@ function AddSongModal({ modalProps, close, onAdd }: AddSongModalProps) {
                 ]}
             >
                 <Flex flexDirection="column" gap="10px">
-                    <BaseText size="md" weight="normal" className={cl("sub")}>
+                    <Text size="md" weight="normal" className={cl("sub")}>
                         {t(plugin.songSpotlight.text.supportedServices)} <b>{parsers.map(x => x.label).join(", ")}</b>
-                    </BaseText>
+                    </Text>
                     <TextInput
                         placeholder="https://open.spotify.com/..."
                         error={error}
@@ -108,7 +108,7 @@ export default function AddSong({ onAdd }: AddSongProps) {
             <Flex alignItems="center" gap="12px" className={cl("editable-song", "add-song")}>
                 <PlusIcon width={28} height={28} className={cl("icon")} />
                 <Flex flexDirection="column" justifyContent="center" gap={0}>
-                    <BaseText size="md" weight="medium">{t(plugin.songSpotlight.text.addSong)}</BaseText>
+                    <Text size="md" weight="medium">{t(plugin.songSpotlight.text.addSong)}</Text>
                 </Flex>
             </Flex>
         </Clickable>

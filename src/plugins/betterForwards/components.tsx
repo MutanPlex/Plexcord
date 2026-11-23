@@ -6,15 +6,15 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { Flex } from "@components/Flex";
 import { AtIcon, DiscordIconSizes, RightArrow, TextIcon } from "@components/Icons";
+import { Text } from "@components/Text";
 import { BasicGuild, Channel, Guild, GuildProfile, Message, MessageAttachment } from "@plexcord/discord-types";
 import { iconsModule } from "@plugins/_core/concatenatedModules";
 import { getGuildAcronym, getIntlMessage } from "@utils/discord";
 import { getUserAvatarUrl, identity } from "@utils/misc";
 import { findByCodeLazy, findComponentByCodeLazy } from "@webpack";
-import { BasicGuildStore, ChannelActionCreators, ChannelStore, DateUtils, GuildProfileStore, GuildStore, IconUtils, InviteActions, Popout, React, RelationshipStore, RestAPI, SnowflakeUtils, useCallback, useEffect, useMemo, useRef, UserStore, useState, useStateFromStores } from "@webpack/common";
+import { BasicGuildStore, ChannelActionCreators, ChannelStore, DateUtils, GuildProfileStore, GuildStore, IconUtils, InviteActions, NavigationRouter, Popout, React, RelationshipStore, RestAPI, SnowflakeUtils, useCallback, useEffect, useMemo, useRef, UserStore, useState, useStateFromStores } from "@webpack/common";
 
 import { cl, ForwardOptionsContext, ForwardOptionsState } from ".";
 
@@ -25,7 +25,6 @@ const ServerProfileComponent = findComponentByCodeLazy("{guildProfile:", "GUILD_
 const getAttachmentType = findByCodeLazy('"PLAINTEXT_PREVIEW":"OTHER"');
 const formatChannelName = findByCodeLazy("#{intl::NO_ACCESS}", "isObfuscated()");
 const getChannelIcon = findByCodeLazy("textFocused:", "isGameInvitesChannel()");
-const navigateTo = findByCodeLazy('getConfig({location:"channel_mention"})');
 const fetchBasicGuild = findByCodeLazy('type:"BASIC_GUILD_FETCH_SUCCESS"');
 const fetchGuildProfile = findByCodeLazy('type:"GUILD_PROFILE_FETCH_SUCCESS"');
 
@@ -115,9 +114,9 @@ function GuildName({ guildId }: { guildId: string; }) {
             {popoutProps => (
                 <div ref={ref} className={cl("footer-element")} onMouseEnter={preload} {...popoutProps}>
                     {guild ? <GuildIcon guild={guild} /> : widget?.ok ? <WidgetIcon guildId={guildId} name={widget.name!} /> : null}
-                    <BaseText size="sm" weight="medium" className={cl("footer-text")}>
+                    <Text size="sm" weight="medium" className={cl("footer-text")}>
                         {guild?.name ?? widget?.name ?? t(plugin.betterForwards.text.viewServer)}
-                    </BaseText>
+                    </Text>
                     <RightArrow width={DiscordIconSizes.xxs} height={DiscordIconSizes.xxs} fill="currentColor" />
                 </div>
             )}
@@ -155,15 +154,15 @@ function ChannelName({ guildId, channelId, messageId }: { guildId?: string; chan
     );
 
     const prefetch = useCallback(() => ChannelActionCreators.preload(guildId ?? "@me", channelId), [guildId, channelId]);
-    const navigate = useCallback(() => navigateTo(guildId ?? "@me", channelId, messageId), [guildId, channelId, messageId]);
+    const navigate = useCallback(() => NavigationRouter.transitionTo(`/channels/${guildId ?? "@me"}/${channelId}/${messageId}`), [guildId, channelId, messageId]);
     const FallbackIcon = guildId ? TextIcon : AtIcon;
 
     return (
         <div className={cl("footer-element")} onClick={navigate} onMouseEnter={prefetch}>
             {channel ? <ChannelIcon channel={channel} name={name} /> : <FallbackIcon width={DiscordIconSizes.xs} height={DiscordIconSizes.xs} />}
-            <BaseText size="sm" weight="medium" className={cl("footer-text")}>
+            <Text size="sm" weight="medium" className={cl("footer-text")}>
                 {channel ? name : <i>{name}</i>}
-            </BaseText>
+            </Text>
             <RightArrow width={DiscordIconSizes.xxs} height={DiscordIconSizes.xxs} fill="currentColor" />
         </div>
     );
@@ -177,9 +176,9 @@ function Timestamp({ snowflake }: { snowflake: string; }) {
 
     return (
         <div className={cl("footer-element")} style={{ pointerEvents: "none" }}>
-            <BaseText size="sm" weight="medium" className={cl("footer-text")}>
+            <Text size="sm" weight="medium" className={cl("footer-text")}>
                 {formatted}
-            </BaseText>
+            </Text>
         </div>
     );
 }
@@ -254,14 +253,14 @@ function SubEmbedPicker({ title, subEmbeds, opts, setOpts, hasOpts, defaultOpts 
 
     return (
         <Flex gap={4} flexDirection="column">
-            <BaseText
+            <Text
                 size="sm"
                 color="text-subtle"
                 className={cl("embed-name")}
                 style={{ opacity: !hasOpts ? 0.5 : undefined }}
             >
                 {title}
-            </BaseText>
+            </Text>
             <TagGroup
                 label={title}
                 selectionMode="multiple"

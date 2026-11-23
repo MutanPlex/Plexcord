@@ -7,8 +7,8 @@
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
+import { Text } from "@components/Text";
 import { IS_MAC } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { OptionType } from "@utils/types";
@@ -63,7 +63,7 @@ function HotkeyRecorder() {
 
     return (
         <div className={cl("hotkey-setting")}>
-            <BaseText size="md" weight="semibold">{t(plugin.commandPalette.text.openPaletteHotkey)}</BaseText>
+            <Text size="md" weight="semibold">{t(plugin.commandPalette.text.openPaletteHotkey)}</Text>
             <Button variant="secondary" onClick={() => setRecording(true)}>
                 {recording ? t(plugin.commandPalette.text.pressKeys) : formatCombo(hotkey)}
             </Button>

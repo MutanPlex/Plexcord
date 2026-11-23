@@ -6,9 +6,9 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
+import { Text } from "@components/Text";
 import { User } from "@plexcord/discord-types";
 import { listData } from "@plugins/songSpotlight.desktop/lib/api";
 import { useAuthorizationStore } from "@plugins/songSpotlight.desktop/lib/stores/AuthorizationStore";
@@ -42,21 +42,21 @@ export default function WidgetSongs({ user }: WidgetSongsProps) {
     let full: JSX.Element | undefined;
     if (failed) {
         full = (
-            <BaseText size="md" weight="semibold" className={cl("errored")}>
+            <Text size="md" weight="semibold" className={cl("errored")}>
                 {t(plugin.songSpotlight.text.uhOhSongSpotlight)}
-            </BaseText>
+            </Text>
         );
     } else if (isAuthorized() && !data) {
         full = <Spinner type={Spinner.Type.SPINNING_CIRCLE} />;
     } else if (!data?.[0]) {
         full = (
             <>
-                <BaseText size="lg" weight="semibold">{t(plugin.songSpotlight.text.looksLikeThereS)}</BaseText>
-                <BaseText size="md" weight="normal">
+                <Text size="lg" weight="semibold">{t(plugin.songSpotlight.text.looksLikeThereS)}</Text>
+                <Text size="md" weight="normal">
                     {owned
                         ? t(plugin.songSpotlight.text.goAddSongs)
                         : t(plugin.songSpotlight.text.tellUserToAddSongs, { name: user.globalName || user.username })}
-                </BaseText>
+                </Text>
                 {owned && (
                     <Button
                         variant="secondary"

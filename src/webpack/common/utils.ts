@@ -18,7 +18,8 @@
 */
 
 import * as t from "@plexcord/discord-types";
-import { _resolveReady, filters, findByCodeLazy, findByPropsLazy, findLazy, mapMangledModuleLazy, waitFor } from "@webpack";
+import { Logger } from "@utils/Logger";
+import { _resolveReady, filters, findByCode, findByCodeLazy, findByPropsLazy, findLazy, mapMangledModuleLazy, proxyLazyWebpack, waitFor } from "@webpack";
 import type * as TSPattern from "ts-pattern";
 
 export let FluxDispatcher: t.FluxDispatcher;
@@ -71,7 +72,14 @@ waitFor("parseTopic", m => Parser = m);
 export let Alerts: t.Alerts;
 waitFor(["show", "close"], m => Alerts = m);
 
-export const showToast: t.showToast = findByCodeLazy(".currentToastMap.has(");
+export const showToast: t.showToast = proxyLazyWebpack(() => {
+    const Toaster = findByCode(".currentToastMap.get(", "setState");
+    if (Toaster) return Toaster;
+
+    const logger = new Logger("Toast");
+    logger.error("Failed to find showToast! Falling back to logging");
+    return logger.log.bind(logger);
+});
 
 export const UserUtils = {
     getUser: findByCodeLazy(".USER(")
@@ -142,7 +150,6 @@ export const ColorUtils = mapMangledModuleLazy("Invalid hex color format", {
 export const ImageUtils = mapMangledModuleLazy("Input data is not a valid image.", {
     extractColors: filters.byCode('"number"==typeof'),
     fileToDataURL: filters.byCode("Result must be a string"),
-    dataURLToBlob: filters.byCode("new Uint8Array("),
     dataURLToFile: filters.byCode("new File(["),
     fitDimensions: filters.byCode("minWidth:", "minHeight:"),
     loadImage: filters.byCode('addEventListener("load"'),

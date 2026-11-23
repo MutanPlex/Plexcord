@@ -10,7 +10,7 @@ import "./styles.css";
 import { plugin, t } from "@api/i18n";
 import { MagnifyingGlassIcon } from "@components/Icons";
 import SettingsPlugin from "@plugins/_core/settings";
-import { PcDevs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import { removeFromArray } from "@utils/misc";
 import definePlugin, { StartAt } from "@utils/types";
 import { SettingsRouter } from "@webpack/common";
@@ -21,7 +21,7 @@ import { SettingsAbout } from "./components/Modals";
 export default definePlugin({
     name: "IconViewer",
     description: () => t(plugin.iconViewer.description),
-    authors: [PcDevs.iamme, PcDevs.MutanPlex],
+    authors: [Devs.iamme, PcDevs.MutanPlex],
     tags: ["media", "utility", "appearance"],
     dependencies: ["Settings", "ConcatenatedModules"],
     startAt: StartAt.WebpackReady,

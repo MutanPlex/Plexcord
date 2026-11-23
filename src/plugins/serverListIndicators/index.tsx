@@ -22,8 +22,8 @@ import "./styles.css";
 import { plugin, t } from "@api/i18n";
 import { addServerListElement, removeServerListElement, ServerListItem, ServerListRenderPosition } from "@api/ServerList";
 import { definePluginSettings } from "@api/Settings";
-import { BaseText } from "@components/BaseText";
 import { FriendsIcon, ServerIcon } from "@components/Icons";
+import { Text } from "@components/Text";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
@@ -60,7 +60,7 @@ function FriendsIndicator() {
     return (
         <div id="pc-friendcount" className={cl("item")} aria-label={`${onlineFriendsCount} ${t(plugin.serverListIndicators.friends)}`}>
             <FriendsIcon width="12px" height="12px" />
-            <BaseText size="xs" id="pc-friendcount-text">{onlineFriendsCount}</BaseText>
+            <Text size="xs" id="pc-friendcount-text">{onlineFriendsCount}</Text>
         </div>
     );
 }
@@ -77,7 +77,7 @@ function ServersIndicator() {
     return (
         <div id="pc-guildcount" className={cl("item")} aria-label={`${guildCount} ${t(plugin.serverListIndicators.servers)}`}>
             <ServerIcon width="12px" height="12px"/>
-            <BaseText size="xs" id="pc-guildcount-text">{guildCount}</BaseText>
+            <Text size="xs" id="pc-guildcount-text">{guildCount}</Text>
         </div>
     );
 }

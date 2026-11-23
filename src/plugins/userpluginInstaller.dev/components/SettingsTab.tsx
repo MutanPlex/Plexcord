@@ -8,7 +8,6 @@
 import { plugin as pluginI18n, t } from "@api/i18n";
 import { getName, pluginRequiresRestart, startPlugin, stopPlugin } from "@api/PluginManager";
 import { useSettings } from "@api/Settings";
-import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { CheckedTextInput } from "@components/CheckedTextInput";
@@ -20,6 +19,7 @@ import {
     SettingsTab as STab,
     wrapTab,
 } from "@components/settings/tabs/BaseTab";
+import { Text } from "@components/Text";
 import { classes, isObjectEmpty } from "@utils/misc";
 import { relaunch } from "@utils/native";
 import { Alerts, closeAllModals, NavigationRouter, showToast,useEffect, useState } from "@webpack/common";
@@ -86,7 +86,7 @@ function UserPluginsTab() {
             <div className={cl("update-check-container")}>
                 {isObjectEmpty(pluginsWithUpdates) ? (
                     !updatesLoaded && (
-                        <BaseText>{t(pluginI18n.userpluginInstaller.text.checkingForUpdates)}</BaseText>
+                        <Text>{t(pluginI18n.userpluginInstaller.text.checkingForUpdates)}</Text>
                     )
                 ) : (
                     <Card
@@ -325,7 +325,7 @@ function UserPluginsTab() {
                             })}
                     </div>
                 ) : (
-                    <BaseText>{t(pluginI18n.userpluginInstaller.text.loadingPlugins)}</BaseText>
+                    <Text>{t(pluginI18n.userpluginInstaller.text.loadingPlugins)}</Text>
                 )}
             </div>
         </STab>

@@ -78,7 +78,7 @@ export interface ProfileBadge {
 }
 
 export interface DirectoryBadge {
-    badge_id: string;
+    badge_id: string | number;
     name: string;
     description: string;
     info_label: string;
@@ -90,6 +90,8 @@ export interface DirectoryBadge {
     owned: true;
     hidden: false;
     tiers: [];
+    userId?: string;
+    originalBadgeId?: string;
 }
 
 const Badges = new Set<ProfileBadge>();

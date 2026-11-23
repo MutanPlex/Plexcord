@@ -48,6 +48,18 @@ export const settings = definePluginSettings({
             );
         }
     },
+    showOnSelf: {
+        type: OptionType.BOOLEAN,
+        label: () => t(plugin.streaks.option.showOnSelf.label),
+        description: () => t(plugin.streaks.option.showOnSelf.description),
+        default: false
+    },
+    showOutsideDMs: {
+        type: OptionType.BOOLEAN,
+        label: () => t(plugin.streaks.option.showOutsideDMs.label),
+        description: () => t(plugin.streaks.option.showOutsideDMs.description),
+        default: true
+    },
     eliteColor: {
         type: OptionType.STRING,
         description: () => t(plugin.streaks.option.eliteColor),

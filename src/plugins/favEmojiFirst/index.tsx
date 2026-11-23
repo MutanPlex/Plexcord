@@ -11,10 +11,10 @@ import { addGlobalContextMenuPatch, findGroupChildrenByChildId, GlobalContextMen
 import { plugin, t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
-import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { PencilIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
+import { Text } from "@components/Text";
 import { Emoji, Message } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
@@ -934,7 +934,7 @@ function EmojiPreview({ emojiRef }: { emojiRef: StoredEmojiRef; }) {
         return <img src={previewUrl} width="20" height="20" alt={getEmojiDisplayName(emojiRef)} />;
     }
 
-    return <BaseText>{getEmojiDisplayName(emojiRef)}</BaseText>;
+    return <Text>{getEmojiDisplayName(emojiRef)}</Text>;
 }
 
 function AliasRow({ alias, emojiRef }: { alias: string; emojiRef: StoredEmojiRef; }) {
@@ -984,12 +984,12 @@ function AliasRow({ alias, emojiRef }: { alias: string; emojiRef: StoredEmojiRef
                         }}
                     />
                 ) : (
-                    <BaseText weight="semibold">:{alias}:</BaseText>
+                    <Text weight="semibold">:{alias}:</Text>
                 )}
-                <BaseText className={cl("row-arrow")}>→</BaseText>
+                <Text className={cl("row-arrow")}>→</Text>
                 <EmojiPreview emojiRef={emojiRef} />
-                <BaseText>{`:${normalizeEmojiName(emojiRef.name)}:`}</BaseText>
-                {error && <BaseText className={cl("row-error")}>{error}</BaseText>}
+                <Text>{`:${normalizeEmojiName(emojiRef.name)}:`}</Text>
+                {error && <Text className={cl("row-error")}>{error}</Text>}
             </div>
             <div className={cl("row-button")}>
                 <Button

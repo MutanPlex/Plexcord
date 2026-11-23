@@ -20,12 +20,18 @@
 import { Guild, GuildMember, Role } from "@plexcord/discord-types";
 import { PermissionOverwriteType } from "@plexcord/discord-types/enums";
 import { classNameFactory } from "@utils/css";
-import { extractAndLoadChunksLazy, findByPropsLazy } from "@webpack";
+import { DefaultExtractAndLoadChunksRegex, extractAndLoadChunksLazy, findByPropsLazy } from "@webpack";
 import { GuildRoleStore } from "@webpack/common";
 
 import { PermissionsSortOrder, settings } from ".";
 
-export const loadGetGuildPermissionSpecMap = extractAndLoadChunksLazy([".PRIMARY,badgeTooltipDelay:"]);
+const memberModViewSidebar = 'name:"GuildMemberModViewSidebar"';
+
+// The sidebar's import is available at startup and includes the guild permission spec.
+export const loadGetGuildPermissionSpecMap = extractAndLoadChunksLazy(
+    [memberModViewSidebar],
+    new RegExp(String.raw`createPromise:\(\)=>${DefaultExtractAndLoadChunksRegex.source},webpackId:[^,]+,${memberModViewSidebar}`)
+);
 export const { getGuildPermissionSpecMap } = findByPropsLazy("getGuildPermissionSpecMap");
 
 export const cl = classNameFactory("pc-permviewer-");

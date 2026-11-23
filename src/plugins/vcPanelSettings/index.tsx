@@ -9,10 +9,10 @@ import "./style.css";
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { BaseText } from "@components/BaseText";
 import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
 import { Margins } from "@components/margins";
+import { Text } from "@components/Text";
 import { VideoDevice } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { identity } from "@utils/misc";
@@ -23,7 +23,7 @@ const settings = definePluginSettings({
     title1: {
         label: () => t(plugin.vCPanelSettings.option.title1.label),
         type: OptionType.COMPONENT,
-        component: () => <BaseText weight="bold" style={{ fontSize: "1.27rem" }}>{t(plugin.vCPanelSettings.text.appearance)}</BaseText>,
+        component: () => <Text weight="bold" style={{ fontSize: "1.27rem" }}>{t(plugin.vCPanelSettings.text.appearance)}</Text>,
         description: ""
     },
     uncollapseSettingsByDefault: {
@@ -35,7 +35,7 @@ const settings = definePluginSettings({
     title2: {
         label: () => t(plugin.vCPanelSettings.option.title2.label),
         type: OptionType.COMPONENT,
-        component: () => <BaseText weight="bold" style={{ fontSize: "1.27rem" }}>{t(plugin.vCPanelSettings.text.settingsToShow)}</BaseText>,
+        component: () => <Text weight="bold" style={{ fontSize: "1.27rem" }}>{t(plugin.vCPanelSettings.text.settingsToShow)}</Text>,
         description: ""
     },
     outputVolume: {
@@ -71,7 +71,7 @@ const settings = definePluginSettings({
     title3: {
         label: () => t(plugin.vCPanelSettings.option.title3.label),
         type: OptionType.COMPONENT,
-        component: () => <BaseText weight="bold" style={{ fontSize: "1.27rem" }}>{t(plugin.vCPanelSettings.text.headersToShow)}</BaseText>,
+        component: () => <Text weight="bold" style={{ fontSize: "1.27rem" }}>{t(plugin.vCPanelSettings.text.headersToShow)}</Text>,
         description: ""
     },
     showOutputVolumeHeader: {

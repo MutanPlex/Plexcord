@@ -6,7 +6,7 @@
  */
 
 import { plugins, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
+import { Text } from "@components/Text";
 import { classNameFactory } from "@utils/css";
 import { classes } from "@utils/misc";
 import { wordsFromCamel, wordsToTitle } from "@utils/text";
@@ -65,12 +65,12 @@ export function SettingsSection({ tag: Tag = "div", name, id, description, label
         <Tag className={cl("section")}>
             <div className={classes(cl("content"), inlineSetting && cl("inline"))}>
                 <div className={cl("label")}>
-                    {title && <BaseText className={cl("title")} size="md" weight="medium">{title}</BaseText>}
-                    {resolvedDescription && <BaseText className={cl("description")} size="sm">{resolvedDescription}</BaseText>}
+                    {title && <Text className={cl("title")} size="md" weight="medium">{title}</Text>}
+                    {resolvedDescription && <Text className={cl("description")} size="sm">{resolvedDescription}</Text>}
                 </div>
                 {children}
             </div>
-            {error && <BaseText className={cl("error")} size="sm">{error}</BaseText>}
+            {error && <Text className={cl("error")} size="sm">{error}</Text>}
         </Tag>
     );
 }

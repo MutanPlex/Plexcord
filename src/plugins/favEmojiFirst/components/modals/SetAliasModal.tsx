@@ -6,8 +6,8 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { Paragraph } from "@components/Paragraph";
+import { Text } from "@components/Text";
 import { Modal, TextInput, useState } from "@webpack/common";
 
 import { SetAliasModalProps } from "./types";
@@ -59,9 +59,9 @@ export function SetAliasModal({
                 placeholder={t(plugin.favoriteEmojiFirst.modal.set.placeholder)}
             />
             {finalError && (
-                <BaseText style={{ color: "var(--text-feedback-critical)", marginTop: 8 }}>
+                <Text style={{ color: "var(--text-feedback-critical)", marginTop: 8 }}>
                     {finalError}
-                </BaseText>
+                </Text>
             )}
         </Modal>
     );

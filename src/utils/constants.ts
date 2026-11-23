@@ -718,6 +718,14 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     NiNoX: {
         name: "NiNoX",
         id: 123435354958200833n
+    },
+    creations: {
+        name: "creations",
+        id: 209830981060788225n
+    },
+    Cramber: {
+        name: "Cramber",
+        id: 342564015974907914n
     }
 } satisfies Record<string, Dev>);
 
@@ -762,10 +770,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     catcraft: {
         name: "catcraft",
         id: 290162449213292546n
-    },
-    creations: {
-        name: "Creation's",
-        id: 209830981060788225n
     },
     Panniku: {
         name: "Panniku",
@@ -899,10 +903,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "Z1xus",
         id: 377450600797044746n
     },
-    niko: {
-        name: "niko",
-        id: 341377368075796483n
-    },
     davidkra230: {
         name: "davidkra230",
         id: 652699312631054356n
@@ -998,10 +998,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     vei: {
         name: "Vei",
         id: 239414094799699968n
-    },
-    iamme: {
-        name: "i am me",
-        id: 984392761929256980n
     },
     benjii: {
         name: "Benjii",
@@ -1214,6 +1210,18 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     rot: {
         name: "rot",
         id: 1021210809164111932n
+    },
+    lethied: {
+        name: "lethied",
+        id: 892246841016590386n
+    },
+    dev0xz02: {
+        name: "dev0xz02",
+        id: 1135547862533550141n
+    },
+    ShaunLWM: {
+        name: "sprxsheep",
+        id: 130964561900732416n
     },
 } satisfies Record<string, PcDev>);
 

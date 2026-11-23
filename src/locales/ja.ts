@@ -81,6 +81,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             disableMinSize: {
                 label: "最小ウィンドウ サイズを無効にする",
                 description: "Discord の最小サイズより小さくても、ウィンドウを任意のサイズに変更できます"
+            },
+            enableBackgroundRendering: {
+                label: "バックグラウンドレンダリングを有効にする",
+                description: "アプリのウィンドウが完全にフォーカスされていないときも更新を続けます"
             }
         },
         quickActions: {
@@ -90,7 +94,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             editQuickCSS: "QuickCSSを編集する",
             relaunchDiscord: "Discordを再起動する",
             openSettingsFolder: "設定フォルダーを開く",
-            viewSourceCode: "ソースコードを表示"
+            viewSourceCode: "ソースコードを表示",
+            openPlayground: "コンポーネントプレイグラウンドを開く"
         },
         specialCards: {
             donations: {
@@ -229,6 +234,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         tabs: {
             renderFailed: "{{tab}} タブを表示できませんでした。問題が続く場合はインストーラーで再インストールしてください！"
+        },
+        playground: {
+            title: "コンポーネントプレイグラウンド",
+            buttons: "ボタン",
+            buttonSize: "ボタンのサイズ",
+            cards: "カード"
         }
     },
 
@@ -401,6 +412,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "プレックスコードドナー",
                     special: "このバッジは、Plexcord 寄付者向けの特別な特典です",
                     description: "ドナーとなって Plexcord の開発をサポートすることをご検討ください。それは大きな意味があるでしょう！"
+                },
+                directory: {
+                    contributed: "貢献",
+                    plugin: "プラグイン",
+                    plugins: "プラグイン",
+                    selfContributed: "あなたは {{count}} に{{link}}しました!",
+                    otherContributed: "この人は {{count}} に{{link}}しました!",
+                    selfNoPlugins: "まだプラグインを作成していません。おそらく他の方法で{{link}}しています!",
+                    otherNoPlugins: "この人はプラグインを作成していません。おそらく他の方法で{{link}}しています!",
+                    restart: "変更を適用するには再起動してください!",
+                    selfDonor: "寄付ありがとうございます!",
+                    otherDonor: "このユーザーは Plexcord の寄付者です!",
+                    selfDonorDescription: "@mutanplex にメッセージを送ることで、いつでも特典を管理できます。",
+                    otherDonorDescription: "Plexcord を支援して、自分だけのバッジと特典を手に入れましょう!"
                 }
             },
         },
@@ -910,7 +935,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             scrollRight: "右にスクロール"
         },
         notices: {
-            error: "通知の表示中にエラーが発生しました"
+            error: "通知の表示中にエラーが発生しました",
+            dismiss: "閉じる"
         },
         tray: {
             aboutPlexcord: "Plexcordについて",
@@ -1029,16 +1055,40 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "ConcatenatedModules",
             description: "バンドラーによって結合されたモジュールを抽出します"
         },
+        duplicateCategory: {
+            name: "DuplicateCategory",
+            description: "同じ権限でカテゴリーを複製するオプションを追加します。",
+            menu: "カテゴリーを複製",
+            toast: {
+                created: "カテゴリーを作成しました。"
+            },
+            error: {
+                missing: "元のカテゴリーはもう存在しません。",
+                failed: "カテゴリーを作成できませんでした。権限を確認して、もう一度お試しください。"
+            },
+            modal: {
+                title: "カテゴリーを作成",
+                cancel: "キャンセル",
+                create: "カテゴリーを作成",
+                name: "カテゴリー名",
+                placeholder: "新しいカテゴリー",
+                copyPermissions: "権限をコピー",
+                copyPermissionsDescription: "元のカテゴリーの権限を新しいカテゴリーにコピーします。サーバーのデフォルト権限を使う場合はオフにしてください。"
+            }
+        },
         noTrack: {
             name: "NoTrack",
             description: "Discord のトラッキング (分析/「科学」)、メトリクス、Sentry クラッシュ レポートを無効にする",
             option: {
                 disableAnalytics: {
                     label: "分析を無効にする",
-                    description: "Discord のトラッキング分析をブロックします。バッジで進捗（例: 配信時間）を記録したい場合はオフにしてください。"
+                    description: "Discord のトラッキング分析をブロックする"
                 },
                 disableStackDumping: {
                     description: "Discord がクラッシュしたときにネイティブのスタックトレースをコンソールに出力します。完全な再起動が必要です。"
+                },
+                allowBadgeTracking: {
+                    description: "バッジが進捗を記録するために必要なイベントは引き続き送信する(例: プレイ時間、配信時間)"
                 }
             }
         },
@@ -1463,11 +1513,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 channelOpenScrollMode: {
                     label: "チャンネルを開く位置",
-                    description: "未読チャンネルを保存した位置（または最下部）で開くか、常に最下部で開くか、デフォルトの未読動作に従います。",
+                    description: "チャット履歴のどこでチャンネルを開くか。最新から5件以内で離れた場合、「保存した位置」は未設定とみなされ、次の代替が使われます。最後に読んだメッセージが下の最大経過時間より古い場合、チャンネルは放置されたとみなされ、「最も古い未読」は未設定とみなされます。",
                     default: "Discord のデフォルト",
-                    bottom: "常に最下部",
-                    saved: "保存した位置"
+                    bottom: "最新のメッセージ",
+                    saved: "保存した位置 > 最も古い未読 > 最新のメッセージ",
+                    savedLatest: "保存した位置 > 最新のメッセージ",
+                    unread: "最も古い未読 > 最新のメッセージ"
+                },
+                maximumLastReadAge: {
+                    label: "最後に読んだメッセージの最大経過時間",
+                    description: "「最も古い未読」の代替を使うための、最後に読んだメッセージの最大経過時間(分)。0 で無制限。"
+                },
+                showJumpToPresentSooner: {
+                    label: "「現在に移動」ボタンを早めに表示",
+                    description: "最新から5件以上上にスクロールしたときに「現在に移動」ボタンを表示します。"
+                },
+                addChatbarButton: {
+                    label: "チャットバーにボタンを追加",
+                    description: "チャンネルを開く位置をすばやく切り替えるボタンをチャットバーに追加します。"
                 }
+            },
+            history: {
+                unavailable: "保存された履歴はまだ利用できません。",
+                clearTitle: "保存された履歴を消去",
+                clearDescription: "再読み込み後にスクロール位置を復元するために記録されているローカルの読み進め状況を消去します。",
+                clear: "消去",
+                success: "成功",
+                failure: "失敗"
             }
         },
         betterBanReasons: {
@@ -1624,6 +1696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "BetterPlusReacts",
             description: ":emoji: の前のプラスの量は、追加するメッセージです"
         },
+        betterPollDetails: {
+            name: "BetterPollDetails",
+            description: "投票する機能を無効にせずに、投票前や期限切れ前に投票の割合と票数を表示します"
+        },
         betterRoleContext: {
             name: "BetterRoleContext",
             description: "ユーザープロフィールやメンバーリストでロールを右クリックしたとき、ロール色のコピー / ロールの編集 / ロールアイコンの表示を行えるようにします",
@@ -1709,6 +1785,20 @@ const translations: MatchStructure<typeof enTranslations> = {
         betterUploadButton: {
             name: "BetterUploadButton",
             description: "シングルクリックでアップロード、右クリックでメニューを開く"
+        },
+        betterYoutubeEmbeds: {
+            name: "BetterYouTubeEmbeds",
+            description: "広告をブロックし、UMG のブロックを回避",
+            option: {
+                fixBlockedEmbeds: {
+                    label: "ブロックされた埋め込みを修正",
+                    description: "UMG などによって Discord での表示がブロックされた動画を復元します"
+                },
+                blockAds: {
+                    label: "広告をブロック",
+                    description: "YouTube の埋め込みと WatchTogether の広告をブロックします。YouTube の広告ブロック対策のため、動画の読み込みに数秒かかることがあります"
+                }
+            }
         },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
@@ -3993,6 +4083,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeFamilyCenterAboveDms: {
                     description: "DM リストの上のファミリーセンターを削除します。",
                     label: "DM の上のファミリーセンターを削除"
+                },
+                removeAccountPopoutBadges: {
+                    label: "アカウントポップアウトのバッジを削除",
+                    description: "アカウントのポップアウトからバッジを削除します。"
+                },
+                removeAccountPopoutOrbs: {
+                    label: "アカウントポップアウトのオーブを削除",
+                    description: "アカウントのポップアウトからオーブを削除します。"
+                },
+                removeInvisibleWarning: {
+                    label: "オフライン表示の警告を削除",
+                    description: "アカウントのポップアウトからオフライン表示ステータスの警告を削除します。"
                 }
             },
             text: {
@@ -4268,8 +4370,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 success: "{{count}} 件の添付ファイルをダウンロードしました。",
                 partial: "{{total}} 件中 {{succeeded}} 件の添付ファイルをダウンロードしました。{{failed}} 件が失敗しました。",
-                downloadedPluralizeSucceededAttachment: "{{pluralize_succeeded_attachment}} をダウンロードしました。",
-                downloadedSucceededOfLength: "{{length}} 件中 {{succeeded}} 件の添付ファイルをダウンロードしました。{{failed}} 件失敗しました。"
+                downloadedPluralizeSucceededAttachment: "{{pluralize_succeeded_attachment}} を保存しました。",
+                downloadedSucceededOfLength: "{{length}} 件中 {{succeeded}} 件の添付ファイルを保存しました。{{failed}} 件失敗しました。",
+                tooLarge: "これらの添付ファイルは大きすぎて ZIP にできません。代わりに1つずつ保存してください。",
+                noneDownloaded: "添付ファイルを1つもダウンロードできませんでした。"
             },
             option: {
                 downloadAllFileTypes: {
@@ -4926,10 +5030,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        fixYoutubeEmbeds: {
-            name: "FixYoutubeEmbeds",
-            description: "Discord での表示がブロックされている YouTube 動画 (UMG など) をバイパスします。"
-        },
         followUser: {
             name: "FollowUser",
             description: "ユーザーのコンテキスト メニューに [フォロー] オプションを追加して、常に同じ VC 内に表示されるようにします。",
@@ -5150,10 +5250,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         fullSearchContext: {
             name: "FullSearchContext",
             description: "メッセージ検索結果のメッセージ コンテキスト メニューに、期待されるすべてのオプションが含まれるようにします。"
-        },
-        fullUserInChatbox: {
-            name: "FullUserInChatbox",
-            description: "チャットボックス内のユーザーのメンションに、左/右クリックなどの機能が追加されます。"
         },
         fullVCPFP: {
             name: "FullVCPFP",
@@ -9914,7 +10010,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showHiddenChannels: {
             name: "ShowHiddenChannels",
-            description: "表示するアクセス権がないチャンネルを表示します。",
+            description: "非表示のチャンネルを表示します。Discord はこの機能を大幅に制限しました。詳細はプラグイン設定を参照してください。",
             tooltip: "隠しチャンネル",
             option: {
                 channelStyle: {
@@ -9968,7 +10064,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknown: "未知",
                 permissionDetails: "権限の詳細",
                 thisIsA: "これは {{status}} {{channelType}} チャンネルです",
-                canNotSee: "このチャンネルの {{type}} は表示されません。",
+                canNotSee: "このチャンネルの名前や{{type}}は表示できません。",
                 guidelines: "ただし、そのガイドラインが表示される場合があります。",
                 lastCreated: "最後に作成された{{type}}:",
                 lastPin: "最後のメッセージピン:",
@@ -9987,6 +10083,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedUsersAndRoles: "許可されるユーザーと役割:",
                 hideAllowedUsersAndRoles: "許可されたユーザーとロールを非表示にする",
                 viewAllowedUsersAndRoles: "許可されたユーザーとロールを表示する"
+            },
+            about: {
+                title: "機能が制限されています",
+                patched: "Discord はこのプラグインの機能の大部分を修正しました({{link}})。非表示のチャンネルは「アクセスなし」と表示されるようになり、名前、トピック、アクセスできる人などを見ることはできなくなりました。",
+                announcement: "公式のお知らせを読む",
+                nothingToDo: "これを修正するために私たちにできることはありません。ただし、チャンネルが存在することや、プライベートボイスチャンネルに誰が接続しているかは引き続き確認できます。"
             }
         },
         showHiddenThings: {
@@ -10344,6 +10446,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     defaultHidden: {
                         name: "defaultHidden",
                         description: "DM/チャンネル/ギルドでの入力をデフォルトで非表示にするかどうか。"
+                    },
+                    dmListIndicator: {
+                        description: "ダイレクトメッセージ一覧の会話で入力中インジケーターを非表示にします。"
                     }
                 }
             },
@@ -10426,6 +10531,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabledLocations: {
                     label: "無効な場所",
                     description: "これらの ID の機能を無効にします。 DM ID、チャネル ID、ギルド ID のカンマ区切りリストを受け入れます。 「デフォルトの非表示」が有効な場合にのみ使用されます。"
+                },
+                hideDmListTypingIndicators: {
+                    label: "DM リストの入力中インジケーターを非表示",
+                    description: "ダイレクトメッセージ一覧の会話で入力中インジケーターを非表示にします。"
                 }
             },
             text: {
@@ -10435,7 +10544,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 membersListIndicators: "メンバーリストのインジケーター",
                 guild: "サーバー",
                 channel: "チャンネル",
-                global: "グローバル"
+                global: "グローバル",
+                dmListIndicators: "DM リストのインジケーター"
             }
         },
         snowfall: {
@@ -10751,7 +10861,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 goldColor: "ゴールドの色（30日以上）",
                 silverColor: "シルバーの色（14日以上）",
                 bronzeColor: "ブロンズの色（7日以上）",
-                defaultColor: "デフォルトの色（1日以上）"
+                defaultColor: "デフォルトの色（1日以上）",
+                showOnSelf: {
+                    label: "自分にも表示",
+                    description: "DM の自分のメッセージにもストリークを表示します"
+                },
+                showOutsideDMs: {
+                    label: "DM 以外でも表示",
+                    description: "DM 以外のメッセージにもストリークを表示します"
+                }
             },
             toast: {
                 authFailed: "認証に失敗しました: {{error}}",
@@ -11755,11 +11873,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
-            description: "Chromium および Plextron クライアントの 2500kbps ビットレートの上限を削除します。",
+            description: "Chromium と Vesktop クライアントの 2500kbps のビットレート上限を解除し、より高いビットレートでステレオの配信音声を有効にし、配信の開始ビットレートを引き上げ、ハードウェア H264 エンコードを使用し、画面共有中に CPU 使用率が増え続ける問題を修正します。",
             option: {
                 experimentalAV1Support: {
                     label: "実験的な AV1 サポート",
                     description: "AV1 コーデックのサポートを有効にします。ストリームの無限ロードなどの問題が発生する可能性があります"
+                },
+                betterCodecs: {
+                    label: "より良いコーデック",
+                    description: "問題が発生する可能性があります!配信時に AV1 や VP9 などのより良いコーデックを優先します。画質は向上するはずですが、配信が延々と読み込まれるなどの問題が起きることがあります。"
                 }
             }
         },
@@ -11881,10 +12003,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "音量"
                 }
             }
-        },
-        youtubeAdblock: {
-            name: "YouTubeAdblock",
-            description: "YouTube の埋め込み広告と、AdGuard 経由で一緒に見るアクティビティをブロックします"
         },
         youtubeDescription: {
             name: "YouTubeDescription",
@@ -12362,7 +12480,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 validate: "検証",
                 resetToDefault: "既定値に戻す",
                 progress: "{{percent}}% - {{transferred}} / {{total}}",
-                cancel: "キャンセル"
+                cancel: "キャンセル",
+                stripFileExtension: "生成された URL からファイル拡張子を削除します",
+                saveOriginalFileName: "選択した URL 形式に関係なく、ファイル名を Zipline に保存してダウンロード時に復元するかどうか"
             },
             option: {
                 serviceType: {
@@ -12574,6 +12694,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsComponent: {
                     description: "設定",
                     label: "設定コンポーネント"
+                },
+                ziplineStripExtension: {
+                    label: "Zipline: 拡張子を削除",
+                    description: "ファイル拡張子を削除"
+                },
+                ziplineOriginalName: {
+                    label: "Zipline: 元のファイル名",
+                    description: "元のファイル名を保持"
                 }
             },
             panel: {
@@ -12646,7 +12774,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 network: "ネットワーク",
                 corsProxyUrl: "CORS プロキシ URL",
                 uploadTimeout: "アップロードのタイムアウト",
-                domainsJsonDescription: "使用するドメインの JSON 配列。例: [\"offensive\"]"
+                domainsJsonDescription: "使用するドメインの JSON 配列。例: [\"offensive\"]",
+                stripFileExtension: "ファイル拡張子を削除",
+                saveOriginalFileName: "元のファイル名を保存"
             },
             status: {
                 cancelled: "アップロードをキャンセルしました。",
@@ -13151,6 +13281,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 gifPickerTyping: {
                     label: "GIFピッカー入力中",
                     description: "GIFピッカーを開いている間、入力中として表示します"
+                },
+                removeChannelSuggestions: {
+                    label: "チャンネルの提案を削除",
+                    description: "サーバーのサイドバーから「おすすめのチャンネル」カテゴリーを削除します"
                 }
             },
             text: {
@@ -13251,7 +13385,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 audiobookshelfServerUrl: "AudioBookShelf サーバーの URL。",
                 audiobookshelfUsername: "AudioBookShelf のユーザー名。",
                 audiobookshelfPassword: "AudioBookShelf のパスワード。",
-                connectsToTosuVia: "ポート 24050 の WebSocket で tosu に接続します。設定は不要です。tosu が osu! と一緒に起動していることを確認してください。",
+                connectsToTosuVia: "WebSocket 経由で tosu に接続します。tosu が osu! と一緒に起動していることを確認してください。",
                 showWhatYouRe: "stats.fm 経由で再生中の曲を表示します。再生履歴が公開されている必要があります。",
                 statsFmUsername: "Stats.fm のユーザー名。",
                 customStatusText: "カスタムステータステキスト。",
@@ -13307,10 +13441,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 viewSong: "曲を見る",
                 showArtistName: "アーティスト名を表示",
                 showTrackName: "曲名を表示",
-                enterValue: "値を入力"
+                enterValue: "値を入力",
+                tosuServerUrl: "tosu のドメイン URL。",
+                tosuPrivacyMode: "プレゼンス内のユーザー名を非表示にします。",
+                plexDescription: "Plex サーバーで再生中のものを表示します。セッションを見るにはサーバーの所有者である必要があります。トークンを取得するには、Plex Web で任意のアイテムを開き、「情報を取得」→「XML を表示」を選び、URL から X-Plex-Token の値をコピーしてください。",
+                plexServerUrl: "Plex サーバーの URL。",
+                plexToken: "Plex のトークン。",
+                plexUsername: "セッションを表示する Plex のユーザー名。",
+                plexUsernamePlaceholder: "Plex のユーザー名",
+                plexShowCover: "カバーアートを表示します。Plex のトークンは画像 URL に含まれて Discord に送信されます。"
             },
             name: "RichPresence",
-            description: "AudioBookShelf、osu!、stats.fm、Jellyfin、Navidrome、Gensokyo Radio 用の統合リッチプレゼンスハブ。",
+            description: "AudioBookShelf、osu!、stats.fm、Jellyfin、Plex、Navidrome、Gensokyo Radio 用の統合リッチプレゼンスハブ。",
             toast: {
                 audiobookshelfRpcIsNot: "AudioBookShelf RPC が設定されていません。",
                 jellyfinRpcIsNot: "Jellyfin RPC が設定されていません。",
@@ -13542,6 +13684,46 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nd_hideOnPause: {
                     description: "音楽が一時停止中はリッチプレゼンスを非表示",
                     label: "Navidrome: 一時停止時は非表示"
+                },
+                px_enabled: {
+                    label: "Plex: 有効",
+                    description: "Plex のプレゼンスを有効にします。"
+                },
+                tosu_serverUrl: {
+                    label: "tosu: サーバー URL",
+                    description: "tosu のドメイン URL。"
+                },
+                tosu_privacyMode: {
+                    label: "tosu: プライバシーモード",
+                    description: "プライバシーモード"
+                },
+                px_serverUrl: {
+                    label: "Plex: サーバー URL",
+                    description: "Plex サーバーの URL。"
+                },
+                px_token: {
+                    label: "Plex: トークン",
+                    description: "Plex のトークン。"
+                },
+                px_username: {
+                    label: "Plex: ユーザー名",
+                    description: "セッションを表示する Plex のユーザー名。"
+                },
+                px_showEpisodeName: {
+                    label: "Plex: エピソード名を表示",
+                    description: "シーズン/エピソード情報の後にエピソード名を表示します。"
+                },
+                px_showCover: {
+                    label: "Plex: カバーを表示",
+                    description: "カバーアートを表示します。Plex のトークンは画像 URL に含まれて Discord に送信されます。"
+                },
+                px_showPausedState: {
+                    label: "Plex: 一時停止状態を表示",
+                    description: "メディアが一時停止中でもプレゼンスを表示します。"
+                },
+                px_privacyMode: {
+                    label: "Plex: プライバシーモード",
+                    description: "メディアの詳細を非表示。"
                 }
             },
             panel: {
@@ -13580,7 +13762,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 detailsFormat: "詳細の形式",
                 stateFormat: "状態の形式",
                 largeTextFormat: "大きいテキストの形式",
-                enabled: "有効"
+                enabled: "有効",
+                token: "トークン",
+                showCoverArt: "カバーアートを表示"
             }
         },
         sedEnhanced: {
@@ -14245,7 +14429,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userPreset: "ユーザープリセット",
                 custom: "カスタム",
                 gaming: "ゲーム",
-                screenshare: "画面共有"
+                screenshare: "画面共有",
+                source: "ソース"
             }
         },
         whitelistedEmojis: {

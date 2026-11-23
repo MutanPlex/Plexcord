@@ -6,7 +6,7 @@
  */
 
 import { plugins, t } from "@api/i18n";
-import { showNotice } from "@api/Notices";
+import { NoticeColors, showNotice } from "@api/Notices";
 import { hasAnyVisibleSettings, isPluginEnabled, pluginRequiresRestart, startDependenciesRecursive, startPlugin, stopPlugin } from "@api/PluginManager";
 import { Settings } from "@api/Settings";
 import { CogWheel, InfoIcon } from "@components/Icons";
@@ -52,7 +52,11 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
 
             if (failures.length) {
                 logger.error(`Failed to start dependencies for ${pluginName}: ${failures.join(", ")}`);
-                showNotice(t(plugins.error.startDependency, { failures: failures.join(", ") }), t(plugins.restart.button.close), () => null);
+                showNotice({
+                    message: t(plugins.error.startDependency, { failures: failures.join(", ") }),
+                    color: NoticeColors.DANGER
+                });
+
                 return;
             }
 

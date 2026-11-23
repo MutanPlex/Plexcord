@@ -81,6 +81,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             disableMinSize: {
                 label: "Minimum pencere boyutunu devre dışı bırak",
                 description: "Pencereyi Discord'un minimum boyutundan bile küçük olacak şekilde istediğin boyuta getirmeni sağlar"
+            },
+            enableBackgroundRendering: {
+                label: "Arka Planda Oluşturmayı Etkinleştir",
+                description: "Uygulama penceresi tam olarak odakta olmasa bile güncellenmeye devam eder"
             }
         },
         quickActions: {
@@ -90,7 +94,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             editQuickCSS: "QuickCSS Düzenle",
             relaunchDiscord: "Discord'u Yeniden Başlat",
             openSettingsFolder: "Ayarlar Klasörünü Aç",
-            viewSourceCode: "Kaynak Kodunu Görüntüle"
+            viewSourceCode: "Kaynak Kodunu Görüntüle",
+            openPlayground: "Bileşen Test Alanını Aç"
         },
         specialCards: {
             donations: {
@@ -229,6 +234,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         tabs: {
             renderFailed: "{{tab}} sekmesi görüntülenemedi. Sorun devam ederse yükleyiciyle yeniden yüklemeyi dene!"
+        },
+        playground: {
+            title: "Bileşen Test Alanı",
+            buttons: "Butonlar",
+            buttonSize: "Buton Boyutu",
+            cards: "Kartlar"
         }
     },
 
@@ -401,6 +412,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Plexcord Destekçisi",
                     special: "Bu rozet, Plexcord bağışçıları için özel bir ayrıcalıktır.",
                     description: "Lütfen bağışçı olarak Plexcord’un geliştirilmesini desteklemeyi düşünün. Bu bizim için çok değerli olur!!"
+                },
+                directory: {
+                    contributed: "katkı",
+                    plugin: "eklenti",
+                    plugins: "eklenti",
+                    selfContributed: "{{count}} için {{link}} yaptınız!",
+                    otherContributed: "Bu kişi {{count}} için {{link}} yaptı!",
+                    selfNoPlugins: "Henüz hiç eklenti yapmadınız. Muhtemelen başka şekillerde {{link}} yaptınız!",
+                    otherNoPlugins: "Bu kişi hiç eklenti yapmamış. Muhtemelen başka şekillerde {{link}} yaptı!",
+                    restart: "Değişiklikleri uygulamak için yeniden başlatın!",
+                    selfDonor: "Bağışınız için teşekkürler!",
+                    otherDonor: "Bu kullanıcı bir Plexcord bağışçısı!",
+                    selfDonorDescription: "@mutanplex ile mesajlaşarak ayrıcalıklarınızı istediğiniz zaman yönetebilirsiniz.",
+                    otherDonorDescription: "Kendi rozetinizi ve ayrıcalıklarınızı almak için Plexcord'u destekleyin!"
                 }
             }
         },
@@ -910,7 +935,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             scrollRight: "Sağa kaydır"
         },
         notices: {
-            error: "Bildirim gösterilirken hata oluştu"
+            error: "Bildirim gösterilirken hata oluştu",
+            dismiss: "Kapat"
         },
         tray: {
             aboutPlexcord: "Plexcord Hakkında",
@@ -1029,16 +1055,40 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "ConcatenatedModules",
             description: "Paketleyici (bundler) tarafından birleştirilmiş modülleri ayıklar"
         },
+        duplicateCategory: {
+            name: "DuplicateCategory",
+            description: "Bir kategoriyi aynı izinlerle çoğaltma seçeneği ekler.",
+            menu: "Kategoriyi Çoğalt",
+            toast: {
+                created: "Kategori oluşturuldu."
+            },
+            error: {
+                missing: "Orijinal kategori artık mevcut değil.",
+                failed: "Kategori oluşturulamadı. İzinlerinizi kontrol edip tekrar deneyin."
+            },
+            modal: {
+                title: "Kategori Oluştur",
+                cancel: "İptal",
+                create: "Kategori Oluştur",
+                name: "Kategori Adı",
+                placeholder: "Yeni Kategori",
+                copyPermissions: "İzinleri Kopyala",
+                copyPermissionsDescription: "Orijinal kategorinin izinlerini yeni kategoriye kopyala. Sunucunun varsayılan izinlerini kullanmak için bunu kapatın."
+            }
+        },
         noTrack: {
             name: "NoTrack",
             description: "Discord'un takip sistemini (analitik/'science'), metriklerini ve Sentry çökme raporlamasını devre dışı bırakır",
             option: {
                 disableAnalytics: {
                     label: "Analizi Kapat",
-                    description: "Discord'un izleme analizlerini engeller. Rozetlerin ilerlemeni takip etmesini istiyorsan (örn: yayın saatleri) bunu kapat."
+                    description: "Discord'un izleme analizlerini engelle"
                 },
                 disableStackDumping: {
                     description: "Discord çöktüğünde konsola yerel yığın izi yazdır. Tam yeniden başlatma gerektirir."
+                },
+                allowBadgeTracking: {
+                    description: "Rozetlerin ilerlemenizi takip etmesi için gereken olayları yine de gönder (ör. oynanan saatler, yayın saatleri)"
                 }
             }
         },
@@ -1463,11 +1513,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 channelOpenScrollMode: {
                     label: "Kanal Açılış Konumu",
-                    description: "Okunmamış kanalları kayıtlı konumda (veya en altta) aç, her zaman en altta aç ya da varsayılan okunmamış davranışına bırak.",
+                    description: "Kanalların sohbet geçmişinde nerede açılacağı. En son mesajın 5 mesaj yakınından ayrılırsanız \"Kayıtlı Konum\" ayarlanmamış sayılır ve bir sonraki yedek kullanılır. Son okuduğunuz mesaj aşağıdaki maksimum yaştan eskiyse kanal terk edilmiş sayılır ve \"En Eski Okunmamış\" ayarlanmamış sayılır.",
                     default: "Discord Varsayılanı",
-                    bottom: "Her Zaman En Alt",
-                    saved: "Kayıtlı Konum"
+                    bottom: "En Son Mesaj",
+                    saved: "Kayıtlı Konum > En Eski Okunmamış > En Son Mesaj",
+                    savedLatest: "Kayıtlı Konum > En Son Mesaj",
+                    unread: "En Eski Okunmamış > En Son Mesaj"
+                },
+                maximumLastReadAge: {
+                    label: "Maksimum Son Okuma Yaşı",
+                    description: "\"En Eski Okunmamış\" yedeğini kullanmak için son okuduğunuz mesajın dakika cinsinden maksimum yaşı. Sınırsız için 0 yapın."
+                },
+                showJumpToPresentSooner: {
+                    label: "Şimdiye Atla Butonunu Daha Erken Göster",
+                    description: "En son mesajın 5 veya daha fazla mesaj yukarısına kaydırıldığında Şimdiye Atla butonunu gösterir."
+                },
+                addChatbarButton: {
+                    label: "Sohbet Çubuğu Butonu Ekle",
+                    description: "Kanal açılış konumunu hızlıca değiştirmek için bir sohbet çubuğu butonu ekler."
                 }
+            },
+            history: {
+                unavailable: "Kayıtlı geçmiş henüz kullanılamıyor.",
+                clearTitle: "Kayıtlı Geçmişi Temizle",
+                clearDescription: "Yeniden yüklemelerden sonra kaydırma konumunu geri getirmek için tutulan yerel geçmiş okuma ilerlemesini temizler.",
+                clear: "Temizle",
+                success: "Başarılı",
+                failure: "Başarısız"
             }
         },
         betterBanReasons: {
@@ -1624,6 +1696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "BetterPlusReacts",
             description: ":emoji: öncesindeki artı işareti sayısı, emojinin ekleneceği mesajı belirtir"
         },
+        betterPollDetails: {
+            name: "BetterPollDetails",
+            description: "Oy kullanma yeteneğini devre dışı bırakmadan, oy vermeden veya süre dolmadan önce anket yüzdelerini ve oy sayılarını gösterir"
+        },
         betterRoleContext: {
             name: "BetterRoleContext",
             description: "Kullanıcı profilinde veya üye listesinde rollere sağ tıkladığında rol rengini kopyalama / rolü düzenleme / rol simgesini görüntüleme seçenekleri ekler",
@@ -1709,6 +1785,20 @@ const translations: MatchStructure<typeof enTranslations> = {
         betterUploadButton: {
             name: "BetterUploadButton",
             description: "Tek tıklama ile yükleme yapın, sağ tıklama ile menüyü açın"
+        },
+        betterYoutubeEmbeds: {
+            name: "BetterYouTubeEmbeds",
+            description: "Reklamları engelle ve UMG engellerini aş",
+            option: {
+                fixBlockedEmbeds: {
+                    label: "Engellenen Gömmeleri Düzelt",
+                    description: "Örneğin UMG tarafından Discord'da gösterilmesi engellenen videoları geri getir"
+                },
+                blockAds: {
+                    label: "Reklamları Engelle",
+                    description: "YouTube gömmelerinde ve WatchTogether'da reklamları engeller. YouTube'un reklam karşıtı önlemleri nedeniyle videonun yüklenmesi birkaç saniye sürebilir"
+                }
+            }
         },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
@@ -3993,6 +4083,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeFamilyCenterAboveDms: {
                     description: "DM listesinin üstündeki aile merkezini kaldırır.",
                     label: "DM'lerin Üstündeki Aile Merkezini Kaldır"
+                },
+                removeAccountPopoutBadges: {
+                    label: "Hesap Açılır Penceresindeki Rozetleri Kaldır",
+                    description: "Hesap açılır penceresinden rozetleri kaldır."
+                },
+                removeAccountPopoutOrbs: {
+                    label: "Hesap Açılır Penceresindeki Orb'ları Kaldır",
+                    description: "Hesap açılır penceresinden orb'ları kaldır."
+                },
+                removeInvisibleWarning: {
+                    label: "Görünmez Uyarısını Kaldır",
+                    description: "Hesap açılır penceresinden görünmez durum uyarısını kaldır."
                 }
             },
             text: {
@@ -4268,8 +4370,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 success: "{{count}} ek indirildi.",
                 partial: "{{total}} ekten {{succeeded}} tanesi indirildi. {{failed}} tanesi başarısız oldu.",
-                downloadedPluralizeSucceededAttachment: "{{pluralize_succeeded_attachment}} indirildi.",
-                downloadedSucceededOfLength: "{{length}} ekten {{succeeded}} tanesi indirildi. {{failed}} başarısız."
+                downloadedPluralizeSucceededAttachment: "{{pluralize_succeeded_attachment}} kaydedildi.",
+                downloadedSucceededOfLength: "{{length}} ekten {{succeeded}} tanesi kaydedildi. {{failed}} tanesi başarısız oldu.",
+                tooLarge: "Bu ekler zip için çok büyük. Bunun yerine tek tek kaydedin.",
+                noneDownloaded: "Hiçbir ek indirilemedi."
             },
             option: {
                 downloadAllFileTypes: {
@@ -4926,10 +5030,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        fixYoutubeEmbeds: {
-            name: "FixYoutubeEmbeds",
-            description: "YouTube videolarının Discord'da görüntülenmesinin engellenmesini atlar (ör. UMG tarafından)"
-        },
         followUser: {
             name: "FollowUser",
             description: "Kullanıcı bağlam menüsüne bir takip seçeneği ekler; her zaman aynı sesli kanalda olmanı sağlar",
@@ -5150,10 +5250,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         fullSearchContext: {
             name: "FullSearchContext",
             description: "Mesaj arama sonuçlarındaki mesaj bağlam menüsünü, beklediğin tüm seçeneklerle tam hale getirir."
-        },
-        fullUserInChatbox: {
-            name: "FullUserInChatbox",
-            description: "Sohbet kutusundaki kullanıcı etiketine sol/sağ tıklama gibi ek işlevler ekler."
         },
         fullVCPFP: {
             name: "FullVCPFP",
@@ -9914,7 +10010,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showHiddenChannels: {
             name: "ShowHiddenChannels",
-            description: "Erişim izniniz olmayan kanalları gösterir.",
+            description: "Gizli kanalları gösterir. Discord bu işlevi büyük ölçüde kısıtladı. Daha fazla bilgi eklenti ayarlarında.",
             tooltip: "Gizli Kanal",
             option: {
                 channelStyle: {
@@ -9968,7 +10064,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknown: "bilinmeyen",
                 permissionDetails: "İzin Detayları",
                 thisIsA: "Bu bir {{status}} {{channelType}} kanalıdır",
-                canNotSee: "Bu kanalın {{type}} kısmını göremezsiniz.",
+                canNotSee: "Bu kanalın adını veya {{type}} göremezsiniz.",
                 guidelines: "Ancak yönergelerini görebilirsiniz:",
                 lastCreated: "Son oluşturulan {{type}}:",
                 lastPin: "Son mesaj sabitleme:",
@@ -9987,6 +10083,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedUsersAndRoles: "İzin verilen kullanıcılar ve roller:",
                 hideAllowedUsersAndRoles: "İzinli Kullanıcılar ve Rolleri Gizle",
                 viewAllowedUsersAndRoles: "İzinli Kullanıcılar ve Rolleri Görüntüle"
+            },
+            about: {
+                title: "Sınırlı İşlevsellik",
+                patched: "Discord bu eklentinin işlevlerinin çoğunu yamaladı ({{link}}). Gizli kanallar artık \"Erişim Yok\" olarak görünüyor ve ad, konu veya erişimi olan kişiler gibi şeyleri görmek artık mümkün değil.",
+                announcement: "duyurularını okuyun",
+                nothingToDo: "Bunu düzeltmek için yapabileceğimiz bir şey yok. Ancak kanalların var olduğunu hâlâ bilebilir ve özel ses kanallarına kimlerin bağlı olduğunu görebilirsiniz."
             }
         },
         showHiddenThings: {
@@ -10344,6 +10446,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     defaultHidden: {
                         name: "defaultHidden",
                         description: "DM’lerde/kanallarda/sunucularda yazıyor bilgisinin varsayılan olarak gizlenip gizlenmeyeceğini belirler."
+                    },
+                    dmListIndicator: {
+                        description: "Direkt Mesajlar listesindeki sohbetlerde yazıyor göstergelerini gizle."
                     }
                 }
             },
@@ -10426,6 +10531,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabledLocations: {
                     label: "Devre Dışı Konumlar",
                     description: "Bu ID'ler için işlevi devre dışı bırak. Virgülle ayrılmış DM ID'leri, kanal ID'leri ve sunucu ID'leri kabul eder. Yalnızca 'Varsayılan Gizli' etkinse kullanılır."
+                },
+                hideDmListTypingIndicators: {
+                    label: "DM Listesi Yazıyor Göstergelerini Gizle",
+                    description: "Direkt Mesajlar listesindeki sohbetlerde yazıyor göstergelerini gizle."
                 }
             },
             text: {
@@ -10435,7 +10544,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 membersListIndicators: "Üye Listesi Göstergeleri",
                 guild: "Sunucu",
                 channel: "Kanal",
-                global: "Genel"
+                global: "Genel",
+                dmListIndicators: "DM Listesi Göstergeleri"
             }
         },
         snowfall: {
@@ -10751,7 +10861,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 goldColor: "Altın Seri Rengi (30+ gün)",
                 silverColor: "Gümüş Seri Rengi (14+ gün)",
                 bronzeColor: "Bronz Seri Rengi (7+ gün)",
-                defaultColor: "Varsayılan Seri Rengi (1+ gün)"
+                defaultColor: "Varsayılan Seri Rengi (1+ gün)",
+                showOnSelf: {
+                    label: "Kendinde Göster",
+                    description: "DM'lerde kendi mesajlarınızda seriyi göster"
+                },
+                showOutsideDMs: {
+                    label: "DM'ler Dışında Göster",
+                    description: "DM'ler dışındaki mesajlarda serileri göster"
+                }
             },
             toast: {
                 authFailed: "Yetkilendirme başarısız: {{error}}",
@@ -11755,11 +11873,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
-            description: "Chromium ve Plextron istemcilerindeki 2500 kbps ekran paylaşımı bitrate sınırını kaldırır.",
+            description: "Chromium ve vesktop istemcilerindeki 2500kbps bit hızı sınırını kaldırır, daha yüksek bit hızıyla stereo yayın sesini etkinleştirir, yayınların başlangıç bit hızını artırır, donanımsal H264 kodlaması kullanır ve ekran paylaşımı sırasında sürekli artan CPU kullanımını düzeltir.",
             option: {
                 experimentalAV1Support: {
                     label: "Deneysel AV1 Desteği",
                     description: "AV1 codec desteğini etkinleştirir. Sonsuz yüklenen akışlar gibi sorunlara neden olabilir"
+                },
+                betterCodecs: {
+                    label: "Daha İyi Kodekler",
+                    description: "SORUNLARA NEDEN OLABİLİR! Yayın yaparken AV1 ve VP9 gibi daha iyi kodekleri tercih et. Kaliteyi artırmalı ancak sonsuza kadar yüklenen yayınlar gibi sorunlara yol açabilir."
                 }
             }
         },
@@ -11881,10 +12003,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Ses seviyesi"
                 }
             }
-        },
-        youtubeAdblock: {
-            name: "YouTubeAdblock",
-            description: "YouTube yerleştirmelerindeki ve WatchTogether aktivitesindeki reklamları AdGuard ile engeller"
         },
         youtubeDescription: {
             name: "YouTubeDescription",
@@ -12362,7 +12480,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 validate: "Doğrula",
                 resetToDefault: "Varsayılana Sıfırla",
                 progress: "%{{percent}} - {{transferred}} / {{total}}",
-                cancel: "İptal"
+                cancel: "İptal",
+                stripFileExtension: "Oluşturulan URL'den dosya uzantısını kaldır",
+                saveOriginalFileName: "Seçilen URL biçiminden bağımsız olarak dosya adının Zipline'a kaydedilip indirirken geri yüklenip yüklenmeyeceği"
             },
             option: {
                 serviceType: {
@@ -12574,6 +12694,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsComponent: {
                     description: "Ayarlar",
                     label: "Ayarlar Bileşeni"
+                },
+                ziplineStripExtension: {
+                    label: "Zipline: Uzantıyı Kaldır",
+                    description: "Dosya uzantısını kaldır"
+                },
+                ziplineOriginalName: {
+                    label: "Zipline: Orijinal Ad",
+                    description: "Orijinal dosya adını koru"
                 }
             },
             panel: {
@@ -12646,7 +12774,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 network: "Ağ",
                 corsProxyUrl: "CORS Proxy URL'si",
                 uploadTimeout: "Yükleme Zaman Aşımı",
-                domainsJsonDescription: "Kullanılacak alan adlarının JSON dizisi, örneğin [\"offensive\"]."
+                domainsJsonDescription: "Kullanılacak alan adlarının JSON dizisi, örneğin [\"offensive\"].",
+                stripFileExtension: "Dosya uzantısını kaldır",
+                saveOriginalFileName: "Orijinal dosya adını kaydet"
             },
             status: {
                 cancelled: "Yükleme iptal edildi.",
@@ -13151,6 +13281,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 gifPickerTyping: {
                     label: "GIF Seçicide Yazıyor",
                     description: "GIF seçici açıkken seni yazıyor olarak gösterir"
+                },
+                removeChannelSuggestions: {
+                    label: "Kanal Önerilerini Kaldır",
+                    description: "Sunucu kenar çubuğundan Önerilen kanallar kategorisini kaldırır"
                 }
             },
             text: {
@@ -13251,7 +13385,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 audiobookshelfServerUrl: "AudioBookShelf sunucu URL'si.",
                 audiobookshelfUsername: "AudioBookShelf kullanıcı adı.",
                 audiobookshelfPassword: "AudioBookShelf parolası.",
-                connectsToTosuVia: "24050 bağlantı noktasında WebSocket üzerinden tosu'ya bağlanır. Yapılandırma gerekmez, yalnızca tosu'nun osu! ile birlikte çalıştığından emin ol.",
+                connectsToTosuVia: "tosu'ya WebSocket üzerinden bağlanır. Sadece tosu'nun osu! ile birlikte çalıştığından emin olun.",
                 showWhatYouRe: "stats.fm üzerinden şu an ne dinlediğini göster. Dinleme geçmişinin herkese açık olması gerekir.",
                 statsFmUsername: "Stats.fm kullanıcı adı.",
                 customStatusText: "Özel durum metni.",
@@ -13307,10 +13441,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 viewSong: "Şarkıyı Görüntüle",
                 showArtistName: "Sanatçı adını göster",
                 showTrackName: "Parça adını göster",
-                enterValue: "Bir değer gir"
+                enterValue: "Bir değer gir",
+                tosuServerUrl: "tosu alan adı URL'si.",
+                tosuPrivacyMode: "Durumda kullanıcı adınızı gizler.",
+                plexDescription: "Plex sunucunuzda ne oynattığınızı gösterin. Oturumları görmek için sunucu sahibi olmalısınız. Token'ınızı almak için Plex Web'de herhangi bir öğeyi açın, Bilgi Al'ı seçin, ardından XML'i Görüntüle'ye tıklayın ve URL'deki X-Plex-Token değerini kopyalayın.",
+                plexServerUrl: "Plex sunucu URL'si.",
+                plexToken: "Plex token'ı.",
+                plexUsername: "Oturumları gösterilecek Plex kullanıcı adı.",
+                plexUsernamePlaceholder: "Plex kullanıcı adı",
+                plexShowCover: "Kapak resmini göster. Plex token'ınız resim URL'si içinde Discord'a gönderilir."
             },
             name: "RichPresence",
-            description: "AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome ve Gensokyo Radio için birleşik zengin durum merkezi.",
+            description: "AudioBookShelf, osu!, stats.fm, Jellyfin, Plex, Navidrome ve Gensokyo Radio için birleşik zengin durum merkezi.",
             toast: {
                 audiobookshelfRpcIsNot: "AudioBookShelf RPC yapılandırılmamış.",
                 jellyfinRpcIsNot: "Jellyfin RPC yapılandırılmamış.",
@@ -13542,6 +13684,46 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nd_hideOnPause: {
                     description: "Müzik duraklatıldığında Zengin Durumu gizle",
                     label: "Navidrome: Duraklatınca Gizle"
+                },
+                px_enabled: {
+                    label: "Plex: Etkin",
+                    description: "Plex durumunu etkinleştir."
+                },
+                tosu_serverUrl: {
+                    label: "tosu: Sunucu URL'si",
+                    description: "tosu alan adı URL'si."
+                },
+                tosu_privacyMode: {
+                    label: "tosu: Gizlilik Modu",
+                    description: "Gizlilik Modu"
+                },
+                px_serverUrl: {
+                    label: "Plex: Sunucu URL'si",
+                    description: "Plex sunucu URL'si."
+                },
+                px_token: {
+                    label: "Plex: Token",
+                    description: "Plex token'ı."
+                },
+                px_username: {
+                    label: "Plex: Kullanıcı Adı",
+                    description: "Oturumları gösterilecek Plex kullanıcı adı."
+                },
+                px_showEpisodeName: {
+                    label: "Plex: Bölüm Adını Göster",
+                    description: "Sezon/bölüm bilgisinden sonra bölüm adını göster."
+                },
+                px_showCover: {
+                    label: "Plex: Kapağı Göster",
+                    description: "Kapak resmini göster. Plex token'ınız resim URL'si içinde Discord'a gönderilir."
+                },
+                px_showPausedState: {
+                    label: "Plex: Duraklatılmış Durumu Göster",
+                    description: "Medya duraklatıldığında durumu göster."
+                },
+                px_privacyMode: {
+                    label: "Plex: Gizlilik Modu",
+                    description: "Medya ayrıntılarını gizle."
                 }
             },
             panel: {
@@ -13580,7 +13762,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 detailsFormat: "Ayrıntı Biçimi",
                 stateFormat: "Durum Biçimi",
                 largeTextFormat: "Büyük Metin Biçimi",
-                enabled: "Etkin"
+                enabled: "Etkin",
+                token: "Token",
+                showCoverArt: "Kapak Resmini Göster"
             }
         },
         sedEnhanced: {
@@ -14245,7 +14429,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userPreset: "Kullanıcı ön ayarı",
                 custom: "Özel",
                 gaming: "Oyun",
-                screenshare: "Ekran Paylaşımı"
+                screenshare: "Ekran Paylaşımı",
+                source: "Kaynak"
             }
         },
         whitelistedEmojis: {

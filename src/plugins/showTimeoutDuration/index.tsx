@@ -9,8 +9,8 @@ import "./styles.css";
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Text } from "@components/Text";
 import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
@@ -100,9 +100,9 @@ export default definePlugin({
                 {tooltipProps => (
                     <div {...tooltipProps} className="pc-std-wrapper">
                         {children}
-                        <BaseText tag="span" size="md" color="text-danger">
+                        <Text tag="span" size="md" color="text-danger">
                             {renderTimeout(message, true)} {t(plugin.showTimeoutDuration.text.timeoutRemaining)}
-                        </BaseText>
+                        </Text>
                     </div>
                 )}
             </Tooltip>

@@ -6,8 +6,8 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
+import { Text } from "@components/Text";
 import { Embed, ListRow, Message, MessageAttachment, ScrollerBaseRef } from "@plexcord/discord-types";
 import { ChannelType } from "@plexcord/discord-types/enums";
 import { LazyComponentWrapper } from "@utils/lazyReact";
@@ -136,7 +136,7 @@ export function FilePicker({ onSelectItem }: FilePickerProps) {
 }
 
 function EmptyList() {
-    return <BaseText className={cl("info-text")}>{t(plugin.favoriteAnything.noFiles)}</BaseText>;
+    return <Text className={cl("info-text")}>{t(plugin.favoriteAnything.noFiles)}</Text>;
 }
 
 const demoAttachment: MessageAttachment = {
@@ -163,11 +163,11 @@ function Demo() {
                     format={FavoriteItemFormat.NONE}
                 />
             </div>
-            <BaseText className={cl("info-text")} size="md">
+            <Text className={cl("info-text")} size="md">
                 {t(plugin.favoriteAnything.text.clickTheStarTo)}
                 <br />
                 {t(plugin.favoriteAnything.text.favoriteFilesWillShow)}
-            </BaseText>
+            </Text>
         </>
     );
 }

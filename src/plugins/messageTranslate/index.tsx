@@ -9,7 +9,7 @@ import "./styles.css";
 
 import { getLanguageName, plugin, t } from "@api/i18n";
 import { TranslateIcon } from "@plugins/translate/TranslateIcon";
-import { PcDevs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin from "@utils/types";
 import { ChannelStore, FluxDispatcher, MessageStore, Parser, UserStore } from "@webpack/common";
@@ -55,7 +55,7 @@ export default definePlugin({
     name: "MessageTranslate",
     description: () => t(plugin.messageTranslate.description),
     tags: ["chat", "utility"],
-    authors: [PcDevs.creations, PcDevs.MutanPlex],
+    authors: [Devs.creations, PcDevs.MutanPlex],
     settings,
 
     patches: [

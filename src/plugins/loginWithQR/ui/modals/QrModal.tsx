@@ -6,9 +6,9 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { QrCodeIcon } from "@components/Icons";
 import { wrapTab } from "@components/settings";
+import { Text } from "@components/Text";
 import loginWithQR from "@plugins/loginWithQR";
 import { images } from "@plugins/loginWithQR/images";
 import { RestAPI, useEffect, useRef, useState } from "@webpack/common";
@@ -348,17 +348,17 @@ function QrModal() {
                 ) : state === LoginStateType.Loading ? (
                     <Spinner type={SpinnerTypes.WANDERING_CUBES} />
                 ) : error.current ? (
-                    <BaseText size="md" weight="semibold" color="text-danger">
+                    <Text size="md" weight="semibold" color="text-danger">
                         {error.current}
-                    </BaseText>
+                    </Text>
                 ) : (
                     <>
-                        <BaseText size="md" weight="semibold" color="text-strong">
+                        <Text size="md" weight="semibold" color="text-strong">
                             {t(plugin.loginWithQR.dragDrop)}
-                        </BaseText>
-                        <BaseText size="sm" weight="medium" color="text-muted">
+                        </Text>
+                        <Text size="sm" weight="medium" color="text-muted">
                             {t(plugin.loginWithQR.orPaste)}
-                        </BaseText>
+                        </Text>
                         <br />
                         <QrCodeIcon />
                     </>

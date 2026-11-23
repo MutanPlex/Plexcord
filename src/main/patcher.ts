@@ -156,6 +156,10 @@ if (!IS_VANILLA) {
 
     process.env.DATA_DIR = join(app.getPath("userData"), "..", "Plexcord");
     if (settings.plugins?.NoTrack?.disableStackDumping !== false) process.env.ELECTRON_ENABLE_STACK_DUMPING = "true";
+
+    if (settings.enableBackgroundRendering) {
+        app.commandLine.appendSwitch("disable-backgrounding-occluded-windows");
+    }
 } else {
     console.log("[Plexcord] Running in vanilla mode. Not loading Plexcord");
 }

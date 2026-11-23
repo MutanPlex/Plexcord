@@ -6,10 +6,10 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
+import { Text } from "@components/Text";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { apiConstants, deleteData, getData, saveData } from "@plugins/songSpotlight.desktop/lib/api";
 import { presentOAuth2Modal } from "@plugins/songSpotlight.desktop/lib/oauth2";
@@ -112,19 +112,19 @@ export default function Settings({ templateData }: SettingsProps) {
 
     return (
         <Flex flexDirection="column" gap="20px">
-            <BaseText size="md" weight="normal">
+            <Text size="md" weight="normal">
                 {t(plugin.songSpotlight.text.viewSongsVia)} {Parser.parse("</songspotlight:1468320979938971802>")} {t(plugin.songSpotlight.text.viewSongsViaSuffix)}
-            </BaseText>
+            </Text>
             {localData
                 ? (
                     <Flex flexDirection="column" gap="12px">
                         <Flex flexDirection="column" gap={0}>
-                            <BaseText size="lg" weight="semibold">{t(plugin.songSpotlight.text.songs)}</BaseText>
+                            <Text size="lg" weight="semibold">{t(plugin.songSpotlight.text.songs)}</Text>
                             {self?.at
                                 && (
-                                    <BaseText size="xs" weight="normal" className={cl("sub")}>
+                                    <Text size="xs" weight="normal" className={cl("sub")}>
                                         {t(plugin.songSpotlight.text.lastUpdated)} <b>{Intl.DateTimeFormat().format(new Date(self.at))}</b>
-                                    </BaseText>
+                                    </Text>
                                 )}
                         </Flex>
                         <Flex flexDirection="column" gap="6px">
@@ -169,7 +169,7 @@ export default function Settings({ templateData }: SettingsProps) {
                 )
                 : <Spinner type={Spinner.Type.WANDERING_CUBES} />}
             <Flex flexDirection="column" gap="12px">
-                <BaseText size="lg" weight="semibold">{t(plugin.songSpotlight.text.authorization)}</BaseText>
+                <Text size="lg" weight="semibold">{t(plugin.songSpotlight.text.authorization)}</Text>
                 <div className={cl("twin-buttons")}>
                     <Button
                         variant="dangerPrimary"

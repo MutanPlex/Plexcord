@@ -7,7 +7,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { BaseText } from "@components/BaseText";
+import { Text } from "@components/Text";
 import { OptionType } from "@utils/types";
 import { useEffect, UserStore, useState } from "@webpack/common";
 
@@ -146,10 +146,10 @@ const BadgeSettings = () => {
 
     return (
         <>
-            <BaseText>{t(plugin.showBadgesInChat.option.badgeSettings.modal)}</BaseText>
+            <Text>{t(plugin.showBadgesInChat.option.badgeSettings.modal)}</Text>
             <div className="pc-sbic-badge-settings">
                 <img className="pc-sbic-settings-avatar" src={UserStore.getCurrentUser().getAvatarURL()}></img>
-                <BaseText className="pc-sbic-settings-username">{(UserStore.getCurrentUser() as any).globalName}</BaseText>
+                <Text className="pc-sbic-settings-username">{(UserStore.getCurrentUser() as any).globalName}</Text>
                 {images
                     .sort((a, b) => a.position - b.position)
                     .map((image, index) => (

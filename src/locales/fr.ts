@@ -81,6 +81,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             disableMinSize: {
                 label: "Désactiver la taille minimale de la fenêtre",
                 description: "Permet de redimensionner la fenêtre à n'importe quelle taille, même plus petite que la taille minimale de Discord"
+            },
+            enableBackgroundRendering: {
+                label: "Activer le rendu en arrière-plan",
+                description: "Garde la fenêtre de l'application à jour même lorsqu'elle n'est pas entièrement au premier plan"
             }
         },
         quickActions: {
@@ -90,7 +94,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             editQuickCSS: "Modifier QuickCSS",
             relaunchDiscord: "Relancer Discord",
             openSettingsFolder: "Ouvrir le dossier des paramètres",
-            viewSourceCode: "Voir le code source"
+            viewSourceCode: "Voir le code source",
+            openPlayground: "Ouvrir le terrain de jeu des composants"
         },
         specialCards: {
             donations: {
@@ -229,6 +234,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         tabs: {
             renderFailed: "Impossible d'afficher l'onglet {{tab}}. Si le problème persiste, essaie de réinstaller avec l'installateur !"
+        },
+        playground: {
+            title: "Terrain de jeu des composants",
+            buttons: "Boutons",
+            buttonSize: "Taille des boutons",
+            cards: "Cartes"
         }
     },
 
@@ -401,6 +412,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Donateur Plexcord",
                     special: "Ce badge est un avantage spécial pour les donateurs Plexcord",
                     description: "Pensez à soutenir le développement de Plexcord en devenant donateur. Cela signifie beaucoup !"
+                },
+                directory: {
+                    contributed: "contribué",
+                    plugin: "plugin",
+                    plugins: "plugins",
+                    selfContributed: "Tu as {{link}} à {{count}} !",
+                    otherContributed: "Cette personne a {{link}} à {{count}} !",
+                    selfNoPlugins: "Tu n'as encore créé aucun plugin. Tu as probablement {{link}} d'autres façons !",
+                    otherNoPlugins: "Cette personne n'a créé aucun plugin. Elle a probablement {{link}} d'autres façons !",
+                    restart: "Redémarre pour appliquer les modifications !",
+                    selfDonor: "Merci pour ton don !",
+                    otherDonor: "Cet utilisateur est un donateur Plexcord !",
+                    selfDonorDescription: "Tu peux gérer tes avantages à tout moment en envoyant un message à @mutanplex.",
+                    otherDonorDescription: "Soutiens Plexcord pour obtenir ton propre badge et des avantages !"
                 }
             },
         },
@@ -910,7 +935,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             scrollRight: "Défiler vers la droite"
         },
         notices: {
-            error: "Erreur lors de l'affichage de l'avis"
+            error: "Erreur lors de l'affichage de l'avis",
+            dismiss: "Fermer"
         },
         tray: {
             aboutPlexcord: "À propos de Plexcord",
@@ -1029,16 +1055,40 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "ConcatenatedModules",
             description: "Extraire les modules qui ont été concaténés par le bundler"
         },
+        duplicateCategory: {
+            name: "DuplicateCategory",
+            description: "Ajoute une option pour dupliquer une catégorie avec les mêmes permissions.",
+            menu: "Dupliquer la catégorie",
+            toast: {
+                created: "Catégorie créée."
+            },
+            error: {
+                missing: "La catégorie d'origine n'existe plus.",
+                failed: "Impossible de créer la catégorie. Vérifie tes permissions et réessaie."
+            },
+            modal: {
+                title: "Créer une catégorie",
+                cancel: "Annuler",
+                create: "Créer la catégorie",
+                name: "Nom de la catégorie",
+                placeholder: "Nouvelle catégorie",
+                copyPermissions: "Copier les permissions",
+                copyPermissionsDescription: "Copier les permissions de la catégorie d'origine vers la nouvelle catégorie. Désactive cette option pour utiliser les permissions par défaut du serveur."
+            }
+        },
         noTrack: {
             name: "NoTrack",
             description: "Désactiver le suivi de Discord (analytics/'science'), les métriques et les rapports de plantage Sentry",
             option: {
                 disableAnalytics: {
                     label: "Désactiver les analyses",
-                    description: "Bloque les analyses de suivi de Discord. Désactivez ceci si vous voulez que les badges suivent votre progression (ex. : heures de stream)."
+                    description: "Bloquer les analyses de suivi de Discord"
                 },
                 disableStackDumping: {
                     description: "Afficher une trace de pile native dans la console quand Discord plante. Nécessite un redémarrage complet."
+                },
+                allowBadgeTracking: {
+                    description: "Envoyer quand même les événements nécessaires aux badges pour suivre ta progression (ex. : heures jouées, heures de stream)"
                 }
             }
         },
@@ -1463,11 +1513,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 channelOpenScrollMode: {
                     label: "Position à l'ouverture d'un salon",
-                    description: "Ouvre les salons non lus à la position enregistrée (ou en bas), toujours en bas, ou laisse le comportement par défaut des non-lus.",
+                    description: "Où ouvrir les salons dans l'historique du chat. Si tu quittes à moins de 5 messages du plus récent, « Position enregistrée » est considérée comme non définie et la solution de repli suivante est utilisée. Si ton dernier message lu est plus ancien que l'âge maximum ci-dessous, le salon est considéré comme abandonné et « Plus ancien non lu » est considéré comme non défini.",
                     default: "Par défaut de Discord",
-                    bottom: "Toujours en bas",
-                    saved: "Position enregistrée"
+                    bottom: "Dernier message",
+                    saved: "Position enregistrée > Plus ancien non lu > Dernier message",
+                    savedLatest: "Position enregistrée > Dernier message",
+                    unread: "Plus ancien non lu > Dernier message"
+                },
+                maximumLastReadAge: {
+                    label: "Âge maximum du dernier message lu",
+                    description: "Âge maximum de ton dernier message lu, en minutes, pour utiliser la solution de repli « Plus ancien non lu ». Mets 0 pour illimité."
+                },
+                showJumpToPresentSooner: {
+                    label: "Afficher plus tôt le bouton Revenir au présent",
+                    description: "Affiche le bouton Revenir au présent lorsque tu as défilé 5 messages ou plus au-dessus du plus récent."
+                },
+                addChatbarButton: {
+                    label: "Ajouter un bouton à la barre de chat",
+                    description: "Ajoute un bouton à la barre de chat pour changer rapidement la position d'ouverture des salons."
                 }
+            },
+            history: {
+                unavailable: "L'historique enregistré n'est pas encore disponible.",
+                clearTitle: "Effacer l'historique enregistré",
+                clearDescription: "Efface la progression de lecture locale, suivie pour restaurer la position de défilement après un rechargement.",
+                clear: "Effacer",
+                success: "Réussi",
+                failure: "Échec"
             }
         },
         betterBanReasons: {
@@ -1624,6 +1696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "BetterPlusReacts",
             description: "Le nombre de '+' avant bir ':emoji:' détermine le message auquel l'ajouter"
         },
+        betterPollDetails: {
+            name: "BetterPollDetails",
+            description: "Affiche les pourcentages et le nombre de votes des sondages avant de voter ou avant l'expiration sans désactiver la possibilité de voter"
+        },
         betterRoleContext: {
             name: "BetterRoleContext",
             description: "Ajoute des options pour copier la couleur / modifier le rôle / voir l'icône du rôle lors d'un clic droit sur les rôles dans le profil utilisateur ou la liste des membres",
@@ -1709,6 +1785,20 @@ const translations: MatchStructure<typeof enTranslations> = {
         betterUploadButton: {
             name: "BetterUploadButton",
             description: "Téléchargez en un seul clic, ouvrez le menu avec un clic droit"
+        },
+        betterYoutubeEmbeds: {
+            name: "BetterYouTubeEmbeds",
+            description: "Bloquer les pubs et contourner les blocages UMG",
+            option: {
+                fixBlockedEmbeds: {
+                    label: "Réparer les intégrations bloquées",
+                    description: "Restaurer les vidéos dont l'affichage est bloqué dans Discord, par exemple par UMG"
+                },
+                blockAds: {
+                    label: "Bloquer les pubs",
+                    description: "Bloque les pubs dans les intégrations YouTube et WatchTogether. La vidéo peut mettre quelques secondes à charger à cause des mesures anti-pub de YouTube"
+                }
+            }
         },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
@@ -3993,6 +4083,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeFamilyCenterAboveDms: {
                     description: "Retirer le centre familial au-dessus de la liste des MP.",
                     label: "Retirer le centre familial au-dessus des MP"
+                },
+                removeAccountPopoutBadges: {
+                    label: "Supprimer les badges du popout du compte",
+                    description: "Supprimer les badges du popout du compte."
+                },
+                removeAccountPopoutOrbs: {
+                    label: "Supprimer les orbes du popout du compte",
+                    description: "Supprimer les orbes du popout du compte."
+                },
+                removeInvisibleWarning: {
+                    label: "Supprimer l'avertissement invisible",
+                    description: "Supprimer l'avertissement du statut invisible du popout du compte."
                 }
             },
             text: {
@@ -4268,8 +4370,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 success: "{{count}} pièce(s) jointe(s) téléchargée(s).",
                 partial: "{{succeeded}} pièces jointes sur {{total}} téléchargées. {{failed}} ont échoué.",
-                downloadedPluralizeSucceededAttachment: "{{pluralize_succeeded_attachment}} téléchargé(s).",
-                downloadedSucceededOfLength: "{{succeeded}} pièce(s) jointe(s) sur {{length}} téléchargée(s). {{failed}} échec(s)."
+                downloadedPluralizeSucceededAttachment: "{{pluralize_succeeded_attachment}} enregistré(s).",
+                downloadedSucceededOfLength: "{{succeeded}} pièces jointes sur {{length}} enregistrées. {{failed}} ont échoué.",
+                tooLarge: "Ces pièces jointes sont trop volumineuses pour être compressées. Enregistre-les une par une à la place.",
+                noneDownloaded: "Impossible de télécharger les pièces jointes."
             },
             option: {
                 downloadAllFileTypes: {
@@ -4926,10 +5030,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        fixYoutubeEmbeds: {
-            name: "FixYoutubeEmbeds",
-            description: "Contourne le blocage de certaines vidéos YouTube sur Discord (par exemple par UMG)"
-        },
         followUser: {
             name: "FollowUser",
             description: "Ajoute une option 'Suivre' dans le menu contextuel pour toujours être dans le même salon vocal que l'utilisateur",
@@ -5150,10 +5250,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         fullSearchContext: {
             name: "FullSearchContext",
             description: "Restaure toutes les options habituelles du menu contextuel des messages dans les résultats de recherche"
-        },
-        fullUserInChatbox: {
-            name: "FullUserInChatbox",
-            description: "Ajoute plus de fonctionnalités aux mentions d'utilisateurs dans la zone de saisie (clic gauche/droit)"
         },
         fullVCPFP: {
             name: "FullVCPFP",
@@ -9914,7 +10010,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showHiddenChannels: {
             name: "AfficherLesSalonsMasqués",
-            description: "Affiche les salons auxquels vous n'avez pas accès.",
+            description: "Affiche les salons cachés. Discord a fortement limité cette fonctionnalité. Plus d'infos dans les paramètres du plugin.",
             tooltip: "Salon masqué",
             option: {
                 channelStyle: {
@@ -9968,7 +10064,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknown: "inconnu",
                 permissionDetails: "Détails des permissions",
                 thisIsA: "Ceci est un salon de {{channelType}} {{status}}",
-                canNotSee: "Vous ne pouvez pas voir le {{type}} de ce salon.",
+                canNotSee: "Tu ne peux pas voir le nom ni les {{type}} de ce salon.",
                 guidelines: "Cependant, vous pouvez consulter ses directives :",
                 lastCreated: "Dernier {{type}} créé :",
                 lastPin: "Dernier message épinglé :",
@@ -9987,6 +10083,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedUsersAndRoles: "Utilisateurs et rôles autorisés :",
                 hideAllowedUsersAndRoles: "Masquer les utilisateurs et rôles autorisés",
                 viewAllowedUsersAndRoles: "Voir les utilisateurs et rôles autorisés"
+            },
+            about: {
+                title: "Fonctionnalité limitée",
+                patched: "Discord a corrigé la plupart des fonctionnalités de ce plugin ({{link}}). Les salons cachés apparaissent désormais comme « Aucun accès », et voir des éléments comme le nom, le sujet ou les personnes y ayant accès n'est plus possible.",
+                announcement: "lire leur annonce",
+                nothingToDo: "Nous ne pouvons rien faire pour corriger cela. Cependant, tu peux toujours savoir que des salons existent et voir qui est connecté aux salons vocaux privés."
             }
         },
         showHiddenThings: {
@@ -10344,6 +10446,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     defaultHidden: {
                         name: "defaultHidden",
                         description: "Indique si l'écriture doit être masquée par défaut."
+                    },
+                    dmListIndicator: {
+                        description: "Masquer les indicateurs de saisie sur les conversations de la liste des messages privés."
                     }
                 }
             },
@@ -10426,6 +10531,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabledLocations: {
                     label: "Lieux désactivés",
                     description: "ID des salons/serveurs où la fonction est inactive."
+                },
+                hideDmListTypingIndicators: {
+                    label: "Masquer les indicateurs de saisie de la liste des MP",
+                    description: "Masquer les indicateurs de saisie sur les conversations de la liste des messages privés."
                 }
             },
             text: {
@@ -10435,7 +10544,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 membersListIndicators: "Indicateurs de la liste des membres",
                 guild: "Serveur",
                 channel: "Salon",
-                global: "Global"
+                global: "Global",
+                dmListIndicators: "Indicateurs de la liste des MP"
             }
         },
         snowfall: {
@@ -10751,7 +10861,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 goldColor: "Couleur de série or (30+ jours)",
                 silverColor: "Couleur de série argent (14+ jours)",
                 bronzeColor: "Couleur de série bronze (7+ jours)",
-                defaultColor: "Couleur de série par défaut (1+ jours)"
+                defaultColor: "Couleur de série par défaut (1+ jours)",
+                showOnSelf: {
+                    label: "Afficher sur moi",
+                    description: "Afficher la série sur tes propres messages en MP"
+                },
+                showOutsideDMs: {
+                    label: "Afficher en dehors des MP",
+                    description: "Afficher les séries sur les messages en dehors des MP"
+                }
             },
             toast: {
                 authFailed: "Échec de l'autorisation : {{error}}",
@@ -11755,11 +11873,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webScreenShareFixes: {
             name: "Correctifs de partage d'écran Web",
-            description: "Supprime la limite de débit de 2500kbps sur les clients Chromium ve Plextron.",
+            description: "Supprime la limite de débit de 2500 kbps sur les clients Chromium et Vesktop, active l'audio stéréo des streams avec un débit plus élevé, augmente le débit de départ des streams, utilise l'encodage H264 matériel et corrige l'utilisation du CPU qui augmente sans fin pendant le partage d'écran.",
             option: {
                 experimentalAV1Support: {
                     label: "Support expérimental AV1",
                     description: "Activer le support du codec AV1. Peut causer des chargements infinis."
+                },
+                betterCodecs: {
+                    label: "Meilleurs codecs",
+                    description: "PEUT CAUSER DES PROBLÈMES ! Préférer de meilleurs codecs comme AV1 et VP9 lors du stream. Devrait améliorer la qualité mais peut entraîner des problèmes comme des streams qui chargent indéfiniment."
                 }
             }
         },
@@ -11881,10 +12003,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Volume sonore."
                 }
             }
-        },
-        youtubeAdblock: {
-            name: "YouTube Adblock",
-            description: "Bloque les publicités dans les intégrations YouTube ve l'activité Watch Together via AdGuard."
         },
         youtubeDescription: {
             name: "YouTube Description",
@@ -12362,7 +12480,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 validate: "Valider",
                 resetToDefault: "Réinitialiser par défaut",
                 progress: "{{percent}} % - {{transferred}} sur {{total}}",
-                cancel: "Annuler"
+                cancel: "Annuler",
+                stripFileExtension: "Retirer l'extension du fichier de l'URL générée",
+                saveOriginalFileName: "Si le nom du fichier sera enregistré sur Zipline et restauré lors du téléchargement, quel que soit le format d'URL choisi"
             },
             option: {
                 serviceType: {
@@ -12574,6 +12694,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsComponent: {
                     description: "Paramètres",
                     label: "Composant des paramètres"
+                },
+                ziplineStripExtension: {
+                    label: "Zipline : Retirer l'extension",
+                    description: "Retirer l'extension du fichier"
+                },
+                ziplineOriginalName: {
+                    label: "Zipline : Nom d'origine",
+                    description: "Conserver le nom de fichier d'origine"
                 }
             },
             panel: {
@@ -12646,7 +12774,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 network: "Réseau",
                 corsProxyUrl: "URL du proxy CORS",
                 uploadTimeout: "Délai d'envoi",
-                domainsJsonDescription: "Tableau JSON des domaines à utiliser, par exemple [\"offensive\"]."
+                domainsJsonDescription: "Tableau JSON des domaines à utiliser, par exemple [\"offensive\"].",
+                stripFileExtension: "Retirer l'extension du fichier",
+                saveOriginalFileName: "Enregistrer le nom de fichier d'origine"
             },
             status: {
                 cancelled: "Envoi annulé.",
@@ -13151,6 +13281,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 gifPickerTyping: {
                     label: "Saisie dans le sélecteur de GIF",
                     description: "Vous affiche en train d'écrire pendant que le sélecteur de GIF est ouvert"
+                },
+                removeChannelSuggestions: {
+                    label: "Supprimer les suggestions de salons",
+                    description: "Supprime la catégorie Salons suggérés de la barre latérale du serveur"
                 }
             },
             text: {
@@ -13251,7 +13385,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 audiobookshelfServerUrl: "URL du serveur AudioBookShelf.",
                 audiobookshelfUsername: "Nom d'utilisateur AudioBookShelf.",
                 audiobookshelfPassword: "Mot de passe AudioBookShelf.",
-                connectsToTosuVia: "Se connecte à tosu via WebSocket sur le port 24050. Aucune configuration nécessaire, assure-toi juste que tosu tourne en même temps qu'osu!.",
+                connectsToTosuVia: "Se connecte à tosu via WebSocket. Assure-toi simplement que tosu tourne en même temps qu'osu!.",
                 showWhatYouRe: "Affiche ce que tu écoutes via stats.fm. Ton historique d'écoute doit être public.",
                 statsFmUsername: "Nom d'utilisateur Stats.fm.",
                 customStatusText: "Texte de statut personnalisé.",
@@ -13307,10 +13441,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 viewSong: "Voir le titre",
                 showArtistName: "Afficher le nom de l'artiste",
                 showTrackName: "Afficher le nom du titre",
-                enterValue: "Saisissez une valeur"
+                enterValue: "Saisissez une valeur",
+                tosuServerUrl: "URL du domaine tosu.",
+                tosuPrivacyMode: "Masque ton nom d'utilisateur dans la présence.",
+                plexDescription: "Affiche ce que tu lis sur ton serveur Plex. Tu dois être le propriétaire du serveur pour voir les sessions. Pour obtenir ton token, ouvre n'importe quel élément dans Plex Web, choisis Obtenir les infos, puis Voir le XML, et copie la valeur X-Plex-Token depuis l'URL.",
+                plexServerUrl: "URL du serveur Plex.",
+                plexToken: "Token Plex.",
+                plexUsername: "Nom d'utilisateur Plex dont afficher les sessions.",
+                plexUsernamePlaceholder: "Nom d'utilisateur Plex",
+                plexShowCover: "Afficher la pochette. Ton token Plex est envoyé à Discord dans l'URL de l'image."
             },
             name: "RichPresence",
-            description: "Hub unifié de Rich Presence pour AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome et Gensokyo Radio.",
+            description: "Hub de rich presence unifié pour AudioBookShelf, osu!, stats.fm, Jellyfin, Plex, Navidrome et Gensokyo Radio.",
             toast: {
                 audiobookshelfRpcIsNot: "Le RPC AudioBookShelf n'est pas configuré.",
                 jellyfinRpcIsNot: "Le RPC Jellyfin n'est pas configuré.",
@@ -13542,6 +13684,46 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nd_hideOnPause: {
                     description: "Masquer la Rich Presence quand la musique est en pause",
                     label: "Navidrome : masquer en pause"
+                },
+                px_enabled: {
+                    label: "Plex : Activé",
+                    description: "Activer la présence Plex."
+                },
+                tosu_serverUrl: {
+                    label: "tosu : URL du serveur",
+                    description: "URL du domaine tosu."
+                },
+                tosu_privacyMode: {
+                    label: "tosu : Mode confidentialité",
+                    description: "Mode confidentialité"
+                },
+                px_serverUrl: {
+                    label: "Plex : URL du serveur",
+                    description: "URL du serveur Plex."
+                },
+                px_token: {
+                    label: "Plex : Token",
+                    description: "Token Plex."
+                },
+                px_username: {
+                    label: "Plex : Nom d'utilisateur",
+                    description: "Nom d'utilisateur Plex dont afficher les sessions."
+                },
+                px_showEpisodeName: {
+                    label: "Plex : Afficher le nom de l'épisode",
+                    description: "Afficher le nom de l'épisode après les infos saison/épisode."
+                },
+                px_showCover: {
+                    label: "Plex : Afficher la pochette",
+                    description: "Afficher la pochette. Ton token Plex est envoyé à Discord dans l'URL de l'image."
+                },
+                px_showPausedState: {
+                    label: "Plex : Afficher l'état en pause",
+                    description: "Afficher la présence quand le média est en pause."
+                },
+                px_privacyMode: {
+                    label: "Plex : Mode confidentialité",
+                    description: "Masquer les détails du média."
                 }
             },
             panel: {
@@ -13580,7 +13762,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 detailsFormat: "Format des détails",
                 stateFormat: "Format de l'état",
                 largeTextFormat: "Format du grand texte",
-                enabled: "Activé"
+                enabled: "Activé",
+                token: "Token",
+                showCoverArt: "Afficher la pochette"
             }
         },
         sedEnhanced: {
@@ -14245,7 +14429,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userPreset: "Préréglage utilisateur",
                 custom: "Personnalisé",
                 gaming: "Jeu",
-                screenshare: "Partage d'écran"
+                screenshare: "Partage d'écran",
+                source: "Source"
             }
         },
         whitelistedEmojis: {

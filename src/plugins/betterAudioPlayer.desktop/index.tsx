@@ -9,7 +9,7 @@ import "./styles.css";
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { PcDevs } from "@utils/constants";
+import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType, PluginNative } from "@utils/types";
 import { ColorUtils, React, showToast } from "@webpack/common";
@@ -253,7 +253,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "BetterAudioPlayer",
     description: () => t(plugin.betterAudioPlayer.description),
-    authors: [PcDevs.creations],
+    authors: [Devs.creations],
     tags: ["media"],
     settings,
     patches: [

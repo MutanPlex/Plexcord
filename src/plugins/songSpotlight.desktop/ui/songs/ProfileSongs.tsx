@@ -6,10 +6,10 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { Flex } from "@components/Flex";
 import { LinkIcon, PencilIcon } from "@components/Icons";
 import { Link } from "@components/Link";
+import { Text } from "@components/Text";
 import { User } from "@plexcord/discord-types";
 import { listData } from "@plugins/songSpotlight.desktop/lib/api";
 import { useAuthorizationStore } from "@plugins/songSpotlight.desktop/lib/stores/AuthorizationStore";
@@ -91,9 +91,9 @@ export default function ProfileSongs({ user, isSideBar }: ProfileSongsProps) {
             key="song-spotlight-profile-songs"
         >
             <Flex justifyContent="space-between">
-                <BaseText size="xs" weight={isSideBar ? "semibold" : "medium"} className={cl("header")}>
+                <Text size="xs" weight={isSideBar ? "semibold" : "medium"} className={cl("header")}>
                     {t(plugin.songSpotlight.text.songSpotlight)}
-                </BaseText>
+                </Text>
                 <Tooltip text={t(plugin.songSpotlight.text.more)}>
                     {props => (
                         <MoreHorizontalIcon
@@ -137,9 +137,9 @@ export default function ProfileSongs({ user, isSideBar }: ProfileSongsProps) {
                 <Link
                     onClick={() => setClamped(false)}
                 >
-                    <BaseText size="sm" weight="medium" className={cl("sub")} style={{ textAlign: "center" }}>
+                    <Text size="sm" weight="medium" className={cl("sub")} style={{ textAlign: "center" }}>
                         {t(plugin.songSpotlight.text.showMore, { count: data.length - profileSongsLimit })}
-                    </BaseText>
+                    </Text>
                 </Link>
             )}
         </div>

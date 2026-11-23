@@ -20,9 +20,9 @@
 import "./AddonCard.css";
 
 import { t, themes } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { Switch } from "@components/settings";
 import { AddonBadge } from "@components/settings/PluginBadge";
+import { Text } from "@components/Text";
 import { classNameFactory } from "@utils/css";
 import { useRef } from "@webpack/common";
 import type { MouseEventHandler, ReactNode } from "react";
@@ -79,7 +79,7 @@ export function OnlineThemeCard({
         >
             <div className={cl("header")}>
                 <div className={cl("name-author")}>
-                    <BaseText size="md" weight="bold" className={cl("name")}>
+                    <Text size="md" weight="bold" className={cl("name")}>
                         <div ref={titleContainerRef} className={cl("title-container")}>
                             <div
                                 ref={titleRef}
@@ -104,12 +104,12 @@ export function OnlineThemeCard({
                             </div>
                         </div>
                         {isNew && <AddonBadge text={t(themes.new)} color="#ED4245" />}
-                    </BaseText>
+                    </Text>
 
                     {!!author && (
-                        <BaseText size="md" color="text-subtle" className={cl("author")}>
+                        <Text size="md" color="text-subtle" className={cl("author")}>
                             {author}
-                        </BaseText>
+                        </Text>
                     )}
                 </div>
 

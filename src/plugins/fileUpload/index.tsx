@@ -413,7 +413,7 @@ export default definePlugin({
     name: "FileUpload",
     description: () => t(plugin.fileUpload.description),
     tags: ["media"],
-    authors: [PcDevs.creations, PcDevs.keircn, Devs.ScattrdBlade, PcDevs.MutanPlex],
+    authors: [Devs.creations, PcDevs.keircn, Devs.ScattrdBlade, PcDevs.MutanPlex],
     settings,
     patches: [
         {

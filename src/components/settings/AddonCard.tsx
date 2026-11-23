@@ -20,9 +20,9 @@
 import "./AddonCard.css";
 
 import { plugins, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { AddonBadge } from "@components/settings/PluginBadge";
 import { Switch } from "@components/Switch";
+import { Text } from "@components/Text";
 import { classNameFactory } from "@utils/css";
 import { useRef } from "@webpack/common";
 import type { MouseEventHandler, ReactNode } from "react";
@@ -56,7 +56,7 @@ export function AddonCard({ disabled, isNew, name, infoButton, footer, author, e
         >
             <div className={cl("header")}>
                 <div className={cl("name-author")}>
-                    <BaseText size="md" weight="bold" className={cl("name")}>
+                    <Text size="md" weight="bold" className={cl("name")}>
                         <div ref={titleContainerRef} className={cl("title-container")}>
                             <div
                                 ref={titleRef}
@@ -73,12 +73,12 @@ export function AddonCard({ disabled, isNew, name, infoButton, footer, author, e
                             </div>
                         </div>
                         {isNew && <AddonBadge text={t(plugins.new)} color="#ED4245" />}
-                    </BaseText>
+                    </Text>
 
                     {!!author && (
-                        <BaseText size="md" color="text-subtle" className={cl("author")}>
+                        <Text size="md" color="text-subtle" className={cl("author")}>
                             {t(plugins.authorPrefix)} {author}
-                        </BaseText>
+                        </Text>
                     )}
                 </div>
 
@@ -91,7 +91,7 @@ export function AddonCard({ disabled, isNew, name, infoButton, footer, author, e
                 />
             </div>
 
-            <BaseText size="sm" className={cl("note")}>{description}</BaseText>
+            <Text size="sm" className={cl("note")}>{description}</Text>
 
             {footer && <div className={cl("footer")}>{footer}</div>}
         </div>

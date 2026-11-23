@@ -81,6 +81,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             disableMinSize: {
                 label: "Vô hiệu hóa kích thước cửa sổ tối thiểu",
                 description: "Cho phép thay đổi kích thước cửa sổ tùy ý, kể cả nhỏ hơn kích thước tối thiểu của Discord"
+            },
+            enableBackgroundRendering: {
+                label: "Bật hiển thị nền",
+                description: "Giữ cửa sổ ứng dụng tiếp tục cập nhật ngay cả khi không được tập trung hoàn toàn"
             }
         },
         quickActions: {
@@ -90,7 +94,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             editQuickCSS: "Chỉnh sửa QuickCSS",
             relaunchDiscord: "Khởi chạy lại Discord",
             openSettingsFolder: "Mở thư mục cài đặt",
-            viewSourceCode: "Xem mã nguồn"
+            viewSourceCode: "Xem mã nguồn",
+            openPlayground: "Mở sân thử nghiệm thành phần"
         },
         specialCards: {
             donations: {
@@ -229,6 +234,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         tabs: {
             renderFailed: "Không thể hiển thị thẻ {{tab}}. Nếu sự cố vẫn tiếp diễn, hãy thử cài đặt lại bằng trình cài đặt!"
+        },
+        playground: {
+            title: "Sân thử nghiệm thành phần",
+            buttons: "Nút",
+            buttonSize: "Kích thước nút",
+            cards: "Thẻ"
         }
     },
 
@@ -401,6 +412,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Nhà tài trợ Plexcord",
                     special: "Huy hiệu này là một lợi ích đặc biệt dành cho Nhà tài trợ Plexcord",
                     description: "Vui lòng cân nhắc hỗ trợ sự phát triển của Plexcord bằng cách trở thành nhà tài trợ. Nó sẽ có ý nghĩa rất nhiều!"
+                },
+                directory: {
+                    contributed: "đóng góp",
+                    plugin: "plugin",
+                    plugins: "plugin",
+                    selfContributed: "Bạn đã {{link}} cho {{count}}!",
+                    otherContributed: "Người này đã {{link}} cho {{count}}!",
+                    selfNoPlugins: "Bạn chưa tạo plugin nào. Có lẽ bạn đã {{link}} theo những cách khác!",
+                    otherNoPlugins: "Người này chưa tạo plugin nào. Có lẽ họ đã {{link}} theo những cách khác!",
+                    restart: "Khởi động lại để áp dụng thay đổi!",
+                    selfDonor: "Cảm ơn bạn đã quyên góp!",
+                    otherDonor: "Người dùng này là nhà tài trợ Plexcord!",
+                    selfDonorDescription: "Bạn có thể quản lý đặc quyền của mình bất cứ lúc nào bằng cách nhắn tin cho @mutanplex.",
+                    otherDonorDescription: "Ủng hộ Plexcord để nhận huy hiệu và đặc quyền riêng!"
                 }
             },
         },
@@ -910,7 +935,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             scrollRight: "Cuộn sang phải"
         },
         notices: {
-            error: "Lỗi khi hiển thị thông báo"
+            error: "Lỗi khi hiển thị thông báo",
+            dismiss: "Đóng"
         },
         tray: {
             aboutPlexcord: "Giới thiệu Plexcord",
@@ -1029,16 +1055,40 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "ConcatenatedModules",
             description: "Trích xuất các module đã được nối lại bởi bundler"
         },
+        duplicateCategory: {
+            name: "DuplicateCategory",
+            description: "Thêm tùy chọn để nhân bản một danh mục với cùng quyền.",
+            menu: "Nhân bản danh mục",
+            toast: {
+                created: "Đã tạo danh mục."
+            },
+            error: {
+                missing: "Danh mục gốc không còn tồn tại.",
+                failed: "Không thể tạo danh mục. Hãy kiểm tra quyền của bạn và thử lại."
+            },
+            modal: {
+                title: "Tạo danh mục",
+                cancel: "Hủy",
+                create: "Tạo danh mục",
+                name: "Tên danh mục",
+                placeholder: "Danh mục mới",
+                copyPermissions: "Sao chép quyền",
+                copyPermissionsDescription: "Sao chép quyền của danh mục gốc sang danh mục mới. Tắt tùy chọn này để dùng quyền mặc định của máy chủ."
+            }
+        },
         noTrack: {
             name: "NoTrack",
             description: "Tắt tính năng theo dõi của Discord (phân tích/'khoa học'), số liệu và báo cáo sự cố Sentry",
             option: {
                 disableAnalytics: {
                     label: "Vô hiệu hóa phân tích",
-                    description: "Chặn phân tích theo dõi của Discord. Tắt tùy chọn này nếu bạn muốn huy hiệu theo dõi tiến độ của bạn (vd: số giờ phát trực tiếp)."
+                    description: "Chặn phân tích theo dõi của Discord"
                 },
                 disableStackDumping: {
                     description: "In dấu vết ngăn xếp gốc ra bảng điều khiển khi Discord bị sập. Cần khởi động lại hoàn toàn."
+                },
+                allowBadgeTracking: {
+                    description: "Vẫn gửi các sự kiện cần thiết để huy hiệu theo dõi tiến độ của bạn (ví dụ: số giờ chơi, số giờ phát trực tiếp)"
                 }
             }
         },
@@ -1463,11 +1513,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 channelOpenScrollMode: {
                     label: "Vị trí khi mở kênh",
-                    description: "Mở kênh chưa đọc ở vị trí đã lưu (hoặc cuối cùng), luôn ở cuối, hoặc theo hành vi chưa đọc mặc định.",
+                    description: "Vị trí mở kênh trong lịch sử trò chuyện. Nếu bạn rời đi trong vòng 5 tin nhắn so với tin mới nhất, \"Vị trí đã lưu\" được coi là chưa đặt và phương án dự phòng tiếp theo sẽ được dùng. Nếu tin nhắn đã đọc cuối cùng cũ hơn độ tuổi tối đa bên dưới, kênh được coi là bị bỏ và \"Tin chưa đọc cũ nhất\" được coi là chưa đặt.",
                     default: "Mặc định của Discord",
-                    bottom: "Luôn ở cuối",
-                    saved: "Vị trí đã lưu"
+                    bottom: "Tin nhắn mới nhất",
+                    saved: "Vị trí đã lưu > Tin chưa đọc cũ nhất > Tin nhắn mới nhất",
+                    savedLatest: "Vị trí đã lưu > Tin nhắn mới nhất",
+                    unread: "Tin chưa đọc cũ nhất > Tin nhắn mới nhất"
+                },
+                maximumLastReadAge: {
+                    label: "Độ tuổi tối đa của lần đọc cuối",
+                    description: "Độ tuổi tối đa của tin nhắn đã đọc cuối cùng, tính bằng phút, để dùng phương án dự phòng \"Tin chưa đọc cũ nhất\". Đặt 0 để không giới hạn."
+                },
+                showJumpToPresentSooner: {
+                    label: "Hiện nút Chuyển đến hiện tại sớm hơn",
+                    description: "Hiện nút Chuyển đến hiện tại khi cuộn lên từ 5 tin nhắn trở lên so với tin mới nhất."
+                },
+                addChatbarButton: {
+                    label: "Thêm nút thanh trò chuyện",
+                    description: "Thêm nút trên thanh trò chuyện để nhanh chóng đổi vị trí mở kênh."
                 }
+            },
+            history: {
+                unavailable: "Lịch sử đã lưu chưa khả dụng.",
+                clearTitle: "Xóa lịch sử đã lưu",
+                clearDescription: "Xóa tiến độ đọc cục bộ được theo dõi để khôi phục vị trí cuộn sau khi tải lại.",
+                clear: "Xóa",
+                success: "Thành công",
+                failure: "Thất bại"
             }
         },
         betterBanReasons: {
@@ -1624,6 +1696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "BetterPlusReacts",
             description: "Số dấu cộng trước :emoji: là thông báo để thêm vào"
         },
+        betterPollDetails: {
+            name: "BetterPollDetails",
+            description: "Hiển thị phần trăm và số phiếu của cuộc thăm dò trước khi bỏ phiếu hoặc hết hạn mà không tắt khả năng bỏ phiếu"
+        },
         betterRoleContext: {
             name: "BetterRoleContext",
             description: "Thêm tùy chọn sao chép màu vai trò / sửa vai trò / xem biểu tượng vai trò khi nhấp chuột phải vào vai trò trong hồ sơ người dùng hoặc danh sách thành viên",
@@ -1709,6 +1785,20 @@ const translations: MatchStructure<typeof enTranslations> = {
         betterUploadButton: {
             name: "BetterUploadButton",
             description: "Tải lên chỉ bằng một cú nhấp chuột, mở menu bằng nhấp chuột phải"
+        },
+        betterYoutubeEmbeds: {
+            name: "BetterYouTubeEmbeds",
+            description: "Chặn quảng cáo và vượt qua chặn của UMG",
+            option: {
+                fixBlockedEmbeds: {
+                    label: "Sửa nội dung nhúng bị chặn",
+                    description: "Khôi phục video bị chặn hiển thị trong Discord, ví dụ bởi UMG"
+                },
+                blockAds: {
+                    label: "Chặn quảng cáo",
+                    description: "Chặn quảng cáo trong nội dung nhúng YouTube và WatchTogether. Video có thể mất vài giây để tải do các biện pháp chống chặn quảng cáo của YouTube"
+                }
+            }
         },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
@@ -3993,6 +4083,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeFamilyCenterAboveDms: {
                     description: "Xóa trung tâm gia đình phía trên danh sách tin nhắn trực tiếp.",
                     label: "Xóa trung tâm gia đình phía trên tin nhắn trực tiếp"
+                },
+                removeAccountPopoutBadges: {
+                    label: "Xóa huy hiệu khỏi cửa sổ tài khoản",
+                    description: "Xóa huy hiệu khỏi cửa sổ bật lên của tài khoản."
+                },
+                removeAccountPopoutOrbs: {
+                    label: "Xóa orb khỏi cửa sổ tài khoản",
+                    description: "Xóa orb khỏi cửa sổ bật lên của tài khoản."
+                },
+                removeInvisibleWarning: {
+                    label: "Xóa cảnh báo ẩn",
+                    description: "Xóa cảnh báo trạng thái ẩn khỏi cửa sổ bật lên của tài khoản."
                 }
             },
             text: {
@@ -4268,8 +4370,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 success: "Đã tải xuống {{count}} tệp đính kèm.",
                 partial: "Đã tải xuống {{succeeded}}/{{total}} tệp đính kèm. {{failed}} tệp thất bại.",
-                downloadedPluralizeSucceededAttachment: "Đã tải xuống {{pluralize_succeeded_attachment}}.",
-                downloadedSucceededOfLength: "Đã tải {{succeeded}}/{{length}} tệp đính kèm. {{failed}} thất bại."
+                downloadedPluralizeSucceededAttachment: "Đã lưu {{pluralize_succeeded_attachment}}.",
+                downloadedSucceededOfLength: "Đã lưu {{succeeded}}/{{length}} tệp đính kèm. {{failed}} tệp thất bại.",
+                tooLarge: "Các tệp đính kèm này quá lớn để nén. Hãy lưu từng tệp một.",
+                noneDownloaded: "Không thể tải xuống tệp đính kèm nào."
             },
             option: {
                 downloadAllFileTypes: {
@@ -4926,10 +5030,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        fixYoutubeEmbeds: {
-            name: "FixYoutubeEmbeds",
-            description: "Bỏ qua các video YouTube bị chặn hiển thị trên Discord (ví dụ: bởi UMG)"
-        },
         followUser: {
             name: "FollowUser",
             description: "Thêm tùy chọn Theo dõi trong menu ngữ cảnh của người dùng để luôn ở cùng một VC với họ",
@@ -5150,10 +5250,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         fullSearchContext: {
             name: "FullSearchContext",
             description: "Làm cho menu ngữ cảnh thư trong kết quả tìm kiếm thư có tất cả các tùy chọn mà bạn mong đợi"
-        },
-        fullUserInChatbox: {
-            name: "FullUserInChatbox",
-            description: "Làm cho đề cập của người dùng trong hộp trò chuyện có nhiều chức năng hơn, như nhấp chuột trái/phải"
         },
         fullVCPFP: {
             name: "FullVCPFP",
@@ -9914,7 +10010,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showHiddenChannels: {
             name: "ShowHiddenChannels",
-            description: "Hiển thị các kênh mà bạn không có quyền truy cập để xem.",
+            description: "Hiển thị các kênh ẩn. Discord đã hạn chế mạnh chức năng này. Xem thêm thông tin trong cài đặt plugin.",
             tooltip: "Kênh ẩn",
             option: {
                 channelStyle: {
@@ -9968,7 +10064,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknown: "không rõ",
                 permissionDetails: "Chi tiết quyền",
                 thisIsA: "Đây là kênh {{status}} {{channelType}}",
-                canNotSee: "Bạn không thể xem {{type}} của kênh này.",
+                canNotSee: "Bạn không thể xem tên hoặc {{type}} của kênh này.",
                 guidelines: "Tuy nhiên, bạn có thể thấy hướng dẫn của nó:",
                 lastCreated: "{{type}} được tạo lần cuối:",
                 lastPin: "Mã pin tin nhắn cuối cùng:",
@@ -9987,6 +10083,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedUsersAndRoles: "Người dùng và vai trò được phép:",
                 hideAllowedUsersAndRoles: "Ẩn người dùng và vai trò được phép",
                 viewAllowedUsersAndRoles: "Xem người dùng và vai trò được phép"
+            },
+            about: {
+                title: "Chức năng bị hạn chế",
+                patched: "Discord đã vá hầu hết chức năng của plugin này ({{link}}). Các kênh ẩn giờ hiển thị là \"Không có quyền truy cập\" và không còn có thể xem tên, chủ đề hay những người có quyền truy cập.",
+                announcement: "đọc thông báo của họ",
+                nothingToDo: "Chúng tôi không thể làm gì để khắc phục điều này. Tuy nhiên, bạn vẫn có thể biết các kênh tồn tại và xem ai đang kết nối với các kênh thoại riêng tư."
             }
         },
         showHiddenThings: {
@@ -10344,6 +10446,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     defaultHidden: {
                         name: "defaultHidden",
                         description: "Có ẩn nội dung nhập trong DM/kênh/bang hội theo mặc định hay không."
+                    },
+                    dmListIndicator: {
+                        description: "Ẩn chỉ báo đang nhập trên các cuộc trò chuyện trong danh sách Tin nhắn trực tiếp."
                     }
                 }
             },
@@ -10426,6 +10531,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabledLocations: {
                     label: "Vị trí bị vô hiệu hóa",
                     description: "Tắt chức năng cho các ID này. Chấp nhận danh sách ID DM, ID kênh và ID bang hội được phân tách bằng dấu phẩy. Chỉ được sử dụng nếu 'Ẩn mặc định' được bật."
+                },
+                hideDmListTypingIndicators: {
+                    label: "Ẩn chỉ báo đang nhập trong danh sách tin nhắn riêng",
+                    description: "Ẩn chỉ báo đang nhập trên các cuộc trò chuyện trong danh sách Tin nhắn trực tiếp."
                 }
             },
             text: {
@@ -10435,7 +10544,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 membersListIndicators: "Chỉ báo danh sách thành viên",
                 guild: "Máy chủ",
                 channel: "Kênh",
-                global: "Toàn cục"
+                global: "Toàn cục",
+                dmListIndicators: "Chỉ báo danh sách tin nhắn riêng"
             }
         },
         snowfall: {
@@ -10751,7 +10861,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 goldColor: "Màu chuỗi Vàng (30+ ngày)",
                 silverColor: "Màu chuỗi Bạc (14+ ngày)",
                 bronzeColor: "Màu chuỗi Đồng (7+ ngày)",
-                defaultColor: "Màu chuỗi mặc định (1+ ngày)"
+                defaultColor: "Màu chuỗi mặc định (1+ ngày)",
+                showOnSelf: {
+                    label: "Hiển thị ở bản thân",
+                    description: "Hiển thị chuỗi trên tin nhắn của chính bạn trong tin nhắn riêng"
+                },
+                showOutsideDMs: {
+                    label: "Hiển thị ngoài tin nhắn riêng",
+                    description: "Hiển thị chuỗi trên tin nhắn ngoài tin nhắn riêng"
+                }
             },
             toast: {
                 authFailed: "Ủy quyền thất bại: {{error}}",
@@ -11755,11 +11873,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
-            description: "Loại bỏ giới hạn tốc độ bit 2500kbps trên máy khách Chrome và Plextron.",
+            description: "Gỡ giới hạn bitrate 2500kbps trên các ứng dụng Chromium và Vesktop, bật âm thanh stream stereo với bitrate cao hơn, tăng bitrate khởi đầu của stream, dùng mã hóa H264 bằng phần cứng và khắc phục mức sử dụng CPU tăng mãi khi chia sẻ màn hình.",
             option: {
                 experimentalAV1Support: {
                     label: "Hỗ trợ AV1 thử nghiệm",
                     description: "Kích hoạt hỗ trợ codec AV1. Có thể gây ra sự cố như tải luồng vô hạn"
+                },
+                betterCodecs: {
+                    label: "Codec tốt hơn",
+                    description: "CÓ THỂ GÂY LỖI! Ưu tiên các codec tốt hơn như AV1 và VP9 khi stream. Có thể cải thiện chất lượng nhưng có thể gây lỗi như stream tải mãi không xong."
                 }
             }
         },
@@ -11881,10 +12003,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Âm lượng"
                 }
             }
-        },
-        youtubeAdblock: {
-            name: "YouTubeAdblock",
-            description: "Chặn quảng cáo trong nội dung nhúng trên YouTube và hoạt động Xem cùng nhau qua AdGuard"
         },
         youtubeDescription: {
             name: "YouTubeDescription",
@@ -12362,7 +12480,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 validate: "Xác thực",
                 resetToDefault: "Đặt lại mặc định",
                 progress: "{{percent}}% - {{transferred}} / {{total}}",
-                cancel: "Hủy"
+                cancel: "Hủy",
+                stripFileExtension: "Bỏ phần mở rộng tệp khỏi URL được tạo",
+                saveOriginalFileName: "Tên tệp có được lưu trên Zipline và khôi phục khi tải xuống hay không, bất kể định dạng URL đã chọn"
             },
             option: {
                 serviceType: {
@@ -12574,6 +12694,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsComponent: {
                     description: "Cài đặt",
                     label: "Thành phần cài đặt"
+                },
+                ziplineStripExtension: {
+                    label: "Zipline: Bỏ phần mở rộng",
+                    description: "Bỏ phần mở rộng tệp"
+                },
+                ziplineOriginalName: {
+                    label: "Zipline: Tên gốc",
+                    description: "Giữ tên tệp gốc"
                 }
             },
             panel: {
@@ -12646,7 +12774,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 network: "Mạng",
                 corsProxyUrl: "URL proxy CORS",
                 uploadTimeout: "Thời gian chờ tải lên",
-                domainsJsonDescription: "Mảng JSON các tên miền sẽ dùng, ví dụ [\"offensive\"]."
+                domainsJsonDescription: "Mảng JSON các tên miền sẽ dùng, ví dụ [\"offensive\"].",
+                stripFileExtension: "Bỏ phần mở rộng tệp",
+                saveOriginalFileName: "Lưu tên tệp gốc"
             },
             status: {
                 cancelled: "Đã hủy tải lên.",
@@ -13151,6 +13281,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 gifPickerTyping: {
                     label: "Đang nhập khi chọn GIF",
                     description: "Hiển thị bạn đang nhập khi trình chọn GIF đang mở"
+                },
+                removeChannelSuggestions: {
+                    label: "Xóa gợi ý kênh",
+                    description: "Xóa danh mục Kênh được gợi ý khỏi thanh bên máy chủ"
                 }
             },
             text: {
@@ -13251,7 +13385,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 audiobookshelfServerUrl: "URL máy chủ AudioBookShelf.",
                 audiobookshelfUsername: "Tên người dùng AudioBookShelf.",
                 audiobookshelfPassword: "Mật khẩu AudioBookShelf.",
-                connectsToTosuVia: "Kết nối tới tosu qua WebSocket ở cổng 24050. Không cần cấu hình, chỉ cần đảm bảo tosu đang chạy cùng osu!.",
+                connectsToTosuVia: "Kết nối với tosu qua WebSocket. Chỉ cần đảm bảo tosu đang chạy cùng osu!.",
                 showWhatYouRe: "Hiển thị bài bạn đang nghe qua stats.fm. Yêu cầu lịch sử nghe của bạn ở chế độ công khai.",
                 statsFmUsername: "Tên người dùng Stats.fm.",
                 customStatusText: "Văn bản trạng thái tùy chỉnh.",
@@ -13307,10 +13441,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 viewSong: "Xem bài hát",
                 showArtistName: "Hiển thị tên nghệ sĩ",
                 showTrackName: "Hiển thị tên bài",
-                enterValue: "Nhập giá trị"
+                enterValue: "Nhập giá trị",
+                tosuServerUrl: "URL tên miền tosu.",
+                tosuPrivacyMode: "Ẩn tên người dùng của bạn trong trạng thái.",
+                plexDescription: "Hiển thị những gì bạn đang phát trên máy chủ Plex. Bạn phải là chủ máy chủ để xem phiên. Để lấy token, mở bất kỳ mục nào trong Plex Web, chọn Lấy thông tin, sau đó Xem XML và sao chép giá trị X-Plex-Token từ URL.",
+                plexServerUrl: "URL máy chủ Plex.",
+                plexToken: "Token Plex.",
+                plexUsername: "Tên người dùng Plex để hiển thị phiên.",
+                plexUsernamePlaceholder: "Tên người dùng Plex",
+                plexShowCover: "Hiển thị ảnh bìa. Token Plex của bạn được gửi tới Discord trong URL hình ảnh."
             },
             name: "RichPresence",
-            description: "Trung tâm Rich Presence hợp nhất cho AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome và Gensokyo Radio.",
+            description: "Trung tâm rich presence hợp nhất cho AudioBookShelf, osu!, stats.fm, Jellyfin, Plex, Navidrome và Gensokyo Radio.",
             toast: {
                 audiobookshelfRpcIsNot: "RPC AudioBookShelf chưa được cấu hình.",
                 jellyfinRpcIsNot: "RPC Jellyfin chưa được cấu hình.",
@@ -13542,6 +13684,46 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nd_hideOnPause: {
                     description: "Ẩn Rich Presence khi nhạc tạm dừng",
                     label: "Navidrome: ẩn khi tạm dừng"
+                },
+                px_enabled: {
+                    label: "Plex: Đã bật",
+                    description: "Bật trạng thái Plex."
+                },
+                tosu_serverUrl: {
+                    label: "tosu: URL máy chủ",
+                    description: "URL tên miền tosu."
+                },
+                tosu_privacyMode: {
+                    label: "tosu: Chế độ riêng tư",
+                    description: "Chế độ riêng tư"
+                },
+                px_serverUrl: {
+                    label: "Plex: URL máy chủ",
+                    description: "URL máy chủ Plex."
+                },
+                px_token: {
+                    label: "Plex: Token",
+                    description: "Token Plex."
+                },
+                px_username: {
+                    label: "Plex: Tên người dùng",
+                    description: "Tên người dùng Plex để hiển thị phiên."
+                },
+                px_showEpisodeName: {
+                    label: "Plex: Hiển thị tên tập",
+                    description: "Hiển thị tên tập sau thông tin mùa/tập."
+                },
+                px_showCover: {
+                    label: "Plex: Hiển thị ảnh bìa",
+                    description: "Hiển thị ảnh bìa. Token Plex của bạn được gửi tới Discord trong URL hình ảnh."
+                },
+                px_showPausedState: {
+                    label: "Plex: Hiển thị trạng thái tạm dừng",
+                    description: "Hiển thị trạng thái khi nội dung bị tạm dừng."
+                },
+                px_privacyMode: {
+                    label: "Plex: Chế độ riêng tư",
+                    description: "Ẩn chi tiết nội dung."
                 }
             },
             panel: {
@@ -13580,7 +13762,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 detailsFormat: "Định dạng chi tiết",
                 stateFormat: "Định dạng trạng thái",
                 largeTextFormat: "Định dạng văn bản lớn",
-                enabled: "Đã bật"
+                enabled: "Đã bật",
+                token: "Token",
+                showCoverArt: "Hiển thị ảnh bìa"
             }
         },
         sedEnhanced: {
@@ -14245,7 +14429,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userPreset: "Cài đặt sẵn của người dùng",
                 custom: "Tùy chỉnh",
                 gaming: "Chơi game",
-                screenshare: "Chia sẻ màn hình"
+                screenshare: "Chia sẻ màn hình",
+                source: "Nguồn"
             }
         },
         whitelistedEmojis: {

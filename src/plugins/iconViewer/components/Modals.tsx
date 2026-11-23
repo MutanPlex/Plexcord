@@ -6,12 +6,12 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { CodeBlock } from "@components/CodeBlock";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
 import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
+import { Text } from "@components/Text";
 import { TooltipContainer } from "@components/TooltipContainer";
 import { Icon, RenderModalProps } from "@plexcord/discord-types";
 import { copyWithToast, getIntlMessage } from "@utils/discord";
@@ -254,15 +254,15 @@ function IconModal({ iconName, Icon, onClose, transitionState }: { iconName: str
                         ))}
                     </Flex>
                     <TooltipContainer text={t(plugin.iconViewer.context.icon.rightClick)}>
-                        <BaseText size="sm" color="text-muted" className="pc-ic-color-label">
+                        <Text size="sm" color="text-muted" className="pc-ic-color-label">
                             {colorData?.name}
-                        </BaseText>
+                        </Text>
                     </TooltipContainer>
                 </Flex>
             </Flex>
             <div className="pc-ic-use-as">
-                <BaseText size="md" weight="semibold">{t(plugin.iconViewer.context.icon.usage)}</BaseText>
-                <BaseText size="sm" color="text-muted">{t(plugin.iconViewer.context.icon.click)}</BaseText>
+                <Text size="md" weight="semibold">{t(plugin.iconViewer.context.icon.usage)}</Text>
+                <Text size="sm" color="text-muted">{t(plugin.iconViewer.context.icon.click)}</Text>
             </div>
             {/* for some reason i cant make this shit codeblock full width, FF 15 */}
             <Clickable className="pc-ic-codeblock-wrapper" onClick={() => copyWithToast(findCode, t(plugin.iconViewer.context.icon.copied))}>

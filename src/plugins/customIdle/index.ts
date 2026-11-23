@@ -6,7 +6,7 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { currentNotice, noticesQueue, popNotice, showNotice } from "@api/Notices";
+import { currentNotice, NoticeColors, noticesQueue, showNotice } from "@api/Notices";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
@@ -70,16 +70,21 @@ export default definePlugin({
 
         const backOnlineMessage = t(plugin.customIdle.backOnline);
         if (
-            currentNotice?.[1] === backOnlineMessage ||
-            noticesQueue.some(([, noticeMessage]) => noticeMessage === backOnlineMessage)
+            currentNotice?.message === backOnlineMessage ||
+            noticesQueue.some(notice => notice.message === backOnlineMessage)
         ) return;
 
-        showNotice(backOnlineMessage, t(plugin.customIdle.exit), () => {
-            popNotice();
-            FluxDispatcher.dispatch({
-                type: "IDLE",
-                idle: false
-            });
+        showNotice({
+            message: backOnlineMessage,
+            buttonText: t(plugin.customIdle.exit),
+            color: NoticeColors.DEFAULT,
+            callback({ dismiss }) {
+                dismiss();
+                FluxDispatcher.dispatch({
+                    type: "IDLE",
+                    idle: false
+                });
+            }
         });
     },
 

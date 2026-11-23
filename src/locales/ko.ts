@@ -81,6 +81,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             disableMinSize: {
                 label: "최소 창 크기 비활성화",
                 description: "Discord의 최소 크기보다 작게도 창 크기를 자유롭게 조절할 수 있습니다"
+            },
+            enableBackgroundRendering: {
+                label: "백그라운드 렌더링 사용",
+                description: "앱 창이 완전히 포커스되지 않았을 때도 계속 업데이트되도록 합니다"
             }
         },
         quickActions: {
@@ -90,7 +94,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             editQuickCSS: "QuickCSS 편집",
             relaunchDiscord: "디스코드 다시 시작하기",
             openSettingsFolder: "설정 폴더 열기",
-            viewSourceCode: "소스 코드 보기"
+            viewSourceCode: "소스 코드 보기",
+            openPlayground: "컴포넌트 플레이그라운드 열기"
         },
         specialCards: {
             donations: {
@@ -229,6 +234,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         tabs: {
             renderFailed: "{{tab}} 탭을 표시하지 못했습니다. 문제가 계속되면 설치 프로그램으로 다시 설치해 보세요!"
+        },
+        playground: {
+            title: "컴포넌트 플레이그라운드",
+            buttons: "버튼",
+            buttonSize: "버튼 크기",
+            cards: "카드"
         }
     },
 
@@ -401,6 +412,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Plexcord 기증자",
                     special: "이 배지는 Plexcord 기부자를 위한 특별 혜택입니다.",
                     description: "기부자가 되어 Plexcord 개발을 지원해 보세요. 그것은 많은 의미를 가질 것입니다!"
+                },
+                directory: {
+                    contributed: "기여",
+                    plugin: "플러그인",
+                    plugins: "플러그인",
+                    selfContributed: "{{count}}에 {{link}}했습니다!",
+                    otherContributed: "이 사람은 {{count}}에 {{link}}했습니다!",
+                    selfNoPlugins: "아직 만든 플러그인이 없습니다. 아마 다른 방식으로 {{link}}했을 거예요!",
+                    otherNoPlugins: "이 사람은 플러그인을 만들지 않았습니다. 아마 다른 방식으로 {{link}}했을 거예요!",
+                    restart: "변경 사항을 적용하려면 다시 시작하세요!",
+                    selfDonor: "후원해 주셔서 감사합니다!",
+                    otherDonor: "이 사용자는 Plexcord 후원자입니다!",
+                    selfDonorDescription: "@mutanplex에게 메시지를 보내 언제든지 혜택을 관리할 수 있습니다.",
+                    otherDonorDescription: "Plexcord를 후원하고 나만의 배지와 혜택을 받으세요!"
                 }
             },
         },
@@ -910,7 +935,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             scrollRight: "오른쪽으로 스크롤"
         },
         notices: {
-            error: "알림 표시 중 오류 발생"
+            error: "알림 표시 중 오류 발생",
+            dismiss: "닫기"
         },
         tray: {
             aboutPlexcord: "Plexcord 정보",
@@ -1029,16 +1055,40 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "ConcatenatedModules",
             description: "번들러에 의해 연결(concatenate)된 모듈을 추출합니다"
         },
+        duplicateCategory: {
+            name: "DuplicateCategory",
+            description: "같은 권한으로 카테고리를 복제하는 옵션을 추가합니다.",
+            menu: "카테고리 복제",
+            toast: {
+                created: "카테고리를 만들었습니다."
+            },
+            error: {
+                missing: "원본 카테고리가 더 이상 존재하지 않습니다.",
+                failed: "카테고리를 만들 수 없습니다. 권한을 확인하고 다시 시도하세요."
+            },
+            modal: {
+                title: "카테고리 만들기",
+                cancel: "취소",
+                create: "카테고리 만들기",
+                name: "카테고리 이름",
+                placeholder: "새 카테고리",
+                copyPermissions: "권한 복사",
+                copyPermissionsDescription: "원본 카테고리의 권한을 새 카테고리에 복사합니다. 서버의 기본 권한을 사용하려면 끄세요."
+            }
+        },
         noTrack: {
             name: "NoTrack",
             description: "Discord의 추적(분석/'과학'), 측정항목 및 Sentry 충돌 보고를 비활성화합니다.",
             option: {
                 disableAnalytics: {
                     label: "분석 비활성화",
-                    description: "Discord의 추적 분석을 차단합니다. 배지로 진행 상황(예: 방송한 시간)을 추적하려면 이 옵션을 끄세요."
+                    description: "Discord의 추적 분석 차단"
                 },
                 disableStackDumping: {
                     description: "Discord가 충돌하면 콘솔에 네이티브 스택 추적을 출력합니다. 완전히 다시 시작해야 합니다."
+                },
+                allowBadgeTracking: {
+                    description: "배지가 진행 상황을 추적하는 데 필요한 이벤트는 계속 전송 (예: 플레이 시간, 방송 시간)"
                 }
             }
         },
@@ -1463,11 +1513,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 channelOpenScrollMode: {
                     label: "채널 열기 위치",
-                    description: "읽지 않은 채널을 저장된 위치(또는 맨 아래)에서 열거나, 항상 맨 아래에서 열거나, 기본 읽지 않음 동작을 따릅니다.",
+                    description: "채팅 기록의 어느 위치에서 채널을 열지 설정합니다. 최신 메시지로부터 5개 이내에서 나가면 \"저장된 위치\"는 설정되지 않은 것으로 간주되어 다음 대체 옵션이 사용됩니다. 마지막으로 읽은 메시지가 아래 최대 경과 시간보다 오래되었으면 채널은 방치된 것으로 간주되고 \"가장 오래된 안 읽은 메시지\"는 설정되지 않은 것으로 간주됩니다.",
                     default: "Discord 기본값",
-                    bottom: "항상 맨 아래",
-                    saved: "저장된 위치"
+                    bottom: "최신 메시지",
+                    saved: "저장된 위치 > 가장 오래된 안 읽은 메시지 > 최신 메시지",
+                    savedLatest: "저장된 위치 > 최신 메시지",
+                    unread: "가장 오래된 안 읽은 메시지 > 최신 메시지"
+                },
+                maximumLastReadAge: {
+                    label: "마지막 읽음 최대 경과 시간",
+                    description: "\"가장 오래된 안 읽은 메시지\" 대체 옵션을 사용하기 위한 마지막으로 읽은 메시지의 최대 경과 시간(분). 무제한은 0으로 설정하세요."
+                },
+                showJumpToPresentSooner: {
+                    label: "현재로 이동 버튼 더 일찍 표시",
+                    description: "최신 메시지보다 5개 이상 위로 스크롤했을 때 현재로 이동 버튼을 표시합니다."
+                },
+                addChatbarButton: {
+                    label: "채팅 바 버튼 추가",
+                    description: "채널 열기 위치를 빠르게 전환하는 버튼을 채팅 바에 추가합니다."
                 }
+            },
+            history: {
+                unavailable: "저장된 기록을 아직 사용할 수 없습니다.",
+                clearTitle: "저장된 기록 지우기",
+                clearDescription: "새로고침 후 스크롤 위치를 복원하기 위해 기록되는 로컬 읽기 진행 상황을 지웁니다.",
+                clear: "지우기",
+                success: "성공",
+                failure: "실패"
             }
         },
         betterBanReasons: {
@@ -1624,6 +1696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "BetterPlusReacts",
             description: ":emoji: 앞에 있는 플러스의 양은 그것을 추가할 메시지입니다."
         },
+        betterPollDetails: {
+            name: "BetterPollDetails",
+            description: "투표 기능을 끄지 않고 투표하거나 만료되기 전에 투표 비율과 투표 수를 표시합니다"
+        },
         betterRoleContext: {
             name: "BetterRoleContext",
             description: "사용자 프로필이나 멤버 목록에서 역할을 우클릭할 때 역할 색상 복사 / 역할 편집 / 역할 아이콘 보기 옵션을 추가합니다",
@@ -1709,6 +1785,20 @@ const translations: MatchStructure<typeof enTranslations> = {
         betterUploadButton: {
             name: "BetterUploadButton",
             description: "한 번의 클릭으로 업로드, 마우스 오른쪽 버튼 클릭으로 메뉴 열기"
+        },
+        betterYoutubeEmbeds: {
+            name: "BetterYouTubeEmbeds",
+            description: "광고 차단 및 UMG 차단 우회",
+            option: {
+                fixBlockedEmbeds: {
+                    label: "차단된 임베드 수정",
+                    description: "UMG 등에 의해 Discord에서 표시가 차단된 동영상을 복원합니다"
+                },
+                blockAds: {
+                    label: "광고 차단",
+                    description: "YouTube 임베드와 WatchTogether의 광고를 차단합니다. YouTube의 광고 차단 방지 조치로 인해 동영상 로딩에 몇 초가 걸릴 수 있습니다"
+                }
+            }
         },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
@@ -3993,6 +4083,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeFamilyCenterAboveDms: {
                     description: "DM 목록 위의 가족 센터를 제거합니다.",
                     label: "DM 위 가족 센터 제거"
+                },
+                removeAccountPopoutBadges: {
+                    label: "계정 팝아웃 배지 제거",
+                    description: "계정 팝아웃에서 배지를 제거합니다."
+                },
+                removeAccountPopoutOrbs: {
+                    label: "계정 팝아웃 오브 제거",
+                    description: "계정 팝아웃에서 오브를 제거합니다."
+                },
+                removeInvisibleWarning: {
+                    label: "보이지 않음 경고 제거",
+                    description: "계정 팝아웃에서 보이지 않음 상태 경고를 제거합니다."
                 }
             },
             text: {
@@ -4268,8 +4370,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 success: "첨부 파일 {{count}}개를 다운로드했습니다.",
                 partial: "첨부 파일 {{total}}개 중 {{succeeded}}개를 다운로드했습니다. {{failed}}개 실패.",
-                downloadedPluralizeSucceededAttachment: "{{pluralize_succeeded_attachment}}을(를) 다운로드했습니다.",
-                downloadedSucceededOfLength: "첨부 파일 {{length}}개 중 {{succeeded}}개를 다운로드했습니다. {{failed}}개 실패."
+                downloadedPluralizeSucceededAttachment: "{{pluralize_succeeded_attachment}}을(를) 저장했습니다.",
+                downloadedSucceededOfLength: "첨부 파일 {{length}}개 중 {{succeeded}}개를 저장했습니다. {{failed}}개 실패.",
+                tooLarge: "첨부 파일이 너무 커서 압축할 수 없습니다. 대신 하나씩 저장하세요.",
+                noneDownloaded: "첨부 파일을 하나도 다운로드할 수 없습니다."
             },
             option: {
                 downloadAllFileTypes: {
@@ -4926,10 +5030,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        fixYoutubeEmbeds: {
-            name: "FixYoutubeEmbeds",
-            description: "Discord에서 표시되지 않도록 차단된 YouTube 비디오를 우회합니다(예: UMG)"
-        },
         followUser: {
             name: "FollowUser",
             description: "항상 동일한 VC에 있도록 사용자 상황에 맞는 메뉴에 팔로우 옵션을 추가합니다.",
@@ -5150,10 +5250,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         fullSearchContext: {
             name: "FullSearchContext",
             description: "메시지 검색 결과의 메시지 컨텍스트 메뉴에 사용자가 기대하는 모든 옵션이 포함되도록 합니다."
-        },
-        fullUserInChatbox: {
-            name: "FullUserInChatbox",
-            description: "채팅 상자에서 사용자가 언급한 내용에 왼쪽/오른쪽 클릭과 같은 더 많은 기능이 포함됩니다."
         },
         fullVCPFP: {
             name: "FullVCPFP",
@@ -9914,7 +10010,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showHiddenChannels: {
             name: "ShowHiddenChannels",
-            description: "볼 수 있는 액세스 권한이 없는 채널을 표시합니다.",
+            description: "숨겨진 채널을 표시합니다. Discord가 이 기능을 크게 제한했습니다. 자세한 내용은 플러그인 설정을 참고하세요.",
             tooltip: "숨겨진 채널",
             option: {
                 channelStyle: {
@@ -9968,7 +10064,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknown: "알려지지 않은",
                 permissionDetails: "권한 세부정보",
                 thisIsA: "{{status}} {{channelType}} 채널입니다",
-                canNotSee: "이 채널의 {{type}}을(를) 볼 수 없습니다.",
+                canNotSee: "이 채널의 이름이나 {{type}}을(를) 볼 수 없습니다.",
                 guidelines: "그러나 다음 지침을 볼 수 있습니다.",
                 lastCreated: "마지막으로 생성된 {{type}}:",
                 lastPin: "마지막 메시지 핀:",
@@ -9987,6 +10083,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedUsersAndRoles: "허용된 사용자 및 역할:",
                 hideAllowedUsersAndRoles: "허용된 사용자 및 역할 숨기기",
                 viewAllowedUsersAndRoles: "허용된 사용자 및 역할 보기"
+            },
+            about: {
+                title: "제한된 기능",
+                patched: "Discord가 이 플러그인 기능의 대부분을 패치했습니다({{link}}). 숨겨진 채널은 이제 \"접근 권한 없음\"으로 표시되며, 이름, 주제, 접근 권한이 있는 사람 등을 더 이상 볼 수 없습니다.",
+                announcement: "공지 읽기",
+                nothingToDo: "저희가 이를 고칠 방법은 없습니다. 하지만 채널이 존재한다는 것은 여전히 알 수 있고, 비공개 음성 채널에 누가 연결되어 있는지 볼 수 있습니다."
             }
         },
         showHiddenThings: {
@@ -10344,6 +10446,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     defaultHidden: {
                         name: "defaultHidden",
                         description: "기본적으로 DM/채널/길드 입력을 숨길지 여부입니다."
+                    },
+                    dmListIndicator: {
+                        description: "다이렉트 메시지 목록의 대화에서 입력 중 표시기를 숨깁니다."
                     }
                 }
             },
@@ -10426,6 +10531,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabledLocations: {
                     label: "장애인 장소",
                     description: "해당 ID에 대한 기능을 비활성화합니다. 쉼표로 구분된 DM ID, 채널 ID 및 길드 ID 목록을 허용합니다. '기본 숨김'이 활성화된 경우에만 사용됩니다."
+                },
+                hideDmListTypingIndicators: {
+                    label: "DM 목록 입력 중 표시기 숨기기",
+                    description: "다이렉트 메시지 목록의 대화에서 입력 중 표시기를 숨깁니다."
                 }
             },
             text: {
@@ -10435,7 +10544,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 membersListIndicators: "멤버 목록 표시기",
                 guild: "서버",
                 channel: "채널",
-                global: "전역"
+                global: "전역",
+                dmListIndicators: "DM 목록 표시기"
             }
         },
         snowfall: {
@@ -10751,7 +10861,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 goldColor: "골드 연속 기록 색상 (30일 이상)",
                 silverColor: "실버 연속 기록 색상 (14일 이상)",
                 bronzeColor: "브론즈 연속 기록 색상 (7일 이상)",
-                defaultColor: "기본 연속 기록 색상 (1일 이상)"
+                defaultColor: "기본 연속 기록 색상 (1일 이상)",
+                showOnSelf: {
+                    label: "내 메시지에 표시",
+                    description: "DM에서 내 메시지에도 스트릭을 표시합니다"
+                },
+                showOutsideDMs: {
+                    label: "DM 외부에서 표시",
+                    description: "DM 외부의 메시지에도 스트릭을 표시합니다"
+                }
             },
             toast: {
                 authFailed: "인증 실패: {{error}}",
@@ -11755,11 +11873,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
-            description: "Chromium 및 Plextron 클라이언트에서 2500kbps 비트 전송률 제한을 제거합니다.",
+            description: "Chromium 및 Vesktop 클라이언트의 2500kbps 비트레이트 제한을 제거하고, 더 높은 비트레이트의 스테레오 방송 오디오를 활성화하며, 방송 시작 비트레이트를 높이고, 하드웨어 H264 인코딩을 사용하고, 화면 공유 중 CPU 사용량이 끝없이 늘어나는 문제를 수정합니다.",
             option: {
                 experimentalAV1Support: {
                     label: "실험적인 AV1 지원",
                     description: "AV1 코덱 지원을 활성화합니다. 스트림 무한 로드와 같은 문제가 발생할 수 있습니다."
+                },
+                betterCodecs: {
+                    label: "더 나은 코덱",
+                    description: "문제가 발생할 수 있습니다! 방송 시 AV1, VP9 같은 더 나은 코덱을 우선 사용합니다. 화질은 향상되지만 방송이 무한히 로딩되는 등의 문제가 생길 수 있습니다."
                 }
             }
         },
@@ -11881,10 +12003,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "용량"
                 }
             }
-        },
-        youtubeAdblock: {
-            name: "YouTubeAdblock",
-            description: "YouTube 삽입 광고 및 AdGuard를 통한 함께 시청 활동 차단"
         },
         youtubeDescription: {
             name: "YouTubeDescription",
@@ -12362,7 +12480,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 validate: "검증",
                 resetToDefault: "기본값으로 재설정",
                 progress: "{{percent}}% - {{transferred}} / {{total}}",
-                cancel: "취소"
+                cancel: "취소",
+                stripFileExtension: "생성된 URL에서 파일 확장자를 제거합니다",
+                saveOriginalFileName: "선택한 URL 형식과 관계없이 파일 이름을 Zipline에 저장하고 다운로드 시 복원할지 여부"
             },
             option: {
                 serviceType: {
@@ -12574,6 +12694,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsComponent: {
                     description: "설정",
                     label: "설정 구성 요소"
+                },
+                ziplineStripExtension: {
+                    label: "Zipline: 확장자 제거",
+                    description: "파일 확장자 제거"
+                },
+                ziplineOriginalName: {
+                    label: "Zipline: 원본 이름",
+                    description: "원본 파일 이름 유지"
                 }
             },
             panel: {
@@ -12646,7 +12774,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 network: "회로망",
                 corsProxyUrl: "CORS 프록시 URL",
                 uploadTimeout: "업로드 시간 제한",
-                domainsJsonDescription: "사용할 도메인의 JSON 배열입니다. 예: [\"offensive\"]"
+                domainsJsonDescription: "사용할 도메인의 JSON 배열입니다. 예: [\"offensive\"]",
+                stripFileExtension: "파일 확장자 제거",
+                saveOriginalFileName: "원본 파일 이름 저장"
             },
             status: {
                 cancelled: "업로드가 취소되었습니다.",
@@ -13151,6 +13281,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 gifPickerTyping: {
                     label: "GIF 선택기 입력 중",
                     description: "GIF 선택기가 열려 있는 동안 입력 중으로 표시합니다"
+                },
+                removeChannelSuggestions: {
+                    label: "채널 추천 제거",
+                    description: "서버 사이드바에서 추천 채널 카테고리를 제거합니다"
                 }
             },
             text: {
@@ -13251,7 +13385,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 audiobookshelfServerUrl: "AudioBookShelf 서버 URL.",
                 audiobookshelfUsername: "AudioBookShelf 사용자 이름.",
                 audiobookshelfPassword: "AudioBookShelf 비밀번호.",
-                connectsToTosuVia: "포트 24050의 WebSocket으로 tosu에 연결합니다. 설정은 필요 없으며 tosu가 osu!와 함께 실행 중인지만 확인하세요.",
+                connectsToTosuVia: "WebSocket을 통해 tosu에 연결합니다. tosu가 osu!와 함께 실행 중인지만 확인하세요.",
                 showWhatYouRe: "stats.fm을 통해 지금 듣고 있는 곡을 표시합니다. 청취 기록이 공개되어 있어야 합니다.",
                 statsFmUsername: "Stats.fm 사용자 이름.",
                 customStatusText: "사용자 지정 상태 텍스트.",
@@ -13307,10 +13441,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 viewSong: "곡 보기",
                 showArtistName: "아티스트 이름 표시",
                 showTrackName: "곡 이름 표시",
-                enterValue: "값 입력"
+                enterValue: "값 입력",
+                tosuServerUrl: "tosu 도메인 URL.",
+                tosuPrivacyMode: "프레즌스에서 사용자 이름을 숨깁니다.",
+                plexDescription: "Plex 서버에서 재생 중인 항목을 표시합니다. 세션을 보려면 서버 소유자여야 합니다. 토큰을 얻으려면 Plex Web에서 아무 항목이나 열고 정보 가져오기, XML 보기를 차례로 선택한 뒤 URL에서 X-Plex-Token 값을 복사하세요.",
+                plexServerUrl: "Plex 서버 URL.",
+                plexToken: "Plex 토큰.",
+                plexUsername: "세션을 표시할 Plex 사용자 이름.",
+                plexUsernamePlaceholder: "Plex 사용자 이름",
+                plexShowCover: "커버 아트를 표시합니다. Plex 토큰이 이미지 URL에 포함되어 Discord로 전송됩니다."
             },
             name: "RichPresence",
-            description: "AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome, Gensokyo Radio를 위한 통합 Rich Presence 허브.",
+            description: "AudioBookShelf, osu!, stats.fm, Jellyfin, Plex, Navidrome, Gensokyo Radio를 위한 통합 리치 프레즌스 허브.",
             toast: {
                 audiobookshelfRpcIsNot: "AudioBookShelf RPC가 구성되지 않았습니다.",
                 jellyfinRpcIsNot: "Jellyfin RPC가 구성되지 않았습니다.",
@@ -13542,6 +13684,46 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nd_hideOnPause: {
                     description: "음악이 일시 정지되면 Rich Presence 숨기기",
                     label: "Navidrome: 일시 정지 시 숨기기"
+                },
+                px_enabled: {
+                    label: "Plex: 사용",
+                    description: "Plex 프레즌스를 사용합니다."
+                },
+                tosu_serverUrl: {
+                    label: "tosu: 서버 URL",
+                    description: "tosu 도메인 URL."
+                },
+                tosu_privacyMode: {
+                    label: "tosu: 개인정보 보호 모드",
+                    description: "개인정보 보호 모드"
+                },
+                px_serverUrl: {
+                    label: "Plex: 서버 URL",
+                    description: "Plex 서버 URL."
+                },
+                px_token: {
+                    label: "Plex: 토큰",
+                    description: "Plex 토큰."
+                },
+                px_username: {
+                    label: "Plex: 사용자 이름",
+                    description: "세션을 표시할 Plex 사용자 이름."
+                },
+                px_showEpisodeName: {
+                    label: "Plex: 에피소드 이름 표시",
+                    description: "시즌/에피소드 정보 뒤에 에피소드 이름을 표시합니다."
+                },
+                px_showCover: {
+                    label: "Plex: 커버 표시",
+                    description: "커버 아트를 표시합니다. Plex 토큰이 이미지 URL에 포함되어 Discord로 전송됩니다."
+                },
+                px_showPausedState: {
+                    label: "Plex: 일시 정지 상태 표시",
+                    description: "미디어가 일시 정지되었을 때 프레즌스를 표시합니다."
+                },
+                px_privacyMode: {
+                    label: "Plex: 개인정보 보호 모드",
+                    description: "미디어 세부 정보를 숨깁니다."
                 }
             },
             panel: {
@@ -13580,7 +13762,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 detailsFormat: "세부 정보 형식",
                 stateFormat: "상태 형식",
                 largeTextFormat: "큰 텍스트 형식",
-                enabled: "활성화됨"
+                enabled: "활성화됨",
+                token: "토큰",
+                showCoverArt: "커버 아트 표시"
             }
         },
         sedEnhanced: {
@@ -14245,7 +14429,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userPreset: "사용자 프리셋",
                 custom: "사용자 지정",
                 gaming: "게임",
-                screenshare: "화면 공유"
+                screenshare: "화면 공유",
+                source: "원본"
             }
         },
         whitelistedEmojis: {

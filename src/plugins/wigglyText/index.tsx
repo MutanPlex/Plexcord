@@ -7,7 +7,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { BaseText } from "@components/BaseText";
+import { Text } from "@components/Text";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 import { ReactNode } from "react";
@@ -119,14 +119,14 @@ export default definePlugin({
     authors: [PcDevs.nexpid, PcDevs.MutanPlex],
     settings,
     settingsAboutComponent: () => (
-        <BaseText>
+        <Text>
             {t(plugin.wigglyText.text.youCanMakeTextWiggle)}<br />
             <ul className="wiggle-example">
                 <li><ExampleWiggle wiggle="x">{t(plugin.wigglyText.text.leftAndRight)}</ExampleWiggle> {t(plugin.wigglyText.text.byTyping)} <code>&lt;~text~&gt;</code></li>
                 <li><ExampleWiggle wiggle="y">{t(plugin.wigglyText.text.upAndDown)}</ExampleWiggle> {t(plugin.wigglyText.text.byTyping)} <code>^~text~^</code></li>
                 <li><ExampleWiggle wiggle="xy">{t(plugin.wigglyText.text.inACircle)}</ExampleWiggle> {t(plugin.wigglyText.text.byTyping)} <code>)~text~(</code></li>
             </ul>
-        </BaseText>
+        </Text>
     ),
 
     patches: [

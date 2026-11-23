@@ -7,7 +7,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { PcDevs } from "@utils/constants";
+import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 enum SteamStatus {
@@ -92,7 +92,7 @@ export const settings = definePluginSettings({
 export default definePlugin({
     name: "SteamStatusSync",
     description: () => t(plugin.steamStatusSync.description),
-    authors: [PcDevs.niko],
+    authors: [Devs.niko],
     tags: ["activity", "utility"],
 
     settings,

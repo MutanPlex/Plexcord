@@ -9,7 +9,7 @@ import "./style.css";
 
 import { plugin, t } from "@api/i18n";
 import { Channel, Guild } from "@plexcord/discord-types";
-import { PcDevs } from "@utils/constants";
+import { Devs } from "@utils/constants";
 import { getCurrentGuild } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { ChannelStore, SelectedGuildStore } from "@webpack/common";
@@ -122,7 +122,7 @@ function onGuildChange() {
 export default definePlugin({
     name: "ChannelBadges",
     description: () => t(plugin.channelBadges.description),
-    authors: [PcDevs.creations],
+    authors: [Devs.creations],
     tags: ["servers", "organisation", "appearance"],
     settings,
 

@@ -6,8 +6,8 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { Flex } from "@components/Flex";
+import { Text } from "@components/Text";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { Modal, openModal, SearchableSelect, useState } from "@webpack/common";
 
@@ -61,9 +61,9 @@ export function LanguageSelectionModal(props: { modalProps: RenderModalProps, sr
         >
             <Flex flexDirection="column" gap={20} style={{ padding: "16px" }}>
                 <div>
-                    <BaseText size="sm" weight="semibold" style={{ marginBottom: "8px" }}>
+                    <Text size="sm" weight="semibold" style={{ marginBottom: "8px" }}>
                         {t(plugin.voiceMessageTranscriber.text.audioLanguage)}
-                    </BaseText>
+                    </Text>
                     <SearchableSelect
                         options={languageOptions}
                         value={languageOptions.find(o => o.value === language)?.value}
@@ -72,9 +72,9 @@ export function LanguageSelectionModal(props: { modalProps: RenderModalProps, sr
                 </div>
 
                 <div>
-                    <BaseText size="sm" weight="semibold" style={{ marginBottom: "8px" }}>
+                    <Text size="sm" weight="semibold" style={{ marginBottom: "8px" }}>
                         {t(plugin.voiceMessageTranscriber.text.action)}
-                    </BaseText>
+                    </Text>
                     <ManaBaseRadioGroup
                         options={[{
                             name: t(plugin.voiceMessageTranscriber.text.transcribe),

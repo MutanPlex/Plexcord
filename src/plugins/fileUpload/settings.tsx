@@ -92,6 +92,20 @@ export const settings = definePluginSettings({
         default: "",
         hidden: true
     },
+    ziplineStripExtension: {
+        type: OptionType.BOOLEAN,
+        label: () => t(plugin.fileUpload.option.ziplineStripExtension.label),
+        description: () => t(plugin.fileUpload.option.ziplineStripExtension.description),
+        default: false,
+        hidden: true
+    },
+    ziplineOriginalName: {
+        type: OptionType.BOOLEAN,
+        label: () => t(plugin.fileUpload.option.ziplineOriginalName.label),
+        description: () => t(plugin.fileUpload.option.ziplineOriginalName.description),
+        default: false,
+        hidden: true
+    },
     folderId: {
         label: () => t(plugin.fileUpload.option.folderId.label),
         type: OptionType.STRING,
@@ -660,6 +674,18 @@ export function SettingsComponent() {
                         value={settings.store.folderId}
                         onChange={v => settings.store.folderId = v}
                         placeholder={t(plugin.fileUpload.text.leaveEmptyForNo)}
+                    />
+                    <SettingSwitch
+                        name={t(plugin.fileUpload.panel.stripFileExtension)}
+                        description={t(plugin.fileUpload.text.stripFileExtension)}
+                        checked={settings.store.ziplineStripExtension}
+                        onChange={v => settings.store.ziplineStripExtension = v}
+                    />
+                    <SettingSwitch
+                        name={t(plugin.fileUpload.panel.saveOriginalFileName)}
+                        description={t(plugin.fileUpload.text.saveOriginalFileName)}
+                        checked={settings.store.ziplineOriginalName}
+                        onChange={v => settings.store.ziplineOriginalName = v}
                     />
                 </SettingGroup>
             )}

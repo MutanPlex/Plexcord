@@ -6,7 +6,7 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
+import { Text } from "@components/Text";
 import { Channel, Guild, User } from "@plexcord/discord-types";
 import { ActivityIcon, ChannelTabsProps, CircleQuestionIcon, closeTab, DiscoveryIcon, ensureUnreadFallbackCountsLoaded, EnvelopeIcon, FriendsIcon, getNotificationDotState, getUnreadFallbackCounts, ICYMIIcon, isTabSelected, moveDraggedTabs, moveToTab, NitroIcon, openedTabs, QuestIcon, settings, ShopIcon, updateUnreadFallbackCounts } from "@plugins/channelTabs/util";
 import { getActiveAutoCompletes } from "@plugins/questify/utils/completion";
@@ -57,7 +57,7 @@ const GuildIcon = ({ guild }: { guild: Guild; }) => {
             className={cl("icon")}
         />
         : <div className={cl("guild-acronym-icon")}>
-            <BaseText size="xs" weight="semibold" tag="span">{getGuildAcronym(guild)}</BaseText>
+            <Text size="xs" weight="semibold" tag="span">{getGuildAcronym(guild)}</Text>
         </div>;
 };
 
@@ -197,7 +197,7 @@ function ChannelTabContent(props: ChannelTabsProps & {
                 <>
                     <GuildIcon guild={guild} />
                     <ChannelTypeIcon channel={channel} guild={guild} />
-                    <BaseText className={cl("name-text")}>{channel.name}</BaseText>
+                    <Text className={cl("name-text")}>{channel.name}</Text>
                     <NotificationDot channelIds={[channel.id]} />
                     <TypingIndicator isTyping={isTyping} />
                 </>
@@ -224,7 +224,7 @@ function ChannelTabContent(props: ChannelTabsProps & {
             return (
                 <>
                     <GuildIcon guild={guild} />
-                    <BaseText className={cl("name-text")}>{name}</BaseText>
+                    <Text className={cl("name-text")}>{name}</Text>
                 </>
             );
         }
@@ -244,9 +244,9 @@ function ChannelTabContent(props: ChannelTabsProps & {
                         isTyping={isTyping}
                         isMobile={isMobile}
                     />
-                    <BaseText className={cl("name-text")}>
+                    <Text className={cl("name-text")}>
                         {username}
-                    </BaseText>
+                    </Text>
                     <NotificationDot channelIds={[channel.id]} />
                     {!showStatusIndicators && <TypingIndicator isTyping={isTyping} />}
                 </>
@@ -256,7 +256,7 @@ function ChannelTabContent(props: ChannelTabsProps & {
             return (
                 <>
                     <ChannelIcon channel={channel} />
-                    <BaseText className={cl("name-text")}>{channel?.name || getIntlMessage("GROUP_DM")}</BaseText>
+                    <Text className={cl("name-text")}>{channel?.name || getIntlMessage("GROUP_DM")}</Text>
                     <NotificationDot channelIds={[channel.id]} />
                     <TypingIndicator isTyping={isTyping} />
                 </>
@@ -284,7 +284,7 @@ function ChannelTabContent(props: ChannelTabsProps & {
             return (
                 <>
                     <Icon />
-                    <BaseText className={cl("name-text")}>{label}</BaseText>
+                    <Text className={cl("name-text")}>{label}</Text>
                 </>
             );
         }
@@ -294,7 +294,7 @@ function ChannelTabContent(props: ChannelTabsProps & {
         return (
             <>
                 <FriendsIcon />
-                <BaseText className={cl("name-text")}>{getIntlMessage("FRIENDS")}</BaseText>
+                <Text className={cl("name-text")}>{getIntlMessage("FRIENDS")}</Text>
             </>
         );
     }
@@ -302,7 +302,7 @@ function ChannelTabContent(props: ChannelTabsProps & {
     return (
         <>
             <CircleQuestionIcon />
-            <BaseText className={cl("name-text")}>{getIntlMessage("UNKNOWN_CHANNEL")}</BaseText>
+            <Text className={cl("name-text")}>{getIntlMessage("UNKNOWN_CHANNEL")}</Text>
         </>
     );
 }

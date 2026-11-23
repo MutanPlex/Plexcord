@@ -13,7 +13,10 @@ import { PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import { pluralize } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
+import { saveFile } from "@utils/web";
 import { ChannelStore, showToast } from "@webpack/common";
+import { zipSync } from "fflate";
+import pLimit from "p-limit";
 
 const logger = new Logger("DownloadAllAttachments");
 
@@ -26,64 +29,74 @@ const settings = definePluginSettings({
     }
 });
 
-async function downloadAll(attachments: MessageAttachment[]) {
-    const usedNames = new Map<string, number>();
+const MAX_ZIP_BYTES = 1024 ** 3;
 
-    function uniqueName(original: string): string {
-        const count = usedNames.get(original) ?? 0;
-        usedNames.set(original, count + 1);
-        if (count === 0) return original;
+function uniqueFilenames(originals: string[]) {
+    const used = new Set<string>();
+
+    return originals.map(original => {
         const dot = original.lastIndexOf(".");
-        return dot === -1
-            ? `${original}_${count}`
-            : `${original.slice(0, dot)}_${count}${original.slice(dot)}`;
+        const base = dot > 0 ? original.slice(0, dot) : original;
+        const ext = dot > 0 ? original.slice(dot) : "";
+
+        let name = original;
+        for (let i = 1; used.has(name.toLowerCase()); i++) name = `${base}_${i}${ext}`;
+        used.add(name.toLowerCase());
+        return name;
+    });
+}
+
+async function fetchAttachment(attachment: MessageAttachment) {
+    const sources = [attachment.proxy_url];
+    if (settings.store.downloadAllFileTypes) sources.push(attachment.url);
+    if (!sources.some(Boolean)) throw new Error("Missing attachment URL");
+
+    let res: Response | undefined;
+    for (const source of sources) {
+        if (!source) continue;
+        res = await fetch(source).catch(() => undefined);
+        if (res?.ok) break;
     }
+    if (!res?.ok) throw new Error(res ? `HTTP ${res.status}` : "Network error");
 
-    const results = await Promise.allSettled(attachments.map(async attachment => {
-        const filename = uniqueName(attachment.filename);
-        const sources = [attachment.proxy_url];
-        if (settings.store.downloadAllFileTypes) sources.push(attachment.url);
-        if (!sources.some(Boolean)) throw new Error("Missing attachment URL");
+    return new Uint8Array(await res.arrayBuffer());
+}
 
-        let res: Response | undefined;
-        for (const source of sources) {
-            if (!source) continue;
-            res = await fetch(source).catch(() => undefined);
-            if (res?.ok) break;
-        }
-        if (!res?.ok) throw new Error(res ? `HTTP ${res.status}` : "Network error");
+async function downloadAll(message: Message) {
+    const { id, attachments } = message;
+    if (attachments.reduce((sum, a) => sum + a.size, 0) > MAX_ZIP_BYTES)
+        return showToast({ text: t(plugin.downloadAllAttachments.toast.tooLarge), variant: "critical" });
 
-        const blob = await res.blob();
-        const url = URL.createObjectURL(blob);
+    const names = uniqueFilenames(attachments.map(a => a.filename));
+    const limit = pLimit(4);
+    const results = await Promise.allSettled(attachments.map(a => limit(() => fetchAttachment(a))));
 
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = filename;
-        a.click();
-        setTimeout(() => URL.revokeObjectURL(url), 10_000);
-    }));
+    const files: Record<string, Uint8Array> = {};
+    results.forEach((result, i) => {
+        if (result.status === "fulfilled") files[names[i]] = result.value;
+        else logger.warn("Failed to download attachment:", result.reason);
+    });
 
-    const failed = results.filter(r => {
-        if (r.status === "rejected") {
-            logger.warn("Failed to download attachment:", r.reason);
-            return true;
-        }
-        return false;
-    }).length;
+    const saved = Object.keys(files);
+    const failed = attachments.length - saved.length;
+    if (!saved.length)
+        return showToast({ text: t(plugin.downloadAllAttachments.toast.noneDownloaded), variant: "critical" });
 
-    const succeeded = attachments.length - failed;
+    saveFile(saved.length === 1
+        ? new File([files[saved[0]] as BlobPart], saved[0])
+        : new File([zipSync(files, { level: 0 }) as BlobPart], `attachments-${id}.zip`, { type: "application/zip" }));
 
     if (failed === 0)
-        showToast({ text: t(plugin.downloadAllAttachments.toast.downloadedPluralizeSucceededAttachment, { pluralize_succeeded_attachment: pluralize(succeeded, "attachment") }), variant: "success" });
+        showToast({ text: t(plugin.downloadAllAttachments.toast.downloadedPluralizeSucceededAttachment, { pluralize_succeeded_attachment: pluralize(saved.length, "attachment") }), variant: "success" });
     else
-        showToast({ text: t(plugin.downloadAllAttachments.toast.downloadedSucceededOfLength, { succeeded, length: attachments.length, failed }), variant: "critical" });
+        showToast({ text: t(plugin.downloadAllAttachments.toast.downloadedSucceededOfLength, { succeeded: saved.length, length: attachments.length, failed }), variant: "critical" });
 }
 
 export default definePlugin({
     name: "DownloadAllAttachments",
     description: () => t(plugin.downloadAllAttachments.description),
     tags: ["utility", "chat"],
-    authors: [PcDevs.dhopcs, PcDevs.MutanPlex],
+    authors: [PcDevs.dhopcs, PcDevs.ShaunLWM, PcDevs.MutanPlex],
     dependencies: ["MessagePopoverAPI"],
     settings,
     messagePopoverButton: {
@@ -95,7 +108,7 @@ export default definePlugin({
                 icon: CloudDownloadIcon,
                 message,
                 channel: ChannelStore.getChannel(message.channel_id),
-                onClick: () => downloadAll(message.attachments)
+                onClick: () => downloadAll(message)
             };
         }
     }

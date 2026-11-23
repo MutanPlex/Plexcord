@@ -6,10 +6,10 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { Flex } from "@components/Flex";
 import { LinkIcon } from "@components/Icons";
 import { Link } from "@components/Link";
+import { Text } from "@components/Text";
 import { apiConstants } from "@plugins/songSpotlight.desktop/lib/api";
 import { cl } from "@plugins/songSpotlight.desktop/lib/utils";
 import { useRender } from "@plugins/songSpotlight.desktop/service";
@@ -96,15 +96,15 @@ function EditableSong({ index, song, insert, setSongRef, onDrag, onDrop, onRemov
             <Flex alignItems="center" gap="12px" className={cl("editable-song")}>
                 <ServiceIcon width={28} height={28} service={song.service} />
                 {failed
-                    ? <BaseText size="md" weight="normal" className={cl("errored")}>{t(plugin.songSpotlight.text.failedToLoad)}</BaseText>
+                    ? <Text size="md" weight="normal" className={cl("errored")}>{t(plugin.songSpotlight.text.failedToLoad)}</Text>
                     : (
                         <Flex flexDirection="column" justifyContent="center" gap={0}>
-                            <BaseText size="md" weight="medium" className={cl("clamped")}>
+                            <Text size="md" weight="medium" className={cl("clamped")}>
                                 {render ? render.label : "..."}
-                            </BaseText>
-                            <BaseText size="sm" weight="normal" className={cl("clamped", "sub")}>
+                            </Text>
+                            <Text size="sm" weight="normal" className={cl("clamped", "sub")}>
                                 {render ? render.sublabel : "..."}
-                            </BaseText>
+                            </Text>
                         </Flex>
                     )}
             </Flex>

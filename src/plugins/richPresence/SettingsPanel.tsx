@@ -90,7 +90,12 @@ function AudioBookShelfSettings() {
 
 function TosuSettings() {
     return (
-        <SettingsSection id="tosu-settings" name="" description={t(plugin.richPresence.text.connectsToTosuVia)} />
+        <>
+            <SettingsSection id="tosu-settings" name="" description={t(plugin.richPresence.text.connectsToTosuVia)} />
+            <TextSetting name={t(plugin.fileUpload.panel.serverUrl)} description={t(plugin.richPresence.text.tosuServerUrl)} settingsKey="tosu_serverUrl" placeholder="127.0.0.1:24050" />
+            <AllowServerSetting settingsKey="tosu_serverUrl" />
+            <SwitchSetting name={t(plugin.richPresence.panel.privacyMode)} description={t(plugin.richPresence.text.tosuPrivacyMode)} settingsKey="tosu_privacyMode" />
+        </>
     );
 }
 
@@ -158,6 +163,22 @@ function JellyfinSettings() {
             <SwitchSetting name={t(plugin.richPresence.panel.showEpisodeName)} description={t(plugin.richPresence.text.showEpisodeNameAfter)} settingsKey="jf_showEpisodeName" />
             <SwitchSetting name={t(plugin.richPresence.panel.showWhenPaused)} description={t(plugin.richPresence.text.showPresenceWhenMedia)} settingsKey="jf_showPausedState" />
             <SwitchSetting name={t(plugin.richPresence.panel.privacyMode)} description={t(plugin.richPresence.text.hideMediaDetails)} settingsKey="jf_privacyMode" />
+        </>
+    );
+}
+
+function PlexSettings() {
+    return (
+        <>
+            <SettingsSection id="plex-settings" name="" description={t(plugin.richPresence.text.plexDescription)} />
+            <TextSetting name={t(plugin.fileUpload.panel.serverUrl)} description={t(plugin.richPresence.text.plexServerUrl)} settingsKey="px_serverUrl" placeholder="https://1-2-3-4.abc123.plex.direct:32400" />
+            <AllowServerSetting settingsKey="px_serverUrl" />
+            <TextSetting name={t(plugin.richPresence.panel.token)} description={t(plugin.richPresence.text.plexToken)} settingsKey="px_token" placeholder="X-Plex-Token" />
+            <TextSetting name={t(plugin.fileUpload.panel.username)} description={t(plugin.richPresence.text.plexUsername)} settingsKey="px_username" placeholder={t(plugin.richPresence.text.plexUsernamePlaceholder)} />
+            <SwitchSetting name={t(plugin.richPresence.panel.showEpisodeName)} description={t(plugin.richPresence.text.showEpisodeNameAfter)} settingsKey="px_showEpisodeName" />
+            <SwitchSetting name={t(plugin.richPresence.panel.showCoverArt)} description={t(plugin.richPresence.text.plexShowCover)} settingsKey="px_showCover" />
+            <SwitchSetting name={t(plugin.richPresence.panel.showWhenPaused)} description={t(plugin.richPresence.text.showPresenceWhenMedia)} settingsKey="px_showPausedState" />
+            <SwitchSetting name={t(plugin.richPresence.panel.privacyMode)} description={t(plugin.richPresence.text.hideMediaDetails)} settingsKey="px_privacyMode" />
         </>
     );
 }
@@ -240,6 +261,7 @@ const TAB_COMPONENTS: Record<ServiceTab, React.ComponentType> = {
     [ServiceTab.Jellyfin]: JellyfinSettings,
     [ServiceTab.GensokyoRadio]: GensokyoRadioSettings,
     [ServiceTab.Navidrome]: NavidromeSettings,
+    [ServiceTab.Plex]: PlexSettings,
 };
 
 const TAB_LABELS: Record<ServiceTab, string> = {
@@ -249,6 +271,7 @@ const TAB_LABELS: Record<ServiceTab, string> = {
     [ServiceTab.Jellyfin]: "Jellyfin",
     [ServiceTab.GensokyoRadio]: "Gensokyo Radio",
     [ServiceTab.Navidrome]: "Navidrome",
+    [ServiceTab.Plex]: "Plex",
 };
 
 const ENABLE_KEYS: Record<ServiceTab, SettingsKey> = {
@@ -258,6 +281,7 @@ const ENABLE_KEYS: Record<ServiceTab, SettingsKey> = {
     [ServiceTab.Jellyfin]: "jf_enabled",
     [ServiceTab.GensokyoRadio]: "gr_enabled",
     [ServiceTab.Navidrome]: "nd_enabled",
+    [ServiceTab.Plex]: "px_enabled",
 };
 
 const TABS = Object.values(ServiceTab);

@@ -18,6 +18,8 @@
 */
 
 import { plugins, t } from "@api/i18n";
+import { _renderNotice, PLEXCORD_NOTICE_TYPE } from "@api/Notices";
+import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -38,9 +40,18 @@ export default definePlugin({
                 },
                 {
                     match: /(?<=,NOTICE_DISMISS:function\(\i\){)return null!=(\i)/,
-                    replace: (m, notice) => `if(${notice}?.id=="PlexcordNotice")return(${notice}=null,Plexcord.Api.Notices.nextNotice(),true);${m}`
+                    replace: (m, notice) => `if(${notice}?.type=="${PLEXCORD_NOTICE_TYPE}")return(${notice}=null,Plexcord.Api.Notices.nextNotice(),true);${m}`
                 }
             ]
+        },
+        {
+            find: ".GLOBAL_BANNER_PREVIEW:return",
+            replacement: {
+                match: /switch\((\i)\.type\){(?=case \i\.\i\.GLOBAL_BANNER_PREVIEW:)/,
+                replace: `$&case "${PLEXCORD_NOTICE_TYPE}":return $self.renderNotice($1);`
+            }
         }
     ],
+
+    renderNotice: ErrorBoundary.wrap(_renderNotice, { noop: true })
 });

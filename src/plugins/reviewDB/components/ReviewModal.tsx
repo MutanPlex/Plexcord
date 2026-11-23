@@ -18,8 +18,8 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Text } from "@components/Text";
 import * as dt from "@plexcord/discord-types";
 import { Auth } from "@plugins/reviewDB/auth";
 import { ReviewType } from "@plugins/reviewDB/entities";
@@ -53,10 +53,10 @@ function ReviewsModal({ modalProps, modalKey, discordId, name, type }: { modalPr
                 {...modalProps}
                 size="lg"
                 title={
-                    <BaseText size="lg" weight="semibold" className={cl("modal-header")}>
+                    <Text size="lg" weight="semibold" className={cl("modal-header")}>
                         {name} {t(plugin.reviewDB.modal.reviews.title)}
                         {!!reviewCount && <span> {t(plugin.reviewDB.text.reviewCount, { count: reviewCount })}</span>}
-                    </BaseText>
+                    </Text>
                 }
                 preview={
                     <div className={cl("modal-footer")}>

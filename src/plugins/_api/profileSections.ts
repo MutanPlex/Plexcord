@@ -18,7 +18,7 @@ export default definePlugin({
         {
             find: ".SIDEBAR,disableToolbar:",
             replacement: {
-                match: /(#{intl::USER_PROFILE_MEMBER_SINCE}\),.{0,100}userId:(\i\.id)\}\)\}\))(?=.{0,100}unownedWishlistItems:\i,wishlistId:\i)/,
+                match: /(#{intl::USER_PROFILE_MEMBER_SINCE}\),.{0,100}userId:(\i\.id)\}\)\}\))(?=.{0,100}user:\i,widgets:)/,
                 replace: "$1,Plexcord.Api.ProfileSections.renderProfileSections({userId:$2,isSideBar:true})",
             }
         },

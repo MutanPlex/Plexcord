@@ -6,7 +6,7 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
+import { Text } from "@components/Text";
 import { TooltipContainer } from "@components/TooltipContainer";
 import { settings } from "@plugins/musicControls/settings";
 import { SpotifyLrcStore } from "@plugins/musicControls/spotify/lyrics/providers/store";
@@ -44,9 +44,9 @@ function LyricsDisplay({ scroll = true }: { scroll?: boolean; }) {
         >
             {currentLyrics ? currentLyrics.map((line, i) => (
                 <div ref={lyricRefs[i]} key={i}>
-                    <BaseText size={currLrcIndex === i ? "sm" : "xs"} className={makeClassName(i)}>
+                    <Text size={currLrcIndex === i ? "sm" : "xs"} className={makeClassName(i)}>
                         {line.text || NoteSvg()}
-                    </BaseText>
+                    </Text>
                 </div>
             )) : showMusicNoteOnNoLyrics ? (
                 <TooltipContainer text={t(plugin.musicControls.context.lyrics.notFound)}>

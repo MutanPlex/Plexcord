@@ -7,6 +7,9 @@
 
 import type { Quest, QuestTaskWatchVideo, QuestTaskWatchVideoOnMobile } from "@plexcord/discord-types";
 import { QuestTaskType } from "@plexcord/discord-types/enums";
+import { getIntlMessage } from "@utils/discord";
+import { LocaleStore } from "@webpack/common";
+import type { ReactNode } from "react";
 
 import { getQuestifySettings, useQuestifySettings } from "../settings/access";
 import { defaultClaimedSubsort, defaultExpiredSubsort, defaultIgnoredSubsort, defaultQuestOrder, defaultUnclaimedSubsort, type QuestOrderStatus, type QuestSubsort, type QuestTileColorSetting, type QuestTileGradient } from "../settings/def";
@@ -171,6 +174,19 @@ export function getQuestTileStyle(quest: (Quest & { dummyColor?: QuestTileColorS
     style["--questify-button-hover"] = toRGB(buttonHoverColor);
 
     return style;
+}
+
+export function getQuestClaimDeadlineText(quest: Quest): ReactNode {
+    const { config, userStatus } = quest;
+    const rewardsExpireAt = config.rewardsConfig?.rewardsExpireAt;
+    const deadline = new Date(rewardsExpireAt);
+
+    if (userStatus?.completedAt == null || userStatus.claimedAt != null || !rewardsExpireAt) return null;
+    if (!Number.isFinite(deadline.getTime())) return null;
+
+    const expirationDate = deadline.toLocaleDateString(LocaleStore.locale, { month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+
+    return getIntlMessage("QUESTS_CLAIM_BY_DATE", { expirationDate });
 }
 
 function createSortFunction(subsort: QuestSubsort): (a: Quest, b: Quest) => number {

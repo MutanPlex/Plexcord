@@ -18,7 +18,7 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { popNotice, showNotice } from "@api/Notices";
+import { NoticeColors, showNotice } from "@api/Notices";
 import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
 import { Margins } from "@components/margins";
@@ -86,11 +86,16 @@ export default definePlugin({
 
         const connectionSuccessful = await new Promise(res => setTimeout(() => res(ws.readyState === WebSocket.OPEN), 5000)); // check if open after 5s
         if (!connectionSuccessful) {
-            showNotice(t(plugin.arRpc.toast.failed), t(plugin.arRpc.toast.retry), () => {
-                // show notice about failure to connect, with retry/ignore
-                popNotice();
-                this.start();
+            showNotice({
+                message: t(plugin.arRpc.toast.failed),
+                buttonText: t(plugin.arRpc.toast.retry),
+                color: NoticeColors.WARNING,
+                callback: ({ dismiss }) => {
+                    dismiss();
+                    this.start();
+                }
             });
+
             return;
         }
 

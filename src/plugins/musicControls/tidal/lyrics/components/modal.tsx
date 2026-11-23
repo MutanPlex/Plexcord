@@ -6,7 +6,7 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
+import { Text } from "@components/Text";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { TidalStore, Track } from "@plugins/musicControls/tidal/TidalStore";
 import { Modal } from "@webpack/common";
@@ -31,9 +31,9 @@ function getTitleNode(track: Track | null) {
                 />
             )}
             <div>
-                <BaseText size="sm" weight="semibold">{track.name}</BaseText>
-                <BaseText size="sm">{t(plugin.musicControls.modal.player.artist)} {track.artist}</BaseText>
-                {track.album && <BaseText size="sm">{t(plugin.musicControls.modal.player.album)} {track.album}</BaseText>}
+                <Text size="sm" weight="semibold">{track.name}</Text>
+                <Text size="sm">{t(plugin.musicControls.modal.player.artist)} {track.artist}</Text>
+                {track.album && <Text size="sm">{t(plugin.musicControls.modal.player.album)} {track.album}</Text>}
             </div>
         </div>
     );
@@ -48,7 +48,7 @@ export function LyricsModal({ rootProps }: { rootProps: RenderModalProps; }) {
             <div className={cl("lyrics-modal-container") + ` ${scrollClasses.auto}`}>
                 {currentLyrics ? (
                     currentLyrics.map((line, i) => (
-                        <BaseText
+                        <Text
                             key={i}
                             size={currLrcIndex === i ? "md" : "sm"}
                             weight={currLrcIndex === i ? "semibold" : "normal"}
@@ -60,10 +60,10 @@ export function LyricsModal({ rootProps }: { rootProps: RenderModalProps; }) {
                                 {formatTime(line.time)}
                             </span>
                             {line.text || NoteSvg(cl("modal-note"))}
-                        </BaseText>
+                        </Text>
                     ))
                 ) : (
-                    <BaseText size="sm" className={cl("modal-no-lyrics")}>{t(plugin.musicControls.modal.player.noLyrics)}</BaseText>
+                    <Text size="sm" className={cl("modal-no-lyrics")}>{t(plugin.musicControls.modal.player.noLyrics)}</Text>
                 )}
             </div>
         </Modal>

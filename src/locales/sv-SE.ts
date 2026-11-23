@@ -81,6 +81,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             disableMinSize: {
                 label: "Inaktivera minsta fönsterstorlek",
                 description: "Låter dig ändra fönstrets storlek fritt, även mindre än Discords minsta storlek"
+            },
+            enableBackgroundRendering: {
+                label: "Aktivera bakgrundsrendering",
+                description: "Håller appfönstret uppdaterat även när det inte är helt i fokus"
             }
         },
         quickActions: {
@@ -90,7 +94,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             editQuickCSS: "Redigera QuickCSS",
             relaunchDiscord: "Starta om Discord",
             openSettingsFolder: "Öppna mappen Inställningar",
-            viewSourceCode: "Se källkoden"
+            viewSourceCode: "Se källkoden",
+            openPlayground: "Öppna komponentlekplats"
         },
         specialCards: {
             donations: {
@@ -229,6 +234,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         tabs: {
             renderFailed: "Det gick inte att visa fliken {{tab}}. Om problemet kvarstår, prova att installera om med installationsprogrammet!"
+        },
+        playground: {
+            title: "Komponentlekplats",
+            buttons: "Knappar",
+            buttonSize: "Knappstorlek",
+            cards: "Kort"
         }
     },
 
@@ -401,6 +412,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Plexcord donator",
                     special: "Detta märke är en speciell förmån för Plexcord-givare",
                     description: "Överväg att stödja utvecklingen av Plexcord genom att bli donator. Det skulle betyda mycket!"
+                },
+                directory: {
+                    contributed: "bidragit",
+                    plugin: "plugin",
+                    plugins: "plugins",
+                    selfContributed: "Du har {{link}} till {{count}}!",
+                    otherContributed: "Den här personen har {{link}} till {{count}}!",
+                    selfNoPlugins: "Du har inte gjort några plugins än. Du har troligen {{link}} på andra sätt!",
+                    otherNoPlugins: "Den här personen har inte gjort några plugins. De har troligen {{link}} på andra sätt!",
+                    restart: "Starta om för att tillämpa ändringarna!",
+                    selfDonor: "Tack för din donation!",
+                    otherDonor: "Den här användaren är en Plexcord-donator!",
+                    selfDonorDescription: "Du kan när som helst hantera dina förmåner genom att skicka ett meddelande till @mutanplex.",
+                    otherDonorDescription: "Stöd Plexcord för att få ditt eget märke och förmåner!"
                 }
             },
         },
@@ -910,7 +935,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             scrollRight: "Rulla åt höger"
         },
         notices: {
-            error: "Fel vid visning av meddelande"
+            error: "Fel vid visning av meddelande",
+            dismiss: "Stäng"
         },
         tray: {
             aboutPlexcord: "Om Plexcord",
@@ -1029,16 +1055,40 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "ConcatenatedModules",
             description: "Extrahera moduler som har sammanfogats av bundlern"
         },
+        duplicateCategory: {
+            name: "DuplicateCategory",
+            description: "Lägger till ett alternativ för att duplicera en kategori med samma behörigheter.",
+            menu: "Duplicera kategori",
+            toast: {
+                created: "Kategori skapad."
+            },
+            error: {
+                missing: "Den ursprungliga kategorin finns inte längre.",
+                failed: "Kunde inte skapa kategorin. Kontrollera dina behörigheter och försök igen."
+            },
+            modal: {
+                title: "Skapa kategori",
+                cancel: "Avbryt",
+                create: "Skapa kategori",
+                name: "Kategorinamn",
+                placeholder: "Ny kategori",
+                copyPermissions: "Kopiera behörigheter",
+                copyPermissionsDescription: "Kopiera den ursprungliga kategorins behörigheter till den nya kategorin. Stäng av detta för att använda serverns standardbehörigheter."
+            }
+        },
         noTrack: {
             name: "NoTrack",
             description: "Inaktivera Discords spårning (analytics/'vetenskap'), mätvärden och Sentry-kraschrapportering",
             option: {
                 disableAnalytics: {
                     label: "Inaktivera Analytics",
-                    description: "Blockerar Discords spårningsanalyser. Stäng av detta om du vill att märken ska spåra dina framsteg (t.ex. streamade timmar)."
+                    description: "Blockera Discords spårningsanalyser"
                 },
                 disableStackDumping: {
                     description: "Skriv ut en inbyggd stackspårning i konsolen när Discord kraschar. Kräver fullständig omstart."
+                },
+                allowBadgeTracking: {
+                    description: "Skicka ändå de händelser som märken behöver för att följa dina framsteg (t.ex. spelade timmar, streamade timmar)"
                 }
             }
         },
@@ -1463,11 +1513,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 channelOpenScrollMode: {
                     label: "Position vid öppning av kanal",
-                    description: "Öppna olästa kanaler på den sparade positionen (eller längst ned), alltid längst ned, eller använd standardbeteendet för olästa.",
+                    description: "Var i chatthistoriken kanaler ska öppnas. Om du lämnar inom 5 meddelanden från det senaste räknas \"Sparad position\" som inte inställd och nästa reserv används. Om ditt senast lästa meddelande är äldre än den maximala åldern nedan räknas kanalen som övergiven och \"Äldsta olästa\" räknas som inte inställd.",
                     default: "Discord-standard",
-                    bottom: "Alltid längst ned",
-                    saved: "Sparad position"
+                    bottom: "Senaste meddelande",
+                    saved: "Sparad position > Äldsta olästa > Senaste meddelande",
+                    savedLatest: "Sparad position > Senaste meddelande",
+                    unread: "Äldsta olästa > Senaste meddelande"
+                },
+                maximumLastReadAge: {
+                    label: "Maximal ålder för senast läst",
+                    description: "Maximal ålder för ditt senast lästa meddelande, i minuter, för att använda reserven \"Äldsta olästa\". Ange 0 för obegränsat."
+                },
+                showJumpToPresentSooner: {
+                    label: "Visa Hoppa till nutid-knappen tidigare",
+                    description: "Visar Hoppa till nutid-knappen när du har rullat 5 eller fler meddelanden ovanför det senaste."
+                },
+                addChatbarButton: {
+                    label: "Lägg till chattfältsknapp",
+                    description: "Lägger till en chattfältsknapp för att snabbt byta kanalernas öppningsposition."
                 }
+            },
+            history: {
+                unavailable: "Den sparade historiken är inte tillgänglig än.",
+                clearTitle: "Rensa sparad historik",
+                clearDescription: "Rensar lokala läsframsteg som sparas för att återställa rullningspositionen efter omladdning.",
+                clear: "Rensa",
+                success: "Lyckades",
+                failure: "Misslyckades"
             }
         },
         betterBanReasons: {
@@ -1624,6 +1696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "BetterPlusReacts",
             description: "Mängden plus före :emoji: är meddelandet att lägga till det"
         },
+        betterPollDetails: {
+            name: "BetterPollDetails",
+            description: "Visar procentsatser och röstantal för omröstningar före röstning eller utgång utan att inaktivera möjligheten att rösta"
+        },
         betterRoleContext: {
             name: "BetterRoleContext",
             description: "Lägger till alternativ för att kopiera rollfärg / redigera roll / visa rollikon när du högerklickar på roller i användarprofilen eller i medlemslistan",
@@ -1709,6 +1785,20 @@ const translations: MatchStructure<typeof enTranslations> = {
         betterUploadButton: {
             name: "BetterUploadButton",
             description: "Ladda upp med ett enda klick, öppna menyn med högerklick"
+        },
+        betterYoutubeEmbeds: {
+            name: "BetterYouTubeEmbeds",
+            description: "Blockera annonser och kringgå UMG-blockeringar",
+            option: {
+                fixBlockedEmbeds: {
+                    label: "Åtgärda blockerade inbäddningar",
+                    description: "Återställ videor som blockerats från att visas i Discord, till exempel av UMG"
+                },
+                blockAds: {
+                    label: "Blockera annonser",
+                    description: "Blockerar annonser i YouTube-inbäddningar och WatchTogether. Videon kan ta några sekunder att ladda på grund av YouTubes antiannonsåtgärder"
+                }
+            }
         },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
@@ -3993,6 +4083,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeFamilyCenterAboveDms: {
                     description: "Ta bort familjecentret ovanför DM-listan.",
                     label: "Ta bort familjecenter ovanför DM"
+                },
+                removeAccountPopoutBadges: {
+                    label: "Ta bort märken från kontopopouten",
+                    description: "Ta bort märken från kontopopouten."
+                },
+                removeAccountPopoutOrbs: {
+                    label: "Ta bort orbs från kontopopouten",
+                    description: "Ta bort orbs från kontopopouten."
+                },
+                removeInvisibleWarning: {
+                    label: "Ta bort osynlig-varning",
+                    description: "Ta bort varningen om osynlig status från kontopopouten."
                 }
             },
             text: {
@@ -4268,8 +4370,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 success: "Laddade ner {{count}} bilaga/bilagor.",
                 partial: "Laddade ner {{succeeded}} av {{total}} bilagor. {{failed}} misslyckades.",
-                downloadedPluralizeSucceededAttachment: "Laddade ned {{pluralize_succeeded_attachment}}.",
-                downloadedSucceededOfLength: "Laddade ned {{succeeded}} av {{length}} bilagor. {{failed}} misslyckades."
+                downloadedPluralizeSucceededAttachment: "Sparade {{pluralize_succeeded_attachment}}.",
+                downloadedSucceededOfLength: "Sparade {{succeeded}} av {{length}} bilagor. {{failed}} misslyckades.",
+                tooLarge: "Dessa bilagor är för stora för att zippas. Spara dem en i taget istället.",
+                noneDownloaded: "Kunde inte ladda ner några bilagor."
             },
             option: {
                 downloadAllFileTypes: {
@@ -4926,10 +5030,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        fixYoutubeEmbeds: {
-            name: "FixYoutubeEmbeds",
-            description: "Förbigår YouTube-videor som blockeras från visning på Discord (till exempel av UMG)"
-        },
         followUser: {
             name: "FollowUser",
             description: "Lägger till ett Följ-alternativ i användarens snabbmeny för att alltid vara i samma VC som dem",
@@ -5150,10 +5250,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         fullSearchContext: {
             name: "FullSearchContext",
             description: "Gör att meddelandekontextmenyn i meddelandesökresultat har alla alternativ du kan förvänta dig"
-        },
-        fullUserInChatbox: {
-            name: "FullUserInChatbox",
-            description: "Får användaromnämnanden i chatboxen att ha fler funktioner, som att vänster-/högerklicka"
         },
         fullVCPFP: {
             name: "FullVCPFP",
@@ -9914,7 +10010,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showHiddenChannels: {
             name: "ShowHiddenChannels",
-            description: "Visa kanaler som du inte har tillgång till.",
+            description: "Visar dolda kanaler. Discord har kraftigt begränsat den här funktionen. Mer info i pluginens inställningar.",
             tooltip: "Dold kanal",
             option: {
                 channelStyle: {
@@ -9968,7 +10064,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknown: "okänd",
                 permissionDetails: "Tillståndsinformation",
                 thisIsA: "Detta är en {{status}} {{channelType}} kanal",
-                canNotSee: "Du kan inte se {{type}} för den här kanalen.",
+                canNotSee: "Du kan inte se namnet eller {{type}} i den här kanalen.",
                 guidelines: "Däremot kan du se dess riktlinjer:",
                 lastCreated: "Senast skapade {{type}}:",
                 lastPin: "Pin för senaste meddelande:",
@@ -9987,6 +10083,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedUsersAndRoles: "Tillåtna användare och roller:",
                 hideAllowedUsersAndRoles: "Dölj tillåtna användare och roller",
                 viewAllowedUsersAndRoles: "Visa tillåtna användare och roller"
+            },
+            about: {
+                title: "Begränsad funktionalitet",
+                patched: "Discord har patchat det mesta av den här pluginens funktionalitet ({{link}}). Dolda kanaler visas nu som \"Ingen åtkomst\" istället, och det går inte längre att se saker som namn, ämne eller personer med åtkomst.",
+                announcement: "läs deras meddelande",
+                nothingToDo: "Det finns inget vi kan göra för att åtgärda detta. Du kan dock fortfarande veta att kanaler finns och se vem som är ansluten till privata röstkanaler."
             }
         },
         showHiddenThings: {
@@ -10344,6 +10446,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     defaultHidden: {
                         name: "defaultHidden",
                         description: "Huruvida man ska dölja att skriva i DM/kanaler/skrån som standard eller inte."
+                    },
+                    dmListIndicator: {
+                        description: "Dölj skrivindikatorer på konversationer i listan över direktmeddelanden."
                     }
                 }
             },
@@ -10426,6 +10531,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabledLocations: {
                     label: "Inaktiverade platser",
                     description: "Inaktivera funktionalitet för dessa ID:n. Accepterar en kommaseparerad lista med DM-ID, kanal-ID och guild-ID. Används endast om 'Default Hidden' är aktiverat."
+                },
+                hideDmListTypingIndicators: {
+                    label: "Dölj skrivindikatorer i DM-listan",
+                    description: "Dölj skrivindikatorer på konversationer i listan över direktmeddelanden."
                 }
             },
             text: {
@@ -10435,7 +10544,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 membersListIndicators: "Indikatorer i medlemslistan",
                 guild: "Server",
                 channel: "Kanal",
-                global: "Global"
+                global: "Global",
+                dmListIndicators: "DM-listindikatorer"
             }
         },
         snowfall: {
@@ -10751,7 +10861,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 goldColor: "Guldsvitens färg (30+ dagar)",
                 silverColor: "Silversvitens färg (14+ dagar)",
                 bronzeColor: "Bronssvitens färg (7+ dagar)",
-                defaultColor: "Standardfärg för svit (1+ dagar)"
+                defaultColor: "Standardfärg för svit (1+ dagar)",
+                showOnSelf: {
+                    label: "Visa på mig själv",
+                    description: "Visa streaken på dina egna meddelanden i DM"
+                },
+                showOutsideDMs: {
+                    label: "Visa utanför DM",
+                    description: "Visa streaks på meddelanden utanför DM"
+                }
             },
             toast: {
                 authFailed: "Auktorisering misslyckades: {{error}}",
@@ -11755,11 +11873,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
-            description: "Tar bort 2500 kbps bithastighetstak på Chromium- och Plextron-klienter.",
+            description: "Tar bort bithastighetsgränsen på 2500kbps i Chromium- och Vesktop-klienter, aktiverar stereoljud i streams med högre bithastighet, höjer startbithastigheten för streams, använder hårdvarubaserad H264-kodning och åtgärdar CPU-användning som växer oändligt vid skärmdelning.",
             option: {
                 experimentalAV1Support: {
                     label: "Experimentell AV1-stöd",
                     description: "Aktivera stöd för AV1-codec. Kan orsaka problem som oändligt ladda strömmar"
+                },
+                betterCodecs: {
+                    label: "Bättre kodekar",
+                    description: "KAN ORSAKA PROBLEM! Föredra bättre kodekar som AV1 och VP9 vid streaming. Bör förbättra kvaliteten men kan leda till problem som streams som laddar oändligt."
                 }
             }
         },
@@ -11881,10 +12003,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Volym"
                 }
             }
-        },
-        youtubeAdblock: {
-            name: "YouTubeAdblock",
-            description: "Blockera annonser i YouTube-inbäddningar och aktiviteten Titta tillsammans via AdGuard"
         },
         youtubeDescription: {
             name: "YouTubeDescription",
@@ -12362,7 +12480,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 validate: "Validera",
                 resetToDefault: "Återställ till standard",
                 progress: "{{percent}} % - {{transferred}} av {{total}}",
-                cancel: "Avbryt"
+                cancel: "Avbryt",
+                stripFileExtension: "Ta bort filändelsen från den genererade URL:en",
+                saveOriginalFileName: "Om filnamnet sparas på Zipline och återställs vid nedladdning, oavsett valt URL-format"
             },
             option: {
                 serviceType: {
@@ -12574,6 +12694,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsComponent: {
                     description: "Inställningar",
                     label: "Inställningskomponent"
+                },
+                ziplineStripExtension: {
+                    label: "Zipline: Ta bort filändelse",
+                    description: "Ta bort filändelse"
+                },
+                ziplineOriginalName: {
+                    label: "Zipline: Originalnamn",
+                    description: "Behåll ursprungligt filnamn"
                 }
             },
             panel: {
@@ -12646,7 +12774,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 network: "Nätverk",
                 corsProxyUrl: "CORS-proxy-URL",
                 uploadTimeout: "Tidsgräns för uppladdning",
-                domainsJsonDescription: "JSON-array med domäner att använda, till exempel [\"offensive\"]."
+                domainsJsonDescription: "JSON-array med domäner att använda, till exempel [\"offensive\"].",
+                stripFileExtension: "Ta bort filändelse",
+                saveOriginalFileName: "Spara ursprungligt filnamn"
             },
             status: {
                 cancelled: "Uppladdningen avbröts.",
@@ -13151,6 +13281,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 gifPickerTyping: {
                     label: "GIF-väljare skriver",
                     description: "Visar dig som skrivande medan GIF-väljaren är öppen"
+                },
+                removeChannelSuggestions: {
+                    label: "Ta bort kanalförslag",
+                    description: "Tar bort kategorin Föreslagna kanaler från serverns sidofält"
                 }
             },
             text: {
@@ -13251,7 +13385,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 audiobookshelfServerUrl: "URL till AudioBookShelf-servern.",
                 audiobookshelfUsername: "AudioBookShelf-användarnamn.",
                 audiobookshelfPassword: "AudioBookShelf-lösenord.",
-                connectsToTosuVia: "Ansluter till tosu via WebSocket på port 24050. Ingen konfiguration behövs, se bara till att tosu körs tillsammans med osu!.",
+                connectsToTosuVia: "Ansluter till tosu via WebSocket. Se bara till att tosu körs tillsammans med osu!.",
                 showWhatYouRe: "Visa vad du lyssnar på via stats.fm. Kräver att din lyssningshistorik är offentlig.",
                 statsFmUsername: "Stats.fm-användarnamn.",
                 customStatusText: "Anpassad statustext.",
@@ -13307,10 +13441,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 viewSong: "Visa låt",
                 showArtistName: "Visa artistnamn",
                 showTrackName: "Visa spårnamn",
-                enterValue: "Ange ett värde"
+                enterValue: "Ange ett värde",
+                tosuServerUrl: "tosu-domän-URL.",
+                tosuPrivacyMode: "Döljer ditt användarnamn i presence.",
+                plexDescription: "Visa vad du spelar på din Plex-server. Du måste vara serverägaren för att se sessioner. För att få din token, öppna valfritt objekt i Plex Web, välj Hämta info, sedan Visa XML och kopiera X-Plex-Token-värdet från URL:en.",
+                plexServerUrl: "Plex-server-URL.",
+                plexToken: "Plex-token.",
+                plexUsername: "Plex-användarnamn att visa sessioner för.",
+                plexUsernamePlaceholder: "Plex-användarnamn",
+                plexShowCover: "Visa omslagsbild. Din Plex-token skickas till Discord i bild-URL:en."
             },
             name: "RichPresence",
-            description: "Samlad Rich Presence-hubb för AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome och Gensokyo Radio.",
+            description: "Samlad rich presence-hubb för AudioBookShelf, osu!, stats.fm, Jellyfin, Plex, Navidrome och Gensokyo Radio.",
             toast: {
                 audiobookshelfRpcIsNot: "AudioBookShelf-RPC är inte konfigurerad.",
                 jellyfinRpcIsNot: "Jellyfin-RPC är inte konfigurerad.",
@@ -13542,6 +13684,46 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nd_hideOnPause: {
                     description: "Dölj Rich Presence när musiken är pausad",
                     label: "Navidrome: dölj vid paus"
+                },
+                px_enabled: {
+                    label: "Plex: Aktiverad",
+                    description: "Aktivera Plex-presence."
+                },
+                tosu_serverUrl: {
+                    label: "tosu: Server-URL",
+                    description: "tosu-domän-URL."
+                },
+                tosu_privacyMode: {
+                    label: "tosu: Integritetsläge",
+                    description: "Integritetsläge"
+                },
+                px_serverUrl: {
+                    label: "Plex: Server-URL",
+                    description: "Plex-server-URL."
+                },
+                px_token: {
+                    label: "Plex: Token",
+                    description: "Plex-token."
+                },
+                px_username: {
+                    label: "Plex: Användarnamn",
+                    description: "Plex-användarnamn att visa sessioner för."
+                },
+                px_showEpisodeName: {
+                    label: "Plex: Visa avsnittsnamn",
+                    description: "Visa avsnittsnamn efter säsongs-/avsnittsinfo."
+                },
+                px_showCover: {
+                    label: "Plex: Visa omslag",
+                    description: "Visa omslagsbild. Din Plex-token skickas till Discord i bild-URL:en."
+                },
+                px_showPausedState: {
+                    label: "Plex: Visa pausat läge",
+                    description: "Visa presence när media är pausat."
+                },
+                px_privacyMode: {
+                    label: "Plex: Integritetsläge",
+                    description: "Dölj mediedetaljer."
                 }
             },
             panel: {
@@ -13580,7 +13762,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 detailsFormat: "Format för detaljer",
                 stateFormat: "Format för tillstånd",
                 largeTextFormat: "Format för stor text",
-                enabled: "Aktiverad"
+                enabled: "Aktiverad",
+                token: "Token",
+                showCoverArt: "Visa omslagsbild"
             }
         },
         sedEnhanced: {
@@ -14245,7 +14429,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userPreset: "Användarförinställning",
                 custom: "Anpassad",
                 gaming: "Spel",
-                screenshare: "Skärmdelning"
+                screenshare: "Skärmdelning",
+                source: "Källa"
             }
         },
         whitelistedEmojis: {

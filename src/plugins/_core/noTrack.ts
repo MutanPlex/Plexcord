@@ -39,13 +39,23 @@ const settings = definePluginSettings({
         default: false,
         restartNeeded: true,
         target: "DESKTOP"
+    },
+    allowBadgeTracking: {
+        type: OptionType.BOOLEAN,
+        description: () => t(plugin.noTrack.option.allowBadgeTracking.description),
+        default: true,
+        restartNeeded: true,
+        disabled() { return !this.store.disableAnalytics; }
     }
 });
+
+const gameEvents = new Set(["launch_game", "running_game_heartbeat"]);
+const streamEvents = new Set(["media_session_joined", "video_stream_started", "video_stream_ended"]);
 
 export default definePlugin({
     name: "NoTrack",
     description: () => t(plugin.noTrack.description),
-    authors: [Devs.Cyn, Devs.Ven, Devs.Nuckyz, Devs.Arrow],
+    authors: [Devs.Cyn, Devs.Ven, Devs.Nuckyz, Devs.Arrow, Devs.Cramber],
     tags: ["privacy", "utility"],
     required: true,
     settings,
@@ -53,11 +63,26 @@ export default definePlugin({
     patches: [
         {
             find: "AnalyticsActionHandlers.handle",
-            predicate: () => settings.store.disableAnalytics,
+            predicate: () => settings.store.disableAnalytics && !settings.store.allowBadgeTracking,
             replacement: {
                 match: /\(0,\i\.analyticsTrackingStoreMaker\)/,
                 replace: "$self.analyticsTrackingStoreMaker",
             },
+        },
+        {
+            find: '"AnalyticsTrackingStore"',
+            predicate: () => settings.store.disableAnalytics && settings.store.allowBadgeTracking,
+            group: true,
+            replacement: [
+                {
+                    match: /handleTrack=function\((\i)\){/,
+                    replace: "$&if(!$self.isBadgeEvent($1.event,$1.properties))return false;"
+                },
+                {
+                    match: /function \i\((\i),\i\){(?=let \i=Date\.now\(\))/,
+                    replace: "$&$1=$1.filter(e=>$self.isBadgeEvent(e.type,e.properties));if(!$1.length)return Promise.resolve();"
+                }
+            ]
         },
         {
             find: ".METRICS_V2",
@@ -151,6 +176,12 @@ export default definePlugin({
                 Reflect.deleteProperty(window, "DiscordSentry");
             }
         });
+    },
+
+    isBadgeEvent(type: string, properties?: Record<string, unknown>) {
+        if (gameEvents.has(type)) return true;
+
+        return streamEvents.has(type) && properties?.context === "stream" && properties.participant_type !== "receiver";
     },
 
     analyticsTrackingStoreMaker() {

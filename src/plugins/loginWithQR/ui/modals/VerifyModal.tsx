@@ -6,8 +6,8 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { Button, TextButton } from "@components/Button";
+import { Text } from "@components/Text";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { images } from "@plugins/loginWithQR/images";
 import { getIntlMessage } from "@utils/discord";
@@ -119,12 +119,12 @@ function VerifyModal({
                             key="img-success"
                             draggable={false}
                         />
-                        <BaseText size="xl" weight="bold" color="text-strong" tag="h1" className={cl("device-header")}>
+                        <Text size="xl" weight="bold" color="text-strong" tag="h1" className={cl("device-header")}>
                             {getIntlMessage("QR_CODE_LOGIN_SUCCESS")}
-                        </BaseText>
-                        <BaseText size="md" weight="semibold" color="text-default" style={{ width: "30rem", textAlign: "center" }}>
+                        </Text>
+                        <Text size="md" weight="semibold" color="text-default" style={{ width: "30rem", textAlign: "center" }}>
                             {getIntlMessage("QR_CODE_LOGIN_SUCCESS_FLAVOR")}
-                        </BaseText>
+                        </Text>
                     </>
                 ) : state === VerifyState.NotFound ? (
                     <>
@@ -134,12 +134,12 @@ function VerifyModal({
                             key="img-not_found"
                             draggable={false}
                         />
-                        <BaseText size="xl" weight="bold" color="text-strong" tag="h1" className={cl("device-header")}>
+                        <Text size="xl" weight="bold" color="text-strong" tag="h1" className={cl("device-header")}>
                             {getIntlMessage("QR_CODE_NOT_FOUND")}
-                        </BaseText>
-                        <BaseText size="md" weight="semibold" color="text-default" style={{ width: "30rem" }}>
+                        </Text>
+                        <Text size="md" weight="semibold" color="text-default" style={{ width: "30rem" }}>
                             {getIntlMessage("QR_CODE_NOT_FOUND_DESCRIPTION")}
-                        </BaseText>
+                        </Text>
                     </>
                 ) : (
                     <>
@@ -149,12 +149,12 @@ function VerifyModal({
                             key="img-loaded"
                             draggable={false}
                         />
-                        <BaseText size="xl" weight="bold" color="text-strong" tag="h1" className={cl("device-header")}>
+                        <Text size="xl" weight="bold" color="text-strong" tag="h1" className={cl("device-header")}>
                             {getIntlMessage("QR_CODE_LOGIN_CONFIRM")}
-                        </BaseText>
-                        <BaseText size="md" weight="semibold" color="text-danger">
+                        </Text>
+                        <Text size="md" weight="semibold" color="text-danger">
                             {t(plugin.loginWithQR.neverScan)}
-                        </BaseText>
+                        </Text>
                         <Button
                             size="medium"
                             variant="dangerPrimary"

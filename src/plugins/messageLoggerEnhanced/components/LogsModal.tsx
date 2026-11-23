@@ -6,10 +6,10 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
 import { InfoIcon } from "@components/Icons";
+import { Text } from "@components/Text";
 import { Channel, RenderModalProps, User } from "@plexcord/discord-types";
 import { DBMessageRecord, deleteMessageIDB, deleteMessagesBulkIDB } from "@plugins/messageLoggerEnhanced/db";
 import { cl, clearLogs, settings } from "@plugins/messageLoggerEnhanced/index";
@@ -246,12 +246,12 @@ function NoResults({ tab }: { tab: LogTabs; }) {
 
     return (
         <div className={cl("modal-empty-logs", "modal-content-inner")} style={{ textAlign: "center" }}>
-            <BaseText size="lg">
+            <Text size="lg">
                 {t(plugin.messageLoggerEnhanced.button.noResults, { tab: getTabLabel(tab) })}
-            </BaseText>
-            <BaseText size="lg" style={{ marginTop: "0.2rem" }}>
+            </Text>
+            <Text size="lg" style={{ marginTop: "0.2rem" }}>
                 {t(plugin.messageLoggerEnhanced.button.tryOtherTabs, { nextTab, lastTab })}
-            </BaseText>
+            </Text>
         </div>
     );
 }
@@ -261,9 +261,9 @@ function EmptyLogs({ hasQuery, reset: forceUpdate }: { hasQuery: boolean; reset:
         <div className={cl("modal-empty-logs", "modal-content-inner")} style={{ textAlign: "center" }}>
             <Flex flexDirection="column" style={{ position: "relative" }}>
 
-                <BaseText size="lg">
+                <Text size="lg">
                     {t(plugin.messageLoggerEnhanced.modal.empty)}
-                </BaseText>
+                </Text>
 
                 {!hasQuery && (
                     <>
@@ -293,7 +293,7 @@ function LoadingLogs({ tab }: { tab: LogTabs; }) {
     return (
         <div className={cl("modal-empty-logs", "modal-content-inner")} style={{ textAlign: "center" }}>
             <Flex flexDirection="column" style={{ position: "relative" }}>
-                <BaseText size="lg">
+                <Text size="lg">
                     {t(plugin.messageLoggerEnhanced.text.loadingTabLogs, {
                         tab: t({
                             [LogTabs.DELETED]: plugin.messageLoggerEnhanced.modal.deleted,
@@ -301,7 +301,7 @@ function LoadingLogs({ tab }: { tab: LogTabs; }) {
                             [LogTabs.GHOST_PING]: plugin.messageLoggerEnhanced.modal.ghostPing
                         }[tab])
                     })}
-                </BaseText>
+                </Text>
             </Flex>
         </div>
     );

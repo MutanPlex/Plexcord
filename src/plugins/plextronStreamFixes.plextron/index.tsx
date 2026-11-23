@@ -9,7 +9,7 @@ import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings, Settings } from "@api/Settings";
 import fakeNitro from "@plugins/fakeNitro";
-import { PcDevs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import { localStorage } from "@utils/localStorage";
 import definePlugin, { OptionType } from "@utils/types";
 
@@ -101,7 +101,7 @@ export default definePlugin({
     name: "PlextronStreamFixes",
     description: () => t(plugin.plextronStreamFixes.description),
     tags: ["voice"],
-    authors: [PcDevs.creations, PcDevs.MutanPlex],
+    authors: [Devs.creations, PcDevs.MutanPlex],
     settings,
 
     patches: [

@@ -19,7 +19,7 @@
 
 import * as DataStore from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
-import { popNotice, showNotice } from "@api/Notices";
+import { NoticeColors, showNotice } from "@api/Notices";
 import { showNotification } from "@api/Notifications";
 import { ChannelType, RelationshipType } from "@plexcord/discord-types/enums";
 import { getUniqueUsername, openUserProfile } from "@utils/discord";
@@ -105,7 +105,10 @@ export async function syncAndRunChecks() {
 
 export function notify(text: string, icon?: string, onClick?: () => void) {
     if (settings.store.notices)
-        showNotice(text, t(plugin.relationshipNotifier.notification.ok), () => popNotice());
+        showNotice({
+            message: text,
+            color: NoticeColors.WARNING
+        });
 
     showNotification({
         title: t(plugin.relationshipNotifier.text.relationshipNotifier),

@@ -81,6 +81,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             disableMinSize: {
                 label: "Wyłącz minimalny rozmiar okna",
                 description: "Pozwala zmienić rozmiar okna na dowolny, nawet mniejszy niż minimalny rozmiar Discorda"
+            },
+            enableBackgroundRendering: {
+                label: "Włącz renderowanie w tle",
+                description: "Utrzymuje aktualizowanie okna aplikacji, nawet gdy nie jest w pełni aktywne"
             }
         },
         quickActions: {
@@ -90,7 +94,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             editQuickCSS: "Edytuj QuickCSS",
             relaunchDiscord: "Uruchom ponownie Discorda",
             openSettingsFolder: "Otwórz folder ustawień",
-            viewSourceCode: "Zobacz kod źródłowy"
+            viewSourceCode: "Zobacz kod źródłowy",
+            openPlayground: "Otwórz plac zabaw komponentów"
         },
         specialCards: {
             donations: {
@@ -229,6 +234,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         tabs: {
             renderFailed: "Nie udało się wyświetlić karty {{tab}}. Jeśli problem nie ustąpi, spróbuj ponownie zainstalować za pomocą instalatora!"
+        },
+        playground: {
+            title: "Plac zabaw komponentów",
+            buttons: "Przyciski",
+            buttonSize: "Rozmiar przycisku",
+            cards: "Karty"
         }
     },
 
@@ -401,6 +412,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Darczyńca Plexcord",
                     special: "Ta odznaka jest specjalnym przywilejem dla darczyńców Plexcord",
                     description: "Rozważ wsparcie rozwoju Plexcord, zostając darczyńcą. To wiele dla nas znaczy!"
+                },
+                directory: {
+                    contributed: "wkład",
+                    plugin: "wtyczka",
+                    plugins: "wtyczek",
+                    selfContributed: "Masz {{link}} w {{count}}!",
+                    otherContributed: "Ta osoba ma {{link}} w {{count}}!",
+                    selfNoPlugins: "Nie stworzyłeś jeszcze żadnych wtyczek. Prawdopodobnie masz {{link}} w inny sposób!",
+                    otherNoPlugins: "Ta osoba nie stworzyła żadnych wtyczek. Prawdopodobnie ma {{link}} w inny sposób!",
+                    restart: "Uruchom ponownie, aby zastosować zmiany!",
+                    selfDonor: "Dziękujemy za darowiznę!",
+                    otherDonor: "Ten użytkownik jest darczyńcą Plexcord!",
+                    selfDonorDescription: "Możesz w każdej chwili zarządzać swoimi korzyściami, pisząc do @mutanplex.",
+                    otherDonorDescription: "Wesprzyj Plexcord, aby zdobyć własną odznakę i korzyści!"
                 }
             },
         },
@@ -910,7 +935,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             scrollRight: "Przewiń w prawo"
         },
         notices: {
-            error: "Błąd podczas wyświetlania powiadomienia"
+            error: "Błąd podczas wyświetlania powiadomienia",
+            dismiss: "Zamknij"
         },
         tray: {
             aboutPlexcord: "O Plexcord",
@@ -1029,16 +1055,40 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "ConcatenatedModules",
             description: "Wyodrębnij moduły, które zostały połączone przez bundler"
         },
+        duplicateCategory: {
+            name: "DuplicateCategory",
+            description: "Dodaje opcję duplikowania kategorii z tymi samymi uprawnieniami.",
+            menu: "Duplikuj kategorię",
+            toast: {
+                created: "Utworzono kategorię."
+            },
+            error: {
+                missing: "Oryginalna kategoria już nie istnieje.",
+                failed: "Nie udało się utworzyć kategorii. Sprawdź swoje uprawnienia i spróbuj ponownie."
+            },
+            modal: {
+                title: "Utwórz kategorię",
+                cancel: "Anuluj",
+                create: "Utwórz kategorię",
+                name: "Nazwa kategorii",
+                placeholder: "Nowa kategoria",
+                copyPermissions: "Kopiuj uprawnienia",
+                copyPermissionsDescription: "Skopiuj uprawnienia oryginalnej kategorii do nowej kategorii. Wyłącz tę opcję, aby użyć domyślnych uprawnień serwera."
+            }
+        },
         noTrack: {
             name: "NoTrack",
             description: "Wyłącz śledzenie Discorda (analityka/'science'), metryki oraz raportowanie błędów Sentry",
             option: {
                 disableAnalytics: {
                     label: "Wyłącz analitykę",
-                    description: "Blokuje analizy śledzące Discorda. Wyłącz to, jeśli chcesz, aby odznaki śledziły twoje postępy (np. godziny streamowania)."
+                    description: "Blokuj analizy śledzące Discorda"
                 },
                 disableStackDumping: {
                     description: "Wypisuj natywny ślad stosu w konsoli, gdy Discord się zawiesi. Wymaga pełnego ponownego uruchomienia."
+                },
+                allowBadgeTracking: {
+                    description: "Nadal wysyłaj zdarzenia potrzebne odznakom do śledzenia twoich postępów (np. godziny gry, godziny streamowania)"
                 }
             }
         },
@@ -1463,11 +1513,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 channelOpenScrollMode: {
                     label: "Pozycja przy otwieraniu kanału",
-                    description: "Otwieraj nieprzeczytane kanały w zapisanej pozycji (lub na dole), zawsze na dole albo zgodnie z domyślnym zachowaniem nieprzeczytanych.",
+                    description: "Gdzie w historii czatu otwierać kanały. Jeśli wyjdziesz w odległości 5 wiadomości od najnowszej, \"Zapisana pozycja\" jest uznawana za nieustawioną i używana jest następna opcja zapasowa. Jeśli twoja ostatnio przeczytana wiadomość jest starsza niż maksymalny wiek poniżej, kanał jest uznawany za porzucony, a \"Najstarsza nieprzeczytana\" za nieustawioną.",
                     default: "Domyślne Discorda",
-                    bottom: "Zawsze na dole",
-                    saved: "Zapisana pozycja"
+                    bottom: "Najnowsza wiadomość",
+                    saved: "Zapisana pozycja > Najstarsza nieprzeczytana > Najnowsza wiadomość",
+                    savedLatest: "Zapisana pozycja > Najnowsza wiadomość",
+                    unread: "Najstarsza nieprzeczytana > Najnowsza wiadomość"
+                },
+                maximumLastReadAge: {
+                    label: "Maksymalny wiek ostatniego odczytu",
+                    description: "Maksymalny wiek twojej ostatnio przeczytanej wiadomości, w minutach, aby użyć opcji zapasowej \"Najstarsza nieprzeczytana\". Ustaw 0, aby bez limitu."
+                },
+                showJumpToPresentSooner: {
+                    label: "Pokazuj wcześniej przycisk Przejdź do teraźniejszości",
+                    description: "Pokazuje przycisk Przejdź do teraźniejszości po przewinięciu 5 lub więcej wiadomości powyżej najnowszej."
+                },
+                addChatbarButton: {
+                    label: "Dodaj przycisk na pasku czatu",
+                    description: "Dodaje przycisk na pasku czatu do szybkiej zmiany pozycji otwierania kanałów."
                 }
+            },
+            history: {
+                unavailable: "Zapisana historia nie jest jeszcze dostępna.",
+                clearTitle: "Wyczyść zapisaną historię",
+                clearDescription: "Czyści lokalny postęp czytania, śledzony w celu przywrócenia pozycji przewijania po przeładowaniu.",
+                clear: "Wyczyść",
+                success: "Sukces",
+                failure: "Niepowodzenie"
             }
         },
         betterBanReasons: {
@@ -1624,6 +1696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "BetterPlusReacts",
             description: "Liczba plusów przed :emoji: określa wiadomość, do której ma zostać dodana reakcja"
         },
+        betterPollDetails: {
+            name: "BetterPollDetails",
+            description: "Pokazuje procenty i liczbę głosów w ankietach przed głosowaniem lub wygaśnięciem bez wyłączania możliwości głosowania"
+        },
         betterRoleContext: {
             name: "BetterRoleContext",
             description: "Dodaje opcje kopiowania koloru roli / edycji roli / podglądu ikony roli po kliknięciu prawym przyciskiem roli w profilu użytkownika lub na liście członków",
@@ -1709,6 +1785,20 @@ const translations: MatchStructure<typeof enTranslations> = {
         betterUploadButton: {
             name: "BetterUploadButton",
             description: "Przesyłaj pliki jednym kliknięciem, otwórz menu prawym przyciskiem myszy"
+        },
+        betterYoutubeEmbeds: {
+            name: "BetterYouTubeEmbeds",
+            description: "Blokuj reklamy i omijaj blokady UMG",
+            option: {
+                fixBlockedEmbeds: {
+                    label: "Napraw zablokowane osadzenia",
+                    description: "Przywróć filmy zablokowane przed wyświetlaniem na Discordzie, na przykład przez UMG"
+                },
+                blockAds: {
+                    label: "Blokuj reklamy",
+                    description: "Blokuje reklamy w osadzeniach YouTube i WatchTogether. Ładowanie filmu może potrwać kilka sekund z powodu zabezpieczeń YouTube przed blokowaniem reklam"
+                }
+            }
         },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
@@ -3993,6 +4083,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeFamilyCenterAboveDms: {
                     description: "Usuń centrum rodzinne nad listą wiadomości prywatnych.",
                     label: "Usuń centrum rodzinne nad wiadomościami"
+                },
+                removeAccountPopoutBadges: {
+                    label: "Usuń odznaki z wyskakującego okna konta",
+                    description: "Usuń odznaki z wyskakującego okna konta."
+                },
+                removeAccountPopoutOrbs: {
+                    label: "Usuń orby z wyskakującego okna konta",
+                    description: "Usuń orby z wyskakującego okna konta."
+                },
+                removeInvisibleWarning: {
+                    label: "Usuń ostrzeżenie o niewidoczności",
+                    description: "Usuń ostrzeżenie o statusie niewidocznym z wyskakującego okna konta."
                 }
             },
             text: {
@@ -4268,8 +4370,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 success: "Pobrano załączniki: {{count}}.",
                 partial: "Pobrano {{succeeded}} z {{total}} załączników. Nieudane: {{failed}}.",
-                downloadedPluralizeSucceededAttachment: "Pobrano {{pluralize_succeeded_attachment}}.",
-                downloadedSucceededOfLength: "Pobrano {{succeeded}} z {{length}} załączników. Nieudane: {{failed}}."
+                downloadedPluralizeSucceededAttachment: "Zapisano {{pluralize_succeeded_attachment}}.",
+                downloadedSucceededOfLength: "Zapisano {{succeeded}} z {{length}} załączników. {{failed}} nie powiodło się.",
+                tooLarge: "Te załączniki są zbyt duże, aby je spakować. Zamiast tego zapisz je pojedynczo.",
+                noneDownloaded: "Nie udało się pobrać żadnych załączników."
             },
             option: {
                 downloadAllFileTypes: {
@@ -4926,10 +5030,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        fixYoutubeEmbeds: {
-            name: "FixYoutubeEmbeds",
-            description: "Omija blokowanie wyświetlania filmów YouTube na Discordzie (np. przez UMG)"
-        },
         followUser: {
             name: "FollowUser",
             description: "Dodaje opcję Obserwuj w menu kontekstowym użytkownika, aby zawsze być na tym samym kanale głosowym co on",
@@ -5150,10 +5250,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         fullSearchContext: {
             name: "FullSearchContext",
             description: "Sprawia, że menu kontekstowe wiadomości w wynikach wyszukiwania ma wszystkie oczekiwane opcje"
-        },
-        fullUserInChatbox: {
-            name: "FullUserInChatbox",
-            description: "Sprawia, że wzmianki o użytkownikach w polu czatu mają więcej funkcji, takich jak kliknięcie lewym/prawym przyciskiem myszy"
         },
         fullVCPFP: {
             name: "FullVCPFP",
@@ -9914,7 +10010,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showHiddenChannels: {
             name: "ShowHiddenChannels",
-            description: "Pokazuje kanały, do których nie masz uprawnień przeglądania.",
+            description: "Pokazuje ukryte kanały. Discord mocno ograniczył tę funkcjonalność. Więcej informacji w ustawieniach wtyczki.",
             tooltip: "Ukryty kanał",
             option: {
                 channelStyle: {
@@ -9968,7 +10064,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknown: "nieznany",
                 permissionDetails: "Szczegóły uprawnień",
                 thisIsA: "To jest {{status}} kanał {{channelType}}",
-                canNotSee: "Nie możesz zobaczyć {{type}} tego kanału.",
+                canNotSee: "Nie możesz zobaczyć nazwy ani {{type}} tego kanału.",
                 guidelines: "Możesz jednak zobaczyć jego zasady (guidelines):",
                 lastCreated: "Ostatnio utworzony {{type}}:",
                 lastPin: "Ostatnio przypięta wiadomość:",
@@ -9987,6 +10083,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedUsersAndRoles: "Użytkownicy i role z dostępem:",
                 hideAllowedUsersAndRoles: "Ukryj listę uprawnionych",
                 viewAllowedUsersAndRoles: "Pokaż listę uprawnionych"
+            },
+            about: {
+                title: "Ograniczona funkcjonalność",
+                patched: "Discord załatał większość funkcjonalności tej wtyczki ({{link}}). Ukryte kanały wyświetlają się teraz jako \"Brak dostępu\", a wyświetlanie nazwy, tematu czy osób z dostępem nie jest już możliwe.",
+                announcement: "przeczytaj ich ogłoszenie",
+                nothingToDo: "Nie możemy nic zrobić, aby to naprawić. Nadal jednak możesz wiedzieć, że kanały istnieją, i widzieć, kto jest połączony z prywatnymi kanałami głosowymi."
             }
         },
         showHiddenThings: {
@@ -10344,6 +10446,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     defaultHidden: {
                         name: "domyślnieUkryte",
                         description: "Czy domyślnie ukrywać pisanie wszędzie czy nie."
+                    },
+                    dmListIndicator: {
+                        description: "Ukryj wskaźniki pisania w rozmowach na liście wiadomości prywatnych."
                     }
                 }
             },
@@ -10426,6 +10531,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabledLocations: {
                     label: "Wyłączone lokalizacje",
                     description: "Lista ID, gdzie pisanie ma być ukryte."
+                },
+                hideDmListTypingIndicators: {
+                    label: "Ukryj wskaźniki pisania na liście DM",
+                    description: "Ukryj wskaźniki pisania w rozmowach na liście wiadomości prywatnych."
                 }
             },
             text: {
@@ -10435,7 +10544,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 membersListIndicators: "Wskaźniki na liście członków",
                 guild: "Serwer",
                 channel: "Kanał",
-                global: "Globalnie"
+                global: "Globalnie",
+                dmListIndicators: "Wskaźniki listy DM"
             }
         },
         snowfall: {
@@ -10751,7 +10861,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 goldColor: "Kolor serii złotej (30+ dni)",
                 silverColor: "Kolor serii srebrnej (14+ dni)",
                 bronzeColor: "Kolor serii brązowej (7+ dni)",
-                defaultColor: "Domyślny kolor serii (1+ dni)"
+                defaultColor: "Domyślny kolor serii (1+ dni)",
+                showOnSelf: {
+                    label: "Pokaż u siebie",
+                    description: "Pokaż serię przy własnych wiadomościach w DM"
+                },
+                showOutsideDMs: {
+                    label: "Pokaż poza DM",
+                    description: "Pokaż serie przy wiadomościach poza DM"
+                }
             },
             toast: {
                 authFailed: "Autoryzacja nie powiodła się: {{error}}",
@@ -11755,11 +11873,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
-            description: "Usuwa limit bitrate 2500kbps w przeglądarkach Chromium oraz kliencie Plextron.",
+            description: "Usuwa limit przepływności 2500kbps w klientach Chromium i Vesktop, włącza stereo dźwięk transmisji z wyższą przepływnością, zwiększa początkową przepływność transmisji, używa sprzętowego kodowania H264 i naprawia bez końca rosnące użycie CPU podczas udostępniania ekranu.",
             option: {
                 experimentalAV1Support: {
                     label: "Eksperymentalne wsparcie AV1",
                     description: "Włącz obsługę kodeka AV1. Może powodować błędy, np. nieskończone ładowanie transmisji"
+                },
+                betterCodecs: {
+                    label: "Lepsze kodeki",
+                    description: "MOŻE POWODOWAĆ PROBLEMY! Preferuj lepsze kodeki, takie jak AV1 i VP9, podczas streamowania. Powinno poprawić jakość, ale może prowadzić do problemów, takich jak bez końca ładujące się transmisje."
                 }
             }
         },
@@ -11881,10 +12003,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Głośność"
                 }
             }
-        },
-        youtubeAdblock: {
-            name: "YouTubeAdblock",
-            description: "Blokuje reklamy w oknach YouTube wewnątrz Discorda oraz w aktywności 'Watch Together' przy użyciu filtrów AdGuard"
         },
         youtubeDescription: {
             name: "YouTubeDescription",
@@ -12362,7 +12480,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 validate: "Zweryfikuj",
                 resetToDefault: "Przywróć domyślne",
                 progress: "{{percent}}% - {{transferred}} z {{total}}",
-                cancel: "Anuluj"
+                cancel: "Anuluj",
+                stripFileExtension: "Usuń rozszerzenie pliku z wygenerowanego adresu URL",
+                saveOriginalFileName: "Czy nazwa pliku zostanie zapisana w Zipline i przywrócona przy pobieraniu, niezależnie od wybranego formatu URL"
             },
             option: {
                 serviceType: {
@@ -12574,6 +12694,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsComponent: {
                     description: "Ustawienia",
                     label: "Komponent ustawień"
+                },
+                ziplineStripExtension: {
+                    label: "Zipline: Usuń rozszerzenie",
+                    description: "Usuń rozszerzenie pliku"
+                },
+                ziplineOriginalName: {
+                    label: "Zipline: Oryginalna nazwa",
+                    description: "Zachowaj oryginalną nazwę pliku"
                 }
             },
             panel: {
@@ -12646,7 +12774,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 network: "Sieć",
                 corsProxyUrl: "Adres URL proxy CORS",
                 uploadTimeout: "Limit czasu przesyłania",
-                domainsJsonDescription: "Tablica JSON domen do użycia, na przykład [\"offensive\"]."
+                domainsJsonDescription: "Tablica JSON domen do użycia, na przykład [\"offensive\"].",
+                stripFileExtension: "Usuń rozszerzenie pliku",
+                saveOriginalFileName: "Zapisz oryginalną nazwę pliku"
             },
             status: {
                 cancelled: "Przesyłanie anulowane.",
@@ -13151,6 +13281,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 gifPickerTyping: {
                     label: "Pisanie w wyborze GIF",
                     description: "Pokazuje, że piszesz, gdy wybór GIF jest otwarty"
+                },
+                removeChannelSuggestions: {
+                    label: "Usuń sugestie kanałów",
+                    description: "Usuwa kategorię Sugerowane kanały z paska bocznego serwera"
                 }
             },
             text: {
@@ -13251,7 +13385,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 audiobookshelfServerUrl: "Adres URL serwera AudioBookShelf.",
                 audiobookshelfUsername: "Nazwa użytkownika AudioBookShelf.",
                 audiobookshelfPassword: "Hasło AudioBookShelf.",
-                connectsToTosuVia: "Łączy się z tosu przez WebSocket na porcie 24050. Konfiguracja nie jest potrzebna, upewnij się tylko, że tosu działa razem z osu!.",
+                connectsToTosuVia: "Łączy się z tosu przez WebSocket. Upewnij się tylko, że tosu działa razem z osu!.",
                 showWhatYouRe: "Pokazuj, czego słuchasz, przez stats.fm. Historia słuchania musi być publiczna.",
                 statsFmUsername: "Nazwa użytkownika Stats.fm.",
                 customStatusText: "Własny tekst statusu.",
@@ -13307,10 +13441,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 viewSong: "Zobacz utwór",
                 showArtistName: "Pokaż nazwę wykonawcy",
                 showTrackName: "Pokaż nazwę utworu",
-                enterValue: "Wpisz wartość"
+                enterValue: "Wpisz wartość",
+                tosuServerUrl: "Adres URL domeny tosu.",
+                tosuPrivacyMode: "Ukrywa twoją nazwę użytkownika w statusie.",
+                plexDescription: "Pokaż, co odtwarzasz na swoim serwerze Plex. Aby widzieć sesje, musisz być właścicielem serwera. Aby uzyskać token, otwórz dowolny element w Plex Web, wybierz Pobierz informacje, następnie Wyświetl XML i skopiuj wartość X-Plex-Token z adresu URL.",
+                plexServerUrl: "Adres URL serwera Plex.",
+                plexToken: "Token Plex.",
+                plexUsername: "Nazwa użytkownika Plex, dla której mają być pokazywane sesje.",
+                plexUsernamePlaceholder: "Nazwa użytkownika Plex",
+                plexShowCover: "Pokaż okładkę. Twój token Plex jest wysyłany do Discorda w adresie URL obrazu."
             },
             name: "RichPresence",
-            description: "Wspólne centrum Rich Presence dla AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome i Gensokyo Radio.",
+            description: "Ujednolicone centrum rich presence dla AudioBookShelf, osu!, stats.fm, Jellyfin, Plex, Navidrome i Gensokyo Radio.",
             toast: {
                 audiobookshelfRpcIsNot: "RPC AudioBookShelf nie jest skonfigurowane.",
                 jellyfinRpcIsNot: "RPC Jellyfin nie jest skonfigurowane.",
@@ -13542,6 +13684,46 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nd_hideOnPause: {
                     description: "Ukryj Rich Presence, gdy muzyka jest wstrzymana",
                     label: "Navidrome: ukryj po wstrzymaniu"
+                },
+                px_enabled: {
+                    label: "Plex: Włączone",
+                    description: "Włącz status Plex."
+                },
+                tosu_serverUrl: {
+                    label: "tosu: URL serwera",
+                    description: "Adres URL domeny tosu."
+                },
+                tosu_privacyMode: {
+                    label: "tosu: Tryb prywatności",
+                    description: "Tryb prywatności"
+                },
+                px_serverUrl: {
+                    label: "Plex: URL serwera",
+                    description: "Adres URL serwera Plex."
+                },
+                px_token: {
+                    label: "Plex: Token",
+                    description: "Token Plex."
+                },
+                px_username: {
+                    label: "Plex: Nazwa użytkownika",
+                    description: "Nazwa użytkownika Plex, dla której mają być pokazywane sesje."
+                },
+                px_showEpisodeName: {
+                    label: "Plex: Pokaż nazwę odcinka",
+                    description: "Pokaż nazwę odcinka po informacjach o sezonie/odcinku."
+                },
+                px_showCover: {
+                    label: "Plex: Pokaż okładkę",
+                    description: "Pokaż okładkę. Twój token Plex jest wysyłany do Discorda w adresie URL obrazu."
+                },
+                px_showPausedState: {
+                    label: "Plex: Pokaż stan wstrzymania",
+                    description: "Pokaż status, gdy multimedia są wstrzymane."
+                },
+                px_privacyMode: {
+                    label: "Plex: Tryb prywatności",
+                    description: "Ukryj szczegóły multimediów."
                 }
             },
             panel: {
@@ -13580,7 +13762,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 detailsFormat: "Format szczegółów",
                 stateFormat: "Format stanu",
                 largeTextFormat: "Format dużego tekstu",
-                enabled: "Włączone"
+                enabled: "Włączone",
+                token: "Token",
+                showCoverArt: "Pokaż okładkę"
             }
         },
         sedEnhanced: {
@@ -14245,7 +14429,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userPreset: "Ustawienie użytkownika",
                 custom: "Własne",
                 gaming: "Gry",
-                screenshare: "Udostępnianie ekranu"
+                screenshare: "Udostępnianie ekranu",
+                source: "Źródło"
             }
         },
         whitelistedEmojis: {

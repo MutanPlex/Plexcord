@@ -6,11 +6,11 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { BookCheckIcon, OpenExternalIcon, PencilIcon, StarFilled, StarOutlined, TrashIcon, UnsendIcon, WindowTopOutlineIcon, XLargeBoldIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
+import { Text } from "@components/Text";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { bookmarkFolderColors, bookmarkPlaceholderName, closeOtherTabs, closeTab, closeTabsToTheLeft, closeTabsToTheRight, createTab, getDiscordFolderIcon, getDiscordFolderIconNames, hasClosedTabs, isBookmarkFolder, openedTabs, reopenClosedTab, settings, toggleCompactTab } from "@plugins/channelTabs/util";
 import { Bookmark, BookmarkFolder, Bookmarks, ChannelTabsProps, UseBookmarkMethods } from "@plugins/channelTabs/util/types";
@@ -113,7 +113,7 @@ function FolderChipPreview({ name, color, iconName }: { name: string; color: str
             padding: "6px 10px"
         }}>
             <FolderGlyph color={color} iconName={iconName} />
-            <BaseText size="sm">{name.trim() || t(plugin.channelTabs.bookmark.folder)}</BaseText>
+            <Text size="sm">{name.trim() || t(plugin.channelTabs.bookmark.folder)}</Text>
         </div>
     );
 }
@@ -140,7 +140,7 @@ function FolderIconPickerModal({ modalProps, modalKey, name, color, iconName, on
         <Modal
             {...modalProps}
             size="sm"
-            title={<BaseText size="lg" weight="semibold">{t(plugin.channelTabs.modal.folderIcon.title)}</BaseText>}
+            title={<Text size="lg" weight="semibold">{t(plugin.channelTabs.modal.folderIcon.title)}</Text>}
             actions={[
                 {
                     text: t(plugin.channelTabs.button.close),
@@ -279,7 +279,7 @@ export function EditModal({ modalProps, modalKey, bookmark, onSave }: {
         <Modal
             {...modalProps}
             size="sm"
-            title={<BaseText size="lg" weight="semibold">{t(plugin.channelTabs.modal.edit.title)}</BaseText>}
+            title={<Text size="lg" weight="semibold">{t(plugin.channelTabs.modal.edit.title)}</Text>}
             actions={[
                 {
                     text: t(plugin.channelTabs.button.save),
@@ -330,7 +330,7 @@ function AddToFolderModal({ modalProps, modalKey, bookmarks, onSave }: {
         <Modal
             {...modalProps}
             size="sm"
-            title={<BaseText size="lg" weight="semibold">{t(plugin.channelTabs.modal.add.title)}</BaseText>}
+            title={<Text size="lg" weight="semibold">{t(plugin.channelTabs.modal.add.title)}</Text>}
             actions={[
                 {
                     text: t(plugin.channelTabs.button.save),
@@ -382,7 +382,7 @@ function DeleteFolderConfirmationModal({ modalProps, modalKey, onConfirm }: {
         <Modal
             {...modalProps}
             size="sm"
-            title={<BaseText size="lg" weight="semibold">{t(plugin.channelTabs.modal.delete.title)}</BaseText>}
+            title={<Text size="lg" weight="semibold">{t(plugin.channelTabs.modal.delete.title)}</Text>}
             actions={[
                 {
                     text: t(plugin.channelTabs.button.delete),

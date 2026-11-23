@@ -81,6 +81,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             disableMinSize: {
                 label: "Deaktiver minimum vinduesstørrelse",
                 description: "Gør det muligt at ændre vinduets størrelse til enhver størrelse, selv mindre end Discords minimumsstørrelse"
+            },
+            enableBackgroundRendering: {
+                label: "Aktivér baggrundsrendering",
+                description: "Holder appvinduet opdateret, selv når det ikke er helt i fokus"
             }
         },
         quickActions: {
@@ -90,7 +94,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             editQuickCSS: "Rediger QuickCSS",
             relaunchDiscord: "Genstart Discord",
             openSettingsFolder: "Åbn indstillingsmappe",
-            viewSourceCode: "Vis kildekode"
+            viewSourceCode: "Vis kildekode",
+            openPlayground: "Åbn komponent-legeplads"
         },
         specialCards: {
             donations: {
@@ -229,6 +234,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         tabs: {
             renderFailed: "Kunne ikke vise fanen {{tab}}. Hvis problemet fortsætter, kan du prøve at geninstallere med installationsprogrammet!"
+        },
+        playground: {
+            title: "Komponent-legeplads",
+            buttons: "Knapper",
+            buttonSize: "Knapstørrelse",
+            cards: "Kort"
         }
     },
 
@@ -401,6 +412,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Plexcord-donor",
                     special: "Dette badge er en særlig fordel for Plexcord-donorer",
                     description: "Overvej venligst at støtte udviklingen af Plexcord ved at blive donor. Det ville betyde meget!"
+                },
+                directory: {
+                    contributed: "bidraget",
+                    plugin: "plugin",
+                    plugins: "plugins",
+                    selfContributed: "Du har {{link}} til {{count}}!",
+                    otherContributed: "Denne person har {{link}} til {{count}}!",
+                    selfNoPlugins: "Du har ikke lavet nogen plugins endnu. Du har sandsynligvis {{link}} på andre måder!",
+                    otherNoPlugins: "Denne person har ikke lavet nogen plugins. De har sandsynligvis {{link}} på andre måder!",
+                    restart: "Genstart for at anvende ændringerne!",
+                    selfDonor: "Tak for din donation!",
+                    otherDonor: "Denne bruger er en Plexcord-donor!",
+                    selfDonorDescription: "Du kan til enhver tid administrere dine fordele ved at skrive til @mutanplex.",
+                    otherDonorDescription: "Støt Plexcord for at få dit eget badge og fordele!"
                 }
             },
         },
@@ -910,7 +935,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             scrollRight: "Rul til højre"
         },
         notices: {
-            error: "Fejl ved visning af meddelelse"
+            error: "Fejl ved visning af meddelelse",
+            dismiss: "Luk"
         },
         tray: {
             aboutPlexcord: "Om Plexcord",
@@ -1029,16 +1055,40 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "ConcatenatedModules",
             description: "Udtag moduler, der er blevet sammenkædet af bundleren"
         },
+        duplicateCategory: {
+            name: "DuplicateCategory",
+            description: "Tilføjer en mulighed for at duplikere en kategori med de samme tilladelser.",
+            menu: "Duplikér kategori",
+            toast: {
+                created: "Kategori oprettet."
+            },
+            error: {
+                missing: "Den oprindelige kategori findes ikke længere.",
+                failed: "Kunne ikke oprette kategorien. Tjek dine tilladelser og prøv igen."
+            },
+            modal: {
+                title: "Opret kategori",
+                cancel: "Annuller",
+                create: "Opret kategori",
+                name: "Kategorinavn",
+                placeholder: "Ny kategori",
+                copyPermissions: "Kopiér tilladelser",
+                copyPermissionsDescription: "Kopiér den oprindelige kategoris tilladelser til den nye kategori. Slå dette fra for at bruge serverens standardtilladelser."
+            }
+        },
         noTrack: {
             name: "NoTrack",
             description: "Deaktiver Discords sporing (analytics/'science'), metrikker og Sentry-fejlrapportering",
             option: {
                 disableAnalytics: {
                     label: "Deaktiver analyse",
-                    description: "Bloker Discords sporingsanalyser. Slå dette fra, hvis du vil have, at badges sporer dine fremskridt (f.eks. timer streamet)."
+                    description: "Bloker Discords sporingsanalyser"
                 },
                 disableStackDumping: {
                     description: "Udskriv en indbygget stakspore i konsollen, når Discord går ned. Kræver fuld genstart."
+                },
+                allowBadgeTracking: {
+                    description: "Send stadig de hændelser, som badges skal bruge til at følge dine fremskridt (f.eks. spillede timer, streamede timer)"
                 }
             }
         },
@@ -1463,11 +1513,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 channelOpenScrollMode: {
                     label: "Position ved åbning af kanal",
-                    description: "Åbn ulæste kanaler på den gemte position (eller nederst), altid nederst, eller brug standardadfærden for ulæste.",
+                    description: "Hvor i chathistorikken kanaler skal åbnes. Hvis du forlader inden for 5 beskeder fra den nyeste, betragtes \"Gemt position\" som ikke angivet, og den næste reserve bruges. Hvis din sidst læste besked er ældre end den maksimale alder nedenfor, betragtes kanalen som forladt, og \"Ældste ulæste\" betragtes som ikke angivet.",
                     default: "Discord-standard",
-                    bottom: "Altid nederst",
-                    saved: "Gemt position"
+                    bottom: "Nyeste besked",
+                    saved: "Gemt position > Ældste ulæste > Nyeste besked",
+                    savedLatest: "Gemt position > Nyeste besked",
+                    unread: "Ældste ulæste > Nyeste besked"
+                },
+                maximumLastReadAge: {
+                    label: "Maksimal alder for sidst læst",
+                    description: "Maksimal alder for din sidst læste besked, i minutter, for at bruge reserven \"Ældste ulæste\". Sæt til 0 for ubegrænset."
+                },
+                showJumpToPresentSooner: {
+                    label: "Vis Hop til nutid-knappen tidligere",
+                    description: "Viser Hop til nutid-knappen, når der er rullet 5 eller flere beskeder over den nyeste."
+                },
+                addChatbarButton: {
+                    label: "Tilføj chatbjælkeknap",
+                    description: "Tilføjer en chatbjælkeknap til hurtigt at skifte kanalernes åbningsposition."
                 }
+            },
+            history: {
+                unavailable: "Den gemte historik er ikke tilgængelig endnu.",
+                clearTitle: "Ryd gemt historik",
+                clearDescription: "Rydder lokal læsefremgang, der gemmes for at gendanne rullepositionen efter genindlæsning.",
+                clear: "Ryd",
+                success: "Lykkedes",
+                failure: "Mislykkedes"
             }
         },
         betterBanReasons: {
@@ -1624,6 +1696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "BetterPlusReacts",
             description: "Antallet af plusser før :emoji: er beskeden, den skal tilføjes til"
         },
+        betterPollDetails: {
+            name: "BetterPollDetails",
+            description: "Viser afstemningsprocenter og stemmetal før afstemning eller udløb uden at deaktivere muligheden for at stemme"
+        },
         betterRoleContext: {
             name: "BetterRoleContext",
             description: "Tilføjer muligheder for at kopiere rollefarve / redigere rolle / se rolleikon, når du højreklikker på roller i brugerprofilen eller i medlemslisten",
@@ -1709,6 +1785,20 @@ const translations: MatchStructure<typeof enTranslations> = {
         betterUploadButton: {
             name: "BetterUploadButton",
             description: "Upload med et enkelt klik, åbn menuen med et højreklik"
+        },
+        betterYoutubeEmbeds: {
+            name: "BetterYouTubeEmbeds",
+            description: "Bloker reklamer og omgå UMG-blokeringer",
+            option: {
+                fixBlockedEmbeds: {
+                    label: "Ret blokerede indlejringer",
+                    description: "Gendan videoer, der er blokeret fra at blive vist i Discord, for eksempel af UMG"
+                },
+                blockAds: {
+                    label: "Bloker reklamer",
+                    description: "Blokerer reklamer i YouTube-indlejringer og WatchTogether. Videoen kan tage nogle sekunder at indlæse på grund af YouTubes anti-reklame-tiltag"
+                }
+            }
         },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
@@ -3993,6 +4083,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeFamilyCenterAboveDms: {
                     description: "Fjern familiecenteret over DM-listen.",
                     label: "Fjern familiecenter over DM'er"
+                },
+                removeAccountPopoutBadges: {
+                    label: "Fjern badges fra konto-popout",
+                    description: "Fjern badges fra konto-popouten."
+                },
+                removeAccountPopoutOrbs: {
+                    label: "Fjern orbs fra konto-popout",
+                    description: "Fjern orbs fra konto-popouten."
+                },
+                removeInvisibleWarning: {
+                    label: "Fjern usynlig-advarsel",
+                    description: "Fjern advarslen om usynlig status fra konto-popouten."
                 }
             },
             text: {
@@ -4268,8 +4370,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 success: "Downloadede {{count}} vedhæftning(er).",
                 partial: "Downloadede {{succeeded}} af {{total}} vedhæftninger. {{failed}} mislykkedes.",
-                downloadedPluralizeSucceededAttachment: "Downloadede {{pluralize_succeeded_attachment}}.",
-                downloadedSucceededOfLength: "Downloadede {{succeeded}} af {{length}} vedhæftede filer. {{failed}} mislykkedes."
+                downloadedPluralizeSucceededAttachment: "Gemte {{pluralize_succeeded_attachment}}.",
+                downloadedSucceededOfLength: "Gemte {{succeeded}} af {{length}} vedhæftede filer. {{failed}} mislykkedes.",
+                tooLarge: "Disse vedhæftede filer er for store til at zippe. Gem dem én ad gangen i stedet.",
+                noneDownloaded: "Kunne ikke downloade nogen vedhæftede filer."
             },
             option: {
                 downloadAllFileTypes: {
@@ -4926,10 +5030,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        fixYoutubeEmbeds: {
-            name: "FixYoutubeEmbeds",
-            description: "Omgår blokering af YouTube-videoer i Discord (f.eks. blokeret af UMG)"
-        },
         followUser: {
             name: "FollowUser",
             description: "Tilføjer en 'Følg'-mulighed i bruger-kontekstmenuen for altid at være i samme stemmekanal som dem",
@@ -5150,10 +5250,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         fullSearchContext: {
             name: "FullSearchContext",
             description: "Sørger for, at besked-kontekstmenuen i søgeresultater har alle de muligheder, man forventer"
-        },
-        fullUserInChatbox: {
-            name: "FullUserInChatbox",
-            description: "Gør bruger-mentions i chatfeltet mere funktionelle, såsom ved venstre/højre-klik"
         },
         fullVCPFP: {
             name: "FullVCPFP",
@@ -9914,7 +10010,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showHiddenChannels: {
             name: "ShowHiddenChannels",
-            description: "Vis kanaler som du normalt ikke har adgang til at se.",
+            description: "Viser skjulte kanaler. Discord har begrænset denne funktionalitet kraftigt. Mere info i plugin-indstillingerne.",
             tooltip: "Skjult kanal",
             option: {
                 channelStyle: {
@@ -9968,7 +10064,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknown: "ukendt",
                 permissionDetails: "Tilladelsesdetaljer",
                 thisIsA: "Dette er en {{status}} {{channelType}} kanal",
-                canNotSee: "Du kan ikke se {{type}} i denne kanal.",
+                canNotSee: "Du kan ikke se navnet eller {{type}} i denne kanal.",
                 guidelines: "Du kan dog se dens retningslinjer:",
                 lastCreated: "Sidst oprettet {{type}}:",
                 lastPin: "Sidst fastgjorte besked:",
@@ -9987,6 +10083,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedUsersAndRoles: "Tilladte brugere og roller:",
                 hideAllowedUsersAndRoles: "Skjul tilladte brugere og roller",
                 viewAllowedUsersAndRoles: "Vis tilladte brugere og roller"
+            },
+            about: {
+                title: "Begrænset funktionalitet",
+                patched: "Discord har patchet det meste af dette plugins funktionalitet ({{link}}). Skjulte kanaler vises nu som \"Ingen adgang\" i stedet, og det er ikke længere muligt at se ting som navn, emne eller personer med adgang.",
+                announcement: "læs deres meddelelse",
+                nothingToDo: "Der er intet, vi kan gøre for at rette dette. Du kan dog stadig vide, at kanalerne findes, og se hvem der er forbundet til private talekanaler."
             }
         },
         showHiddenThings: {
@@ -10344,6 +10446,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     defaultHidden: {
                         name: "standardSkjult",
                         description: "Om du som standard skal skjule at du skriver."
+                    },
+                    dmListIndicator: {
+                        description: "Skjul skriveindikatorer på samtaler i listen over direkte beskeder."
                     }
                 }
             },
@@ -10426,6 +10531,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabledLocations: {
                     label: "Deaktiverede steder",
                     description: "ID'er på kanaler/servere hvor funktionen skal være deaktiveret."
+                },
+                hideDmListTypingIndicators: {
+                    label: "Skjul skriveindikatorer i DM-listen",
+                    description: "Skjul skriveindikatorer på samtaler i listen over direkte beskeder."
                 }
             },
             text: {
@@ -10435,7 +10544,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 membersListIndicators: "Indikatorer i medlemslisten",
                 guild: "Server",
                 channel: "Kanal",
-                global: "Global"
+                global: "Global",
+                dmListIndicators: "DM-listeindikatorer"
             }
         },
         snowfall: {
@@ -10751,7 +10861,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 goldColor: "Guld-stimefarve (30+ dage)",
                 silverColor: "Sølv-stimefarve (14+ dage)",
                 bronzeColor: "Bronze-stimefarve (7+ dage)",
-                defaultColor: "Standard-stimefarve (1+ dage)"
+                defaultColor: "Standard-stimefarve (1+ dage)",
+                showOnSelf: {
+                    label: "Vis på mig selv",
+                    description: "Vis streaken på dine egne beskeder i DM'er"
+                },
+                showOutsideDMs: {
+                    label: "Vis uden for DM'er",
+                    description: "Vis streaks på beskeder uden for DM'er"
+                }
             },
             toast: {
                 authFailed: "Godkendelse mislykkedes: {{error}}",
@@ -11755,11 +11873,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
-            description: "Fjerner grænsen på 2500kbps bitrate for skærmdeling på Chromium- og Plextron-klienter.",
+            description: "Fjerner bithastighedsgrænsen på 2500kbps på Chromium- og Vesktop-klienter, aktiverer stereo-streamlyd med højere bithastighed, hæver streams' startbithastighed, bruger hardware-H264-kodning og retter CPU-forbrug, der vokser uendeligt under skærmdeling.",
             option: {
                 experimentalAV1Support: {
                     label: "Eksperimentel AV1-understøttelse",
                     description: "Aktiver AV1-codec. Kan give problemer som f.eks. streams der aldrig færdigindlæses."
+                },
+                betterCodecs: {
+                    label: "Bedre codecs",
+                    description: "KAN FORÅRSAGE PROBLEMER! Foretræk bedre codecs som AV1 og VP9 ved streaming. Bør forbedre kvaliteten, men kan føre til problemer som streams, der indlæser uendeligt."
                 }
             }
         },
@@ -11881,10 +12003,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Lydstyrke"
                 }
             }
-        },
-        youtubeAdblock: {
-            name: "YouTubeAdblock",
-            description: "Blokerer reklamer i YouTube-embeds og 'Watch Together'-aktiviteten via AdGuard."
         },
         youtubeDescription: {
             name: "YouTubeDescription",
@@ -12362,7 +12480,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 validate: "Validér",
                 resetToDefault: "Nulstil til standard",
                 progress: "{{percent}} % - {{transferred}} af {{total}}",
-                cancel: "Annuller"
+                cancel: "Annuller",
+                stripFileExtension: "Fjern filtypenavnet fra den genererede URL",
+                saveOriginalFileName: "Om filnavnet gemmes på Zipline og gendannes ved download, uanset det valgte URL-format"
             },
             option: {
                 serviceType: {
@@ -12574,6 +12694,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsComponent: {
                     description: "Indstillinger",
                     label: "Indstillingskomponent"
+                },
+                ziplineStripExtension: {
+                    label: "Zipline: Fjern filtype",
+                    description: "Fjern filtypenavn"
+                },
+                ziplineOriginalName: {
+                    label: "Zipline: Originalt navn",
+                    description: "Behold originalt filnavn"
                 }
             },
             panel: {
@@ -12646,7 +12774,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 network: "Netværk",
                 corsProxyUrl: "CORS-proxy-URL",
                 uploadTimeout: "Tidsgrænse for upload",
-                domainsJsonDescription: "JSON-array med domæner, der skal bruges, f.eks. [\"offensive\"]."
+                domainsJsonDescription: "JSON-array med domæner, der skal bruges, f.eks. [\"offensive\"].",
+                stripFileExtension: "Fjern filtypenavn",
+                saveOriginalFileName: "Gem originalt filnavn"
             },
             status: {
                 cancelled: "Upload annulleret.",
@@ -13151,6 +13281,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 gifPickerTyping: {
                     label: "GIF-vælger skriver",
                     description: "Viser dig som skrivende, mens GIF-vælgeren er åben"
+                },
+                removeChannelSuggestions: {
+                    label: "Fjern kanalforslag",
+                    description: "Fjerner kategorien Foreslåede kanaler fra serverens sidebjælke"
                 }
             },
             text: {
@@ -13251,7 +13385,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 audiobookshelfServerUrl: "URL til AudioBookShelf-server.",
                 audiobookshelfUsername: "AudioBookShelf-brugernavn.",
                 audiobookshelfPassword: "AudioBookShelf-adgangskode.",
-                connectsToTosuVia: "Forbinder til tosu via WebSocket på port 24050. Ingen konfiguration nødvendig, sørg bare for, at tosu kører sammen med osu!.",
+                connectsToTosuVia: "Forbinder til tosu via WebSocket. Sørg bare for, at tosu kører sammen med osu!.",
                 showWhatYouRe: "Vis, hvad du lytter til via stats.fm. Kræver, at din lyttehistorik er offentlig.",
                 statsFmUsername: "Stats.fm-brugernavn.",
                 customStatusText: "Brugerdefineret statustekst.",
@@ -13307,10 +13441,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 viewSong: "Vis sang",
                 showArtistName: "Vis kunstnernavn",
                 showTrackName: "Vis nummernavn",
-                enterValue: "Indtast en værdi"
+                enterValue: "Indtast en værdi",
+                tosuServerUrl: "tosu-domæne-URL.",
+                tosuPrivacyMode: "Skjuler dit brugernavn i presence.",
+                plexDescription: "Vis hvad du afspiller på din Plex-server. Du skal være serverejer for at se sessioner. For at få dit token skal du åbne et vilkårligt element i Plex Web, vælge Hent info, derefter Vis XML og kopiere X-Plex-Token-værdien fra URL'en.",
+                plexServerUrl: "Plex-server-URL.",
+                plexToken: "Plex-token.",
+                plexUsername: "Plex-brugernavn, som sessioner skal vises for.",
+                plexUsernamePlaceholder: "Plex-brugernavn",
+                plexShowCover: "Vis coverbillede. Dit Plex-token sendes til Discord i billed-URL'en."
             },
             name: "RichPresence",
-            description: "Samlet Rich Presence-hub til AudioBookShelf, osu!, stats.fm, Jellyfin, Navidrome og Gensokyo Radio.",
+            description: "Samlet rich presence-hub for AudioBookShelf, osu!, stats.fm, Jellyfin, Plex, Navidrome og Gensokyo Radio.",
             toast: {
                 audiobookshelfRpcIsNot: "AudioBookShelf RPC er ikke konfigureret.",
                 jellyfinRpcIsNot: "Jellyfin RPC er ikke konfigureret.",
@@ -13542,6 +13684,46 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nd_hideOnPause: {
                     description: "Skjul Rich Presence, når musikken er sat på pause",
                     label: "Navidrome: skjul ved pause"
+                },
+                px_enabled: {
+                    label: "Plex: Aktiveret",
+                    description: "Aktivér Plex-presence."
+                },
+                tosu_serverUrl: {
+                    label: "tosu: Server-URL",
+                    description: "tosu-domæne-URL."
+                },
+                tosu_privacyMode: {
+                    label: "tosu: Privatlivstilstand",
+                    description: "Privatlivstilstand"
+                },
+                px_serverUrl: {
+                    label: "Plex: Server-URL",
+                    description: "Plex-server-URL."
+                },
+                px_token: {
+                    label: "Plex: Token",
+                    description: "Plex-token."
+                },
+                px_username: {
+                    label: "Plex: Brugernavn",
+                    description: "Plex-brugernavn, som sessioner skal vises for."
+                },
+                px_showEpisodeName: {
+                    label: "Plex: Vis episodenavn",
+                    description: "Vis episodenavn efter sæson-/episodeinfo."
+                },
+                px_showCover: {
+                    label: "Plex: Vis cover",
+                    description: "Vis coverbillede. Dit Plex-token sendes til Discord i billed-URL'en."
+                },
+                px_showPausedState: {
+                    label: "Plex: Vis pausetilstand",
+                    description: "Vis presence, når medier er sat på pause."
+                },
+                px_privacyMode: {
+                    label: "Plex: Privatlivstilstand",
+                    description: "Skjul mediedetaljer."
                 }
             },
             panel: {
@@ -13580,7 +13762,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 detailsFormat: "Format for detaljer",
                 stateFormat: "Format for tilstand",
                 largeTextFormat: "Format for stor tekst",
-                enabled: "Aktiveret"
+                enabled: "Aktiveret",
+                token: "Token",
+                showCoverArt: "Vis coverbillede"
             }
         },
         sedEnhanced: {
@@ -14245,7 +14429,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userPreset: "Brugerforudindstilling",
                 custom: "Brugerdefineret",
                 gaming: "Gaming",
-                screenshare: "Skærmdeling"
+                screenshare: "Skærmdeling",
+                source: "Kilde"
             }
         },
         whitelistedEmojis: {

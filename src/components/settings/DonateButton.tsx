@@ -26,14 +26,15 @@ import { showToast } from "@webpack/common";
 
 export function DonateButton({
     className,
+    variant = "none",
     ...props
 }: Partial<ButtonProps>) {
     return (
         <Button
-            {...props}
-            variant="none"
             size="medium"
             type="button"
+            variant={variant}
+            {...props}
             onClick={() => PlexcordNative.native.openExternal("https://github.com/sponsors/MutanPlex")}
             className={className || "pc-donate-button"}
         >
@@ -45,14 +46,15 @@ export function DonateButton({
 
 export function InviteButton({
     className,
+    variant = "none",
     ...props
 }: Partial<ButtonProps>) {
     return (
         <Button
-            {...props}
-            variant="none"
             size="medium"
             type="button"
+            variant={variant}
+            {...props}
             onClick={async e => {
                 e.preventDefault();
                 openInviteModal("HQGYXm5XSh").catch(() =>

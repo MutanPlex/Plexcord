@@ -80,6 +80,14 @@ export const settings = definePluginSettings({
         hidden: true,
         onChange: () => onServiceChange?.(),
     },
+    px_enabled: {
+        label: () => t(plugin.richPresence.option.px_enabled.label),
+        description: () => t(plugin.richPresence.option.px_enabled.description),
+        type: OptionType.BOOLEAN,
+        default: false,
+        hidden: true,
+        onChange: () => onServiceChange?.(),
+    },
 
     // AudioBookShelf
     abs_serverUrl: {
@@ -193,6 +201,22 @@ export const settings = definePluginSettings({
         hidden: true,
     },
 
+    // tosu
+    tosu_serverUrl: {
+        label: () => t(plugin.richPresence.option.tosu_serverUrl.label),
+        description: () => t(plugin.richPresence.option.tosu_serverUrl.description),
+        type: OptionType.STRING,
+        default: "",
+        hidden: true
+    },
+    tosu_privacyMode: {
+        label: () => t(plugin.richPresence.option.tosu_privacyMode.label),
+        description: () => t(plugin.richPresence.option.tosu_privacyMode.description),
+        type: OptionType.BOOLEAN,
+        default: false,
+        hidden: true
+    },
+
     // Jellyfin
     jf_serverUrl: {
         label: () => t(plugin.richPresence.option.jf_serverUrl.label),
@@ -284,6 +308,57 @@ export const settings = definePluginSettings({
     jf_privacyMode: {
         label: () => t(plugin.richPresence.option.jf_privacyMode.label),
         description: () => t(plugin.richPresence.option.jf_privacyMode.description),
+        type: OptionType.BOOLEAN,
+        default: false,
+        hidden: true,
+    },
+
+    // Plex
+    px_serverUrl: {
+        label: () => t(plugin.richPresence.option.px_serverUrl.label),
+        description: () => t(plugin.richPresence.option.px_serverUrl.description),
+        type: OptionType.STRING,
+        default: "",
+        hidden: true,
+    },
+    px_token: {
+        label: () => t(plugin.richPresence.option.px_token.label),
+        description: () => t(plugin.richPresence.option.px_token.description),
+        type: OptionType.STRING,
+        default: "",
+        hidden: true,
+    },
+    px_username: {
+        label: () => t(plugin.richPresence.option.px_username.label),
+        description: () => t(plugin.richPresence.option.px_username.description),
+        type: OptionType.STRING,
+        default: "",
+        hidden: true,
+    },
+    px_showEpisodeName: {
+        label: () => t(plugin.richPresence.option.px_showEpisodeName.label),
+        description: () => t(plugin.richPresence.option.px_showEpisodeName.description),
+        type: OptionType.BOOLEAN,
+        default: true,
+        hidden: true,
+    },
+    px_showCover: {
+        label: () => t(plugin.richPresence.option.px_showCover.label),
+        description: () => t(plugin.richPresence.option.px_showCover.description),
+        type: OptionType.BOOLEAN,
+        default: false,
+        hidden: true,
+    },
+    px_showPausedState: {
+        label: () => t(plugin.richPresence.option.px_showPausedState.label),
+        description: () => t(plugin.richPresence.option.px_showPausedState.description),
+        type: OptionType.BOOLEAN,
+        default: true,
+        hidden: true,
+    },
+    px_privacyMode: {
+        label: () => t(plugin.richPresence.option.px_privacyMode.label),
+        description: () => t(plugin.richPresence.option.px_privacyMode.description),
         type: OptionType.BOOLEAN,
         default: false,
         hidden: true,

@@ -189,7 +189,7 @@ export default definePlugin({
         {
             find: "__invalid_threadMainContent",
             replacement: {
-                match: /className:\i\.\i,onClick:\i,onAuxClick:(?=.{0,100}__invalid_threadMainContent)/,
+                match: /className:\i\.\i,.{0,30},onAuxClick:(?=.{0,100}__invalid_threadMainContent)/,
                 replace: "draggable:!0,onDragStart:e=>$self.onChannelDragStart(e),$&"
             }
         },
@@ -231,7 +231,7 @@ export default definePlugin({
         {
             find: ".VOICE_CHANNEL_TILE,children:",
             replacement: {
-                match: /(?<=\.VOICE_USER,.{0,250})className:\i\.\i,onDoubleClick:\i,/,
+                match: /(?<=\.VOICE_USER,.{0,250})className:\i\.\i,onDoubleClick:\i\.\i,/,
                 replace: "draggable:!0,onDragStart:e=>$self.onUserDragStart(e,{id:arguments[0].participantUserId}),\"data-dragify-user\":!0,\"data-user-id\":arguments[0].participantUserId,$&"
             }
         },

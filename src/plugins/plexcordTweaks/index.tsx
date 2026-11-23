@@ -120,6 +120,13 @@ const settings = definePluginSettings({
         restartNeeded: true,
         default: false,
     },
+    removeChannelSuggestions: {
+        type: OptionType.BOOLEAN,
+        label: () => t(plugin.plexcordTweaks.option.removeChannelSuggestions.label),
+        description: () => t(plugin.plexcordTweaks.option.removeChannelSuggestions.description),
+        restartNeeded: true,
+        default: false,
+    },
     showAllBadges: {
         label: () => t(plugin.plexcordTweaks.option.showAllBadges.label),
         type: OptionType.BOOLEAN,
@@ -157,7 +164,7 @@ export default definePlugin({
     dependencies: ["CommandsAPI", "HeaderBarAPI"],
     authors: [
         Devs.thororen,
-        PcDevs.nyx,
+        Devs.nyx,
         PcDevs.Naibuu,
         PcDevs.keircn,
         Devs.SerStars,
@@ -170,6 +177,7 @@ export default definePlugin({
         PcDevs.tie,
         PcDevs.itzmeshadow999,
         PcDevs.luqenov,
+        PcDevs.lethied,
         PcDevs.MutanPlex
     ],
     settings,
@@ -223,6 +231,14 @@ export default definePlugin({
                 replace: ""
             },
             predicate: () => settings.store.jsonGateway
+        },
+        {
+            find: '"placeholder-channel-id"',
+            replacement: {
+                match: /let\{selectedChannel:\i,activeJoinedRelevantThreads:\i\}.{0,30}\.GUILD_DIRECTORY\|\|/,
+                replace: "return false;$&"
+            },
+            predicate: () => settings.store.removeChannelSuggestions
         },
         {
             find: "UserProfileBadgeListRows",

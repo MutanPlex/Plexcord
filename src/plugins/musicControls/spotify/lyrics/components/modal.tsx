@@ -6,7 +6,7 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
+import { Text } from "@components/Text";
 import { RenderModalProps } from "@plexcord/discord-types";
 import { SpotifyStore, Track } from "@plugins/musicControls/spotify/SpotifyStore";
 import { openImageModal } from "@utils/discord";
@@ -22,7 +22,7 @@ const formatTime = (time: number) => {
 
 function getTitleNode(track: Track | null) {
     if (!track) {
-        return <BaseText size="sm" weight="semibold">{t(plugin.musicControls.modal.player.noPlaying)}</BaseText>;
+        return <Text size="sm" weight="semibold">{t(plugin.musicControls.modal.player.noPlaying)}</Text>;
     }
     return (
         <div className={cl("header-content")}>
@@ -39,9 +39,9 @@ function getTitleNode(track: Track | null) {
                 />
             )}
             <div>
-                <BaseText size="sm" weight="semibold">{track.name}</BaseText>
-                <BaseText size="sm">{t(plugin.musicControls.modal.player.artist)} {track.artists.map(a => a.name).join(", ")}</BaseText>
-                <BaseText size="sm">{t(plugin.musicControls.modal.player.album)} {track.album.name}</BaseText>
+                <Text size="sm" weight="semibold">{track.name}</Text>
+                <Text size="sm">{t(plugin.musicControls.modal.player.artist)} {track.artists.map(a => a.name).join(", ")}</Text>
+                <Text size="sm">{t(plugin.musicControls.modal.player.album)} {track.album.name}</Text>
             </div>
         </div>
     );
@@ -59,7 +59,7 @@ export function LyricsModal({ props }: { props: RenderModalProps; }) {
             <div className={`${cl("lyrics-modal-container")} ${scrollClasses.auto}`}>
                 {currentLyrics ? (
                     currentLyrics.map((line, i) => (
-                        <BaseText
+                        <Text
                             key={i}
                             size={currLrcIndex === i ? "md" : "sm"}
                             weight={currLrcIndex === i ? "semibold" : "normal"}
@@ -69,12 +69,12 @@ export function LyricsModal({ props }: { props: RenderModalProps; }) {
                                 {formatTime(line.time)}
                             </span>
                             {line.text || NoteSvg()}
-                        </BaseText>
+                        </Text>
                     ))
                 ) : (
-                    <BaseText size="sm" className={cl("modal-no-lyrics")}>
+                    <Text size="sm" className={cl("modal-no-lyrics")}>
                         {t(plugin.musicControls.modal.player.noLyrics)}
-                    </BaseText>
+                    </Text>
                 )}
             </div>
         </Modal>

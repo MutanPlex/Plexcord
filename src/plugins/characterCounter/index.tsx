@@ -10,7 +10,7 @@ import "./style.css";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { ErrorBoundary } from "@components/index";
-import { Devs, PcDevs } from "@utils/constants";
+import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
 import { useEffect, UserStore, useState } from "@webpack/common";
@@ -37,7 +37,7 @@ function getCounterColor(percentage: number) {
 export default definePlugin({
     name: "CharacterCounter",
     description: () => t(plugin.characterCounter.description),
-    authors: [Devs.thororen, PcDevs.creations],
+    authors: [Devs.thororen, Devs.creations],
     tags: ["chat", "utility"],
     settings,
     patches: [

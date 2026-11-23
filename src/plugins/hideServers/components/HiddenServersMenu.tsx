@@ -6,11 +6,11 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { Heading } from "@components/Heading";
 import { XSmallIcon } from "@components/Icons";
+import { Text } from "@components/Text";
 import { Guild, RenderModalProps } from "@plexcord/discord-types";
 import { HiddenServersStore } from "@plugins/hideServers/HiddenServersStore";
 import { classNameFactory } from "@utils/css";
@@ -74,9 +74,9 @@ function GuildRow({ guild }) {
                     </div>
                 )}
             </div>
-            <BaseText size="md" weight="medium" className={cl("name")}>
+            <Text size="md" weight="medium" className={cl("name")}>
                 {guild.name}
-            </BaseText>
+            </Text>
             <Button
                 variant="dangerSecondary"
                 size="iconOnly"
@@ -151,7 +151,7 @@ export function HiddenServersMenu({ guilds }: { guilds: Guild[]; }) {
             />
         ) : null}
 
-        {hiddenGuilds.length === 0 && <BaseText size="md" weight="medium">{t(plugin.hideServers.button.noHiddenServers)}</BaseText>}
+        {hiddenGuilds.length === 0 && <Text size="md" weight="medium">{t(plugin.hideServers.button.noHiddenServers)}</Text>}
     </div>;
 }
 

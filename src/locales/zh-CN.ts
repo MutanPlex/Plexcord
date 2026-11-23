@@ -81,6 +81,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             disableMinSize: {
                 label: "禁用最小窗口大小",
                 description: "允许将窗口调整为任意大小，甚至小于 Discord 的最小尺寸"
+            },
+            enableBackgroundRendering: {
+                label: "启用后台渲染",
+                description: "即使应用窗口未完全聚焦也保持更新"
             }
         },
         quickActions: {
@@ -90,7 +94,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             editQuickCSS: "编辑 QuickCSS",
             relaunchDiscord: "重新启动不和谐",
             openSettingsFolder: "打开设置文件夹",
-            viewSourceCode: "查看源代码"
+            viewSourceCode: "查看源代码",
+            openPlayground: "打开组件试验场"
         },
         specialCards: {
             donations: {
@@ -229,6 +234,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         tabs: {
             renderFailed: "无法渲染 {{tab}} 标签页。如果问题持续，请尝试使用安装程序重新安装！"
+        },
+        playground: {
+            title: "组件试验场",
+            buttons: "按钮",
+            buttonSize: "按钮大小",
+            cards: "卡片"
         }
     },
 
@@ -401,6 +412,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Plexcord 供体",
                     special: "此徽章是 Plexcord 捐赠者的特殊福利",
                     description: "请考虑成为捐助者来支持 Plexcord 的发展。这意味着很多！"
+                },
+                directory: {
+                    contributed: "贡献",
+                    plugin: "插件",
+                    plugins: "插件",
+                    selfContributed: "你已为 {{count}} 做出{{link}}!",
+                    otherContributed: "此人已为 {{count}} 做出{{link}}!",
+                    selfNoPlugins: "你还没有制作任何插件。你很可能以其他方式做出了{{link}}!",
+                    otherNoPlugins: "此人没有制作任何插件。他们很可能以其他方式做出了{{link}}!",
+                    restart: "重启以应用更改!",
+                    selfDonor: "感谢你的捐赠!",
+                    otherDonor: "此用户是 Plexcord 捐赠者!",
+                    selfDonorDescription: "你可以随时私信 @mutanplex 来管理你的特权。",
+                    otherDonorDescription: "支持 Plexcord,获取你自己的徽章和特权!"
                 }
             },
         },
@@ -910,7 +935,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             scrollRight: "向右滚动"
         },
         notices: {
-            error: "显示通知时出错"
+            error: "显示通知时出错",
+            dismiss: "关闭"
         },
         tray: {
             aboutPlexcord: "关于 Plexcord",
@@ -1029,16 +1055,40 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "ConcatenatedModules",
             description: "提取已被打包工具（bundler）拼接的模块"
         },
+        duplicateCategory: {
+            name: "DuplicateCategory",
+            description: "添加一个以相同权限复制类别的选项。",
+            menu: "复制类别",
+            toast: {
+                created: "类别已创建。"
+            },
+            error: {
+                missing: "原类别已不存在。",
+                failed: "无法创建类别。请检查你的权限后重试。"
+            },
+            modal: {
+                title: "创建类别",
+                cancel: "取消",
+                create: "创建类别",
+                name: "类别名称",
+                placeholder: "新类别",
+                copyPermissions: "复制权限",
+                copyPermissionsDescription: "将原类别的权限复制到新类别。关闭此项以使用服务器的默认权限。"
+            }
+        },
         noTrack: {
             name: "NoTrack",
             description: "禁用 Discord 的跟踪（分析/“科学”）、指标和 Sentry 崩溃报告",
             option: {
                 disableAnalytics: {
                     label: "禁用分析",
-                    description: "阻止 Discord 的跟踪分析。如果你希望徽章记录你的进度（例如：直播时长），请关闭此项。"
+                    description: "阻止 Discord 的追踪分析"
                 },
                 disableStackDumping: {
                     description: "Discord 崩溃时在控制台输出原生堆栈跟踪。需要完全重启。"
+                },
+                allowBadgeTracking: {
+                    description: "仍然发送徽章追踪你的进度所需的事件(例如:游戏时长、直播时长)"
                 }
             }
         },
@@ -1463,11 +1513,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 channelOpenScrollMode: {
                     label: "频道打开位置",
-                    description: "在保存的位置（或底部）打开未读频道、始终在底部打开，或使用默认的未读行为。",
+                    description: "在聊天记录中的哪个位置打开频道。如果你离开时距离最新消息不超过 5 条,“已保存位置”将视为未设置并使用下一个备选。如果你最后已读的消息比下方的最大时长更早,该频道将视为已放弃,“最早未读”将视为未设置。",
                     default: "Discord 默认",
-                    bottom: "始终在底部",
-                    saved: "保存的位置"
+                    bottom: "最新消息",
+                    saved: "已保存位置 > 最早未读 > 最新消息",
+                    savedLatest: "已保存位置 > 最新消息",
+                    unread: "最早未读 > 最新消息"
+                },
+                maximumLastReadAge: {
+                    label: "最后已读的最大时长",
+                    description: "使用“最早未读”备选时,最后已读消息的最大时长(分钟)。设为 0 表示无限制。"
+                },
+                showJumpToPresentSooner: {
+                    label: "更早显示“跳到最新”按钮",
+                    description: "当向上滚动超过最新消息 5 条或更多时显示“跳到最新”按钮。"
+                },
+                addChatbarButton: {
+                    label: "添加聊天栏按钮",
+                    description: "添加一个聊天栏按钮,用于快速切换频道打开位置。"
                 }
+            },
+            history: {
+                unavailable: "已保存的历史记录暂不可用。",
+                clearTitle: "清除已保存的历史记录",
+                clearDescription: "清除用于在重新加载后恢复滚动位置的本地回读进度。",
+                clear: "清除",
+                success: "成功",
+                failure: "失败"
             }
         },
         betterBanReasons: {
@@ -1624,6 +1696,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "BetterPlusReacts",
             description: ":emoji: 前面的加号是要添加到的消息"
         },
+        betterPollDetails: {
+            name: "BetterPollDetails",
+            description: "在投票前或到期前显示投票百分比和票数,且不会禁用投票功能"
+        },
         betterRoleContext: {
             name: "BetterRoleContext",
             description: "在用户资料或成员列表中右键点击身份组时，添加复制身份组颜色 / 编辑身份组 / 查看身份组图标的选项",
@@ -1709,6 +1785,20 @@ const translations: MatchStructure<typeof enTranslations> = {
         betterUploadButton: {
             name: "BetterUploadButton",
             description: "单击上传，右键打开菜单"
+        },
+        betterYoutubeEmbeds: {
+            name: "BetterYouTubeEmbeds",
+            description: "屏蔽广告并绕过 UMG 屏蔽",
+            option: {
+                fixBlockedEmbeds: {
+                    label: "修复被屏蔽的嵌入内容",
+                    description: "恢复在 Discord 中被屏蔽显示的视频,例如被 UMG 屏蔽的视频"
+                },
+                blockAds: {
+                    label: "屏蔽广告",
+                    description: "屏蔽 YouTube 嵌入内容和 WatchTogether 中的广告。由于 YouTube 的反广告拦截措施,视频可能需要几秒钟才能加载"
+                }
+            }
         },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
@@ -3993,6 +4083,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeFamilyCenterAboveDms: {
                     description: "移除私信列表上方的家庭中心。",
                     label: "移除私信上方的家庭中心"
+                },
+                removeAccountPopoutBadges: {
+                    label: "移除账号弹出框中的徽章",
+                    description: "从账号弹出框中移除徽章。"
+                },
+                removeAccountPopoutOrbs: {
+                    label: "移除账号弹出框中的宝珠",
+                    description: "从账号弹出框中移除宝珠。"
+                },
+                removeInvisibleWarning: {
+                    label: "移除隐身警告",
+                    description: "从账号弹出框中移除隐身状态警告。"
                 }
             },
             text: {
@@ -4268,8 +4370,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 success: "已下载 {{count}} 个附件。",
                 partial: "已下载 {{total}} 个附件中的 {{succeeded}} 个，{{failed}} 个失败。",
-                downloadedPluralizeSucceededAttachment: "已下载 {{pluralize_succeeded_attachment}}。",
-                downloadedSucceededOfLength: "已下载 {{length}} 个附件中的 {{succeeded}} 个。{{failed}} 个失败。"
+                downloadedPluralizeSucceededAttachment: "已保存 {{pluralize_succeeded_attachment}}。",
+                downloadedSucceededOfLength: "已保存 {{length}} 个附件中的 {{succeeded}} 个。{{failed}} 个失败。",
+                tooLarge: "这些附件太大,无法压缩。请逐个保存。",
+                noneDownloaded: "无法下载任何附件。"
             },
             option: {
                 downloadAllFileTypes: {
@@ -4926,10 +5030,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        fixYoutubeEmbeds: {
-            name: "FixYoutubeEmbeds",
-            description: "绕过 Discord 上禁止显示的 YouTube 视频（例如 UMG）"
-        },
         followUser: {
             name: "FollowUser",
             description: "在用户上下文菜单中添加“关注”选项，以始终与他们位于同一 VC 中",
@@ -5150,10 +5250,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         fullSearchContext: {
             name: "FullSearchContext",
             description: "使消息搜索结果中的消息上下文菜单包含您期望的所有选项"
-        },
-        fullUserInChatbox: {
-            name: "FullUserInChatbox",
-            description: "使聊天框中的用户提及具有更多功能，例如左/右键单击"
         },
         fullVCPFP: {
             name: "FullVCPFP",
@@ -9914,7 +10010,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showHiddenChannels: {
             name: "ShowHiddenChannels",
-            description: "显示您无权查看的频道。",
+            description: "显示隐藏频道。Discord 大幅限制了此功能。更多信息请查看插件设置。",
             tooltip: "隐藏频道",
             option: {
                 channelStyle: {
@@ -9968,7 +10064,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 unknown: "未知",
                 permissionDetails: "权限详情",
                 thisIsA: "这是一个 {{status}} {{channelType}} 频道",
-                canNotSee: "您看不到该频道的 {{type}}。",
+                canNotSee: "你无法看到此频道的名称或{{type}}。",
                 guidelines: "但是，您可能会看到其指南：",
                 lastCreated: "最后创建的 {{type}}:",
                 lastPin: "最后一条消息图钉：",
@@ -9987,6 +10083,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 allowedUsersAndRoles: "允许的用户和角色：",
                 hideAllowedUsersAndRoles: "隐藏允许的用户和角色",
                 viewAllowedUsersAndRoles: "查看允许的用户和角色"
+            },
+            about: {
+                title: "功能受限",
+                patched: "Discord 已修补此插件的大部分功能({{link}})。隐藏频道现在显示为“无权访问”,并且无法再看到名称、主题或有权访问的人等信息。",
+                announcement: "阅读他们的公告",
+                nothingToDo: "我们无法修复此问题。不过,你仍然可以知道频道的存在,并看到谁连接到了私人语音频道。"
             }
         },
         showHiddenThings: {
@@ -10344,6 +10446,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     defaultHidden: {
                         name: "defaultHidden",
                         description: "默认情况下是否隐藏 DM/频道/公会中的输入。"
+                    },
+                    dmListIndicator: {
+                        description: "隐藏私信列表中会话的正在输入指示器。"
                     }
                 }
             },
@@ -10426,6 +10531,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabledLocations: {
                     label: "残疾人场所",
                     description: "禁用这些 ID 的功能。接受以逗号分隔的 DM ID、频道 ID 和行会 ID 列表。仅在启用“默认隐藏”时使用。"
+                },
+                hideDmListTypingIndicators: {
+                    label: "隐藏私信列表正在输入指示器",
+                    description: "隐藏私信列表中会话的正在输入指示器。"
                 }
             },
             text: {
@@ -10435,7 +10544,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 membersListIndicators: "成员列表指示器",
                 guild: "服务器",
                 channel: "频道",
-                global: "全局"
+                global: "全局",
+                dmListIndicators: "私信列表指示器"
             }
         },
         snowfall: {
@@ -10751,7 +10861,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 goldColor: "黄金连续颜色（30+ 天）",
                 silverColor: "白银连续颜色（14+ 天）",
                 bronzeColor: "青铜连续颜色（7+ 天）",
-                defaultColor: "默认连续颜色（1+ 天）"
+                defaultColor: "默认连续颜色（1+ 天）",
+                showOnSelf: {
+                    label: "在自己身上显示",
+                    description: "在私信中你自己的消息上显示连续天数"
+                },
+                showOutsideDMs: {
+                    label: "在私信之外显示",
+                    description: "在私信以外的消息上显示连续天数"
+                }
             },
             toast: {
                 authFailed: "授权失败：{{error}}",
@@ -11755,11 +11873,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
-            description: "取消了 Chromium 和 Plextron 客户端上 2500kbps 的比特率上限。",
+            description: "移除 Chromium 和 Vesktop 客户端的 2500kbps 码率上限,启用更高码率的立体声直播音频,提高直播的起始码率,使用硬件 H264 编码,并修复屏幕共享时 CPU 占用不断增长的问题。",
             option: {
                 experimentalAV1Support: {
                     label: "实验性 AV1 支持",
                     description: "启用 AV1 编解码器支持。可能会导致无限加载流等问题"
+                },
+                betterCodecs: {
+                    label: "更好的编解码器",
+                    description: "可能导致问题!直播时优先使用 AV1 和 VP9 等更好的编解码器。应能提升画质,但可能导致直播无限加载等问题。"
                 }
             }
         },
@@ -11881,10 +12003,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "体积"
                 }
             }
-        },
-        youtubeAdblock: {
-            name: "YouTubeAdblock",
-            description: "通过 AdGuard 屏蔽 YouTube 嵌入广告和 Watch Together 活动"
         },
         youtubeDescription: {
             name: "YouTubeDescription",
@@ -12362,7 +12480,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 validate: "验证",
                 resetToDefault: "重置为默认",
                 progress: "{{percent}}% - {{transferred}} / {{total}}",
-                cancel: "取消"
+                cancel: "取消",
+                stripFileExtension: "从生成的 URL 中去除文件扩展名",
+                saveOriginalFileName: "无论选择哪种 URL 格式,是否在 Zipline 上保存文件名并在下载时恢复"
             },
             option: {
                 serviceType: {
@@ -12574,6 +12694,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 settingsComponent: {
                     description: "设置",
                     label: "设置组件"
+                },
+                ziplineStripExtension: {
+                    label: "Zipline:去除扩展名",
+                    description: "去除文件扩展名"
+                },
+                ziplineOriginalName: {
+                    label: "Zipline:原始名称",
+                    description: "保留原始文件名"
                 }
             },
             panel: {
@@ -12646,7 +12774,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 network: "网络",
                 corsProxyUrl: "CORS 代理 URL",
                 uploadTimeout: "上传超时",
-                domainsJsonDescription: "要使用的域名 JSON 数组，例如 [\"offensive\"]。"
+                domainsJsonDescription: "要使用的域名 JSON 数组，例如 [\"offensive\"]。",
+                stripFileExtension: "去除文件扩展名",
+                saveOriginalFileName: "保存原始文件名"
             },
             status: {
                 cancelled: "上传已取消。",
@@ -13151,6 +13281,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 gifPickerTyping: {
                     label: "GIF 选择器输入中",
                     description: "打开 GIF 选择器时显示你正在输入"
+                },
+                removeChannelSuggestions: {
+                    label: "移除频道建议",
+                    description: "从服务器侧边栏移除“推荐频道”类别"
                 }
             },
             text: {
@@ -13251,7 +13385,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 audiobookshelfServerUrl: "AudioBookShelf 服务器 URL。",
                 audiobookshelfUsername: "AudioBookShelf 用户名。",
                 audiobookshelfPassword: "AudioBookShelf 密码。",
-                connectsToTosuVia: "通过端口 24050 上的 WebSocket 连接到 tosu。无需配置，只需确保 tosu 与 osu! 同时运行。",
+                connectsToTosuVia: "通过 WebSocket 连接到 tosu。只需确保 tosu 与 osu! 一起运行。",
                 showWhatYouRe: "通过 stats.fm 显示你正在收听的内容。需要你的收听历史为公开。",
                 statsFmUsername: "Stats.fm 用户名。",
                 customStatusText: "自定义状态文本。",
@@ -13307,10 +13441,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 viewSong: "查看歌曲",
                 showArtistName: "显示艺人名称",
                 showTrackName: "显示曲目名称",
-                enterValue: "输入一个值"
+                enterValue: "输入一个值",
+                tosuServerUrl: "tosu 域名 URL。",
+                tosuPrivacyMode: "在状态中隐藏你的用户名。",
+                plexDescription: "显示你在 Plex 服务器上正在播放的内容。你必须是服务器所有者才能查看会话。要获取令牌,请在 Plex Web 中打开任意项目,选择“获取信息”,然后选择“查看 XML”,并从 URL 中复制 X-Plex-Token 的值。",
+                plexServerUrl: "Plex 服务器 URL。",
+                plexToken: "Plex 令牌。",
+                plexUsername: "要显示其会话的 Plex 用户名。",
+                plexUsernamePlaceholder: "Plex 用户名",
+                plexShowCover: "显示封面。你的 Plex 令牌会包含在图片 URL 中发送给 Discord。"
             },
             name: "RichPresence",
-            description: "适用于 AudioBookShelf、osu!、stats.fm、Jellyfin、Navidrome 和 Gensokyo Radio 的统一 Rich Presence 中心。",
+            description: "适用于 AudioBookShelf、osu!、stats.fm、Jellyfin、Plex、Navidrome 和 Gensokyo Radio 的统一富状态中心。",
             toast: {
                 audiobookshelfRpcIsNot: "AudioBookShelf RPC 未配置。",
                 jellyfinRpcIsNot: "Jellyfin RPC 未配置。",
@@ -13542,6 +13684,46 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nd_hideOnPause: {
                     description: "音乐暂停时隐藏 Rich Presence",
                     label: "Navidrome：暂停时隐藏"
+                },
+                px_enabled: {
+                    label: "Plex:已启用",
+                    description: "启用 Plex 状态。"
+                },
+                tosu_serverUrl: {
+                    label: "tosu:服务器 URL",
+                    description: "tosu 域名 URL。"
+                },
+                tosu_privacyMode: {
+                    label: "tosu:隐私模式",
+                    description: "隐私模式"
+                },
+                px_serverUrl: {
+                    label: "Plex:服务器 URL",
+                    description: "Plex 服务器 URL。"
+                },
+                px_token: {
+                    label: "Plex:令牌",
+                    description: "Plex 令牌。"
+                },
+                px_username: {
+                    label: "Plex:用户名",
+                    description: "要显示其会话的 Plex 用户名。"
+                },
+                px_showEpisodeName: {
+                    label: "Plex:显示剧集名称",
+                    description: "在季/集信息后显示剧集名称。"
+                },
+                px_showCover: {
+                    label: "Plex:显示封面",
+                    description: "显示封面。你的 Plex 令牌会包含在图片 URL 中发送给 Discord。"
+                },
+                px_showPausedState: {
+                    label: "Plex:显示暂停状态",
+                    description: "媒体暂停时显示状态。"
+                },
+                px_privacyMode: {
+                    label: "Plex:隐私模式",
+                    description: "隐藏媒体详情。"
                 }
             },
             panel: {
@@ -13580,7 +13762,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 detailsFormat: "详情格式",
                 stateFormat: "状态格式",
                 largeTextFormat: "大文本格式",
-                enabled: "启用"
+                enabled: "启用",
+                token: "令牌",
+                showCoverArt: "显示封面"
             }
         },
         sedEnhanced: {
@@ -14245,7 +14429,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 userPreset: "用户预设",
                 custom: "自定义",
                 gaming: "游戏",
-                screenshare: "屏幕共享"
+                screenshare: "屏幕共享",
+                source: "源"
             }
         },
         whitelistedEmojis: {

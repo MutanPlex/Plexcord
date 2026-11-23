@@ -23,11 +23,11 @@ import { generateId } from "@api/Commands";
 import { plugin as pluginI18n, plugins, t, useForceUpdateOnLocaleChange } from "@api/i18n";
 import { hasAnyVisibleSettings, isSettingHidden } from "@api/PluginManager";
 import { useSettings } from "@api/Settings";
-import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Paragraph } from "@components/Paragraph";
+import { Text } from "@components/Text";
 import { RenderModalProps, User } from "@plexcord/discord-types";
 import { debounce } from "@shared/debounce";
 import { gitRemote } from "@shared/plexcordUserAgent";
@@ -195,7 +195,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
             size="lg"
             title={
                 <div className={cl("header")}>
-                    <BaseText tag="h1" size="lg" weight="semibold" className={cl("title")}>{displayName}</BaseText>
+                    <Text tag="h1" size="lg" weight="semibold" className={cl("title")}>{displayName}</Text>
                     {!pluginMeta.userPlugin && (
                         <div className={cl("links")}>
                             <FavoriteButton
@@ -217,7 +217,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
             subtitle={
                 <div className={cl("info")}>
                     <div>
-                        <BaseText size="sm" className={cl("description")}>{displayDescription}</BaseText>
+                        <Text size="sm" className={cl("description")}>{displayDescription}</Text>
                         {!!plugin.tags?.length && <PluginTags tags={plugin.tags} />}
                     </div>
                 </div>
@@ -234,7 +234,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
             )}
             <div className="pc-settings-modal-content">
                 <section>
-                    <BaseText size="lg" weight="semibold" color="text-strong" className={classes(Margins.top8, Margins.bottom8)}>{t(plugins.pluginModal.authors)}</BaseText>
+                    <Text size="lg" weight="semibold" color="text-strong" className={classes(Margins.top8, Margins.bottom8)}>{t(plugins.pluginModal.authors)}</Text>
                     <div style={{ width: "fit-content" }}>
                         <ErrorBoundary noop>
                             <UserSummaryItem
@@ -263,7 +263,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
 
                 <section>
                     <Flex style={{ justifyContent: "space-between", alignItems: "center" }} className={classes(Margins.top16, Margins.bottom8)}>
-                        <BaseText size="lg" weight="semibold" color="text-strong">{t(plugins.pluginModal.settings)}</BaseText>
+                        <Text size="lg" weight="semibold" color="text-strong">{t(plugins.pluginModal.settings)}</Text>
                         {hasSettings && (
                             <Tooltip text={t(plugins.restart.resetDefault)} shouldShow={!isObjectEmpty(pluginSettings)}>
                                 {({ onMouseEnter, onMouseLeave }) => (

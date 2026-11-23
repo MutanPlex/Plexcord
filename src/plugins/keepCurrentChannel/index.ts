@@ -69,6 +69,9 @@ export default definePlugin({
 
             if (previousCache?.channelId) {
                 if (ChannelStore.hasChannel(previousCache.channelId)) {
+                    if (previousCache?.guildId === "@favorites") {
+                        NavigationRouter.transitionToGuild("@favorites");
+                    }
                     ChannelRouter.transitionToChannel(previousCache.channelId);
                 } else {
                     NavigationRouter.transitionToGuild("@me");
@@ -97,6 +100,9 @@ export default definePlugin({
 
             await DataStore.set("KeepCurrentChannel_previousData", previousCache);
         } else if (previousCache.channelId) {
+            if (previousCache.guildId === "@favorites") {
+                NavigationRouter.transitionToGuild("@favorites");
+            }
             ChannelRouter.transitionToChannel(previousCache.channelId);
         }
     }

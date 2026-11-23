@@ -55,7 +55,7 @@
     font-size: 14px;
     font-weight: 500;
     line-height: 1.2857;
-    color: var(--text-default);
+    color: var(--white);
 }
 
 .pc-notice-text p {
@@ -72,7 +72,7 @@
 
 /* Info variant */
 .pc-notice-info {
-    background: var(--background-feedback-info);
+    background: var(--background-feedback-mod-info);
     border: 1px solid var(--icon-feedback-info);
     color: var(--text-feedback-info);
 }
@@ -83,7 +83,7 @@
 
 /* Warning variant */
 .pc-notice-warning {
-    background: var(--background-feedback-warning);
+    background: var(--background-feedback-mod-warning);
     border: 1px solid var(--icon-feedback-warning);
     color: var(--text-feedback-warning);
 }
@@ -94,7 +94,7 @@
 
 /* Danger variant */
 .pc-notice-danger {
-    background: var(--background-feedback-critical);
+    background: var(--background-feedback-mod-critical);
     border: 1px solid var(--icon-feedback-critical);
     color: var(--text-feedback-critical);
 }
@@ -105,7 +105,7 @@
 
 /* Positive variant */
 .pc-notice-positive {
-    background: var(--background-feedback-positive);
+    background: var(--background-feedback-mod-positive);
     border: 1px solid var(--icon-feedback-positive);
     color: var(--text-feedback-positive);
 }

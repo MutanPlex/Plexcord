@@ -133,3 +133,67 @@
 .pc-special-image {
     width: 65%;
 }
+
+.pc-special-card-dark {
+    background-color: #232428 !important;
+    background-image: none !important;
+    position: relative;
+    overflow: hidden;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.pc-special-card-dark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("https://media.discordapp.net/stickers/1311070116305436712.png?size=2048");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: luminosity;
+    pointer-events: none;
+    z-index: 0;
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0,
+        black 2px,
+        black calc(100% - 2px),
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to bottom,
+        transparent 0,
+        black 2px,
+        black calc(100% - 2px),
+        transparent 100%
+    );
+}
+
+.pc-special-card-dark .pc-special-card-flex {
+    position: relative;
+    z-index: 1;
+}
+
+.pc-special-card-dark .pc-special-title,
+.pc-special-card-dark .pc-special-subtitle,
+.pc-special-card-dark .pc-special-text {
+    color: #ffffff !important;
+}
+
+.pc-special-card-dark .pc-donate-button,
+.pc-special-card-dark .pc-invite-button,
+.pc-special-card-dark button {
+    overflow: visible !important;
+    color: black !important;
+    background-color: color-mix(in srgb, #575757 50%, rgb(255 255 255)) !important;
+}
+
+.pc-special-card-dark .pc-donate-button:hover,
+.pc-special-card-dark .pc-invite-button:hover,
+.pc-special-card-dark button:hover {
+    overflow: visible !important;
+    color: black !important;
+    background-color: color-mix(in srgb, #575757 50%, rgb(201 201 201)) !important;
+}

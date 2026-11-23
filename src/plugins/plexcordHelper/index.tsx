@@ -20,7 +20,7 @@ export default definePlugin({
     dependencies: ["MessageAccessoriesAPI"],
     authors: [
         Devs.thororen,
-        PcDevs.nyx,
+        Devs.nyx,
         PcDevs.Naibuu,
         PcDevs.MutanPlex
     ],
@@ -68,6 +68,13 @@ export default definePlugin({
             replacement: {
                 match: /(?<=handleContextMenu.{0,350})(?=link:(\i)\.url)/,
                 replace: "...$1,"
+            }
+        },
+        {
+            find: 'id:"quiet-mode"',
+            replacement: {
+                match: /(\i)\?(\(0,\i\.jsxs\)\(\i\.Fragment,\{children:\[.{0,150}?id:"quiet-mode".{0,200}?badge:)/,
+                replace: "true?$2!$1?void 0:"
             }
         }
     ],
